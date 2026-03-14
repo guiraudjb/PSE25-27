@@ -1,0 +1,173 @@
+RÈGLEMENT SUR LES DONNÉES.
+
+LEXIQUE COMPLET.
+
+      Données désigne toute représentation numérique d'actes, de faits ou d'informations.
+
+      Métadonnées représente une description structurée du contenu ou de l'utilisation des données qui facilite la découverte de ces données.
+
+      Produit connecté qualifie un objet qui obtient, génère ou recueille des données concernant son utilisation ou son environnement.
+
+      Service connexe définit un service numérique ou logiciel connecté au produit de telle sorte que son absence empêcherait le produit d'exécuter ses fonctions.
+
+      Utilisateur est une personne physique ou morale à laquelle appartient un produit connecté ou qui a reçu des droits d'utilisation temporels.
+
+      Détenteur de données désigne une personne physique ou morale qui a le droit ou l'obligation d'utiliser et de mettre à disposition des données.
+
+      Destinataire de données est une personne physique ou morale autre que l'utilisateur qui agit à des fins liées à son activité professionnelle.
+
+      Contrat intelligent désigne un programme informatique utilisé pour l'exécution automatique d'un accord ou d'une de ses parties.
+
+      Interopérabilité définit la capacité de plusieurs systèmes ou services à échanger et utiliser des données afin de remplir leurs fonctions essentielles.
+
+COURS DÉTAILLÉ.
+
+I. DISPOSITIONS GÉNÉRALES ET CHAMP D'APPLICATION.
+
+   A. Objectifs et portée du règlement.
+
+      Ce règlement européen établit des règles harmonisées concernant l'équité de l'accès aux données et de leur utilisation de manière globale.
+
+      Il s'applique aux données à caractère personnel et non personnel générées par l'utilisation de produits connectés et de services numériques connexes.
+
+      Les règles garantissent que les utilisateurs tirent profit des données générées par les produits qu'ils achètent ou qu'ils louent.
+
+      Ce texte complète le droit de la protection des données personnelles sans jamais le remplacer ni en restreindre les principes fondamentaux.
+
+   B. Entités concernées par les règles.
+
+      Les dispositions s'imposent aux fabricants de produits connectés et aux fournisseurs de services connexes opérant sur le marché de l'Union européenne.
+
+      Elles visent également les détenteurs de données et les destinataires de données établis ou offrant des services au sein de l'Union.
+
+      Les organismes du secteur public et les institutions de l'Union sont également soumis à ces règles lors de demandes fondées sur des besoins exceptionnels et urgents.
+
+II. PARTAGE DE DONNÉES ENTRE ENTREPRISES ET CONSOMMATEURS.
+
+   A. Accessibilité par défaut des données.
+
+      Les produits connectés et services connexes doivent être conçus pour que les données qu'ils génèrent soient facilement accessibles à l'utilisateur final.
+
+      Le fabricant ou le vendeur a l'obligation d'informer clairement l'utilisateur sur la nature et le volume des données générées avant la signature du contrat.
+
+      L'accès par l'utilisateur s'effectue sans frais, de manière sécurisée et dans un format structuré lisible par une machine.
+
+   B. Droits de partage avec des tiers.
+
+      L'utilisateur a le droit d'exiger que le détenteur des données transmette ces informations à un tiers de son choix rapidement.
+
+      Le tiers bénéficiaire doit traiter ces données uniquement pour les finalités convenues avec l'utilisateur et ne peut les utiliser pour le profiler de manière abusive.
+
+      Les grandes entreprises désignées comme contrôleurs d'accès sur le marché numérique ne sont pas autorisées à recevoir ces données en tant que tiers privilégiés.
+
+III. OBLIGATIONS DES DÉTENTEURS DE DONNÉES.
+
+   A. Conditions de mise à disposition.
+
+      Lorsqu'il doit partager des données, le détenteur convient des modalités avec le destinataire selon des conditions équitables, raisonnables et non discriminatoires.
+
+      Le détenteur ne peut pas exiger de contrepartie déraisonnable et doit faire preuve de transparence sur les méthodes de calcul de toute compensation financière.
+
+      Les microentreprises et petites entreprises bénéficient d'un allègement de certaines obligations de partage pour ne pas freiner leur capacité d'innovation interne.
+
+   B. Protection et règlement des litiges.
+
+      Les utilisateurs et destinataires ont accès à des organes certifiés de règlement des litiges pour résoudre les conflits liés aux conditions de partage des données.
+
+      Le détenteur de données peut appliquer des mesures techniques pour protéger ses secrets d'affaires, à condition que cela n'entrave pas le droit d'accès des utilisateurs.
+
+      En cas de violation manifeste des conditions, le détenteur peut suspendre l'accès aux données et demander la destruction des produits concurrents créés de manière illicite.
+
+IV. CLAUSES CONTRACTUELLES ABUSIVES.
+
+   A. Protection contre les déséquilibres.
+
+      Une clause contractuelle concernant l'accès aux données qui est imposée unilatéralement à une entreprise n'est pas contraignante si elle s'avère abusive et injuste.
+
+      Une clause est jugée abusive lorsqu'elle s'écarte manifestement des bonnes pratiques commerciales et crée un déséquilibre majeur entre les deux parties contractantes.
+
+      L'objectif de cette règle est d'empêcher les grandes entreprises d'exploiter leur pouvoir de négociation au détriment des plus petites entités commerciales.
+
+   B. Exemples de clauses présumées abusives.
+
+      Sont strictement interdites les clauses qui excluent la responsabilité de la partie imposant le contrat en cas de faute intentionnelle ou de négligence grave constatée.
+
+      Le texte présume également abusives les dispositions qui empêchent la partie la plus faible d'utiliser les données qu'elle a elle-même générées pendant le contrat.
+
+      Si une clause abusive est formellement identifiée, le reste du contrat demeure valable à condition que la clause litigieuse puisse en être dissociée sans dénaturer l'accord.
+
+V. BESOINS EXCEPTIONNELS DU SECTEUR PUBLIC.
+
+   A. Demandes des autorités publiques.
+
+      Dans des situations d'urgence publique comme une catastrophe naturelle, les entreprises doivent fournir gratuitement les données nécessaires aux organismes du secteur public.
+
+      Ces requêtes gouvernementales doivent rester exceptionnelles, ciblées, transparentes, proportionnées et justifiées par une mission d'intérêt public explicitement prévue.
+
+      Le mécanisme d'urgence inclut un coordinateur de données pour centraliser les requêtes et éviter que plusieurs autorités ne réclament simultanément les mêmes informations.
+
+   B. Traitement et indemnisation.
+
+      Les données transmises lors d'un besoin exceptionnel ne peuvent être utilisées qu'à cette seule fin et doivent être détruites une fois l'urgence totalement passée.
+
+      Si la demande gouvernementale survient en dehors d'une situation d'urgence absolue, les entreprises ont droit à une compensation raisonnable couvrant les coûts de transmission.
+
+      Les secrets d'affaires inclus dans ces transferts bénéficient de mesures de confidentialité strictes pour éviter tout préjudice commercial à l'entreprise fournisseuse.
+
+VI. CHANGEMENT DE FOURNISSEUR DE SERVICES DE TRAITEMENT.
+
+   A. Suppression des obstacles au changement.
+
+      Les fournisseurs de services d'informatique en nuage doivent garantir contractuellement que leurs clients peuvent migrer vers un autre fournisseur sans aucune entrave.
+
+      Le processus de changement comprend une période transitoire claire pendant laquelle le fournisseur initial maintient la continuité absolue du service et sa sécurité.
+
+      Le client doit avoir la possibilité technique d'exporter toutes ses données et actifs numériques dans un format structuré et hautement interopérable.
+
+   B. Disparition progressive des frais.
+
+      Les frais de changement de fournisseur, souvent utilisés pour retenir les clients de manière artificielle, doivent être réduits progressivement par les opérateurs.
+
+      À l'issue de la période de transition définie par le règlement européen, l'imposition de frais de migration sera totalement et définitivement interdite.
+
+      Cette politique volontariste favorise un marché plus dynamique en empêchant le verrouillage technologique prolongé des utilisateurs professionnels et particuliers.
+
+VII. INTEROPÉRABILITÉ ET EXÉCUTION.
+
+   A. Normes et contrats intelligents.
+
+      Les espaces européens de données doivent se baser sur des spécifications ouvertes pour assurer l'interopérabilité sémantique et technique des précieuses informations.
+
+      Les contrats intelligents servant au partage de données doivent comporter des mécanismes de contrôle rigoureux et la possibilité d'interrompre leur exécution en cas de dysfonctionnement.
+
+      La Commission européenne est en droit d'adopter des spécifications communes lorsque les normes harmonisées s'avèrent inexistantes ou gravement insuffisantes.
+
+   B. Suivi et sanctions administratives.
+
+      Chaque État membre désigne des autorités compétentes indépendantes chargées de veiller à l'application stricte et uniforme du présent règlement européen.
+
+      Les infractions constatées peuvent donner lieu à des sanctions financières proportionnées à la gravité du manquement et au chiffre d'affaires de l'entreprise fautive.
+
+      Un comité européen de l'innovation dans le domaine des données est mis en place pour coordonner les pratiques nationales et conseiller utilement la Commission.
+
+POINTS D'ATTENTION.
+
+      Chaque phrase de ce document récapitulatif se termine obligatoirement par un point.
+
+      Les règles de protection des données personnelles prévalent rigoureusement sur ce règlement en cas de conflit juridique potentiel.
+
+      Le texte interdit formellement l'utilisation des données obtenues pour développer un produit connecté qui serait directement concurrent.
+
+      Les microentreprises sont généralement exemptées des obligations techniques de partage pour protéger leur croissance et leur agilité.
+
+      Les contrats de partage de données ne peuvent contraindre à la divulgation de secrets d'affaires sans une protection juridique adéquate.
+
+EXEMPLES CITES.
+
+      Le relevé automatique de la température par une machine agricole est une donnée générée entrant directement dans le champ d'application de ce texte.
+
+      L'utilisation prolongée d'un assistant virtuel pour dicter une commande vocale génère des données soumises aux nouvelles règles du règlement.
+
+      Le passage complexe d'un service de cloud public à une infrastructure informatique sur site illustre le changement de fournisseur de traitement de données.
+
+      Une requête de la protection civile pour analyser les déplacements de population lors d'une inondation caractérise un besoin exceptionnel du secteur public.

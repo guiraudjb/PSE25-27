@@ -1,0 +1,105 @@
+PANORAMA DE LA CYBERMENACE DEUX MILLE VINGT CINQ.
+
+LEXIQUE COMPLET.
+
+      Rançongiciel désigne un code malveillant déployé pour bloquer l'accès aux données en échange d'une rançon.
+
+      Double extorsion qualifie la technique consistant à chiffrer les données puis à menacer de les divulguer.
+
+      Infostealer est un code malveillant conçu pour collecter des informations sur le poste de travail de la victime.
+
+      Courtier en accès initial représente un attaquant qui s'introduit dans un système pour revendre cet accès.
+
+      Hacktiviste définit un acteur malveillant agissant pour des motivations politiques ou idéologiques.
+
+      Tunneling est une méthode permettant de transporter des données sur un réseau via des protocoles non pris en charge.
+
+      Lolbins désigne des binaires légitimes d'un système d'exploitation détournés de manière furtive.
+
+COURS DÉTAILLÉ.
+
+I. LES MOTIVATIONS DES ATTAQUANTS.
+
+   A. L'extorsion de fonds.
+
+      Les attaques par rançongiciel demeurent une menace majeure avec une légère baisse en deux mille vingt cinq mais affectant toujours lourdement les petites et moyennes entreprises ainsi que les secteurs de la santé et de l'éducation.
+
+      Certains groupes privilégient l'exfiltration de données sans chiffrement pour monétiser leurs attaques ou revendre les accès initiaux.
+
+      Des acteurs étatiques déploient également des rançongiciels à des fins d'extorsion marquant une évolution de leurs modes opératoires.
+
+   B. L'espionnage stratégique.
+
+      Les modes opératoires réputés russes et chinois ciblent activement les secteurs gouvernementaux et diplomatiques.
+
+      Les attaquants cherchent à collecter du renseignement stratégique en compromettant des réseaux diplomatiques ou des infrastructures critiques.
+
+   C. La déstabilisation et le sabotage.
+
+      Les opérations de sabotage se poursuivent notamment en Ukraine avec l'utilisation de codes destructeurs ciblants les infrastructures énergétiques.
+
+      Les dénis de service distribués et les actions contre de petites installations industrielles faiblement sécurisées sont fréquemment utilisés par des groupes hacktivistes pour nuire à la réputation de leurs victimes.
+
+II. L'ÉVOLUTION DES CAPACITÉS DES ATTAQUANTS.
+
+   A. L'emploi de services légitimes et de l'intelligence artificielle.
+
+      Le détournement d'outils d'administration à distance et de services de stockage hébergés sur internet permet aux attaquants de dissimuler leurs actions dans le trafic normal.
+
+      L'utilisation croissante de l'intelligence artificielle aide les cybercriminels à générer des sites malveillants crédibles ou à optimiser leurs phases de reconnaissance.
+
+   B. Les techniques d'ingénierie sociale diversifiées.
+
+      Les acteurs malveillants maîtrisent des techniques sophistiquées comme la fatigue d'authentification multifactorielle ou l'hameçonnage vocal pour tromper les utilisateurs.
+
+      Certaines techniques consistent à inciter directement les victimes à exécuter des commandes malveillantes qu'elles pensent légitimes.
+
+   C. Le suivi complexe des capacités attaquantes.
+
+      Le processus d'imputation est rendu difficile par l'utilisation d'outils publics partagés entre différents modes opératoires.
+
+      Les fuites de données internes de groupes cybercriminels majeurs offrent paradoxalement de précieuses informations sur leur organisation et leurs outils.
+
+III. LE CIBLAGE ET LES OPPORTUNITÉS D'ACCÈS.
+
+   A. Les opportunités liées aux contextes spécifiques.
+
+      Les faiblesses structurelles des systèmes d'information bureautiques offrent des portes d'entrée faciles en raison d'un manque d'audits globaux.
+
+      Des cadres légaux étrangers peuvent imposer l'installation de logiciels administratifs contenant des fonctionnalités malveillantes espionnant les entreprises.
+
+      Les événements politiques ou diplomatiques majeurs génèrent des pics d'attaques ciblées à des fins d'influence ou d'espionnage.
+
+   B. L'exploitation massive des vulnérabilités techniques.
+
+      Les équipements de bordure comme les pare-feu ou les passerelles privées virtuelles sont massivement ciblés dès la publication de leurs failles de sécurité.
+
+      Les environnements de virtualisation et les serveurs de messagerie restent des cibles de choix pour obtenir des accès profonds et persistants.
+
+      Les terminaux mobiles sont de plus en plus visés par des vulnérabilités sans clic développées par des entreprises spécialisées dans la lutte informatique offensive.
+
+   C. Les attaques par la chaîne d'approvisionnement.
+
+      La compromission d'un prestataire informatique permet aux attaquants de se déplacer latéralement vers les réseaux de nombreux clients finaux.
+
+      Les environnements hébergés dans le nuage sont devenus des cibles critiques dont le chiffrement ou la compromission paralyse simultanément des dizaines d'organisations.
+
+POINTS D'ATTENTION.
+
+Les réactions précipitées lors d'un incident de cybersécurité peuvent engendrer des dégâts supérieurs à l'attaque initiale.
+
+La compromission répétée des équipements de bordure mobilise fortement les équipes de réponse à incident.
+
+Les frontières entre les acteurs étatiques et les groupes cybercriminels s'estompent de plus en plus.
+
+EXEMPLES CITES.
+
+La souche de rançongiciel Qilin a fait plus de sept cents victimes en deux mille vingt cinq.
+
+Le groupe cybercriminel Cl0p a exploité une vulnérabilité sur une solution de transfert Oracle pour exfiltrer des données.
+
+Le mode opératoire russe Sandworm a mené des attaques destructrices sur des infrastructures électriques polonaises.
+
+Le code malveillant Lumma Stealer illustre la résilience et l'instabilité des logiciels cybercriminels vendus comme service.
+
+L'entreprise Ivanti a vu ses équipements compromis par l'exploitation de multiples vulnérabilités de manière répétée.

@@ -1,0 +1,75 @@
+Quel est l'intitulé officiel du règlement (UE) 2023/2854 ?,Le règlement sur les données (Data Act).
+Quel traité sert de base juridique principale au règlement sur les données ?,L'article 114 du traité sur le fonctionnement de l'Union européenne.
+À quelle date le règlement sur les données devient-il applicable ?,Le 12 septembre 2025.
+Le règlement sur les données s'applique sans préjudice de quel cadre juridique majeur sur la protection des données ?,Le règlement général sur la protection des données (RGPD).
+Définition : Données,"Toute représentation numérique d'actes, de faits ou d'informations et toute compilation de ceux-ci."
+Comment définit-on les 'métadonnées' selon l'article 2 ?,Une description structurée du contenu ou de l'utilisation des données facilitant leur découverte ou utilisation.
+Qu'est-ce qu'un 'produit connecté' au sens du règlement ?,"Un objet qui obtient, génère ou recueille des données sur son utilisation ou son environnement."
+Quelle est la condition pour qu'un service numérique soit considéré comme 'service connexe' ?,Son absence empêcherait le produit connecté d'exécuter une ou plusieurs de ses fonctions.
+Qui est considéré comme 'utilisateur' d'un produit connecté ?,La personne physique ou morale propriétaire du produit ou détentrice de droits temporaires d'utilisation.
+Définition : Détenteur de données,"Personne ayant le droit ou l'obligation, selon la loi ou un contrat, d'utiliser et de mettre à disposition des données."
+Qu'est-ce qu'un 'destinataire de données' ?,"Une personne, autre que l'utilisateur, à la disposition de laquelle le détenteur met des données."
+Comment sont définies les 'données relatives au produit' ?,Données générées par l'utilisation d'un produit connecté que le fabricant a conçu pour être extractibles.
+Les données représentant la numérisation des actions de l'utilisateur lors de la fourniture d'un service numérique sont appelées _____.,Données relatives au service connexe
+Que désigne l'expression 'données facilement accessibles' ?,Données que le détenteur peut obtenir légalement du produit sans effort disproportionné.
+"Selon l'article 3, comment les produits connectés doivent-ils être conçus par défaut ?",De sorte que les données relatives au produit soient accessibles à l'utilisateur de manière aisée et sécurisée.
+Vrai ou Faux : L'accès de l'utilisateur aux données de son produit connecté doit être payant.,"Faux, l'accès doit être sans frais pour l'utilisateur."
+Quelles informations sur les données doivent être fournies à l'utilisateur avant l'achat d'un produit connecté ?,"Le type, le format et le volume estimé des données que le produit est capable de générer."
+"En plus du volume, quelle information sur la temporalité des données doit être communiquée avant l'achat ?",Si le produit est capable de générer des données en continu et en temps réel.
+Quelle obligation d'information concerne le stockage des données avant la conclusion du contrat ?,Le lieu de stockage (dispositif intégré ou serveur distant) et la durée de conservation prévue.
+L'utilisateur doit être informé de l'identité du _____ de données potentiel avant de conclure un contrat de service connexe.,Détenteur
+"Lorsqu'un utilisateur ne peut accéder directement aux données, sous quel délai le détenteur doit-il les fournir ?",Sans retard injustifié.
+À quel niveau de qualité le détenteur doit-il fournir les données à l'utilisateur ?,À un niveau de qualité identique à celui dont bénéficie le détenteur de données lui-même.
+Sous quelle condition un détenteur peut-il restreindre contractuellement l'accès aux données ?,Si le traitement est susceptible de porter atteinte aux exigences de sécurité du produit.
+Quelle autorité le détenteur doit-il notifier s'il refuse de partager des données pour des raisons de sécurité ?,L'autorité compétente désignée par l'État membre.
+Que doit faire le détenteur concernant les secrets d'affaires avant leur divulgation à l'utilisateur ?,Il doit les recenser et convenir de mesures techniques et organisationnelles pour préserver leur confidentialité.
+Quelle mesure peut prendre un détenteur si un utilisateur ne met pas en œuvre les mesures convenues pour protéger un secret d'affaires ?,Il peut bloquer ou suspendre le partage des données définies comme secrets d'affaires.
+Dans quel cas exceptionnel un détenteur peut-il refuser totalement une demande d'accès liée à un secret d'affaires ?,S'il démontre qu'il est très probable qu'il subisse un préjudice économique grave.
+Vrai ou Faux : Un utilisateur peut utiliser les données obtenues pour développer un produit connecté concurrent.,"Faux, cette utilisation est explicitement interdite par l'article 4, paragraphe 10."
+Un détenteur peut-il utiliser des données non personnelles de l'utilisateur pour obtenir des informations sur ses méthodes de production ?,"Non, si cela est susceptible de porter atteinte à la position commerciale de l'utilisateur."
+L'utilisateur a le droit de demander au détenteur de mettre les données à la disposition d'un _____.,Tiers
+Quelle catégorie d'entreprises ne peut pas être un tiers éligible pour recevoir des données selon l'article 5 ?,Les entreprises désignées comme contrôleurs d'accès (gatekeepers) par le règlement sur les marchés numériques.
+Un tiers recevant des données peut-il les utiliser pour le profilage des personnes physiques ?,Seulement si cela est strictement nécessaire pour fournir le service demandé par l'utilisateur.
+Quelle est l'obligation d'un tiers concernant la conservation des données reçues ?,Il doit les effacer lorsqu'elles ne sont plus nécessaires à la finalité convenue.
+Les obligations de partage de données ne s'appliquent pas aux produits fabriqués par quelles structures ?,Les microentreprises et les petites entreprises (sous certaines conditions).
+Pendant quelle période les entreprises moyennes sont-elles exemptées des obligations de partage après leur mise sur le marché ?,Pendant une période d'un an.
+Quels sont les trois critères 'FRAND' que doivent respecter les conditions de mise à disposition des données en B2B ?,"Équitable, raisonnable et non discriminatoire (et de manière transparente)."
+Qui a la charge de prouver l'absence de discrimination dans les conditions de mise à disposition des données ?,Le détenteur de données.
+La compensation demandée par un détenteur pour la mise à disposition de données peut inclure une _____.,Marge
+Quelle est la limite de compensation si le destinataire des données est une PME ?,Elle ne doit pas excéder les coûts directement liés à la mise à disposition des données.
+Quels types de coûts sont inclus dans le calcul de la compensation raisonnable ?,"Les coûts de formatage, de diffusion électronique et de stockage."
+Où les parties peuvent-elles porter leurs litiges concernant les conditions FRAND ?,Devant un organe de règlement des litiges certifié.
+Sous quelle condition la décision d'un organe de règlement des litiges est-elle contraignante ?,Si les parties ont expressément consenti à son caractère contraignant avant le début de la procédure.
+Un détenteur peut utiliser le _____ ou des contrats intelligents pour empêcher l'accès non autorisé aux données.,Chiffrement
+Que doit faire un tiers s'il a fourni de fausses informations pour obtenir des données ?,"Il doit effacer les données et les copies, et peut être tenu d'indemniser la partie lésée."
+Dans quel contexte une clause contractuelle entre entreprises est-elle considérée comme non contraignante ?,Lorsqu'elle est imposée unilatéralement et qu'elle est abusive.
+Quel est le critère général pour définir une clause comme 'abusive' entre entreprises ?,"Si elle s'écarte manifestement des bonnes pratiques commerciales, contrairement à la bonne foi."
+Citez un exemple de clause contractuelle 'toujours' considérée comme abusive.,L'exclusion de la responsabilité en cas d'actes intentionnels ou de négligence grave.
+Une clause permettant à une partie de modifier substantiellement le prix sans motif valable est _____ être abusive.,Présumée
+Vrai ou Faux : Une clause négociée puis modifiée par les deux parties peut être contestée comme abusive selon l'article 13.,"Faux, elle ne doit pas avoir été imposée unilatéralement."
+À qui incombe la preuve qu'une clause n'a pas été imposée unilatéralement ?,À la partie qui a fourni la clause.
+Dans quelle situation un organisme du secteur public peut-il exiger l'accès à des données privées ?,S'il démontre l'existence d'un besoin exceptionnel pour une mission d'intérêt public.
+Quel type de situation constitue un 'besoin exceptionnel' prioritaire ?,"La réaction à une situation d'urgence (catastrophe naturelle, urgence sanitaire, etc.)."
+"En dehors des urgences, pour quelle mission spécifique le secteur public peut-il demander des données non personnelles ?",La production de statistiques officielles.
+Quelles entreprises sont exemptées de fournir des données au secteur public en dehors des situations d'urgence ?,Les microentreprises et les petites entreprises.
+Que doit démontrer un organisme public avant de demander des données hors urgence ?,"Qu'il a épuisé tous les autres moyens, y compris l'achat de données sur le marché."
+Une demande de données par le secteur public doit être formulée par _____ et être spécifique.,Écrit
+Vrai ou Faux : Les données obtenues par le secteur public en cas de besoin exceptionnel peuvent être réutilisées par des tiers.,"Faux, elles ne sont pas considérées comme des données ouvertes."
+Quel est le délai maximal pour qu'un détenteur rejette une demande liée à une urgence ?,Cinq jours ouvrables.
+Quel est le délai de réponse pour une demande de données du secteur public hors situation d'urgence ?,Trente jours ouvrables.
+Le détenteur doit privilégier l'_____ des données personnelles avant de les transmettre au secteur public.,Anonymisation
+Quelle est la règle de compensation pour les données fournies lors d'une urgence ?,La mise à disposition est gratuite (sauf pour les micro et petites entreprises).
+De quoi se compose la 'juste compensation' pour les demandes du secteur public hors urgence ?,Des coûts techniques et organisationnels plus une marge raisonnable.
+Avec quels types d'entités le secteur public peut-il partager les données reçues pour recherche ?,Des organismes de recherche ou des instituts de statistique agissant sans but lucratif.
+Combien de temps les chercheurs peuvent-ils conserver les données après leur effacement par l'organisme public ?,Six mois maximum.
+Quel est l'objectif du chapitre VI du règlement ?,Faciliter le changement de fournisseur de services de traitement de données (cloud/edge).
+Définition : Service de traitement de données,Service numérique permettant un accès réseau à la demande à un ensemble partagé de ressources informatiques.
+Qu'est-ce que l'équivalence fonctionnelle lors d'un changement de cloud ?,Le maintien d'un niveau minimal de fonctionnalité entre l'ancien et le nouveau service.
+Les frais de transfert de données lors d'un changement de fournisseur de cloud doivent être _____ après trois ans.,Supprimés
+Que sont les 'données exportables' dans le contexte du changement de cloud ?,"Les données d'entrée et de sortie, y compris les métadonnées, générées par l'utilisation du service par le client."
+Quel est le rôle du 'coordinateur de données' ?,Agir comme point de contact unique et faciliter la coopération entre autorités compétentes d'un État membre.
+Quelle instance conseille la Commission sur les normes techniques et l'interopérabilité ?,Le comité européen de l'innovation dans le domaine des données.
+Définition : Contrat intelligent (Smart Contract),Programme informatique utilisé pour l'exécution automatique d'un accord garantissant l'intégrité des données.
+Quelle exigence essentielle s'applique aux contrats intelligents concernant leur arrêt ?,Ils doivent pouvoir être interrompus et résiliés par un mécanisme de contrôle (kill switch).
+Quel droit de propriété intellectuelle est clarifié comme ne s'appliquant pas aux bases de données issues de capteurs ?,Le droit 'sui generis' prévu par la directive 96/9/CE.
+"Les sanctions en cas d'infraction au règlement doivent être effectives, proportionnées et _____.",Dissuasives
