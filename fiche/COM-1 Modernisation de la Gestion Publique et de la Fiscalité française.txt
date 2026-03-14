@@ -1,0 +1,171 @@
+ASSURER LA BONNE GESTION DES DENIERS PUBLICS, DE LA FONCTION COMPTABLE AU RECOUVREMENT DE L'IMPOT.
+
+LEXIQUE COMPLET.
+
+      La Déclaration des droits de l'homme et du citoyen de 1789 définit les principes de l'ordre public financier à travers ses articles 13, 14 et 15.
+
+      La responsabilité des gestionnaires publics est une réforme majeure qui modifie le rôle du comptable public en passant d'un contrôle exhaustif à une logique de maîtrise des risques.
+
+      Les Services Facturiers, abrégés SFACT, sont des structures déployées pour simplifier la chaîne financière du secteur public local et hospitalier.
+
+      Les Centres de Gestion Financière, abrégés CGF, sont des structures destinées à traiter une part prépondérante des dépenses de l'État.
+
+      Le référentiel M57 est la nouvelle norme budgétaire et comptable généralisée pour les collectivités locales.
+
+      Le Compte Financier Unique, abrégé CFU, est un document unifié remplaçant les comptes administratifs et de gestion pour les collectivités locales.
+
+      Chorus est le système d'information financier de l'État dont la modernisation technique et fonctionnelle est prévue pour 2027.
+
+      Hélios est l'application informatique de gestion comptable utilisée pour le secteur public local.
+
+      La facturation électronique est un dispositif obligatoire entre entreprises visant à simplifier les démarches et lutter contre la fraude à la TVA grâce à des données en temps réel.
+
+      Le Portail Pro est une interface unique permettant aux professionnels de gérer leurs relations avec la DGFiP, la Douane et l'URSSAF.
+
+      Fidji est l'application de gestion de la publicité foncière en cours de réécriture pour modernisation.
+
+      La TICPE désigne la Taxe Intérieure de Consommation sur les Produits Énergétiques dont le recouvrement est transféré à la DGFiP.
+
+      Les Pôles de Recouvrement Spécialisé, abrégés PRS, concentrent le recouvrement forcé des créances des professionnels.
+
+      ROC SP est le nouvel outil informatique de Recouvrement Optimisé des Créances destiné aux particuliers.
+
+      Les Pôles Nationaux de Contrôle à Distance, abrégés PNCD, sont des structures utilisant le datamining pour traiter massivement les dossiers des particuliers.
+
+      PILAT est le projet informatique visant à créer un outil intégré et unique pour l'ensemble de la chaîne du contrôle fiscal.
+
+      OSS et IOSS désignent les guichets uniques de TVA européens pour le commerce électronique et les importations.
+
+      CESOP est une directive européenne prévoyant l'échange automatique de données de paiements entre États membres.
+
+COURS DÉTAILLÉ.
+
+I. CADRE GENERAL ET MISSIONS DE LA DGFIP.
+
+   A. Fondements juridiques et constitutionnels.
+
+      La mission première de la DGFiP est de faire respecter l'ordre public financier conformément aux principes fixés par la Déclaration des droits de l'homme et du citoyen de 1789.
+
+      L'article 13 établit la nécessité d'une contribution commune répartie selon les facultés des citoyens.
+
+      L'article 14 garantit le droit des citoyens de constater la nécessité de l'impôt, d'y consentir et d'en suivre l'emploi.
+
+      L'article 15 pose le principe selon lequel la société a le droit de demander compte à tout agent public de son administration.
+
+   B. Périmètre d'action.
+
+      Le champ d'action de la DGFiP englobe la fonction comptable et financière de l'État, des collectivités territoriales et des hôpitaux publics.
+
+      Ses missions incluent également la gestion et le recouvrement des impôts ainsi que la lutte contre la fraude fiscale.
+
+II. OBJECTIF 1 : DEPLOYER UN CADRE RENOVE POUR LA GESTION PUBLIQUE.
+
+   A. Transformation du métier de comptable public.
+
+      La réforme de la responsabilité des gestionnaires publics impose au comptable de passer d'une logique d'exhaustivité des contrôles à une approche ciblée sur les enjeux et les risques.
+
+      Le rôle de conseil auprès des ordonnateurs est renforcé et le formalisme des contrôles est allégé pour se concentrer sur le visa des dépenses à risques.
+
+      L'intelligence artificielle sera étendue aux dépenses des sphères locale et hospitalière ainsi qu'à la paie de l'État pour moderniser les procédures.
+
+   B. Simplification de l'organisation comptable.
+
+      La simplification de la chaîne financière passe par le déploiement de services facturiers pour le secteur public local et hospitalier avec un objectif de cent services en 2027.
+
+      Les centres de gestion financière seront généralisés pour traiter les dépenses de l'État avec un objectif de quatre-vingts centres en 2027.
+
+      Des conventions partenariales seront systématiquement signées entre la DGFiP et les grandes collectivités ou groupements hospitaliers.
+
+   C. Qualité des comptes et modernisation des outils.
+
+      La généralisation du référentiel M57 constitue la nouvelle norme comptable pour les collectivités locales.
+
+      Le Compte Financier Unique sera déployé progressivement pour atteindre une couverture totale en 2027.
+
+      Un régime pérenne de fiabilisation des comptes locaux sera mis en place, s'appuyant notamment sur la synthèse qualité des comptes.
+
+      Les systèmes d'information seront modernisés avec la bascule vers la nouvelle version de Chorus pour l'État et l'évolution d'Hélios pour le secteur local.
+
+III. OBJECTIF 2 : CONSOLIDER, MODERNISER ET SIMPLIFIER LA GESTION ET LE RECOUVREMENT.
+
+   A. Gestion fiscale des particuliers et des professionnels.
+
+      Les Services des Impôts des Particuliers se recentrent sur l'accueil généraliste multicanal et la gestion des dossiers complexes dans le cadre de la feuille de route SIP de demain.
+
+      Le parcours déclaratif des particuliers sera modernisé avec un élargissement du pré-remplissage et une refonte du calendrier de l'impôt sur le revenu pour des avis plus rapides.
+
+      La mise en œuvre de la facturation électronique vise à simplifier les démarches des entreprises et à lutter contre la fraude à la TVA grâce à l'exploitation de données en temps réel.
+
+      Les Services des Impôts des Entreprises verront leurs compétences enrichies avec des tâches de première vérification et d'accompagnement des entreprises.
+
+      Les centres de contact pour les professionnels seront généralisés à partir de 2025 pour répondre à leurs besoins spécifiques.
+
+   B. Transformation des missions foncières.
+
+      La démarche Foncier innovant utilise les nouvelles technologies et l'imagerie pour améliorer la détection des changements fonciers et la mise à jour du cadastre.
+
+      L'objectif est de réduire le délai moyen de mise à jour du fichier immobilier à soixante-quinze jours d'ici 2027.
+
+      La modernisation inclut la réécriture de l'application Fidji et un partenariat avec l'IGN pour le plan cadastral.
+
+   C. Unification et efficacité du recouvrement.
+
+      L'unification du recouvrement au sein de la DGFiP doit être achevée par l'intégration des contributions indirectes et de la TICPE.
+
+      Le recouvrement forcé des professionnels est concentré au sein des pôles de recouvrement spécialisé qui délaisseront les actions à faibles enjeux.
+
+      Le recouvrement des amendes sera renforcé par la généralisation de centres de contact dédiés et l'automatisation des échanges avec la Chancellerie.
+
+      L'objectif pour 2027 est d'augmenter de vingt pour cent le taux de recouvrement forcé des créances des professionnels.
+
+IV. OBJECTIF 3 : RENFORCER LE CIVISME FISCAL ET LA LUTTE CONTRE LA FRAUDE.
+
+   A. Stratégie globale et civisme fiscal.
+
+      La lutte contre la fraude s'appuie sur un équilibre entre le contrôle répressif et l'encouragement au civisme fiscal par la régularisation des erreurs de bonne foi.
+
+      La DGFiP développera une méthodologie pour évaluer la fraude évitée grâce aux actions d'accompagnement et de sécurisation juridique.
+
+      Une feuille de route de lutte contre toutes les fraudes aux finances publiques a été arrêtée en avril 2023 pour adapter les sanctions et les outils.
+
+   B. Moyens technologiques et réorganisation du contrôle.
+
+      Le datamining et l'intelligence artificielle devront cibler cinquante pour cent de la programmation du contrôle des professionnels et des particuliers d'ici 2027.
+
+      Le projet PILAT vise à unifier le système d'information de la chaîne du contrôle fiscal pour supprimer les ruptures applicatives.
+
+      Les Pôles Nationaux de Contrôle à Distance monteront en puissance pour traiter massivement les dossiers grâce à l'analyse de données.
+
+   C. Coopération internationale et européenne.
+
+      La France appliquera la réforme de l'OCDE imposant un taux minimum d'imposition de quinze pour cent aux grandes entreprises multinationales.
+
+      La lutte contre la fraude à la TVA dans le commerce électronique passera par le contrôle des guichets uniques OSS et IOSS.
+
+      L'échange automatique d'informations sera renforcé, notamment pour les données de paiement via la directive CESOP.
+
+      La DGFiP s'engage à répondre à quatre-vingts pour cent des demandes d'assistance internationale en matière de TVA en moins de quatre-vingt-dix jours d'ici 2027.
+
+   D. Transformation du métier juridique.
+
+      Une stratégie de transformation numérique vise à offrir un point d'entrée unique dématérialisé pour le contentieux à l'horizon 2025-2030.
+
+      Des outils prédictifs seront utilisés pour détecter les contentieux émergents et optimiser les stratégies juridictionnelles.
+
+POINTS D'ATTENTION.
+
+      Il est essentiel de comprendre que la réforme de la responsabilité des gestionnaires publics transforme la nature du contrôle comptable qui devient sélectif et basé sur les risques.
+
+      La majorité des objectifs chiffrés de modernisation, comme les délais fonciers ou le déploiement des centres de gestion, sont fixés à l'échéance de 2027.
+
+      L'industrialisation du contrôle fiscal est marquée par l'objectif que la moitié des contrôles soient programmés par l'intelligence artificielle.
+
+      La sécurité des agents de contrôle fiscal fait l'objet d'un plan d'action spécifique suite aux événements tragiques de 2022.
+
+EXEMPLES CITES.
+
+      Le texte cite l'exemple de ne plus demander de pièces justificatives inutiles par simple crainte du juge des comptes mais de privilégier les pièces pertinentes.
+
+      L'assistant digital Relance successions est mentionné comme un exemple d'outil pour améliorer le civisme et les rentrées fiscales.
+
+      Le drame intervenu dans le Pas-de-Calais en novembre 2022 est cité pour justifier le renforcement de la sécurité des agents.

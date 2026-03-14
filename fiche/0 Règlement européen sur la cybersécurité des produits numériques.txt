@@ -1,0 +1,183 @@
+FICHE DE RÉVISION : RÈGLEMENT (UE) 2024/2847 SUR LA CYBERRÉSILIENCE.
+
+LEXIQUE COMPLET.
+
+      Un produit comportant des éléments numériques désigne tout produit logiciel ou matériel et ses solutions de traitement de données à distance, y compris les composants mis sur le marché séparément.
+
+      Le traitement de données à distance correspond à tout traitement pour lequel le logiciel est conçu par le fabricant et dont l'absence empêcherait le produit d'exécuter une de ses fonctions.
+
+      Une vulnérabilité exploitable est une faiblesse ou une faille susceptible d'être utilisée efficacement par un adversaire en conditions de fonctionnement effectives.
+
+      La période d'assistance est la durée au cours de laquelle un fabricant est tenu de garantir que les vulnérabilités sont traitées efficacement, notamment par des mises à jour de sécurité.
+
+      Une nomenclature des logiciels ou SBOM est un document officiel contenant les détails et les relations avec la chaîne d'approvisionnement des différents composants utilisés dans la fabrication d'un produit.
+
+      Un intendant de logiciels ouverts est une personne morale fournissant un soutien systématique au développement de produits logiciels libres et ouverts destinés à des activités commerciales.
+
+      Un produit important comportant des éléments numériques est un produit dont la fonctionnalité comporte un risque de cybersécurité élevé, classé en classe I ou II selon l'annexe III du règlement.
+
+      Un produit critique comportant des éléments numériques est un produit dont la fonctionnalité présente un risque systémique élevé, listé à l'annexe IV du règlement.
+
+COURS DÉTAILLÉ.
+
+I. DISPOSITIONS GÉNÉRALES ET CHAMP D'APPLICATION.
+
+   A. Objet et périmètre du règlement.
+
+      Le règlement établit des règles pour la mise à disposition sur le marché de produits comportant des éléments numériques afin de garantir leur cybersécurité.
+
+      Il définit des exigences essentielles concernant la conception, le développement, la production et la gestion des vulnérabilités de ces produits.
+
+      Le texte s'applique aux produits dont l'utilisation prévue comprend une connexion directe ou indirecte, logique ou physique, à un dispositif ou à un réseau.
+
+   B. Exclusions et limitations.
+
+      Le règlement ne s'applique pas aux dispositifs médicaux, aux dispositifs médicaux de diagnostic in vitro et aux véhicules à moteur qui sont déjà régis par des règlements sectoriels spécifiques.
+
+      Les produits certifiés conformément au règlement sur l'aviation civile et les équipements marins sont également exclus du champ d'application.
+
+      Les produits développés exclusivement à des fins de sécurité nationale ou militaire, ou conçus pour traiter des informations classifiées, ne sont pas soumis à ce règlement.
+
+      Les logiciels libres et ouverts ne sont concernés que s'ils sont mis à disposition sur le marché dans le cadre d'une activité commerciale.
+
+II. OBLIGATIONS DES OPÉRATEURS ÉCONOMIQUES.
+
+   A. Obligations incombant aux fabricants.
+
+      Les fabricants doivent s'assurer que leurs produits sont conçus, développés et fabriqués conformément aux exigences essentielles de cybersécurité énoncées à l'annexe I.
+
+      Une évaluation des risques de cybersécurité doit être réalisée et documentée, couvrant les phases de planification, conception, développement, production, livraison et maintenance.
+
+      Les fabricants doivent faire preuve de diligence raisonnable lors de l'intégration de composants tiers, y compris les logiciels libres, pour ne pas compromettre la sécurité du produit final.
+
+      La période d'assistance doit être déterminée pour refléter la durée d'utilisation prévue, avec une durée minimale de cinq ans sauf si la durée de vie du produit est inférieure.
+
+      Les fabricants doivent fournir des mises à jour de sécurité gratuites et automatiques lorsque cela est possible, et ces mises à jour doivent rester disponibles pendant dix ans ou la durée de la période d'assistance.
+
+      Une documentation technique complète et une déclaration UE de conformité doivent être établies et conservées pendant au moins dix ans ou la durée de la période d'assistance.
+
+      Un point de contact unique doit être désigné pour permettre aux utilisateurs de communiquer directement et rapidement, notamment pour signaler des vulnérabilités.
+
+   B. Obligations des importateurs et distributeurs.
+
+      Les importateurs ne doivent mettre sur le marché que des produits conformes aux exigences essentielles et doivent vérifier que le fabricant a mené les procédures d'évaluation de la conformité.
+
+      Si un importateur ou un distributeur considère qu'un produit n'est pas conforme ou présente un risque important, il ne doit pas le mettre sur le marché et doit en informer le fabricant et les autorités de surveillance.
+
+      Les distributeurs doivent vérifier la présence du marquage CE et s'assurer que le produit est accompagné des informations et instructions nécessaires.
+
+   C. Cas spécifiques des intendants de logiciels ouverts.
+
+      Les intendants de logiciels ouverts doivent mettre en place une politique de cybersécurité favorisant le développement sécurisé et le traitement efficace des vulnérabilités.
+
+      Ils sont tenus de coopérer avec les autorités de surveillance du marché pour atténuer les risques posés par leurs produits.
+
+      Ils sont soumis aux obligations de signalement des vulnérabilités activement exploitées et des incidents graves affectant leurs réseaux et systèmes.
+
+III. GESTION DES VULNÉRABILITÉS ET SIGNALEMENT.
+
+   A. Processus de signalement obligatoire.
+
+      Le fabricant doit notifier toute vulnérabilité activement exploitée et tout incident grave ayant des répercussions sur la sécurité à l'ENISA et au CSIRT coordinateur via une plateforme unique.
+
+      Une alerte précoce doit être envoyée dans les vingt-quatre heures suivant la prise de connaissance de la vulnérabilité ou de l'incident.
+
+      Une notification de vulnérabilité ou d'incident plus détaillée doit être soumise dans les soixante-douze heures, suivie d'un rapport final après la résolution ou dans le mois suivant pour les incidents.
+
+   B. Gestion des vulnérabilités et transparence.
+
+      Les fabricants doivent identifier et documenter les composants de leurs produits, notamment en établissant une nomenclature des logiciels ou SBOM.
+
+      Ils doivent remédier sans retard aux vulnérabilités par des mises à jour de sécurité, fournies séparément des mises à jour de fonctionnalité lorsque cela est techniquement possible.
+
+      Des tests et examens de sécurité réguliers doivent être effectués sur les produits.
+
+      Une politique de divulgation coordonnée des vulnérabilités doit être mise en place pour faciliter le signalement par des tiers.
+
+IV. CONFORMITÉ DU PRODUIT ET EXIGENCES ESSENTIELLES.
+
+   A. Exigences de sécurité (Annexe I).
+
+      Les produits doivent être livrés sans vulnérabilité exploitable connue et avec une configuration sécurisée par défaut.
+
+      Ils doivent protéger la confidentialité et l'intégrité des données stockées ou transmises, notamment par le chiffrement.
+
+      Les produits doivent assurer une protection contre les accès non autorisés et limiter les surfaces d'attaque.
+
+      Les fabricants doivent garantir la disponibilité des fonctions essentielles, y compris la résilience face aux attaques par déni de service.
+
+   B. Procédures d'évaluation de la conformité.
+
+      Pour les produits standards, le fabricant peut effectuer une évaluation basée sur le contrôle interne de la production (Module A).
+
+      Les produits importants de classe I nécessitent soit l'application de normes harmonisées avec contrôle interne, soit un examen UE de type par un tiers (Module B) suivi du contrôle interne (Module C), soit une assurance complète de la qualité (Module H).
+
+      Les produits importants de classe II nécessitent obligatoirement l'intervention d'un tiers via un examen UE de type ou une assurance complète de la qualité, ou une certification européenne de cybersécurité.
+
+      Les produits critiques peuvent être soumis à une obligation de certification européenne de cybersécurité si la Commission l'exige par acte délégué.
+
+   C. Marquage CE et déclaration.
+
+      Le marquage CE doit être apposé de manière visible, lisible et indélébile sur le produit ou son emballage.
+
+      Une déclaration UE de conformité doit être établie, attestant que le respect des exigences essentielles a été démontré.
+
+      Une version simplifiée de la déclaration UE de conformité peut être fournie avec le produit, contenant un lien internet vers le texte complet.
+
+V. SURVEILLANCE DU MARCHÉ, GOUVERNANCE ET SANCTIONS.
+
+   A. Surveillance et gouvernance.
+
+      Les États membres désignent des autorités de surveillance du marché responsables de l'application du règlement.
+
+      Un groupe de coopération administrative ou ADCO est institué pour assurer l'application uniforme du règlement et faciliter la coopération entre autorités.
+
+      L'ENISA joue un rôle central dans la gestion de la plateforme unique de signalement et la coordination technique.
+
+      La Commission peut intervenir au niveau de l'Union en cas de risques importants via des mesures correctives ou restrictives.
+
+   B. Sanctions et pénalités.
+
+      Le non-respect des exigences essentielles de cybersécurité ou des obligations de gestion des risques est passible d'une amende administrative jusqu'à quinze millions d'euros ou deux virgule cinq pour cent du chiffre d'affaires mondial annuel.
+
+      Le non-respect des autres obligations administratives ou techniques est passible d'une amende jusqu'à dix millions d'euros ou deux pour cent du chiffre d'affaires mondial annuel.
+
+      La fourniture d'informations inexactes ou trompeuses peut entraîner une amende jusqu'à cinq millions d'euros ou un pour cent du chiffre d'affaires.
+
+      Des exceptions aux amendes administratives sont prévues pour les microentreprises et petites entreprises concernant certains délais de notification et pour les intendants de logiciels ouverts.
+
+VI. DISPOSITIONS TRANSITOIRES ET FINALES.
+
+   A. Calendrier d'application.
+
+      Le règlement entre en vigueur le vingtième jour suivant sa publication.
+
+      Il devient applicable le 11 décembre 2027, soit trente-six mois après son entrée en vigueur.
+
+      L'obligation de signalement des vulnérabilités et incidents s'applique de manière anticipée à partir du 11 septembre 2026.
+
+      Les dispositions relatives à la notification des organismes d'évaluation s'appliquent à partir du 11 juin 2026.
+
+   B. Mesures de soutien.
+
+      Les États membres doivent soutenir les microentreprises et les PME, notamment par des formations et des sas réglementaires pour tester les produits innovants.
+
+      Une documentation technique simplifiée peut être utilisée par les microentreprises et les petites entreprises.
+
+POINTS D'ATTENTION.
+
+      La durée minimale de support de cinq ans est une règle par défaut mais peut être ajustée selon la durée de vie prévue du produit.
+
+      Les mises à jour de sécurité doivent être fournies gratuitement.
+
+      La conformité aux normes harmonisées confère une présomption de conformité aux exigences essentielles.
+
+      Les produits comportant des éléments numériques modifiés substantiellement sont considérés comme de nouveaux produits devant subir une nouvelle évaluation.
+
+EXEMPLES CITES.
+
+      Consultez l'annexe III pour la liste des produits importants comme les navigateurs, les systèmes d'exploitation, les routeurs ou les objets connectés domestiques.
+
+      Consultez l'annexe IV pour la liste des produits critiques comme les cartes à puce ou les dispositifs matériels avec boîtier de sécurité.
+
+      Référez-vous à l'article 14 pour les délais stricts de notification de 24 heures et 72 heures.

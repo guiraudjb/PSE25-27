@@ -1,0 +1,223 @@
+LINUX : MANIPULER LES FICHIERS ET LES REPERTOIRES (PSE TRAD 2025-2027).
+
+LEXIQUE COMPLET.
+
+      Un inode est une structure de données contenant toutes les métadonnées d'un fichier comme les permissions, la taille, le propriétaire ou l'emplacement des blocs, à l'exception du nom du fichier.
+
+      Le chemin absolu correspond à la localisation complète d'un répertoire ou d'un fichier en partant de la racine du système.
+
+      Un lien physique ou hard link désigne deux fichiers qui partagent le même numéro d'inode et pointent vers les mêmes données sur le disque.
+
+      Le mode octal est une notation numérique utilisée pour définir les permissions d'accès, par exemple 755 ou 644.
+
+      Le SUID ou Set User ID est un droit spécial sur un fichier exécutable qui permet à l'utilisateur de l'exécuter avec les privilèges du propriétaire du fichier, souvent l'administrateur root.
+
+      Le SGID ou Set Group ID est un droit spécial appliqué sur un répertoire qui force les nouveaux fichiers créés à hériter du groupe du répertoire parent plutôt que du groupe principal de l'utilisateur créateur.
+
+      Le Sticky bit est un droit spécial appliqué sur un répertoire partagé comme tmp qui empêche un utilisateur de supprimer un fichier qui ne lui appartient pas, même s'il possède les droits d'écriture sur le dossier.
+
+      Les ACL ou Access Control Lists sont des listes de contrôle d'accès qui permettent d'attribuer des droits spécifiques à des utilisateurs ou des groupes de manière plus fine que les permissions standards.
+
+      Les flux standards sont les canaux de communication d'un processus comprenant l'entrée standard stdin, la sortie standard stdout et la sortie d'erreurs stderr.
+
+      Un pipe est un mécanisme représenté par une barre verticale qui connecte la sortie standard d'une commande à l'entrée standard de la commande suivante.
+
+      Un here document est une redirection d'entrée qui permet de fournir un bloc de texte multiligne directement à une commande ou un script.
+
+COURS DÉTAILLÉ.
+
+I. MANIPULER LES REPERTOIRES.
+
+   A. Navigation de base.
+
+      La navigation efficace dans l'arborescence Linux repose sur l'utilisation conjointe des commandes pwd et cd.
+
+      La commande pwd affiche le chemin absolu du répertoire courant, ce qui est utile lors de l'utilisation de plusieurs terminaux.
+
+      La commande cd permet de se déplacer, soit vers un chemin absolu, soit vers le répertoire parent avec deux points, soit vers le répertoire précédent avec un tiret.
+
+      Il est recommandé d'utiliser des alias ou des variables d'environnement comme HOME pour simplifier les déplacements récurrents.
+
+   B. Création et suppression de répertoires.
+
+      L'organisation du système repose sur la création de dossiers structurés pour les applications, les données ou les archives.
+
+      La commande mkdir permet de créer un répertoire, et l'option p est idéale pour générer une arborescence complète en une seule fois.
+
+      La suppression se fait avec rmdir pour les dossiers vides ou rm avec l'option r pour supprimer récursivement un contenu.
+
+      L'utilisation de l'option i avec la commande rm est fortement conseillée pour demander une confirmation avant toute suppression définitive.
+
+   C. Lister et explorer le contenu.
+
+      La commande ls est l'outil principal pour afficher le contenu des répertoires avec diverses options comme l pour les détails ou a pour les fichiers cachés.
+
+      L'option i de la commande ls révèle le numéro d'inode associé à chaque fichier.
+
+      La commande find permet de cibler et supprimer un fichier spécifique via son numéro d'inode, ce qui est pratique pour les noms de fichiers corrompus.
+
+      L'association de ls avec grep via un pipe permet de filtrer efficacement l'affichage du contenu d'un répertoire.
+
+   D. Cas pratiques d'administration.
+
+      Les commandes de gestion permettent de contrôler l'espace disque, comme la vérification de la taille des sous-répertoires de var.
+
+      L'automatisation du nettoyage des fichiers temporaires peut être programmée via l'ordonnanceur cron pour maintenir la performance du système.
+
+II. MANIPULER LES FICHIERS.
+
+   A. Création et modification.
+
+      La commande touch permet de créer un fichier vide ou de mettre à jour l'horodatage d'un fichier existant.
+
+      Les redirections avec echo permettent d'écraser un fichier ou d'ajouter du texte à la fin sans effacer le contenu existant.
+
+      Les éditeurs de texte en mode console comme nano ou vim sont utilisés pour modifier le contenu des fichiers.
+
+      Il est impératif de faire une copie de sauvegarde avant de modifier un fichier de configuration critique.
+
+   B. Lecture et affichage.
+
+      La commande cat affiche tout le contenu d'un fichier, tandis que less permet une navigation page par page adaptée aux gros fichiers.
+
+      Les commandes head et tail affichent respectivement le début et la fin d'un fichier.
+
+      L'option f de la commande tail est essentielle pour surveiller en temps réel l'ajout de nouvelles lignes dans un fichier de log.
+
+   C. Copier, déplacer et renommer.
+
+      La commande cp copie des fichiers, avec l'option u pour ne copier que si la source est plus récente que la destination.
+
+      La commande mv sert à déplacer ou renommer des fichiers.
+
+      La suppression avec rm est définitive car il n'existe pas de corbeille par défaut sous Linux.
+
+      La création d'un alias rm égal à rm i dans le fichier bashrc permet de sécuriser les suppressions.
+
+   D. Archivage et compression.
+
+      La commande tar permet de regrouper des fichiers dans une archive et de les extraire.
+
+      Les outils gzip et bzip2 compressent les fichiers, bzip2 offrant généralement un meilleur taux de compression.
+
+      La combinaison de tar avec gzip permet de créer des archives compressées directement pour les sauvegardes.
+
+III. MANIPULER LES DROITS D'ACCES.
+
+   A. La structure des droits.
+
+      La commande ls avec l'option l affiche les permissions sous la forme de blocs de trois caractères pour le propriétaire, le groupe et les autres.
+
+      Les lettres r, w et x correspondent respectivement aux droits de lecture, d'écriture et d'exécution.
+
+      La vérification des droits sur les fichiers critiques comme shadow est vitale pour la sécurité du système.
+
+   B. Les commandes principales de gestion.
+
+      La commande chmod modifie les permissions en utilisant soit la notation symbolique soit la notation octale.
+
+      La commande chown change le propriétaire d'un fichier, tandis que chgrp modifie le groupe associé.
+
+   C. Les droits spéciaux.
+
+      Le SUID permet l'exécution d'un fichier avec les privilèges de son propriétaire, ce qui présente un risque de sécurité si mal utilisé.
+
+      Le SGID sur un répertoire assure l'héritage du groupe pour les fichiers qui y sont créés, facilitant le travail collaboratif.
+
+      Le Sticky bit protège les fichiers contre la suppression par des tiers dans les répertoires partagés.
+
+   D. Les ACL Access Control Lists.
+
+      Les ACL permettent d'ajouter des droits pour des utilisateurs spécifiques sans modifier les permissions globales du groupe.
+
+      La commande setfacl configure ces droits étendus et getfacl permet de les consulter.
+
+      L'usage des ACL est recommandé dans les environnements multi-utilisateurs complexes.
+
+IV. LES COMMANDES DE MANIPULATION AVANCEES.
+
+   A. La recherche de fichiers.
+
+      La commande find explore l'arborescence en temps réel selon des critères comme le nom, la taille ou l'utilisateur.
+
+      La commande locate est beaucoup plus rapide car elle interroge une base de données indexée mise à jour par updatedb.
+
+   B. La comparaison et l'intégrité.
+
+      La commande diff compare deux fichiers texte ligne par ligne pour identifier les modifications.
+
+      Les commandes md5sum et sha256sum calculent des empreintes numériques pour vérifier l'intégrité des fichiers téléchargés.
+
+   C. L'analyse et le filtrage.
+
+      La commande grep recherche des motifs spécifiques dans les fichiers et supporte la récursivité.
+
+      Les expressions régulières permettent de définir des motifs complexes comme le début de ligne ou des plages de caractères.
+
+      Les outils comme wc, sort et uniq permettent de compter, trier et supprimer les doublons dans les résultats.
+
+   D. La surveillance.
+
+      La commande tail avec l'option f permet de suivre l'activité des logs en continu.
+
+      La commande watch exécute une commande à intervalles réguliers pour surveiller l'évolution d'un état ou d'un répertoire.
+
+V. LES REDIRECTIONS ET PIPES.
+
+   A. Flux standards.
+
+      Le système gère trois flux identifiés par des descripteurs numériques, soit 0 pour l'entrée, 1 pour la sortie standard et 2 pour les erreurs.
+
+   B. Redirections de sortie.
+
+      Le chevron simple redirige la sortie vers un fichier en l'écrasant, tandis que le double chevron ajoute le contenu à la fin.
+
+      Il est possible de rediriger spécifiquement les erreurs avec 2 devant le chevron ou de tout combiner dans un seul fichier.
+
+   C. Redirections d'entrée.
+
+      Le chevron inversé redirige le contenu d'un fichier vers l'entrée d'une commande.
+
+      Le double chevron inversé permet d'utiliser un here document pour fournir plusieurs lignes de texte comme entrée.
+
+   D. Les Pipes.
+
+      Le caractère pipe permet d'enchaîner les commandes en transmettant la sortie de l'une vers l'entrée de l'autre.
+
+      Cette technique permet de construire des traitements complexes comme l'analyse statistique des logs web.
+
+POINTS D'ATTENTION.
+
+      La suppression avec la commande rm est définitive et ne passe par aucune corbeille, ce qui impose une grande prudence.
+
+      L'utilisation de l'alias rm i est une sécurité indispensable pour prévenir les suppressions accidentelles.
+
+      La lecture de fichiers très volumineux avec cat peut saturer le terminal, il faut donc privilégier la commande less.
+
+      Des permissions trop permissives sur les fichiers système critiques comme etc shadow compromettent la sécurité globale.
+
+      Le droit spécial SUID doit être limité au strict nécessaire car il permet une élévation de privilèges potentiellement dangereuse.
+
+      La base de données utilisée par la commande locate doit être mise à jour régulièrement pour refléter l'état réel du système.
+
+EXEMPLES CITES.
+
+      La commande pwd affiche le chemin absolu du répertoire courant.
+
+      La commande mkdir p crée toute une arborescence de répertoires parents manquants.
+
+      La commande find inum delete supprime un fichier en ciblant son numéro d'inode.
+
+      La commande cp u ne copie le fichier que si la source est plus récente que la destination.
+
+      La commande tar czvf crée une archive compressée et horodatée d'un dossier.
+
+      La commande chmod 600 restreint l'accès d'un fichier uniquement à son propriétaire en lecture et écriture.
+
+      La commande setfacl m attribue des droits spécifiques à un utilisateur nommé.
+
+      La commande grep root cherche les lignes commençant par le mot root.
+
+      La commande watch n 2 ls lh surveille l'évolution d'un répertoire toutes les deux secondes.
+
+      La commande df h redirigée vers un fichier horodaté permet de monitorer l'espace disque.

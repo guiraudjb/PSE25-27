@@ -1,0 +1,22 @@
+Standardisation Unix;Quel organisme définit les standards stricts pour qu'un système porte le label Unix ?;L'Open Group. Il certifie la conformité (ex: présence de CDE, gestion des threads) pour assurer l'interopérabilité.
+Portabilité du système;Quelle innovation de 1974 a permis à Unix d'être facilement porté sur d'autres machines ?;La réécriture du noyau en langage C par Dennis Ritchie. Cela a remplacé l'assembleur et facilité la maintenance.
+Protocole Réseau BSD;Quelle innovation majeure a été introduite par la variante BSD-UNIX de Berkeley ?;L'intégration native du protocole TCP/IP. C'est devenu la pierre angulaire d'Internet.
+Standard POSIX;Comment garantir la compatibilité entre différentes versions d'Unix (HP-UX, AIX, Linux) ?;En respectant le standard POSIX. Il établit un cadre commun (API) pour les développeurs.
+Définition Linux vs GNU;Si je dis 'J'installe Linux', qu'est-ce que j'installe techniquement au sens strict ?;Uniquement le noyau (kernel). Le système complet (compilateur GCC, shell bash) est GNU/Linux.
+Licence GPL;Je modifie le code source du noyau Linux et je redistribue mon système. Que dois-je faire ?;Je dois publier mes modifications. La licence GPL impose le partage des améliorations avec la communauté.
+Mise à jour Noyau;Nous sommes en octobre 2025. Quelle version du noyau dois-je viser pour être à jour et stable ?;La version 6.5.x. La distinction paire/impaire pour la stabilité n'existe plus.
+Architecture Système;Quel langage moderne commence à être utilisé aux côtés du C pour écrire le noyau ?;Rust. Il est introduit pour améliorer la sécurité mémoire dans le développement du noyau.
+Multitâche Unix;Comment le système gère-t-il plusieurs utilisateurs sur un seul processeur ?;Par le temps partagé et le mode préemptif. Le système interrompt et réalloue les ressources selon les priorités.
+Sécurité Fichiers;Quel mécanisme permet de limiter l'espace disque consommé par un utilisateur spécifique ?;Les quotas. Ils s'ajoutent aux droits d'accès et aux ACL pour gérer les ressources partagées.
+Administration AIX;Sur un serveur IBM AIX, quel outil utiliser pour configurer le système sans connaître toutes les commandes ?;SMIT (System Management Interface Tool). Il offre une interface texte ou graphique pour l'administration.
+Stockage Solaris;Quelle technologie utiliser sur Solaris pour gérer la compression et la déduplication nativement ?;ZFS. C'est un système de fichiers avancé qui garantit aussi l'intégrité des données.
+Architecture NetBSD;Quel OS choisir pour un projet embarqué sur une architecture processeur très exotique ?;NetBSD. Il est réputé pour sa portabilité extrême (plus de 50 architectures supportées).
+Sécurité OpenBSD;Quel outil spécifique à OpenBSD utiliseriez-vous pour configurer un pare-feu robuste ?;PF (Packet Filter). OpenBSD est focalisé sur la sécurité proactive et le code audité.
+Administration HP-UX;Quel est l'outil d'administration historique pour les systèmes HP-UX (Legacy) ?;SAM (System Administration Manager). Il centralise la gestion des utilisateurs et périphériques.
+Architecture macOS;Sur quelle base technique repose le système macOS 26 en 2025 ?;Darwin. C'est un noyau hybride combinant Mach et des composants BSD.
+Administration OpenSUSE;Quel outil graphique centralise la configuration sur une distribution OpenSUSE ?;YaST. Il permet de tout gérer, du réseau aux logiciels, simplifiant l'administration.
+Stabilité Debian/Ubuntu;Pour un serveur de production nécessitant peu de changements, quel type de version choisir ?;Une version LTS (Long Term Support). Exemple : Ubuntu 24.04 qui assure 5 ans de stabilité.
+Fiabilité Minix;Pourquoi le système Minix est-il considéré comme très fiable malgré sa simplicité ?;Grâce à son architecture micro-noyau. Les pilotes s'exécutent en espace utilisateur, isolant les pannes.
+Interopérabilité;Quelle est la différence fondamentale entre un système ouvert et un système distribué ?;Ouvert = respect des normes/specs publiques. Distribué = répartition de charge sur plusieurs nœuds (peut être fermé).
+Supercalculateurs;Quel système d'exploitation domine à 100% le TOP500 des supercalculateurs en 2025 ?;Linux. Sa flexibilité et son coût en font le standard absolu pour le calcul haute performance (HPC).
+Unix Like vs Based;Comment classer Linux par rapport à la famille Unix historique (System V) ?;C'est un système 'Unix Like'. Il s'inspire de la philosophie Unix mais a son propre noyau, contrairement aux 'Unix Based' (AIX, Solaris).

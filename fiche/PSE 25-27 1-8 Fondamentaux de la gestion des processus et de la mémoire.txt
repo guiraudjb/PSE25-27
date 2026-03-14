@@ -1,0 +1,173 @@
+FONDAMENTAUX DE LA GESTION DES PROCESSUS ET DE LA MÉMOIRE.
+
+LEXIQUE COMPLET.
+
+      Un processus est une entité dynamique gérée par le système d'exploitation englobant le code exécutable et les ressources nécessaires comme la mémoire et la pile.
+
+      Un thread ou processus léger est une unité d'exécution partageant le même espace d'adressage que son processus parent.
+
+      Le PCB ou Process Control Block est une structure de données servant de carte d'identité au processus pour stocker son état et ses registres.
+
+      Le contexte d'exécution regroupe les informations nécessaires comme les registres et les descripteurs pour reprendre l'exécution d'un processus.
+
+      Un ordonnanceur ou scheduler est le composant décidant quel processus s'exécute à un instant donné et pour combien de temps.
+
+      La commutation de contexte est le mécanisme de sauvegarde de l'état actuel d'un processus et de restauration de celui du suivant.
+
+      La préemption est la capacité du système d'exploitation à interrompre un processus en cours via un quantum de temps.
+
+      Un quantum est une tranche de temps très courte allouée à un processus pour garantir un accès équitable au processeur.
+
+      L'interblocage ou deadlock est une situation où des processus s'attendent mutuellement indéfiniment en bloquant des ressources.
+
+      Une condition de course ou race condition est un conflit survenant lors d'accès simultanés non protégés à une ressource partagée.
+
+      Un mutex est un verrou permettant de garantir l'exclusion mutuelle dans une section critique.
+
+      La MMU ou Memory Management Unit est le composant matériel traduisant les adresses virtuelles en adresses physiques.
+
+      La pagination est la division de la mémoire en blocs de taille fixe appelés pages pour gérer la mémoire virtuelle.
+
+      Un défaut de page ou page fault est le signal déclenché lorsque la page demandée est absente de la mémoire vive.
+
+      La segmentation est le découpage de la mémoire en segments logiques de taille variable reflétant la structure du programme.
+
+COURS DÉTAILLÉ.
+
+I. FONDAMENTAUX DE LA GESTION DES PROCESSUS.
+
+   A. Définition et structure.
+
+      Un processus constitue une entité dynamique qui inclut le code exécutable ainsi que l'espace d'adressage dédié contenant les variables et la pile d'exécution.
+
+      L'espace mémoire d'un processus est isolé pour garantir que les données ne soient pas corrompues ou accessibles sans autorisation par d'autres applications.
+
+      L'état du processus qui peut être en cours d'exécution, en attente ou bloqué détermine la manière dont le système alloue les ressources.
+
+   B. Distinction entre processus et threads.
+
+      Les processus lourds fonctionnent comme des unités indépendantes avec leur propre espace mémoire ce qui les rend robustes mais coûteux en temps de commutation.
+
+      Les threads partagent le même espace d'adressage au sein d'un processus parent ce qui les rend plus rapides à créer et adaptés au parallélisme.
+
+      Ce partage de mémoire impose une gestion rigoureuse pour éviter les conflits d'accès simultanés aux variables partagées.
+
+   C. Rôle du système d'exploitation.
+
+      Le système d'exploitation assure une allocation équitable des ressources comme la mémoire et le temps processeur pour éviter qu'un processus ne monopolise le système.
+
+      Il garantit l'isolation des processus pour protéger le système contre les erreurs et les comportements malveillants en confinant chaque application.
+
+      Il fournit des mécanismes de communication inter-processus pour permettre la collaboration sécurisée tout en maintenant l'indépendance des applications.
+
+II. ORDONNANCEMENT DES PROCESSUS.
+
+   A. Le gestionnaire de tâches.
+
+      L'ordonnanceur de haut niveau décide quels programmes sont admis en mémoire en fonction de la charge du système et des ressources disponibles.
+
+      L'ordonnanceur de bas niveau gère la commutation de contexte qui permet de basculer rapidement d'un processus à un autre.
+
+      La commutation de contexte nécessite la sauvegarde des registres et du compteur ordinal ce qui engendre un coût en temps CPU appelé overhead.
+
+   B. Types de multiprogrammation.
+
+      La multiprogrammation non préemptive laisse le processus garder la main jusqu'à sa terminaison ou un blocage volontaire ce qui risque de monopoliser le CPU.
+
+      La multiprogrammation coopérative repose sur le fait que les processus cèdent volontairement le contrôle mais reste vulnérable aux programmes égoïstes.
+
+      La multiprogrammation préemptive permet au système d'interrompre un processus à tout moment grâce à un quantum de temps pour assurer la réactivité.
+
+   C. Gestion multi-cœurs et PCB.
+
+      Les architectures multi-cœurs permettent une exécution réellement parallèle et nécessitent de gérer l'affinité CPU pour optimiser l'utilisation des caches.
+
+      Le Process Control Block est la structure vitale qui stocke l'état du processus, ses registres et ses droits d'accès pour permettre le multi-tâche.
+
+      La sauvegarde et la restauration du contexte via le PCB sont des opérations critiques pour assurer la reprise transparente des processus interrompus.
+
+III. ALGORITHMES D'ORDONNANCEMENT.
+
+   A. Algorithmes classiques.
+
+      L'algorithme FIFO traite les processus dans l'ordre d'arrivée mais pénalise les tâches courtes si un processus long est en tête de file.
+
+      L'algorithme SJF privilégie les tâches les plus courtes pour minimiser l'attente mais risque de provoquer la famine des processus longs.
+
+      Le Round-Robin alloue un quantum de temps fixe à chaque processus de manière cyclique ce qui garantit l'équité pour les systèmes interactifs.
+
+      L'algorithme HPF utilise des priorités pour favoriser les tâches critiques mais nécessite un mécanisme de vieillissement pour éviter la famine des basses priorités.
+
+   B. Algorithmes avancés.
+
+      L'algorithme HRN calcule un ratio entre le temps d'attente et la durée d'exécution pour favoriser les processus qui attendent depuis longtemps.
+
+      Le MLF utilise plusieurs files de priorité avec rétrogradation progressive des processus gourmands en CPU vers des files inférieures.
+
+      Le CFS de Linux utilise un modèle de parts proportionnelles basé sur le poids des processus pour offrir une équité continue sans quanta fixes.
+
+IV. COMMUNICATION ET SYNCHRONISATION.
+
+   A. Problématiques et mécanismes.
+
+      Les conditions de course surviennent lorsque plusieurs entités modifient une ressource partagée sans protection rendant le résultat imprévisible.
+
+      L'interblocage se produit quand quatre conditions sont réunies dont l'exclusion mutuelle, l'attente circulaire, la non-préemption et l'attente active.
+
+      Les mutex agissent comme des verrous pour protéger les sections critiques en assurant qu'un seul thread y accède à la fois.
+
+      Les sémaphores utilisent un compteur et des opérations d'attente et de signalement pour coordonner l'accès à un nombre limité de ressources.
+
+   B. Étude de cas du dîner des philosophes.
+
+      Ce problème modélise l'interblocage causé par l'attente circulaire lorsque chaque philosophe attend une fourchette détenue par son voisin.
+
+      Une solution simple consiste à limiter le nombre de convives pour garantir qu'une fourchette reste disponible.
+
+      La solution hiérarchique impose de saisir la fourchette de numéro inférieur en premier pour briser la symétrie et empêcher l'attente circulaire.
+
+V. GESTION DE LA MÉMOIRE.
+
+   A. Rôle et modes d'exécution.
+
+      Le mode noyau offre un accès illimité à la mémoire et au matériel tandis que le mode utilisateur restreint l'accès à l'espace propre de l'application.
+
+      Le gestionnaire de mémoire doit allouer l'espace nécessaire aux processus tout en empêchant les accès non autorisés pour la sécurité.
+
+   B. Pagination et mémoire virtuelle.
+
+      La pagination divise la mémoire physique et virtuelle en blocs de taille fixe appelés pages pour optimiser l'allocation.
+
+      La MMU traduit à la volée les adresses virtuelles en adresses physiques grâce aux tables de pagination.
+
+      Les algorithmes de remplacement comme LRU suppriment les pages les moins récemment utilisées lorsque la mémoire vive est pleine.
+
+   C. Segmentation.
+
+      La segmentation découpe la mémoire en blocs logiques de taille variable correspondant au code, à la pile ou aux données.
+
+      Elle permet une protection granulaire en définissant des droits spécifiques comme la lecture seule pour le segment de code.
+
+POINTS D'ATTENTION.
+
+      Les threads sont plus performants que les processus lourds pour le parallélisme mais introduisent des risques élevés de conditions de course.
+
+      L'interblocage nécessite la réunion simultanée des quatre conditions de Coffman et briser une seule condition suffit à l'éviter.
+
+      L'ordonnancement sur processeurs multi-cœurs doit respecter l'affinité CPU pour maintenir les performances liées aux caches mémoires.
+
+      La multiprogrammation préemptive est indispensable pour garantir la réactivité des systèmes interactifs modernes contrairement au mode coopératif.
+
+EXEMPLES CITES.
+
+      Traitement de requêtes dans un serveur web utilisant des threads.
+
+      Affichage fluide d'une interface utilisateur gérée par des threads.
+
+      Navigateur web isolé ne pouvant accéder aux fichiers d'un autre logiciel.
+
+      Algorithme Completely Fair Scheduler utilisé dans le noyau Linux.
+
+      Problème du producteur et du consommateur géré par des sémaphores.
+
+      Dîner des philosophes illustrant l'interblocage et la hiérarchie des ressources.

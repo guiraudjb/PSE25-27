@@ -1,0 +1,60 @@
+Quelle est l'architecture du noyau Linux décrite dans le document ?,Linux repose sur une architecture dite monolithique modulaire.
+Comment l'architecture monolithique de Linux est-elle rendue flexible ?,"Grâce au mécanisme des modules du noyau, qui peuvent être chargés ou déchargés dynamiquement."
+Où sont stockés les modules du noyau Linux ?,Ils sont stockés dans l'arborescence /lib/modules/<version_du_noyau>.
+Citez trois responsabilités critiques du noyau Linux.,"L'ordonnancement des processus, la gestion de la mémoire et la gestion des entrées/sorties (I/O)."
+"Sous Linux, par quoi chaque programme en cours d'exécution est-il représenté ?","Chaque programme est représenté par un processus, avec un identifiant (PID) et un état."
+Quels outils permettent d'observer les états des processus sous Linux ?,Les outils comme ps ou top permettent d'observer les états des processus.
+Quelle est la fonction de l'ordonnanceur du noyau Linux ?,"Il détermine quel processus accède au processeur et pour combien de temps, en équilibrant équité et réactivité."
+À quoi servent les mécanismes `nice` et `renice` sous Linux ?,Ils permettent d'influencer le comportement de l'ordonnanceur en modifiant les priorités des processus.
+Quelle est l'approche de Linux concernant la mémoire vive libre ?,"Linux adopte une approche opportuniste, utilisant la mémoire libre pour le cache disque afin d'accélérer les accès."
+Quand le noyau Linux utilise-t-il l'espace de swap ?,"Lorsque la mémoire vive devient insuffisante, pour éviter un arrêt brutal des processus."
+Quel paramètre du noyau influence sa propension à utiliser le swap ?,Le paramètre `swappiness`.
+Quelles commandes permettent d'analyser le comportement de la mémoire du noyau ?,"Les commandes `free`, `vmstat` et la lecture des fichiers dans `/proc`."
+Quel protocole est utilisé par des outils de supervision évolués comme Nagios ou Centreon pour interroger un système distant ?,Le protocole SNMP (Simple Network Management Protocol).
+"Quelle est la philosophie fondamentale du Système de Gestion des Fichiers (SGF) sous Linux, héritée d'Unix ?","La philosophie est ""tout est fichier"", unifiant la manipulation des données, périphériques et interfaces."
+"Selon le document, quelle est une origine très fréquente d'incident pour un administrateur système Linux ?",Une saturation d'un volume.
+Quelle norme définit le rôle et la localisation des principaux répertoires dans l'arborescence Linux ?,Le Filesystem Hierarchy Standard (FHS).
+Qu'est-ce que le superbloc dans un système de fichiers Linux ?,"Il contient les informations globales du système de fichiers (taille, état, nombre d'inodes, etc.)."
+Que décrit un inode dans un système de fichiers Linux ?,"Un inode décrit les métadonnées d'un fichier (droits, propriétaire, dates) et les pointeurs vers les blocs de données."
+"Outre la saturation en espace disque, quel autre type de saturation peut affecter un système de fichiers ?","La saturation en inodes, fréquente sur les serveurs générant de très nombreux petits fichiers."
+Quelles commandes permettent de créer un système de fichiers sur une partition ?,Les commandes `fdisk` (pour partitionner) puis `mkfs.<typefs>`.
+Pour quel type de système de fichiers le document suggère-t-il l'utilisation de `xfs` ?,Pour un système de cartographie qui gère de très gros fichiers.
+Quelle est la conséquence de la corruption du superbloc d'un système de fichiers ?,La corruption du superbloc rend le système de fichiers inutilisable.
+Quelle commande permet de surveiller à la fois l'espace disque occupé et le nombre d'inodes utilisés ?,La commande `df`.
+Qu'est-ce que le LVM (Logical Volume Manager) ?,C'est une couche d'abstraction entre le matériel et les systèmes de fichiers qui offre de la flexibilité au stockage.
+De quelles trois structures est composé le LVM ?,"Il est composé des PV (Physical Volumes), VG (Volume Groups) et LV (Logical Volumes)."
+Quelles sont les trois commandes de base pour créer les structures LVM ?,"Les commandes sont `pvcreate`, `vgcreate` et `lvcreate`."
+Quelles commandes permettent de superviser l'état des structures LVM ?,"Les commandes `pvs`, `vgs` et `lvs`."
+Quelle commande LVM avancée permet de migrer des données d'un volume physique à un autre sans interruption de service ?,La commande `pvmove`.
+Quelles sont les deux grandes approches de migration de données sous Linux ?,La migration au niveau du stockage (avec LVM) et la migration au niveau du système de fichiers (avec rsync).
+Comment la commande `pvmove` opère-t-elle pour migrer des données ?,"Elle opère au niveau des extents LVM, en copiant progressivement les données d'un PV source vers un PV cible."
+Quels sont les deux prérequis avant de lancer une migration avec `pvmove` ?,Disposer d'un volume physique cible dans le même groupe de volumes et d'un espace libre suffisant sur celui-ci.
+Quelle est la première étape d'une migration LVM avec `pvmove` ?,Étape 1 : Analyse de l'existant avec la commande `pvs` pour identifier les volumes et leur occupation.
+Quelles deux commandes sont utilisées à l'étape 2 (intégration du nouveau support) d'une migration LVM ?,Les commandes `pvcreate /dev/sdX` et `vgextend vg_data /dev/sdX`.
+Quelle est la syntaxe de base de la commande pour déclencher la migration des données LVM ?,"`pvmove /dev/sdY /dev/sdX`, où sdY est la source et sdX est la cible."
+Quelle commande permet de suivre l'avancement d'une opération `pvmove` ?,La commande `pvmove --monitor`.
+Quelle est la dernière étape (finalisation) d'une migration LVM après que `pvmove` soit terminé ?,Retirer le volume physique source du groupe de volumes avec `vgreduce vg_data /dev/sdY`.
+Quel est le principal avantage de la migration de données via `pvmove` ?,"La continuité de service, car l'opération se fait sans démonter les systèmes de fichiers."
+Quelle est une limite majeure de la migration par `pvmove` ?,Elle ne permet pas de changer de type de système de fichiers.
+Dans quel cas une migration par `rsync` est-elle nécessaire ?,Lorsque le stockage n'est pas géré par LVM ou lorsqu'on souhaite changer de système de fichiers.
+Quel est le principe de fonctionnement de `rsync` ?,Il compare les fichiers source et destination et ne transfère que les différences.
+Que signifie l'option `-a` dans la commande `rsync` ?,"C'est le mode archive, qui préserve les droits, propriétaires, liens et dates."
+"Lors d'une migration avec rsync, quelle est la première étape après avoir créé et monté la cible ?",Effectuer une première synchronisation avec `rsync` alors que les applications sont toujours actives.
+Quelle option de `rsync` est cruciale lors de la synchronisation finale pour garantir une correspondance stricte ?,"L'option `--delete`, qui supprime sur la destination les fichiers qui n'existent plus sur la source."
+Quelle est l'étape finale d'une migration par `rsync` pour la rendre effective ?,"La bascule, qui consiste à modifier les points de montage (souvent dans `/etc/fstab`) et à redémarrer les services."
+"La migration avec _____ est idéale pour des migrations matérielles transparentes, sans changement logique.",pvmove
+La migration avec _____ est indispensable pour les restructurations ou les changements de systèmes de fichiers.,rsync
+Qu'est-ce qu'un réseau SAN (Storage Area Network) ?,"Un réseau indépendant, souvent en fibre optique, reliant des serveurs à des baies de disques."
+Comment chaque port Fibre Channel (FC) sur un réseau SAN est-il identifié de manière unique ?,Par un numéro appelé World Wide Name (WWN).
+"En administration SAN, qu'est-ce que le 'zoning' ?",La création de zones de communication sécurisées au sein du SAN en organisant les chemins entre serveurs et baies.
+"En administration SAN, comment s'appelle l'opération de découpage des disques physiques en unités logiques ?",Le LUN mapping (création de LUN - Logical Unit Number).
+"En administration SAN, comment se nomme l'autorisation donnée à un serveur pour accéder à une LUN spécifique ?",Le masking.
+Qu'est-ce qu'un stockage NAS (Network Attached Storage) ?,Un stockage qui présente des volumes sous forme de partages réseau à travers le réseau Ethernet classique (TCP/IP).
+Quels protocoles de partage sont typiquement utilisés par le NAS dans les environnements Linux et Microsoft ?,NFS dans les environnements Linux et SMB/CIFS dans les environnements Microsoft.
+Quelle est la principale différence entre SAN et NAS au niveau du modèle OSI ?,"Elles n'évoluent pas sur les mêmes couches du modèle OSI (le SAN est au niveau bloc, le NAS au niveau fichier)."
+Quel type de stockage (SAN ou NAS) offre généralement les performances les plus élevées ?,"Le stockage SAN, car les volumes sont perçus comme des disques locaux par les serveurs."
+Quel est un cas d'usage typique pour le stockage SAN ?,Les bases de données ou les datastores pour les environnements virtualisés.
+Quel est un avantage majeur du stockage NAS par rapport au SAN ?,Une gestion plus simple des droits d'accès et le partage simultané de volumes entre plusieurs serveurs.
+Quel est un cas d'usage typique pour le stockage NAS ?,"L'archivage, la sauvegarde, et le partage de fichiers collaboratifs."
+Quel est le principal inconvénient du stockage SAN mentionné dans le texte ?,Un coût élevé et la nécessité de compétences techniques spécifiques.
+Quel est le principal inconvénient du stockage NAS mentionné dans le texte ?,Des performances généralement inférieures à celles du SAN.

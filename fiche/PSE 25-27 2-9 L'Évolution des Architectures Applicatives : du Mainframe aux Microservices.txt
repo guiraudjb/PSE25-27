@@ -1,0 +1,182 @@
+ARCHITECTURE APPLICATIVE (PSE TRAD 2025 – 2027).
+
+LEXIQUE COMPLET.
+      Un mainframe est un ordinateur central puissant utilisé comme épine dorsale informatique pour concentrer les traitements et les données.
+
+      Un terminal passif est un périphérique d'entrée et de sortie sans capacité de calcul propre.
+
+      L'architecture monolithique désigne un système où toutes les applications et données sont hébergées et contrôlées en un seul point.
+
+      Un tiers est un niveau logique d'une application regroupant des services partageant un même rôle fonctionnel comme la présentation ou les données.
+
+      L'architecture client-serveur ou 2-tiers répartit les tâches entre un poste client gérant l'interface et un serveur gérant les données.
+
+      Un middleware est un logiciel assurant la communication et l'échange de données entre différentes applications ou couches.
+
+      L'architecture 3-tiers introduit une couche intermédiaire dédiée à la logique métier pour isoler la présentation des données.
+
+      Un serveur d'applications est un environnement d'exécution pour la couche métier intégrant des services techniques comme les transactions ou la sécurité.
+
+      Le MOM ou Message Oriented Middleware facilite les échanges asynchrones via des messages pour découpler les systèmes.
+
+      Une promesse est un mécanisme de gestion des flux asynchrones permettant d'éviter les blocages sans infrastructure lourde.
+
+      SOAP est un protocole d'échange basé sur XML caractérisé par sa rigueur et son typage fort.
+
+      REST est un style d'architecture pour les services web s'appuyant sur HTTP et JSON.
+
+      Le terme stateless signifie que chaque requête contient toutes les informations nécessaires sans dépendre d'un contexte serveur.
+
+      JSON est un format de données léger et facile à parser devenu le standard des échanges web.
+
+      Une SPA ou Single Page Application est une application web chargeant le code une seule fois et mettant à jour le contenu dynamiquement.
+
+      Le SSR ou Server-Side Rendering consiste à générer le contenu d'une page web côté serveur pour optimiser le référencement.
+
+      GraphQL est un langage de requête permettant au client de définir précisément la structure des données souhaitées.
+
+      Les microservices sont une architecture découpant une application en services indépendants communiquant via des API.
+
+      La conteneurisation est une technique d'encapsulation d'une application et de ses dépendances dans une unité isolée.
+
+      L'orchestration désigne l'automatisation du déploiement et de la gestion des clusters de conteneurs.
+
+COURS DÉTAILLÉ.
+
+I. DES MAINFRAMES AUX ARCHITECTURES WEB : LA DYNAMIQUE CENTRALISATION ET DÉCENTRALISATION.
+
+   A. L'ère des mainframes (années 1960–1980) : centralisation extrême.
+
+      Les mainframes ont constitué l'épine dorsale des systèmes informatiques en imposant une centralisation absolue des traitements et des données.
+
+      Les utilisateurs interagissaient avec le système via des terminaux passifs qui servaient uniquement à l'affichage et à la saisie sans capacité de calcul.
+
+      Cette architecture monolithique simplifiait la maintenance et la sécurité car tout était contrôlé en un point unique.
+
+      Les limites de ce modèle incluaient une rigidité face aux évolutions et la création de goulots d'étranglement sur la machine centrale.
+
+   B. Le client-serveur (années 1990) : première décentralisation.
+
+      Les architectures 2-tiers ont réparti les responsabilités en confiant l'interface au client et la gestion des données au serveur.
+
+      Cette approche a permis de réduire la charge sur les serveurs centraux tout en exploitant la puissance des postes de travail.
+
+      La complexité du déploiement et de la maintenance des applications sur chaque poste client est devenue un problème majeur.
+
+      Les parcs informatiques hétérogènes ont engendré des difficultés de compatibilité et de mise à jour des logiciels.
+
+   C. Le web et la recentralisation (années 1990–2000).
+
+      L'essor d'Internet a recentralisé les traitements sur des serveurs web accessibles via des navigateurs jouant le rôle de clients légers.
+
+      Le déploiement a été radicalement simplifié car aucune installation spécifique n'était requise sur le poste utilisateur.
+
+      Les protocoles HTTP et HTML se sont imposés comme les standards mondiaux pour la diffusion des applications.
+
+      Le manque de dynamisme des interfaces web imposant un rechargement complet de la page à chaque interaction a dégradé l'expérience utilisateur.
+
+II. LES ARCHITECTURES MULTI-NIVEAUX ET L'INTEROPÉRABILITÉ.
+
+   A. Architectures 3-tiers et n-tiers : séparation des couches.
+
+      L'architecture 3-tiers sépare distinctement la couche de présentation, la couche métier et la couche de données.
+
+      Les serveurs d'applications comme J2EE ou .NET exécutent la couche métier et fournissent des services techniques comme la sécurité ou les transactions.
+
+      Cette séparation modulaire facilite la maintenance, l'évolution et la sécurité indépendante de chaque partie du système.
+
+      L'évolution vers le n-tiers ajoute des couches intermédiaires supplémentaires comme la gestion des caches ou l'équilibrage de charge.
+
+   B. Middleware et promesses : vers l'asynchrone.
+
+      Les Message Oriented Middleware ont historiquement facilité les échanges asynchrones pour découpler les applications et garantir la livraison des messages.
+
+      La mise en œuvre de ces solutions d'infrastructure était souvent lourde et complexe.
+
+      L'apparition de JavaScript et Node.js a introduit les promesses pour gérer les flux asynchrones de manière plus légère au niveau du code.
+
+      Ce mécanisme évite les blocages lors des requêtes réseau sans nécessiter d'infrastructures coûteuses comme les ESB.
+
+   C. Services web : de SOAP à REST.
+
+      Le protocole SOAP basé sur XML offrait une grande rigueur et un typage fort adaptés aux systèmes critiques.
+
+      La verbosité et la complexité de SOAP ont cependant posé des problèmes de performance et de lourdeur.
+
+      L'architecture REST s'est imposée en utilisant les standards HTTP et JSON pour offrir une solution plus légère et flexible.
+
+      Le caractère stateless de REST permet de ne pas conserver de contexte serveur ce qui favorise la scalabilité.
+
+III. REST ET LES FRAMEWORKS MODERNES : L'ÈRE DES APPLICATIONS DYNAMIQUES.
+
+   A. REST : le standard des APIs modernes.
+
+      REST structure les échanges autour de ressources identifiées par des URL et manipulées par les verbes HTTP standardisés.
+
+      Le format JSON a remplacé XML grâce à sa légèreté et sa compatibilité native avec JavaScript.
+
+      Les bonnes pratiques incluent le versioning des endpoints et la sécurisation via des protocoles comme OAuth 2.0.
+
+      L'absence d'état ou stateless simplifie la répartition de la charge entre plusieurs instances de serveurs.
+
+   B. Clients riches et frameworks JavaScript.
+
+      Les Single Page Applications chargent le code une seule fois et mettent à jour le contenu dynamiquement via des appels API.
+
+      Cette approche offre une réactivité proche des applications natives mais pose des problèmes d'indexation pour les moteurs de recherche.
+
+      Le Server-Side Rendering résout ces problèmes SEO en générant le contenu côté serveur avant l'envoi au navigateur.
+
+      Des frameworks comme Next.js ou Nuxt.js combinent les avantages des interfaces riches et du rendu serveur.
+
+   C. Data exchange : JSON, GraphQL.
+
+      L'utilisation de JSON avec REST peut entraîner une sur-récupération ou une sous-récupération de données lors de requêtes complexes.
+
+      GraphQL permet au client de demander exactement les champs nécessaires y compris pour des données imbriquées en une seule requête.
+
+      Cette technologie est idéale pour les données interconnectées complexes tandis que REST reste adapté aux cas simples.
+
+IV. VERS DES ARCHITECTURES MODULAIRES : MICROSERVICES ET CONTENEURISATION.
+
+   A. Microservices : découplage et scalabilité.
+
+      Les microservices découpent l'application en services autonomes responsables chacun d'une fonction métier spécifique.
+
+      La communication entre ces services se fait via des API légères ou des messages asynchrones.
+
+      Cette architecture améliore la résilience car une panne sur un service n'impacte pas nécessairement l'ensemble du système.
+
+      La complexité augmente cependant pour la gestion des données distribuées et le monitoring des interactions.
+
+   B. Conteneurisation : Docker et orchestration.
+
+      La conteneurisation encapsule l'application et ses dépendances pour garantir la portabilité entre les environnements de développement et de production.
+
+      Les conteneurs sont plus légers que les machines virtuelles car ils partagent le noyau du système d'exploitation.
+
+      L'outil Kubernetes permet d'orchestrer le déploiement et la mise à l'échelle automatique des clusters de conteneurs.
+
+      L'automatisation inclut le redémarrage en cas de panne et la mise à jour sans interruption de service.
+
+POINTS D'ATTENTION.
+      L'histoire de l'architecture oscille entre des phases de centralisation comme les mainframes et de décentralisation comme le client-serveur.
+
+      Chaque modèle architectural présente des compromis spécifiques entre la facilité de maintenance et la complexité de déploiement.
+
+      La gestion de l'asynchrone a évolué des middlewares d'infrastructure lourds vers des solutions de code plus légères.
+
+      Les microservices offrent une grande agilité mais requièrent une maturité technique élevée pour gérer la complexité distribuée.
+
+EXEMPLES CITES.
+      Les secteurs de la banque et de l'assurance utilisent encore les mainframes.
+
+      Les serveurs d'applications J2EE et .NET.
+
+      Les middlewares CORBA et DCOM.
+
+      Les frameworks React et Angular et Vue.js.
+
+      Les outils Docker et Kubernetes.
+
+      Les protocoles HTTP et SOAP et REST.

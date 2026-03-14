@@ -1,0 +1,48 @@
+Pour quelles raisons les espaces mémoires des processus sont-ils étanches ?,"Pour éviter la divulgation/corruption de données, l'exécution de code malveillant, et le blocage du système."
+Qu'est-ce que l'isolation des espaces mémoire des processus rend nécessaire ?,"Des mécanismes de synchronisation, des moyens de communication, et des protocoles de coordination."
+Définissez le principe d'exclusion mutuelle.,C'est un principe qui empêche la modification simultanée d'une ressource partagée critique par plusieurs processus.
+Qu'est-ce qu'une section critique ?,Une partie du code qui ne peut pas être exécutée simultanément par plusieurs processus.
+Quel est l'objectif de l'identification des sections critiques dans le code ?,Protéger les ressources critiques partagées des accès concurrents le temps de leur exécution.
+Quel type de mécanisme de synchronisation utilise une variable booléenne `verrou` et fait boucler le processus en attente ?,L'attente active.
+Quelle est la primitive souvent associée à l'attente active ?,La primitive TAS (Test and Set).
+Quels sont les inconvénients de l'attente active ?,Elle est gourmande en CPU et ne gère ni timeout ni processus mourant.
+"Quel mécanisme de synchronisation, inventé par Dijkstra, permet une attente passive ?",Les sémaphores.
+Quelle primitive de sémaphore permet d'entrer en section critique et peut endormir le processus ?,La primitive P(mutex).
+Quelle primitive de sémaphore signale la sortie de la section critique et réveille un processus en attente ?,La primitive V(mutex).
+Quels sont les deux types de sémaphores ?,Les sémaphores binaires (mutex) et les sémaphores comptants.
+Quel est le principal avantage de l'attente passive via les sémaphores par rapport à l'attente active ?,L'attente passive donne un meilleur rendement CPU.
+Quelle est une limite des sémaphores concernant la défaillance d'un processus ?,"Si un processus meurt sans libérer le sémaphore, il y a un risque de blocage."
+Quel est le principe de la communication par mémoire partagée ?,Une zone mémoire commune est mise en place où plusieurs processus peuvent lire ou écrire.
+Quels types de sémaphores sont absolument nécessaires pour utiliser la mémoire partagée en toute sécurité ?,Un sémaphore d'exclusion mutuelle (accès concurrent) et un sémaphore de synchronisation (producteur/consommateur).
+Quel est le principal avantage de la mémoire partagée en termes de performance ?,Elle est très rapide car il n'y a pas de copie de données entre les processus.
+Quel est le principal inconvénient de la programmation avec mémoire partagée ?,La programmation est complexe et nécessite une discipline stricte pour éviter la corruption de données.
+Quel est le nom officiel dans Unix pour les boîtes aux lettres ou files de messages ?,Message queues.
+Quel est le principe des files de messages (message queues) ?,"C'est une communication indirecte et asynchrone via un tampon FIFO (Premier entré, Premier sorti)."
+Quels sont les trois sémaphores nécessaires au fonctionnement des files de messages ?,"Un sémaphore mutex, un sémaphore 'nombre de messages', et un sémaphore 'nombre de places disponibles'."
+Quel est le principe de la communication par rendez-vous ?,Les deux processus (producteur et consommateur) doivent atteindre simultanément un point d'attente pour communiquer.
+Quand un 'interblocage' (deadlock) survient-il ?,"Il survient quand deux ou plusieurs processus sont bloqués, chacun attendant une ressource détenue par l'autre."
+Quels sont les deux synonymes de 'interblocage' mentionnés dans le document ?,L'étreinte fatale et le deadlock.
+Quels sont les trois mécanismes de communication inclus dans le module IPC UNIX Système V ?,"La mémoire partagée, la file de messages et les sémaphores."
+Quelle est la principale caractéristique des tubes ordinaires pour la communication inter-processus ?,Ils permettent la communication sous forme d'un flot continu d'octets (stream) entre des processus de même filiation.
+Quel appel système permet de créer un tube ordinaire ?,L'appel système `pipe()`.
+Une des limites des tubes ordinaires est que l'opération de lecture y est _____ : une information lue est extraite du tube.,destructive
+La communication via des tubes ordinaires est limitée aux processus ayant la même _____.,filiation
+Quel est l'avantage principal des tubes nommés (FIFOs) par rapport aux tubes ordinaires ?,Ils permettent la communication entre des processus qui n'ont pas de filiation.
+Comment un tube nommé persiste-t-il dans le système ?,"Il persiste dans le système de fichiers jusqu'à sa suppression explicite (par exemple, avec la commande `rm`)."
+Quelles commandes permettent de créer un tube nommé de type 'p' ?,Les commandes `mknod` et `mkfifo`.
+Quel est l'inconvénient principal des tubes nommés (FIFOs) concernant la communication bidirectionnelle ?,Leur usage en duplex n'est pas fiable ; ils sont généralement utilisés comme unidirectionnels.
+Qu'est-ce qu'un signal dans le contexte de la communication inter-processus ?,Un message asynchrone envoyé à un processus pour générer une interruption logicielle.
+Quelle commande permet à un utilisateur d'envoyer un signal à un processus ?,La commande `kill`.
+À quoi correspond le signal SIGKILL (9) ?,À un arrêt forcé et immédiat du processus.
+À quoi correspond le signal SIGTERM (15) ?,"À un signal de terminaison standard, demandant au processus de s'arrêter proprement."
+Quel signal est utilisé pour demander la suspension d'un processus ?,Le signal SIGSTOP (17).
+Quel signal est utilisé pour demander la reprise d'un processus suspendu ?,Le signal SIGCONT (19).
+Qu'est-ce qu'une socket ?,Un point de communication bidirectionnel par lequel un processus peut émettre ou recevoir des données.
+Quelle famille de sockets (PF_UNIX ou PF_INET) est utilisée pour la communication locale via des fichiers locaux ?,La famille PF_UNIX.
+Quelle famille de sockets (PF_UNIX ou PF_INET) est utilisée pour la communication réseau ?,La famille PF_INET.
+Quelles commandes permettent de lister les connexions établies au travers de sockets ?,Les commandes `netstat` et `ss`.
+"D'après l'évaluation, l'algorithme Test And Set (TAS) est-il du type attente active ou attente passive ?",Attente active.
+"D'après l'évaluation, quels sont les deux rôles principaux du sémaphore ?",L'attente passive et la synchronisation.
+"D'après l'évaluation, est-il vrai ou faux que les systèmes multi-processeurs réduisent le risque d'interblocage ?",Faux.
+Quels sont les avantages de la communication par socket mentionnés dans l'évaluation ?,La communication réseau et la communication full duplex (bidirectionnelle simultanée).
+"D'après l'évaluation, l'appel système `fork()` sert-il directement à la communication inter-processus ?",Faux.

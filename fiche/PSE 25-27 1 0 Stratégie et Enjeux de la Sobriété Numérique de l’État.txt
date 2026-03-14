@@ -1,0 +1,131 @@
+LA SOBRIETE NUMERIQUE.
+
+LEXIQUE COMPLET.
+
+      La sobriété numérique consiste à concevoir, produire et utiliser le numérique de manière plus sobre pour réduire son impact environnemental tout en maintenant son efficacité.
+      
+      L'empreinte numérique désigne l'impact environnemental global du numérique qui inclut la fabrication des équipements, les centres de données, les réseaux et les usages.
+      
+      L'écoconception est une démarche visant à réduire les besoins en ressources informatiques et énergétiques dès la phase de conception logicielle et matérielle.
+      
+      La rationalisation des usages implique de limiter les flux de données et les volumes de stockage inutiles pour optimiser la consommation numérique.
+      
+      La durabilité des infrastructures vise à allonger la durée de vie du matériel et à favoriser le réemploi pour réduire le gaspillage technologique.
+      
+      La mission numérique responsable ou MiNumEco est l'entité qui pilote les initiatives de sensibilisation et les bonnes pratiques numériques au sein de l'administration.
+      
+      Le programme France 2030 est un plan d'investissement doté de 54 milliards d'euros soutenant l'offre numérique innovante et la durabilité des infrastructures.
+
+COURS DÉTAILLÉ.
+
+I. CONTEXTE ET ENJEUX DE LA SOBRIETE NUMERIQUE.
+
+   A. L'urgence environnementale du numérique.
+
+      Le secteur du numérique représente environ quatre pour cent des émissions mondiales de gaz à effet de serre, ce qui est supérieur aux émissions du transport aérien.
+      
+      Cette empreinte environnementale inclut la fabrication des équipements, la gestion des centres de données, les infrastructures réseaux et l'ensemble des usages quotidiens.
+      
+      La croissance annuelle des usages numériques est forte, portée par l'explosion des données, la multiplication des serveurs et la généralisation du cloud.
+      
+      La montée en puissance de l'intelligence artificielle contribue également à l'augmentation de la consommation de ressources numériques.
+      
+      Au-delà des émissions de gaz, le numérique participe à l'épuisement des ressources abiotiques, notamment les métaux et minéraux nécessaires à la fabrication du matériel.
+
+   B. La stratégie de l'État et le cadre institutionnel.
+
+      La circulaire Services publics écoresponsables lancée en 2020 et révisée en 2023 fixe un cadre pour réduire l'impact écologique de l'administration.
+      
+      L'objectif affiché est de réduire de vingt-deux pour cent les émissions de gaz à effet de serre des services publics d'ici à 2027 grâce à quinze mesures concrètes.
+      
+      Le volet numérique de cette stratégie s'articule autour du réemploi de matériel, de la maîtrise de la consommation numérique et de la sensibilisation des agents.
+      
+      La Direction interministérielle du numérique pilote les feuilles de route du numérique responsable pour chaque ministère en s'appuyant sur le réseau de référents ministériels.
+
+II. DEFINITION ET PILIERS D'ACTION.
+
+   A. Définition officielle et objectifs.
+
+      Selon l'ADEME et la DINUM, la sobriété numérique est l'art d'optimiser chaque étape du cycle de vie d'un produit ou service numérique.
+      
+      L'objectif est de concilier la performance technique nécessaire au service public avec une responsabilité environnementale accrue.
+
+   B. Les trois piliers de l'application professionnelle.
+
+      Le premier pilier est l'écoconception qui cherche à réduire les besoins en ressources dès la création des logiciels et du matériel.
+      
+      Le deuxième pilier est la rationalisation des usages qui consiste à limiter les flux et les volumes de données inutiles, qu'elles soient en transit ou stockées.
+      
+      Le troisième pilier est la durabilité des infrastructures qui se concentre sur l'allongement de la durée de vie des équipements et la réduction du gaspillage par le réemploi.
+
+III. APPLICATION TECHNIQUE DANS LE CADRE DU PSE TRAD.
+
+   A. Optimisation des processus et des traitements.
+
+      L'optimisation des processus nécessite de surveiller activement la consommation de mémoire et les entrées-sorties pour libérer des ressources.
+      
+      Il est recommandé de réécrire ou d'ajuster les scripts informatiques pour les rendre moins consommateurs en ressources système.
+      
+      La rationalisation des traitements par lots ou batchs implique de planifier leur exécution en fonction de la charge du serveur.
+      
+      L'exécution de ces traitements doit être conditionnée à la présence effective des ressources nécessaires pour éviter les échecs et les relances inutiles.
+
+   B. Gestion des infrastructures et des données.
+
+      La mise en veille des serveurs inactifs doit être systématisée par la détection des périodes d'inactivité et la programmation de cycles d'arrêt.
+      
+      La mutualisation des ressources passe par la virtualisation qui permet d'héberger plusieurs machines virtuelles sur un seul serveur physique.
+      
+      L'utilisation de la conteneurisation via des outils comme Docker permet d'exécuter plusieurs applications isolées sur le même hôte pour optimiser l'usage matériel.
+      
+      Les environnements de test et de développement doivent être rationalisés pour éviter la multiplication inutile d'instances.
+      
+      Le nettoyage régulier des données implique la suppression des fichiers temporaires, des sauvegardes obsolètes et des doublons.
+      
+      La compression des données, des sauvegardes et des transferts de bases de données aux formats adaptés permet de réduire l'espace de stockage et la bande passante.
+
+   C. Optimisation des flux réseaux.
+
+      Il est nécessaire de limiter les flux réseau en mutualisant les transferts de données pour éviter la redondance.
+      
+      Les requêtes inutiles doivent être limitées et les données fréquemment utilisées doivent être mises en cache pour réduire les appels au serveur.
+
+IV. SPECIFICITES DE L'ADMINISTRATION ET REGLEMENTATION.
+
+   A. Les référentiels techniques et légaux.
+
+      Le Référentiel général d'écoconception de services numériques définit les critères pour concevoir des services responsables et sert d'outil d'évaluation.
+      
+      La démarche de sobriété doit s'articuler en cohérence avec le Référentiel général de sécurité et le Référentiel général d'accessibilité.
+      
+      Le Règlement général de protection des données impose également un cadre strict qui rejoint les objectifs de minimisation des données collectées.
+      
+      Le guide réalisé par l'ADEME et l'ARCEP en 2023 définit les indicateurs officiels pour mesurer l'empreinte environnementale du numérique.
+
+   B. Le code de la commande publique.
+
+      L'article L2111-1 du code de la commande publique impose de définir avec précision la nature et l'étendue des besoins avant tout lancement de consultation.
+      
+      Cette définition des besoins doit obligatoirement prendre en compte des objectifs de développement durable dans leurs dimensions économique, sociale et environnementale.
+
+POINTS D'ATTENTION.
+
+      Il ne faut pas opposer la performance technique et la responsabilité environnementale car le PSE traditionnel agit sur les leviers concrets de consommation et de stockage pour une performance durable.
+      
+      La consommation énergétique du numérique dépasse celle du transport aérien et continue de croître fortement chaque année.
+      
+      La stratégie de l'État s'appuie sur une structure claire allant de la DINUM jusqu'aux référents ministériels pour assurer le déploiement des mesures.
+      
+      L'achat public est un levier majeur de la sobriété numérique encadré par la loi pour intégrer systématiquement les critères environnementaux.
+
+EXEMPLES CITES.
+
+      L'utilisation de la technologie Docker est citée pour illustrer la conteneurisation et l'exécution d'applications isolées sur un même hôte.
+      
+      La réécriture des scripts est mentionnée comme méthode pour optimiser les processus actifs et libérer de la mémoire.
+      
+      La planification des traitements batch selon la charge serveur est un exemple de rationalisation des traitements.
+      
+      La mise en cache des données fréquemment utilisées est une technique pour limiter les requêtes et les flux réseau.
+      
+      Le cloud souverain et le cloud de confiance sont évoqués dans le contexte de la généralisation du stockage distant.

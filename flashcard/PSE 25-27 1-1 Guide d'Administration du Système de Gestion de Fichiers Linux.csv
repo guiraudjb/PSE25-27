@@ -1,0 +1,61 @@
+Quelle est la première étape critique de l'organisation d'un disque sous Linux ?,"Le partitionnement, qui consiste à diviser un support de stockage en zones indépendantes appelées partitions."
+Quel objectif du partitionnement permet de cloisonner les données en isolant des répertoires majeurs sur des partitions distinctes ?,L'organisation.
+Comment le partitionnement peut-il améliorer la sécurité d'un système Linux ?,"En limitant les dégâts potentiels d'un incident ; par exemple, si `/var/log` se remplit, la partition racine `/` reste fonctionnelle."
+Quel ancien schéma de partitionnement est limité à 4 partitions primaires et à une taille maximale de 2 To par partition ?,Le MBR (Master Boot Record).
+Quelle commande est utilisée pour sauvegarder le MBR (Master Boot Record) d'un disque `/dev/sda` ?,`dd if=/dev/sda of=/root/mbr_backup.img bs=512 count=1`
+"Quel schéma de partitionnement moderne, utilisé avec UEFI, supporte jusqu'à 128 partitions et des tailles de plusieurs exaoctets ?",La GPT (GUID Partition Table).
+Quelle caractéristique de la GPT assure une meilleure protection contre la corruption de la table des partitions ?,"La redondance, avec une copie de la table GPT en début et en fin de disque."
+Quel outil de partitionnement en ligne de commande est traditionnellement utilisé pour les disques au format MBR ?,`fdisk`
+Quel outil de partitionnement est spécifiquement conçu pour les disques utilisant le schéma GPT ?,`gdisk`
+Quelle commande permet de visualiser la topologie des partitions et des disques sous forme hiérarchique ?,`lsblk`
+"Dans une stratégie de partitionnement avancée pour un serveur critique, pourquoi la partition `/boot` est-elle souvent gardée hors du LVM ?",Pour assurer la compatibilité avec les chargeurs d'amorçage qui pourraient ne pas savoir lire les volumes LVM.
+Quel est le principal avantage du LVM (Logical Volume Manager) par rapport au partitionnement traditionnel ?,Il introduit une abstraction qui permet de manipuler des volumes logiques plus souples et redimensionnables.
+"Dans l'architecture LVM, que représente un Volume Physique (PV) ?",Une partition ou un disque entier initialisé pour être utilisé par LVM.
+"Dans l'architecture LVM, que représente un Groupe de Volumes (VG) ?","Un regroupement logique de plusieurs Volumes Physiques (PV), formant une ""réserve"" de stockage."
+"Dans l'architecture LVM, que représente un Volume Logique (LV) ?","Une partition logique créée à l'intérieur d'un Groupe de Volumes (VG), sur laquelle on peut créer un système de fichiers."
+Quelle partition doit impérativement rester en dehors du LVM pour garantir le démarrage du système ?,La partition `/boot`.
+Quel est le type de partition à utiliser lors du partitionnement d'un disque pour qu'il soit reconnu par LVM ?,Le type `8e` (Linux LVM).
+Quelle commande initialise une partition (ex: `/dev/sdb1`) en tant que Volume Physique (PV) LVM ?,`pvcreate /dev/sdb1`
+Quelle commande crée un Groupe de Volumes (VG) nommé `vgdata` à partir des PV `/dev/sdb1` et `/dev/sdb2` ?,`vgcreate vgdata /dev/sdb1 /dev/sdb2`
+Quelle commande crée un Volume Logique (LV) de 20 Go nommé `lv_data` dans le VG `vgdata` ?,`lvcreate -L 20G -n lv_data vgdata`
+"Après avoir étendu un volume logique LVM avec `lvextend`, quelle commande faut-il utiliser pour que le système de fichiers (ext4) utilise le nouvel espace ?",`resize2fs`
+"Quelle commande LVM permet de migrer des données d'un Volume Physique (PV) à un autre au sein du même VG, sans interruption de service ?",`pvmove`
+"Quelle fonctionnalité LVM permet de capturer l'état d'un volume à un instant T, ce qui est très utile pour des sauvegardes cohérentes ?",Les snapshots (instantanés).
+"Quel système de fichiers ancien, non journalisé, est parfois encore utilisé pour des partitions `/boot` ou des systèmes embarqués ?",`ext2`
+Quelle innovation majeure le système de fichiers `ext3` a-t-il apportée par rapport à `ext2` ?,"La journalisation, qui améliore la récupération après un crash."
+"Le système de fichiers ____ est le standard actuel dans de nombreuses distributions Linux, combinant stabilité, performance et compatibilité.",`ext4`
+Pour quel type de charge de travail le système de fichiers XFS est-il particulièrement optimisé ?,"Les très gros fichiers et les systèmes massivement parallèles (serveurs de bases de données, calcul intensif)."
+"Quel système de fichiers moderne intègre des fonctionnalités avancées comme les snapshots, les subvolumes et la compression transparente ?",`Btrfs` (B-tree FS).
+Quel système de fichiers a été spécifiquement conçu pour optimiser les performances et réduire l'usure sur les SSD et mémoires flash ?,`F2FS` (Flash-Friendly File System).
+Qu'est-ce que `tmpfs` ?,"Un système de fichiers temporaire qui réside en mémoire vive (RAM), rapide mais volatil."
+Quelle est la commande générique pour créer et formater un système de fichiers sur une partition sous Linux ?,`mkfs`
+Quelle commande spécifique est utilisée pour formater une partition en `XFS` ?,`mkfs.xfs`
+Quelle est la commande générique pour vérifier et tenter de réparer l'intégrité d'un système de fichiers ?,`fsck` (file system check).
+"Quel outil de réparation spécifique doit être utilisé pour un système de fichiers XFS, car `fsck` ne le gère pas ?",`xfs_repair`
+Dans quel fichier de configuration déclare-t-on les montages de systèmes de fichiers qui doivent être effectués automatiquement au démarrage ?,`/etc/fstab`
+"Quelle option de montage, spécifiée dans `/etc/fstab` ou avec la commande `mount`, empêche l'exécution de programmes binaires depuis un système de fichiers ?",`noexec`
+"Quelle commande affiche l'espace disque utilisé et libre pour chaque système de fichiers monté, dans un format lisible par l'homme ?",`df -h`
+Quelle commande permet de calculer la taille totale d'un répertoire et de ses sous-répertoires (ex: `/var/log`) ?,`du -sh /var/log`
+"Outre l'espace disque, quelle ressource peut être épuisée sur un système de fichiers, en particulier lorsqu'il y a des millions de petits fichiers ?",Les inodes.
+Quelle commande permet de surveiller l'utilisation des inodes pour chaque système de fichiers monté ?,`df -i`
+Quelle commande permet de lister les processus qui génèrent le plus d'entrées/sorties (E/S) disque en temps réel ?,`iotop`
+Quelle commande permet d'identifier les processus qui utilisent un système de fichiers monté (ex: `/mnt/data`) ?,`fuser -m /mnt/data`
+"Quelle commande affiche le type de système de fichiers et l'UUID d'un périphérique bloc, information souvent utilisée dans `/etc/fstab` ?",`blkid`
+Quel est le rôle du VFS (Virtual File System) dans le noyau Linux ?,Il agit comme une couche d'abstraction et une interface standardisée entre les applications et les différents types de systèmes de fichiers.
+"Grâce à quelle couche d'abstraction une commande comme `ls` fonctionne-t-elle de la même manière sur un système de fichiers `ext4`, `NFS` ou `/proc` ?",Le VFS (Virtual File System).
+"Dans le VFS, quelle structure de données représente l'état général d'un système de fichiers monté (taille, type, options) ?",Le superblock virtuel.
+"Dans le VFS, quelle structure de données décrit les entrées de répertoire et est mise en cache pour accélérer la recherche de chemins ?",Le dentry (Directory Entry).
+Le système de fichiers `/proc` stocke-t-il des données sur un disque physique ?,"Non, c'est un système de fichiers virtuel qui expose une interface dynamique vers les structures internes du noyau."
+Quel fichier dans `/proc` fournit des informations détaillées sur les caractéristiques des processeurs du système ?,`/proc/cpuinfo`
+Quel fichier dans `/proc` donne un état détaillé de l'utilisation de la mémoire RAM et du swap ?,`/proc/meminfo`
+"Dans `/proc`, où peut-on trouver des informations sur un processus en cours d'exécution ayant un PID spécifique ?",Dans le répertoire `/proc/[PID]/`.
+Quel sous-répertoire de `/proc` permet de consulter et de modifier dynamiquement des paramètres du noyau ?,`/proc/sys`
+Les modifications effectuées directement dans `/proc/sys` sont-elles permanentes ?,"Non, elles sont volatiles et disparaissent après un redémarrage."
+Comment peut-on rendre permanentes les modifications des paramètres du noyau effectuées via `/proc/sys` ?,En les ajoutant dans le fichier `/etc/sysctl.conf` ou dans un fichier sous `/etc/sysctl.d/`.
+Quel est le rôle principal du système de fichiers virtuel `/sys` (sysfs) ?,Il fournit une vue organisée et structurée des périphériques matériels du système et de leurs pilotes.
+Quelle est la principale différence entre `/proc` et `/sys` ?,"`/proc` se concentre sur les processus et l'état du noyau, tandis que `/sys` se concentre sur la hiérarchie des périphériques matériels."
+"Dans quelle sous-arborescence de `/sys` les périphériques sont-ils organisés par classe fonctionnelle (réseau, bloc, son, etc.) ?",`/sys/class/`
+Dans quelle sous-arborescence de `/sys` trouve-t-on la liste des périphériques de type bloc comme les disques durs et les partitions ?,`/sys/block/`
+Quel service système moderne utilise intensivement `/sys` pour détecter et configurer automatiquement les périphériques lors de leur branchement ?,`udev`
+Où peut-on trouver la vitesse négociée par une interface réseau (ex: `eth0`) en utilisant le système de fichiers `sysfs` ?,Dans le fichier `/sys/class/net/eth0/speed`.
+Dans quel fichier peut-on modifier la politique de gouvernance du CPU (ex: passer en mode 'performance') via `sysfs` ?,`/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`

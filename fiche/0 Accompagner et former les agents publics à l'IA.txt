@@ -1,0 +1,115 @@
+ACCOMPAGNEMENT ET FORMATION DES AGENTS PUBLICS À L'INTELLIGENCE ARTIFICIELLE.
+
+LEXIQUE COMPLET.
+
+      La GRH publique désigne la gestion des ressources humaines appliquée spécifiquement au contexte de l'administration et de la fonction publique.
+
+      L'acculturation représente l'ensemble des actions visant à informer et familiariser les agents avec les concepts, les usages et les enjeux de l'intelligence artificielle.
+
+      Le Shadow IA, ou IA de l'ombre, qualifie l'utilisation non déclarée et non approuvée d'outils d'intelligence artificielle par les agents, ce qui engendre des risques de sécurité et de confidentialité.
+
+      Les soft skills correspondent aux compétences douces et comportementales, telles que les capacités socio-émotionnelles ou cognitives, indispensables pour s'adapter aux mutations du travail.
+
+      Le référentiel éthique est un document cadrant les règles morales et déontologiques spécifiques à l'usage de l'IA, s'inspirant du RGPD et du contrôle déontologique.
+
+      Le prompt désigne la commande ou l'instruction donnée à une intelligence artificielle générative pour obtenir un résultat précis.
+
+COURS DÉTAILLÉ.
+
+I. CADRE GÉNÉRAL ET ENJEUX DU DISPOSITIF.
+
+   A. Objectifs et prévention des risques.
+
+      L'objectif principal de ce dispositif est de prévenir les risques liés à une utilisation mal maîtrisée de l'intelligence artificielle dans les processus de gestion des ressources humaines.
+
+      Il convient d'anticiper les mécanismes nécessaires pour que les agents soient correctement informés, sensibilisés, formés et accompagnés à toutes les étapes de l'évolution technologique.
+
+      Trois problématiques majeures structurent cette démarche, à savoir l'acculturation et la formation des agents, la création d'un référentiel éthique spécifique et l'accompagnement pratique dans l'utilisation des outils.
+
+II. DÉCLINAISON OPÉRATIONNELLE EN TROIS AXES.
+
+   A. Acculturation et formation des agents.
+
+      Le responsable des ressources humaines doit inscrire les agents concernés, ainsi que les managers et la direction, à des actions de sensibilisation recensées notamment par le Campus du numérique de la DINUM ou disponibles sur la plateforme MENTOR.
+
+      Une synthèse des compétences à acquérir ou à renforcer doit être transmise au service de formation professionnelle pour identifier les modules existants ou en créer de nouveaux si nécessaire.
+
+      Il est recommandé de mobiliser les nouveaux profils recrutés formés à l'IA pour encadrer l'utilisation des outils et d'adapter les parcours de formation selon l'impact de l'IA sur les agents.
+
+   B. Création d'un référentiel éthique.
+
+      La première étape consiste à vérifier l'existence préalable d'un référentiel de règles éthiques au sein de la structure.
+
+      À défaut, il est nécessaire d'établir un référentiel alliant les dimensions RH, juridiques et numériques, en s'inspirant du RGPD et de la charte d'utilisation des outils numériques.
+
+      La mise en place d'un réseau de correspondants ou d'une commission d'éthique est préconisée pour veiller au respect des règles, accompagnée d'un processus de signalement des mauvais usages.
+
+   C. Accompagnement à l'usage au quotidien.
+
+      L'accompagnement repose sur la mise à disposition d'un kit d'utilisation de l'IA comprenant un guide, une charte et le référentiel éthique.
+
+      Des séances régulières d'information et des ateliers d'appropriation collective doivent être organisés pour fournir des clés de compréhension et apprendre à prompter ensemble.
+
+      Un suivi des agents utilisant l'IA doit être proposé, incluant des outils d'évaluation pour accompagner la réflexion des équipes et des managers.
+
+III. POINTS DE VIGILANCE TRANSVERSAUX.
+
+   A. Gestion humaine et compétences.
+
+      Il est impératif d'embarquer les agents dès le début du processus pour renforcer leur engagement et éviter toute déresponsabilisation ultérieure.
+
+      La formation ne doit pas se limiter à l'outil technique mais englober la préparation à la transformation par le développement de compétences douces comme la persévérance ou la tolérance à l'ambiguïté.
+
+      Il faut veiller à entretenir le regard critique des agents pour qu'ils ne s'endorment pas au volant face aux réponses de l'IA et continuent de faire des choix actifs.
+
+   B. Pilotage et risques organisationnels.
+
+      Les actions de sensibilisation doivent cibler tous les agents pour contrer le risque de Shadow IA où des utilisateurs non formés exposent l'administration à des cyberattaques ou des fuites de données.
+
+      L'anticipation est clé pour déployer les formations avant la mise en œuvre effective des nouveaux outils.
+
+      Un triple pilotage impliquant les RH, le service formation et le service numérique est recommandé, tout en surveillant le risque de fracture numérique entre les agents.
+
+      Le dialogue social joue un rôle central et doit associer les représentants du personnel pour établir un diagnostic partagé.
+
+      L'intégration d'une personnalité externe dans les comités d'éthique peut apporter une caution supplémentaire et limiter les biais organisationnels.
+
+IV. EXEMPLES DE PRATIQUES MINISTÉRIELLES.
+
+   A. Initiatives pédagogiques et structurelles.
+
+      Le ministère de l'Éducation nationale travaille à la finalisation d'une charte d'usage et met en place un cadre d'animation autour de l'IA générative.
+
+      Le ministère de la Transition écologique, via son Ecolab, propose depuis plusieurs années des webinaires sur la culture de la donnée et des parcours PIX spécifiques.
+
+      Le ministère des Armées a créé une académie du numérique en 2020 pour centraliser les ressources et élaborer une stratégie d'acculturation incluant un catalogue unique et des parcours de formation contextuels.
+
+   B. Évaluations et prospective.
+
+      Les ministères économiques et financiers ont lancé une étude d'impact de l'IA sur les métiers d'enquête et de contrôle pour définir un plan d'actions à court et moyen termes.
+
+      L'Institut de la gestion publique et du développement économique offre un catalogue de formations variées allant des fondamentaux de l'IA à des mises en pratique.
+
+      L'offre de formation pour 2025 prévoit d'intégrer l'IA directement dans les formations métiers plutôt que de la traiter comme un sujet isolé.
+
+POINTS D'ATTENTION.
+
+      Il est essentiel de vérifier systématiquement que les contenus générés par l'IA ne comportent pas de biais de stéréotypes ou de discriminations.
+
+      L'utilisation d'outils non approuvés par l'administration constitue un risque majeur de sécurité informatique appelé Shadow IA.
+
+      Le maintien des compétences actuelles des agents est nécessaire pour garantir leur capacité à valider ou corriger les propositions de la machine.
+
+      La validation par l'équipe de direction est requise à chaque étape de la production des documents cadres.
+
+EXEMPLES CITES.
+
+      La plateforme interministérielle MENTOR est citée comme ressource pour les formations en ligne.
+
+      Le Campus du numérique de la DINUM est mentionné pour le recensement des actions de sensibilisation.
+
+      L'application PIX est utilisée pour l'autoévaluation et l'entraînement aux compétences numériques.
+
+      L'atelier Bataille de l'IA est déployé par le ministère des Armées comme outil pédagogique.
+
+      Le cycle supérieur du numérique pour les cadres supérieurs inclut un séminaire sur le Big Data et l'IA.

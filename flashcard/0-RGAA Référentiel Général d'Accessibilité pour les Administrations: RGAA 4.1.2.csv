@@ -1,0 +1,74 @@
+"Selon le RGAA, quels sont les quatre grands principes de l'accessibilité numérique ?","Perceptible, utilisable, compréhensible et robuste."
+"Dans le contexte du RGAA, le principe de _____ signifie que l'utilisateur doit pouvoir, par exemple, trouver facilement le contenu et naviguer à l'intérieur de celui-ci.",utilisable
+Quel article de loi français définit l'obligation d'accessibilité pour les services de communication au public en ligne ?,L'article 47 de la loi n° 2005-102 du 11 février 2005.
+À partir de quel seuil de chiffre d'affaires une entreprise privée est-elle concernée par l'obligation d'accessibilité numérique selon le RGAA ?,À partir d'un seuil de chiffre d'affaires de 250 millions d'euros.
+Quels types de contenus audio et vidéo préenregistrés sont exemptés de l'obligation d'accessibilité ?,Ceux publiés avant le 23 septembre 2020.
+"Selon le RGAA, les contenus des intranets et extranets publiés avant le _____ sont exemptés jusqu'à ce que ces sites fassent l'objet d'une révision en profondeur.",23 septembre 2019
+Quelle norme européenne est la référence pour la conformité aux exigences légales en matière d’accessibilité numérique en France ?,La norme EN 301 549 V2.1.2 (2018-08).
+"Qu'est-ce qu'une ""dérogation pour charge disproportionnée"" dans le cadre du RGAA ?",Une dérogation invocable pour un contenu ou une fonctionnalité spécifique lorsqu'il est raisonnablement impossible de le rendre accessible.
+"Lorsqu'une dérogation pour charge disproportionnée est invoquée, que doit-on fournir à l'utilisateur ?",Une alternative permettant d'accéder à des contenus ou fonctionnalités équivalentes.
+Quels sont les trois éléments qui ne constituent pas des circonstances légitimes pour invoquer une charge disproportionnée ?,"L'absence de priorité, le manque de temps ou de connaissances."
+L'évaluation de la conformité au RGAA est réalisée sur un _____ de pages représentatif du service.,échantillon
+"Citez au moins cinq pages qui doivent obligatoirement faire partie de l'échantillon d'un audit RGAA, si elles existent.","Page d’accueil, page contact, page mentions légales, page 'accessibilité', et page plan du site (aussi possibles : page d'aide, page d'authentification)."
+Quand un critère RGAA est-il considéré comme non applicable à une page ?,"Quand le contenu concerné n'existe pas, est exempté, ou fait l'objet d'une dérogation avec alternative accessible."
+Comment calcule-t-on le pourcentage de critères RGAA respectés pour un service en ligne ?,En divisant le nombre de critères validés par le nombre de critères applicables sur l'ensemble de l'échantillon.
+Quels sont les trois états de conformité possibles dans une déclaration d'accessibilité ?,"Conformité totale, conformité partielle, et non-conformité."
+"Quel est le seuil de critères respectés pour déclarer une ""conformité partielle"" ?",Au moins 50 % des critères de contrôle du RGAA doivent être respectés.
+"Que doit contenir la section ""dispositifs d’assistance et de contact"" d'une déclaration d'accessibilité ?",Un mécanisme de signalement (email ou formulaire) et la mention de la possibilité de saisir le Défenseur des droits.
+Quand une déclaration d'accessibilité doit-elle être mise à jour ?,"Lors d'une modification substantielle, 3 ans après sa publication, ou 18 mois après une nouvelle version du référentiel."
+Où la déclaration d'accessibilité doit-elle être publiée pour un site internet ?,"Sur une page ""accessibilité"", directement accessible depuis la page d’accueil et n'importe quelle autre page du site."
+Concept : Schéma pluriannuel de mise en accessibilité,Définition : Document d'une durée maximale de trois ans présentant la politique de l'entité en matière d'accessibilité numérique.
+Quelle mention obligatoire concernant l'accessibilité doit figurer sur la page d'accueil d'un service en ligne ?,"L'une des trois mentions : ""Accessibilité : totalement conforme"", ""partiellement conforme"" ou ""non conforme""."
+La méthode technique du RGAA ne couvre pas nativement quels types de services numériques ?,"Les applications mobiles natives, les progiciels et le mobilier urbain numérique."
+Critère RGAA 1.1 : Chaque image porteuse d’information doit avoir une _____ textuelle.,alternative
+Critère RGAA 1.2 : Comment une image de décoration doit-elle être traitée pour être ignorée par les technologies d'assistance ?,"Elle doit avoir un attribut alt vide (alt="""") ou un attribut WAI-ARIA aria-hidden=""true"" ou role=""presentation""."
+"Critère RGAA 1.3 : Outre son existence, que doit être une alternative textuelle pour une image porteuse d'information ?",Elle doit être pertinente et décrire l'information que l'image véhicule.
+"Critère RGAA 1.6 : Si une image porteuse d'information nécessite une description longue, quel mécanisme peut être utilisé ?","Un attribut longdesc, un lien adjacent vers la description, ou un attribut WAI-ARIA aria-describedby."
+"Critère RGAA 1.9 : Pour lier correctement une image à sa légende, quelles balises HTML5 sont recommandées ?","La balise <figure> pour englober l'image et la légende, et la balise <figcaption> pour la légende elle-même."
+Critère RGAA 2.1 : Quel attribut est obligatoire pour chaque cadre (<iframe> ou <frame>) ?,Un attribut `title`.
+Critère RGAA 3.1 : Quelle est la règle fondamentale concernant l'utilisation de la couleur pour transmettre une information ?,L'information ne doit pas être donnée uniquement par la couleur.
+Critère RGAA 3.2 : Quel est le rapport de contraste minimum requis entre un texte de taille normale (< 24px) et son arrière-plan ?,Un rapport de 4.5:1.
+"Critère RGAA 3.2 : Quel est le rapport de contraste minimum requis pour un texte de grande taille (≥ 24px) ou un texte en gras (≥ 18,5px) ?",Un rapport de 3:1.
+Critère RGAA 3.3 : Quel est le rapport de contraste minimum requis pour les composants d'interface et les éléments graphiques porteurs d'information ?,Un rapport de 3:1.
+"Critère RGAA 4.1 : Pour un média temporel pré-enregistré seulement audio, quelle alternative doit être fournie ?",Une transcription textuelle.
+"Critère RGAA 4.3 : Pour un média temporel synchronisé pré-enregistré, que doit-on fournir pour rendre le contenu audio accessible ?",Des sous-titres synchronisés.
+"Critère RGAA 4.5 : Pour un média temporel pré-enregistré avec des informations visuelles importantes non décrites dans l'audio, que faut-il ajouter ?",Une audiodescription synchronisée.
+"Critère RGAA 4.10 : Si un son est déclenché automatiquement et dure plus de 3 secondes, que doit pouvoir faire l'utilisateur ?",L'utilisateur doit pouvoir l'arrêter ou contrôler son volume indépendamment du système.
+Critère RGAA 5.3 : Quelle condition un tableau de mise en forme doit-il respecter concernant son contenu linéarisé ?,Le contenu linéarisé doit rester compréhensible.
+Critère RGAA 5.6 : Comment doivent être déclarés les en-têtes de colonne et de ligne dans un tableau de données ?,"Avec des balises `<th>` ou des balises avec un rôle WAI-ARIA `role=""columnheader""` ou `role=""rowheader""`."
+"Critère RGAA 5.7 : Pour un tableau complexe, quelle technique permet d'associer explicitement une cellule de données (`<td>`) à ses en-têtes (`<th>`) ?",Utiliser les attributs `id` sur les en-têtes et `headers` sur la cellule de données.
+"Critère RGAA 6.1 : Que signifie qu'un lien doit être ""explicite"" ?","L'intitulé du lien, seul ou avec son contexte, doit permettre de comprendre sa fonction et sa destination."
+"Critère RGAA 6.1.5 : Si un lien a un intitulé visible, que doit contenir son nom accessible ?",Le nom accessible doit contenir au moins l'intitulé visible.
+Critère RGAA 7.1 : Quelle est l'exigence principale pour un script qui génère un composant d'interface ?,"Le composant doit être compatible avec les technologies d'assistance (nom, rôle, valeur accessibles)."
+Critère RGAA 7.3 : Chaque fonctionnalité contrôlée par un script doit être contrôlable par _____ et par tout dispositif de pointage.,le clavier
+"Critère RGAA 7.4 : Si un script initie un changement de contexte, comment l'utilisateur doit-il en être informé ?","Il doit en être averti avant le déclenchement, ou le changement doit être initié par un bouton ou un lien explicite."
+Critère RGAA 7.5 : Quel attribut WAI-ARIA est utilisé pour que les messages de statut informant de la réussite ou du résultat d'une action soient correctement restitués ?,"L'attribut `role=""status""`."
+Critère RGAA 8.1 : Quel élément doit obligatoirement être présent au début de chaque page web pour en définir le type ?,Le type de document (balise `doctype`).
+"Critère RGAA 8.2.1 : Dans une page web, quelle doit être la caractéristique de la valeur d'un attribut `id` ?",La valeur de l'attribut `id` doit être unique dans la page.
+Critère RGAA 8.3 : Comment la langue par défaut d'une page web doit-elle être déclarée ?,Avec un attribut `lang` (et/ou `xml:lang`) sur l'élément `<html>`.
+"Critère RGAA 8.7 : Si un passage de texte est dans une langue différente de la langue par défaut de la page, comment doit-on le signaler ?",En utilisant un attribut `lang` sur l'élément contenant le texte ou sur l'un de ses parents.
+Critère RGAA 9.1 : Comment l'information doit-elle être structurée dans une page web pour en faciliter la navigation ?,Par l'utilisation appropriée et hiérarchique de titres (balises `<hx>` ou rôle WAI-ARIA `heading`).
+Critère RGAA 9.2 : Quelle balise HTML5 est utilisée pour structurer la zone de contenu principal d'une page ?,La balise `<main>`.
+Critère RGAA 9.3 : Comment doivent être structurées les informations regroupées visuellement sous forme de liste non ordonnée ?,"En utilisant les balises `<ul>` et `<li>` ou les rôles WAI-ARIA `role=""list""` et `role=""listitem""`."
+Critère RGAA 10.2 : Que doit-il se passer pour le contenu visible porteur d'information lorsque les feuilles de styles sont désactivées ?,Il doit rester présent et accessible.
+Critère RGAA 10.4 : Jusqu'à quel pourcentage le texte d'une page web doit-il pouvoir être agrandi sans perte d'information ?,"Jusqu'à 200%, au moins."
+Critère RGAA 10.7 : Quelle est l'exigence concernant un élément qui reçoit le focus au clavier ?,La prise de focus doit être visible.
+Critère RGAA 10.13 : Un contenu additionnel qui apparaît au survol ou au focus doit être contrôlable. Citez l'une des trois conditions à respecter.,"Il doit être possible de le survoler sans qu'il disparaisse, il doit être possible de le masquer, ou il doit rester visible jusqu'à ce que l'utilisateur déplace le focus/survol."
+Critère RGAA 11.1 : De quelle manière un champ de formulaire doit-il être associé à son étiquette textuelle ?,"Via une balise `<label>` avec l'attribut `for`, ou via WAI-ARIA (`aria-label`, `aria-labelledby`)."
+"Critère RGAA 11.5 : Si nécessaire, comment les champs de même nature (ex: jour, mois, année pour une date) doivent-ils être regroupés ?","Dans une balise `<fieldset>` ou une balise avec un `role=""group""`."
+Critère RGAA 11.6 : Quel élément est utilisé pour donner un titre (une légende) à un regroupement de champs (`<fieldset>`) ?,La balise `<legend>`.
+Critère RGAA 11.10 : Comment peut-on indiquer qu'un champ de formulaire est obligatoire de manière programmatique ?,"En utilisant l'attribut `required` ou `aria-required=""true""`."
+Critère RGAA 11.13 : Quel attribut HTML permet de faciliter le remplissage automatique des champs avec les données de l'utilisateur ?,L'attribut `autocomplete`.
+Critère RGAA 12.1 : De combien de systèmes de navigation différents un ensemble de pages doit-il disposer au minimum ?,"Deux systèmes différents (ex: menu et plan de site, menu et moteur de recherche, etc.)."
+Critère RGAA 12.2 : Quelle est la règle de cohérence pour le menu et les barres de navigation dans un ensemble de pages ?,Ils doivent toujours être à la même place (visuellement et dans le code).
+Critère RGAA 12.7 : Quel type de lien doit être présent pour permettre aux utilisateurs de naviguer rapidement vers la zone de contenu principal ?,Un lien d'évitement ou d'accès rapide.
+"Critère RGAA 12.8 : Que signifie un ""ordre de tabulation cohérent"" ?",L'ordre dans lequel le focus se déplace avec la touche tabulation est logique et suit l'ordre de lecture visuel.
+"Critère RGAA 12.9 : Qu'est-ce qu'un ""piège au clavier"" qu'il faut absolument éviter ?",Une situation où un utilisateur au clavier peut entrer dans un composant mais ne peut pas en sortir en utilisant la touche tabulation.
+"Critère RGAA 13.1 : Si une page a une limite de temps (ex: session qui expire), que doit pouvoir faire l'utilisateur ?",Il doit pouvoir supprimer ou augmenter la limite de temps.
+"Critère RGAA 13.3 : Si un document bureautique en téléchargement n'est pas accessible, que faut-il proposer ?",Une version accessible du document ou une version alternative au format HTML.
+"Critère RGAA 13.8 : Si un contenu en mouvement ou clignotant est déclenché automatiquement et dure plus de 5 secondes, que faut-il fournir ?","Un mécanisme permettant à l'utilisateur de l'arrêter, le relancer ou le masquer."
+Glossaire RGAA : Alternative textuelle (image),"Le ""nom accessible"" restitué par les technologies d'assistance pour un élément graphique."
+Glossaire RGAA : Changement de contexte,"Changements majeurs dans le contenu d'une page qui peuvent désorienter l'utilisateur s'ils sont faits sans qu'il en soit conscient (ex: nouvelle fenêtre, changement de focus important)."
+Glossaire RGAA : Landmarks (WAI-ARIA),"Rôles WAI-ARIA permettant d'indiquer les zones principales d'un document (`banner`, `main`, `navigation`, `contentinfo`)."
+Glossaire RGAA : Média temporel synchronisé,Un flux audio ou vidéo synchronisé avec un autre format pour présenter de l'information (ex: un film avec son et image).
+Glossaire RGAA : Transcription textuelle,Un contenu textuel associé à un média temporel qui retranscrit la totalité de ce qui est exprimé oralement et décrit les informations visuelles importantes.

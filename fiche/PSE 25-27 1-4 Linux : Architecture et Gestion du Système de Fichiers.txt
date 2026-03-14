@@ -1,0 +1,243 @@
+LINUX : LE SYSTEME DE GESTION DES FICHIERS.
+
+LEXIQUE COMPLET.
+
+      Un système de fichiers est une organisation cohérente assurant la conformité de l'ensemble d'un support de stockage tel qu'un disque.
+
+      Un inode ou index node est une structure de données décrivant les métadonnées d'un fichier et pointant vers ses blocs de données.
+
+      Le concept Tout est fichier signifie que programmes, périphériques, répertoires, sockets et flux réseau partagent une représentation commune manipulable par les mêmes outils.
+
+      Les métadonnées sont les informations décrivant le fichier comme la taille, les droits ou les dates, stockées dans l'inode à l'exclusion du nom de fichier.
+
+      Un lien dur est un nom supplémentaire pointant vers le même inode qu'un autre fichier et restant valide tant que l'inode existe.
+
+      Un lien symbolique est un raccourci pointant vers un chemin d'accès et devenant cassé si la cible disparaît.
+
+      Le FHS ou Filesystem Hierarchy Standard est la norme définissant la structure minimale et la destination des répertoires sous Unix et Linux.
+
+      Le montage est le processus permettant de raccorder un système de fichiers à un répertoire de l'arborescence pour rendre son contenu accessible.
+
+      Les extents sont des ensembles de blocs contigus introduits par ext4 pour limiter la fragmentation et améliorer les performances.
+
+      La journalisation est un mécanisme utilisant un journal pour limiter les corruptions de données en cas d'arrêt brutal du système.
+
+      Le wear leveling est une technique de gestion optimisée de l'usure utilisée par F2FS pour les mémoires Flash.
+
+      Le sticky bit est un droit spécial qui empêche la suppression d'un fichier par un autre utilisateur que son propriétaire, souvent utilisé sur le répertoire temporaire.
+
+COURS DÉTAILLÉ.
+
+I. LES CARACTERISTIQUES DES FICHIERS SOUS LINUX.
+
+   A. Généralités et concept de fichier.
+
+      Le système de fichiers constitue un élément clé du système d'exploitation assurant une organisation cohérente du support de stockage.
+
+      Le système d'exploitation réserve des blocs sur le support pour stocker les informations nécessaires à la gestion de cette structure.
+
+      Sur un système Linux, le principe fondamental est que tout est fichier, incluant les programmes, les périphériques, les répertoires et les sockets.
+
+      Cette unification permet d'utiliser des outils standards comme ls ou chmod pour manipuler des éléments de nature très différente.
+
+   B. Notion d'inode.
+
+      Chaque fichier est décrit par une structure nommée inode qui contient les métadonnées mais pas le nom du fichier.
+
+      L'inode stocke les identifiants de propriétaire et de groupe, la taille, les droits d'accès, les horodatages et le nombre de liens durs.
+
+      La structure d'un inode comprend généralement un entête de métadonnées et douze pointeurs directs référençant les blocs de données.
+
+      Elle contient également un pointeur indirect simple, un pointeur indirect double et un pointeur indirect triple pour adresser de grands volumes de données.
+
+      Cette architecture permet de gérer des fichiers très volumineux tout en optimisant l'accès rapide aux petits fichiers.
+
+      Avec une taille de bloc définie à 1 ko, la limite de taille d'un fichier est d'environ 1 To.
+
+      Tous les inodes sont référencés dans une table des inodes située dans les premières zones du système de gestion de fichiers.
+
+   C. Types de systèmes de fichiers.
+
+      Le système ext2 est un système simple ne possédant pas de journalisation.
+
+      Le système ext3 ajoute un journal pour limiter les corruptions en cas de coupure de courant.
+
+      Le système ext4 introduit les extents et supporte des fichiers jusqu'à 16 To ainsi que des millions de fichiers.
+
+      Le système XFS est optimisé pour gérer de gros volumes et des fichiers massifs.
+
+      Le système Btrfs est moderne et intègre la gestion des snapshots, la compression et le RAID.
+
+II. LES DIFFERENTS TYPES DE FICHIERS.
+
+   A. Distinction entre fichiers ordinaires et spéciaux.
+
+      Les fichiers ordinaires contiennent du texte, du code ou des binaires exécutables.
+
+      Les fichiers spéciaux nécessitent une gestion interne par le noyau pour garantir leur intégrité et gérer les périphériques ou la communication.
+
+      Les tubes nommés ou FIFO permettent aux processus de communiquer via une séquence d'octets agissant comme un canal bidirectionnel.
+
+      Les sockets sont des moyens de communication bidirectionnelle entre processus locaux ou distants via le réseau.
+
+      Les pseudo-terminaux simulent un terminal classique avec une architecture maître et esclave.
+
+      Les disquettes virtuelles sont des montages permettant de simuler un disque supplémentaire sans espace physique additionnel.
+
+   B. Identification des fichiers.
+
+      La commande ls avec l'option l permet d'identifier le type de fichier grâce au premier caractère de la ligne.
+
+      Le tiret indique un fichier ordinaire tandis que la lettre d signale un répertoire.
+
+      La lettre l désigne un lien symbolique et la lettre p identifie un tube nommé.
+
+      Les lettres c et b désignent respectivement les périphériques en mode caractère et en mode bloc.
+
+      La lettre s indique qu'il s'agit d'un socket.
+
+   C. Liens durs et symboliques.
+
+      Un lien dur pointe directement vers le même inode et assure l'accès au fichier tant que cet inode existe.
+
+      Un lien symbolique pointe vers un chemin d'accès et devient inutilisable si le fichier cible est supprimé ou déplacé.
+
+III. L'ARBORESCENCE DES FICHIERS.
+
+   A. Organisation et nommage.
+
+      L'arborescence Linux est hiérarchique et démarre à la racine notée par un slash.
+
+      Un nom de fichier doit être unique, sensible à la casse et ne pas dépasser 255 caractères.
+
+      Certains caractères comme le slash, les parenthèses ou l'espace sont interdits ou déconseillés dans les noms de fichiers.
+
+   B. Notion de chemin.
+
+      Un chemin absolu commence toujours par la racine et décrit le trajet complet vers le fichier.
+
+      Un chemin relatif dépend du répertoire courant et ne commence pas par un slash.
+
+      Le symbole point représente le répertoire courant et le symbole double point représente le répertoire parent.
+
+   C. Le standard FHS.
+
+      Le standard FHS définit la structure des répertoires commune à la majorité des systèmes Unix et Linux.
+
+      Le répertoire boot contient le noyau et les fichiers nécessaires au démarrage.
+
+      Le répertoire etc regroupe les fichiers de configuration du système.
+
+      Les répertoires bin, sbin et usr bin contiennent les exécutables et utilitaires système.
+
+      Le répertoire var est destiné aux données variables comme les journaux, les files d'attente et les boîtes aux lettres.
+
+      Le répertoire home héberge les dossiers personnels des utilisateurs et root est réservé à l'administrateur.
+
+      Les répertoires mnt et media servent de points de montage pour les périphériques temporaires.
+
+IV. LES DROITS D'ACCES.
+
+   A. Permissions de base.
+
+      Les droits sont définis pour trois entités qui sont l'utilisateur propriétaire, le groupe propriétaire et les autres utilisateurs.
+
+      Les permissions possibles sont la lecture r, l'écriture w et l'exécution x.
+
+      La commande ls l affiche ces droits sous la forme d'une série de caractères comme rwxr xr x.
+
+   B. Bits spéciaux et ACL.
+
+      Le bit setuid permet l'exécution d'un fichier avec les droits de son propriétaire.
+
+      Le bit setgid permet l'exécution avec les droits du groupe associé.
+
+      Le sticky bit positionné sur le répertoire tmp empêche la suppression d'un fichier par un utilisateur autre que son propriétaire.
+
+      Les listes de contrôle d'accès ou ACL permettent une gestion plus fine des permissions via les commandes getfacl et setfacl.
+
+   C. Notation octale.
+
+      La notation octale représente les droits par des chiffres où lecture vaut 4, écriture vaut 2 et exécution vaut 1.
+
+      Une permission rwx correspond au chiffre 7 et une permission r x correspond au chiffre 5.
+
+   D. Commandes de gestion.
+
+      La commande chmod permet de modifier les droits d'accès d'un fichier ou d'un répertoire.
+
+      La commande chown permet de changer le propriétaire et le groupe d'un fichier.
+
+      La commande umask définit les permissions appliquées par défaut lors de la création d'un fichier.
+
+V. LA GESTION DU SYSTEME DE FICHIERS.
+
+   A. Détail des systèmes de fichiers.
+
+      Le FFS de Berkeley a introduit des blocs plus larges et des groupes de cylindres pour améliorer les performances mais souffre d'un temps de vérification long.
+
+      Le NFS permet d'accéder à des fichiers distants via le réseau de manière transparente en utilisant le protocole RPC.
+
+      Le NFS version 4 apporte des améliorations en matière de sécurité avec Kerberos et de verrouillage de fichiers.
+
+      Le système EXT4 est le standard actuel offrant journalisation, allocation différée et utilisation des extents pour la contiguïté.
+
+      Le système BTRFS propose des fonctionnalités avancées comme les snapshots, les sous-volumes et le RAID intégré.
+
+      Le système F2FS est spécifiquement conçu pour les mémoires Flash en utilisant une structure en log et le wear leveling.
+
+   B. Choix et création.
+
+      Le choix du système de fichiers se fait lors du partitionnement et du formatage selon l'usage prévu et le type de stockage.
+
+      Les partitions critiques comme home, var ou tmp doivent être séparées pour la sécurité et la stabilité.
+
+      La création du système de fichiers s'effectue avec des commandes de formatage comme mkfs point ext4.
+
+   C. Opérations courantes.
+
+      La navigation se fait avec cd pour changer de répertoire et pwd pour afficher la position actuelle.
+
+      La commande touch crée un fichier vide et mkdir crée un répertoire.
+
+      La commande mv permet de déplacer ou renommer des fichiers.
+
+      La commande rm supprime des fichiers et nécessite l'option r pour supprimer des répertoires.
+
+   D. Montage et démontage.
+
+      Le montage raccorde un système de fichiers à un répertoire existant appelé point de montage pour le rendre accessible.
+
+      La commande mount permet de réaliser un montage manuel ou de vérifier les montages existants.
+
+      Le fichier etc fstab contient la configuration pour automatiser les montages au démarrage du système.
+
+      Le démontage se fait avec la commande umount et déconnecte le système de fichiers de l'arborescence.
+
+      La racine du système ne peut jamais être démontée lorsque le système d'exploitation est actif.
+
+POINTS D'ATTENTION.
+
+      Il est possible de saturer un disque en épuisant le nombre d'inodes disponibles même s'il reste de l'espace de stockage en octets.
+
+      La suppression du fichier cible rend un lien symbolique cassé et inutilisable immédiatement.
+
+      Un lien dur préserve l'accès au contenu du fichier même si le fichier original est supprimé tant que l'inode possède au moins un lien.
+
+      Monter un système de fichiers sur un répertoire qui n'est pas vide rendra le contenu original de ce répertoire inaccessible tant que le montage est actif.
+
+      Les performances et la durée de vie des SSD dépendent du choix d'un système de fichiers adapté comme F2FS ou ext4 bien configuré.
+
+EXEMPLES CITES.
+
+      Le fichier dev null est un trou noir qui détruit toutes les données qui y sont écrites.
+
+      Le fichier dev random est un générateur de nombres pseudo aléatoires.
+
+      La commande chmod 755 fichier attribue les droits de lecture et exécution à tous et d'écriture uniquement au propriétaire.
+
+      La commande mount t nfs permet de monter un partage réseau NFS manuellement.
+
+      La commande df i permet de surveiller le taux d'utilisation des inodes sur les partitions.
+
+      Le chemin etc passwd est un exemple de chemin absolu vers un fichier de configuration.

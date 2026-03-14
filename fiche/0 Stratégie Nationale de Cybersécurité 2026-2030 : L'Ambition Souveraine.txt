@@ -1,0 +1,165 @@
+STRATEGIE NATIONALE DE CYBERSECURITE 2026-2030.
+
+LEXIQUE COMPLET.
+
+      La résilience désigne la volonté et la capacité d'un pays, de la société et des pouvoirs publics à résister aux conséquences d'une agression ou d'une catastrophe majeure, puis à rétablir rapidement leur fonctionnement normal.
+
+      Les stratégies hybrides se caractérisent par la conjonction de cyberattaques, de manipulations de l'information, de l'instrumentalisation du droit et de l'économie, ainsi que le recours à des opérations militaires.
+
+      Le C4 correspond au Centre de coordination des crises cyber qui rassemble les acteurs étatiques pour organiser la réponse aux cyberattaques.
+
+      L'InterCERT France est la première communauté de centres de réponse à incident en France qui fédère le partage d'informations techniques sur les menaces.
+
+      Le Processus de Pall Mall est une initiative visant à lutter contre la prolifération et l'usage irresponsable des capacités d'intrusion cyber disponibles sur le marché.
+
+      L'Appel de Paris est une initiative fédérant des acteurs internationaux autour de principes fondateurs pour promouvoir un cyberespace ouvert, sûr, stable, accessible et pacifique.
+
+COURS DÉTAILLÉ.
+
+I. CONTEXTE ET AMBITION STRATÉGIQUE.
+
+   A. Une révolution numérique et des menaces accrues.
+
+      La révolution numérique constitue une rupture silencieuse qui bouleversent l'ordre du monde et rend la cybersécurité vitale pour la liberté et la souveraineté.
+
+      L'espace numérique est devenu un théâtre de puissance où se jouent les affrontements entre nations et où la frontière entre souveraineté et dépendance est ténue.
+
+      La menace s'intensifie et s'étend à tout le tissu économique et social, allant de l'espionnage au sabotage en passant par la criminalité et la subversion.
+
+      L'essor des technologies de rupture comme l'intelligence artificielle ou l'informatique quantique amplifie les risques pesant sur les infrastructures numériques critiques.
+
+   B. Vision et objectifs globaux.
+
+      La France ambitionne de devenir un pôle majeur de la cybersécurité mondiale et une puissance souveraine dans cet espace.
+
+      L'objectif central est d'atteindre une résilience cyber de premier rang à l'horizon 2030 en s'appuyant sur les acquis des stratégies précédentes.
+
+      Cette nouvelle stratégie répond à l'évolution de la menace qui forme désormais un continuum d'agressions imbriquées mêlant acteurs étatiques et cybercriminels.
+
+II. PILIER 1 : LE VIVIER DE TALENTS CYBER.
+
+   A. Développement d'une culture inclusive et précoce.
+
+      La pénurie mondiale de main-d'œuvre nécessite d'orienter les jeunes vers ces métiers dès le plus jeune âge et de lutter contre les préjugés tenaces.
+
+      La France s'engage à mener des actions pour attirer des profils diversifiés, notamment féminins et issus de milieux sociaux défavorisés.
+
+      La cybersécurité sera intégrée dans les dispositifs d'engagement civique destinés à la jeunesse.
+
+   B. Formation et dynamique européenne des compétences.
+
+      Une plateforme nationale pour l'orientation vers les métiers de la cybersécurité sera créée pour faire converger les efforts publics et privés.
+
+      La formation continue et les programmes de reconversion seront soutenus pour adapter les compétences à un domaine en constante évolution.
+
+      Des passerelles seront établies entre les disciplines scientifiques cyber et non cyber pour favoriser la fertilisation croisée des expertises.
+
+      Au niveau européen, la France encouragera l'harmonisation des cursus et la mobilité des professionnels entre les États membres.
+
+III. PILIER 2 : RENFORCER LA RÉSILIENCE DE LA NATION.
+
+   A. Préparation aux crises et sensibilisation.
+
+      Une marque nationale de prévention du risque numérique sera lancée pour porter des campagnes de sensibilisation sur le modèle de la sécurité routière.
+
+      La culture de la gestion de crise sera diffusée à tout le tissu économique et social pour préparer la nation à affronter des attaques systémiques.
+
+      Un programme d'exercices de crise sera développé pour éprouver les capacités de réponse à tous les niveaux, du local à l'international.
+
+   B. Protection et accompagnement des victimes.
+
+      Le niveau de sécurité des services de l'État et des opérateurs critiques sera maintenu à un standard très élevé.
+
+      Des obligations proportionnées seront déployées pour un périmètre étendu d'entités conformément à la directive européenne NIS2.
+
+      Un label de confiance sera mis en œuvre pour inciter les autres acteurs comme les collectivités et associations à élever leur niveau de sécurité.
+
+      Le parcours des victimes sera simplifié avec la création d'un portail national unique intégrant la plateforme 17Cyber comme guichet grand public.
+
+IV. PILIER 3 : ENTRAVER L'EXPANSION DE LA MENACE.
+
+   A. Activation des leviers de découragement.
+
+      La stratégie vise à augmenter le coût financier, humain et réputationnel pour les adversaires potentiels afin de les décourager.
+
+      L'ensemble des leviers judiciaires, techniques, diplomatiques, militaires et économiques sera mobilisé de manière coordonnée.
+
+      Le Centre de coordination des crises cyber élargira son action pour proposer des options de réponse à l'autorité politique, incluant l'attribution publique.
+
+   B. Mobilisation du secteur privé et partage d'informations.
+
+      Un filtre de cybersécurité grand public sera déployé pour prévenir l'accès aux sites malveillants.
+
+      Le partage d'informations techniques sur les menaces sera renforcé entre l'État et le privé via le rôle fédérateur de l'InterCERT France.
+
+V. PILIER 4 : MAÎTRISE DES FONDEMENTS NUMÉRIQUES.
+
+   A. Souveraineté technologique et investissements.
+
+      La France doit maîtriser ses dépendances technologiques pour conserver sa liberté d'action dans le cyberespace.
+
+      Les investissements cibleront des technologies critiques comme la cryptographie, le cloud et la protection des données.
+
+      Le soutien à la recherche sur la sécurité des produits open source est explicitement mentionné.
+
+   B. Marché industriel européen.
+
+      La stratégie soutient l'émergence de capacités industrielles européennes de premier plan et la consolidation du secteur.
+
+      La France contribuera activement au déploiement du cadre européen de certification des produits et services de cybersécurité.
+
+      L'objectif est de disposer d'une capacité d'évaluation de sécurité autonome au sein de l'Union européenne.
+
+VI. PILIER 5 : STABILITÉ INTERNATIONALE.
+
+   A. Principes et gouvernance mondiale.
+
+      La France défend l'application du droit international dans le cyberespace et promeut un espace libre, ouvert et non fragmenté.
+
+      Elle rejette les logiques de blocs et soutient une gouvernance multi-acteurs incluant la société civile et le secteur privé.
+
+      L'action internationale s'appuie sur des initiatives comme l'Appel de Paris et le Processus de Pall Mall contre la prolifération des outils intrusifs.
+
+   B. Partenariats et cyber-solidarité.
+
+      L'Union européenne est considérée comme l'organisation politique privilégiée pour renforcer l'autonomie stratégique.
+
+      Au sein de l'OTAN, la France promeut l'intégration de la cyberdéfense tout en veillant à la complémentarité avec l'UE.
+
+      La France développera une capacité de cyber-solidarité via des actions de formation structurelle et un appui opérationnel à ses partenaires.
+
+VII. GOUVERNANCE NATIONALE.
+
+   A. Modèle d'organisation.
+
+      Le modèle français sépare les missions défensives et offensives tout en garantissant leur coordination.
+
+      La gouvernance s'articule autour de trois missions clés nommées L'État défend la Nation, L'État se sécurise, et La Nation se renforce.
+
+   B. Coordination élargie.
+
+      Toutes les parties prenantes, y compris les territoires et la société civile, seront intégrées dans la gouvernance nationale.
+
+      Le pilotage stratégique est assuré par le SGDSN via le C4 stratégique et le comité de pilotage des politiques publiques cyber.
+
+POINTS D'ATTENTION.
+
+      La stratégie insiste sur la nécessité de former massivement des talents pour combler la pénurie actuelle.
+
+      La distinction entre les missions défensives et offensives reste un pilier du modèle français.
+
+      La directive européenne NIS2 est un élément central pour l'extension des obligations de sécurité à de nouveaux secteurs.
+
+      La réponse aux attaques inclut désormais explicitement l'attribution publique comme option politique.
+
+      La coopération public-privé est renforcée à tous les niveaux, de la réponse à incident au développement industriel.
+
+EXEMPLES CITES.
+
+      La guerre d'agression de la Russie en Ukraine démontre le besoin vital de préparation collective.
+
+      Des hôpitaux ont été paralysés par des attaquants utilisant des modes d'action d'intensité grandissante.
+
+      La plateforme 17Cyber servira de guichet unique pour les victimes de cybermalveillance.
+
+      Le label de confiance permettra aux acteurs de valoriser leurs efforts de sécurisation auprès de leurs clients.

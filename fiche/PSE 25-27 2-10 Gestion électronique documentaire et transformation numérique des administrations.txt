@@ -1,0 +1,161 @@
+GESTION ÉLECTRONIQUE DOCUMENTAIRE ET DÉMATÉRIALISATION.
+
+LEXIQUE COMPLET.
+
+      La GED (Gestion Électronique de Documents) est un ensemble d'outils et de méthodes pour maîtriser les flux documentaires d'une organisation.
+
+      La GEIDE (Gestion Électronique de l'Information et des Documents de l'Entreprise) est une extension de la GED incluant les contenus structurés et non structurés.
+
+      Le Cycle de vie du document est un concept encadrant le document de sa création à son archivage ou sa destruction.
+
+      L'Archivage électronique est le processus de conservation de documents à valeur probante garantissant intégrité et inaltérabilité.
+
+      Le Cloud Souverain est une infrastructure d'hébergement située sur le territoire national ou européen protégeant contre les lois extraterritoriales.
+
+      L'OCR (Reconnaissance Optique de Caractères) est une technologie convertissant des images de texte en fichiers numériques.
+
+      La RAD (Reconnaissance Automatique de Documents) est une technologie identifiant le type de document par analyse de sa mise en page.
+
+      La LAD (Lecture Automatique de Documents) est l'extraction automatique de données spécifiques via des algorithmes.
+
+      L'IRC (Reconnaissance Intelligente de Caractères) est une technologie complétant l'OCR pour structurer les données et corriger les erreurs.
+
+      Le PDF/A est un standard de format de fichier ouvert conçu pour l'archivage à long terme et la pérennité.
+
+      La Traçabilité correspond à l'enregistrement et à l'horodatage de toutes les actions effectuées sur un document.
+
+      Le Workflow documentaire est un circuit automatisé de validation et de circulation des documents.
+
+COURS DÉTAILLÉ.
+
+I. LA GESTION ÉLECTRONIQUE DE DOCUMENTS (GED) ET SES FONDEMENTS TECHNOLOGIQUES.
+
+   A. Définition et objectifs de la GED et de la GEIDE.
+
+      La GED a pour ambition de transformer les documents physiques ou numériques en ressources accessibles et sécurisées.
+
+      Elle couvre toutes les étapes essentielles allant de l'acquisition à l'archivage pérenne en passant par l'indexation et la modification.
+
+      La GEIDE élargit ce périmètre en gérant aussi bien les documents structurés comme les bases de données que les contenus non structurés comme les emails.
+
+      Le cycle de vie du document est le concept clé qui garantit une gestion optimale à chaque étape selon les règles légales.
+
+      L'évolution technologique repose sur la numérisation et l'OCR depuis les années 1990 et intègre désormais l'analyse sémantique.
+
+   B. Les solutions GED : du local au cloud souverain.
+
+      Les solutions GED se sont démocratisées pour rationaliser les flux documentaires et répondre à la transformation numérique.
+
+      Les administrations ont adopté ces outils pour moderniser les services et simplifier les démarches pour les usagers.
+
+      La souveraineté numérique impose le recours à des clouds souverains hébergés sur le territoire national ou européen.
+
+      Ces infrastructures protègent les données sensibles contre l'extraterritorialité des lois étrangères et assurent la conformité RGPD.
+
+      L'Intelligence Artificielle joue un rôle central en permettant l'analyse et le classement automatique de volumes massifs de documents.
+
+      Les algorithmes de machine learning facilitent la recherche en langage naturel et les analyses prédictives.
+
+II. ENJEUX ET BÉNÉFICES DE LA GEIDE POUR LES ORGANISATIONS.
+
+   A. Maîtrise des flux documentaires et gains de productivité.
+
+      L'automatisation des processus réduit les délais de traitement et élimine les goulots d'étranglement.
+
+      La traçabilité complète est assurée par l'horodatage des actions ce qui prouve l'intégrité des documents.
+
+      La mutualisation de l'information dans un référentiel unique favorise la collaboration et brise les silos entre services.
+
+      La conformité aux réglementations est facilitée par le respect strict des règles de conservation et de protection des données.
+
+   B. GED et Archivage électronique : complémentarité et différences.
+
+      La GED gère les documents actifs qui sont vivants et modifiables avec une gestion de versions successives.
+
+      L'archivage électronique concerne les documents à valeur probante qui doivent rester figés et inaltérables.
+
+      La pérennité des archives repose sur l'utilisation de standards ouverts comme le PDF/A pour éviter l'obsolescence.
+
+      L'interopérabilité assure que les documents restent consultables et échangeables sur plusieurs décennies.
+
+      La sécurité est renforcée par l'hébergement sur des clouds souverains offrant chiffrement et redondance.
+
+III. FONCTIONNALITÉS CLÉS ET TECHNOLOGIES ASSOCIÉES.
+
+   A. Acquisition et dématérialisation.
+
+      La numérisation convertit le papier en numérique via des scanners haute performance en utilisant des formats adaptés comme le PDF/A.
+
+      L'acquisition intègre également les flux nativement numériques tels que les emails et les formulaires web.
+
+      La Reconnaissance Automatique de Documents identifie le type de document en analysant sa mise en page.
+
+      La Lecture Automatique de Documents extrait les données clés comme les dates et les montants via l'OCR et l'IRC.
+
+      L'automatisation par l'IA réduit les erreurs humaines et accélère considérablement le temps de traitement.
+
+   B. Indexation, stockage et diffusion.
+
+      L'indexation permet de retrouver les documents et peut être manuelle ou automatique via des codes-barres.
+
+      L'IA permet une indexation sémantique en identifiant les entités nommées et les relations entre les fichiers.
+
+      Le stockage est souvent hybride avec les documents actifs en local et les archives sur des clouds souverains.
+
+      La diffusion est sécurisée par une gestion fine des droits d'accès et des outils de partage comme les liens temporaires.
+
+   C. Workflow documentaire et collaboration.
+
+      Le workflow automatise les circuits de validation en notifiant les responsables à chaque étape du processus.
+
+      La gestion des versions permet de conserver l'historique des modifications et de restaurer des états antérieurs.
+
+      Les outils collaboratifs comme la messagerie et les annotations sont intégrés pour fluidifier le travail d'équipe.
+
+      L'accessibilité via le cloud favorise la mobilité et le télétravail en garantissant un accès sécurisé partout.
+
+IV. DÉMATÉRIALISATION ET TRANSFORMATION NUMÉRIQUE DES ADMINISTRATIONS.
+
+   A. Dématérialisation interne et externe.
+
+      La dématérialisation interne supprime les tâches manuelles et accélère les validations administratives.
+
+      Les gains financiers proviennent de la réduction des coûts d'impression et de stockage ainsi que de l'amélioration de la trésorerie.
+
+      La facturation électronique et la gestion des marchés publics en ligne sont des applications concrètes de cette transformation.
+
+      La sécurité des échanges est renforcée par le chiffrement qui protège mieux les données que le format papier.
+
+   B. L’administration électronique en France : du PAGSI au plan France Numérique 2020.
+
+      Le plan PAGSI lancé en 1998 a posé les bases infrastructurelles de l'administration numérique.
+
+      Le programme ADELE déployé entre 2004 et 2012 a centré les services en ligne sur les besoins de l'usager.
+
+      Le portail mon.service-public.fr ouvert en 2009 a unifié l'accès aux démarches administratives.
+
+      Le plan France Numérique 2020 vise l'abandon du papier et la dématérialisation intégrale de toutes les démarches.
+
+      L'utilisation de l'IA et des clouds souverains est essentielle pour rendre l'administration plus agile et protectrice.
+
+POINTS D'ATTENTION.
+
+      Il est crucial de ne pas confondre la GED active autorisant la modification avec l'archivage probatoire interdisant toute altération.
+
+      La souveraineté des données est un enjeu juridique majeur nécessitant l'usage de clouds nationaux ou européens.
+
+      L'utilisation de formats propriétaires pour l'archivage est un risque car seule l'utilisation de standards ouverts garantit la pérennité.
+
+      L'IA n'est pas une simple option mais une technologie structurelle pour l'automatisation de la capture et de l'indexation.
+
+EXEMPLES CITES.
+
+      La plateforme NumSECCloud est citée comme exemple de cloud souverain et privé.
+
+      Le portail mon.service-public.fr est l'exemple historique du guichet unique pour les usagers.
+
+      Le format PDF/A est le standard cité pour l'archivage à long terme.
+
+      Le programme ADELE est l'exemple de la politique de modernisation centrée sur l'usager.
+
+      Les factures et les microfilms sont cités comme des types de documents traités par la GED.

@@ -1,0 +1,349 @@
+SCHÉMA DIRECTEUR DU NUMÉRIQUE (SDNum) DE LA DGFIP - STRATÉGIE 2025.
+
+LEXIQUE COMPLET.
+
+      L'AAIv2 désigne l'Assistance Administrative Internationale version 2.
+
+      La méthode Agile est une gestion de projet collaborative où le développement est itératif, incrémental et adaptatif.
+
+      L'AMD est l'application historique de recouvrement des amendes et condamnations pécuniaires.
+
+      L'ANF correspond à l'Accès des Notaires aux Fichiers immobiliers.
+
+      L'ANSSI est l'Agence Nationale de la Sécurité des Systèmes d'Information chargée de prévenir les risques cyber.
+
+      Une API ou interface de programmation d'application standardise l'échange d'information entre logiciels.
+
+      ATLAS est l'application transverse d'archivage de documents.
+
+      BALTIC est la Base d'Accès à La Taxation et aux Informations Cadastrales.
+
+      BANKFIP est le projet de rénovation de la banque en ligne des clients Dépôts de Fonds Trésor remplaçant DFTNet.
+
+      BASIL est le projet de refonte des applications de fiscalité locale FDL et FIDELIO.
+
+      CAFEE est la Calculette pour les Formalités de l'Enregistrement.
+
+      Le CAI est le Comité d'Architecture Informatique.
+
+      CAMELIA est l'application de gestion des concours de la DGFiP.
+
+      CASOAR est l'application de Suivi des Contractuels des Apprentis et des Stagiaires.
+
+      CESOP est le système central électronique d'information sur les paiements.
+
+      Le CFU est le Compte Financier Unique.
+
+      CFVR signifie Ciblage de la Fraude et Valorisation des Requêtes.
+
+      Chorus est le logiciel de comptabilité de l'État.
+
+      Le Cloud désigne l'utilisation de serveurs distants pour traiter ou stocker l'information.
+
+      Le Cycle en V est une méthode de gestion de projet linéaire avec validation par étape.
+
+      La DAE est la Direction des Achats de l'État.
+
+      Debian est une distribution Linux composée presque exclusivement de logiciels libres.
+
+      Le Décommissionnement est le processus de mise hors service définitive d'une application.
+
+      DELTA concerne les Délibérations Relatives aux Taxes gérées par la DGFiP.
+
+      Le DevOps est un regroupement de pratiques favorisant la collaboration entre développeurs et exploitants pour un déploiement continu.
+
+      DSFR Builder est un outil web permettant de réaliser des interfaces respectant le design system de l'État et l'accessibilité.
+
+      E-CONTACTS est l'outil de gestion de la relation usager via une messagerie sécurisée.
+
+      L'EAI désigne l'Échange Automatisé des Informations.
+
+      L'ENSU est l'Espace Numérique Sécurisé Unifié.
+
+      ERICA est le Registre Informatisé du Contentieux Administratif.
+
+      ETNA est l'Environnement de Travail Numérique de l'Agent.
+
+      La Facturation électronique est le projet majeur de dématérialisation des échanges de factures entre assujettis à la TVA.
+
+      FARITAS est le projet pour Faciliter le Recouvrement de l'Impôt et de la Taxe de Séjour.
+
+      FIDJI est le Fichier Informatisé des Données Juridiques Immobilières.
+
+      Le Foncier Innovant utilise l'analyse de photos aériennes par intelligence artificielle pour la détection fiscale.
+
+      Galaxie est l'application de restitution des liens entre personnes physiques et morales.
+
+      GAUDDI permet la dématérialisation du dossier individuel de l'agent et de la relation comptable.
+
+      GCOS est le système d'exploitation historique orienté Mainframe.
+
+      GESFIE est la Gestion du Fichier Immobilier et de l'Enregistrement.
+
+      Gestpart est l'application de centralisation et de traitement des déclarations de l'impôt sur le revenu.
+
+      GMBI signifie Gérer Mes Biens Immobiliers.
+
+      Helios est l'application de gestion comptable des collectivités locales.
+
+      L'IGF est l'Inspection Générale des Finances.
+
+      Une IHM est une Interface homme-machine.
+
+      ILIAD est l'application de gestion des déclarations de fiscalité des particuliers.
+
+      IQUIT est le projet de dématérialisation de la délivrance du quitus fiscal.
+
+      ISTYA est le catalogue d'exploration des métadonnées de la DGFiP.
+
+      ITIL recense les bonnes pratiques du management du système d'information.
+
+      LexIA est un outil de recherche documentaire juridique assisté par l'IA.
+
+      LLaMandement est un outil de résumé des amendements parlementaires assisté par l'IA.
+
+      La M57 est l'instruction budgétaire et comptable applicable aux collectivités locales.
+
+      Le Mainframe désigne les gros ordinateurs à haute performance pour le traitement de données massives.
+
+      Mareva est la méthode d'analyse et de remontée de la valeur des projets informatiques.
+
+      MEDOC est l'application de comptabilité et recouvrement des impôts des professionnels.
+
+      MUTSI est le projet de mutualisation des SI retraites du SRE et de la CDC.
+
+      NARA est la Nouvelle Application de Recouvrement des Amendes.
+
+      NUBO est le Cloud interne de l'État opéré par la DGFiP.
+
+      OPERA est l'application de Contrôle de Gestion.
+
+      Les Outils d'analytics permettent le traitement et la représentation des données.
+
+      PILAT est le programme de Pilotage et Analyse du Contrôle.
+
+      Les Piliers 1 et 2 sont des modules informatiques liés aux directives de l'OCDE sur l'impôt minimum mondial.
+
+      Un POC est une preuve de concept ou Proof Of Concept.
+
+      P0P est le projet Paie Zéro Papier.
+
+      Le Programme COPERNIC est le service historique ayant mis en place le système d'information fiscal unifié.
+
+      PES V2 est le Protocole d'échange standard entre ordonnateur et comptable.
+
+      REC est l'application de recouvrement des impôts sur rôle.
+
+      REST est un style d'architecture pour les services web.
+
+      Le RGAA est le Référentiel Général d'Amélioration de l'Accessibilité.
+
+      Le RGI est le Référentiel Général d'Interopérabilité.
+
+      Le RGPD est le Règlement Général de Protection des Données.
+
+      Le RGS est le Référentiel Général de Sécurité.
+
+      RIAL est le Référentiel Inter-Administratif des Locaux.
+
+      Le RIE est le Réseau Interministériel de l'État.
+
+      Le ROP est le Référentiel des Organismes Publics.
+
+      RSP ou ROC SP concerne la Refonte des Systèmes de Paiement.
+
+      S2ICLOM est le Système d'Information Intégré pour les Collectivités Locales d'Outre-Mer.
+
+      Le SaaS ou Software as a Service est un modèle où les applications sont hébergées sur des serveurs distants.
+
+      SAFe est un cadre pour l'implémentation des pratiques Agile à l'échelle de l'entreprise.
+
+      Scrum est un cadre de méthodologie Agile.
+
+      Le SIG est le Service d'Information du Gouvernement.
+
+      Signaux faibles est un modèle algorithmique de détection d'entreprises en défaillance.
+
+      SOAP est un protocole d'échange d'information structurée.
+
+      La SRP est la Mission Stratégie Relation aux Publics.
+
+      TAAP est le Traitement Automatique d'Analyse Prédictive.
+
+      La TASCOM est la Taxe sur les surfaces commerciales.
+
+      Télé@ctes est le système de télétransmission des actes notariés.
+
+      L'UGAP est l'Union des Groupements d'Achat Publics.
+
+      L'Urbanisation est la démarche d'organisation du SI pour réduire les redondances.
+
+      L'UX est la démarche centrée sur l'expérience utilisateur.
+
+      VEGA est l'application de Vente aux Enchères Digitales des Administrations.
+
+      VIES2 est le système automatisé d'information sur la TVA au niveau européen.
+
+      Vue360 est un module de restitution synthétique d'un dossier fiscal.
+
+COURS DÉTAILLÉ.
+
+I. LE NUMÉRIQUE À LA DGFIP, HISTOIRE ET CONTEXTE.
+
+   A. Un héritage technique en évolution.
+
+      Le système d'information de la DGFiP s'est construit dès les années 1970 sur une base centralisée utilisant des technologies Mainframe GCOS pour assurer la robustesse de l'impôt et de la comptabilité publique.
+
+      L'évolution technologique a intégré progressivement Unix, Linux, la virtualisation, le cloud et le big data, tout en conservant un socle de compétences internes fort.
+
+      Les étapes marquantes incluent les téléprocédures des années 2000, le programme Copernic, le prélèvement à la source en 2019 et la déclaration automatique des revenus en 2020.
+
+   B. Le SI en 2025 : Organisation et Moyens.
+
+      La DGFiP compte plus de 5000 agents dans ses services informatiques, représentant plus du quart des effectifs de l'informatique civile de l'État.
+
+      L'organisation a été restructurée en 2021 avec la création de la Délégation à la Transformation Numérique ou DTNum pour l'innovation et la donnée, aux côtés du Service des Systèmes d'Information ou SSI.
+
+      La Direction des Projets Numériques ou DPN porte la fabrication logicielle tandis que les 7 DISI et 35 ESI assurent l'exploitation et l'assistance en région.
+
+      Le parc applicatif comprend 785 applications recensées en décembre 2024, nécessitant une stratégie de décommissionnement des outils obsolètes.
+
+   C. Technologies et Méthodes.
+
+      La stratégie privilégie le Cloud par défaut, le DevOps pour rapprocher développeurs et exploitants, et les méthodes Agiles pour les projets adaptés.
+
+      L'intelligence artificielle et la valorisation des données via la Plateforme Sécurisée de Données sont des axes de développement majeurs.
+
+      L'ouverture du numérique s'étend à tous les métiers via les intrapreneurs et la reconnaissance des initiatives locales.
+
+II. SERVIR LES MISSIONS DE LA DGFIP.
+
+   A. Gestion Publique et Comptabilité.
+
+      L'objectif est de rénover le cadre de la gestion publique par la modernisation et la dématérialisation.
+
+      Le projet P0P ou Paye Zéro Papier vise la dématérialisation des pièces justificatives de paye dès le premier semestre 2025.
+
+      L'application S2ICLOM fournira un système comptable intégré pour le Pacifique en 2026.
+
+      L'interconnexion via API entre HELIOS et D2C automatisera les flux comptables au premier trimestre 2025.
+
+   B. Recouvrement et Recettes Publiques.
+
+      La réforme majeure est la généralisation de la facturation électronique, avec une obligation de réception pour toutes les entreprises en septembre 2026 et d'émission en septembre 2027.
+
+      Le projet NARA remplacera l'application obsolète AMD pour le recouvrement des amendes d'ici 2028.
+
+      La modernisation implique la sortie des technologies Mainframe pour les applications MEDOC et REC.
+
+      Le projet Foncier Innovant utilise l'IA pour détecter les piscines et bâtis non déclarés, avec une cible d'achèvement en 2025.
+
+   C. Lutte contre la Fraude.
+
+      Le programme PILAT rénove les outils du contrôle fiscal avec des applications comme Vue360 et GALAXIE.
+
+      Le projet CFVR utilise le datamining et l'IA pour programmer environ la moitié des contrôles fiscaux.
+
+      L'internationalisation des échanges de données s'intensifie avec les projets DAC7, DAC8 sur les crypto-actifs, et CESOP pour les paiements transfrontaliers.
+
+   D. Services aux Usagers et Partenaires.
+
+      L'offre de service en ligne s'enrichit avec la sécurisation par double facteur généralisée en 2025 pour les particuliers.
+
+      Le portail unique Portailpro.gouv centralise les démarches fiscales, sociales et douanières pour les entreprises.
+
+      Le projet FICOBA 3 modernisera le fichier des comptes bancaires fin 2025.
+
+      L'offre Cloud NUBO, opérée par la DGFiP sur des logiciels libres, héberge 500 projets pour l'administration.
+
+   E. Ressources Humaines et Pilotage.
+
+      L'application Sign@lFIP permet aux agents de signaler les incivilités et agressions.
+
+      L'environnement de travail numérique évolue avec la plateforme collaborative NOVAE.
+
+      Le pilotage de la performance s'appuie sur la Plateforme Sécurisée de Données pour remplacer les outils statistiques anciens comme OPERA.
+
+III. LES GRANDS PRINCIPES DIRECTEURS.
+
+   A. L'Utilisateur au Centre.
+
+      La conception des applications suit la démarche UX en 5 étapes, allant de la compréhension des besoins aux tests utilisateurs.
+
+      L'accessibilité numérique est une obligation légale suivie via le respect du RGAA et l'utilisation de l'outil DSFR Builder.
+
+      La disponibilité des applications est mesurée toutes les 10 minutes, affichant un taux de 98,7 pourcents pour les usagers en 2024.
+
+   B. Un Système d'Information à l'État de l'Art.
+
+      La réduction de la dette technique est prioritaire avec un objectif de conformité technologique de 78 pourcents fin 2027, contre 43,6 pourcents en 2024.
+
+      La stratégie Cloud First vise à basculer 30 pourcents des applications sur le cloud d'ici 2027.
+
+      L'organisation DevOps est déployée pour rapprocher les équipes de développement et d'exploitation.
+
+   C. Maîtrise des Risques et Sécurité.
+
+      La cybersécurité est cruciale face à une augmentation de 90 pourcents des attaques entre 2023 et 2024.
+
+      La souveraineté est assurée par la maîtrise interne des datacenters et la priorité donnée aux logiciels libres comme Debian ou PostgreSQL.
+
+      La résilience du système est renforcée par des plans de continuité et l'hébergement sur des sites distincts.
+
+   D. Organisation et Gouvernance.
+
+      L'urbanisation du SI permet de cartographier les applications et de réduire les redondances.
+
+      La gouvernance des grands projets s'appuie sur la méthode MAREVA pour analyser la valeur et le retour sur investissement.
+
+      Le Comité d'Architecture Informatique ou CAI valide les choix techniques de tous les projets.
+
+      Les tests sont industrialisés et systématiques avant toute mise en production.
+
+   E. Écoresponsabilité et Interministériel.
+
+      La sobriété numérique passe par l'allongement de la durée de vie du matériel et l'écoconception des services.
+
+      La DGFiP joue un rôle interministériel fort en fournissant des services comme NUBO, ImprimFIP ou en utilisant le RIE.
+
+IV. INNOVATION ET FORCES INTERNES.
+
+   A. L'Intelligence Artificielle.
+
+      L'IA est déployée pour la productivité des agents via des résumés automatiques et des assistants virtuels.
+
+      Des projets concrets comme LLaMandement ou la détection foncière illustrent l'usage de l'IA.
+
+      Une doctrine stratégique de l'IA sera publiée fin 2025.
+
+   B. Capital Humain.
+
+      Le maintien des compétences internes est stratégique, avec un accent sur la formation et le recrutement.
+
+      Le métier de Maîtrise d'Ouvrage ou MOA est renforcé et professionnalisé.
+
+      La Fabrique Numérique encadre et valorise les logiciels d'initiative locale développés par les agents.
+
+POINTS D'ATTENTION.
+
+      Le nombre d'attaques informatiques a explosé de 90 pourcents en un an, atteignant 4925 attaques en 2024.
+
+      La dette technique reste élevée avec seulement 43,6 pourcents de conformité technologique en 2024, nécessitant des efforts soutenus jusqu'en 2027.
+
+      La transition vers le Cloud est en cours mais ne concerne que 16 pourcents des applications en 2024 pour une cible de 30 pourcents.
+
+      Les échéances de la facturation électronique en 2026 et 2027 imposent une préparation rigoureuse des systèmes.
+
+      Le recrutement et la fidélisation des compétences numériques sont des enjeux majeurs dans un marché concurrentiel.
+
+EXEMPLES CITES.
+
+      L'application D2C a été développée en méthode Agile et mise en service en un temps record sur le cloud NUBO.
+
+      Le projet LLaMandement utilise l'IA pour résumer les amendements parlementaires.
+
+      L'API FICOBA est utilisée par 106 partenaires pour accéder aux données bancaires.
+
+      Le cloud NUBO héberge 500 projets pour une quinzaine de ministères.
+
+      L'application Sign@lFIP a permis de déclarer 2113 incidents en 2024.

@@ -1,0 +1,73 @@
+Quelle commande Linux affiche les pages de manuel pour une commande spécifique ?,man [commande]
+Comment obtenir une brève description d'une commande directement depuis le terminal ?,En utilisant la commande `whatis [commande]`.
+Quelle commande recherche les pages de manuel contenant un mot-clé spécifique ?,apropos [mot-clé]
+Quelle commande affiche des informations détaillées sur le noyau Linux et le système ?,uname -a
+Comment afficher la version de la distribution Red Hat ?,cat /etc/redhat-release
+Quelle commande affiche la durée de fonctionnement du système depuis le dernier démarrage ?,uptime
+"Pour afficher le nom d'hôte actuel du système, on utilise la commande _____.",hostname
+Quelle commande affiche la date et l'heure actuelles du système ?,date
+Comment afficher le calendrier du mois en cours dans le terminal ?,cal
+Quelle commande est utilisée pour afficher les systèmes de fichiers montés ?,mount
+La commande `_____` affiche l'identifiant de l'utilisateur actuel.,id
+Quelle commande affiche le dernier utilisateur à s'être connecté ?,last
+Comment savoir qui est actuellement connecté au système ?,En utilisant la commande `who`.
+Quelle commande affiche qui est connecté et ce qu'il fait ?,w
+"La commande `groupadd ""[groupe]""` sert à _____.",créer un nouveau groupe.
+Comment ajouter un nouvel utilisateur au système ?,"Avec la commande `useradd -c ""[Commentaire]"" -m [utilisateur]`."
+Quelle commande est utilisée pour supprimer un utilisateur ?,userdel [utilisateur]
+Comment changer le propriétaire et le groupe d'un fichier ou d'un répertoire ?,chown [propriétaire]:[groupe] [fichier]
+"En notation octale, que signifie la permission `777` pour un fichier ?","Le propriétaire, le groupe et les autres ont tous les droits (lecture, écriture, exécution)."
+Que signifie la permission de fichier `755` ?,"Le propriétaire a tous les droits (rwx), tandis que le groupe et les autres ont les droits de lecture et d'exécution (r-x)."
+"Une permission de `644` sur un fichier signifie que le propriétaire peut lire et écrire, tandis que les autres peuvent seulement _____.",lire
+Quelle commande affiche les informations sur les périphériques réseau ?,ifconfig
+Comment afficher la table de routage IP ?,netstat -r
+La commande `_____` est utilisée pour vérifier la connectivité avec un hôte distant.,ping [hôte]
+Quelle commande affiche les informations DNS d'un nom de domaine ?,host [domaine]
+Comment tracer le chemin des paquets vers une destination ?,traceroute [hôte]
+Quelle commande affiche les informations de la base de données Whois pour un domaine ?,whois [domaine]
+La commande `lsusb -tv` est utilisée pour _____.,afficher les périphériques USB dans une arborescence.
+Comment afficher les informations sur le CPU ?,cat /proc/cpuinfo
+"Pour afficher les informations sur la mémoire, on utilise la commande `cat _____`.",/proc/meminfo
+Quelle commande affiche l'espace disque utilisé sur les systèmes de fichiers montés ?,df -h
+Comment afficher l'espace utilisé par les fichiers et répertoires dans le répertoire courant ?,du -sh
+Quelle commande affiche l'espace mémoire libre et utilisé ?,free -h
+La commande `scp [fichier] [serveur]:/[chemin]` est utilisée pour _____.,copier de manière sécurisée un fichier vers un serveur distant.
+Comment synchroniser les fichiers et répertoires entre le système local et un système distant ?,Avec la commande `rsync -a [source] [destination]`.
+Quelle commande installe un paquet en utilisant le gestionnaire de paquets YUM ?,yum install [paquet]
+Comment mettre à jour tous les paquets sur un système basé sur RPM (comme CentOS) ?,yum update
+La commande `rpm -i [paquet.rpm]` sert à _____.,installer un paquet à partir d'un fichier RPM local.
+Quelle commande recherche un paquet par mot-clé avec YUM ?,yum search [mot-clé]
+Quelle commande installe un paquet sur un système Debian/Ubuntu ?,sudo apt-get install [paquet]
+Comment rechercher un paquet sur un système Debian/Ubuntu ?,sudo apt-cache search [paquet]
+La commande `grep [motif] [fichier]` est utilisée pour _____.,rechercher un motif spécifique à l'intérieur d'un fichier.
+Comment effectuer une recherche de motif insensible à la casse avec `grep` ?,En utilisant l'option `-i` (`grep -i`).
+Quelle commande trouve tous les fichiers commençant par 'find' dans le répertoire courant ?,find . -name 'find*'
+Comment trouver les fichiers de plus de 10 Mo dans le répertoire courant et ses sous-répertoires ?,find . -size +10M
+La commande `locate [fichier]` est utilisée pour _____.,localiser rapidement un fichier en utilisant une base de données indexée.
+Quelle commande compresse un fichier en utilisant l'algorithme gzip ?,gzip [fichier]
+Comment extraire un fichier compressé avec gzip (`.gz`) ?,gzip -d [fichier.gz]
+La commande `tar -cvf [archive.tar] [répertoire]` sert à _____.,créer une archive tar non compressée à partir d'un répertoire.
+Comment extraire les fichiers d'une archive `.tar` ?,tar -xvf [archive.tar]
+Quelle commande est utilisée pour créer une archive tar compressée avec gzip (`.tar.gz`) ?,tar -czvf [archive.tar.gz] [répertoire]
+"Pour extraire une archive `.tar.gz`, on utilise la commande `tar -_____ [archive.tar.gz]`.",xzvf
+Quelle commande affiche les processus en cours d'exécution ?,ps
+"Pour afficher tous les processus en cours sur le système, on utilise la commande `ps _____`.",aux
+Quelle commande affiche un aperçu interactif des processus système ?,top
+Comment terminer un processus en utilisant son identifiant de processus (PID) ?,kill [PID]
+La commande `killall [processus]` est utilisée pour _____.,terminer tous les processus portant un nom spécifique.
+"Quelle commande liste les fichiers et répertoires, y compris ceux cachés ?",ls -a
+Comment changer de répertoire pour aller au répertoire parent ?,cd ..
+La commande `mkdir [répertoire]` sert à _____.,créer un nouveau répertoire.
+Quelle commande supprime un fichier vide ?,rm [fichier]
+"Pour supprimer un répertoire et tout son contenu de manière récursive, on utilise la commande `rm _____`.",-r [répertoire]
+Comment copier le fichier `abc` vers le répertoire `/xyz/` ?,cp abc /xyz/
+Quelle commande déplace ou renomme le fichier `abc` en `xyz` ?,mv abc xyz
+La commande `touch [fichier]` est utilisée pour _____.,créer un fichier vide ou mettre à jour son horodatage.
+Comment afficher les 10 premières lignes d'un fichier ?,head [fichier]
+Quelle commande affiche les 10 dernières lignes d'un fichier ?,tail [fichier]
+"Pour suivre en temps réel les ajouts à un fichier, on utilise `tail _____`.",-f [fichier]
+Quelle commande affiche le contenu d'un fichier binaire chiffré (`gpg`) ?,gpg -d [fichier.gpg]
+Comment envoyer un processus en arrière-plan ?,bg
+Quelle commande ramène un processus arrêté ou en arrière-plan au premier plan ?,fg
+La commande `nice` est utilisée pour _____.,démarrer un processus avec une priorité de planification spécifique.
+Comment afficher l'utilisation de la mémoire par processus de manière interactive ?,htop

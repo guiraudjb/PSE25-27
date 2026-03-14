@@ -1,0 +1,54 @@
+"Quelle était l'épine dorsale des systèmes informatiques dans les années 1960-1980, marquant une ère de centralisation absolue ?",Les mainframes (ou ordinateurs centraux).
+"Dans l'architecture mainframe, quel était le rôle des terminaux utilisateurs ?","Ils étaient de simples périphériques d'entrée/sortie, dépourvus de capacité de calcul propre."
+Quel était un avantage majeur de l'architecture monolithique des mainframes ?,"Une gestion simplifiée des ressources, de la maintenance et de la sécurité, car tout était contrôlé en un seul point."
+Citez deux secteurs qui recourent encore aux mainframes pour des opérations critiques.,"La banque, l'assurance ou les grandes administrations."
+Quelle était une des limites majeures de la centralisation des mainframes ?,"Le manque de flexibilité et d'évolutivité, créant des goulots d'étranglement."
+Quelle architecture a marqué un tournant dans les années 1990 en introduisant une première forme de décentralisation ?,L'architecture client/serveur.
+Un _____ est un niveau logique d'une application qui regroupe un ensemble de services partageant un même rôle fonctionnel.,tiers
+"Dans l'architecture 2-tiers, quelle était la responsabilité principale du client ?",La gestion de l'interface utilisateur et une partie des traitements.
+Quel nouveau défi l'architecture 2-tiers a-t-elle engendré ?,La complexité du déploiement et de la maintenance des applications sur chaque poste client.
+Quelle couche a été introduite par les architectures 3-tiers pour mieux isoler les fonctions ?,Une couche intermédiaire dédiée à la logique métier.
+Citez un exemple de middleware qui assurait la communication entre les couches dans les architectures 3-tiers.,"CORBA, DCOM ou RMI."
+Comment l'arrivée du web a-t-elle 'recentralisé' une partie des traitements dans les années 1990-2000 ?,Les traitements étaient effectués sur des serveurs accessibles via des clients légers (navigateurs web).
+Quel a été l'avantage radical de l'approche web pour le déploiement des applications ?,"Les utilisateurs n'avaient plus besoin d'installer de logiciels spécifiques, un simple navigateur suffisait."
+Quelle était une limite majeure des interfaces web de l'époque qui dégradait l'expérience utilisateur ?,"Le manque de dynamisme, car chaque interaction nécessitait un rechargement complet de la page."
+Quelles sont les trois couches distinctes dans une architecture 3-tiers ?,"La couche de présentation, la couche métier et la couche de données."
+Quel est le rôle principal des serveurs d'applications comme J2EE ou .NET ?,"Fournir un environnement d'exécution robuste pour la couche métier, intégrant des services techniques essentiels."
+"L'évolution vers des architectures ____ a permis une distribution encore plus fine des responsabilités, en ajoutant des couches intermédiaires.",n-tiers
+Quel type de middleware a historiquement été utilisé pour faciliter les échanges asynchrones entre applications ?,Les Message Oriented Middleware (MOM).
+"Quel mécanisme, popularisé par JavaScript et Node.js, permet de gérer les flux asynchrones de manière plus légère et intuitive ?",Les systèmes de promesses (promises).
+Comment les promesses se distinguent-elles des infrastructures lourdes comme les ESB (Enterprise Service Bus) ?,Elles s'intègrent naturellement dans les environnements modernes sans nécessiter de solutions externes ou d'infrastructures coûteuses.
+"Quel protocole, basé sur XML, a longtemps été le standard pour les échanges entre applications avant REST ?",SOAP (Simple Object Access Protocol).
+Quel était le principal inconvénient de SOAP ?,"Sa complexité, sa verbosité et la lourdeur de ses messages qui pouvaient ralentir les échanges."
+Sur quels standards du web l'architecture REST s'appuie-t-elle ?,HTTP et JSON.
+Que signifie le caractère 'stateless' (sans état) de REST ?,"Chaque requête contient toutes les informations nécessaires à son traitement, sans dépendre d'un contexte stocké sur le serveur."
+"Au cœur de l'architecture REST, la notion de _____ est identifiée par une URL et manipulée via des verbes HTTP.",ressource
+Citez les 4 verbes HTTP standardisés utilisés par REST pour manipuler les ressources.,"GET, POST, PUT, DELETE."
+Quel format de données a largement remplacé XML dans les APIs REST grâce à sa syntaxe concise ?,JSON (JavaScript Object Notation).
+"Dans la gestion d'une API REST, quelle bonne pratique permet de faire évoluer les services sans rompre la compatibilité ?",Le versioning des endpoints.
+Citez un mécanisme de sécurité couramment utilisé pour authentifier et autoriser les requêtes dans une API REST.,OAuth 2.0 ou les jetons JWT (JSON Web Tokens).
+À quoi sert un outil comme OpenAPI (anciennement Swagger) ?,À générer automatiquement la documentation des APIs pour faciliter leur adoption.
+"Comment l'utilisation des codes de statut HTTP standard (200, 404, 500...) rend-elle les APIs REST plus prévisibles ?","Elle permet de comprendre rapidement le résultat d'une requête (succès, erreur client, erreur serveur), ce qui facilite le débogage."
+Terme : Single Page Application (SPA),"Définition : Application qui charge son code une seule fois et met à jour le contenu dynamiquement via des appels API, sans recharger la page."
+Citez deux frameworks JavaScript populaires pour la création de SPAs.,"React, Angular ou Vue.js."
+Quel est le défi majeur des Single Page Applications (SPA) ?,"Le référencement par les moteurs de recherche (SEO), qui ont du mal à indexer le contenu généré dynamiquement."
+Quelle technique résout le problème de SEO des SPAs en générant le contenu HTML côté serveur ?,Le Server-Side Rendering (SSR).
+Quel framework SSR est associé à React ?,Next.js.
+Quel framework SSR est associé à Vue.js ?,Nuxt.js.
+Quelle alternative à REST permet aux clients de définir précisément les données dont ils ont besoin pour éviter le 'sur-récupération' (over-fetching) ?,GraphQL.
+Dans quel cas d'usage GraphQL est-il particulièrement judicieux ?,Pour les applications nécessitant des interactions fines avec des données interconnectées et complexes.
+Quand est-ce que REST reste souvent une solution plus adaptée que GraphQL ?,Pour des APIs simples ou des cas d'usage standardisés.
+Quelle approche architecturale remplace les systèmes monolithiques par un ensemble de services indépendants et autonomes ?,L'architecture microservices.
+Comment les microservices communiquent-ils généralement entre eux ?,"Via des APIs légères, souvent basées sur REST ou des messages asynchrones."
+Quel est l'un des principaux avantages des microservices en termes de résilience ?,"Si un service tombe en panne, les autres peuvent continuer à fonctionner, limitant l'impact global."
+Quel avantage les microservices offrent-ils en termes de choix technologiques ?,Chaque service peut être développé avec le langage ou la base de données la plus adaptée à sa fonction (hétérogénéité technologique).
+Quelle est la contrepartie de la flexibilité des microservices ?,"Une complexité accrue en matière de gestion des dépendances, de cohérence des données et de communication inter-services."
+Quel composant est souvent utilisé pour centraliser la gestion des requêtes et sécuriser les communications dans une architecture microservices ?,Une API Gateway.
+"La ______, popularisée par Docker, a révolutionné le déploiement en offrant un environnement isolé et portable pour chaque service.",conteneurisation
+Qu'est-ce qu'un conteneur encapsule ?,Une application et toutes ses dépendances dans une unité légère et autonome.
+Quel problème classique la portabilité des conteneurs élimine-t-elle ?,Le problème du 'ça marche sur ma machine'.
+En quoi les conteneurs sont-ils plus efficaces que les machines virtuelles ?,"Ils partagent le noyau du système d'exploitation hôte, ce qui réduit l'overhead et les coûts d'infrastructure."
+Quel outil est nécessaire pour automatiser le déploiement et la gestion d'un grand nombre de conteneurs en production ?,"Un orchestrateur de conteneurs, comme Kubernetes."
+Quelle est la fonction principale de Kubernetes ?,"Automatiser le déploiement, la mise à l'échelle et la gestion des applications conteneurisées au sein de clusters."
+Citez une fonctionnalité clé apportée par l'orchestration avec Kubernetes.,"Le load balancing, la découverte de services, ou le rolling update (mise à jour sans interruption)."
+La combinaison de Docker et Kubernetes est devenue un standard pour quel type d'environnements modernes ?,Les environnements cloud natifs (cloud native).

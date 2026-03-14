@@ -1,0 +1,315 @@
+LINUX : ADMINISTRER LE SYSTEME DE GESTION DE FICHIERS SOUS LINUX.
+
+LEXIQUE COMPLET.
+
+      Le partitionnement est une opération critique consistant à diviser un support de stockage en zones indépendantes appelées partitions.
+
+      Le MBR ou Master Boot Record est un schéma de partitionnement historique limité à 4 partitions primaires et une taille de 2 To.
+
+      Le GPT ou GUID Partition Table est un schéma moderne associé à l'UEFI supportant jusqu'à 128 partitions et des tailles exaoctets.
+
+      Le LVM ou Logical Volume Manager est une couche d'abstraction logicielle permettant de manipuler des volumes logiques souples.
+
+      Un PV ou Physical Volume désigne une partition ou un disque initialisé pour être utilisé par le LVM.
+
+      Un VG ou Volume Group est un regroupement logique de plusieurs volumes physiques formant une réserve de stockage globale.
+
+      Un LV ou Logical Volume est une partition logique créée à l'intérieur d'un groupe de volumes pour accueillir un système de fichiers.
+
+      Un système de fichiers définit la manière dont les données sont stockées, organisées et retrouvées sur un support physique.
+
+      La journalisation est un mécanisme enregistrant les transactions pour améliorer la récupération des données après un crash.
+
+      Un inode est une structure de données représentant un fichier et contenant ses métadonnées comme la taille ou les droits.
+
+      Le VFS ou Virtual File System est une couche d'abstraction agissant comme une interface standardisée entre les applications et les systèmes de fichiers.
+
+      Une Dentry ou Directory Entry est une structure du VFS décrivant les entrées de répertoire et mise en cache pour accélérer les recherches.
+
+      Le tmpfs est un système de fichiers stocké en mémoire vive volatile utilisé pour les fichiers temporaires.
+
+      Le répertoire proc est un système de fichiers virtuel exposant en temps réel les informations du noyau et des processus.
+
+      Le répertoire sys est un système de fichiers virtuel exposant une vue structurée des périphériques matériels et de leurs attributs.
+
+      Le service udev gère la détection et la configuration automatique des périphériques en s'appuyant sur les événements de sysfs.
+
+COURS DÉTAILLÉ.
+
+I. LE PARTITIONNEMENT.
+
+   A. Objectifs et principes du partitionnement.
+
+      L'organisation permet d'isoler les répertoires majeurs pour cloisonner les données et éviter la saturation globale du disque.
+
+      La performance est optimisée en plaçant les répertoires sollicités intensivement sur des partitions dédiées ou en mémoire vive.
+
+      La sécurité est renforcée en limitant les dégâts potentiels d'un incident ou d'une attaque sur une partition spécifique.
+
+      La flexibilité prépare le système à accueillir des solutions modernes comme le LVM, le RAID ou le chiffrement de volumes.
+
+   B. Les structures de partitionnement MBR et GPT.
+
+      Le MBR occupe le premier secteur de 512 octets et contient le code d'amorçage ainsi que la table des partitions.
+
+      Le MBR est considéré comme obsolète car il est limité à 4 partitions primaires et ne gère pas les partitions de plus de 2 To.
+
+      Une sauvegarde du MBR est recommandée après l'installation via la commande dd car sa corruption rend le disque inutilisable.
+
+      Le GPT est le standard moderne conçu pour l'UEFI et permet de dépasser les limitations techniques du MBR.
+
+      Le GPT supporte jusqu'à 128 partitions ainsi que des tailles de plusieurs exaoctets et inclut une redondance.
+
+   C. Les outils de partitionnement sous Linux.
+
+      La commande fdisk est l'outil traditionnel pour gérer les disques utilisant le schéma MBR.
+
+      La commande gdisk est l'outil spécifique pour manipuler les tables de partition GPT.
+
+      La commande parted gère à la fois MBR et GPT et est souvent utilisée dans les scripts d'installation automatisée.
+
+      Les commandes lsblk et blkid permettent de visualiser la topologie des disques et les identifiants UUID.
+
+   D. Stratégies de partitionnement.
+
+      La stratégie minimaliste comprend une racine, un swap et éventuellement une partition boot pour une machine simple.
+
+      Le serveur de production standard sépare les partitions home, var, opt, srv et tmp pour cloisonner les usages.
+
+      Les serveurs critiques nécessitent un partitionnement granulaire avec une partition boot hors LVM et un var volumineux isolé.
+
+      La partition boot doit rester formatée en ext4 et placée hors du LVM pour garantir la compatibilité au démarrage.
+
+II. LE LVM (LOGICAL VOLUME MANAGER).
+
+   A. Introduction et architecture.
+
+      Le LVM introduit une abstraction permettant de manipuler des volumes logiques souples indépendamment de la topologie physique.
+
+      L'architecture repose sur trois niveaux hiérarchiques qui sont les Physical Volumes, les Volume Groups et les Logical Volumes.
+
+   B. Préparation et partitionnement préalable.
+
+      La partition boot doit impérativement rester en dehors du LVM pour assurer la compatibilité avec les chargeurs d'amorçage.
+
+      Le reste du disque est attribué à une partition de type 8e Linux LVM qui sera initialisée en Physical Volume.
+
+      Il est recommandé de séparer le groupe de volumes système vgroot des groupes de volumes applicatifs comme vgdata.
+
+   C. Création et initialisation.
+
+      La commande pvcreate initialise un disque ou une partition pour l'intégrer à l'architecture LVM.
+
+      La commande vgcreate rassemble un ou plusieurs volumes physiques pour former une réserve de stockage globale.
+
+      La commande lvcreate découpe une partition logique au sein d'un groupe de volumes existant.
+
+   D. Redimensionnement et gestion de l'espace.
+
+      L'extension d'un volume logique est une opération sûre réalisée avec lvextend suivi de resize2fs pour le système de fichiers.
+
+      La réduction d'un volume avec lvreduce est une opération délicate qui nécessite une vérification préalable des données.
+
+   E. Migration et ajout de stockage.
+
+      La commande pvmove permet de déplacer les données d'un disque physique vers un autre sans interruption de service.
+
+      La commande vgextend permet d'ajouter un nouveau disque physique à un groupe de volumes existant.
+
+      La commande pvs permet de vérifier l'occupation des Physical Extents avant de lancer une migration de données.
+
+   F. Snapshots et surveillance.
+
+      La commande lvcreate avec l'option tiret s permet de créer un instantané figé d'un volume pour des sauvegardes cohérentes.
+
+      Les commandes pvdisplay, vgdisplay et lvdisplay fournissent des informations détaillées sur l'état des volumes.
+
+III. LES DIFFERENTS TYPES DE SYSTEMES DE FICHIERS.
+
+   A. Principes généraux.
+
+      Un système de fichiers définit la structure interne de stockage incluant le superbloc, les inodes et les blocs de données.
+
+      Le choix du système de fichiers dépend de la nature des données, de la charge attendue et des contraintes de performance.
+
+   B. Les systèmes de fichiers traditionnels.
+
+      Le système ext2 est l'ancien standard sans journalisation encore utilisé pour les partitions boot ou les systèmes embarqués.
+
+      Le système ext3 a introduit la journalisation pour améliorer la récupération des données après un arrêt brutal.
+
+      Le système ext4 est le standard actuel combinant stabilité, performance via les extents et support jusqu'à 1 exaoctet.
+
+   C. Les systèmes de fichiers modernes.
+
+      Le système XFS est optimisé pour les très gros fichiers et le parallélisme mais ne supporte pas la réduction de taille.
+
+      Le système Btrfs propose des fonctionnalités avancées comme les snapshots intégrés, la compression et les sous-volumes.
+
+      Le système F2FS est spécifiquement conçu pour optimiser les performances et la durée de vie des mémoires flash et SSD.
+
+   D. Les systèmes spécialisés.
+
+      Le système tmpfs permet de stocker des fichiers temporaires directement dans la mémoire vive pour une rapidité maximale.
+
+      Le système ZFS offre une intégrité de bout en bout et une gestion de volume intégrée mais nécessite un module externe.
+
+   E. Critères de choix.
+
+      La taille des données oriente le choix vers ext4 ou XFS pour les grands volumes et les bases de données.
+
+      La fiabilité et la compatibilité privilégient ext4 dans la majorité des installations Linux standards.
+
+IV. LES COMMANDES D'ADMINISTRATION DU SGF.
+
+   A. Création et formatage.
+
+      La commande mkfs permet d'initialiser une partition avec un système de fichiers spécifique comme ext4 ou xfs.
+
+      L'option tiret L permet d'attribuer un label au système de fichiers lors de sa création.
+
+      Le choix du formatage est définitif et le changer implique de reformater et de restaurer les données.
+
+   B. Vérification et réparation.
+
+      La commande fsck est l'outil générique qui appelle les modules spécifiques de réparation pour chaque format.
+
+      Il est impératif de démonter le système de fichiers ou de le monter en lecture seule avant toute réparation.
+
+      Le système de fichiers XFS utilise son propre outil de réparation nommé xfs_repair.
+
+   C. Montage et démontage.
+
+      La commande mount rend le système de fichiers accessible dans l'arborescence à un point de montage donné.
+
+      Le fichier etc fstab configure les points de montage permanents pour qu'ils soient actifs au démarrage.
+
+      Les options de montage comme ro, noexec ou nosuid permettent de renforcer la sécurité des partitions.
+
+   D. Gestion de l'espace et quotas.
+
+      La commande df tiret h affiche l'espace disque utilisé et disponible pour chaque système de fichiers monté.
+
+      La commande du tiret sh permet de calculer la taille occupée par un répertoire spécifique.
+
+      Les quotas permettent de limiter l'espace disque alloué à un utilisateur ou à un groupe.
+
+   E. Surveillance et diagnostic.
+
+      La commande df tiret i surveille l'utilisation des inodes pour éviter la saturation par des petits fichiers.
+
+      La commande lsof permet d'identifier les processus qui maintiennent des fichiers ouverts sur un point de montage.
+
+      La commande watch df tiret h permet de suivre l'évolution de l'espace disque en temps réel.
+
+V. LE SYSTEME DE FICHIERS VIRTUEL (VFS).
+
+   A. Principe du VFS.
+
+      Le VFS fournit une couche d'abstraction qui uniformise l'accès aux différents systèmes de fichiers pour les applications.
+
+      Il traduit les appels système génériques en instructions spécifiques comprises par le module du système de fichiers.
+
+   B. Structures principales.
+
+      Le superbloc virtuel représente l'état général du montage et l'inode virtuel contient les métadonnées unifiées.
+
+      La dentry décrit les entrées de répertoire et le VFS maintient un cache pour accélérer la résolution des chemins.
+
+   C. Avantages pour l'administrateur.
+
+      Le VFS assure que les commandes standard fonctionnent de manière identique quel que soit le format du disque.
+
+      Il permet la coexistence transparente de systèmes de fichiers locaux, réseaux et virtuels dans la même arborescence.
+
+VI. LE SYSTEME DE FICHIERS /PROC.
+
+   A. Nature et rôle.
+
+      Le répertoire proc est une interface virtuelle qui expose l'état du noyau et des processus sans stockage disque.
+
+      Il sert de point de communication permettant à l'administrateur d'interroger et de configurer le noyau.
+
+   B. Structure générale.
+
+      Les fichiers globaux comme cpuinfo et meminfo donnent des informations sur le matériel et les ressources.
+
+      Chaque processus actif possède un sous-répertoire nommé par son PID contenant son état et ses descripteurs.
+
+   C. Utilisation pratique.
+
+      La lecture des fichiers permet un diagnostic rapide du matériel et des processus sans outils tiers.
+
+      L'écriture dans le sous-répertoire sys permet de modifier les paramètres du noyau à la volée.
+
+      Les modifications effectuées dans proc sont volatiles et disparaissent au redémarrage du système.
+
+VII. LE SYSTEME DE FICHIERS /SYS.
+
+   A. Nature et rôle.
+
+      Le répertoire sys expose une vue structurée des périphériques matériels et de leurs pilotes.
+
+      Il sert d'interface privilégiée pour le service udev qui gère la configuration automatique du matériel.
+
+   B. Organisation.
+
+      Le dossier class regroupe les périphériques par fonction comme le réseau ou le stockage.
+
+      Le dossier block liste spécifiquement les périphériques de stockage de type bloc.
+
+   C. Consultation et modification.
+
+      Il est possible de lire les attributs techniques comme la vitesse d'une interface réseau ou la taille d'un disque.
+
+      L'écriture dans certains fichiers permet de déclencher des actions comme la désactivation d'une carte réseau.
+
+POINTS D'ATTENTION.
+
+La partition boot doit toujours être placée hors du LVM et formatée en ext4 pour assurer le démarrage.
+
+Une sauvegarde du MBR est indispensable après l'installation pour se prémunir contre la corruption du secteur d'amorçage.
+
+Il ne faut jamais lancer une réparation fsck sur un système de fichiers monté en écriture.
+
+Le système de fichiers XFS ne supporte pas la réduction de taille nativement contrairement à ext4.
+
+Un disque peut être saturé par manque d'inodes même s'il reste de l'espace de stockage libre en octets.
+
+Les modifications de paramètres noyau via proc et sys sont perdues au redémarrage si elles ne sont pas scriptées.
+
+Une erreur de syntaxe dans le fichier fstab peut empêcher le système de démarrer correctement.
+
+La migration de données avec pvmove nécessite de vérifier au préalable que le disque cible a suffisamment d'extents libres.
+
+EXEMPLES CITES.
+
+dd if=/dev/sda of=/root/mbr_backup.img bs=512 count=1.
+
+pvcreate /dev/sdb1.
+
+vgcreate vgdata /dev/sdb1 /dev/sdb2.
+
+lvcreate -L 20G -n lv_data vgdata.
+
+lvextend -L +10G /dev/vgroot/lv_home.
+
+resize2fs /dev/vgroot/lv_home.
+
+lvreduce -L 15G /dev/vgroot/lv_var.
+
+pvmove /dev/sdc1 /dev/sdc2.
+
+lvcreate -s -n lv_home_snap -L 5G /dev/vg_main/lv_home.
+
+mkfs.ext4 -L data /dev/sda2.
+
+mount /dev/sda2 /mnt/data.
+
+echo 1 > /proc/sys/net/ipv4/ip_forward.
+
+echo 262144 > /proc/sys/net/core/rmem_max.
+
+cat /sys/class/net/eth0/speed.
+
+echo 1 > /sys/class/net/eth0/device/remove.

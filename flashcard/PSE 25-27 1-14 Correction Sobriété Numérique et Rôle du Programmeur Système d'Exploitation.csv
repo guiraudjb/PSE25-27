@@ -1,0 +1,29 @@
+Quelle est la définition de la sobriété numérique selon le document ?,"Concevoir, produire et utiliser le numérique de manière plus responsable afin de réduire son impact environnemental tout en préservant son efficacité."
+Quel est l'objectif chiffré du programme « Bercy vert » concernant les émissions de gaz à effet de serre liées au numérique ?,Diminuer de 22 % les émissions de gaz à effet de serre liées au numérique d'ici 2027.
+Dans quelle démarche plus large la sobriété numérique s'inscrit-elle au niveau ministériel ?,Dans le cadre de la démarche Services publics écoresponsables (SPE) et du programme « Bercy vert ».
+Quels trois éléments la sobriété numérique cherche-t-elle à concilier dans la transformation des SI ?,"La frugalité, la performance et la disponibilité."
+Quel référentiel garantit l'accessibilité numérique pour tous les usagers ?,Le référentiel général d’amélioration de l’accessibilité (RGAA).
+Quel référentiel encadre la sécurité des systèmes d’information et peut présenter une injonction paradoxale avec la sobriété numérique ?,Le référentiel général de sécurité (RGS).
+Quelle injonction paradoxale le RGS présente-t-il par rapport à la sobriété numérique ?,La contradiction entre le besoin de traçabilité (logs) et l'objectif de réduction des données.
+Quel règlement impose la protection et la gestion responsable des données personnelles ?,Le règlement général sur la protection des données (RGPD).
+Comment le RGPD contribue-t-il à la sobriété numérique ?,En imposant la minimisation des données et la suppression des données devenues inutiles.
+Le référentiel général d’écoconception _____ impose des principes permettant de réduire l’empreinte environnementale dès la conception.,RGESN
+Quelle action est citée comme exemple de rationalisation du parc et des infrastructures ?,La fusion de serveurs sous-utilisés.
+Comment l'allongement du cycle de vie du matériel peut-il être mis en œuvre ?,"Via le reconditionnement, la maintenance préventive et le choix de matériel réparable."
+Quel indicateur d'efficacité énergétique des datacentres est mentionné comme pouvant être amélioré ?,Le PUE (Power Usage Effectiveness).
+Quel est l'avantage des architectures scalables et adaptatives dans un contexte de sobriété numérique ?,"Elles permettent de monter en capacité lors des pics d'activité puis de redescendre, optimisant l'usage des ressources."
+En quoi consiste la gestion raisonnée des données dans le cadre de la sobriété numérique ?,"Mettre en place une politique de cycle de vie des données incluant l'archivage, la suppression et la limitation des duplications."
+"Sur le plan organisationnel, comment la planification des traitements évolue-t-elle avec la sobriété numérique ?",Les arbitrages tiennent compte des périodes de charge et des contraintes énergétiques pour reprogrammer les traitements non critiques.
+Quels types d'indicateurs sont intégrés dans un pilotage écoresponsable des environnements ?,"Des indicateurs de consommation, de volumétrie, de durée d’exécution et de charge."
+Quelle est la conséquence de la sobriété numérique sur la coordination entre les équipes informatiques ?,"Elle implique une meilleure communication entre exploitants, architectes, développeurs et métiers."
+Quel est le double rôle essentiel du PSE dans la mise en œuvre de la sobriété numérique ?,Il assure un rôle d'expert technique mais également un rôle transverse.
+Comment le PSE mobilise-t-il son expertise technique pour l'optimisation opérationnelle ?,"En formulant des recommandations, en contribuant à la conception de solutions efficientes et en optimisant les scripts."
+"Dans le cadre de l'analyse des performances, quelles sources de surconsommation le PSE identifie-t-il ?","L'utilisation CPU par processus, ou la croissance anormale de fichiers temporaires ou de logs."
+Comment un PSE peut-il optimiser des scripts ou des batchs pour la sobriété numérique ?,En ajoutant des conditions ou en limitant les boucles pour les rendre plus efficaces.
+En quoi consiste le rôle du PSE dans le maintien de la qualité opérationnelle ?,Il maintient le niveau de disponibilité malgré les ajustements et vérifie la priorisation des services critiques.
+Quel nouveau type de risque induit par la sobriété numérique le PSE doit-il gérer ?,Des risques comme des traitements concurrents déclenchés après des optimisations de batchs.
+Citez trois exemples d'indicateurs que le PSE produit et exploite pour le pilotage SPE.,"Les volumes de logs, le taux de charge CPU, l'occupation du stockage, ou le temps d’exécution des scripts."
+Comment le PSE contribue-t-il à la diffusion d'une culture de sobriété numérique ?,"Il sensibilise, forme et accompagne les équipes en transmettant des connaissances techniques appliquées."
+Dans quel contexte de développement le partage de bonnes pratiques par le PSE est-il particulièrement pertinent ?,"Dans le cadre d'une approche DevOps, pour intégrer la sobriété tout au long du cycle de développement."
+La sobriété numérique agit comme un moteur de transformation _____ : elle incite à concevoir des architectures plus rationnelles.,globale
+"Quel défi futur est mentionné, où le PSE sera pleinement associé ?",Développer des usages innovants de l'intelligence artificielle tout en maîtrisant leur coût énergétique.

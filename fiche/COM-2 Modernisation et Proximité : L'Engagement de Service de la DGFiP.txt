@@ -1,0 +1,175 @@
+OFFRIR DES SERVICES EFFICACES ET ADAPTÉS (DGFIP 2023-2027).
+
+LEXIQUE COMPLET.
+
+      NRP désigne le Nouveau Réseau de Proximité, une réorganisation territoriale majeure engagée en 2019 visant à augmenter les points de contact.
+
+      SGC signifie Service de Gestion Comptable, une structure spécialisée chargée exclusivement de la comptabilité des collectivités territoriales.
+
+      CDL correspond au Conseiller aux Décideurs Locaux, une fonction dédiée au conseil fiscal et financier auprès des élus locaux.
+
+      ENSU est l'acronyme pour Espace Numérique Sécurisé Unifié, le futur portail modernisé pour les professionnels intégrant le paiement des créances.
+
+      ENSAP désigne l'Espace Numérique Sécurisé de l'Agent Public, un espace personnel pour les fonctionnaires d'État.
+
+      GMBI signifie Gérer Mes Biens Immobiliers, un service en ligne permettant la gestion des déclarations et paiements liés à l'immobilier.
+
+      Ad’AP renvoie aux Agendas d’Accessibilité Programmée, un dispositif pour la mise en accessibilité des établissements recevant du public.
+
+      SIICLOM est un logiciel comptable spécifique développé pour les besoins des collectivités d'Outre-mer.
+
+      VEGA est le projet de digitalisation des ventes aux enchères des administrations pour la gestion du patrimoine mobilier.
+
+      Nubo est le nom du Cloud souverain développé par la DGFiP et mis à disposition des autres administrations.
+
+      Imprimfip désigne le service industriel d'éditique de la DGFiP, destiné à devenir l'opérateur de référence de l'État.
+
+      API signifie Interface de Programmation d'Application et permet l'échange automatisé de données entre la DGFiP et ses partenaires.
+
+      SMCL, SPOCC et SPOCH sont des documents de données financières concernant respectivement la situation mensuelle des collectivités, les opérations comptables et les comptes des hôpitaux.
+
+COURS DÉTAILLÉ.
+
+I. CONTEXTE ET NOUVEAU RÉSEAU DE PROXIMITÉ (NRP).
+
+   A. Bilan de la réorganisation 2019-2023.
+
+      La DGFiP a engagé une importante transformation de son réseau territorial pour s'adapter aux nouveaux besoins.
+
+      Cette réforme a conduit à la fermeture des trésoreries mixtes et des SIP-SIE ainsi qu'à la réduction de moitié des postes comptables.
+
+      La création de nouvelles structures spécialisées a été centrale avec les services de gestion comptable et les conseillers aux décideurs locaux.
+
+      Le maillage territorial a été densifié grâce aux maisons France services et aux permanences en mairies.
+
+      Le nombre de communes où la DGFiP est présente a ainsi augmenté de cinquante pour cent par rapport au premier janvier 2019.
+
+   B. Perspectives 2023-2027.
+
+      La période actuelle vise à stabiliser et consolider les organisations issues du déploiement du NRP.
+
+      Le déploiement des services relocalisés, comme les centres de contact, sera assuré selon le calendrier prévu.
+
+II. OBJECTIF 4 : GARANTIR L'ACCÈS AUX INFORMATIONS ET SERVICES AUX USAGERS.
+
+   A. Clarification et enrichissement de l'information (Chantier 4-1).
+
+      La compréhension de la norme fiscale doit être facilitée dès son élaboration par la consultation des services de gestion et des représentants des contribuables.
+
+      L'accès aux règles sera ouvert plus largement via une base de rescrits et de documentation administrative.
+
+      Les modalités de contact seront élargies sur tous les supports incluant la téléphonie, la messagerie et les guichets.
+
+      Les fonctionnalités de l'application smartphone impots.gouv seront alignées le plus possible sur celles du site internet.
+
+      La déclaration de revenus en ligne deviendra une téléprocédure à part entière et ne sera plus une simple transposition du format papier.
+
+   B. Renforcement de l'offre multicanale (Chantier 4-2).
+
+      L'espace numérique des professionnels sera modernisé via l'espace numérique sécurisé unifié nommé ENSU.
+
+      Cet espace intègrera les factures locales et hospitalières et proposera systématiquement le paiement en ligne.
+
+      Pour les agents publics, une messagerie sécurisée sera ajoutée à l'espace ENSAP pour les questions relatives aux retraites.
+
+      L'accueil physique des indépendants sera assuré dans le cadre d'un partenariat avec les URSSAF.
+
+   C. Accueil adapté et inclusion (Chantier 4-3).
+
+      La rénovation immobilière des accueils se poursuivra pour améliorer l'ergonomie et déployer une identité visuelle propre.
+
+      L'engagement dans les maisons France services sera maintenu en partenariat avec l'agence nationale de la cohésion des territoires.
+
+      L'accompagnement des publics en difficulté face à l'illettrisme ou l'illectronisme sera renforcé.
+
+      Les travaux de mise en accessibilité des bâtiments recevant du public seront poursuivis conformément aux agendas programmés.
+
+      Le pilotage de l'activité d'accueil sera doté de nouveaux outils basés sur une mesure plus fiable des flux et motifs.
+
+   D. Garantie de la satisfaction (Chantier 4-4).
+
+      La qualité de service sera mesurée pour veiller au respect des engagements du programme Services publics +.
+
+      Un comparatif de satisfaction sera établi entre les retraités du régime de l'État et ceux des autres régimes.
+
+III. OBJECTIF 5 : AMÉLIORER LE SERVICE AUX COLLECTIVITÉS LOCALES.
+
+   A. Consolidation du binôme SGC et CDL.
+
+      L'organisation reposant sur le service de gestion comptable et le conseiller aux décideurs locaux est désormais stabilisée.
+
+      La mission de conseil du CDL sera pérennisée face aux demandes croissantes grâce à la mutualisation des bonnes pratiques.
+
+      Les méthodes de travail entre le SGC et le CDL seront innovantes pour assurer une bonne articulation.
+
+      Le pilotage et les moyens d'action des services de gestion comptable seront renforcés.
+
+   B. Outils numériques et fiabilisation fiscale (Chantier 5-1).
+
+      La fiabilisation des bases de la fiscalité directe locale continuera via les applicatifs Surf et Majic.
+
+      Le service Gérer mes biens immobiliers permettra le paiement en ligne des taxes d'urbanisme.
+
+      Une interface de signalement et d'échanges avec les collectivités sera mise en place dans ce service.
+
+      Un nouveau portail de gestion locale offrira des services d'information fiscale et un simulateur de produits fiscaux.
+
+      Ce portail permettra également la transmission dématérialisée des délibérations fiscales.
+
+   C. Projets informatiques structurels.
+
+      Le projet Hélios 2 développera les capacités de traitement des données et le contrôle automatisé de la qualité comptable.
+
+      Le logiciel SIICLOM sera spécifiquement développé pour la comptabilité des collectivités d'Outre-mer.
+
+      Le projet VEGA assurera la digitalisation des ventes aux enchères pour la gestion du patrimoine mobilier de l'État.
+
+      Le site internet dédié aux dons sera ouvert aux collectivités locales.
+
+IV. OBJECTIF 6 : ÉTENDRE LES SERVICES AUX PARTENAIRES.
+
+   A. Administration de référence en données et services (Chantier 6-2).
+
+      La DGFiP mettra à disposition des infrastructures comme le Cloud souverain Nubo.
+
+      Le service Imprimfip montera en charge pour devenir l'opérateur d'éditique de l'État.
+
+      L'accès aux données sera ouvert de façon sécurisée via des interfaces de programmation applicatives nommées API.
+
+      La publication en open data des codes sources et des algorithmes sera accrue.
+
+      Les données financières du secteur public local seront mieux diffusées via les états SMCL et SPOCC.
+
+   B. Offres de services spécifiques (Chantier 6-1).
+
+      Une offre de paye à façon sera définie pour les organismes publics nationaux.
+
+      La refonte du système d'information des retraites se poursuivra en mutualisation avec la Caisse des dépôts et consignations.
+
+      La gestion des successions vacantes sera transformée par la dématérialisation des échanges avec les notaires et banques.
+
+      Un portail bancaire rénové et sécurisé sera mis en place pour les déposants de fonds au Trésor.
+
+POINTS D'ATTENTION.
+
+L'objectif est que cent pour cent des directions disposent d'au moins un accueil rénové au standard en 2027.
+
+La cible pour l'indice de qualité de service est fixée à quatre-vingts pour cent.
+
+Le taux de mise en ligne des factures publiques sur l'ENSU doit atteindre soixante-trois pour cent.
+
+La DGFiP vise la fiabilisation de plus de trois millions de fiches fiscales sur la période.
+
+L'objectif pour les API est d'atteindre deux cents dossiers de clients externes en production par an en 2027.
+
+EXEMPLES CITES.
+
+Les plateformes de location saisonnière pourront utiliser le portail de gestion locale pour la taxe de séjour.
+
+Les préfectures auront accès au portail de gestion locale pour le contrôle de légalité.
+
+Les partenaires cités pour les successions incluent les huissiers de justice et les notaires.
+
+L'agence nationale de la cohésion des territoires est le partenaire pour les maisons France services.
+
+La Caisse des dépôts et consignations est le partenaire pour la liquidation des pensions.

@@ -1,0 +1,70 @@
+"Selon le guide de l'ANSSI, sur quels sujets les équipes opérationnelles (administrateurs, développeurs, etc.) doivent-elles être formées ?","Législation, risques et menaces, maintien en condition de sécurité, authentification, durcissement des systèmes, cloisonnement réseau et journalisation."
+À quelle fréquence les équipes opérationnelles doivent-elles suivre des formations sur la sécurité des systèmes d'information ?,"À leur prise de poste, puis à intervalles réguliers."
+Quels sujets minimaux doivent être abordés lors de la sensibilisation des utilisateurs à la sécurité informatique ?,"Les enjeux, les informations sensibles, les réglementations, les règles de sécurité quotidiennes et les moyens de sécurité disponibles."
+Quelle mesure renforcée peut être envisagée pour formaliser les règles que les utilisateurs doivent respecter ?,L'élaboration et la signature d'une charte des moyens informatiques.
+"Avant d'externaliser un système d'information, que doit faire une entité pour maîtriser les risques ?",Évaluer les risques spécifiques à l'infogérance et prendre en compte les besoins et mesures de sécurité dès la rédaction des exigences.
+"Dans le cadre de l'infogérance, quel document le prestataire doit-il fournir pour formaliser ses engagements de sécurité ?",Un plan d'assurance sécurité (PAS).
+"Pour protéger efficacement les données sensibles, quelle est la première étape indispensable selon la règle n°4 ?",Identifier précisément quelles sont ces données sensibles.
+Que doit contenir au minimum un schéma simplifié du réseau (cartographie) ?,"Les zones IP, le plan d'adressage, les équipements de routage et de sécurité, les interconnexions extérieures et la localisation des serveurs sensibles."
+Pourquoi les comptes à privilèges sont-ils des cibles privilégiées par les attaquants ?,Car ils souhaitent obtenir un accès le plus large possible au système d’information.
+Quelle est la recommandation de l'ANSSI concernant la nomenclature des comptes de services et d'administration ?,Définir et utiliser une nomenclature simple et claire pour faciliter leur revue et la détection d'intrusion.
+Quels éléments minimaux les procédures d'arrivée et de départ des utilisateurs doivent-elles prendre en compte ?,"Création/suppression des comptes, gestion des droits, gestion des accès physiques, affectation des équipements mobiles et gestion des informations sensibles."
+Quelle est la mesure 'renforcée' concernant les procédures d'arrivée et de départ des utilisateurs ?,Les procédures doivent être formalisées et mises à jour en fonction du contexte.
+Quelle est la règle de base concernant la connexion d'équipements au réseau de l'entité ?,Seule la connexion de terminaux maîtrisés par l'entité doit être autorisée.
+Quelle solution pragmatique peut être mise en place pour les terminaux personnels ou visiteurs nécessitant un accès réseau ?,La mise à disposition d’un réseau Wi-Fi avec un SSID dédié.
+Quelle mesure technique 'renforcée' peut compléter l'interdiction des équipements non maîtrisés sur le réseau ?,"L'authentification des postes sur le réseau, par exemple avec le standard 802.1X."
+Pourquoi les comptes d'accès au système d'information doivent-ils être nominatifs ?,Pour faciliter l'attribution d'une action en cas d'incident ou identifier des comptes compromis.
+Quelle est la règle pour les comptes d'un administrateur ?,"Un compte d'administration nominatif, distinct du compte utilisateur, doit être attribué à chaque administrateur."
+La journalisation liée aux comptes (connexions réussies/échouées) est une mesure de niveau _____.,Renforcé
+"Pour chaque ressource sensible du système, que faut-il définir, contrôler et éviter ?","Il faut définir quelle population peut y accéder, contrôler strictement son accès et éviter sa dispersion ou duplication."
+Citez une mesure technique pour encadrer l'application des règles de choix de mots de passe.,"Le blocage des comptes après plusieurs échecs, la désactivation des connexions anonymes, ou l'utilisation d'un outil d'audit de robustesse."
+Quelle solution sécurisée est au premier rang pour protéger les mots de passe stockés sur les systèmes ?,L'utilisation d'un coffre-fort numérique.
+Que faut-il faire impérativement avec les éléments d'authentification par défaut des équipements et services ?,Ils doivent être modifiés dès leur installation.
+La mesure consistant à renouveler régulièrement les éléments d'authentification (après leur changement initial) est de niveau _____.,Renforcé
+L'authentification forte nécessite l'utilisation de deux facteurs différents parmi trois catégories. Quelles sont ces catégories ?,"Ce que je sais (mot de passe), ce que je possède (carte à puce) et ce que je suis (biométrie)."
+"Pour une authentification forte de niveau 'renforcé', quels mécanismes doivent être privilégiés ?","Les cartes à puces ou, à défaut, les mots de passe à usage unique (OTP) avec jeton physique."
+Quatre mesures sont citées pour un niveau de sécurité minimal sur le parc informatique. Citez-en deux.,"Limiter les applications installées, utiliser un pare-feu local et un antivirus, chiffrer les partitions de données, ou désactiver les exécutions automatiques (autorun)."
+La mesure 'renforcée' pour la sécurité des postes stipule que les données vitales doivent faire l'objet de sauvegardes régulières stockées sur des équipements _____.,déconnectés
+Que préconise l'ANSSI concernant les clés USB de provenance inconnue ?,Proscrire leur branchement sur le système d'information.
+"Sur les postes utilisateurs, quelle mesure 'renforcée' permet de se protéger des périphériques amovibles ?","Utiliser des solutions pour interdire l'exécution de programmes sur ces périphériques (ex: AppLocker, option de montage noexec)."
+Dans quel but est-il recommandé d'utiliser un outil de gestion centralisée comme Active Directory ?,Pour homogénéiser les politiques de sécurité sur l'ensemble du parc informatique et faciliter leur application.
+Quel est l'objectif principal de l'activation du pare-feu local des postes de travail ?,Rendre plus difficile le déplacement latéral d'un attaquant d'un poste compromis vers d'autres postes.
+"Pour une configuration 'renforcée' du pare-feu local, quelle est l'approche de filtrage recommandée ?",Bloquer l'ensemble des flux par défaut et n'autoriser que les services nécessaires depuis les équipements correspondants (liste blanche).
+Que doit-on faire systématiquement avec les données sensibles envoyées par courriel ou hébergées dans le cloud ?,Il faut procéder à leur chiffrement systématique avant de les envoyer ou de les héberger.
+Comment doit être transmis le secret (mot de passe) permettant de déchiffrer des données envoyées par un canal ?,"Via un canal de confiance ou, à défaut, un canal distinct (ex: par téléphone si les données sont envoyées par courriel)."
+"Quel est le risque d'un réseau 'à plat', sans cloisonnement ?",La compromission d'une seule machine met en péril l'ensemble des machines connectées.
+Comment se caractérise une zone réseau dans une architecture segmentée ?,"Par des VLAN et des sous-réseaux IP dédiés, voire des infrastructures dédiées selon sa criticité."
+"Pour la sécurité des réseaux Wi-Fi, quel mode de chiffrement robuste est recommandé ?",Le mode WPA2 avec l'algorithme AES CCMP.
+Comment doit être géré l'accès Wi-Fi pour les terminaux personnels ou visiteurs ?,Il doit être séparé des connexions Wi-Fi des terminaux de l'entité (ex: SSID et VLAN distincts).
+Les protocoles réseaux sécurisés sont souvent identifiables par l'ajout de la lettre 's'. Que signifie ce 's' ?,Secure (sécurisé en anglais).
+Quel protocole sécurisé est venu remplacer les anciens protocoles de communication TELNET et RLOGIN ?,SSH (Secure SHell).
+Une passerelle sécurisée d'accès à Internet doit comprendre au minimum un pare-feu et un _____.,serveur mandataire (proxy)
+"Pour les postes nomades, que recommande fortement l'ANSSI avant de naviguer sur le Web ?",Établir au préalable une connexion sécurisée (VPN) au système d'information pour naviguer à travers la passerelle de l'entité.
+Où doivent être physiquement cloisonnées les infrastructures hébergeant des services visibles sur Internet ?,Elles doivent être physiquement cloisonnées de toutes les infrastructures qui n'ont pas vocation à être visibles depuis Internet.
+Quel est le principal vecteur d'infection du poste de travail ?,La messagerie (pièces jointes ou liens malveillants).
+Que faut-il faire si l'on a un doute sur l'authenticité d'un courriel ?,"Une vérification de l'authenticité par un autre canal (téléphone, SMS, etc.) est nécessaire."
+"Pour renforcer la sécurité de la messagerie, il est souhaitable de ne pas exposer directement les serveurs de boîtes aux lettres sur Internet et d'utiliser un _____.",serveur relai
+"Pour une interconnexion réseau avec un partenaire via Internet, quel type de tunnel est préconisé ?","Un tunnel site à site, de préférence IPsec."
+"Que doit-on faire avec les prises réseau se trouvant dans des zones ouvertes au public (hall d'accueil, salle de réunion) ?",Elles doivent être restreintes ou désactivées.
+Pourquoi un poste de travail ou un serveur d'administration ne doit-il en aucun cas avoir accès à Internet ?,En raison des risques que la navigation web et la messagerie font peser sur son intégrité.
+"Dans une logique de segmentation, le réseau d'administration doit être spécifiquement cloisonné, notamment vis-à-vis du _____.",réseau bureautique des utilisateurs
+Quelle est la recommandation par défaut concernant les privilèges d'administration pour un utilisateur sur son poste de travail ?,"Un utilisateur, quelle que soit sa position, ne doit pas disposer de privilèges d'administration sur son poste de travail."
+"Pour éviter toute indiscrétion lors de déplacements, que doit-on positionner sur l'écran des terminaux nomades ?",Un filtre de confidentialité.
+"Quelle est la recommandation fondamentale pour les données stockées sur l'ensemble des matériels nomades (ordinateurs, clés USB, etc.) ?",Ne stocker que des données préalablement chiffrées.
+"En situation de nomadisme, quel type de connexion est fortement recommandé pour se connecter au système d'information de l'entité ?",Un tunnel VPN IPsec entre le poste nomade et une passerelle VPN de l'entité.
+"Quelle est la première recommandation concernant l'usage des terminaux mobiles (ordiphones, tablettes) ?",Ne pas mutualiser les usages personnel et professionnel sur un seul et même terminal.
+"Pour des raisons de sécurité, l'usage d'un _____ intégré au terminal mobile est déconseillé.",assistant vocal
+Dans quel délai maximal les correctifs de sécurité doivent-ils être appliqués sur l'ensemble des composants du système ?,Dans le mois qui suit leur publication par l'éditeur.
+Qu'est-ce que l'adhérence logicielle ('adhérences logicielles') et pourquoi doit-elle être limitée ?,C'est la dépendance de fonctionnement d'un logiciel par rapport à un autre; elle doit être limitée pour ne pas être bloqué par un logiciel dont le support arrive à son terme.
+"Pour pouvoir corréler les événements entre différents composants, leur source de synchronisation de temps (protocole NTP) doit être _____.",identique
+Pour quelle durée minimale les événements critiques pour la sécurité doivent-ils être journalisés et conservés ?,Pendant au moins un an (ou plus selon les obligations légales).
+Quel est l'objectif d'une politique de sauvegarde formalisée ?,"Définir des exigences en matière de sauvegarde de l'information, des logiciels et des systèmes pour assurer la poursuite de l'activité."
+À quelle fréquence minimale est-il souhaitable de planifier un exercice de restauration des données ?,Au moins une fois par an.
+"L'ANSSI recommande la réalisation d'audits réguliers du système d'information, au moins _____ par an.",une fois
+Comment l'ANSSI nomme-t-elle les prestataires qu'elle qualifie pour réaliser des audits de sécurité ?,Prestataires d’audit de la sécurité des systèmes d’information (PASSI).
+Quel est le rôle du référent en sécurité des systèmes d'information ?,"Il est le premier contact pour les questions de sécurité, définit et vérifie les règles, sensibilise les utilisateurs et centralise les incidents."
+"En cas de suspicion d'intrusion sur une machine, que faut-il faire immédiatement et que ne faut-il pas faire ?","Il faut déconnecter la machine du réseau, mais la maintenir sous tension et ne pas la redémarrer."
+Que signifie l'acronyme PRIS dans le contexte de la gestion d'incidents ?,Prestataire de réponse aux incidents de sécurité.
+Selon quels deux axes les risques sont-ils généralement évalués dans une analyse formelle ?,Leur probabilité d'apparition et leur gravité.
+Quelle méthode d'analyse de risques est référencée et recommandée par l'ANSSI ?,La méthode EBIOS (Expression des Besoins et Identification des Objectifs de Sécurité).
+Citez deux types de prestataires de service qualifiés par l'ANSSI.,"PASSI (audit), PRIS (réponse à incidents), PDIS (détection d'incidents) ou SecNumCloud (cloud)."

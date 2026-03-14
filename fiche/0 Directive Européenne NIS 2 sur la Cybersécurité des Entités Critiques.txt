@@ -1,0 +1,191 @@
+DIRECTIVE (UE) 2022/2555 CONCERNANT LA CYBERSÉCURITÉ (NIS 2).
+
+LEXIQUE COMPLET.
+
+      La sécurité des réseaux et des systèmes d'information désigne la capacité de ces systèmes à résister à tout événement compromettant la disponibilité, l'authenticité, l'intégrité ou la confidentialité des données ou des services.
+
+      Un incident est défini comme un événement compromettant la disponibilité, l'authenticité, l'intégrité ou la confidentialité des données stockées, transmises ou traitées, ou des services offerts.
+
+      Un incident de cybersécurité majeur est un incident causant des perturbations dépassant les capacités de réaction d'un État membre ou ayant un impact important sur au moins deux États membres.
+
+      Une cybermenace importante désigne une menace susceptible d'avoir un impact grave sur les réseaux et systèmes d'information en causant un dommage matériel, corporel ou moral considérable.
+
+      La gestion des incidents regroupe toutes les actions et procédures visant à prévenir, détecter, analyser et contenir un incident ou à y répondre et à y remédier.
+
+      Un point d'échange internet est une structure de réseau permettant l'interconnexion de plus de deux réseaux indépendants pour faciliter l'échange de trafic internet.
+
+      Le système de noms de domaine ou DNS est un système hiérarchique et distribué d'affectation de noms permettant l'identification des services et ressources internet.
+
+      Un fournisseur de services gérés est une entité fournissant des services liés à l'installation, la gestion, l'exploitation ou l'entretien de produits et réseaux TIC via une assistance ou une administration active.
+
+COURS DÉTAILLÉ.
+
+I. DISPOSITIONS GÉNÉRALES ET CHAMP D'APPLICATION.
+
+   A. Objet et finalité.
+
+      La directive établit des mesures pour obtenir un niveau commun élevé de cybersécurité dans l'ensemble de l'Union européenne afin d'améliorer le fonctionnement du marché intérieur.
+
+      Elle impose aux États membres d'adopter des stratégies nationales, de désigner des autorités compétentes et de mettre en place des mesures de gestion des risques ainsi que des obligations d'information pour les entités concernées.
+
+   B. Champ d'application et entités concernées.
+
+      La directive s'applique aux entités publiques ou privées qualifiées de moyennes ou grandes entreprises qui fournissent leurs services ou exercent leurs activités au sein de l'Union.
+
+      Elle s'applique également, quelle que soit leur taille, aux entités critiques, aux fournisseurs de réseaux de communications électroniques publics, aux prestataires de services de confiance et aux registres de noms de domaine.
+
+      Sont exclues du champ d'application les entités opérant dans les domaines de la sécurité nationale, de la défense, de l'application de la loi, ainsi que les parlements et les banques centrales.
+
+   C. Distinction entre entités essentielles et importantes.
+
+      Les entités essentielles incluent les grandes entreprises des secteurs hautement critiques, les prestataires de services de confiance qualifiés, les registres de noms de domaine et les entités de l'administration publique centrale,.
+
+      Les entités importantes regroupent les entités visées aux annexes I et II qui ne sont pas qualifiées d'essentielles, ce qui inclut généralement les moyennes entreprises des secteurs critiques ou les grandes entreprises des autres secteurs critiques.
+
+      Les États membres doivent établir une liste des entités essentielles et importantes au plus tard le 17 avril 2025 et la mettre à jour régulièrement.
+
+   D. Relation avec les actes sectoriels.
+
+      Si un acte juridique sectoriel de l'Union impose des mesures de gestion des risques ou de notification d'incidents d'effet équivalent à la présente directive, ces dispositions sectorielles priment.
+
+II. GOUVERNANCE NATIONALE ET EUROPÉENNE.
+
+   A. Stratégie nationale de cybersécurité.
+
+      Chaque État membre doit adopter une stratégie nationale définissant les objectifs stratégiques, les ressources et les mesures réglementaires pour atteindre un niveau élevé de cybersécurité.
+
+      Cette stratégie doit inclure des politiques sur la sécurité de la chaîne d'approvisionnement, la gestion des vulnérabilités, l'éducation, la formation et la sensibilisation des citoyens,,.
+
+   B. Autorités compétentes et CSIRT.
+
+      Les États membres désignent des autorités compétentes pour superviser la mise en œuvre de la directive et un point de contact unique pour assurer la liaison transfrontière.
+
+      Des centres de réponse aux incidents de sécurité informatique ou CSIRT doivent être désignés pour surveiller les menaces, gérer les incidents et diffuser des alertes précoces,.
+
+      Les CSIRT doivent respecter des exigences de disponibilité, de sécurité des locaux, de continuité des services et de coopération internationale,.
+
+   C. Gestion de crise et divulgation des vulnérabilités.
+
+      Chaque État membre désigne une autorité de gestion des crises cyber et adopte un plan national de réaction aux incidents et crises majeurs,.
+
+      Un CSIRT est désigné comme coordinateur pour la divulgation coordonnée des vulnérabilités afin de faciliter l'interaction entre les chercheurs et les fabricants.
+
+      L'ENISA tient à jour une base de données européenne des vulnérabilités permettant la divulgation et l'enregistrement volontaires des vulnérabilités connues.
+
+   D. Coopération au niveau de l'Union.
+
+      Un groupe de coopération est institué pour soutenir la coopération stratégique et l'échange d'informations entre les États membres, la Commission et l'ENISA,.
+
+      Un réseau des CSIRT est créé pour promouvoir une coopération opérationnelle rapide, échanger des informations sur les incidents et fournir une assistance mutuelle,.
+
+      Le réseau EU-CyCLONe est établi pour contribuer à la gestion coordonnée des incidents de cybersécurité majeurs et des crises au niveau opérationnel.
+
+III. GESTION DES RISQUES ET OBLIGATIONS DES ENTITÉS.
+
+   A. Gouvernance et responsabilité.
+
+      Les organes de direction des entités essentielles et importantes doivent approuver les mesures de gestion des risques, superviser leur mise en œuvre et peuvent être tenus responsables des manquements.
+
+      Les membres de ces organes de direction sont tenus de suivre une formation pour acquérir les compétences nécessaires à l'évaluation des risques de cybersécurité.
+
+   B. Mesures de gestion des risques.
+
+      Les entités doivent prendre des mesures techniques, opérationnelles et organisationnelles appropriées pour gérer les risques et limiter l'impact des incidents.
+
+      L'approche doit être multirisque et inclure la sécurité de la chaîne d'approvisionnement, la gestion des incidents, la continuité des activités, le chiffrement et l'hygiène informatique de base,.
+
+      Les entités doivent tenir compte des vulnérabilités de leurs fournisseurs et prestataires de services directs lors de l'évaluation des mesures de sécurité.
+
+   C. Obligations de signalement des incidents.
+
+      Tout incident ayant un impact important doit être notifié au CSIRT ou à l'autorité compétente sans retard injustifié.
+
+      Une alerte précoce doit être soumise dans les 24 heures suivant la connaissance de l'incident, indiquant s'il est d'origine malveillante ou s'il a un impact transfrontière.
+
+      Une notification d'incident détaillée incluant une évaluation initiale de la gravité et de l'impact doit être fournie dans les 72 heures.
+
+      Un rapport final doit être soumis au plus tard un mois après la notification de l'incident, décrivant les détails, la cause probable et les mesures d'atténuation.
+
+   D. Certification et normalisation.
+
+      Les États membres peuvent imposer aux entités l'utilisation de produits et services TIC certifiés dans le cadre de schémas européens de certification de cybersécurité.
+
+      Le recours aux normes et spécifications techniques européennes et internationales est encouragé pour assurer une mise en œuvre convergente des mesures de sécurité.
+
+IV. JURIDICTION ET ENREGISTREMENT.
+
+   A. Règles de compétence territoriale.
+
+      Les entités relèvent de la compétence de l'État membre dans lequel elles sont établies.
+
+      Les fournisseurs de communications électroniques relèvent de l'État membre où ils fournissent leurs services.
+
+      Certains fournisseurs numériques comme les fournisseurs de services cloud ou de centres de données relèvent de l'État membre où se trouve leur établissement principal dans l'Union.
+
+   B. Registre et base de données des noms de domaine.
+
+      L'ENISA crée et tient un registre des fournisseurs de services DNS, cloud, centres de données et autres services numériques critiques.
+
+      Les registres de noms de domaine de premier niveau doivent collecter et maintenir exactes les données d'enregistrement des noms de domaine dans une base de données spécialisée.
+
+      Ces entités doivent répondre aux demandes d'accès légitimes aux données d'enregistrement dans un délai de 72 heures.
+
+V. SUPERVISION ET EXÉCUTION.
+
+   A. Principes généraux.
+
+      Les autorités compétentes doivent procéder à une supervision efficace et prendre les mesures nécessaires pour assurer le respect de la directive.
+
+      Les priorités de supervision peuvent être fixées selon une approche basée sur les risques.
+
+   B. Supervision des entités essentielles.
+
+      Les autorités disposent de pouvoirs d'inspection sur place, de contrôle à distance, d'audit de sécurité régulier et de demande d'informations,.
+
+      En cas de violation, elles peuvent émettre des avertissements, adopter des instructions contraignantes, ordonner la cessation du comportement ou désigner un responsable du contrôle,.
+
+      Elles peuvent suspendre temporairement une certification ou demander l'interdiction temporaire d'exercice de responsabilités dirigeantes pour les dirigeants.
+
+   C. Supervision des entités importantes.
+
+      La supervision s'effectue principalement ex post, sur la base d'éléments de preuve ou d'indications de non-conformité.
+
+      Les autorités disposent de pouvoirs similaires d'inspection, d'audit et de demande d'informations nécessaires à l'évaluation ex post.
+
+   D. Amendes administratives.
+
+      Pour les entités essentielles, les amendes peuvent atteindre au moins 10 000 000 EUR ou 2 % du chiffre d'affaires mondial total, le montant le plus élevé étant retenu.
+
+      Pour les entités importantes, les amendes peuvent atteindre au moins 7 000 000 EUR ou 1,4 % du chiffre d'affaires mondial total, le montant le plus élevé étant retenu.
+
+VI. DISPOSITIONS FINALES.
+
+   A. Transposition et abrogation.
+
+      Les États membres doivent adopter et publier les dispositions nécessaires pour se conformer à la directive au plus tard le 17 octobre 2024.
+
+      La directive (UE) 2016/1148 dite NIS 1 est abrogée avec effet au 18 octobre 2024.
+
+   B. Réexamen.
+
+      La Commission réexaminera le fonctionnement de la directive au plus tard le 17 octobre 2027 et tous les 36 mois par la suite.
+
+POINTS D'ATTENTION.
+
+      La responsabilité des organes de direction est personnelle et directe concernant la validation et la supervision des mesures de cybersécurité.
+
+      Les délais de notification des incidents sont extrêmement courts avec une première alerte sous 24 heures.
+
+      L'approche de gestion des risques doit couvrir impérativement la sécurité de la chaîne d'approvisionnement et des fournisseurs.
+
+      Les sanctions financières prévues sont élevées et calquées sur le modèle du RGPD avec des plafonds en pourcentage du chiffre d'affaires mondial.
+
+EXEMPLES CITES.
+
+      Secteurs hautement critiques cités en Annexe I incluent l'Énergie, les Transports, le Secteur bancaire, la Santé et l'Eau potable.
+
+      Secteurs critiques cités en Annexe II incluent les Services postaux, la Gestion des déchets, la Fabrication de produits chimiques et la Fabrication de véhicules.
+
+      Entités de l'infrastructure numérique citées incluent les fournisseurs de points d'échange internet, de services DNS et d'informatique en nuage.
+
+      Fournisseurs numériques cités incluent les places de marché en ligne, les moteurs de recherche en ligne et les réseaux sociaux.

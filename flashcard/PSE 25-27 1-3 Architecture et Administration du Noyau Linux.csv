@@ -1,0 +1,60 @@
+Quel est le rôle fondamental du noyau dans un système d'exploitation ?,"Il assure l'interface entre le matériel (processeur, mémoire, périphériques) et les applications."
+Quelle est la particularité du noyau sous Linux par rapport à un simple intermédiaire neutre ?,C'est un système complet de gestion des ressources qui optimise leur utilisation et assure la stabilité.
+"Dans un noyau _____, toutes les fonctions du système (planification, mémoire, drivers, FS) sont regroupées dans un seul bloc.",monolithique
+Quel est le principal avantage d'un noyau monolithique ?,"La performance et la vitesse, car il n'y a pas de séparation stricte entre les composants."
+Quel est l'inconvénient majeur d'une architecture de noyau monolithique ?,Une erreur dans un driver peut compromettre la stabilité globale de tout le système.
+Quelles sont les fonctions minimales gérées par un micro-noyau ?,"La gestion de la mémoire, l'ordonnancement et la communication inter-processus."
+Comment un micro-noyau gère-t-il les services comme les pilotes et les systèmes de fichiers ?,Il les délègue à des processus s'exécutant en espace utilisateur.
+Quel est le principal avantage d'une architecture en micro-noyau ?,"La robustesse et la sécurité, car chaque service est isolé des autres."
+Comment est qualifiée l'architecture du noyau Linux ?,De monolithique modulaire.
+Qu'est-ce qui confère sa flexibilité au noyau Linux malgré son architecture monolithique ?,La capacité de charger dynamiquement la plupart des pilotes et fonctionnalités sous forme de modules.
+Qu'est-ce que la portabilité du noyau Linux ?,"Sa capacité à fonctionner sur une large gamme d'architectures matérielles comme x86, ARM, RISC-V."
+Quelle caractéristique du noyau Linux lui permet de gérer aussi bien un système embarqué qu'un supercalculateur ?,Son évolutivité (scalability).
+Que signifie la licence GPL pour le noyau Linux ?,Que son code source est disponible et modifiable par tous.
+"Que sont les versions ""LTS"" du noyau Linux ?","Des versions ""Long Term Support"" maintenues pendant plusieurs années, idéales pour la production."
+Par quelle structure de données chaque programme est-il représenté dans le noyau Linux ?,La structure de processus `task_struct`.
+Quel est le nom de l'ordonnanceur actuel par défaut du noyau Linux ?,CFS (Completely Fair Scheduler).
+Quel est l'objectif principal de l'ordonnanceur CFS (Completely Fair Scheduler) ?,Donner à chaque processus une part équitable du temps CPU.
+Pour quel type d'applications l'ordonnanceur RT (Real Time) est-il utilisé ?,Pour les applications critiques comme les télécommunications ou la robotique.
+Quelles commandes permettent à un administrateur d'ajuster les priorités des processus ?,"Les commandes `nice`, `renice` et `chrt`."
+Quel mécanisme permet à chaque processus de croire qu'il dispose de son propre espace mémoire complet ?,"La mémoire virtuelle, mise en œuvre grâce à la pagination."
+"À quoi sert le ""swap"" dans la gestion de la mémoire Linux ?",Il permet de décharger la mémoire vive (RAM) sur disque lorsque celle-ci est saturée.
+Quelle optimisation mémoire est particulièrement utile pour les bases de données et les systèmes lourds ?,Les Hugepages.
+Quelle est l'extension des fichiers correspondant aux modules du noyau Linux ?,`.ko` (kernel object).
+Quelle commande permet de charger dynamiquement un module du noyau et ses dépendances ?,`modprobe`
+Quelle commande permet de lister les modules actuellement chargés dans le noyau ?,`lsmod`
+Quelle couche d'abstraction du noyau Linux fournit une interface générique entre les applications et les systèmes de fichiers ?,Le VFS (Virtual File System).
+"Dans l'architecture VFS, que représente un `inode` ?","Il représente les métadonnées d'un fichier ou d'un répertoire (droits, pointeurs vers les blocs, etc.)."
+"Dans l'architecture VFS, qu'est-ce qu'un `dentry` (directory entry) ?",Une entrée de répertoire qui associe un nom de fichier à son `inode`.
+"Dans l'architecture VFS, que représente la structure `superblock` ?","Elle représente un système de fichiers monté avec ses informations globales (taille, type, état)."
+Citez deux exemples de systèmes de fichiers locaux supportés par Linux.,"ext4, XFS, Btrfs (deux parmi la liste sont acceptables)."
+Citez deux exemples de systèmes de fichiers virtuels sous Linux.,"procfs (`/proc`), sysfs (`/sys`), tmpfs."
+Quel est le principal avantage du VFS pour les applications ?,"L'uniformité : elles utilisent les mêmes appels systèmes (open, read, write) quel que soit le système de fichiers sous-jacent."
+Quelle est l'unique porte d'entrée des applications vers les fonctions critiques du noyau ?,Les appels systèmes (syscalls).
+Quel outil permet de surveiller l'utilisation des appels systèmes par un processus ?,`strace` ou `auditd`.
+"Quelle est la version du noyau la plus récente, publiée par Linus Torvalds toutes les 8 à 10 semaines ?",Le noyau Mainline.
+Citez une raison principale pour laquelle un administrateur compilerait son propre noyau Linux.,"Pour le support matériel spécifique, l'optimisation des performances, le renforcement de la sécurité ou l'expérimentation."
+Quelle commande permet de télécharger les sources du noyau depuis le site officiel kernel.org ?,`wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.5.tar.xz` (l'exemple est suffisant).
+Quel paquet faut-il installer sur Debian/Ubuntu pour obtenir les outils de compilation essentiels ?,`build-essential`
+"Sur un système RHEL/CentOS, quel groupe de paquets installe les outils de développement nécessaires à la compilation ?","`yum groupinstall ""Development Tools""`"
+Quelle commande lance l'interface de configuration du noyau en mode texte (ncurses) ?,`make menuconfig`
+"Lors d'une mise à jour du noyau, quelle commande permet de reprendre la configuration existante et de ne répondre qu'aux nouvelles options ?",`make oldconfig`
+Quelle est la commande pour lancer la compilation du noyau en utilisant tous les cœurs disponibles du processeur ?,`make -j$(nproc)`
+"Après la compilation, quelle commande installe les modules dans `/lib/modules/` ?",`make modules_install`
+Quelle commande finale copie le noyau dans `/boot` et met à jour le chargeur de démarrage GRUB ?,`make install`
+Quelle est la bonne pratique concernant les anciens noyaux lors du test d'un nouveau noyau compilé ?,Toujours garder un noyau stable précédent dans le menu de GRUB pour pouvoir démarrer dessus en cas de problème.
+"Sur Debian/Ubuntu, quel outil permet de générer un paquet `.deb` à partir d'un noyau compilé pour simplifier le déploiement ?",`make-kpkg`
+"Quelle commande affiche des informations détaillées sur un module, comme ses paramètres et sa licence ?",`modinfo <nom_du_module>`
+Comment peut-on activer le routage IP de manière dynamique via l'interface `sysctl` ?,`sysctl -w net.ipv4.ip_forward=1`
+Dans quel fichier de configuration les paramètres `sysctl` doivent-ils être placés pour être persistants après un redémarrage ?,`/etc/sysctl.conf`
+Comment régler le paramètre `vm.swappiness` à 10 pour réduire l'agressivité de l'utilisation du swap ?,`sysctl -w vm.swappiness=10`
+Quelle commande permet de connaître la version du noyau actuellement en cours d'exécution ?,`uname -r`
+"Quel outil affiche le tampon de messages du noyau, utile pour diagnostiquer des problèmes au démarrage ?",`dmesg`
+"Sur un système utilisant systemd, quelle commande filtre les journaux pour n'afficher que les messages du noyau ?",`journalctl -k`
+Comment peut-on changer l'ordonnanceur d'E/S (I/O scheduler) pour un disque `sda` et le passer en `deadline` ?,`echo deadline > /sys/block/sda/queue/scheduler`
+Que signifie l'acronyme CVE dans le contexte de la sécurité informatique ?,Common Vulnerabilities and Exposures.
+"Qu'est-ce que le ""live patching"" du noyau ?",C'est une technologie qui permet d'appliquer des correctifs de sécurité critiques au noyau sans avoir besoin de redémarrer le système.
+Citez une solution de live patching pour le noyau Linux.,"kpatch (Red Hat), ksplice (Oracle/Ubuntu), ou Canonical Livepatch (Ubuntu)."
+Quel mécanisme moderne et puissant permet de charger des programmes légers directement dans le noyau pour analyser son comportement en temps réel ?,eBPF (extended Berkeley Packet Filter).
+Quel outil avancé permet de tracer finement les événements du noyau ?,`ftrace`
+Quel est l'outil standard pour l'analyse des performances CPU et mémoire au niveau du noyau ?,`perf`

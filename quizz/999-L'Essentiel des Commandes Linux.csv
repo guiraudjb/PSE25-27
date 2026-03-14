@@ -1,0 +1,35 @@
+Quelle commande permet de consulter la page de manuel détaillée d'une commande ?;help;man;info;whatis;3;La commande man suivie du nom de la commande affiche sa documentation complète (manuel).
+Quelle option de la commande ls permet d'afficher tous les fichiers y compris les fichiers cachés ?;-l;-R;-a;-t;4;L'option -a (all) affiche tous les fichiers, y compris ceux commençant par un point (cachés).
+Quelle commande est utilisée pour créer un nouveau répertoire ?;rmdir;mkdir;touch;cat;3;La commande mkdir (make directory) permet de créer un dossier vide.
+Quelle est la fonction de la commande pwd ?;Afficher le répertoire actuel;Changer de mot de passe;Lister les processus;Afficher les permissions;2;pwd signifie Print Working Directory et affiche le chemin absolu du dossier courant.
+Quelle commande permet de supprimer récursivement un répertoire et tout son contenu ?;rm -r;rmdir;del -all;erase -f;2;L'option -r (récursif) avec rm permet de supprimer un dossier et les fichiers qu'il contient.
+Quelle commande affiche les 10 premières lignes d'un fichier ?;tail;less;cat;head;5;La commande head affiche par défaut le début (les 10 premières lignes) d'un fichier.
+Comment renommer un fichier nommé aaa en bbb ?;mv aaa bbb;cp aaa bbb;rn aaa bbb;name aaa bbb;2;La commande mv (move) est utilisée pour déplacer ou renommer des fichiers.
+Que fait la commande touch ?;Supprime un fichier;Affiche le contenu d'un fichier;Crée un fichier vide ou met à jour l'horodatage;Copie un fichier;4;touch crée un fichier s'il n'existe pas ou met à jour sa date de dernière modification.
+Quelle permission numérique correspond à rwx (lecture écriture exécution) pour tout le monde ?;755;644;777;700;4;Le chiffre 7 représente r (4) + w (2) + x (1), donc 777 donne tous les droits au propriétaire, au groupe et aux autres.
+Quelle commande permet de changer le propriétaire d'un fichier ?;chmod;chown;chgrp;usermod;3;La commande chown (change owner) modifie le propriétaire et/ou le groupe d'un fichier.
+Quelle commande affiche les informations relatives au noyau (kernel) ?;uname -r;cat /proc/cpuinfo;hostname;uptime;2;uname -r affiche spécifiquement la version du noyau Linux utilisé.
+Quelle commande permet de visualiser les processus en cours d'exécution en temps réel ?;ps;top;jobs;kill;3;top (ou htop) affiche une vue dynamique et temps réel des processus système.
+Comment arrêter (tuer) un processus en connaissant son ID (PID) ?;stop PID;end PID;kill PID;close PID;4;La commande kill suivie du PID envoie un signal pour terminer le processus.
+Quelle commande affiche l'espace disque libre et utilisé de manière lisible (human readable) ?;du -sh;df -h;free -m;fdisk -l;3;La commande df (disk free) avec l'option -h affiche l'espace disponible en unités lisibles (Go, Mo).
+Quelle commande permet de rechercher une chaîne de caractères spécifique à l'intérieur d'un fichier ?;find;locate;grep;search;4;grep est l'outil standard pour rechercher des motifs de texte dans des fichiers.
+Quelle commande permet de télécharger un fichier depuis le web ?;curl;get;wget;download;4;La commande wget permet de télécharger non interactivement des fichiers depuis le web.
+Quelle commande affiche les interfaces réseau et leurs adresses IP ?;ip addr;netstat;ping;dig;2;ip addr (ou ifconfig sur les vieux systèmes) liste les configurations des interfaces réseau.
+À quoi sert la commande ping ?;Transférer des fichiers;Vérifier la connectivité réseau;Scanner les ports;Changer l'adresse IP;3;ping envoie des paquets ICMP pour tester si une machine distante est accessible.
+Quelle commande affiche la mémoire RAM libre et utilisée ?;df;du;mem;free;5;La commande free affiche l'état de la mémoire physique et du swap.
+Quelle commande permet de se connecter de manière sécurisée à une machine distante ?;telnet;ftp;ssh;rlogin;4;ssh (Secure Shell) permet une connexion chiffrée à un hôte distant.
+Quelle commande est utilisée pour compresser un fichier avec l'algorithme gzip ?;tar;zip;gzip;compress;4;gzip compresse les fichiers et leur ajoute généralement l'extension .gz.
+Quelle commande permet de créer une archive tar ?;tar -x;tar -c;tar -v;tar -z;3;L'option -c (create) de la commande tar est utilisée pour générer une nouvelle archive.
+Quelle commande affiche l'historique des redémarrages du système ?;uptime;history;last reboot;who;4;last reboot consulte le fichier de log wtmp pour afficher les derniers redémarrages.
+Que fait la commande whoami ?;Affiche les utilisateurs connectés;Affiche le nom de l'utilisateur courant;Affiche l'ID de l'utilisateur;Affiche le groupe de l'utilisateur;3;whoami renvoie simplement le nom de login de l'utilisateur actuel.
+Quelle commande permet d'installer un paquet sur une distribution basée sur RedHat/CentOS via un gestionnaire ?;apt-get install;pacman -S;yum install;dpkg -i;4;yum (ou dnf) est le gestionnaire de paquets standard pour les distributions de la famille RedHat.
+Quelle commande affiche les messages du tampon circulaire du noyau (kernel ring buffer) ?;dmesg;syslog;journalctl;klog;2;dmesg est essentiel pour diagnostiquer les problèmes matériels et de démarrage détectés par le noyau.
+Quelle commande affiche des informations détaillées sur le processeur (CPU) ?;uname -a;cat /proc/cpuinfo;lscpu;top;3;Le fichier virtuel /proc/cpuinfo contient les détails techniques du processeur.
+Comment copier un fichier de la machine locale vers un serveur distant via SSH ?;ftp;wget;scp;cp;4;scp (Secure Copy) utilise SSH pour transférer des fichiers entre hôtes de manière sécurisée.
+Quelle commande permet de tracer le chemin pris par les paquets réseau vers un hôte ?;ping;traceroute;netstat;route;3;traceroute (ou tracepath) affiche les routeurs intermédiaires traversés pour atteindre une destination.
+Quelle commande affiche la liste des périphériques USB connectés ?;lspci;lsblk;lsusb;lshw;4;lsusb liste les bus USB et les périphériques qui y sont connectés.
+Quelle commande affiche les dernières lignes d'un fichier et attend les nouvelles données (suivi en direct) ?;tail -f;head -f;cat -f;less -f;2;L'option -f (follow) de tail permet de surveiller un fichier de log en temps réel.
+Quelle commande permet de rechercher des fichiers modifiés il y a moins de 10 minutes ?;find / -mmin 10;find / -mtime 10;locate -10;grep -10;2;L'option -mmin -10 avec find cherche les fichiers modifiés dans les dernières 10 minutes (la source indique -mmin 10 pour exactement 10 min mais le concept est la recherche temporelle).
+Quelle commande affiche l'utilisation de la bande passante actuelle ?;ping;iftop;netstat;dig;3;iftop affiche l'utilisation de la bande passante sur une interface réseau.
+Quelle commande affiche la table de routage IP ?;route;ip route;netstat -r;Toutes les réponses;5;La commande route (ou ip route) permet de visualiser les routes définies pour le trafic réseau.
+Quelle commande est utilisée pour extraire les fichiers d'une archive .zip ?;gunzip;tar;unzip;extract;4;unzip est l'utilitaire spécifique pour décompresser les archives au format zip.

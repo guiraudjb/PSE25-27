@@ -1,0 +1,214 @@
+DESCRIPTION DES MECANISMES DE COMMUNICATION INTER-PROCESSUS.
+
+LEXIQUE COMPLET.
+      Un processus est une entité exécutant du code en partageant le processeur et la mémoire mais disposant d'un espace mémoire étanche.
+      L'exclusion mutuelle est un principe de sécurité qui empêche plusieurs processus de modifier simultanément une même ressource partagée.
+      Une section critique désigne la partie du code informatique qui ne doit pas être exécutée en même temps par plusieurs processus.
+      L'attente active ou Test and Set est un mécanisme de synchronisation où un processus boucle indéfiniment pour tester la disponibilité d'une ressource.
+      L'attente passive est un mécanisme utilisant des sémaphores pour endormir un processus en attente d'une ressource et libérer le processeur.
+      Un sémaphore est une variable protégée inventée par Dijkstra permettant de contrôler l'accès aux ressources partagées via des primitives.
+      La mémoire partagée est un espace d'adressage commun permettant à plusieurs processus de lire et écrire des données sans effectuer de copie.
+      Une file de messages est un tampon fonctionnant selon le principe du premier entré premier sorti pour la communication asynchrone.
+      Le rendez-vous est un mode de communication où l'émetteur et le récepteur doivent se synchroniser à un moment précis pour échanger.
+      L'interblocage ou étreinte fatale est une situation où des processus s'attendent mutuellement de manière infinie pour obtenir une ressource.
+      Les IPC Système V sont un module standard sous UNIX regroupant la mémoire partagée, les files de messages et les sémaphores.
+      Un tube ordinaire est un canal de communication unidirectionnel volatil réservé aux processus ayant un lien de parenté.
+      Un tube nommé ou FIFO est un fichier spécial persistant permettant la communication entre n'importe quels processus.
+      Un signal est une interruption logicielle asynchrone envoyée à un processus pour modifier son exécution.
+      Une socket est un point de communication bidirectionnel permettant des échanges locaux ou à travers un réseau.
+
+COURS DETAILLE.
+
+I. LES PRINCIPES DE LA SYNCHRONISATION ENTRE DES PROCESSUS.
+
+   A. L'isolation et la nécessité de coordination.
+
+      Les processus partagent le processeur et la mémoire mais possèdent des espaces mémoire isolés pour la sécurité.
+
+      Cette étanchéité prévient la divulgation de données confidentielles et l'exécution de code malveillant.
+
+      L'isolation empêche également le blocage complet du système par un seul processus défaillant.
+
+      Des mécanismes de synchronisation et des protocoles de coordination sont donc indispensables pour éviter les incohérences.
+
+   B. L'Exclusion Mutuelle et la Section Critique.
+
+      L'exclusion mutuelle interdit l'accès simultané de plusieurs processus à une ressource critique partagée.
+
+      La section critique correspond à la zone de code où s'effectue l'accès à cette ressource protégée.
+
+      L'identification de ces sections permet de mettre en place des verrous temporaires durant l'exécution.
+
+   C. L'Attente Active.
+
+      Ce mécanisme repose sur une variable verrou booléenne indiquant si la ressource est libre ou occupée.
+
+      La primitive utilisée pour ce fonctionnement est appelée Test and Set ou TAS.
+
+      Le processus demandeur boucle indéfiniment tant que la variable indique que la ressource est bloquée.
+
+      Cette méthode présente l'inconvénient majeur de consommer inutilement des ressources processeur.
+
+      Elle ne gère ni le temps limite d'attente ni le cas des processus qui s'arrêtent inopinément.
+
+   D. L'Attente Passive via les Sémaphores.
+
+      Ce concept a été introduit par Dijkstra en 1968 pour améliorer la gestion des ressources critiques.
+
+      Le sémaphore utilise la primitive P pour demander l'entrée en section critique et endormir le processus si nécessaire.
+
+      La primitive V est utilisée à la sortie pour libérer la ressource et réveiller un processus en attente.
+
+      Les sémaphores peuvent être binaires pour l'exclusion mutuelle ou comptants pour gérer plusieurs unités de ressources.
+
+      L'attente passive offre un meilleur rendement du processeur car les processus bloqués ne consomment pas de cycles.
+
+      Le risque principal est le blocage indéfini si un processus meurt sans avoir libéré le sémaphore.
+
+II. LES PRINCIPES DE LA COMMUNICATION ENTRE DES PROCESSUS.
+
+   A. La Mémoire Partagée.
+
+      Les processus communiquent en utilisant une zone de mémoire commune pour la lecture et l'écriture.
+
+      L'écriture directe dans la mémoire d'un autre processus est interdite par le système d'exploitation.
+
+      Ce mécanisme impose l'utilisation d'un sémaphore d'exclusion mutuelle pour gérer les accès concurrents.
+
+      Un sémaphore de synchronisation est également requis pour coordonner le producteur et le consommateur.
+
+      Cette méthode est très rapide car elle ne nécessite aucune copie de données entre les processus.
+
+      Elle est particulièrement adaptée au traitement de gros volumes de données.
+
+      Sa mise en œuvre est complexe et exige une discipline de programmation stricte pour éviter la corruption.
+
+   B. Les Boîtes aux lettres ou Files de Messages.
+
+      Ce système permet une communication indirecte et asynchrone via un tampon géré en mode premier entré premier sorti.
+
+      Le processus producteur dépose un message structuré dans la file d'attente.
+
+      Le processus consommateur retire les messages dans leur ordre d'arrivée exact.
+
+      Le fonctionnement correct exige trois sémaphores distincts pour l'exclusion, le nombre de messages et les places disponibles.
+
+      L'avantage principal est la fiabilité et le maintien de l'ordre des données sans partage de zone mémoire.
+
+   C. La Communication par Rendez-vous.
+
+      Les deux processus concernés doivent atteindre un point d'attente simultanément pour effectuer l'échange.
+
+      Le producteur envoie son message et reste bloqué jusqu'à la réception d'un accusé de réception.
+
+      Le consommateur reçoit le message, envoie l'accusé de réception et libère ainsi le producteur.
+
+      Cette méthode assure une cohérence maximale des échanges.
+
+      Elle présente toutefois un risque d'attente longue si les processus ne sont pas bien synchronisés.
+
+   D. L'Interblocage.
+
+      Cette situation critique survient lorsque deux processus sont bloqués en attendant chacun une ressource détenue par l'autre.
+
+      Ce phénomène est aussi appelé étreinte fatale ou deadlock en anglais.
+
+      L'exemple classique illustrant ce problème est celui du dîner des philosophes.
+
+III. LES IPC SYSTEME V.
+
+   A. Présentation du module.
+
+      Le module IPC Système V est un standard présent sur les systèmes UNIX et Linux.
+
+      Il regroupe trois mécanismes principaux de communication et de synchronisation.
+
+   B. Les composants.
+
+      La mémoire partagée permet le partage d'une partie de l'espace d'adressage virtuel.
+
+      La file de messages permet l'envoi de flux de données formatées entre processus quelconques.
+
+      Les sémaphores assurent la synchronisation de l'exécution des processus.
+
+IV. LA COMMUNICATION PAR FICHIERS SPECIAUX.
+
+   A. Les Tubes Ordinaires.
+
+      Ces canaux de communication sont créés par l'appel système pipe et utilisent deux descripteurs de fichiers.
+
+      Ils permettent de transmettre un flot continu d'octets de manière unidirectionnelle.
+
+      Les tubes ordinaires ne possèdent pas de nom et disparaissent à l'arrêt des processus ou du système.
+
+      Les opérations de lecture et d'écriture sont atomiques si la taille des données ne dépasse pas une limite définie.
+
+      La lecture est destructive car l'information lue est extraite définitivement du tube.
+
+      L'utilisation est strictement limitée aux processus ayant un lien de filiation.
+
+   B. Les Tubes Nommés ou FIFOs.
+
+      Ces tubes persistent dans le système de fichiers et apparaissent comme des fichiers de type p.
+
+      Ils permettent la communication entre des processus n'ayant aucun lien de parenté.
+
+      La suppression du fichier spécial doit être réalisée explicitement avec une commande système.
+
+      L'utilisation en mode bidirectionnel ou duplex n'est pas fiable techniquement.
+
+V. LES SIGNAUX.
+
+   A. Définition et Fonctionnement.
+
+      Un signal est un message générant une interruption logicielle asynchrone pour un processus.
+
+      Chaque processus hérite de la table de traitement des signaux de son processus père.
+
+      Un programmeur peut installer un gestionnaire de signaux pour modifier le comportement par défaut.
+
+   B. Commandes et Types.
+
+      La commande kill est utilisée pour envoyer un signal spécifique à un processus identifié.
+
+      La commande kill avec l'option l permet de lister tous les signaux disponibles sur le système.
+
+      Le signal SIGHUP indique une fin de session.
+
+      Le signal SIGINT correspond à une interruption classique.
+
+      Le signal SIGKILL force l'arrêt immédiat et inconditionnel d'un processus.
+
+      Le signal SIGTERM demande poliment la terminaison d'un processus.
+
+      Le signal SIGSTOP suspend l'exécution du processus.
+
+VI. LA COMMUNICATION AVEC LES SOCKETS.
+
+   A. Caractéristiques.
+
+      Une socket est un point de communication permettant l'émission et la réception de données.
+
+      La communication via les sockets est par nature bidirectionnelle.
+
+   B. Familles de protocoles.
+
+      Les sockets UNIX utilisent la famille PF_UNIX pour des communications locales via fichiers.
+
+      Les sockets réseaux utilisent la famille PF_INET pour communiquer via TCP ou UDP.
+
+POINTS D'ATTENTION.
+      L'attente active consomme inutilement des ressources processeur contrairement à l'attente passive.
+      Une file de messages nécessite impérativement l'usage de trois sémaphores pour fonctionner correctement.
+      Les tubes ordinaires sont volatiles et réservés à la filiation alors que les tubes nommés sont persistants.
+      L'écriture dans un tube est atomique uniquement si la taille des données est inférieure à la constante système.
+      La commande rm est nécessaire pour supprimer un tube nommé car il persiste sur le disque.
+      Les sockets permettent une communication bidirectionnelle fiable contrairement aux tubes.
+
+EXEMPLES CITES.
+      La commande ls permet de visualiser les tubes nommés identifiés par la lettre p.
+      La commande rm est utilisée pour supprimer un tube nommé du système de fichiers.
+      La commande kill permet d'envoyer des signaux comme l'arrêt forcé.
+      Les commandes netstat et ss permettent de lister les connexions sockets établies.
+      L'appel système pipe permet de créer un tube ordinaire.
+      Le problème du dîner des philosophes illustre le concept d'interblocage.

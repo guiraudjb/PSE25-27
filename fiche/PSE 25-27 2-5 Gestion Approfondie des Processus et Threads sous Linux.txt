@@ -1,0 +1,197 @@
+PROCESSUS APPROFONDISSEMENTS LINUX.
+
+LEXIQUE COMPLET.
+
+      Un processus est un programme en cours d'exécution auquel le système alloue des ressources comme le temps processeur et la mémoire.
+
+      L'ordonnanceur ou scheduler est le composant du système d'exploitation chargé de distribuer le temps processeur entre les processus prêts.
+
+      Le quantum de temps est la durée finie d'allocation du processeur à un processus avant une éventuelle préemption.
+
+      La préemption est l'action de l'ordonnanceur de retirer le processeur à un processus en cours pour l'attribuer à un autre.
+
+      Le swapping est un mécanisme historique de bascule des processus de la mémoire vive vers le disque, remplacé sous Linux par la gestion des pages mémoires.
+
+      Une interruption est un événement matériel ou logiciel qui suspend immédiatement le flux d'exécution pour lancer une routine dédiée.
+
+      Un signal est un événement logiciel asynchrone envoyé à un processus pour lui transmettre une information ou un ordre.
+
+      Un handler est une fonction spécifique au sein d'un processus chargée de traiter un signal reçu.
+
+      L'appel système fork permet de créer un nouveau processus par duplication du processus appelant.
+
+      L'appel système exec remplace le code du processus courant par un nouveau programme.
+
+      Un zombie est un processus terminé ayant libéré ses ressources mais dont l'entrée subsiste dans la table des processus en attente de la prise en compte par le père.
+
+      Un thread est un flux d'exécution léger possédant sa propre pile mais partageant la mémoire globale avec les autres threads du même processus.
+
+      L'exclusion mutuelle est un mécanisme nécessaire pour gérer les accès concurrents aux ressources partagées entre threads.
+
+      Le changement de contexte est l'opération de sauvegarde de l'état du processus sortant et de restauration de celui du processus entrant.
+
+      La valeur nice est un paramètre défini par l'utilisateur influençant la priorité statique d'un processus traditionnel.
+
+COURS DÉTAILLÉ.
+
+I. ETATS DES PROCESSUS ET CYCLE DE VIE.
+
+   A. Les differents etats generiques.
+
+      L'état créé correspond à un processus qui vient d'être initialisé par son parent, ses ressources sont allouées et il est inscrit dans la table des processus.
+
+      L'état prêt désigne un processus présent dans la file d'attente de l'ordonnanceur, qui n'attend que la disponibilité du processeur pour s'exécuter.
+
+      L'état en cours d'exécution signifie que le processus exécute ses instructions sur l'unité de traitement, sachant qu'il n'y a qu'un seul processus élu par cœur.
+
+      L'état endormi caractérise un processus en attente d'un événement externe comme une entrée sortie, il ne consomme pas de temps processeur.
+
+      L'état suspendu concerne un processus mis en pause volontairement par l'utilisateur jusqu'à une demande explicite de reprise.
+
+   B. Correspondance dans le systeme Linux.
+
+      L'état TASK_RUNNING noté R indique que le processus est soit prêt dans la file d'attente, soit en cours d'exécution effective.
+
+      L'état TASK_INTERRUPTIBLE noté S correspond à un sommeil standard où le processus peut être réveillé par un signal ou un timer.
+
+      L'état TASK_UNINTERRUPTIBLE noté D désigne un sommeil profond lié à une attente matérielle comme un disque, durant lequel le processus ne peut pas être interrompu par un signal.
+
+      L'état TASK_ZOMBIE noté Z signale que le processus a terminé son exécution via exit mais que son père n'a pas encore acquitté sa fin.
+
+      L'état TASK_STOPPED noté T indique que le processus a été suspendu, généralement par le signal SIGSTOP ou la commande CTRL-Z.
+
+   C. Interruptions et signaux.
+
+      Les interruptions sont des événements matériels immédiats qui suspendent le processeur pour exécuter une routine du noyau, comme lors d'une fin d'écriture disque.
+
+      Les signaux sont des notifications logicielles asynchrones traitées en différé au moment où le processeur bascule du mode noyau vers le mode utilisateur.
+
+      L'appel système kill permet aux processus ou au noyau d'envoyer des signaux qui seront gérés par des handlers spécifiques.
+
+   D. Cycle de vie detaille.
+
+      La naissance débute par l'appel fork par un processus père P0, créant un fils P1 par duplication des données et de la pile, suivi d'un exec pour charger le nouveau code.
+
+      Lors de sa première exécution, P1 est placé dans la file des prêts, est élu par l'ordonnanceur, et s'exécute durant son quantum de temps.
+
+      Durant sa vie, le processus alterne entre exécution, préemption s'il épuise son quantum, et sommeil s'il effectue des appels système bloquants comme read.
+
+      La mort survient quand P1 appelle exit, passant à l'état zombie et envoyant le signal SIGCHLD à son père pour que ce dernier nettoie son entrée dans la table.
+
+II. ORDONNANCEMENT ET PRIORITES SOUS LINUX.
+
+   A. Principes generaux.
+
+      L'ordonnanceur a pour rôle de partager le temps processeur entre les processus prêts et de décider lequel doit être élu.
+
+      Linux sépare les processus en deux catégories, ceux dits temps réel souple qui sont prioritaires et les processus traditionnels.
+
+   B. Politiques d'ordonnancement.
+
+      La politique SCHED_FIFO concerne les processus temps réel de priorité 0 à 99 et ne possède pas de quantum de temps, le processus garde la main tant qu'il ne bloque pas.
+
+      La politique SCHED_RR ou Round Robin est similaire à FIFO mais impose un quantum de temps pour permettre le partage entre processus de même priorité temps réel.
+
+      La politique SCHED_OTHER ou SCHED_NORMAL est celle des processus classiques, basée sur un tourniquet et une priorité dynamique recalculée en permanence.
+
+      Il existe des politiques annexes comme SCHED_BATCH pour les tâches de fond ou SCHED_IDLE pour les processus très peu prioritaires.
+
+   C. Calcul de la priorite traditionnelle.
+
+      La priorité d'un processus classique se calcule à partir d'une base statique, de la valeur nice définie par l'utilisateur et d'un bonus dynamique.
+
+      La valeur nice s'étend de moins vingt pour la priorité maximale à plus dix-neuf pour la priorité minimale.
+
+      En interne, la priorité des processus classiques est mappée de 100 à 139, restant toujours inférieure à celle des processus temps réel située entre 0 et 99.
+
+III. CHANGEMENT DE CONTEXTE.
+
+   A. Definition et causes.
+
+      Le changement de contexte est le moment où un processus perd l'allocation du processeur au profit d'un autre.
+
+      Il est déclenché par la fin du quantum de temps, un appel système bloquant, la fin d'un processus ou le réveil d'une tâche plus prioritaire.
+
+   B. Mecanisme technique.
+
+      La fonction schedule détermine le prochain processus à exécuter selon les règles de priorité.
+
+      La fonction context_switch sauvegarde les registres et le compteur ordinal du processus sortant sur sa pile et restaure ceux du processus entrant.
+
+IV. PROCESSUS LEGERS LES THREADS.
+
+   A. Concept et structure.
+
+      Les threads permettent d'avoir plusieurs fils d'exécution au sein d'un même processus en partageant l'espace mémoire global.
+
+      Chaque thread dispose de sa propre pile d'exécution mais partage le code, les données, le tas et les fichiers ouverts.
+
+   B. Avantages et inconvenients.
+
+      La création et la commutation de threads sont plus performantes car elles évitent la duplication lourde des tables mémoires.
+
+      La communication est simplifiée par le partage de la mémoire, évitant le recours aux mécanismes de communication inter-processus.
+
+      Le développement est plus complexe car il nécessite de gérer l'atomicité et l'exclusion mutuelle pour éviter les conflits d'accès mémoire.
+
+   C. Implementation Linux.
+
+      Linux utilise la librairie pthread pour gérer les threads et les considère comme des processus légers visibles individuellement par le noyau.
+
+V. COMMANDES DE GESTION SOUS LINUX.
+
+   A. Visualisation de la hierarchie et des etats.
+
+      La commande pstree affiche l'arbre généalogique des processus et montre les threads entre accolades.
+
+      La commande ps avec les options ef ou ax permet de lister tous les processus avec leur PID, PPID et leur statut détaillé.
+
+      La colonne STAT de la commande ps indique l'état actuel comme R pour Running, S pour Sleeping ou Z pour Zombie.
+
+      Des indicateurs supplémentaires dans STAT précisent si le processus est prioritaire, multithread ou au premier plan.
+
+   B. Analyse dynamique et consommation.
+
+      La commande top affiche en temps réel les processus les plus gourmands en ressources CPU et mémoire, avec un rafraîchissement périodique.
+
+      La commande vmstat fournit des statistiques globales sur le système, notamment le nombre d'interruptions et de changements de contexte par seconde.
+
+      L'option H de la commande top permet de visualiser la consommation individuelle de chaque thread au lieu de celle du processus global.
+
+   C. Manipulation des processus.
+
+      La commande kill permet d'envoyer des signaux, par exemple SIGSTOP pour suspendre ou SIGKILL pour forcer l'arrêt immédiat.
+
+      La commande nice est utilisée pour lancer un programme avec une priorité modifiée.
+
+      La commande renice permet de changer la priorité d'un processus déjà en cours d'exécution en spécifiant son PID.
+
+      La commande ps avec l'option o permet de personnaliser l'affichage pour voir la classe d'ordonnancement et la priorité interne.
+
+POINTS D'ATTENTION.
+
+      Un processus en état D ou sommeil ininterruptible ne peut pas être tué tant que son opération matérielle n'est pas terminée.
+
+      L'échelle de priorité nice est inversée, ce qui signifie que la valeur la plus basse moins vingt donne la priorité la plus haute.
+
+      Les processus temps réel ont une priorité interne de 0 à 99 qui est toujours supérieure à celle des processus normaux de 100 à 139.
+
+      Un processus zombie ne consomme ni CPU ni mémoire vive mais occupe une entrée dans la table des processus.
+
+      Seul l'utilisateur root a le droit de diminuer la valeur nice pour augmenter la priorité d'un processus.
+
+      Les threads d'un même processus apparaissent avec le même PID mais des SPID différents.
+
+EXEMPLES CITES.
+
+      L'arborescence pstree montre systemd comme processus initial racine.
+
+      Un serveur d'application Java Tomcat est présenté comme exemple de processus multithread possédant 48 threads.
+
+      La commande vmstat est utilisée pour observer un système subissant environ 1000 changements de contexte par seconde.
+
+      La commande kill avec le signal SIGSTOP est utilisée pour figer un terminal bash et SIGCONT pour le relancer.
+
+      Des processus système critiques comme migration et watchdog s'exécutent en mode SCHED_FIFO avec la priorité maximale.
+
+      La commande renice est appliquée pour corriger la priorité d'un shell bash de moins douze à sept.

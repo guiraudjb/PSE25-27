@@ -1,0 +1,159 @@
+LINUX : INTRODUCTION AU NOYAU LINUX.
+
+LEXIQUE COMPLET.
+
+      Le Noyau (Kernel) est la couche logicielle fondamentale et le cœur central du système d'exploitation qui assure l'interface entre le matériel et les applications.
+
+      Un Noyau monolithique est une architecture où toutes les fonctions du système comme la planification, la mémoire et les pilotes sont regroupées dans un seul bloc pour favoriser la performance.
+
+      Un Micro-noyau est une architecture réduite au strict minimum qui délègue la plupart des fonctions à l'espace utilisateur pour privilégier la robustesse et la sécurité.
+
+      Le Noyau monolithique modulaire qualifie l'architecture Linux qui intègre les fonctions essentielles tout en permettant le chargement dynamique de pilotes sous forme de modules.
+
+      Un Module est un fichier objet du noyau portant l'extension .ko qui permet d'ajouter une fonctionnalité ou un pilote sans devoir recompiler le noyau.
+
+      La structure task_struct représente un programme ou un processus et contient son état, son identifiant PID et ses priorités.
+
+      Le CFS (Completely Fair Scheduler) est l'ordonnanceur par défaut de Linux qui vise à distribuer le temps processeur de manière équitable entre les processus.
+
+      Le Swap est un mécanisme permettant de décharger la mémoire vive sur le disque dur lorsque la RAM est saturée.
+
+      Les Hugepages sont un mécanisme d'optimisation de la gestion mémoire utilisé particulièrement pour les bases de données et les systèmes lourds.
+
+      Le VFS (Virtual File System) est une couche d'abstraction fournissant une interface générique aux applications pour interagir avec différents systèmes de fichiers sans se soucier de leur format.
+
+      Un Inode est une structure interne du VFS représentant un fichier ou un répertoire et contenant ses métadonnées et ses droits.
+
+      Une Dentry (Directory Entry) est une entrée de répertoire qui associe un nom de fichier à son inode correspondant.
+
+      Le Superblock est une structure représentant un système de fichiers monté et contenant ses informations globales.
+
+      Les Appels systèmes (Syscalls) constituent la seule porte d'entrée permettant aux applications d'accéder aux fonctions critiques du noyau comme l'ouverture de fichiers.
+
+      Une version LTS (Long Term Support) désigne une version du noyau maintenue sur plusieurs années, recommandée pour les environnements de production.
+
+      Le Live Patching est une technologie permettant d'appliquer des correctifs de sécurité au noyau en mémoire sans avoir besoin de redémarrer le serveur.
+
+      L'outil eBPF est un mécanisme moderne permettant de charger des programmes légers directement dans le noyau pour analyser son comportement en temps réel.
+
+COURS DÉTAILLÉ.
+
+I. LES CONCEPTS GENERAUX D'UN NOYAU.
+
+   A. Rôle et types d'architectures.
+
+      Le noyau agit comme un système complet de gestion des ressources capable d'optimiser l'utilisation des composants matériels et d'assurer la stabilité du système.
+
+      L'architecture monolithique regroupe toutes les fonctions dans un seul bloc, ce qui offre performance et vitesse, mais une erreur de pilote peut compromettre tout le système.
+
+      L'architecture micro-noyau isole chaque service en espace utilisateur pour plus de sécurité et de robustesse, mais souffre d'une communication plus lente entre les composants.
+
+      Le noyau Linux adopte une architecture monolithique modulaire qui combine les performances de l'intégration des fonctions essentielles et la flexibilité du chargement dynamique de modules.
+
+   B. Caractéristiques spécifiques de Linux.
+
+      La portabilité permet à Linux de fonctionner sur une vaste gamme de matériels, allant des serveurs x86 aux architectures ARM des smartphones.
+
+      L'évolutivité rend le noyau capable de gérer aussi bien des systèmes embarqués avec peu de mémoire que des supercalculateurs massifs.
+
+      L'ouverture du code source sous licence GPL permet à quiconque de modifier et d'adapter le noyau.
+
+   C. Gestion des ressources système.
+
+      La gestion des processus repose sur l'ordonnanceur qui décide quel processus accède au processeur, en utilisant généralement le CFS pour l'équité ou le mode RT pour le temps réel.
+
+      La gestion de la mémoire inclut l'allocation dynamique, la pagination virtuelle et le swap pour gérer la saturation de la RAM.
+
+      La gestion des périphériques s'effectue via des pilotes qui sont souvent intégrés directement ou chargés sous forme de modules pour éviter la recompilation.
+
+   D. Le système de fichiers virtuel (VFS).
+
+      Le VFS offre une interface unifiée permettant aux commandes standard comme open ou read de fonctionner indifféremment sur des systèmes de fichiers locaux, réseaux ou virtuels.
+
+      Les structures clés du VFS comprennent l'inode pour les métadonnées, la dentry pour les noms de fichiers et le superblock pour les informations globales du système de fichiers.
+
+      Le montage d'un système de fichiers consiste pour le VFS à créer une entrée de superbloc et à associer les inodes au point de montage visé.
+
+   E. Sécurité et cycle de vie.
+
+      La sécurité repose sur le contrôle strict des appels systèmes qui sont les seuls points d'interaction entre l'espace utilisateur et le noyau.
+
+      Le cycle de développement comprend des versions Mainline fréquentes, des versions Stable pour les corrections, et des versions LTS pour la stabilité à long terme.
+
+II. LA PREPARATION ET LA COMPILATION D'UN NOUVEAU NOYAU.
+
+   A. Objectifs et préparation.
+
+      La compilation manuelle est justifiée pour supporter un matériel spécifique, optimiser les performances, renforcer la sécurité ou activer des fonctionnalités expérimentales.
+
+      La préparation nécessite le téléchargement des sources depuis kernel.org et l'installation d'outils de compilation comme gcc, make et des librairies comme libncurses-dev et libssl-dev.
+
+   B. Configuration et compilation.
+
+      La configuration définit les fonctionnalités à inclure via des interfaces comme make menuconfig ou en reprenant une configuration existante avec make oldconfig.
+
+      Il est crucial d'ajuster les options concernant le processeur, les systèmes de fichiers et les protocoles réseaux pour éviter un noyau trop lourd ou inopérant.
+
+      La compilation s'exécute avec la commande make, souvent parallélisée pour utiliser tous les cœurs du processeur, suivie de l'installation des modules et du noyau lui-même.
+
+   C. Installation et gestion post-compilation.
+
+      L'installation copie le noyau et l'image initrd dans le répertoire de démarrage et met à jour le chargeur de démarrage GRUB.
+
+      Les modules compilés sont stockés dans un répertoire spécifique correspondant à la version du noyau pour être chargés à la demande.
+
+      Il est recommandé de conserver un noyau stable précédent dans le menu de démarrage et d'automatiser la création de paquets pour le déploiement sur plusieurs machines.
+
+III. L'ADMINISTRATION D'UN NOYAU LINUX.
+
+   A. Gestion dynamique des modules et paramètres.
+
+      Les modules peuvent être listés, chargés ou déchargés à chaud pour ajouter des pilotes sans redémarrage, ce qui garantit une grande flexibilité.
+
+      Le noyau expose ses paramètres via les systèmes de fichiers virtuels et la commande sysctl permet de les modifier en temps réel, par exemple pour le routage réseau ou la gestion du swap.
+
+   B. Mises à jour et diagnostics.
+
+      La mise à jour régulière du noyau est indispensable pour corriger les failles de sécurité et assurer la compatibilité matérielle.
+
+      Les outils de diagnostic comme dmesg permettent de lire le tampon circulaire des messages du noyau pour identifier les pannes matérielles ou les erreurs de pilotes.
+
+   C. Optimisation et sécurité avancée.
+
+      L'administrateur peut optimiser les performances en ajustant les priorités CPU, en activant les Hugepages pour la mémoire ou en changeant l'ordonnanceur d'entrées-sorties pour les disques.
+
+      La sécurité implique une veille sur les vulnérabilités CVE et l'application de correctifs, parfois via le live patching pour éviter l'interruption de service.
+
+      La supervision avancée utilise des outils comme perf ou eBPF qui transforment le noyau en une boîte noire transparente pour une analyse fine du comportement système.
+
+POINTS D'ATTENTION.
+
+      Une erreur dans un pilote au sein d'un noyau monolithique peut compromettre la stabilité de l'ensemble du système.
+
+      Une configuration du noyau trop restrictive lors de la compilation peut empêcher le système de démarrer correctement.
+
+      L'oubli des librairies de développement comme libssl-dev ou libncurses-dev provoquera l'échec immédiat de la compilation.
+
+      Une faille de sécurité non corrigée dans le noyau peut donner un accès root complet à un attaquant.
+
+      Il faut toujours conserver plusieurs versions de noyaux installées pour pouvoir revenir en arrière en cas de problème technique.
+
+EXEMPLES CITES.
+
+      La commande wget permet de télécharger les sources du noyau depuis le site officiel.
+
+      La commande make menuconfig lance l'interface de configuration textuelle du noyau.
+
+      La commande make tiret j suivi de nproc compile le noyau en utilisant tous les cœurs disponibles du processeur.
+
+      La commande modprobe charge un module en gérant automatiquement ses dépendances.
+
+      La commande sysctl permet d'activer le routage IP ou de modifier la valeur de swappiness sans redémarrage.
+
+      La commande dmesg affiche les messages du tampon du noyau utiles pour le diagnostic matériel.
+
+      La commande uname tiret r permet de vérifier la version du noyau actuellement active.
+
+      L'écho du mode deadline dans le fichier scheduler du périphérique permet de changer l'ordonnanceur disque à la volée.
+
+      L'outil canonical-livepatch permet d'activer les correctifs à chaud sur un système Ubuntu.

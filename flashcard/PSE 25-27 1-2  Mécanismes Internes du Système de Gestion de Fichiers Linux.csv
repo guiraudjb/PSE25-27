@@ -1,0 +1,63 @@
+Quel est le rôle principal d'un système de gestion de fichiers (SGF) sous Linux ?,"Le SGF fournit une abstraction entre le matériel de stockage et l'utilisateur, organisant les blocs binaires en fichiers et répertoires exploitables."
+Citez une des fonctions principales du SGF concernant l'organisation des données.,Il transforme l'espace brut du disque en une structure hiérarchique cohérente dont la racine est /.
+Comment le SGF gère-t-il l'identification des fichiers ?,Il associe à chaque fichier un nom et un numéro d'inode unique pour le gérer indépendamment du support physique.
+Quelle fonction du SGF assure la cohérence des données via la journalisation et les copies de sauvegarde ?,La fonction de fiabilité.
+Quelle est la structure interne d'un système de fichiers qui contient les informations globales comme la taille et le nombre d'inodes ?,Le superbloc.
+À quoi sert la carte d'occupation des inodes (inode bitmap) ?,C'est un tableau qui indique si chaque inode est libre ou occupé.
+Qu'est-ce qu'un inode (index node) dans un système de fichiers Linux ?,C'est une structure de données associée à chaque fichier/répertoire qui contient ses métadonnées.
+Quelle information n'est PAS contenue dans un inode ?,Le nom du fichier (il est stocké dans la structure du répertoire).
+Citez trois exemples de métadonnées stockées dans un inode.,"Le type de fichier, les permissions d'accès (rwx), l'UID/GID du propriétaire, les horodatages, la taille, ou les pointeurs vers les blocs de données."
+Quelle commande permet d'afficher le numéro d'inode d'un fichier ?,La commande `ls -li nom_du_fichier`.
+Quelle commande permet de vérifier l'utilisation des inodes sur un système de fichiers ?,La commande `df -i`.
+"Quelle est l'unité de base du stockage utilisée par le système de fichiers, dont la taille est fixée au formatage ?",Le bloc.
+Quel est l'inconvénient d'utiliser de grands blocs de données pour un système de fichiers ?,Ils provoquent une fragmentation interne (espace gaspillé) pour les petits fichiers.
+"Quel phénomène, particulièrement pénalisant sur HDD, résulte de la dispersion des blocs d'un même fichier sur le disque ?",La fragmentation externe.
+Quelle commande permet de vérifier le nombre de fragments qui composent un fichier ?,La commande `filefrag fichier`.
+"Dans la structure d'un inode, comment sont organisés les pointeurs pour adresser les blocs de données ?","En pointeurs directs (les 12 premiers), puis indirects simples, doubles et triples."
+"Quel symptôme apparaît lorsqu'un système de fichiers manque d'inodes, même s'il reste de l'espace disque ?","Une erreur de type ""No space left on device"" lors de la création de nouveaux fichiers."
+Que se passe-t-il avec l'inode et les blocs de données d'un fichier supprimé mais encore ouvert par un processus ?,L'inode et ses blocs restent réservés et l'espace n'est pas libéré jusqu'à la fermeture du descripteur de fichier par le processus.
+Quelle commande permet de lister les fichiers supprimés mais encore ouverts par des processus ?,La commande `lsof | grep deleted`.
+Quelle option de montage permet de réduire fortement les écritures sur un disque (utile pour les SSD) en désactivant la mise à jour de l'heure de dernier accès ?,L'option `noatime`.
+Quelle est la bonne pratique pour la gestion du TRIM sur un SSD au lieu d'utiliser l'option de montage `discard` ?,Programmer l'exécution périodique de la commande `fstrim` via cron ou un systemd timer.
+"Quelle commande affiche des informations détaillées sur un système de fichiers ext, comme la taille des blocs et la densité d'inodes ?",La commande `tune2fs -l /dev/sdX`.
+À quoi servent les tables systèmes dans l'interaction avec le SGF ?,"Elles servent de relais en mémoire entre les structures du SGF (inodes, blocs) et les processus utilisateurs pour améliorer les performances et gérer les accès concurrents."
+"Quelle table, propre à chaque processus, associe un entier (descripteur) à un fichier ouvert ?",La table des descripteurs de fichiers (File Descriptor Table).
+"Par convention, à quoi correspondent les descripteurs de fichiers 0, 1 et 2 ?","0: entrée standard (stdin), 1: sortie standard (stdout), 2: sortie d'erreur standard (stderr)."
+"Quelle table, maintenue par le noyau, conserve des informations sur TOUS les fichiers actuellement ouverts dans le système ?",La table globale des fichiers ouverts (System-wide File Table).
+Quelle est la troisième table système clé qui conserve en mémoire une copie des inodes actifs pour éviter les accès disques ?,La table des inodes en mémoire (Inode Table).
+"Lors de l'appel système `open()`, que fait le noyau après avoir chargé l'inode en mémoire ?",Il ajoute une entrée dans la table globale des fichiers ouverts et crée un descripteur dans la table du processus pointant vers cette entrée.
+"Quel mécanisme permet de verrouiller uniquement une partie d'un fichier, utile pour les bases de données ?",Le verrouillage au niveau des enregistrements (record locking) via l'appel système `fcntl`.
+"Quelle est la cause fréquente de l'erreur ""Too many open files"" pour un processus ?","La saturation de sa table de descripteurs de fichiers, dont la limite par défaut est souvent de 1024."
+Quelle commande permet d'afficher la limite de descripteurs de fichiers pour un processus ?,La commande `ulimit -n`.
+Dans quel fichier de configuration peut-on augmenter la limite de descripteurs de fichiers ouverts ?,Dans le fichier `/etc/security/limits.conf`.
+Quelle commande permet d'identifier le(s) processus qui utilisent un fichier ou un répertoire spécifique ?,La commande `fuser`.
+Comment peut-on lister les descripteurs de fichiers ouverts par un processus donné avec le PID 1234 ?,En utilisant la commande `ls -l /proc/1234/fd/` ou `cat /proc/1234/fd/`.
+Qu'est-ce qu'un appel système (syscall) dans le contexte du système de fichiers Linux ?,C'est une fonction spéciale qui constitue l'interface entre l'espace utilisateur et l'espace noyau pour demander l'exécution d'une opération sur un fichier.
+Quel appel système est utilisé pour ouvrir ou créer un fichier et retourner un descripteur ?,L'appel système `open()`.
+Quels sont les deux appels systèmes fondamentaux pour lire et écrire des données dans un fichier ouvert ?,Les appels systèmes `read()` et `write()`.
+Quel appel système permet de changer la position courante de lecture/écriture dans un fichier ?,L'appel système `lseek()`.
+"Quel appel système est utilisé pour récupérer les métadonnées d'un inode (taille, droits, etc.) ?",L'appel système `stat()`.
+Comment un lien dur (hard link) est-il créé au niveau des appels systèmes ?,"Via l'appel système `link(oldpath, newpath)`."
+"Quel appel système supprime un lien vers un inode, ce qui peut entraîner la suppression du fichier ?",L'appel système `unlink()`.
+Quand l'appel système `close()` libère-t-il réellement l'inode et les blocs de données ?,Uniquement si plus aucun autre lien (hard link) ni aucun autre processus n'utilise cet inode.
+Quel outil de diagnostic permet de tracer les appels systèmes effectués par un processus en temps réel ?,L'outil `strace`.
+Pourquoi une application qui appelle `write()` pour chaque caractère est-elle inefficace ?,"Parce que chaque appel système implique un passage coûteux de l'espace utilisateur à l'espace noyau, et il est plus performant de grouper les écritures dans un buffer."
+"Dans quel répertoire virtuel du système peut-on trouver des paramètres globaux liés au système de fichiers, comme `file-max` ?",Dans le répertoire `/proc/sys/fs/`.
+L'usure des cellules de mémoire flash NAND est une contrainte majeure pour quel type de support de stockage ?,Les disques SSD (Solid State Drive).
+Quel outil est essentiel pour déclencher manuellement l'opération TRIM sur un SSD ?,La commande `fstrim`.
+Les _____ sont les unités de stockage effectives du contenu des fichiers.,blocs de données
+Quel est le risque si un disque manque d'inodes avant de manquer d'espace de stockage ?,Cela bloque la création de tout nouveau fichier sur le système de fichiers.
+Les systèmes de fichiers modernes comme ext4 et XFS utilisent des algorithmes qui tentent de placer les blocs d'un fichier de manière _____ pour limiter la fragmentation.,contiguë
+Que se passe-t-il lors de la suppression d'un fichier au niveau des structures du SGF ?,"Le lien entre le nom et l'inode est supprimé, et si le compteur de liens de l'inode tombe à zéro, l'inode et ses blocs de données sont marqués comme libres."
+Quelle commande permet d'identifier les secteurs défectueux sur un disque dur ?,La commande `badblocks`.
+Quel est le principal symptôme de blocs de données corrompus ?,Des fichiers illisibles et des erreurs d'entrée/sortie (Input/output error).
+L'option de montage `relatime` est un compromis qui met à jour le temps d'accès (atime) uniquement si _____.,c'est nécessaire (par exemple si l'atime est plus ancien que le temps de modification).
+"Quelle commande affiche les métadonnées d'un fichier, y compris son numéro d'inode, sa taille et les blocs utilisés ?",La commande `stat`.
+"L'outil _____ peut afficher le superbloc, les bitmaps et d'autres structures internes d'un système de fichiers ext.",dumpe2fs
+La _____ est une table maintenue par le noyau qui conserve en mémoire une copie des inodes actifs.,table des inodes en mémoire (Inode Table)
+L'appel système _____ permet d'appliquer un verrou global sur un fichier entier.,flock
+Quelle est la conséquence d'une 'fuite de fichiers ouverts' dans une application mal développée ?,"Une accumulation d'entrées dans les tables de fichiers ouverts, pouvant mener à une erreur 'Too many open files'."
+Quelle commande est indispensable pour identifier quel processus empêche le démontage d'un système de fichiers ?,La commande `fuser -m /point/de/montage`.
+"Les commandes standards comme `ls`, `cp`, `mv`, `rm` sont des surcouches qui invoquent en interne des _____.",appels systèmes (syscalls)
+Quel appel système permet de créer un lien symbolique ?,L'appel système `symlink()`.
+"Quel outil, complémentaire à `strace`, trace les appels aux bibliothèques d'un processus ?",L'outil `ltrace`.

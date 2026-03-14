@@ -1,0 +1,171 @@
+ANALYSE DE LA GOUVERNANCE NUMÉRIQUE ET DE LA RÉSILIENCE STRATÉGIQUE 2026-2030.
+
+LEXIQUE COMPLET.
+
+      Le RGPD désigne le Règlement Général sur la Protection des Données qui constitue la pierre angulaire de la confiance numérique en Europe.
+
+      L'AI Act ou RIA est le règlement européen sur l'intelligence artificielle qui impose des conditions de développement pour une IA de confiance et classifie les systèmes selon leur niveau de risque.
+
+      La Directive NIS2 est la norme européenne élargissant les obligations de cybersécurité à dix-huit secteurs d'activité en distinguant les entités essentielles des entités importantes.
+
+      Le CRA ou Cyber Resilience Act est le règlement imposant des exigences de cybersécurité pour tout produit comportant des éléments numériques tout au long de son cycle de vie.
+
+      Le RGS signifie Référentiel Général de Sécurité et impose aux administrations des règles pour garantir la confidentialité et l'intégrité des échanges numériques.
+
+      Le RGI est le Référentiel Général d'Interopérabilité qui recommande des standards ouverts pour éviter l'enfermement technologique.
+
+      Le RGAA correspond au Référentiel Général d'Accessibilité pour les Administrations et constitue une obligation légale pour l'inclusion numérique des personnes handicapées.
+
+      Le RGESN est le Référentiel Général d'Écoconception de Services Numériques visant à réduire l'empreinte environnementale du numérique.
+
+      Le SGDSN est le Secrétariat général de la défense et de la sécurité nationale qui assiste le Premier ministre dans la définition des politiques de défense.
+
+      L'ANSSI est l'Agence nationale de la sécurité des systèmes d'information agissant comme autorité technique de référence pour la défense et la régulation cyber.
+
+      L'OSIIC est l'Opérateur des Systèmes d'Information Interministériels Classifiés chargé des communications sécurisées des plus hautes autorités de l'État.
+
+      SecNumCloud est le label de l'ANSSI qualifiant les offres de cloud computing garantissant un haut niveau de sécurité et une immunité aux lois extraterritoriales.
+
+COURS DÉTAILLÉ.
+
+I. L'ARCHITECTURE NORMATIVE EUROPÉENNE DE SÉCURITÉ.
+
+   A. Convergence entre RGPD et Intelligence Artificielle.
+
+      L'Union européenne a mis en place un cadre réglementaire horizontal qui associe la protection des données personnelles à la régulation des technologies émergentes.
+
+      Le RGPD impose des obligations strictes de transparence et de sécurité tandis que l'AI Act pose les conditions de développement d'une IA de confiance.
+
+      La relation entre ces textes est complémentaire car la conformité à l'AI Act facilite celle au RGPD grâce aux exigences de documentation technique.
+
+      L'AI Act interdit dès février 2025 les pratiques à risque inacceptable comme la notation sociale et soumet les systèmes à haut risque à des évaluations strictes.
+
+      Le Bureau de l'IA rattaché à la Commission européenne assure la supervision des modèles d'IA à usage général.
+
+   B. La Directive NIS2 et la Gestion des Risques.
+
+      La directive NIS2 remplace la version de 2016 pour répondre à l'intensification des menaces en élargissant son champ d'application à dix-huit secteurs.
+
+      Les entités régulées sont divisées en Entités Essentielles soumises à une surveillance ex ante et en Entités Importantes soumises à une surveillance ex post.
+
+      Les mesures de gestion des risques incluent l'authentification à plusieurs facteurs et la sécurisation de la chaîne d'approvisionnement.
+
+      Les incidents significatifs doivent faire l'objet d'un avertissement précoce sous 24 heures et d'une notification complète sous 72 heures.
+
+   C. Le Cyber Resilience Act et la Sécurité des Produits.
+
+      Le Cyber Resilience Act impose des exigences de cybersécurité horizontales pour tous les produits matériels ou logiciels comportant des éléments numériques.
+
+      Les fabricants doivent garantir la sécurité tout au long du cycle de vie du produit et fournir des mises à jour automatiques par défaut.
+
+      L'objectif est de corriger le faible niveau de sécurité intrinsèque des produits connectés et d'améliorer l'information des utilisateurs.
+
+      Les vulnérabilités exploitées doivent être signalées aux équipes de réponse aux incidents nationales.
+
+II. LES RÉFÉRENTIELS TECHNIQUES NATIONAUX.
+
+   A. Sécurité et Interopérabilité des Services Publics.
+
+      Le Référentiel Général de Sécurité structure la qualité des services numériques en imposant l'homologation de sécurité pour valider les fonctions cryptographiques.
+
+      L'ANSSI supervise cette qualification pour s'assurer que seuls des dispositifs robustes sont utilisés dans les télé-services publics.
+
+      Le Référentiel Général d'Interopérabilité favorise l'usage de protocoles ouverts et de formats non propriétaires pour fluidifier les échanges inter-administratifs.
+
+   B. Accessibilité et Sobriété Numérique.
+
+      Le Référentiel Général d'Accessibilité pour les Administrations oblige les organismes publics à garantir l'accès aux services pour les personnes en situation de handicap.
+
+      Le non-respect des critères du RGAA expose les entités à des sanctions administratives pouvant atteindre 25 000 euros par an et par service.
+
+      La loi REEN a donné naissance au Référentiel Général d'Écoconception de Services Numériques qui propose 79 critères pour minimiser l'impact environnemental.
+
+      L'écoconception permet de réduire l'impact carbone provenant de la fabrication des équipements et d'allonger la durée de vie du matériel.
+
+III. STRATÉGIE NATIONALE DE CYBERSÉCURITÉ 2026-2030.
+
+   A. Objectifs de Souveraineté et de Formation.
+
+      La stratégie nationale vise à faire de la France une puissance cyber de premier rang en réduisant les dépendances technologiques critiques.
+
+      L'État investit dans le cloud souverain et le chiffrement post-quantique pour préserver sa liberté d'action.
+
+      L'ambition est de créer le plus grand vivier de talents cyber en Europe en renforçant la formation initiale et continue.
+
+      Un portail national unique sera créé pour orienter la jeunesse vers les métiers de la cybersécurité et simplifier l'accès aux dispositifs existants.
+
+   B. Résilience Collective et Assistance.
+
+      L'objectif est d'atteindre une résilience où chaque acteur économique est préparé aux crises grâce à la généralisation des exercices de crise cyber.
+
+      Un portail national unique accompagnera les victimes et offrira un cadre normatif simplifié pour les PME et les collectivités.
+
+      La France développera d'ici 2028 une capacité d'assistance cyber pour soutenir ses partenaires internationaux vulnérables.
+
+IV. GOUVERNANCE ET ACTEURS INSTITUTIONNELS.
+
+   A. Le Rôle du SGDSN et de l'OSIIC.
+
+      Le SGDSN coordonne l'action interministérielle en cas de crise majeure et supervise la protection du secret de la défense nationale.
+
+      Il a sous sa responsabilité des services spécialisés comme VIGINUM pour la lutte contre les ingérences numériques étrangères.
+
+      L'OSIIC est l'opérateur chargé de garantir la sécurité des communications du Président de la République et du Gouvernement en tout lieu.
+
+      Ce service déploie les réseaux classifiés interministériels et sécurise 230 000 mobiles ainsi que 90 ambassades françaises.
+
+   B. Les Missions de l'ANSSI.
+
+      L'ANSSI assure la défense et la réaction en détectant les attaques informatiques contre les administrations et entités critiques.
+
+      Elle exerce une mission de prévention et de conseil en accompagnant la sécurisation des systèmes par des guides de bonnes pratiques.
+
+      Son rôle de régulation inclut la gestion des visas de sécurité pour les prestataires de confiance et la supervision de la directive NIS2.
+
+      L'agence agit comme un bouclier numérique en assurant une veille permanente sur les vulnérabilités émergentes.
+
+V. RÉSILIENCE OPÉRATIONNELLE ET LUTTE CONTRE LA CORRUPTION.
+
+   A. Souveraineté du Cloud et Continuité d'Activité.
+
+      Le label SecNumCloud impose l'immunité face aux lois extraterritoriales et le principe de composition pour accélérer les certifications.
+
+      À partir de 2026, les ministères devront héberger leurs données sensibles exclusivement sur des solutions qualifiées SecNumCloud.
+
+      Les plans de reprise d'activité souverains reposent sur une analyse d'impact métier et des procédures techniques de restauration.
+
+      La clause de réversibilité est indispensable contractuellement pour permettre à une entité de récupérer ses données sans rupture de service.
+
+   B. Plan National de Lutte contre la Corruption 2025-2029.
+
+      Le plan renforce la sécurisation des fichiers de l'État exposés aux risques de consultation indue par le crime organisé.
+
+      La mesure de criblage permet de vérifier les antécédents des agents occupant des fonctions sensibles pour éviter l'infiltration des services publics.
+
+      Une plateforme de signalement anonyme centralisée garantit la confidentialité des lanceurs d'alerte signalant des faits suspects.
+
+      L'intelligence artificielle est utilisée par l'Agence française anticorruption pour détecter les signaux faibles et analyser les risques de fraude.
+
+POINTS D'ATTENTION.
+
+      Les pratiques d'IA à risque inacceptable sont interdites dès le 2 février 2025.
+
+      Les entités essentielles sous NIS2 risquent des sanctions jusqu'à 10 millions d'euros ou 2 % du chiffre d'affaires mondial.
+
+      Les obligations principales du Cyber Resilience Act s'appliqueront à partir de décembre 2027.
+
+      Le respect du RGAA est vérifié par des audits et le manquement entraîne des sanctions financières.
+
+      Le surcoût du cloud souverain SecNumCloud est estimé entre 25 % et 40 % par rapport au cloud traditionnel.
+
+EXEMPLES CITES.
+
+      MonEspaceNIS2 est le simulateur mis à disposition par l'ANSSI pour l'auto-évaluation des entités.
+
+      NumEcoDiag est un outil permettant d'évaluer la maturité environnementale des services numériques.
+
+      ISIS est le réseau classifié utilisé pour le partage de documents interministériels.
+
+      HORUS et OSIRIS sont les systèmes de visioconférence protégés administrés par l'OSIIC.
+
+      Le programme CaRE fournit des kits méthodologiques pour la cybersécurité des établissements de santé.

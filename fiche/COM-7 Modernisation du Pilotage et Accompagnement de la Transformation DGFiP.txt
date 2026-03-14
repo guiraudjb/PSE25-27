@@ -1,0 +1,127 @@
+RENFORCEMENT DU PILOTAGE DE LA PERFORMANCE ET ACCOMPAGNEMENT DU CHANGEMENT (STRATEGIE DGFIP 2023-2027).
+
+LEXIQUE COMPLET.
+
+      Pilotage par la performance : Approche de gouvernance centrée sur la recherche permanente de l'efficacité, de l'efficience et de la satisfaction des usagers, s'appuyant sur des données fiables et des indicateurs pertinents.
+
+      Efficience : Rapport entre les résultats obtenus et les ressources utilisées, dont la mesure devient centrale dans les nouveaux indicateurs de la DGFiP.
+
+      Supra-départementalisation : Organisation administrative consistant à regrouper certaines missions à une échelle supérieure au département pour atteindre une taille critique suffisante et maintenir l'expertise.
+
+      Data Visualisation : Technique de représentation graphique des données visant à faciliter la lecture des tableaux de bord et la prise de décision pour les responsables stratégiques et opérationnels.
+
+      Responsabilité des gestionnaires publics : Réforme impliquant un changement de culture pour les comptables et les ordonnateurs, axée sur une meilleure analyse des risques financiers et du pilotage de l'activité.
+
+      Signaux faibles : Indicateurs discrets ou tendances naissantes que l'audit doit identifier pour permettre l'anticipation et l'alerte avant la survenance de risques majeurs.
+
+      PCA (Plan de Continuité d'Activité) : Ensemble de procédures documentées permettant à l'administration de maintenir ses missions essentielles en cas de crise majeure.
+
+      DTNum : Direction de la Transformation Numérique, structure dont l'expertise est mobilisée pour piloter, coordonner les actions numériques et fournir les outils nécessaires à la DGFiP.
+
+      SGDSN : Secrétariat général de la défense et de la sécurité nationale, organisme qui prépare et conduit les exercices de crise interministériels auxquels participe la DGFiP.
+
+COURS DETAILLE.
+
+I. OBJECTIF 17 : ANCRER LA RECHERCHE DE LA PERFORMANCE DANS LE PILOTAGE.
+
+   A. Les principes directeurs du nouveau pilotage.
+
+      L'ambition de transformation de la DGFiP exige de placer le contrôle de gestion, l'audit et la maîtrise des risques au centre de la gouvernance.
+
+      Les indicateurs de performance doivent être réorientés vers la mesure de l'efficacité, de l'efficience et de la satisfaction des usagers et partenaires pour démontrer l'utilisation optimale des moyens.
+
+      Les données nécessaires au calcul de ces indicateurs devront être intégrées nativement dans la conception des applications pour limiter les saisies manuelles et faciliter l'analyse.
+
+   B. Chantier 17-1 : Mesurer l'efficience des missions.
+
+      L'analyse de la taille critique des structures peut conduire à mutualiser certaines missions entre départements sans remettre en cause le réseau territorial.
+
+      La supra-départementalisation ou la régionalisation sont envisagées pour renforcer l'efficacité des missions reposant sur un trop faible nombre d'experts dans les petites directions.
+
+      L'objectif pour 2025 est de doter chaque principal type de structure métier d'au moins un indicateur d'efficience.
+
+      L'objectif pour 2027 est d'atteindre un total d'au moins 30 indicateurs d'efficience, avec au moins un indicateur par structure métier.
+
+      Les effectifs et les outils du contrôle de gestion seront renforcés tant dans les directions locales qu'au sein de l'administration centrale.
+
+      Des expérimentations sur l'introduction d'une comptabilité analytique seront approfondies en ciblant les cas d'usage les plus pertinents.
+
+   C. Chantier 17-2 : Le pilotage par la performance au coeur des methodes.
+
+      La collaboration entre les contrôleurs de gestion et les services métiers doit être renforcée pour développer une véritable culture du pilotage.
+
+      Le déploiement des tableaux de bord de suivi d'activité débutera par ceux des directeurs en 2024.
+
+      Les tableaux de bord deviendront modulables pour les services infra-départementaux en 2025.
+
+      La généralisation des tableaux modulables multiservices est programmée pour 2027.
+
+      L'utilisation des outils de data visualisation sera généralisée pour faciliter l'emploi de ces tableaux de bord et l'acculturation au contrôle de gestion.
+
+   D. Chantier 17-3 : Renforcer l'audit, l'alerte et l'anticipation.
+
+      La réforme de la responsabilité des gestionnaires publics impose un changement de culture incluant les ordonnateurs et nécessite une meilleure maîtrise des risques financiers.
+
+      L'approche par les enjeux sera réaffirmée dans les missions d'audit et la mise en oeuvre effective des conclusions sera davantage vérifiée.
+
+      La capacité de traitement des données de masse et d'identification des signaux faibles sera renforcée pour améliorer l'anticipation.
+
+      L'audit informatique sera développé en interne pour accroître l'autonomie et la capacité de contrôle de la DGFiP.
+
+      La cible quantitative pour 2027 est fixée à 32 audits nationaux et 2 000 audits locaux.
+
+      La DGFiP développera une vision prospective en recourant accruement aux comparaisons avec le secteur privé, l'international et les autres administrations.
+
+   E. Chantier 17-4 : Renforcer la resilience face aux crises.
+
+      L'expérience de la crise COVID-19 sert de base pour structurer une gouvernance de crise plus anticipative.
+
+      Un réseau de référents continuité d'activité sera structuré en administration centrale et dans les directions territoriales.
+
+      La DGFiP réalisera un exercice de crise propre par an, en plus de sa participation aux exercices interministériels.
+
+      L'indicateur de résilience impose que 100 pour cent des Plans de Continuité d'Activité soient mis à jour chaque année dès 2023.
+
+II. OBJECTIF 18 : ACCOMPAGNER DAVANTAGE LES TRANSFORMATIONS.
+
+   A. Chantier 18-1 et 18-2 : Conduite du changement et association des cadres.
+
+      La réussite des projets repose sur une plus grande association des équipes et le partage des orientations stratégiques pour favoriser l'adhésion.
+
+      L'implication des métiers dans le pilotage du changement doit être renforcée tout en maintenant la responsabilité des directeurs territoriaux.
+
+      Les cadres seront soutenus par le modèle managérial de la DGFiP et des outils d'accompagnement comme le coaching, le 360 degrés ou les plateformes d'écoute.
+
+      Des dispositifs collectifs comme les ateliers participatifs et les séminaires seront déployés pour faire progresser les pratiques managériales.
+
+      L'implication des cadres sera valorisée par une part d'intéressement variable dans le cadre de la réforme de la haute fonction publique.
+
+      L'objectif clé est d'augmenter le taux d'engagement des agents de plus 15 points d'ici 2027.
+
+   B. Chantier 18-3 : S'appuyer sur le numerique et l'innovation.
+
+      L'expertise de la DTNum est centrale pour piloter, coordonner les actions et fournir les plateformes numériques nécessaires à la transformation.
+
+      Un dispositif de veille technologique et méthodologique sera mis en place pour capter les innovations bénéfiques.
+
+      L'accompagnement des agents dans l'appropriation du numérique sera intensifié pour diffuser l'innovation dans tous les collectifs de travail.
+
+      Les innovations numériques et managériales doivent être rendues accessibles et compréhensibles pour l'ensemble des agents et des cadres.
+
+POINTS D'ATTENTION.
+
+      Le passage d'une culture de régularité à une culture de performance et de gestion des risques concerne désormais tous les acteurs, y compris les ordonnateurs.
+
+      La stratégie repose sur une production de données fiables intégrées nativement dans les applications pour nourrir les indicateurs d'efficience.
+
+      La restructuration potentielle des missions à faible effectif via la supra-départementalisation est un levier d'efficience explicite.
+
+      Le calendrier de déploiement des outils de pilotage est progressif et s'étend jusqu'en 2027 pour couvrir l'ensemble des strates hiérarchiques.
+
+EXEMPLES CITES.
+
+      La gestion du fonds de solidarité durant la crise COVID-19 est citée comme exemple de réactivité et d'efficacité.
+
+      Le Secrétariat général de la défense et de la sécurité nationale est mentionné pour l'organisation des exercices de crise interministériels.
+
+      Le Forum de l'emploi numérique de l'État est cité comme lieu de présence des services informatiques de la DGFiP.

@@ -1,0 +1,137 @@
+TRAJECTOIRE DE CREDITS ET D'EMPLOIS 2023-2027 (PROGRAMME 156).
+
+LEXIQUE COMPLET.
+
+      Le Programme 156 correspond au cadre budgétaire dédié à la gestion fiscale et financière de l'État dont la trajectoire est ici définie.
+
+      Le terme ETPT signifie Équivalent Temps Plein Travaillé et sert d'unité de mesure pour définir le plafond d'emplois annuel autorisé.
+
+      Le terme ETP signifie Équivalent Temps Plein et est utilisé ici pour quantifier le flux de réduction nette des emplois chaque année.
+
+      Le sigle AE désigne les Autorisations d'Engagement qui constituent la limite supérieure des dépenses pouvant être engagées juridiquement.
+
+      Le sigle CP désigne les Crédits de Paiement qui correspondent à la limite supérieure des dépenses pouvant être payées ou ordonnancées dans l'année.
+
+      La mention HT2 signifie Hors Titre 2 et regroupe les crédits de fonctionnement et d'investissement hors dépenses de personnel.
+
+      La mention T2 HCAS désigne le Titre 2 Hors Compte d'Affectation Spéciale et couvre les dépenses de personnel incluant les salaires.
+
+      Le sigle SI fait référence aux Systèmes d'Information qui bénéficient d'une ligne budgétaire spécifique.
+
+      Le sigle LFI signifie Loi de Finances Initiale et sert de référence pour les prévisions budgétaires votées par le Parlement.
+
+COURS DETAILLE.
+
+I. LA TRAJECTOIRE DES EMPLOIS DU PROGRAMME 156.
+
+   A. Evolution du plafond d'emplois (ETPT).
+      
+      Le plafond d'emplois, exprimé en Équivalent Temps Plein Travaillé, suit une tendance baissière globale sur la période quinquennale.
+      
+      Le point de départ observé en exécution 2022 s'élève à 93 025 ETPT, ce qui est inférieur à la prévision initiale de 95 039 ETPT.
+      
+      La trajectoire prévoit une légère remontée en 2023 à 93 920 ETPT avant d'entamer une décrue continue les années suivantes.
+      
+      L'objectif final impératif est fixé à un plafond de 91 779 ETPT pour l'année 2027.
+
+   B. Schema de reduction des effectifs (ETP).
+
+      La réduction des emplois mesure le solde des suppressions de postes en Équivalent Temps Plein prévues chaque année.
+      
+      L'année 2022 a connu une réduction significative de 1 515 ETP en exécution.
+      
+      Le rythme de réduction ralentit en 2023 avec 850 suppressions et en 2024 avec 450 suppressions.
+      
+      L'année 2025 constitue une exception notable car elle affiche une réduction de 0 ETP, marquant une pause dans les suppressions de postes.
+      
+      Le rythme de croisière reprend pour les deux dernières années de la trajectoire avec 850 suppressions prévues en 2026 et en 2027.
+
+   C. Mecanismes d'ajustement.
+
+      Les chiffres annuels présentés possèdent une valeur indicative, seul l'objectif de 2027 constituant une cible ferme.
+      
+      La trajectoire pourra être révisée en fonction des mesures de périmètre modifiant le champ d'action de l'administration.
+      
+      Des ajustements pourront également provenir de mesures de transfert de personnel vers ou depuis d'autres entités.
+      
+      Les futures lois de finances pourront introduire de nouvelles mesures modifiant cette planification initiale.
+
+II. LA TRAJECTOIRE BUDGETAIRE GLOBALE.
+
+   A. Evolution des Autorisations d'Engagement (AE).
+
+      Le montant total des Autorisations d'Engagement pour le programme 156 passe de 5 687 M€ en 2022 à 6 034 M€ en cible 2027.
+      
+      Un pic d'engagement est visible en 2023 avec un montant total atteignant 6 180 M€.
+      
+      Les crédits Hors Titre 2 connaissent des variations liées aux projets, passant de 1 111 M€ en 2022 à 1 304 M€ en 2027.
+
+   B. Evolution des Credits de Paiement (CP).
+
+      Le total des Crédits de Paiement progresse régulièrement de 5 607 M€ en 2022 à 5 947 M€ en 2027.
+      
+      Cette progression assure la couverture des engagements pris et permet de financer le fonctionnement courant et les investissements.
+      
+      Les crédits de paiement Hors Titre 2 augmentent de 1 031 M€ en 2022 à 1 217 M€ en 2027.
+
+   C. Stabilite de la masse salariale (T2 HCAS).
+
+      Les dépenses de personnel, classées en Titre 2 Hors Compte d'Affectation Spéciale, restent globalement stables sur la période.
+      
+      Elles évoluent de 4 576 M€ en 2022 à 4 730 M€ en 2027, oscillant autour de 4 700 M€ durant le quinquennat.
+      
+      Cette stabilité financière contraste avec la baisse des effectifs physiques décrite dans la première partie.
+
+III. FOCUS SUR LES INVESTISSEMENTS STRATEGIQUES.
+
+   A. Les Systemes d'Information (SI).
+
+      Le budget alloué aux Systèmes d'Information bénéficie d'une stricte stabilisation à un niveau élevé.
+      
+      Le montant est fixé à 450 M€ par an, aussi bien en Autorisations d'Engagement qu'en Crédits de Paiement, de 2023 à 2027.
+      
+      Cela représente une augmentation significative par rapport à l'exécution 2022 qui s'établissait à 346 M€ en AE et 321 M€ en CP.
+
+   B. Le projet de facturation electronique.
+
+      Ce projet connait une montée en puissance progressive des crédits alloués sur la période.
+      
+      Les engagements sont quasi nuls en 2023 avec 0,6 M€ avant de croître fortement pour atteindre un pic de 28,68 M€ en 2026.
+      
+      Les crédits de paiement suivent une courbe identique, culminant à 28,78 M€ en 2026 avant de redescendre à 17,6 M€ en 2027.
+
+   C. Le projet immobilier CAD Nanterre.
+
+      Ce projet immobilier se caractérise par un engagement massif et ponctuel des crédits suivi d'un étalement des paiements.
+      
+      La quasi-totalité de l'investissement est engagée en 2024 avec 91,9 M€ d'Autorisations d'Engagement.
+      
+      Les paiements sont répartis sur plusieurs années avec 10,5 M€ en 2024, un pic de 29,9 M€ en 2025 et 22,6 M€ en 2027.
+
+IV. DISPOSITIFS DE FINANCEMENT COMPLEMENTAIRE.
+
+   A. Sources externes potentielles.
+
+      La Direction Générale des Finances Publiques peut solliciter des financements additionnels au-delà des dotations du programme 156.
+      
+      Le document mentionne explicitement la possibilité de candidater auprès du fonds interministériel pour la transformation publique.
+      
+      Une autre source de financement citée est le fonds de transformation ministériel.
+
+POINTS D'ATTENTION.
+
+      L'année 2025 se distingue par une pause totale dans la réduction des effectifs avec zéro suppression d'emploi en ETP.
+
+      Le budget informatique est sanctuarisé à hauteur de 450 millions d'euros par an sur toute la période du plan.
+
+      Il existe un décalage temporel important entre l'engagement de la dépense en 2024 pour Nanterre et ses paiements effectifs jusqu'en 2027.
+
+      L'objectif de plafond d'emplois pour 2027 est une cible impérative à atteindre au plus tard à cette date.
+
+EXEMPLES CITES.
+
+      Le fonds interministériel pour la transformation publique est cité comme exemple de financement externe.
+
+      Le projet immobilier du CAD Nanterre illustre la gestion pluriannuelle des crédits d'investissement.
+
+      Le déploiement de la facturation électronique est présenté comme un projet à fort impact budgétaire croissant jusqu'en 2026.

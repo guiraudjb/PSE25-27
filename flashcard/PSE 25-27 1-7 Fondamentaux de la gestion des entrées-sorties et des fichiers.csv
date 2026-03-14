@@ -1,0 +1,64 @@
+Quel est l'objectif premier du système d'exploitation dans la gestion des entrées/sorties (E/S) ?,Masquer la complexité technique des périphériques en offrant une interface unifiée et simplifiée.
+Le système d'exploitation agit comme un intermédiaire essentiel entre les _____ et le matériel.,applications logicielles
+Que se passerait-il si la couche d'abstraction du système d'exploitation n'existait pas pour les E/S ?,"Chaque programme devrait inclure du code spécifique pour chaque type de périphérique, rendant le développement complexe et peu portable."
+Comment un périphérique comme une imprimante attire-t-il l'attention du processeur ?,Il génère une interruption.
+Quelle est la séquence d'actions du système d'exploitation lorsqu'il intercepte une interruption ?,Il sauvegarde l'état actuel du processeur et exécute une routine dédiée pour traiter l'événement.
+Quel est le principal avantage de l'abstraction matérielle offerte par le système d'exploitation pour les logiciels ?,Elle assure l'indépendance matérielle et la portabilité des logiciels sur diverses configurations.
+Qu'est-ce qu'un bus dans le contexte des composants matériels ?,"Un ensemble de conducteurs électriques qui transportent des signaux entre les composants comme le processeur, la mémoire et les périphériques."
+"Quelle est la fonction principale du bus système (ou Front Side Bus, FSB) ?",Il relie directement le processeur à la mémoire et aux contrôleurs principaux pour assurer un débit élevé.
+Donnez des exemples de bus d'E/S conçus pour connecter des périphériques externes.,Le PCI Express (PCIe) ou l'USB.
+Pourquoi les architectures modernes privilégient-elles les bus série (comme PCIe) par rapport aux bus parallèles ?,"Ils offrent des débits plus élevés, une meilleure évolutivité et réduisent les problèmes de synchronisation et d'interférences."
+Quel est le rôle d'un contrôleur dans la gestion des E/S ?,Il agit comme un intermédiaire intelligent qui traduit les commandes génériques du SE en signaux spécifiques pour un périphérique.
+À quoi servent les tampons (buffers) gérés par un contrôleur ?,Ce sont des zones de mémoire temporaire pour stocker les données en transit et lisser les différences de vitesse.
+Définition : Couche d’abstraction matérielle (HAL),Un composant logiciel qui isole le noyau du système d’exploitation des spécificités du matériel sous-jacent.
+Quel est le principal avantage de la HAL pour la portabilité des systèmes d'exploitation ?,Elle leur permet de s'exécuter sur une grande variété de plates-formes sans modification majeure du noyau.
+Comment la HAL simplifie-t-elle le développement de logiciels pour les programmeurs ?,Elle leur évite d'écrire du code spécifique à chaque périphérique en fournissant des appels standardisés.
+Qu'est-ce qui caractérise les périphériques de flux (stream devices) ?,"Ils traitent les données de manière séquentielle et continue, sans nécessiter un accès arbitraire à des blocs."
+Citez des exemples de périphériques de flux.,"Un clavier, une souris ou une carte son."
+Qu'est-ce qui caractérise les périphériques en mode bloc (block devices) ?,Ils organisent les données en blocs de taille fixe qui peuvent être lus ou écrits de manière arbitraire et indépendante.
+Citez des exemples de périphériques en mode bloc.,"Les disques durs, les SSD ou les clés USB."
+Qu'est-ce qu'un périphérique hybride ?,"Un périphérique qui combine les caractéristiques des modes flux et bloc selon l'opération, comme un graveur de CD/DVD."
+Quel composant du système d'exploitation orchestre les interactions entre le logiciel et le matériel ?,Le gestionnaire de périphériques.
+Comment le gestionnaire de périphériques gère-t-il les erreurs de manière hiérarchique ?,Il tente de les corriger au niveau du contrôleur ou du pilote avant de les remonter au système d'exploitation.
+"Dans l'architecture de bus, quel composant gère les périphériques d'E/S plus lents comme les ports USB ?",Le pont sud (southbridge).
+Quel type de bus spécifie où les données doivent être lues ou écrites ?,Le bus d'adresses.
+"Quel type de bus transporte les signaux qui déterminent le type d'opération à effectuer (lecture, écriture) ?",Le bus de contrôle.
+Quel type de bus transporte les informations elles-mêmes ?,Le bus de données.
+Quel est le principal avantage de la standardisation des bus ?,Elle assure la compatibilité et l'évolutivité en permettant aux périphériques de différents fabricants de fonctionner ensemble.
+Définition : Accès direct en mémoire (DMA),Une technique permettant aux périphériques d'échanger des données directement avec la mémoire centrale sans solliciter le processeur.
+Dans quels scénarios le DMA est-il particulièrement utile ?,"Pour les opérations gourmandes en données, comme le transfert de fichiers volumineux ou la réception de paquets réseau."
+Quelle est l'alternative au DMA qui utilise des interruptions (IRQ) pour attirer l'attention du processeur ?,Les ports d'entrée/sortie.
+Comparez le DMA et les ports d'E/S en termes de performance pour les transferts de données massifs.,"Le DMA est plus efficace car il minimise l'intervention du processeur, tandis que les ports d'E/S sont moins efficaces pour ces tâches."
+Les _____ agissent comme des traducteurs qui convertissent les commandes génériques du système en instructions spécifiques pour chaque périphérique.,pilotes de périphériques
+Quelles ressources matérielles un pilote doit-il réserver et gérer pour éviter les conflits ?,Les plages d'adresses mémoire ou les lignes d'interruption (IRQ).
+Quelle est la différence entre un pilote générique et un pilote spécifique ?,"Un pilote générique offre une compatibilité de base pour une gamme de périphériques, tandis qu'un pilote spécifique est optimisé pour un modèle particulier."
+Quel est le mécanisme fondamental permettant aux périphériques de signaler au processeur qu'un événement nécessite une attention immédiate ?,Les interruptions matérielles.
+"Lorsqu'un périphérique génère une interruption, il envoie un signal sur une ligne dédiée appelée _____.",IRQ (Interrupt ReQuest)
+Quelle structure de données contient les pointeurs vers les routines spécifiques (handlers) pour chaque type d'interruption ?,"La table des vecteurs d'interruption (IDT, Interrupt Descriptor Table)."
+Quel serait l'inconvénient si le processeur devait constamment sonder (polling) l'état des périphériques au lieu d'utiliser des interruptions ?,Cela gaspillerait des ressources et réduirait considérablement les performances du système.
+Quelles sont les actions principales d'une routine de gestion des interruptions (interrupt handler) ?,"Elle sauvegarde le contexte actuel du processeur, traite l'événement, puis restaure le contexte."
+Comment l'adresse d'un secteur est-elle définie sur un disque dur traditionnel (HDD) ?,"Par un triplet : numéro de cylindre, numéro de tête et numéro de secteur."
+Quelle est l'unité minimale de lecture/écriture sur un SSD ?,Une page (généralement de 4 Ko).
+Quelle est l'unité minimale d'effacement sur un SSD ?,Un bloc (composé de plusieurs pages).
+Nommez deux algorithmes sophistiqués nécessaires à la gestion des SSD pour maintenir leur durabilité.,Le wear leveling (répartition de l'usure) et le garbage collection (nettoyage des blocs inutilisés).
+Qu'est-ce que le partitionnement d'un disque ?,Une technique pour organiser l'espace de stockage en sections logiques indépendantes appelées partitions.
+Quel est le rôle du Master Boot Record (MBR) ?,Il contient une table des partitions qui décrit la localisation et la taille de chaque partition sur le disque.
+Quelle est la limitation majeure du MBR concernant le nombre de partitions ?,Il ne peut gérer que quatre partitions primaires.
+Quel schéma de partitionnement moderne remplace le MBR et supporte des disques de plus de 2 To ?,Le GPT (GUID Partition Table).
+"Dans un système de fichiers, quel niveau est perçu par les utilisateurs comme une arborescence de répertoires et de fichiers ?",Le niveau logique.
+Quelle est la différence entre le formatage physique et le formatage logique d'un disque ?,"Le formatage physique divise le disque en pistes et secteurs, tandis que le formatage logique écrit les structures du système de fichiers (ex: tables d'allocation)."
+Distinguez un enregistrement logique d'un enregistrement physique.,"Un enregistrement logique est une unité de données cohérente pour l'utilisateur (ex: une ligne), tandis qu'un enregistrement physique (bloc) est l'unité de stockage de base pour le disque."
+Quelle méthode d'accès aux fichiers lit les données dans l'ordre où elles sont stockées ?,L'accès séquentiel.
+Quelle méthode d'accès permet de sauter directement à n'importe quel enregistrement en utilisant son adresse ?,L'accès direct (ou aléatoire).
+Quelle méthode d'accès combine un index pour localiser rapidement un enregistrement qui est ensuite lu séquentiellement ?,L'accès séquentiel indexé.
+Quelle structure de données établit une correspondance entre les noms symboliques des fichiers et leurs emplacements physiques sur le disque ?,Le catalogue des fichiers (ou répertoire).
+Les systèmes Unix/Linux utilisent des _____ pour stocker les métadonnées des fichiers et les pointeurs vers les blocs de données.,inodes (index nodes)
+Qu'est-ce que le cache disque et quel est son but ?,C'est une zone de mémoire rapide (RAM) qui stocke temporairement les données fréquemment utilisées pour améliorer les performances de lecture/écriture.
+Quel est le risque majeur associé à l'utilisation d'un cache disque en cas d'arrêt brutal du système ?,"La perte des données en attente d'être écrites depuis le cache vers le disque, pouvant corrompre des fichiers."
+"Comment un système de fichiers journalisé (ex: ext4, NTFS) garantit-il l'intégrité des données ?","Il enregistre d'abord les changements dans un journal avant de les appliquer, permettant de récupérer un état cohérent après un crash."
+Quel est le rôle des utilitaires comme `fsck` (Linux) ou `chkdsk` (Windows) ?,Ils analysent la structure d'un système de fichiers pour détecter et corriger les incohérences.
+Définition : BIOS (Basic Input Output System),"Un micrologiciel qui s'exécute au démarrage pour initialiser le matériel, configurer les paramètres de base et charger le système d'exploitation."
+Quelle est la limitation du BIOS concernant la taille des disques durs ?,"Il est limité à une capacité maximale de 2,2 To en raison de son utilisation du schéma de partitionnement MBR."
+Quel micrologiciel moderne a été conçu pour remplacer le BIOS ?,L'UEFI (Unified Extensible Firmware Interface).
+Citez deux avantages majeurs de l'UEFI par rapport au BIOS.,Un démarrage plus rapide (mode 32/64 bits) et le support de disques de grande capacité (via GPT).
+Quelle fonctionnalité de sécurité de l'UEFI protège contre les malwares qui s'exécutent avant le système d'exploitation ?,Secure Boot.

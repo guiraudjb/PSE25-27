@@ -1,0 +1,67 @@
+Quel organisme a été créé par le décret du 30 octobre 2012 pour piloter la transformation numérique et administrative de l'État ?,Le Secrétariat général pour la modernisation de l’action publique (SGMAP).
+"En quelle année le SGMAP a-t-il été scindé en deux entités distinctes, la DITP et la DINSIC ?","En 2017, par les décrets du 20 novembre."
+Quelle direction a remplacé la DINSIC suite au décret du 25 octobre 2019 ?,La Direction interministérielle du numérique (DINUM).
+Sous l'autorité de qui la DINUM est-elle placée ?,Sous l'autorité du Premier ministre.
+Citez l'une des quatre priorités de la feuille de route 2019-2023 de la DINUM concernant les organisations publiques.,Engager une mutation profonde des organisations publiques pour conduire les projets numériques.
+Quel est l'objectif de la DINUM en matière de compétences numériques au sein de l'État ?,Renforcer significativement les compétences numériques pour doter les agents des savoir-faire nécessaires.
+Dans quel but la DINUM cherche-t-elle à développer l'exploitation effective des données ?,Pour rendre l'État plus efficace dans son action et plus simple pour les usagers.
+Comment la DINUM vise-t-elle à préserver la souveraineté numérique de l'État ?,En investissant dans des outils numériques mutualisés et sécurisés.
+Citez deux exemples de services ou ressources partagés développés et opérés par la DINUM.,"Le réseau interministériel de l’État (RIE), FranceConnect, data.gouv.fr ou api.gouv.fr."
+Quelle direction de programme au sein de la DINUM pilote le programme interministériel TECH.GOUV ?,La direction de programme TECH.GOUV.
+Quel département de la DINUM conçoit et gère des infrastructures mutualisées comme le RIE ?,Le département « Infrastructures et services opérés » (ISO).
+Quel département de la DINUM coordonne la stratégie de la donnée et promeut l'open data ?,Le département « Etalab ».
+Quelle est la mission principale du département « Performance des services numériques » (PSN) de la DINUM ?,"Élaborer des plans d’action pour la mutualisation, la dématérialisation et l’amélioration de la qualité des services."
+Qu'est-ce que l'interopérabilité en informatique ?,"La capacité des systèmes informatiques à communiquer, échanger des informations et travailler ensemble malgré leurs différences."
+Quel est l'acronyme du référentiel qui vise à garantir l'interopérabilité des systèmes de l'administration française ?,RGI (Référentiel Général d'Intéroperabilité).
+Le RGI a pour objectif de concevoir des systèmes interopérables à _____.,moindre coût
+Quel est l'objectif principal du Référentiel général de sécurité (RGS) ?,Renforcer la confiance des usagers dans les services électroniques mis à disposition par les autorités administratives.
+"Quelle démarche, recommandée par l'ANSSI, est obligatoire pour certains systèmes d'information de l'État afin de garantir leur exploitation sécurisée ?",L'homologation de sécurité.
+À quelle étape du processus d'homologation de sécurité un audit technique formel peut-il être systématiquement effectué si les enjeux le justifient ?,À la sixième étape du processus.
+Quelle est la différence fondamentale entre un audit statique et un audit dynamique de code ?,"L'audit statique examine le code source sans l'exécuter, tandis que l'audit dynamique simule des attaques sur l'application en fonctionnement."
+Citez un exemple d'outil spécialisé utilisé pour les audits dynamiques d'applications.,"Burp Suite, ZAP (Zed Attack Proxy) ou Nessus."
+"Selon l'article 34 de la loi Informatique & Libertés, quelle obligation a le responsable du traitement des données ?",Il doit prendre toutes les mesures nécessaires pour préserver la sécurité des données.
+Quelles sont les peines encourues pour le non-respect de l'obligation de sécurité des données personnelles selon l'article 226-17 du code pénal ?,Cinq ans d'emprisonnement et 300 000 euros d'amende.
+Qu'est-ce que l'accessibilité en informatique ?,"La capacité d'un système à être utilisé par une grande variété de personnes, quel que soit leur handicap ou déficience."
+Quel est le nom du référentiel qui définit les normes techniques d'accessibilité des services en ligne en France ?,Le Référentiel général d'amélioration de l'accessibilité (RGAA).
+"La loi du 11 février 2005 impose une obligation d'_____, dont le RGAA est issu.",accessibilité
+Quelle obligation les entités concernées par le RGAA ont-elles concernant leur statut de conformité ?,Elles doivent mentionner obligatoirement le statut de conformité RGAA sur la page d'accueil.
+Citez une catégorie d'entreprises privées soumises aux obligations du RGAA.,Les entreprises dont le chiffre d'affaires est supérieur à 250 millions d'euros réalisés en France.
+Quel est le premier grand principe du RGAA ?,Un site perceptible : l'information doit être perceptible par tous les utilisateurs.
+Le principe RGAA 'Un site utilisable' stipule notamment que toutes les fonctionnalités doivent être accessibles au _____.,clavier
+Que signifie le principe RGAA 'Un site compréhensible' ?,"Le contenu textuel doit être lisible et compréhensible, et les pages doivent fonctionner de manière prévisible."
+À quoi correspond le principe RGAA 'Un site robuste' ?,"Optimiser la compatibilité avec les agents utilisateurs actuels et futurs, y compris les technologies d'assistance."
+Quel est l'acronyme du règlement européen applicable depuis le 25 mai 2018 pour la protection des données personnelles ?,RGPD (Règlement Général sur la Protection des Données).
+Quelle autorité française est chargée de superviser les traitements informatiques et de veiller à l'application du RGPD ?,La Commission Nationale de l'Informatique et des Libertés (CNIL).
+Le RGPD a remplacé les formalités préalables auprès de la CNIL par une logique de _____.,conformité continue
+Le RGPD s'applique à tout organisme qui réalise un traitement de données à caractère personnel et qui est établi dans l'UE ou qui cible une personne se situant dans _____.,l'Union Européenne (UE)
+Qu'est-ce que l'écoconception des services numériques selon le RGESN ?,Intégrer les impacts environnementaux dans la conception pour prolonger la durée de vie des équipements et réduire la consommation de ressources.
+Quel est l'acronyme du référentiel pour l'écoconception des services numériques ?,RGESN (Référentiel général d'écoconception de services numériques).
+Quels organismes co-pilotent la mission interministérielle numérique responsable qui a mené au RGESN ?,"La DINUM, le Ministère de la Transition Écologique, l’ADEME et l’Institut du Numérique Responsable."
+Quelle loi de 2016 a reconnu les codes sources produits par l'administration comme des documents administratifs communicables et réutilisables ?,La Loi pour une République numérique.
+Quel est le principe directeur pour le choix des SI à mutualiser au sein de l'État ?,"Le choix se fait en fonction des gains financiers et de la valeur ajoutée, avant les questions de gouvernance."
+La mutualisation au sein du SI de l'État débouche-t-elle toujours sur une solution unique ?,"Non, l'objectif est de proposer des outils interopérables et adaptés, pas nécessairement une solution unique."
+Quel projet stratégique porté par la DINUM étend l'identification sécurisée des usagers aux entreprises et aux agents publics ?,FranceConnect Phase II.
+Quel département de la DINUM est responsable de la plateforme data.gouv.fr ?,Le département Etalab.
+Quel est le rôle de la plateforme data.gouv.fr ?,Rassembler et mettre à disposition librement les données publiques produites par l'État et d'autres acteurs publics.
+"Quel programme, animé par Etalab, accompagne les projets innovants en intelligence artificielle dans la sphère publique ?",Le programme Lab IA.
+Qu'est-ce que le 'Panorama des projets numériques de l'État' ?,Une publication semestrielle offrant une vision d'ensemble des projets stratégiques ou sensibles de l'État.
+Quel est le seuil de coût pour qu'un projet numérique soit typiquement inclus dans le Panorama des projets de l'État ?,Un coût qui dépasse 9 millions d’euros.
+Quelle méthodologie est au cœur de l'approche du Panorama des projets numériques de l'État ?,Une méthodologie centrée sur l’utilisateur.
+"Quel incubateur de services numériques, inclus dans le programme TECH.GOUV, favorise l'innovation par des méthodes agiles ?",L'incubateur Beta.gouv.
+L'un des principes des grands projets SI est qu'une entité _____ doit garantir un traitement équitable de tous les ministères utilisateurs.,interministérielle
+"Selon les bonnes pratiques, une mutualisation de système d'information implique une _____ complète, notamment sur la satisfaction des utilisateurs.",transparence
+Quelle est la justification requise pour qu'un ministère ne participe pas à un service SI mutualisé ?,La non-participation doit correspondre à des spécificités justifiées.
+Quel est l'un des principaux objectifs de l'écoconception en lien avec les équipements ?,"Réduire la contribution à l’obsolescence des équipements (utilisateurs, réseau, serveur)."
+Quelle est la première question à se poser avant de mettre en œuvre un référentiel d'écoconception pour un service numérique ?,Il faut se demander si le service numérique est vraiment nécessaire.
+L'écoconception doit être intégrée dans un cercle vertueux en s'appuyant sur d'autres référentiels existants comme le RGAA pour l'_____.,accessibilité
+Quel organisme est responsable de la publication du Référentiel général de sécurité (RGS) ?,L'Agence nationale de la sécurité des systèmes d'information (ANSSI).
+"Dans un audit statique de code, que signifie le terme 'faux positifs' ?",Ce sont des vulnérabilités potentielles détectées par les outils qui ne sont pas de réelles failles de sécurité après analyse humaine.
+Comment un audit dynamique évalue-t-il l'efficacité des mesures de sécurité comme les pare-feux ?,En simulant des attaques ciblées et en analysant la réaction du système et de ses défenses.
+Une entreprise qui subit une défaillance informatique peut être tenue responsable en sa qualité de _____ ou de sous-traitant.,responsable de traitement
+"Pour que la délégation de pouvoirs d'un dirigeant vers un DSI soit valable, elle doit être, entre autres, _____ et précise.",limitée
+"Le RGAA couvre trois canaux de communication : le Web, la télévision et la _____.",téléphonie
+Quelle obligation légale d'accessibilité impose aux entités de publier un plan d'action sur plusieurs années ?,La publication d'un schéma de mise en accessibilité pluriannuel (jusqu'à 3 ans).
+"Le RGPD fixe des règles pour la collecte, l'utilisation et la _____ des données personnelles.",conservation
+"À quel type de données le RGPD s'applique-t-il, qu'elles soient sur support informatique ou papier ?",Les données à caractère personnel.
+Quel est l'un des objectifs du RGI pour éviter des coûts inutiles ?,Éviter la prolifération coûteuse de choix hétéroclites.
+"La Loi pour une République numérique impose aux administrations de privilégier les licences _____ pour leurs développements, sauf exception.",libres

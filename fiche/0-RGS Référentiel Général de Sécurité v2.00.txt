@@ -1,0 +1,223 @@
+TITRE DU COURS : REFERENTIEL GENERAL DE SECURITE (RGS) VERSION 2.0.
+
+LEXIQUE COMPLET.
+
+      Le RGS ou Référentiel Général de Sécurité est un cadre réglementaire visant à renforcer la confiance des usagers dans les services électroniques proposés par les autorités administratives.
+
+      L'analyse de risques est une démarche consistant à identifier les menaces, estimer leurs conséquences et décider des actions nécessaires pour réduire le risque à un niveau acceptable.
+
+      Une menace est une cause potentielle d'un incident indésirable pouvant entraîner des dommages au sein d'un système et d'un organisme.
+
+      L'homologation de sécurité est une décision formelle prise par une autorité administrative attestant que le système est protégé conformément aux objectifs et que les risques résiduels sont acceptés.
+
+      L'identification est l'action de communiquer une identité préalablement enregistrée.
+
+      L'authentification consiste à apporter la preuve de l'identité dont se réclame une personne ou une machine.
+
+      La signature électronique est un mécanisme garantissant l'identité du signataire, l'intégrité du document et le consentement du signataire sur le contenu.
+
+      Le cachet électronique est l'équivalent de la signature pour un service applicatif ou une machine et garantit l'origine ainsi que l'intégrité des données.
+
+      La confidentialité désigne la protection des informations contre l'accès non autorisé, assurée par le chiffrement et la gestion des droits d'accès.
+
+      L'horodatage électronique est une fonction permettant d'attester qu'une donnée existe sous forme électronique à un instant donné via une contremarque de temps.
+
+      La qualification est un label attestant de la conformité au RGS et de la confiance accordée à un produit de sécurité ou à un prestataire.
+
+      L'IGC/A ou Infrastructure de Gestion de la Confiance de l'Administration est l'infrastructure dont l'ANSSI est l'autorité racine.
+
+      Un PSCO est un Prestataire de Services de Confiance Qualifié.
+
+COURS DETAILLE.
+
+I. LA DEMARCHE DE MISE EN CONFORMITE.
+
+   A. Le processus standard.
+      
+      Pour mettre leur système d'information en conformité, les autorités administratives doivent suivre une démarche en cinq étapes imposée par le décret RGS.
+
+      La première étape est la réalisation d'une analyse des risques pour identifier les besoins de sécurité.
+
+      La deuxième étape consiste en la définition des objectifs de sécurité.
+
+      La troisième étape est le choix et la mise en œuvre des mesures de protection et de défense appropriées.
+
+      La quatrième étape est l'homologation de sécurité du système avant sa mise en service opérationnelle.
+
+      La cinquième étape est le suivi opérationnel de la sécurité tout au long de la vie du système.
+
+   B. Le processus simplifié pour les systèmes existants.
+
+      Si un système est déjà en service sans avoir suivi la démarche initiale, une procédure simplifiée est autorisée.
+
+      Elle débute par la réalisation d'un audit de sécurité interne ou externalisé.
+
+      Elle se poursuit par une analyse de risques simplifiée et la mise en œuvre des mesures correctives issues de l'audit.
+
+      Elle se conclut par la décision d'homologation de sécurité et le suivi opérationnel classique.
+
+   C. Les facteurs clés de succès.
+
+      Les autorités doivent veiller à l'intégration de clauses de sécurité dans les contrats avec les prestataires.
+
+      Le facteur humain est également primordial, notamment par la sensibilisation et la formation du personnel.
+
+II. DESCRIPTION DES ETAPES TECHNIQUES.
+
+   A. L'analyse des risques.
+
+      Cette étape vise à préciser les besoins de sécurité en fonction des menaces et des enjeux.
+
+      Elle permet de décider des usages cryptographiques et des niveaux de sécurité requis parmi les trois niveaux disponibles.
+
+      La méthode recommandée s'appuie sur la norme ISO 27005 et la méthode EBIOS.
+
+   B. La définition des objectifs de sécurité.
+
+      Les objectifs couvrent traditionnellement la disponibilité, l'intégrité et la confidentialité.
+
+      Le RGS ajoute deux domaines complémentaires que sont l'authentification et la traçabilité.
+
+      Ces objectifs doivent être formulés en termes de protection et de défense.
+
+   C. L'homologation de sécurité.
+
+      L'homologation est une attestation formelle prononcée par l'autorité administrative responsable du système.
+
+      Elle confirme que les risques résiduels sont acceptés.
+
+      Elle s'appuie sur un dossier d'homologation et doit faire l'objet de revues périodiques.
+
+   D. Le suivi opérationnel.
+
+      Le suivi implique la collecte et l'analyse des journaux d'événements et des alarmes.
+
+      Il comprend également la gestion des incidents, la veille sur les vulnérabilités et la mise à jour des plans de continuité.
+
+III. PROTECTION DES ECHANGES ET CRYPTOGRAPHIE.
+
+   A. Principes généraux.
+
+      Le RGS n'impose pas de technologie spécifique mais fixe des exigences de fonctions et de niveaux de sécurité.
+
+      Les règles relatives à la cryptographie sont détaillées dans les annexes B1, B2 et B3.
+
+   B. Les certificats électroniques.
+
+      Les certificats sont utilisés pour l'authentification, la signature, le cachet et la confidentialité.
+
+      Il existe trois niveaux de sécurité aux exigences croissantes notés une étoile, deux étoiles et trois étoiles.
+
+      Un certificat à double usage pour l'authentification et la signature est possible uniquement aux niveaux une et deux étoiles.
+
+   C. L'authentification.
+
+      Cette fonction vérifie l'identité d'une personne ou d'une machine.
+
+      Elle repose sur une bi-clé, un certificat, un dispositif d'authentification et un module de vérification.
+
+   D. La signature et le cachet.
+
+      La signature garantit l'identité du signataire, l'intégrité du document et le consentement.
+
+      Le cachet remplit les mêmes fonctions d'intégrité et d'origine pour les serveurs et les services applicatifs.
+
+      Une signature de niveau trois étoiles réalisée avec un dispositif sécurisé est présumée fiable au sens du code civil.
+
+   E. La confidentialité.
+
+      La protection de la confidentialité repose essentiellement sur le chiffrement.
+
+      Elle inclut aussi la gestion des droits d'accès qui doit être implémentée au plus près du stockage des données.
+
+   F. L'horodatage électronique.
+
+      L'horodatage atteste l'existence d'une donnée à un instant précis via une contremarque de temps.
+
+      Contrairement aux certificats, l'annexe A5 ne définit qu'un niveau unique de sécurité pour l'horodatage.
+
+      Un horodatage conforme au décret de 2011 est de facto conforme aux exigences du RGS.
+
+IV. ACCUSES DE RECEPTION ET QUALIFICATION.
+
+   A. Accusés d'enregistrement et de réception.
+
+      Ces accusés ne sont pas des fonctions de sécurité en soi mais s'appuient sur elles.
+
+      Il est recommandé qu'ils soient horodatés et signés ou cachetés selon les niveaux du RGS.
+
+      Leur sauvegarde est obligatoire tant que des réclamations sont possibles.
+
+   B. Qualification des produits de sécurité.
+
+      L'autorité administrative doit privilégier les produits qualifiés.
+
+      Il existe trois niveaux de qualification nommés élémentaire, standard et renforcé.
+
+      La qualification repose sur une certification préalable comme la CSPN ou les Critères Communs suivie de contrôles par l'ANSSI.
+
+   C. Qualification des prestataires de services de confiance.
+
+      La qualification des prestataires est accordée pour une durée de trois ans.
+
+      Elle concerne les prestataires de certification électronique, d'horodatage et d'audit.
+
+      Les auditeurs sont évalués sur l'audit organisationnel, de code, d'architecture et les tests d'intrusion.
+
+V. VALIDATION DES CERTIFICATS ET RECOMMANDATIONS.
+
+   A. Validation des certificats par l'Etat.
+
+      Les certificats délivrés aux autorités administratives doivent être validés par l'ANSSI.
+
+      L'autorité administrative envoie un dossier comprenant la Politique de Certification et l'audit de conformité.
+
+      Le silence de l'ANSSI pendant deux mois après réception du dossier vaut validation.
+
+      Les certificats racines de l'IGC/A garantissent la chaîne de confiance pour l'administration.
+
+   B. Recommandations organisationnelles.
+
+      Il est essentiel d'organiser les responsabilités via un RSSI et une Politique de Sécurité des Systèmes d'Information.
+
+      La sécurité doit être intégrée dès le début des projets selon une approche globale.
+
+      Les plans de continuité et de reprise d'activité doivent être testés régulièrement.
+
+   C. Recommandations pour l'externalisation.
+
+      Les projets d'informatique en nuage nécessitent une analyse des risques spécifiques.
+
+      Les contrats doivent inclure des clauses de réversibilité et de propriété des données.
+
+   D. Transition entre la version 1 et la version 2.
+
+      Les nouveaux systèmes doivent appliquer immédiatement la version 2.
+
+      Les certificats conformes à la version 1 peuvent être émis pendant un an après l'entrée en vigueur de la version 2.
+
+      Ces certificats restent acceptés pendant leur durée de vie, soit une transition totale maximale de quatre ans.
+
+POINTS D'ATTENTION.
+
+      La responsabilité de l'homologation incombe exclusivement à l'autorité administrative et ne peut être déléguée.
+
+      Il est impératif de distinguer la signature réservée aux personnes physiques du cachet réservé aux machines.
+
+      L'horodatage ne comporte qu'un seul niveau de sécurité contrairement aux trois niveaux des autres fonctions.
+
+      Le certificat à double usage est strictement interdit au niveau de sécurité trois étoiles.
+
+      La validation des certificats par l'Etat porte sur la procédure de délivrance et non sur le statut technique de révocation.
+
+EXEMPLES CITES.
+
+      Consulter la norme ISO 27005 pour la gestion des risques.
+
+      Utiliser la méthode EBIOS pour l'analyse des risques.
+
+      Se référer aux guides de l'ANSSI comme le guide Maturité SSI ou le guide GISSIP.
+
+      Visiter le site du CERT-FR pour la veille sur les vulnérabilités.
+
+      Appliquer la norme ISO 27001 pour le système de management de la sécurité.

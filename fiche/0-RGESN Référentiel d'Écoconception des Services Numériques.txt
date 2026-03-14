@@ -1,0 +1,191 @@
+REVISION DU REFERENTIEL GENERAL DE L'ECOCONCEPTION DES SERVICES NUMERIQUES (RGESN) VERSION 2024.
+
+LEXIQUE COMPLET.
+
+      L'écoconception des services numériques désigne l'intégration des caractéristiques environnementales dans la conception du produit en vue d'améliorer sa performance environnementale tout au long de son cycle de vie.
+
+      Un service numérique est défini comme l'association d'équipements, d'infrastructures et de logiciels permettant de réaliser une unité fonctionnelle précise.
+
+      L'obsolescence matérielle ou logicielle correspond au fait qu'un équipement ou un logiciel devienne dépassé ou inutilisable, souvent précipité par des exigences logicielles croissantes qui forcent le renouvellement des terminaux.
+
+      Les dark patterns, ou procédés manipulatoires, sont des interfaces trompeuses conçues pour manipuler l'utilisateur et influencer son comportement, souvent vers une surconsommation ou une perte de contrôle.
+
+      Le PUE, ou Power Usage Effectiveness, est un indicateur d'efficience énergétique d'un centre de données calculé par le ratio entre l'énergie totale consommée et l'énergie utilisée par les équipements informatiques.
+
+      Le WUE, ou Water Usage Effectiveness, est l'indicateur mesurant l'efficience de l'utilisation de l'eau pour le refroidissement des centres de données.
+
+      La chaleur fatale désigne la chaleur thermique générée par le fonctionnement des serveurs informatiques qui peut être récupérée pour chauffer des bâtiments.
+
+      Les données froides sont des données archivées ou peu consultées, par opposition aux données chaudes qui sont fréquemment accédées et nécessitent des supports de stockage plus performants.
+
+      La déclaration d'écoconception est un document public obligatoire pour se prévaloir du référentiel, garantissant la transparence des efforts et affichant le score d'avancement du service.
+
+      Le score d'avancement est un indicateur de maturité vis-à-vis du référentiel calculé en fonction du nombre de critères validés pondérés par leur niveau de priorité.
+
+      Une mise à jour incrémentielle est une technique permettant de ne télécharger que les parties modifiées du code lors d'une mise à jour, plutôt que de remplacer l'intégralité du programme.
+
+      La preuve de travail est un mécanisme de consensus utilisé dans certaines blockchains, notamment pour le minage, qui est très énergivore et déconseillé par le référentiel.
+
+      Le lazy loading, ou chargement progressif, est une technique consistant à ne charger les ressources comme les images que lorsque l'utilisateur les fait apparaître à l'écran.
+
+COURS DÉTAILLÉ.
+
+I. CONTEXTE ET OBJECTIFS DU RGESN.
+
+   A. Cadre institutionnel et enjeux.
+
+      Le Référentiel Général de l'Écoconception de Services Numériques a été élaboré par l'Arcep et l'Arcom en lien avec l'ADEME, suite à l'article 25 de la loi du 15 novembre 2021 visant à réduire l'empreinte environnementale du numérique.
+
+      Ce document non contraignant devient obligatoire pour toute communication publique se référant à une démarche environnementale afin de garantir la fiabilité et la transparence des allégations.
+
+      Le secteur numérique représente environ deux virgule cinq pour cent de l'empreinte carbone en France, un chiffre qui pourrait augmenter de quarante-cinq pour cent d'ici 2030 sans action corrective.
+
+      La fabrication des terminaux constitue la majeure partie de l'impact environnemental, représentant entre soixante-cinq et quatre-vingt-dix pour cent de l'empreinte totale du numérique.
+
+   B. Les quatre objectifs principaux.
+
+      Le premier objectif est de concevoir des services durables permettant d'allonger la durée de vie des terminaux en assurant la compatibilité avec des appareils anciens.
+
+      Le deuxième objectif vise à promouvoir la sobriété face aux stratégies de captation de l'attention, en limitant les fonctionnalités comme la lecture automatique ou le défilement infini.
+
+      Le troisième objectif consiste à diminuer les ressources mobilisées sur le cycle de vie du service en optimisant le trafic de données, les calculs et la sollicitation des infrastructures.
+
+      Le quatrième objectif est d'accroître la transparence sur l'empreinte environnementale via la publication d'indicateurs fiables et d'une déclaration d'écoconception.
+
+II. METHODOLOGIE ET FORMAT.
+
+   A. Structure et Priorisation des critères.
+
+      Le référentiel comporte soixante-dix-huit critères répartis en neuf thématiques couvrant le cycle de vie du projet.
+
+      Les critères sont classés en trois niveaux de priorité basés sur leur impact environnemental, leur portée systémique et leur difficulté de mise en œuvre.
+
+      Le niveau Prioritaire regroupe trente critères à fort impact ou portée systémique et se voit attribuer un coefficient de pondération de un virgule cinq.
+
+      Le niveau Recommandé concerne vingt-huit critères avec un impact important mais une mise en œuvre plus souple, pondérés à un virgule vingt-cinq.
+
+      Le niveau Modéré comprend vingt critères à l'impact plus faible ou à la mise en œuvre aisée, avec une pondération de un.
+
+   B. Calcul du score et Déclaration.
+
+      Le score d'avancement se calcule en divisant la somme des points des critères validés par la somme des points des critères applicables, le tout multiplié par cent.
+
+      La déclaration d'écoconception doit contenir la date, la liste des critères validés et non validés, le score d'avancement, le plan de progression et les fonctionnalités critiques évaluées.
+
+III. ANALYSE DETAILLEE DES 9 THEMATIQUES.
+
+   A. Stratégie.
+
+      Cette phase impose d'évaluer l'utilité du service au regard des objectifs de développement durable et de définir précisément les cibles utilisatrices pour éviter les fonctionnalités superflues.
+
+      La gouvernance du projet doit inclure un référent écoconception identifié et la fixation d'objectifs chiffrés de réduction d'impacts environnementaux.
+
+      La collecte de données doit être responsable et minimisée, en évitant les métadonnées de profilage et en privilégiant les technologies standards interopérables et l'Open Source.
+
+   B. Spécifications.
+
+      La lutte contre l'obsolescence programmée est centrale, exigeant que le service fonctionne sur des terminaux anciens.
+
+      Pour une application native, elle doit être utilisable sur des terminaux mis sur le marché il y a sept ans ou plus.
+
+      Pour un service web, il doit fonctionner sur des équipements dotés d'un microprocesseur de dix ans ou plus et supporter des navigateurs vieux de deux ans.
+
+      Le service doit également être utilisable en condition de connexion bas débit ou hors connexion.
+
+      Les fournisseurs et services tiers doivent être sélectionnés en tenant compte de leurs engagements et impacts environnementaux.
+
+   C. Architecture.
+
+      L'architecture doit être conçue pour réduire les impacts, avec une capacité à adapter les ressources allouées à la demande réelle pour éviter le surdimensionnement.
+
+      Les protocoles utilisés doivent garantir la pérennité du service, notamment par le support d'IPv6 et des versions récentes de TLS.
+
+      Les mises à jour logicielles doivent dissocier les correctifs de sécurité des évolutions fonctionnelles pour ne pas forcer le renouvellement matériel.
+
+      Les mises à jour incrémentielles doivent être privilégiées pour ne pas obliger l'utilisateur à retélécharger tout le code à chaque modification.
+
+   D. Expérience et Interface Utilisateur UX UI.
+
+      L'interface doit éviter les stratégies de captation de l'attention comme la lecture automatique des vidéos et le défilement infini ou mur de contenu.
+
+      Les notifications doivent être limitées par défaut et facilement désactivables par l'utilisateur.
+
+      L'usage de dark patterns ou procédés manipulatoires trompant l'utilisateur est proscrit.
+
+      L'utilisateur doit être informé des impacts environnementaux des fonctionnalités lourdes et disposer de moyens de contrôle comme un mode sobriété.
+
+      Le design doit privilégier la sobriété en optant pour le texte plutôt que l'image ou la vidéo, et en utilisant des composants natifs du système.
+
+   E. Contenus.
+
+      Les images doivent utiliser des formats adaptés et performants comme WebP, AVIF ou JPEG XL plutôt que des formats lourds.
+
+      Les vidéos doivent adapter leur définition au terminal de lecture, par exemple ne pas diffuser de la 4K sur un mobile, et utiliser des codecs efficaces comme AV1 ou VP9.
+
+      Un mode écoute seule ou audio only doit être proposé pour les vidéos afin d'économiser la bande passante lorsque l'image n'est pas regardée.
+
+      Une stratégie d'archivage et de suppression des contenus obsolètes doit être définie pour alléger le stockage.
+
+   F. Frontend.
+
+      Le poids des pages et le nombre de requêtes par écran doivent être limités par des seuils maximums définis.
+
+      Les mécanismes de mise en cache doivent être exploités pour la totalité des contenus transférés sous le contrôle du service.
+
+      La compression des ressources transférées doit être activée via des algorithmes comme Brotli ou GZIP.
+
+      Le chargement des ressources doit être différé via le lazy loading pour ne télécharger que ce qui est visible à l'écran.
+
+   G. Backend.
+
+      Un système de cache serveur doit être mis en place pour les données les plus fréquemment utilisées.
+
+      Des durées de conservation doivent être appliquées aux données pour assurer leur suppression ou archivage automatique.
+
+      Si une blockchain est utilisée, elle doit reposer sur un mécanisme de consensus minimisant la consommation de ressources, comme la preuve d'enjeu, et éviter la preuve de travail.
+
+   H. Hébergement.
+
+      L'hébergeur choisi doit avoir une démarche de réduction d'empreinte, avec un indicateur PUE idéalement inférieur à un virgule cinq.
+
+      L'efficience de l'eau est surveillée via le WUE qui doit être minimisé, avec une cible inférieure à zéro virgule quatre litres par kilowattheure.
+
+      L'hébergeur doit utiliser majoritairement de l'électricité d'origine renouvelable documentée et traiter efficacement la chaleur fatale produite par les serveurs.
+
+      Les données froides doivent être stockées sur des supports distincts et adaptés par rapport aux données chaudes.
+
+   I. Algorithmie.
+
+      La nécessité d'une phase d'entraînement pour l'intelligence artificielle doit être questionnée pour éviter un usage non justifié.
+
+      Les modèles pré-entraînés doivent être privilégiés pour limiter la quantité d'entraînement nécessaire.
+
+      La complexité des modèles doit être minimisée, par exemple en préférant une régression simple au deep learning si cela suffit.
+
+      La fréquence de réentraînement des modèles doit être optimisée et espacée selon les besoins réels.
+
+POINTS D'ATTENTION.
+
+L'objectif premier du référentiel est l'allongement de la durée de vie des terminaux car leur fabrication constitue l'impact écologique majeur.
+
+La conformité au référentiel exige une transparence totale via la publication obligatoire de la déclaration d'écoconception.
+
+L'écoconception ne se limite pas à l'optimisation technique du code mais englobe la stratégie, le design et le modèle économique du service.
+
+Les critères de compatibilité matérielle sont très stricts, demandant le support de processeurs vieux de dix ans pour le web.
+
+Il est crucial de distinguer les mises à jour de sécurité des mises à jour de fonctionnalités pour lutter contre l'obsolescence logicielle.
+
+EXEMPLES CITES.
+
+Les formats d'images recommandés sont WebP, AVIF et JPEG XL.
+
+Les codecs vidéo recommandés pour leur efficacité sont AV1, VP9 et HEVC.
+
+Les mécanismes de compression de transfert cités sont Brotli et GZIP.
+
+Les protocoles réseaux favorisés sont IPv6, HTTP/2, HTTP/3 et TLS 1.3.
+
+La méthode de consensus blockchain à éviter est la preuve de travail ou minage.
+
+L'outil API Ecowatt est cité pour planifier les tâches asynchrones hors des pics de consommation électrique.

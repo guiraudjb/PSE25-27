@@ -1,0 +1,317 @@
+AIDE-MÉMOIRE COMPLET DES COMMANDES LINUX.
+
+LEXIQUE COMPLET.
+
+      Le Shell est l'interface en ligne de commande qui permet aux utilisateurs d'interagir avec le système d'exploitation.
+
+      Le Kernel est le noyau du système d'exploitation qui gère les ressources matérielles et logicielles.
+
+      Les Permissions définissent les droits de lecture, d'écriture et d'exécution accordés aux utilisateurs sur les fichiers.
+
+      Un Processus est une instance d'un programme en cours d'exécution gérée par le système.
+
+      Le Système de Fichiers est la structure de données utilisée par le système d'exploitation pour stocker et organiser les fichiers.
+
+COURS DÉTAILLÉ.
+
+I. COMMANDES D'AIDE ET DE NAVIGATION.
+
+   A. Obtenir de l'aide.
+
+      Pour passer en revue toutes les options disponibles d'une commande spécifique, il faut utiliser la commande suivie de l'option tiret h ou tiret help.
+
+      La commande info permet de trouver des documents d'information détaillés concernant une commande donnée.
+
+      La commande whatis affiche une description sur une seule ligne concernant la commande interrogée.
+
+      Pour visualiser la page de manuel détaillée d'une commande, on utilise man suivi du nom de la commande.
+
+      La commande apropos permet de rechercher dans les pages de manuel les commandes disponibles correspondant à une fonctionnalité spécifique.
+
+   B. Options de la commande ls.
+
+      La commande ls tiret a affiche tous les fichiers, y compris ceux qui sont cachés.
+
+      L'option tiret R permet d'afficher les fichiers de manière récursive.
+
+      L'option tiret r inverse l'ordre d'affichage des résultats.
+
+      Le tri par date de dernière modification s'effectue avec l'option tiret t.
+
+      L'option tiret S permet de trier les fichiers par taille.
+
+      Pour obtenir un format de liste longue affichant les détails, on utilise l'option tiret l.
+
+      L'option tiret 1 affiche un fichier par ligne.
+
+      L'option tiret m sépare les résultats par une virgule.
+
+      L'option tiret Q affiche les sorties entre guillemets.
+
+II. GESTION DES FICHIERS ET RÉPERTOIRES.
+
+   A. Manipulation de fichiers.
+
+      La commande ls tiret l affiche le type de fichier et les permissions d'accès.
+
+      La commande ls tiret a liste également les fichiers cachés.
+
+      La commande pwd montre le répertoire actuel.
+
+      La commande mkdir crée un nouveau répertoire.
+
+      La commande rm xyz supprime le fichier xyz.
+
+      L'option tiret r avec rm supprime les répertoires et leur contenu de manière récursive.
+
+      L'option tiret f avec rm force la suppression d'un fichier sans demande de confirmation.
+
+      La combinaison rm tiret rf permet de forcer la suppression récursive d'un répertoire.
+
+      La commande cp aaa bbb copie le fichier aaa vers le fichier bbb.
+
+      La commande cp tiret r copie un répertoire de manière récursive vers une autre destination.
+
+      La commande mv permet de renommer ou de déplacer un fichier.
+
+      La commande touch crée un fichier vide ou met à jour l'horodatage.
+
+      La commande cat est utilisée pour visualiser le contenu d'un fichier.
+
+      La commande less permet de parcourir un fichier texte.
+
+      La commande head affiche les dix premières lignes d'un fichier.
+
+      La commande tail affiche les dix dernières lignes d'un fichier.
+
+      La commande tail tiret f affiche les dernières lignes d'un fichier au fur et à mesure qu'elles changent.
+
+   B. Sécurité et transfert de fichiers locaux.
+
+      La commande file abc détermine le type du fichier abc.
+
+      La commande gpg tiret c crypte le fichier abc.
+
+      La commande gpg tiret d décrypte le fichier abc.
+
+      La commande dir affiche les fichiers dans le répertoire courant.
+
+      La commande put abc permet de télécharger le fichier abc du local vers un serveur distant.
+
+      La commande get file permet de télécharger un fichier depuis un serveur distant vers le local.
+
+III. INFORMATIONS SYSTÈME ET MATÉRIEL.
+
+   A. Informations système de base.
+
+      La commande uname tiret a affiche les informations du système Linux.
+
+      La commande uname tiret r affiche les informations relatives au noyau kernel.
+
+      La commande cat suivie du chemin etc redhat release montre la version installée de Redhat.
+
+      La commande uptime affiche le temps d'exécution du système.
+
+      La commande hostname affiche le nom d'hôte du système.
+
+      La commande hostname tiret i affiche les adresses IP de l'hôte.
+
+      La commande last reboot affiche l'historique des redémarrages du système.
+
+      La commande date affiche la date et l'heure actuelles.
+
+      La commande cal affiche le calendrier mensuel.
+
+      La commande mount montre les systèmes de fichiers montés.
+
+   B. Informations matérielles.
+
+      La commande dmesg affiche les messages contenus dans le tampon circulaire du noyau.
+
+      La commande cat proc cpuinfo affiche les informations relatives au processeur.
+
+      La commande cat proc meminfo affiche les informations relatives à la mémoire.
+
+      La commande lspci affiche les périphériques PCI.
+
+      La commande lsusb affiche les périphériques USB.
+
+      La commande dmidecode affiche les informations DMI et SMBios du BIOS.
+
+      La commande hdparm tiret i affiche des informations sur le disque sda.
+
+      La commande hdparm tiret tT effectue un test de vitesse de lecture sur le disque sda.
+
+      La commande badblocks tiret s vérifie les blocs illisibles sur le disque sda.
+
+IV. GESTION DES UTILISATEURS.
+
+   A. Identification et sessions.
+
+      La commande id affiche les identifiants utilisateur et groupe de l'utilisateur actuel.
+
+      La commande last montre les derniers utilisateurs connectés.
+
+      La commande whoami indique qui est connecté en tant qu'utilisateur actuel.
+
+      La commande who montre qui est connecté au système.
+
+      La commande w montre qui est connecté et ce qu'ils font.
+
+   B. Administration des comptes.
+
+      La commande groupadd test crée un groupe nommé test.
+
+      La commande useradd crée un compte utilisateur, par exemple useradd tiret c "GK" tiret m Gokhan.
+
+      La commande userdel supprime un compte utilisateur.
+
+      La commande usermod permet d'ajouter un utilisateur à un groupe spécifique.
+
+V. RÉSEAU ET TRANSFERT DE FICHIERS.
+
+   A. Outils de diagnostic et configuration réseau.
+
+      La commande ip addr affiche les interfaces réseau et les adresses IP.
+
+      La commande arp affiche l'activité Ethernet et les paires IP.
+
+      La commande iftop affiche l'utilisation de la bande passante actuelle.
+
+      La commande dig est utilisée pour la recherche DNS simple.
+
+      La commande ethtool vérifie les paramètres de la carte réseau NIC.
+
+      La commande ping vérifie la connectivité et l'accessibilité du réseau.
+
+      La commande netstat permet de vérifier les connexions réseau.
+
+      La commande route affiche la table de routage IP.
+
+      La commande traceroute ou tracepath est utilisée pour tracer le chemin réseau.
+
+      La commande whois vérifie les informations de domaine et IP.
+
+      La commande ss donne des informations détaillées sur les sockets.
+
+      La commande nmap est utilisée pour les audits de sécurité.
+
+   B. Transfert et connexion à distance.
+
+      La commande ssh est utilisée pour une connexion sécurisée.
+
+      La commande scp fichier.txt serveur deux points slash tmp copie un fichier de manière sécurisée vers un répertoire distant.
+
+      La commande rsync synchronise les fichiers et répertoires entre le système local et distant.
+
+      La commande wget permet de télécharger le contenu du web.
+
+      La commande telnet est utilisée pour une connexion séquentielle classique.
+
+      La commande ftp est utilisée pour le transfert de fichiers.
+
+VI. GESTION DES DISQUES ET PROCESSUS.
+
+   A. Utilisation du disque.
+
+      La commande df montre l'espace disque libre sur le système.
+
+      La commande df tiret h affiche l'espace disque libre et utilisé.
+
+      La commande du montre l'utilisation totale du disque pour le répertoire courant.
+
+      La commande du tiret ah affiche l'utilisation du disque pour tous les fichiers dans un format lisible.
+
+      La commande free montre la mémoire libre et utilisée.
+
+      La commande findmnt affiche les points de montage pour tous les systèmes de fichiers.
+
+   B. Gestion des processus.
+
+      La commande ps affiche les processus en cours d'exécution.
+
+      La commande ps PID donne le statut d'un processus particulier.
+
+      La commande pidof donne l'ID de processus d'un programme.
+
+      La commande top affiche tous les processus en cours d'exécution.
+
+      La commande htop est un visualiseur de processus interactif.
+
+      La commande kill pid termine le processus avec l'ID spécifié.
+
+      La commande pkill termine les processus par leur nom.
+
+      La commande killall tue tous les processus nommés.
+
+      La commande bg met en arrière-plan les tâches arrêtées les plus récentes.
+
+      La commande fg ramène une tâche au premier plan.
+
+VII. INSTALLATION, RECHERCHE ET PERMISSIONS.
+
+   A. Installation de paquets.
+
+      La commande sudo install abc installe le paquet abc.
+
+      La commande rpm tiret i installe un paquet rpm.
+
+      La commande rpm tiret e supprime un paquet rpm.
+
+      La commande yum install installe un paquet via le gestionnaire YUM.
+
+      La commande dnf install installe un paquet via le gestionnaire DNF.
+
+      La commande apt tiret get install installe un paquet via le gestionnaire APT.
+
+   B. Recherche.
+
+      La commande grep recherche une chaîne de caractères dans un fichier.
+
+      La commande grep tiret i effectue une recherche insensible à la casse.
+
+      La commande grep tiret r effectue une recherche récursive.
+
+      La commande find recherche des fichiers, par exemple par nom ou par utilisateur.
+
+      La commande locate trouve l'emplacement d'un fichier rapidement.
+
+      La commande whereis localise le binaire, la source et la page manuelle d'une commande.
+
+   C. Permissions et compression.
+
+      La commande chmod change les permissions d'un fichier ou d'un groupe.
+
+      La commande chown change le propriétaire et le groupe d'un fichier.
+
+      Les permissions sont notées r pour lecture, w pour écriture, x pour exécution.
+
+      L'exemple 777 signifie que le propriétaire, le groupe et tout le monde ont les permissions rwx.
+
+      La commande tar cf archive.tar crée une archive nommée contenant un répertoire.
+
+      La commande gzip abc compresse le fichier abc en utilisant gzip.
+
+      La commande gunzip extrait les fichiers compressés.
+
+POINTS D'ATTENTION.
+
+La commande rm tiret rf est très puissante et supprime des fichiers sans demander de confirmation.
+
+Les commandes de gestion de paquets varient selon la distribution Linux utilisée comme rpm, yum ou apt.
+
+La commande chmod utilise des valeurs numériques où 4 vaut lecture, 2 vaut écriture et 1 vaut exécution.
+
+La commande top permet de surveiller l'état du système en temps réel.
+
+EXEMPLES CITES.
+
+chmod 777 nomdufichier.
+
+tar cf archive.tar repertoire.
+
+ssh user at host.
+
+grep motcle fichier.
+
+ls tiret al.

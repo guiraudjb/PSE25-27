@@ -1,0 +1,22 @@
+Concept de fichier sous Linux;Quel principe fondamental unifie la gestion des programmes, périphériques et répertoires ?;Tout est fichier. Cela permet d'utiliser les mêmes outils (ls, cat, chmod) pour manipuler des ressources très différentes.
+Structure Inode;Citez trois types de métadonnées stockées dans un inode (à l'exclusion du nom du fichier).;UID/GID, taille, droits d'accès, horodatages, pointeurs vers les blocs. L'inode ne contient jamais le nom du fichier.
+Commande ls -l et types;Comment identifier un répertoire et un lien symbolique en utilisant la commande ls -l ?;Regarder le premier caractère de la ligne : 'd' pour un répertoire et 'l' pour un lien symbolique,.
+Lien dur (Hard link);Que se passe-t-il si on supprime le fichier source d'un lien dur ?;Le fichier reste accessible via le lien dur. Il pointe vers le même inode et reste valide tant que l'inode existe.
+Lien symbolique;Quelle est la différence majeure d'un lien symbolique par rapport à un lien dur en cas de suppression de la cible ?;Le lien symbolique devient cassé (inutilisable) car il pointe vers un chemin et non vers l'inode.
+Fichiers spéciaux;Quelle est la fonction du fichier spécial /dev/null ?;Il détruit tout ce qu'on y écrit. C'est un trou noir pour les données.
+Chemin absolu;Comment reconnaît-on un chemin absolu dans l'arborescence ?;Il commence toujours par la racine '/' (ex: /etc/passwd).
+Navigation relative;Vous êtes dans /var/log. Quelle commande permet de remonter au répertoire parent /var ?;cd .. (Le symbole '..' représente le répertoire parent),.
+Standard FHS - Configuration;Dans quel répertoire standard trouve-t-on les fichiers de configuration comme passwd ou sshd_config ?;/etc. C'est l'emplacement réservé à la configuration système.
+Standard FHS - Variables;Quel répertoire est destiné à stocker les logs, les spools d'impression et les mails ?;/var. Il contient les données dont la taille varie au cours de la vie du système.
+Permissions Octales;À quelle combinaison de droits correspond la valeur octale 755 ?;rwxr-xr-x (Propriétaire : lecture/écriture/exécution, Groupe et Autres : lecture/exécution).
+Modification de droits;Quelle commande permet d'attribuer les droits rwxr-xr-x au fichier script.sh ?;chmod 755 script.sh.
+Changement de propriétaire;Quelle commande permet de changer le propriétaire d'un fichier pour 'user' et le groupe pour 'group' ?;chown user:group fichier.
+Sticky Bit;Quel est l'effet du sticky bit sur le répertoire /tmp ?;Il empêche un utilisateur de supprimer les fichiers d'un autre utilisateur, même s'il a le droit d'écriture sur le répertoire.
+Système de fichiers EXT4;Quelle fonctionnalité l'ext4 introduit-il pour améliorer les performances par rapport à la gestion bloc par bloc ?;Les extents. Ce sont des ensembles de blocs contigus qui limitent la fragmentation.
+Système de fichiers Btrfs;Citez une fonctionnalité clé de Btrfs utile pour la sauvegarde et la restauration rapide.;Les snapshots (instantanés). Ils permettent de sauvegarder l'état du système à un instant T.
+Système de fichiers F2FS;Pour quel type de support le système de fichiers F2FS est-il optimisé ?;Les mémoires Flash (SSD, cartes SD). Il gère l'usure (wear leveling) et la structure spécifique de ces supports.
+Formatage;Quelle commande permet de formater la partition /dev/sda1 avec le système de fichiers ext4 ?;mkfs.ext4 /dev/sda1.
+Montage manuel;Quelle commande permet de rendre accessible la partition /dev/sdb1 dans le dossier /mnt/data ?;mount /dev/sdb1 /mnt/data.
+Montage automatique;Quel fichier faut-il éditer pour qu'une partition soit montée automatiquement au démarrage ?;/etc/fstab. Il contient la table des systèmes de fichiers.
+Surveillance Inodes;Quelle commande permet de vérifier si l'on arrive à saturation du nombre d'inodes disponibles ?;df -i. Une saturation d'inodes empêche la création de fichiers même s'il reste de l'espace disque.
+Réseau NFS;Quel est l'avantage principal du système NFS ?;Il permet d'accéder à des fichiers distants via le réseau de manière transparente, comme s'ils étaient locaux.

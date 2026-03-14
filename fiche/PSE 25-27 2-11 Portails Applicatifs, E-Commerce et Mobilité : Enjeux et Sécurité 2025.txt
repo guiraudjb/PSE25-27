@@ -1,0 +1,165 @@
+PORTAILS APPLICATIFS, E-COMMERCE ET MOBILITE.
+
+LEXIQUE COMPLET.
+
+      Un portail applicatif est une plateforme web offrant un point d'entrée unique et sécurisé vers diverses ressources du système d'information via une authentification centralisée.
+
+      Le SSO ou Single Sign-On désigne un mécanisme d'authentification unique permettant à l'utilisateur de s'identifier une seule fois pour accéder à toutes les applications autorisées.
+
+      Le LDAP est un protocole standard permettant d'interroger et de modifier des services d'annuaire pour gérer les identités de manière centralisée.
+
+      SAML 2.0 est le standard de protocole dominant pour l'échange de données d'authentification dans les applications d'entreprise.
+
+      OAuth 2.0 et OpenID Connect sont les protocoles d'authentification privilégiés pour les applications cloud et mobiles.
+
+      Un CMS ou Content Management System est un système de gestion de contenu permettant de créer et gérer des sites web.
+
+      La DSP2 est la Directive sur les Services de Paiement 2, une réglementation européenne imposant l'authentification forte et limitant la responsabilité du client en cas de fraude.
+
+      La SCA ou Strong Customer Authentication correspond à l'authentification forte du client exigée par la DSP2.
+
+      Le 3D-Secure est un protocole de sécurité authentifiant le porteur de la carte lors d'un paiement en ligne pour réduire la fraude.
+
+      La norme PCI/DSS est le standard international de sécurité pour la protection des données de cartes bancaires.
+
+      SIPS est une solution de paiement sécurisé développée par Worldline proposant une caisse virtuelle.
+
+      La tokenisation est le procédé de remplacement des données bancaires sensibles par un jeton unique pour sécuriser les transactions.
+
+      Un e-wallet ou portefeuille électronique est une solution stockant des moyens de paiement pour réaliser des transactions sans saisir de coordonnées bancaires.
+
+      Le BYOD ou Bring Your Own Device désigne l'utilisation d'équipements personnels à des fins professionnelles.
+
+      Le COPE ou Corporate Owned, Personally Enabled désigne des terminaux appartenant à l'entreprise mais autorisés pour un usage personnel.
+
+      Une PWA ou Progressive Web App est une application web accessible via un navigateur sans téléchargement préalable.
+
+      Le MDM ou Mobile Device Management est une solution logicielle pour superviser et sécuriser globalement les terminaux mobiles.
+
+      Le MAM ou Mobile Application Management est une gestion centrée uniquement sur les applications et les données professionnelles via un conteneur sécurisé.
+
+      L'EMM ou Enterprise Mobility Management est une solution unifiée combinant les fonctionnalités du MDM et du MAM.
+
+      Le Zero Trust est un modèle de sécurité où aucune confiance n'est accordée par défaut et qui exige une vérification systématique de l'identité.
+
+COURS DETAILLE.
+
+I. PORTAILS APPLICATIFS : INTEGRATION, AUTHENTIFICATION ET GESTION DE CONTENU.
+
+   A. DEFINITION ET ENJEUX.
+
+      Un portail applicatif est un point d'entrée unifié basé sur les technologies Internet qui regroupe des outils disparates pour simplifier l'accès au système d'information.
+
+      Les enjeux stratégiques incluent la centralisation des ressources, l'amélioration de l'expérience utilisateur grâce à la personnalisation, et l'adaptation à la mobilité pour un accès permanent.
+
+      Les évolutions récentes montrent une interconnexion accrue avec les ERP et CRM ainsi qu'une intégration croissante de l'intelligence artificielle et du cloud.
+
+   B. AUTHENTIFICATION UNIQUE (SSO).
+
+      Le principe du SSO permet à un utilisateur de ne s'identifier qu'une seule fois pour accéder à l'ensemble de ses applications autorisées.
+
+      Le SSO serveur repose sur une base centrale comme un annuaire LDAP, offrant une sécurité renforcée sans transmission de mots de passe mais nécessitant une adaptation des applications.
+
+      Le SSO client utilise un logiciel sur le poste utilisateur pour injecter les identifiants, ce qui évite de modifier les applications mais pose des problèmes de compatibilité et de sécurité locale.
+
+      Les protocoles dominants sont SAML 2.0 pour les applications d'entreprise et OAuth 2.0 ou OpenID Connect pour le cloud et le mobile.
+
+   C. INTEGRATION DE CONTENU ET OUTILS.
+
+      Le portail agrège des contenus documentaires, des applications métier et des outils collaboratifs comme les messageries ou les agendas.
+
+      Les outils de gestion de contenu ou CMS peuvent être open source comme Drupal et WordPress ou propriétaires comme IBM Websphere.
+
+      Pour les besoins complexes, les portails métier développés en Java intègrent les systèmes hérités et offrent des fonctionnalités avancées de reporting.
+
+II. COMMERCE ELECTRONIQUE : SOLUTIONS DE PAIEMENT ET SECURITE.
+
+   A. ENJEUX DU PAIEMENT EN LIGNE.
+
+      Le commerce électronique représente une part importante des dépenses et exige simplicité, sécurité et diversité des moyens de paiement.
+
+      Les commerçants doivent lutter contre l'abandon de panier causé par la complexité tout en se conformant aux réglementations strictes comme la DSP2.
+
+      La fraude en ligne génère des pertes mondiales considérables, rendant la sécurisation des transactions prioritaire.
+
+   B. SOLUTIONS DE PAIEMENT SECURISE.
+
+      La carte bancaire reste le moyen de paiement majoritaire et utilise le protocole 3D-Secure pour authentifier fortement le porteur via une saisie de code ou la biométrie.
+
+      La solution SIPS de Worldline centralise les paiements via une caisse virtuelle conforme à la norme PCI/DSS et chiffrée en RSA.
+
+      Les portefeuilles électroniques comme PayPal ou Apple Pay stockent les moyens de paiement et sont utilisés par une grande majorité des consommateurs pour leur praticité.
+
+   C. RISQUES ET SECURISATION.
+
+      Les principaux risques incluent le phishing, la fraude à la carte bancaire via des données volées et les logiciels malveillants sur les terminaux.
+
+      La directive DSP2 impose l'authentification forte SCA et réduit la franchise à la charge du client à 50 euros en cas de fraude avérée.
+
+      Les technologies de sécurisation reposent sur le chiffrement SSL ou TLS, la tokenisation des données cartes et l'analyse comportementale par intelligence artificielle.
+
+III. MOBILITE : ACCES, EQUIPEMENTS ET DEVELOPPEMENT.
+
+   A. CONTEXTE ET EQUIPEMENTS.
+
+      La mobilité distingue l'accès itinérant depuis un site de l'entreprise et l'accès nomade depuis l'extérieur.
+
+      Les équipements principaux sont les smartphones, massivement utilisés pour le travail, ainsi que les tablettes et les ordinateurs portables.
+
+      La gestion du parc inclut les terminaux maîtrisés fournis par l'entreprise et les terminaux personnels utilisés dans un cadre professionnel ou BYOD.
+
+   B. CONTROLE DES ACCES ET SYNCHRONISATION.
+
+      La sécurité des accès mobiles repose sur l'utilisation de VPN pour chiffrer les données et de l'authentification multi-facteurs MFA.
+
+      La synchronisation des données de messagerie et d'agenda se fait généralement via le protocole ActiveSync qui assure une mise à jour en temps réel.
+
+   C. DEVELOPPEMENT D'APPLICATIONS MOBILES.
+
+      Le développement natif en langages Swift ou Kotlin offre des performances optimales et un accès complet au matériel mais reste coûteux.
+
+      Le développement hybride avec des outils comme React Native permet un code unique pour plusieurs plateformes, réduisant les coûts mais aussi les performances.
+
+      Les Progressive Web Apps sont des sites web accessibles via navigateur sans téléchargement, facilitant l'accès mais limitant les fonctionnalités hors ligne.
+
+IV. GESTION ET SECURITE DES TERMINAUX MOBILES.
+
+   A. GESTION DU PARC (MDM ET MAM).
+
+      Le MDM permet de superviser l'ensemble du terminal, d'installer des configurations à distance et d'effacer les données en cas de vol.
+
+      Il assure la gestion du parc logiciel en autorisant ou bloquant certaines applications et détecte les modifications du système comme le jailbreak.
+
+      Le MAM se concentre exclusivement sur la sécurisation des applications professionnelles en les isolant dans un conteneur étanche, idéal pour le BYOD.
+
+      L'EMM unifie ces approches pour offrir une gestion complète des terminaux et des applications.
+
+   B. POLITIQUES DE SECURITE.
+
+      Une politique de sécurité mobile stricte doit interdire les applications non sûres et imposer le chiffrement intégral des données stockées.
+
+      Les mises à jour automatiques des systèmes d'exploitation et des applications sont cruciales pour combler les failles de sécurité.
+
+      L'approche Zero Trust impose de vérifier systématiquement l'identité de l'utilisateur et la conformité du terminal avant toute connexion.
+
+POINTS D'ATTENTION.
+
+      Il ne faut pas confondre le SSO Serveur qui est centralisé et sécurisé avec le SSO Client qui est local et dépendant du navigateur.
+
+      La distinction entre MDM et MAM est fondamentale car le MDM contrôle tout l'appareil alors que le MAM ne protège que les données de l'entreprise.
+
+      La franchise client en cas de fraude sur un paiement est plafonnée à 50 euros par la réglementation DSP2.
+
+      Le protocole 3D-Secure est un mécanisme d'authentification du porteur de la carte et non une assurance ou une garantie bancaire.
+
+EXEMPLES CITES.
+
+      Les solutions de SSO citées incluent Okta, Microsoft Azure AD et Ping Identity.
+
+      Les CMS mentionnés sont Drupal, WordPress, Liferay et Typo3.
+
+      Les solutions de paiement incluent SIPS, PayPal, Wero, Apple Pay et Google Pay.
+
+      Les langages de développement mobile cités sont Swift pour iOS et Kotlin pour Android.
+
+      Les outils de gestion MDM incluent Jamf, Microsoft Intune et VMware Workspace ONE.

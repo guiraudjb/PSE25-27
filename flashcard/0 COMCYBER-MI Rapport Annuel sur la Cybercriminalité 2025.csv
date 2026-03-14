@@ -1,0 +1,66 @@
+Quel organisme a été institué en décembre 2023 pour coordonner et renforcer l'action contre la cybercriminalité en France ?,Le Commandement du ministère de l’Intérieur dans le cyberespace (COMCYBER-MI).
+Combien d'atteintes numériques ont été enregistrées en France en 2024 ?,348 000 atteintes numériques ont été enregistrées en 2024.
+Quel a été le pourcentage d'augmentation des atteintes numériques en France sur une période de cinq ans jusqu'en 2024 ?,Une augmentation de 74% en cinq ans.
+"En 2024, quel pourcentage des atteintes numériques concernait les biens ?",65% des atteintes numériques concernaient les biens.
+De quel pourcentage le nombre de saisines pour des cyberattaques par rançongiciel a-t-il baissé en 2024 ?,Le nombre de saisines a baissé de 13% en 2024.
+Quelle est la nouvelle tendance privilégiée par les attaquants par rançongiciel au lieu du chiffrement systématique des données ?,Ils privilégient le vol et la menace de diffusion des données pour contraindre les victimes à payer.
+"Au niveau international en 2024, quel groupe de rançongiciels a supplanté LockBit en nombre d'attaques ?",RansomHub a supplanté LockBit.
+Combien de revendications d'attaques hacktivistes contre la France ont été recensées en 2024 ?,707 revendications d'attaques hacktivistes.
+Quels sont les deux modes d'action principalement privilégiés par les hacktivistes ?,Les attaques par déni de service distribué (DDoS) et les défigurations de sites internet.
+Comment l'IA est-elle utilisée pour amplifier les attaques de type DDoS ?,"L'IA permet la gestion d'attaques multivectorielles, s'adaptant aux cibles en temps réel."
+"La répartition, l'automatisation et la rationalisation des tâches entre cybercriminels est une caractéristique de l'_____ de la cybercriminalité.",industrialisation
+Quelles sont les trois motivations principales des cybercriminels ?,"L'appât du gain, l'idéologie ou l'orgueil."
+Quels sont les quatre principaux types d'infrastructures de communication utilisés par les cybercriminels ?,"Les forums cybercriminels, les messageries chiffrées, les réseaux sociaux et la téléphonie."
+Comment appelle-t-on le modèle économique consistant à mettre à disposition des compétences ou outils cybercriminels clés en main en échange d'une rémunération ?,La Cybercriminalité en tant que Service (Cybercrime-as-a-Service ou CaaS).
+Quel type de service CaaS fournit des outils pour lancer une campagne d'hameçonnage ?,Le Phishing-as-a-Service (PhaaS).
+Quel est l'objectif du Malware-as-a-Service (MaaS) ?,La location ou la vente d'un logiciel malveillant prêt à l'emploi pour dérober des informations.
+Quel service CaaS implique la location d'un réseau de machines zombies pour saturer un serveur ?,Le DDoS-as-a-Service (DDoaaS).
+Qu'est-ce que le Ransomware-as-a-Service (RaaS) ?,La fourniture d'outils permettant de déployer un rançongiciel sur le système d'information d'une cible.
+Terme : Hébergement pare-balles (Bulletproof Hosting),Un service d'hébergement d'infrastructures techniques destiné à supporter des activités criminelles en offrant anonymisation et protection.
+"Quel groupe de rançongiciels, apparu fin 2024, aurait utilisé l'IA pour développer son logiciel malveillant ?",Le groupe FunkSec.
+Quelle opération coordonnée des forces de l'ordre a affaibli la famille de rançongiciel LockBit en 2024 ?,L'opération Cronos.
+Définition : Hameçonnage (phishing),Une technique visant à induire en erreur une personne pour lui dérober des fonds ou des informations confidentielles.
+Quelle est la forme d'hameçonnage qui utilise les SMS et qui a connu une forte hausse en 2024 ?,Le smishing (SMS phishing).
+Qu'est-ce que le vishing ?,C'est une forme d'hameçonnage réalisée par appels téléphoniques (voice phishing).
+Comment nomme-t-on une campagne d'hameçonnage très ciblée sur une personne stratégique au sein d'une entreprise ?,Le harponnage ou spear phishing.
+"La technique d'usurpation d'une ligne téléphonique légitime, souvent utilisée dans le vishing, est appelée _____.",spoofing
+Définition : Usurpation d'identité numérique (spoofing),"Une méthode utilisée par les cybercriminels pour se faire passer pour une entité légitime en usurpant un support numérique (email, IP, numéro de téléphone)."
+"Dans la fraude au président, quelle identité les cybercriminels usurpent-ils généralement ?","Celle d'une personne dont les fonctions sont stratégiques pour l'entreprise (président, comptable)."
+Qu'est-ce que le swatting ?,Un canular téléphonique où les attaquants simulent une situation d'urgence pour déclencher l'intervention indue des forces de l'ordre.
+Définition : Infostealers,"Des logiciels malveillants conçus pour extraire des données sensibles (mots de passe, identifiants bancaires) sur les appareils infectés."
+Quelle est la première étape du mode opératoire d'un infostealer ?,"L'infection, via des pièces jointes malveillantes, des logiciels piratés ou des liens d'hameçonnage."
+Quelle opération internationale menée en octobre 2024 visait à démanteler les réseaux des infostealers RedLine et META ?,L'opération Magnus.
+Qu'est-ce qu'une fuite de données (dataleak) ?,Le piratage ou la récupération puis la diffusion ou la vente de bases de données volumineuses par des cybercriminels.
+"Comment appelle-t-on les sites, souvent sur le darkweb, où des groupes de rançongiciels publient les données volées des victimes qui refusent de payer ?","Des ""data leak sites"" ou ""wall of shame"" (mur de la honte)."
+"Selon le rapport, quel secteur était la cible privilégiée des fuites de données revendiquées en 2024, constituant 30% du total ?",Le secteur des administrations.
+Quelle est la principale motivation derrière le vol et la revente de données ?,La motivation financière (l'appât du gain) constitue le principal motif.
+Définition : Rançongiciel (ransomware),Un logiciel malveillant qui bloque l'accès à un ordinateur ou à des fichiers par chiffrement pour exiger le paiement d'une rançon.
+Quelle méthode d'attaque par rançongiciel consiste à mener des actions ciblées de haute technicité sur des organisations importantes ?,La chasse au gros gibier (Big game hunting).
+"Qui sont les ""courtiers en accès initiaux"" (initial access brokers) ?",Des acteurs malveillants spécialisés dans la découverte et la revente de vulnérabilités permettant un premier accès au réseau d'une victime.
+"La technique de la _____ consiste à chiffrer les données de la victime et, en plus, à les dérober en menaçant de les diffuser.",double extorsion
+Qu'ajoute la technique de la triple extorsion à celle de la double extorsion ?,Elle ajoute l'interruption de l'activité via une attaque par déni de service distribué (DDoS).
+Qu'est-ce qu'un botnet ?,Un réseau d'équipements numériques infectés et pilotés à distance par des cybercriminels via des serveurs de contrôle (C2).
+Quel type d'attaque utilise un botnet pour surcharger un serveur avec du trafic réseau jusqu'à le rendre indisponible ?,Une cyberattaque par déni de service distribué (DDoS).
+"Le _____ consiste à détourner frauduleusement la capacité de calcul d'un ordinateur, souvent via un botnet, pour miner des crypto-actifs.",crypto-minage (cryptojacking)
+Définition : Deepfakes,"Des contenus falsifiés (vidéos, audios) créés par IA, capables de reproduire l'apparence ou la voix d'une personne avec un grand réalisme."
+Quelle technique d'attaque contre les IA consiste à polluer les jeux de données utilisés pour entraîner les modèles d'apprentissage ?,L'empoisonnement des données (data poisoning).
+À quoi sert la plateforme Thésée mentionnée dans les chiffres clés de 2024 ?,À enregistrer les plaintes ou signalements relatifs aux escroqueries sur internet.
+Quelle est la fonction de la plateforme Pharos ?,Elle permet de signaler les contenus illicites sur internet.
+À quoi est dédiée la plateforme Perceval ?,Elle est dédiée aux signalements d'usages frauduleux de cartes bancaires.
+Comment appelle-t-on les cybercriminels amateurs qui s'approprient des outils clés en main ?,Des script kiddies.
+"Dans le modèle RaaS, quel est le rôle des ""affiliés"" ?","Ce sont les utilisateurs des logiciels malveillants fournis par les développeurs, qui mènent les attaques et partagent les revenus."
+Quel groupe de rançongiciels utilise une version modifiée du code source de Babuk qui a fuité en 2021 ?,Le groupe Termite.
+Quel est le premier vecteur de compromission le plus souvent exploité par les cybercriminels ?,Le facteur humain.
+"Quelle pratique, liée au travail, représente une source de compromission pouvant être exploitée par les cybercriminels pour des campagnes de phishing ?",Le télétravail.
+"Dans le contexte des fuites de données, que signifie ""doxing"" ?",La divulgation ciblée d'informations personnelles ou sensibles sur une personne.
+Une attaque par la _____ consiste à cibler les sous-traitants d'une organisation pour accéder indirectement à celle-ci.,chaîne logistique (supply chain)
+Quelle technique de manipulation psychologique est utilisée par les cybercriminels pour inciter une victime à fournir des informations ?,L'ingénierie sociale (social engineering).
+"Quelle est la finalité principale d'un logiciel ""infostealer"" ?","Extraire des données sensibles comme les mots de passe, cookies, et portefeuilles de crypto-actifs de l'appareil infecté."
+"Quel type de technologie d'IA, comme les LLM, VLM ou LAM, peut être exploité pour créer des maliciels ou pour mieux détecter les menaces ?",Les technologies à base de grands modèles.
+"Les messageries chiffrées comme Encrochat, Ghost et SkyECC sont-elles à l'abri des opérations judiciaires ?","Non, des opérations de grande ampleur ont permis d'identifier des dizaines de milliers de criminels les utilisant."
+"Quel phénomène le rapport décrit-il comme ""l'ubérisation du trafic de stupéfiants"" ?",L'utilisation de technologies comme le darknet et les messageries chiffrées pour optimiser et sécuriser le trafic de drogues.
+"Quelle est la conséquence pour une TPE-PME d'une cyberattaque par rançongiciel en Europe, selon le rapport ?","Près de la moitié des attaques les concernent, et leur activité peine à se maintenir, risquant la faillite."
+Comment les cybercriminels adaptent-ils le montant de la rançon demandée ?,"Ils l'adaptent à la capacité potentielle de la cible à payer, pour que le paiement soit théoriquement possible."
+"Quel type d'accès distant, souvent vendu par les courtiers en accès initiaux, est mentionné dans le rapport ?","Des accès distants ""RDP"", ""VPN"" ou à une solution de cybersécurité de la cible."
+"Quelle est la deuxième étape du fonctionnement d'un botnet, après l'infection des supports ?",La gestion du réseau botnet via un serveur de Commande & Contrôle (C2).
+Le bourrage d'identifiants (credential stuffing) est une attaque qui exploite des _____ pour forcer l'authentification.,données de connexion connues (souvent issues de fuites de données)

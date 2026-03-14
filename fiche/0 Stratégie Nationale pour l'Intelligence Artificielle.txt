@@ -1,0 +1,199 @@
+DONNER UN SENS A L'INTELLIGENCE ARTIFICIELLE.
+
+LEXIQUE COMPLET.
+
+      L'intelligence artificielle désigne un ensemble de théories et de techniques mises en œuvre en vue de réaliser des machines capables de simuler l'intelligence humaine et de reproduire des processus cognitifs.
+
+      L'apprentissage automatique ou machine learning est un champ de l'intelligence artificielle qui permet aux ordinateurs d'apprendre à partir de données sans être explicitement programmés pour chaque tâche.
+
+      L'apprentissage profond ou deep learning est une technique d'apprentissage automatique reposant sur des réseaux de neurones artificiels comportant plusieurs couches de traitement de l'information.
+
+      La boîte noire caractérise des systèmes algorithmiques dont il est possible d'observer les données d'entrée et de sortie mais dont le fonctionnement interne et le cheminement logique restent opaques ou difficilement explicables.
+
+      Les données d'intérêt général sont des données détenues par des acteurs privés dont l'ouverture est jugée nécessaire pour le fonctionnement efficace du marché ou des politiques publiques.
+
+      Le bac à sable d'innovation est un dispositif permettant d'alléger temporairement certaines contraintes réglementaires pour faciliter l'expérimentation de nouvelles technologies en conditions réelles.
+
+      Les Instituts 3IA correspondent aux Instituts Interdisciplinaires d'Intelligence Artificielle proposés pour fédérer la recherche et la formation d'excellence sur le territoire français.
+
+      La complémentarité capacitante définit une interaction entre l'homme et la machine qui vise à augmenter les capacités humaines et la créativité plutôt qu'à les remplacer ou les asservir.
+
+      L'explicabilité est la capacité à fournir des explications intelligibles sur les décisions prises par un algorithme ou un système d'intelligence artificielle.
+
+COURS DETAILLE.
+
+I. UNE POLITIQUE ECONOMIQUE ARTICULEE AUTOUR DE LA DONNEE.
+
+   A. Renforcer l'écosystème de la donnée.
+
+      La stratégie économique française et européenne doit reposer sur une politique offensive favorisant l'accès et la circulation des données qui constituent la matière première de l'intelligence artificielle contemporaine.
+
+      L'État doit encourager la création de communs de la donnée en incitant les acteurs économiques à partager et mutualiser leurs informations pour ne pas laisser le monopole aux géants numériques.
+
+      La puissance publique doit organiser l'ouverture de certaines données détenues par des acteurs privés lorsqu'elles présentent un intérêt général pour l'innovation ou la mission de service public.
+
+      Le droit à la portabilité des données doit être mis en œuvre dans une visée citoyenne pour permettre aux individus de faire circuler leurs données vers des services d'intérêt général ou de recherche.
+
+   B. Consolider le tissu industriel et la recherche.
+
+      Il est nécessaire de concentrer l'effort industriel sur quatre secteurs stratégiques prioritaires qui sont la santé, l'environnement, les transports-mobilités et la défense-sécurité.
+
+      La politique industrielle doit s'organiser autour de grands défis sectoriels et de la mise en place de plateformes de mutualisation de données propres à chaque secteur.
+
+      Des bacs à sable d'innovation doivent être instaurés pour permettre aux entreprises de tester leurs solutions avec un allègement temporaire des contraintes réglementaires.
+
+   C. La transformation de l'Etat.
+
+      L'État doit devenir un moteur de la transformation en intégrant l'intelligence artificielle dans ses propres services pour gagner en efficacité et en qualité de service public.
+
+      Un coordinateur interministériel doit être nommé pour piloter la stratégie nationale et animer un réseau de référents dans les différentes administrations.
+
+      La commande publique doit être utilisée comme un levier stratégique pour soutenir l'innovation et les acteurs européens de l'intelligence artificielle.
+
+II. POUR UNE RECHERCHE AGILE ET DIFFUSANTE.
+
+   A. Création des Instituts Interdisciplinaires d'Intelligence Artificielle.
+
+      Le rapport recommande la création d'un réseau d'Instituts Interdisciplinaires d'Intelligence Artificielle nommés 3IA pour fédérer les chercheurs et les entreprises sur le territoire.
+
+      Ces instituts doivent permettre de tripler le nombre de personnes formées à l'intelligence artificielle et favoriser l'interdisciplinarité entre les sciences dures et les sciences humaines.
+
+      Les 3IA doivent bénéficier d'une grande autonomie de gestion et de financements importants pour attirer les meilleurs talents internationaux et retenir les chercheurs français.
+
+   B. Moyens de calcul et attractivité.
+
+      La recherche publique doit disposer d'un supercalculateur dédié à l'intelligence artificielle pour rivaliser avec les moyens des grands acteurs privés.
+
+      Il est impératif de revaloriser les carrières des chercheurs en début de parcours en doublant leur salaire pour éviter la fuite des cerveaux vers le secteur privé ou l'étranger.
+
+      Les échanges entre le monde académique et l'industrie doivent être fluidifiés en permettant aux chercheurs de consacrer une partie de leur temps à des projets privés.
+
+III. ANTICIPER ET MAITRISER LES IMPACTS SUR LE TRAVAIL.
+
+   A. Une transformation profonde des métiers.
+
+      L'automatisation va transformer la majorité des métiers existants en modifiant la nature des tâches effectuées par les travailleurs.
+
+      La politique publique doit favoriser une complémentarité capacitante entre l'homme et la machine pour éviter l'aliénation au travail et développer les compétences proprement humaines.
+
+      Il est nécessaire de créer un lab public de la transformation du travail pour anticiper les mutations et expérimenter de nouvelles solutions d'accompagnement.
+
+   B. Formation et évolution des compétences.
+
+      La formation professionnelle doit être réformée pour cibler davantage les populations dont les emplois sont les plus menacés par l'automatisation.
+
+      L'apprentissage de la créativité et des compétences transversales doit devenir une priorité de la formation initiale et continue.
+
+      L'objectif quantitatif est de multiplier par trois le nombre de personnes formées aux métiers de l'intelligence artificielle en France d'ici trois ans.
+
+IV. L'INTELLIGENCE ARTIFICIELLE AU SERVICE DE L'ECOLOGIE.
+
+   A. Une technologie pour la transition écologique.
+
+      L'intelligence artificielle offre des opportunités pour optimiser la consommation énergétique et mieux comprendre les phénomènes climatiques.
+
+      La France doit porter le sujet de la convergence entre transition numérique et transition écologique au niveau international.
+
+      La libération des données écologiques publiques et privées est indispensable pour permettre aux chercheurs et entrepreneurs de développer des solutions vertes.
+
+   B. Vers une IA plus verte.
+
+      Il est crucial de développer une intelligence artificielle moins énergivore en soutenant la recherche sur les composants électroniques et l'optimisation des calculs.
+
+      Une plateforme de mesure de l'impact environnemental des solutions numériques intelligentes doit être mise en place pour informer les consommateurs.
+
+      Le verdissement de la chaîne de valeur des centres de données doit être encouragé par les pouvoirs publics.
+
+V. QUELLE ETHIQUE DE L'INTELLIGENCE ARTIFICIELLE.
+
+   A. Transparence et responsabilité.
+
+      L'opacité des algorithmes d'apprentissage automatique nécessite de développer la recherche sur l'explicabilité pour comprendre les décisions prises par les machines.
+
+      Des corps d'auditeurs publics doivent être créés pour vérifier la conformité des algorithmes et lutter contre les biais discriminatoires potentiels.
+
+      Les concepteurs d'intelligence artificielle doivent intégrer les considérations éthiques dès la phase de conception des systèmes.
+
+   B. Gouvernance éthique.
+
+      Un comité d'éthique des technologies numériques et de l'intelligence artificielle doit être créé pour organiser le débat public et éclairer les choix de société.
+
+      Il est nécessaire de mener une réflexion spécifique sur les sujets sensibles comme la police prédictive ou les armes létales autonomes pour garder la maîtrise humaine.
+
+      Une étude d'impact sur les discriminations devrait être rendue obligatoire pour les algorithmes ayant un impact significatif sur les personnes.
+
+VI. POUR UNE INTELLIGENCE ARTIFICIELLE INCLUSIVE.
+
+   A. Diversité et mixité.
+
+      Le secteur du numérique souffre d'un déficit majeur de mixité qui risque de conduire à la reproduction de biais sexistes dans les algorithmes.
+
+      Un objectif de quarante pour cent d'étudiantes dans les filières numériques doit être fixé à l'horizon deux mille vingt.
+
+      Une base de données nationale sur les inégalités femmes-hommes au travail doit être mise en place pour objectiver la situation et mesurer les progrès.
+
+   B. Inclusion sociale.
+
+      L'intelligence artificielle doit être utilisée pour améliorer l'accès aux droits et aux services publics pour l'ensemble de la population.
+
+      La médiation numérique doit être renforcée pour accompagner les citoyens face à la dématérialisation et à l'automatisation des services.
+
+      Il faut soutenir l'innovation sociale basée sur l'intelligence artificielle pour qu'elle bénéficie aux acteurs de l'économie sociale et solidaire.
+
+VII. FOCUS SECTORIELS.
+
+   A. Transformer l'éducation.
+
+      L'intelligence artificielle permet de développer l'apprentissage personnalisé et adaptatif pour mieux répondre aux besoins de chaque élève.
+
+      Il faut former les enseignants à l'utilisation de ces nouveaux outils et accompagner la transformation de leurs pratiques pédagogiques.
+
+   B. La santé à l'heure de l'IA.
+
+      Le déploiement de l'IA en santé doit permettre une médecine plus prédictive et personnalisée au bénéfice du patient.
+
+      La création d'une plateforme de données de santé massive et sécurisée est la condition indispensable au développement de la recherche médicale française.
+
+   C. L'agriculture augmentée.
+
+      L'agriculture doit s'appuyer sur l'intelligence artificielle pour améliorer les rendements tout en réduisant l'impact environnemental des exploitations.
+
+      Il est nécessaire de structurer une filière de la donnée agricole pour permettre aux agriculteurs de garder la maîtrise de la valeur créée.
+
+   D. Transport et mobilité.
+
+      L'Europe doit devenir un leader du véhicule autonome en mettant en place un cadre réglementaire favorable à l'expérimentation.
+
+      Les données de mobilité doivent être ouvertes pour favoriser l'émergence de nouvelles solutions de transport multimodal.
+
+   E. Défense et sécurité.
+
+      L'intelligence artificielle est un enjeu de souveraineté nationale pour garantir la supériorité opérationnelle des armées et la sécurité intérieure.
+
+      L'État doit conserver la maîtrise de ses systèmes critiques tout en collaborant avec l'écosystème d'innovation civil.
+
+POINTS D'ATTENTION.
+
+      L'intelligence artificielle ne doit pas être une fin en soi mais doit avoir un sens au service de l'humain.
+
+      La souveraineté numérique européenne dépend de la capacité à conserver et valoriser les données sur le continent.
+
+      L'acceptabilité sociale de l'IA repose sur la confiance et la capacité à expliquer les décisions algorithmiques.
+
+      La formation est le goulot d'étranglement principal du développement de l'IA en France.
+
+      L'impact écologique du numérique ne doit pas être négligé dans la course à la puissance de calcul.
+
+EXEMPLES CITES.
+
+      Le règlement général sur la protection des données permet la portabilité des données personnelles.
+
+      La plateforme APB est un exemple d'algorithme public ayant suscité des débats sur la transparence.
+
+      Le programme de la DARPA sur l'explicabilité de l'IA vise à rendre les modèles compréhensibles par les humains.
+
+      L'algorithme COMPAS aux États-Unis a démontré des biais raciaux dans la prédiction de la récidive criminelle.
+
+      La reconnaissance d'images en santé permet de détecter des mélanomes avec une précision supérieure aux dermatologues.
+
+      Le stockage de données sur ADN est une piste de recherche pour réduire la consommation énergétique.

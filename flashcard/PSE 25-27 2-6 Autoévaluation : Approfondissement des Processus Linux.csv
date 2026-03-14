@@ -1,0 +1,17 @@
+Classez dans l'ordre les cinq étapes d'un cycle de vie minimal d'un processus sous Linux.,"1. création, 2. Prêt à être exécuté, 3. en cours d'exécution, 4. zombie, 5. détruit."
+"Dans le cycle de vie minimal d'un processus, quel état suit immédiatement l'état 'création' ?",Prêt à être exécuté.
+"Dans le cycle de vie minimal d'un processus, quel état précède l'état 'détruit' ?",Zombie.
+Un processus qui effectue une demande de lecture sur un périphérique de stockage passe dans l'état _____.,Endormi
+Par quel mécanisme un processus passe-t-il à l'état 'endormi' lors d'une demande d'entrée/sortie ?,Il effectue un appel système.
+Quand un processus endormi suite à une demande d'E/S est-il réveillé ?,Il est réveillé par le système lorsque la donnée demandée est disponible.
+Quelle commande permet de modifier la priorité d'un processus au moment de son lancement ?,La commande `nice`.
+Quel type de priorité la commande `nice` permet-elle de modifier ?,La priorité statique d'un processus.
+Le basculement du processeur d'un processus à un autre se fait grâce à un changement de _____.,contexte
+En quoi consiste précisément un 'changement de contexte' ?,"Il consiste à sauvegarder le contexte d'exécution du processus en cours, puis à restaurer le contexte du processus nouvellement élu."
+Citez un des avantages des threads liés à la performance.,La rapidité d'exécution.
+Citez un des avantages des threads liés à l'interaction entre eux.,La simplicité de communication.
+Quel avantage les threads apportent-ils pour la gestion de l'accès aux données partagées ?,La simplicité de synchronisation.
+Quelle commande est spécifiquement utilisée pour visualiser la filiation (l'arborescence) des processus ?,La commande `pstree`.
+Citez trois commandes qui permettent de lister les processus en cours d'exécution sous Linux.,"`ps`, `pstree`, et `top`."
+Quelle commande fournit une vue statique (un 'snapshot') des processus en cours d'exécution ?,La commande `ps`.
+Quelle commande fournit une vue dynamique et interactive des processus en cours d'exécution ?,La commande `top`.

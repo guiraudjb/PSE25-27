@@ -1,0 +1,30 @@
+Navigation basique;Afficher le chemin absolu du répertoire courant;pwd (print working directory)
+Navigation basique;Revenir directement au répertoire précédent visité;cd -
+Création de répertoires;Créer une arborescence complète (ex: /srv/backup/2025) en une seule commande;mkdir -p /srv/backup/2025
+Suppression sécurisée;Supprimer un répertoire et tout son contenu de manière récursive;rm -r nom_dossier
+Listing de fichiers;Afficher les fichiers cachés (commençant par un point);ls -a
+Gestion des Inodes;Supprimer un fichier en ciblant son numéro d'inode (ex: 131072);find . -inum 131072 -delete
+Création de fichiers;Mettre à jour l'horodatage d'un fichier existant ou créer un fichier vide;touch fichier.txt
+Modification de contenu;Ajouter du texte à la fin d'un fichier sans écraser l'existant;echo "Texte" >> fichier.txt
+Lecture de fichiers;Afficher les 20 premières lignes d'un fichier;head -n 20 fichier.log
+Surveillance de fichiers;Suivre en temps réel les nouvelles lignes ajoutées à un fichier de log;tail -f fichier.log
+Copie intelligente;Copier un fichier uniquement si la source est plus récente que la destination;cp -u source destination
+Sécurité suppression;Créer un alias pour demander confirmation avant chaque suppression;alias rm="rm -i"
+Archivage compression;Créer une archive compressée au format gzip du dossier /var/log;tar -czvf archive.tar.gz /var/log
+Droits d'accès (Octal);Donner les droits rwx (propriétaire) et r-x (groupe/autres) à un fichier;chmod 755 fichier
+Changement propriétaire;Changer le propriétaire d'un fichier pour 'alice' et le groupe pour 'dev';chown alice:dev fichier.txt
+Droits spéciaux (SUID);Quel est l'effet du SUID sur un exécutable ?;Il s'exécute avec les privilèges du propriétaire du fichier (souvent root) et non de l'utilisateur courant
+Droits spéciaux (Sticky bit);Empêcher la suppression d'un fichier par un autre utilisateur dans un dossier partagé (/tmp);Appliquer le Sticky bit (chmod +t répertoire)
+ACL (Access Control Lists);Donner spécifiquement les droits rwx à l'utilisateur 'bob' sur un fichier;setfacl -m u:bob:rwx fichier
+Recherche (Find);Trouver tous les fichiers de plus de 50Mo dans /var/log;find /var/log -size +50M
+Recherche (Locate);Quelle est la différence principale entre find et locate ?;Locate est plus rapide car elle interroge une base indexée (updatedb), contrairement à find qui parcourt le disque
+Intégrité de fichier;Vérifier l'empreinte SHA-256 d'une image ISO téléchargée;sha256sum fichier.iso
+Comparaison de fichiers;Afficher les différences ligne par ligne entre deux fichiers texte;diff fichier1 fichier2
+Analyse (Grep);Rechercher "erreur" sans tenir compte de la casse (majuscule/minuscule);grep -i "erreur" fichier.log
+Expressions régulières;Rechercher les lignes qui commencent par "root";grep "^root" fichier
+Automatisation surveillance;Exécuter une commande toutes les 2 secondes pour voir l'évolution;watch -n 2 commande
+Flux standards;Quel chiffre correspond à la sortie d'erreurs (stderr) ?;Le descripteur 2
+Redirection d'erreurs;Rediriger uniquement les erreurs d'une commande vers un fichier;commande 2> fichier_erreurs.txt
+Redirection totale;Rediriger la sortie standard ET les erreurs vers le même fichier;commande &> sortie.log
+Pipes (Tubes);Enchaîner deux commandes (la sortie de l'une devient l'entrée de l'autre);Utiliser le caractère pipe | (ex: ls -l | grep ".log")
+Traitement complexe;Compter le nombre de lignes contenant le mot "error" dans un fichier;grep "error" fichier | wc -l

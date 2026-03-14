@@ -1,0 +1,129 @@
+FICHE DE REVISION : LA SOBRIETE NUMERIQUE ET LE ROLE DU PSE.
+
+LEXIQUE COMPLET.
+
+      La sobriété numérique est une démarche consistant à concevoir, produire et utiliser le numérique de manière modérée pour réduire son impact environnemental tout en maintenant son efficacité opérationnelle.
+
+      Le terme SPE désigne le triptyque Sobriété, Performance et Efficience qui doit guider l'action du Programmeur de Système d'Exploitation.
+
+      Le RGESN correspond au Référentiel Général d'Écoconception de Services Numériques et vise notamment la mutualisation matérielle et l'allongement de la durée de vie des équipements,.
+
+      Le RGI, ou Référentiel Général d'Interopérabilité, favorise la standardisation des protocoles d'échange et la mutualisation des briques logicielles.
+
+      Le RGPD, Règlement Général sur la Protection des Données, impose la minimisation de la collecte des données, ce qui limite mécaniquement la volumétrie de stockage nécessaire.
+
+      Le PUE, ou Power Usage Effectiveness, est un indicateur technique permettant de mesurer l'efficacité énergétique d'un centre de données.
+
+      Le Right Sizing est une pratique d'ajustement au plus juste des ressources allouées à une application pour éviter le surdimensionnement des serveurs.
+
+      Le GreenOps est une méthodologie d'exploitation visant à piloter et réduire l'empreinte écologique des services numériques via la supervision.
+
+      L'architecture scalable désigne une structure informatique capable de s'adapter dynamiquement à la charge en augmentant ou réduisant les ressources.
+
+      La doctrine Cloud au centre est une orientation stratégique de l'État favorisant l'usage de l'informatique en nuage pour optimiser la consommation des ressources.
+
+COURS DETAILLE.
+
+I. CADRE REGLEMENTAIRE ET DEFINITION.
+
+   A. CONTEXTE ADMINISTRATIF.
+
+      La circulaire Services Publics écoresponsables lancée en 2020 et révisée en 2023 impose des objectifs de réduction des émissions de gaz à effet de serre.
+
+      Cette démarche vise une réduction de vingt-deux pour cent des émissions d'ici 2027.
+
+      La sobriété numérique ne doit pas être perçue comme une contrainte mais comme une opportunité de rationalisation et de modernisation du système d'information de l'État.
+
+   B. LES CINQ REFERENTIELS PILIERS.
+
+      La mise en œuvre de la sobriété s'appuie sur la synergie de cinq référentiels majeurs que sont le RGESN, le RGI, le RGAA, le RGS et le RGPD.
+
+      Ces référentiels constituent le socle indispensable d'une architecture écoresponsable en traitant l'interopérabilité, l'accessibilité, la sécurité, la protection des données et l'écoconception.
+
+II. IMPACTS SUR L'ARCHITECTURE DES SYSTEMES D'INFORMATION.
+
+   A. URBANISATION ET MUTUALISATION.
+
+      L'application du RGI et du RGS pousse vers une urbanisation stricte du Système d'Information.
+
+      Il est nécessaire de mutualiser des briques logicielles réutilisables et de standardiser les protocoles d'échange pour réaliser des économies d'échelle.
+
+      La sécurisation des échanges inter-administration via des API permet d'éviter la redondance de l'information stockée.
+
+      Cette rationalisation des ressources s'inscrit dans la logique de Bercy vert.
+
+   B. OPTIMISATION DU MATERIEL ET DES DONNEES.
+
+      Le respect du RGPD impose de ne collecter que les données strictement nécessaires et de supprimer les données obsolètes pour limiter la volumétrie globale,.
+
+      L'allongement de la durée de vie du matériel est un levier majeur préconisé par le RGESN pour réduire l'impact écologique des projets,.
+
+      L'architecture doit être pensée comme scalable pour s'adapter aux besoins sans gaspillage.
+
+III. LES NOUVELLES PRATIQUES D'EXPLOITATION.
+
+   A. GESTION DYNAMIQUE DES RESSOURCES.
+
+      La doctrine Cloud au centre introduit de nouvelles pratiques indispensables pour optimiser la consommation de ressources.
+
+      L'infrastructure à la demande permet d'ajuster la ressource allouée à une application à un instant donné.
+
+      La mise en place de mécanismes d'élasticité ou auto-scaling permet d'ajouter de la ressource lors des pics de charge et de l'éteindre lorsque l'activité redescend.
+
+      La virtualisation et la conteneurisation permettent une augmentation significative du taux d'utilisation du matériel physique.
+
+   B. SUPERVISION AVANCEE ET INDICATEURS.
+
+      Les outils de supervision ne se limitent plus à la surveillance de la disponibilité du service.
+
+      Il est impératif de mesurer la consommation de chaque processus en ressources et en énergie pour mettre en œuvre des politiques GreenOps et FinOps.
+
+      L'utilisation d'indicateurs de consommation précis comme le PUE pour les datacenters est requise.
+
+      Ces indicateurs permettent aux développeurs de mesurer la performance énergétique de leur code et d'optimiser l'efficience des applicatifs.
+
+IV. LE ROLE DU PROGRAMMEUR SYSTEME D'EXPLOITATION (PSE).
+
+   A. EXPERTISE TECHNIQUE ET CONCEPTION.
+
+      Le PSE intervient dès la phase de conception pour apporter son expertise technique et architecturale.
+
+      Il formule des recommandations favorisant une conception plus efficiente et intègre des critères de sobriété dans les projets.
+
+      Il conseille les équipes sur l'intégration des projets vers le cloud en recommandant les infrastructures les moins énergivores.
+
+   B. OPTIMISATION OPERATIONNELLE.
+
+      Le PSE assure l'optimisation des scripts et des traitements par lots aussi appelés batchs.
+
+      Il garantit la disponibilité des services par une priorisation des flux adaptée selon une logique de Sobriété, Performance et Efficience.
+
+      La supervision et l'analyse fine des logs et des consommations CPU font partie de ses missions quotidiennes.
+
+   C. GESTION DU CYCLE DE VIE ET ACCULTURATION.
+
+      Le PSE intervient dans la gestion du cycle de vie du matériel en qualifiant le matériel de seconde main pour le maintenir en condition opérationnelle.
+
+      Il organise le réemploi interne en intégrant des serveurs déclassés dans des environnements non critiques comme le développement ou la recette.
+
+      Il joue un rôle clé dans l'acculturation des équipes et le partage des bonnes pratiques en matière de numérique responsable.
+
+POINTS D'ATTENTION.
+
+      La rédaction doit impérativement adopter un style administratif neutre et impersonnel.
+
+      L'usage des pronoms personnels comme nous est strictement interdit et doit être remplacé par des tournures impersonnelles.
+
+      L'argumentation doit toujours expliquer le comment et avec quels outils les actions sont menées.
+
+      Il est nécessaire de mettre en évidence la transversalité entre la sobriété numérique et le rôle spécifique du PSE.
+
+      La conclusion doit proposer une ouverture pertinente sur les enjeux futurs ou l'évolution de la réglementation.
+
+EXEMPLES CITES.
+
+      La plateforme don.archives-domaines.gouv.fr permet de proposer des biens meubles à d'autres administrations.
+
+      L'utilisation du PUE permet de rapporter l'énergie totale consommée par un datacenter à l'énergie utile des équipements.
+
+      Le nettoyage des habillages superflus ou gras numérique dans les applications web contribue à la sobriété.

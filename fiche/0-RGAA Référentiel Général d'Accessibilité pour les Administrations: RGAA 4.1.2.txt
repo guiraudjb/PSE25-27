@@ -1,0 +1,269 @@
+REFERENTIEL GENERAL D'AMELIORATION DE L'ACCESSIBILITE (RGAA) - VERSION 4.1.2.
+
+LEXIQUE COMPLET.
+
+      Accessibilité numérique : Consiste à rendre les services de communication en ligne perceptibles, utilisables, compréhensibles et robustes pour les personnes handicapées.
+
+      Accessible et activable : Un composant d'interface est accessible et activable lorsque l'utilisateur peut prendre le focus et déclencher l'action indifféremment par un pointeur ou le clavier.
+
+      Accolés : L'étiquette et son champ doivent être visuellement proches de manière à ce que la relation entre les deux ne puisse pas prêter à confusion.
+
+      Alternative textuelle : Nom accessible restitué par les technologies d'assistance pour les éléments graphiques comme les images ou les zones cliquables.
+
+      Ambigu pour tout le monde : Lien dont l'intention ne peut être déterminée à partir du lien et de toute l'information de la page présentée en même temps, même pour un utilisateur sans limitation fonctionnelle.
+
+      Audiodescription synchronisée : Narration ajoutée à une piste sonore pour décrire les détails visuels importants qui ne peuvent être compris à partir de la piste sonore principale seulement.
+
+      CAPTCHA : Test utilisé pour distinguer un utilisateur humain d'un ordinateur, utilisant souvent des images déformées ou des questions logiques.
+
+      Changement de contexte : Changements majeurs dans le contenu d'une page web qui peuvent désorienter l'utilisateur s'ils sont faits sans avertissement, comme l'ouverture d'une nouvelle fenêtre ou le changement de focus.
+
+      Composant d'interface : Élément avec lequel l'utilisateur peut interagir, comme un bouton, un lien, ou des éléments plus complexes comme des menus ou des onglets.
+
+      Contraste : Opposition marquée entre la luminosité d'une couleur de premier plan et d'une couleur d'arrière-plan, calculée selon une formule de luminance relative.
+
+      Environnement maîtrisé : Tout environnement dans lequel l'accès à l'information, les technologies et le profil des utilisateurs sont connus et contrôlés, comme un intranet d'entreprise.
+
+      Image de décoration : Image n'ayant aucune fonction et ne véhiculant aucune information particulière par rapport au contenu auquel elle est associée.
+
+      Image porteuse d'information : Image qui véhicule une information nécessaire à la compréhension du contenu auquel elle est associée.
+
+      Image texte : Image affichant du texte, dont l'usage est déconseillé s'il est possible de reproduire l'effet en CSS.
+
+      Landmarks : Rôles WAI-ARIA permettant d'indiquer les zones principales du document comme l'en-tête, la navigation ou le contenu principal.
+
+      Légende : Dispositif permettant de titrer les groupes de champs de même nature ou d'associer un texte explicatif à une image.
+
+      Lien d'évitement : Lien dont la fonction est de permettre de sauter une zone dans la page pour accéder directement au contenu principal ou à une autre zone pertinente.
+
+      Média temporel : Contenu audio, vidéo ou synchronisé qui se déroule dans le temps.
+
+      Média non temporel : Contenu qui ne se déroule pas dans le temps, comme une animation Flash interactive ou une carte interactive.
+
+      Message de statut : Information de changement de contenu qui n'interrompt pas l'activité principale de l'utilisateur et ne change pas le contexte.
+
+      Schéma pluriannuel : Document présentant la politique de l'entité en matière d'accessibilité numérique sur une durée maximum de trois ans.
+
+      Tableau de données : Structure permettant d'organiser des informations en lignes et en colonnes avec des relations logiques entre les cellules de données et les en-têtes.
+
+      Transcription textuelle : Contenu textuel donnant accès à la totalité de ce qui est exprimé oralement et aux informations descriptives d'un média temporel.
+
+COURS DÉTAILLÉ.
+
+I. REGLES DE MISE EN OEUVRE ET OBLIGATIONS LEGALES.
+
+   A. Notion d'accessibilité et principes fondamentaux.
+
+      Le handicap est défini comme toute limitation d'activité ou restriction de participation à la vie en société subie en raison d'une altération substantielle d'une ou plusieurs fonctions.
+
+      L'accessibilité numérique repose sur quatre principes fondamentaux qui sont la perceptibilité, l'utilisabilité, la compréhension et la robustesse des contenus.
+
+      Un contenu perceptible signifie faciliter la perception visuelle et auditive ou proposer des équivalents textuels.
+
+      Un contenu utilisable implique de rendre toutes les fonctionnalités accessibles au clavier et de fournir des éléments d'orientation.
+
+      Un contenu compréhensible nécessite que les pages fonctionnent de manière prévisible et aident l'utilisateur à corriger ses erreurs.
+
+      Un contenu robuste doit être compatible avec les utilisations actuelles et futures, y compris les technologies d'assistance.
+
+   B. Champ d'application et acteurs concernés.
+
+      L'obligation d'accessibilité s'applique aux personnes morales de droit public et aux délégataires d'une mission de service public.
+
+      Les entreprises privées sont également concernées si elles réalisent un chiffre d'affaires annuel en France supérieur à 250 millions d'euros.
+
+      Les services concernés incluent les sites internet, intranet, extranet, les progiciels utilisés via navigateur, les applications mobiles et le mobilier urbain numérique.
+
+      Les services de médias audiovisuels et les organismes privés à but non lucratif ne fournissant pas de services essentiels ne sont pas concernés.
+
+   C. Contenus exemptés et dérogations.
+
+      Les fichiers bureautiques publiés avant le 23 septembre 2018 sont exemptés sauf s'ils sont nécessaires à une démarche administrative.
+
+      Les contenus audio et vidéo préenregistrés publiés avant le 23 septembre 2020 sont exemptés.
+
+      Les contenus diffusés en direct et les cartes dont l'essentiel de l'information est fourni ailleurs sont exemptés.
+
+      Les contenus de tiers non financés ni contrôlés par l'organisme ainsi que certaines collections patrimoniales sont exemptés.
+
+      Une dérogation pour charge disproportionnée peut être invoquée si la mise en accessibilité compromet la mission ou la viabilité économique de l'organisme.
+
+      Cette dérogation doit être temporaire, motivée et accompagnée si possible d'une alternative accessible.
+
+      L'aménagement de poste pour une personne handicapée prévaut sur les dérogations et le référentiel général.
+
+   D. Evaluation et déclaration de conformité.
+
+      La conformité se vérifie par rapport à la norme européenne EN 301 549 V2.1.2 ou aux critères WCAG 2.1 niveaux A et AA.
+
+      L'audit doit être réalisé sur un échantillon représentatif incluant les pages obligatoires comme l'accueil, le contact, les mentions légales, l'accessibilité, le plan du site, l'aide et l'authentification.
+
+      L'échantillon doit aussi inclure au moins une page par type de service, les processus complets, et 10 pour cent de pages sélectionnées au hasard.
+
+      La déclaration d'accessibilité doit indiquer un état de conformité qui peut être totalement conforme, partiellement conforme ou non conforme.
+
+      La conformité est partielle si au moins 50 pour cent des critères de contrôle du RGAA sont respectés.
+
+      La déclaration doit lister les contenus non accessibles, fournir un moyen de contact et mentionner les voies de recours auprès du Défenseur des droits.
+
+      Une mention visible de l'état de conformité doit figurer sur la page d'accueil.
+
+II. METHODE TECHNIQUE ET CRITERES DE CONTROLE.
+
+   A. Thématique 1 Images.
+
+      Chaque image porteuse d'information doit avoir une alternative textuelle pertinente.
+
+      Les images de décoration doivent être ignorées par les technologies d'assistance grâce à un attribut alt vide ou un attribut aria hidden.
+
+      Les CAPTCHA doivent avoir une alternative identifiant leur nature et une solution d'accès alternatif au contenu sécurisé doit être présente.
+
+      Les images textes doivent être évitées et remplacées par du texte stylé sauf si la graphie est essentielle.
+
+      Les légendes d'images doivent être correctement reliées à l'image correspondante, par exemple via la balise figure et figcaption.
+
+   B. Thématique 2 Cadres.
+
+      Chaque cadre iframe ou frame doit posséder un attribut title pertinent pour en décrire le contenu.
+
+   C. Thématique 3 Couleurs.
+
+      L'information ne doit pas être donnée uniquement par la couleur mais doit être complétée par du texte ou des symboles.
+
+      Le contraste entre le texte et son arrière-plan doit être d'au moins 4 virgul 5 pour 1 pour un texte standard.
+
+      Le contraste peut être réduit à 3 pour 1 pour les textes de grande taille ou en gras de taille suffisante.
+
+      Les composants d'interface et les éléments graphiques porteurs d'information doivent avoir un contraste d'au moins 3 pour 1 par rapport au fond.
+
+   D. Thématique 4 Multimédia.
+
+      Les médias temporels préenregistrés doivent avoir une transcription textuelle ou une audiodescription si nécessaire.
+
+      Les vidéos synchronisées doivent posséder des sous-titres pertinents.
+
+      Les médias doivent être clairement identifiables par un titre ou un texte adjacent.
+
+      Les sons déclenchés automatiquement de plus de 3 secondes doivent être contrôlables par l'utilisateur.
+
+      La consultation des médias doit être contrôlable par le clavier et tout dispositif de pointage.
+
+   E. Thématique 5 Tableaux.
+
+      Les tableaux de données doivent avoir un titre pertinent via la balise caption.
+
+      Les en-têtes de lignes et de colonnes doivent être déclarés avec la balise th et correctement reliés aux cellules via les attributs scope ou headers.
+
+      Les tableaux de données complexes doivent comporter un résumé expliquant leur structure.
+
+      Les tableaux de mise en forme ne doivent pas utiliser de balises de données et doivent se linéariser correctement.
+
+   F. Thématique 6 Liens.
+
+      Chaque lien doit être explicite, c'est à dire que son intitulé seul ou avec son contexte permet de comprendre sa destination.
+
+      Le nom accessible du lien doit contenir au moins l'intitulé visible pour faciliter la navigation vocale.
+
+      Tout lien doit avoir un contenu textuel ou une alternative textuelle s'il s'agit d'une image lien.
+
+   G. Thématique 7 Scripts.
+
+      Les scripts doivent être compatibles avec les technologies d'assistance en exposant leur nom, rôle, valeur et état.
+
+      Les scripts doivent être utilisables au clavier et par tout dispositif de pointage.
+
+      L'utilisateur doit être averti ou avoir le contrôle avant tout changement de contexte initié par un script.
+
+      Les messages de statut doivent être correctement restitués via des rôles ARIA comme status ou alert.
+
+   H. Thématique 8 Éléments obligatoires.
+
+      Le code source doit être valide selon le type de document déclaré pour éviter les erreurs d'analyse.
+
+      Chaque page doit avoir un titre de page pertinent dans la balise title.
+
+      La langue par défaut de la page doit être indiquée et chaque changement de langue dans le contenu doit être balisé.
+
+      Les balises ne doivent pas être utilisées uniquement à des fins de présentation, comme les tableaux pour la mise en page.
+
+   I. Thématique 9 Structuration de l'information.
+
+      L'information doit être structurée par une hiérarchie de titres cohérente de h1 à h6.
+
+      La structure du document doit utiliser les balises sémantiques header, nav, main et footer.
+
+      Les listes doivent être balisées correctement avec ul, ol ou dl.
+
+   J. Thématique 10 Présentation de l'information.
+
+      Les feuilles de styles doivent être utilisées pour la présentation et le contenu doit rester compréhensible si elles sont désactivées.
+
+      Le texte doit rester lisible lorsqu'il est agrandi jusqu'à 200 pour cent.
+
+      Le contenu doit s'adapter sans perte d'information à une largeur de 320 pixels sans défilement horizontal.
+
+      La prise de focus doit être visible sur chaque élément interactif.
+
+      L'information ne doit pas être donnée uniquement par la forme, la taille ou la position.
+
+   K. Thématique 11 Formulaires.
+
+      Chaque champ de formulaire doit avoir une étiquette pertinente accolée.
+
+      Les champs de même nature doivent être regroupés avec une légende pertinente.
+
+      Les erreurs de saisie doivent être identifiées et des suggestions de correction doivent être proposées.
+
+      Pour les données sensibles ou financières, l'utilisateur doit pouvoir vérifier, modifier ou annuler ses données avant validation.
+
+      L'attribut autocomplete doit être utilisé pour faciliter le remplissage des données personnelles.
+
+   L. Thématique 12 Navigation.
+
+      Le site doit proposer au moins deux systèmes de navigation comme un menu et un plan du site.
+
+      Les menus et barres de navigation doivent être cohérents et situés à la même place sur toutes les pages.
+
+      Un lien d'évitement ou d'accès rapide au contenu principal doit être présent.
+
+      L'ordre de tabulation doit être logique et ne pas contenir de piège au clavier.
+
+   M. Thématique 13 Consultation.
+
+      L'utilisateur doit avoir le contrôle sur les limites de temps, pour pouvoir les allonger ou les supprimer.
+
+      L'ouverture de nouvelles fenêtres ne doit pas se faire sans action de l'utilisateur.
+
+      Les documents bureautiques en téléchargement doivent être accessibles ou avoir une alternative accessible.
+
+      Les effets de flash ne doivent pas dépasser trois fois par seconde pour éviter les crises d'épilepsie.
+
+      Les actions gestuelles complexes doivent avoir une alternative simple.
+
+POINTS D'ATTENTION.
+
+      La conformité partielle est atteinte dès que 50 pour cent des critères sont respectés, en dessous le site est non conforme.
+
+      L'utilisation d'ARIA ne doit se faire que si les éléments HTML natifs ne suffisent pas à rendre le contenu accessible.
+
+      L'ordre de calcul du nom accessible privilégie aria labelledby, puis aria label, puis l'attribut natif comme alt ou le texte du lien.
+
+      La désactivation de JavaScript n'est pas une méthode valide pour vérifier l'accessibilité, les scripts doivent être rendus accessibles.
+
+      Les contenus cachés visuellement via display none sont ignorés par les lecteurs d'écran, contrairement à ceux cachés hors écran.
+
+      L'attribut title a un support limité et ne devrait être utilisé qu'en dernier recours pour fournir une étiquette.
+
+EXEMPLES CITES.
+
+      Utiliser un attribut autocomplete égal à shipping name pour un champ de nom de livraison.
+
+      Une image de décoration doit avoir un attribut alt vide ou aria hidden égal à true.
+
+      Pour un bouton B dans un éditeur, le nom accessible doit être Mettre en gras et non juste B.
+
+      Un lien ayant pour texte goyave est ambigu s'il n'y a pas de contexte pour savoir s'il mène à une définition ou une photo.
+
+      L'utilisation de la couleur rouge seule pour indiquer un champ obligatoire n'est pas conforme.
+
+      Un bouton avec aria label confirmer la saisie alors que le texte visible est valider la saisie est non conforme.

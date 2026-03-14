@@ -1,0 +1,303 @@
+CYBERDICO ET FONDAMENTAUX DE LA CYBERSÉCURITÉ.
+
+LEXIQUE COMPLET.
+
+      L'accès local désigne des attaques effectuées avec un accès physique au réseau ou à un équipement.
+
+      L'adware est un logiciel publicitaire affichant des bandeaux souvent perçus comme envahissants.
+
+      L'alerte consiste à avertir une entité d'un incident de sécurité potentiel ou avéré.
+
+      L'analyseur syntaxique ou parseur est un outil permettant d'analyser un texte structuré.
+
+      L'assistance englobe les services proposés aux victimes concernant la source et les impacts d'un incident.
+
+      L'audit est un processus méthodique visant à évaluer la conformité à un référentiel.
+
+      L'authenticité garantit l'attribution d'une information à son auteur légitime.
+
+      Le balayage de ports est une technique envoyant des paquets pour déduire l'état des ports d'une machine.
+
+      La blockchain ou chaîne de blocs est un registre de comptes numériques sécurisé par cryptographie et sans intermédiaire.
+
+      Le blog est un site personnel présentant des articles chronologiques.
+
+      Le bootkit est un code malveillant infectant le processus de démarrage pour prendre le contrôle du système.
+
+      Le botnet est un réseau de machines zombies utilisé à des fins malveillantes à l'insu des propriétaires.
+
+      Le bug bounty est un programme de chasse aux vulnérabilités récompensant les découvreurs de failles.
+
+      Le BYOD désigne l'utilisation professionnelle d'équipements personnels comme des téléphones ou ordinateurs.
+
+      Le canal caché permet le transfert dissimulé d'informations par un processus malveillant.
+
+      Le canular ou hoax est une information vraie ou fausse incitant à des actions souvent dommageables.
+
+      La cartographie du risque est une représentation visuelle des risques identifiés.
+
+      Le cloud ou infrastructure nuagique permet un accès réseau à des ressources informatiques partagées.
+
+      Le cookie est une information stockée par le navigateur pour mémoriser le comportement de l'internaute.
+
+      La cryptographie est la science de la transformation de messages pour assurer leur sécurité via des clés.
+
+      La cryptomonnaie est une monnaie virtuelle permettant des échanges anonymes via une blockchain.
+
+      Le cyberespace est l'espace de communication formé par l'interconnexion mondiale des équipements numériques.
+
+      Le cybersquating est l'enregistrement abusif de noms de domaine pour bloquer leur attribution légitime.
+
+      Le darknet est un internet clandestin nécessitant des protocoles spécifiques comme le chiffrement.
+
+      Le deep web est la partie de l'internet inaccessible aux moteurs de recherche classiques.
+
+      La défiguration est la modification malveillante de l'apparence d'un site web.
+
+      Le domaine de premier niveau est l'extension située à la fin d'un nom de domaine internet.
+
+      L'endiguement regroupe les actions limitant l'ampleur d'un incident au début de la crise.
+
+      L'éradication vise la recherche et la neutralisation des emprises de l'attaquant dans le système.
+
+      L'état de l'art rassemble les bonnes pratiques et technologies de référence en sécurité.
+
+      L'exfiltration de données correspond au vol ou transfert non autorisé de données vers l'extérieur.
+
+      Le FAI ou Fournisseur d'accès à Internet offre l'accès aux services de communication en ligne.
+
+      Le hacktivisme est l'usage de cyberattaques pour véhiculer des messages idéologiques.
+
+      L'homologation de sécurité est la décision administrative autorisant l'exploitation d'un système d'information.
+
+      L'iframe est une balise HTML insérant un document dans une page web.
+
+      L'infogérance est la gestion externalisée des ressources informatiques d'une entreprise.
+
+      L'ingérence numérique étrangère vise à diffuser massivement des fausses informations pour nuire à la nation.
+
+      L'injecteur ou dropper est un programme conçu pour installer un logiciel malveillant sur une cible.
+
+      L'intrusion est le fait de pénétrer dans un espace logique ou physique sans autorisation.
+
+      Le keylogger enregistre les frappes au clavier pour voler des informations saisies.
+
+      La levée de doute consiste à vérifier si un événement est un incident réel ou un faux positif.
+
+      Le microblog diffuse des messages courts en temps réel au sein de fils de discussion.
+
+      Le nomadisme numérique permet l'accès au système d'information depuis des lieux non maîtrisés.
+
+      L'offuscation transforme le code source pour le rendre inintelligible et protéger son fonctionnement.
+
+      Le pare-feu protège un ordinateur ou un réseau en filtrant les connexions entrantes et sortantes.
+
+      Le point d'eau est une attaque piégeant un site légitime fréquenté par une cible spécifique.
+
+      Le polymorphisme permet à un virus de changer son code et son apparence pour éviter la détection.
+
+      La qualification est la vérification qu'un produit ou service répond aux besoins de l'administration.
+
+      Le renifleur ou sniffer capture les trames de données transitant sur un réseau.
+
+      Le rootkit est un logiciel furtif donnant des droits d'administrateur à un tiers non autorisé.
+
+      Le shadow IT désigne les systèmes informatiques déployés sans l'approbation de la direction informatique.
+
+      Le switch ou concentrateur distribue les communications de données au sein d'un réseau local.
+
+      Le typosquatting exploite les fautes de frappe pour diriger vers des sites malveillants aux noms proches.
+
+      La veille est le suivi continu de l'actualité et de l'environnement pour anticiper les menaces.
+
+      Le webshell est une console web malveillante permettant le contrôle à distance d'un serveur.
+
+COURS DÉTAILLÉ.
+
+I. CONCEPTS FONDAMENTAUX ET SÉCURITÉ DES SYSTÈMES.
+
+   A. Définitions et Principes de Base.
+
+      La cybersécurité est l'état recherché pour un système d'information afin de résister aux événements du cyberespace.
+
+      Elle repose sur trois piliers fondamentaux que sont la confidentialité, l'intégrité et la disponibilité.
+
+      La confidentialité assure que l'information est accessible uniquement aux destinataires autorisés.
+
+      L'intégrité garantit que les données ne sont modifiées que par une action légitime et restent complètes.
+
+      Le système d'information (SI) englobe les infrastructures et logiciels pour traiter et stocker les données.
+
+      La sécurité des systèmes d'information (SSI) inclut tous les moyens techniques et non-techniques de protection.
+
+      Le cœur de confiance est la partie critique du SI dont la compromission entraîne celle de tout le système.
+
+   B. Authentification et Cryptographie.
+
+      L'authentification vérifie l'identité revendiquée par une entité, souvent précédée d'une identification.
+
+      L'authentification forte requiert des protocoles robustes résistant aux attaques, souvent de type défi-réponse.
+
+      Le mot de passe est un élément de déverrouillage classique pour vérifier une identité.
+
+      La cryptographie transforme un message clair en message chiffré pour assurer la sécurité des échanges.
+
+      Le chiffrement produit un cryptogramme illisible sans la clé de déchiffrement adéquate.
+
+      Le hachage est une fonction à sens unique transformant une chaîne en une empreinte de taille fixe.
+
+      L'infrastructure de gestion de clés (IGC) ou PKI gère les clés cryptographiques et les certificats.
+
+      La cryptographie post-quantique vise à résister aux futures capacités de calcul des ordinateurs quantiques.
+
+II. PANORAMA DES MENACES ET MODES OPÉRATOIRES.
+
+   A. Typologie des Cyberattaques.
+
+      Une cyberattaque porte atteinte aux systèmes informatiques à des fins malveillantes comme l'espionnage ou le sabotage.
+
+      Le déni de service (DoS) empêche un système de fournir le service attendu en saturant ses ressources.
+
+      Le déni de service distribué (DDoS) utilise un réseau de machines compromises pour amplifier cette saturation.
+
+      L'homme du milieu (Man-in-the-middle) intercepte et manipule les échanges entre deux parties sans être détecté.
+
+      L'attaque par canal auxiliaire observe les signaux physiques comme la consommation électrique pour extraire des données.
+
+      L'injection SQL détourne une application en insérant du code malveillant dans les requêtes de base de données.
+
+      Le cross-site request forgery force la victime à envoyer des requêtes illégitimes à son insu vers un site vulnérable.
+
+   B. Logiciels Malveillants (Maliciels).
+
+      Un maliciel est tout programme développé pour nuire à un système ou un réseau.
+
+      Le virus est un programme qui se duplique et infecte d'autres fichiers, nécessitant souvent une action humaine.
+
+      Le ver est un logiciel autonome qui se propage activement sur le réseau sans intervention de l'utilisateur.
+
+      Le cheval de Troie masque une fonction malveillante sous l'apparence d'un programme légitime et utile.
+
+      Le rançongiciel chiffre les données de la victime et exige le paiement d'une rançon pour les restituer.
+
+      L'espiogiciel ou spyware collecte et transmet des informations sur l'utilisateur à son insu.
+
+      Le cryptomineur utilise les ressources de la victime pour valider des transactions de cryptomonnaie.
+
+      La bombe logique déclenche des dommages lorsque certaines conditions spécifiques sont réunies.
+
+   C. Ingénierie Sociale et Fraude.
+
+      L'ingénierie sociale exploite la confiance ou l'ignorance humaine pour obtenir des informations ou un accès.
+
+      Le phishing ou hameçonnage vole des identifiants en simulant un tiers de confiance via courriel.
+
+      Le spearphishing est un hameçonnage ciblé et personnalisé pour tromper une organisation ou une personne précise.
+
+      L'arnaque au président ou FOVI manipule une victime pour obtenir un virement de fonds frauduleux.
+
+      Le quishing redirige la victime vers une ressource malveillante via le scan d'un code QR.
+
+      L'usurpation de carte SIM permet de contourner la double authentification en détournant le numéro de téléphone.
+
+III. INFRASTRUCTURES ET VULNÉRABILITÉS.
+
+   A. Réseaux et Protocoles.
+
+      Le protocole IP permet aux ordinateurs de communiquer sur Internet via des adresses uniques.
+
+      Le DNS est le système traduisant les noms de domaine en adresses IP compréhensibles par les machines.
+
+      L'usurpation DNS envoie de fausses réponses pour rediriger le trafic vers des sites contrôlés par l'attaquant.
+
+      Le DNS pharming modifie un serveur DNS pour dévoyer les résolutions de noms de domaine.
+
+      Le VPN crée un tunnel sécurisé pour interconnecter des réseaux locaux à travers Internet.
+
+      La voix sur IP (VoIP) véhicule la communication vocale via les réseaux compatibles TCP/IP.
+
+   B. Failles et Exploitation.
+
+      Une vulnérabilité est une faille de sécurité permettant de porter atteinte au fonctionnement ou aux données.
+
+      L'exploitation "zero-day" utilise une vulnérabilité inconnue n'ayant fait l'objet d'aucun correctif.
+
+      La vulnérabilité "N-day" dispose d'un correctif existant qui n'a pas encore été déployé par l'utilisateur.
+
+      Le code d'exploitation ou exploit est le programme permettant d'utiliser une vulnérabilité précise.
+
+      Le débordement de tampon survient quand un programme écrit hors de la zone mémoire allouée.
+
+      L'élévation de privilège permet à un attaquant d'obtenir des droits supérieurs à ceux prévus.
+
+IV. GOUVERNANCE, DÉFENSE ET RÉPONSE.
+
+   A. Gestion des Risques et Conformité.
+
+      L'analyse de risque évalue les menaces pesant sur une organisation pour définir les mesures de sécurité.
+
+      La méthode EBIOS Risk Manager est la référence française pour l'appréciation et le traitement des risques.
+
+      Le RGPD encadre le traitement et la protection des données à caractère personnel dans l'Union européenne.
+
+      La directive NIS vise à élever le niveau de cybersécurité des entreprises et administrations européennes.
+
+      Les Opérateurs d'Importance Vitale (OIV) gèrent des activités indispensables à la survie de la nation.
+
+      Les Opérateurs de Services Essentiels (OSE) fournissent des services critiques pour l'économie ou la société.
+
+   B. Détection et Gestion de Crise.
+
+      La détection identifie les événements de sécurité par la supervision du système d'information.
+
+      Un incident de sécurité compromet la disponibilité, l'intégrité ou la confidentialité des données.
+
+      Le CERT ou CSIRT est un centre d'alerte et de réaction aux attaques informatiques.
+
+      La gestion de crise cyber organise la réponse pour préserver les intérêts et rétablir les opérations.
+
+      Le plan de continuité d'activité (PCA) guide le fonctionnement en mode dégradé après une perturbation.
+
+      Le plan de reprise d'activité (PRA) définit les procédures pour rétablir les activités normales.
+
+      La remédiation est le projet de reprise de contrôle du système pour revenir à un état sain.
+
+   C. Organisation de la Défense en France.
+
+      L'ANSSI agit comme l'autorité nationale en matière de sécurité et de défense des systèmes d'information.
+
+      La cyberdéfense regroupe les mesures techniques et non techniques pour défendre les systèmes essentiels.
+
+      Le modèle français sépare distinctement les missions défensives et les missions offensives de l'État.
+
+      Les prestataires qualifiés incluent les PASSI pour l'audit et les PDIS pour la détection d'incidents.
+
+      Le Visa de sécurité identifie les solutions de cybersécurité les plus fiables évaluées par l'ANSSI.
+
+POINTS D'ATTENTION.
+
+      Il ne faut pas confondre identification qui est dire qui on est et authentification qui est prouver qui on est.
+
+      Une alerte malveillante ou swatting peut provoquer une intervention inutile des forces de police.
+
+      Le débridage ou jailbreak supprime les protections constructeur mais expose l'appareil à des risques accrus.
+
+      La cybercriminalité vise le profit ou le délit alors que la cyberdéfense protège les intérêts vitaux de l'État.
+
+      La reconstruction du système d'information est une étape technique essentielle de la remédiation.
+
+      Les indicateurs de compromission ou IOC sont des marqueurs techniques permettant de caractériser une attaque.
+
+EXEMPLES CITES.
+
+      Le phishing incite à cliquer sur des liens frauduleux contenus dans des courriels piégés.
+
+      Le ransomware chiffre les données et demande une rançon pour fournir la clé de déchiffrement.
+
+      L'attaque par saturation téléphonique ou TDoS bloque les services d'urgence par un afflux d'appels.
+
+      Le supply chain attack a compromis de nombreuses victimes via des fournisseurs de logiciels dès 2016.
+
+      Le password spraying tente un mot de passe courant sur un grand nombre de comptes différents.
+
+      Le téléchargement furtif installe un code malveillant lors de la simple visite d'un site web compromis.
