@@ -1,0 +1,199 @@
+TITRE DU COURS.
+
+RÉFÉRENTIEL CYBER FRANCE RECYF VERSION DEUX POINT CINQ.
+
+LEXIQUE COMPLET.
+
+      Action d'administration désigne l'installation ou la modification d'une configuration pouvant impacter le fonctionnement ou la sécurité.
+
+      Administrateur désigne une personne physique avec des droits privilégiés chargée de la maintenance.
+
+      Annuaire est une ressource centralisant les informations des utilisateurs et fournissant l'identification.
+
+      Authentification multifacteur combine au moins deux facteurs parmi la connaissance ou la possession ou la caractéristique inhérente.
+
+      Capacité opérationnelle regroupe les processus et ressources pour atteindre un objectif précis.
+
+      Code malveillant exploite les vulnérabilités logicielles à des fins malveillantes.
+
+      Cœur de confiance regroupe les annuaires et les ressources permettant d'en prendre le contrôle.
+
+      Compte d'administration dispose des privilèges nécessaires aux actions d'administration.
+
+      Dispositif de détection identifie les indicateurs de compromission sur les réseaux ou les systèmes.
+
+      Durée maximale d'interruption admissible indique le temps au bout duquel les impacts deviennent inacceptables.
+
+      Événement de sécurité indique une violation possible de la politique de sécurité.
+
+      Facteur d'authentification est un élément mémorisé ou physique ou biométrique vérifiant une identité.
+
+      Incident de sécurité compromet la disponibilité ou l'authenticité ou l'intégrité des données.
+
+      Indicateur de compromission est une trace technique manifestant une tentative d'attaque.
+
+      Information sensible englobe les données personnelles ou scientifiques ou commerciales protégées par la loi.
+
+      Interconnexion permet le transfert d'information entre deux systèmes d'information.
+
+      Mécanisme d'authentification vérifie l'identité d'un utilisateur avant l'accès aux ressources.
+
+      Point de rétablissement de données définit le moment à partir duquel les informations sont restaurées.
+
+      Règle de filtrage autorise ou interdit les flux de données selon des critères définis.
+
+      Réseau d'administration est dédié physiquement ou logiquement aux flux d'administration.
+
+      Sécurité numérique protège les réseaux et les utilisateurs contre les cybermenaces.
+
+      Sous-système isole des ressources informatiques ayant un même besoin de sécurité.
+
+      Système d'analyse exploite les événements pour identifier des incidents de sécurité.
+
+      Système d'information englobe les infrastructures logicielles permettant de traiter les données.
+
+      Système d'information d'infrastructure est généraliste et utile au fonctionnement de plusieurs autres systèmes.
+
+      Système d'information tiers est une ressource partagée qui n'est pas sous la responsabilité de l'entité.
+
+      Utilisateur désigne les personnels et prestataires accédant aux systèmes informatiques.
+
+COURS DÉTAILLÉ.
+
+I. GOUVERNANCE DES SYSTÈMES D'INFORMATION.
+
+   A. Recensement et cartographie.
+
+      Les entités dressent une liste exhaustive de leurs activités et des systèmes d'information associés.
+
+      Certains systèmes peuvent être exclus s'ils ne présentent aucun risque de dégradation ou de divulgation ou d'altération des données.
+
+      Une cartographie détaillée est requise pour faciliter le maintien en condition opérationnelle et la réaction aux incidents.
+
+   B. Cadre de gouvernance et ressources humaines.
+
+      Le dirigeant exécutif porte la responsabilité de la sécurité numérique et nomme des référents dédiés.
+
+      Une politique de sécurité des systèmes d'information doit être rédigée et validée par la direction.
+
+      La sécurité s'intègre dès le recrutement par la sensibilisation et jusqu'au départ par la désactivation des accès.
+
+   C. Maîtrise de l'écosystème.
+
+      Une cartographie des prestataires et fournisseurs informatiques doit être maintenue à jour.
+
+      Les contrats doivent inclure des clauses de sécurité numérique et de notification des incidents.
+
+   D. Approche par les risques et audit pour les entités essentielles.
+
+      Les entités essentielles déploient une gouvernance basée sur l'analyse des risques réévaluée tous les trois ans.
+
+      Un programme d'audit indépendant incluant des tests d'intrusion vérifie régulièrement le niveau de sécurité réel.
+
+II. PROTECTION DES SYSTÈMES D'INFORMATION.
+
+   A. Sécurité physique et architecture réseau.
+
+      L'accès aux locaux techniques et aux salles serveurs est strictement restreint et surveillé.
+
+      Les systèmes d'information sont cloisonnés en zones de sécurité étanches pour limiter la propagation des menaces.
+
+      Les flux de communication sont filtrés par des pare-feux qui bloquent par défaut tout trafic non autorisé.
+
+   B. Accès distants et protection contre les codes malveillants.
+
+      Les connexions depuis l'extérieur imposent un chiffrement du canal et une authentification forte.
+
+      Les entités essentielles interdisent les équipements personnels pour se connecter à leur réseau.
+
+      Des mécanismes de protection de type antivirus analysent tous les fichiers provenant de sources externes.
+
+   C. Gestion des identités et des accès.
+
+      Chaque utilisateur possède un compte nominatif avec des droits limités à son strict besoin professionnel.
+
+      Les mots de passe par défaut sont systématiquement remplacés et renforcés selon les bonnes pratiques.
+
+      Une revue annuelle des comptes et des autorisations est obligatoirement réalisée par l'entité.
+
+   D. Administration sécurisée et durcissement.
+
+      Les administrateurs utilisent des comptes dédiés uniquement à leurs tâches de maintenance.
+
+      L'administration des entités essentielles s'effectue depuis un réseau isolé et des postes de travail spécifiques.
+
+      Le cœur de confiance hébergeant les annuaires fait l'objet de mesures de protection maximales.
+
+      Les logiciels inutiles sont supprimés pour réduire la surface d'attaque des serveurs et des postes.
+
+III. DÉFENSE DES SYSTÈMES D'INFORMATION.
+
+   A. Identification des incidents.
+
+      Des outils de collecte permettent de faire remonter les signalements d'anomalies par les utilisateurs.
+
+      Les événements techniques sont analysés pour qualifier rapidement toute tentative de compromission.
+
+   B. Supervision continue pour les entités essentielles.
+
+      Un centre de supervision analyse les journaux informatiques et traite les alertes sous vingt-quatre heures.
+
+      Les traces informatiques sont conservées en sécurité pendant au moins trois mois pour faciliter les enquêtes.
+
+      La stratégie de détection est améliorée en continu pour couvrir les nouvelles menaces identifiées.
+
+IV. RÉSILIENCE DES SYSTÈMES D'INFORMATION.
+
+   A. Sauvegardes et continuité d'activité.
+
+      Des sauvegardes régulières sont réalisées et protégées contre les rançongiciels par un stockage déconnecté.
+
+      Les entités essentielles définissent des plans de continuité et de reprise avec des durées d'interruption tolérées.
+
+      Les procédures de restauration des données sont testées techniquement au moins une fois par an.
+
+   B. Gestion de crise cyber.
+
+      Une procédure spécifique de gestion de crise est formalisée avec une liste de contacts imprimée sur papier.
+
+      Des moyens de communication de secours sécurisés sont prévus si le réseau principal est hors d'usage.
+
+   C. Entraînements réguliers.
+
+      Des exercices de simulation de crise sont organisés pour valider les réflexes des équipes dirigeantes.
+
+      Les retours d'expérience permettent d'adapter les procédures après chaque incident ou entraînement.
+
+POINTS D'ATTENTION.
+
+Les objectifs de sécurité s'appliquent à toutes les entités sauf justification documentée d'absence de risque.
+
+L'application stricte du principe de proportionnalité réserve les objectifs seize à vingt aux seules entités essentielles.
+
+Le dirigeant exécutif est personnellement responsable de la validation de la politique de sécurité.
+
+L'utilisation d'équipements personnels est tolérée pour les entités importantes mais prohibée pour les entités essentielles.
+
+Toute compromission du cœur de confiance est considérée comme une perte totale du système d'information.
+
+Les correctifs de sécurité doivent être appliqués sans délai sur les équipements directement exposés à internet.
+
+EXEMPLES CITÉS.
+
+Le vol de données personnelles ou l'altération des factures justifie l'inclusion d'un système dans le périmètre.
+
+L'annuaire active directory de microsoft constitue généralement le cœur de confiance d'un réseau d'entreprise.
+
+Le stockage hors ligne sur une bande magnétique isole les sauvegardes des attaques de rançongiciels.
+
+La méthode ebios risk manager permet de structurer l'analyse méthodique des risques informatiques.
+
+Un pare-feu filtre le trafic en analysant l'adresse de provenance et le numéro de port logiciel.
+
+Le recours à un réseau privé virtuel de type ipsec sécurise les échanges des télétravailleurs.
+
+La configuration initiale d'un routeur exige la modification immédiate de son mot de passe constructeur.
+
+Le signalement d'un courriel frauduleux par un salarié déclenche la procédure de gestion d'incident.
+
+La revue manuelle ou automatique des configurations valide la fermeture des ports de communication inutiles.
