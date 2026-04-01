@@ -1,0 +1,52 @@
+Quelles sont les deux fonctions de protection garanties par la gestion mémoire du noyau Linux ?,L'isolation stricte des processus et la protection de l'espace noyau.
+"Contrairement aux systèmes historiques, quel mécanisme Linux n'utilise-t-il plus de manière active pour la gestion mémoire ?",La segmentation.
+"Dans le modèle de mémoire ""flat"" de Linux, à quelle valeur est fixée la base des segments ?",$0x0$.
+Sur quel mécanisme repose l'intégralité de la gestion mémoire effective sous Linux ?,La pagination.
+Quel composant de la hiérarchie mémoire contient le pointeur de pile et le compteur ordinal ?,Les registres.
+"Quels protocoles matériels gèrent les caches CPU (L1, L2, L3) ?",Les protocoles MESI ou MOESI.
+Comment appelle-t-on l'événement où une donnée est trouvée immédiatement dans le cache CPU ?,Un cache hit.
+"Que se passe-t-il lors d'un ""cache miss"" au niveau du processeur ?",Le système doit avoir recours à la RAM.
+"Vrai ou Faux : Une valeur élevée de RAM ""used"" dans la commande `free` indique nécessairement une saturation.","Faux, car Linux réalloue dynamiquement le page cache."
+"Quel est l'avantage principal d'un SSD lors de la survenue de ""page faults"" majeurs ?",Il améliore notablement les performances de lecture sur disque.
+À quoi sert principalement la segmentation sur une architecture x86-64 sous Linux ?,À distinguer le mode utilisateur du mode noyau.
+Quelle structure fournit les descripteurs nécessaires à l'amorçage via la segmentation ?,La GDT (Global Descriptor Table).
+Quelle est la taille par défaut d'une page standard sur une architecture x86_64 ?,4 KiB.
+"Quelle est la taille d'une ""HugePage"" classique sous Linux ?",2 MiB.
+Dans quels types d'environnements utilise-t-on généralement les HugePages ?,"Les bases de données, les hyperviseurs ou les gros traitements."
+"Quelle taille de page est associée au mécanisme ""HugeTLB"" pour les charges massives (HPC) ?",1 GiB.
+Combien de niveaux de tables de pages Linux peut-il utiliser selon l'architecture ?,4 à 5 niveaux.
+"Dans la hiérarchie des tables de pages, que signifie l'acronyme PGD ?",Page Global Directory.
+Quel est le dernier niveau de la table des pages avant d'atteindre l'offset de l'adresse physique ?,La PTE (Page Table Entry).
+Quel composant matériel assure la traduction automatique des adresses virtuelles en adresses physiques ?,La MMU (Memory Management Unit).
+Quel est le rôle du TLB (Translation Lookaside Buffer) ?,Stocker les traductions récentes pour accélérer les accès mémoire.
+Quelle opération coûteuse est provoquée par une modification de mapping mémoire au niveau du cache de traduction ?,Un TLB flush.
+"Dans une entrée de table de pages (PTE), que signifie le bit ""Dirty"" ?",Il indique si la page a été modifiée en RAM.
+"Comment définit-on un ""Minor page fault"" ?",La page est déjà en RAM et nécessite seulement une mise à jour du mapping.
+"Pourquoi un ""Major page fault"" est-il considéré comme très coûteux ?",Car la page doit être lue depuis le disque.
+Quelle est la première étape du noyau lors de la détection d'un page fault ?,L'interruption du processus fautif.
+"Après un page fault, quelle structure est consultée pour vérifier la validité de l'accès avant l'allocation ?",La VMA (Virtual Memory Area).
+Citez deux des trois principaux allocateurs de structures internes du noyau Linux.,"SLAB, SLUB ou SLOB."
+Quels sont les trois rôles principaux du Swap ?,"Déplacer les pages inactives, libérer de la RAM et prévenir l'OOM."
+Quel daemon noyau est chargé de basculer les pages inactives vers le swap ?,kswapd.
+Quel mécanisme d'urgence est déclenché si la pression mémoire persiste malgré l'action de kswapd ?,L'OOM Killer (Out Of Memory Killer).
+Sur quels critères le noyau calcule-t-il le score d'un processus pour l'OOM Killer ?,"La consommation mémoire, l'importance système et le comportement du processus."
+Que contient une VMA (Virtual Memory Area) ?,"Les adresses de début/fin, les permissions et l'éventuel fichier mappé."
+Dans quel répertoire du système `/proc` peut-on consulter les VMAs d'un processus spécifique ?,Dans `/proc/<PID>/maps` ou `/proc/<PID>/smaps`.
+"Quel est l'allocateur noyau par défaut, reconnu pour sa performance et sa simplicité ?",L'allocateur SLUB.
+À quoi correspond la zone mémoire physique nommée ZONE_DMA ?,À la zone compatible avec les anciennes contraintes matérielles de l'accès direct à la mémoire.
+Pourquoi la ZONE_HIGHMEM est-elle considérée comme obsolète sur les systèmes 64 bits ?,Parce que l'espace d'adressage 64 bits permet d'accéder directement à toute la RAM.
+Quelle commande permet d'obtenir une vue globale et détaillée de la mémoire via le système de fichiers `/proc` ?,`cat /proc/meminfo`.
+"Dans la commande `free`, quel champ est l'indicateur le plus fiable de la mémoire réellement disponible ?","Le champ ""available""."
+Quelle commande permet d'afficher les partitions ou fichiers de swap actifs ?,`swapon --show`.
+"Comment peut-on modifier dynamiquement la valeur de la ""swappiness"" du système ?",Via la commande `sudo sysctl vm.swappiness=<valeur>`.
+Quelle commande permet de connaître la taille des pages standard configurée sur le système ?,`getconf PAGESIZE`.
+Terme : Frame.,Définition : Une page telle qu'elle existe physiquement dans la RAM.
+Quel est l'avantage de l'utilisation des HugePages concernant le cache de traduction (TLB) ?,Elles réduisent le nombre de TLB misses.
+Quel outil de diagnostic interactif permet de surveiller la consommation mémoire par processus ?,`htop`.
+La zone mémoire principale utilisée par le noyau est appelée _____.,ZONE_NORMAL
+Une adresse virtuelle est décomposée en plusieurs index de tables de pages et se termine par un _____.,offset
+Quel fichier fournit des informations sur l'utilisation des allocateurs de type slab ?,`/proc/slabinfo`.
+"Dans la résolution d'un page fault, que se passe-t-il immédiatement après la mise à jour des tables de pages ?",La reprise transparente de l'instruction du processus.
+Pourquoi Linux utilise-t-il des tables de pages à plusieurs niveaux ?,Pour adresser efficacement de très grands espaces virtuels sans gaspiller de mémoire pour les tables elles-mêmes.
+Quel bit d'une PTE indique si une page est accessible en lecture/écriture ?,Le bit RW.
+La commande `vmstat -w 1` est utile pour observer _____ en temps réel.,l'activité de la mémoire et du swap
