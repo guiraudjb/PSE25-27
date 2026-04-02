@@ -1,0 +1,145 @@
+MANIPULER LES DONNÉES LES ÉDITEURS DE TEXTE SOUS LINUX.
+
+LEXIQUE COMPLET.
+
+      Éditeur de texte est un programme pour modifier des fichiers bruts comme des scripts ou des configurations.
+
+      Traitement de texte est un logiciel orienté sur la mise en page et les styles comme LibreOffice.
+
+      Mémoire tampon est un espace temporaire où un fichier est chargé pour être modifié avant la sauvegarde sur le disque.
+
+      Mode commande est un état dans lequel chaque touche pressée est interprétée comme une action ou une instruction de navigation.
+
+      Mode insertion est un état permettant de saisir directement du texte pour l'ajouter au document en cours d'édition.
+
+      Expression régulière est une syntaxe de recherche permettant de cibler et de transformer des motifs textuels complexes.
+
+      Buffer gap est une structure de données optimisée utilisée par Emacs pour permettre des insertions rapides.
+
+      Hook est un mécanisme de programmation déclenchant l'exécution de fonctions spécifiques lors d'événements particuliers dans Emacs.
+
+      Registre de suppression est un espace mémorisant automatiquement les derniers textes effacés dans vi pour permettre leur restauration.
+
+COURS DÉTAILLÉ.
+
+I. LE RÔLE ET L'OBJECTIF D'UN ÉDITEUR DE TEXTE SOUS LINUX.
+
+   A. Spécificités de l'environnement Unix.
+
+      L'usage des éditeurs de texte est particulièrement courant car de très nombreux composants du système reposent sur des fichiers texte.
+
+      Le but est de manipuler précisément des lignes et du code sans se préoccuper du formatage visuel.
+
+      Les fichiers générés sont totalement dépourvus d'informations de mise en forme comme les polices ou les styles de caractères.
+
+II. L'ÉDITEUR ED ET SA LOGIQUE HISTORIQUE.
+
+   A. Fonctionnement global et philosophie.
+
+      Ce programme historique est extrêmement compatible et reste disponible dans les environnements matériels ou logiciels très limités.
+
+      Il ne modifie pas les fichiers directement mais utilise une mémoire tampon sécurisant ainsi les opérations de test.
+
+      L'interface n'affiche pas de page complète mais requiert de manipuler le contenu en adressant spécifiquement des lignes.
+
+   B. Adressage et manipulations structurelles.
+
+      La syntaxe de base associe une adresse de ligne courante ou absolue avec une commande d'action spécifique.
+
+      L'utilisateur peut cibler des intervalles entiers pour supprimer ou déplacer ou copier des blocs de texte.
+
+      Des options d'affichage détaillées révèlent les caractères invisibles problématiques générés par des environnements étrangers.
+
+   C. Puissance des substitutions et de l'automatisation.
+
+      Le système maîtrise les expressions régulières pour modifier massivement le texte et extraire des champs de données.
+
+      Son véritable intérêt moderne réside dans son intégration aux scripts shell pour transformer automatiquement de nombreux fichiers.
+
+III. L'ÉDITEUR VI ET SA PUISSANCE EN PLEIN ÉCRAN.
+
+   A. Conception et caractéristiques principales.
+
+      Conçu à l'université de Berkeley cet outil offre une édition plein écran basée sur la rapidité et la composition d'actions.
+
+      Il favorise une navigation ultra rapide au clavier sans avoir besoin de faire défiler manuellement le texte ou d'utiliser une souris.
+
+      La variante améliorée nommée vim apporte des fonctionnalités modernes comme la coloration syntaxique et l'auto-complétion.
+
+   B. Les trois modes d'interaction.
+
+      Le mode commande est actif par défaut et traduit chaque appui sur une touche en un déplacement ou une altération du texte.
+
+      Le mode insertion permet de taper le contenu final du document et s'active par des touches spécifiques selon la position désirée.
+
+      Le mode ex s'ouvre en bas de l'écran pour saisir des requêtes complexes de substitution ou pour sauvegarder le travail.
+
+   C. Registres et manipulations avancées.
+
+      Toute destruction de texte est conservée en mémoire dans un registre anonyme pour permettre un collage ultérieur.
+
+      Les suppressions majeures sont stockées automatiquement dans neuf registres numérotés afin de récupérer les erreurs de manipulation.
+
+      Des tampons identifiés par des lettres permettent de jongler avec plusieurs morceaux de texte au cours de la même session.
+
+IV. L'ÉDITEUR GNU EMACS ET SON ENVIRONNEMENT EXTENSIBLE.
+
+   A. Une architecture reposant sur deux couches.
+
+      Un noyau programmé en langage C gère les interactions matérielles et l'affichage des buffers de manière optimisée.
+
+      Une couche supérieure fonctionnant en Emacs Lisp contient la logique métier et définit toutes les commandes interactives.
+
+   B. Un écosystème malléable et complet.
+
+      Le comportement global de l'interface peut être redéfini dynamiquement pendant l'exécution grâce au système de programmation intégré.
+
+      Il intègre directement des processus tiers comme la compilation ou la gestion de version au sein de son propre espace de travail.
+
+V. L'ÉDITEUR NANO POUR LA SIMPLICITÉ ET L'INTUITIVITÉ.
+
+   A. Accessibilité et ergonomie immédiate.
+
+      L'interface démarre directement en mode d'édition pour éviter aux utilisateurs débutants de se perdre dans des commandes abstraites.
+
+      Un menu permanent situé au bas de l'écran affiche les raccourcis essentiels en utilisant la touche Contrôle comme modificateur.
+
+   B. Cas d'usage privilégiés.
+
+      L'outil est idéal pour les interventions urgentes de dépannage sur un système minimal sans interface graphique.
+
+      Il offre tout de même des fonctions pratiques comme l'indentation automatique ou la recherche et le remplacement interactif.
+
+POINTS D'ATTENTION.
+
+Il faut toujours s'assurer de sauvegarder explicitement les modifications avant de quitter l'éditeur sous peine de perdre son travail.
+
+L'éditeur ed ne demande pas de confirmation automatique avant de quitter, ce qui nécessite une grande prudence.
+
+Il est recommandé de s'entraîner sur des copies de fichiers de configuration pour éviter d'altérer le système par erreur.
+
+L'ouverture d'un fichier avec la commande view permet de limiter les risques de suppression accidentelle lors d'une simple lecture.
+
+Les registres nommés dans l'éditeur vi sont vidés de leur contenu dès que le programme est fermé par l'utilisateur.
+
+L'éditeur nano demande une confirmation de sauvegarde s'il détecte des changements lors de la tentative de fermeture.
+
+EXEMPLES CITES.
+
+L'instruction wq dans le mode ex de vi sauvegarde les modifications puis ferme l'éditeur.
+
+L'instruction q dans le mode ex de vi ferme le fichier en abandonnant toutes les modifications en cours.
+
+L'instruction dd dans le mode commande de vi supprime intégralement la ligne où se trouve le curseur.
+
+L'instruction u dans le mode commande de vi annule la dernière altération effectuée sur le texte.
+
+L'instruction s avec l'option g dans le mode ex de vi remplace toutes les occurrences d'une chaîne sur la ligne ciblée.
+
+La combinaison de touches Contrôle plus X ferme l'interface de l'éditeur nano de façon sécurisée.
+
+La combinaison de touches Contrôle plus O sauvegarde le contenu actuel du fichier ouvert avec nano.
+
+La combinaison de touches Contrôle X suivi de Contrôle F permet d'ouvrir un nouveau fichier dans Emacs.
+
+La combinaison de touches M suivi de X permet de lancer une commande étendue par son nom complet sous Emacs.

@@ -1,0 +1,61 @@
+Quel est l'objectif principal d'un éditeur de texte sous Linux par rapport à un traitement de texte ?,La manipulation précise du code et des lignes sans mise en page.
+Pourquoi l'usage des éditeurs de texte est-il particulièrement courant sous Linux ?,"Car la configuration du système, les services et les scripts reposent sur des fichiers texte."
+Quel éditeur est considéré comme l'éditeur de texte « standard » historique sous Unix ?,ed
+Quelle est la particularité du fonctionnement de l'éditeur ed concernant la modification des fichiers ?,Il travaille sur une mémoire tampon (buffer) et ne modifie pas le fichier directement.
+"Dans l'éditeur ed, quel symbole représente la ligne courante ?",.
+"Dans l'éditeur ed, quel symbole représente la dernière ligne d'un fichier ?",$
+Quelle commande ed permet d'afficher les lignes comprises entre 3 et 8 ?,"3,8p"
+Comment effectue-t-on une recherche vers l'arrière dans l'éditeur ed ?,En utilisant des points d'interrogation (?expression?).
+"Dans ed, quel type d'affichage permet de diagnostiquer des problèmes de caractères invisibles ?",L'affichage détaillé.
+Quelle commande ed permet de supprimer les lignes 3 à 7 ?,"3,7d"
+Comment marque-t-on la ligne courante avec la lettre 'a' dans ed ?,k a
+Quelle commande ed permet de fusionner (joindre) les lignes 5 et 6 ?,"5,6j"
+Quelle commande ed déplace les lignes 3 à 6 après la ligne 10 ?,"3,6m10"
+Quelle commande ed copie les lignes 3 à 6 après la ligne 10 ?,"3,6t10"
+Comment repasse-t-on du mode insertion au mode commande dans l'éditeur ed ?,En tapant une ligne contenant uniquement un point (.).
+"Dans une substitution ed, que permet de faire le paramètre 'g' ?",Remplacer toutes les occurrences du motif sur la ligne.
+"Dans une substitution ed, quel symbole réinsère la chaîne de caractères trouvée ?",&
+Comment automatise-t-on généralement ed dans un script shell ?,En lui fournissant une suite de commandes via une redirection (EOF/Here-doc).
+Où l'éditeur vi a-t-il été conçu historiquement ?,À Berkeley.
+Que signifie l'acronyme vim ?,Vi IMproved
+Quel outil permet d'apprendre les bases de vi de manière guidée en environ 30 minutes ?,vimtutor
+Quelle commande permet d'ouvrir un fichier en lecture seule dans vi pour réduire les risques ?,view
+"Dans vi, quelle commande permet de sauvegarder les modifications et de quitter ?",:wq
+"Dans vi, quelle commande force l'écriture d'un fichier protégé ?",:w!
+Quelle option vi permet d'afficher les numéros de ligne ?,:set nu
+Quelles touches vi permettent le déplacement de base (caractère par caractère) ?,"h, j, k, l"
+"Dans vi, quelle commande permet d'aller directement à la fin du fichier ?",G
+Quels sont les trois modes de fonctionnement de l'éditeur vi ?,"Mode commande, mode insertion et mode ex."
+Comment accède-t-on au mode insertion dans vi ?,En appuyant sur la touche 'i'.
+"Dans vi, quelle commande permet d'exécuter une commande Unix sans quitter l'éditeur ?",:!commande
+"Dans vi, quelle touche permet d'annuler la dernière action effectuée ?",u
+"Dans vi, à quoi sert la commande point (.) ?",À répéter la dernière commande de modification.
+Quelle commande vi insère du texte après le curseur ?,a
+Quelle commande vi ouvre une nouvelle ligne au-dessus de la ligne courante ?,O
+"Dans vi, quelle commande permet de supprimer un mot entier ?",dw
+Quelle commande vi permet de supprimer trois lignes d'un coup ?,3dd
+"Dans vi, comment effectue-t-on une recherche de motif vers l'avant ?",/motif
+Quelle commande vi permet de coller le contenu du buffer anonyme après le curseur ?,p
+De combien de buffers nommés (lettres) dispose vi pour stocker des extraits de texte ?,26
+"Dans vi, que deviennent les buffers nommés à la fermeture de l'éditeur ?",Ils sont perdus.
+Comment appelle-t-on les registres numérotés de 1 à 9 qui conservent les blocs supprimés dans vi ?,Registres de suppression (delete buffers).
+Quelle commande vi permet de restaurer l'avant-dernière suppression ?,"""2p"
+"Dans le mode ex de vi, quelle commande remplace toutes les occurrences de la ligne courante ?",:s/ancien/nouveau/g
+Quelle commande vi permet d'effectuer une substitution sur l'ensemble du fichier ?,:%s/ancien/nouveau/g
+"Dans une substitution vi, comment réinsère-t-on un champ capturé par des parenthèses ?",Via une référence \\n.
+Quelle commande permet de récupérer un tampon vi après un crash système ?,vi -r fichier
+"Dans vi, quel raccourci clavier permet de rafraîchir l'affichage de l'écran ?",Ctrl + L
+Qui est le créateur de l'éditeur GNU Emacs ?,Richard Stallman
+Sur quel langage de programmation repose la couche d'extension d'Emacs ?,Emacs Lisp (Elisp)
+"Dans Emacs, comment appelle-t-on les structures où le texte est stocké ?",Buffers
+Quel mécanisme permet à Emacs d'exécuter des fonctions lors d'événements précis comme la sauvegarde ?,Les hooks
+"Dans Emacs, quel raccourci permet d'ouvrir un fichier ?",C-x C-f
+"Dans Emacs, quel raccourci permet d'annuler une commande en cours ?",C-g
+Quel est l'avantage principal de l'éditeur nano pour un débutant ?,Il est intuitif et n'utilise pas de modes complexes.
+"Dans l'interface de nano, que représente le symbole '^' placé devant une lettre ?",La touche Ctrl
+"Dans nano, quel raccourci permet de sauvegarder le fichier ?",Ctrl + O
+"Dans nano, quel raccourci permet d'effectuer une recherche ?",Ctrl + W
+Quelle commande nano permet de couper une ligne de texte ?,Ctrl + K
+"Dans nano, quel raccourci permet d'accéder à l'aide intégrée ?",Ctrl + G
+Quelle option de lancement de nano permet d'afficher les numéros de ligne ?,-l
+"Dans nano, quel raccourci permet d'aller à une ligne précise ?",Ctrl + _
