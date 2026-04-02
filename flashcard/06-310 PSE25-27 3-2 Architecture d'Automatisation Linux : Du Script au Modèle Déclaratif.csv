@@ -1,0 +1,50 @@
+Quel problème structurel survient lorsqu'un script Bash conçu pour 10 serveurs est déployé sur 1000 serveurs aux environnements hétérogènes ?,Le mur de la variance.
+Comment appelle-t-on la propriété d'une opération qui produit le même résultat qu'elle soit exécutée une seule fois ou plusieurs fois ?,L'idempotence.
+Quel est le risque principal d'un script Bash non idempotent lors d'une deuxième exécution ?,Il peut planter ou dupliquer des entrées de configuration.
+Quelle est la conséquence d'une modification manuelle d'un script sur un serveur sans mise à jour du dépôt Git ?,L'absence de source de vérité unique rend l'infrastructure non reproductible.
+Que signifie l'acronyme MTTR dans le contexte de la maintenance système ?,Mean Time To Recovery (temps moyen de rétablissement).
+Quelle est la limite du modèle basé sur l'action humaine face à une alerte nocturne ?,Le MTTR est limité par la disponibilité et la vitesse de réaction de l'humain.
+Quelle approche décrit une politique d'état final plutôt qu'une suite d'étapes de configuration ?,L'approche déclarative.
+"Dans une architecture basée sur l'IaC, quel est le rôle de l'outil (comme Ansible ou Puppet) face à une politique définie ?",L'outil décide de la procédure optimale pour atteindre l'état souhaité.
+Quel bénéfice apporte l'abstraction de la complexité pour l'administrateur système ?,Elle permet de gérer la variance des environnements sans modifier les commandes.
+Quel paradigme utilise le dépôt Git comme source de vérité unique pour les modifications d'infrastructure ?,Le GitOps.
+Pourquoi le passage par une Pull Request est-il considéré comme un garde-fou ?,Il permet la relecture et la critique du code par les pairs avant la mise en production.
+Quelle action Git permet de réaliser un « rollback » stable et traçable de l'infrastructure ?,Le git revert du dernier commit.
+Comment appelle-t-on l'écart constaté entre l'état réel d'un serveur et l'état désiré défini dans Git ?,La dérive (drift).
+Quel est l'objectif du mode « convergence » dans une architecture d'automatisation ?,Réduire automatiquement l'écart entre l'état réel et l'état désiré sans intervention humaine.
+Définition : Infrastructure as Code (IaC),Gestion et provisionnement de l'infrastructure via des fichiers de définition lisibles par machine.
+Quelle est la caractéristique principale du langage DSL de Puppet ?,Il est purement déclaratif.
+Quel outil est préférentiellement utilisé pour les ressources de type « création/destruction » en amont de la configuration ?,Terraform.
+"Dans un modèle GitOps, quel est le rôle de l'opérateur d'auto-réconciliation ?",Comparer en permanence l'état désiré dans Git à l'état actuel sur les serveurs.
+Citez les quatre forces motivant le passage du script à l'architecture automatisée.,"Scalabilité, fiabilité, traçabilité et efficacité opérationnelle."
+Quels sont les trois piliers d'une architecture d'automatisation robuste ?,"Gestion d'état (idempotence), gestion des secrets et gestion de configuration centralisée."
+Pourquoi l'idempotence est-elle indispensable pour l'auto-guérison d'un système ?,Elle permet au système de se corriger sans risque de casser les éléments déjà conformes.
+Quelle est la règle absolue concernant les mots de passe et clés API dans un dépôt Git ?,Aucun secret ne doit apparaître en clair dans le code d'infrastructure.
+Comment les secrets doivent-ils être gérés lors de l'exécution d'un pipeline CI/CD ?,Le pipeline doit injecter les secrets de manière transparente pour l'exécution mais opaque pour l'humain.
+À quoi sert un magasin clé-valeur (KV store) distribué dans un grand parc de serveurs ?,À centraliser la configuration dynamique et l'annuaire de services.
+Quel outil permet le chiffrement AES256 de fichiers de variables pour les petits parcs ?,Ansible Vault.
+Quel est l'avantage principal du modèle d'exécution « Push » ?,Sa simplicité et sa faible latence pour des actions immédiates ou des correctifs urgents.
+Quelle est la contrainte majeure du modèle Push pour le contrôleur central ?,Il doit connaître et pouvoir joindre toutes les machines cibles via le réseau.
+Quel est l'avantage du modèle « Pull » en termes de montée en échelle ?,"Chaque agent gère sa propre charge, permettant un passage à l'échelle massif."
+Comment le modèle Pull réagit-il si le serveur central est momentanément injoignable ?,L'agent peut continuer à appliquer la politique locale en mode dégradé.
+Quel patron de conception (pattern) sert d'unité d'encapsulation fondamentale pour structurer le code d'automatisation ?,Le rôle.
+Qu'est-ce qu'une dépendance inter-hôte dans l'orchestration système ?,Une condition où un serveur (ex: application) attend qu'un autre (ex: base de données) soit prêt.
+Quel type de test vérifie qu'un rôle fonctionne correctement dans un conteneur ou une VM isolée ?,Le test unitaire.
+À quoi servent les tests de conformité après une configuration ?,"À vérifier que l'état attendu (ports, services, fichiers) est effectivement présent sur la machine."
+Quelle mesure technique permet d'éviter qu'un playbook sature le réseau ou les API cibles ?,La limitation du parallélisme (ex: paramètre forks).
+Quel composant architectural sert de point d'entrée unique pour sécuriser les flux vers des environnements cloisonnés ?,Le bastion (ou Jump Host).
+Quelle méthode permet de garantir l'authenticité des commits de configuration ?,La signature GPG des commits.
+"En sécurité, quel principe limite les droits de l'utilisateur d'automatisation au strict nécessaire ?",Le principe du moindre privilège.
+Quel outil est utilisé pour collecter et centraliser les métriques d'exécution de l'automatisation ?,Prometheus.
+À quoi sert l'outil Loki dans une architecture d'automatisation ?,À la centralisation et à l'exploitation des logs d'exécution.
+"Dans l'exemple d'architecture fourni, quel logiciel est utilisé comme KV Store pour stocker l'état désiré ?",Consul.
+Quelle est la fonction du DNS Consul pour les applications ?,Le « service discovery » (découverte dynamique de services sans IP en dur).
+Quel logiciel assure la gestion dynamique des secrets avec une durée de vie (TTL) limitée ?,HashiCorp Vault.
+Pourquoi le modèle Pull améliore-t-il la sécurité des cibles réseau ?,"Les cibles n'ont pas besoin d'accepter de connexions entrantes, elles initient les flux vers l'extérieur."
+"Dans un scénario de déploiement, quelle est l'étape suivant immédiatement le « Merge » d'une Pull Request ?",La mise à jour de l'état désiré dans le KV Store via un pipeline.
+Comment un ingénieur diagnostique-t-il une machine en échec persistant dans une architecture Pull ?,Il se connecte via le bastion en mode Push dégradé (SSH).
+Quel est l'intérêt d'utiliser Grafana dans ce contexte ?,Afficher en temps réel le déroulement des opérations et l'état de l'infrastructure.
+Quel est le risque de la « dette technique d'automatisation » dans un script Bash ?,Le script devient un monstre illisible à cause de l'accumulation de conditions spécifiques.
+Pourquoi l'exécution d'un script Bash procédural standard n'est-elle pas idempotente par conception ?,Il nécessite une logique de vérification préalable complexe souvent omise par le développeur.
+"En mode Push, comment appelle-t-on le serveur qui initie les commandes vers les nœuds ?",Le contrôleur central.
+"Dans le modèle déclaratif, que se passe-t-il si un service configuré s'arrête accidentellement ?",L'outil de gestion d'état détecte l'écart et relance le service automatiquement.
