@@ -1,0 +1,119 @@
+TITRE DU COURS LINUX ET EXPRESSIONS REGULIERES.
+
+LEXIQUE COMPLET.
+
+      Les expressions régulières sont des outils informatiques permettant d'identifier, de filtrer ou d'extraire des chaînes de caractères selon des critères très précis.
+
+      Les métacaractères génériques sont des symboles comme le point ou l'astérisque permettant de rechercher une séquence sans en connaître le contenu exact.
+
+      L'antislash est un caractère spécifique utilisé pour neutraliser le rôle spécial d'un métacaractère afin de le rechercher en tant que texte ordinaire.
+
+      Les classes standards prédéfinies représentent des ensembles intégrés pour simplifier la recherche de types précis comme les chiffres ou les espaces.
+
+      Les opérateurs de répétition correspondent aux symboles servant à définir le nombre minimal ou maximal d'occurrences d'un motif recherché.
+
+      Les groupements désignent l'utilisation de parenthèses pour répéter une séquence complète de caractères au lieu d'un seul élément isolé.
+
+COURS DÉTAILLÉ.
+
+I. COMPRENDRE LES EXPRESSIONS REGULIERES.
+
+   A. Utilité et fonctionnement des expressions régulières.
+
+      Les expressions régulières sont indispensables pour toute manipulation avancée de données sous le système d'exploitation Linux.
+
+      Elles servent principalement à rechercher des lignes spécifiques dans des fichiers volumineux ou à filtrer des journaux systèmes appelés logs.
+
+      Ces outils permettent également d'extraire des informations structurées, de nettoyer des fichiers ou de vérifier des formats spécifiques de données.
+
+      Ils autorisent le passage d'une recherche purement aléatoire à une recherche totalement intelligente et structurée.
+
+   B. Intégration dans les différents outils du système.
+
+      Les expressions régulières se retrouvent au cœur de multiples outils essentiels sous le système d'exploitation Linux.
+
+      Elles sont utilisées par des commandes de filtrage très répandues comme grep, egrep, sed et awk.
+
+      Certains éditeurs de texte classiques tels que vi ou nano les intègrent également dans leurs fonctionnalités principales.
+
+II. SYNTAXE ET CONSTRUCTION DES EXPRESSIONS.
+
+   A. Utilisation des métacaractères génériques de base.
+
+      Le point remplace un seul caractère obligatoire inconnu, à l'exception spécifique du caractère de retour à la ligne.
+
+      L'astérisque indique la présence de zéro, une ou plusieurs occurrences de l'élément qui le précède directement dans la requête.
+
+      Pour rechercher un métacaractère en tant que texte littéral, il est obligatoire d'utiliser un antislash pour neutraliser complètement son effet.
+
+   B. Positionnement des éléments dans la chaîne de texte.
+
+      Le symbole de l'accent circonflexe permet d'isoler uniquement les éléments qui commencent par un motif précis positionné en tout début de ligne.
+
+      Le symbole du dollar sert quant à lui à vérifier qu'un motif donné se trouve exactement à la toute fin d'une ligne ciblée.
+
+   C. Application des alternatives et des ensembles de caractères.
+
+      Le caractère pipe exprime un choix strict entre deux alternatives distinctes lors d'une recherche textuelle.
+
+      Les crochets définissent une liste de caractères possibles pour analyser et faire correspondre une même position dans le texte.
+
+      Il est très important de noter que dans ces crochets, les caractères spéciaux perdent leur signification particulière pour redevenir des lettres simples.
+
+   D. Création d'intervalles et gestion des négations.
+
+      Les intervalles définis entre crochets permettent de cibler des plages continues de lettres ou de chiffres comme l'alphabet.
+
+      L'ajout d'un accent circonflexe au tout début d'un intervalle inverse la sélection initiale pour exclure formellement ces caractères.
+
+      Les classes prédéfinies comme la classe alpha ou la classe digit offrent une méthode beaucoup plus robuste pour traiter des ensembles complexes.
+
+   E. Définition des opérateurs de répétition et des groupements textuels.
+
+      Le signe plus exige la présence d'une ou de plusieurs occurrences de l'élément qui est positionné juste avant lui.
+
+      Le point d'interrogation rend l'élément qui le précède totalement facultatif, avec zéro ou une seule occurrence possible.
+
+      Les accolades permettent de définir avec une grande précision le nombre exact ou l'intervalle d'occurrences d'un motif préalablement défini.
+
+      Les parenthèses servent à regrouper plusieurs caractères pour appliquer une répétition globale sur l'ensemble de la séquence encadrée.
+
+III. APPLICATIONS PRATIQUES ET EXEMPLES CONCRETS.
+
+   A. Méthodes d'analyse et de validation de données.
+
+      Les expressions régulières automatisent le traitement des grands volumes de données tout en contrôlant la stricte validité des informations reçues.
+
+      Elles valident efficacement des formats très complexes comme les adresses informatiques, les numéros de téléphone ou les adresses de courriels.
+
+      Elles s'avèrent également très utiles pour identifier des anomalies système ou filtrer des erreurs critiques cachées dans les fichiers de journalisation.
+
+   B. Procédures de nettoyage et d'automatisation des tâches.
+
+      Ces puissants outils permettent de supprimer facilement les caractères parasites ou les espaces totalement inutiles dans des fichiers importés.
+
+      Ils constituent la base de l'automatisation via les scripts shell pour pouvoir transformer massivement des fichiers directement sur le système.
+
+      La maîtrise complète de ces expressions transforme un simple ordinateur en un moteur surpuissant et intelligent d'analyse textuelle.
+
+POINTS D'ATTENTION.
+
+      Certains caractères possèdent une signification particulière et ne sont pas interprétés comme de simples lettres par le système d'exploitation.
+
+      Il faut systématiquement utiliser le caractère antislash pour pouvoir rechercher le caractère réel d'un point ou d'un astérisque dans un texte brut.
+
+      À l'intérieur des listes créées par des crochets, tous les caractères spéciaux redeviennent de simples caractères ordinaires sans aucun pouvoir spécial d'interprétation.
+
+      Les classes standards prédéfinies sont toujours recommandées car elles se révèlent beaucoup plus fiables que les intervalles simples pour les jeux de caractères étendus.
+
+EXEMPLES CITES.
+
+      La recherche de variantes avec le point s'effectue via l'expression de la lettre A suivie d'un point puis de la lettre B pour trouver toute chaîne correspondante.
+
+      L'isolation de lignes commençant par une erreur s'écrit tout simplement avec un accent circonflexe suivi du mot error dans un fichier système de journalisation.
+
+      Le filtrage des fichiers se terminant par une extension spécifique s'accomplit en utilisant l'antislash suivi du point puis de l'extension et enfin du symbole dollar.
+
+      Le nettoyage des retours à la ligne parasites d'un fichier importé depuis un autre système se fait généralement avec la commande de substitution de l'outil sed.
+
+      La validation d'une adresse de courrier électronique nécessite la combinaison de listes, du signe plus, d'un point littéral et du symbole arobase de séparation.
