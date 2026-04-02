@@ -1,0 +1,65 @@
+Quelle est l'idée centrale de la manipulation de données sous Linux ?,Traiter les fichiers ou les sorties de commandes comme des flux de texte.
+"Dans la philosophie Unix, quel est le rôle des petits outils spécialisés ?","Lire une entrée, la transformer ou la filtrer, puis produire une sortie."
+"Quel outil est spécialisé dans la transformation « en ligne » (substitutions, suppressions) ?",sed
+"Quel outil privilégie l'extraction, le calcul et la restructuration en champs ?",awk
+Citez trois exemples de filtres simples utilisés dans un pipeline Linux.,"tr, cut et grep."
+Que signifie l'acronyme « sed » ?,Stream EDitor (éditeur de flux).
+Quelle est la principale différence opérationnelle entre sed et ed ?,"sed applique un script automatiquement sur chaque ligne, tandis que ed est interactif."
+"Dans sed, qu'est-ce que le « pattern space » ?",Une zone de travail où chaque ligne est chargée pour être transformée.
+Pourquoi sed est-il particulièrement efficace pour les fichiers volumineux ?,Il traite les données en streaming sans charger l'intégralité du fichier en mémoire.
+Comment appliquer une commande sed à une ligne spécifique par son numéro ?,En utilisant le numéro de la ligne comme adresse avant la commande.
+Quelle syntaxe sed permet de cibler un intervalle entre deux motifs ?,"sed '/debut/,/fin/commande' fichier.txt"
+"Dans sed, à quoi sert le symbole « ! » placé après une adresse ?",À appliquer la commande à toutes les lignes sauf celles ciblées par l'adresse.
+Quelle combinaison d'options sed permet de n'afficher que les lignes sélectionnées ?,L'option -n combinée à la commande p.
+À quoi sert la commande « q » dans un script sed ?,À quitter sed et arrêter immédiatement le traitement du flux.
+Quelle commande sed est utilisée pour supprimer les lignes sélectionnées ?,La commande d.
+Comment insérer le contenu d'un fichier externe après une ligne précise avec sed ?,Avec la commande r (read).
+Quelle commande sed permet de remplacer entièrement une ligne par un nouveau texte ?,La commande c\ (change).
+"Dans la commande de substitution s/.../.../g, que signifie l'option « g » ?",Remplacer toutes les occurrences du motif sur la ligne (global).
+Quelle commande sed effectue une traduction caractère par caractère ?,La commande y.
+À quoi sert le « hold space » dans sed ?,C'est un espace mémoire temporaire permettant de stocker des fragments de texte entre les cycles.
+Quelle commande sed copie le contenu du « pattern space » vers le « hold space » ?,La commande h.
+Quelle est la fonction principale de l'outil awk ?,Analyser des fichiers structurés et manipuler des données organisées en colonnes.
+Comment awk découpe-t-il chaque ligne lue ?,En enregistrements (lignes) et en champs (colonnes).
+Quelle est la structure de base d'un programme awk ?,motif { action }
+Quelle section d'un programme awk s'exécute avant la lecture du fichier ?,Le bloc BEGIN.
+Quelle section d'un programme awk s'exécute après avoir traité toutes les lignes ?,Le bloc END.
+"Dans awk, que représente la variable intitée $0 ?",La ligne complète en cours de traitement.
+"Dans awk, que représente la variable intégrée $1 ?",Le contenu du premier champ de la ligne.
+Que contient la variable awk nommée « NR » ?,Le numéro de l'enregistrement courant (généralement le numéro de ligne).
+Que contient la variable awk nommée « NF » ?,Le nombre total de champs dans l'enregistrement courant.
+À quoi sert la variable « FS » dans awk ?,À définir le séparateur de champs en entrée.
+Quelle option de la ligne de commande awk permet de définir le séparateur de champs ?,L'option -F.
+Quelle fonction awk permet d'extraire une partie d'une chaîne de caractères ?,substr()
+Quelle fonction awk est utilisée pour effectuer un remplacement global ?,gsub()
+Comment awk redirige-t-il sa sortie vers un fichier spécifique à l'intérieur d'un script ?,En utilisant l'opérateur de redirection > après l'instruction print.
+Quelle est la fonction principale de la commande tr ?,"Traduire, supprimer ou compresser des caractères."
+Quelle option de tr permet de supprimer des caractères ?,-d
+Quelle option de tr permet de réduire les répétitions de caractères identiques ?,-s
+À quoi sert principalement la commande cut ?,À extraire des colonnes à positions fixes ou des champs délimités.
+Quelle commande Linux est spécialisée dans la recherche de lignes via des expressions régulières ?,grep
+Quelle variante de grep accepte des expressions régulières étendues ?,egrep
+Quelle option de sort permet d'effectuer un tri numérique ?,-n
+Comment trier un fichier en ordre décroissant avec sort ?,Avec l'option -r.
+Quelle option de sort permet de supprimer directement les doublons lors du tri ?,-u
+Quelle est la condition impérative pour que la commande uniq fonctionne correctement ?,Les données d'entrée doivent être préalablement triées.
+Quelle option de uniq permet de compter le nombre d'occurrences de chaque ligne ?,-c
+Quelle commande permet de tronquer des lignes trop longues à une largeur définie ?,fold
+Quelle commande affiche par défaut les 10 premières lignes d'un fichier ?,head
+À quoi sert l'option « -f » de la commande tail ?,À suivre en temps réel les ajouts à la fin d'un fichier (suivi de log).
+"Dans un pipeline, quel outil est idéal pour extraire des données structurées ?",awk
+Quel outil de filtrage est le plus rapide pour isoler des erreurs dans un journal ?,grep
+Quelle commande awk permet de sommer les valeurs de la troisième colonne sur tout un fichier ?,{total += $3} suivi d'un affichage dans le bloc END.
+Quelle commande sed permet d'anonymiser des données en remplaçant un identifiant ?,La commande de substitution s/ancien_id/nouveau_id/.
+Pourquoi combiner sort et uniq plutôt que d'utiliser une seule commande ?,uniq ne détecte que les doublons consécutifs.
+Comment s'appelle l'opérateur symbolisé par « | » utilisé pour enchaîner les filtres ?,Le pipe (ou tube).
+Quel filtre permet d'extraire la tranche horaire d'une date formatée de manière fixe ?,cut
+Quel outil est préférable pour produire un rapport formaté avec en-tête et pied de page ?,awk
+"Dans sed, quel effet produit la commande « a\ » ?",Ajouter du texte après la ligne ciblée.
+Quelle variable awk permet d'obtenir le nombre total de champs d'une ligne ?,$NF$
+Comment trier le fichier /etc/passwd selon la troisième colonne (séparateur « : ») ?,sort -t: -k3 /etc/passwd
+Quel est l'usage typique de la commande head -n 10 ?,Vérifier rapidement le format ou l'en-tête d'un fichier.
+Quelle fonction awk permet de découper une chaîne complexe en tableau ?,split()
+Comment convertir toutes les minuscules en majuscules avec tr ?,tr 'a-z' 'A-Z'
+"Dans sed, quelle commande permet d'écrire spécifiquement certaines lignes dans un fichier d'audit ?",La commande w.
+Quel outil de la boîte à outils pipeline est utilisé pour échantillonner le début d'un flux ?,head

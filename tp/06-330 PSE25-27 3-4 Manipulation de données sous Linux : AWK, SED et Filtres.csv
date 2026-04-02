@@ -1,0 +1,30 @@
+sed Substitution simple;Dans un fichier nommé texte.txt, remplacez la première occurrence du mot ancien par nouveau sur chaque ligne.;sed 's/ancien/nouveau/' texte.txt
+sed Substitution globale;Dans un fichier nommé texte.txt, remplacez toutes les occurrences du mot ancien par nouveau.;sed 's/ancien/nouveau/g' texte.txt
+sed Ciblage par numéro de ligne;Dans le fichier fichier.txt, appliquez la substitution du mot ancien par nouveau uniquement sur la ligne numéro 5.;sed '5s/ancien/nouveau/' fichier.txt
+sed Ciblage par intervalle;Appliquez la substitution globale du mot ancien par nouveau uniquement entre les lignes 3 et 8 du fichier fichier.txt.;sed '3,8s/ancien/nouveau/g' fichier.txt
+sed Ciblage par motif;Trouvez les lignes contenant le motif ERROR dans fichier.log et remplacez la chaîne anc par nou.;sed '/ERROR/s/anc/nou/' fichier.log
+sed Négation de motif;Affichez toutes les lignes de fichier.txt sauf celles contenant le mot debug en utilisant la commande de suppression.;sed '/debug/d' fichier.txt
+sed Impression sélective;N'affichez que les lignes explicitement sélectionnées par la substitution de ancien par nouveau dans fichier.txt.;sed -n 's/ancien/nouveau/p' fichier.txt
+sed Arrêt prématuré;Arrêtez la lecture du fichier volumineux massif.txt immédiatement après avoir lu la 10ème ligne pour gagner du temps.;sed '10q' massif.txt
+sed Suppression ciblée;Supprimez les 5 premières lignes du fichier data.csv qui correspondent à un en-tête non désiré.;sed '1,5d' data.csv
+sed Hold space;Mémorisez la ligne courante dans l'espace de stockage secondaire de sed (hold space).;sed 'h' fichier.txt
+awk Extraction de colonnes;Affichez uniquement le premier champ de chaque ligne du fichier fichier.txt.;awk '{print $1}' fichier.txt
+awk Motif de recherche;Extrayez et affichez uniquement les lignes contenant le mot error dans logfile.;awk '/error/ {print}' logfile
+awk Blocs de structure;Créez un script awk lisant fichier.txt qui affiche DEBUT avant le traitement des données et FIN après le traitement.;awk 'BEGIN {print "DEBUT"} {print $0} END {print "FIN"}' fichier.txt
+awk Conditions mathématiques;Affichez la ligne entière uniquement si la valeur numérique de la troisième colonne est strictement supérieure à 100 dans fichier.txt.;awk '$3 > 100 {print $0}' fichier.txt
+awk Personnalisation du séparateur;Affichez le premier champ du fichier système /etc/passwd sachant que le séparateur logique est le caractère deux-points.;awk -F: '{print $1}' /etc/passwd
+awk Utilisation de la variable NF;Affichez uniquement les lignes du fichier fichier.txt qui contiennent strictement plus de 5 champs définis.;awk 'NF > 5 {print $0}' fichier.txt
+awk Modification de texte interne;Utilisez la fonction awk appropriée pour remplacer globalement le mot error par ERREUR dans logfile et affichez le résultat.;awk '{gsub("error","ERREUR")} {print}' logfile
+tr Suppression;Nettoyez le flux issu de fichier.txt en supprimant purement et simplement le caractère deux-points.;tr -d ':' < fichier.txt
+tr Conversion de casse;Convertissez toutes les lettres minuscules en lettres majuscules dans le fichier fichier.txt.;tr 'a-z' 'A-Z' < fichier.txt
+tr Compression d'espaces;Compressez les suites redondantes d'espaces multiples en un seul espace dans le fichier fichier.txt.;tr -s ' ' < fichier.txt
+cut Découpage par délimiteur;Extrayez la première colonne du fichier data.csv en spécifiant explicitement que le délimiteur est le caractère deux-points.;cut -d ':' -f1 data.csv
+grep Filtrage par chaîne;Isolez toutes les lignes contenant le mot ERROR de manière littérale dans le fichier logfile.;grep 'ERROR' logfile
+sort Tri décroissant numérique;Triez le contenu de fichier.txt de manière strictement numérique et dans l'ordre décroissant.;sort -nr fichier.txt
+sort Tri avec clé spécifique;Triez le fichier /etc/passwd en utilisant la troisième colonne comme clé numérique de tri et le deux-points comme séparateur.;sort -t: -k3 -n /etc/passwd
+uniq Comptage des doublons;Comptez le nombre d'occurrences consécutives de chaque ligne unique dans le fichier liste.txt qui a été préalablement trié.;sort liste.txt | uniq -c
+fold Limitation de longueur;Affichez le contenu de fichier.txt en imposant une largeur maximale stricte de 80 caractères par ligne.;fold -w 80 fichier.txt
+head Échantillonnage de début;Affichez très rapidement et uniquement les 10 premières lignes de fichier.txt.;head -n 10 fichier.txt
+tail Suivi continu;Surveillez l'ajout en direct de nouvelles lignes en temps réel dans le journal système /var/log/messages.;tail -f /var/log/messages
+Exercice de synthèse 1;Extrayez les adresses IP (colonne 1) d'un fichier apache.log, triez-les, comptez leur occurrence pour éliminer les doublons, puis triez le résultat final numériquement par ordre décroissant pour identifier l'adresse la plus active.;awk '{print $1}' apache.log | sort | uniq -c | sort -nr
+Exercice de synthèse 2;À partir de /etc/passwd, excluez toutes les lignes contenant nologin via une recherche inversée, passez le résultat intégral en majuscules, puis utilisez awk pour extraire le nom d'utilisateur (champ 1 avec séparateur :) en affichant le titre UTILISATEURS au tout début.;grep -v 'nologin' /etc/passwd | tr 'a-z' 'A-Z' | awk -F: 'BEGIN {print "UTILISATEURS"} {print $1}'

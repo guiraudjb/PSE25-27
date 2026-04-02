@@ -1,0 +1,186 @@
+MANIPULER LES DONNÉES SOUS LINUX COMMANDES AWK SED ET FILTRES.
+
+LEXIQUE COMPLET.
+
+      Le flux de texte désigne une suite de données sous forme de journaux ou de fichiers de configuration divers.
+
+      Le programme sed correspond à un éditeur de flux non interactif appliquant scrupuleusement des règles de transformation.
+
+      L'analyseur awk est un outil de traitement avancé spécifiquement conçu pour manipuler des données organisées en colonnes.
+
+      La zone de travail appelée pattern space est l'endroit précis où sed charge le texte lu ligne par ligne.
+
+      L'espace de mémorisation nommé hold space sert de stockage temporaire à sed entre deux cycles de traitement successifs.
+
+      Un enregistrement désigne concrètement chaque ligne individuelle d'un fichier lue par l'outil de traitement awk.
+
+      Un champ représente chaque segment obtenu après le découpage automatique d'une ligne complète par le programme awk.
+
+COURS DÉTAILLÉ.
+
+I. MANIPULER DU TEXTE COMME UN FLUX.
+
+   A. La philosophie des systèmes Unix.
+
+      Sous le système Linux, une grande partie des données se présente sous la forme de fichiers ou de flux de texte.
+
+      Ces données englobent notamment les rapports réguliers, les exports au format CSV ou les sorties de diverses commandes.
+
+      La philosophie globale repose sur l'enchaînement de petits outils très spécialisés dans une tâche unique et bien définie.
+
+      Ces petits utilitaires lisent une entrée, transforment les données en mémoire puis produisent une nouvelle sortie adaptée.
+
+   B. Les objectifs et les grandes familles d'outils.
+
+      La première famille inclut sed qui permet d'effectuer des transformations en ligne comme des substitutions et des suppressions.
+
+      La deuxième famille comprend awk qui se consacre principalement à l'extraction et à la restructuration selon une logique tabulaire.
+
+      Les filtres classiques viennent compléter cet arsenal en offrant des briques simples pour chercher ou traduire de l'information.
+
+      L'objectif ultime consiste à nettoyer ou analyser d'immenses volumes de texte sans jamais altérer les fichiers initiaux.
+
+II. L'ÉDITEUR DE FLUX SED.
+
+   A. Le rôle principal de cet utilitaire.
+
+      Cet outil se définit comme un éditeur de flux qui applique des scripts de façon totalement automatique sur chaque ligne lue.
+
+      Il s'utilise extrêmement souvent pour corriger un format particulier ou pour supprimer des lignes devenues superflues.
+
+      Il offre aussi la possibilité de remplacer une chaîne de caractères ou d'insérer des lignes de commentaires pertinentes.
+
+   B. Le principe de fonctionnement en espace de travail.
+
+      Le programme charge systématiquement chaque ligne lue dans une zone de mémoire dédiée appelée explicitement pattern space.
+
+      Il applique ensuite rigoureusement toutes les commandes du script qui concernent très spécifiquement la ligne chargée.
+
+      Il écrit le résultat final vers la sortie standard puis amorce immédiatement un nouveau cycle pour la ligne suivante.
+
+      Ce fonctionnement ininterrompu en streaming évite de saturer la mémoire et s'adapte parfaitement aux très gros fichiers.
+
+   C. Le ciblage spécifique des lignes par adresses.
+
+      La grande puissance de ce programme vient de sa capacité à cibler des lignes selon leur numéro d'apparition précis.
+
+      Une adresse de ciblage peut englober une ligne unique, un intervalle défini ou une expression régulière complexe.
+
+      L'utilisation du symbole de négation permet de modifier l'ensemble du texte en excluant seulement les lignes initialement visées.
+
+   D. Les actions de suppression et de filtrage.
+
+      L'utilisateur peut décider d'imprimer exclusivement les lignes sélectionnées pour transformer l'outil en véritable filtre strict.
+
+      La commande qui ordonne de quitter stoppe le traitement de manière anticipée pour accélérer la lecture globale d'un fichier.
+
+      La fonction dédiée à la suppression retire très efficacement les en-têtes inutiles ou les entrées jugées totalement indésirables.
+
+   E. Les opérations d'insertion et de substitution.
+
+      Les commandes d'insertion et de modification ajoutent ou remplacent du texte librement, tandis que les fonctions de lecture permettent d'importer un document externe.
+
+      La substitution demeure l'opération la plus courante pour remplacer un motif par un autre sur l'intégralité du document traité.
+
+      Cette action aide grandement à uniformiser la casse des lettres ou à corriger les délimiteurs d'un fichier de données brut.
+
+      Le programme propose également un second espace de mémoire garantissant le stockage temporaire entre divers cycles de lecture.
+
+III. LE TRAITEMENT AVANCÉ DES DONNÉES AVEC AWK.
+
+   A. La logique de structuration et d'analyse.
+
+      L'analyseur awk examine en profondeur les fichiers dont les informations se structurent historiquement sous forme de colonnes.
+
+      Il lit scrupuleusement chaque enregistrement pour le diviser immédiatement en plusieurs champs bien distincts et repérables.
+
+      Il applique des vérifications logiques et des calculs mathématiques avant de générer une sortie totalement reformulée.
+
+   B. L'architecture globale d'un programme complet.
+
+      Le script s'articule autour de trois blocs distincts qui s'exécutent de façon ordonnée selon l'avancement naturel de la lecture.
+
+      La section initiale permet souvent d'afficher un en-tête clair pour introduire intelligemment le rapport qui sera généré.
+
+      La section centrale vérifie l'existence d'un motif spécifique afin de déclencher une action appropriée directement sur la ligne.
+
+      La section finale s'active uniquement à la fin du fichier pour calculer un total ou afficher un résultat statistique global.
+
+   C. Les variables intégrées et les fonctions natives.
+
+      L'outil embarque des variables automatiques comme le numéro de ligne ou le nombre de champs, et permet de définir un séparateur personnalisé.
+
+      Il inclut de multiples fonctions natives comme length, substr ou gsub servant respectivement à mesurer la longueur, à extraire une partie ou à remplacer un mot.
+
+      Ces capacités autorisent un traitement du texte particulièrement fin et adapté aux besoins complexes de formatage.
+
+   D. Les structures de contrôle et les interactions.
+
+      Le programme emploie des conditions logiques et des boucles de répétition très similaires à celles du langage de programmation C.
+
+      Il autorise l'écriture de ses résultats finaux vers de nouveaux fichiers de sortie ou directement vers des processus externes.
+
+      Ces caractéristiques techniques le rendent absolument indispensable pour produire des rapports statistiques extrêmement fiables.
+
+IV. LES FILTRES DE DONNÉES EN BOÎTE À OUTILS.
+
+   A. Les outils de traduction et de découpe.
+
+      L'utilitaire tr modifie les chaînes caractère par caractère dans le but précis de supprimer ou de convertir certains symboles.
+
+      Il se révèle indispensable pour harmoniser un document contenant des séparateurs erronés ou d'inutiles espaces redondants.
+
+      L'utilitaire cut isole des positions figées ou des champs clairement séparés par un délimiteur spécifique dans le texte.
+
+   B. Les outils dédiés à la recherche et au tri.
+
+      L'utilitaire grep repère des occurrences précises en analysant de simples chaînes littérales ou des expressions régulières.
+
+      Il aide considérablement les administrateurs à isoler des erreurs, tandis que ses variantes egrep et fgrep gèrent des motifs complexes et stricts.
+
+      L'utilitaire sort réorganise l'ordre des lignes de façon alphabétique, purement numérique ou décroissante, tout en fusionnant des documents.
+
+   C. Les outils de déduplication et de mise en forme.
+
+      L'utilitaire uniq vient épauler le tri préalable en supprimant définitivement toutes les répétitions de lignes devenues consécutives.
+
+      L'utilitaire fold limite drastiquement la longueur des lignes affichées pour améliorer la lisibilité globale au sein d'un terminal.
+
+      Les utilitaires head et tail restreignent l'affichage aux premières ou aux dernières lignes afin d'échantillonner rapidement un fichier.
+
+V. LA VISION PRATIQUE DE LA COMBINAISON DES OUTILS.
+
+   A. Le choix judicieux du composant.
+
+      Le programme sed démontre toute son utilité lors de la modification rapide et fluide de textes sous forme de flux continu.
+
+      L'analyseur awk révèle tout son potentiel dans la découpe structurelle en champs et dans la réalisation d'opérations de calcul.
+
+      Les filtres standards garantissent quant à eux des interventions immédiates pour extraire, classer ou organiser l'information.
+
+   B. La grande puissance de l'assemblage modulaire.
+
+      L'incroyable efficacité de l'environnement Linux s'exprime dans la libre association de tous ces programmes indépendants.
+
+      L'utilisateur connecte fréquemment la recherche, le tri, le nettoyage et le filtrage au sein d'une seule et même commande.
+
+      Cette flexibilité unique autorise la création de chaînes de traitement de données d'une très grande complexité via des pipes.
+
+POINTS D'ATTENTION.
+
+      Il convient de ne pas confondre sed qui traite un flux continu et ed qui réclame des commandes interactives de la part de l'utilisateur.
+      L'espace de mémoire supplémentaire de sed sauvegarde des fragments précieux pour les exploiter utilement lors de cycles ultérieurs.
+      La fonction uniq requiert de manière stricte un tri préalable du fichier pour parvenir à éliminer correctement les lignes en double.
+      L'ensemble des règles de manipulation des textes se retrouve en détail dans la vaste documentation officielle du projet GNU.
+
+EXEMPLES CITES.
+
+      La commande qui effectue une substitution complète d'un ancien motif par un nouveau s'écrit sed 's/ancien/nouveau/g' fichier.txt.
+
+      L'affichage exclusif de la toute première colonne d'un document nécessite l'utilisation de la syntaxe awk '{print $1}' fichier.txt.
+
+      La suppression totale d'un caractère indésirable comme les deux-points s'obtient très simplement en tapant tr -d ':' < fichier.txt.
+
+      L'extraction minutieuse des messages d'erreur depuis un journal d'événements s'active via la requête awk '/ERROR/ {print $0}' logfile.
+
+      L'observation ininterrompue des nouvelles entrées d'un journal de système demande l'exécution de la formulation tail -f /var/log/messages.
