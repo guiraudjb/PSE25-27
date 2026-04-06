@@ -1,0 +1,127 @@
+TITRE DU COURS.
+
+L'ARCHITECTURE ET L'ORGANISATION DU CONTROLE FISCAL FRANCAIS.
+
+LEXIQUE COMPLET.
+
+      MRV désigne la Mission Requêtes et Valorisation qui croise d'immenses bases de données au niveau national pour détecter les anomalies statistiques.
+
+      PNAD correspond aux Pôles Nationaux d'Analyse de Données répartis sur le territoire pour produire des fiches de ciblage.
+
+      PILAT est le grand logiciel métier interne de Pilotage et Analyse du Contrôle Fiscal.
+
+      MOA représente la Maîtrise d'Ouvrage gérée par le Service de la Sécurité Juridique et du Contrôle Fiscal.
+
+      MOE fait référence à la Maîtrise d'Oeuvre dirigée par la Direction des Projets Numériques.
+
+      DCN désigne les Directions à Compétence Nationale gérant les dossiers aux enjeux financiers colossaux.
+
+      DVNI est la Direction des Vérifications Nationales et Internationales en charge des très grandes entreprises.
+
+      DNVSF signifie Direction Nationale d'Enquêtes et de Vérifications des Situations Fiscales.
+
+      DNEF est la Direction Nationale des Enquêtes Fiscales qui agit comme un service de renseignement administratif.
+
+      DIRCOFI correspond aux directions interrégionales qui contrôlent les entreprises de taille intermédiaire.
+
+      DDFiP et DRFiP sont les directions locales des finances publiques.
+
+      BDV représente les Brigades Départementales de Vérification pour le contrôle sur place des artisans.
+
+      BCR signifie Brigades de Contrôle et de Recherche spécialisées dans l'investigation sur le terrain.
+
+      PCE et PCRP sont les services en charge du contrôle sur pièces depuis le bureau.
+
+      SIE et SIP désignent les services gérant le contrôle formel de base pour les entreprises et les particuliers.
+
+      ONAF est l'Office National Anti-Fraude qui agit comme un service de police judiciaire.
+
+      OFJ et ODJ font référence aux Officiers Fiscaux et Douaniers Judiciaires disposant de pouvoirs pénaux.
+
+COURS DETAILLE.
+
+I. L'ARCHITECTURE GLOBALE DU CONTROLE FISCAL.
+
+   A. Les objectifs et la nature du contrôle.
+
+      Le contrôle fiscal français repose sur une organisation pyramidale et technologique complexe.
+
+      Il a pour but d'assurer la conformité fiscale, de traquer la fraude et de recouvrer l'impôt.
+
+      Le système s'adapte à la gravité des infractions et à la taille des contribuables.
+
+   B. Les cinq piliers fondamentaux.
+
+      L'écosystème du contrôle se divise en cinq grands piliers complémentaires.
+
+      Le premier pilier est le ciblage par l'exploitation de la donnée.
+
+      Les autres piliers incluent l'outil de gestion, les opérations nationales, le maillage territorial et l'action judiciaire.
+
+II. LE CIBLAGE ET LE SYSTEME NERVEUX NUMERIQUE.
+
+   A. L'identification par la donnée.
+
+      Des structures spécialisées identifient les fraudes potentielles grâce à l'intelligence artificielle et au croisement des données.
+
+      La Mission Requêtes et Valorisation analyse d'immenses bases au niveau national pour détecter les comportements frauduleux.
+
+      Les Pôles Nationaux d'Analyse de Données assistent cette mission et produisent des fiches de ciblage pour le terrain.
+
+   B. Le logiciel de pilotage.
+
+      L'administration s'appuie sur une infrastructure numérique unifiée pour relier les analystes aux vérificateurs.
+
+      Le projet Pilotage et Analyse du Contrôle Fiscal centralise les cibles et distribue les dossiers.
+
+      Ce logiciel permet de formater, de standardiser et de tracer tout le travail des agents d'un bout à l'autre de la procédure.
+
+III. LE MAILLAGE DU CONTROLE SUR LE TERRITOIRE.
+
+   A. Les directions à compétence nationale.
+
+      Le haut du spectre gère les dossiers aux enjeux financiers colossaux et les montages particulièrement sophistiqués.
+
+      La Direction des Vérifications Nationales et Internationales contrôle les très grandes entreprises et les multinationales.
+
+      La Direction Nationale d'Enquêtes et de Vérifications des Situations Fiscales surveille les personnes physiques à très forts enjeux.
+
+   B. Le niveau interrégional et local.
+
+      Les directions interrégionales contrôlent les entreprises de taille intermédiaire et les grosses entreprises moyennes.
+
+      Le contrôle sur place chez le contribuable est assuré par les brigades départementales et les brigades de recherche.
+
+      Le contrôle sur pièces depuis le bureau est réalisé par des pôles spécialisés pour les professionnels et les particuliers.
+
+IV. LE VOLET REPRESSIF ET JUDICIAIRE.
+
+   A. La lutte contre la criminalité organisée.
+
+      L'administration passe le relais aux pouvoirs de police lorsque la fraude fiscale devient de la criminalité organisée.
+
+      L'Office National Anti-Fraude a été créé en mai deux mille vingt-quatre pour assurer cette mission répressive.
+
+   B. Les moyens d'action pénaux.
+
+      Ce service agit comme une police judiciaire à compétence nationale sous la direction exclusive de magistrats.
+
+      Les officiers disposent de pouvoirs pénaux importants comme les écoutes, les gardes à vue et les saisies d'avoirs criminels.
+
+      Ils luttent spécifiquement contre les fraudes complexes aux finances publiques et le blanchiment d'argent.
+
+POINTS D'ATTENTION.
+
+      L'approche du contrôle fiscal est passée d'une méthode purement artisanale à une véritable logique industrielle.
+
+      Les données alimentent en permanence un logiciel centralisateur qui distribue le travail à toute la pyramide d'agents.
+
+      Le recours à la police judiciaire constitue l'ultime recours pour les cas relevant spécifiquement du grand banditisme financier.
+
+EXEMPLES CITES.
+
+      Les multinationales et les entreprises du CAC quarante sont ciblées par les services d'envergure nationale.
+
+      Le travail dissimulé est une infraction recherchée spécifiquement par les brigades de contrôle et de recherche directement sur le terrain.
+
+      Les fraudes à la taxe sur la valeur ajoutée et aux douanes sont des infractions complexes traitées par l'office national anti-fraude.
