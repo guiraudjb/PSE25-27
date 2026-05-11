@@ -1,0 +1,55 @@
+Quel était l'algorithme de routage utilisé par le protocole RIP avant l'avènement d'OSPF ?,L'algorithme de Bellman-Ford (Vecteur de distance).
+Quelle est la limite structurelle maximale de sauts (hops) autorisée par le protocole RIP ?,15 sauts (le 16ème est considéré comme infini/inaccessible).
+Comment appelle-t-on le problème de RIP où les routeurs s'échangent de fausses informations en boucle après une panne de lien ?,Le comptage vers l'infini (Count-to-Infinity).
+Quelle lacune de RIPv1 entraînait un gaspillage monumental d'adresses IPv4 ?,L'absence de support pour le VLSM (Variable Length Subnet Mask).
+Quel algorithme mathématique est à la base du fonctionnement d'OSPF ?,L'algorithme de Dijkstra (ou Shortest Path First - SPF).
+Que signifie le terme 'Open' dans le nom du protocole OSPF ?,Il indique que le protocole est un standard ouvert et non propriétaire.
+Quelle version d'OSPF a été spécifiquement conçue pour supporter nativement l'IPv6 ?,OSPFv3 (RFC 5340).
+Nommez la table OSPF qui contient la liste de tous les routeurs directement connectés avec une communication valide.,La Table des Voisins (Neighbor Table / Adjacency Database).
+"Quelle table OSPF, strictement identique pour tous les routeurs d'une même zone, contient l'ensemble des LSA ?",La Table Topologique (Link-State Database - LSDB).
+Dans quelle table un routeur OSPF injecte-t-il les meilleurs chemins sans boucle après l'exécution de l'algorithme SPF ?,La Table de Routage (Routing Table / RIB).
+Quel est le numéro de protocole IP utilisé par OSPF pour l'encapsulation de ses paquets ?,Le protocole 89.
+Quel type de paquet OSPF (Type 1) sert de 'Keepalive' pour vérifier la présence d'un voisin ?,Le paquet Hello.
+"À quoi sert le paquet OSPF de Type 2, nommé DBD (Database Description) ?",À fournir un résumé (sommaire) du contenu de la LSDB locale pour comparaison.
+Quel type de paquet OSPF est envoyé par un routeur pour demander explicitement une information manquante vue dans un DBD ?,Le paquet LSR (Link-State Request).
+Quel paquet OSPF contient les informations détaillées des LSA réelles en réponse à un LSR ?,Le paquet LSU (Link-State Update).
+Comment OSPF confirme-t-il la réception fiable d'un paquet LSU ?,Par l'envoi d'un paquet LSAck (Link-State Acknowledgment).
+"Dans la machine à états OSPF, que signifie l'état 'Init' ?","Un paquet Hello a été reçu, mais le routeur local ne voit pas encore son propre Router-ID dans la liste des voisins."
+À quel état de la machine de voisinage OSPF l'élection du DR et du BDR a-t-elle lieu ?,L'état 2-Way (Bidirectionnel).
+Pourquoi deux routeurs DROTHER sur un segment Ethernet s'arrêtent-ils à l'état 2-Way ?,Pour économiser les ressources en évitant de synchroniser inutilement leurs bases de données entre eux.
+Quel état OSPF indique que les routeurs négocient les rôles de Maître/Esclave et vérifient le MTU ?,L'état ExStart (Exchange Start).
+Que signifie l'état 'Full' dans une adjacence OSPF ?,Les bases de données (LSDB) des deux routeurs sont 100% synchronisées.
+Quelle est la formule par défaut du coût OSPF sur un routeur Cisco ?,$Coût = \frac{100 \text{ Mbps}}{\text{Bande Passante de l'interface}}$.
+Pourquoi est-il crucial de modifier la 'reference-bandwidth' sur les réseaux modernes (Gigabit/10G) ?,"Par défaut, tout lien $\ge 100 \text{ Mbps}$ a un coût de 1, empêchant OSPF de distinguer les liens plus rapides."
+Quel type de réseau OSPF est activé par défaut sur les interfaces Ethernet ?,Le type Broadcast.
+Quelles sont les adresses Multicast utilisées par OSPF en mode Broadcast ?,224.0.0.5 (tous les routeurs OSPF) et 224.0.0.6 (tous les DR/BDR).
+Y a-t-il une élection de DR/BDR sur un lien de type Point-to-Point ?,"Non, car il n'y a que deux équipements sur le segment."
+Quelle est la contrainte majeure du type de réseau NBMA (Non-Broadcast Multi-Access) ?,La découverte automatique des voisins est impossible ; ils doivent être configurés statiquement.
+Comment OSPF traite-t-il les interfaces Loopback par défaut ?,Comme une route d'hôte isolée avec un masque $/32$.
+Quel est l'objectif principal de la division d'un réseau OSPF en zones (Areas) ?,Améliorer la scalabilité en limitant la propagation des LSA et la fréquence des calculs SPF.
+Quelle est la 'Règle d'Or' concernant la hiérarchie des zones OSPF ?,Toutes les zones doivent être physiquement ou logiquement connectées à l'Area 0 (Backbone).
+Quel type de routeur OSPF se situe à la frontière entre l'Area 0 et une autre zone ?,L'ABR (Area Border Router).
+Quel type de LSA est généré par chaque routeur pour décrire l'état de ses liens directs dans sa zone ?,Le LSA de Type 1 (Router LSA).
+Qui génère les LSA de Type 2 (Network LSA) sur un segment multi-accès ?,Le DR (Designated Router).
+Quel est le rôle des LSA de Type 3 (Summary LSA) ?,Transporter les informations réseaux d'une zone vers une autre via l'ABR.
+Quel routeur est responsable de la génération des LSA de Type 5 (AS External LSA) ?,L'ASBR (Autonomous System Boundary Router).
+Quel type de zone OSPF bloque les LSA de Type 4 et 5 et les remplace par une route par défaut ?,La zone Stub (Stub Area).
+Quelle est la particularité d'une zone 'Totally Stubby' (propriétaire Cisco) ?,"Elle bloque les LSA de Type 3, 4 et 5, ne conservant qu'une route par défaut vers l'ABR."
+Pourquoi utiliserait-on une zone NSSA (Not-So-Stubby Area) ?,Pour bénéficier du filtrage d'une zone Stub tout en permettant l'importation de routes externes via un ASBR local.
+Quelle solution technique permet de relier une zone isolée à l'Area 0 en traversant une zone de transit ?,Le Virtual Link (Lien Virtuel).
+Quel critère OSPF utilise-t-il par défaut pour choisir son Router-ID (RID) en l'absence de configuration manuelle ?,L'adresse IP la plus élevée parmi les interfaces physiques actives (ou Loopback).
+À quoi sert la commande 'passive-interface' sous OSPF ?,À annoncer un réseau sans envoyer ni recevoir de paquets Hello sur l'interface correspondante.
+Où doit-on configurer l'agrégation (summarization) des routes internes dans un design multi-zones ?,Sur l'ABR (Area Border Router).
+Quel protocole complémentaire permet à OSPF de détecter une panne de voisin en quelques millisecondes ?,Le protocole BFD (Bidirectional Forwarding Detection).
+"Dans le diagnostic OSPF, quelle est la cause la plus fréquente d'un blocage à l'état 'ExStart' ?",Une différence de MTU (Maximum Transmission Unit) entre les deux interfaces.
+Quel est l'état normal entre deux routeurs DROTHER sur un segment Ethernet ?,L'état 2-Way.
+Quelle commande permet de visualiser si un LSA spécifique est bien présent dans la mémoire du routeur ?,show ip ospf database
+Quelle est la Distance Administrative (AD) par défaut d'OSPF ?,110
+Définition : BDR (Backup Designated Router),Routeur de secours sur un segment multi-accès qui remplace le DR en cas de panne sans recalculer le réseau.
+Qu'est-ce que le 'Dead Timer' dans OSPF ?,Le délai d'attente (40s par défaut sur Ethernet) avant de déclarer un voisin hors service faute de Hello reçu.
+Concept : SPF Throttling,Mécanisme qui retarde le calcul de Dijkstra pour protéger le CPU en cas de battement (flapping) incessant d'un lien.
+Quelle est la différence entre un IGP et un EGP ?,"Un IGP (ex: OSPF) route à l'intérieur d'un AS, tandis qu'un EGP (ex: BGP) route entre différents AS."
+Que signifie le terme 'Convergence' en routage ?,"L'état où tous les routeurs ont une vue identique, stable et correcte de la topologie réseau."
+Quel type de masque OSPF utilise-t-il dans sa syntaxe de configuration traditionnelle (ex: network 10.0.0.0 _____ area 0) ?,Le Wildcard Mask (masque générique ou inversé).
+À quoi sert le paquet LSAck (Type 5) ?,"À confirmer la bonne réception d'une mise à jour LSU, garantissant la fiabilité du protocole."
+Quelle commande force OSPF à notifier chaque changement d'état d'un voisin dans les logs système ?,log-adjacency-changes detail
