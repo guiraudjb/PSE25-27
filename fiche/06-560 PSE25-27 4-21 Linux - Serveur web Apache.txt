@@ -1,0 +1,119 @@
+SERVEUR WEB APACHE HTTPD SOUS LINUX.
+
+LEXIQUE COMPLET.
+
+      Apache HTTPD (Apache HTTP Server) : logiciel libre de serveur web cree en 1995, maintenu par l'Apache Software Foundation. Fortement modulaire, compatible multiplateforme (Linux, Windows, macOS), supporte les langages de scripts (PHP, perl, python). Version stable actuelle : 2.4.x. Le nom vient de "A Patchy server" (serveur plein de correctifs).
+
+      HTTP (HyperText Transfer Protocol) : protocole de communication client-serveur sans etat permettant l'echange de ressources web. Fonctionne sur le port 80. Le client envoie une requete, le serveur retourne une reponse. Sans etat signifie que le serveur ne garde pas en memoire les interactions precedentes (les cookies compensent ce manque).
+
+      HTTPS : version securisee d'HTTP utilisant le chiffrement TLS/SSL. Fonctionne sur le port 443.
+
+      Verbes HTTP : methodes definissant l'action sur une ressource. GET (recuperer une ressource), POST (envoyer des donnees volumineuses au serveur), HEAD (obtenir uniquement les entetes), PUT (remplacer une ressource), DELETE (effacer une ressource).
+
+      apachectl : utilitaire de controle du serveur Apache (situe dans /usr/sbin). Permet de demarrer, arreter, redemarrer le service et de verifier la syntaxe de la configuration.
+
+      DocumentRoot : directive Apache definissant le repertoire dans lequel sont stockes les documents servis par le serveur web (par defaut /var/www/html).
+
+      Virtual Host (Hote virtuel) : configuration Apache permettant de faire cohabiter plusieurs sites web distincts sur un meme serveur Apache. Deux types : par IP (chaque site a une IP differente) et par nom (sites partagent la meme IP, differencies par le nom de domaine HTTP).
+
+      MPM (Multi-Processing Module) : module Apache definissant comment le serveur gere processus et threads pour repondre aux requetes HTTP. Trois MPM disponibles : prefork (processus mono-threades), worker (processus multi-threades), event (worker avec gestion asynchrone des connexions).
+
+      MPM prefork : mode historique d'Apache ou chaque requete est traitee par un processus enfant distinct. Seul MPM compatible avec les modules non thread-safe (comme PHP en mode mod_php classique). Consommation memoire elevee sous forte charge.
+
+      MPM worker : mode ou chaque processus enfant peut gerer plusieurs threads. Empreinte memoire reduite mais tous les modules utilises doivent etre thread-safe.
+
+      MPM event : variante du worker integrant une gestion asynchrone des connexions inactives. Les threads ne restent pas bloques sur les connexions en attente. Conseille pour les sites avec de nombreuses connexions longues et persistantes (websockets).
+
+      mod_ssl : module Apache gerant le chiffrement HTTPS via TLS/SSL. Necessite un certificat compose d'une partie publique et d'une cle privee.
+
+      mod_proxy_http : module Apache permettant de configurer Apache comme proxy ou reverse proxy HTTP.
+
+      SNI (Server Name Indication) : extension TLS permettant au client d'indiquer le nom du serveur dans la poignee de main TLS, rendant possible l'utilisation de virtual hosts par nom meme pour les connexions HTTPS chiffrees.
+
+      access_log : fichier de journalisation Apache enregistrant les caracteristiques de chaque requete/reponse (adresse IP, methode, horodatage, code reponse, taille). Configure par les directives LogFormat et CustomLog.
+
+      error_log : fichier de journalisation Apache enregistrant les messages d'erreur du serveur. Niveaux de gravite (du plus grave au moins grave) : emerg, alert, crit, error, warn, notice, info, debug. Configure par la directive LogLevel.
+
+      KeepAlive : mecanisme HTTP/1.1 permettant la reutilisation d'une connexion TCP pour plusieurs requetes successives. Active par la directive "KeepAlive On", limite par KeepAliveTimeout (delai entre requetes) et MaxKeepAliveRequests (nombre max de requetes par connexion).
+
+COURS DETAILLE.
+
+I. PRESENTATION ET PROTOCOLE HTTP.
+
+   A. Apache HTTPD.
+
+      Apache HTTP Server (Apache HTTPD) est un logiciel libre de serveur web maintenu par l'Apache Software Foundation. Il s'agit du premier projet de la fondation Apache, cree initialement en 1995 comme collection de correctifs du serveur NCSA HTTPd (d'ou le nom "A Patchy server"). Il est gratuit, ouvert, fortement modulaire (fonctionnalites ajoutables a la carte), compatible multiplateforme (Linux, Windows, macOS) et supporte les langages de scripts (PHP, perl, python). La version actuelle est la 2.4.x. Les branches 2.0.x et 2.2.x ne doivent plus etre utilisees.
+
+   B. Le protocole HTTP.
+
+      Le role du serveur Apache est de dialoguer avec les clients par l'intermediaire du protocole HTTP (HyperText Transfer Protocol). HTTP est un protocole de communication client-serveur sans etat : le client envoie une requete et le serveur retourne une reponse (page web, images, JSON). Sans etat signifie que chaque requete est independante ; le serveur peut utiliser les cookies pour maintenir des informations de session. HTTP fonctionne par defaut sur le port 80, et HTTPS sur le port 443.
+
+      HTTP definit des verbes specifiques. GET recupere une ressource (parametres en URL, longueur limitee). POST envoie des donnees volumineuses au serveur (formulaires, fichiers). HEAD obtient uniquement les entetes de la reponse. PUT remplace une ressource et DELETE efface une ressource (mis en avant par REST). Les codes HTTP importants sont : 200 (succes), 400 (requete mal formee), 403 (acces interdit), 404 (document introuvable), 500 (erreur interne du serveur), 502 (mauvaise reponse d'un serveur intermediaire), 503 (service temporairement indisponible) et 504 (delai d'attente depasse).
+
+      Il existe trois versions majeures d'HTTP cohabitant selon le support des clients et serveurs. HTTP/1.1 (1997) introduit le keep-alive permettant d'utiliser une meme connexion TCP pour plusieurs requetes. HTTP/2 apporte le multiplexage complet des requetes (plusieurs requetes en parallele dans la meme connexion TCP), la priorisation des ressources et la compression des entetes. HTTP/3 repose sur le protocole QUIC (UDP) et apporte une reduction de la latence et une meilleure resilience a la perte de paquet, mais son support est experimental dans Apache.
+
+II. CONTROLE ET CONFIGURATION D'APACHE.
+
+   A. Commandes de controle (apachectl).
+
+      L'utilitaire apachectl permet de controler et d'inspecter le serveur Apache. La commande "apachectl -v" affiche la version d'Apache. La commande "apachectl -V" affiche la version et les parametres de compilation (MPM utilise, chemins de configuration). La commande "apachectl -l" affiche les modules compiles statiquement dans le binaire httpd.
+
+      Pour la gestion du service : "apachectl start" demarre le daemon Apache httpd, "apachectl stop" arrete le daemon, "apachectl restart" redémarre le daemon (si le demon n'est pas en cours d'execution, il est demarre), "apachectl status" affiche un rapport d'etat. La commande "apachectl graceful" redemarre Apache en douceur : les connexions en cours ne sont pas fermees et le serveur attend la fin du traitement des requetes en cours avant de recharger les processus. La commande "apachectl graceful-stop" arrete le daemon en douceur. La commande "apachectl configtest" effectue une verification de la syntaxe du fichier de configuration avant redemarrage. Ces options sont aussi compatibles avec la gestion classique des services systemd via systemctl.
+
+   B. Configuration selon la distribution.
+
+      Sur les distributions Debian et derivees (Ubuntu, Mint), l'installation utilise le nom "apache2" comme nom de paquet. Le fichier de configuration principal est /etc/apache2/apache2.conf. La configuration presente une organisation en deux types de repertoires : les repertoires "-available" (conf-available, mods-available, sites-available) stockent la configuration disponible mais pas encore active ; les repertoires "-enabled" (conf-enabled, mods-enabled, sites-enabled) contiennent des liens symboliques vers la configuration active. Les outils a2enconf/a2disconf, a2enmod/a2dismod et a2ensite/a2dissite permettent d'activer ou desactiver des elements en creant ou supprimant les liens symboliques correspondants.
+
+      Sur les distributions Red Hat et derivees (Alma, Rocky), l'installation utilise le nom "httpd" comme nom de paquet. Le fichier de configuration principal est /etc/httpd/conf/httpd.conf. La configuration complementaire se place dans /etc/httpd/conf.d/ et les modules dans /etc/httpd/conf.modules.d.
+
+   C. Fichiers de journalisation et configuration de base.
+
+      Il existe deux fichiers de logs essentiels. Le fichier access_log retrace les caracteristiques de chaque requete/reponse servie : adresse IP, methode (GET/POST), horodatage, code reponse et taille. Il est configure via les directives LogFormat (definit le format et lui donne un nom) et CustomLog (indique le chemin d'acces et le format choisi). Le fichier error_log trace les messages d'erreur du serveur et des applications. Les niveaux de gravite de la directive LogLevel du plus grave au moins grave sont : emerg, alert, crit, error, warn, notice, info, debug. Chaque niveau inclut les niveaux superieurs.
+
+      La configuration de base du fichier apache2.conf ou httpd.conf comprend : ServerRoot (racine de la configuration, par exemple /etc/httpd), ServerName (nom du serveur, exemple www.igpde.fr), Listen 80 (port d'ecoute), User apache et Group apache (compte d'execution du service, recommande de creer un utilisateur dedie), DocumentRoot (repertoire des documents servis, par exemple /var/www/html). Il est possible d'appliquer des configurations a des sections specifiques du systeme de fichiers avec les directives Directory et Files, et a l'arborescence web avec Location. Pour les expressions rationnelles, on utilise DirectoryMatch et LocationMatch.
+
+III. FONCTIONNALITES ETENDUES, SECURITE ET PERFORMANCE.
+
+   A. Virtual Hosts et pages dynamiques.
+
+      Apache permet de faire cohabiter plusieurs sites web differents sur un meme serveur, ce que l'on appelle des hotes virtuels ou virtual hosts. Deux types existent. Les hotes virtuels par IP (IP-based Virtual Host) : chaque site est associe a une adresse IP differente, un couple IP/port ne correspond qu'a un seul virtual host. Avantages : compatible avec tous les navigateurs, robuste pour HTTPS. Inconvenient : necessite plusieurs adresses IP. Les hotes virtuels par nom (Name-based Virtual Host) : les sites partagent la meme adresse IP et sont differencies par le nom de domaine dans la requete HTTP. Plus economiques et souples. Les versions recentes de HTTPS/TLS supportent SNI (Server Name Indication) permettant les virtual hosts par nom meme pour les connexions chiffrees.
+
+      Apache peut servir des pages creees dynamiquement avec des langages de scripts externes (Python, PHP, Perl, Lua) via le chargement du module adequat. Pour PHP : "LoadModule php8_module /usr/lib/apache2/modules/libphp8.2.so" ou "a2enmod php8.2", puis declenchement de PHP sur les fichiers .php avec la directive FilesMatch.
+
+   B. Proxy, reverse proxy et securite HTTPS.
+
+      Un proxy est un serveur intermediaire acceptant les requetes HTTP du client et les transmettant au serveur de destination finale. Apache peut jouer le role de proxy (module mod_proxy_http, directive ProxyRequests On) pour sortir vers une zone externe. Un reverse proxy permet l'acces a une zone interne en masquant les adresses reelles des serveurs au client (directives ProxyPass et ProxyPassReverse).
+
+      La securite HTTPS est assure par le module mod_ssl. Il faut disposer d'un certificat correspondant au nom d'hote heberge (partie publique + cle privee). La configuration SSL definit : SSLEngine on (active HTTPS), SSLCertificateFile et SSLCertificateKeyFile (localisation des fichiers), SSLProtocol (restreindre aux versions securisees : TLSv1.2 TLSv1.3), SSLCipherSuite (suites cryptographiques autorisees) et SSLHonorCipherOrder on (respecter l'ordre des suites definies par le serveur). Il est recommande de configurer "ServerTokens Prod" pour ne pas diffuser les informations sur la version d'Apache dans les reponses. La directive Require permet de controler les acces par IP ou nom d'hote.
+
+   C. Performance et alternatives.
+
+      Les MPM (Multi-Processing Modules) definissent comment Apache gere processus et threads. MPM prefork traite chaque requete dans un processus enfant distinct, mono-thread : seul MPM compatible avec les modules non thread-safe, mais consommation memoire elevee. MPM worker utilise des processus enfants multi-threades : empreinte memoire reduite mais tous les modules doivent etre thread-safe. MPM event est une variante de worker avec gestion asynchrone des connexions inactives : conseille pour les connexions longues et persistantes comme les websockets.
+
+      Les directives de performance importantes sont : MinSpareServers et MaxSpareServers (processus libres en permanence), ServerLimit (nombre maximal de processus), MaxRequestPerChild (nombre de requetes par processus avant renouvellement, evite les fuites memoire), Timeout (temps maximum d'attente), KeepAlive On avec KeepAliveTimeout et MaxKeepAliveRequests (connexions persistantes), et "Protocols h2 http/1.1" (activation HTTP/2 depuis Apache 2.4.17).
+
+      Les alternatives a Apache sont : pour le serveur web, Nginx (tres performant, peu gourmand en memoire, le plus utilise sur internet, disponible en version opensource et payante) et Lighttpd (tres leger, optimise pour peu de ressources). Pour le proxy : Squid (supporte aussi FTP). Pour le reverse proxy et la repartition de charge : HAProxy (tres robuste, nombreuses options de routage et tests de vie) et Nginx. Pour le cache : Varnish (specialise dans le cache de contenu web pour acceleration du trafic).
+
+POINTS D'ATTENTION.
+
+      La commande "apachectl configtest" doit etre utilisee systematiquement avant tout redemarrage d'Apache en production : une erreur de syntaxe dans la configuration provoque l'echec du demarrage et rend le service indisponible. En cas de doute, "apachectl graceful" permet de recharger la configuration sans interrompre les connexions en cours.
+
+      ServerName doit etre defini explicitement dans la configuration : s'il est absent, Apache tente de le determiner en effectuant une recherche DNS inverse sur l'adresse IP, ce qui peut generer des avertissements et un comportement inattendu.
+
+      L'utilisation des anciennes directives Apache "Allow", "Deny" et "Order" est deconseillée : elles sont obsoletes et appellees a disparaitre dans les versions futures. Utiliser exclusivement la directive "Require" et ses variantes.
+
+      Le MPM prefork est le seul compatible avec les modules non thread-safe (comme certaines versions de mod_php) : avant de passer en MPM worker ou event, verifier que tous les modules charges sont thread-safe, sous peine de comportements aleatoires sous charge.
+
+      TLS 1.0 et TLS 1.1 sont desormais considerees comme non securisees : la configuration SSLProtocol doit explicitement restreindre aux versions TLSv1.2 et TLSv1.3 uniquement pour se conformer aux recommandations de l'ANSSI et aux exigences de securite actuelles.
+
+EXEMPLES CITES.
+
+      Les sites igpde.finances.gouv.fr, www.igpde.fr et documentation.igpde.fr peuvent etre heberges sur un meme serveur Apache via des virtual hosts par nom, differencies par le ServerName dans chaque bloc VirtualHost partageant la meme adresse IP.
+
+      La commande "a2dismod php7.4 && a2enmod php8.1 && systemctl restart apache2" permet de migrer d'une version PHP a une autre sur Debian sans modifier manuellement les fichiers de configuration.
+
+      Le format de log "combined" enregistre pour chaque requete : IP source (%h), horodatage (%t), requete (%r), code retour (%s), taille (%b), referer et user-agent. Ce format est standard et demande par la DGFiP pour la concentration centralisee des logs.
+
+      La directive "Require ip 192.168.20.0/24" limite l'acces a un dossier ou une URL Apache uniquement aux clients d'un sous-reseau local. La directive "Require not host hackers.com" interdira specifiquement l'acces depuis un domaine particulier.
+
+      La configuration ProxyPass et ProxyPassReverse permet de publier via Apache une application deployee sur un serveur interne (192.168.44.2 port 8080) en la rendant accessible via l'URL /appliprotegee sur le serveur Apache frontal, sans exposer l'adresse du serveur interne au client.

@@ -1,0 +1,175 @@
+RESEAU LINUX : GNU LINUX RESEAU TCP IP.
+
+LEXIQUE COMPLET.
+
+      Pile TCP/IP : ensemble des protocoles TCP/IP integres nativement dans le noyau Linux, herites de la culture Unix et des travaux de l'ARPA pour ARPANET.
+
+      ARP (Address Resolution Protocol) : protocole de niveau 2 permettant de traduire une adresse IP (niveau 3) en une adresse MAC (niveau 2), indispensable pour acheminer les trames sur un reseau local.
+
+      RARP (Reverse Address Resolution Protocol) : inverse d'ARP, defini par la RFC 903 (1984), permettant a un hote de connaitre son adresse IP a partir de son adresse MAC. Remplace aujourd'hui par DHCP.
+
+      ICMP (Internet Control Message Protocol) : protocole de niveau 3 encapsule dans les paquets IP, permettant d'echanger des messages de controle et d'erreur entre hotes (Destination unreachable, Time exceeded, Redirect, Echo request/reply).
+
+      TTL (Time To Live) : compteur present dans chaque paquet IP qui diminue a chaque saut. Quand il atteint 0, le paquet est jete et un message ICMP "Time Exceeded" est envoye a l'emetteur.
+
+      IP (Internet Protocol) : protocole de niveau 3 non fiable et non connecte (CLNS) assurant l'acheminement des datagrammes de la source a la destination sans garantie de livraison, via des tables de routage.
+
+      MTU (Maximum Transmission Unit) : taille maximale d'un paquet pouvant transiter sur un lien reseau. Si un paquet est trop grand, IP le fragmente en paquets plus petits reassembles par le destinataire.
+
+      TCP (Transmission Control Protocol) : protocole de niveau 4 fiable et oriente connexion garantissant que les donnees arrivent sans erreur, dans l'ordre et sans perte, grace aux mecanismes de controle de flux, d'acquittement et de retransmission.
+
+      Three-Way Handshake : etablissement de connexion TCP en trois etapes : le client envoie SYN, le serveur repond SYN-ACK, le client confirme avec ACK.
+
+      Socket : combinaison unique d'une adresse IP et d'un port (IP:port) identifiant une connexion reseau sur un hote.
+
+      Ports reserves (0-1023) : ports associes aux services standards tels que 80 (HTTP), 443 (HTTPS), 22 (SSH), 25 (SMTP), 53 (DNS).
+
+      Ports dynamiques (1024-65535) : ports attribues dynamiquement par le systeme aux applications lors de l'etablissement de connexions.
+
+      RTT (Round Trip Time) : temps aller-retour d'un paquet entre emetteur et destinataire, utilise par TCP pour calculer le delai de retransmission.
+
+      UDP (User Datagram Protocol) : protocole de niveau 4 non fiable et non connecte (CLTS), plus rapide que TCP car il evite les mecanismes de controle. Utilise pour les applications tolerant des pertes.
+
+      HTTP : HyperText Transfer Protocol, protocole de navigation web, port 80, TCP.
+
+      HTTPS : HTTP securise via TLS/SSL, port 443, TCP. Chiffrement des donnees par certificat numerique.
+
+      FTP : File Transfer Protocol, transfert de fichiers (ports 20 et 21, TCP). Obsolete, remplace par SFTP.
+
+      SFTP : SSH File Transfer Protocol, transfert de fichiers securise via SSH, port 22, TCP.
+
+      SCP : Secure Copy, copie de fichiers securisee via SSH, port 22, TCP.
+
+      SMTP : Simple Mail Transfer Protocol, envoi de courriers electroniques, port 25, TCP.
+
+      POP3 : Post Office Protocol v3, releve des emails avec stockage local, port 110, TCP.
+
+      IMAP4 : Internet Message Access Protocol v4, releve des emails sans les supprimer du serveur (multi-appareils), port 143, TCP.
+
+      SSH : Secure Shell, connexion securisee a distance par chiffrement, port 22, TCP.
+
+      DNS : Domain Name System, resolution de noms de domaine en adresses IP, port 53, TCP/UDP.
+
+      NTP : Network Time Protocol, synchronisation des horloges, port 123, UDP.
+
+      Telnet : connexion a distance non securisee, port 23, TCP. Obsolete, remplace par SSH.
+
+      TLS (Transport Layer Security) : standard moderne de chiffrement des communications, versions 1.2 et 1.3, successeur de SSL (Secure Sockets Layer, developpe par Netscape dans les annees 1990).
+
+      ARP poisoning / ARP spoofing : attaque consistant a usurper l'adresse MAC d'un hote pour intercepter le trafic reseau.
+
+COURS DETAILLE.
+
+I. LINUX ET TCP/IP : UN HERITAGE UNIX.
+
+   A. La convergence historique entre Unix et TCP/IP.
+
+      GNU/Linux, en tant que systeme d'exploitation open source inspire d'Unix, a herite d'une integration native des protocoles TCP/IP. Des les annees 1970, l'ARPA (Advanced Research Projects Agency) du Departement de la Defense americain (DOD) a developpe le modele DOD (ou modele TCP/IP), un cadre pragmatique pour les reseaux informatiques. Ce modele, concu pour etre robuste, flexible et interoperable, a rapidement seduit les milieux universitaires qui ont contribue a son developpement via le projet ARPANET.
+
+      L'Unix des annees 1970 a 1980 a integre nativement TCP/IP dans son noyau, faisant de cette suite protocolaire un standard de fait pour les systemes Unix. Lorsque Linus Torvalds a cree Linux en 1991, inspire par Minix, il a logiquement repris cette integration de TCP/IP. Contrairement aux modeles proprietaires d'IBM ou de Microsoft, TCP/IP offrait une ouverture et une interoperabilite inegalees.
+
+      Aujourd'hui, la pile TCP/IP reste au coeur de Linux, avec des outils comme ip, ping et ss pour la configurer et la surveiller. Le modele TCP/IP s'est impose comme standard de fait grace a son efficacite, sa simplicite et son ouverture, les RFC etant accessibles librement a quiconque souhaite les implementer.
+
+II. PROTOCOLES DE SUPPORT : ARP, RARP ET ICMP.
+
+   A. ARP : la traduction IP vers MAC.
+
+      ARP est un protocole de niveau 2 (couche Liaison dans le modele OSI) qui traduit une adresse IP (niveau 3) en une adresse MAC (niveau 2). Sans ARP, un hote ne pourrait pas acheminer une trame vers un autre hote sur le meme reseau local, car les commutateurs utilisent les adresses MAC.
+
+      Le fonctionnement d'ARP repose sur la diffusion. Lorsqu'un hote A veut envoyer un paquet a un hote B sur le meme reseau local, il consulte sa table ARP pour trouver l'adresse MAC associee a l'adresse IP de B. Si l'entree n'existe pas, A diffuse (broadcast) une requete ARP de type "Qui a l'adresse IP X ? Repondez-moi a l'adresse MAC Y." L'hote B repond directement a A avec son adresse MAC. A met alors a jour sa table ARP pour les prochaines communications.
+
+      Sous Linux, la gestion de la table ARP se fait via la commande ip neigh. La commande "ip neigh show" affiche toutes les entrees du cache ARP. La commande "ip neigh add" permet d'ajouter manuellement une entree statique permanente. La commande "ip neigh del" supprime une entree. L'ARP poisoning (ou ARP spoofing) est une attaque dans laquelle un attaquant usurpe l'adresse MAC d'un hote pour intercepter le trafic.
+
+   B. RARP : la traduction MAC vers IP.
+
+      RARP est l'inverse d'ARP. Il permet a un hote de connaitre son adresse IP a partir de son adresse MAC. Ce protocole, defini par la RFC 903 en 1984, etait surtout utilise par les stations sans disque (diskless workstations) qui n'avaient pas de memoire locale pour stocker leur configuration IP.
+
+      RARP a ete remplace par des protocoles plus modernes comme DHCP (Dynamic Host Configuration Protocol), qui permet une attribution dynamique des adresses IP. Les tables RARP devaient etre mises a jour manuellement par l'administrateur, ce qui le rendait statique et difficile a maintenir.
+
+   C. ICMP : diagnostic et controle reseau.
+
+      ICMP est un protocole de niveau 3 (comme IP) qui permet d'echanger des messages de controle et d'erreur entre hotes. Il est indispensable pour le diagnostic reseau et la gestion des erreurs. Contrairement a une idee recue, ICMP n'est pas un protocole de transport : il est encapsule dans les paquets IP.
+
+      Les messages ICMP principaux sont : Destination unreachable (hote ou reseau inaccessible), Time exceeded (TTL depasse, pour eviter les boucles infinies), Redirect (redirection de route), et Echo request/reply (utilise par la commande ping).
+
+      Sous Linux, la commande ping utilise ICMP pour verifier la connectivite avec un hote distant. La commande traceroute (ou mtr) utilise ICMP (ou UDP) pour tracer le chemin des paquets et identifier les sauts intermediaires. ICMP est parfois bloque par les pare-feu pour eviter les attaques par ICMP Flood ou Ping of Death.
+
+III. LE PROTOCOLE IP.
+
+   A. Caracteristiques et fonctionnement.
+
+      IP (Internet Protocol) est un protocole de niveau 3 (couche Reseau) non fiable et non connecte (CLNS : ConnectionLess Network Service). Son role est d'acheminer les datagrammes de la source a la destination sans garantie de livraison. La fiabilite est assuree par les couches superieures, notamment TCP.
+
+      IP decoupe les donnees en datagrammes et decide du chemin a emprunter pour chaque paquet en utilisant les tables de routage pour determiner la prochaine etape (next hop) vers la destination. IP est independant du support physique : il peut fonctionner sur Ethernet, Wi-Fi, fibre optique et tout autre support.
+
+      Les caracteristiques cles d'IP sont : l'adressage IP (chaque hote a une adresse IP unique en version 4 ou 6), la fragmentation (si un paquet est trop grand pour le MTU du reseau, IP le fragmente en paquets reassembles par le destinataire), et le TTL (compteur qui diminue a chaque saut, le paquet est jete quand TTL atteint 0 et un message ICMP Time Exceeded est envoye).
+
+      Sous Linux, les commandes du paquet iproute2 gerent IP. "ip addr" affiche les adresses IP des interfaces reseau. "ip route" affiche la table de routage. "ip route add default via 192.168.1.1" definit une passerelle par defaut.
+
+IV. LES PROTOCOLES DE TRANSPORT : TCP ET UDP.
+
+   A. TCP : fiabilite et connexion orientee.
+
+      TCP (Transmission Control Protocol) est un protocole de niveau 4 fiable et oriente connexion. Il garantit que les donnees arrivent sans erreur, dans l'ordre et sans perte, grace aux mecanismes de controle de flux, d'acquittement et de retransmission.
+
+      L'etablissement de connexion TCP (Three-Way Handshake) se deroule en trois etapes. Le client envoie un segment avec le flag SYN et son numero de sequence initial. Le serveur repond avec un segment SYN-ACK et son propre numero de sequence. Le client envoie un ACK pour confirmer la reception. Les deux hotes synchronisent ainsi leurs numeros de sequence et valident la connexion.
+
+      Les mecanismes de fiabilite de TCP sont les numeros de sequence (chaque octet est numerote), les acquittements cumulatifs (ACK confirmant la reception de tous les octets jusqu'a un certain numero), les retransmissions (si un ACK n'est pas recu dans le delai RTT), le controle de flux (mecanisme de fenetrage pour adapter le debit a la capacite du recepteur), et le controle de congestion (ajustement du debit en fonction de la charge du reseau).
+
+      TCP utilise des ports (16 bits) pour identifier les applications. Un socket est une combinaison IP:port unique dans le reseau. Les ports reserves (0-1023) sont associes aux services standards : 80 pour HTTP, 22 pour SSH, 443 pour HTTPS. Les ports dynamiques (1024-65535) sont attribues dynamiquement aux applications. Sous Linux : "ss -t" liste les connexions TCP et "lsof -i TCP" liste les processus utilisant des connexions TCP.
+
+   B. UDP : rapidite et simplicite.
+
+      UDP (User Datagram Protocol) est un protocole de niveau 4 non fiable et non connecte (CLTS). Contrairement a TCP, UDP ne garantit pas la livraison, l'ordre ou la detection des erreurs. Il est beaucoup plus rapide et leger car il evite tous les mecanismes de controle de TCP.
+
+      UDP encapsule simplement les donnees dans un datagramme UDP et les envoie sans etablissement de connexion. L'en-tete UDP est minimaliste (8 octets contre plus de 20 pour TCP). La fiabilite est laissee a l'application si elle en a besoin.
+
+      Les cas d'usage de UDP sont le streaming video et audio (YouTube, Netflix), les jeux en ligne ou la vitesse prime sur la fiabilite, le DNS (port 53) pour la rapidite des requetes, NTP (port 123) pour la synchronisation des horloges, et la VoIP ou le protocole RTP s'appuie sur UDP. Sous Linux : "ss -u" liste les connexions UDP.
+
+V. SERVICES APPLICATIFS ET CONFIGURATION SOUS LINUX.
+
+   A. Protocoles applicatifs et ports.
+
+      Les protocoles applicatifs s'appuient sur TCP ou UDP pour offrir des services specifiques. HTTP utilise le port 80 (TCP) pour la navigation web. HTTPS utilise le port 443 (TCP) avec chiffrement TLS/SSL. FTP utilise les ports 20 et 21 (TCP) pour le transfert de fichiers, mais est obsolete. SFTP et SCP utilisent le port 22 (TCP) via SSH pour les transferts securises. SMTP utilise le port 25 (TCP) pour l'envoi de courriers. POP3 utilise le port 110 (TCP) pour la releve d'emails avec stockage local. IMAP4 utilise le port 143 (TCP) pour la releve multi-appareils sans suppression du serveur. SSH utilise le port 22 (TCP) pour l'administration a distance securisee. DNS utilise le port 53 (TCP et UDP). NTP utilise le port 123 (UDP). Telnet utilise le port 23 (TCP) mais est obsolete, remplace par SSH.
+
+   B. Securisation des protocoles.
+
+      HTTPS est la version securisee de HTTP. Le serveur et le client negocient un chiffrement via un certificat SSL/TLS avant d'echanger les donnees. TLS (Transport Layer Security), versions 1.2 et 1.3, est le standard moderne, successeur de SSL (developpe par Netscape dans les annees 1990). TLS etablit une session chiffree via un certificat numerique et utilise des cles publiques/privees pour authentifier le serveur et chiffrer les donnees. TLS est utilise pour HTTPS, SMTP securise (SMTPS) et IMAP securise (IMAPS).
+
+   C. Fichiers de configuration reseau sous Linux.
+
+      Le fichier /etc/hosts assure la resolution statique de noms d'hotes en adresses IP, avec le format "@IP nom_hote alias". Le fichier /etc/resolv.conf configure les serveurs DNS utilises par le systeme avec le format "nameserver @IP_DNS". Sur Debian/Ubuntu, le fichier /etc/network/interfaces configure les interfaces reseau (adresses IP, passerelle, DNS). Sur CentOS/RHEL, les fichiers /etc/sysconfig/network-scripts/ifcfg-* configurent chaque interface individuellement. Le fichier /etc/nsswitch.conf definit l'ordre de resolution des noms (par exemple "hosts: files dns").
+
+      Les principales commandes de gestion reseau sous Linux sont : ip (gestion des interfaces, routes et adresses IP, remplace ifconfig), ping (test de connectivite via ICMP), traceroute (trace le chemin des paquets), ss (liste les connexions TCP/UDP, remplace netstat), lsof (liste les fichiers ouverts y compris les connexions reseau), dig et nslookup (requetes DNS), curl (transfert de donnees via HTTP, FTP et autres protocoles), wget (telechargement de fichiers), et tcpdump (capture et analyse de paquets).
+
+POINTS D'ATTENTION.
+
+      ARP ne fonctionne que sur le reseau local : pour communiquer avec un hote sur un autre reseau, la trame est envoyee a la passerelle (routeur) dont on resout l'adresse MAC via ARP.
+
+      ICMP est parfois bloque par les pare-feu : dans ce cas, les commandes ping et traceroute ne fonctionnent plus, mais cela n'indique pas necessairement que l'hote est eteint.
+
+      TCP est oriente connexion et garantit la livraison dans l'ordre, au prix d'une surcharge protocolaire. UDP ne garantit rien mais est beaucoup plus rapide, les deux repondant a des besoins differents.
+
+      Les ports reserves (0-1023) necessitent des privileges root pour etre ouverts sous Linux. Un service comme Apache ecoute sur le port 80 en root puis peut abandonner ses privileges.
+
+      FTP transmet les donnees et les mots de passe en clair : il ne doit plus etre utilise en production, remplace par SFTP ou SCP.
+
+      Telnet est non chiffre et ne doit jamais etre utilise sur un reseau non securise : SSH (port 22) est son remplacement direct.
+
+      La commande "ss" est l'outil moderne remplacant "netstat" : "ss -tuln" affiche tous les ports TCP et UDP en ecoute.
+
+EXEMPLES CITES.
+
+      La commande "ping 8.8.8.8" teste la connectivite avec le serveur DNS de Google via ICMP Echo Request/Reply.
+
+      La commande "ip route add default via 192.168.1.1" definit une passerelle par defaut sous Linux.
+
+      La commande "tcpdump -i eth0 port 80" capture le trafic HTTP sur l'interface eth0.
+
+      La commande "systemctl disable telnet && systemctl enable sshd" remplace Telnet par SSH pour l'administration securisee.
+
+      La commande "iptables -A INPUT -p tcp --dport 22 -j ACCEPT" autorise les connexions SSH entrantes dans le pare-feu.
+
+      Pour configurer un serveur web Apache avec une IP statique sur Debian, on edite /etc/network/interfaces, on configure /etc/resolv.conf, on installe Apache avec "apt install apache2" puis on l'active avec "systemctl enable apache2".
+
+      Le DNS utilise UDP sur le port 53 pour les requetes de resolution de noms (rapides), et bascule sur TCP pour les transferts de zone (volumineux).

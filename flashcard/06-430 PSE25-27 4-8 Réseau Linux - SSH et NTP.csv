@@ -1,0 +1,50 @@
+Quel est le risque majeur des protocoles comme Telnet ou rsh par rapport à SSH ?,Ils transmettent les identifiants et mots de passe en clair sur le réseau.
+Quel protocole chiffre l'intégralité des échanges pour sécuriser les connexions distantes sous Linux ?,SSH (Secure Shell).
+Quel port TCP est utilisé par défaut par le service SSH ?,Le port 22.
+Quels sont les deux principaux protocoles SSH utilisés pour le transfert de fichiers sécurisé ?,SCP (Secure Copy) et SFTP (Secure File Transfer Protocol).
+"Lors de l'établissement d'une connexion SSH, quel type de cryptographie est utilisé pour échanger la clé de session ?",La cryptographie asymétrique (clé publique/privée).
+Pourquoi SSH utilise-t-il la cryptographie symétrique après l'authentification ?,Parce qu'elle est plus rapide que la cryptographie asymétrique pour chiffrer les données échangées.
+"Dans le modèle de cryptographie asymétrique SSH, quel élément doit être gardé secret par l'hôte ?",La clé privée.
+Quel algorithme supporté par SSH est réputé pour sa rapidité lors de la signature numérique ?,DSA (Digital Signature Algorithm).
+Quel algorithme supporté par SSH est reconnu pour sa rapidité lors de la vérification ?,RSA (Rivest Shamir Adleman).
+Quel est le compromis de taille de clé (en bits) recommandé pour l'équilibre sécurité/performance sous SSH ?,1024 bits.
+Quel paquet doit être installé sur une distribution Debian/Ubuntu pour configurer un serveur SSH ?,openssh-server.
+Quel est le chemin du fichier de configuration principal du serveur SSH ?,/etc/ssh/sshd_config
+"Dans `sshd_config`, quelle directive permet de modifier le port d'écoute pour éviter les scans automatiques ?",Port.
+Quelle directive du fichier `sshd_config` force l'usage de la version 2 du protocole SSH ?,Protocol 2.
+Quelle directive de configuration permet de désactiver l'authentification par mot de passe au profit des clés ?,PasswordAuthentication no.
+"Pour renforcer la sécurité, quelle directive empêche l'utilisateur 'root' de se connecter directement via SSH ?",PermitRootLogin no.
+Quelle commande Systemd permet de redémarrer le service SSH après une modification de configuration ?,systemctl restart sshd
+Quelle commande permet de vérifier que le démon SSH est bien actif dans la liste des processus ?,ps -ef | grep sshd
+Quelle commande réseau confirme que le serveur SSH écoute bien sur le port 22 ?,netstat -tuln | grep 22 ou ss -tuln | grep 22
+Quel est l'avantage principal de l'authentification par clés SSH par rapport au mot de passe ?,Elle évite de transmettre des identifiants en clair sur le réseau.
+Quelle commande permet de générer une paire de clés RSA sur le client Linux ?,ssh-keygen -t rsa -b 2048
+Dans quel fichier local est stockée la clé privée générée par SSH ?,~/.ssh/id_rsa
+Quel fichier contient la clé publique SSH destinée à être partagée avec les serveurs ?,~/.ssh/id_rsa.pub
+Quelle commande simplifiée permet de copier automatiquement la clé publique du client vers le serveur ?,ssh-copy-id user@serveur
+Quels sont les droits d'accès (`chmod`) recommandés pour le répertoire `~/.ssh` ?,700.
+"Sur le serveur, dans quel fichier sont ajoutées les clés publiques des clients autorisés ?",~/.ssh/authorized_keys
+Quel fichier stocke les empreintes (fingerprints) des serveurs auxquels le client s'est déjà connecté ?,~/.ssh/known_hosts
+Quel est le rôle du fichier `known_hosts` lors d'une connexion SSH ?,Il permet de détecter les attaques par usurpation d'identité du serveur.
+"Quelle directive supplémentaire, en plus de `PasswordAuthentication no`, est conseillée pour désactiver l'usage des mots de passe ?",UsePAM no.
+Quelle est la syntaxe `scp` pour copier un fichier local vers un serveur distant ?,scp fichier user@serveur:/chemin/destination
+Quelle est la fonction principale du protocole NTP (Network Time Protocol) ?,Synchroniser les horloges système des machines d'un réseau.
+Quel problème matériel courant sur les ordinateurs le protocole NTP permet-il de corriger ?,La dérive des horloges système due à l'imprécision des oscillateurs matériels.
+"Dans la hiérarchie NTP, que représente le niveau 'Stratum 0' ?",Les horloges atomiques de référence.
+Comment appelle-t-on les serveurs directement synchronisés avec une horloge atomique (ex: INRIA) ?,Des serveurs de Stratum 1.
+À quel niveau de strate NTP appartiennent généralement les clients finaux d'un réseau ?,Stratum 3 ou supérieur.
+Quelle précision temporelle peut être atteinte par les serveurs NTP ?,Une précision de l'ordre de la microseconde.
+À quoi servent les 'secondes intercalaires' gérées par NTP ?,À compenser les variations de la rotation terrestre.
+Quel est le nom du paquet à installer pour utiliser le démon NTP sous Debian/Ubuntu ?,ntp.
+Quel est le fichier de configuration principal du service NTP ?,/etc/ntp.conf
+"Dans `/etc/ntp.conf`, quel mot-clé permet d'accélérer la synchronisation initiale avec un serveur ?",iburst.
+"Dans `/etc/ntp.conf`, quelle directive limite les accès pour empêcher la modification de l'horloge par des tiers ?",restrict.
+Quelle commande permet d'afficher la liste des serveurs NTP (peers) avec leur strate et leur décalage (offset) ?,ntpq -p
+"Sur les systèmes utilisant Systemd, quelle commande affiche l'état complet de la synchronisation horaire ?",timedatectl
+Quelle commande permet de réaliser une synchronisation ponctuelle et immédiate de l'heure ?,ntpdate
+Quelle commande synchronise l'horloge matérielle (BIOS) avec l'heure du système Linux ?,hwclock
+Pourquoi la synchronisation NTP est-elle cruciale pour l'analyse des journaux (logs) ?,Pour assurer la cohérence temporelle des événements entre plusieurs machines.
+Quelle directive `sshd_config` active spécifiquement l'authentification par clé publique ?,PubkeyAuthentication yes.
+Quels sont les droits d'accès (`chmod`) requis pour le fichier `authorized_keys` sur le serveur ?,600.
+"En France, quels organismes sont cités comme exemples de serveurs de Stratum 1 ?",L'INRIA et le CINES.
+Quelle option de la directive `restrict` dans NTP interdit spécifiquement les modifications de l'horloge ?,nomodify.

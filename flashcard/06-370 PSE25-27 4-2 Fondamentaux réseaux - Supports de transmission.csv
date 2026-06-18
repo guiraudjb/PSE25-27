@@ -1,0 +1,53 @@
+Quelles sont les trois grandes familles de supports de transmission ?,"Les supports métalliques, les supports non métalliques (optiques) et les supports immatériels."
+Comment définit-on le rôle des supports de transmission dans un réseau ?,Ce sont les canaux physiques par lesquels transitent les données entre les nœuds du réseau.
+Quel type de signal est utilisé par les supports métalliques pour transmettre des données ?,Des courants électriques.
+Quel vecteur est utilisé par les supports non métalliques (fibres optiques) pour la transmission ?,La lumière.
+Les supports immatériels utilisent des _____ pour transmettre les données sans fil.,ondes électromagnétiques
+Citez deux exemples de supports métalliques mentionnés dans le document.,La paire torsadée et le câble coaxial.
+Quels sont les six critères clés pour choisir un support de transmission ?,"Le débit, la distance, le coût, l'environnement, la flexibilité et les normes."
+Quelle est la portée maximale approximative du Bluetooth selon le document ?,Quelques mètres.
+Quelle décennie a vu le déploiement massif de la fibre optique pour les liaisons longue distance ?,Les années 1990.
+Pourquoi les conducteurs d'une paire torsadée sont-ils enroulés en hélice ?,Pour réduire les interférences électromagnétiques (bruit).
+Que signifie l'acronyme UTP ?,Unshielded Twisted Pair (paire torsadée non blindée).
+Quel est l'avantage principal du type de câble STP par rapport à l'UTP ?,Il réduit les interférences dans les environnements bruyants grâce à un blindage métallique.
+Quelle est la limite principale de la distance pour les paires torsadées ?,L'affaiblissement du signal dû à la résistance du cuivre.
+Quel débit maximal peut atteindre un câble de Catégorie $6$ sur $100$ m ?,$1$ Gbit/s.
+De quoi est composé le blindage d'un câble coaxial ?,D'une tresse ou d'une feuille métallique.
+Pourquoi le câble coaxial est-il moins sensible aux interférences que la paire torsadée ?,Grâce à sa structure coaxiale partageant le même axe.
+Quel est l'inconvénient majeur de l'installation des câbles coaxiaux par rapport aux paires torsadées ?,"Leur rigidité, qui les rend moins flexibles à installer."
+Quel phénomène physique permet de confiner la lumière dans le cœur d'une fibre optique ?,Le principe de la réflexion totale interne.
+Quelle est la différence de diamètre de cœur entre une fibre Multimode (MMF) et Monomode (SMF) ?,La MMF a un cœur de $50-62.5$ $\mu m$ tandis que la SMF a un cœur de $8-10$ $\mu m$.
+Quelle distance maximale peut atteindre une fibre Monomode (SMF) ?,Jusqu'à $100$ km.
+Pourquoi la fibre optique est-elle considérée comme sécurisée ?,Elle est difficile à intercepter car elle ne produit pas de rayonnement électromagnétique.
+Quels sont les deux types de connecteurs optiques précis cités en exemple ?,LC et SC.
+La norme _____ définit les catégories de câblage pour les réseaux locaux.,ISO 11801
+Que mesure le paramètre ACR dans la classification des câbles ?,Le rapport entre l'atténuation et la diaphonie (Attenuation to Crosstalk Ratio).
+Quelle catégorie de câble est spécifiquement conçue pour le $10$ Gigabit Ethernet jusqu'à $55$ m ?,Catégorie $6a$.
+Quel est le débit maximal théorique de la Catégorie $8$ ?,$25-40$ Gbit/s.
+Quels types de prises spécifiques sont utilisés pour les catégories $7$ et $8$ ?,GG45 ou TERA.
+Quelle gamme de fréquences est utilisée par les faisceaux hertziens ?,De $2$ GHz à $40$ GHz.
+Pourquoi les stations de faisceaux hertziens doivent-elles être placées en hauteur ?,Pour éviter les obstacles car la propagation est limitée à l'horizon optique.
+À quelle altitude se situent les satellites en orbite géostationnaire ?,$36\ 000$ km.
+Quel est le principal inconvénient de la transmission par satellite pour les applications interactives ?,Une latence élevée ($500-700$ ms).
+Dans quelle architecture Wi-Fi toutes les stations sont-elles connectées via un point d'accès (AP) ?,Le mode Infrastructure.
+Qu'est-ce qu'un BSSID ?,L'adresse MAC du point d'accès dans un réseau Wi-Fi en mode infrastructure.
+Le mode Wi-Fi _____ permet aux machines de communiquer directement sans point d'accès.,Ad Hoc (ou IBSS)
+"Quelle norme Wi-Fi introduite en $1999$ fonctionne à $11$ Mbit/s sur la bande $2,4$ GHz ?",$802.11b$.
+Quelle est la principale technologie introduite par la norme $802.11n$ ?,Le MIMO (Multi-Input Multi-Output).
+Quel est le débit théorique maximal de la norme $802.11ax$ (Wi-Fi 6) ?,$11$ Gbit/s.
+Quelle innovation du Wi-Fi $6$ permet de partager un canal entre plusieurs utilisateurs simultanément ?,L'OFDMA (Orthogonal Frequency Division Multiple Access).
+Que signifie la technologie MLO introduite avec le Wi-Fi $7$ ?,Multi-Link Operation (utilisation simultanée de plusieurs bandes de fréquences).
+Quelle norme de sécurité est renforcée avec l'arrivée du Wi-Fi $6$ ?,WPA3.
+Quelle est la bande de fréquence commune au Bluetooth et au Wi-Fi ?,$2.4$ GHz.
+Quelle classe de Bluetooth permet une portée allant jusqu'à $100$ m ?,Classe I.
+Combien d'appareils au maximum peuvent être connectés simultanément dans un piconet Bluetooth ?,$7$ appareils.
+Que signifie l'acronyme BLE introduit avec le Bluetooth $4.0$ ?,Bluetooth Low Energy (faible consommation énergétique).
+Quelle amélioration apporte le Bluetooth $5.4$ en $2023$ ?,Le chiffrement des données publicitaires (Encrypted Advertising Data - EAD).
+Quel support est recommandé pour câbler des data centers nécessitant de très hauts débits ?,La fibre optique.
+Quel type de câble faut-il privilégier dans un milieu industriel avec beaucoup de parasites ?,Un câble blindé (STP) ou de la fibre optique.
+Pourquoi choisir des catégories de câbles supérieures (ex: Cat $8$) lors d'une installation ?,Pour assurer l'évolutivité et anticiper les besoins futurs en débit.
+Quel est l'avantage des satellites LEO (comme Starlink) par rapport aux satellites géostationnaires ?,Une latence réduite et un débit accru.
+Quel support est idéal pour connecter des sites isolés comme des îles ou des zones rurales sans câblage ?,Les faisceaux hertziens ou les satellites.
+"La fibre optique est composée d'un cœur, d'une gaine optique et d'une _____.",gaine de protection (plastique)
+Quel est le débit maximal de la norme $802.11g$ ?,$54$ Mbit/s.
+Concept : Diaphonie,Interférences électromagnétiques se produisant entre les paires d'un même câble.

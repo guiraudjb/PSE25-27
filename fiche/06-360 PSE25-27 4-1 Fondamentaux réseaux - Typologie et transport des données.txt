@@ -1,0 +1,167 @@
+FONDAMENTAUX RESEAUX : TYPOLOGIE DES RESEAUX ET TRANSPORT DES DONNEES.
+
+LEXIQUE COMPLET.
+
+      Reseau informatique : ensemble d'equipements interconnectes permettant l'echange de donnees et le partage de ressources entre des entites distantes.
+
+      Protocole : description formelle de regles a suivre pour echanger des informations entre equipements, comparable a une langue commune ou a des conventions postales.
+
+      TCP/IP : suite de protocoles de communication devenue le standard de fait des reseaux informatiques modernes, permettant de transporter textes, images, parole et video.
+
+      RFC (Request For Comments) : documents ouverts et collaboratifs crees des 1968 par le Network Working Group pour definir les protocoles et standards d'Internet.
+
+      ARPANET : premier reseau a commutation de paquets, ancetre d'Internet, cree dans les annees 1960 par l'ARPA du Departement de la Defense americain.
+
+      PAN (Personal Area Network) : reseau personnel couvrant quelques metres, relie les equipements d'un seul utilisateur.
+
+      LAN (Local Area Network) : reseau local couvrant un batiment ou un campus, avec des debits de quelques Megabits a plusieurs centaines de Megabits par seconde.
+
+      MAN (Metropolitan Area Network) : reseau metropolitain interconnectant plusieurs LAN sur une ville ou un campus via des liens a haut debit.
+
+      RAN (Regional Area Network) : reseau regional couvrant jusqu'a 50 km de rayon pour les reseaux sans fil.
+
+      WAN (Wide Area Network) : reseau etendu reliant des pays et continents via fibre optique ou satellites, dont Internet est l'exemple le plus connu.
+
+      Topologie logique : mode de circulation des donnees et d'echange des messages sur le reseau.
+
+      Topologie physique : mode d'interconnexion physique des equipements du reseau.
+
+      Paquet : unite de base du transport des donnees sur un reseau, encapsule dans une trame.
+
+      Trame : structure binaire encapsulant un paquet, contenant des marqueurs de debut et de fin permettant son identification.
+
+      Flot : ensemble de paquets issus d'un meme utilisateur et d'une meme application.
+
+      Noeud de transfert : equipement de reseau (routeur, commutateur) charge de recevoir les paquets et de determiner leur prochain saut.
+
+      Table de routage : table utilisee par chaque noeud contenant les adresses des reseaux de destination, les passerelles intermediaires et les interfaces reseau a emprunter.
+
+      Routage de paquets : mecanisme dans lequel chaque noeud choisit la route optimale de maniere independante, la route pouvant varier dynamiquement selon l'etat du reseau.
+
+      Commutation de paquets : mecanisme dans lequel un chemin dedie est etabli pour tous les paquets d'un meme flot via une procedure de signalisation prealable.
+
+      OSPF, BGP : exemples de protocoles de routage utilises pour evaluer l'etat du reseau et calculer les routes.
+
+COURS DETAILLE.
+
+I. ORIGINES ET ENJEUX DES RESEAUX INFORMATIQUES.
+
+   A. Fondements historiques et role des protocoles.
+
+      Les reseaux informatiques actuels sont le fruit d'evolutions initiees dans les annees 1960 et marquees par une acceleration technologique continue. Leur objectif initial etait de faire communiquer des entites distantes telles que des ordinateurs, des serveurs ou des imprimantes, d'abord reliees a un serveur central, puis interconnectees entre elles de facon distribuee.
+
+      Pour permettre ces echanges, des protocoles de communication ont ete developpes. Un protocole est une description formelle de regles a suivre pour echanger des informations, comparables a une langue commune ou a des conventions postales. Comme une enveloppe contient l'adresse du destinataire, un paquet reseau inclut des en-tetes contenant les adresses IP et les ports necessaires pour acheminer les donnees vers leur destination.
+
+      Parmi tous les protocoles developpes, la suite TCP/IP s'est imposee comme le standard de fait dans le monde des reseaux. Initialement concue pour transporter des textes et des images, elle a evolue pour integrer la parole et la video.
+
+   B. Les enjeux repondus par TCP/IP.
+
+      La suite TCP/IP a permis de repondre a plusieurs enjeux majeurs. Le premier est la mutualisation des ressources, c'est-a-dire le partage de fichiers, d'imprimantes, de memoire ou de processeurs avec une diversification croissante des ressources disponibles.
+
+      Le deuxieme enjeu est l'extension de l'espace de communication, avec la creation d'Intranet et d'Extranet pour connecter des utilisateurs au sein d'une organisation ou avec des partenaires externes.
+
+      Le troisieme enjeu est la federation des pratiques, notamment la convergence entre reseaux telephoniques et informatiques, illustree par les technologies ToIP et VoIP.
+
+      Enfin, le quatrieme enjeu est l'etoffement de l'offre de services, avec l'evolution des services web quantitativement (volume de donnees) et qualitativement (messagerie, navigation, audio, video).
+
+   C. ARPANET et la naissance d'Internet.
+
+      ARPANET est ne dans les annees 1960 sous l'impulsion de l'ARPA du Departement de la Defense americain. Son objectif etait de connecter des reseaux heterogenes tout en etant resistant a une attaque nucleaire. Il reposait sur la commutation par paquets, une innovation majeure pour l'epoque.
+
+      Le premier lien fut etabli le 21 novembre 1969 entre l'Universite de Californie a Los Angeles et le Stanford Research Institute. En 1972, le reseau comptait deja 200 hotes.
+
+      Les RFC, creees par le Network Working Group en 1968, sont devenues la memoire collective d'Internet. Ces documents ouverts et collaboratifs ont structure les premiers protocoles comme TELNET et FTP, symbolisant une culture de partage et de meritocratie informelle. La premiere RFC d'avril 1969 definissait la notion de machine hote.
+
+      En 1983, on comptait 562 machines connectees ; en 1984, 1 024 machines et la mise en place du DNS. Dans les annees 1990, le nombre depassa le million, ARPANET fut integre a Internet, et l'architecture en toile basee sur HTML et HTTP vit le jour avec les premiers navigateurs.
+
+II. TYPOLOGIE DES RESEAUX PAR ECHELLE ET USAGE.
+
+   A. Les cinq categories de reseaux.
+
+      Les reseaux informatiques se distinguent principalement par leur etendue geographique et leur debit. On distingue cinq grandes categories, chacune repondant a des besoins specifiques.
+
+      Le reseau personnel (PAN, Personal Area Network) interconnecte des equipements personnels comme des smartphones, ordinateurs portables, imprimantes ou tablettes sur quelques metres pour un seul utilisateur. La connexion Bluetooth entre un telephone et un casque en est un exemple typique.
+
+      Le reseau local (LAN, Local Area Network) couvre des batiments tels que des entreprises ou des campus universitaires, sur plusieurs centaines de metres, avec des debits allant de quelques Megabits a plusieurs centaines de Megabits par seconde. Le reseau interne d'une entreprise reliant postes, serveurs et imprimantes en est l'exemple classique.
+
+      Le reseau metropolitain (MAN, Metropolitan Area Network) permet l'interconnexion de plusieurs LAN sur une ville ou un campus via des liens a haut debit tels que la fibre optique. Le reseau d'une universite reliant plusieurs batiments illustre cette categorie.
+
+      Le reseau regional (RAN, Regional Area Network) couvre une large superficie geographique pouvant atteindre 50 km de rayon pour les reseaux sans fil, permettant de connecter un grand nombre d'utilisateurs depuis une seule antenne.
+
+      Le reseau etendu (WAN, Wide Area Network) relie des pays, continents ou zones geographiques vastes via des reseaux terrestres a fibre optique ou des reseaux hertziens a satellites. Internet lui-meme, qui connecte des millions de reseaux locaux a travers le monde, est le plus grand exemple de WAN.
+
+III. TOPOLOGIES RESEAU.
+
+   A. Distinction entre topologie physique et logique.
+
+      Une topologie decrit la maniere dont les noeuds, c'est-a-dire les ordinateurs et les equipements, sont interconnectes. On distingue deux types de topologies. La topologie logique decrit le mode de circulation des donnees et d'echange des messages sur le reseau. La topologie physique decrit le mode d'interconnexion physique des equipements.
+
+   B. Les topologies physiques.
+
+      La topologie en bus relie les stations par un cable coaxial commun. Les connexions sont passives, ce qui signifie que le signal n'est pas regenere, limitant ainsi l'etendue du reseau. L'ajout d'une nouvelle station ne perturbe pas le reseau et peut se faire sans interruption. Son principal inconvenient est qu'une panne du cable peut paralyser l'ensemble du reseau.
+
+      La topologie en anneau organise les equipements en boucle fermee. Les noeuds sont actifs car ils regenerent le signal, mais une coupure de l'anneau interrompt le reseau. Pour pallier ce probleme, on peut doubler l'anneau. Le reseau Token Ring d'IBM en est l'exemple historique.
+
+      La topologie en etoile connecte tous les noeuds a un noeud central appele concentrateur ou hub. Le cablage est plus couteux car il necessite des paires torsadees, mais la gestion est simplifiee car une panne sur un noeud n'affecte pas les autres. Les reseaux Ethernet modernes utilisent cette topologie.
+
+      La topologie hierarchique est derivee de l'etoile. Elle consiste en un ensemble de reseaux en etoile relies entre eux par des concentrateurs. Elle est utilisee dans les reseaux locaux tels que ceux bases sur la norme 10BASE-T.
+
+      La topologie arborescente connecte un noeud a un repeteur qui etend le reseau sous forme de nouveaux bus. Elle est utilisee principalement pour les extensions de reseaux.
+
+      La topologie maillee relie chaque noeud a plusieurs autres, offrant plusieurs chemins possibles pour les donnees, ce qui cree de la redondance. Elle est utilisee avec des commutateurs comme les autocommutateurs PABX et dans les reseaux militaires. Son avantage principal est la resilience en cas de panne d'un lien.
+
+IV. TRANSPORT DES DONNEES : PAQUETS, ROUTAGE ET COMMUTATION.
+
+   A. Paquets, trames et acheminement.
+
+      Les donnees transitent sur les reseaux sous forme de paquets, qui constituent les unites de base du transport. Chaque paquet est encapsule dans une trame, structure binaire contenant une succession specifique d'elements permettant de reconnaitre son debut et sa fin.
+
+      Les paquets d'un meme flot, c'est-a-dire issus d'un meme utilisateur et d'une meme application, sont achemines de noeud en noeud jusqu'a leur destinataire final. Le reseau de transfert est compose de noeuds de transfert tels que des routeurs et des commutateurs, relies par des lignes de communication. Chaque noeud a pour role de recevoir les paquets et de determiner leur prochain saut.
+
+   B. Le routage de paquets.
+
+      Dans le mecanisme de routage de paquets, chaque noeud utilise une table de routage pour determiner la route optimale. Cette table contient les adresses des reseaux de destination, les passerelles intermediaires et les interfaces reseau a emprunter.
+
+      La route peut varier dynamiquement selon l'etat du reseau, notamment en fonction du trafic et des pannes. Deux paquets d'un meme flot peuvent donc emprunter des chemins differents. L'etat du reseau est evalue via des protocoles de routage tels que OSPF ou BGP.
+
+   C. La commutation de paquets.
+
+      Dans le mecanisme de commutation de paquets, un chemin dedie est etabli en amont pour tous les paquets d'un meme flot. Ce chemin est signale au reseau via une procedure specifique, comme l'etablissement de connexion dans le protocole TCP.
+
+      La principale difficulte de ce mecanisme reside dans la mise en place du chemin, qui necessite une signalisation coteuse en ressources impliquant des echanges de messages de controle. Cela rend les reseaux a commutation de paquets plus onereux que ceux bases sur le routage classique.
+
+POINTS D'ATTENTION.
+
+      ARPANET a ete concu pour etre resistant a une attaque nucleaire, d'ou son architecture distribuee qui ne repose pas sur un point central unique.
+
+      La suite TCP/IP n'a pas ete concue initialement pour la video et la voix, mais elle a evolue pour les integrer progressivement.
+
+      La topologie en bus presente un point de defaillance unique sur le cable commun, contrairement a la topologie en etoile ou une panne d'un noeud n'affecte pas les autres.
+
+      En routage de paquets, deux paquets d'un meme flot peuvent arriver dans le desordre car ils peuvent emprunter des chemins differents selon l'etat dynamique du reseau.
+
+      La commutation de paquets est plus onereuse que le routage car elle necessite une phase de signalisation avant tout transfert de donnees.
+
+      SMB1 n'est pas lie a ce cours, mais a noter que la commutation est utilisee dans TCP (connexion orientee), tandis que le routage pur est plus proche d'UDP (sans connexion prealable).
+
+EXEMPLES CITES.
+
+      Le premier lien ARPANET fut etabli le 21 novembre 1969 entre l'Universite de Californie a Los Angeles et le Stanford Research Institute.
+
+      En 1984, le DNS (Domain Name System) fut mis en place alors qu'Internet comptait 1 024 machines connectees.
+
+      La connexion entre un telephone et un casque Bluetooth est un exemple de reseau PAN.
+
+      Le reseau interne d'une entreprise reliant postes, serveurs et imprimantes est un exemple de reseau LAN.
+
+      Le reseau d'une universite reliant plusieurs batiments via fibre optique est un exemple de reseau MAN.
+
+      Internet, qui connecte des millions de reseaux locaux, est le plus grand exemple de reseau WAN.
+
+      Les reseaux Token Ring d'IBM illustrent la topologie en anneau.
+
+      Les reseaux Ethernet modernes utilisent la topologie en etoile.
+
+      Les protocoles OSPF et BGP sont des exemples de protocoles de routage dynamique.
+
+      L'etablissement de connexion TCP avant tout transfert de donnees illustre le principe de la commutation de paquets.

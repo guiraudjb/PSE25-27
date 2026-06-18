@@ -1,0 +1,50 @@
+Quel est le rôle principal des entrées/sorties (E/S) pour un programme ?,"Permettre la communication avec les périphériques (disques, clavier, réseau)."
+Pourquoi le système d'exploitation masque-t-il la complexité du matériel lors des E/S ?,Pour fournir des interfaces standardisées aux applications.
+Citez deux exemples d'interfaces standardisées fournies par Linux pour la gestion des données.,Les interfaces read et write.
+Quelle est la principale différence de vitesse de traitement entre le processeur et les opérations d'E/S ?,Les opérations d'E/S sont beaucoup plus lentes que celles du processeur.
+Quel est le rôle du noyau (kernel) vis-à-vis des applications et du matériel ?,Il agit comme intermédiaire pour garantir la sécurité et la cohérence des échanges.
+Énumérez les cinq éléments principaux d'une opération d'E/S selon l'architecture générale.,"Le périphérique, le contrôleur, le bus, le pilote et le noyau."
+Quel composant assure l'interface matérielle directe avec le périphérique ?,Le contrôleur.
+Quel est l'avantage d'une organisation en couches pour la gestion des E/S ?,Elle rend le système modulaire et indépendant du matériel utilisé.
+Quelle est l'unique interface entre l'espace utilisateur et l'espace noyau pour lire des données ?,L'appel système (system call).
+Citez trois garanties offertes par le passage obligatoire par le noyau lors d'une E/S.,"La sécurité des accès, l'isolation entre processus et la cohérence du système."
+Définition : Périphérique de type caractère,Périphérique transmettant les données de manière séquentielle sous forme de flux continu.
+Donnez deux exemples de périphériques de type caractère.,Le clavier et le terminal.
+Définition : Périphérique de type bloc,Périphérique manipulant des données organisées en blocs et permettant un accès direct.
+Donnez deux exemples de périphériques de type bloc.,Les disques durs et les SSD.
+Pourquoi la distinction entre type caractère et type bloc est-elle importante ?,Elle conditionne les performances et le mode d'accès aux données.
+Quel est l'inconvénient majeur des E/S programmées ?,"Le processeur reste occupé pendant toute la durée de l'accès, ce qui est inefficace."
+Que signifie l'acronyme DMA dans le contexte des entrées/sorties ?,Direct Memory Access.
+Quel est le fonctionnement du mécanisme DMA ?,Il transfère les données directement entre le périphérique et la mémoire sans solliciter le CPU.
+Quel est le bénéfice principal du DMA pour le processeur ?,Le processeur est libéré pour exécuter d'autres tâches pendant le transfert.
+Pour quels types de périphériques le DMA est-il principalement utilisé ?,Les périphériques à fort débit comme les disques ou les cartes réseau.
+Quel est le but d'une interruption dans la gestion des E/S ?,Permettre à un périphérique de signaler un événement (comme la fin d'une lecture) au processeur.
+Que fait le processeur lorsqu'il reçoit une interruption ?,Il suspend le programme en cours pour exécuter une routine du noyau traitant l'événement.
+Quel problème d'efficacité le mécanisme d'interruption permet-il d'éviter ?,Il évite l'attente active du processeur.
+Quel est le rôle logiciel des pilotes de périphériques (drivers) ?,Traduire les commandes génériques du système en instructions spécifiques au matériel.
+"Outre la traduction des commandes, quelle autre fonction assurent les pilotes ?",Ils gèrent les erreurs et assurent le bon fonctionnement des échanges.
+"Grâce aux pilotes, de quoi les applications n'ont-elles plus besoin de se soucier ?",Des détails techniques spécifiques du matériel utilisé.
+Quel est le principe fondamental de Linux concernant la représentation des périphériques ?,Tous les périphériques sont représentés comme des fichiers.
+Quel chemin de fichier est généralement associé à un disque sous Linux ?,/dev/sda
+Quel chemin de fichier est généralement associé à un terminal sous Linux ?,/dev/tty
+Quel est l'avantage de la représentation unifiée des périphériques sous forme de fichiers ?,Elle simplifie l'administration et permet d'utiliser les mêmes opérations (lecture/écriture) pour tout.
+Quelle commande permet de visualiser l'ensemble des périphériques reconnus dans le répertoire dédié ?,ls /dev
+Quelle commande Linux affiche les disques et leurs partitions de manière structurée ?,lsblk
+Quelles commandes permettent d'identifier respectivement le matériel PCI et USB connecté ?,lspci et lsusb
+Quel outil fournit des statistiques détaillées sur le débit et les temps d'attente des disques ?,iostat
+Quel outil donne une vue globale de l'activité de la mémoire et des E/S du système ?,vmstat
+Quelle commande est la plus utile pour identifier les processus consommant le plus d'E/S en temps réel ?,iotop
+Quels systèmes de fichiers virtuels fournissent des informations détaillées sur le noyau et le matériel ?,/proc et /sys
+Le noyau vérifie les _____ avant de déclencher une opération d'entrée/sortie.,Droits d'accès
+"Contrairement aux périphériques de type caractère, les périphériques de type bloc permettent un accès _____.",Direct (ou aléatoire)
+Le transfert de données via le _____ est indispensable pour les périphériques à haut débit.,DMA (Direct Memory Access)
+"Dans l'architecture Linux, le _____ transporte physiquement les données entre les composants.",Bus
+La couche d'_____ matérielle permet de rendre le système Linux portable.,Abstraction
+Comment appelle-t-on la routine exécutée par le noyau suite à un signal de périphérique ?,Une routine de traitement d'interruption.
+Vrai ou Faux : Un programme utilisateur peut piloter directement un disque sans passer par le noyau.,Faux (il doit obligatoirement passer par un appel système).
+Vrai ou Faux : Les E/S programmées sont plus performantes que le DMA.,Faux (le DMA est plus performant car il libère le CPU).
+Quel paramètre de performance iostat mesure-t-it pour indiquer une surcharge potentielle ?,La saturation (ou le temps d'attente).
+Quel type de périphérique transmet les données une par une dans un ordre précis ?,Le périphérique de type caractère (séquentiel).
+Pourquoi dit-on que l'architecture des E/S est modulaire ?,"Parce qu'elle sépare les responsabilités en couches distinctes (pilote, noyau, contrôleur)."
+Que signifie le terme 'indépendance matérielle' dans le contexte des pilotes ?,Le fait que les applications fonctionnent de la même manière quel que soit le modèle de matériel.
+Le répertoire _____ regroupe les fichiers spéciaux représentant les périphériques matériels.,/dev

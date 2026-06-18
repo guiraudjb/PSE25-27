@@ -1,0 +1,121 @@
+DHCP ET DNS SOUS WINDOWS SERVER.
+
+LEXIQUE COMPLET.
+
+      DHCP (Dynamic Host Configuration Protocol) : protocole (RFC 2131) permettant d'attribuer automatiquement les parametres reseau aux postes clients d'un reseau IP (adresse IP, masque, passerelle, serveurs DNS, nom de domaine, duree de bail).
+
+      Etendue DHCP (Scope) : plage d'adresses IP configuree sur le serveur DHCP et distribuee aux clients. Exemple : 192.168.1.10 a 192.168.1.200.
+
+      Bail DHCP (Lease) : duree pendant laquelle une adresse IP est attribuee a un client DHCP. Le client renouvelle le bail avant son expiration.
+
+      Reservation DHCP : association permanente entre une adresse MAC et une adresse IP precise, garantissant que le meme equipement recoit toujours la meme adresse IP.
+
+      Exclusion DHCP : adresse ou plage d'adresses IP appartenant a l'etendue mais ne devant jamais etre distribuees (reservees aux equipements a adresse statique).
+
+      Processus DORA : les quatre etapes du protocole DHCP : Discover (le client recherche un serveur DHCP), Offer (le serveur propose une adresse), Request (le client demande l'utilisation de l'adresse), Acknowledge (le serveur valide l'attribution).
+
+      Autorisation DHCP dans Active Directory : mecanisme Windows Server exigeant qu'un serveur DHCP soit explicitement autorise dans Active Directory avant de distribuer des adresses, evitant les serveurs DHCP pirates (rogue DHCP).
+
+      Options DHCP : parametres supplementaires distribues par le serveur DHCP aux clients. Option 003 = passerelle, Option 006 = serveurs DNS, Option 015 = nom de domaine DNS, Options 066/067 = serveurs et fichiers de demarrage PXE.
+
+      Haute disponibilite DHCP : mecanisme Windows Server permettant le mode failover (basculement automatique), la repartition de charge et la redondance entre deux serveurs DHCP.
+
+      DNS (Domain Name System) : systeme traduisant les noms de machines en adresses IP (RFC 1034 et RFC 1035). Indispensable a Active Directory, aux services reseau, a Internet et aux applications distribuees.
+
+      Zone DNS principale : zone modifiable contenant les enregistrements DNS originaux, modifiable par l'administrateur.
+
+      Zone DNS secondaire : copie en lecture seule d'une zone principale, utilisee pour la redondance.
+
+      Zone DNS integree Active Directory (AD-integrated) : zone DNS stockee dans la base AD DS avec replication automatique, securisation et tolerance aux pannes.
+
+      Zone directe : zone DNS effectuant la resolution Nom vers IP.
+
+      Zone inverse : zone DNS effectuant la resolution IP vers Nom (dans le domaine .in-addr.arpa).
+
+      DNS dynamique (DDNS) : mecanisme permettant l'enregistrement automatique des machines dans le DNS et la mise a jour automatique des adresses IP. Tres utilise conjointement avec DHCP.
+
+      Redirecteur DNS : serveur DNS transmettant les requetes qu'il ne peut pas resoudre localement vers d'autres serveurs (DNS du FAI, DNS publics, serveurs internes).
+
+      Enregistrement SRV : enregistrement DNS specifique a Active Directory permettant la localisation des services du domaine (controleurs, Kerberos, LDAP).
+
+      DNSSEC : extension securisee du DNS ajoutant des signatures numeriques aux enregistrements pour garantir leur authenticite.
+
+COURS DETAILLE.
+
+I. SERVICE DHCP SOUS WINDOWS SERVER.
+
+   A. Fonctionnement et processus DORA.
+
+      Le protocole DHCP (RFC 2131) permet d'attribuer automatiquement les parametres reseau aux postes clients sans configuration manuelle. Sans DHCP, chaque machine devrait etre configuree manuellement avec une adresse IP, un masque de sous-reseau, une passerelle par defaut, des serveurs DNS et d'autres parametres. DHCP automatise cette gestion et reduit fortement les erreurs de configuration. Les objectifs sont : automatiser la configuration TCP/IP, centraliser l'administration reseau, eviter les conflits d'adresses IP, simplifier le deploiement des postes et permettre la mobilite des equipements.
+
+      Le service DHCP utilise le port UDP 67 pour le serveur et le port UDP 68 pour le client.
+
+      Le fonctionnement DHCP repose sur quatre etapes (DORA). Premiere etape (Discover) : le client demarre sans adresse IP et diffuse une requete broadcast sur le reseau pour localiser un serveur DHCP. Deuxieme etape (Offer) : le serveur DHCP repond avec une adresse IP disponible, le masque, la passerelle, les serveurs DNS et la duree du bail. Troisieme etape (Request) : le client accepte l'offre et envoie une requete confirmant son choix. Quatrieme etape (Acknowledge) : le serveur confirme officiellement l'attribution.
+
+      Le client renouvelle automatiquement son bail avant expiration : a T1 (50 % du bail) il tente le renouvellement aupres du meme serveur. A T2 (87,5 % du bail) il tente aupres d'autres serveurs DHCP si le premier ne repond pas.
+
+   B. Deploiement et configuration DHCP sous Windows Server.
+
+      Le role DHCP s'installe via le Gestionnaire de serveur, PowerShell ou Windows Admin Center. La commande PowerShell est : "Install-WindowsFeature DHCP -IncludeManagementTools".
+
+      Dans un environnement Active Directory, le serveur DHCP doit etre autorise avec la commande "Add-DhcpServerInDC". Cela evite les serveurs DHCP pirates qui pourraient distribuer de fausses configurations reseau.
+
+      Une etendue (Scope) definit la plage IP (StartRange et EndRange), le masque, la duree du bail et les exclusions. La commande PowerShell "Add-DhcpServerv4Scope" cree une etendue. Les options DHCP les plus importantes sont : Option 003 pour la passerelle, Option 006 pour les serveurs DNS, Option 015 pour le nom de domaine DNS, et les Options 066/067 pour le demarrage PXE des postes sans disque.
+
+      Une reservation DHCP associe de maniere permanente une adresse MAC a une adresse IP precise via la commande "Add-DhcpServerv4Reservation". Les informations DHCP (baux, reservations, journaux, config etendues) sont stockees dans %systemroot%\System32\dhcp. La haute disponibilite DHCP permet le mode failover, la repartition de charge et la redondance pour assurer la continuite de service et la tolerance aux pannes.
+
+II. SERVICE DNS SOUS WINDOWS SERVER.
+
+   A. Principes et types d'enregistrements.
+
+      Le DNS (Domain Name System, RFC 1034 et 1035) traduit les noms de machines en adresses IP. Exemple : srv-fichiers.entreprise.local vers 192.168.1.10. Le DNS est indispensable a Active Directory, aux services reseau, a Internet et aux applications distribuees. Le port DNS est UDP 53 pour les requetes classiques et TCP 53 pour les transferts de zones et les grosses reponses.
+
+      Les types d'enregistrements DNS sont : A (Nom vers IPv4), AAAA (Nom vers IPv6), PTR (resolution inverse IP vers Nom), CNAME (alias vers un autre nom), MX (serveur de messagerie du domaine), NS (serveur DNS autoritaire) et SRV (localisation de services Active Directory comme Kerberos et LDAP).
+
+   B. Zones DNS et fonctionnalites avancees.
+
+      La zone principale est modifiable et contient les enregistrements originaux. La zone secondaire est une copie en lecture seule pour la redondance. La zone integree Active Directory est stockee dans la base AD DS avec replication automatique, securisation et tolerance aux pannes : c'est la methode recommandee dans un environnement AD. La zone directe effectue la resolution Nom vers IP. La zone inverse effectue la resolution IP vers Nom.
+
+      Le DNS dynamique (DDNS) permet l'enregistrement automatique des machines et la mise a jour automatique des adresses IP. Il est tres utilise avec DHCP pour maintenir la coherence du DNS sans intervention manuelle. Les redirecteurs DNS transmettent les requetes inconnues vers les DNS du FAI, des DNS publics ou d'autres serveurs internes. La mise en cache DNS ameliore les performances et reduit le trafic reseau en conservant temporairement les reponses.
+
+   C. Implementation et securisation DNS sous Windows Server.
+
+      Le role DNS s'installe avec la commande PowerShell "Install-WindowsFeature DNS -IncludeManagementTools". Une zone DNS se cree avec "Add-DnsServerPrimaryZone". Un enregistrement A s'ajoute avec "Add-DnsServerResourceRecordA" (en specifiant le nom, la zone et l'adresse IPv4).
+
+      La securisation DNS sous Windows Server propose : les mises a jour securisees (seules les machines membres du domaine peuvent enregistrer des noms), le controle des transferts de zone (restriction aux serveurs secondaires autorises), DNSSEC (signatures numeriques des enregistrements) et la journalisation DNS.
+
+III. INTEGRATION DHCP ET DNS.
+
+   A. Fonctionnement conjoint.
+
+      DHCP et DNS sont fortement lies dans un domaine Windows. DHCP attribue les adresses IP et les parametres DNS. DNS permet ensuite la resolution des noms et l'acces aux services. DHCP peut enregistrer automatiquement les clients dans le DNS et mettre a jour les enregistrements DNS dynamiques, assurant la coherence du reseau et l'automatisation complete de l'adressage.
+
+      Le scenario complet est le suivant : le client demarre, le DHCP fournit une adresse IP, le DHCP enregistre le poste dans le DNS avec son nom et son adresse, les autres machines peuvent alors resoudre le nom du nouveau poste et communiquer avec lui.
+
+   B. Commandes PowerShell essentielles.
+
+      Pour DHCP : "Get-DhcpServerv4Scope" (liste les etendues), "Get-DhcpServerv4Lease" (liste les baux actifs), "Add-DhcpServerv4Scope" (cree une etendue). Pour DNS : "Get-DnsServerZone" (liste les zones), "Get-DnsServerResourceRecord" (liste les enregistrements), "Add-DnsServerPrimaryZone" (cree une zone principale).
+
+POINTS D'ATTENTION.
+
+      Le serveur DHCP doit imperativement etre autorise dans Active Directory (commande Add-DhcpServerInDC) avant de distribuer des adresses : un serveur DHCP non autorise dans un domaine AD sera ignore par les clients.
+
+      L'etendue DHCP doit contenir des exclusions pour toutes les adresses IP attribuees statiquement (serveurs, routeurs, imprimantes) afin d'eviter les conflits d'adresses.
+
+      DNS TCP port 53 n'est pas seulement utilise pour les transferts de zones : les reponses DNS depassant 512 octets (puis 4096 octets avec EDNS) sont aussi transmises via TCP.
+
+      La zone DNS integree Active Directory est preferee aux zones standard dans un domaine AD : la replication est automatique via le mecanisme AD, sans configuration de transferts de zone manuels.
+
+      Les enregistrements SRV sont critiques pour Active Directory : leur absence ou leur corruption empeche les postes de trouver les controleurs de domaine pour l'authentification.
+
+EXEMPLES CITES.
+
+      La commande "Add-DhcpServerv4Scope -Name LAN -StartRange 192.168.1.10 -EndRange 192.168.1.200 -SubnetMask 255.255.255.0" cree une etendue DHCP pour le reseau 192.168.1.0/24.
+
+      La commande "Add-DnsServerResourceRecordA -Name SRV-FICHIERS -ZoneName entreprise.local -IPv4Address 192.168.1.10" cree un enregistrement A pointant vers le serveur de fichiers.
+
+      La commande "Add-DnsServerPrimaryZone -Name entreprise.local -ZoneFile entreprise.local.dns" cree une zone DNS principale pour le domaine entreprise.local.
+
+      Quand un poste Windows rejoint le domaine et recoit une adresse via DHCP, ce dernier enregistre automatiquement un enregistrement A dans la zone DNS du domaine, permettant aux autres machines de resoudre le nom du nouveau poste.
+
+      Les RFC de reference sont : RFC 2131 pour DHCP, RFC 1034 et RFC 1035 pour DNS.

@@ -1,0 +1,179 @@
+INTRODUCTION AUX RESEAUX ET SUPPORTS DE TRANSMISSION.
+
+LEXIQUE COMPLET.
+
+      Support de transmission : canal physique par lequel transitent les donnees sur un reseau, constituant l'infrastructure materielle indispensable a la communication entre les noeuds.
+
+      Supports metalliques : supports utilisant des courants electriques pour transmettre les donnees, comme les paires torsadees et les cables coaxiaux.
+
+      Supports non metalliques : supports utilisant la lumiere pour transmettre les donnees, comme les fibres optiques.
+
+      Supports immaterialels : supports utilisant des ondes electromagnetiques sans fil, comme les faisceaux hertziens, les satellites, le Wi-Fi et le Bluetooth.
+
+      Paire torsadee : cable compose de deux conducteurs en cuivre isoles l'un de l'autre et enroules en helice pour reduire les interferences electromagnetiques.
+
+      UTP (Unshielded Twisted Pair) : paire torsadee non blindee, utilisee pour les reseaux locaux et la telephonie.
+
+      STP (Shielded Twisted Pair) : paire torsadee blindee avec ecran metallique pour reduire les interferences dans les environnements bruyants.
+
+      Cable coaxial : cable compose d'un conducteur central, d'un isolant (dielectrique), d'un blindage metallique et d'une gaine externe, offrant une meilleure immunite au bruit.
+
+      Fibre optique : fil de verre ou de plastique tres fin transmettant la lumiere via le principe de reflexion totale interne, compose d'un coeur, d'une gaine optique et d'une gaine de protection.
+
+      Fibre multimode (MMF) : fibre avec plusieurs chemins pour la lumiere (dispersion modale), coeur de 50 a 62,5 microns, jusqu'a 1 Gbit/s sur 550 m, pour les reseaux locaux.
+
+      Fibre monomode (SMF) : fibre avec un seul chemin pour la lumiere, coeur de 8 a 10 microns, 10 Gbit/s et plus sur 100 km, pour les liaisons longue distance.
+
+      Reflexion totale interne : phenomene physique qui confine la lumiere dans le coeur de la fibre grace a la difference d'indice de refraction entre le coeur et la gaine optique.
+
+      Norme ISO 11801 : norme internationale classant les cables de paires torsadees en categories basees sur l'attenuation, la diaphonie et l'ACR.
+
+      Diaphonie : interference entre paires de conducteurs adjacents dans un cable.
+
+      ACR (Attenuation to Crosstalk Ratio) : rapport entre l'attenuation du signal et la diaphonie.
+
+      Faisceau hertzien : support immateriel utilisant des frequences elevees (2 a 40 GHz) et des antennes directionnelles pour transmettre des donnees en ligne de vue.
+
+      Satellite geostionnaire : satellite en orbite a 36 000 km d'altitude, relayant les signaux radio entre stations au sol, avec une latence elevee de 500 a 700 ms.
+
+      Satellite LEO (Low Earth Orbit) : satellite en orbite basse reduisant significativement la latence par rapport aux satellites geostationnaires, comme Starlink.
+
+      Wi-Fi (802.11) : ensemble de normes pour les reseaux locaux sans fil (WLAN) utilisant les bandes de frequences 2,4 GHz, 5 GHz et 6 GHz.
+
+      BSS (Basic Service Set) : ensemble de stations Wi-Fi connectees a un point d'acces en mode infrastructure, identifie par un BSSID (adresse MAC du point d'acces).
+
+      IBSS (Independent Basic Service Set) : reseau Wi-Fi en mode Ad Hoc ou les machines communiquent directement entre elles sans point d'acces, identifie par un SSID.
+
+      MIMO (Multi-Input Multi-Output) : technologie utilisant plusieurs antennes pour ameliorer le debit Wi-Fi, introduite avec la norme 802.11n.
+
+      OFDMA : technique permettant de partager un canal entre plusieurs utilisateurs simultanement, introduite avec le Wi-Fi 6 (802.11ax).
+
+      Bluetooth (WPAN) : technologie de reseau personnel sans fil fonctionnant sur la bande 2,4 GHz, avec une portee de quelques metres a 100 m selon la classe.
+
+      BLE (Bluetooth Low Energy) : version a faible consommation d'energie du Bluetooth (4.0), ideale pour l'Internet des objets (IoT).
+
+      FTTH (Fiber To The Home) : deploiement de la fibre optique jusqu'aux logements des abonnes.
+
+COURS DETAILLE.
+
+I. INTRODUCTION AUX SUPPORTS DE TRANSMISSION.
+
+   A. Role et definition.
+
+      Les supports de transmission sont les canaux physiques par lesquels transitent les donnees sur un reseau. Ils constituent l'infrastructure materielle indispensable pour assurer la communication entre les noeuds, qu'il s'agisse d'ordinateurs, de serveurs ou d'equipements reseau. Sans ces supports, aucun echange de donnees ne serait possible, qu'il s'agisse de textes, d'images, de voix ou de video.
+
+   B. Les trois grandes familles.
+
+      Les supports de transmission se repartissent en trois grandes familles, chacune adaptee a des besoins specifiques en termes de debit, de distance, de cout et d'environnement.
+
+      Les supports metalliques utilisent des courants electriques pour transmettre les donnees. Les paires torsadees et les cables coaxiaux en sont les principaux representants.
+
+      Les supports non metalliques utilisent la lumiere pour transmettre les donnees. La fibre optique en est l'exemple exclusif.
+
+      Les supports immaterialels utilisent des ondes electromagnetiques sans fil. Les faisceaux hertziens, les satellites, les reseaux Wi-Fi et Bluetooth appartiennent a cette famille.
+
+   C. Criteres de choix et evolution historique.
+
+      Le choix d'un support depend de plusieurs criteres cles : le debit necessaire, la distance a couvrir, le cout d'installation et de maintenance, l'environnement et sa resistance aux interferences electromagnetiques, la flexibilite d'adaptation aux evolutions technologiques, et le respect des normes internationales telles que l'ISO 11801.
+
+      Les supports ont evolue historiquement pour repondre a des besoins croissants. Les annees 1970 et 1980 ont ete dominees par les supports metalliques. Les annees 1990 ont vu le deploiement massif de la fibre optique pour les liaisons longue distance. Les annees 2000 a 2020 ont marque l'essor des technologies sans fil (Wi-Fi, Bluetooth, 4G, 5G) pour une mobilite accrue.
+
+II. SUPPORTS FILAIRES METALLIQUES.
+
+   A. Les paires torsadees.
+
+      Une paire torsadee est composee de deux conducteurs en cuivre isoles l'un de l'autre et enroules en helice autour d'un axe central. Ce torsadage reduit les interferences electromagnetiques causees par l'environnement ou les autres paires a proximite. Les paires torsadees sont regroupees dans un cable, generalement par quatre paires pour les reseaux Ethernet.
+
+      Il existe deux types principaux. La paire UTP (Unshielded Twisted Pair) est non blindee et utilisee pour les reseaux locaux et les boucles locales telephoniques. La paire STP (Shielded Twisted Pair) est dotee d'un ecran metallique pour reduire les interferences dans les environnements bruyants tels que les usines ou les centres de donnees.
+
+      Les avantages des paires torsadees sont leur faible cout en materiau et en installation, leur flexibilite et leur large utilisation comme standard pour Ethernet et la telephonie. Leurs limites sont l'affaiblissement du signal sur de longues distances du a la resistance du cuivre, la sensibilite aux interferences et le debit limite par la qualite du cable et la distance.
+
+   B. Les cables coaxiaux.
+
+      Un cable coaxial est compose d'un conducteur central en cuivre, d'un isolant dielectrique entourant le conducteur, d'un blindage metallique sous forme de tresse ou de feuille pour proteger contre les interferences, et d'une gaine externe de protection. Cette structure coaxiale permet une meilleure immunite au bruit que les paires torsadees.
+
+      Les cables coaxiaux sont aujourd'hui consideres comme obsoletes, mais ils etaient tres utilises avant l'avenement des cables Ethernet a paires torsadees. Leurs avantages etaient une moindre sensibilite aux interferences, une bande passante plus elevee permettant plusieurs centaines de Mbit/s sur 1 km, et une meilleure portee pouvant atteindre 10 km avec des repeteurs. Leurs limites etaient un cout plus eleve, une rigidite rendant l'installation difficile et une attenuation sur de longues distances.
+
+III. SUPPORTS FILAIRES OPTIQUES.
+
+   A. Principe et structure de la fibre optique.
+
+      Une fibre optique est un fil de verre ou de plastique tres fin transmettant la lumiere, emise par une diode LED ou un laser. Elle est composee de trois elements : un coeur ou se propage la lumiere, une gaine optique d'indice de refraction inferieur a celui du coeur qui confine la lumiere par reflexion totale interne, et une gaine de protection en plastique resistant aux contraintes mecaniques.
+
+   B. Fibre multimode et fibre monomode.
+
+      La fibre multimode (MMF) offre plusieurs chemins pour la lumiere, engendrant un phenomene de dispersion modale. Son coeur mesure de 50 a 62,5 microns. Elle permet un debit jusqu'a 1 Gbit/s sur une distance maximale de 550 m. Elle est utilisee pour les reseaux locaux et les courts trajets.
+
+      La fibre monomode (SMF) n'offre qu'un seul chemin pour la lumiere, eliminant la dispersion modale. Son coeur mesure de 8 a 10 microns. Elle permet un debit de 10 Gbit/s et plus sur des distances pouvant atteindre 100 km. Elle est utilisee pour les liaisons longue distance de type WAN.
+
+   C. Caracteristiques et cas d'usage.
+
+      Les avantages de la fibre optique sont considerables : un debit tres eleve pouvant atteindre 100 Gbit/s et plus, une immunite totale aux interferences electromagnetiques, une faible attenuation du signal sur de longues distances, et une securite elevee car difficile a intercepter sans rayonnement electromagnetique. Ses limites sont son cout eleve a l'installation, sa fragilite aux courbures et aux chocs mecaniques, et la complexite de son raccordement necessitant des connecteurs precis tels que les types LC ou SC.
+
+      La fibre optique est utilisee pour les arteres principales des reseaux Internet (liaisons transatlantiques, backbone), les reseaux metropolitains reliant des data centers ou des campus, et le deploiement jusqu'a l'abonne (FTTH).
+
+   D. La norme ISO 11801.
+
+      La norme ISO 11801 et son equivalent americain TIA/EIA-568 classent les cables de paires torsadees en categories basees sur l'attenuation, la diaphonie et l'ACR. La categorie 3 supporte 10 Mbit/s pour Ethernet 10BASE-T. La categorie 5 supporte 100 Mbit/s pour Ethernet 100BASE-TX. La categorie 5e supporte le Gigabit Ethernet (1 Gbit/s). La categorie 6 est concue pour le Gigabit a 250 MHz. La categorie 6a supporte le 10 Gigabit Ethernet jusqu'a 55 m. La categorie 7 utilise des cables ecrantes S/FTP a 600 MHz. La categorie 8 supporte 25 a 40 Gbit/s sur 30 m maximum pour les data centers.
+
+      Les categories superieures (6, 7, 8) sont retrocompatibles avec les categories inferieures, ce qui permet de conserver les equipements existants lors d'une migration vers un debit superieur.
+
+IV. SUPPORTS IMMATERIALELS.
+
+   A. Les faisceaux hertziens.
+
+      Les faisceaux hertziens utilisent des frequences tres elevees allant de 2 GHz a 40 GHz et des antennes directionnelles pour transmettre des donnees. La propagation est limitee a l'horizon optique, ce qui implique que les stations doivent etre placees en hauteur pour eviter les obstacles tels que les batiments ou les reliefs.
+
+      Les avantages des faisceaux hertziens sont l'absence de cablage (ideal pour les zones difficiles d'acces comme les montagnes et les deserts), un haut debit pouvant atteindre plusieurs Gbit/s, et une bonne fiabilite peu sensible aux intemperies. Leurs limites sont une portee limitee par la courbure de la Terre necessitant des relais, une sensibilite aux obstacles exigeant une ligne de vue degagee, et un cout eleve pour les antennes directionnelles.
+
+   B. La transmission par satellite.
+
+      La transmission par satellite utilise une antenne parabolique reliee a un modem qui convertit les donnees numeriques en signaux analogiques et inversement. Les ondes radio sont emises vers un satellite en orbite geostationnaire a 36 000 km d'altitude, qui les relaie vers une autre station au sol. Les frequences utilisees dependent du type de satellite (bandes C, Ku, Ka).
+
+      Les avantages sont une couverture mondiale permettant l'acces a Internet partout, un haut debit pouvant atteindre 100 Mbit/s et plus avec les satellites LEO comme Starlink, et une resilience face aux catastrophes terrestres. Les limites sont une latence elevee de 500 a 700 ms pour les satellites geostationnaires, un cout eleve en abonnements et equipements, et une sensibilite aux intemperies.
+
+   C. Les reseaux Wi-Fi (normes 802.11).
+
+      Le Wi-Fi est une technologie de reseau local sans fil (WLAN) fonctionnant sur les bandes 2,4 GHz, 5 GHz et 6 GHz. Il existe deux architectures principales. Le mode Infrastructure connecte toutes les stations via un point d'acces (AP) formant un BSS (Basic Service Set) identifie par un BSSID. Le mode Ad Hoc (IBSS) permet aux machines de communiquer directement entre elles sans point d'acces.
+
+      Les normes Wi-Fi ont evolue depuis 1999. La norme 802.11b (1999) offrait 11 Mbit/s sur la bande 2,4 GHz. La norme 802.11g (2003) portait le debit a 54 Mbit/s. La norme 802.11n (2009) introduisit le MIMO pour atteindre 450 Mbit/s. La norme 802.11ac (2014) atteignit 1,3 Gbit/s sur la bande 5 GHz en utilisant le MU-MIMO et des canaux de 80 et 160 MHz. La norme 802.11ax (Wi-Fi 6, 2021) introduisit l'OFDMA et le 1024-QAM pour atteindre 11 Gbit/s theoriques avec une reduction de la latence de 75% et la securite WPA3. La norme 802.11be (Wi-Fi 7, 2024) vise 46 Gbit/s grace au Multi-Link Operation (MLO).
+
+   D. Le Bluetooth.
+
+      Le Bluetooth est une technologie de reseau personnel sans fil (WPAN) fonctionnant sur la bande 2,4 GHz. Il permet de connecter jusqu'a 7 appareils simultanement en mode piconet. Sa consommation energetique est faible, ce qui le rend ideal pour les appareils portables.
+
+      La portee varie selon la classe : la Classe I atteint 100 m pour les peripheriques industriels, la Classe II atteint 10 m pour les smartphones et ecouteurs. La version Bluetooth 4.0 a introduit le BLE (Bluetooth Low Energy) a faible consommation, ideal pour l'IoT. La version 5.0 a double la portee et le debit tout en augmentant la capacite de donnees par paquet. La version 5.4 (2023) a introduit le chiffrement des donnees publicitaires (Encrypted Advertising Data).
+
+POINTS D'ATTENTION.
+
+      Les cables coaxiaux sont desormais obsoletes pour les reseaux d'entreprise mais restent utilises pour la distribution de signaux television.
+
+      La fibre monomode ne peut pas etre utilisee avec les emetteurs/recepteurs prevus pour la fibre multimode : les equipements optiques doivent etre compatibles avec le type de fibre installe.
+
+      La norme 802.11ac (5 GHz) n'est pas retro-compatible avec les equipements 802.11b/g (2,4 GHz) uniquement, car ces derniers ne peuvent pas utiliser la bande 5 GHz.
+
+      La latence elevee des satellites geostationnaires (500 a 700 ms) les rend inadaptes aux jeux video en ligne et aux applications temps reel necessitant une faible latence.
+
+      Les faisceaux hertziens necessitent absolument une ligne de vue degagee entre les deux antennes, sans obstacle physique sur le trajet.
+
+      Le Bluetooth et le Wi-Fi utilisent tous deux la bande 2,4 GHz, ce qui peut creer des interferences entre les deux technologies dans un meme environnement.
+
+      Les categories de cables 7 et 8 utilisent des prises specifiques (GG45, TERA) qui peuvent etre adaptees en RJ45 pour la compatibilite avec les equipements existants.
+
+EXEMPLES CITES.
+
+      Un cable Categorie 6 permet un debit de 1 Gbit/s sur 100 m.
+
+      Un cable Categorie 8 supporte 25 a 40 Gbit/s sur 30 m pour les tres hauts debits dans les data centers.
+
+      La connexion entre un telephone et un casque Bluetooth illustre un reseau WPAN de Classe II (portee 10 m).
+
+      Le deploiement FTTH (Fiber To The Home) est l'exemple le plus concret de la fibre optique jusqu'a l'abonne.
+
+      Starlink est un exemple de constellation de satellites LEO offrant une latence reduite par rapport aux satellites geostationnaires.
+
+      Le reseau Wi-Fi d'une entreprise est un exemple de mode Infrastructure avec un ou plusieurs points d'acces.
+
+      La norme 802.11ax (Wi-Fi 6) est compatible avec toutes les normes precedentes (a/b/g/n/ac) et introduit la bande 6 GHz.
+
+      Les normes Ethernet 100BASE-TX et 10BASE-T sont associees respectivement aux categories de cables 5 et 3 de la norme ISO 11801.

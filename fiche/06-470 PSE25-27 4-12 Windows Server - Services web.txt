@@ -1,0 +1,127 @@
+LES SERVICES WEB SOUS WINDOWS SERVER.
+
+LEXIQUE COMPLET.
+
+      IIS (Internet Information Services) : serveur web Microsoft integre a Windows Server permettant l'hebergement de sites web, l'execution d'applications ASP.NET, l'hebergement d'API, les services FTP, la gestion des certificats HTTPS et l'administration centralisee des services web.
+
+      HTTP (HyperText Transfer Protocol) : protocole de transfert de donnees entre client et serveur web, sur le port 80 TCP. Les donnees transitent en clair.
+
+      HTTPS : version securisee de HTTP utilisant le chiffrement TLS/SSL, sur le port 443 TCP. Toute application web exposee sur Internet doit utiliser HTTPS.
+
+      HTTP.sys : pilote noyau Windows charge d'ecouter les requetes HTTP, de gerer les connexions reseau et d'ameliorer les performances. Composant fondamental d'IIS.
+
+      Site Web IIS : unite logique dans IIS possedant un nom, une racine physique (dossier sur le serveur) et une liaison reseau (binding).
+
+      Binding IIS : association d'une adresse IP, d'un port, d'un nom d'hote et d'un protocole pour definir comment un site IIS est accessible sur le reseau.
+
+      Pool d'applications (Application Pool) : mecanisme IIS isolant chaque application web dans son propre processus worker (w3wp.exe) avec son identite de securite et ses parametres memoire, pour eviter qu'un site defaillant bloque les autres.
+
+      Racine web (wwwroot) : dossier physique C:\inetpub\wwwroot contenant les fichiers des sites web publies par IIS.
+
+      ASP.NET : framework Microsoft pour la creation d'applications web dynamiques. Deux versions principales : ASP.NET Framework (classique) et ASP.NET Core (multiplateforme et modulaire).
+
+      Kestrel : serveur web leger integre a ASP.NET Core, utilise en tandem avec IIS en mode reverse proxy pour les applications modernes.
+
+      TLS/SSL (Transport Layer Security / Secure Sockets Layer) : protocoles de chiffrement des communications HTTPS, garantissant la confidentialite et l'integrite des echanges entre client et serveur.
+
+      Certificat numerique : fichier electronique lie a une cle cryptographique permettant d'authentifier le serveur et d'etablir la connexion HTTPS. Le certificat peut etre auto-signe, emis par une autorite interne ou delivre par une autorite de certification publique (CA).
+
+      Authentification anonyme IIS : mode d'acces public sans compte utilisateur, utilise pour les sites publics.
+
+      Authentification Windows IIS : authentification s'appuyant sur Active Directory, Kerberos et NTLM, utilisee principalement en intranet.
+
+      Authentification Basic IIS : mode d'authentification envoyant le login et le mot de passe encodes en Base64. Doit imperativement etre combine a HTTPS pour ne pas exposer les identifiants en clair.
+
+      Permissions NTFS : droits d'acces aux fichiers et dossiers du systeme de fichiers Windows (ACL), utilises par IIS pour controler l'acces aux contenus web.
+
+      ARR (Application Request Routing) : module IIS assurant les fonctions de reverse proxy et de repartition de charge entre plusieurs serveurs backend.
+
+      Code HTTP : code numerique retourne par le serveur dans la reponse HTTP indiquant le statut de la requete. 200 = succes, 301 = redirection, 403 = acces interdit, 404 = ressource introuvable, 500 = erreur serveur, 503 = service indisponible.
+
+      inetmgr : console graphique IIS Manager permettant de gerer les sites, les pools, les bindings, les certificats HTTPS et les performances du serveur web.
+
+COURS DETAILLE.
+
+I. ARCHITECTURE ET FONCTIONNEMENT D'IIS.
+
+   A. Principes generaux.
+
+      Un service web permet a un serveur de fournir des ressources accessibles a distance via un reseau IP (Internet ou intranet). Les ressources peuvent etre des pages HTML, des applications web, des API, des fichiers ou des services metiers. Sous Windows Server, le principal service web est IIS (Internet Information Services).
+
+      Le traitement d'une requete dans IIS suit plusieurs etapes : le client envoie une requete HTTP ou HTTPS, le pilote noyau HTTP.sys recoit la requete et gere la connexion reseau, la requete est transmise au pool d'applications correspondant, le moteur IIS execute la requete (en appelant ASP.NET si necessaire) et renvoie la reponse au client. HTTP.sys est un pilote noyau optimise pour l'ecoute des requetes HTTP, la gestion des connexions reseau et l'amelioration des performances (mise en cache, file d'attente des requetes).
+
+   B. Composants principaux d'IIS.
+
+      Chaque site IIS possede un nom identifiant le site dans la console, une racine physique (dossier sur le disque contenant les fichiers web) et un ou plusieurs bindings. Un binding associe une adresse IP, un port, un nom d'hote et un protocole. Exemple de binding HTTPS : adresse 192.168.1.10, port 443, nom d'hote intranet.local.
+
+      Les pools d'applications isolent les applications web dans des processus separes pour ameliorer la stabilite, renforcer la securite et eviter qu'un site bloque les autres. Chaque pool possede son propre processus worker (w3wp.exe), son identite de securite (compte de service) et ses parametres memoire.
+
+      Le repertoire principal IIS est C:\inetpub\ et contient wwwroot (racine des sites web par defaut), logs (journaux), fichiers temporaires et configuration.
+
+II. INSTALLATION ET CONFIGURATION D'IIS.
+
+   A. Installation.
+
+      IIS s'installe via le Gestionnaire de serveur (Ajouter des roles et fonctionnalites → Serveur Web IIS) ou via PowerShell avec la commande "Install-WindowsFeature -Name Web-Server -IncludeManagementTools". La verification de l'installation se fait en accedant a http://localhost : la page d'accueil IIS s'affiche si l'installation a reussi.
+
+   B. Configuration d'un site web.
+
+      La creation d'un site necessite un nom de site, un dossier physique contenant les fichiers, un port d'ecoute et un nom DNS eventuel. La gestion des documents par defaut (Default Documents) permet de charger automatiquement Index.html, Default.aspx ou Default.html quand l'URL ne precise pas de fichier.
+
+      Les repertoires virtuels associent un chemin web (URL) a un dossier physique situe en dehors de la racine du site, permettant de servir des contenus depuis plusieurs emplacements.
+
+      La console graphique IIS Manager (inetmgr) permet de gerer les sites, d'administrer les pools, de configurer HTTPS, de surveiller les performances et d'effectuer toutes les operations d'administration IIS. La commande PowerShell "New-Website -Name SiteTest -Port 80 -PhysicalPath C:\SiteTest" cree un site via PowerShell. La commande "Iisreset" redémarre le service IIS complet.
+
+III. APPLICATIONS ASP.NET ET SECURISATION IIS.
+
+   A. Hebergement des applications ASP.NET.
+
+      ASP.NET est le framework Microsoft pour les applications web dynamiques. ASP.NET Framework est la version classique liee a Windows. ASP.NET Core est la version moderne, multiplateforme et modulaire. L'hebergement ASP.NET Core sous IIS utilise le module ASP.NET Core, le serveur Kestrel (serveur web interne a l'application) et IIS en mode reverse proxy transmettant les requetes a Kestrel.
+
+   B. Securisation d'IIS.
+
+      HTTPS chiffre les communications entre le client et le serveur grace aux protocoles TLS/SSL. Le certificat peut etre auto-signe (usage interne ou test), emis par une autorite de certification interne a l'entreprise (PKI d'entreprise), ou delivre par une autorite de certification publique (Let's Encrypt, DigiCert, etc.) pour les sites publics. La configuration HTTPS se fait en trois etapes : importer le certificat dans le magasin de certificats Windows, ajouter un binding HTTPS sur le site IIS et selectionner le certificat.
+
+      IIS propose trois modes d'authentification principaux. L'authentification anonyme permet un acces public sans compte utilisateur, utilisee pour les sites grand public. L'authentification Windows utilise Active Directory, Kerberos et NTLM pour les environnements intranet. L'authentification Basic envoie le login et le mot de passe en Base64 et doit etre obligatoirement utilisee avec HTTPS pour proteger les identifiants.
+
+      La securite IIS depend aussi des permissions NTFS, des comptes de pools et des ACL Windows. Le principe est d'accorder le minimum de privileges et d'eviter les permissions excessives. Le filtrage des requetes permet de bloquer certaines extensions de fichiers, de limiter la taille des requetes et d'empecher certaines attaques web (injection, traversee de repertoires, etc.). Les ports a ouvrir dans le pare-feu sont 80/TCP pour HTTP et 443/TCP pour HTTPS. La commande PowerShell "New-NetFirewallRule -DisplayName HTTP -Direction Inbound -Protocol TCP -LocalPort 80 -Action Allow" ouvre le port 80.
+
+IV. JOURNAUX, CODES HTTP ET HAUTE DISPONIBILITE.
+
+   A. Journaux IIS et codes HTTP.
+
+      Les journaux IIS sont stockes dans C:\inetpub\logs\LogFiles et enregistrent pour chaque requete : l'adresse IP du client, l'URL demandee, le code HTTP retourne, le navigateur utilise et la date et heure de la requete. Ces journaux permettent l'analyse des acces, le depannage et la detection d'attaques.
+
+      Les codes HTTP importants a connaitre sont : 200 (succes), 301 (redirection permanente), 403 (acces interdit), 404 (ressource introuvable), 500 (erreur interne du serveur) et 503 (service indisponible, souvent lie a un pool arrete).
+
+   B. Surveillance, maintenance et haute disponibilite.
+
+      La supervision IIS porte sur l'utilisation CPU, la memoire, le temps de reponse et la disponibilite des pools. Le recyclage des pools (recycling) consiste a redemarrer periodiquement le processus worker pour eviter les fuites memoire et ameliorer la stabilite.
+
+      Pour la haute disponibilite et l'optimisation, IIS propose la compression HTTP (reduit la taille des donnees echangees), le cache IIS (ameliore les performances en conservant les reponses frequentes), le Load Balancing (repartition de charge entre plusieurs serveurs) et ARR (Application Request Routing) qui fournit les fonctions de reverse proxy et de repartition de charge.
+
+POINTS D'ATTENTION.
+
+      HTTP.sys est un pilote noyau : il s'execute au niveau du noyau Windows et non en mode utilisateur. Il intercepte toutes les connexions HTTP avant meme qu'IIS les traite. Une faille dans HTTP.sys est donc particulierement critique.
+
+      L'authentification Basic d'IIS envoie les identifiants en Base64 (encodage, pas chiffrement) : sans HTTPS, les mots de passe sont facilement recuperables par sniffing sur le reseau.
+
+      Le code HTTP 503 indique generalement qu'un pool d'applications est arrete : verifier l'etat des pools dans IIS Manager avant de diagnostiquer un probleme reseau.
+
+      La permission NTFS du compte de pool d'applications sur le dossier wwwroot doit etre au minimum "Lecture" : sans cette permission, IIS retourne une erreur 403 ou 500 meme si le fichier existe.
+
+      Le recyclage du pool arrete et redémarre le processus w3wp.exe : les sessions applicatives en cours sont perdues si l'application ne gere pas la persistance de session (Session State).
+
+      ARR (Application Request Routing) necessite l'installation d'un module supplementaire sur IIS : il n'est pas inclus par defaut dans l'installation standard d'IIS.
+
+EXEMPLES CITES.
+
+      La commande "Install-WindowsFeature -Name Web-Server -IncludeManagementTools" installe IIS avec les outils de gestion sous Windows Server, puis la verification s'effectue via http://localhost.
+
+      La commande PowerShell "New-Website -Name SiteTest -Port 80 -PhysicalPath C:\SiteTest" cree un nouveau site IIS avec la racine physique dans le dossier C:\SiteTest.
+
+      Un binding HTTPS typique associe l'adresse 192.168.1.10, le port 443 et le nom d'hote intranet.local avec le protocole HTTPS.
+
+      La commande "New-NetFirewallRule -DisplayName HTTP -Direction Inbound -Protocol TCP -LocalPort 80 -Action Allow" ouvre le port 80 dans le pare-feu Windows pour autoriser les requetes HTTP entrantes.
+
+      Un code HTTP 404 dans les journaux IIS indique qu'un utilisateur a tente d'acceder a une ressource absente du serveur. Un code 403 indique un acces refuse par les permissions NTFS ou les restrictions IIS.

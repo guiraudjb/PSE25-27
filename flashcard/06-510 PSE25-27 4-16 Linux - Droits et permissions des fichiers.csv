@@ -1,0 +1,56 @@
+"Sous Linux, quel est le principe fondamental concernant la nature des éléments du système ?",Tout est fichiers.
+"Quelle commande Linux permet d'afficher les informations statistiques, incluant le type de fichier ?",ls -l
+"Dans la commande ls -l, que signifie le symbole « - » au début de la ligne ?",Un fichier ordinaire.
+"Dans la commande ls -l, que signifie la lettre « d » au début de la ligne ?",Un dossier (répertoire).
+"Dans la commande ls -l, que signifie la lettre « l » au début de la ligne ?",Un lien symbolique.
+"Dans la commande ls -l, que signifie la lettre « c » au début de la ligne ?",Un périphérique de type caractère.
+"Dans la commande ls -l, que signifie la lettre « b » au début de la ligne ?",Un périphérique de type bloc.
+Quelle commande permet d'afficher l'intégralité des informations détaillées d'un fichier nommé « mon_fic » ?,stat mon_fic
+"Dans le système de droits Linux, que représente l'abréviation « U » ?",Le propriétaire (User).
+"Dans le système de droits Linux, que représente l'abréviation « G » ?",Le groupe propriétaire (Group).
+"Dans le système de droits Linux, que représente l'abréviation « O » ?",Le reste des utilisateurs (Other).
+Quel droit permet de lister le contenu d'un répertoire ?,Le droit de lecture (R pour Read).
+"Sur un fichier, que permet concrètement le droit « W » (Write) ?",L'écriture ou la modification du fichier.
+"Sur un répertoire, que permet concrètement le droit « W » (Write) ?",La modification du contenu (ajout ou suppression de fichiers).
+"Sur un répertoire, à quoi correspond le droit « X » (eXecution) ?",Le parcours au travers du répertoire.
+Quel mécanisme définit les permissions par défaut lors de la création d'un fichier par soustraction ?,Le Umask.
+Quelle est la valeur numérique (octale) associée au droit de lecture (R) ?,4
+Quelle est la valeur numérique (octale) associée au droit d'écriture (W) ?,2
+Quelle est la valeur numérique (octale) associée au droit d'exécution (X) ?,1
+Quelle est la valeur octale correspondant aux droits complets « rwx » ?,$4 + 2 + 1 = 7$
+Comment est représenté un droit vide ou absent dans l'affichage sous forme de lettres ?,Par un tiret ( - ).
+Quelle est la valeur octale correspondant aux droits « r-x » ?,$4 + 0 + 1 = 5$
+Quelle est la valeur octale globale pour un fichier possédant les droits « rwx r-- -wx » ?,743
+Quelle commande est utilisée pour modifier les permissions d'un fichier ?,chmod
+Quelle commande symbolique chmod permet d'ajouter le droit d'exécution au groupe propriétaire ?,chmod g+x
+Quelle commande symbolique chmod permet de retirer le droit d'écriture au propriétaire ?,chmod u-w
+"Dans une commande chmod, que représente la lettre « a » ?","Tous les utilisateurs (all : user, group et other)."
+Quelle commande permet de modifier simultanément le propriétaire et le groupe d'un fichier ?,chown identifiant_user:identifiant_group mon_fichier
+Que signifie l'acronyme SUID dans la gestion des droits étendus ?,Set User ID
+Quelle est la notation octale du bit spécial SUID ?,4xxx
+Quel est l'effet du bit SUID sur un programme ?,Il s'exécute avec les droits du propriétaire du programme.
+"Dans la commande ls -l, quel caractère indique la présence du SUID et à quelle position ?",Un « s » remplace le « x » du propriétaire.
+Donnez un exemple de programme système nécessitant le bit SUID pour fonctionner.,Le programme passwd (pour modifier /etc/shadow).
+Que signifie l'acronyme SGID dans la gestion des droits étendus ?,Set Group ID
+Quelle est la notation octale du bit spécial SGID ?,2xxx
+Quel est l'effet du bit SGID sur l'exécution d'un programme ?,Il s'exécute avec les droits du groupe propriétaire.
+Comment le SGID est-il représenté visuellement dans la sortie de ls -l ?,Un « s » remplace le « x » à la position du groupe.
+Quelle est la notation octale du Sticky Bit ?,1xxx
+"Sur un répertoire, quel est l'effet principal du Sticky Bit ?",Seul le propriétaire d'un fichier peut le supprimer.
+Quel répertoire système Linux utilise classiquement le Sticky Bit ?,Le répertoire /tmp/
+Comment le Sticky Bit est-il représenté visuellement dans ls -l ?,Un « t » remplace le « x » de la position « other ».
+Que permettent les ACL (Access Control Lists) par rapport au système UGO classique ?,Elles prolongent la flexibilité de la gestion des droits.
+Quelle option de la commande mount permet d'activer le support des ACL ?,-o acl
+Quelle commande permet d'afficher les ACL configurées sur un fichier ?,getfacl mon_fichier
+Quelle commande setfacl permet d'attribuer le droit d'exécution à l'utilisateur « mon_user » ?,setfacl -m u:mon_user:x mon_fichier
+Quelle option de la commande setfacl permet de supprimer une ACL spécifique ?,-x
+Quelle option de la commande setfacl permet de supprimer toutes les ACL d'un fichier ?,-b
+Quel signe visuel dans ls -l indique la présence d'ACL sur un fichier ?,Un signe « + » en fin de ligne des droits.
+Quelle option de setfacl permet d'ajouter des droits par défaut sur un dossier ?,-d
+Calcul : Quel sera le droit octal d'un fichier créé avec un umask de 027 ?,640 (depuis la base 666).
+Résultat de la commande : chmod 2755 dossier,Activation du SGID et droits rwxr-xr-x.
+Quelle commande permet spécifiquement d'ajouter le Sticky Bit de manière symbolique ?,chmod +t dossier
+À quel type de fichier correspond le symbole « $s$ » remplaçant le « $x$ » utilisateur ?,Un fichier avec le bit SUID activé.
+Quelle est la base numérique utilisée pour soustraire l'umask lors de la création d'un répertoire ?,777
+Quelle est la base numérique utilisée pour soustraire l'umask lors de la création d'un fichier ordinaire ?,666
+"Sur un dossier avec le Sticky Bit, qui peut supprimer un fichier en dehors de root ?",Uniquement le propriétaire du fichier.

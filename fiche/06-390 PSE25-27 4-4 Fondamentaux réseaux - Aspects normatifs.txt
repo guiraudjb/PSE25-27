@@ -1,0 +1,139 @@
+FONDAMENTAUX RESEAUX : ASPECTS NORMATIFS ET MODELES EN COUCHES.
+
+LEXIQUE COMPLET.
+
+      Interoperabilite : capacite de systemes heterogenes (materiels, logiciels, protocoles differents) a communiquer et a echanger des donnees sans dependre d'une technologie ou d'un fabricant particulier.
+
+      Reseau proprietaire : reseau dont les protocoles et les equipements sont specifiques a un fabricant et non compatibles avec ceux d'autres constructeurs.
+
+      Modele en couches : architecture decoupant les fonctions de communication en niveaux independants, chaque couche traitant les donnees et les transmettant a la couche adjacente via des en-tetes.
+
+      Modele OSI (Open Systems Interconnection) : modele normatif a 7 couches developpe par l'ISO a partir de 1977 (norme ISO IS7498, adoption officielle en 1984) pour creer un cadre universel d'interconnexion independant des fabricants.
+
+      ISO (International Standards Organisation) : organisation internationale de normalisation ayant developpe le modele OSI.
+
+      Modele TCP/IP (DOD) : modele pragmatique a 4 couches issu des travaux de l'ARPA pour ARPANET, avec les premières versions de TCP et IP en 1974, devenu le standard de fait d'Internet.
+
+      Encapsulation : processus d'ajout d'un en-tete par chaque couche lors de l'envoi des donnees, de la couche superieure vers la couche inferieure.
+
+      Decapsulation : processus inverse de l'encapsulation, consistant a retirer chaque en-tete lors de la reception des donnees, de la couche inferieure vers la couche superieure.
+
+      Couches homologues : entites de meme niveau sur deux machines differentes echangeant des informations de controle via les en-tetes de leur couche.
+
+      Protocole de couche N : regles de communication entre entites paires de meme niveau sur deux machines distinctes.
+
+      Bit : unite de donnees de la couche Physique (couche 1 OSI).
+
+      Trame : unite de donnees de la couche Liaison (couche 2 OSI), ou de la couche Acces reseau (TCP/IP).
+
+      Datagramme / Paquet : unite de donnees de la couche Reseau (couche 3 OSI), ou de la couche Internet (TCP/IP).
+
+      Segment : unite de donnees de la couche Transport (couche 4 OSI et TCP/IP).
+
+      TCP (Transmission Control Protocol) : protocole de transport oriente connexion, avec controle de flux, acquittements et retransmissions, utilise pour les applications necessitant de la fiabilite.
+
+      UDP (User Datagram Protocol) : protocole de transport non connecte, sans controle de flux, utilise pour les applications tolerant des pertes comme le streaming video ou la VoIP.
+
+      ARP (Address Resolution Protocol) : protocole de la couche Internet TCP/IP resolvant les adresses MAC a partir des adresses IP.
+
+      ICMP (Internet Control Message Protocol) : protocole de la couche Internet TCP/IP transportant des messages de controle et d'erreur (exemple : commande ping).
+
+COURS DETAILLE.
+
+I. GENESE ET ENJEUX DES MODELES EN COUCHES.
+
+   A. Le contexte historique.
+
+      Les reseaux informatiques apparus dans les annees 1960 a 1970 ont rapidement revele un besoin crucial d'interoperabilite. Alors que les innovations d'ARPANET se developpaient avec ses protocoles ouverts et ses RFC, les grands acteurs industriels tels qu'IBM, BULL et APPLE proposaient des reseaux proprietaires cloisonnes, non compatibles entre eux. Ce monde cloisonne posait un probleme majeur : comment connecter des systemes heterogenes en materiels, logiciels et protocoles sans etre limite par les technologies specifiques de chaque constructeur.
+
+   B. L'emergence des modeles normatifs.
+
+      Face a cette fragmentation, deux approches ont emerge pour standardiser les communications. Le modele OSI (Open Systems Interconnection), initie par l'ISO des 1977, a publie une premiere version en 1978 (norme ISO IS7498) et a ete adopte officiellement en 1984. Il visait a creer un cadre universel pour l'interconnexion de systemes ouverts, independamment des fabricants ou des technologies.
+
+      Le modele TCP/IP (ou DOD) est issu des travaux de l'ARPA pour ARPANET, avec les premieres versions des protocoles TCP et IP en 1974, puis leur integration dans les systemes UNIX dans les annees 1980. Contrairement a OSI, TCP/IP s'est impose comme un standard de fait, porte par l'Internet naissant.
+
+   C. Objectifs communs des modeles en couches.
+
+      Les modeles en couches repondent a trois besoins communs. Ils segmentent la complexite en divisant les problemes de communication en sous-problemes plus simples a gerer. Ils favorisent l'interoperabilite en permettant a des systemes heterogenes de communiquer sans dependre d'un fabricant ou d'une technologie. Ils standardisent les protocoles en definissant des regles communes pour que les equipements de differents constructeurs puissent echanger des donnees.
+
+II. PRINCIPES GENERAUX DES MODELES EN COUCHES.
+
+   A. Encapsulation et fonctionnement vertical.
+
+      Un modele en couches repose sur l'idee que les donnees traversent plusieurs niveaux de protocoles. Chaque couche traite les donnees en y ajoutant des en-tetes (metadonnees) specifiques, puis les transmet a la couche suivante. A la reception, les en-tetes sont retires par chaque couche jusqu'a ce que les donnees originales soient reconstruites. Ce mecanisme s'appelle l'encapsulation a l'envoi et la decapsulation a la reception.
+
+      Les couches communiquent verticalement : une couche N fournit des services a la couche N+1 et utilise ceux de la couche N-1. Les couches homologues (meme niveau sur deux machines differentes) echangent des informations de controle via leurs en-tetes, comme des accuses de reception ou des signalements d'erreurs.
+
+   B. Terminologie des unites de donnees.
+
+      Chaque couche manipule une unite de donnees specifique. Le bit est l'unite de la couche Physique. La trame est l'unite de la couche Liaison. Le paquet ou datagramme est l'unite de la couche Reseau. Le segment est l'unite de la couche Transport. Le message est echange entre les couches Application et Transport. Les donnees brutes de l'utilisateur constituent le point de depart.
+
+   C. Interets du modele en couches.
+
+      La modularite signifie que chaque couche a un role precis et peut evoluer independamment des autres. L'independance garantit que les couches superieures n'ont pas besoin de connaitre les details des couches inferieures. L'interoperabilite permet a des systemes utilisant des technologies differentes sur certaines couches de communiquer entre eux.
+
+III. LE MODELE OSI : ARCHITECTURE THEORIQUE ET NORMATIVE.
+
+   A. Les sept couches du modele OSI.
+
+      La couche 1 (Physique) assure la transmission des bits sur le support physique (cables, fibre, sans fil). Elle normalise les caracteristiques electriques et mecaniques telles que les connecteurs et les tensions. Les protocoles associes sont RS-232 et Ethernet 10BASE-T.
+
+      La couche 2 (Liaison) assure le decoupage en trames, la detection et correction d'erreurs, et la gestion des collisions. Les protocoles associes sont Ethernet, PPP et Wi-Fi (802.11).
+
+      La couche 3 (Reseau) assure le routage et l'adressage logique via IP, et l'acheminement des paquets de bout en bout. Les protocoles associes sont IP, ICMP, OSPF et BGP.
+
+      La couche 4 (Transport) assure la fiabilite du transport (controle de flux, acquittements, retransmissions) et le multiplexage. Les protocoles associes sont TCP et UDP.
+
+      La couche 5 (Session) assure la gestion des connexions : ouverture, fermeture et synchronisation. Les protocoles associes sont NetBIOS et RPC.
+
+      La couche 6 (Presentation) assure la conversion, le chiffrement et la compression des donnees (par exemple, ASCII vers Unicode, SSL/TLS). Les protocoles associes sont SSL/TLS, JPEG et MPEG.
+
+      La couche 7 (Application) fournit l'interface utilisateur aux services reseau : messagerie, transfert de fichiers, navigation web. Les protocoles associes sont HTTP, FTP, SMTP et DNS.
+
+   B. Forces et limites du modele OSI.
+
+      Les forces du modele OSI sont sa completude theorique (couvrant tous les aspects de la communication), sa normalisation internationale permettant l'interoperabilite entre systemes heterogenes, et son vocabulaire standardise servant de reference pour toutes les architectures reseau.
+
+      Ses limites sont sa complexite rendant difficile une implementation complete, son cout eleve necessitant des ressources importantes, la lenteur du processus de standardisation lie a l'ISO, et son faible usage pratique car TCP/IP, plus simple et pragmatique, s'est impose.
+
+IV. LE MODELE TCP/IP : STANDARD PRAGMATIQUE D'INTERNET.
+
+   A. Les quatre couches du modele TCP/IP.
+
+      La couche 1 (Acces reseau) regroupe les couches 1 et 2 d'OSI. Elle assure la transmission physique des donnees, gere les adresses MAC et les erreurs materielles. Les protocoles associes sont Ethernet, Wi-Fi (802.11) et PPP. L'unite de donnees est la trame.
+
+      La couche 2 (Internet) correspond a la couche 3 d'OSI. Elle assure l'adressage et le routage des paquets via les adresses IP. Les paquets sont achemines independamment en mode non connecte, l'ordonnancement et la fiabilite etant geres par les couches superieures. Les protocoles associes sont IP, ICMP, ARP et RARP. L'unite de donnees est le datagramme.
+
+      La couche 3 (Transport) correspond a la couche 4 d'OSI. Elle assure le transport de bout en bout, fiable avec TCP ou non fiable avec UDP. TCP est oriente connexion avec controle de flux, acquittements et retransmissions, utilise pour HTTP et FTP. UDP est non connecte, sans controle de flux, utilise pour le streaming video et la VoIP. L'unite de donnees est le segment.
+
+      La couche 4 (Application) regroupe les couches 5, 6 et 7 d'OSI. Elle fournit les services reseau aux applications : navigation web, messagerie, transfert de fichiers, resolution de noms, configuration reseau. Les protocoles associes sont HTTP, FTP, SMTP, DNS et DHCP. L'unite de donnees est la donnee applicative.
+
+   B. Pourquoi TCP/IP s'est impose.
+
+      Le modele OSI est theorique et complet mais complexe et couteux a deployer, avec un processus de standardisation long lie a l'ISO. TCP/IP est un modele pragmatique, simple et efficace qui s'est impose par son adaptabilite et son ouverture. Il est open source (les sources en C sont disponibles gratuitement) et independant du support physique (cable, fibre, sans fil, satellite).
+
+      Bien que TCP/IP domine en pratique, les concepts d'OSI (couches, encapsulation, vocabulaire) restent utiles pour comprendre et decrire les architectures reseau. OSI est la reference intellectuelle, TCP/IP est le standard de fait.
+
+POINTS D'ATTENTION.
+
+      Le modele OSI compte sept couches, le modele TCP/IP n'en compte que quatre : la couche Application de TCP/IP regroupe les couches Session, Presentation et Application d'OSI, et la couche Acces reseau regroupe les couches Physique et Liaison.
+
+      ARP (Address Resolution Protocol) appartient a la couche Internet du modele TCP/IP (couche Reseau dans OSI), et non a la couche Acces reseau, bien qu'il opere sur les adresses MAC.
+
+      TCP est oriente connexion (etablissement de session avec la poignee de main en trois etapes) tandis qu'UDP est sans connexion : ce sont deux modes de transport fondamentalement differents.
+
+      Le modele OSI n'a jamais ete deploye dans sa totalite en production : c'est un modele de reference intellectuelle, pas un modele operationnel.
+
+      La norme ISO IS7498 de 1978 definit le modele OSI. La date d'adoption officielle est 1984, soit sept ans apres le debut des travaux de l'ISO en 1977.
+
+EXEMPLES CITES.
+
+      Lorsqu'un utilisateur envoie un email, celui-ci est encapsule dans des en-tetes successifs (couche Application, puis Transport, puis Reseau, puis Liaison) et decapsule a l'arrivee dans l'ordre inverse.
+
+      IBM, BULL et APPLE proposaient des reseaux proprietaires dans les annees 1970 a 1980, illustrant le besoin d'interoperabilite qui a conduit a la creation des modeles normatifs.
+
+      ICMP est utilise par la commande ping pour tester la connectivite reseau entre deux machines.
+
+      HTTP utilise TCP pour la fiabilite, tandis que le streaming video utilise UDP pour la performance et la tolerace aux pertes.
+
+      Les protocoles TCP et IP ont ete integres dans les systemes UNIX dans les annees 1980, assurant leur diffusion massive aupres de la communaute scientifique et technique.

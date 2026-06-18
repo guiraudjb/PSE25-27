@@ -1,0 +1,151 @@
+COMPRENDRE LE FONCTIONNEMENT DU RESEAU SOUS WINDOWS SERVER.
+
+LEXIQUE COMPLET.
+
+      Pile TCP/IP Windows : implementation de la suite de protocoles TCP/IP au coeur du reseau Windows Server, traitant les protocoles, segmentant les donnees, gerant le routage et controlant les connexions.
+
+      SMB (Server Message Block) : protocole Windows permettant le partage de fichiers, le partage d'imprimantes et l'acces distant aux ressources, tres utilise dans les environnements Windows Server.
+
+      RDP (Remote Desktop Protocol) : protocole propriétaire Microsoft permettant la connexion a distance a un bureau Windows, sur le port 3389 TCP.
+
+      IIS (Internet Information Services) : serveur web integre a Windows Server supportant HTTP et HTTPS.
+
+      Winsock : API reseau principale de Windows permettant la creation de sockets, les connexions TCP/UDP et l'envoi/reception de donnees. Presque toutes les applications reseau Windows utilisent Winsock.
+
+      NetAPI : API Windows permettant l'administration reseau, la gestion des partages et la gestion des sessions reseau.
+
+      WMI (Windows Management Instrumentation) : interface Windows de supervision, d'automatisation et d'administration distante, notamment pour recuperer des informations IP et surveiller les cartes reseau.
+
+      WFP (Windows Filtering Platform) : infrastructure Microsoft de filtrage reseau, utilisee par le Pare-feu Windows, les logiciels de securite et les systemes IPSEC.
+
+      NDIS (Network Driver Interface Specification) : specification de pilotes reseau utilisee par Windows pour interfacer les applications avec les cartes reseau physiques.
+
+      SDN (Software Defined Networking) : mise en reseau definie par logiciel, separant le plan de controle du plan de transport des donnees pour rendre l'administration centralisee, automatisee et programmable.
+
+      Hyper-V : hyperviseur Microsoft integre a Windows Server permettant la virtualisation de machines, de commutateurs reseau, de VLAN et de cartes reseau.
+
+      SLAAC (Stateless Address Autoconfiguration) : mecanisme d'auto-configuration d'adresses IPv6 sans serveur DHCP, supporte par Windows Server.
+
+      NetBIOS : ancien systeme de communication reseau utilise historiquement par Windows pour l'identification des machines sur les reseaux locaux. Les noms NetBIOS sont limites a 15 caracteres.
+
+      WINS (Windows Internet Name Service) : serveur centralisant les noms NetBIOS et leurs adresses IP pour permettre la resolution des noms dans les anciens environnements Windows.
+
+      LMHOSTS : fichier local statique associant des noms NetBIOS a des adresses IP, equivalent Windows du fichier /etc/hosts pour la resolution NetBIOS.
+
+      NIC Teaming : agregation de plusieurs cartes reseau physiques pour augmenter la bande passante et assurer la tolerance aux pannes sous Windows Server.
+
+      Failover Clustering : mecanisme de haute disponibilite permettant a un autre noeud de reprendre automatiquement les services en cas de panne.
+
+      pathping : commande Windows combinant ping, tracert et l'analyse des pertes de paquets pour un diagnostic reseau avance.
+
+      ipconfig /all : commande Windows affichant la configuration IP complete de toutes les interfaces reseau (adresses, masques, passerelle, DNS, adresse MAC, statut DHCP).
+
+COURS DETAILLE.
+
+I. ARCHITECTURE RESEAU WINDOWS SERVER.
+
+   A. Principes et modeles en couches.
+
+      Le reseau est un element fondamental de Windows Server permettant la communication entre ordinateurs, le partage de ressources, l'acces aux services distants, l'administration centralisee et l'hebergement d'applications. L'architecture reseau de Windows Server est modulaire, evolutive, securisee et compatible avec les standards TCP/IP.
+
+      Le fonctionnement reseau repose sur une organisation en couches : chaque couche possede un role precis, ses propres protocoles et ses propres mecanismes de traitement. Chaque couche fournit des services a la couche superieure et utilise les services de la couche inferieure. Cette separation permet la modularite, la maintenance simplifiee, l'independance du materiel et l'evolution des technologies sans modifier toutes les applications.
+
+      Windows Server utilise principalement le modele TCP/IP a 4 couches. La couche Acces reseau gere le materiel, les pilotes et les cartes reseau (envoi physique, trames Ethernet, adresses MAC). La couche Internet gere l'adressage IP, le routage et le decoupage en paquets (protocoles IP, ICMP, ARP). La couche Transport assure la communication entre applications via TCP (fiable) ou UDP (rapide). La couche Application fournit les services aux applications (DNS, DHCP, HTTPS, SMB, IIS).
+
+   B. Protocoles reseau essentiels sous Windows Server.
+
+      IP (Internet Protocol) permet l'adressage des machines, l'acheminement des paquets et la communication entre reseaux. IPv4 utilise des adresses sur 32 bits (exemple : 192.168.1.10). IPv6 utilise des adresses sur 128 bits (exemple : 2001:db8::1). Sur les dernieres versions de Windows Server, IPv6 est active par defaut et Microsoft recommande de ne pas le desactiver car Active Directory utilise IPv6. Windows supporte SLAAC, DHCPv6 et le dual stack IPv4/IPv6.
+
+      TCP (Transmission Control Protocol) garantit la livraison des donnees, l'ordre des paquets et la detection des erreurs. Il fonctionne en trois phases : ouverture de connexion, echange de donnees, et fermeture de connexion.
+
+      UDP (User Datagram Protocol) privilege la rapidite sans garantir la livraison, l'ordre ou la correction des erreurs. Il est utilise pour les applications tolerant les pertes.
+
+      DNS (Domain Name System) traduit les noms de machines en adresses IP (exemple : serveur.local vers 192.168.1.20). Le serveur DNS est indispensable dans les infrastructures Windows modernes, notamment pour Active Directory.
+
+      DHCP (Dynamic Host Configuration Protocol) attribue automatiquement l'adresse IP, le masque, la passerelle et les serveurs DNS. Avantages : administration simplifiee et reduction des erreurs manuelles.
+
+      SMB (Server Message Block) permet le partage de fichiers, le partage d'imprimantes et l'acces distant aux ressources. Il est fortement utilise dans les environnements Windows Server.
+
+      HTTP (port 80) et HTTPS (port 443) sont les protocoles des services web. HTTPS ajoute le chiffrement TLS pour la securite des echanges. Ils sont utilises par IIS, les applications web et les consoles d'administration.
+
+   C. Tableau des ports reseau essentiels Windows.
+
+      Le DNS utilise le port 53. DHCP utilise les ports 67 (serveur) et 68 (client). HTTP utilise le port 80. HTTPS utilise le port 443. SMB utilise le port 445. RDP (Remote Desktop Protocol) utilise le port 3389.
+
+II. API RESEAU ET SERVICES EN COUCHES.
+
+   A. Les API reseau de Windows Server.
+
+      Winsock est l'API reseau principale de Windows. Elle permet la creation de sockets, les connexions TCP/UDP et l'envoi/reception de donnees. La quasi-totalite des applications reseau Windows utilisent Winsock.
+
+      NetAPI permet l'administration reseau, la gestion des partages et la gestion des sessions reseau depuis les applications Windows.
+
+      WMI (Windows Management Instrumentation) permet la supervision, l'automatisation et l'administration distante du reseau. Il peut recuperer des informations IP et surveiller les cartes reseau de maniere programmable.
+
+      WFP (Windows Filtering Platform) fournit une infrastructure de filtrage reseau utilisee par le Pare-feu Windows, les logiciels de securite et les systemes IPSEC.
+
+   B. Architecture des services reseau en couches.
+
+      Les services reseau fonctionnent en empilement : chaque niveau depend du niveau inferieur. Les pilotes reseau (couche inferieure) communiquent avec le materiel, gerent les cartes reseau et transmettent les trames. Windows utilise la specification NDIS (Network Driver Interface Specification) pour standardiser cette interface.
+
+      La pile TCP/IP constitue le coeur du reseau Windows : elle traite les protocoles reseau, segmente les donnees, gere le routage et controle les connexions. Au-dessus de la pile TCP/IP, Windows Server fournit plusieurs services reseau : DNS Server, DHCP Server, Remote Access, IIS et SMB Server.
+
+III. SDN, VIRTUALISATION ET HAUTE DISPONIBILITE.
+
+   A. SDN et virtualisation Hyper-V.
+
+      Le SDN (Software Defined Networking) consiste a piloter le reseau par logiciel, rendant l'administration centralisee, automatisee et programmable. Le SDN separe le plan de controle du plan de transport des donnees, ce qui permet une gestion dynamique, une virtualisation avancee et une automatisation du reseau.
+
+      Windows Server utilise le SDN via Hyper-V, les commutateurs virtuels, les reseaux virtuels et les politiques reseau centralisees. Les avantages sont le deploiement rapide, la flexibilite, l'isolation des reseaux, l'automatisation et la meilleure gestion du cloud.
+
+      Hyper-V, l'hyperviseur Microsoft integre a Windows Server, permet de gerer les commutateurs virtuels, les VLAN, les reseaux prives, le NAT virtuel, les cartes reseau virtuelles et l'isolation des machines virtuelles.
+
+   B. Haute disponibilite et pannes reseau frequentes.
+
+      Les mecanismes de haute disponibilite reseau sous Windows Server sont le NIC Teaming (agregation de cartes reseau), le Failover Clustering (basculement automatique en cas de panne), le Load Balancing (equilibrage de charge), la tolerance de panne et la redondance reseau.
+
+      Les pannes reseau frequentes sont : mauvaise configuration IP, DNS incorrect, passerelle absente, port bloque par le pare-feu, service arrete, conflit d'adresse IP et probleme de VLAN.
+
+IV. DIAGNOSTIC RESEAU ET SECURITE.
+
+   A. Utilitaires de diagnostic reseau Windows.
+
+      La commande "ping 8.8.8.8" teste la connectivite reseau via ICMP. La commande "tracert google.com" affiche le chemin reseau vers une destination. La commande "ipconfig /all" affiche la configuration IP complete. La commande "nslookup serveur.local" teste la resolution DNS. La commande "netstat -an" affiche les connexions actives, les ports ouverts et les statistiques reseau. La commande "pathping" combine ping, tracert et l'analyse des pertes de paquets.
+
+      Wireshark est un outil externe d'analyse reseau permettant la capture de paquets, l'analyse des protocoles et le depannage avance.
+
+      PowerShell permet la gestion avancee du reseau via : "Get-NetIPAddress" (adresses IP), "Get-NetAdapter" (interfaces reseau), "Test-NetConnection google.com" (test de connectivite), "Resolve-DnsName google.com" (resolution DNS) et "Get-NetTCPConnection" (connexions TCP actives).
+
+   B. Resolution de noms NetBIOS et securite.
+
+      NetBIOS est un ancien systeme de communication reseau historiquement utilise par Windows pour l'identification des machines sur les reseaux locaux. Les noms NetBIOS sont limites a 15 caracteres. Les methodes de resolution sont : le broadcast (requete a tout le reseau local, peu efficace sur grands reseaux), WINS (serveur centralisant les noms NetBIOS et leurs adresses IP), LMHOSTS (fichier local statique nom NetBIOS et IP) et DNS (methode moderne privilegiee par les reseaux actuels).
+
+      Windows Server integre plusieurs mecanismes de securite reseau : le Pare-feu Windows, IPSEC (chiffrement et authentification des communications), TLS/HTTPS (chiffrement des echanges web), le filtrage reseau, le controle des ports et l'authentification reseau. Ces mecanismes protegent les donnees, les connexions et les services reseau.
+
+POINTS D'ATTENTION.
+
+      IPv6 est active par defaut sous Windows Server et Microsoft recommande de ne pas le desactiver : Active Directory l'utilise en interne et le desactiver peut provoquer des dysfonctionnements dans l'annuaire.
+
+      SMB utilise le port 445 et non le port 139 dans ses versions modernes : SMB v1 (port 139) est obsolete et vulnerable (exploit EternalBlue/WannaCry). Il doit etre desactive.
+
+      RDP (port 3389) expose le serveur aux attaques par force brute si laisse ouvert sans protection : il convient de restreindre l'acces par pare-feu, de changer le port et d'activer l'authentification NLA (Network Level Authentication).
+
+      DNS est indispensable au fonctionnement d'Active Directory : une panne DNS provoque une indisponibilite en chaine de l'authentification, des GPO et des services Windows.
+
+      NetBIOS est un systeme ancien et limite a 15 caracteres : les environnements modernes privilegient DNS et doivent desactiver NetBIOS sur TCP/IP lorsque cela est possible pour reduire la surface d'attaque.
+
+      pathping est specifique a Windows et combine en une seule commande les fonctions de ping et tracert avec une analyse statistique des pertes de paquets sur chaque saut.
+
+EXEMPLES CITES.
+
+      La resolution DNS "serveur.local" retourne l'adresse 192.168.1.20 dans un domaine Active Directory.
+
+      La commande "ipconfig /all" affiche l'adresse IP, le masque, la passerelle, les serveurs DNS, l'adresse MAC et l'etat DHCP de chaque interface reseau.
+
+      La commande "nslookup serveur.local" permet de tester la resolution DNS d'un serveur membre du domaine Active Directory.
+
+      Hyper-V peut creer un commutateur virtuel de type externe permettant aux machines virtuelles d'acceder au reseau physique, un type interne limitant les communications a l'hote et aux VM, ou un type prive isolant completement les VM.
+
+      La commande PowerShell "Test-NetConnection google.com" teste a la fois la resolution DNS et la connectivite TCP vers la destination.
+
+      Le Failover Clustering permet a un second serveur de reprendre automatiquement les ressources (services SMB, DHCP, etc.) en cas de panne du serveur principal, avec un temps de basculement de quelques secondes.
