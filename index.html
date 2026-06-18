@@ -1420,6 +1420,7 @@
         let isDragging = false, startX = 0, startY = 0, lastPinchDist = null;
 
         container.addEventListener('pointerdown', e => {
+            if(e.target.closest('button')) return; // laisser les boutons zoom fonctionner
             pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
             container.setPointerCapture(e.pointerId);
             if(pointers.size === 1 && zoomLevel > 1) {
