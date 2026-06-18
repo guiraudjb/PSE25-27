@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v37-cache-v1';
+const CACHE_NAME = 'v37-cache-v2';
 const ASSETS = [
   'index.html',
   'modules.json',

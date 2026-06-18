@@ -1,7 +1,7 @@
 {
   "name": "FORMATION V37 - AUTO LOAD",
   "short_name": "FormV37",
-  "description": "Outil d'apprentissage interactif avec Quiz et Flashcards",
+  "description": "Outil d'apprentissage interactif avec Quiz, Flashcards, Infographie, Fiche de révision et TP.",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#f5f5fe",

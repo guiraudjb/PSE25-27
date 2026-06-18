@@ -570,8 +570,8 @@
         .info-layout { display: flex; flex-direction: column; height: 100%; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); }
         .podcast-container { flex-shrink: 0; padding: 1vh; border-bottom: 1px solid var(--border); background: var(--bg-container); display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;}
         audio { width: 90%; max-width: 600px; height: 4vh; filter: var(--audio-filter); margin: 0 auto; display: block; }
-        .info-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; background: #111; overflow: hidden; position: relative; }
-        #info-image { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .info-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; background: #111; overflow: hidden; position: relative; touch-action: none; }
+        #info-image { max-width: 100%; max-height: 100%; object-fit: contain; user-select: none; -webkit-user-drag: none; }
         .zoom-controls { position: absolute; bottom: 10px; right: 10px; display: flex; gap: 5px; }
         .zoom-btn { width: 40px; height: 40px; border-radius: 50%; font-size: 1.5em; cursor: pointer; border: none; background: rgba(255,255,255,0.8); }
 
@@ -584,6 +584,48 @@
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 1; } }
         .paused-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index: 100; display: flex; align-items: center; justify-content: center; font-size: 3em; font-weight: bold; color: var(--primary); display: none; backdrop-filter: blur(2px); }
         .paused .paused-overlay { display: flex; }
+
+        /* =========================================
+           3. NOUVELLES FONCTIONNALITES
+           ========================================= */
+        /* Quiz — coloration immédiate des choix */
+        .choice-btn.correct { background: var(--success) !important; border-color: var(--success) !important; color: #fff !important; }
+        .choice-btn.wrong   { background: var(--error)   !important; border-color: var(--error)   !important; color: #fff !important; }
+
+        /* Badges onglets */
+        .tab-badge { font-size: 0.7em; background: var(--primary); color: var(--bg-container); border-radius: 10px; padding: 1px 6px; margin-left: 5px; vertical-align: middle; }
+        .tab-btn.active .tab-badge { background: var(--bg-page); color: var(--primary); }
+
+        /* Questions ratées */
+        .missed-list { text-align: left; max-height: 28vh; overflow-y: auto; margin: 5px 0; }
+        .missed-item { border-left: 3px solid var(--error); padding: 4px 8px; margin: 3px 0; font-size: 0.85em; }
+        .missed-q { color: var(--secondary); }
+        .missed-a { color: var(--success); font-weight: bold; }
+
+        /* Historique scores */
+        .score-history-list { list-style: none; padding: 0; margin: 5px 0 0 0; font-size: 0.85em; }
+        .score-history-list li { padding: 3px 8px; border-bottom: 1px dashed var(--border); display: flex; justify-content: space-between; }
+
+        /* Recherche module */
+        #module-search { padding: 0.5vh 1vh; border: 1px solid var(--border); border-radius: var(--radius); width: 100%; background: var(--bg-container); color: var(--text-main); font-family: inherit; font-size: 0.9em; margin-bottom: 5px; }
+
+        /* Vitesse TTS */
+        #tts-speed { padding: 2px 6px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-container); color: var(--text-main); font-family: inherit; font-size: 0.9em; cursor: pointer; }
+
+        /* Boutons plein écran et aide */
+        .fullscreen-btn, .help-btn { background: transparent; border: 1px solid var(--secondary); color: var(--secondary); border-radius: var(--radius); padding: 4px 8px; cursor: pointer; font-size: 0.9em; font-family: inherit; }
+        .fullscreen-btn:hover, .help-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .help-btn { border-radius: 50%; width: 28px; height: 28px; padding: 0; font-weight: bold; }
+
+        /* Overlay raccourcis clavier */
+        #kbd-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 99999; align-items: center; justify-content: center; }
+        .kbd-panel { background: var(--bg-container); color: var(--text-main); padding: 20px; border-radius: var(--radius); max-width: 380px; width: 90%; border: 1px solid var(--border); }
+        .kbd-panel h3 { margin: 0 0 12px 0; color: var(--primary); }
+        .kbd-panel table { width: 100%; border-collapse: collapse; }
+        .kbd-panel td { padding: 5px 8px; font-size: 0.9em; }
+        .kbd-panel td:first-child { white-space: nowrap; }
+        kbd { background: var(--bg-page); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-family: monospace; font-size: 0.85em; }
+        .kbd-close { font-size: 0.8em; color: var(--secondary); text-align: center; margin: 10px 0 0 0; }
 
     </style>
 </head>
@@ -650,17 +692,19 @@
                         <option value="theme-daltonian">Daltonien Safe</option>
                     </optgroup>
                 </select>
+                <button class="fullscreen-btn" id="btn-fullscreen" onclick="toggleFullscreen()" aria-label="Plein écran">⛶</button>
+                <button class="help-btn" onclick="showKeyboardHelp()" aria-label="Raccourcis clavier">?</button>
                 <a href="https://arducible.fr" aria-label="Quitter l'application" style="text-decoration:none; color:var(--error); font-weight:bold; border:1px solid var(--error); padding:4px 8px; border-radius:var(--radius);">X</a>
             </div>
         </div>
 
         <div class="nav-tabs" role="tablist" aria-label="Menu principal">
             <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-settings" id="btn-settings" onclick="userSwitchTab('settings')">PARAMÈTRES</button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-quiz" id="btn-quiz" onclick="userSwitchTab('quiz')">QUIZ</button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-flashcard" id="btn-flashcard" onclick="userSwitchTab('flashcard')">FLASHCARD</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-quiz" id="btn-quiz" onclick="userSwitchTab('quiz')">QUIZ<span class="tab-badge" id="badge-quiz"></span></button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-flashcard" id="btn-flashcard" onclick="userSwitchTab('flashcard')">FLASHCARD<span class="tab-badge" id="badge-flashcard"></span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-infographie" id="btn-infographie" onclick="userSwitchTab('infographie')">INFOGRAPHIE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-fiche" id="btn-fiche" onclick="userSwitchTab('fiche')">FICHE</button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tp" id="btn-tp" onclick="userSwitchTab('tp')">TP</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tp" id="btn-tp" onclick="userSwitchTab('tp')">TP<span class="tab-badge" id="badge-tp"></span></button>
         </div>
 
         <div id="tab-settings" class="tab-content active" role="tabpanel" aria-labelledby="btn-settings">
@@ -668,6 +712,7 @@
                 <h2>CONFIGURATION</h2>
                 <div class="config-row">
                     <span>Choix du module</span>
+                    <input type="search" id="module-search" placeholder="Filtrer les modules..." aria-label="Filtrer les modules" oninput="filterModules(this.value)">
                     <div style="display:flex; gap:10px;">
                         <select id="folderSelect" class="std-select" aria-label="Liste des modules">
                             <option value="" disabled selected>Chargement des modules...</option>
@@ -727,10 +772,18 @@
                 </div>
                 <button class="action-btn" onclick="nextQuizQuestion()">SUIVANT (AUTO)</button>
             </div>
-            <div id="quiz-end" class="game-view" style="justify-content:center; text-align:center;">
-                <h2 style="color:var(--primary);">QUIZ TERMINÉ</h2>
-                <h1 id="fb-final-score" style="font-size:5em;">0/0</h1>
-                <button class="action-btn" onclick="resetQuiz()">REJOUER</button>
+            <div id="quiz-end" class="game-view scrollable-content" style="justify-content:flex-start; text-align:center; padding-top:2vh;">
+                <h2 style="color:var(--primary); margin:0;">QUIZ TERMINÉ</h2>
+                <h1 id="fb-final-score" style="font-size:4em; margin:0.2em 0;">0/0</h1>
+                <div id="quiz-missed-section" class="hidden">
+                    <p style="color:var(--error); font-weight:bold; margin:8px 0 4px 0;">Questions ratées :</p>
+                    <div id="quiz-missed-list" class="missed-list"></div>
+                </div>
+                <div id="quiz-history-section" style="width:100%; margin-top:10px; border-top:1px dashed var(--border); padding-top:8px;">
+                    <p style="font-size:0.85em; color:var(--secondary); margin:0 0 4px 0;">Historique de ce module :</p>
+                    <ul id="quiz-history-list" class="score-history-list"></ul>
+                </div>
+                <button class="action-btn" onclick="resetQuiz()" style="margin-top:auto;">REJOUER</button>
             </div>
         </div>
 
@@ -753,8 +806,10 @@
             <div class="flashcard-controls">
                 <button class="nav-btn" onclick="prevCard()" aria-label="Carte précédente">←</button>
                 <button id="btn-fc-autoplay" class="auto-btn" onclick="toggleFlashAutoplay()">▶ AUTO</button>
+                <button class="nav-btn" onclick="shuffleFlash()" aria-label="Mélanger les cartes" title="Mélanger">⇄</button>
                 <button class="nav-btn" onclick="nextCard()" aria-label="Carte suivante">→</button>
             </div>
+            <p style="text-align:center; font-size:0.7em; color:var(--secondary); margin:4px 0 0 0;"><kbd>←</kbd><kbd>→</kbd> naviguer &nbsp; <kbd>Espace</kbd> retourner &nbsp; <kbd>?</kbd> aide</p>
         </div>
 
         <div id="tab-infographie" class="tab-content" role="tabpanel" aria-labelledby="btn-infographie">
@@ -770,6 +825,7 @@
                     <img id="info-image" class="hidden" src="" alt="Infographie du module">
                     <div class="zoom-controls">
                         <button class="zoom-btn" onclick="zoomInfo(0.1)" aria-label="Zoomer">+</button>
+                        <button class="zoom-btn" onclick="resetZoom()" aria-label="Réinitialiser le zoom" title="Reset">⊙</button>
                         <button class="zoom-btn" onclick="zoomInfo(-0.1)" aria-label="Dézoomer">-</button>
                     </div>
                 </div>
@@ -782,6 +838,12 @@
                 <button id="btn-fiche-toggle" class="nav-btn" onclick="toggleFiche()" aria-label="Lecture ou Pause">▶</button>
                 <button class="nav-btn" onclick="forwardFiche()" aria-label="Phrase suivante">⏩</button>
                 <button class="nav-btn" onclick="stopFiche(true)" aria-label="Arrêter la lecture">■</button>
+                <select id="tts-speed" aria-label="Vitesse de lecture TTS" title="Vitesse de lecture">
+                    <option value="0.75">×0.75</option>
+                    <option value="1" selected>×1</option>
+                    <option value="1.25">×1.25</option>
+                    <option value="1.5">×1.5</option>
+                </select>
             </div>
             <div class="fiche-text" id="fiche-content" tabindex="0" aria-label="Contenu de la fiche de révision">
                 Aucune fiche chargée.
@@ -811,6 +873,20 @@
 
     </main>
 
+    <div id="kbd-overlay" onclick="showKeyboardHelp()" role="dialog" aria-modal="true" aria-label="Raccourcis clavier">
+        <div class="kbd-panel" onclick="event.stopPropagation()">
+            <h3>Raccourcis clavier</h3>
+            <table>
+                <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Carte/exercice précédent·suivant</td></tr>
+                <tr><td><kbd>Espace</kbd></td><td>Retourner la carte / Pause lecture</td></tr>
+                <tr><td><kbd>F</kbd></td><td>Basculer plein écran</td></tr>
+                <tr><td><kbd>Échap</kbd></td><td>Quitter le plein écran</td></tr>
+                <tr><td><kbd>?</kbd></td><td>Afficher / fermer cette aide</td></tr>
+            </table>
+            <p class="kbd-close">Cliquez en dehors pour fermer</p>
+        </div>
+    </div>
+
 <script>
     // --- SKINS ---
     function changeSkin(skinName) {
@@ -818,6 +894,10 @@
         localStorage.setItem('selectedSkin', skinName);
     }
     const savedSkin = localStorage.getItem('selectedSkin');
+    if(!savedSkin && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.className = 'theme-night';
+        document.getElementById('skinSelect').value = 'theme-night';
+    }
     if(savedSkin) {
         // Liste à jour avec les 33 thèmes
         const allowedSkins = [
@@ -845,12 +925,12 @@
         podcast: './podcast/', tp: './tp/', fiche: './fiche/'
     };
     
-    let quizData = [], flashData = [], tpData = [];
+    let quizData = [], flashData = [], tpData = [], allModules = [];
     let currentFileBase = "", currentTab = 'settings';
-    let qIndex = 0, qScore = 0, qTimerInterval, qTimeLeft = 20, qIsPaused = false, qPhase = 'game';
+    let qIndex = 0, qScore = 0, qTimerInterval, qTimeLeft = 20, qIsPaused = false, qPhase = 'game', qWrongAnswers = [];
     let fIndex = 0, fAutoplayTimeout, isAutoplay = false, fPhase = 'front';
     let tpIndex = 0;
-    let zoomLevel = 1;
+    let zoomLevel = 1, panX = 0, panY = 0;
 
     // --- ACCESSIBILITÉ ---
     function handleCardKey(e, type) {
@@ -976,7 +1056,8 @@
                 
                 // Tri alphabétique naturel
                 files.sort((a,b) => a.localeCompare(b, undefined, {numeric: true, sensitivity: 'base'}));
-                
+                allModules = [...files];
+
                 const def = document.createElement('option'); def.text = "-- Choisir un module --"; def.disabled = true; def.selected = true; select.add(def);
                 
                 files.forEach(f => {
@@ -1008,6 +1089,7 @@
         document.getElementById('tp-front').textContent = "Chargement..."; document.getElementById('tp-back').textContent = "...";
         document.getElementById('fiche-content').textContent = "Chargement...";
         document.getElementById('info-image').classList.add('hidden');
+        document.getElementById('info-image').style.transform = ''; zoomLevel = 1; panX = 0; panY = 0;
         document.getElementById('info-placeholder').classList.remove('hidden');
         document.getElementById('podcast-player').src = "";
         document.getElementById('quiz-end').classList.remove('active');
@@ -1033,7 +1115,7 @@
             if(txtTp) parseTpCSV(txtTp); else tpData = [];
             document.getElementById('fiche-content').textContent = txtFiche ? txtFiche : "Aucune fiche de révision disponible (.txt)";
             
-            resetFlashcard(); resetTp();
+            resetFlashcard(); resetTp(); updateTabBadges();
 
             const img = document.getElementById('info-image');
             img.onload = () => { img.classList.remove('hidden'); document.getElementById('info-placeholder').classList.add('hidden'); };
@@ -1081,7 +1163,7 @@
     function resetQuiz() {
         clearInterval(qTimerInterval);
         if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-        qIndex = 0; qScore = 0; qPhase = 'game';
+        qIndex = 0; qScore = 0; qPhase = 'game'; qWrongAnswers = [];
         document.getElementById('quiz-end').classList.remove('active');
         document.getElementById('quiz-feedback').classList.remove('active');
         document.getElementById('quiz-game').classList.add('active');
@@ -1140,31 +1222,43 @@
     }
 
     function checkAnswer(idx) {
-        clearInterval(qTimerInterval); // Arrêt timer question
+        clearInterval(qTimerInterval);
         window.speechSynthesis.cancel();
-        
+
         const q = quizData[qIndex];
         const isCorrect = (idx === q.correctIndex);
         if(isCorrect) qScore++;
+        if(!isCorrect) qWrongAnswers.push({ question: q.question, correctAnswer: q.choices[q.correctIndex] });
 
-        qPhase = 'feedback';
-        document.getElementById('quiz-game').classList.remove('active');
-        document.getElementById('quiz-feedback').classList.add('active');
+        // Coloration immédiate des boutons (vert = bonne réponse, rouge = mauvais choix)
+        document.querySelectorAll('.choice-btn').forEach((btn, i) => {
+            btn.onclick = null;
+            if(i === q.correctIndex) btn.classList.add('correct');
+            else if(i === idx) btn.classList.add('wrong');
+        });
 
-        const statusDiv = document.getElementById('fb-status');
-        if(isCorrect) { statusDiv.textContent = "BONNE RÉPONSE"; statusDiv.className = "status-success"; }
-        else { statusDiv.textContent = "ERREUR / TEMPS ÉCOULÉ"; statusDiv.className = "status-error"; }
+        const showFeedback = () => {
+            qPhase = 'feedback';
+            document.getElementById('quiz-game').classList.remove('active');
+            document.getElementById('quiz-feedback').classList.add('active');
 
-        document.getElementById('fb-correct').textContent = q.choices[q.correctIndex];
-        maximizeText('fb-correct');
-        document.getElementById('fb-expl').textContent = q.expl;
+            const statusDiv = document.getElementById('fb-status');
+            if(isCorrect) { statusDiv.textContent = "BONNE RÉPONSE"; statusDiv.className = "status-success"; }
+            else { statusDiv.textContent = "ERREUR / TEMPS ÉCOULÉ"; statusDiv.className = "status-error"; }
 
-        if(document.getElementById('ttsToggle').checked) {
-            let prefix = isCorrect ? "Bravo ! " : "Faux. ";
-            speak(`${prefix} La bonne réponse était : ${q.choices[q.correctIndex]}. ${q.expl}`);
-        }
+            document.getElementById('fb-correct').textContent = q.choices[q.correctIndex];
+            maximizeText('fb-correct');
+            document.getElementById('fb-expl').textContent = q.expl;
 
-        startFeedbackTimer();
+            if(document.getElementById('ttsToggle').checked) {
+                let prefix = isCorrect ? "Bravo ! " : "Faux. ";
+                speak(`${prefix} La bonne réponse était : ${q.choices[q.correctIndex]}. ${q.expl}`);
+            }
+            startFeedbackTimer();
+        };
+
+        // Délai court pour laisser voir la coloration (pas de délai si timeout)
+        setTimeout(showFeedback, idx === -1 ? 0 : 700);
     }
 
     function startFeedbackTimer() {
@@ -1208,6 +1302,40 @@
         document.getElementById('quiz-game').classList.remove('active');
         document.getElementById('quiz-end').classList.add('active');
         document.getElementById('fb-final-score').textContent = `${qScore} / ${quizData.length}`;
+
+        // Enregistrer le score
+        saveQuizScore(qScore, quizData.length, currentFileBase);
+
+        // Afficher les questions ratées
+        const missedSection = document.getElementById('quiz-missed-section');
+        const missedList = document.getElementById('quiz-missed-list');
+        missedList.innerHTML = '';
+        if(qWrongAnswers.length > 0) {
+            missedSection.classList.remove('hidden');
+            qWrongAnswers.forEach(item => {
+                const div = document.createElement('div'); div.className = 'missed-item';
+                const q = document.createElement('div'); q.className = 'missed-q'; q.textContent = item.question;
+                const a = document.createElement('div'); a.className = 'missed-a'; a.textContent = '✓ ' + item.correctAnswer;
+                div.appendChild(q); div.appendChild(a); missedList.appendChild(div);
+            });
+        } else { missedSection.classList.add('hidden'); }
+
+        // Afficher l'historique
+        const history = loadScoreHistory(currentFileBase);
+        const histList = document.getElementById('quiz-history-list');
+        histList.innerHTML = '';
+        if(history.length === 0) {
+            histList.innerHTML = '<li style="color:var(--secondary)">Aucun historique</li>';
+        } else {
+            history.forEach((entry, i) => {
+                const pct = Math.round(entry.score / entry.total * 100);
+                const li = document.createElement('li');
+                const label = document.createElement('span'); label.textContent = (i === 0 ? '→ ' : '') + entry.date;
+                const val = document.createElement('span'); val.style.color = pct >= 70 ? 'var(--success)' : 'var(--error)';
+                val.textContent = `${entry.score}/${entry.total} (${pct}%)`;
+                li.appendChild(label); li.appendChild(val); histList.appendChild(li);
+            });
+        }
     }
 
     // --- FLASHCARD & TP ---
@@ -1275,7 +1403,66 @@
     function prevTp() { if(tpIndex > 0) { tpIndex--; updateTpUI(); } }
 
     // --- UTILS SUPP ---
-    function zoomInfo(delta) { zoomLevel += delta; if(zoomLevel < 0.5) zoomLevel = 0.5; document.getElementById('info-image').style.transform = `scale(${zoomLevel})`; }
+    function zoomInfo(delta) {
+        zoomLevel += delta;
+        if(zoomLevel < 0.5) zoomLevel = 0.5;
+        if(zoomLevel <= 1) { panX = 0; panY = 0; }
+        applyInfoTransform();
+        document.querySelector('.info-container').style.cursor = zoomLevel > 1 ? 'grab' : 'default';
+    }
+    function resetZoom() { zoomLevel = 1; panX = 0; panY = 0; applyInfoTransform(); document.querySelector('.info-container').style.cursor = 'default'; }
+    function applyInfoTransform() {
+        document.getElementById('info-image').style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+    }
+    (function initInfoPan() {
+        const container = document.querySelector('.info-container');
+        const pointers = new Map();
+        let isDragging = false, startX = 0, startY = 0, lastPinchDist = null;
+
+        container.addEventListener('pointerdown', e => {
+            pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+            container.setPointerCapture(e.pointerId);
+            if(pointers.size === 1 && zoomLevel > 1) {
+                isDragging = true;
+                startX = e.clientX - panX;
+                startY = e.clientY - panY;
+                container.style.cursor = 'grabbing';
+            }
+            if(pointers.size === 2) {
+                isDragging = false;
+                const pts = [...pointers.values()];
+                lastPinchDist = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
+            }
+            e.preventDefault();
+        });
+
+        container.addEventListener('pointermove', e => {
+            pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+            if(pointers.size === 2) {
+                const pts = [...pointers.values()];
+                const dist = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
+                if(lastPinchDist) {
+                    zoomLevel = Math.max(0.5, zoomLevel + (dist - lastPinchDist) * 0.01);
+                    if(zoomLevel <= 1) { panX = 0; panY = 0; }
+                    applyInfoTransform();
+                }
+                lastPinchDist = dist;
+            } else if(isDragging) {
+                panX = e.clientX - startX;
+                panY = e.clientY - startY;
+                applyInfoTransform();
+            }
+        });
+
+        const endPointer = e => {
+            pointers.delete(e.pointerId);
+            if(pointers.size < 2) lastPinchDist = null;
+            if(pointers.size === 0) { isDragging = false; container.style.cursor = zoomLevel > 1 ? 'grab' : 'default'; }
+        };
+        container.addEventListener('pointerup', endPointer);
+        container.addEventListener('pointercancel', endPointer);
+    })();
+
     function speak(txt) { if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(txt); u.lang = 'fr-FR'; window.speechSynthesis.speak(u); } }
 
     // --- FICHE TTS ---
@@ -1310,7 +1497,7 @@
         highlightChunk(currentChunkIndex);
         if(window.speechSynthesis.speaking) window.speechSynthesis.cancel();
         ficheUtterance = new SpeechSynthesisUtterance(ficheChunks[currentChunkIndex]);
-        ficheUtterance.lang = 'fr-FR'; ficheUtterance.rate = 1;
+        ficheUtterance.lang = 'fr-FR'; ficheUtterance.rate = parseFloat(document.getElementById('tts-speed')?.value || 1);
         ficheUtterance.onend = function() { if(!isFichePaused && ficheChunks.length > 0) { currentChunkIndex++; speakNextChunk(); } };
         ficheUtterance.onerror = function(e) { if(!isFichePaused && ficheChunks.length > 0) { currentChunkIndex++; speakNextChunk(); } };
         window.speechSynthesis.speak(ficheUtterance); setToggleIcon('playing');
@@ -1325,6 +1512,91 @@
     function stopAudioForSeek() { if (ficheUtterance) { ficheUtterance.onend = null; ficheUtterance.onerror = null; } window.speechSynthesis.cancel(); }
     function rewindFiche() { if(currentChunkIndex > 0) { const wasPlaying = window.speechSynthesis.speaking && !isFichePaused; if(wasPlaying) stopAudioForSeek(); currentChunkIndex--; if(wasPlaying) speakNextChunk(); else highlightChunk(currentChunkIndex); } }
     function forwardFiche() { if(currentChunkIndex < ficheChunks.length - 1) { const wasPlaying = window.speechSynthesis.speaking && !isFichePaused; if(wasPlaying) stopAudioForSeek(); currentChunkIndex++; if(wasPlaying) speakNextChunk(); else highlightChunk(currentChunkIndex); } }
+
+    // --- FLASHCARD SHUFFLE ---
+    function shuffleFlash() {
+        if(flashData.length === 0) return;
+        stopAllProcesses();
+        for(let i = flashData.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [flashData[i], flashData[j]] = [flashData[j], flashData[i]];
+        }
+        fIndex = 0; updateFlashcardUI();
+    }
+
+    // --- PLEIN ÉCRAN ---
+    function toggleFullscreen() {
+        if(!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(() => {});
+        } else { document.exitFullscreen(); }
+    }
+    document.addEventListener('fullscreenchange', () => {
+        const btn = document.getElementById('btn-fullscreen');
+        if(btn) btn.textContent = document.fullscreenElement ? '✕' : '⛶';
+    });
+
+    // --- FILTRE MODULES ---
+    function filterModules(query) {
+        const select = document.getElementById('folderSelect');
+        const btn = document.getElementById('btnLoad');
+        const currentVal = select.value;
+        const q = query.toLowerCase().trim();
+        select.innerHTML = '';
+        const def = document.createElement('option'); def.text = "-- Choisir un module --"; def.disabled = true; def.selected = true; select.add(def);
+        const filtered = q ? allModules.filter(f => f.toLowerCase().replace(/_/g, ' ').includes(q)) : allModules;
+        filtered.forEach(f => {
+            const opt = document.createElement('option'); opt.value = f;
+            opt.text = f.replace('.csv', '').replace(/_/g, ' ').toUpperCase();
+            if(f === currentVal) { opt.selected = true; btn.disabled = false; }
+            select.add(opt);
+        });
+        select.onchange = () => { btn.disabled = false; document.getElementById('status-msg').textContent = "Prêt à charger."; };
+    }
+
+    // --- BADGES ONGLETS ---
+    function updateTabBadges() {
+        const map = { quiz: quizData.length, flashcard: flashData.length, tp: tpData.length };
+        Object.entries(map).forEach(([tab, count]) => {
+            const badge = document.getElementById('badge-' + tab);
+            if(badge) badge.textContent = count > 0 ? count : '';
+        });
+    }
+
+    // --- HISTORIQUE SCORES ---
+    function saveQuizScore(score, total, moduleBase) {
+        if(!moduleBase || total === 0) return;
+        const key = 'quiz_history_' + moduleBase;
+        let history = JSON.parse(localStorage.getItem(key) || '[]');
+        history.unshift({ score, total, date: new Date().toLocaleDateString('fr-FR') });
+        if(history.length > 5) history = history.slice(0, 5);
+        localStorage.setItem(key, JSON.stringify(history));
+    }
+    function loadScoreHistory(moduleBase) {
+        return JSON.parse(localStorage.getItem('quiz_history_' + moduleBase) || '[]');
+    }
+
+    // --- AIDE RACCOURCIS ---
+    function showKeyboardHelp() {
+        const el = document.getElementById('kbd-overlay');
+        el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // --- RACCOURCIS CLAVIER GLOBAUX ---
+    document.addEventListener('keydown', e => {
+        const tag = document.activeElement.tagName;
+        if(tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+        if(e.key === 'ArrowRight') { if(currentTab === 'flashcard') nextCard(); if(currentTab === 'tp') nextTp(); }
+        if(e.key === 'ArrowLeft')  { if(currentTab === 'flashcard') prevCard(); if(currentTab === 'tp') prevTp(); }
+        if(e.key === ' ') {
+            e.preventDefault();
+            if(currentTab === 'flashcard') flipCard();
+            if(currentTab === 'tp') flipTp();
+            if(currentTab === 'fiche') toggleFiche();
+        }
+        if(e.key === 'f' || e.key === 'F') toggleFullscreen();
+        if(e.key === 'Escape') { if(document.fullscreenElement) document.exitFullscreen(); document.getElementById('kbd-overlay').style.display = 'none'; }
+        if(e.key === '?' || e.key === '/') showKeyboardHelp();
+    });
 
     // --- AUTO LOAD ---
     // Lancer la recherche automatiquement au démarrage
