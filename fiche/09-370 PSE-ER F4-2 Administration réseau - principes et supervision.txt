@@ -1,56 +1,251 @@
-ADMINISTRATION RÉSEAU : PRINCIPES ET SUPERVISION
+L'ADMINISTRATION RÉSEAU : PRINCIPES, ASPECTS ORGANISATIONNELS ET OUTILS DE SUPERVISION.
 
-1. PRINCIPES GÉNÉRAUX - LES CINQ AXES ISO
-- Gestion des anomalies (Fault Management) : réseau opérationnel sans rupture de service (99,999 % de disponibilité = quelques secondes d'indisponibilité par an, ce qui définit une QoS). Localiser rapidement toute panne : surveiller les alarmes, localiser un incident par diagnostic des alarmes, journaliser les problèmes.
-- Gestion de la configuration (Configuration Management) : gérer la configuration matérielle et logicielle pour optimiser l'utilisation ; chaque équipement et compteur identifié de façon unique par un nom ou un identificateur d'objet OID (Object Identifier).
-- Gestion des performances (Performance Management) : contrôler à tout moment si le réseau écoule le trafic pour lequel il a été conçu.
-- Gestion de la sécurité (Security Management) : contrôles d'accès au réseau, confidentialité, intégrité et authentification des données.
-- Gestion de la comptabilité (Accounting Management) : suivre la consommation réseau par abonné pour établir une facture.
-Enjeux : offrir une solution unique pour administrer un milieu hétérogène, avec des outils adaptables à la taille et à la diversité technologique ; automatiser le traitement de l'information pour agir « pro-activement » et non « réagir en mode pompier ». Superviser = anticiper, prévoir, éviter de subir.
 
-2. ASPECTS ORGANISATIONNELS
-Deux écueils à éviter : l'absence (ou l'insuffisance) d'informations ; le trop-plein d'informations (« trop d'informations tue l'information »), qui survient quand les aspects organisationnels n'ont pas été suffisamment pris en compte.
-Étapes préparatoires : plan du réseau (diagrammes, schémas) ; plan d'adressage ; recensement des pratiques des utilisateurs (développeurs, exploitants et techniciens, utilisateurs finaux) ; détermination des équipements actifs à prendre en charge (approche séquentielle calquée sur la modélisation en couches) ; détermination des objets et services par équipement ; regroupement en entités logiques (politique de supervision par groupe d'objet, interactions entre objets, seuils d'alertes et groupes à alerter) ; politiques par type de service (seuils, cas particuliers) ; choix des outils. S'appuyer sur la modélisation en couches ; prendre en compte la globalité des composants (pas seulement les couches 2-3 du modèle DOD).
-Trois catégories d'objets à superviser :
-- Supervision réseau : communication entre machines ; bon fonctionnement des communications et performance des liens (débit, latence, taux d'erreurs) ; ex. vérifier qu'une IP est joignable, qu'un port est ouvert.
-- Supervision système : la machine elle-même et ses ressources (mémoire utilisée, charge processeur, logs système).
-- Supervision applicative : fonctionnement d'une application ; connexion sur son port pour vérifier qu'elle retourne les bonnes informations, analyse de logs applicatifs. Un port ouvert ne garantit pas que l'application derrière n'est pas « plantée ».
+LEXIQUE COMPLET.
 
-3. ASPECTS PROTOCOLAIRES
-ICMP (Internet Control Message Protocol) : protocole de couche 3 (réseau) qui palie l'absence de message d'erreur d'IP ; les équipements intermédiaires l'utilisent pour prévenir la machine émettrice d'un incident. Paquets ICMP encapsulés dans des paquets IP, pouvant contenir des bouts du paquet IP fautif. Erreurs classées en types, parfois re-divisés en codes (type 3 = destinataire inaccessible, 16 codes). Simple ; pas de fonction directe de supervision, mais source d'information (qualité du réseau, présence d'un hôte).
-SNMP (Simple Network Management Protocol) :
-- Contexte : l'ISO a proposé dans les années 80 la norme CMIS/CMIP (Common Management Information Service ISO 9595, Common Management Information Protocol ISO 9596) et un cadre architectural (ISO 7498). En parallèle, l'IAB (Internet Activities Board) a approuvé SNMP comme solution à court terme et CMOT (CMIP Over TCP) à long terme. Au début des années 90, SNMP, plus simple, est devenu le standard de fait, adopté par de nombreux constructeurs (réseaux IP et réseaux d'opérateurs comme ATM). SNMP a repris et adapté beaucoup des idées de CMIS/CMIP.
-- Trois éléments : base de données MIB gérée par chaque agent, modifiable par un manager (RFC 1156 et 1213 pour la MIB-I puis la MIB-II) ; structure commune de représentation SMI (Structure of Management Information, RFC 1155) ; protocole d'échange SNMP entre manager et agent (RFC 1157).
-- Bâti au-dessus d'UDP/IP : UDP pour sa simplicité, sa rapidité et sa concision (8 octets d'en-tête contre 20 pour TCP) -> remontée rapide des alarmes ; mais non connecté et non fiable -> perte de messages possible.
-- Cinq types de messages SNMPv1 : get-request (GET, valeur courante d'un objet), get-next-request (GETNEXT, prochain objet), set-request (SET, mise à jour d'une valeur), get-response (réponse à GET/GETNEXT/SET), trap (TRAP, signal d'un agent vers un manager, remontée d'alarme). Protocole commande/réponse sans états.
-- Ports UDP : 161 côté agent (GET, GETNEXT, SET) ; 162 côté manager (TRAPs).
-- Champ communauté (community) : chaîne de caractères = mot de passe de validation ; si incorrecte, requête rejetée ; passe en clair -> faille importante de SNMPv1, comblée par les versions ultérieures.
-- Encodage TLV (Type, Longueur, Valeur) / BER (Basic Encoding Rules) défini dans la SMI ; gourmand en octets (un octet -> trois octets) ; nombre variable de paramètres.
-- SMI : règles de description ; identifie de façon unique un objet de la MIB (OID, Object ID) ; représentation des données et types ; objet déclaré/défini en ASN.1 (Abstract Syntax Notation 1). Types utilisés : INTEGER (32 bits complément à 2), OCTET STRING, IpAddress, PhysAddress (MAC 6 octets), Counter (entier 32 bits non signé, retour à 0 après 2^32-1), TimeTicks (compteur 32 bits non signé en 1/100 de s).
-- MIB : base de données de l'agent, structure d'arbre similaire au DNS ; racine non nommée ; objet identifié de façon absolue par son OID (nœud de l'arbre) ; chaque nœud a aussi un nom symbolique. Ex. sysDescr = iso.org.dod.internet.mgmt.mib.system.sysDescr.0, OID = 1.3.6.1.2.1.1.1.0. Les objets utiles commencent par 1.3.6.1.2.1. C'est l'OID qui est transmis dans une requête, pas le nom symbolique. MIB standard vs MIB privée (objets propres, branche iso.org.dod.internet.private.enterprises.nom_entreprise ; souscrire un numéro d'entreprise à l'IANA). Accès à un objet simple (feuille) : ajouter .0 en suffixe à l'OID.
-- Versions : SNMPv1 (RFC 1155, sécurité triviale par la chaîne « community ») ; SNMPsec (historique, sécurité par groupes, oublié) ; SNMPv2p (mise à jour des opérations, nouveaux types, sécurité par groupes) ; SNMPv2c (community string-based, RFC 1441) ; SNMPv2u (sécurité basée sur les usagers) ; SNMPv2* (combine v2p et v2u, jamais publié en RFC, RFC 1901) ; SNMPv3 (standard actuel, RFC 3411 ; sécurité basée sur les usagers + types/opérations de SNMPv2p + capacité pour les proxies).
-NET-SNMP : implémentation libre sous Linux. Ensemble d'outils : API d'accès à SNMP, agent SNMP extensible, commandes en ligne pour interroger des agents et gérer/générer des TRAPs, version de netstat utilisant SNMP, browser de MIB (tkmib) écrit en Tk. Porté sur Linux, HP-UX, Solaris, SunOS, NetBSD, FreeBSD, Win32. Supporte SNMPv1/v2/v3.
-- Agent : exécutable snmpd ; fichier de configuration snmpd.conf (exemple EXAMPLE.conf) ; utilitaire snmpconf pour le créer interactivement (snmpconf -g basic_setup).
-- Commandes : snmpget (GET), snmpset (SET), snmpgetnext (GETNEXT + valeur de l'objet suivant), snmpwalk (balaye complètement une branche de la MIB), snmptranslate (OID décimal <-> forme symbolique).
+      Administration de réseau : ensemble des activités de contrôle, de gestion et de supervision en temps réel de la qualité et de l'état d'un réseau, apparu il y a une trentaine d'années, dont l'ISO a cerné cinq axes.
 
-4. OUTILS DE SUPERVISION
-« Petits » outils (briques de base) :
-- Ping : utilise ICMP (requête Echo, réponse Echo Reply) ; savoir si une machine est accessible (sinon la raison via le code d'erreur ICMP), mesurer la latence ; souvent utilisé pour alerter quand une machine n'est plus joignable.
-- MRTG : réalisé en Perl et C ; surveille la charge des liens réseaux ; génère des pages HTML avec des images PNG (état en temps réel). Un script Perl récupère les données via SNMP et les envoie à un programme C qui les stocke et génère les graphiques ; étendu à toute variable SNMP, voire à des scripts pour données non SNMP.
-- RRDTOOL : même auteur que MRTG, évolution ; gestion du stockage revue (technique « Round Robin » -> Round Robin Database TOOL) ; graphiques améliorés, interfaçage modulaire ; incontournable, utilisé dans quasiment tous les logiciels de supervision open-source.
-- tcpdump / Wireshark (capture de paquets, détection d'usages frauduleux) ; Iperf (audit du réseau).
-Solutions complètes : « console d'administration globale » ; passage à l'échelle (vue globale de centaines de machines puis zoom).
-- NetMRG (2001) : historiques et auto-scroll, templates, gestion des jours de travail. Composants : moteur C++ multithreadé (récolte via scripts/SNMP/MySQL), RRDTOOL, base MySQL (config), interface PHP. « Device Tree » : Group -> Device -> Sub device -> Monitors ; « events » en cas de problème.
-- Cacti : basé sur RRDTOOL, interface la plus complète ; base MySQL ; moteur de récolte en C (Cactid, Threads POSIX) si besoin de performances, sinon moteur PHP. Interface : « Console » (config) et « Graphs » (affichage) avec trois modes : Tree mode (arbre par groupes), List mode (liste des graphiques d'une machine), Preview mode (graphiques affichés directement).
-- Zabbix (2001 ; entreprise Zabbix SIA en 2005) : acquisition des données via SNMP, via test de service (rien à installer, tests limités à des pings ou des protocoles SMTP/HTTP), ou via l'agent Zabbix local (originalité : toute info sans SNMP). Composants : serveur (cœur : centralise par trapping ou polling, configuration, alerte), proxy (optionnel, bufférise pour alléger le serveur), agent (collecte les données locales), interface Web (PHP). Tout en C sauf l'interface Web. Interface en 5 parties : Monitoring, Inventory, Report, Configuration, Administration.
-- Nagios : successeur de NetSaint ; le logiciel libre le plus connu. Historique : 1999 NetSaint (Ethan Galstad), 2002 renommé Nagios, 2004 v1.2, 2006 v2.0, 2008 v3.0. Architecture modulaire : moteur en C (ordonnancement), interface Web via CGI, greffons (plugins, plus de 1200). Interface : monitoring (vue globale, précise, carte, problèmes, 3D), reporting, configuration.
-  * Plugin = script/programme accomplissant une tâche et une seule ; renvoie un code retour (0 = OK, 1 = WARNING, 2 = CRITICAL, 3 = UNKNOWN) et un petit texte explicatif sur la sortie standard.
-  * NRPE (Nagios Remote Plugin Executor) : Nagios initie la vérification (polling) ; NRPE reçoit la demande, exécute, renvoie le résultat. NSCA (Nagios Service Check Acceptor) : vérification planifiée et exécutée en local (trapping), résultat envoyé à Nagios ; inverse le sens des connexions (utile avec des pare-feu en diode). check_by_ssh (comptes non privilégiés, implications de sécurité) ; NSClient / NRPE_NT pour Windows.
-  * Fichiers de config dans /etc/nagios ; structure define { param value } (pas d'espace dans les valeurs) ; test de cohérence : nagios -v nagios.cfg. Vérifications le plus souvent actives, parfois passives.
-- Centréon (2003, Français, ex-Oréon, repris par Merethis) : évolution de Nagios (interface et fonctionnalités), compatible avec le moteur Nagios.
-- Shinken : refonte complète du cœur de Nagios en Python ; architecture plus souple, conçue pour les architectures distribuées ; ~5x plus de performances que Nagios classique ; compatible nagios, nrpe et certains plugins ; supervision à distance via SSH ou tunnel SSL ; gestion des dépendances réseau et logiques ; supervision active et passive ; noms en UTF-8 ; plugins en shell, C++, Perl, Python, Ruby.
-- Icinga : fork open-source de Nagios ; visualisation via rapports ; modulaire, interfaces web ou mobiles ; environnements complexes, multi-sites.
-Solutions payantes :
-- MOM et SCOM (Microsoft) : supervision d'ordinateurs interconnectés (Active Directory, SQL Server, Exchange, SCOM lui-même). Un agent installé sur la machine scrute plusieurs sources (journal d'événements, compteurs de performance, codes de retour) et envoie les infos pertinentes au serveur, qui conserve un historique et déclenche des alertes ; règles selon le contexte : notification (courriel, pager), ticket d'incident, action (script). Management Packs = ensembles de règles et d'informations pour superviser une application spécifique ; SCOM corrige la complexité reprochée à MOM.
-- ITM (IBM Tivoli Monitoring) : logiciel de supervision du framework Tivoli d'IBM ; surveille OS, réseau, applications, matériel ; alertes vers une console (Tivoli Enterprise Console) ; version 6.1 basée sur Omegamon de Candle (racheté par IBM).
-- BMC Patrol : un des plus anciens logiciels de supervision, pionnier ; multi-plateforme (AIX, HP-UX, Solaris, tous les environnements Windows) ; dénominations telles que « Performance Manager ».
+      Gestion des anomalies (Fault Management) : axe visant un réseau opérationnel sans rupture de service, par exemple un taux de disponibilité à 99,999 pour cent soit quelques secondes d'indisponibilité par an, ce qui définit une qualité de service ; on surveille les alarmes, on localise l'incident par diagnostic et on journalise les problèmes.
+
+      Gestion de la configuration (Configuration Management) : axe consistant à gérer la configuration matérielle et logicielle du réseau pour en optimiser l'utilisation, chaque équipement et compteur devant être identifié de façon unique par un identificateur d'objet OID.
+
+      Gestion des performances (Performance Management) : axe consistant à contrôler à tout moment que le réseau est en mesure d'écouler le trafic pour lequel il a été conçu.
+
+      Gestion de la sécurité (Security Management) : axe gérant les contrôles d'accès au réseau, la confidentialité des données qui y transitent, leur intégrité et leur authentification.
+
+      Gestion de la comptabilité (Accounting Management) : axe suivant la consommation réseau par abonné en vue d'établir une facture.
+
+      Superviser : anticiper, prévoir et éviter de subir les informations en provenance d'autres personnes, l'automatisation de l'analyse rationnelle et méthodique des informations remontées permettant la mise en place de statistiques et de procédures pour résoudre les problèmes sous-jacents.
+
+      Écueils de la supervision : l'absence ou l'insuffisance d'informations, objectif initial le plus immédiat, et le trop-plein d'informations, résumé par la formule trop d'informations tue l'information, quand les aspects organisationnels n'ont pas été suffisamment pris en compte.
+
+      Aspects préparatoires : établissement d'un plan du réseau sous forme de diagramme, prise de connaissance du plan d'adressage, recensement des pratiques des développeurs, exploitants et utilisateurs finaux, détermination des équipements actifs par une approche séquentielle calquée sur la modélisation en couches, regroupement des objets en entités logiques, choix d'une politique de supervision par groupe, détermination des interactions, des seuils d'alertes et des groupes à alerter, et choix des outils.
+
+      Administration-supervision réseau : supervision de l'aspect communication entre machines, du bon fonctionnement des communications et de la performance des liens en débit, latence et taux d'erreurs, par exemple vérifier qu'une adresse IP est joignable ou qu'un port est ouvert.
+
+      Administration-supervision système : supervision cantonnée à la machine et à ses ressources, mémoire utilisée, charge processeur, analyse des fichiers de logs système.
+
+      Administration-supervision applicative : supervision plus subtile vérifiant le fonctionnement d'une application, par exemple une tentative de connexion sur son port pour voir si elle retourne les bonnes informations, ou l'analyse de logs applicatifs, un port ouvert ne garantissant pas que l'application n'est pas plantée.
+
+      ICMP (Internet Control Message Protocol) : protocole de couche 3 palliant l'absence de message d'erreur d'IP, les équipements intermédiaires l'utilisant pour prévenir la machine émettrice d'un incident de transmission, les paquets ICMP étant encapsulés dans des paquets IP et pouvant contenir des bouts du paquet fautif, les erreurs étant classées en types et parfois en codes, le type 3 destinataire inaccessible ayant seize codes ; source d'information sur la qualité du réseau et la présence d'un hôte.
+
+      CMIS/CMIP : protocole d'administration de réseau proposé par l'ISO dans les années 1980, Common Management Information Service ISO 9595 et Common Management Information Protocol ISO 9596, avec un cadre d'architecture ISO 7498.
+
+      CMOT (CMIP Over TCP) : solution à long terme envisagée par l'IAB en parallèle de SNMP.
+
+      SNMP (Simple Network Management Protocol) : protocole développé dans les années 1980, plus simple que CMIS/CMIP dont il a repris des idées, approuvé par l'IAB comme solution à court terme et devenu standard de fait au début des années 1990, protocole d'administration des réseaux IP et des réseaux d'opérateurs comme ATM.
+
+      Éléments de SNMP : une base de données MIB gérée par chaque agent, définie par les RFC 1156 et 1213 pour la MIB-I puis la MIB-II, une structure commune de représentation des objets, le SMI défini par la RFC 1155, et un protocole d'échange entre manager et agent, le protocole SNMP de la RFC 1157.
+
+      Transport de SNMP : SNMP est bâti au-dessus d'UDP/IP, choisi pour sa simplicité, sa rapidité et sa concision, huit octets d'en-tête contre vingt pour TCP, ce qui permet de remonter rapidement des alarmes, mais au prix d'un mode non connecté et non fiable où des messages peuvent être perdus.
+
+      Types de messages SNMPv1 : get-request pour obtenir la valeur courante d'un objet, get-next-request pour obtenir la valeur du prochain objet à partir d'un objet courant, set-request pour mettre à jour une valeur, get-response pour renvoyer la valeur en réponse à un GET, GETNEXT ou SET, et trap pour un signal émis par un agent vers un manager, notamment pour remonter une alarme.
+
+      Ports SNMP : port UDP 161 côté agent pour les requêtes GET, GETNEXT et SET, et port UDP 162 côté manager pour les TRAP.
+
+      Communauté (community) : chaîne de caractères vue comme un mot de passe validant une requête SNMP, une communauté incorrecte entraînant le rejet ; elle passe en clair sur le réseau, ce qui est une faille importante de SNMPv1.
+
+      Codage TLV (Type, Longueur, Valeur) ou BER (Basic Encoding Rules) : codage des paramètres d'une requête défini dans le SMI, classique en télécommunications, gourmand en octets puisqu'un paramètre sur un octet est encodé sur trois, mais permettant un nombre variable de paramètres.
+
+      SMI (Structure of Management Information) : structure décrivant les règles de description de l'information et permettant d'identifier de façon unique un objet de la MIB par un OID, s'intéressant aussi à la représentation et au type des données, un objet étant déclaré en langage ASN.1.
+
+      OID (Object ID) : identificateur unique d'un objet de la MIB, nœud de l'arbre.
+
+      ASN.1 (Abstract Syntax Notation 1) : langage de représentation de données dont SNMP n'utilise qu'une petite partie, avec quelques types comme INTEGER entier sur trente-deux bits en complément à deux, OCTET STRING chaîne de caractères, IpAddress adresse IP, PhysAddress adresse MAC, Counter entier trente-deux bits non signé bouclant à zéro, et TimeTicks compteur de temps en centièmes de seconde.
+
+      MIB (Management Information Base) : base de données gérée par un agent SNMP regroupant les objets gérés selon les règles SMI, à structure d'arbre similaire au DNS avec une racine non nommée, chaque nœud ayant un nom symbolique et pouvant être identifié symboliquement ou par son OID transmis dans les requêtes.
+
+      MIB standard : objets standards de la MIB, les objets intéressants ayant un OID commençant par 1.3.6.1.2.1, l'accès à une feuille se faisant en ajoutant point zéro à l'OID.
+
+      MIB privée : objets propres à un agent, placés dans la branche iso.org.dod.internet.private.enterprises.nom_entreprise, nécessitant de souscrire un numéro d'entreprise à l'IANA.
+
+      Versions de SNMP : SNMPv1 ancien standard à sécurité triviale basée sur la communauté, SNMPsec historique ajoutant une sécurité par groupes, SNMPv2p historique avec de nouvelles opérations et types, SNMPv2c avec la sécurité par communauté, SNMPv2u avec une sécurité basée sur les usagers, SNMPv2* combinant SNMPv2p et SNMPv2u, et SNMPv3 standard actuel combinant sécurité par usagers et opérations de SNMPv2p avec la capacité pour les proxies.
+
+      NET-SNMP : package libre implémentant SNMP sous Linux, comprenant une API, un agent extensible, des commandes en ligne pour interroger des agents et gérer des TRAP, une version de netstat utilisant SNMP et un navigateur de MIB tkmib, porté sur de nombreux systèmes et supportant SNMPv1, v2 et v3.
+
+      snmpd : exécutable de l'agent SNMP NET-SNMP, de fichier de configuration snmpd.conf, avec un exemple EXAMPLE.conf et l'utilitaire interactif snmpconf pour créer le fichier sans en connaître la structure.
+
+      Commandes NET-SNMP : snmpget pour une requête GET, snmpset pour un SET, snmpgetnext pour un GETNEXT, snmpwalk pour balayer complètement une branche de la MIB, et snmptranslate pour convertir un OID décimal en forme symbolique et réciproquement.
+
+      Ping : outil utilisant ICMP pour savoir si une machine destination est accessible et mesurer la latence, envoyant une requête ICMP Echo et attendant une ICMP Echo Reply, souvent utilisé pour alerter quand une machine n'est plus joignable.
+
+      MRTG : outil en Perl et C surveillant la charge des liens réseau, générant des pages HTML avec des images PNG représentant en temps réel l'état de la ressource, un script Perl recherchant les données via SNMP et un programme C les stockant et générant les graphiques, extensible à toute variable SNMP ou non.
+
+      RRDTOOL (Round Robin Database Tool) : évolution de MRTG du même auteur, avec une gestion de stockage revue par la technique Round Robin pour améliorer les performances, des graphiques enrichis et une interface plus modulaire, devenu incontournable et utilisé dans quasiment tous les logiciels de supervision open source.
+
+      Console d'administration globale : caractéristique des solutions complètes de supervision permettant de gérer l'ensemble des machines d'un réseau, avec un passage à l'échelle aisé d'une vue globale de centaines de machines à un zoom sur une machine précise.
+
+      NetMRG : outil de 2001 basé sur un moteur C++ multithreadé de récolte, RRDTOOL, une base MySQL de configuration et une interface PHP, avec un Device Tree organisant groupes, machines, sous-devices et graphiques.
+
+      Cacti : outil basé sur RRDTOOL et MySQL, se présentant comme l'interface la plus complète de RRDTOOL, avec un moteur de récolte en C nommé Cactid utilisant les threads POSIX en cas de besoin de performances, sinon le moteur PHP, une partie Console de configuration et une partie Graphs avec trois modes d'affichage, Tree mode, List mode et Preview mode.
+
+      Zabbix : solution open source créée en 2001 avec l'entreprise Zabbix SIA en 2005, acquérant les données via SNMP, via test de service par ping ou test de protocoles sans rien installer, ou via un agent Zabbix local, avec une architecture en serveur cœur centralisant données et configuration, un proxy optionnel de bufférisation, un agent de collecte locale et une interface web en PHP, l'interface étant divisée en Monitoring, Inventory, Report, Configuration et Administration.
+
+      Nagios : successeur de NetSaint créé en 1999 par Ethan Galstad, devenu Nagios en 2002, le logiciel libre le plus connu de la supervision réseau, à architecture modulaire avec un moteur en C ordonnançant la supervision, une interface web en CGI et plus de mille deux cents greffons ou plugins étendant les possibilités.
+
+      NRPE (Nagios Remote Plugin Executor) : agent esclave qui reçoit une demande de vérification de Nagios, exécute la vérification puis renvoie le résultat, mode polling, ayant grandement contribué à la souplesse multi-plateforme de Nagios.
+
+      NSCA (Nagios Service Check Acceptor) : agent où la vérification est planifiée et exécutée en local puis le résultat envoyé à Nagios, mode passif ou trapping, permettant d'inverser le sens des connexions entre serveur supervisé et superviseur, utile dans un réseau à pare-feu en diode.
+
+      check_by_ssh : plugin supposant la création de comptes non privilégiés sur les machines pour lancer les plugins nécessaires, avec des implications de sécurité.
+
+      Codes retour de plugin : zéro pour OK service fonctionnant correctement, un pour WARNING mode dégradé, deux pour CRITICAL service ne fonctionnant plus, et trois pour UNKNOWN état indéterminable, avec un message d'une ligne décrivant la situation.
+
+      Centréon : évolution de Nagios créée en 2003 par des Français, anciennement Oréon, reprise par Merethis, entièrement compatible avec le moteur Nagios, avec les pages Home, Monitoring, Views, Reporting, Configuration et Administration et un tableau récapitulatif des machines actives.
+
+      Shinken : refonte complète du cœur de Nagios en Python, à architecture plus souple et distribuée, compatible avec Nagios, NRPE et certains plugins, projet indépendant après le refus des développeurs de Nagios, offrant la supervision à distance par SSH ou tunnel SSL, la gestion des dépendances, la supervision active et passive, et presque cinq fois plus de performances que Nagios classique.
+
+      ICINGA : autre fork open source de Nagios, offrant la génération de rapports, évolutif et extensible pour des environnements complexes multi-sites, modulaire avec des interfaces web ou mobiles.
+
+      SCOM : solution Microsoft de supervision, héritière de SeNTry ELM, reposant sur un agent installé sur la machine supervisée qui scrute le journal d'événements, les compteurs de performance et les codes de retour et envoie les informations au serveur, celui-ci conservant l'historique dans une base et déclenchant des alertes, notifications, tickets ou actions selon des règles, s'appuyant sur des Management Packs par application.
+
+      ITM (IBM Tivoli Monitoring) : logiciel de supervision du framework Tivoli d'IBM, surveillant systèmes, réseau, applications et matériel et envoyant des alertes vers Tivoli Enterprise Console, la version 6.1 étant basée sur l'outil Omegamon de Candle.
+
+      BMC Patrol : un des plus anciens logiciels de supervision du marché, pionnier avec BMC, multi-plateforme sur AIX, HP-UX, Solaris et Windows.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LES PRINCIPES GÉNÉRAUX.
+
+
+   A. Les cinq axes de l'ISO.
+
+      Le besoin de contrôler, gérer et superviser en temps réel la qualité et l'état des réseaux est devenu une priorité, d'où le concept d'administration et de supervision apparu il y a une trentaine d'années ; l'ISO a cerné cinq axes, la gestion des anomalies qui vise un réseau sans rupture de service par la surveillance des alarmes et le diagnostic, la gestion de la configuration matérielle et logicielle avec une identification unique par OID, la gestion des performances qui contrôle que le réseau écoule le trafic prévu, la gestion de la sécurité qui gère contrôles d'accès, confidentialité, intégrité et authentification, et la gestion de la comptabilité qui suit la consommation par abonné pour facturer.
+
+      Un administrateur système administre aussi son réseau sans trop de problèmes tant qu'il est petit, les difficultés s'amoncelant avec la taille, d'où la rationalisation et les normes d'administration.
+
+
+   B. Les enjeux.
+
+      Un enjeu de la supervision est d'offrir une solution unique d'administration dans un milieu hétérogène indépendamment des contraintes physiques et techniques, adaptable à la taille et à la diversité technologique des réseaux ; un autre enjeu est l'automatisation du traitement de l'information, face à la criticité croissante des réseaux, pour agir proactivement et non réagir en mode pompier ; superviser, c'est anticiper, prévoir et éviter de subir les informations, l'automatisation de l'analyse méthodique permettant des statistiques et des procédures.
+
+
+II. LES ASPECTS ORGANISATIONNELS ET TECHNIQUES.
+
+
+   A. Les aspects organisationnels.
+
+      Les aspects préparatoires et organisationnels sont aussi importants que les aspects techniques, souvent mis en avant à tort ; deux écueils sont à éviter, l'absence d'informations et le trop-plein résumé par trop d'informations tue l'information, ce dernier survenant quand les aspects organisationnels n'ont pas été pris en compte.
+
+      Les principes préparatoires sont l'établissement d'un plan du réseau, la prise de connaissance du plan d'adressage, le recensement des pratiques des développeurs, exploitants et utilisateurs, la détermination des équipements actifs par une approche séquentielle en couches, le regroupement des objets en entités logiques, le choix d'une politique de supervision par groupe, la détermination des interactions, des seuils et des groupes à alerter, et le choix des outils ; l'expert réseau ne peut se contenter des seules couches 2 et 3 du modèle DoD ; on regroupe les objets à superviser en trois catégories, l'administration réseau qui surveille les communications et la performance des liens, l'administration système qui surveille la machine et ses ressources, et l'administration applicative qui vérifie le fonctionnement d'une application, un port ouvert ne garantissant pas qu'elle n'est pas plantée.
+
+
+   B. Les aspects protocolaires.
+
+      ICMP est un protocole de couche 3 palliant l'absence de message d'erreur d'IP, les équipements intermédiaires prévenant l'émetteur d'un incident, les erreurs étant classées en types et codes, le type 3 destinataire inaccessible ayant seize codes ; simple, il n'a pas pour fonction initiale la supervision mais renseigne sur la qualité du réseau et la présence d'un hôte.
+
+      L'ISO a proposé CMIS/CMIP comme protocole d'administration dans les années 1980, mais l'IAB a approuvé SNMP comme solution à court terme et CMOT à long terme ; SNMP, plus simple, est devenu standard de fait au début des années 1990, protocole d'administration des réseaux IP et des réseaux d'opérateurs comme ATM, reprenant des idées de CMIS/CMIP ; SNMP comporte une base MIB par agent définie par les RFC 1156 et 1213, une structure de représentation SMI de la RFC 1155, et un protocole d'échange de la RFC 1157.
+
+
+III. LE PROTOCOLE SNMP EN DÉTAIL.
+
+
+   A. Le fonctionnement.
+
+      SNMP est bâti au-dessus d'UDP/IP, choisi pour sa simplicité et sa concision, huit octets d'en-tête contre vingt pour TCP, ce qui remonte rapidement les alarmes, mais en mode non connecté et non fiable où des messages peuvent être perdus ; cinq types de messages existent en SNMPv1, get-request, get-next-request, set-request, get-response en réponse à un GET, GETNEXT ou SET, et trap émis par un agent vers un manager pour une alarme.
+
+      SNMP utilise le port UDP 161 côté agent pour GET, GETNEXT et SET, et le port UDP 162 côté manager pour les TRAP ; la communauté est une chaîne vue comme un mot de passe validant une requête, une communauté incorrecte entraînant le rejet, mais elle passe en clair, ce qui est une faille de SNMPv1 ; les paramètres sont encodés en TLV ou BER défini dans le SMI, gourmand en octets mais permettant un nombre variable de paramètres.
+
+
+   B. Le SMI et la MIB.
+
+      Le SMI décrit les règles de description de l'information et identifie de façon unique un objet de la MIB par un OID, s'intéressant à la représentation et au type des données, un objet étant déclaré en ASN.1 dont SNMP n'utilise que quelques types, INTEGER, OCTET STRING, IpAddress, PhysAddress, Counter et TimeTicks.
+
+      La MIB est une base gérée par un agent regroupant les objets selon les règles SMI, à structure d'arbre similaire au DNS avec une racine non nommée, chaque nœud ayant un nom symbolique et un OID transmis dans les requêtes ; l'objet sysDescr a le nom symbolique iso.org.dod.internet.mgmt.mib.system.sysDescr.0 et l'OID 1.3.6.1.2.1.1.1.0, les objets intéressants ayant un OID commençant par 1.3.6.1.2.1 et l'accès à une feuille se faisant en ajoutant point zéro ; la MIB standard contient les objets standards, la MIB privée les objets propres à un agent dans la branche private.enterprises.nom_entreprise, nécessitant un numéro d'entreprise souscrit à l'IANA.
+
+
+   C. Les versions et NET-SNMP.
+
+      On distingue SNMPv1 ancien standard à sécurité triviale par la communauté, SNMPsec historique par groupes, SNMPv2p, SNMPv2c par communauté, SNMPv2u par usagers, SNMPv2* combinant SNMPv2p et SNMPv2u, et SNMPv3 standard actuel combinant sécurité par usagers, opérations de SNMPv2p et capacité pour les proxies.
+
+      NET-SNMP est le package libre d'implémentation sous Linux, comprenant une API, un agent extensible, des commandes en ligne, une version de netstat et le navigateur tkmib, supportant SNMPv1, v2 et v3 ; l'installation classique passe par tar, configure, make et make install, les commandes étant placées dans /usr/local/bin et /usr/local/sbin et les fichiers MIB dans /usr/local/share/snmp/mibs ; l'agent snmpd a un fichier snmpd.conf avec un exemple EXAMPLE.conf et l'utilitaire interactif snmpconf ; les commandes principales sont snmpget, snmpset, snmpgetnext, snmpwalk qui balaie une branche, et snmptranslate qui convertit OID et forme symbolique.
+
+
+IV. LES OUTILS DE SUPERVISION.
+
+
+   A. Les briques de base.
+
+      Ces petits outils simples, combinés par des scripts, aident à l'administration et sont souvent à la base des grosses solutions ; Ping utilise ICMP pour savoir si une machine est accessible et mesurer la latence, envoyant une requête Echo et attendant un Echo Reply ; MRTG, en Perl et C, surveille la charge des liens en générant des pages HTML avec des images PNG, un script Perl cherchant les données via SNMP et un programme C les stockant, extensible à toute variable ; RRDTOOL, évolution de MRTG, revoit le stockage par la technique Round Robin pour les performances, enrichit les graphiques et rend l'interface modulaire, et est devenu incontournable dans quasiment tous les logiciels open source ; tcpdump et Wireshark capturent les paquets, iperf audite le réseau.
+
+
+   B. Les solutions complètes.
+
+      Ces solutions proposent une console d'administration globale et un passage à l'échelle aisé, d'une vue de centaines de machines à un zoom sur une machine ; NetMRG de 2001 combine un moteur C++ multithreadé, RRDTOOL, MySQL et une interface PHP avec un Device Tree ; Cacti, basé sur RRDTOOL et MySQL, se présente comme l'interface la plus complète de RRDTOOL, avec un moteur C Cactid optionnel pour les performances, une partie Console et une partie Graphs à trois modes Tree, List et Preview.
+
+      Zabbix, open source créé en 2001 avec Zabbix SIA en 2005, acquiert les données via SNMP, via test de service par ping ou protocoles sans installation, ou via un agent Zabbix local, avec un serveur cœur, un proxy optionnel de bufférisation, un agent et une interface web PHP, divisée en Monitoring, Inventory, Report, Configuration et Administration ; Nagios, successeur de NetSaint créé en 1999 par Ethan Galstad et renommé en 2002, est le logiciel libre le plus connu, modulaire avec un moteur en C, une interface CGI et plus de mille deux cents plugins, avec les agents NRPE en polling et NCSA en trapping.
+
+      Centréon, évolution de Nagios créée en 2003 par des Français et reprise par Merethis, est compatible avec le moteur Nagios ; Shinken réécrit le cœur de Nagios en Python avec une architecture distribuée compatible Nagios et NRPE, presque cinq fois plus performante ; ICINGA est un autre fork orienté rapports pour environnements complexes multi-sites ; les solutions payantes comprennent SCOM de Microsoft à agent et Management Packs, ITM de Tivoli d'IBM vers Tivoli Enterprise Console, et BMC Patrol multi-plateforme.
+
+
+V. LA CONFIGURATION ET LA MISE EN RÉSEAU DE NAGIOS.
+
+
+   A. Les plugins et les codes retour.
+
+      Nagios repose sur des adaptateurs, la plupart en Perl et C, communiquant une information standardisée au processus maître, avec un guide de développement des plugins ; un plugin est un script fournissant un code retour, zéro pour OK, un pour WARNING, deux pour CRITICAL et trois pour UNKNOWN, plus un message d'une ligne d'aide au diagnostic ; les adaptateurs, appelés depuis nagios.cfg, se répartissent en catégories, équipements et système comme check_disk basé sur df, get_load_average basé sur uptime, check_swap, check_ups et check_hpjd, réseaux et protocoles comme check_ping basé sur ICMP et check_udp, et services comme check_dns, check_ftp, check_http, check_imap, check_ldap, check_mysql et check_pop.
+
+      Le principe est toujours de formaliser une requête dans le protocole et de vérifier l'état de l'hôte distant ; il ne sert à rien de se lancer dans une installation complexe si le besoin se limite à un test de réponse de vie, et les aspects préparatoires comptent autant que les aspects techniques ; un plugin doit être léger, simple et n'accomplir qu'une tâche.
+
+
+   B. La supervision distribuée.
+
+      Les plugins locaux au serveur sont exécutés directement par Nagios, la vérification d'un service à distance passant aussi par un plugin local ; pour l'exécution de greffons à distance, on peut passer par d'autres serveurs Nagios en supervision distribuée, ou par des agents, NRPE le Nagios Remote Plugin Executor, NSCA le Nagios Service Check Acceptor, check_by_ssh avec des comptes non privilégiés et des implications de sécurité, ou NSClient pour les serveurs Windows.
+
+      La différence entre NRPE et NSCA est l'initiateur de la vérification, NRPE recevant la demande de Nagios, exécutant puis renvoyant le résultat, alors qu'avec NSCA la vérification est planifiée en local, exécutée puis le résultat envoyé à Nagios, ce qui permet d'inverser le sens des connexions, utile avec des pare-feu en diode ; les fichiers de configuration sont dans /etc/nagios, sur le principe define avec des paramètres sans espace dans les valeurs, la cohérence se testant avec nagios -v ; les machines sont déclarées dans hosts.cfg et leurs services dans services.cfg, avec des templates generic-host et generic-service et des commandes comme check_smtp, check_pop, check_imap, ou check_nrpe pour un plugin distant.
+
+
+POINTS D'ATTENTION.
+
+      L'ISO a cerné cinq axes d'administration réseau, anomalies, configuration, performances, sécurité et comptabilité.
+
+      Les aspects organisationnels comptent autant que les aspects techniques ; trop d'informations tue l'information.
+
+      L'expert réseau ne peut se limiter aux couches 2 et 3 ; il faut aussi superviser le système et l'applicatif.
+
+      Un port ouvert ne garantit pas que l'application derrière n'est pas plantée.
+
+      SNMP est bâti sur UDP, non fiable, d'où une possible perte de messages, mais rapide pour les alarmes.
+
+      SNMP utilise le port UDP 161 côté agent et le port UDP 162 côté manager pour les TRAP.
+
+      La communauté SNMPv1 passe en clair sur le réseau, ce qui est une faille de sécurité importante.
+
+      C'est l'OID, et non le nom symbolique, qui est transmis dans une requête SNMP.
+
+      L'accès à une feuille de la MIB se fait en ajoutant point zéro à l'OID.
+
+      La MIB privée d'une entreprise nécessite un numéro d'entreprise souscrit à l'IANA.
+
+      RRDTOOL est utilisé dans quasiment tous les logiciels de supervision open source.
+
+      Les codes retour de plugin Nagios sont zéro OK, un WARNING, deux CRITICAL et trois UNKNOWN.
+
+      NRPE fonctionne en polling à l'initiative de Nagios, NSCA en trapping à l'initiative de la machine supervisée, ce qui permet d'inverser le sens des connexions.
+
+
+EXEMPLES CITES.
+
+      Taux de disponibilité à 99,999 pour cent soit quelques secondes d'indisponibilité par an.
+
+      Type ICMP 3 destinataire inaccessible avec seize codes différents.
+
+      Protocole CMIS/CMIP de l'ISO, normes 9595, 9596 et 7498, et CMOT envisagé par l'IAB.
+
+      Objet sysDescr d'OID 1.3.6.1.2.1.1.1.0 et sysUpTime d'OID 1.3.6.1.2.1.1.3.0.
+
+      Commandes NET-SNMP snmpget, snmpset, snmpgetnext, snmpwalk et snmptranslate.
+
+      Outils MRTG et RRDTOOL du même auteur, ce dernier utilisant la technique Round Robin.
+
+      Solutions NetMRG, Cacti, Zabbix, Nagios, Centréon, Shinken et ICINGA.
+
+      Historique de Nagios, NetSaint créé en 1999 par Ethan Galstad, renommé en 2002, version 3.0 en 2008.
+
+      Agents NRPE en polling et NSCA en trapping, plugin check_by_ssh.
+
+      Plugins Nagios check_disk basé sur df, check_ping basé sur ICMP, check_smtp, check_pop et check_imap.
+
+      Script shell NRPE interrogeant le nombre de connexions SMTP établies sur le port 25 à la DGFiP.

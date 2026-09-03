@@ -1,41 +1,232 @@
-PRINCIPALES COMMANDES LINUX / UNIX
+LINUX ET UNIX : LES PRINCIPALES COMMANDES DE PROCESSUS ET DE RÉSEAU.
 
-1. GESTION DES PROCESSUS
-ps : visualise les processus (multitâche). Options selon le système : ps -aux (BSD), ps -edf (AT&T / System V). ps -e (tous les processus), ps -l (forme longue : F, S, UID, PID, PPID, C, PRI, NI, SZ, WCHAN, TTY, TIME, CMD), ps axf (arborescence, façon pstree). Inconvénient : liste à un instant t seulement ; on ne peut jamais avoir la liste exacte des processus en cours.
-top : améliore ps (affichage dynamique des processus et ressources), non standard partout.
-htop : F7/F8 priorité, F9 tuer (avec choix du signal), F6 tri, F5 arbre, F3 recherche ; affiche mémoire et CPU par cœur, uptime, charge.
-sar : collecte des activités système. sar -u (% CPU, défaut), sar -q (processus en attente), sar -r (mémoire centrale et swap). Ex. sar -u 2 5.
-kill : envoie n'importe quel signal à n'importe quel processus du même propriétaire (appel système kill). kill -l liste les signaux. kill -9 (SIGKILL) : destruction brutale. kill -1 (SIGHUP, reload) : relecture de la configuration.
-at : lancement différé (at parametre_temporel commande ; Ctrl-D pour sortir ; at -l liste les travaux en attente).
-crontab : tâches répétitives. crontab -e (éditer), crontab -l (lister). Six champs : minute (0-59), heure (0-23), jour du mois (1-31), mois (1-12 ou nom), jour de la semaine (0-6, 0 = dimanche, ou nom), commande. Ajouter > /dev/null 2>&1 en fin de ligne pour ignorer toute la sortie. Tâches de maintenance de préférence en plage nocturne.
 
-2. SAUVEGARDE ET RESTAURATION
-tar : archive/désarchive. Options c (créer), v (verbeux), f (fichier), x (extraire), t (table de contenu), z (compression gzip). tar cf archive.tar /home/ ; tar czf archive.tar.gz /home/. Taille de l'archive ≈ taille des données (sans compression). Permet, contrairement à dump, de sauvegarder une partie seulement d'une partition, voire des fichiers sans rapport. Problèmes : ne sauvegarde pas correctement les numéros majeur/mineur de /dev (préférer /dev/MAKEDEV), gère mal les fichiers à trous (blocs non alloués sauvés en ASCII zéro) ; effacer les fichiers core avant sauvegarde par cron. Duplication d'arborescence : ( cd /usr/local ; tar cf - . ) | ( cd /mnt ; tar xf - ). Packages Internet : .tar.gz / .tgz (gunzip puis tar xvf).
-Sauvegarde incrémentale avec tar : touch -t <date> .comparateur pour créer un repère daté, puis find ~ -newer .comparateur | tar -c -T - -f incrementale.tar.
-cpio : programme traditionnel, mode caractères, multi-volumes, utilise stdin/stdout/stderr (opérateurs de redirection). Liste des fichiers fournie sur l'entrée standard, souvent via find : find /home/ | cpio -o > home-backup.cpio. Restauration : cpio -it < /dev/rfd0. Combiné à find pour des sauvegardes sélectives (find -mtime, -atime...).
-dd : transfert de données brutes, utile entre systèmes différents et pour évaluer des problèmes de performances disque (I/O). Ex. dd if=/dev/rfd0 of=/u/bob conv=ascii (EBCDIC vers ASCII).
-mt : manipulation des bandes magnétiques (pas une commande de sauvegarde) : avancer, reculer, rembobiner, marques de fin de fichier. mt -f /dev/rmt/0 (statut), mt -f /dev/rmt/0n fsf 1 (avancer d'un fichier).
-rsync : proche de rcp, beaucoup plus d'options, utilise ssh par défaut (rsync -a source/ login@serveur:/destination/). Options : -r récursif, -l liens symboliques, -t dates, -g groupe, -o propriétaire, -D périphériques, -v verbeux, -z compression, -e ssh ; --del / --delete-after supprime sur la destination les fichiers absents de la source, --ignore-errors, --force ; -n liste sans exécuter. Peu pertinent de stocker données et sauvegardes sur le même disque physique.
+LEXIQUE COMPLET.
 
-3. COMMANDES RÉSEAU (CLASSEMENT PAR COUCHE DOD)
-net-tools (ancien, 2001) vs iproute2 (récent, par défaut sur CentOS 7, Arch Linux) : ifconfig -> ip addr, arp -> ip neigh, route -> ip route, netstat -> ss. iproute2 ajoute NAT, gestion du cache et des tunnels.
-Couche 1 (adresses physiques) :
-- ifconfig / ip addr : informations et configuration des cartes réseau (adresse MAC, adresse IP, activation/désactivation, ajout/suppression d'adresses).
-- arp -a / ip neigh : correspondances adresses MAC <-> adresses IP de la table ARP. Si des routeurs séparent deux hôtes, c'est la MAC de la gateway par défaut qui est stockée.
-Couche 2 (IP) :
-- route -n / netstat -rn / ip route : visualiser et configurer la table de routage.
-- ping : envoie une requête ICMP echo-request, attend un echo-reply ; 4 requêtes par défaut sous Linux (configurable). Vérifie loopback (127.0.0.0/8), hôtes distants, équipements. Résolution de noms via /etc/hosts (liens statiques nom/IP), pas par DNS avec ping <nom>. Statistiques finales : min / avg / max / mdev (écart type, maximum deviation). Premier echo-request plus long (connexion setup). Options : -c nombre, -i intervalle en secondes (défaut 1 s), -s taille du paquet (+ 8 octets d'en-tête ICMP). Limite : ICMP peut être bloqué par les pare-feux.
-- traceroute / tracert : suit le chemin d'un paquet en incrémentant le TTL à partir de 1 ; chaque routeur décrémente le TTL et émet un message ttl exceeded à 0. Cartographie du réseau. Pare-feux : blocage fréquent (lignes * * *).
-- tcptraceroute : envoie des paquets TCP SYN (port 80 par défaut) au lieu d'UDP/ICMP ECHO, contourne les filtres courants. Messages ICMP d'erreur : !H (hôte inaccessible), !N (réseau inaccessible), !P (protocole inaccessible), !S (échec source route), !F (fragmentation nécessaire), !X (communication administrativement interdite).
-Couche 3 (TCP/UDP) :
-- netstat : statistiques des connexions TCP/UDP et sockets Unix (sous Linux depuis /proc/net/*). Sans option : sockets Unix. netstat -a (toutes connexions et ports), netstat -ntl (TCP, sans DNS, listeners), netstat -ntlp (+ PID / nom du programme). S'appuie sur /etc/services.
-- ss (socket statistics) : équivalent iproute2. ss [OPTIONS] [STATE-FILTER] [ADDRESS-FILTER]. Options t/u/x (TCP/UDP/Unix), -a (toutes), -n (sans DNS), -l (à l'écoute), -p (processus/PID). États : established, syn-sent, syn-recv, fin-wait-1/2, time-wait, closed, close-wait, last-ack, closing, all, connected. Opérateurs de tri sur les ports (le/ge/eq/ne/gt/lt).
+      ps : commande listant les processus à un instant donné, à options différentes selon le système, ps -aux sur les systèmes BSD et ps -edf sur les systèmes AT&T ; ps -e affiche tous les processus, ps -l l'affichage long, ps -ef la liste complète, et ps axf l'arborescence sous Linux.
 
-4. OUTILS D'ANALYSE DU TRAFIC RÉSEAU
-tcpdump : affiche les en-têtes de paquets d'une interface (Unix, Linux, Mac, Windows). Se lance en root car il met l'interface en mode promiscuous (accepte tous les paquets). tcpdump -D (interfaces), tcpdump port http, tcpdump dst <ip> and port domain, tcpdump -w capture.dump (enregistre, format non clair), tcpdump -r capture.log (relit).
-iptraf : analyseur de trafic IP coloré et interactif (ncurses), non installé par défaut (yum/aptitude install iptraf). iptraf -i eth0 (trafic IP), iptraf -s eth0 (TCP/UDP), iptraf -l eth0 (débit). Menus : Configure (résolution DNS inverse), Filters (adresses IP, ports).
-Wireshark (ex-Ethereal, projet 1998) : analyseur de protocole et de réseau, gratuit, GUI ou ligne de commande, tous OS. Plus d'une centaine de protocoles, capture temps réel (mirroring de ports), relit tcpdump / Microsoft Network Monitor / Sniffer Pro. Deux types de filtres : filtres de capture (définis au démarrage, limitent la taille du journal) et filtres d'affichage (modifiables en cours, recherche précise, plus puissants). Trois panneaux : liste des paquets (Packet list pane : IP/MAC, ports, contenu ; MAC seule si couche 2, IP si couche 3+, port si couche 4+), détails de paquet (Packet details pane : par couche OSI, dépliable), dissection (Packet bytes pane : hexadécimal). Barre de statut : carte réseau, état de la capture, emplacement, taille, paquets capturés (P) / affichés (D) / marqués (M) / perdus.
-tshark : Wireshark en ligne de commande. -f filtre de capture (syntaxe tcpdump), -i interface, -w fichier de sortie, -R filtre d'affichage, -z pour la dissection/statistiques, -a duration:N / filesize:N / files:N pour les captures en continu. editcap divise ou retire des paquets d'un fichier ; mergecap regroupe plusieurs fichiers.
+      Limite de ps : la liste étant prise à un instant donné, on ne peut jamais avoir la liste exacte des processus en cours, certains pouvant disparaître le temps de l'affichage.
 
-5. COMMANDES DIVERSES
-head : premières lignes d'un fichier (10 par défaut). tail : dernières lignes (nombre en argument, tail -5). wc : compte les mots par défaut, -l compte les lignes. file : type d'un fichier (ascii ou binaire). seq : série de nombres (seq 1000 ; seq 5 5 20 par pas de 5). grep : recherche une chaîne dans un fichier, -r pour la récursivité, accepte les expressions régulières. su / su - : changer d'utilisateur, sans option tente de se connecter en root.
+      top : amélioration de ps, non standard sur tous les systèmes, listant en continu l'ensemble des processus et des ressources utilisées.
+
+      htop : outil interactif de supervision, permettant de changer la priorité d'un processus, de le tuer en choisissant le signal, de trier par consommation, d'afficher un arbre, de rechercher un processus et d'afficher l'usage par cœur de processeur, ainsi que l'uptime et la charge du système.
+
+      sar : commande native collectant des données sur les activités système, sar -u pour le pourcentage d'utilisation des CPU, option par défaut, sar -q pour le nombre de processus en attente, sar -r pour l'utilisation de la mémoire centrale et du swap.
+
+      kill : commande et appel système envoyant n'importe quel signal à n'importe quel processus du même propriétaire ; kill -l liste les signaux, kill -9 détruit brutalement le processus avec SIGKILL, kill -1 force la relecture de la configuration.
+
+      Signaux : événements associés à un numéro, dont SIGHUP numéro 1, SIGINT numéro 2, SIGKILL numéro 9, SIGSEGV numéro 11, SIGTERM numéro 15, SIGSTOP numéro 17 et SIGCONT numéro 19.
+
+      at : commande de lancement différé d'un processus, attendant un paramètre temporel puis la commande, at -l listant les processus en attente, Ctrl-D sortant de la zone de commande.
+
+      crontab : commande de planification, éditée avec crontab -e et listée avec crontab -l, la table comportant six champs, minute de 0 à 59, heure de 0 à 23, jour du mois de 1 à 31, mois de 1 à 12 ou un nom, jour de la semaine de 0 à 6 avec 0 pour dimanche ou un nom, puis la commande ; l'expression redirigeant vers /dev/null puis dupliquant l'erreur vers la sortie ignore toute la sortie.
+
+      tar : commande d'archivage, utilisée de préférence avec gzip, l'option c créant l'archive, t affichant sa table de contenu, x extrayant, v étant verbeuse et f désignant le fichier ou le périphérique ; contrairement à dump, elle sauvegarde une partie seulement d'une partition et des fichiers sans rapport entre eux.
+
+      Problèmes de tar : il ne sauvegarde pas correctement les numéros majeur et mineur des fichiers de /dev, qu'il vaut mieux recréer avec /dev/MAKEDEV, et ne gère pas par défaut les fichiers à trous, dont les blocs non alloués sont sauvés en caractères ASCII zéro.
+
+      Sauvegarde incrémentale avec tar : usage de touch pour créer un fichier témoin à une date de référence, puis de find avec l'option -newer pour transmettre à tar les fichiers plus récents.
+
+      cpio : programme traditionnel manipulant les données en mode caractère, gérant le multi-volume, utilisant l'entrée et la sortie standard, donc s'utilisant avec les redirections et souvent alimenté par la sortie de find.
+
+      dd : commande de transfert de données brutes, utile entre systèmes différents, pour la conversion EBCDIC vers ASCII et pour évaluer rapidement des problèmes de performances des entrées-sorties disque.
+
+      mt : commande de manipulation des bandes magnétiques, faisant avancer ou reculer la bande, la rembobinant et écrivant des marques de fin de fichier, sans être une commande de sauvegarde, mt -f affichant l'état de l'unité et mt fsf avançant d'un fichier.
+
+      rsync : programme similaire à rcp mais bien plus riche, utilisant ssh par défaut, avec les options r pour la récursivité, l pour les liens symboliques, t pour les dates, g pour le groupe, o pour le propriétaire, D pour les périphériques, --del pour supprimer sur la destination les fichiers absents de la source, -z pour la compression, -n pour simuler et -e ssh pour le transport.
+
+      net-tools : ancien paquet Linux de 2001 fournissant ifconfig, arp, route et netstat, en cours de remplacement par iproute2 sur certaines distributions comme CentOS 7 et ArchLinux.
+
+      iproute2 : paquet récent remplaçant net-tools, où ifconfig devient ip addr, arp devient ip neigh, route devient ip route et netstat devient ss, en ajoutant NAT, gestion du cache et des tunnels.
+
+      ARP : sur la couche 1 du modèle DoD qui utilise les adresses physiques, commande manipulant et affichant les correspondances adresse MAC vers adresse IP ; arp -a affiche la table dynamique, l'adresse MAC de la passerelle par défaut étant stockée quand un routeur sépare les hôtes.
+
+      route -n et netstat -rn : commandes net-tools de visualisation de la table de routage, remplacées par ip route sous iproute2, qui ajoute la fonction de remplacement.
+
+      ping : commande envoyant une requête ICMP echo-request et attendant une réponse echo-reply, envoyant quatre requêtes par défaut sous Linux, permettant de vérifier la boucle locale, un hôte distant et des équipements réseau ; elle affiche la taille des paquets, le temps de réponse, le pourcentage de paquets perdus et, en dernière ligne, les temps minimum, moyen, maximum et l'écart type.
+
+      Options de ping : -c fixe le nombre de requêtes, -i l'intervalle en secondes, -s la taille du paquet, huit octets étant réservés à l'en-tête ICMP ; ping peut être bloqué par un pare-feu car ICMP est parfois interdit.
+
+      Résolution locale de ping : ping avec un nom utilise le fichier /etc/hosts, qui contient des liens statiques entre noms et adresses IP, et non le DNS.
+
+      traceroute (tracert) : commande suivant le chemin d'un paquet en augmentant incrémentalement le TTL, chaque routeur décrémentant le TTL et émettant un message d'erreur quand il atteint zéro, ce qui permet de construire une carte logique du réseau et de connaître l'hébergeur ; il utilise UDP ou ICMP.
+
+      Messages d'erreur de traceroute : !H hôte inaccessible, !N réseau inaccessible, !P protocole inaccessible, !S échec de routage source, !F fragmentation nécessaire, !X communication administrativement interdite.
+
+      tcptraceroute : implémentation de traceroute utilisant des paquets TCP SYN sur le port 80, capable de contourner les filtres des pare-feu qui autorisent les paquets TCP entrants mais bloquent ICMP et UDP.
+
+      netstat : commande de la couche 3 du modèle DoD correspondant à TCP et UDP, fournissant des statistiques sur les connexions client-serveur et les sockets UNIX, à partir de /proc/net sous Linux ; netstat -a donne toutes les connexions, netstat -ntl les listeners TCP sans résolution DNS, netstat -ntlp le programme associé à chaque port, en s'appuyant sur /etc/services.
+
+      ss (socket statistics) : commande d'iproute2 remplaçant netstat, avec les options t, u ou x pour trier par TCP, UDP ou sockets UNIX, -a pour toutes les connexions, -n pour éviter le DNS, -l pour les ports à l'écoute, -p pour le nom du processus et son PID, et un filtre d'état parmi established, syn-sent, time-wait, closed et autres.
+
+      tcpdump : outil d'analyse réseau affichant les en-têtes de paquets d'une interface, disponible sur de nombreux systèmes, lancé en root car il passe l'interface en mode promiscuous où elle accepte tous les paquets ; tcpdump -D liste les interfaces, -w enregistre dans un fichier non lisible en clair, -r le relit.
+
+      mode promiscuous : mode dans lequel une interface réseau accepte tous les paquets IP, même ceux qui ne lui sont pas destinés.
+
+      iptraf : commande interactive et colorée en librairie ncurses analysant le trafic IP, en particulier le débit des interfaces, utile pour détecter du trafic malveillant, avec iptraf -i pour le trafic IP d'une interface, -s pour le trafic TCP et UDP, -l pour le débit, et des filtres par adresse et port.
+
+      Wireshark : analyseur de protocole et de réseau, anciennement Ethereal, projet de 1998, gratuit, en ligne de commande ou interface graphique, disponible sur tous les systèmes, capturant en temps réel plus d'une centaine de protocoles et relisant des fichiers de tcpdump, Microsoft Network Monitor et Sniffer Pro ; c'est le couteau suisse de l'expert réseau.
+
+      Filtre de capture Wireshark : premier filtre large défini au démarrage de la capture pour limiter la taille du journal.
+
+      Filtre d'affichage Wireshark : filtre plus puissant et complexe, modifiable pendant la capture, permettant de rechercher exactement les données souhaitées à l'intérieur des données capturées.
+
+      Panneaux de Wireshark : le panneau liste des paquets affiche tous les paquets capturés avec adresses et ports, le panneau détails de paquet donne les informations par couche OSI, et le panneau de dissection ou packet bytes pane affiche la même information en hexadécimal.
+
+      tshark : version en ligne de commande de Wireshark, capturant le trafic avec -f pour le filtre de capture, -i pour l'interface et -w pour le fichier, l'affichant avec -R pour le filtre d'affichage et -r pour relire, et disséquant des champs avec -z ; editcap divise un fichier de capture et mergecap en joint deux.
+
+      head, tail, wc, file, seq, grep, su : commandes diverses, head affichant les premières lignes d'un fichier, tail les dernières, wc comptant les mots ou les lignes avec -l, file déterminant le type ASCII ou binaire, seq renvoyant une série de chiffres, grep recherchant une chaîne ou une expression régulière avec -r pour la récursivité, su changeant d'utilisateur, su ou su - sans option tentant de se connecter en root.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LA GESTION DES PROCESSUS.
+
+
+   A. La commande ps.
+
+      Linux et Unix sont synonymes de multitâche, visible avec ps ; une bonne utilisation repose sur la connaissance des options, différentes selon que le système est de type BSD, avec ps -aux, ou AT&T, avec ps -edf.
+
+      Parmi les options utiles, ps -e affiche tous les processus de la machine, ps -l l'affichage long avec les colonnes F, S, UID, PID, PPID, priorité et autres, ps -ef la liste complète, et sous Linux ps axf affiche l'arborescence des processus avec des branches ; ps a pour limite de donner la liste à un instant donné, si bien qu'on ne peut jamais avoir la liste exacte des processus en cours, certains pouvant disparaître le temps de l'affichage, top étant une amélioration non standard.
+
+
+   B. Les commandes de supervision.
+
+      htop permet de changer la priorité d'un processus, de le tuer en choisissant le signal, de trier par consommation, d'afficher un arbre, de rechercher un processus et d'afficher l'usage par cœur, ainsi que l'uptime et la charge ; sar collecte des données sur les activités système, sar -u donnant le pourcentage d'utilisation des CPU, option par défaut, sar -q le nombre de processus en attente et sar -r l'utilisation de la mémoire centrale et du swap.
+
+      kill envoie n'importe quel signal à n'importe quel processus du même propriétaire, kill -l liste les signaux, kill -9 détruit brutalement le processus avec SIGKILL, à utiliser en connaissance de cause, et kill -1 force la relecture de la configuration ; les signaux ont un numéro, SIGHUP 1, SIGINT 2, SIGKILL 9, SIGSEGV 11 et SIGTERM 15.
+
+
+   C. La planification.
+
+      La commande at lance un processus de façon différée, attendant un paramètre temporel puis la commande, at -l listant les processus en attente ; la crontab s'édite avec crontab -e et se liste avec crontab -l, sa table comportant six champs, minute, heure, jour du mois, mois, jour de la semaine puis commande.
+
+      Il est conseillé d'exécuter les tâches de maintenance sur une plage nocturne où il y a peu d'utilisateurs ; pour ne pas recevoir de message à chaque action, on redirige la sortie vers un fichier, l'expression redirigeant vers /dev/null puis dupliquant l'erreur vers la sortie ignorant efficacement tout ; l'installation réussie est confirmée par un message.
+
+
+II. LES COMMANDES DE SAUVEGARDE ET DE RESTAURATION.
+
+
+   A. tar.
+
+      tar s'utilise de préférence avec gzip, l'option c créant l'archive, l'ajout de l'option z compressant avec gzip, t affichant la table de contenu, x extrayant, v étant verbeuse et f désignant le fichier ; l'archive fait presque la taille des données sauvegardées.
+
+      Contrairement à dump, tar sauvegarde une partie seulement d'une partition et des fichiers sans rapport entre eux ; ses problèmes classiques sont de ne pas sauvegarder correctement les numéros majeur et mineur de /dev, qu'il vaut mieux recréer avec /dev/MAKEDEV, et de ne pas gérer par défaut les fichiers à trous ; on peut dupliquer une arborescence en tubant un tar de création vers un tar d'extraction, et faire une sauvegarde incrémentale avec touch pour un fichier témoin daté et find avec -newer alimentant tar ; les paquets Internet ont souvent le suffixe .tar.gz ou .tgz, décompressés avec gunzip puis tar xvf.
+
+
+   B. Les autres outils.
+
+      cpio manipule les données en mode caractère, gère le multi-volume et utilise l'entrée et la sortie standard, donc s'utilise avec les redirections, souvent alimenté par find qui transmet la liste des fichiers ; en jouant avec find, on crée des sauvegardes sophistiquées, par exemple des fichiers non touchés depuis un an.
+
+      dd transfère des données brutes, utile entre systèmes différents, pour la conversion EBCDIC vers ASCII et pour évaluer des problèmes de performances des entrées-sorties disque ; mt manipule les bandes, avance, recule, rembobine et écrit des marques de fin de fichier, mt -f affichant l'état de l'unité ; rsync, similaire à rcp mais bien plus riche, utilise ssh par défaut, avec les options r, l, t, g, o, D pour préserver les attributs, --del pour supprimer sur la destination les fichiers absents de la source, -z pour compresser et -n pour simuler ; il est peu pertinent de stocker données et sauvegardes sur le même disque physique.
+
+
+III. LES COMMANDES RÉSEAU PAR COUCHE DU MODÈLE DoD.
+
+
+   A. La couche 1 et les adresses physiques.
+
+      Sous Linux, ifconfig, arp, route et netstat viennent de l'ancien paquet net-tools de 2001, remplacé par iproute2 sur certaines distributions, où ifconfig devient ip addr, arp devient ip neigh, route devient ip route et netstat devient ss.
+
+      DoD utilise les adresses physiques MAC en couche 1 ; ifconfig ou ip addr donne les informations sur les cartes réseau, et arp -a, ou ip neigh, affiche la table dynamique des correspondances adresse MAC vers adresse IP ; deux machines d'un même réseau local échangent leur adresse MAC, et quand un routeur les sépare, l'adresse MAC de l'interface du routeur par défaut est stockée par chaque hôte.
+
+
+   B. La couche 2 et le routage.
+
+      Les commandes net-tools pour la table de routage sont route -n et netstat -rn, remplacées par ip route sous iproute2, qui ajoute la fonction de remplacement de route et d'autres fonctions comme le NAT et la gestion des tunnels.
+
+      ICMP contrôle et supervise la couche IP ; ping envoie une requête echo-request et attend une réponse echo-reply, quatre par défaut sous Linux, et permet de vérifier la boucle locale pour tester la pile TCP/IP, un hôte distant et des équipements réseau ; il affiche la taille des paquets, le temps de réponse en millisecondes, le pourcentage de paquets perdus et, en dernière ligne, les temps minimum, moyen, maximum et l'écart type ; la première requête est la plus longue comme pour tout protocole réseau ; l'option -c fixe le nombre de requêtes, -i l'intervalle, -s la taille, huit octets étant réservés à l'en-tête ICMP, et ping avec un nom utilise /etc/hosts et non le DNS ; ping peut être bloqué par un pare-feu car ICMP est parfois interdit.
+
+      traceroute suit le chemin d'un paquet en augmentant incrémentalement le TTL, chaque routeur décrémentant le TTL et émettant un message d'erreur quand il atteint zéro, ce qui permet de construire une carte logique du réseau ; il n'y a pas de règle de nommage des routeurs entre fournisseurs d'accès, ce qui rend l'interprétation parfois difficile ; les messages d'erreur incluent !H hôte inaccessible, !N réseau inaccessible, !P protocole inaccessible, !S échec de routage source, !F fragmentation nécessaire et !X communication administrativement interdite ; quand un pare-feu bloque ICMP ou UDP, tcptraceroute, qui envoie des paquets TCP SYN sur le port 80, contourne les filtres autorisant le TCP entrant.
+
+
+   C. La couche 3 et les connexions.
+
+      netstat correspond à TCP et UDP et fournit des statistiques sur les connexions client-serveur et les sockets UNIX, à partir de /proc/net sous Linux ; sans option, il donne les informations sur les sockets UNIX, netstat -a toutes les connexions, ports et états, netstat -ntl les listeners TCP sans résolution DNS, et netstat -ntlp le programme associé à chaque port, en s'appuyant sur /etc/services qui associe le numéro de port au nom du protocole.
+
+      ss, apparue avec iproute2, remplace netstat, avec les options t, u ou x pour trier par TCP, UDP ou sockets UNIX, -a pour toutes les connexions car -t n'affiche par défaut que les connexions établies, -n pour éviter le DNS, -l pour les ports à l'écoute et -p pour le nom du processus et son PID ; on peut filtrer par état parmi established, syn-sent, syn-recv, fin-wait, time-wait, closed et autres, et par adresse et port avec support CIDR et des opérateurs de comparaison.
+
+
+IV. LES OUTILS D'ANALYSE DU TRAFIC RÉSEAU.
+
+
+   A. tcpdump et iptraf.
+
+      tcpdump affiche les en-têtes de paquets d'une interface selon les options, disponible sur de nombreux systèmes, lancé en root car il passe l'interface en mode promiscuous où elle accepte tous les paquets même non destinés ; tcpdump -D liste les interfaces disponibles, une expression comme dst suivie d'une adresse et de port domain filtre le DNS vers une adresse, -w enregistre dans un fichier non lisible en clair et -r le relit.
+
+      iptraf analyse le trafic IP, en particulier le débit des interfaces, pour détecter du trafic malveillant, coloré et interactif en librairie ncurses, à installer explicitement ; iptraf -i surveille le trafic IP d'une interface, -s le trafic TCP et UDP, -l le débit, et le menu Configure active la recherche DNS inverse et permet de définir des filtres par adresse et port.
+
+
+   B. Wireshark et tshark.
+
+      Wireshark, anciennement Ethereal, projet de 1998, est un analyseur de protocole et de réseau gratuit, en ligne de commande ou interface graphique, disponible sur tous les systèmes, capturant en temps réel plus d'une centaine de protocoles et relisant des fichiers de tcpdump, Microsoft Network Monitor et Sniffer Pro ; c'est le couteau suisse de l'expert réseau et un outil indispensable pour tout audit.
+
+      Wireshark utilise deux types de filtres, le filtre de capture, défini au démarrage comme premier filtre large pour limiter la taille du journal, et le filtre d'affichage, plus puissant et complexe, modifiable pendant la capture, pour rechercher exactement les données souhaitées ; l'interface comprend le panneau liste des paquets avec adresses et ports, le panneau détails de paquet par couche OSI, et le panneau de dissection en hexadécimal, avec en bas la carte utilisée, l'état de la capture, sa taille et les nombres de paquets capturés, affichés, marqués et perdus.
+
+      tshark est la version en ligne de commande, capturant avec -f pour le filtre de capture au format tcpdump, -i pour l'interface et -w pour le fichier, affichant avec -R pour le filtre d'affichage et -r pour relire, et disséquant des champs avec -z, par exemple pour compter les images GIF d'un trafic HTTP ; pour l'HTTPS on importe la clé publique ; editcap divise un fichier de capture et mergecap en joint deux.
+
+
+V. LES COMMANDES DIVERSES.
+
+      head affiche les premières lignes d'un fichier, dix par défaut, tail les dernières, avec un argument pour le nombre de lignes ; wc compte les mots par défaut et les lignes avec -l ; file détermine le type ASCII ou binaire ; seq renvoie une série de chiffres, avec un pas optionnel ; grep recherche une chaîne ou une expression régulière dans un fichier, -r le faisant récursivement dans une arborescence ; su change d'utilisateur, su ou su - sans option tentant de se connecter en root.
+
+
+POINTS D'ATTENTION.
+
+      Les options de ps diffèrent entre systèmes BSD, ps -aux, et AT&T, ps -edf.
+
+      ps donne la liste des processus à un instant donné, jamais la liste exacte en cours.
+
+      kill -9 détruit brutalement le processus ; kill -1 force la relecture de la configuration.
+
+      La crontab comporte six champs dans l'ordre minute, heure, jour du mois, mois, jour de la semaine, commande.
+
+      tar ne sauvegarde pas correctement les numéros majeur et mineur de /dev ni les fichiers à trous par défaut.
+
+      cpio lit la liste des fichiers par l'entrée standard et s'utilise avec les redirections, souvent alimenté par find.
+
+      Sous iproute2, ifconfig devient ip addr, arp devient ip neigh, route devient ip route et netstat devient ss.
+
+      ping avec un nom utilise /etc/hosts, pas le DNS, et peut être bloqué par un pare-feu filtrant ICMP.
+
+      Dans un ping, huit octets sont réservés à l'en-tête ICMP et la première requête est la plus longue.
+
+      traceroute par ICMP ou UDP est souvent bloqué par les pare-feu ; tcptraceroute par TCP SYN les contourne.
+
+      netstat et ss s'appuient sur /etc/services pour associer un numéro de port à un nom de protocole.
+
+      tcpdump et les analyseurs passent l'interface en mode promiscuous et nécessitent les droits root.
+
+      Le filtre de capture de Wireshark se fixe au démarrage, le filtre d'affichage se modifie pendant la capture.
+
+
+EXEMPLES CITES.
+
+      ps axf affichant l'arborescence des processus avec gdm3, Xorg et gnome-session.
+
+      Liste des signaux par kill -l, de SIGHUP numéro 1 à SIGRTMAX numéro 32.
+
+      Entrée crontab 0 1 1 * * find /tmp -atime 3 -exec rm -f pour le premier jour du mois à une heure.
+
+      Sauvegarde tar cf puis tar czf avec gzip d'un répertoire /home.
+
+      Duplication d'arborescence par tar cf - tubé vers un tar xf - dans un autre répertoire.
+
+      Sauvegarde incrémentale par touch d'un fichier témoin puis find -newer alimentant tar.
+
+      cpio alimenté par find /home pour créer une archive .cpio.
+
+      Conversion dd if égale /dev/rfd0 of égale /u/bob conv égale ascii.
+
+      rsync -e ssh -avz --delete-after vers un serveur distant, l'option -n simulant l'opération.
+
+      ping -c 4 localhost avec temps rtt min, moyen, max et mdev.
+
+      traceroute vers www.idsoftware.com traversant douze sauts, dont des routeurs ATM d'ALTER.NET.
+
+      tcptraceroute vers un portail DGFiP sur le port 80 aboutissant à une destination marquée open.
+
+      netstat -ntlp montrant vino-server sur le port 5900.
+
+      tshark -f "tcp port 80" -i eth4 -w /root/http.cap pour capturer le trafic HTTP.

@@ -1,40 +1,276 @@
-PLAN D'ADRESSAGE IPv4 : SUBNETTING, VLSM, CIDR
+LE PLAN D'ADRESSAGE IPv4 : SUBNETTING, VLSM, CIDR ET GESTION DES ADRESSES.
 
-1. ESPACE D'ADRESSAGE PRIVÉ (RFC 1918)
-Motivation : saturation du schéma d'adressage originel ; IPv6 est la solution de fond mais la transition est longue, d'où des améliorations d'IPv4. De nombreux organismes utilisent TCP/IP en interne sans se connecter à Internet : leurs adresses n'ont pas besoin d'être uniques mondialement.
-Trois plages réservées, non routées sur Internet, utilisables librement sans déclaration :
-- 10.0.0.0/8 (classe A)
-- 172.16.0.0 à 172.31.255.255 (classe B)
-- 192.168.0.0/16 (classe C)
-Masques par défaut : A 255.0.0.0 ; B 255.255.0.0 ; C 255.255.255.0. Avantages : conservation de l'espace global, flexibilité et évolutivité pour les organisations. Pour faire communiquer deux réseaux privés : NAT (Network Address Translation), aucune unicité n'étant garantie.
 
-2. NOTIONS FONDAMENTALES ET ADRESSES SPÉCIALES
-Classes A, B, C (individuelles), D (diffusion), E (réservée). Notation /X : X = nombre de bits à 1 du Network-id (ex. 100.10.5.1/8 -> 255.0.0.0). Une adresse IP est indissociable de son masque : communiquer une adresse sans masque est une information incomplète.
-Adresse du réseau = adresse d'hôte ET (logique) masque de sous-réseau (1∧1=1, sinon 0). Le masque détermine si deux équipements sont sur le même segment / sous-réseau.
-Adresses de diffusion :
-- Dirigée : host-id tout à 1 (X.255.255.255 en A, X.Y.255.255 en B, X.Y.Z.255 en C) ; tous les équipements du réseau ; jamais source, toujours destination.
-- Limitée : 255.255.255.255 ; réduit la diffusion au réseau local, sans franchir de routeur.
-- Multidiffusion : adresse de classe D en destination ; protocole IGMP (Internet Group Management Protocol), à ne pas confondre avec ICMP.
-Adresse 0.0.0.0 : (1) avec DHCP, un hôte requiert une adresse ; (2) dans une table de routage, entrée du routeur (passerelle) par défaut. Ne peut être qu'une adresse source.
+LEXIQUE COMPLET.
 
-3. SUBNETTING (RFC 950)
-Le système des classes fige la longueur des masques et est trop rigide (classe C : 254 hôtes, trop peu ; classe B : 65 534, rarement atteint ; plus aucune classe disponible). Le subnetting ajoute un 3e niveau hiérarchique en divisant le champ host-id en subnetwork-id (identifie le segment comme un réseau unique) + host-id (adresse les équipements). Invisible de l'extérieur : Internet route sur le Network-id parent aligné sur l'octet ; tous les sous-réseaux partagent le même Network-id, avec des subnetwork-id différents ; seul le routeur local différencie les sous-réseaux.
-Détermination du masque à partir du nombre de sous-réseaux : 2^n >= nombre de sous-réseaux -> n bits d'extension. Ex. 8 sous-réseaux -> 3 bits, 192.168.1.0/24 -> /27 (255.255.255.224). Pas (nombre d'adresses par sous-réseau) = 256 - valeur du dernier octet du masque (256 - 224 = 32). Méthode par division : 256 / nb sous-réseaux = adresses/sous-réseau ; 256 - ce résultat = valeur du dernier octet.
-Détermination du masque à partir du nombre d'hôtes : puissance de 2 immédiatement supérieure au besoin (+2 adresses de service). Ex. 70 hôtes -> 2^7 = 128 -> 7 bits d'hôte (126 hôtes adressables), masque 255.255.255.128 ou /25 ; valeur du dernier octet = 256 - 128 = 128. Séquence : adresse du dernier hôte + 1 = adresse de diffusion ; adresse de diffusion + 1 = adresse du sous-réseau suivant.
-Avantages : pas besoin de nouvelles classes, sécurité améliorée, tables de routage Internet non impactées ; inconvénient : adresses de service (sous-réseau + diffusion) proportionnelles au nombre de sous-réseaux.
-Sous-réseau 0 et dernier : RFC 950 recommandait de ne pas les utiliser (confusion : 195.1.1.0/24 et 195.1.1.0/27 s'écrivent pareil). RIPv1 ne les permet pas. Cisco : instruction ip subnet-zero. RIPv2 et OSPF les gèrent (ils véhiculent les masques).
+      Plan d'adressage : organisation des adresses IP d'un réseau, indissociable de la gestion de ces adresses, nécessaire au bon fonctionnement du réseau lorsqu'il atteint une taille importante.
 
-4. VLSM (Variable Length Subnet Masking, RFC 1878)
-Inconvénient du subnetting : un seul masque, organisation figée en un nombre fixe de sous-réseaux de taille fixe. Le VLSM applique récursivement le sous-adressage : le réseau est divisé en sous-réseaux, dont un ou plusieurs sont eux-mêmes divisés en sous-réseaux plus petits, etc. Exemple : 130.10.0.0/16 -> 8 sous-réseaux (3 bits, /19, 255.255.224.0) ; le sous-réseau 3 (130.10.96.0/19) -> 16 sous-réseaux (+4 bits, /23) ; le sous-sous-réseau 14 (130.10.124.0/23) -> 8 sous-réseaux (+3 bits, /26, 255.255.255.192). Adresse de diffusion = adresse du sous-réseau suivant - 1 ; les hôtes sont entre l'adresse réseau et l'adresse de diffusion.
-Route aggregation : regroupement de plusieurs routes de sous-réseaux proches en une seule -> tables de routage réduites, à condition d'implémenter la plus grande occurrence du masque sur tous les routeurs de la chaîne.
-Protocoles : RIPv1 ne supporte pas le VLSM (masque unique par réseau) ; RIPv2 et OSPF le supportent (transport du masque à chaque signalisation, authentification MD5). Méfiance vis-à-vis du « théoriquement supportable » qui peut devenir « pratiquement inexploitable ».
+      RFC (Request for Comments) : appel à commentaires, document de référence décrivant une technique ou un protocole d'Internet.
 
-5. CIDR / SUPERNETTING (Classless Inter-Domain Routing)
-Sur-adressage utilisé par les fournisseurs d'accès Internet (FAI/ISP) pour attribuer de grands blocs d'adresses de classe C aux très grandes organisations. Créé par l'IETF en 1992 (RFC 1338, 1517-1520) face au proche épuisement des classes B, à la taille croissante des tables de routage et à l'éventuelle saturation de l'adressage 32 bits. À ne pas confondre avec le CIRD (Code d'Identification de Réseau pour Données) de X25.
-Un Supernet est un bloc d'adresses ayant le même préfixe réseau (bits de poids forts contigus identiques). Avantages : élimine les concepts de classe A/B/C, distribution plus efficace de l'espace, route agrégation. Les routeurs utilisent la longueur du préfixe réseau (dont chaque routeur est averti), et non les 3 bits de début des classes, pour séparer numéro de réseau et numéro d'hôte. Ex. /20 -> 4096 adresses (2^12), soit 16 classes C ; /22 -> 4 classes C.
-Utilisation en blocs égaux ou inégaux (un FAI possédant un /21 sert des clients ayant besoin de 800, 500, 250 adresses en allongeant progressivement le préfixe).
-Distinction fondamentale : VLSM = besoins internes à une organisation ; CIDR = orienté fournisseurs d'accès Internet. Pour appliquer ces techniques, tous les équipements du réseau doivent s'y conformer, sous peine de dysfonctionnement du routage. En pratique, la technique la plus utilisée reste le subnetting.
-Rappel : 16 384 réseaux de classe B, 2 097 152 réseaux de classe C.
+      RFC 1918 : document réservant trois plages d'adresses à usage privatif pour les réseaux internes, non routées sur Internet, sans obligation de déclaration ni d'enregistrement.
 
-6. MÉTHODOLOGIE DE RÉSOLUTION D'UN PLAN D'ADRESSAGE
-Constituer et actualiser des bases de connaissances (équipements, paramétrages, plan d'adressage) pour une réactivité maximale face à un blocage. Face à un problème : déterminer s'il concerne tout un réseau local ou un seul équipement final, puis si un matériel est défectueux ou si une liaison est coupée, et vérifier segment par segment.
+      Adresse privée : adresse d'un réseau interne n'ayant pas besoin d'être mondialement unique car non routée sur Internet, prise dans l'une des trois plages de la RFC 1918, à savoir 10.0.0.0, 172.16.0.0 à 172.31.0.0 et 192.168.0.0 à 192.168.255.0.
+
+      NAT (Network Address Translation) : mécanisme de translation d'adresses nécessaire pour faire communiquer deux réseaux à adressage privé, aucune garantie d'unicité ne pouvant être assurée entre organisations.
+
+      Masque de réseau par défaut : masque associé à une classe, 255.0.0.0 pour la classe A, 255.255.0.0 pour la classe B, 255.255.255.0 pour la classe C ; en adressage privé, une plage de classe A comme 10 peut recevoir un masque de classe C.
+
+      Notation slash X : notation où X est le Network-id, nombre de bits à un identifiant le réseau ; par exemple 100.10.5.1 slash 8 correspond au masque 255.0.0.0.
+
+      Adresse de réseau : adresse obtenue par un ET logique entre l'adresse de l'hôte et le masque de sous-réseau, désignant le réseau lui-même et tous ses nœuds, par exemple 132.90.0.0 pour 132.90.114.2 avec le masque 255.255.0.0.
+
+      ET logique : opération binaire donnant un si l'adresse et le masque ont un, sinon zéro, utilisée pour déterminer si deux équipements appartiennent au même segment physique et au même sous-réseau.
+
+      Adresse de diffusion dirigée : adresse dont tous les bits du host-id sont à un, destinée à tous les équipements du réseau, toujours adresse de destination et jamais adresse source, par exemple 20.255.255.255 pour le réseau 20.0.0.0 slash 8.
+
+      Adresse de diffusion limitée : adresse 255.255.255.255 réduisant la diffusion au réseau local sans franchir de routeur, toujours adresse de destination.
+
+      Adresse de multidiffusion : adresse de classe D servant d'adresse de destination pour envoyer un datagramme à un groupe d'équipements partageant cette adresse, les membres ayant aussi une adresse de classe A, B ou C.
+
+      IGMP (Internet Group Management Protocol) : protocole de gestion des groupes de multidiffusion, à ne pas confondre avec ICMP qui signale les erreurs et gère les messages de contrôle pour IP.
+
+      Adresse IP à zéro : adresse 0.0.0.0, utilisée avec DHCP quand un hôte requiert une adresse, et dans les tables de routage pour désigner le routeur ou la passerelle par défaut ; elle ne peut être utilisée que comme adresse source.
+
+      Subnetting (sous-adressage) : technique décrite dans la RFC 950 ajoutant un troisième niveau hiérarchique en divisant le champ host-id en subnetwork-id et host-id, afin de répondre à la rigidité des masques et à la pénurie d'adresses.
+
+      Subnetwork-id : partie de l'adresse identifiant le segment comme un réseau unique au sein d'un réseau parent.
+
+      Préfixe de réseau étendu : masque de réseau par défaut prolongé de bits pris sur le host-id pour coder les sous-réseaux.
+
+      Pas d'un sous-réseau : nombre d'adresses par sous-réseau, égal à 256 moins la valeur décimale du dernier octet du masque, incluant l'adresse de sous-réseau et l'adresse de diffusion.
+
+      ip subnet-zero : instruction à ajouter dans la configuration d'un routeur Cisco pour autoriser l'utilisation du sous-réseau numéro zéro.
+
+      RIPv1 : protocole de routage limité à un unique masque de sous-réseau par réseau, n'autorisant ni le premier ni le dernier sous-réseau, ne supportant pas VLSM.
+
+      RIPv2 et OSPF : protocoles de routage véhiculant les masques de sous-réseau avec les adresses, autorisant le sous-réseau zéro et le dernier, et supportant VLSM, avec authentification MD5 pour RIPv2.
+
+      VLSM (Variable Length Subnet Masking) : technique de la RFC 1878 appliquant récursivement le sous-adressage, un ou plusieurs sous-réseaux étant eux-mêmes divisés, pour une distribution plus efficace de l'espace d'adresses, utilisée pour des besoins internes à une organisation.
+
+      Route aggregation (groupement de route) : regroupement de plusieurs routes proches en une seule pour réduire la taille des tables de routage, à condition d'implémenter la plus grande occurrence du masque sur tous les routeurs de la chaîne.
+
+      CIDR (Classless Internet Domain Routing) : sur-adressage ou supernetting créé par l'IETF en 1992, décrit dans les RFC 1338 et 1517 à 1520, éliminant les concepts de classe A, B et C, orienté vers les fournisseurs d'accès Internet pour distribuer de grands blocs d'adresses de classe C.
+
+      Supernet : bloc d'adresses IP ayant le même préfixe réseau, c'est-à-dire un nombre de bits de poids fort contigus identiques.
+
+      Préfixe réseau CIDR : longueur de préfixe communiquée à chaque routeur pour déterminer le point de séparation entre numéro de réseau et numéro d'hôte, par exemple 255.255.240.0 ou slash 20 permettant quatre mille quatre-vingt-seize adresses, soit seize classes C.
+
+      Allocation statique : mode d'adressage où le gestionnaire configure chaque équipement de façon permanente avec une adresse IP, un masque, une passerelle et des DNS, mis en œuvre lorsque le plan couvre les besoins actuels et futurs.
+
+      Allocation dynamique : attribution d'adresses IP régie par le protocole DHCP.
+
+      DHCP (Dynamic Host Configuration Protocol) : protocole de configuration dynamique d'hôte décrit dans une RFC, conçu à l'origine pour pallier le manque d'adresses puisque tous les utilisateurs ne se connectent pas en même temps, reposant sur UDP dont la valeur décimale de protocole est dix-sept.
+
+      Serveur DHCP : service installé et activé sur une machine, paramétré avec la plage d'adresses disponibles, le masque, les adresses exclues et la durée de bail, devant être sur le même segment Ethernet que les clients sauf agent de relais.
+
+      Agent de relais DHCP : dispositif de la RFC 1542 relayant les diffusions DHCP vers d'autres réseaux quand les stations sont séparées du serveur par des routeurs.
+
+      Bail (lease) : durée déterminée pendant laquelle une adresse IP est accordée à un client, renouvelable par réémission de requêtes, la suppression de l'adresse ayant lieu si le bail arrive définitivement à échéance.
+
+      DHCP Discover : requête initiale du client sans adresse, émise en diffusion avec l'adresse source 0.0.0.0.
+
+      DHCP Offer : datagramme par lequel un serveur DHCP propose une adresse IP et une durée de bail, dirigé vers l'adresse physique de la carte du client.
+
+      DHCP Request : datagramme par lequel le client accepte une offre et refuse les autres.
+
+      DHCPACK : requête par laquelle le serveur confirme l'offre et transmet les autres paramètres IP et temporisateurs de bail.
+
+      Réservation DHCP : correspondance définie dans la configuration du serveur entre l'adresse MAC d'un client et l'adresse IP qui lui sera systématiquement proposée, ce qui fige son adressage.
+
+      Logiciel de gestion d'adresses IP : logiciel à interface graphique gérant plusieurs milliers d'adresses, avec gestion centralisée ou répartie, détection de conflits, importation de fichiers texte et annuaire LDAP, tels que MetaIP, NetID ou QIP.
+
+      IPv6 : nouvelle version du protocole IP décrite dans la RFC 1883, résultant des travaux de l'IETF, dont le réseau expérimental mondial est appelé 6Bone.
+
+      IPsec : composant obligatoire d'IPv6, implémenté par l'en-tête d'authentification AH et l'en-tête d'extension ESP.
+
+      Anycast : nouveau type d'adressage apparu avec IPv6, en complément de l'unicast et du multicast, les adresses de broadcast étant abandonnées.
+
+
+COURS DÉTAILLÉ.
+
+
+I. L'ESPACE D'ADRESSAGE PRIVÉ.
+
+
+   A. La motivation.
+
+      Le développement rapide d'Internet a vite saturé le schéma originel d'adressage ; même si IPv6 est la solution, le changement ne peut être immédiat, si bien qu'IPv4 a subi des améliorations pour répondre aux besoins d'adressage et à la difficulté d'obtenir un réseau de classe C ou B.
+
+      Beaucoup d'organismes utilisent TCP/IP en interne sans intention de se connecter à Internet, leurs adresses n'ayant pas besoin d'être mondialement uniques car non routées sur Internet ; c'est le principe de la RFC 1918.
+
+
+   B. La RFC 1918 et le NAT.
+
+      L'autorité d'affectation des numéros a réservé trois plages d'adresses privées, dans lesquelles tout organisme est libre d'utiliser autant d'adresses que nécessaire sans déclaration ; les valeurs 255 du dernier réseau correspondent à des adresses de diffusion générale, et une plage de classe A comme 10 peut être associée à un masque de classe C.
+
+      L'adressage privé protège l'espace d'adressage global et donne aux organisations une plus grande flexibilité d'architecture ; mais faire communiquer deux réseaux privés nécessite la translation d'adresses NAT, aucune garantie d'unicité ne pouvant être assurée entre organisations.
+
+
+II. LES NOTIONS FONDAMENTALES ET LES ADRESSES SPÉCIALES.
+
+
+   A. Le masque et l'adresse de réseau.
+
+      Les classes A, B et C sont des classes d'adresses individuelles, la classe D sert à la diffusion et la classe E est réservée ; dans la notation slash X, X est le nombre de bits à un identifiant le réseau, par exemple slash 8 pour 255.0.0.0.
+
+      Une adresse IP est liée par essence au masque qui lui est appliqué, si bien qu'une adresse communiquée sans son masque est une information incomplète ; l'adresse de réseau s'obtient par un ET logique entre l'adresse de l'hôte et le masque, par exemple 132.90.0.0 pour 132.90.114.2 avec le masque 255.255.0.0 ; le masque permet de déterminer si deux équipements appartiennent au même segment physique et donc au même sous-réseau.
+
+
+   B. Les adresses de diffusion et les adresses particulières.
+
+      Il existe trois types d'adresses de diffusion, l'adresse de diffusion dirigée dont tous les bits du host-id sont à un, destinée à tous les équipements du réseau et toujours adresse de destination, par exemple 20.255.255.255 pour 20.0.0.0 slash 8 ; l'adresse de diffusion limitée 255.255.255.255 qui reste sur le réseau local sans franchir de routeur ; et l'adresse de multidiffusion de classe D, destinée à un groupe d'équipements et gérée par le protocole IGMP, à ne pas confondre avec ICMP.
+
+      L'adresse 0.0.0.0 a une double signification, elle est utilisée avec DHCP quand un hôte requiert une adresse, et dans les tables de routage pour désigner le routeur ou la passerelle par défaut ; elle ne peut être utilisée que comme adresse source.
+
+
+III. LES MASQUES DE SOUS-RÉSEAU (SUBNETTING).
+
+
+   A. Le principe.
+
+      L'adressage IP repose sur un réseau logique indépendant du matériel et structuré pour un routage efficace, mais le système des classes fige la longueur des masques et s'adapte mal à la taille d'une organisation, une classe C n'offrant que deux cent cinquante-quatre équipements et une classe B soixante-cinq mille cinq cent trente-quatre rarement atteints, et toutes les classes étant déjà affectées.
+
+      Le subnetting, décrit dans la RFC 950, ajoute un troisième niveau hiérarchique en divisant le champ host-id en subnetwork-id et host-id, le subnetwork-id identifiant le segment comme un réseau unique et le host-id adressant les équipements de chaque segment ; il n'a pas d'incidence sur les tables de routage d'Internet car la structure n'est pas visible de l'extérieur, tous les sous-réseaux utilisant le même Network-id avec des Subnetwork-id différents, seul le routeur de l'entité différenciant les sous-réseaux.
+
+
+   B. La détermination du masque à partir du nombre de sous-réseaux.
+
+      Pour huit sous-réseaux à partir de 192.168.1.0 slash 24, il faut trois bits supplémentaires puisque deux puissance trois vaut huit, d'où un dernier octet à 224 comme subnetwork-id et cinq bits à zéro pour le host-id ; le pas vaut 256 moins 224 égale trente-deux adresses par sous-réseau, adresse de sous-réseau et de diffusion comprises, le masque commun étant 255.255.255.224 ou slash 27.
+
+      Une autre méthode consiste à diviser 256 par le nombre de sous-réseaux souhaité, 256 divisé par 8 égale trente-deux adresses par sous-réseau, puis à retrancher ce résultat de 256, 256 moins 32 égale 224, valeur du dernier octet du masque.
+
+
+   C. La détermination du masque à partir du nombre d'hôtes.
+
+      Pour soixante-dix hôtes par site à partir de 172.16.0.0 slash 16, chaque sous-réseau comptera soixante-douze adresses, deux étant réservées ; le nombre de bits pour coder soixante-dix hôtes est la puissance de deux immédiatement supérieure, soit sept bits pour deux puissance sept égale cent vingt-huit, permettant cent vingt-six hôtes par sous-réseau et cinquante-six adresses de réserve.
+
+      La longueur du Subnetwork-id vaut trente-deux moins seize moins sept égale neuf bits, soit deux puissance neuf égale cinq cent douze sous-réseaux de cent vingt-six hôtes ; le masque se déduit par 256 moins 128 égale 128, valeur du dernier octet, soit 255.255.255.128 ou slash 25 ; la séquence des adresses est telle que l'adresse du dernier hôte plus un est l'adresse de diffusion, et l'adresse de diffusion plus un est l'adresse du sous-réseau suivant.
+
+
+   D. Les avantages et le sous-réseau zéro.
+
+      Le subnetting évite d'obtenir de nouvelles classes, améliore la sécurité et n'impacte pas les tables de routage d'Internet, au prix d'adresses de service proportionnelles au nombre de sous-réseaux ; la RFC 950 recommandait de ne pas utiliser le premier ni le dernier sous-réseau pour éviter les confusions, ce que RIPv1 impose puisqu'il confond le réseau parent et le sous-réseau zéro, alors que les routeurs Cisco autorisent le sous-réseau zéro avec l'instruction ip subnet-zero et que RIPv2 et OSPF gèrent les deux car ils véhiculent les masques.
+
+
+IV. VLSM ET CIDR.
+
+
+   A. Le masque à longueur variable (VLSM).
+
+      L'inconvénient du subnetting est de ne supporter qu'un seul masque, figeant le réseau en un nombre fixe de sous-réseaux de taille fixe ; le VLSM, présenté dans la RFC 1878, applique récursivement le sous-adressage, un ou plusieurs sous-réseaux étant eux-mêmes divisés en sous-réseaux plus petits.
+
+      Ainsi, à partir de 130.10.0.0 slash 16, coder huit sous-réseaux demande trois bits, soit un masque de slash 19 égal à 255.255.224.0 ; le sous-réseau numéro 3, 130.10.96.0 slash 19, subdivisé en seize sous-réseaux demande quatre bits de plus, soit slash 23 égal à 255.255.254.0 ; le sous-sous-réseau numéro 14, 130.10.124.0 slash 23, subdivisé en huit sous-réseaux demande trois bits de plus, soit slash 26 égal à 255.255.255.192 ; l'adresse de diffusion d'un sous-réseau est l'adresse du sous-réseau suivant moins un.
+
+      Le VLSM permet un groupement de route, la route aggregation, qui réduit la taille des tables de routage à condition d'implémenter la plus grande occurrence du masque sur tous les routeurs ; RIPv1 ne supporte pas VLSM, à la différence de RIPv2 et OSPF qui transportent les informations de masque à chaque signalisation de route avec authentification MD5 ; il faut se méfier du théoriquement supportable qui peut devenir pratiquement inexploitable.
+
+
+   B. Le sur-adressage (CIDR).
+
+      Le CIDR, ou routage Internet sans classe, a été créé par l'IETF en 1992 face au proche épuisement des classes B, à la taille grandissante des tables de routage et à la saturation possible de l'adressage trente-deux bits ; il est décrit dans les RFC 1338 et 1517 à 1520, à ne pas confondre avec le CIRD du plan d'adressage X25.
+
+      Un Supernet est un bloc d'adresses ayant le même préfixe réseau ; le CIDR élimine les concepts de classe A, B et C, les routeurs utilisant le préfixe réseau communiqué pour séparer numéro de réseau et numéro d'hôte, par exemple slash 20 permettant quatre mille quatre-vingt-seize adresses, soit seize classes C ; il supporte le regroupement de route, permet de regrouper des blocs contigus en blocs plus grands, et sert notamment aux fournisseurs d'accès Internet pour répartir un bloc en blocs égaux ou inégaux selon les besoins des clients ; le VLSM est utilisé en interne, le CIDR est orienté vers les fournisseurs d'accès ; tous les équipements du réseau doivent se conformer à ces techniques sous peine de dysfonctionnement du routage, la technique la plus utilisée restant le subnetting.
+
+
+V. LA MÉTHODOLOGIE DE RÉSOLUTION.
+
+
+   A. La nécessité d'une méthode.
+
+      La sophistication des chaînes de liaison impose de constituer et d'actualiser des bases de connaissances des équipements, de leur paramétrage et du plan d'adressage, pour une réactivité maximale face à un blocage ; un problème téléinformatique a de nombreuses origines, et une méthodologie stricte s'impose pour ne pas perdre de temps, la première question étant de savoir si le problème concerne tout un réseau local ou un seul équipement.
+
+
+   B. Le diagnostic.
+
+      Quand tout le réseau local est concerné, l'expert détermine si le problème vient d'un matériel défectueux ou d'une coupure de liaison, vérifie chaque segment et l'accessibilité des interfaces en pingant les adresses, contrôle le routage et les listes de contrôle d'accès des routeurs, et peut recourir à un analyseur de protocoles pour capturer des traces IP.
+
+      Quand un seul équipement est concerné, le gestionnaire utilise les commandes natives de Windows, collecte les informations du poste, vérifie l'installation de TCP/IP, tente d'accéder à une autre station du même réseau puis teste le lien avec la passerelle par défaut.
+
+
+VI. LA GESTION DES ADRESSES IP.
+
+
+   A. L'allocation statique.
+
+      L'adressage statique est mis en œuvre lorsque le plan couvre les besoins actuels et futurs ; le gestionnaire configure chaque équipement de façon permanente avec une adresse IP, un masque, une passerelle et des DNS, ne modifiant qu'en cas de changement d'adressage.
+
+      Il demande une grande rigueur et une actualisation constante pour éviter les conflits d'adresses, participe à la politique de sécurité par l'identification permanente des machines, et facilite la résolution des incidents.
+
+
+   B. L'allocation dynamique par DHCP.
+
+      DHCP a été conçu pour pallier le manque d'adresses puisque tous les utilisateurs ne se connectent pas en même temps ; il repose sur UDP, protocole sans connexion ni sécurité adapté aux requêtes commande-réponse et à la diffusion, dont la valeur décimale de protocole est dix-sept.
+
+      Le service serveur DHCP est installé et activé sur une machine, paramétré avec la plage d'adresses disponibles, le masque, les adresses exclues et la durée de bail ; il doit être sur le même segment Ethernet que les clients, sauf mise en œuvre d'un agent de relais DHCP de la RFC 1542 quand des routeurs séparent les stations ; le client se configure simplement dans la configuration TCP/IP.
+
+      Le dialogue est le suivant, le client sans adresse émet une requête DHCP Discover en diffusion avec l'adresse source 0.0.0.0, un serveur à l'écoute répond par un DHCP Offer proposant une adresse et un bail dirigé vers l'adresse physique du client, le client accepte une offre et refuse les autres par un DHCP Request, et le serveur confirme par un DHCPACK avec les autres paramètres et temporisateurs ; sans DHCPACK, le client réémet un DHCP Request puis un DHCP Discover ; à échéance du bail, le client cherche à le renouveler puis supprime son adresse et en cherche une nouvelle.
+
+      DHCP peut délivrer une configuration plus complète qu'une adresse, comme l'adresse d'un serveur DNS ou du routeur de premier bond, et peut figer l'adressage d'un client par une réservation liant son adresse MAC à une adresse IP ; il faut assurer la disponibilité du serveur, stratégique, par des sécurités électriques et matérielles et un serveur de remplacement, sauvegarder régulièrement la base DHCP et tester la restauration, et tenir compte du changement de carte réseau qui modifie l'adresse MAC ; des logiciels à interface graphique gèrent plusieurs milliers d'adresses avec détection de conflits, importation de fichiers texte et annuaire LDAP.
+
+
+VII. BRÈVE INTRODUCTION À IPv6.
+
+
+   A. La nécessité et les caractéristiques.
+
+      L'évolution vers IPv6 s'impose face à la saturation des adresses IPv4, à l'importance des tables de routage des fournisseurs d'accès, au manque de sécurité et de qualité de service pour les applications temps réel, et à l'émergence du commerce électronique et de l'audio-vidéo, IPv5 étant resté expérimental.
+
+      IPv6 est décrit dans la RFC 1883 et résulte des travaux de l'IETF, son réseau expérimental mondial étant appelé 6Bone ; l'en-tête comprend les champs Version valant six, Priorité, Label de flux sur vingt-quatre bits, Longueur utile sur seize bits, Prochain en-tête sur huit bits, Limite de saut sur huit bits décrémentée à chaque routeur, et adresses source et destination sur cent vingt-huit bits.
+
+
+   B. L'adressage et la sécurité.
+
+      Les possibilités d'adressage sont multipliées par quatre, de trente-deux à cent vingt-huit bits, avec plus de niveaux hiérarchiques pour réduire les tables de routage par agrégation, et la configuration automatique des adresses ; la notation utilise huit blocs hexadécimaux de deux octets séparés par deux-points, une série de zéros pouvant être compressée en deux-points doubles, par exemple FE00::1, et une forme mixte hexadécimale et décimale pointée pour la transition depuis IPv4.
+
+      Le broadcast est abandonné au profit du multicast, équivalent de la classe D, et un nouveau type Anycast apparaît ; l'en-tête IPv6 fait quarante octets, le double d'IPv4, plusieurs champs IPv4 peu utilisés ayant été éliminés ; le routage IPv6 ne diffère pas vraiment d'IPv4 avec CIDR, si ce n'est la taille des adresses, le routage statique étant identique et le routage dynamique possible par extensions ; IPsec est un composant obligatoire d'IPv6, implémenté par les en-têtes AH et ESP, et primordial dans toute migration.
+
+
+POINTS D'ATTENTION.
+
+      Les adresses privées de la RFC 1918 ne sont pas routées sur Internet et n'exigent aucune déclaration.
+
+      Faire communiquer deux réseaux à adressage privé nécessite du NAT faute de garantie d'unicité.
+
+      Une adresse IP sans son masque est une information incomplète.
+
+      L'adresse de diffusion est toujours une adresse de destination, jamais une adresse source ; l'adresse 0.0.0.0 ne peut être qu'une adresse source.
+
+      Ne pas confondre IGMP, gestion des groupes de multidiffusion, et ICMP, signalement d'erreurs pour IP.
+
+      Le subnetting n'est pas visible depuis l'extérieur du réseau privé ; les routeurs externes ne voient que le réseau parent.
+
+      Le pas d'un sous-réseau vaut 256 moins la valeur décimale du dernier octet du masque, adresses de sous-réseau et de diffusion comprises.
+
+      RIPv1 ne supporte pas VLSM ni le sous-réseau zéro ; RIPv2 et OSPF le supportent car ils véhiculent les masques.
+
+      Le VLSM sert aux besoins internes d'une organisation, le CIDR est orienté vers les fournisseurs d'accès Internet.
+
+      La technique d'optimisation la plus utilisée reste le subnetting.
+
+      Un serveur DHCP doit être sur le même segment Ethernet que ses clients, sauf agent de relais DHCP.
+
+      DHCP repose sur UDP, dont la valeur décimale de protocole dans l'en-tête IP est dix-sept.
+
+      L'en-tête IPv6 fait quarante octets, le double de l'en-tête IPv4 de vingt octets, malgré une adresse quatre fois plus longue.
+
+
+EXEMPLES CITES.
+
+      Plages privées de la RFC 1918, 10.0.0.0, 172.16.0.0 à 172.31.0.0 et 192.168.0.0 à 192.168.255.0.
+
+      Adresse de diffusion dirigée 20.255.255.255 pour le réseau 20.0.0.0 slash 8.
+
+      Découpage de 192.168.1.0 slash 24 en huit sous-réseaux avec le masque 255.255.255.224 ou slash 27 et un pas de trente-deux adresses.
+
+      Découpage de 172.16.0.0 slash 16 pour soixante-dix hôtes par site avec le masque 255.255.255.128 ou slash 25 et cent vingt-six hôtes adressables.
+
+      VLSM sur 130.10.0.0 slash 16 avec les masques slash 19, slash 23 puis slash 26 pour les subdivisions successives.
+
+      Préfixe CIDR slash 20 égal à 255.255.240.0 permettant quatre mille quatre-vingt-seize adresses, soit seize classes C.
+
+      Instruction ip subnet-zero sur les routeurs Cisco pour autoriser le sous-réseau numéro zéro.
+
+      Échanges DHCP Discover, DHCP Offer, DHCP Request et DHCPACK entre client et serveur.
+
+      Logiciels de gestion d'adresses IP MetaIP, NetID et QIP associés à des bases de données.
+
+      Adresse de bouclage IPv6 FE00::1 obtenue par compression des zéros.

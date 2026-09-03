@@ -1,62 +1,214 @@
-ADMINISTRATION RÉSEAU : SNMP, MIB ET CAS PRATIQUES
+L'ADMINISTRATION RÉSEAU : LE MODÈLE MANAGER-AGENT, LA MIB ET DES CAS PRATIQUES.
 
-1. LE MODÈLE ADMINISTRATEUR ET LA MIB
-Historique : dans les années 80, le diagnostic pour l'accès aux grands systèmes centraux se résumait à savoir si c'était le système, le réseau ou l'utilisateur qui était en panne. Les outils, réservés aux constructeurs, étaient très propriétaires et avaient un champ de vision limité (pas de regard efficace à la fois sur l'ordinateur central, le réseau et les applications). Avec les systèmes ouverts et Internet (modèle OSI à sept couches, puis vague IP), les outils sont devenus nombreux, composites, partagés, autonomes : seul le rapprochement d'informations de l'ensemble des outils permet de trouver rapidement la source d'un dysfonctionnement.
-L'ISO a généralisé l'administration des réseaux en cinq volets ; l'information a été organisée dans la MIB (Management Information Base) ; les requêtes ont été modélisées selon CMIP (Common Management Information Protocol), rigoureux mais complexe. La communauté Internet en a retenu l'essentiel dans une version simplifiée, SNMP, à laquelle les constructeurs se sont massivement ralliés.
-Modèle « Manager / Agent » : organise le dialogue entre une station d'administration et les équipements qui fournissent des services (du routeur manageable au switch administrable) ; vise la vision de bout en bout de la chaîne de liaison.
 
-Besoins fonctionnels d'administration selon l'ISO :
-- Gestion des fautes (fault management) : surveillance (détecter, prendre en compte les événements non sollicités, enregistrer, analyser pour prévoir et prévenir) ; localisation des pannes par sollicitation des équipements susceptibles d'être impliqués (attention aux effets de bord) ; résolution des pannes par les corrections appropriées.
-- Gestion des configurations : installation et paramétrage initial, suppression, suivi des versions ; contrôle et surveillance de la configuration (aspect patrimonial) ; identification précise des équipements (nom ou adresse non équivoque).
-- Gestion des performances : surveillance et réglage du trafic et des charges, observation de la QoS ; temps de réponse de bout en bout et disponibilité des services (la disponibilité est mesurée, le temps de réponse ne dispose pas encore d'une réponse satisfaisante).
-- Gestion comptable : relever l'utilisation et la charge des équipements, les imputer aux bénéficiaires. Largement insatisfaite : les équipements gèrent des liens logiques sans connaître leurs utilisateurs et ne s'intéressent pas au contenu des trames.
-- Gestion de la sécurité : confidentialité des échanges, enregistrement des événements de tentatives d'intrusion, remontée aux autorités. Difficulté : les RSSI se méfient des outils de surveillance (truchement favori des pirates, qui utilisent des informations sur les ressources et leur fonctionnement). L'éradication des trames vers les ports 161 et 162 serait une mesure radicale.
+LEXIQUE COMPLET.
 
-MIB : point d'ancrage du modèle, commun aux deux protocoles. Représentation externe arborescente, purement virtuelle (l'implantation interne importe peu). Toutes les branches découlent de la racine (root). À chaque niveau, des nœuds pouvant contenir quatre types d'objets de base : entiers, chaînes de caractères, identificateurs d'objet, objets de type null. Structures simples possibles (tableaux et séquences). Chaque objet : un nom et une syntaxe (type, utilisation lecture/écriture, statut requis/facultatif), défini dans un sous-ensemble de la syntaxe ASN.1 de la couche 6 du modèle OSI.
-Structure : les informations utiles sont sur les nœuds. Nom d'un nœud = concaténation des noms des prédécesseurs séparés par un point. Deux identifications : descripteur d'objet mnémonique (ex. ISO.Org.DoD.Internet.Mgmt.Mib.Ip.IpReceives) ou identifiant d'objet OID (ex. 1.3.6.1.2.1.4.3.0, le 0 final désignant une occurrence).
-Trois sortes d'objets, dans des branches homogènes :
-- Standard : règles d'évolution strictes ; tous les logiciels du marché sont compatibles « MIB 2 ». Mise à jour = création d'une nouvelle branche au même point d'implantation (l'ancienne déclarée obsolète), les objets ne diffèrent que par l'identifiant de la nouvelle branche (ex. IpReceives : 1.3.6.1.2.1.4.3 en MIB 1, 1.3.6.1.2.2.4.3 en MIB 2) -> compatibilité ascendante (reverse compatibility). Branches confiées à des organismes désignés.
-- Privés : à la disposition des constructeurs, sous le nœud « private », chaque constructeur y recevant un identifiant propre dans la branche « entreprise ». Liberté d'organisation et de publication. Les constructeurs concentrent leurs efforts sur leur branche privée (c'est là qu'ils emportent la décision d'achat). Les fournisseurs de plates-formes reçoivent les nouvelles MIB décrites en ASN.1 et un « compilateur de MIB » les prend en compte ; les descriptions de MIB sont parfois vendues.
-- Expérimentaux : communauté Internet, tests de nouveaux objets en attente de normalisation.
-Un manager dispose ainsi de milliers d'entrées dans une MIB, calculées et mises à disposition par des agents (réseau, équipements, serveurs et OS, SGBD...). Chaque administrateur doit élaborer ses propres solutions pour choisir les indicateurs pertinents.
+      SINAPS V5 : évolution du service Nagios à la DGFiP ayant vocation à devenir l'outil unique de supervision, application en PHP compatible avec Nagios qu'elle utilise pour traiter les remontées d'alerte, s'appuyant sur une base de données MySQL, modulaire et composée de briques ; à côté subsistent Nagios, SINAPS v4 proche de Nagios et Pegase, outil propriétaire pour les plateformes AIX.
 
-2. LES PROTOCOLES SNMP ET CMIP
-Deux protocoles de dialogue station / agent, fondés sur une représentation commune (MIB) et une architecture identique :
-- Station d'administration : deux parties (dialogue avec les équipements en SNMP, CMIP ou protocoles plus anciens ; présentation du résultat aux utilisateurs).
-- Agent : processus s'exécutant sur l'équipement, qui obtient les informations et les délivre à la station habilitée.
-L'administrateur interroge l'agent (indicateurs désignés par leur OID), l'agent répond. Seul cas où l'agent a l'initiative : l'alarme (Trap).
-Messages SNMP : GetRequest (demande d'une info ; réponse GetResponse ou NoSuchObject), GetNextRequest (demande de la suivante), GetBulk (demande d'un lot d'informations), SetRequest (mise à jour), Trap (alarme, pas de réponse). Ces messages sont aussi l'essentiel du dialogue CMIP (syntaxe différente).
-CMIP : théoriquement préférable (modèle objet, meilleure prise en compte de la sécurité, mode connecté -> la station sait en permanence si les agents sont actifs et en état de répondre). En pratique délaissé pour complexité au profit de SNMP : quelques centaines de lignes de code C suffisent à écrire un manager ou un agent SNMP.
-Reproche principal à SNMP : faiblesse de la sécurité. Les versions progressent, la V3 s'impose. La V3 n'est pas une simple mise à jour : elle s'implémente au-dessus des versions 1 et 2 pour leur fournir ses services de sécurité.
-- Faiblesses de la V2 : pas de chiffrement des échanges ; le mot de passe « communauté » est transmis en clair durant les sessions.
-- Apports de sécurité de la V3 : authentification par utilisateur via le modèle USM (User-based Security Model ; hachage MD5 et SHA, chiffrement des clés privées avec DES pour l'instant) ; contrôle d'accès aux ressources à plusieurs niveaux.
+      Serveur de configuration de SINAPS : cœur de SINAPS v5 permettant de paramétrer toute la solution, type de collectes, cibles, types d'utilisateurs et vues, la configuration se propageant vers les collecteurs et les serveurs de restitution.
 
-3. UTILISATION ET LIMITES
-Le modèle Manager / Agent est surtout mis en œuvre dans des stations d'administration qui intègrent graphiquement les résultats des requêtes, avec des regroupements en sous-ensembles cohérents. Les administrateurs passent d'une vision précise d'une ressource individuelle à une vision globale du système (stockage d'un SGBD, charge d'un réseau, nombre d'utilisateurs d'un serveur...). Les plates-formes intégrées ne remplacent pas complètement les outils spécialisés : les premières donnent une emprise sur l'économie générale d'un système hétérogène et permettent de localiser les pannes ; les seconds servent aux investigations approfondies sur un sous-ensemble.
-Trois limites de la supervision globale :
-- Elle porte sur des trafics ou des charges sans les individualiser (on sait que le trafic IP croît mais pas à qui l'attribuer, ni les temps de réponse).
-- La simplicité du protocole ne permet pas de construire des outils d'intervention.
-- Manque d'appropriation par les développeurs : tant qu'ils n'enrichissent pas les compteurs de la branche « application » de la MIB, une bonne part du fonctionnement reste impénétrable.
-Comblement : les sondes associées à la « MIB RMON » (ou des automates programmables) surveillent de manière autonome des portions de réseau ou des applications, réagissent aux événements locaux et rapportent en SNMP des informations synthétisées.
-NTP (Network Time Protocol) : « maître du temps », construit selon une hiérarchie en couches, synchronise les horloges des équipements malgré le mode non connecté d'IP ; nécessaire pour la corrélation des problèmes de réseau et la gestion centralisée de la sécurité.
+      Base de données de configuration de SINAPS : base MySQL stockant la configuration globale, se répliquant automatiquement vers la base homologue du site de plan de reprise d'activité.
 
-4. CAS PRATIQUES
-DGFiP :
-- Nagios (supervise serveurs LDAP, serveurs de messagerie) : service de base = via ICMP, indiquer si une machine est démarrée et depuis combien de temps elle n'est plus disponible ; supervision de nombreux services par serveur (certaines remontées à l'initiative du serveur, d'autres renvoyées par la machine supervisée) ; historisation dans une base, graphiques ; schéma d'architecture logique à partir de la description des machines.
-- SINAPS V5 : vocation d'outil unique de supervision de la DGFiP ; application PHP compatible avec Nagios (utilisé pour traiter les remontées d'alerte) ; base MySQL. Coexiste encore avec Nagios, SINAPS v4 et Pegase (outil propriétaire pour les plateformes AIX). Architecture modulaire :
-  * Serveur de configuration : le cœur, paramètre toute la solution (types de collectes, cibles, utilisateurs, vues) ; la configuration se propage vers les collecteurs et les serveurs de restitution.
-  * Base de données de configuration : stocke la configuration globale ; réplication automatique vers la base homologue du site de PRA ; MySQL.
-  * Collecteurs de supervision : hébergent une instance de Nagios ; interceptent ou récupèrent (par requêtes) les informations de supervision des équipements et applications ; transmettent aux serveurs de restitution.
-  * Serveurs SINAPS : serveurs d'application (portail d'accès aux informations : arbres d'hypervision, messages d'alerte, graphes ; écrivent et lisent en base de supervision) et serveurs de calcul (calculs des indicateurs et de l'état des services ; récupèrent les métriques, renvoient le résultat aux serveurs de restitution).
-SG-SEP : solution d'administration et de supervision basée sur Nagios et CACTI ; organisation par « familles » de serveurs, puis par serveur, puis par services. NARETO : interface d'habillage orientée « web service ». Secteur messagerie : outils shell (traitement des infos d'alerte et des indicateurs) + base PostgreSQL 9.1 + framework Rails 3.1 (rendu, affichage, reporting).
-DGI (pôle fiscal) - projet ASR (Administration des Systèmes et des Réseaux), piloté par l'équipe ESR de la DAI (bureau SI3) : né de l'insuffisance des outils. Concerne ~300 serveurs MMA (Machines Multi-Applicatives) par CSI (Centre de Services Informatiques). Surveillance actuelle via le TETE (Terminal Electronique de Télé Exploitation) de l'EML.
-Objectifs : administration (actions manuelles ou automatisées, en local ou à distance, préventives ou réactives) ; supervision (LAN et WAN, systèmes, applications ; suivi des performances, de la disponibilité et de la sécurité ; s'appuyer sur SNMP ; préventive - anticiper la dégradation, ex. taux de remplissage d'un système de fichiers - et réactive - alerte, mél, SMS) ; télé assistance (PC Anywhere, études sur VNC) ; télé distribution (EML, SATO ; UFT, CFT à remplacer ; études sur Rsync et AFD).
-Orientations : logiciels libres (pas de passation de marché) ; protocole SNMP ; langages Perl, Java, XML ; environnement UNIX (AIX, HP-UX), Windows 2000/NT, serveurs d'administration Linux ; capacité de montée en charge, architecture distribuée, ergonomie.
-Produits retenus : supervision - Nagios, OpenSSH ; analyse des performances - MRTG, OpenNMS ; prise en main à distance - VNC, OpenSSH ; transfert de données - OpenSSH ; gestion de configuration - OpenNMS.
-- OpenNMS : supervision réseau et analyse des performances ; supervision d'un large éventail de services ; analyse via SNMP (comme MRTG) ; découverte automatique des composants et services ; support natif de SNMP (gestion des traps) ; notifications, rapports de disponibilité et de performances ; infrastructure Java/XML. Lacunes : ergonomie limitée (pas de cartographie réseau), maturité.
-- MRTG (Multi Router Traffic Grapher) : analyse de performances, génère des graphes à partir de statistiques SNMP (trafic réseau, compteurs applicatifs, ressources système : CPU, disque) ; suivi journalier, hebdomadaire, mensuel, annuel ; alertes sur dépassement de seuil ; intégration avec RRDTool ; consommation de bande minime. Limites : repose sur SNMP (non généralisé à la DGI), ergonomie basique, non adapté au temps réel.
-- VNC (Virtual Network Computing) : prise en main à distance ; connexion en mode graphique client/serveur indépendamment des OS (HP-UX, AIX, Linux, Windows 9x/2000) ; simplicité ; intégration OpenSSH ; connexion reverse à l'initiative du serveur. Faiblesses : limites de sécurité (gestion des utilisateurs), consommation de bande passante (pas de cache), mauvaise prise en charge des postes Windows.
-- OpenSSH : version libre de la suite SSH ; crypte les données échangées entre systèmes distants. Programmes : ssh (remplace telnet et rlogin), scp (remplace rcp), sftp (version sécurisée de FTP). Authentification forte, confidentialité, intégrité (bi-clés DSA/RSA, algorithmes symétriques pour le chiffrement de session). Brique de base des communications sécurisées ; client graphique Putty pour Windows.
-Types d'outils de supervision : le « Framework » (outil intégré : OpenView d'HP, Tivoli d'IBM, Openmaster de Bull, Unicenter de Computer Associates) ; une série d'outils à fonctionnalité propre intégrables sur une plate-forme (plus ouvert, meilleure interopérabilité) ; les produits libres (souplesse, sans passation de marché ; solution privilégiée).
-SNMP dans ce contexte : architecture client/serveur (l'agent = serveur, le manager = client) ; deux modes - polling (le manager interroge à intervalle régulier l'agent qui écoute sur UDP/161) et trap (l'agent émet des alertes vers le manager sur UDP/162 en cas d'événement inhabituel).
-Nagios (cas DGI) : supervision réseau et système ; support SNMP par intégration avec des logiciels spécifiques (pas natif : interfaces Net-SNMP et trapsnmp, Nagios étant l'évolution de NetSaint) ; vérifications passives supportées ; architecture distribuée (hypervision / supervision redondante) ; supervision des ressources via SSH ; cartographie réseau ; factorisation par groupes de machines. Limites : pas de support natif SNMP, montée en charge (support SGBD limité), pas de rapport de performance, pas de découverte automatique. Serveur de supervision = serveur Linux. Méthodes de collecte : sondes réseau ; agent SNMP (via Net-SNMP et trapsnmp) ; agent SNMP « intelligent » paramétré pour les traps via des MIB constructeur ou applicatives ; agent propriétaire NRPE (Perl, Shell ou C) ; SSH qui exécute directement les sondes.
+      Collecteurs de supervision de SINAPS : serveurs hébergeant une instance de Nagios qui interceptent les informations de supervision des équipements et applications, envoient des requêtes pour en retirer des informations, et les transmettent aux serveurs de restitution.
+
+      Serveurs SINAPS : serveurs de deux types, les serveurs d'application qui hébergent le portail d'accès et affichent arbres d'hypervision, alertes et graphes, et les serveurs de calcul qui effectuent les calculs des indicateurs et de l'état des services, les serveurs d'application écrivant et lisant dans la base de supervision et les serveurs de calcul n'y accédant que pour récupérer les métriques.
+
+      NARETO : plateforme de supervision spécifique du secteur messagerie du SG-SEP, intégrant des outils d'administration système en shell pour le traitement des alertes et indicateurs, une base PostgreSQL pour le stockage et un framework applicatif Rails pour le rendu, l'affichage et le reporting.
+
+      Administration : ensemble d'actions manuelles ou automatisées menées sur les infrastructures, en local ou à distance, de façon préventive ou en réaction à un incident.
+
+      Supervision : suivi des performances, de la disponibilité et de la sécurité sur les réseaux, systèmes et applications, avec historisation des événements et statistiques, préventive pour anticiper la dégradation d'une application ou d'un équipement, et réactive par déclenchement d'alerte, envoi de courriel ou de SMS.
+
+      Modèle Manager-Agent : modèle organisant le dialogue entre une station d'administration et les équipements fournissant des services sur un réseau, du routeur manageable au commutateur administrable, permettant une vision de bout en bout de la chaîne de liaison.
+
+      Station d'administration : machine généralement organisée en deux parties, l'une chargée du dialogue avec les équipements en mode SNMP ou CMIP, l'autre présentant le résultat aux utilisateurs, intégrant graphiquement les requêtes et opérant des regroupements en sous-ensembles cohérents.
+
+      Agent : processus s'exécutant sur un équipement, serveur, routeur ou autre, qui obtient des équipements auxquels il est rattaché les informations qu'il délivre à la station habilitée conformément au protocole.
+
+      Gestion des fautes (fault management) : domaine ISO envisageant la surveillance qui détecte les pannes et prend en compte les événements non sollicités pour les enregistrer et les analyser, la localisation des pannes par sollicitation des équipements en évitant les effets de bord, et la résolution par les corrections appropriées.
+
+      Gestion des configurations : domaine ISO comprenant l'installation et le paramétrage initial des équipements avec suppression et suivi des versions, le contrôle et la surveillance de la configuration dans son aspect patrimonial, et l'identification précise des équipements par un nom ou une adresse non équivoque.
+
+      Gestion des performances : domaine ISO comprenant la surveillance et le réglage du trafic et des charges et l'observation de la qualité de service, le temps de réponse de bout en bout et la disponibilité des services étant les composantes les plus citées, seule la disponibilité disposant d'une mesure satisfaisante.
+
+      Gestion comptable : domaine ISO consistant à relever l'utilisation et la charge des équipements et à les imputer aux bénéficiaires, largement insatisfait car les équipements gèrent des liens logiques sans connaître leurs utilisateurs et sans s'intéresser au contenu des trames.
+
+      Gestion de la sécurité : domaine ISO veillant à la confidentialité des échanges, enregistrant les événements significatifs de tentatives d'intrusion et les faisant remonter aux autorités ; les responsables de la sécurité regardent les outils de surveillance avec circonspection car les pirates s'en servent, l'éradication des trames vers les ports 161 et 162 étant une mesure radicale.
+
+      MIB (Management Information Base) : base d'informations structurée et normalisée, point d'ancrage du modèle commun aux deux protocoles, à représentation externe arborescente purement virtuelle où l'implantation interne importe peu, toutes les branches découlant de la racine, chaque nœud pouvant contenir quatre types d'objets de base, entiers, chaînes de caractères, identificateurs d'objet et objets de type null.
+
+      Objet de la MIB : élément caractérisé par un nom et une syntaxe donnant son type, son utilisation en lecture ou écriture et son statut requis ou facultatif, défini dans un sous-ensemble de la syntaxe ASN.1 de la couche 6 du modèle OSI.
+
+      Descripteur d'objet et identifiant d'objet : deux désignations d'un nœud de la MIB, le descripteur par concaténation des noms des prédécesseurs séparés par un point comme ISO.Org.DoD.Internet.Mgmt.Mib.Ip.IpReceives, et l'OID par des entiers comme 1.3.6.1.2.1.4.3.0, le zéro final désignant une occurrence au niveau considéré.
+
+      Objets standard, privés et expérimentaux : trois sortes d'objets de la MIB rassemblés dans des branches homogènes ; les objets standard suivent des règles d'évolution strictes, tous les logiciels du marché étant compatibles MIB 2, la mise à jour créant une nouvelle branche au même point que la branche modifiée déclarée obsolète, ce qui assure une compatibilité descendante, les branches standard étant confiées à des organismes désignés.
+
+      Branche privée : branche à la disposition des constructeurs sous le nœud private, chaque constructeur y recevant un identifiant propre dans la branche entreprise, avec toute liberté d'organisation et de publication, ce qui pose aux stations d'administration généralistes le problème de disposer de la dernière version de chaque MIB constructeur.
+
+      Compilateur de MIB : outil permettant à une station d'administration de prendre en compte les nouvelles versions de MIB décrites en ASN.1, les descriptions de MIB étant parfois vendues, ce qui est plus ou moins un gage de qualité.
+
+      Branche expérimentale : branche utilisée par la communauté Internet pour les tests de nouveaux objets en attente de normalisation.
+
+      SNMP et CMIP : deux protocoles de dialogue entre station d'administration et agent, fondés sur la MIB et une architecture identique ; CMIP est en théorie préférable, fondé sur un modèle objet, mieux sécurisé et opérant en mode connecté, mais en pratique largement délaissé au profit de SNMP pour des raisons de complexité, quelques centaines de lignes de code C suffisant à écrire un manager ou un agent SNMP.
+
+      Messages SNMP : GetRequest et sa réponse GetResponse ou NoSuchObject pour demander une information, GetNextRequest pour la suivante, GetBulk pour un lot d'informations, SetRequest pour la mise à jour, et Trap pour une alarme sans réponse, seul cas où l'agent a l'initiative du dialogue.
+
+      Faiblesses de SNMPv2 : pas de chiffrement des échanges et communauté transmise en clair pendant les sessions.
+
+      Apports de SNMPv3 : authentification par utilisateur par le modèle USM (User-based Security Model) avec fonctions de hachage MD5 et SHA et chiffrement des clés privées avec DES, et contrôle d'accès aux ressources à plusieurs niveaux ; SNMPv3 n'est pas une simple mise à jour mais s'implémente au-dessus des versions 1 et 2 pour leur fournir ses services de sécurité.
+
+      Limites de la supervision : elle porte sur des trafics et charges sans les individualiser, on sait que le trafic IP croît sans l'attribuer à un utilisateur ni mesurer ses temps de réponse ; la simplicité du protocole ne permet pas de construire des outils d'intervention ; et tant que les développeurs n'enrichissent pas les compteurs de la branche application de la MIB, une bonne part du fonctionnement reste impénétrable.
+
+      MIB RMON : MIB de sondes ou d'automates programmables surveillant de manière autonome des portions de réseau ou des applications, réagissant aux événements locaux et rapportant en SNMP des informations synthétisées aux administrateurs.
+
+      NTP (Network Time Protocol) : protocole maître du temps de la RFC 1035, construit selon une hiérarchie en couches, synchronisant les horloges des équipements sur une même base de temps, nécessaire à la corrélation des problèmes de réseau et à la gestion centralisée de la sécurité malgré le mode non connecté d'IP.
+
+      Framework de supervision : outil intégré comportant tous les éléments pour superviser et récupérer les événements, comme OpenView d'HP, Tivoli d'IBM, OpenMaster de Bull et Unicenter de Computer Associates.
+
+      OpenNMS : produit libre de supervision réseau et d'analyse des performances, supervisant un large éventail de services, analysant les performances via SNMP comme MRTG, découvrant automatiquement les composants et services, supportant nativement SNMP et la gestion des traps, avec notifications et rapports, mais à ergonomie limitée sans cartographie et à maturité imparfaite.
+
+      MRTG (Multi Router Traffic Grapher) : outil d'analyse de performances générant des graphes à partir de statistiques SNMP, supervisant les composants réseau, les ressources système et par adresse IP ou nom d'interface, avec suivi journalier à annuel et déclenchement d'alarmes sur dépassement de seuil, s'intégrant avec RRDTool, à faible consommation de bande passante, mais reposant sur SNMP non généralisé et à ergonomie basique peu adaptée au temps réel.
+
+      VNC (Virtual Network Computing) : outil libre de prise en main à distance en mode graphique entre un client et un serveur indépendamment des systèmes d'exploitation, avec paramétrage de résolution, profondeur de couleurs et taille d'écran, s'intégrant avec OpenSSH et permettant une connexion inverse à l'initiative du serveur, mais avec des limites de sécurité, une forte consommation de bande passante sans gestion de cache et une mauvaise prise en charge des postes Windows.
+
+      OpenSSH : version libre de la suite d'outils du protocole SSH, programme terminal chiffrant les données échangées entre systèmes distants, avec ssh en remplacement de telnet et rlogin, scp en remplacement de rcp et sftp version sécurisée de FTP, supportant l'authentification forte, la confidentialité et l'intégrité avec gestion des bi-clés DSA et RSA, considéré comme une brique de base des communications sécurisées et intégrable avec VNC ou Nagios.
+
+      Polling : mode de fonctionnement classique de SNMP où la station manager interroge à intervalle régulier les éléments monitorés, le serveur agent écoutant sur UDP 161.
+
+      Trap : mode de fonctionnement de SNMP où l'agent envoie des alertes vers le manager sur UDP 162 quand des événements inhabituels se produisent.
+
+      Méthodes de collecte de Nagios : les sondes réseau, l'agent SNMP via les interfaces Netsnmp et trapsnmp puisque SNMP n'est pas natif dans Nagios, l'agent SNMP intelligent paramétré pour les traps via des MIB constructeur ou applicatives, et l'agent propriétaire Nagios NRPE en Perl, shell ou C, ou SSH qui exécute directement les sondes.
+
+      Projet ASR (Administration des Systèmes et des Réseaux) : projet de l'ex Direction Générale des Impôts né du constat d'insuffisance des outils d'administration, piloté par l'équipe ESR, couvrant l'administration, la supervision, la télé-assistance et la télé-distribution, avec une tendance à l'utilisation de logiciels libres respectant les orientations SNMP et les standards Perl, Java et XML.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LES CAS PRATIQUES DE SUPERVISION.
+
+
+   A. Nagios et SINAPS à la DGFiP.
+
+      Nagios est utilisé à la DGFiP pour superviser les serveurs LDAP et de messagerie, offrant une vision macro des pools de serveurs proche de l'architecture, une vision de l'état des serveurs via ICMP indiquant si une machine est démarrée et depuis quand elle n'est plus disponible, une vision des services par serveur où certaines remontées sont à l'initiative du serveur et d'autres renvoyées par la machine supervisée, un détail par service permettant de le relancer ou d'arrêter sa supervision, une historisation en base avec extraction de graphiques, et des schémas d'architecture logique.
+
+      SINAPS v5 a vocation à devenir l'outil unique de supervision de la DGFiP, application PHP compatible Nagios qu'elle utilise pour traiter les alertes, sur base MySQL, modulaire ; le serveur de configuration en est le cœur et paramètre les collectes, les cibles, les utilisateurs et les vues, la configuration se propageant aux collecteurs et serveurs de restitution ; la base de configuration MySQL se réplique vers le site de plan de reprise d'activité ; les collecteurs hébergent une instance de Nagios et interceptent ou récupèrent les informations qu'ils transmettent aux serveurs de restitution ; les serveurs SINAPS sont d'application, hébergeant le portail et affichant arbres, alertes et graphes, ou de calcul, effectuant les calculs des indicateurs, les serveurs d'application écrivant et lisant dans la base et les serveurs de calcul n'y accédant que pour récupérer les métriques.
+
+
+   B. Les solutions du SG-SEP.
+
+      Le SG-SEP a mis en place une solution basée sur Nagios et Cacti, avec des vues par familles de serveurs, par serveur puis par services, similaires à celles de la DGFiP, et une nouvelle interface d'habillage orientée web service, NARETO ; le secteur messagerie a en outre mis en place une plateforme spécifique intégrant des outils d'administration système en shell pour le traitement des alertes et indicateurs, une base PostgreSQL pour le stockage et un framework Rails pour le rendu, l'affichage et le reporting, permettant la remontée et la valorisation statistique et graphique.
+
+
+II. LE MODÈLE ADMINISTRATEUR.
+
+
+   A. L'historique et les besoins.
+
+      La difficulté d'administrer des ressources croît plus que proportionnellement avec leur nombre ; dans les années 1980, l'accès aux grands systèmes centraux était déjà confronté au diagnostic, limité à savoir si c'était le système, le réseau ou l'utilisateur qui était en panne ; les outils étaient alors très propriétaires et à champ de vision limité.
+
+      Avec les systèmes ouverts et Internet, l'interconnexion est devenue la règle sur le modèle OSI vite balayé par IP, les outils devenant nombreux, composites et partagés, seul le rapprochement d'informations de l'ensemble permettant de trouver la source du dysfonctionnement ; l'ISO a généralisé l'administration en cinq volets, l'information étant structurée dans la MIB, les requêtes modélisées par le protocole complexe CMIP, la communauté Internet en retenant l'essentiel dans SNMP auquel les constructeurs se sont ralliés, ce qui correspond à la naissance du modèle Manager-Agent.
+
+
+   B. Les cinq domaines de l'ISO.
+
+      La gestion des fautes envisage la surveillance qui détecte les pannes et analyse les événements non sollicités, la localisation par sollicitation des équipements en évitant les effets de bord, et la résolution par les corrections ; la gestion des configurations comprend l'installation et le suivi des versions, le contrôle patrimonial de la configuration et l'identification précise des équipements.
+
+      La gestion des performances porte sur la surveillance du trafic et des charges et la qualité de service, le temps de réponse de bout en bout et la disponibilité étant les plus cités, seule la disponibilité étant bien mesurée ; la gestion comptable relève l'utilisation pour l'imputer aux bénéficiaires, mais reste insatisfaite car les équipements gèrent des liens logiques sans connaître leurs utilisateurs ; la gestion de la sécurité veille à la confidentialité et enregistre les tentatives d'intrusion, les responsables de la sécurité regardant les outils de surveillance avec circonspection car les pirates s'en servent.
+
+
+III. LA MIB.
+
+
+   A. La structure.
+
+      Le stockage dans une MIB est le point d'ancrage du modèle, commun aux deux protocoles, à représentation externe arborescente purement virtuelle, toutes les branches découlant de la racine, chaque nœud pouvant contenir des entiers, des chaînes de caractères, des identificateurs d'objet et des objets null, éventuellement constitués de tableaux et de séquences.
+
+      Chaque objet est caractérisé par un nom et une syntaxe donnant son type, son utilisation en lecture ou écriture et son statut requis ou facultatif, défini dans un sous-ensemble de la syntaxe ASN.1 de la couche 6 du modèle OSI ; le nom d'un nœud est obtenu par concaténation des noms des prédécesseurs séparés par un point, avec deux possibilités, un descripteur d'objet mnémonique et un identifiant d'objet OID, le zéro final désignant une occurrence parmi plusieurs possibles.
+
+
+   B. Les branches et le rôle des constructeurs.
+
+      La MIB comporte des objets standard, privés et expérimentaux dans des branches homogènes ; les objets standard suivent des règles strictes, tous les logiciels étant compatibles MIB 2, la mise à jour créant une nouvelle branche au même point que la branche obsolète, les objets équivalents ne différant que par l'identifiant de la nouvelle branche, ce qui assure une compatibilité descendante, les branches standard étant confiées à des organismes désignés.
+
+      Les branches privées sont sous le nœud private, chaque constructeur recevant un identifiant dans la branche entreprise et organisant sa structure comme il veut, ce qui pose aux stations généralistes le problème de disposer de la dernière version de chaque MIB constructeur ; en pratique, les fournisseurs de plateformes intégrées ont des accords avec les fournisseurs d'équipements, reçoivent les MIB en ASN.1 et les prennent en compte avec un compilateur de MIB, les descriptions étant parfois vendues ; la branche expérimentale sert aux tests de nouveaux objets ; un manager dispose ainsi de milliers d'entrées sur le réseau, les équipements, les serveurs et les systèmes de gestion de bases de données, chaque administrateur devant élaborer ses propres solutions pour choisir les indicateurs pertinents.
+
+
+IV. LES PROTOCOLES D'ADMINISTRATION.
+
+
+   A. SNMP et CMIP.
+
+      SNMP et CMIP sont fondés sur la MIB et une architecture identique, la station d'administration ayant une partie de dialogue et une partie de présentation, l'agent étant un processus sur l'équipement qui délivre les informations à la station habilitée ; l'administrateur interroge l'agent pour un ou plusieurs indicateurs désignés par leur OID, l'agent répondant, le seul cas où l'agent a l'initiative étant l'alarme Trap.
+
+      Les messages sont GetRequest et sa réponse GetResponse ou NoSuchObject, GetNextRequest pour la suivante, GetBulk pour un lot, SetRequest pour la mise à jour et Trap pour une alarme sans réponse ; CMIP est en théorie préférable, fondé sur un modèle objet, mieux sécurisé et en mode connecté ce qui permet à la station de savoir en permanence si les agents sont actifs, mais en pratique délaissé pour sa complexité au profit de SNMP dont quelques centaines de lignes de code C suffisent.
+
+
+   B. Les versions et les limites.
+
+      Le principal reproche à SNMP est sa faiblesse en sécurité, sur laquelle progressent les versions successives, la V3 s'imposant peu à peu ; la V2 n'a pas de chiffrement des échanges et transmet la communauté en clair, alors que la V3 apporte l'authentification par utilisateur par le modèle USM avec hachage MD5 et SHA et chiffrement des clés privées avec DES, et un contrôle d'accès à plusieurs niveaux, la V3 s'implémentant au-dessus des versions 1 et 2.
+
+      La supervision a des limites, elle porte sur des trafics et charges sans les individualiser, la simplicité du protocole ne permet pas de construire des outils d'intervention, et tant que les développeurs n'enrichissent pas les compteurs de la branche application de la MIB, une bonne part du fonctionnement reste impénétrable ; ces lacunes sont comblées par les sondes de la MIB RMON qui surveillent de manière autonome et rapportent en SNMP, et le protocole NTP synchronise les horloges des équipements, nécessaire à la corrélation des problèmes et à la gestion centralisée de la sécurité.
+
+
+V. LE CAS DU PÔLE FISCAL DE LA DGFiP.
+
+      Le projet ASR de l'ex Direction Générale des Impôts est né du constat d'insuffisance des outils d'administration des serveurs multi-applicatifs, environ trois cents par centre de services informatiques, la surveillance étant réalisée par des outils locaux ou le terminal de synthèse TETE ; ses objectifs couvrent l'administration en actions manuelles ou automatisées préventives ou réactives, la supervision préventive et réactive sur les réseaux, systèmes et applications s'appuyant sur SNMP, la télé-assistance et la télé-distribution.
+
+      La tendance est aux logiciels libres respectant les orientations SNMP et les standards Perl, Java et XML, fonctionnant en environnement DGI sur serveurs UNIX AIX et HP-UX, Windows et serveurs d'administration Linux répartis sur le territoire, avec des critères de montée en charge, de support de SNMP, d'architecture distribuée et d'ergonomie ; les produits retenus sont Nagios et OpenSSH pour la supervision, MRTG et OpenNMS pour l'analyse des performances, VNC et OpenSSH pour la prise en main à distance et OpenSSH pour le transfert de données.
+
+      Il existe trois types d'outils de supervision, le framework intégré comme OpenView, Tivoli, OpenMaster et Unicenter, la série d'outils intégrables sur une plateforme plus ouverte, et les produits libres privilégiés car ne nécessitant pas de passation de marché ; SNMP fonctionne en polling où le manager interroge les agents sur UDP 161, et en trap où l'agent envoie des alertes sur UDP 162 ; Nagios supervise réseau et système, avec support SNMP non natif, notification, cartographie et hypervision, ses limites étant l'absence de support natif de SNMP, la montée en charge et l'absence de rapport de performance et de découverte automatique, ses méthodes de collecte étant les sondes réseau, l'agent SNMP via Netsnmp et trapsnmp, l'agent SNMP intelligent via des MIB constructeur, et l'agent propriétaire NRPE ou SSH.
+
+      Nagios est le plus adapté et va être mis en œuvre au niveau de la plateforme de supervision globale appelée tour de guet, mais n'étant pas complètement en phase avec les orientations DGI, l'évolution d'OpenNMS est à surveiller ; les prérequis avant industrialisation sont l'analyse détaillée du besoin, la définition du paramétrage cible, les développements complémentaires des agents SNMP applicatifs et la préparation du déploiement, avec une participation active de la DGI au projet Open Source.
+
+
+POINTS D'ATTENTION.
+
+      SINAPS v5 est compatible Nagios qu'il utilise pour traiter les remontées d'alerte, sur base MySQL, en architecture modulaire.
+
+      Le service de base de Nagios via ICMP indique si une machine est démarrée et depuis quand elle ne l'est plus.
+
+      L'ISO découpe l'administration en cinq domaines, fautes, configurations, performances, comptabilité et sécurité.
+
+      La représentation externe de la MIB est arborescente et purement virtuelle ; l'implantation interne importe peu.
+
+      Un nœud de la MIB se désigne par un descripteur mnémonique ou par un OID, le zéro final indiquant une occurrence.
+
+      La mise à jour d'une branche standard de la MIB crée une nouvelle branche au même point, l'ancienne devenant obsolète, ce qui assure la compatibilité descendante.
+
+      Les constructeurs font leurs efforts dans leur branche privée, pas dans les branches standard.
+
+      Trap est le seul message SNMP où l'agent a l'initiative du dialogue.
+
+      CMIP est en théorie préférable et en mode connecté, mais délaissé au profit de SNMP pour sa complexité.
+
+      SNMPv2 n'a pas de chiffrement et transmet la communauté en clair ; SNMPv3 apporte le modèle USM et le contrôle d'accès.
+
+      SNMPv3 s'implémente au-dessus des versions 1 et 2, ce n'est pas une simple mise à jour.
+
+      SNMP fonctionne en polling sur UDP 161 et en trap sur UDP 162 ; SNMP n'est pas natif dans Nagios.
+
+
+EXEMPLES CITES.
+
+      Outils de supervision de la DGFiP, Nagios, SINAPS v4 et v5, et Pegase pour les plateformes AIX.
+
+      Plateforme NARETO du SG-SEP avec shell, PostgreSQL et framework Rails.
+
+      Objet IpReceives désigné par ISO.Org.DoD.Internet.Mgmt.Mib.Ip.IpReceives ou l'OID 1.3.6.1.2.1.4.3.0.
+
+      OID d'IpReceives 1.3.6.1.2.1.4.3 dans la MIB 1 et 1.3.6.1.2.2.4.3 dans la MIB 2.
+
+      Messages SNMP GetRequest, GetNextRequest, GetBulk, SetRequest et Trap.
+
+      Modèle USM de SNMPv3 avec hachage MD5 et SHA et chiffrement des clés privées avec DES.
+
+      MIB RMON de sondes surveillant de manière autonome et rapportant en SNMP.
+
+      Protocole NTP maître du temps de la RFC 1035, à hiérarchie en couches.
+
+      Frameworks de supervision OpenView d'HP, Tivoli d'IBM, OpenMaster de Bull et Unicenter de Computer Associates.
+
+      Projet ASR de l'ex DGI, serveurs multi-applicatifs à environ trois cents par centre de services informatiques.
+
+      Suite OpenSSH avec ssh, scp et sftp en remplacement de telnet, rcp et FTP.

@@ -1,46 +1,329 @@
-WINDOWS SERVER 2008 : DÉCOUVERTE, INSTALLATION, DÉMARRAGE
+WINDOWS SERVER 2008 : DÉCOUVERTE, INSTALLATION ET DÉMARRAGE.
 
-1. HISTORIQUE ET ÉDITIONS
-Première version de Windows en 1985 (poste de travail) ; premier serveur avec Windows NT. NT 3.1 (1993), NT 4.0 (1996), Windows 2000 (2000), Server 2003, Server 2008 (février 2008), Server 2008 R2 (octobre 2009 : premier Windows uniquement 64 bits).
-Éditions 2008 : Standard, Enterprise, Datacenter, Web, Itanium (Itanium 64 bits seulement ; les autres en 32 et 64 bits). Autres : HPC, Foundation (64 bits), Small Business Server, Essential Business Server.
-Limites principales :
-- Standard : 4 CPU, 32 Go RAM, 1 VM + hôte.
-- Enterprise : 8 CPU, 2 To RAM, 4 VM, ajout mémoire à chaud, DFS-R, ADFS, AD Certificate Services, Failover Clustering.
-- Datacenter : 64 CPU, 2 To RAM, virtualisation illimitée, ajout/remplacement à chaud mémoire et CPU, Failover Clustering.
-- Web : 4 CPU, 32 Go RAM, rôles Web (IIS) et DNS uniquement.
-- Foundation : 1 CPU 64 bits, 15 utilisateurs max, 8 Go RAM, préinstallée uniquement. HPC : 4 CPU 64 bits, 128 Go RAM, super-calculateur.
-Server Core : installation minimale, même noyau, ligne de commande uniquement (pas de GUI, navigateur, panneau de configuration) ; ~2 Go de disque (vs 8 Go), 512 Mo RAM ; packages installés à la demande.
 
-2. ARCHITECTURE
-Noyau = fusion Windows Vista + nouveau code. Fondamentaux : sécurité, virtualisation, Web.
-Deux couches : mode utilisateur (sous-systèmes, applications, services ; priorité basse, espace d'adressage propre, pas d'accès direct aux ressources, appels système) et mode noyau (accès direct aux données système et au matériel, zone mémoire protégée, priorités des threads et des interruptions).
-Mode exécutif : composants s'exécutant en mode noyau, prioritaires sur le CPU ; fonctions : gestion mémoire, ordonnancement des processus, communication avec les périphériques.
-Sous-systèmes du mode utilisateur : intégraux (sécurité, service poste de travail, service serveur) et environnementaux (émulent d'autres OS via leurs API).
-Composants du mode noyau : ensemble Executive (system service dispatcher, interfaces du mode noyau, gestionnaire d'E/S, moniteur de sécurité, gestionnaire IPC, gestionnaire de mémoire virtuelle VMM, gestionnaire de processus, gestionnaire PnP, gestionnaire d'alimentation, GDI, gestionnaire d'objets) ; HAL (couche d'abstraction du matériel : DLL avec le code matériel spécifique) ; pilotes de mode noyau conformes à l'architecture WDM (Windows Driver Model).
+LEXIQUE COMPLET.
 
-3. CARACTÉRISTIQUES
-Flexibilité : rôles et fonctionnalités, PowerShell, Windows Remote Shell, services de déploiement WDS.
-Robustesse : cluster failover, Server Core, nouvelle pile réseau.
-Sécurité : contrôleurs de domaine en lecture seule (RODC), Network Access Protection (NAP), Active Directory Federation Services (ADFS).
-Virtualisation : machines virtuelles (Hyper-V), Terminal Server.
-Web : IIS7 réécrit, modulaire (surface d'attaque réduite) ; fondation de SharePoint V3, du WCF (Framework 3.0), du service de streaming.
+      Windows NT : première version de Windows pour serveur, dont dérive la lignée Windows Server.
 
-4. INSTALLATION
-Planification : identification des rôles, option d'installation (complète ou Core), virtualisation, édition, version 32 ou 64 bits, matériel.
-Rôle serveur : fonction du serveur après installation ; plusieurs rôles possibles ; rôle prédéfini ou applicatif. Server Core ne peut pas utiliser ASP.NET (pas de Framework).
-Choix de version : matériel neuf en 64 bits ; certains pilotes seulement en 32 bits ; Hyper-V exige du matériel x64 ; en 64 bits (sauf Itanium), tous les pilotes en mode noyau doivent être signés. Mises à niveau interplateformes (32↔64) non prises en charge ; Core↔complète impossible sans réinstallation. Microsoft recommande toujours une nouvelle installation.
-Installation manuelle : 4 informations seulement (langue et paramètres régionaux, numéro de licence, acceptation du contrat, disque ou partition) ; le reste dans la configuration initiale. Format d'image WIM (Windows Imaging Format). Partitions primaires uniquement, amorçables. Activation : 60 jours de grâce ; slmgr -rearm prolonge 3 fois (240 jours). Journaux d'installation : Setupapi.log, Setup.etl dans %WINDIR%\Panther (Observateur d'événements, wevtutil, tracerpt).
+      Édition : déclinaison de Windows Server 2008 aux capacités différentes ; les éditions Standard, Enterprise, Datacenter et Web existent en trente-deux et soixante-quatre bits, Itanium seulement en soixante-quatre bits, auxquelles s'ajoutent HPC, Foundation, Small Business Server et Essential Business Server.
 
-5. SYSTÈMES DE FICHIERS
-NTFS (privilégié) : correction automatique de certaines erreurs de disque, grands disques, sécurité (autorisations, chiffrement EFS), compression, indexation, liens mis à jour lors d'un déplacement de volume ; support de 10 Mo à 2 To, taille de fichier limitée à celle du support ; accessible seulement par Windows NT/2000/2003/2008.
-FAT32 : aucune sécurité, partition de 32 Go max (dans cette version), fichier de 4 Go max ; utile pour un multiboot avec Windows 95/98/ME.
-FAT / FAT16 : ancien, rare. Critères de choix : sécurité, OS à installer, taille des partitions et fichiers, administration, accès aux ressources partagées, capacité du support.
-Licences : une licence Windows Server par instance + une CAL par utilisateur ou périphérique. Deux types de CAL : de poste de travail (économique si plusieurs utilisateurs par poste) ou d'utilisateur (mieux pour les nomades). Deux modes : Par utilisateur/Par périphérique (irréversible, une CAL par utilisateur ou périphérique sur l'ensemble des serveurs) ou Par serveur (une CAL par connexion simultanée à un serveur donné ; un passage unique vers le mode Par utilisateur/périphérique autorisé). Exceptions : accès Internet sans authentification, édition Web Server, connecteur externe, ≤ 2 accès d'administration, hôte de virtualisation uniquement.
+      Server Core : installation minimale qui ne contient qu'un nombre limité de fonctionnalités, avec un noyau identique à l'installation complète mais utilisable uniquement en invite de commande, sans interface graphique, ni navigateur, ni panneau de configuration.
 
-6. DÉMARRAGE
-Environnement repensé, prise en charge BIOS et UEFI. Magasin BCD (Boot Configuration Data) à la place de Boot.ini ; nouveau gestionnaire de démarrage et chargeur remplaçant Ntldr.exe. Modification via bcdedit.exe (droits d'administration ; sauvegarde par bcdedit /export) ; outils graphiques VistaBootPro, EasyBCD.
-Séquence : mise sous tension -> le CMOS charge le BIOS, exécute le POST -> lecture du MBR -> chargement de bootmgr.exe (racine de la partition active) -> lecture du magasin BCD (répertoire boot) -> chargement de winload.exe (%systemroot%\system32) pour Vista/2008, ou ntoskrnl pour Windows 2000/2003, ou winresume.exe si hibernation -> winload charge les pilotes de boot -> transfert du contrôle au noyau ntoskrnl.exe -> le shell affiche l'écran de connexion.
-Dépannage :
-- Dernière configuration valide connue (F8) : revient à l'état du registre du dernier démarrage réussi ; écrasée dès qu'un utilisateur se connecte ; utile après un pilote critique provoquant un écran bleu.
-- Options de démarrage avancées (F8) : mode sans échec (services et pilotes minimaux, VGA ; 3 variantes : invite de commandes, bureau local sans réseau, bureau local avec réseau), journalisation du démarrage (ntbtlog.txt), démarrage VGA (640x480), mode restauration des services d'annuaire (DC sans AD), mode débogage, empêcher le redémarrage automatique, désactiver le contrôle des signatures de pilotes.
-- BIOS ACPI (Advanced Configuration and Power Interface), inventaire des périphériques Plug and Play, pilotes de stockage de masse (contrôleur SCSI/RAID/Fibre Channel), restauration de l'OS ou du serveur complet via le DVD d'installation (« Réparer votre ordinateur » -> « Restauration de l'ordinateur Windows ») et une sauvegarde Windows Server Backup.
+      R2 : version qui étend les capacités de Windows Server 2008, première version de Windows disponible uniquement pour les processeurs soixante-quatre bits.
+
+      Rôle serveur : fonction qu'aura le serveur après installation, prédéfinie par Microsoft ou définie par l'administrateur pour une application, on parle alors de rôle de serveur applicatif ; plusieurs rôles peuvent être attribués à un même serveur.
+
+      Fonctionnalité : composant additionnel installable, distinct des rôles.
+
+      Mode utilisateur et mode noyau : deux couches principales de l'architecture, le mode utilisateur regroupant les sous-systèmes des applications, le mode noyau accédant directement aux données système et au matériel dans une zone mémoire protégée.
+
+      Mode exécutif (Executive) : ensemble des composants qui s'exécutent en mode noyau, prioritaires sur l'utilisation du processeur, dont les fonctions essentielles sont la gestion de la mémoire, l'ordonnancement des processus et la communication avec les périphériques.
+
+      HAL (couche d'abstraction du matériel) : bibliothèque de liens dynamiques contenant le code matériel spécifique qui gère les interfaces d'entrées-sorties, les contrôleurs d'interruption et la communication multiprocesseur.
+
+      Pilote WDM (Windows Driver Model) : pilote de mode noyau modulaire fait de routines standard et de routines internes, en quelque sorte un pilote de pilotes réduisant le code nécessaire aux pilotes spécifiques.
+
+      Sous-systèmes intégraux et environnementaux : les intégraux prennent en charge des fonctions essentielles comme la sécurité, le service poste de travail et le service serveur ; les environnementaux permettent d'exécuter des applications écrites pour d'autres systèmes en convertissant leurs appels d'API vers les composants du mode noyau.
+
+      IIS (Internet Information Services) : serveur web réécrit et intégré au système d'exploitation, modulaire, qui réduit la surface d'attaque et sert de fondation à SharePoint version trois, à Windows Communication Foundation et au streaming.
+
+      Hyper-V : plateforme de virtualisation, qui ne s'installe que sur matériel soixante-quatre bits compatible bien que les serveurs virtuels puissent être trente-deux ou soixante-quatre bits.
+
+      RODC (contrôleur de domaine en lecture seule) : fonctionnalité de sécurité étendant la protection au niveau de l'environnement.
+
+      NAP (Network Access Protection) : mécanisme garantissant que l'accès au réseau ne se fait qu'avec des ordinateurs sains.
+
+      ADFS (Active Directory Federation Services) : fonctionnalité de fédération sécurisée d'identités entre entreprises.
+
+      WIM (Windows Imaging Format) : format d'image fichier utilisé pour l'installation, plus efficace et rapide que l'installation traditionnelle fichier par fichier.
+
+      Activation et période de grâce : contrôle auprès de Microsoft que la copie est authentique ; sans clé, on dispose de soixante jours pour activer, période extensible trois fois avec la commande slmgr tiret rearm, faute de quoi le serveur ne tourne qu'avec des fonctionnalités réduites.
+
+      CAL (licence d'accès client) : licence requise pour chaque utilisateur, poste de travail ou combinaison qui accède au logiciel serveur, en licence de poste de travail ou d'utilisateur, exploitée en mode Par utilisateur ou Par périphérique, qui remplace l'ancien mode Par siège, ou en mode Par serveur.
+
+      Connecteur externe : licence acquittée par serveur permettant l'accès d'utilisateurs externes sans CAL individuelle.
+
+      NTFS : système de fichiers privilégié de Windows Server 2008, qui résout automatiquement certaines erreurs disque, prend mieux en charge les grands disques, offre autorisations et chiffrement, compression, indexation, mise à jour des liens lors d'un déplacement de volume, pour une capacité de dix méga-octets à deux téra-octets, la taille d'un fichier étant limitée à celle du support ; il n'est accessible que par Windows NT, deux mille, deux mille trois et deux mille huit.
+
+      FAT32 : système de fichiers plus ancien sans le niveau de sécurité de NTFS, limité à des partitions de trente-deux giga-octets et des fichiers de quatre giga-octets, utile surtout pour une configuration à démarrage multiple avec d'anciennes versions de Windows.
+
+      FAT16 (ou FAT) : système de fichiers encore plus ancien, rarement utilisé.
+
+      Partition primaire : partition ne contenant qu'un lecteur logique et pouvant être amorçable ; Windows Server 2008 ne crée que des partitions primaires.
+
+      BIOS et UEFI : les deux modèles de microprogramme pris en charge par le nouvel environnement de démarrage de Windows Server 2008.
+
+      POST : autotest matériel exécuté après le chargement du BIOS.
+
+      MBR (Master Boot Record) : secteur contenant notamment le nom du fichier de démarrage bootmgr.exe situé à la racine de la partition active.
+
+      BCD (Boot Configuration Data) : magasin de données de configuration de démarrage qui remplace le fichier texte Boot.ini, mieux sécurisé, compatible avec d'autres plates-formes et gérant plus de paramètres, stocké dans le répertoire boot de la partition active.
+
+      Ntldr : ancien chargeur Windows remplacé par le gestionnaire de démarrage Windows et un nouveau chargeur.
+
+      bootmgr.exe : gestionnaire de démarrage chargé en mémoire à partir du MBR, qui lit le magasin BCD.
+
+      winload.exe : chargeur de démarrage de Windows Vista et Windows Server 2008, situé dans system32, qui charge les pilotes configurés pour démarrer au boot puis transfère le contrôle au noyau.
+
+      winresume.exe : chargeur utilisé à la place de winload.exe si le système est en hibernation.
+
+      ntoskrnl.exe : noyau de Windows, situé dans system32, auquel winload.exe transfère le contrôle avant l'affichage de l'écran de connexion ; c'est aussi le chargeur des versions antérieures à Windows Server 2008.
+
+      bcdedit : utilitaire en ligne de commande fourni par Microsoft pour gérer BCD, aux paramètres pouvant être complexes, avec des outils graphiques tiers comme VistaBootPro ou EasyBCD.
+
+      ACPI (Advanced Configuration and Power Interface) : norme actuelle du fonctionnement du BIOS ; un BIOS ACPI non conforme risque de ne pas prendre correctement en charge les communications avec le matériel.
+
+      APM (Advanced Power Management) : ancienne conception de gestion de l'énergie encore prise en charge par certaines versions.
+
+      Plug-and-Play : technologie qui reconnaît automatiquement les périphériques et évite les conflits de configuration et le paramétrage manuel.
+
+      IRQ : requête d'interruption, paramètre à rendre unique par carte pour éviter les conflits avec les périphériques hors Plug-and-Play.
+
+      Options de démarrage avancées : menu obtenu par la touche F8 après le BIOS, pour dépanner le démarrage.
+
+      Mode sans échec : démarrage avec les seuls services et pilotes minimum et un pilote graphique VGA standard, en invite de commande, en Bureau local sans réseau ou avec réseau.
+
+      ntbtlog.txt : fichier créé par l'option d'inscription des événements de démarrage dans le journal, contenant la liste de tous les pilotes chargés, y compris le dernier avant un problème.
+
+      Démarrage VGA : démarrage en basse résolution six cent quarante sur quatre cent quatre-vingts, surtout pour résoudre une mauvaise configuration de résolution.
+
+      Mode restauration des services d'annuaire : démarrage d'un contrôleur de domaine sans lancer les services d'annuaire, d'intérêt désormais limité car Active Directory peut être arrêté et démarré sans redémarrer.
+
+      Mode débogage : mode utilisant un autre ordinateur pour déterminer l'origine d'un problème, complexe et réservé aux serveurs très coûteux.
+
+      Désactiver le contrôle des signatures : option permettant de démarrer une version soixante-quatre bits avec des pilotes de mode noyau non signés, à des fins de test uniquement.
+
+      Dernière configuration valide connue : fonctionnalité qui, après une modification ayant provoqué un écran bleu, ramène le serveur à l'état du dernier démarrage suivi d'une connexion utilisateur.
+
+      Restauration de l'ordinateur Windows : outil de l'environnement de récupération permettant de récupérer le système d'exploitation ou l'intégralité du serveur à partir du DVD d'installation et d'une sauvegarde créée par la Sauvegarde de Windows Server.
+
+
+COURS DÉTAILLÉ.
+
+
+I. DÉCOUVERTE DES SYSTÈMES WINDOWS.
+
+
+   A. Historique.
+
+      La première version de Windows date de mille neuf cent quatre-vingt-cinq et concernait le poste de travail, la première version pour serveur apparaissant avec Windows NT ; les jalons sont Windows NT 3.1 en juin mille neuf cent quatre-vingt-treize, NT 3.5, NT 3.51, NT 4.0 en juillet mille neuf cent quatre-vingt-seize, Windows 2000 en février deux mille, Windows Server 2003 en avril deux mille trois, Windows Home Server en juillet deux mille sept, Windows Server 2008 en février deux mille huit et Windows Server 2008 R2 en octobre deux mille neuf.
+
+
+   B. Les éditions de Windows Server 2008.
+
+      Windows Server 2008 reprend les technologies des versions précédentes et apporte de nouveaux outils de virtualisation, de ressources web et de gestion, avec de nouvelles versions d'IIS, de Server Manager, d'Hyper-V et de PowerShell ; les éditions principales sont Standard, Enterprise, Datacenter, Web et Itanium.
+
+      L'édition Standard admet quatre processeurs physiques, trente-deux giga-octets de mémoire et une machine virtuelle plus l'hôte ; l'édition Enterprise admet huit processeurs, deux téra-octets de mémoire, quatre machines virtuelles plus l'hôte, l'ajout de mémoire à chaud, la réplication DFS-R, les services de fédération et de certificats Active Directory, RRAS et IAS et le Failover Clustering ; l'édition Datacenter admet soixante-quatre processeurs, deux téra-octets de mémoire, des droits de virtualisation illimités et l'ajout ou le remplacement à chaud de mémoire et de processeurs.
+
+      L'édition Web est limitée aux rôles Web et DNS avec quatre processeurs et trente-deux giga-octets de mémoire ; l'édition Itanium, en soixante-quatre bits uniquement, est limitée aux rôles Web et application ; l'édition Foundation admet un processeur soixante-quatre bits, quinze utilisateurs et huit giga-octets de mémoire, vendue uniquement préinstallée ; l'édition HPC admet quatre processeurs soixante-quatre bits et cent vingt-huit giga-octets de mémoire, orientée super-calculateur.
+
+
+   C. Windows Server 2008 R2 et l'installation Core.
+
+      Windows Server 2008 prévoit une installation minimale appelée Core, qui ne contient qu'un nombre limité de fonctionnalités, avec un noyau identique à l'installation complète mais utilisable uniquement en invite de commande, sans interface graphique, sans navigateur et sans panneau de configuration.
+
+      Le mode Core réduit l'utilisation de la mémoire à cinq cent douze méga-octets et l'occupation disque à environ un ou deux giga-octets contre huit avec l'installation complète.
+
+
+   D. L'architecture en couches.
+
+      Windows Server 2008 représente la fusion du code du noyau de Windows Vista et de celui du nouveau système, l'architecture reposant sur la sécurité, la virtualisation et le web ; c'est un système portable pour les processeurs x86 ou x64, multitâche, fonctionnant sur monoprocesseur ou multiprocesseurs, dont la modularité repose sur deux couches, le mode utilisateur et le mode noyau.
+
+      La couche la plus basse décrit le matériel, au-dessus se trouve le mode noyau, puis le mode utilisateur qui contient les sous-systèmes, les processus système, les services et les applications.
+
+      Le mode utilisateur regroupe les sous-systèmes sur lesquels s'appuient les applications, qui n'ont pas d'accès direct aux ressources, s'exécutent dans un espace d'adressage propre et à faible priorité, la sécurité d'Active Directory faisant partie de ce sous-système ; on distingue les sous-systèmes intégraux qui prennent en charge des fonctions essentielles, sécurité, service poste de travail et service serveur, et les sous-systèmes environnementaux qui émulent d'autres systèmes et convertissent les appels d'API vers le mode noyau.
+
+      Le mode noyau accède directement à la mémoire dans une zone protégée, détermine l'ordre d'exécution du code selon des priorités attribuées à chaque thread et l'ordre de priorité des interruptions ; l'ensemble exécutif contient le répartiteur d'appels système, les interfaces du mode noyau, le gestionnaire d'entrées-sorties, le moniteur de sécurité, le gestionnaire de communications interprocessus, le gestionnaire de mémoire virtuelle, le gestionnaire de processus, le gestionnaire Plug-and-Play, le gestionnaire d'alimentation, le gestionnaire d'affichage et le gestionnaire d'objets, complété par la couche d'abstraction du matériel et par les pilotes de mode noyau conformes à l'architecture WDM.
+
+
+II. CARACTÉRISTIQUES DU SYSTÈME.
+
+
+   A. Un système flexible et robuste.
+
+      La flexibilité renvoie à la notion de rôles et de fonctionnalités et aux nouvelles possibilités de gestion comme PowerShell, Windows Remote Shell fondé sur des services web et les services de déploiement WDS ; la robustesse renvoie à la fiabilité assurée notamment par le cluster failover, la notion de Server Core et la nouvelle architecture de la pile réseau.
+
+
+   B. Sécurité, virtualisation et web.
+
+      Windows Server 2008 est le système d'exploitation le plus sécurisé de Microsoft à l'époque, étendant la sécurité à l'environnement avec les contrôleurs de domaine en lecture seule, NAP pour l'accès par des ordinateurs sains et ADFS pour la fédération d'identités ; la virtualisation regroupe les machines virtuelles et les outils de type Terminal Server, favorisée par le modèle de licences ; le web est lié au serveur IIS entièrement réécrit et intégré, modulaire, fondation de SharePoint, de Windows Communication Foundation et du streaming.
+
+      Windows Server 2008 est disponible en dix-neuf langues, seules quelques-unes pour l'édition Itanium.
+
+
+III. L'INSTALLATION.
+
+
+   A. Enjeux et planification.
+
+      L'installation est une étape importante dont les répercussions touchent les performances, l'optimisation des ressources, la surface d'attaque, la haute disponibilité et le dimensionnement du matériel ; la planification doit définir l'identification des rôles, le choix de l'option complète ou minimale, l'usage de la virtualisation, le choix d'une édition, d'une version et du matériel.
+
+
+   B. Le choix des rôles.
+
+      Les applications qui tournent sur Windows Server 2008 doivent être catégorisées en rôles pour simplifier le travail de l'administrateur, un rôle définissant la fonction du serveur ; il est recommandé de définir les rôles applicatifs, et le Server Core ne peut utiliser ASP.NET pour le rôle services web puisque le Framework n'y est pas installé.
+
+
+   C. Le choix de l'édition.
+
+      L'édition Enterprise est un excellent choix dès que l'on virtualise, sa licence autorisant quatre serveurs virtuels, mais son coût est plus élevé ; l'édition Datacenter autorise un nombre illimité de serveurs virtuels et s'impose pour les fermes virtualisées ainsi que pour un serveur applicatif hautement performant, hautement disponible et à tolérance de pannes matérielle renforcée ; pour un serveur physique, le choix se fait entre Standard et Enterprise sur des critères techniques, l'édition Itanium se cantonnant aux rôles web et applicatif.
+
+
+   D. Le choix de la version trente-deux ou soixante-quatre bits.
+
+      Les nouveaux serveurs reposent sur du matériel soixante-quatre bits, mais certains pilotes ne sont disponibles qu'en trente-deux bits incompatibles avec le soixante-quatre bits ; Hyper-V ne s'installe que sur matériel x64, Exchange Server 2007 ne s'installe qu'en soixante-quatre bits, et la tendance est au soixante-quatre bits dès que la mémoire dépasse quatre giga-octets, sous réserve de disposer des pilotes et de tester l'application.
+
+      En mode soixante-quatre bits, sauf Itanium, Windows Server 2008 exige que tous les pilotes de mode noyau soient signés, sans quoi il ne peut s'installer.
+
+
+   E. Le choix du matériel.
+
+      Pour un serveur neuf, le problème des pilotes soixante-quatre bits et du matériel minimal ne devrait pas se poser, mais il faut toujours contrôler la liste de compatibilité avant l'achat ; pour du matériel recyclé, une version trente-deux bits devrait s'installer sans problème ; le matériel doit correspondre au minimum requis, il faut disposer des pilotes de la version installée, et le BIOS doit être mis à jour avant l'installation.
+
+
+   F. L'installation manuelle.
+
+      L'installation a été simplifiée et optimisée, identique à celle de Windows Vista ; l'administrateur ne fournit que quatre informations, la langue et les paramètres régionaux, le numéro de licence, l'acceptation du contrat et le disque ou la partition d'installation, toutes les autres opérations étant reportées à la configuration initiale ; l'installation repose sur le format d'image WIM plutôt que sur une copie fichier par fichier des huit giga-octets de données.
+
+      Sans clé, on dispose de soixante jours pour activer, période extensible trois fois jusqu'à deux cent quarante jours avec slmgr tiret rearm ; Windows Server 2008 ne crée que des partitions primaires ; l'installation sans Core propose d'activer les rapports automatiques et Windows Update, avec pour meilleure pratique une stratégie de mise à jour via Windows Update, le service WSUS ou un outil tiers gérée par stratégie de groupe ; le Bureau à distance est désactivé par défaut.
+
+
+   G. L'installation en mode Core.
+
+      L'installation Core n'installe qu'un sous-ensemble, les éléments fondamentaux et les packages permettant l'installation des rôles, sans Framework ni Bureau, l'administration locale se faisant en invite de commande ; elle occupe environ deux giga-octets, tous les packages de rôles et de fonctionnalités étant stockés sur le disque et installés à la demande, l'ordinateur redémarrant à la fin.
+
+
+   H. La mise à jour et la mise à niveau.
+
+      La mise à jour vers Windows Server 2008 n'est pas conseillée bien que possible, car il faut aussi reconfigurer la plupart des services et le risque d'incompatibilité est grand ; Microsoft recommande toujours une nouvelle installation ; les mises à niveau interplateformes de trente-deux vers soixante-quatre bits ou l'inverse ne sont pas prises en charge, et il n'est pas possible de passer d'une installation Core à une installation complète sans réinstaller.
+
+
+IV. LES SYSTÈMES DE FICHIERS NTFS ET FAT32.
+
+
+   A. NTFS.
+
+      NTFS est le système de fichiers privilégié : il résout automatiquement certaines erreurs disque contrairement à FAT32, prend mieux en charge les grands disques et offre une sécurité optimisée par les autorisations et le chiffrement ; les fichiers et dossiers peuvent être chiffrés et compressés, les liens sont mis à jour lors d'un déplacement vers un autre volume, le contenu et les propriétés sont indexés, la capacité prise en compte va de dix méga-octets à deux téra-octets et la taille d'un fichier est limitée à celle du support ; NTFS n'est accessible que par Windows NT, deux mille, deux mille trois et deux mille huit.
+
+
+   B. FAT32 et le choix du système de fichiers.
+
+      FAT32 n'offre pas le niveau de sécurité de NTFS, donc tous les utilisateurs ayant accès à l'ordinateur peuvent lire ses fichiers ; on ne peut créer une partition FAT32 de plus de trente-deux giga-octets ni y stocker un fichier de plus de quatre giga-octets, la capacité prise en compte allant de cinq cent douze méga-octets à deux téra-octets et la taille des clusters étant optimisée au-delà de cinq cent douze méga-octets.
+
+      NTFS est fortement conseillé, mais il faut installer FAT dans deux cas, lorsque des fichiers doivent être accessibles localement par des systèmes non compatibles NTFS, et lorsque plusieurs systèmes cohabitent, la partition active primaire devant alors être reconnue de tous ; les versions antérieures de Windows peuvent accéder à des volumes NTFS via un réseau mais pas localement.
+
+
+V. LES LICENCES D'ACCÈS CLIENT.
+
+
+   A. Principe.
+
+      Chaque instance du logiciel serveur exécutée nécessite une licence Windows Server, et une CAL Windows Server 2008 est requise pour chaque utilisateur, poste de travail ou combinaison accédant au logiciel, sauf accès uniquement par Internet sans authentification, accès à Windows Web Server, utilisateurs externes couverts par un connecteur externe, deux postes ou utilisateurs au maximum à des fins d'administration, ou usage uniquement comme hôte de virtualisation.
+
+
+   B. Types et modes.
+
+      Il existe des CAL de poste de travail, moins onéreuses quand chaque poste sert à plusieurs utilisateurs, et des CAL d'utilisateur, plus intéressantes quand des employés accèdent depuis des périphériques inconnus ou depuis plusieurs postes.
+
+      Après le choix du type, deux modes sont disponibles : le mode Par utilisateur ou Par périphérique, qui remplace l'ancien mode Par siège, où le nombre de CAL est égal au nombre d'utilisateurs ou de périphériques, choix irréversible mais avec réattribution possible, souvent le plus économique en environnement distribué ; et le mode Par serveur, où le nombre de CAL est égal au nombre maximal d'accès simultanés à un serveur donné, avec un passage unique possible vers le mode Par utilisateur ou Par périphérique, plus économique avec peu de serveurs et des besoins d'accès limités.
+
+
+VI. LES FICHIERS ET JOURNAUX D'INSTALLATION.
+
+
+   A. Journaux et Observateur d'événements.
+
+      Le programme d'installation crée des fichiers journaux pour toutes les actions, comme Setupapi.log, à consulter en cas de problème ; les événements de performance de l'installation sont consultables dans l'Observateur d'événements sous les journaux Windows et le nœud Système, en ouvrant le journal enregistré Setup.etl situé par défaut dans le répertoire Panther.
+
+      Sur un serveur sans Windows AIK ni Windows OPK, il faut exécuter depuis la racine du support un script qui installe le fournisseur du suivi d'événements pour Windows ; on exporte le journal vers un fichier XML ou texte avec les commandes wevtutil ou tracerpt.
+
+
+VII. LE DÉMARRAGE DE WINDOWS SERVER 2008.
+
+
+   A. Le nouvel environnement de démarrage.
+
+      L'environnement de démarrage a été totalement repensé pour prendre en charge les microprogrammes BIOS et UEFI ; il utilise le magasin des données de configuration de démarrage BCD à la place du fichier Boot.ini, un nouveau gestionnaire de démarrage Windows et un nouveau chargeur remplaçant Ntldr.
+
+      Il faut des droits d'administration pour modifier la configuration de démarrage, faite avec BCDEdit.exe en invite de commande ; une modification erronée peut empêcher le démarrage, aussi faut-il faire au préalable une sauvegarde avec bcdedit slash export.
+
+
+   B. La séquence de démarrage.
+
+      À la mise sous tension, le CMOS charge le BIOS qui exécute le POST, puis le système cherche le MBR qui contient le nom du fichier de démarrage bootmgr.exe situé à la racine de la partition active ; bootmgr se charge en mémoire et lit les données du magasin BCD du répertoire boot de la partition active, puis charge winload.exe pour Windows Vista ou Windows Server 2008, ou ntoskrnl.exe pour les versions antérieures, winresume.exe remplaçant winload.exe si le système est en hibernation.
+
+      winload.exe charge les pilotes configurés pour démarrer au boot puis transfère le contrôle au noyau ntoskrnl.exe, et enfin le shell affiche l'écran de connexion ; le processus n'utilise plus le fichier texte Boot.ini sensible aux attaques mais le magasin BCD, mieux sécurisé, compatible avec d'autres plates-formes et gérant plus de paramètres.
+
+
+   C. BCD et bcdedit.
+
+      L'utilitaire de gestion de BCD est bcdedit, en ligne de commande, simple à utiliser mais aux paramètres pouvant être complexes ; des outils graphiques tiers gratuits ou payants comme VistaBootPro ou EasyBCD facilitent sa gestion ; ce processus sert surtout en multi-boot pour un poste de travail et, pour un serveur, à dépanner le démarrage.
+
+
+   D. Le contrôle du BIOS et de l'ACPI.
+
+      Il faut disposer des derniers pilotes et de la dernière version du BIOS pour un ordinateur x86 ou soixante-quatre bits, ou du microprogramme approprié pour une architecture Itanium ; la norme ACPI régit le fonctionnement du BIOS, Windows prenant aussi en charge d'anciennes conceptions APM et Plug-and-Play, mais un BIOS ACPI non conforme risque de ne pas prendre correctement en charge les communications avec le matériel, auquel cas le programme d'installation s'arrête avec des instructions.
+
+
+   E. L'inventaire des périphériques et les pilotes de stockage de masse.
+
+      Le Plug-and-Play reconnaît automatiquement les périphériques et évite les conflits ; pour les périphériques hors Plug-and-Play ou non conformes, il faut faire son propre inventaire des IRQ et des adresses mémoire depuis un système existant via le panneau de configuration ou les informations du BIOS, et rendre uniques les paramètres de chaque carte, quitte à retirer une carte pendant l'installation.
+
+      Pour un contrôleur de stockage de masse comme une carte SCSI, RAID ou Fibre Channel, il faut vérifier sa compatibilité et se procurer à l'avance le fichier de pilote fourni par le fabricant sur une clé USB ; si le contrôleur n'est pas pris en charge par les pilotes du support, l'installation s'arrête en indiquant qu'aucun disque n'est présent, et il faut redémarrer l'installation puis appuyer sur Contrôle-six pour fournir le pilote.
+
+
+   F. Les options de démarrage avancées.
+
+      Après le BIOS, la touche F8 fait apparaître les options avancées : le mode sans échec lance le système avec les seuls services et pilotes minimum et un pilote graphique VGA standard, en invite de commande, en Bureau local sans réseau ou avec réseau ; l'inscription des événements de démarrage crée le fichier ntbtlog.txt listant tous les pilotes chargés y compris le dernier avant un problème ; le démarrage VGA lance en basse résolution ; le mode restauration des services d'annuaire démarre un contrôleur de domaine sans les services d'annuaire, d'intérêt désormais limité ; le mode débogage utilise un autre ordinateur pour diagnostiquer ; une option empêche le redémarrage automatique après un incident ; une autre désactive le contrôle des signatures pour tester des pilotes non signés en soixante-quatre bits.
+
+
+   G. La dernière configuration valide connue.
+
+      Ce n'est pas un outil de dépannage mais une fonctionnalité qui, après une modification du système ayant provoqué un écran bleu au démarrage, permet de revenir à l'état du dernier démarrage suivi d'une connexion utilisateur, moment où la dernière configuration valide connue et la configuration actuelle deviennent identiques ; on y accède par la touche F8 puis en sélectionnant l'option, et il est recommandé après une mise à jour de pilote d'attendre le chargement complet de tous les pilotes avant de conclure.
+
+
+   H. La restauration du système d'exploitation.
+
+      On récupère le système d'exploitation ou l'intégralité du serveur avec le DVD d'installation et une sauvegarde de la Sauvegarde de Windows Server : on déconnecte le stockage externe, on démarre sur le DVD, on choisit Réparer votre ordinateur puis Restauration de l'ordinateur Windows, on reconnecte le stockage contenant la sauvegarde et on suit l'assistant, avec la possibilité de restaurer la dernière sauvegarde ou une autre, de formater et repartitionner ou de ne restaurer que les disques système, d'installer des pilotes et de spécifier des options avancées ; l'environnement de récupération n'ajuste pas les horodatages à l'heure d'été, et l'ordinateur redémarre à l'issue.
+
+
+POINTS D'ATTENTION.
+
+      Server Core ne s'administre localement qu'en invite de commande et ne peut être converti en installation complète sans réinstaller.
+
+      En version soixante-quatre bits, hors Itanium, tous les pilotes de mode noyau doivent être signés pour que l'installation aboutisse.
+
+      Toujours privilégier une nouvelle installation à une mise à jour ; les mises à niveau de trente-deux vers soixante-quatre bits ne sont pas prises en charge.
+
+      NTFS est fortement conseillé ; FAT n'est justifié que pour l'accès local par des systèmes non compatibles NTFS ou pour la partition active d'un démarrage multiple.
+
+      Le choix du mode Par utilisateur ou Par périphérique pour les CAL est irréversible.
+
+      Toujours sauvegarder la configuration de démarrage avec bcdedit slash export avant de la modifier.
+
+      Un BIOS ACPI non conforme peut faire échouer l'installation.
+
+      Pour un contrôleur de stockage de masse non reconnu par le support, préparer le pilote du fabricant sur une clé USB.
+
+      Après installation d'un pilote ou d'une application, attendre le chargement complet avant de recourir à la dernière configuration valide connue.
+
+
+EXEMPLES CITES.
+
+      Extension de la période de grâce avec la commande slmgr tiret rearm.
+
+      Installation basée sur le format d'image WIM plutôt que fichier par fichier.
+
+      Script d'installation du fournisseur de suivi d'événements exécuté avec cscript depuis le dossier sources etwproviders du DVD.
+
+      Ouverture du journal Setup.etl du répertoire Panther dans l'Observateur d'événements, export avec wevtutil qe ou tracerpt.
+
+      Sauvegarde de la configuration de démarrage avec bcdedit slash export.
+
+      Chemins winload.exe, winresume.exe et ntoskrnl.exe dans system32, bootmgr.exe à la racine de la partition active.
+
+      Fourniture d'un pilote de stockage de masse en redémarrant l'installation et en appuyant sur Contrôle-six.
+
+      Menu F8 des options de démarrage avancées avec le mode sans échec et l'inscription dans ntbtlog.txt.
+
+      Restauration complète du serveur via Réparer votre ordinateur puis Restauration de l'ordinateur Windows.

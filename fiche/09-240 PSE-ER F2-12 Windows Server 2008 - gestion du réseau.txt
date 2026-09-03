@@ -1,39 +1,237 @@
-WINDOWS SERVER 2008 : PRINCIPES DE LA GESTION DU RÉSEAU
+WINDOWS SERVER 2008 : LES PRINCIPES DE LA GESTION DU RÉSEAU.
 
-1. SERVICES RÉSEAU EN COUCHES
-Accès à distance (service « Réseau et accès distant ») : permet aux clients distants d'accéder aux serveurs et ressources (fichiers, imprimantes, services) comme s'ils étaient sur le réseau local. Deux types :
-- Dial-up : connexion via téléphone ou infrastructure de télécommunications ; connexion temporaire physique ou virtuelle.
-- VPN (réseau privé virtuel) : connexion virtuelle point à point via un réseau IP. Windows prend en charge SSTP (Secure Socket Transmission Protocol), tunnel récent qui encapsule PPP sur le canal SSL de HTTPS (port 443) et traverse la plupart des pare-feux qui bloquent PPTP ou L2TP/IPSec.
-Accès à distance vs contrôle à distance : l'accès à distance est une connexion proxy vers le réseau ; le contrôle à distance exécute les applications sur un serveur et n'en présente que l'interface.
 
-Active Directory : mise en œuvre Windows de services d'annuaire légers de type LDAP. Base de données d'objets représentant les ressources ; classes et attributs définis par un schéma ; objets hiérarchisés (conteneurs). API d'accès : API C de LDAP ; ADSI (interface COM au-dessus de LDAP, multi-langages, utilisable par WSH) ; MAPI (Exchange/Outlook) ; API SAM (ouverture de session, Msv1_0 pour NTLM et Kerberos) ; Net API (clients NT 4) ; API NTDS (SID/GUID, gestion et réplication).
-Stockage : fichier %SystemRoot%\NTDS\Ntds.dit, répliqué sur chaque contrôleur de domaine. Service d'annuaire dans le processus LSASS ; moteur ESE (Extensible Storage Engine, alias JET Blue), bibliothèque Esent.dll ; mises à jour transactionnelles pour l'intégrité.
+LEXIQUE COMPLET.
 
-Répartition de charge réseau (Network Load Balancing) : incluse dans Windows Server 2008, basée sur le filtrage NDIS. Cluster de jusqu'à 32 ordinateurs (hôtes du cluster) ; adresses IP dédiées + une seule adresse IP virtuelle publiée. La demande cliente arrive à tous les hôtes, un seul répond ; chaque demande gérée par un et un seul hôte. Défaillance d'un hôte : la grappe redistribue les demandes ; un hôte de remplacement peut être ajouté. Conditions : protocoles pris en charge par la pile Windows TCP/IP ; capacité à gérer les demandes sur n'importe quel système (l'état partagé est géré par l'application, le NLB ne le distribue pas). Applications adaptées : serveur web de contenu statique, Windows Media, Terminal Server.
+      Accès à distance : service Réseau et accès distant permettant aux clients distants de se connecter à des serveurs et ressources réseau comme s'ils étaient physiquement présents sur le réseau local ; il agit comme une connexion proxy à un réseau Windows, à la différence du contrôle à distance qui exécute les applications sur un serveur en présentant une interface au client.
 
-Système de fichiers distribué (DFS) et réplication DFS :
-- DFS relie des machines à des partages via un espace de noms unique ; accès client transparent quelle que soit la localisation. La racine de l'espace de noms doit être un partage sur un serveur Windows. Équilibrage de charge et haute disponibilité par jeux de réplicats (FRS pour créer une réplique). Côté serveur : service Dfssvc.exe (exportation, topologie dans le registre ou Active Directory) + pilote Dfs.sys (recherche de topologie). Côté client : pilote Dfsc.sys (redirecteur SMB), fournisseur Ntlanman.dll.
-- DFSR (réplication DFS) : réplique le contenu d'un partage DFS et le dossier SYSVOL (scripts de connexion, fichiers de stratégie de groupe). Réplication multi-maître distribuée. Jeu de réplicats = 2 systèmes ou plus reproduisant une arborescence selon un calendrier et une topologie (anneau, étoile, mesh) ; un ordinateur peut être membre de plusieurs jeux. Seuls les volumes NTFS (s'appuie sur le journal NTFS). Compression différentielle à distance (RDC) : seules les différences répliquées. Service Dfsr.exe, authentification RPC chiffrée, API Active Directory pour la configuration, interface WMI.
+      Dial-up : accès à distance où le client se connecte à un serveur d'accès distant via un téléphone ou une infrastructure de télécommunications, qui crée une connexion temporaire physique ou virtuelle.
 
-2. UTILITAIRES DE DIAGNOSTICS RÉSEAU
-Moyens d'administration : script et Windows PowerShell, lignes de commandes, Netsh, Centre Réseau et partage.
-Windows PowerShell : interpréteur et langage de script pour l'administration ; accepte et retourne des objets .NET (et non du simple texte). Applets de commande (>100, extensibles), utilisables seules ou combinées ; accès au Registre et aux certificats comme au système de fichiers.
-Lignes de commandes : IPCONFIG, NETSTAT, TRACERT, PATHPING, PING, NBTSTAT, NETDIAG.
-- IPCONFIG : sans paramètre, affiche adresses IPv4/IPv6, masque et passerelle par défaut de toutes les cartes ; actualise DHCP et le nom de domaine. /all = détail, /? = aide.
-- NETSTAT : connexions TCP actives, ports d'écoute, statistiques Ethernet, table de routage IP, statistiques IPv4 (IP, ICMP, TCP, UDP) et IPv6.
-- PING (Packet INternet Groper) : requête ICMP echo ; temps de réponse, état de la connexion ; diagnostic de connectivité ; adresse IP ou nom.
-- TRACERT : route d'un paquet IP ; contrôle du TTL (1, puis 2, 3...) ; chaque routeur renvoie « durée de vie dépassée lors du transit » ; chaque requête répétée trois fois ; requête inverse pour le nom de chaque adresse.
-- PATHPING : plus rapide ; requêtes ICMP à TTL croissant comme TRACERT, mais affichage immédiat des résultats, puis attente de la réponse du dernier hôte pour les statistiques.
-- NBTSTAT : visualise et manipule le cache de noms NetBIOS (600 s par défaut) ; paramètres sensibles à la casse.
-- NETDIAG : batterie de tests sur presque toutes les fonctions réseau (navigateur, DNS, IPCONFIG, IPX, Kerberos, LDAP, NETSTAT, Netware, Route, WAN, WINS, Winsock) ; outil de premier secours ; /q (silencieux), /v (documenté).
-Netsh (Network Shell) : ligne de commande, commandes hiérarchisées ; configure et affiche l'état des rôles et composants (local ou distant) ; équivalent MMC + réseaux purement IPv6, avec ponts ou RPC ; utilisable dans scripts et fichiers batch.
-Centre Réseau et partage : regroupe la gestion du réseau : intégrité graphique du réseau, partage de dossiers, nouvelles connexions distantes (accès à distance ou VPN), connexions sans fil. Accès via Panneau de configuration ou icône Réseau de la zone de notification.
+      VPN (Virtual Private Network) : accès à distance créant une connexion virtuelle point à point entre client et serveur via un réseau IP.
 
-3. RÉSOLUTION DE NOMS NETBIOS
-Trois méthodes : diffusion (petits réseaux non routés), fichier local LMHOSTS (emprunté à Unix), base centralisée WINS (propre à Microsoft). Sous Windows, les noms sont résolus en priorité par le DNS, puis par NetBIOS si le DNS échoue ; LLMNR est un mécanisme secondaire de secours.
-Diffusion : les machines se découvrent en « criant » leur nom et leur adresse ; trafic incessant. Les diffusions NetBIOS ne passent pas les routeurs (un domaine de diffusion = segment sans routeur) ; NetBIOS lui-même (ports 137 et 139) peut être routé. Inscription de nom : au démarrage, l'ordinateur diffuse une inscription de nom NetBIOS pour vérifier l'unicité. Résolution : NetBT consulte d'abord le cache de noms ; sinon jusqu'à trois requêtes sur le sous-réseau local ; l'hôte ayant enregistré le nom répond positivement.
-LMHOSTS : fichier texte statique (adresses IP + noms), insensible à la casse, dans %systemroot%\System32\Drivers\etc (avec HOSTS, SERVICES, PROTOCOL, NETWORK, QUOTES ; exemple LMHOSTS.sam). Paramètres en majuscules précédés de # (#PRE, #DOM ; # sert aussi de commentaire). À n'utiliser qu'en dernier recours (tables statiques = pièges si non mises à jour). Peut être centralisé, sans empêcher un fichier local.
-WINS (Windows Internet Name Service) : ancêtre d'Active Directory et du DNS (jusqu'à Windows 2000 ; conservé pour Windows 95/98). Base de mappages noms NetBIOS / adresses IP. Deux fonctions : inscription de nom et résolution de nom. Un client WINS est configuré avec l'adresse d'au moins un serveur (principal + secondaire).
-- Inscription : requête au serveur ; si pas d'homonyme, réponse positive, ajout à la base, échéance de réinscription (valable six jours par défaut) ; si homonyme avec autre IP, le serveur interroge le titulaire actuel avant de trancher ; renouvellement à mi-intervalle ; libération à la fermeture normale (intervalle d'extinction). Inscription non conservée si : libération sans réinscription à temps, non-renouvellement, serveur WINS indisponible au renouvellement, déconnexion anormale.
-- Résolution : NetBT.sys envoie une requête de recherche ; un nom avec un point ou de plus de 16 caractères est traité comme un nom d'hôte DNS (via TCPIP.SYS). Le serveur renvoie l'adresse IP si l'enregistrement est actif ; requête au serveur secondaire si le principal est indisponible.
-- Pratique : plusieurs serveurs par zones géographiques ; chaque serveur est propriétaire des enregistrements de ses clients et les réplique vers ses partenaires de réplication. Modes de réplication : émission (push : le serveur envoie ses mises à jour) et collecte (pull : les partenaires viennent les chercher à intervalles réguliers).
+      SSTP (Secure Socket Transmission Protocol) : protocole de tunnel VPN récent qui encapsule les données PPP sur le canal SSL du protocole HTTPS, fonctionne sur le port 443 et traverse la plupart des pare-feu et routeurs qui bloquent PPTP ou L2TP/IPsec.
+
+      Active Directory : mise en œuvre Windows de services légers d'annuaire de type LDAP, à base de données d'objets représentant des ressources, dont les classes et attributs sont définis par un schéma et qui sont hiérarchisés, un objet conteneur pouvant en stocker d'autres.
+
+      API C de LDAP : interface en langage C utilisant le protocole LDAP en réseau, utilisable directement par les applications C ou C++.
+
+      ADSI (Active Directory Service Interfaces) : interface COM d'Active Directory implémentée au-dessus de LDAP, faisant abstraction des détails de programmation LDAP, prenant en charge Visual Basic, C, Visual C++ et Windows Script Host.
+
+      MAPI (Messaging API) : interface prise en charge pour la compatibilité avec les clients de messagerie tels qu'Exchange et Outlook.
+
+      API SAM : interface de gestion de sécurité des comptes construite au-dessus d'Active Directory, fournissant une interface d'ouverture de session aux paquets d'authentification tels que Msv1_0 pour l'authentification héritée NTLM et Kerberos.
+
+      Net API : interface de mise en réseau de Windows NT 4 utilisée par les clients NT 4 pour accéder à Active Directory via la base SAM.
+
+      API NTDS : interface de recherche du SID et du GUID dans Active Directory via DsCrackNames, et de gestion et réplication d'Active Directory.
+
+      Ntds.dit : fichier de base de données implémentant Active Directory, situé par défaut dans NTDS, répliqué sur un contrôleur de domaine, géré par le service d'annuaire s'exécutant dans le processus LSASS.
+
+      ESE (Extensible Storage Engine) : moteur de stockage de la base Active Directory, aussi appelé JET Blue, également utilisé par Exchange Server 2007, Desktop Search et Windows Mail, sa bibliothèque Esent.dll fournissant les routines d'accès.
+
+      Répartition de charge réseau (Network Load Balancing) : technologie basée sur le filtrage NDIS permettant de créer un cluster d'au plus trente-deux hôtes gérant plusieurs adresses IP dédiées et une seule adresse IP virtuelle publiée, la demande d'un client arrivant à tous les ordinateurs mais un seul hôte y répondant.
+
+      Redistribution en cas d'échec : mécanisme par lequel, si un hôte du cluster échoue, le reste de la grappe le constate et redistribue les demandes entrantes aux autres hôtes, un hôte de remplacement pouvant être ajouté.
+
+      Conditions du serveur d'applications : l'application doit être basée sur des protocoles pris en charge par la pile Windows TCP/IP et capable de gérer les demandes sur n'importe quel système du cluster, donc de gérer elle-même l'état partagé, la répartition de charge ne distribuant pas automatiquement cet état ; elle convient à un serveur web de contenu statique, à Windows Media et à Terminal Server.
+
+      DFS (Distributed File System) : service reliant les machines aux partages de fichiers par un seul espace de noms, offrant un accès client transparent quelle que soit la localisation, la racine de l'espace de noms devant être un partage défini sur un serveur Windows.
+
+      Jeu de réplicats DFS : ensemble de deux ou plusieurs systèmes reproduisant entre eux le contenu d'une arborescence selon un calendrier et une topologie de réplication définis administrativement.
+
+      FRS (File Replication System) : service de réplication de fichiers permettant à un administrateur de copier des données et de créer une réplique DFS.
+
+      Mise en œuvre serveur de DFS : composée du service Dfssvc.exe, responsable de l'exportation DFS et du maintien de la topologie dans le Registre sur les systèmes non Active Directory ou dans Active Directory, et du pilote Dfs.sys qui recherche la topologie pour diriger le client vers le système hébergeant le fichier.
+
+      Mise en œuvre client de DFS : pilote Dfsc.sys utilisant le redirecteur SMB pour communiquer avec les serveurs DFS, le fournisseur client étant Ntlanman.dll.
+
+      DFSR (réplication DFS) : réplication du contenu d'un partage DFS et du répertoire SYSVOL contenant le script de connexion et les fichiers de stratégie de groupe, en mode multi-maître distribué où n'importe quel serveur peut répliquer, les modifications d'un répertoire ou fichier répliqué étant propagées aux autres contrôleurs de domaine.
+
+      Topologie de réplication : ensemble des connexions définissant la relation entre les contrôleurs de domaine d'une forêt et les répliques de partitions d'annuaire partagées, pouvant être en anneau, en étoile ou en maille.
+
+      Contrainte NTFS de DFSR : seuls les répertoires sur volumes NTFS peuvent être reproduits, DFSR s'appuyant sur le journal NTFS pour détecter les modifications.
+
+      RDC (compression différentielle à distance) : mécanisme utilisé par DFSR pour ne répliquer que les différences entre deux serveurs, réduisant la bande passante ; DFSR est implémenté comme le service Dfsr.exe utilisant l'authentification RPC chiffrée et dispose d'une interface WMI.
+
+      Powershell : interpréteur de ligne de commande et langage de script d'administration de Windows Server 2008 qui accepte et retourne des objets .NET plutôt que du texte, offrant plus de cent applets de commande principales et la possibilité d'en créer, et accédant au Registre et aux certificats aussi facilement qu'au système de fichiers.
+
+      Applet de commande : outil de commande simple de Powershell, utilisable seul ou combiné à d'autres pour augmenter la puissance, permettant de gérer les ordinateurs du réseau en ligne de commande.
+
+      IPCONFIG : commande affichant la configuration réseau TCP/IP en cours, actualisant les paramètres DHCP et le nom de domaine, avec /all pour les informations détaillées.
+
+      NETSTAT : commande affichant les connexions TCP actives, les ports en écoute, les statistiques Ethernet, la table de routage IP et les statistiques IPv4 et IPv6.
+
+      PING (Packet Internet Groper) : commande envoyant une requête ICMP echo vers une autre machine et renvoyant le temps de réponse ou l'état de la connexion, utilisée avec une adresse IP ou un nom d'ordinateur pour diagnostiquer la connectivité.
+
+      TRACERT : commande indiquant la route prise par un paquet IP et le nom de chaque interface, envoyant des requêtes ICMP echo avec une valeur de TTL croissante à partir de un, chaque routeur renvoyant une erreur de durée de vie dépassée, chaque requête étant répétée trois fois, avec par défaut une résolution inverse des noms.
+
+      PATHPING : outil de diagnostic plus rapide que TRACERT, envoyant des requêtes ICMP echo à TTL croissant mais affichant les résultats immédiatement puis attendant la réponse du dernier hôte pour calculer les statistiques.
+
+      NBTSTAT : commande visualisant et manipulant le contenu du cache de noms NetBIOS, où une entrée est mise en cache pendant six cents secondes par défaut, sensible à la casse pour ses paramètres.
+
+      NETDIAG : utilitaire effectuant une série de tests complets sur presque toutes les fonctions réseau pour identifier et isoler les problèmes, avec des résultats souvent trop longs pour l'écran, testant navigateur, DNS, IPCONFIG, Kerberos, LDAP, NETSTAT, Route, WAN et WINS, avec /q pour une sortie silencieuse et /v pour le mode documenté.
+
+      Netsh (Network Shell) : utilitaire en ligne de commande hiérarchisé configurant et affichant l'état des rôles et composants des serveurs, offrant souvent la même fonctionnalité que la MMC mais permettant en plus l'administration de réseaux purement IPv6, avec ponts ou par RPC, sur l'ordinateur local ou distant, utilisable dans des scripts.
+
+      Centre Réseau et partage : outil regroupant les composants de gestion du réseau, permettant de visualiser graphiquement l'intégrité du réseau, de configurer le partage de dossiers, de configurer des connexions distantes ou VPN et de gérer les connexions sans fil, lancé depuis le Panneau de configuration ou l'icône Réseau.
+
+      Résolution de nom NetBIOS : mécanisme de résolution des noms d'ordinateur NetBIOS dans un réseau Windows, de trois types, par diffusion pour les petits réseaux, avec le fichier local LMHOSTS emprunté au monde UNIX, et avec la base centralisée et le service WINS propre à Microsoft.
+
+      Diffusion (broadcasting) : mécanisme où une machine crie son nom et son adresse à la cantonade, générant un trafic incessant, utilisé par NetBIOS sur les petits réseaux non routés, les diffusions NetBIOS ne passant pas les routeurs alors que NetBIOS lui-même, sur les ports 137 et 139, peut être routé.
+
+      Domaine de diffusion : segment de réseau sur lequel les ordinateurs peuvent dialoguer sans passer par un routeur.
+
+      Inscription de nom : procédure par laquelle un ordinateur Windows qui démarre diffuse une inscription de nom NetBIOS pour vérifier qu'aucun poste n'utilise le même nom.
+
+      Cache de noms NetBIOS : table consultée par NetBT avant toute diffusion, réduisant les émissions sur le réseau local, le demandeur pouvant envoyer jusqu'à trois requêtes de nom sur le sous-réseau local en cas d'absence.
+
+      LMHOSTS : fichier texte de table statique listant noms de machines et adresses IP, non sensible à la casse, situé dans System32/Drivers/etc avec HOSTS, SERVICES, PROTOCOL, NETWORK et QUOTES et un exemple LMHOSTS.sam à renommer et adapter ; les paramètres sont en majuscules précédés du dièse, préfixe des paramètres comme PRE ou DOM et des commentaires ; à n'utiliser qu'en dernier recours car les tables statiques non mises à jour sont des pièges.
+
+      WINS (Windows Internet Name Service) : ancêtre d'Active Directory et du DNS, utilisé jusqu'à Windows 2000, maintenant une base de mappages noms NetBIOS et adresses IP que les clients utilisent pour inscrire leurs services et trouver les adresses IP des autres, avec deux fonctions, inscription de nom et résolution de nom ; sous Windows, les noms sont résolus en priorité par DNS puis par NetBIOS en cas d'échec.
+
+      LLMNR (Link-Local Multicast Name Resolution) : mécanisme secondaire de secours utilisé quand IPv4 n'est pas installé, étendant le format de paquet DNS pour la résolution IPv4 et IPv6 sur le même lien local.
+
+      Échéance de réinscription : moment auquel une inscription WINS expire, valable six jours par défaut, le client soumettant une requête de renouvellement à mi-chemin de l'intervalle pour chaque service inscrit.
+
+      Intervalle d'extinction : durée de validité attribuée à un enregistrement libéré à la fermeture normale du client, pendant laquelle il n'est pas répliqué, le serveur propriétaire pouvant le réattribuer mais pas les partenaires de réplication.
+
+      Partenaire de réplication : serveur WINS vers lequel un serveur propriétaire réplique ses enregistrements, la réplication se faisant en mode émission, où le serveur envoie ses mises à jour, ou en mode collecte, où les partenaires viennent les chercher à intervalles réguliers.
+
+      Serveur WINS principal et secondaire : configuration cliente à deux serveurs, la requête étant envoyée au serveur secondaire quand le principal est indisponible ; un nom contenant un point ou de plus de seize caractères est considéré comme un nom d'hôte DNS et traité par TCPIP.SYS et non par NETBT.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LES SERVICES RÉSEAU EN COUCHES.
+
+
+   A. L'accès à distance.
+
+      L'accès à distance, disponible par le service Réseau et accès distant, permet aux clients distants de se connecter à des serveurs et ressources réseau comme s'ils étaient présents sur le réseau local ; il agit comme une connexion proxy à un réseau Windows, à la différence du contrôle à distance qui exécute les applications sur le serveur en présentant une interface au client.
+
+      Windows fournit deux types d'accès à distance, le dial-up où le client se connecte via un téléphone ou une infrastructure de télécommunications qui crée une connexion temporaire, et le VPN qui crée une connexion virtuelle point à point via un réseau IP ; le protocole SSTP, récent, encapsule les données PPP sur le canal SSL de HTTPS, fonctionne sur le port 443 et traverse la plupart des pare-feu et routeurs qui bloquent PPTP ou L2TP/IPsec.
+
+
+   B. Active Directory.
+
+      Active Directory est la mise en œuvre Windows de services légers d'annuaire de type LDAP, à base de données d'objets représentant des ressources, dont les classes et attributs sont définis par un schéma et qui sont hiérarchisés, un objet conteneur pouvant en stocker d'autres.
+
+      Plusieurs interfaces permettent d'y accéder, l'API C de LDAP directement utilisable en C ou C++, ADSI, interface COM au-dessus de LDAP faisant abstraction de la programmation LDAP et prenant en charge Visual Basic, C, Visual C++ et Windows Script Host, MAPI pour la compatibilité avec Exchange et Outlook, l'API SAM fournissant une interface d'ouverture de session aux paquets Msv1_0 et Kerberos, la Net API pour les clients NT 4 via la base SAM, et l'API NTDS pour rechercher le SID et le GUID et gérer la réplication.
+
+      Active Directory est un fichier de base de données nommé par défaut Ntds.dit, répliqué sur un contrôleur de domaine, géré par le service d'annuaire s'exécutant dans le processus LSASS au moyen de DLL fournissant des mises à jour transactionnelles ; le magasin repose sur le moteur ESE, aussi appelé JET Blue, également utilisé par Exchange Server 2007, Desktop Search et Windows Mail.
+
+
+   C. La répartition de charge réseau.
+
+      Basée sur le filtrage NDIS, elle permet de créer un cluster d'au plus trente-deux hôtes gérant plusieurs adresses IP dédiées et une seule adresse IP virtuelle publiée ; la demande d'un client arrive à tous les ordinateurs mais un seul hôte y répond, les pilotes NDIS répartissant l'espace client de façon distribuée, chaque demande étant gérée par un et un seul hôte.
+
+      Si un hôte échoue, le reste de la grappe le constate et redistribue les demandes entrantes, un hôte de remplacement pouvant être ajouté ; ce n'est pas une solution polyvalente, le serveur d'applications devant être basé sur des protocoles de la pile Windows TCP/IP et capable de gérer les demandes sur n'importe quel système, donc de gérer lui-même l'état partagé que la répartition de charge ne distribue pas automatiquement ; les applications idéales sont un serveur web de contenu statique, Windows Media et Terminal Server.
+
+
+   D. Le système de fichiers distribué et sa réplication.
+
+      DFS relie les machines aux partages de fichiers par un seul espace de noms, offrant un accès client transparent quelle que soit la localisation, la racine devant être un partage défini sur un serveur Windows ; il offre en outre des jeux de réplicats, un administrateur pouvant utiliser le service FRS pour créer une réplique, plusieurs formes d'équilibrage de charge et une haute disponibilité par acheminement des demandes vers un autre membre quand un membre devient indisponible.
+
+      Côté serveur, DFS comprend le service Dfssvc.exe, responsable de l'exportation et du maintien de la topologie dans le Registre ou dans Active Directory, et le pilote Dfs.sys qui recherche la topologie pour diriger le client ; côté client, le pilote Dfsc.sys utilise le redirecteur SMB, le fournisseur étant Ntlanman.dll.
+
+      DFSR réplique le contenu d'un partage DFS et du répertoire SYSVOL, qui contient le script de connexion et les fichiers de stratégie de groupe, en mode multi-maître distribué où n'importe quel serveur peut répliquer ; son concept fondamental est le jeu de réplicats, deux systèmes ou plus reproduisant une arborescence selon un calendrier et une topologie définis, en anneau, en étoile ou en maille ; seuls les répertoires sur volumes NTFS sont reproduits, DFSR s'appuyant sur le journal NTFS ; il utilise la compression différentielle à distance RDC pour ne répliquer que les différences, est implémenté comme le service Dfsr.exe en RPC chiffré et dispose d'une interface WMI.
+
+
+II. LES UTILITAIRES DE DIAGNOSTIC RÉSEAU.
+
+
+   A. Powershell et les lignes de commande.
+
+      Windows Server 2008 s'administre par les technologies de script et Powershell, les lignes de commande, Netsh et le Centre Réseau et partage ; Powershell accepte et retourne des objets .NET plutôt que du texte, offre plus de cent applets de commande principales et la possibilité d'en créer, les applets étant utilisables seules ou combinées, et accède au Registre et aux certificats aussi facilement qu'au système de fichiers.
+
+      Parmi les commandes, IPCONFIG affiche la configuration TCP/IP et actualise DHCP, avec /all pour le détail ; NETSTAT affiche les connexions TCP actives, les ports en écoute et les statistiques IPv4 et IPv6 ; PING envoie une requête ICMP echo et renvoie le temps de réponse ou l'état ; TRACERT indique la route et le nom de chaque interface en envoyant des requêtes à TTL croissant depuis un, chaque routeur renvoyant une erreur de durée de vie dépassée, chaque requête étant répétée trois fois ; PATHPING est plus rapide, affichant les résultats immédiatement puis attendant le dernier hôte pour les statistiques ; NBTSTAT visualise le cache de noms NetBIOS, en cache six cents secondes par défaut et sensible à la casse ; NETDIAG teste presque toutes les fonctions réseau et est l'outil de premier secours pour les problèmes complexes.
+
+
+   B. Netsh et le Centre Réseau et partage.
+
+      Netsh est un utilitaire hiérarchisé configurant et affichant l'état des rôles et composants, offrant souvent la même fonctionnalité que la MMC mais permettant en plus l'administration de réseaux purement IPv6, avec ponts ou par RPC, sur l'ordinateur local ou distant et dans des scripts.
+
+      Le Centre Réseau et partage regroupe les composants de gestion du réseau et permet de visualiser graphiquement l'intégrité, de configurer le partage de dossiers, de configurer des connexions distantes ou VPN et de gérer les connexions sans fil, lancé depuis le Panneau de configuration ou l'icône Réseau de la barre des tâches.
+
+
+III. LA RÉSOLUTION DE NOM NETBIOS.
+
+
+   A. La résolution par diffusion.
+
+      Trois types de résolution existent, par diffusion pour les petits réseaux, avec le fichier LMHOSTS emprunté au monde UNIX, et avec la base centralisée et le service WINS propre à Microsoft ; la diffusion fait crier à une machine son nom et son adresse à la cantonade, génère un trafic incessant et ne passe pas les routeurs, alors que NetBIOS lui-même, sur les ports 137 et 139, peut être routé ; un domaine de diffusion est le segment où les ordinateurs dialoguent sans routeur.
+
+      La résolution par diffusion exige que chaque station ait un nom unique, vérifié à l'inscription de nom quand l'ordinateur démarre ; NetBT recherche d'abord dans le cache de noms NetBIOS, ce qui réduit les émissions, sinon le demandeur envoie jusqu'à trois requêtes sur le sous-réseau local, chaque hôte voisin vérifie sa table locale NetBIOS, et l'ordinateur ayant enregistré le nom envoie une réponse positive, après quoi le demandeur peut communiquer par datagramme ou session NetBIOS.
+
+
+   B. La résolution par LMHOSTS.
+
+      Le fichier LMHOSTS résout les noms dans un environnement sans serveur centralisé de résolution NetBIOS ; c'est une table statique de noms et d'adresses IP non sensible à la casse, située dans System32/Drivers/etc avec HOSTS, SERVICES, PROTOCOL, NETWORK et QUOTES et un exemple LMHOSTS.sam à renommer et adapter.
+
+      Les ordinateurs Windows utilisent LMHOSTS par défaut s'il existe, l'usage pouvant être désactivé en effaçant le fichier et en cochant les cases de l'onglet WINS ; les paramètres sont en majuscules précédés du dièse, à la fois préfixe de paramètres comme PRE ou DOM et marqueur de commentaire ; LMHOSTS ne doit être utilisé qu'en dernier recours car les tables statiques non mises à jour sont des pièges, et un fichier centralisé n'empêche pas chaque ordinateur d'avoir un fichier local.
+
+
+   C. Le service WINS.
+
+      WINS, ancêtre d'Active Directory et du DNS jusqu'à Windows 2000, maintient une base de mappages noms NetBIOS et adresses IP, encore utilisée pour les parcs avec des postes Windows 95 ou 98 ; sans WINS, NetBIOS utilise des messages de diffusion locale, et sous Windows les noms sont résolus en priorité par DNS puis par NetBIOS en cas d'échec, LLMNR étant un mécanisme de secours quand IPv4 n'est pas installé ; le DNS dynamique rend WINS inutile depuis Windows 2000 en permettant aux clients de créer automatiquement leurs enregistrements.
+
+      WINS assure deux fonctions, l'inscription de nom et la résolution de nom, un client étant configuré avec l'adresse d'au moins un serveur ; à l'inscription, le client envoie une requête, le serveur répond positivement et enregistre le nom avec une échéance de réinscription valable six jours par défaut si aucun conflit n'existe, ou enquête auprès du titulaire existant en cas de nom identique avec une autre adresse ; le client renouvelle à mi-chemin de l'intervalle, et à la fermeture normale il demande la libération du nom, l'enregistrement libéré recevant un intervalle d'extinction pendant lequel il n'est pas répliqué.
+
+      Une inscription n'est pas conservée si le client libère et ne se réinscrit pas dans les délais, ne renouvelle pas dans les délais, si le serveur est indisponible au renouvellement, ou après une déconnexion anormale sans réponse à la proposition ; à la résolution, le pilote NetBT.sys envoie une requête, un nom contenant un point ou de plus de seize caractères étant traité comme un nom DNS par TCPIP.SYS, le serveur renvoyant l'adresse IP si l'enregistrement existe et est actif, un client à deux serveurs interrogeant le secondaire si le principal est indisponible.
+
+      En pratique, on met plusieurs serveurs WINS couvrant des zones géographiques, chacun propriétaire des enregistrements de ses clients et répliquant vers ses partenaires de réplication, l'ajout d'un partenaire fusionnant les bases ; la réplication se fait en mode émission, le serveur envoyant ses mises à jour, ou en mode collecte, les partenaires venant les chercher à intervalles réguliers.
+
+
+POINTS D'ATTENTION.
+
+      L'accès à distance agit comme un proxy vers le réseau Windows, contrairement au contrôle à distance qui exécute les applications sur le serveur.
+
+      SSTP passe par le port 443 de HTTPS et traverse les pare-feu qui bloquent PPTP ou L2TP/IPsec.
+
+      Active Directory est stocké dans Ntds.dit et géré par le service d'annuaire dans le processus LSASS, sur un moteur ESE alias JET Blue.
+
+      Un cluster de répartition de charge réseau compte au plus trente-deux hôtes, avec une adresse IP virtuelle unique publiée.
+
+      La répartition de charge réseau ne distribue pas l'état partagé ; l'application doit le gérer elle-même.
+
+      Seuls les répertoires sur volumes NTFS peuvent être répliqués par DFSR, qui s'appuie sur le journal NTFS.
+
+      DFSR ne réplique que les différences grâce à la compression différentielle à distance RDC.
+
+      TRACERT part d'un TTL de un et l'incrémente, chaque requête étant répétée trois fois.
+
+      Les diffusions NetBIOS ne passent pas les routeurs, mais NetBIOS sur les ports 137 et 139 peut être routé.
+
+      LMHOSTS ne doit servir qu'en dernier recours car les tables statiques non mises à jour sont des pièges, et ses paramètres sont en majuscules précédés du dièse.
+
+      Sous Windows, un nom est résolu en priorité par DNS, puis par NetBIOS en cas d'échec.
+
+      Une inscription WINS est valable six jours par défaut et se renouvelle à mi-chemin de l'intervalle.
+
+      Un nom NetBIOS contenant un point ou de plus de seize caractères est traité comme un nom DNS et non par NETBT.
+
+
+EXEMPLES CITES.
+
+      Protocole SSTP fonctionnant sur le port 443 de HTTPS.
+
+      Fichier Active Directory Ntds.dit répliqué sur un contrôleur de domaine.
+
+      Moteur ESE alias JET Blue partagé avec Exchange Server 2007, Desktop Search et Windows Mail.
+
+      Cluster de répartition de charge réseau d'au plus trente-deux hôtes avec une adresse IP virtuelle.
+
+      Services DFS Dfssvc.exe et pilote Dfs.sys côté serveur, pilote Dfsc.sys et fournisseur Ntlanman.dll côté client.
+
+      Réplication du répertoire SYSVOL contenant script de connexion et fichiers de stratégie de groupe.
+
+      Commandes IPCONFIG /all, NETSTAT, PING, TRACERT, PATHPING, NBTSTAT et NETDIAG.
+
+      Cache de noms NetBIOS conservé six cents secondes par défaut.
+
+      Fichier LMHOSTS.sam d'exemple dans System32/Drivers/etc, à renommer et adapter, avec les préfixes PRE et DOM.
+
+      Inscription WINS valable six jours par défaut, réplication en mode émission ou collecte.
+
+      Ports NetBIOS 137 et 139 routables.

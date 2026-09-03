@@ -1,52 +1,446 @@
-SYSTÈMES DE FICHIERS ET GESTION DES DISQUES SOUS UNIX / LINUX
+LES SYSTÈMES DE FICHIERS ET LA GESTION DES DISQUES SOUS UNIX ET LINUX.
 
-1. LE MODÈLE « TOUT EST FICHIER » ET L'INODE
-Tout est fichier : texte, configuration, processus, périphériques. L'inode est une structure sur disque qui décrit un fichier de façon exhaustive (UID, GID, taille, type, nombre de liens, adressage des blocs, droits ugo/rwx, dates) SAUF son nom. Un répertoire est un fichier contenant une table (nom -> numéro d'inode). Une inode n'est unique qu'au sein d'une partition ; le système manipule le couple (disque, inode).
-Adressage des blocs : 10 blocs directs dans l'inode, puis blocs d'indirection simple, double et triple pour les gros fichiers. Le FFS de Berkeley utilise 12 adresses directes, 1 indirecte, 2 doubles.
-Nommage : nom de 255 caractères max, casse significative, caractères interdits (/, espace, *, ()). Chemin absolu (depuis /) ou relatif (depuis le répertoire courant ; . et ..).
 
-2. TYPES DE FICHIERS
-- Normal (régulier) : contient des données (texte lisible ou binaire).
-- Répertoire (catalogue) : table nom/inode ; « . » (lui-même) et « .. » (père) créés automatiquement.
-- Spéciaux : associés à un périphérique ; l'inode contient l'identification du pilote, pas d'adresses de blocs. Deux modes : caractère (E/S caractère par caractère, sans tampon : clavier, écran, imprimante) et bloc (bloc par bloc, avec buffer : disques, bandes). Numéro majeur = pilote/contrôleur ; numéro mineur = périphérique précis ou particularité (partition, carte).
-- Liens : dur/physique (partage l'inode de la cible, pas d'inode propre, impossible entre partitions) ; symbolique (inode propre, pointe vers un chemin, « cassé » si la cible disparaît).
-- Tube nommé (FIFO) : fichier spécial nommé, communication inter-processus en flot d'octets, premier entré premier sorti, lecture destructive, capacité finie.
-- Socket (BSD) : communication bidirectionnelle, y compris entre machines distantes.
-- Pseudo-terminal : paire maître/esclave de périphériques caractère virtuels ; commande tty (ex. /dev/pts/1).
+LEXIQUE COMPLET.
 
-3. ARBORESCENCE (répertoires principaux)
-/ (racine, jamais démontable) ; /root (home de l'administrateur, sur la partition racine) ; /bin et /sbin (binaires primordiaux du boot) ; /usr/sbin, /usr/local/sbin (binaires système non primordiaux) ; /lib (bibliothèques dynamiques primordiales) ; /usr/lib, /usr/include (bibliothèques et .h) ; /etc (configuration : passwd, group, hosts, fstab, inittab, resolv.conf...) ; /dev (fichiers spéciaux ; « en vrac » sous Linux/FreeBSD, structuré sous Solaris/HP-UX) ; /tmp (vidé au boot) ; /var/log (journaux), /var/mail (BAL), /var/run (PID des démons), /var/tmp (non vidé au boot) ; /mnt (point de montage temporaire) ; /opt (paquets applicatifs complets, config dans /etc/opt) ; spécificités : /sys ou /usr/src, /proc (Linux : vue virtuelle des processus, du matériel, du noyau), /tcb (HP-UX), /kernel ou /devices (Solaris).
+      Principe du tout-fichier : sous Unix et Linux, tout est fichier, du simple fichier texte aux fichiers de configuration, en passant par les processus et les périphériques comme les disques, les CD-ROM et les imprimantes.
 
-4. TYPES DE SYSTÈMES DE FICHIERS
-- System V (s5fs) : petits blocs (1-2 ko), métadonnées boot block / super block (critique) / i-list / data blocks ; dépassé.
-- FFS / UFS (Berkeley) : blocs jusqu'à 64 ko avec fragments, super bloc répliqué, inodes répartis dans des groupes de cylindres -> meilleure fiabilité et récupération ; inconvénient : fsck long.
-- Journalisés : VxFS (HP-UX), JFS (AIX), ext3 -> journal de transactions des métadonnées, restauration rapide et cohérente. VxFS accède par « extent » (plusieurs blocs).
-- CDFS (lecture seule), NFS (systèmes de fichiers distants via réseau, accès plus lents).
-- ZFS (Solaris, 2005) : premier système 128 bits ; auto-réparation, RAID 0/1/5/6 intégré, compression à la volée, snapshots ; licence CDDL. Inspire btrfs.
-- ext4 (Linux, mature depuis 2008) : extents à la place de l'adressage indirect (moins de fragmentation, gros fichiers plus rapides, fsck plus court), blocs sur 48 bits -> SF jusqu'à 1 Eo, fichier jusqu'à 16 To, sous-répertoires illimités, checksum du journal. Risque : allocation différée (allocate-on-flush) jusqu'à 60 s -> plus de pertes en cas de crash qu'ext3 (5 s). Utilitaire e4defrag.
-- btrfs (Oracle, GPL) : B-tree, 64 bits, sous-volumes, snapshots par copy-on-write, checksums données et métadonnées, back references, redimensionnement à chaud, compression ; btrfsck (3x plus de RAM qu'ext2fsck).
-- F2FS (Samsung) : Flash-Friendly File System pour mémoire flash NAND (SD, SSD, eMMC), noyau Linux 3.8 (2012).
+      Fichier : suite définie d'octets matérialisée par des blocs disques et une inode qui contient les propriétés du fichier mais pas son nom.
 
-5. MONTAGE ET DISQUES PHYSIQUES
-Montage : greffe d'une partition sur un répertoire (point de montage) ; monter sur un répertoire non vide en masque le contenu ; la racine / est toujours montée. Montage manuel (mount) ou automatique (automount).
-Disque dur : plateaux tournant autour d'un axe, têtes de lecture/écriture. Formatage de bas niveau : division en pistes, secteurs, cylindres. Partitionnement (après bas niveau, avant formatage logique) : cloisonner les utilisateurs, faciliter sauvegardes et NFS, limiter l'expansion. Informations dans le disk label (caractéristiques physiques, partitions, secteurs défectueux). Une partition peut contenir un système de fichiers, une zone de swap ou rien.
-Types de disques : IDE/ATA puis SATA (SATA 3 ~600 Mo/s, 1 câble = 1 disque) ; SCSI (norme d'interface, SCSI 1/2/3, SCSI 3 en couches, Fibre Channel) ; SSD (mémoire flash, sans mécanique, latence très faible, accès petits fichiers jusqu'à 20x plus rapides, capacités encore inférieures) ; disques hybrides.
-Nommage : AIX /dev/hdisk ; HP-UX et Solaris /dev/rdsk/c0t4d0s0 (c contrôleur, t target SCSI, d disque, s partition/slice).
+      Bloc disque : unité de base de stockage sur le disque ; tout fichier consomme un espace multiple de la taille d'un bloc.
 
-6. AJOUT D'UN DISQUE ET GESTIONNAIRE DE VOLUMES
-4 étapes : préparation et connexion ; formatage et partitionnement (disk label : fdisk sous Linux, format sous Solaris) ; création et vérification du système de fichiers (mknod pour les fichiers spéciaux, mkfs pour le SF, fsck pour la cohérence) ; montage (mount) et mise à jour de /etc/(v)fstab.
-LVM / GVL : les disques deviennent des volumes physiques -> regroupés en groupes de volumes (unités d'allocation dites partitions/domaines physiques, ~4 Mo) -> découpés en volumes logiques (Logical Extent) sur lesquels on crée des SF extensibles ; permet des copies redondantes et s'affranchit de la limite « un SF par disque ».
+      Inode (i-nœud) : structure de données sur un disque qui décrit et stocke tous les attributs d'un fichier, y compris son emplacement physique, à l'exception de son nom ; passage obligé de tous les échanges entre le système de fichiers et la mémoire, elle n'est unique qu'au sein d'une même partition, le système manipulant les objets via un couple disque et inode.
 
-7. ENTRELACEMENT ET RAID
-Entrelacement (striping) : plusieurs disques physiques vus comme un seul disque logique ; les E/S sont réparties et effectuées en parallèle -> performances accrues (utile pour de très gros fichiers). Solutions matérielles ou logicielles (GVL).
-RAID (Redundant Array of Inexpensive Disks) : ensemble de disques géré par un contrôleur ; encaisse la panne d'au moins un disque, données reconstruites depuis les autres.
-- RAID 0 (striping) : données par bandes, E/S parallèles, vitesse maximale, AUCUNE redondance ; minimum 2 disques.
-- RAID 1 (mirroring) : duplication ; sécurité élevée, lecture 2x plus rapide ; 50 % de capacité utile, coût élevé ; minimum 2 disques.
-- RAID 2 : code de Hamming (ECC) ; obsolète.
-- RAID 3 : octets sur les disques + 1 disque de parité (au bit) ; minimum 3 disques ; tolère 1 panne.
-- RAID 4 : parité au niveau du bloc sur un disque dédié ; minimum 3 disques ; disque de parité goulet.
-- RAID 5 : parité au niveau du bloc RÉPARTIE sur tous les disques ; performances proches du RAID 0, tolérance élevée ; utile = n-1 disques ; minimum 3 disques ; solution populaire.
-- RAID 6 : deux parités sur deux disques dédiés ; tolère 2 pannes simultanées ; minimum 4 disques.
-- RAID 01 / RAID 10 : mêmes performances, mais RAID 10 (miroirs agrégés) tolère la perte de bien plus de disques -> préféré. Combinaisons courantes : 10, 30, 50.
-Choix RAID selon 3 critères : sécurité (reconstruction : RAID 5 recalcule, RAID 1 recopie), performances (RAID 1 meilleur en lecture, faible en écriture intensive), coût (RAID 5 : 80-90 % utile ; RAID 1 : 50 %).
-Mise en place : logicielle (driver de l'OS), par le système de fichiers (ZFS), matérielle (DASD hot-swappable, contrôleurs RAID sur bus PCI).
+      UID et GID : identifiants de l'utilisateur propriétaire et du groupe propriétaire d'un fichier, stockés dans l'inode.
+
+      Adressage direct et indirect : une inode de fichier normal contient la liste des dix premiers blocs, puis le numéro d'un bloc d'indirection simple, puis d'un bloc d'indirection double, puis d'un bloc d'indirection triple, ce qui économise la taille des inodes et donne un accès rapide aux petits fichiers tout en permettant de très gros fichiers.
+
+      Fichier normal ou régulier : fichier contenant des données, lisibles comme un texte ou illisibles comme un exécutable, dit alors fichier binaire.
+
+      Répertoire ou catalogue : fichier binaire contenant une liste de couples nom de fichier et numéro d'inode, donc une table de correspondance entre un numéro d'inode et un nom ; à la création d'un répertoire, le système crée le fichier point qui le représente et le fichier point-point qui représente le répertoire père.
+
+      Fichier spécial : fichier associé à un dispositif d'entrée-sortie propre à un périphérique, géré comme un fichier ordinaire mais servant à l'activation des dispositifs physiques ; son inode ne contient pas d'adresses de blocs de données mais l'identification du pilote qui gère le périphérique.
+
+      Mode caractère : mode d'accès des fichiers spéciaux dans lequel les entrées-sorties se font caractère par caractère, pour les terminaux, claviers, écrans et la mémoire.
+
+      Mode bloc : mode d'accès dans lequel les entrées-sorties se font bloc par bloc au moyen d'un tampon, avec assemblage préalable des données avant transfert d'un bloc entier, pour les disques et les bandes.
+
+      Numéro majeur : dans un fichier spécial, information qui remplace la taille et identifie le pilote et donc le contrôleur de périphérique.
+
+      Numéro mineur : information qui identifie le périphérique ou une de ses particularités, comme une partition, un emplacement ou un numéro de carte.
+
+      Lien dur (physique) : entrée de répertoire séparée qui partage les mêmes blocs de données et la même inode qu'un autre fichier, sans inode propre, impossible entre deux partitions différentes.
+
+      Lien symbolique : pointeur qui référence un fichier ou un répertoire situé ailleurs dans le système de fichiers, avec sa propre inode, qui devient cassé si le fichier source est supprimé et qui fonctionne entre partitions.
+
+      Tube (pipe) : mécanisme de communication entre processus sous forme d'un flot continu d'octets, qui permet de rediriger la sortie d'une commande vers l'entrée d'une autre et fonde l'approche filtre d'Unix.
+
+      Tube nommé (FIFO) : fichier spécial qui possède un nom dans l'arborescence, dit First In First Out car l'ordre des caractères en entrée est conservé en sortie, la lecture y étant destructive et la capacité finie.
+
+      Socket : mécanisme apparu sur BSD facilitant la communication de données entre processus, mais dans les deux sens et éventuellement entre machines distantes via le réseau.
+
+      Pseudo-terminal : paire de périphériques de caractères virtuels formant un canal bidirectionnel, une extrémité maître et une extrémité esclave qui se comporte comme un terminal classique, de type BSD ou System V ; la commande tty affiche le pseudo-terminal utilisé.
+
+      Chemin absolu : chemin d'accès qui part de la racine et indique exactement où se trouve le fichier.
+
+      Chemin relatif : chemin d'accès exprimé par rapport au répertoire courant, désigné par le point.
+
+      Racine (slash) : ancêtre de tous les répertoires ; le système de fichiers racine est toujours monté quand le système est actif et ne peut être démonté.
+
+      Méta-données : informations structurelles réservées par le système sur un certain nombre de blocs du support pour définir et gérer le système de fichiers.
+
+      Système de fichiers : organisation globale qui assure la cohérence de l'ensemble d'un support au-dessus de la notion d'inode.
+
+      System V (s5fs) : premier modèle de système de fichiers Unix, orienté efficacité du stockage, avec des blocs de un ou deux kilo-octets, une zone de boot, un super bloc critique, une i-list et des blocs de données ; largement dépassé, supporté seulement en compatibilité descendante.
+
+      FFS (Fast File System) de BSD : système de fichiers qui réorganise les blocs, jusqu'à soixante-quatre kilo-octets, introduit la notion de fragment comme unité de stockage, réplique le super bloc et répartit les inodes, avec une organisation en groupes de cylindres contenant chacun une copie du super bloc, une carte du groupe et une partie de la liste des inodes ; l'objectif est de récupérer une grande partie des données en cas de problème, au prix d'un fsck très long.
+
+      UFS (Unix File System) : norme issue du FFS, incorporée dans System V point quatre, adoptée par Solaris, Tru64 et BSD du milieu des années quatre-vingt au milieu des années quatre-vingt-dix.
+
+      VxFS et JFS : Veritas File System sous HP-UX et Journaled File System sous AIX, systèmes de fichiers journalisés qui enregistrent dans un journal de transactions tous les changements des méta-données, permettant une restauration rapide avec conservation de la cohérence, l'accès disque se faisant par extent.
+
+      CDFS : système de fichiers de CD-ROM, en lecture seule, à structure arborescente, sur lequel fsck ne peut être utilisé.
+
+      NFS (Network File System) : système de fichiers distant accessible via un réseau et utilisable dans un système de fichiers local, avec des temps d'accès au moins trois fois supérieurs à ceux d'un système de fichiers local.
+
+      ZFS : système de fichiers révolutionnaire apparu en deux mille cinq sous Solaris, premier système de fichiers cent vingt-huit bits, capable d'auto-réparation avec des disques redondants, gérant le RAID zéro, un, cinq ou six au niveau du système de fichiers, la compression à la volée et les snapshots par copy-on-write, sous licence CDDL.
+
+      EXT3 : système de fichiers Linux qui a apporté la journalisation et de plus grandes capacités par rapport à EXT2, avec un système de fichiers jusqu'à seize téra-octets, un fichier jusqu'à deux téra-octets et des blocs de quatre kilo-octets.
+
+      EXT4 : successeur d'EXT3 mature depuis fin deux mille huit, qui passe le nombre de blocs de trente-deux à quarante-huit bits, remplace l'adressage indirect par les extents, permet un système de fichiers jusqu'à un exaoctet et un fichier jusqu'à seize téra-octets, un nombre illimité de sous-répertoires, une somme de contrôle sur le journal et une défragmentation à la demande avec e4defrag.
+
+      Extent : plage de blocs consécutifs sur le disque, réservée à la création d'un fichier, enregistrée par trois données seulement, le début, la taille et le premier bloc physique, ce qui évite la fragmentation.
+
+      Allocation différée (allocate-on-flush) : technique où l'écriture n'est pas faite en temps réel, EXT4 gardant les données jusqu'à une minute contre cinq secondes pour EXT3, d'où un risque plus grand de perte de données en cas de plantage.
+
+      Btrfs (B-tree File System) : système de fichiers Linux sous licence GPL développé par Oracle, reprenant des concepts de ZFS, ReiserFS et EXT4, avec des sous-volumes, une arborescence en couches, des extents, des snapshots par copy-on-write évitant la journalisation, des back references et des sommes de contrôle sur toutes les données et méta-données, un redimensionnement à chaud et l'utilitaire btrfsck.
+
+      F2FS (Flash-Friendly File System) : système de fichiers open source de Samsung pour mémoire flash NAND, intégré au noyau Linux 3.8 fin deux mille douze, qui prend en compte la géométrie interne et les contraintes de la flash.
+
+      Point de montage : répertoire de l'arborescence unique auquel une partition est raccordée, ce qui rend ses fichiers accessibles à partir de ce répertoire ; greffer sur un répertoire non vide fait perdre l'accès à son contenu.
+
+      Montage et démontage : le montage rend disponible le contenu d'un système de fichiers via le système d'exploitation, manuellement avec mount ou automatiquement avec automount, le démontage rompant ce lien, sauf pour la racine.
+
+      Formatage de bas niveau : opération qui divise la surface des plateaux en pistes, secteurs et cylindres.
+
+      Partitionnement : opération faite après le formatage de bas niveau et avant le formatage logique, qui crée des zones du disque dont les données ne sont pas mélangées.
+
+      Disk label : zone du disque qui stocke les caractéristiques physiques du disque, les paramètres de partitionnement et les secteurs défectueux.
+
+      Swap : partition sans structure de système de fichiers, dédiée à la pagination.
+
+      IDE, ATA et SATA : connecteurs apparus avec les PC, moins chers que le SCSI, la mécanique étant identique ; le SATA existe en trois normes, la SATA trois offrant six cents méga-octets par seconde théoriques, un câble reliant un connecteur à un disque.
+
+      SCSI : Small Computer System Interface, norme d'interface d'échange de données existant en SCSI un, deux et trois, la version trois passant à la fibre Channel, un nombre de périphériques quasi illimité et une architecture en couches.
+
+      SSD (Solid State Disk) : disque à mémoire flash sans élément mécanique, désormais couplé au SATA, avec des latences sans comparaison, un accès aux petits fichiers jusqu'à vingt fois plus rapide et des débits dépassant cinq cents méga-octets par seconde, mais des capacités encore inférieures aux disques mécaniques.
+
+      Disque hybride : disque couplant SSD et disque mécanique pour la réactivité et la volumétrie, peu développé.
+
+      mknod : commande de création des fichiers spéciaux, de syntaxe mknod suivi du nom, du mode c ou b, du numéro majeur et du numéro mineur.
+
+      mkfs : commande de création d'un système de fichiers sur un fichier spécial, nécessitant des paramètres complexes.
+
+      fsck : commande de vérification de la cohérence des systèmes de fichiers.
+
+      Fichier /etc/fstab (ou vfstab) : table des partitions, modifiée après l'ajout d'un disque pour finaliser sa prise en compte.
+
+      Gestionnaire de volumes logiques (GVL, LVM) : outil présent nativement chez de nombreux Unix comme HP-UX et AIX, qui facilite l'ajout et la réorganisation des espaces disques.
+
+      Volume physique : disque initialisé et converti pour être employé par le GVL, divisé en unités d'espace allouable appelées partitions physiques sous AIX ou domaines physiques sous HP-UX, généralement de quatre méga-octets.
+
+      Groupe de volumes : ensemble nommé de disques ou de volumes physiques, pouvant inclure des grappes RAID accédées comme une seule unité, qui affranchit le système de fichiers de la limitation d'un système de fichiers par disque.
+
+      Volume logique : ensemble d'unités d'allocation logiques appelées logical extents, sur lequel on crée les systèmes de fichiers ; il peut contenir des copies redondantes, un volume logique correspondant alors à deux volumes physiques, l'original et le miroir.
+
+      Entrelacement : combinaison d'un ou plusieurs disques physiques en un seul disque logique, qui répartit les entrées-sorties sur plusieurs disques effectuées en parallèle pour augmenter les performances.
+
+      RAID (Redundant Array of Inexpensive Disks) : ensemble de disques durs gérés par des contrôleurs spécialisés, censé encaisser la panne d'au moins un disque, le disque de remplacement étant rempli de données reconstruites.
+
+      Facteur d'entrelacement : taille relative des bandes stockées sur chaque unité physique, dont dépend le débit de transfert, plus petit donnant un meilleur débit.
+
+      DASD (Direct Access Storage Device) : unité de stockage externe pourvue d'une alimentation propre et de connecteurs de disques à chaud, hot swappable, qui gère elle-même ses disques et est reconnue comme un disque SCSI standard.
+
+      Contrôleur de disques RAID : carte s'enfichant dans un slot PCI ou ISA permettant de contrôler plusieurs disques durs.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LE CONCEPT DE FICHIER ET L'INODE.
+
+
+   A. Le tout-fichier.
+
+      Sous Unix et Linux, tout est fichier, du simple fichier texte aux fichiers de configuration de plusieurs milliers de lignes, en passant par les processus et les périphériques ; le contenu d'un fichier est entièrement défini par son créateur, qui n'a pas à gérer l'allocation des ressources, cet aspect relevant du système.
+
+      Les fichiers n'étant pas typés du point de vue de l'utilisateur, le concept de fichier offre un type générique et polymorphe, le système gérant la multiplicité des formats effectifs, cette généralisation nécessitant des structures d'organisation dont l'inode.
+
+
+   B. L'inode.
+
+      Sous Unix, tout fichier est identifié par un numéro appelé numéro d'inode ; l'inode est la structure de données sur le disque qui décrit et stocke tous les attributs d'un fichier, y compris son emplacement physique, à l'exception de son nom, l'arborescence n'étant qu'un outil de référencement.
+
+      L'inode contient les informations sur le propriétaire avec l'UID et le GID, la taille du fichier, le type de fichier qui peut être répertoire, mode bloc, mode caractère, lien symbolique, tube nommé ou socket, le nombre de liens dont la mise à zéro entraîne la destruction de l'objet et la récupération de la place, la localisation sur le disque des blocs de l'objet, les droits d'accès et les dates de dernier accès et de dernière modification.
+
+      L'inode n'est unique qu'au sein d'une même partition, le système manipulant les objets via un couple disque et inode.
+
+
+   C. L'adressage des blocs de données.
+
+      Une inode de fichier normal contient la liste des dix premiers blocs occupés par le fichier, puis si nécessaire le numéro d'un bloc d'indirection simple contenant les numéros des blocs suivants, puis le numéro d'un bloc d'indirection double contenant une liste de blocs d'indirection simple, puis le numéro d'un bloc d'indirection triple contenant une liste de blocs d'indirection double.
+
+      Cette organisation économise sur la taille des inodes, donne un accès rapide aux petits fichiers, la majorité des fichiers étant petits, et permet de très gros fichiers pouvant atteindre dix plus deux cent cinquante-six plus deux cent cinquante-six au carré plus deux cent cinquante-six au cube blocs, soit un téra-octet pour des blocs de un kilo-octet ; un bloc d'indirection quadruple n'est pas prévu ; il s'agit du premier modèle s5fs de System V, dont les capacités ont évolué avec des systèmes de fichiers plus performants comme le FFS de Berkeley qui gère une structure d'inode plus permissive.
+
+
+II. LES TYPES DE FICHIERS.
+
+
+   A. Le fichier normal.
+
+      Un fichier normal ou régulier contient des données ; il peut être lisible comme un fichier texte ou illisible comme un exécutable, appelé alors fichier binaire.
+
+
+   B. Le répertoire.
+
+      Le répertoire est un fichier binaire contenant la liste des autres fichiers, élément d'organisation de l'espace disque, structuré hiérarchiquement comme un arbre, d'où le terme d'arborescence, avec une racine, un répertoire père pour tout répertoire non racine et d'éventuels répertoires fils.
+
+      À la création d'un répertoire, le système crée automatiquement le fichier point qui représente le répertoire lui-même et le fichier point-point qui représente le répertoire père ; le contenu d'un répertoire est une suite de couples nom de fichier et numéro d'inode, donc une table de correspondance, comparable au système de conversion du DNS entre noms de serveurs et adresses IP.
+
+
+   C. Les fichiers spéciaux.
+
+      Un fichier spécial est associé à un dispositif d'entrée-sortie spécifique à un périphérique, disque, bande, terminal, imprimante ou carte réseau ; il est géré comme un fichier ordinaire mais ne sert pas au stockage, seulement à l'activation des dispositifs physiques et aux opérations de lecture-écriture.
+
+      Chaque fichier spécial possède une inode, mais celle-ci ne contient pas d'adresses de blocs de données ; elle contient l'identification du dispositif physique et les informations permettant d'identifier le pilote qui gère le périphérique.
+
+      Les fichiers spéciaux travaillent en mode caractère, caractère par caractère, pour les terminaux et la mémoire, ou en mode bloc, bloc par bloc au moyen d'un tampon, pour les disques et les bandes ; à la place de la taille, on trouve le numéro majeur qui identifie le pilote et le contrôleur, et le numéro mineur qui identifie le périphérique ou une de ses particularités comme une partition ou un numéro de carte.
+
+      Le système ne permet pas l'accès direct aux informations des fichiers spéciaux, indépendamment du système de droits, la structure du code du noyau ne permettant que des accès spéciaux, afin d'en assurer l'intégrité.
+
+
+   D. Les liens durs et symboliques.
+
+      Les liens font apparaître un même fichier dans plusieurs répertoires ou sous des noms différents, évitant les duplications et assurant la cohérence des mises à jour.
+
+      Le lien dur ou physique est une entrée de répertoire séparée qui partage les mêmes blocs de données et la même inode qu'un autre fichier, sans inode propre ; il ne peut être créé entre deux partitions différentes car les numéros d'inode ne sont uniques qu'au sein d'une partition.
+
+      Le lien symbolique est un pointeur qui référence un fichier ou un répertoire situé ailleurs, avec sa propre inode ; la suppression du fichier source rend le lien cassé, et le lien symbolique fonctionne entre partitions.
+
+
+   E. Les tubes, les sockets et les pseudo-terminaux.
+
+      Les tubes sont un mécanisme de communication entre processus sous forme d'un flot continu d'octets, qui permet l'approche filtre en redirigeant la sortie d'une commande vers l'entrée d'une autre ; un tube nommé est un fichier spécial ayant un nom dans l'arborescence, appelé FIFO car l'ordre des caractères en entrée est conservé en sortie, la lecture y étant destructive et la capacité finie, correspondant en général au nombre d'adresses directes des inodes.
+
+      Les sockets, apparues sur BSD, facilitent la communication entre processus dans les deux sens et éventuellement entre machines distantes via le réseau.
+
+      Un pseudo-terminal est une paire de périphériques de caractères virtuels formant un canal bidirectionnel avec une extrémité maître et une extrémité esclave qui se comporte comme un terminal classique, de type BSD ou System V, la commande tty affichant celui utilisé.
+
+
+III. L'ARBORESCENCE DES FICHIERS.
+
+
+   A. Objectifs et distinctions.
+
+      Connaître l'arborescence permet de connaître le contenu et l'utilité des principaux répertoires et de surveiller les répertoires système qui peuvent grossir à cause des journaux ; on distingue répertoires système et utilisateurs, répertoires partageables et non partageables, répertoires figés comme /usr et /opt et répertoires évolutifs comme /var/mail et /var/spool/lpd.
+
+
+   B. Le socle commun.
+
+      Longtemps la hiérarchie a été non standard et dépendante de chaque système, ce qui gênait le portage des scripts et la gestion en environnement hétérogène ; malgré les efforts de standardisation, on distingue une partie commune à tous les Unix et Linux, à laquelle s'ajoutent des spécificités.
+
+      La racine slash contient les répertoires principaux ; /root est le répertoire personnel de l'administrateur, situé sur la partition racine pour être chargé au démarrage avant le montage de /home, pas toujours présent.
+
+      /bin et /sbin contiennent les binaires primordiaux utilisés pendant le boot, dans la même partition que la racine, /sbin regroupant des commandes système comme arp, fsck, halt, ifconfig, init, mkfs et shutdown, /bin des commandes comme bash, chmod, cp et mkdir ; /usr/sbin et /usr/bin contiennent les binaires non primordiaux, /usr/local/sbin les commandes d'administration propres à la machine.
+
+      /lib contient les bibliothèques dynamiques primordiales, à ne pas effacer, /usr/lib les bibliothèques non primordiales et les bibliothèques statiques point a, /usr/include les fichiers d'en-tête point h de programmation en C.
+
+      /etc contient les fichiers de configuration des utilitaires primordiaux comme group, passwd, hosts, fstab, inittab, resolv.conf et syslog.conf ; /dev contient les fichiers spéciaux d'accès aux ressources physiques, organisé en vrac sous FreeBSD et Linux ou de manière structurée en sous-répertoires sous Solaris et HP-UX, ses droits d'accès étant très importants.
+
+      /tmp stocke des fichiers temporaires et est en principe vidé au boot, /var/log stocke les journaux du système, /var/mail les boîtes aux lettres, /var/run des informations d'état après le dernier boot avec des fichiers de type démon point pid, /var/tmp des fichiers temporaires non vidés au boot ; /mnt est un point de montage provisoire, /opt reçoit des paquets complets de commandes, /proc sous Linux offre une représentation virtuelle des informations sur les processus, le matériel et le noyau, /sys ou /usr/sys sur les Unix commerciaux contient les modules point o pour recompiler un noyau.
+
+
+IV. LES SYSTÈMES DE FICHIERS.
+
+
+   A. Généralités.
+
+      Au-dessus de l'inode, le monde Unix s'appuie sur une organisation globale, le système de fichiers, qui assure la cohérence d'un support ; le système se réserve un certain nombre de blocs pour y stocker des informations structurelles appelées méta-données, positionnées de manière spécifique selon le type de système de fichiers.
+
+
+   B. System V.
+
+      Le système de fichiers System V, héritier du s5fs, privilégiait l'efficacité du stockage avec des blocs de un ou deux kilo-octets, ce qui convient à de nombreux petits fichiers mais moins au transfert de très gros fichiers ; ses méta-données comprennent un boot block contenant le programme de démarrage aux secteurs zéro à quinze, un super bloc contenant l'état, la table des inodes et la liste des inodes disponibles, élément critique, une i-list des descripteurs de fichiers et des data blocks de un kilo-octet ; ce système est aujourd'hui dépassé, supporté seulement en compatibilité descendante.
+
+
+   C. FFS de BSD et UFS.
+
+      Le Fast File System de BSD remédie aux limites de performance en réorganisant les blocs, qui peuvent atteindre soixante-quatre kilo-octets, avec la notion de fragment, sous-unité de bloc en deux, quatre ou huit, qui devient l'unité de stockage tandis que le bloc reste l'unité d'entrée-sortie.
+
+      Le FFS répartit le super bloc à différents endroits avec synchronisation des copies, ce qui permet de continuer à accéder au système de fichiers si le super bloc principal est endommagé, et répartit les inodes sur le système de fichiers ; il s'organise en groupes de cylindres, chacun contenant une copie du super bloc placée à un endroit différent pour se trouver sur des plateaux différents, une carte du groupe et une partie de la liste des inodes, l'objectif étant de récupérer une grande partie des données en cas de dommage localisé.
+
+      Ce système s'est imposé comme la norme UFS incorporée dans System V point quatre, adoptée par Solaris, Tru64 et BSD ; son inconvénient majeur est que, du fait de la structure répartie des informations critiques, le fsck est très long.
+
+
+   D. La journalisation : VxFS et JFS.
+
+      VxFS sous HP-UX et JFS sous AIX génèrent un journal de transactions, stocké sur un emplacement ou une partition dédiés, qui enregistre tous les changements des méta-données, ce qui permet une restauration très rapide en cas de crash avec conservation de la cohérence.
+
+      L'accès disque se fait par extent, constitué de plusieurs blocs, le système se contentant d'un seul accès disque et pouvant combiner plusieurs ajouts en une seule écriture ; la restauration est rapide, mais VxFS est plus gourmand en mémoire qu'un UFS classique.
+
+
+   E. Autres systèmes de fichiers.
+
+      Le CDFS est le système de fichiers des CD-ROM, en lecture seule, à structure arborescente, sur lequel fsck ne peut être utilisé.
+
+      Le NFS est un système de fichiers distant accessible via un réseau et utilisable dans un système de fichiers local, avec des temps d'accès au moins trois fois supérieurs à ceux d'un système de fichiers local.
+
+
+   F. ZFS.
+
+      ZFS, apparu en deux mille cinq sous Solaris, est le premier système de fichiers cent vingt-huit bits, ce qui lui donne une volumétrie démesurée pour le nombre d'inodes comme pour la taille maximale d'un fichier ; il s'auto-répare avec des disques redondants s'il détecte une anomalie, permet le RAID zéro, un, cinq ou six au niveau du système de fichiers, la compression à la volée et les snapshots par copie d'arborescence, sous licence CDDL qui le cloisonne au monde Unix.
+
+      ZFS a failli être le système de fichiers par défaut de Mac OS X, projet échoué pour des raisons techniques et de licence ; beaucoup de ses nouveautés ont été reprises dans Btrfs.
+
+
+   G. EXT2, EXT3 et EXT4.
+
+      EXT3, utilisé pendant de nombreuses années depuis le noyau 2.4.15 de novembre deux mille un, a apporté la journalisation et de plus grandes capacités par rapport à EXT2 ; il permet un système de fichiers jusqu'à seize téra-octets, un fichier jusqu'à deux téra-octets et des blocs de quatre kilo-octets, EXT2 étant encore utilisé pour les disques SSD dont la durée de vie baisse avec le nombre d'écritures.
+
+      EXT4, mature depuis fin deux mille huit avec le noyau 2.6.28, apporte davantage de changements à EXT3 que celui-ci n'en avait apporté à EXT2 : le nombre de blocs passe de trente-deux à quarante-huit bits, ce qui permet un système de fichiers jusqu'à un exaoctet et un fichier jusqu'à seize téra-octets, un nombre illimité de sous-répertoires, une somme de contrôle sur le journal, une journalisation en une passe au lieu de deux et une défragmentation à la demande avec e4defrag.
+
+      L'amélioration principale d'EXT4 est l'usage des extents en lieu et place de l'adressage indirect : un extent enregistre seulement le début, la taille de la portion de fichier et le numéro du premier bloc physique, ce qui évite la fragmentation et permet un contrôle de cohérence plus poussé ; la durée d'un fsck est fortement réduite.
+
+      Le principal inconvénient d'EXT4 est le risque de perte de données lié à l'allocation différée, dite allocate-on-flush : EXT4 peut garder les données non écrites pendant une minute contre cinq secondes pour EXT3, si bien qu'un plantage pendant ce délai les perd, EXT3 conservant en outre le fichier d'origine lors d'une modification alors qu'EXT4 avec les extents peut le perdre ; la solution nodelalloc dans fstab dégrade les performances, et à partir du noyau 2.6.30 le système force automatiquement l'allocation directe pour certains fichiers.
+
+
+   H. Btrfs.
+
+      Btrfs, sous licence GPL développé par Oracle, reprend des concepts de ZFS, ReiserFS et EXT4, avec beaucoup de similitudes avec ZFS ; il utilise des sous-volumes, arborescences séparées auxquelles on peut imposer des quotas différents, une arborescence en couches de type B-tree avec des clés de cent trente-six bits, et des extents comme EXT4.
+
+      Il propose des snapshots, photographies du système de fichiers à un instant donné, opérationnelles et modifiables, réalisées par la technique du copy-on-write qui évite la journalisation ; il protège les données par des back references, qui permettent de savoir depuis un bloc vers quelles méta-données il pointe et de détecter les corruptions, et par des sommes de contrôle sur toutes les données et méta-données.
+
+      Btrfs permet le redimensionnement à chaud, complétant LVM, dispose de l'utilitaire btrfsck qui utilise trois fois plus de mémoire que ext2fsck, offre un outil de migration depuis EXT3 et EXT4 avec retour arrière possible, la compression à la volée, et prévoit le chiffrement ; il offre la puissance d'un système de fichiers soixante-quatre bits, mais sa pérennité en tant que produit édité par une société commerciale et son retard sur EXT4 constituent des handicaps.
+
+
+   I. F2FS.
+
+      F2FS de Samsung est un système de fichiers open source pour mémoire flash NAND, intégré au noyau Linux 3.8 fin deux mille douze, qui prend en compte les contraintes de la flash comme l'effacement avant écriture, l'écriture séquentielle sur blocs effacés et les cycles d'écriture limités, et détecte la géométrie interne pour régler ses paramètres ; pour les disques SSD, des systèmes de fichiers spécifiques comme jffs2 ou logfs restent adaptés.
+
+
+   J. Le montage et le démontage.
+
+      Les fichiers d'un système Unix sont organisés dans une arborescence unique, mais on peut avoir plusieurs partitions grâce au montage, qui raccorde une partition à un répertoire de l'arborescence appelé point de montage ; greffer sur un répertoire non vide fait perdre l'accès à son contenu.
+
+      Le montage peut être manuel avec mount ou automatique avec automount ; le démontage rompt le lien entre le répertoire de montage et le système de fichiers, la seule exception étant la racine, toujours montée quand le système est actif et impossible à démonter.
+
+
+V. DES SYSTÈMES DE FICHIERS AUX DISQUES.
+
+
+   A. Structure physique du disque.
+
+      Un disque dur est constitué de plusieurs plateaux rigides empilés à faible distance, tournant autour d'un axe et recouverts d'oxyde magnétique polarisable, les lectures et écritures se faisant par une pile de têtes qui se déplacent à haute vitesse sur les rayons des plateaux.
+
+
+   B. Formatage de bas niveau et partitionnement.
+
+      Le formatage de bas niveau divise la surface des plateaux en pistes, secteurs et cylindres ; le partitionnement, fait après le formatage de bas niveau et avant le formatage logique, crée des zones dont les données ne sont pas mélangées.
+
+      On partitionne pour cloisonner les utilisateurs et les problèmes, faciliter les sauvegardes, limiter l'expansion de certains utilisateurs et faciliter NFS ; les problèmes courants sont une partition pleine face à une autre surdimensionnée et vide et la divergence des implémentations entre constructeurs.
+
+      Une partition peut contenir un système de fichiers, une zone de swap sans structure de système de fichiers, ou rien si elle est réservée pour un usage ultérieur ; les informations de partitionnement sont stockées dans le disk label, qui contient les caractéristiques physiques, les paramètres de partitionnement et les secteurs défectueux.
+
+
+   C. Les étapes de l'ajout d'un disque.
+
+      Quel que soit l'Unix, l'ajout d'un disque repose sur quatre grandes étapes : la préparation et la connexion du disque, le formatage et le partitionnement, la création et la vérification du nouveau système de fichiers, et le montage du système de fichiers.
+
+
+   D. Les types de disques et de connecteurs.
+
+      Trois principaux types dominent le marché : les disques IDE, les disques SCSI et les disques SSD.
+
+      Les connecteurs IDE, ATA et SATA sont apparus avec les PC, moins chers que le SCSI, la mécanique étant identique ; le SATA existe en trois normes, la SATA trois offrant six cents méga-octets par seconde théoriques non exploités par les disques mécaniques, un câble reliant un connecteur à un disque, les disques SATA concurrençant le SCSI pour les faibles et moyennes volumétries et pouvant être couplés à ISCSI ou FCoE sur des baies.
+
+      Le SCSI est une norme d'interface d'échange de données, SCSI un en mille neuf cent quatre-vingt-six, SCSI deux en mille neuf cent quatre-vingt-dix, SCSI trois en mille neuf cent quatre-vingt-quinze, cette dernière passant à la fibre Channel, un nombre de périphériques quasi illimité de seize millions, une décomposition en couches et une séparation des couches physiques et hautes, en serial SCSI.
+
+      Les disques SSD sont à mémoire flash, sans élément mécanique, composés de contrôleurs et de modules mémoire réinscriptibles, désormais couplés au SATA, avec des latences sans comparaison, un accès aux petits fichiers jusqu'à vingt fois plus rapide et des débits dépassant cinq cents méga-octets par seconde en lecture ou écriture, mais des capacités encore inférieures aux disques mécaniques qui dépassent deux téra-octets contre rarement cinq cent douze giga-octets pour les SSD ; il existe aussi des disques hybrides couplant SSD et disque mécanique, peu développés.
+
+
+   E. Les commandes.
+
+      Les commandes de dépôt d'un disk label sont propres à chaque constructeur, fdisk sous Linux, format sous Solaris, des outils intégrés sous HP-UX et AIX ; les conventions de nommage des fichiers spéciaux sont /dev/hdisk sous AIX et /dev/rdsk/cxtxdxsx sous HP-UX et Solaris, où c désigne le contrôleur, t l'identifiant SCSI, d la section et s le numéro de partition.
+
+      Avant de créer un système de fichiers, les fichiers spéciaux des partitions physiques doivent exister, le plus souvent créés nativement par le système à la détection du matériel, sinon créés avec mknod suivi du nom, du mode c ou b, du numéro majeur et du numéro mineur, ces numéros ne s'inventant pas et étant donnés par le système.
+
+      Le système de fichiers est créé avec mkfs sur un fichier spécial, avec des paramètres complexes à utiliser via un gestionnaire de volumes logiques si possible ; on vérifie la cohérence avec fsck, on monte avec mount le fichier spécial sur le point de montage, puis la table des partitions de /etc/fstab ou vfstab est modifiée pour finaliser la prise en compte.
+
+
+VI. LES GESTIONNAIRES DE VOLUMES LOGIQUES.
+
+
+   A. Volumes physiques et groupes de volumes.
+
+      Avec l'évolution des outils d'administration et de virtualisation, la gestion des disques est facilitée par les gestionnaires de volumes logiques présents nativement chez HP-UX et AIX ; les disques doivent d'abord être initialisés en volumes physiques, divisés en unités d'espace allouable appelées partitions physiques sous AIX ou domaines physiques sous HP-UX, généralement de quatre méga-octets.
+
+      Un groupe de volumes est un ensemble nommé de disques ou de volumes physiques, pouvant inclure des grappes RAID accédées comme une seule unité ; son espace total est un ensemble d'unités d'allocation physiques, ce qui affranchit le système de fichiers de la limitation d'un système de fichiers par disque, chaque groupe de volumes ayant un répertoire sous /dev.
+
+
+   B. Volumes logiques.
+
+      Un volume logique est constitué d'unités d'allocation logiques appelées logical extents ; il peut contenir des copies redondantes, un volume logique correspondant alors à deux volumes physiques, l'un contenant l'original et l'autre le miroir, et c'est sur les volumes logiques que l'on crée les systèmes de fichiers.
+
+      Sur un volume logique on construit un système de fichiers que l'on monte normalement, sa taille pouvant être augmentée à concurrence des volumes physiques disponibles, le volume logique possédant sous /dev une entrée en mode bloc et une en mode caractère.
+
+
+VII. L'ENTRELACEMENT ET LE RAID.
+
+
+   A. L'entrelacement.
+
+      L'entrelacement combine un ou plusieurs disques physiques en un seul disque logique vu par Unix comme tout autre périphérique ; il vise à augmenter les performances des entrées-sorties en répartissant les opérations de lecture et d'écriture sur plusieurs disques effectuées en parallèle, ce qui est particulièrement efficace pour le transfert de très gros fichiers sur un système monoprocesseur ; il existe des solutions matérielles avec des périphériques spéciaux et des solutions logicielles via un gestionnaire de volumes logiques.
+
+
+   B. Principes du RAID.
+
+      On n'utilise plus de disques indépendants mais un ensemble de disques, en général rackables, gérés par des contrôleurs spécialisés, censé encaisser la panne d'au moins un disque, le système continuant de fonctionner et le disque de remplacement étant rempli de données reconstruites à partir des autres disques.
+
+
+   C. Les niveaux RAID.
+
+      Le RAID zéro, appelé stripping ou agrégat par bande, répartit les données sur l'ensemble des disques sans redondance, donc sans tolérance aux pannes, mais avec une vitesse de transfert élevée ; il faut au moins deux disques, la taille finale étant limitée par le plus petit disque, et le facteur d'entrelacement caractérise la taille des bandes, plus petit donnant un meilleur débit.
+
+      Le RAID un, appelé mirroring, shadowing ou duplexing, duplique l'information sur plusieurs disques, ce qui apporte une grande sécurité et une lecture plus rapide, le serveur continuant à fonctionner si un disque tombe en panne ; ses inconvénients sont l'usage de cent pour cent de disques en plus, une charge processeur en réalisation logicielle et un coût élevé puisque seule la moitié de la capacité est utilisable.
+
+      Le RAID zéro plus un ou RAID zéro-un crée d'abord des ensembles RAID zéro matériels puis les regroupe logiquement en RAID un, offrant des performances multipliées et supportant la perte de deux disques dans l'exemple du cours.
+
+      Le RAID un plus zéro ou RAID un-zéro crée d'abord des ensembles RAID un matériels puis les regroupe logiquement en RAID zéro, avec les mêmes performances que le RAID zéro-un mais une bien meilleure tolérance aux pannes, jusqu'à deux disques par ensemble RAID un, ce qui explique qu'il lui soit préféré.
+
+      Le RAID deux, obsolète, stocke les données comme le RAID zéro avec des bits de contrôle par code de Hamming sur des unités distinctes, ce contrôle étant désormais intégré aux contrôleurs de disques.
+
+      Le RAID trois stocke les données sous forme d'octets sur chaque disque et dédie un disque à un bit de parité, ce qui permet de reconstituer un disque défaillant, mais pas deux simultanément ; il faut au moins trois disques.
+
+      Le RAID quatre est proche du RAID trois, mais la parité est faite au niveau d'un bloc et non d'un bit, stockée sur un disque dédié, ce qui évite d'accéder à de multiples lecteurs pour de petites lectures, mais impose au disque de contrôle un temps d'accès égal à la somme des autres ; il faut au moins trois disques et les offres commerciales sont rares.
+
+      Le RAID cinq calcule la parité au niveau d'un secteur mais la répartit sur l'ensemble des disques, ce qui améliore l'accès en lecture comme en écriture, avec des performances proches du RAID zéro et une tolérance aux pannes élevée ; l'espace utile sur n disques est de n moins un disques, d'où l'intérêt d'un grand nombre de disques.
+
+      Le RAID six, ajouté aux niveaux de Berkeley, utilise deux fonctions de parité stockées sur deux disques dédiés, ce qui assure la redondance en cas d'avarie simultanée de deux disques et impose au moins quatre disques.
+
+
+   D. Les combinaisons RAID X0.
+
+      On implémente d'abord un mode qui gère la tolérance de panne, un, trois, quatre, cinq ou six, puis un RAID zéro pour maximiser les performances ; le RAID cinquante offre d'excellentes performances tout en gérant la tolérance de panne, et les combinaisons les plus utilisées sont le RAID dix, trente et cinquante, le RAID quarante et soixante étant rares faute de succès commercial du RAID quatre et du RAID six ; les modes combinant deux niveaux à parité, comme le RAID cinquante-cinq, ne sont quasiment jamais implémentés car ils exigent une carte RAID très puissante.
+
+
+   E. Le choix et la mise en œuvre.
+
+      Les solutions généralement retenues sont le RAID un et le RAID cinq, le choix dépendant de la sécurité, le RAID cinq reconstruisant le disque manquant à partir des autres et le RAID un opérant une copie disque à disque, des performances, le RAID un étant meilleur en lecture mais souffrant en écriture, et du coût, le RAID cinq offrant quatre-vingts à quatre-vingt-dix pour cent du volume alloué contre cinquante pour cent pour le RAID un.
+
+      Une solution RAID peut être mise en place de façon logicielle par un pilote du système d'exploitation, par le système de fichiers comme ZFS, ou de façon matérielle avec des unités DASD pourvues d'une alimentation propre et de connecteurs de disques à chaud, hot swappables et reconnues comme un disque SCSI standard, ou avec des contrôleurs de disques RAID s'enfichant dans des slots PCI ou ISA.
+
+
+POINTS D'ATTENTION.
+
+      L'inode contient tout sur un fichier sauf son nom, et n'est unique qu'au sein d'une même partition.
+
+      Un lien dur ne peut pas être créé entre deux partitions différentes ; le lien symbolique le permet mais devient cassé si le fichier source disparaît.
+
+      L'accès aux fichiers spéciaux se fait uniquement par le système, indépendamment des droits, afin d'assurer l'intégrité des structures internes.
+
+      Greffer une partition sur un répertoire non vide fait perdre l'accès au contenu de ce répertoire.
+
+      Le système de fichiers racine ne peut jamais être démonté tant que le système est actif.
+
+      Le fsck d'un FFS ou d'un UFS est très long à cause de la structure répartie des informations critiques ; les systèmes journalisés y remédient.
+
+      Le risque de perte de données est plus élevé avec EXT4 qu'avec EXT3 en cas de crash, à cause de l'allocation différée qui peut retenir les écritures jusqu'à une minute.
+
+      Ne pas effacer les bibliothèques dynamiques de /lib et conserver une trace écrite d'un ls tiret l de /dev.
+
+      En RAID zéro, la panne d'un seul disque entraîne la perte de toutes les données.
+
+      Le RAID un-zéro est préféré au RAID zéro-un pour sa meilleure tolérance aux pannes.
+
+      En RAID cinq, il faut un grand nombre de disques pour rentabiliser la parité qui coûte l'équivalent d'un disque.
+
+
+EXEMPLES CITES.
+
+      Fichier toto.txt contenant le texte « toto est là » et son chemin absolu /home/olivier/toto.txt, opposé au chemin relatif point slash olivier slash toto.txt depuis /home.
+
+      Conventions de nommage de fichiers spéciaux /dev/hdisk sous AIX, /dev/rdsk/cxtxdxsx sous HP-UX et Solaris.
+
+      Commande de dépôt d'un disk label fdisk sous Linux et format sous Solaris.
+
+      Création d'un système de fichiers UFS sous Solaris avec mkfs tiret F ufs sur un fichier spécial de disquette, aux nombreuses sous-options.
+
+      Montage d'un nouveau système de fichiers avec mount /dev/sda3 sur /nouveauSF.
+
+      Deux disques de cinq cents méga-octets combinés en un groupe de volumes donnant l'impression d'un disque d'un giga-octet.
+
+      Deux disques de vingt giga-octets en RAID zéro donnant un disque logique de quarante giga-octets, un disque de dix et un de vingt-sept donnant quarante giga-octets avec dix-sept giga-octets inutilisés.
+
+      Exemple du cours de neuf disques de dix giga-octets répartis en trois ensembles, comparant la tolérance aux pannes du RAID zéro-un et du RAID un-zéro.
+
+      Combinaisons courantes RAID dix, trente et cinquante, combinaisons rares RAID quarante et soixante.

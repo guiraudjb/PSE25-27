@@ -1,42 +1,250 @@
-LE PROTOCOLE IP (IPv4)
+LE PROTOCOLE IP (INTERNET PROTOCOL) VERSION 4.
 
-1. LA PILE TCP/IP
-Principe d'IP : faire ce qui est possible pour transporter les datagrammes de la source vers la destination, sans savoir si les stations sont sur un même réseau ou sur des réseaux différents, ni s'il existe réellement un chemin. Document de référence : RFC 1122. TCP/IP est indépendant des couches basses (Ethernet, Token Ring, X25), recouvre les couches 3 à 7 d'OSI (sans corrélation précise), et lui est antérieur. Protocole d'Internet.
 
-2. ADRESSES IPv4
-32 bits (4 octets), notation décimale pointée (ex. 192.33.160.20). Deux parties : identifiant du réseau (Net-ID) + identifiant de l'hôte (Host-ID). 5 classes :
-- Classe A : réseau sur 8 bits, 1er bit à 0, 1er octet 1-127 ; RRR.HHH.HHH.HHH ; 127 réseaux d'environ 16 millions d'hôtes ; très grandes entreprises.
-- Classe B : réseau sur 16 bits, 2 premiers bits à 10, 1er octet 128-191 ; RRR.RRR.HHH.HHH ; environ 16 000 réseaux de plus de 65 000 hôtes ; grandes entreprises.
-- Classe C : réseau sur 24 bits, 3 premiers bits à 110, 1er octet 192-223 ; RRR.RRR.RRR.HHH ; plus de 2 millions de réseaux de 254 hôtes ; entreprises moyennes.
-- Classe D : multicast (envoi à un groupe). Classe E : réservée pour d'autres usages.
-Impossible d'avoir tous les bits à 0 ou tous à 1. Deux stations sur le même sous-réseau (aucun routeur entre elles) ont une partie réseau identique. Seul le NIC (Network Information Center) attribue les adresses de réseau ; un LAN non relié à Internet peut choisir librement mais devra tout revoir en cas de raccordement.
+LEXIQUE COMPLET.
 
-3. FONCTIONNEMENT D'IPv4
-Service : simple remise de datagrammes en mode non connecté ; chaque paquet indépendant ; pas de contrôle de flux (TCP). Trois services aux couches supérieures : acheminement de l'unité de données, gestion des requêtes de service, rapport des erreurs de transmission.
-Destinataire sur le même réseau -> envoi direct. Sur un autre réseau -> envoi à un routeur qui achemine vers la destination (ou un sous-réseau intermédiaire).
-Les modules Internet (programmes des hôtes et routeurs) transfèrent les datagrammes de module en module selon l'interprétation de l'adresse IP.
+      Protocole IP : protocole dont le principe de base est de faire ce qui est possible pour transporter les datagrammes de leur source vers leur destination, qu'elles soient sur un même réseau ou sur des réseaux différents, sans garantir qu'un moyen de joindre la destination existe.
 
-4. FRAGMENTATION
-MTU (Maximum Transfer Unit) : taille maximale du bloc de données d'une trame de couche Liaison (1500 pour Ethernet), variable selon les réseaux. Fragmentation gérée par IP quand un datagramme dépasse la MTU d'un réseau traversé. On ne peut pas savoir à l'avance si un paquet sera fragmenté. Datagramme « non fractionnable » (bit DF) : rejeté s'il ne peut être acheminé sans fragmentation.
-Découpage en portions multiples de 8 octets (64 bits), sauf la dernière. Champ Fragment Offset : position du fragment en blocs de 8 octets (0 pour le premier). Champ Identification : unique par paire source-destination et par protocole pendant toute la transmission ; sert à distinguer les fragments de datagrammes différents.
-Réassemblage : uniquement par le destinataire final (jamais les équipements intermédiaires ; un paquet fragmenté le reste, voire est re-fragmenté). Recombinaison des fragments dont identification, source, destination et protocole sont identiques, à la position du Fragment Offset. Si un fragment manque : détecté au réassemblage, tous les autres supprimés, pas de retransmission, rien remonté à la couche Transport.
+      Datagramme : paquet de données acheminé par la couche IP, entité absolument indépendante de toutes les autres.
 
-5. EN-TÊTE IPv4
-- Version (4 bits) : format du datagramme.
-- Longueur d'en-tête LET/IHL (4 bits) : longueur en mots de 32 bits, >= 5 (en-tête minimal sans option).
-- Type de service TOS (8 bits) : 3 bits de priorité, 1 bit Delay, 1 bit Throughput, 1 bit Reliability, 2 bits à 0 ; arbitrage entre faible retard, faible taux d'erreur et haut débit ; pas plus de 2 optimisations sur 3.
-- Longueur totale (16 bits) : datagramme entier (en-tête + données) en octets ; max 65 535 ; recommandé <= 576 sauf si la destination accepte davantage.
-- Identification (16 bits) : identifie les fragments d'un même datagramme.
-- Flags (3 bits) : commutateurs de contrôle (dont DF, MF).
-- Fragment Offset (13 bits) : décalage du premier octet du fragment, en blocs de 8 octets ; 0 pour le premier fragment.
-- Durée de vie TTL (8 bits) : limite le temps de vie ; décrémenté à chaque routeur, datagramme détruit si TTL nul.
-- Protocole (8 bits) : protocole de couche supérieure ; utilisé uniquement par le destinataire final.
-- Checksum d'en-tête (16 bits) : calculé sur l'en-tête uniquement ; recalculé et vérifié à chaque routeur où l'en-tête est réinterprété (TTL modifié).
-- Adresse source (32 bits), Adresse destination (32 bits).
-- Options (taille variable, 0 ou plusieurs) : implémentées par tous les modules IP ; l'option de sécurité peut être obligatoire dans certains environnements.
+      Pile TCP/IP : famille de protocoles et de commandes dont font partie TCP et IP, dont le document de référence est le RFC 1122, indépendante des couches basses et recouvrant les couches 3 à 7 du modèle OSI sans corrélation précise, TCP/IP étant antérieur au modèle OSI.
 
-6. ARP, RARP, ICMP
-ARP (Address Resolution Protocol) : trouver l'adresse physique (MAC, 48 bits) d'un hôte à partir de son adresse logique (IP, 32 bits). L'hôte A émet en broadcast une requête contenant son IP, sa MAC et l'IP de B ; seul B reconnaît son IP et renvoie sa MAC. Cache ARP : chaque hôte conserve les correspondances IP-MAC récentes et le consulte avant de diffuser (broadcast coûteux). Trame ARP : Type hardware, Type de protocole, Hlen, Plen, Opération (1 requête ARP, 2 réponse ARP, 3 requête RARP, 4 réponse RARP...), 4 adresses (hardware et protocole, expéditeur et destinataire).
-RARP (Reverse ARP) : une station sans disque (Network Computer, terminal) connaît sa MAC mais pas son IP (pas de mémoire de masse). Elle émet un message RARP contenant sa MAC en broadcast ; un serveur d'adresses RARP (table MAC-IP) répond avec son IP. Émis dès la mise sous tension, avant le chargement de l'OS. Plusieurs serveurs RARP pour éviter la surcharge.
-ICMP (Internet Control Message Protocol) : messages de tests et de contrôle entre hôtes pour signaler des problèmes réseau. Datagrammes ICMP encapsulés dans IP. Partie intégrante d'IP, implémenté dans chaque module IP. Ne rend pas IP fiable (signale seulement les erreurs). Chaque message ICMP : champ type, champ code, et les 8 premiers octets du datagramme fautif (pour identification par l'expéditeur).
-Principaux messages : Destination injoignable (routeur incapable d'acheminer, ou couche IP du destinataire ne peut délivrer), Dépassement de temps (durée de vie expirée), Problème de paramètre (en-tête IP non reconnu, uniquement en cas de destruction), Saturation d'un élément du réseau (routeur à court de mémoire). Aucun message ICMP en réponse à un ICMP (éviter le cercle vicieux) ; ICMP émis uniquement pour le fragment zéro d'un datagramme fragmenté. La commande ping utilise ICMP : « echo request » -> « echo reply » pour tester la connectivité.
+      Internet : vaste interconnexion de réseaux locaux TCP/IP à travers le monde, s'appuyant sur le protocole IP.
+
+      Adresse IP : adresse logique identifiant une connexion d'une machine à un réseau, à distinguer de l'adresse physique MAC ; une machine reliée à plusieurs réseaux possède plusieurs adresses IP.
+
+      Adresse IPv4 : adresse de longueur fixe de trente-deux bits, soit quatre octets, écrite en notation décimale pointée octet par octet séparés par un point, par exemple 192.33.160.20.
+
+      Net-ID : identifiant du réseau, partie gauche de l'adresse IPv4.
+
+      Host-ID : identifiant de l'hôte sur le réseau, partie droite de l'adresse IPv4, laissée à l'appréciation de l'administrateur du site.
+
+      Classe A : classe d'adresse à identifiant réseau sur huit bits dont le premier bit est à zéro, premier octet de 1 à 127, environ cent vingt-sept réseaux de près de seize millions d'hôtes, réservée aux très grandes entreprises.
+
+      Classe B : classe d'adresse à identifiant réseau sur seize bits dont les deux premiers bits sont 10, premier octet de 128 à 191, environ seize mille réseaux de plus de soixante-cinq mille hôtes, adaptée aux grandes entreprises.
+
+      Classe C : classe d'adresse à identifiant réseau sur vingt-quatre bits dont les trois premiers bits sont 110, premier octet de 192 à 223, plus de deux millions de réseaux de deux cent cinquante-quatre hôtes, adaptée aux entreprises de taille moyenne.
+
+      Classe D : classe d'adresse sans distinction réseau et hôte, utilisée par les mécanismes de multicast, envoi de messages à un groupe de machines.
+
+      Classe E : classe d'adresse sans distinction réseau et hôte, initialement réservée pour d'autres usages d'IP.
+
+      NIC (Network Information Center) : seul organisme habilité à attribuer les adresses de réseau, sauf pour un réseau local non relié à Internet où l'installateur choisit librement ses adresses, au risque de devoir revoir tout le plan de numérotation en cas de raccordement ultérieur.
+
+      Service non connecté : mode de fonctionnement d'IP, qui n'offre qu'une remise de datagrammes en mode non connecté et ne s'occupe pas du contrôle de flux, pris en charge par TCP.
+
+      Module Internet : programme exécuté dans les hôtes et les routeurs, entre lesquels les datagrammes sont transférés jusqu'à la destination selon l'interprétation d'une adresse IP.
+
+      MTU (Maximum Transfer Unit) : taille maximale du bloc de données contenu dans une trame de la couche liaison, imposée par cette couche, égale à mille cinq cents octets pour Ethernet, variable selon les réseaux traversés.
+
+      Fragmentation : mécanisme géré par IP découpant un datagramme trop grand quand il arrive sur une portion de réseau n'acceptant que des datagrammes plus courts.
+
+      Datagramme non fractionnable : datagramme qui ne doit jamais être fragmenté, et qui est rejeté s'il ne peut atteindre sa destination sans fragmentation.
+
+      Fragment Offset : champ de treize bits indiquant le décalage du premier octet du fragment par rapport au datagramme complet, mesuré en blocs de huit octets, valant zéro pour le premier fragment.
+
+      NBF (nombre de blocs du fragment) : nombre de blocs de huit octets dans une portion de données fragmentée.
+
+      Champ d'identification : champ de seize bits assigné par l'émetteur, unique pour une paire source-destination et un protocole pendant toute la transmission, servant à distinguer les fragments d'un datagramme de ceux d'un autre.
+
+      Réassemblage : recombinaison des fragments dont les champs identification, source, destination et protocole sont identiques, réalisée seulement par le destinataire final ; l'absence d'un fragment entraîne la suppression de tous les autres sans retransmission ni remontée à la couche transport.
+
+      Champ Version : champ de quatre bits renseignant le format du datagramme et de son en-tête pour une interprétation correcte.
+
+      LET (Longueur d'en-tête) : champ de quatre bits codant la longueur de l'en-tête en mots de trente-deux bits, devant être supérieure ou égale à cinq, valeur d'une en-tête sans option.
+
+      TOS (Type Of Service) : champ de huit bits indiquant la qualité de service souhaitée, avec trois bits de priorité et un bit chacun pour Delay, Throughput et Reliability, la négociation portant sur faible retard, faible taux d'erreur et haut débit.
+
+      Longueur totale : champ de seize bits donnant la longueur du datagramme entier en octets, au plus soixante-cinq mille cinq cent trente-cinq, la valeur de référence recommandée étant cinq cent soixante-seize octets si la capacité de la destination n'est pas connue.
+
+      Flags : champ de trois bits contenant des commutateurs de contrôle de la fragmentation.
+
+      TTL (Time To Live) : champ de huit bits limitant la durée de présence d'un datagramme dans le réseau, décrémenté d'une unité à chaque passage dans un routeur et détruit quand il devient nul, ce qui évite qu'un datagramme non acheminable, par exemple sur une boucle de routage, ne congestionne le réseau.
+
+      Champ Protocole : champ de huit bits indiquant le protocole de couche supérieure des données, utilisé seulement par le destinataire final pour remettre les données au bon protocole de couche 4, les valeurs étant listées dans la RFC Assigned Numbers.
+
+      Checksum d'en-tête : champ de seize bits calculé sur l'en-tête uniquement, à recalculer et vérifier en chaque point où l'en-tête est réinterprété puisque des champs comme le TTL sont modifiés en transit.
+
+      Adresse source et adresse destination : champs de trente-deux bits contenant respectivement l'adresse IP de la source et celle du destinataire.
+
+      Options : champ de taille variable, éventuellement nul, devant être implémenté par tous les modules IP, l'option de sécurité pouvant être obligatoire dans certains environnements.
+
+      ARP (Address Resolution Protocol) : protocole permettant de trouver l'adresse physique d'un hôte à partir de son adresse logique, par diffusion d'une requête et réponse de l'hôte concerné avec sa paire adresse logique et adresse physique.
+
+      Cache ARP : table de mise en correspondance des adresses logiques et physiques récemment acquises, consultée avant toute diffusion pour éviter le coût du broadcast.
+
+      RARP (Reverse Address Resolution Protocol) : protocole par lequel une station sans disque, connaissant son adresse physique mais pas son adresse logique, émet un message avec son adresse physique à tous les hôtes, un serveur d'adresses lui retournant son adresse logique ; émis dès la mise sous tension, avant le chargement du système d'exploitation.
+
+      Serveur d'adresses RARP : hôte configuré pour reconnaître les messages RARP, possédant une table adresses physiques et logiques des stations sans disque, souvent dupliqué pour éviter la surcharge.
+
+      Champ Opération de la trame ARP : type d'opération, un pour requête ARP, deux pour réponse ARP, trois pour requête RARP, quatre pour réponse RARP, et valeurs suivantes pour RARP dynamique et InARP.
+
+      ICMP (Internet Control Message Protocol) : protocole d'échange de messages de tests et de contrôle entre deux hôtes, encapsulé dans des datagrammes IP, partie intégrante de IP devant être implémenté dans chaque module IP, servant à signaler des erreurs sans rendre IP fiable.
+
+      GGP : protocole routeur à routeur par lequel les routeurs échangent des informations de contrôle et de gestion du réseau.
+
+      Destination injoignable : message ICMP émis vers l'expéditeur quand un routeur ne peut acheminer un datagramme ou que la couche IP du destinataire ne peut le délivrer à la couche supérieure.
+
+      Dépassement de temps : message ICMP prévenant l'expéditeur de la destruction d'un datagramme dont la durée de vie a expiré.
+
+      Problème de paramètre : message ICMP émis par un hôte ne reconnaissant pas l'en-tête IP d'un datagramme reçu, uniquement en cas de destruction du datagramme.
+
+      Saturation d'un élément du réseau : message ICMP émis quand un routeur n'a plus assez de mémoire pour recevoir des datagrammes.
+
+      Ping : commande utilisant ICMP pour tester la connectivité d'une machine cible, la source envoyant à intervalles réguliers un message echo request auquel la cible répond par un echo reply.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LA PILE TCP/IP ET LES ADRESSES IPv4.
+
+
+   A. La pile TCP/IP.
+
+      La pile TCP/IP désigne une famille de protocoles et de commandes dont font partie TCP et IP, de document de référence le RFC 1122 ; moins d'une dizaine sont utilisés en réseau local, car TCP/IP se positionne comme un protocole d'interconnexion de réseaux hétérogènes, totalement indépendant des couches basses telles qu'Ethernet, Token Ring ou X25.
+
+      Il recouvre les couches 3 à 7 du modèle OSI sans corrélation précise, étant antérieur à ce modèle ; il est utilisé aussi bien sur de petits réseaux locaux qu'à travers des liaisons internationales, et c'est le protocole sur lequel s'appuie Internet, vaste interconnexion de réseaux locaux TCP/IP.
+
+
+   B. Le format des adresses IPv4.
+
+      Les adresses IP sont des adresses logiques, à distinguer des adresses physiques MAC des cartes Ethernet ; une adresse IP identifie une connexion d'une machine à un réseau, si bien qu'une machine reliée à plusieurs réseaux possède plusieurs adresses IP.
+
+      Une adresse IPv4 a une longueur fixe de trente-deux bits, soit quatre octets, écrite en notation décimale pointée octet par octet séparés par un point, par exemple 192.33.160.20 ; elle se compose de l'identifiant du réseau, le Net-ID, et de l'identifiant de l'hôte sur ce réseau, le Host-ID.
+
+
+   C. Les cinq classes d'adresses.
+
+      Trois classes principales existent : la classe A a un identifiant réseau sur huit bits dont le premier bit est à zéro, un premier octet de 1 à 127, permettant environ cent vingt-sept réseaux de près de seize millions d'hôtes, réservée aux très grandes entreprises ; la classe B a un identifiant réseau sur seize bits commençant par 10, un premier octet de 128 à 191, environ seize mille réseaux de plus de soixante-cinq mille hôtes, adaptée aux grandes entreprises ; la classe C a un identifiant réseau sur vingt-quatre bits commençant par 110, un premier octet de 192 à 223, plus de deux millions de réseaux de deux cent cinquante-quatre hôtes, adaptée aux entreprises moyennes.
+
+      Pour ces trois classes, il est impossible d'avoir tous les bits à zéro ou tous les bits à un ; deux autres classes ne distinguent pas réseau et hôte, la classe D pour le multicast et la classe E réservée à d'autres usages.
+
+      Deux stations d'un même sous-réseau, sans routeur intercalé, portent des adresses dont les parties réseau sont identiques ; une adresse IP doit être unique au monde, d'où l'attribution des adresses de réseau par le seul NIC, sauf pour un réseau local non relié à Internet où l'installateur choisit librement, au risque de revoir tout le plan de numérotation en cas de raccordement ultérieur.
+
+
+II. LE FONCTIONNEMENT DU PROTOCOLE IPv4.
+
+
+   A. Le rôle et les services.
+
+      La couche IP achemine un datagramme entre une station source et une station destinataire, sur le même segment ou sur des réseaux différents reliés par un ou plusieurs routeurs ; chaque paquet est indépendant, IP n'offrant qu'une remise de datagrammes en mode non connecté et ne s'occupant pas du contrôle de flux, pris en charge par TCP.
+
+      Si la destination est sur le même réseau que l'émetteur, le paquet lui est envoyé directement, sinon IP l'envoie vers un routeur qui l'achemine vers la destination ou un sous-réseau jusqu'à la remise finale ; IP procure trois services aux couches supérieures, l'acheminement de l'unité de données, la gestion des requêtes de service et le rapport des erreurs de transmission.
+
+
+   B. La description fonctionnelle.
+
+      La fonction du protocole Internet est d'acheminer les datagrammes à travers un ensemble de réseaux interconnectés, en les transférant d'un module Internet à l'autre, ces modules étant des programmes exécutés dans les hôtes et les routeurs ; le transfert se fait selon l'interprétation d'une adresse IP, d'où l'importance de la gestion de cette adresse.
+
+      Un datagramme peut traverser une section de réseau dont la taille maximale de paquet, la MTU, est inférieure à sa taille ; la MTU est imposée par la couche liaison et vaut mille cinq cents octets pour Ethernet ; pour surmonter cette variation, IP gère un mécanisme de fragmentation.
+
+
+   C. La fragmentation et le réassemblage.
+
+      La fragmentation devient nécessaire quand un grand datagramme arrive sur une portion de réseau n'acceptant que des datagrammes plus courts ; on ne peut connaître à l'avance la MTU minimale rencontrée, ni le chemin, donc ni savoir si un paquet sera fragmenté ; un datagramme spécifié non fractionnable ne doit jamais être fragmenté et est rejeté s'il ne peut atteindre sa destination autrement.
+
+      Pour fragmenter, un module Internet crée plusieurs datagrammes et copie les champs d'en-tête originaux ; les données sont divisées en portions multiples de huit octets sauf la dernière, le champ Fragment Offset indiquant la position en blocs de huit octets, le champ d'identification permettant de rattacher les fragments à leur datagramme, unique pour la paire source-destination et le protocole.
+
+      Le réassemblage recombine les fragments dont les champs identification, source, destination et protocole sont identiques, en replaçant chaque portion à la position relative indiquée par le Fragment Offset ; il n'est réalisé que par le destinataire final, un paquet fragmenté restant fragmenté ou étant re-fragmenté sur un réseau plus restrictif ; s'il manque un fragment, tous les autres sont supprimés sans retransmission et rien n'est remonté à la couche transport.
+
+
+III. L'EN-TÊTE DU PROTOCOLE IPv4.
+
+
+   A. Les champs de format et de longueur.
+
+      Le champ Version, sur quatre bits, renseigne le format du datagramme et de son en-tête ; le champ LET, sur quatre bits, code la longueur de l'en-tête en mots de trente-deux bits, devant être supérieure ou égale à cinq, valeur d'une en-tête sans option ; la Longueur totale, sur seize bits, donne la longueur du datagramme entier en octets, au plus soixante-cinq mille cinq cent trente-cinq, avec une valeur de référence de cinq cent soixante-seize octets recommandée si la capacité de la destination n'est pas connue.
+
+
+   B. Les champs de qualité de service et de fragmentation.
+
+      Le champ TOS, sur huit bits, indique la qualité de service souhaitée avec trois bits de priorité et un bit chacun pour Delay, Throughput et Reliability, la négociation portant sur faible retard, faible taux d'erreur et haut débit ; améliorer un paramètre dégrade souvent un autre, aussi vaut-il mieux ne pas activer plus de deux optimisations sur trois.
+
+      Le champ Identification, sur seize bits, identifie les fragments d'un même datagramme ; les Flags, sur trois bits, contiennent des commutateurs de contrôle ; le Fragment Offset, sur treize bits, indique le décalage du premier octet du fragment en blocs de huit octets, valant zéro pour le premier fragment ; Flags et Fragment Offset occupent ensemble seize bits.
+
+
+   C. Les champs de contrôle d'acheminement.
+
+      Le TTL, sur huit bits, limite la durée de présence d'un datagramme dans le réseau, décrémenté à chaque passage dans un routeur et détruit quand il devient nul, ce qui évite qu'un datagramme non acheminable, par exemple sur une boucle de routage, ne congestionne le réseau.
+
+      Le champ Protocole, sur huit bits, indique le protocole de couche supérieure, utilisé seulement par le destinataire final pour remettre les données au bon protocole de couche 4 ; le Checksum d'en-tête, sur seize bits, est calculé sur l'en-tête uniquement et doit être recalculé et vérifié en chaque point où l'en-tête est réinterprété puisque des champs comme le TTL sont modifiés en transit ; suivent l'adresse source et l'adresse destination sur trente-deux bits, puis les Options, de taille variable éventuellement nulle, à implémenter par tous les modules IP.
+
+
+IV. LES PROTOCOLES ARP, RARP ET ICMP.
+
+
+   A. La problématique de la correspondance d'adresses.
+
+      Les adresses physiques sont stockées en dur sur les cartes réseau, les adresses logiques dans des fichiers sur disque ; deux machines d'un même réseau physique ne communiquent que si elles connaissent leurs adresses physiques, alors que les couches hautes manipulent des adresses logiques indépendantes de l'architecture, d'où le besoin d'un mécanisme de correspondance.
+
+      Sur Ethernet, l'adresse MAC est sur six octets et l'adresse Internet sur quatre octets ; convertir une adresse logique de trente-deux bits en adresse physique de quarante-huit bits est le rôle d'ARP ; une station sans disque, telle un terminal Windows ou un Network Computer, connaît son adresse physique mais pas son adresse logique, qu'elle acquiert par RARP émis dès la mise sous tension, avant même de charger son système d'exploitation, sans quoi elle ne pourrait reconnaître qu'un message ARP lui est adressé.
+
+
+   B. Le principe d'ARP.
+
+      Un hôte A qui veut émettre vers un hôte B dont il ne connaît que l'adresse IP diffuse en broadcast un message contenant sa propre adresse logique, son adresse physique et l'adresse logique de B ; seul B reconnaît son adresse Internet et retourne à A un message contenant son adresse physique.
+
+      Le broadcast étant coûteux, chaque hôte gère un cache de correspondances logiques et physiques récemment acquises, consulté avant toute diffusion ; la trame ARP contient le type hardware, le type de protocole, la longueur d'adresse hardware Hlen, la longueur d'adresse de haut niveau Plen, le champ Opération, un pour requête ARP, deux pour réponse ARP, trois pour requête RARP, quatre pour réponse RARP et valeurs suivantes pour RARP dynamique et InARP, puis les adresses hardware et protocole de l'expéditeur et du destinataire.
+
+
+   C. Le principe de RARP.
+
+      L'hôte qui veut acquérir son adresse logique émet un message RARP contenant son adresse physique vers tous les hôtes du réseau local ; un seul hôte configuré, le serveur d'adresses, reconnaît le message et retourne l'adresse logique grâce à une table de correspondance des stations sans disque ; le réseau comporte souvent plusieurs serveurs pour éviter la surcharge, et ce protocole n'est utilisé que par les hôtes sans information sur leur adresse logique.
+
+
+   D. Le protocole ICMP.
+
+      ICMP échange des messages de tests et de contrôle entre deux hôtes et permet de détecter des problèmes sur le réseau, ses datagrammes étant encapsulés dans des datagrammes IP ; les routeurs communiquent entre eux par le protocole routeur à routeur GGP, et un routeur ou un hôte peut avoir à signaler à l'émetteur une erreur de traitement.
+
+      ICMP s'appuie sur IP comme un protocole de couche supérieure mais reste partie intégrante de IP et doit être implémenté dans chaque module IP ; IP n'assure pas un service fiable, des datagrammes pouvant se perdre sans message de contrôle, et les protocoles de niveau supérieur doivent implémenter leurs propres mécanismes de contrôle d'erreur ; le but des messages ICMP est de signaler des erreurs, pas de rendre IP fiable.
+
+      Chaque datagramme ICMP a un champ type et un champ code renseignant l'événement, ainsi que les huit premiers octets du datagramme concerné pour permettre l'identification ; les principaux problèmes remontés sont Destination injoignable, Dépassement de temps, Problème de paramètre et Saturation d'un élément du réseau ; aucun message ICMP n'est émis en réponse à un message ICMP ni en cas de problème sur un datagramme ICMP, et les messages ne sont émis qu'en réponse à un traitement erroné du fragment zéro d'un datagramme fragmenté ; la commande ping utilise ICMP, la source envoyant un echo request auquel la cible répond par un echo reply.
+
+
+POINTS D'ATTENTION.
+
+      Une adresse IP identifie une connexion à un réseau, pas une machine ; une machine multi-réseaux a plusieurs adresses IP.
+
+      Pour les classes A, B et C, on ne peut avoir tous les bits d'un identifiant à zéro ou tous à un.
+
+      Le premier octet situe la classe : 1 à 127 pour A, 128 à 191 pour B, 192 à 223 pour C, la classe D servant au multicast.
+
+      IP est un service non connecté et non fiable ; le contrôle de flux et la fiabilité relèvent de TCP.
+
+      On ne peut pas savoir à l'avance si un datagramme sera fragmenté, la MTU minimale du chemin étant inconnue.
+
+      Un datagramme non fractionnable qui ne peut être acheminé sans fragmentation est rejeté.
+
+      Le réassemblage n'est effectué que par le destinataire final ; la perte d'un fragment entraîne la suppression de tous les autres sans retransmission.
+
+      La LET doit être supérieure ou égale à cinq, valeur d'une en-tête sans option.
+
+      Il est recommandé de ne pas activer plus de deux optimisations de TOS sur trois.
+
+      Le TTL est décrémenté à chaque routeur et le datagramme est détruit quand il atteint zéro.
+
+      Le checksum d'en-tête, calculé sur l'en-tête seul, doit être recalculé à chaque point où l'en-tête est réinterprété.
+
+      Une station sans disque doit émettre un RARP dès sa mise sous tension, avant de charger son système d'exploitation.
+
+      Aucun message ICMP n'est émis en réponse à un message ICMP, pour éviter un cercle vicieux.
+
+
+EXEMPLES CITES.
+
+      Adresse IPv4 en notation décimale pointée 192.33.160.20.
+
+      Classe A de premier octet 1 à 127, classe B de 128 à 191, classe C de 192 à 223.
+
+      MTU d'Ethernet égale à mille cinq cents octets.
+
+      Longueur totale d'un datagramme codée sur seize bits, au plus soixante-cinq mille cinq cent trente-cinq octets, valeur de référence cinq cent soixante-seize octets.
+
+      Champ Opération de la trame ARP, un pour requête ARP, deux pour réponse ARP, trois pour requête RARP, quatre pour réponse RARP.
+
+      Station sans disque de type terminal Windows ou Network Computer acquérant son adresse par RARP.
+
+      Messages ICMP Destination injoignable, Dépassement de temps, Problème de paramètre et Saturation d'un élément du réseau.
+
+      Commande ping envoyant un echo request et recevant un echo reply.

@@ -1,216 +1,309 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 4, thème 6
-TECHNOLOGIES DE CHIFFREMENT ET PROTOCOLES DE SÉCURITÉ
-=======================================================================
+TECHNOLOGIES DE CHIFFREMENT, INFRASTRUCTURES DE GESTION DE CLÉS ET PROTOCOLES DE SÉCURITÉ.
 
-1. PRINCIPES ET VOCABULAIRE
------------------------------------------------------------------------
-- Cryptologie = « science du secret », à la frontière des mathématiques
-  et de l'informatique. Deux branches :
-  * cryptographie : conception de mécanismes (côté concepteur) ;
-  * cryptanalyse : analyse et mise en défaut (côté attaquant).
-- Vocabulaire :
-  * chiffrement : transformation d'un texte clair en texte chiffré à
-    l'aide d'une clé.
-  * chiffre : substitution au niveau des lettres.
-  * code : substitution au niveau des mots ou des phrases.
-  * cryptogramme : message chiffré.
-  * cryptosystème : algorithme de chiffrement.
-  * décrypter : retrouver le clair SANS la clé (les anglophones
-    « cassent » un code).
-- Article fondateur de la cryptographie asymétrique : Diffie & Hellman,
-  1976.
+LEXIQUE COMPLET.
 
-OBJECTIFS DE SÉCURITÉ :
-  * Confidentialité : information accessible aux seules personnes
-    autorisées (assurée par le chiffrement).
-  * Intégrité : empêcher/détecter toute altération non autorisée
-    (codes d'authentification de message, signature numérique).
-  * Authentification de données (provenance) / d'entités (= identification).
-  * Non-répudiation : empêcher une entité de nier une action ; mécanisme
-    principal = signature à clé publique.
+      Cryptologie : science du secret, discipline à la frontière des mathématiques et de l'informatique, traitant de la conception, de la sécurité et de l'emploi des mécanismes cryptographiques, primitives, modes opératoires et protocoles.
 
-2. CHIFFREMENT SYMÉTRIQUE
------------------------------------------------------------------------
-- Une seule clé secrète, PARTAGÉE, sert à chiffrer ET à déchiffrer.
-- Taille de clé n -> 2^n clés possibles ; sécurité conditionnée par la
-  résistance à la RECHERCHE EXHAUSTIVE (énumération de toutes les clés).
-- Deux familles :
-  * chiffrement par bloc (block cipher) ;
-  * chiffrement par flot (stream cipher).
-- Algorithmes : DES, 3DES, AES, RC4, RC5, MISTY1, chiffre de Vernam.
-- Inconvénients :
-  * 1 clé par paire de correspondants -> gestion difficile à grande
-    échelle ;
-  * partage de la clé -> signature et non-répudiation IMPOSSIBLES.
+      Cryptographie : branche de la cryptologie qui étudie la conception de mécanismes assurant la confidentialité, l'intégrité ou l'authenticité de l'information, c'est-à-dire l'art de créer des cryptogrammes.
 
-3. CHIFFREMENT ASYMÉTRIQUE
------------------------------------------------------------------------
-- Opérations publiques (chiffrer, vérifier une signature) et privées
-  (déchiffrer, signer) utilisent des clés DIFFÉRENTES :
-  * clé publique : largement diffusée ;
-  * clé privée : gardée confidentielle.
-- Clés reliées par des « problèmes difficiles » (théorie des nombres) :
-  * multiplication de grands nombres premiers <-> factorisation ;
-  * logarithmes discrets, courbes elliptiques.
-  (Difficulté = complexité temporelle, pas impossibilité.)
-- Algorithmes : RSA, DSA ; protocole d'échange de clés Diffie-Hellman.
-- Chiffrer pour un correspondant = utiliser SA clé publique ;
-  déchiffrer = utiliser SA clé privée.
-- Apports : plus besoin de partager un secret préalable ; résout la mise
-  en accord de clé.
-- Limites :
-  * il faut CERTIFIER les clés publiques (problème d'authentification
-    non résolu par le seul chiffrement asymétrique) ;
-  * algorithmes LENTS -> inadaptés aux gros volumes ;
-  * vulnérable à l'attaque par INTERCEPTION (man in the middle).
-- En pratique : l'asymétrique échange la clé symétrique, puis le
-  symétrique (rapide) chiffre les données.
+      Cryptanalyse : branche de la cryptologie qui analyse les cryptogrammes pour en évaluer la sécurité et, le cas échéant, les décrypter.
 
-4. HACHAGE, SIGNATURE, CERTIFICATS
------------------------------------------------------------------------
-FONCTION DE HACHAGE :
-  * transforme, de façon déterministe, une donnée de taille quelconque
-    en un condensat (empreinte / haché) de TAILLE FIXE.
-  * propriétés : non inversible (calcul d'antécédent difficile) ET sans
-    collision (pas deux messages de même condensat).
-  * algorithmes : MD5 (définitivement cassé), SHA-1 (non conforme au
-    référentiel), SHA-2 / SHA-256 (utilisable), SHA-3 (2012, alternative).
-  * attaques annoncées en août 2004. Sert aussi aux codes
-    d'authentification de message (ex. HMAC).
+      Chiffrement : transformation, à l'aide d'une clé, d'un message en clair en un message incompréhensible pour qui ne dispose pas de la clé de déchiffrement.
 
-SIGNATURE ÉLECTRONIQUE :
-  * garantit l'intégrité sans clé secrète partagée + authentification
-    forte de l'émetteur + non-répudiation.
-  * = empreinte du message CHIFFRÉE avec la CLÉ PRIVÉE de l'émetteur,
-    ajoutée au message.
-  * vérification : clé PUBLIQUE de l'émetteur -> restitue l'empreinte
-    d'origine, comparée à l'empreinte recalculée du message reçu.
-  * l'action de signer assure : identification, authentification,
-    intégrité, non-répudiation.
+      Chiffre : procédé de substitution opérant au niveau des lettres.
 
-CERTIFICAT :
-  * document électronique liant une clé publique, son propriétaire
-    (personne, application, site) et un usage.
-  * carte d'identité numérique, SIGNÉE par l'autorité de certification
-    (tiers de confiance).
-  * durée de vie limitée ; renouvelable ; révocable avant échéance.
-  * norme X.509 (ITU-T, RFC 2459). Publication via annuaires LDAP
-    (RFC 2251). Certificats révoqués -> CRL (Certificate Revocation List,
-    format X.509 v2 CRL).
-  * champs X.509 : Version, N° de série, Algorithme de signature,
-    Émetteur (DN de l'AC), Valide de / à, Objet (DN du détenteur),
-    Clé publique, extensions, Utilisation de la clé, Thumbprint
-    (signature de l'AC sur les champs précédents).
+      Code : procédé de substitution opérant au niveau des mots ou des phrases.
 
-5. IGC / PKI
------------------------------------------------------------------------
-IGC (Infrastructure de Gestion de Clés) / PKI (Public Key
-Infrastructure) = ensemble de matériels, logiciels, personnes, règles et
-procédures pour créer, gérer, stocker, distribuer et révoquer des
-certificats à clé publique.
+      Cryptogramme : message chiffré.
 
-CYCLE DE VIE D'UNE CLÉ :
-  1. Demande (auprès de l'autorité d'enregistrement).
-  2. Génération :
-     - centralisée : clé aléatoire (générateur d'aléa) ou dérivée d'une
-       clé maître ;
-     - locale : clé aléatoire, différentiation locale, ou échange de clé
-       (protocole dédié lors de l'ouverture de session).
-  3. Affectation : fait passer une valeur numérique du statut de donnée
-     brute au statut de clé (identité + usage). Le PREMIER ENRÔLEMENT
-     repose sur des procédés physiques/organisationnels, non
-     cryptographiques.
-  4. Introduction : distribution, transport, injection dans
-     l'environnement de confiance.
-  5. Utilisation : uniquement dans un environnement de confiance.
-  6. Fin de vie : révocation, retrait, destruction.
-     (Révoquer != retirer : une clé révoquée peut encore servir à la
-     vérification / compatibilité ascendante ; une clé retirée peut être
-     archivée pour enquête.)
-  7. Renouvellement : normal ou provoqué (compromission).
-  8. Recouvrement : pour la disponibilité ou des exigences légales ;
-     objectifs par nature contraires à la sécurité ; séquestre de clé.
+      Cryptosystème : algorithme de chiffrement.
 
-ACTEURS :
-  * Autorité de Certification (AC) : tiers de confiance ; définit et fait
-    appliquer la politique de certification ; SIGNE les certificats avec
-    sa clé privée ; peut être organisationnelle, institutionnelle ou
-    RACINE (auto-certifiée ou cautionnée). Responsable du niveau de
-    confiance de l'IGC.
-  * Autorité d'Enregistrement (AE) : contrôle l'identité du demandeur ;
-    authentifie les demandes de révocation (exécutées ensuite par l'AC) ;
-    assure le recouvrement lors des renouvellements ; possède un bi-clé
-    certifié.
-  * Opérateur de Certification : distribution sécurisée des certificats ;
-    gestion du cycle de vie avec l'AE ; peut générer les bi-clés.
+      Décrypter : retrouver le message clair d'un message chiffré sans posséder la clé de déchiffrement, terme propre au français, les anglophones parlant de casser un code.
 
-RÉVOCATION : pas de protocole standard automatique -> moyens
-administratifs. Le demandeur doit PROUVER qu'il est propriétaire de la
-clé. Les CRL doivent être protégées, disponibles en permanence et à jour
-(temps réel) -> nécessite la SYNCHRONISATION des horloges de tous les
-acteurs.
+      Confidentialité : garantie que des informations transmises ou stockées ne sont accessibles qu'aux personnes autorisées, classiquement assurée par le chiffrement.
 
-POLITIQUE DE CERTIFICATION : ensemble de règles indiquant pour quoi le
-certificat est applicable, par qui, et les conditions de mise en œuvre
-(juridique, administratif, technique). Les certificats sont définis en
-fonction de l'usage visé (population, durée de vie des clés, distribution,
-recouvrement, haute disponibilité des CRL, interopérabilité /
-certifications croisées, etc.).
+      Intégrité des données : garantie qu'aucune altération non autorisée, modification, suppression partielle ou insertion, n'a eu lieu, assurée par des codes d'authentification de message ou des signatures numériques.
 
-6. PROTOCOLES DE SÉCURITÉ
------------------------------------------------------------------------
-SSH (Secure Shell) — à préférer à telnet / rlogin / rsh / rcp :
-  1. le serveur génère une paire de clés RSA (toutes les heures) ;
-  2. il envoie sa clé publique au client ;
-  3. le client génère une clé symétrique, la chiffre avec la clé du
-     serveur et la renvoie ;
-  4. le reste de la communication est en chiffrement symétrique.
+      Authentification de données : garantie qu'une donnée provient bien d'un interlocuteur particulier, impliquant son intégrité.
 
-TUNNELING : chemin privé (tunnel) à travers une infrastructure
-éventuellement publique ; données encapsulées et chiffrées. Ex. :
-tunnel SSH (redirection d'un flux TCP) ; stunnel (s'appuie sur SSL).
+      Authentification d'entités : identification, garantie qu'un correspondant est bien celui qu'il prétend être, réalisable par des moyens symétriques ou asymétriques.
 
-SSL (Secure Sockets Layer) : se situe ENTRE la couche application et la
-couche transport ; garantit authentification, intégrité, confidentialité ;
-très utilisé pour les sites web (HTTPS).
+      Non-répudiation : service empêchant une entité de nier avoir effectué une action, principalement assuré par la signature à clé publique.
 
-IPSec (IP Security protocol, IETF) :
-  * authentification, confidentialité, intégrité ; protège contre
-    l'IP spoofing, le TCP session hijacking et le sniffing ; agit au
-    niveau IP.
-  * algorithmes : authentification par signature DSS ou RSA ; intégrité
-    par HMAC-MD5, HMAC-SHA-1 ; confidentialité par DES, RC5, IDEA, CAST,
-    Blowfish.
-  * 2 protocoles : AH (Authentication Header — authentifie) ;
-    ESP (Encapsulating Security Payload — authentifie ET chiffre).
-  * 3 modes : transport (hôtes = extrémités), tunnel (passerelles =
-    extrémités), intermédiaire (machine <-> passerelle).
-  * SA (Security Association) établie par connexion : algorithme de
-    chiffrement (DES, 3DES) + clé de session via IKE (Internet Key
-    Exchange) + algorithme d'authentification (SHA-1, MD5).
+      Cryptographie symétrique : cryptographie conventionnelle ou à clé secrète, dans laquelle une même clé partagée sert à chiffrer et à déchiffrer.
 
-VPN (Virtual Private Network) : tunnel chiffré sur une infrastructure
-publique entre 2 points ; s'appuie sur IPSec, SSL ou d'autres protocoles
-(ex. OpenVPN).
+      Clé secrète : suite quelconque de bits de taille fixée n, dont la protection conditionne la sécurité du système symétrique.
 
-=======================================================================
-À RETENIR
-- Cryptographie (conception) vs cryptanalyse (attaque) ; décrypter = sans
-  la clé.
-- Symétrique : 1 clé partagée, rapide, mais pas de signature ni de
-  non-répudiation ; DES/3DES/AES/RC4.
-- Asymétrique : clé publique + clé privée ; Diffie-Hellman 1976 ; RSA,
-  DSA ; lent -> sert à échanger la clé symétrique ; vulnérable au MITM.
-- Hachage : empreinte de taille fixe, non inversible, sans collision ;
-  MD5 cassé, SHA-1 hors référentiel, SHA-2 OK.
-- Signature = empreinte chiffrée avec la clé PRIVÉE de l'émetteur ->
-  intégrité + authentification + non-répudiation.
-- Certificat : lie clé publique et identité ; signé par l'AC ; norme
-  X.509 ; révocation via CRL.
-- IGC : AC (signe, politique), AE (vérifie l'identité, révocations),
-  Opérateur (distribution). Cycle de vie : demande, génération,
-  affectation, introduction, utilisation, fin de vie, renouvellement,
-  recouvrement.
-- SSL entre application et transport (HTTPS) ; IPSec au niveau IP
-  (AH + ESP, modes transport/tunnel/intermédiaire, SA via IKE) ;
-  VPN = tunnel chiffré sur réseau public.
+      Recherche exhaustive : attaque générique consistant à énumérer les deux puissance n clés possibles, qui n'aboutit que si le nombre de calculs reste réalisable.
+
+      Chiffrement par bloc : block cipher, chiffrement symétrique traitant les données par blocs de taille fixe.
+
+      Chiffrement par flot : stream cipher, chiffrement symétrique traitant les données bit à bit ou octet par octet.
+
+      DES : algorithme symétrique par bloc historique.
+
+      Triple DES : renforcement de DES par triple application.
+
+      AES : algorithme symétrique par bloc moderne, successeur de DES.
+
+      RC4 : algorithme symétrique par flot.
+
+      RC5 : algorithme symétrique par bloc paramétrable.
+
+      MISTY1 : algorithme symétrique par bloc.
+
+      Chiffre de Vernam : chiffrement symétrique à masque jetable, théoriquement inconditionnellement sûr.
+
+      Cryptographie asymétrique : cryptographie à clé publique, issue de l'article de Whitfield Diffie et Martin Hellman de mille neuf cent soixante-seize, où les opérations publiques et privées n'utilisent pas la même clé.
+
+      Clé privée : clé qu'un seul utilisateur possède et emploie pour les opérations privées, déchiffrement et signature, devant rester confidentielle.
+
+      Clé publique : clé connue de tous et employée pour les opérations publiques, chiffrement et vérification de signature, pouvant être largement diffusée.
+
+      Bi-clé : paire formée d'une clé privée et de la clé publique associée, la connaissance de la publique ne permettant pas de retrouver la privée.
+
+      Problème difficile : opération mathématiquement définie et inversible mais asymétrique dans sa difficulté, dont le calcul inverse a une complexité temporelle prohibitive.
+
+      Factorisation : décomposition d'un grand entier en produit de ses facteurs premiers, opération inverse de la multiplication de grands nombres premiers, sans méthode efficace connue à ce jour.
+
+      Logarithme discret : problème difficile de la théorie des nombres utilisé en cryptographie asymétrique, notamment dans les structures de courbes elliptiques.
+
+      DSA : algorithme asymétrique de signature.
+
+      RSA : algorithme asymétrique de chiffrement et de signature reposant sur la difficulté de la factorisation.
+
+      Échange de clés Diffie-Hellman : protocole asymétrique permettant à deux parties d'élaborer une clé secrète commune sans partage préalable de secret.
+
+      Fonction de hachage : primitive transformant de manière déterministe une suite de bits de longueur quelconque en un condensat de taille fixée, non paramétrée par une clé.
+
+      Condensat : empreinte ou haché, résultat d'une fonction de hachage.
+
+      Résistance à la préimage : propriété d'une fonction de hachage telle qu'il est difficile, à partir d'un condensat, de trouver un message qui le produit.
+
+      Résistance aux collisions : propriété d'une fonction de hachage telle qu'il est difficile de trouver deux messages distincts ayant le même condensat.
+
+      MD5 : fonction de hachage historique, définitivement cassée.
+
+      SHA-1 : fonction de hachage historique, retirée du référentiel de sécurité.
+
+      SHA-2 : famille de fonctions de hachage, dont SHA-256, restant utilisable.
+
+      SHA-3 : nouvelle famille de fonctions de hachage publiée à partir de deux mille douze, destinée à offrir une alternative et non à remplacer immédiatement SHA-2.
+
+      HMAC : code d'authentification de message construit à partir d'une fonction de hachage.
+
+      Signature électronique : empreinte du message chiffrée avec la clé privée de l'émetteur, assurant identification, authentification, intégrité et non-répudiation, vérifiable avec la clé publique correspondante.
+
+      Certificat numérique : document électronique signé par une autorité de certification, fixant l'association entre une clé publique, son propriétaire et l'application pour laquelle il est émis, à durée de vie limitée, renouvelable et révocable.
+
+      Autorité de certification : tiers de confiance qui applique la politique de certification, signe les certificats avec sa clé privée et reste responsable du niveau de confiance de l'infrastructure.
+
+      Autorité d'enregistrement : entité qui contrôle l'identité du demandeur, authentifie les demandes de révocation et assure le recouvrement lors du renouvellement.
+
+      Opérateur de certification : entité qui réalise la distribution sécurisée des certificats et gère leur cycle de vie, pouvant générer les bi-clés pour le compte des utilisateurs.
+
+      Autorité racine : autorité de certification institutionnelle capable de cautionner au niveau national des autorités subalternes.
+
+      X509 : norme UIT-T définissant le format des certificats et des listes de révocation, associée aux RFC deux mille quatre cent cinquante-neuf.
+
+      LDAP : Lightweight Directory Access Protocol, protocole d'annuaire servant à publier les certificats et donc les clés publiques.
+
+      CRL : Certificate Revocation List, liste signée des certificats révoqués, au format défini par X509 version deux.
+
+      IGC : Infrastructure de Gestion de Clés, en anglais PKI, ensemble de matériels, logiciels, personnes, règles et procédures nécessaires pour créer, gérer, stocker, distribuer et révoquer des certificats à clé publique.
+
+      Politique de certification : ensemble de règles indiquant ce pour quoi un certificat est applicable, par qui, et à quelles conditions juridiques, administratives et techniques.
+
+      Affectation : opération qui fait passer une valeur numérique du statut de donnée brute au statut de clé cryptographique en l'associant à une identité et à un usage.
+
+      Premier enrôlement : première admission d'un utilisateur ou d'un équipement dans un système, dont la sécurité repose sur des procédés physiques et organisationnels non cryptographiques.
+
+      Recouvrement de clé : opération visant à retrouver une clé pour assurer la disponibilité d'un service ou répondre à une exigence légale, difficile car contraire aux objectifs de sécurité.
+
+      Séquestre de clé : conservation d'une clé auprès d'un tiers en vue d'un recouvrement ultérieur.
+
+      SSH : Secure Shell, protocole d'accès distant chiffré remplaçant telnet, rlogin, rsh et rcp.
+
+      Tunneling : encapsulation, éventuellement chiffrée, d'un flux dans un chemin privé créé à travers une infrastructure éventuellement publique.
+
+      stunnel : logiciel de tunneling s'appuyant sur SSL.
+
+      SSL : Secure Sockets Layer, bibliothèque de sécurisation située entre la couche application et la couche transport, garantissant authentification, intégrité et confidentialité, très utilisée pour HTTPS.
+
+      IPsec : IP Security protocol, ensemble de spécifications de l'IETF assurant authentification, intégrité et confidentialité au niveau réseau, protégeant du spoofing IP, du vol de session TCP et du sniffing.
+
+      AH : Authentication Header, protocole d'IPsec permettant d'authentifier les messages.
+
+      ESP : Encapsulating Security Payload, protocole d'IPsec permettant d'authentifier et de chiffrer les messages.
+
+      Mode transport : mode d'IPsec où les machines source et destination sont les deux extrémités de la connexion sécurisée.
+
+      Mode tunnel : mode d'IPsec où les extrémités de la connexion sécurisée sont des passerelles qui encapsulent les communications hôte à hôte.
+
+      Mode intermédiaire : mode d'IPsec établissant un tunnel entre une machine et une passerelle.
+
+      SA : Security Association, contexte négocié pour chaque connexion IPsec, comprenant un algorithme de chiffrement, une clé de session et un algorithme d'authentification.
+
+      IKE : Internet Key Exchange, protocole d'établissement des clés de session d'IPsec.
+
+      VPN : Virtual Private Network, chemin privé virtuel créant un tunnel chiffré entre deux points sur une infrastructure publique, s'appuyant sur IPsec, SSL ou un autre protocole.
+
+COURS DÉTAILLÉ.
+
+I. CHIFFREMENT - PRINCIPES ET GÉNÉRALITÉS.
+
+   A. Cryptologie, cryptographie et cryptanalyse.
+
+      La cryptographie est une des disciplines de la cryptologie qui protège les messages en assurant confidentialité, authenticité et intégrité, souvent à l'aide de secrets ou de clés, rendant un message inintelligible à qui n'y a pas droit. Elle est utilisée depuis l'Antiquité, mais certaines de ses méthodes majeures, comme la cryptographie asymétrique, datent de la fin du vingtième siècle. Chiffrer assure la confidentialité en transformant un texte en clair en un texte brouillé dit chiffré.
+
+      La cryptologie, à la frontière des mathématiques et de l'informatique, est la science du secret. Longtemps centrée sur la confidentialité à des fins militaires ou diplomatiques, elle a connu un essor scientifique avec la société de l'information et est devenue un outil incontournable de sécurisation des systèmes d'information. Elle traite de la conception, de la sécurité et de l'emploi des mécanismes cryptographiques, ce terme englobant les primitives comme les fonctions de hachage et le chiffrement par bloc, les modes opératoires et les protocoles. On la divise selon le point de vue : la cryptographie conçoit les mécanismes de sécurité, la cryptanalyse analyse leur sécurité et cherche à la mettre en défaut ; il n'y a pas de cryptographie sans cryptanalyse et inversement.
+
+   B. Les objectifs de sécurité.
+
+      Sur le plan technique, on distingue la cryptographie symétrique, conventionnelle ou à clé secrète, de la cryptographie asymétrique ou à clé publique, cette séparation venant de l'article fondateur de Diffie et Hellman de mille neuf cent soixante-seize, qui a montré qu'il n'est pas nécessaire de partager un secret au préalable pour chiffrer à l'attention d'un destinataire donné.
+
+      Une seconde dimension de classification est l'objectif de sécurité visé : confidentialité, intégrité des données, authentification de données ou d'entités et non-répudiation. La confidentialité empêche l'accès non autorisé aux informations, classiquement par le chiffrement mais aussi par des mesures organisationnelles. L'intégrité empêche ou détecte toute altération, modification, suppression partielle ou insertion, par des codes d'authentification de message ou des signatures numériques. L'authentification de données garantit leur origine et implique leur intégrité ; l'authentification d'entités, ou identification, garantit qu'un correspondant est bien celui qu'il prétend être. La non-répudiation empêche une entité de nier une action, principalement par la signature à clé publique, une signature devant rester valide même si le signataire change ensuite d'avis.
+
+II. LE CHIFFREMENT SYMÉTRIQUE.
+
+      Les primitives symétriques utilisent des clés partagées par plusieurs personnes ou entités ; une clé secrète symétrique est simplement un élément secret, et la sécurité repose sur la protection de ce secret. La clé est généralement une suite de bits de taille fixée notée n, déterminante car on peut former exactement deux puissance n clés de longueur n. Ces systèmes sont attaquables par recherche exhaustive, énumération de toutes les clés, qui n'aboutit que si le nombre de calculs reste réalisable par des moyens informatiques raisonnables.
+
+      Le chiffrement conventionnel se divise en chiffrement par bloc et chiffrement par flot. Une seule clé sert à la fois à chiffrer et à déchiffrer : l'émetteur chiffre avec cette clé, le destinataire déchiffre avec la même clé en appliquant l'algorithme en sens inverse ; cette clé est particulièrement vulnérable si elle tombe entre les mains d'un pirate. Les algorithmes usuels sont DES, Triple DES, AES, RC4, RC5, MISTY1 et le chiffre de Vernam.
+
+      La mise en œuvre est difficile avec un grand nombre de protagonistes car il faut une clé pour chaque paire d'utilisateurs souhaitant communiquer. Autre inconvénient du partage de la clé secrète : la signature et la non-répudiation sont impossibles.
+
+III. LE CHIFFREMENT ASYMÉTRIQUE.
+
+   A. Principe.
+
+      L'idée majeure est que les opérations publiques, chiffrement et vérification de signature, n'ont pas besoin d'utiliser les mêmes clés que les opérations privées, déchiffrement et signature. La cryptographie asymétrique, telle que décrite par Diffie et Hellman, utilise des clés privées que seul un utilisateur possède et des clés publiques que tout le monde connaît, reliées par des équations mathématiques qui fondent des problèmes réputés difficiles à résoudre. L'image du mélange de peinture illustre cette difficulté : mélanger du jaune et du bleu pour obtenir du vert est facile, séparer à nouveau les pigments est pratiquement infaisable ; le vert est public, le bleu et le jaune sont privés.
+
+   B. Aspects techniques.
+
+      L'opération asymétrique la plus connue est la multiplication de grands nombres premiers, dont l'inverse est la factorisation : choisir deux nombres premiers et les multiplier est facile, mais dès que la taille des entiers est grande, aucune méthode efficace de factorisation utilisant une technologie disponible n'a été rendue publique à ce jour. Cette factorisation n'est pas impossible, elle est parfaitement définie et des algorithmes simples existent ; le problème réside dans la complexité temporelle, et rien ne garantit qu'il n'existe pas de méthode efficace. Les recherches des trente dernières années n'ont fourni que peu de problèmes asymétriques utilisables, presque tous issus de la théorie des nombres, factorisation et calcul de logarithmes discrets, les courbes elliptiques en étant un exemple particulièrement intéressant. Les algorithmes usuels sont DSA, RSA et le protocole d'échange de clés Diffie-Hellman.
+
+   C. Cinématique et apports.
+
+      Pour chiffrer un message à l'attention d'un correspondant, on utilise sa clé publique ; le déchiffrement se fait avec sa clé privée. La connaissance de la clé publique ne permet pas de retrouver la clé privée, si bien que la clé publique peut être largement diffusée tandis que la clé privée reste confidentielle. Un message chiffré avec une clé publique ne peut être déchiffré qu'avec la clé privée correspondante.
+
+      L'apport principal est qu'il n'est pas nécessaire que les deux correspondants partagent au préalable une clé secrète, ce qui résout élégamment le problème de mise en accord de clé de la cryptographie symétrique. Reste cependant le problème de la certification des clés publiques, c'est-à-dire s'assurer qu'une clé publique appartient bien au correspondant visé. Formulé sous le diptyque confidentialité et authentification : l'asymétrique lève le problème de la confidentialité mais laisse entier celui de l'authentification de l'origine du secret, résolu par des mécanismes de certification. Autre inconvénient, technique cette fois, les algorithmes asymétriques sont très lents et ne peuvent servir pour de grands volumes de données ; on les emploie donc pour échanger les clés symétriques qui assureront ensuite l'échange rapide. Enfin, même avec la signature électronique, l'asymétrique reste vulnérable à une attaque par interception.
+
+IV. HACHAGE, SIGNATURE ET CERTIFICATS.
+
+   A. Les fonctions de hachage.
+
+      Une fonction de hachage convertit une donnée en une donnée plus petite, son empreinte, sans qu'il soit possible de revenir à la donnée initiale. Ces primitives ne sont pas paramétrées par des clés, mais sont classées parmi les primitives symétriques car émetteur et récepteur réalisent les mêmes opérations. La fonction transforme de manière déterministe une suite de bits de longueur quelconque en un condensat, empreinte ou haché, de taille fixée. On exige qu'elle soit en pratique non inversible, le calcul d'un antécédent étant difficile, et qu'elle soit sans collision, c'est-à-dire qu'on ne puisse pas trouver deux messages distincts de même condensat. Les algorithmes cités sont MD5, SHA, SHA-1, SHA-256, non encore cassée à la date du document, et SHA-3, publiée à partir de deux mille douze pour offrir une alternative et non pour remplacer la précédente.
+
+   B. La signature électronique.
+
+      La signature cryptographique garantit l'intégrité d'un message sans clé secrète partagée et assure une authentification forte de l'émetteur en l'empêchant de nier avoir envoyé le message, propriété de non-répudiation. Signer assure ainsi identification, authentification, intégrité et non-répudiation. La signature est une empreinte chiffrée ajoutée au message, avec une relation biunivoque entre l'objet signé et la signature ; la fonction de hachage employée pour ce scellement interdit de reconstruire l'objet initial et d'obtenir la même empreinte pour deux objets différents.
+
+      La signature numérique est obtenue en chiffrant l'empreinte du message avec la clé privée de l'émetteur : pour un bi-clé donné, seul le détenteur de la clé privée peut signer. À la réception, la clé publique de l'émetteur appliquée à la signature restitue l'empreinte d'envoi, comparée à l'empreinte du message reçu. Si la clé publique ne correspond pas au bi-clé de l'émetteur, l'empreinte n'est pas restituée et la signature est invalide ; si le message a été altéré, l'empreinte diffère. On obtient ainsi authentification de l'auteur, non-répudiation et vérification de l'intégrité. Les fonctions de hachage servent aussi à réaliser certains codes d'authentification de message comme HMAC. Après les attaques annoncées en août deux mille quatre sur les principales familles de fonctions de hachage, le panel des fonctions sûres s'est réduit : ni MD5, définitivement cassé, ni SHA-1, non conforme au référentiel, n'en font plus partie, et la famille SHA-2 reste utilisable en attendant SHA-3.
+
+   C. Le certificat numérique.
+
+      L'asymétrique, la signature et le hachage lèvent la confidentialité et l'intégrité mais laissent entière l'authentification forte, résolue par la certification. La certification des clés publiques est la parade à l'attaque par interception et à l'authentification des clés publiques et donc, indirectement, des entités. Le certificat est un document électronique fixant les relations entre une clé publique, son propriétaire, personne, application ou site, et l'application pour laquelle il est émis. Pour une personne, il vaut carte d'identité numérique attestant l'adéquation entre une entité et sa clé publique, sa valeur dépendant de l'autorité de certification qui l'a validé et de conditions temporelles et spatiales. Pour une application, il garantit qu'elle n'a pas été détournée de ses fonctions ; pour un site, il garantit que l'on est bien sur le site voulu. Cette garantie est fournie par un tiers de confiance, l'autorité de certification, qui signe le certificat. Un certificat a une durée de vie limitée, peut être renouvelé et peut être révoqué avant la fin de sa validité.
+
+      Le certificat s'appuie sur la norme X509, standard UIT-T associé aux RFC deux mille quatre cent cinquante-neuf, qui associe à la clé des informations spécifiques à l'entité. La publication des certificats, et donc des clés publiques, utilise des annuaires de type LDAP. Les certificats révoqués sont regroupés dans des listes CRL, structures de données signées au format X509 version deux. La structure d'un certificat X509 comprend la version, le numéro de série, l'algorithme de signature, l'émetteur identifié par son nom distinctif, les dates de début et de fin de validité, l'objet identifiant le détenteur de la clé publique par son nom distinctif, la clé publique, les contraintes de base, l'utilisation de la clé, l'algorithme d'empreinte et l'empreinte, signature numérique de l'autorité de certification sur l'ensemble des champs précédents.
+
+V. INFRASTRUCTURE DE GESTION DE CLÉS - IGC ET PKI.
+
+   A. Le cycle de vie d'une clé.
+
+      La gestion des éléments de chiffrement nécessite une infrastructure dédiée traitant leur cycle de vie. Une clé n'est générée qu'après une demande, implicite ou explicite, qui marque le début du cycle de vie et peut être formalisée pour le suivi.
+
+      La génération dépend des algorithmes et exige une expertise cryptographique. La génération centralisée fait confiance à un tiers : elle peut être une génération centralisée de clé aléatoire à partir d'un générateur d'aléa, ou une dérivation de clé à partir d'une clé maître et d'éléments publics d'identification. La génération locale intervient au niveau de l'utilisateur final : génération locale de clé aléatoire, différentiation locale de clé à partir d'une clé locale et d'éléments de différenciation, ou échange de clé lors de l'ouverture d'une session au moyen d'un protocole dédié pour élaborer une clé commune.
+
+      L'affectation admet la clé dans le système d'information : elle associe la valeur numérique à une identité et à un usage, signature, chiffrement ou échange de clé, et fait passer la valeur du statut de donnée brute à celui de clé cryptographique. Elle ne se confond pas avec l'injection dans un équipement, qui relève de l'introduction. Elle est plus critique encore lors de la première admission, le premier enrôlement, dont la sécurité ne peut résulter que de procédés physiques et organisationnels non cryptographiques et lors duquel sont affectés les premiers éléments permettant de reconnaître ensuite l'utilisateur de façon sûre.
+
+      L'introduction distribue et transporte la clé jusqu'à l'utilisateur ou l'équipement puis l'injecte dans son environnement de confiance, faisant passer la clé affectée du système de gestion de clés au système applicatif. L'utilisation ne peut se faire que dans un environnement de confiance responsable du stockage et de la bonne gestion des clés. La fin de vie donne lieu à une révocation, un retrait ou une destruction : révoquer n'est pas retirer, une clé révoquée pouvant encore servir à des vérifications ou à la compatibilité ascendante, et une clé retirée pouvant être archivée pour une enquête ultérieure. Le renouvellement, à prévoir dès la conception, intervient normalement ou à la suite d'un événement fortuit comme une compromission. Le recouvrement de clé assure la disponibilité d'un service ou répond à une exigence légale ; il est difficile car contraire aux objectifs de sécurité, et un simple archivage ne suffit pas, par exemple dans un échange Diffie-Hellman aléatoire où toutes les données échangées sont publiques et le secret de session est à usage unique et non conservé.
+
+   B. Les acteurs de l'IGC.
+
+      Une IGC est un ensemble de matériels, logiciels, personnes, règles et procédures pour créer, gérer, stocker, distribuer et révoquer des certificats à clé publique. Pour obtenir un certificat, l'utilisateur s'adresse à l'autorité d'enregistrement, qui génère un bi-clé, envoie la clé privée au client et applique les critères de l'autorité de certification, laquelle certifie la clé publique et appose sa signature, le certificat étant parfois fabriqué par un opérateur de certification.
+
+      L'autorité de certification est un tiers de confiance disposant lui-même d'un certificat, par auto-certification ou cautionné par une autre autorité. La crédibilité du certificat est assurée par la signature de l'autorité, calculée avec sa clé privée sur la clé publique du demandeur, son identification et des informations complémentaires ; la vérification se fait avec la clé publique de l'autorité, la confiance étant absolue si l'on y accède directement, sinon il faut passer par une autre autorité ayant certifié la clé publique de l'autorité émettrice. Une autorité peut être organisationnelle ou institutionnelle et, dans ce dernier cas, cautionner des autorités subalternes au niveau national comme autorité racine. L'autorité de certification s'appuie sur deux entités déléguées mais garde la responsabilité des procédures et du niveau de confiance : l'autorité d'enregistrement contrôle les données identifiant le demandeur, authentifie les demandes de révocation exécutées ensuite par l'autorité de certification, assure le recouvrement lors du renouvellement et possède un bi-clé certifié ; l'opérateur de certification réalise la distribution sécurisée des certificats, gère leur cycle de vie avec l'autorité d'enregistrement, peut générer les bi-clés pour le compte des utilisateurs et possède un bi-clé certifié.
+
+      Les fonctions des IGC pour la gestion des certificats sont l'enregistrement des demandes et la vérification des critères, avec contrôle de l'identité du demandeur et de sa possession de la clé privée, la création des certificats, leur diffusion entraînant publication des clés publiques, leur archivage, leur renouvellement en fin de validité, leur suspension temporaire, leur révocation sur péremption, perte, vol ou compromission, et la création et publication des listes de révocation. La révocation intervient sur date de fin de validité atteinte ou clé privée divulguée, perdue ou compromise. Aucun protocole standard ne réalise la révocation automatiquement, d'où le recours à des moyens administratifs sécurisés, le demandeur devant prouver qu'il est propriétaire de la clé ; les listes de révocation doivent être protégées contre la corruption, accessibles en permanence, aussi à jour que possible et supposent une synchronisation des horloges de tous les acteurs.
+
+   C. La politique de certification et ses illustrations.
+
+      Une politique de certification est un ensemble de règles indiquant ce pour quoi un certificat est applicable, par qui et à quelles conditions juridiques, administratives et techniques. Les certificats et leurs moyens de mise en œuvre se définissent selon l'usage visé, en étudiant la population des utilisateurs et les critères d'attribution, les moyens de collecte et de validation des informations, la durée de vie des clés et des certificats et la gestion des listes de révocation, les moyens de distribution par communication sécurisée de type VPN ou sur support de type carte, la sécurité physique de l'IGC et de ses annuaires, les services à haute disponibilité comme la gestion des listes de révocation, le besoin de recouvrement des clés privées et l'interopérabilité pour les certifications croisées, le support matériel et logiciel chez l'utilisateur et la vétusté des postes, l'impact sur les structures existantes et la formation des acteurs.
+
+      Pour une application cliente, le cycle de vie d'une clé peut être : demande auprès d'une autorité d'enregistrement, génération locale par un navigateur ou une carte à puce, premier enrôlement auprès de l'autorité d'enregistrement, affectations ultérieures en ligne, introduction réduite à la certification puisque la génération est locale, utilisation à chaque établissement de session sécurisée pour un contrôle d'accès, fin de vie par expiration ou révocation, demande de renouvellement auprès de l'autorité d'enregistrement et séquestre de clé comme service de recouvrement.
+
+      Pour un système de paiement, la clé du porteur suit le cycle : demande sous forme de demande de support de paiement au guichet bancaire, génération centralisée lors de la personnalisation de la carte, affectation au même moment, introduction à la délivrance de la carte ou par activation téléphonique, utilisation à chaque transaction, la fin de validité de la carte n'étant pas la fin de vie de la clé qui peut être reconduite, une carte volée étant mise en liste, renouvellement de la clé au changement de carte en cas de perte, sans fonctionnalité de recouvrement.
+
+      Pour la sécurisation locale d'un poste de travail, la clé de sécurisation suit le cycle : demande par un administrateur donnant des droits d'accès, génération locale au poste, affectation locale liée aux droits d'accès, introduction au moment du chiffrement du disque dur, utilisation permanente pendant l'usage du poste, fin de vie lors d'un reformatage ou d'un transchiffrement, changement de clé au changement d'utilisateur pour empêcher l'accès aux données du prédécesseur, et sauvegarde souhaitable de la clé de chiffrement du disque, accessible à un administrateur désigné ou réservée à un rôle particulier.
+
+VI. PROTOCOLES DE SÉCURITÉ.
+
+   A. SSH et le tunneling.
+
+      Il est indispensable d'utiliser SSH plutôt que telnet, rlogin, rsh ou rcp. Le serveur génère une paire de clés RSA renouvelée toutes les heures et envoie sa clé publique au client ; le client génère une clé symétrique, la chiffre avec la clé du serveur et la lui renvoie ; le reste de la communication est en chiffrement symétrique.
+
+      Un protocole de tunneling crée un chemin privé, ou tunnel, à travers une infrastructure éventuellement publique, les données pouvant être encapsulées et chiffrées pour l'emprunter ; c'est une solution intéressante pour relier deux entités distantes à moindre coût. Un flux TCP quelconque peut être redirigé dans un tunnel SSH ; un autre logiciel de tunneling est stunnel, qui utilise SSL.
+
+   B. SSL et les connexions TCP sur IP sécurisées.
+
+      Les connexions TCP sur IP sécurisées peuvent s'appuyer sur la bibliothèque SSL, située entre la couche application et la couche transport. SSL garantit l'authentification, l'intégrité et la confidentialité et est très largement utilisée pour la sécurisation des sites web via HTTPS.
+
+   C. IPsec.
+
+      IPsec est issu d'un groupe de travail de l'IETF. Ses spécifications principales sont l'authentification, la confidentialité et l'intégrité, protégeant du spoofing IP et du vol de session TCP, la confidentialité par session chiffrée protégeant du sniffing, et une sécurisation au niveau de la couche transport, protection de niveau trois. Les algorithmes utilisés sont l'authentification par signature DSS ou RSA, l'intégrité par fonction de condensation HMAC-MD5 ou HMAC-SHA-1, et la confidentialité par chiffrement DES, RC5, IDEA, CAST ou Blowfish.
+
+      IPsec fonctionne en mode transport, les machines source et destination étant les deux extrémités de la connexion sécurisée, en mode tunnel, les extrémités étant des passerelles qui encapsulent les communications hôte à hôte dans les en-têtes du protocole de tunnel, et en mode intermédiaire, tunnel entre une machine et une passerelle. Il utilise deux protocoles : l'en-tête d'authentification AH, qui authentifie les messages, et le protocole de sécurité encapsulant ESP, qui authentifie et chiffre les messages.
+
+      IPsec n'est pas transparent pour l'utilisateur selon le mode choisi. L'établissement d'une connexion suit des règles : les deux machines s'accordent sur les algorithmes et protocoles, et une Security Association est établie pour chaque connexion, comprenant un algorithme de chiffrement comme DES ou Triple DES, une clé de session obtenue via IKE et un algorithme d'authentification comme SHA-1 ou MD5.
+
+   D. Le VPN.
+
+      Un VPN crée un tunnel chiffré sur une infrastructure publique entre deux points. Les logiciels de VPN peuvent s'appuyer sur IPsec, SSL ou d'autres protocoles de chiffrement, OpenVPN étant un exemple.
+
+POINTS D'ATTENTION.
+
+      Ne pas confondre décrypter, retrouver le clair sans la clé, et déchiffrer, retrouver le clair avec la clé.
+
+      Le symétrique est rapide mais impose une clé par paire d'utilisateurs et interdit signature et non-répudiation ; l'asymétrique lève le partage de secret mais est lent et vulnérable à l'interception.
+
+      En pratique on combine les deux : l'asymétrique sert à échanger la clé de session symétrique, qui assure ensuite le chiffrement des données en volume.
+
+      La difficulté des problèmes asymétriques, factorisation et logarithme discret, est temporelle et non prouvée impossible : rien ne garantit qu'une méthode efficace n'existe pas.
+
+      Une fonction de hachage sûre doit résister à la préimage et aux collisions ; depuis août deux mille quatre, MD5 est cassé et SHA-1 est écarté du référentiel, SHA-2 restant utilisable.
+
+      La signature numérique chiffre l'empreinte avec la clé privée de l'émetteur ; la vérification se fait avec sa clé publique. Le chiffrement de confidentialité fait l'inverse : clé publique du destinataire pour chiffrer, clé privée pour déchiffrer.
+
+      L'asymétrie, la signature et le hachage ne résolvent pas l'authentification forte des clés publiques : seule la certification par un tiers de confiance le fait.
+
+      Dans une IGC, l'autorité de certification garde la responsabilité même si elle délègue l'enregistrement et la distribution ; elle signe avec sa clé privée et sa clé publique sert à vérifier.
+
+      Il n'existe aucun protocole standard de révocation automatique : la gestion des CRL est administrative, exige des listes protégées, disponibles en permanence et à jour, et une synchronisation des horloges.
+
+      Le premier enrôlement d'un utilisateur ou d'un équipement repose sur des mesures physiques et organisationnelles, pas sur la cryptographie.
+
+      SSL se situe entre application et transport et porte HTTPS ; IPsec agit au niveau réseau, protège du spoofing IP, du TCP hijacking et du sniffing, et distingue AH, authentification seule, et ESP, authentification et chiffrement.
+
+      Un VPN n'est qu'un tunnel chiffré sur infrastructure publique ; il s'appuie sur IPsec, SSL ou un autre protocole selon l'implémentation.
+
+EXEMPLES CITES.
+
+      L'article fondateur de Whitfield Diffie et Martin Hellman de mille neuf cent soixante-seize donnant naissance à la cryptographie asymétrique.
+
+      L'image du mélange de peinture jaune et bleue en vert pour illustrer un problème asymétrique dans sa difficulté.
+
+      Les algorithmes symétriques DES, Triple DES, AES, RC4, RC5, MISTY1 et le chiffre de Vernam.
+
+      Les algorithmes asymétriques DSA, RSA et le protocole d'échange de clés Diffie-Hellman ; les courbes elliptiques comme structure pour le logarithme discret.
+
+      Les fonctions de hachage MD5, SHA, SHA-1, SHA-256 et SHA-3 publiée à partir de deux mille douze ; le code d'authentification HMAC.
+
+      Les attaques d'août deux mille quatre réduisant le panel des fonctions de hachage sûres, MD5 définitivement cassé et SHA-1 retiré du référentiel.
+
+      La norme X509 associée aux RFC deux mille quatre cent cinquante-neuf, les annuaires LDAP et les listes de révocation CRL au format X509 version deux.
+
+      Les trois cycles de vie de clé illustratifs : application cliente avec séquestre de clé, système de paiement bancaire avec personnalisation centralisée de la carte, et sécurisation locale d'un poste par chiffrement du disque dur.
+
+      SSH avec renouvellement horaire de la paire RSA du serveur ; stunnel sur SSL ; OpenVPN comme logiciel de VPN.
+
+      IPsec issu de l'IETF, ses protocoles AH et ESP, ses modes transport, tunnel et intermédiaire, la Security Association et le protocole IKE ; algorithmes de confidentialité DES, RC5, IDEA, CAST et Blowfish.

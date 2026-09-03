@@ -1,56 +1,228 @@
-WINDOWS SERVER 2008 : SYSTÈME DE FICHIERS ET PANNES
+WINDOWS SERVER 2008 : LES SYSTÈMES DE FICHIERS ET LA TOLÉRANCE DE PANNES.
 
-1. LES SYSTÈMES DE FICHIERS DE WINDOWS
-NTFS : sécurité et efficacité ; blocage de l'accès à un fichier ou répertoire pour un seul utilisateur ; compression de disque, quotas de disque, cryptage, attributs par fichier.
-FAT / FAT32 : dépassés (DOS 6.22, Windows 3.1, 95/98), utilisés seulement pour la compatibilité.
-convert.exe : convertit les partitions FAT/FAT32 vers NTFS. Opération à sens unique : une partition NTFS ne se reconvertit pas, il faut l'effacer et la recréer.
 
-2. NTFS (New Technology File System)
-Structure de base : MFT (Master File Table), fichier des descripteurs de fichiers ; noms longs. Accès plus rapide que la FAT car arbre binaire (B+) ; l'information sur les clusters est stockée avec chaque cluster (pas dans une table unique comme la FAT).
-Limites : théorique 16 exaoctets (17 milliards de To) ; physique = celle des disques (2 To). Capacité minimale d'une partition : 400 Mo (NTFS consomme beaucoup d'espace pour ses structures).
-Fonctionnalités : ACL (l'administrateur contrôle qui accède à chaque fichier), compression intégrée, noms Unicode, noms longs jusqu'à 255 caractères + noms 8.3, sécurité sur supports amovibles et fixes, gestion de très gros fichiers.
-Fichiers de structure : MFT (position indiquée dans le MBR, dupliquée pour la sécurité), fichier du volume (nom du volume), fichier Bitmap (état d'allocation du volume), répertoire racine, fichier journal (fiabilité de la structure).
-Évolution de la MFT : à la création d'un fichier, une entrée est ajoutée (la MFT grandit) ; à la suppression, l'entrée est marquée libre et réutilisable mais la MFT ne se réduit pas. NTFS cherche des espaces contigus pouvant contenir tout le fichier.
-Descripteurs : chaque objet externe reçoit un numéro = indice dans la MFT du descripteur ; taille du descripteur 1 à 4 ko (fixée à la création du volume). Attributs résidents (dans le descripteur, au sein de la MFT) ou non résidents (hors MFT, espace propre). Un petit objet a tous ses attributs résidents ; sinon les données sont non résidentes.
-Clusters : unité d'allocation, taille de 512 octets à 64 koctets (compromis espace / accès) ; numérotés sur 64 bits -> 16 milliards de clusters par volume. Allocation par zone pour les attributs non résidents : la valeur de l'attribut est remplacée par la suite des descriptions de zones (nombre et taille quelconques), avec compression (déplacement relatif à la zone précédente, suppression des octets nuls de tête). Longueur d'un attribut non résident sur 64 bits -> fichiers jusqu'à 16 Go. Le contenu d'un fichier est un attribut sans nom ; l'utilisateur peut créer des attributs nommés à contenus séparés.
-Répertoires : contenu en arbre binaire. Entrées : nom de l'objet (clé), numéro dans la MFT (localise le descripteur), dates de création/modification/accès, taille, numéro du répertoire parent dans la MFT. Seuls les deux premiers champs sont nécessaires (les autres sont dupliqués du descripteur) : avantage = accès aux infos essentielles sans lire le descripteur ; inconvénient = toute modification à porter à plusieurs endroits sous peine d'incohérence. Le numéro du répertoire parent permet de remonter l'arborescence. Attribut Bitmap par répertoire : indique les nœuds libres de l'arbre binaire ; s'il n'y en a plus, allocation d'une nouvelle zone et mise à jour de la Bitmap.
+LEXIQUE COMPLET.
 
-3. LE FICHIER JOURNAL
-NTFS assure la récupération du système de fichiers par traitement transactionnel : toutes les sous-opérations sont enregistrées dans le journal (comment refaire, comment défaire) avant d'être reportées sur le disque, comme dans une base de données.
-Les opérations sur les structures concernent plusieurs secteurs répartis : elles se font en séquence ; l'ordre est choisi pour minimiser les dégâts en cas de panne (mieux vaut perdre de l'espace disque que d'allouer deux fois le même bloc à deux objets). Écriture paresseuse (lazy write) : les opérations sont faites dans des tampons en mémoire, l'écriture sur disque est différée pour la performance -> risque aggravé en cas de panne.
-Transaction (exemple : création de fichier avec allocation) : 1. initialisation de la transaction ; 2. création d'un descripteur dans la MFT ; 3. création de l'entrée dans le répertoire parent ; 4. mise à l'état non libre des bits des clusters alloués dans la Bitmap ; 5. clôture de la transaction. Les opérations 2-3-4 se font en mémoire ; chacune donne un enregistrement dans le journal.
-Le gestionnaire de tampons écrit les tampons du fichier journal avant les autres. Périodiquement, l'état des transactions et la liste des tampons non écrits sont enregistrés dans le journal.
-Après une panne : l'analyse du journal identifie les transactions clôturées non portées physiquement sur disque (à refaire) et les transactions non clôturées déjà portées sur disque (à défaire).
+      NTFS (New Technology File System) : système de fichiers offrant un grand niveau de sécurité et d'efficacité, capable de bloquer l'accès à un fichier ou un répertoire pour un seul utilisateur, avec compression de disque, quotas et cryptage.
 
-4. PROTECTION DES RESSOURCES WINDOWS
-WFP (Windows File Protection) : disponible depuis Windows 2000.
-WRP (Windows Resource Protection), Windows Server 2008 : remplace WFP (et la protection de Windows Server 2003 / XP / 2000).
-- Windows Installer ignore l'installation d'un fichier protégé par WRP, enregistre un avertissement dans le journal et poursuit sans erreur (auparavant, il demandait l'installation). WRP protège aussi les clés de registre (même comportement).
-- Une ressource protégée par WRP dans un composant Windows Installer doit servir de chemin de la clé du composant ; Windows Installer n'installe, ne met à jour ni ne supprime alors ce composant. Ne pas inclure de ressources protégées dans un package : utiliser des mécanismes de remplacement de ressources.
-- Modification limitée aux administrateurs, uniquement via un mécanisme de remplacement de ressources avec le service d'installation de modules Windows.
-- Extensions protégées : .DLL, .EXE, .OCX, .SYS (et une longue liste de fichiers critiques : .bat, .cmd, .com, .cpl, .inf, .msi, .reg, .scr, .vbs...).
-- Dossiers critiques protégés : un dossier ne contenant que des fichiers protégés peut être verrouillé (seul l'administrateur y crée des fichiers/sous-dossiers) ou partiellement verrouillé.
-- Clés de registre essentielles protégées : sous-clés et valeurs associées peuvent l'être aussi.
-- Copies des fichiers WRP nécessaires au redémarrage : dans %windir%\WinSxS\Backup. Les fichiers critiques non nécessaires au redémarrage n'y sont pas copiés. Taille du cache et liste des fichiers non modifiables.
+      FAT et FAT32 : systèmes de fichiers dépassés, utilisés généralement pour la compatibilité avec d'autres systèmes comme DOS 6.22, Windows 3.1 ou Windows 95 et 98.
 
-5. LES VOLUMES SOUS WINDOWS
-Deux types de disques : basique et dynamique.
-- Disque basique : composé de partitions (primaires, étendues) et de lecteurs logiques ; requis pour le dual-boot avec DOS, Windows 3.x, 9x/Me, toute version de NT.
-- Disque dynamique (depuis Windows 2000 et XP) : une seule partition peut contenir tout le disque ; divisé en volumes couvrant un ou plusieurs disques ; redimensionnable sans redémarrer ; une partie de l'espace (fin du disque) est réservée aux informations de description.
-Trois types de volumes :
-- Volume simple : espace d'un seul disque.
-- Volume multiple : espace de plusieurs disques (max 32), remplis successivement (transparent pour l'utilisateur) ; agrégat de partitions. Si un disque tombe -> toutes les données perdues. Performances dégradées (lecture séquentielle).
-- Agrégat par bande sans parité (RAID 0) : espace libre de plusieurs disques (max 32) en un volume logique ; performances accrues (lecture/écriture sur tous les disques à la même vitesse). Si un disque est perdu -> toutes les données perdues.
-États d'un volume dynamique : Erreur (ne redémarre pas automatiquement, à réparer) ; En état (accessible, sans problème connu) ; En état (avec risque) (accessible mais erreurs d'E/S détectées) ; Initialisation (en cours, sera « en état » à la fin).
-Limitations des volumes dynamiques : non accessibles par DOS ou Windows < 2000 ; MBR contient un pointeur vers les données de configuration situées dans le dernier méga-octet ; les volumes mis à jour depuis une partition basique ne peuvent pas être étendus (surtout s'ils contiennent les fichiers de démarrage et le volume de boot) ; Windows ne s'installe pas sur un volume dynamique créé à partir de l'espace non alloué lors de l'installation ; non supportés par portables et médias amovibles ; conversion d'un disque de démarrage basique -> dynamique irréversible.
-Gestion : quotas sur volumes NTFS uniquement (pas FAT/FAT32, pas sur des dossiers d'une partition NTFS). Informations de disque enregistrées sur le disque lui-même (déplacement facile d'un système à l'autre). Console MMC pour la gestion à distance ; utilitaire dmtool.exe pour de grandes quantités de disques.
+      convert.exe : utilitaire convertissant les partitions FAT ou FAT32 vers NTFS ; l'inverse est impossible, la partition NTFS devant être effacée et recréée en FAT ou FAT32.
 
-6. TOLÉRANCE DE PANNES (RAID)
-Tolérance de pannes = capacité du système à compenser la défaillance d'un dispositif matériel (disque dur). Standard : RAID (plusieurs niveaux).
-Windows Server met en œuvre les niveaux 1 (mirroring) et 5 (agrégat par bandes avec parité), sur disques dynamiques uniquement. Configuration via le composant enfichable « Gestion de disque » (MMC) et son assistant.
-- RAID 1 (mirroring) : données dupliquées à l'identique sur tous les disques de la matrice. Lecture très bonne (chaque disque fournit une partie de l'information), écriture équivalente à un seul disque. Espace disponible = celui du plus petit disque. Grande sécurité (si un disque lâche, les autres ont tout). Inconvénient : rapport prix/espace très défavorable. Minimum 2 disques ; Windows n'en autorise pas plus de 2.
-- RAID 5 (agrégat par bandes avec parité) : données écrites sur 3 à 32 disques dynamiques + informations de parité (déterminées à partir des données) permettant de régénérer un disque en panne (reconstruction du RAID). Plus rapide en lecture (plusieurs disques simultanément), moins performant en écriture que le RAID 1 (calculs de parité). Occupe seulement 20 % de l'espace pour la redondance, contre 50 % pour un miroir.
-Gestion des pannes :
-- RAID 5 : vérifier l'état dans le Gestionnaire de disques ; si le disque est marqué manquant, tenter de le réactiver avant remplacement.
-- RAID 1 : si la réactivation échoue, casser le miroir, remplacer le disque, puis reformer le miroir.
-Correspondances de termes : disque dynamique / disque basique (volume simple <-> partition, etc.).
+      MFT (Master File Table) : table de fichiers maître, structure de base de NTFS contenant des informations détaillées sur les fichiers, appelée fichier des descripteurs de fichiers, dont la position est indiquée dans le premier secteur de la partition MBR et qui est dupliquée pour la sécurité ; elle grandit à chaque création de fichier et ne se réduit pas à la suppression, l'entrée étant seulement marquée comme libre.
+
+      Arbre B+ : arborescence de répertoire performante utilisée par NTFS pour garder la trace des clusters des fichiers, l'information étant stockée avec chaque cluster et non dans une simple table comme la FAT.
+
+      Descripteur de fichier : enregistrement de la MFT dont l'indice est le numéro attribué à chaque objet externe à sa création, de taille fixée à la création du volume entre un et quatre kilo-octets, constitué d'attributs résidents rangés dans le descripteur ou non résidents alloués à l'extérieur de la MFT.
+
+      Attribut résident : attribut dont le contenu est rangé dans le descripteur de l'objet lui-même, possible si l'objet est suffisamment petit.
+
+      Attribut non résident : attribut, en particulier les données, stocké à l'extérieur de la MFT dans un espace alloué en propre par allocation par zone, la valeur dans le descripteur étant remplacée par la suite des descriptions des zones allouées, la longueur étant mémorisée sur soixante-quatre bits ce qui autorise des fichiers jusqu'à seize gigaoctets.
+
+      Cluster (unité d'allocation) : unité de stockage de taille variable de cinq cent douze octets à soixante-quatre kilo-octets, choisie en compromis entre l'utilisation de l'espace disque et le nombre d'accès, numérotée sur soixante-quatre bits ce qui implique la gestion de seize milliards de clusters par volume.
+
+      Attribut nommé : attribut créé par l'utilisateur pouvant avoir un contenu séparé dans un espace distinct, le contenu d'un fichier étant lui-même un attribut sans nom.
+
+      Entrée de répertoire : information contenue dans un répertoire organisé en arbre binaire, comprenant le nom de l'objet qui est la clé, son numéro dans la MFT, les dates de création, modification et accès, la taille et le numéro du répertoire parent ; seuls le nom et le numéro sont nécessaires, les autres étant une copie de l'attribut nom de fichier du descripteur, permettant un accès rapide au prix d'une redondance à maintenir cohérente ; le numéro du répertoire parent permet de remonter l'arborescence.
+
+      Attribut Bitmap de répertoire : attribut indiquant quels nœuds de l'arbre binaire d'un répertoire sont libres, une nouvelle zone étant allouée s'il n'en reste plus.
+
+      Fichier Bitmap du volume : fichier de la structure NTFS décrivant l'état d'allocation du volume.
+
+      Fichier journal : fichier de la structure NTFS garantissant la fiabilité par une technique de traitement transactionnel, où toutes les sous-opérations sont enregistrées avant d'être reportées sur le disque, à la manière d'une base de données.
+
+      Transaction : ensemble d'opérations élémentaires dont on garantit qu'elles sont toutes effectuées, même en cas de panne, ou qu'aucune ne l'est ; chaque opération donne lieu à un enregistrement décrivant comment la refaire et comment la défaire.
+
+      Écriture paresseuse : principe consistant à effectuer les opérations dans des tampons en mémoire et à les écrire sur disque plus tard pour gagner en performance, le gestionnaire de tampons écrivant toutefois les tampons du fichier journal avant les autres.
+
+      Point de contrôle : enregistrement périodique dans le fichier journal de l'état des transactions et de la liste des tampons non encore écrits sur disque.
+
+      Séquence de création de fichier : initialisation d'une transaction, création du descripteur dans la MFT, création de l'entrée dans le répertoire parent, mise à l'état non libre des bits des clusters alloués dans la bitmap, puis clôture de la transaction, les opérations intermédiaires se faisant en mémoire.
+
+      WFP (Windows File Protection) : protection des fichiers Windows disponible depuis Windows 2000.
+
+      WRP (Windows Resource Protection) : protection des ressources de Windows Server 2008 remplaçant la WFP, protégeant fichiers et clés de Registre ; à la rencontre d'une ressource protégée, Windows Installer ignore son installation, enregistre un avertissement dans le journal et poursuit sans erreur, alors que sous 2003, XP et 2000 il demandait l'installation.
+
+      Extensions protégées par WRP : notamment .DLL, .EXE, .OCX et .SYS, ainsi qu'une longue liste d'extensions de fichiers critiques dont .bat, .cmd, .com, .cpl, .inf, .msi, .reg, .scr, .vbs et .wsf.
+
+      Cache WRP : répertoire windir/WinSxS/Backup contenant les copies des fichiers WRP nécessaires au redémarrage de Windows, dont la taille et la liste ne peuvent être modifiées, les fichiers critiques non nécessaires au redémarrage n'y étant pas copiés.
+
+      Disque de base (mode basique) : disque composé de partitions, primaires ou étendues, avec des lecteurs logiques, à utiliser pour un dual-boot avec DOS, Windows 3.x, Windows 9x/Me ou toute version de Windows NT.
+
+      Disque dynamique : disque initialisé en mode dynamique, possible depuis Windows 2000 et XP, divisé en volumes pouvant inclure un ou plusieurs disques, redimensionnables sans redémarrage, une partie de l'espace en fin de disque étant réservée aux informations de description ; le MBR contient un pointeur vers ces données situées dans le dernier méga-octet.
+
+      Volume simple : volume dynamique contenant l'espace d'un seul disque.
+
+      Volume multiple : volume dynamique contenant l'espace de plusieurs disques, au maximum trente-deux, utilisés successivement de façon transparente, formant un agrégat de partitions ; la panne d'un disque perd toutes les données et les performances sont dégradées par la lecture séquentielle.
+
+      Agrégat par bande sans parité : volume contenant l'espace libre de plusieurs disques, au maximum trente-deux, en un seul volume logique, augmentant les performances par lecture et écriture simultanées sur tous les disques, mais la panne d'un disque perd toutes les données.
+
+      États d'un volume dynamique : Erreur nécessitant une réparation, En état accessible sans problème connu, En état avec risque accessible mais avec des erreurs d'entrée-sortie détectées, et Initialisation.
+
+      Limitations des volumes dynamiques : inaccessibles par DOS et Windows antérieur à 2000, non supportés par les portables et les médias amovibles ; les volumes mis à jour depuis une partition basique ne peuvent être étendus, surtout s'ils contiennent le volume de boot, seuls les volumes créés après la mise à jour l'étant ; Windows Server ne peut être installé sur un volume dynamique créé pendant l'installation ; la conversion d'un disque de démarrage en dynamique est irréversible.
+
+      MMC en ligne de commande : commande créant une console sur mesure, notamment pour gérer les disques d'un ordinateur distant.
+
+      Quotas : limites d'espace définissables sur des volumes NTFS mais pas sur des volumes FAT ou FAT32 ni sur des dossiers à l'intérieur d'une partition NTFS.
+
+      dmtool.exe : utilitaire développé pour faciliter la gestion de grandes quantités de disques, les informations de disque étant enregistrées physiquement sur le disque lui-même, ce qui permet de le déplacer d'un système à l'autre.
+
+      Tolérance de pannes : capacité du système à compenser la défaillance d'un dispositif matériel, en l'occurrence un disque dur, le standard étant le RAID formé de plusieurs niveaux.
+
+      RAID 1 (mirroring) : niveau où toutes les données sont dupliquées de manière identique sur tous les disques de la matrice, avec de très bonnes performances en lecture et équivalentes à un seul disque en écriture, l'espace disponible étant celui du plus petit disque, une panne préservant toutes les données sur les autres ; rapport prix sur espace défavorable, au moins deux disques nécessaires, pas plus de deux sous Windows.
+
+      RAID 5 (agrégat par bandes avec parité) : niveau écrivant les données sur trois à trente-deux disques dynamiques avec des informations de parité permettant de régénérer les données d'un disque en panne ; plus rapide en lecture par lecture simultanée de plusieurs disques, moins performant en écriture que le RAID 1 à cause des calculs de parité, il n'occupe que vingt pour cent de l'espace contre cinquante pour cent pour le miroir, au moins trois disques nécessaires.
+
+      Reconstruction du RAID : récupération des données d'un disque en panne à partir des données et informations de parité présentes sur les autres disques.
+
+      Gestion de disque : composant enfichable exploitable avec MMC, avec un assistant pour configurer les options de tolérance de pannes.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LES SYSTÈMES DE FICHIERS DE WINDOWS.
+
+
+   A. NTFS face à FAT.
+
+      NTFS offre un grand niveau de sécurité et d'efficacité grâce à sa capacité à bloquer l'accès à un fichier ou répertoire pour un seul utilisateur, avec compression de disque, quotas et cryptage ; FAT et FAT32, dépassés, servent généralement à la compatibilité avec DOS 6.22, Windows 3.1 ou Windows 95 et 98.
+
+      L'utilitaire convert.exe convertit les partitions FAT ou FAT32 vers NTFS, mais l'inverse est impossible, la partition NTFS devant être effacée et recréée en FAT ou FAT32.
+
+
+   B. Les caractéristiques de NTFS.
+
+      NTFS repose sur la MFT contenant des informations détaillées sur les fichiers, permettant les noms longs ; l'accès est plus rapide qu'en FAT car NTFS utilise un arbre binaire pour localiser les fichiers ; la limite théorique de taille d'une partition est de seize exaoctets, la limite physique étant celle des disques, deux téraoctets.
+
+      NTFS utilise une arborescence organisée en arbre B+ où l'information sur les clusters est stockée avec chaque cluster et non dans une simple table, gère de très gros fichiers, offre le contrôle par liste d'accès, la compression intégrée, les noms Unicode, les noms longs jusqu'à deux cent cinquante-cinq caractères ainsi que les noms 8.3, et la sécurité des données sur supports amovibles et fixes ; une partition NTFS doit avoir au moins quatre cents mégaoctets car NTFS utilise beaucoup d'espace pour ses structures, mais exploite ensuite mieux l'espace.
+
+
+II. LA STRUCTURE DU SYSTÈME NTFS.
+
+
+   A. Les fichiers de structure.
+
+      Les principaux fichiers de structure sont la MFT, fichier des descripteurs dont la position est indiquée dans le premier secteur de la partition et qui est dupliquée pour la sécurité, le fichier du volume contenant le nom du volume, le fichier Bitmap décrivant l'état d'allocation, le répertoire racine et le fichier journal garantissant la fiabilité.
+
+      Quand un fichier est créé, une entrée est ajoutée à la MFT qui grandit ; quand il est supprimé, son entrée est marquée comme libre et réutilisable mais la MFT ne se réduit pas ; NTFS tente de trouver des espaces contigus pouvant contenir l'intégralité du fichier pour des performances optimales.
+
+
+   B. Les descripteurs et les clusters.
+
+      Chaque objet externe reçoit à sa création un numéro qui est son indice dans la MFT, le descripteur ayant une taille fixée à la création du volume entre un et quatre kilo-octets ; un objet est constitué d'attributs résidents rangés dans le descripteur si l'objet est petit, ou non résidents alloués à l'extérieur, en particulier les données.
+
+      La taille d'un cluster est un compromis entre l'espace disque et le nombre d'accès, variant de cinq cent douze octets à soixante-quatre kilo-octets, les clusters étant numérotés sur soixante-quatre bits soit seize milliards par volume ; NTFS utilise l'allocation par zone pour les attributs non résidents, la valeur dans le descripteur étant remplacée par les descriptions des zones, avec une compression des descripteurs de zone par déplacement relatif et suppression des octets nuls de tête ; la longueur d'un attribut non résident est sur soixante-quatre bits, autorisant des fichiers jusqu'à seize gigaoctets ; le contenu d'un fichier est un attribut sans nom, l'utilisateur pouvant créer des attributs nommés à contenu séparé.
+
+
+   C. Les répertoires.
+
+      Le contenu d'un répertoire est organisé en arbre binaire, chaque entrée contenant le nom de l'objet qui est la clé, son numéro dans la MFT, les dates, la taille et le numéro du répertoire parent ; seuls le nom et le numéro sont nécessaires, les trois autres étant une copie de l'attribut nom de fichier du descripteur, ce qui donne un accès rapide aux informations essentielles au prix d'une redondance à maintenir cohérente, le numéro du parent permettant de remonter l'arborescence.
+
+      Les arbres binaires créent et suppriment des nœuds au fil des ajouts et suppressions ; un attribut Bitmap par répertoire indique les nœuds libres pour permettre leur réutilisation, une nouvelle zone étant allouée s'il n'en reste plus.
+
+
+   D. Le fichier journal.
+
+      NTFS implémente la récupération par traitement transactionnel, toutes les sous-opérations étant enregistrées dans le fichier journal avant d'être reportées sur le disque ; les opérations sur les structures concernent plusieurs secteurs et sont effectuées en séquence avec un ordre choisi pour minimiser les dégâts en cas de panne, en préférant perdre de l'espace disque plutôt que d'allouer deux fois le même bloc.
+
+      L'écriture paresseuse aggrave le risque en différant l'écriture des tampons mémoire sur disque ; le fichier journal mémorise la séquence des actions pour pouvoir les refaire ou les défaire après une panne, avec la notion de transaction garantissant que toutes les opérations élémentaires sont effectuées ou qu'aucune ne l'est.
+
+      La création d'un fichier avec allocation comprend l'initialisation de la transaction, la création du descripteur dans la MFT, la création de l'entrée dans le répertoire parent, la mise à l'état non libre des bits des clusters dans la bitmap, puis la clôture, les opérations intermédiaires se faisant en mémoire ; chaque opération produit un enregistrement de refaire et défaire, le gestionnaire écrivant les tampons du journal avant les autres, et un point de contrôle enregistre périodiquement l'état des transactions et des tampons non écrits ; à la panne, l'analyse du journal permet de refaire les transactions clôturées non portées sur disque et de défaire les transactions non clôturées portées sur disque.
+
+
+III. LA PROTECTION DES RESSOURCES WINDOWS.
+
+      La WFP est disponible depuis Windows 2000 ; la WRP de Windows Server 2008 la remplace et protège fichiers et clés de Registre ; quand Windows Installer rencontre une ressource protégée par WRP, il ignore son installation, enregistre un avertissement dans le journal et poursuit sans erreur, alors que sous Windows Server 2003, XP et 2000 il demandait l'installation du fichier.
+
+      Une ressource protégée par WRP dans un composant Windows Installer doit servir de chemin de clé du composant, Windows Installer n'installant, ne mettant à jour ni ne supprimant alors le composant ; il ne faut pas inclure de ressources protégées dans un package, des mécanismes de remplacement devant être mis en place, l'autorisation de modification étant limitée aux administrateurs via le service d'installation de modules Windows.
+
+      WRP protège les fichiers à extension .DLL, .EXE, .OCX et .SYS, une longue liste d'extensions critiques dont .bat, .cmd, .com, .cpl, .inf, .msi, .reg, .scr, .vbs et .wsf, des dossiers critiques pouvant être totalement ou partiellement verrouillés, et des clés de Registre essentielles avec leurs sous-clés et valeurs ; les copies nécessaires au redémarrage sont dans windir/WinSxS/Backup, dont la taille et la liste ne peuvent être modifiées, les fichiers critiques non nécessaires au redémarrage n'y étant pas copiés.
+
+
+IV. LES VOLUMES SOUS WINDOWS.
+
+
+   A. Disques de base et disques dynamiques.
+
+      En mode basique, le disque est composé de partitions primaires et étendues avec des lecteurs logiques, à utiliser pour un dual-boot avec DOS, Windows 3.x, Windows 9x/Me ou toute version de Windows NT ; en mode dynamique, possible depuis Windows 2000 et XP, on peut créer une seule partition couvrant tout le disque, le disque étant divisé en volumes pouvant inclure un ou plusieurs disques, redimensionnables sans redémarrage, une partie de l'espace en fin de disque étant réservée aux informations de description pointées par le MBR.
+
+      Les trois types de volumes sont le volume simple contenant l'espace d'un seul disque, le volume multiple contenant l'espace de plusieurs disques, au maximum trente-deux, utilisés successivement, formant un agrégat de partitions où une panne perd tout et où les performances sont dégradées, et l'agrégat par bande sans parité contenant l'espace libre de plusieurs disques, au maximum trente-deux, augmentant les performances par lecture et écriture simultanées mais où une panne perd tout.
+
+
+   B. Les états et les limitations.
+
+      Les états d'un volume dynamique sont Erreur nécessitant une réparation, En état accessible sans problème connu, En état avec risque accessible mais avec des erreurs d'entrée-sortie, et Initialisation ; les volumes dynamiques sont inaccessibles par DOS et Windows antérieur à 2000, non supportés par les portables et médias amovibles.
+
+      Les volumes mis à jour depuis une partition basique ne peuvent être étendus, surtout s'ils contiennent les fichiers de démarrage et le volume de boot, seuls les volumes créés après la mise à jour l'étant ; Windows Server ne peut être installé sur un volume dynamique créé pendant l'installation ; la conversion d'un disque de démarrage vers un volume dynamique est irréversible ; les quotas se définissent sur des volumes NTFS mais pas FAT ou FAT32 ni sur des dossiers d'une partition NTFS ; les informations de disque sont enregistrées sur le disque lui-même, ce qui permet de le déplacer, l'utilitaire dmtool.exe facilitant la gestion de grandes quantités de disques.
+
+
+V. LA TOLÉRANCE DE PANNES ET LE RAID.
+
+
+   A. Les principes.
+
+      La tolérance de pannes est la capacité à compenser la défaillance d'un disque dur, le standard étant le RAID formé de plusieurs niveaux ; Windows Server permet les niveaux 1, mirroring, et 5, agrégat par bandes avec parité, sur les disques dynamiques uniquement ; avec le RAID 5, les données sont écrites sur trois à trente-deux disques avec des informations de parité permettant de régénérer les données manquantes.
+
+      Le RAID 5 est plus rapide en lecture par lecture simultanée de plusieurs disques, mais moins performant en écriture que le RAID 1 à cause des calculs de parité ; la tolérance de pannes se met en place avec le composant enfichable Gestion de disque et un assistant.
+
+
+   B. Les modes miroir et parité.
+
+      Le mode 1 ou miroir duplique toutes les données de manière identique sur tous les disques, avec de très bonnes performances en lecture et équivalentes à un seul disque en écriture, l'espace disponible étant celui du plus petit disque, une panne préservant toutes les données ; son rapport prix sur espace est très défavorable, au moins deux disques sont nécessaires et Windows n'en permet pas plus de deux, écrivant les mêmes données sur les deux disques.
+
+      Le mode 5 avec contrôle de parité nécessite beaucoup de calcul mais offre un bon compromis entre performance et espace, au moins trois disques étant nécessaires ; chaque disque contient une partie des données et des informations de parité déterminées à partir des données, permettant de récupérer les données d'un disque en panne, ce qu'on appelle la reconstruction du RAID ; le miroir occupe cinquante pour cent de l'espace pour la réplication alors que le RAID 5 n'en occupe que vingt pour cent.
+
+      En cas de problème sur un RAID 5, il faut vérifier l'état du disque dans le Gestionnaire de disques et, s'il est marqué comme manquant, tenter de le réactiver avant remplacement ; en RAID 1, si la réactivation échoue, il faut d'abord casser le miroir, remplacer le disque, puis reformer le miroir.
+
+
+POINTS D'ATTENTION.
+
+      convert.exe convertit FAT vers NTFS mais pas l'inverse.
+
+      La MFT grandit à chaque création de fichier et ne se réduit jamais, l'entrée d'un fichier supprimé étant seulement marquée comme libre.
+
+      Un attribut est résident dans le descripteur si l'objet est petit, sinon non résident dans un espace alloué en propre.
+
+      La taille d'un cluster varie de cinq cent douze octets à soixante-quatre kilo-octets, en compromis entre espace disque et nombre d'accès.
+
+      Le fichier journal enregistre chaque opération avec un moyen de la refaire et de la défaire ; les tampons du journal sont écrits avant les autres.
+
+      À une panne, on refait les transactions clôturées non portées sur disque et on défait les transactions non clôturées portées sur disque.
+
+      Sous Windows Server 2008, Windows Installer ignore une ressource protégée par WRP au lieu de demander son installation.
+
+      Un volume multiple ou un agrégat par bande sans parité perd toutes ses données si un seul disque tombe en panne.
+
+      La conversion d'un disque de démarrage en disque dynamique est irréversible.
+
+      Les quotas ne se posent que sur des volumes NTFS, pas sur FAT, FAT32, ni sur des dossiers d'une partition NTFS.
+
+      Windows n'autorise que deux disques en RAID 1 miroir et au moins trois en RAID 5.
+
+      Le miroir occupe cinquante pour cent de l'espace, le RAID 5 seulement vingt pour cent.
+
+
+EXEMPLES CITES.
+
+      Limite théorique de partition NTFS de seize exaoctets, limite physique de deux téraoctets.
+
+      Noms de fichiers NTFS jusqu'à deux cent cinquante-cinq caractères ainsi que les noms 8.3 de Microsoft.
+
+      Taille minimale d'une partition NTFS de quatre cents mégaoctets pour ses structures.
+
+      Descripteur de la MFT de un à quatre kilo-octets, clusters numérotés sur soixante-quatre bits.
+
+      Séquence de création de fichier en cinq étapes autour d'une transaction.
+
+      Extensions protégées par WRP .DLL, .EXE, .OCX et .SYS, et fichiers critiques .bat, .cmd, .reg, .vbs.
+
+      Répertoire de cache WRP windir/WinSxS/Backup.
+
+      Volume multiple ou agrégat par bande jusqu'à trente-deux disques.
+
+      États d'un volume dynamique Erreur, En état, En état avec risque et Initialisation.
+
+      RAID 5 sur trois à trente-deux disques dynamiques avec parité.
+
+      Miroir Windows limité à deux disques, RAID 5 nécessitant au moins trois disques.

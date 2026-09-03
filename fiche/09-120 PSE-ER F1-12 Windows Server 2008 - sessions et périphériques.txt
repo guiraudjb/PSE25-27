@@ -1,49 +1,357 @@
-WINDOWS SERVER 2008 : OUVERTURE DE SESSION ET GESTION DES PÉRIPHÉRIQUES
+L'OUVERTURE DE SESSION WINDOWS ET LA GESTION DES PÉRIPHÉRIQUES SOUS WINDOWS SERVER 2008.
 
-1. L'OUVERTURE DE SESSION WINDOWS
-Winlogon gère l'ouverture et la fermeture de session interactive : création de la fenêtre interactive (clavier, souris, écran), du descripteur de sécurité de la station de travail (aucun processus non autorisé ne peut y accéder), de deux bureaux (un pour les applications, accessible aux utilisateurs ; un réservé à Winlogon, invisible tant qu'aucun utilisateur n'est connecté), gestion des time-out. Un processus Winlogon par utilisateur connecté ; réauthentification possible après verrouillage.
-Processus système critiques (non arrêtables) : winlogon.exe, lsass.exe (sécurité locale), smss.exe (gestionnaire de session), csrss.exe (Client/Server Runtime SubSystem), wininit.exe.
-SAS (Secure Attention Sequence) : par défaut Ctrl-Alt-Suppr ; interceptée par Winlogon, qui exécute LogonUI (vérification du nom et du mot de passe via les credential providers) et crée un SID de session unique local.
-Si authentification réussie : LSASS vérifie autorisations et privilèges dans la base des politiques locales, les ajoute au jeton, crée le jeton d'accès, le duplique pour Winlogon, audite si nécessaire, renvoie un succès. Si échec : LSASS termine la session, nettoie les structures, renvoie un échec ; Winlogon affiche une erreur.
-Après authentification : shell graphique (en général explorer.exe). Écran de veille sécurisé -> Winlogon verrouille la session et redemande l'authentification.
 
-2. SYSTÈME D'ENTRÉE-SORTIE (E/S)
-Objectif : fournir aux applications une couche d'abstraction pour les périphériques. Fonctionnalités : uniformisation de la protection des ressources, E/S asynchrones et performantes, services aux pilotes interopérables, fonctionnement en couches et extensibilité, chargement/déchargement dynamique des pilotes, PnP, gestion de l'alimentation, multiples systèmes de fichiers, surveillance via WMI.
-Composants :
-- Gestionnaire d'E/S : cœur du système ; relie applications et composants système aux périphériques virtuels, logiques, physiques ; crée et supprime les IRP.
-- Pilotes : interface d'E/S pour un type de périphérique ; reçoivent les commandes du gestionnaire d'E/S et signalent leur achèvement.
-- Gestionnaire PnP : travaille avec le gestionnaire d'E/S et le pilote de bus ; allocation des ressources, ajout/retrait de périphériques, chargement du pilote (ou appel d'un gestionnaire d'installation en mode utilisateur s'il ne l'a pas).
-- Gestionnaire d'alimentation : transitions d'états d'alimentation.
-- Routines WMI (WMI WDM) : dialogue indirect des pilotes avec le service WMI en mode utilisateur.
-- Registre : descriptions des périphériques, paramètres d'initialisation et de configuration des pilotes.
-- Fichiers INF (.inf) : installation de pilote, description du périphérique. Fichiers CAT (.cat) : signatures numériques de certification.
-- HAL (Hardware Abstraction Layer) : isole les pilotes des spécificités du processeur et du contrôleur d'interruptions, API masquant les différences de plateformes ; pilote de bus de tous les périphériques non contrôlés par d'autres pilotes.
-Fichiers virtuels : les threads font leurs E/S sur des fichiers virtuels même pour du matériel ; le gestionnaire d'E/S redirige dynamiquement vers le pilote concerné.
-IRP (Input-Output Request Packet) : représente la plupart des requêtes d'E/S ; le gestionnaire d'E/S crée l'IRP, passe un pointeur au pilote, le pilote effectue l'opération et repasse l'IRP, le gestionnaire le supprime. Le gestionnaire d'E/S gère aussi tampons, timeouts, et permet à un pilote d'en appeler d'autres.
+LEXIQUE COMPLET.
 
-3. PLUG AND PLAY ET ALIMENTATION
-PnP : reconnaît les modifications de configuration matérielle. Coopération matériel + pilote + OS ; normes industrielles (USB). Fonctions : détection automatique, ajout/retrait à chaud, allocation des ressources (IRQ, ports d'E/S, canaux DMA) au démarrage et en fonctionnement, chargement du pilote d'après l'identification, détection des changements de configuration. Procédure d'énumération des composants ; entrées de registre d'après les scripts INF. Matériel dans la HCL (Hardware Compatibility List) -> installation quasi automatique ; sinon l'administrateur règle les conflits d'adresse et d'IRQ.
-Gestionnaire d'alimentation : interaction dynamique pour conserver la batterie et réduire l'usure (arrêt disque/écran après inactivité) ; prend en charge l'ACPI (Advanced Configuration and Power Interface). Le matériel et le BIOS doivent être conformes ACPI.
-États système ACPI : six, de S0 à S5. S0 = consommation maximale, aucune latence ; S1 à S4 = veille (l'ordinateur semble éteint) ; S5 = entièrement éteint. En S1-S3, réveil et reprise à l'endroit d'arrêt. Avant S4 (hibernation) : enregistrement du contenu compressé de la mémoire dans Hiberfil.sys (racine du volume système) ; au démarrage le chargeur détecte l'image mémoire et reprend l'exécution.
-États périphériques ACPI : quatre, D0 (allumé) à D3 (éteint) ; D1 et D2 définis par les pilotes. Le gestionnaire d'alimentation est prioritaire sur les pilotes pour décider de l'état électrique et de la mise en veille ; les pilotes de bus fournissent une table de mappage entre états système et états périphériques ; un pilote peut baisser unilatéralement la consommation d'un périphérique inactif.
-Configuration : Panneau de configuration -> Options d'alimentation.
+      Winlogon : composant de Windows qui gère l'ouverture et la fermeture de session interactive ; c'est un processus système critique qui ne peut être arrêté, et un processus Winlogon est créé pour chaque utilisateur connecté.
 
-4. PILOTES ET SIGNATURE
-Windows Server 2008 supporte pleinement le PnP : détection immédiate d'un nouveau périphérique et installation automatique du pilote si disponible. Avant l'installation, le gestionnaire PnP vérifie la politique de signature : Ignorer (installe tout), Avertir (message avant un pilote non signé), Interdire (bloque un pilote non signé). WHQL (Windows Hardware Quality Labs) teste les pilotes ; ceux qui réussissent sont signés par Microsoft.
-Vérificateur de pilotes : Verifier.exe, active des options de contrôle sur des composants système (gestionnaire d'E/S, gestionnaire de mémoire...) pour isoler les bugs des pilotes en mode noyau. Vérificateur de fichiers système : WRP (Windows Resource Protection), protège les fichiers système critiques par des ACL ; utilitaire Sfc.exe.
+      Fenêtre interactive : fenêtre créée par Winlogon prenant en compte le clavier, la souris et l'écran, associée à un descripteur de sécurité de la station de travail qui garantit qu'aucun processus non autorisé par Winlogon n'y accède.
 
-5. GESTIONNAIRE DE PÉRIPHÉRIQUES
-Console MMC accessible via le Panneau de configuration (Matériel et audio), la commande mmc devmgmt.msc, ou Gestion de l'ordinateur. Permet de vérifier le bon fonctionnement, configurer les paramètres, identifier les pilotes chargés, gérer l'activation et l'installation, afficher les périphériques cachés (menu Affichage). Signalétique : branche développée = dysfonctionnement ; croix rouge = périphérique désactivé ; point d'exclamation = problème de ressource ou pilotes manquants. Arborescence des périphériques : chaque branche est un nœud de périphérique.
+      Bureaux de Winlogon : deux bureaux créés à l'ouverture de session, l'un destiné aux applications et accessible par Winlogon et les utilisateurs, l'autre réservé à Winlogon et ne contenant que ce qui lui est utile, seul ce dernier étant visible tant qu'aucun utilisateur n'est connecté.
 
-6. MODIFICATION DE L'ENVIRONNEMENT
-- Ajout de processeur ou de mémoire : branchement à chaud, vus comme des périphériques Plug and Play.
-- Disques IDE : un contrôleur IDE par disque recommandé (écriture sur un seul disque à la fois) ; miroir possible pour la tolérance de pannes. Disques ATA : contrôleur adapté, meilleures performances. Disques SCSI : initiateur logiciel iSCSI reliant un hôte à un groupe de stockage iSCSI externe via une carte réseau (SAN à base de blocs).
-- Cartes réseau : pilotes NDIS (Network Driver Interface Specification) ; installation simplifiée si PnP + fichier INF + pilote WDM.
-- Plusieurs moniteurs : autant de sorties vidéo AGP/PCI/DVI ; combinaison possible mais l'affichage s'aligne sur l'interface la plus lente.
+      Time-out : opérations de délai d'expiration implémentées par Winlogon, pouvant obliger l'utilisateur à s'authentifier de nouveau après un verrouillage de session.
 
-7. IMPRESSION LOCALE ET RÉSEAU
-Terminologie : périphérique d'impression = matériel ; imprimante = interface logicielle entre le périphérique et Windows ; serveur d'impression = serveur gérant des imprimantes, contenant le pilote de chaque périphérique. Impression locale (poste relié directement au périphérique) vs impression réseau (via un serveur d'impression).
-Ajout / partage d'imprimante : privilèges d'Administrateur requis ; assistant d'ajout ; l'imprimante partagée est automatiquement publiée dans Active Directory (sinon parcours du réseau) ; pilotes supplémentaires pour les clients (téléchargement automatique pour Windows 2000/NT4/NT3.51/95/98).
-Priorités : plusieurs imprimantes logiques vers le même périphérique, priorités individuelles de 1 (faible, par défaut) à 99 (forte).
-Pool d'impression (Print Pooling) : une imprimante logique reliée à plusieurs périphériques identiques (locaux ou réseau) ; le travail va au premier périphérique disponible ; activé dans l'onglet Port.
-Impression Internet IPP : http/https ; serveur d'impression avec Internet Information Server ; imprimantes visibles sur http://nom_de_serveur/printers.
+      Processus système critiques : processus qui ne peuvent être arrêtés, à savoir Winlogon, lsass.exe pour la sécurité locale, smss.exe gestionnaire de session, csrss.exe Client Server Runtime SubSystem et Winit.exe.
+
+      SAS (Secure Attention Sequence) : combinaison de touches interceptée par Winlogon pour déclencher l'authentification, par défaut Ctrl Alt Suppr sous Windows.
+
+      LogonUI : processus exécuté par Winlogon qui vérifie le nom et le mot de passe de l'utilisateur à travers les credential providers.
+
+      SID local de session : identifiant unique créé par Winlogon pour l'utilisateur, fourni au processus Lsass comme argument de la fonction LsaLogonUser et inclus dans le jeton du processus de connexion en cas d'identification réussie.
+
+      LsaLookupAuthenticationPackage : fonction de Lsass appelée par Winlogon pour récupérer une instanciation des packages d'authentification.
+
+      LsaLogonUser : fonction par laquelle Winlogon fournit les informations de connexion aux packages d'authentification.
+
+      Packages d'authentification : bibliothèques situées dans le Registre sous HKLM barre SYSTEM barre CurrentControlSet barre Control barre Lsa, qui valident la connexion ; si aucune ne la déclare valide, le processus de connexion est arrêté.
+
+      Jeton d'accès : structure créée par Lsass après vérification des autorisations et privilèges de l'utilisateur dans la base des politiques locales, puis dupliquée pour être fournie à Winlogon.
+
+      Shell graphique : interface sous laquelle travaille l'utilisateur authentifié, en général l'Explorateur Windows explorer.exe.
+
+      Écran de veille sécurisé : écran de veille dont l'activité met fin est suivie d'un verrouillage de session par Winlogon et d'une nouvelle demande d'authentification.
+
+      Gestion des périphériques : prise en considération de tous les périphériques connectés à l'ordinateur et contrôlés par le ou les microprocesseurs, chaque périphérique nécessitant l'installation de son pilote.
+
+      Système d'entrée-sortie (E/S) : ensemble de composants du noyau qui gèrent les périphériques matériels et fournissent aux applications et au système des interfaces vers ces périphériques, en offrant une couche d'abstraction.
+
+      Gestionnaire d'E/S : cœur du système d'E/S qui relie les applications et composants système aux périphériques virtuels, logiques et physiques, définit l'infrastructure de gestion et est responsable de la création et de la suppression des IRP.
+
+      Pilote de périphérique : composant fournissant une interface d'E/S pour un type de périphériques, qui reçoit les commandes du gestionnaire d'E/S et l'informe de leur achèvement, et qui convertit les requêtes en requêtes spécifiques au matériel.
+
+      Gestionnaire Plug and Play (PnP) : composant travaillant avec le gestionnaire d'E/S et le pilote de bus pour guider l'allocation des ressources matérielles et détecter l'ajout ou le retrait de périphériques ; il charge un pilote dont il dispose ou fait appel à un gestionnaire d'installation en mode utilisateur.
+
+      Gestionnaire d'alimentation : composant travaillant avec le gestionnaire d'E/S pour guider le système et les pilotes dans les transitions d'états d'alimentation, prioritaire sur les pilotes pour décider de l'état électrique et du moment de la mise en veille.
+
+      WMI (Windows Management Instrumentation) : ensemble de routines, baptisé WMI WDM pour Windows Driver Model, permettant aux pilotes d'agir indirectement avec le service WMI du mode utilisateur, notamment pour la surveillance des pilotes.
+
+      Fichier INF : fichier d'installation de pilote composé d'instructions décrivant un périphérique, rédigé par Microsoft ou le fabricant du matériel.
+
+      Fichier CAT : signature numérique que Windows utilise pour vérifier qu'un pilote a passé avec succès les tests de certification.
+
+      HAL (Hardware Abstraction Layer) : couche d'abstraction matérielle qui isole les pilotes des spécificités du processeur et du contrôleur d'interruptions, offre des API masquant les différences entre plateformes, et sert de pilote de bus de tous les périphériques non contrôlés par d'autres pilotes.
+
+      Fichier virtuel : source ou destination d'E/S traitée comme s'il s'agissait d'un fichier, sur laquelle les threads réalisent leurs E/S même pour du matériel, ce qui généralise l'interface des applications avec les périphériques.
+
+      IRP (Input-Output Request Packet) : paquet représentant la plupart des requêtes d'E/S, créé par le gestionnaire d'E/S qui passe au pilote un pointeur vers lui ; le pilote effectue l'opération puis repasse l'IRP au gestionnaire d'E/S, qui s'en défait à la fin de l'opération.
+
+      Énumération des composants : procédure par laquelle le Plug and Play découvre les composants matériels, avant de charger le pilote qui convient et d'écrire les entrées de Registre d'après les scripts INF.
+
+      HCL (Hardware Compatibility List) : liste de compatibilité matérielle ; le Plug and Play installe l'essentiel des nouveaux matériels qui y figurent, sinon l'administrateur doit vérifier les allocations de ressources et régler les conflits d'adresse et d'IRQ.
+
+      ACPI (Advanced Configuration and Power Interface) : interface avancée de configuration et d'alimentation, prise en charge par les services du gestionnaire d'alimentation, qui garantit une série unique de fonctions pour le contrôle de l'état d'énergie d'un ordinateur.
+
+      États système S0 à S5 : six niveaux électriques définis par ACPI, S0 étant la consommation maximale sans latence, S1 à S4 des états de veille où l'ordinateur semble éteint, et S5 l'extinction complète.
+
+      Hiberfil.sys : fichier d'hibernation stocké dans le dossier racine du volume système, dans lequel le gestionnaire d'alimentation enregistre le contenu compressé de la mémoire avant le passage à S4.
+
+      NTLDR : chargeur d'amorçage qui, détectant une image mémoire valide dans le fichier d'hibernation, en charge le contenu et reprend l'exécution au point où elle s'était arrêtée.
+
+      États périphérique D0 à D3 : quatre états définis par ACPI pour les périphériques, D0 entièrement allumé et D3 entièrement éteint, les états intermédiaires D1 et D2 étant laissés à la charge des pilotes.
+
+      Politique de signature des pilotes : politique vérifiée par le gestionnaire PnP avant installation, avec trois options, Ignorer qui installe tout pilote signé ou non, Avertir qui affiche un message avant d'installer un pilote sans signature, et Interdire qui bloque l'installation d'un fichier non signé.
+
+      WHQL (Windows Hardware Quality Labs) : laboratoires de Microsoft qui testent les pilotes ; un pilote qui réussit le test est signé par Microsoft.
+
+      Vérificateur de pilotes : mécanisme permettant de trouver et d'isoler les bogues des pilotes ou d'autre code en mode noyau, en activant des options de composants système, configurable avec Verifier.exe.
+
+      WRP (Windows Resource Protection) : protection de ressources de Windows qui préserve l'intégrité des fichiers critiques, bibliothèques et applications impliqués dans le démarrage, implémentée par des listes de contrôle d'accès et pilotée par l'utilitaire Sfc.exe.
+
+      Gestionnaire de périphériques : console MMC accessible depuis le composant Matériel et audio du Panneau de configuration, par la commande mmc devmgmt.msc ou par Gestion de l'ordinateur, permettant de vérifier le fonctionnement, configurer les matériels, identifier les pilotes chargés, gérer l'activation et l'installation et afficher les périphériques cachés.
+
+      MMC (Microsoft Management Console) : console de gestion permettant de créer, enregistrer et ouvrir un ensemble d'outils d'administration.
+
+      Arborescence des périphériques : présentation des périphériques chargés au démarrage ou pris en charge en cours de fonctionnement, chaque branche définissant un nœud de périphérique sous lequel sont répertoriés les périphériques configurés.
+
+      Périphériques cachés : périphériques non affichés par défaut, rendus visibles par l'option Afficher les périphériques cachés du menu Affichage, apparaissant avec une icône grisée.
+
+      Périphérique d'impression : matériel qui permet d'éditer et d'imprimer des documents, communément appelé imprimante.
+
+      Imprimante : interface logicielle entre le périphérique d'impression et Windows.
+
+      Serveur d'impression : serveur qui gère des imprimantes et contient le pilote d'imprimante propre à chaque périphérique d'impression connecté, disponible dans la version de chaque client.
+
+      Impression locale : impression demandée par un poste de travail sur un périphérique qui lui est directement relié.
+
+      Impression réseau : impression à partir d'un serveur d'impression, le périphérique pouvant être raccordé localement ou via le réseau.
+
+      Priorités d'impression : valeurs de un, la plus faible et la valeur par défaut, à quatre-vingt-dix-neuf, la plus forte, assignées à plusieurs imprimantes logiques pointant vers le même périphérique d'impression, réglées dans les paramètres avancés.
+
+      Pool d'impression (Print Pooling) : regroupement d'une ou plusieurs imprimantes identiques, locales ou munies d'une carte réseau, en une seule imprimante logique, un travail étant envoyé au premier périphérique disponible, activé dans l'onglet Port par la case Activer le pool d'imprimante.
+
+      IPP (impression Internet) : usage du protocole http ou https pour imprimer, le serveur d'impression devant disposer d'Internet Information Server, les imprimantes partagées étant visibles sur http barre barre nom_de_serveur barre printers.
+
+      NDIS (Network Driver Interface Specification) : pilotes auxquels font appel les cartes réseau pour la prise en charge des réseaux Windows.
+
+      Initiateur iSCSI : initiateur logiciel Microsoft qui connecte un ordinateur hôte à un groupe de stockage iSCSI externe via une carte réseau, activant les réseaux SAN à base de blocs sans équipements supplémentaires.
+
+
+COURS DÉTAILLÉ.
+
+
+I. L'OUVERTURE DE SESSION WINDOWS.
+
+
+   A. Winlogon et son initialisation.
+
+      Winlogon est le composant de Windows qui gère l'ouverture et la fermeture de session interactive ; à l'ouverture de session, il crée et ouvre une fenêtre interactive prenant en compte le clavier, la souris et l'écran, et crée un descripteur de sécurité de la station de travail garantissant qu'aucun processus non autorisé par Winlogon n'y accède.
+
+      Il crée deux bureaux, l'un destiné aux applications et accessible par Winlogon et les utilisateurs, l'autre réservé à Winlogon et limité à ce qui lui est utile, seul ce dernier étant visible tant qu'aucun utilisateur n'est connecté ; il implémente aussi les opérations de time-out et peut être configuré pour obliger l'utilisateur à s'authentifier de nouveau après un verrouillage de session ; un processus Winlogon est créé pour chaque utilisateur connecté.
+
+
+   B. La connexion utilisateur.
+
+      Winlogon est un processus système critique qui ne peut être arrêté, comme lsass.exe pour la sécurité locale, smss.exe le gestionnaire de session, csrss.exe le Client Server Runtime SubSystem et Winit.exe ; il intercepte les entrées du clavier et notamment la SAS, par défaut Ctrl Alt Suppr.
+
+      Quand la SAS est saisie, Winlogon exécute LogonUI qui vérifie le nom et le mot de passe à travers les credential providers, et crée un SID unique local de session pour l'utilisateur, fourni à Lsass comme argument de LsaLogonUser et inclus dans le jeton du processus de connexion si l'identification réussit.
+
+      Winlogon récupère une instanciation des packages d'authentification via LsaLookupAuthenticationPackage, ces packages se trouvant dans le Registre sous HKLM barre SYSTEM barre CurrentControlSet barre Control barre Lsa, puis leur fournit les informations de connexion via LsaLogonUser ; si aucun package ne déclare la connexion valide, le processus de connexion est arrêté.
+
+      Une connexion authentifiée conduit Lsass à vérifier dans la base des politiques locales les autorisations et privilèges des identifiants associés à l'utilisateur et à les ajouter au jeton ; Lsass crée alors un jeton d'accès, le duplique en une instanciation fournie à Winlogon, termine sa propre instanciation, audite l'opération si nécessaire et retourne un signal de succès.
+
+      Si la connexion n'est pas authentifiée, Lsass termine la session de connexion nouvellement créée, nettoie toutes ses structures et renvoie un signal d'échec à Winlogon, qui affiche alors un message d'erreur.
+
+
+   C. L'environnement de travail.
+
+      Après authentification, l'utilisateur travaille sous un shell graphique, en général l'Explorateur Windows explorer.exe ; Winlogon contrôle le clavier et la souris pour activer un écran de veille après inactivité ou sur SAS, puis pour l'arrêter dès qu'une activité est détectée.
+
+      Si l'écran de veille est marqué comme sécurisé, Winlogon verrouille la session en cours et refait une demande d'authentification ; la liste des utilisateurs affichés sur l'écran d'accueil dépend du paramétrage de Winlogon.
+
+
+II. LES PRINCIPES DE GESTION DES ENTRÉES-SORTIES.
+
+
+   A. L'objectif du système d'E/S.
+
+      Gérer des périphériques, c'est prendre en considération tous les périphériques connectés à l'ordinateur et contrôlés par les microprocesseurs ; pour qu'un périphérique soit utilisé, son pilote doit être installé, le gestionnaire Plug and Play énumérant les composants matériels et définissant leurs capacités.
+
+      Le système d'E/S est formé de composants du noyau qui gèrent ensemble les périphériques matériels et fournissent aux applications et au système des interfaces vers ces périphériques ; son objectif est de fournir une couche d'abstraction rendant l'utilisation des périphériques simple et facile.
+
+      Les fonctionnalités attendues sont l'uniformisation de la protection des ressources partageables, des E/S asynchrones et performantes, des services performants et interopérables dédiés aux pilotes, un fonctionnement en couches garantissant l'extensibilité, le chargement et le déchargement dynamiques des pilotes, la prise en charge du Plug and Play, de la gestion de l'alimentation, de multiples systèmes de fichiers et de la surveillance des pilotes par WMI.
+
+
+   B. Les éléments intervenant dans la gestion d'E/S.
+
+      Le gestionnaire d'E/S est le cœur du système, reliant les applications et composants système aux périphériques virtuels, logiques et physiques et définissant l'infrastructure de gestion ; un ensemble de pilotes fournit une interface d'E/S par type de périphérique, recevant les commandes du gestionnaire d'E/S et l'informant de leur achèvement.
+
+      Le gestionnaire PnP travaille avec le gestionnaire d'E/S et le pilote de bus pour guider l'allocation des ressources matérielles et gérer l'ajout ou le retrait de périphériques, chargeant un pilote dont il dispose ou faisant appel à un gestionnaire d'installation en mode utilisateur ; le gestionnaire d'alimentation guide le système et les pilotes dans les transitions d'états d'alimentation.
+
+      Des routines WMI, baptisées WMI WDM, permettent aux pilotes d'agir indirectement avec le service WMI du mode utilisateur ; le Registre stocke la description des périphériques matériels fondamentaux et les paramètres d'initialisation et de configuration des pilotes ; les fichiers INF sont des fichiers d'installation décrivant un périphérique et les fichiers CAT sont les signatures numériques vérifiant la certification d'un pilote.
+
+      La HAL isole les pilotes des spécificités du processeur et du contrôleur d'interruptions, offre des API masquant les différences entre plateformes et sert de pilote de bus de tous les périphériques non contrôlés par d'autres pilotes ; c'est la couche basse proche du matériel.
+
+      Les composants du mode utilisateur qui font appel au mode noyau pour la gestion des périphériques sont les applications, les services Windows, le service WMI, le gestionnaire Plug and Play utilisateur et les composants d'installation.
+
+
+   C. Le traitement d'une entrée-sortie classique.
+
+      La plupart des opérations d'E/S n'impliquent pas tous les composants, seuls ceux concernés en mode noyau et en mode utilisateur interagissent au moment d'une requête ; une requête débutant par une demande d'accès à un périphérique par une application est traitée par le gestionnaire d'E/S, un ou plusieurs pilotes et la HAL.
+
+      Sous Windows, les threads font des E/S sur des fichiers virtuels même pour du matériel, un fichier virtuel désignant une source ou une destination d'E/S traitée comme un fichier ; les applications en mode utilisateur appellent les fonctions internes du système d'E/S pour lire, écrire ou effectuer d'autres opérations, et le gestionnaire d'E/S redirige dynamiquement ces requêtes vers le pilote de périphérique concerné.
+
+
+III. LES COMPOSANTS DU SYSTÈME D'ENTRÉE-SORTIE.
+
+
+   A. Le gestionnaire d'E/S et les paquets IRP.
+
+      Le gestionnaire d'E/S définit le cadre selon lequel les requêtes sont livrées aux pilotes ; la plupart des requêtes sont représentées par un paquet IRP qui circule entre deux composants, les requêtes sans IRP étant l'exception.
+
+      Lors d'une requête, le gestionnaire d'E/S crée un IRP et passe au pilote concerné un pointeur vers cet IRP ; le pilote reçoit l'IRP, effectue l'opération spécifiée et le repasse au gestionnaire d'E/S, qui se défait du paquet à la fin de l'opération, étant responsable de la création et de la suppression des IRP.
+
+      Le gestionnaire d'E/S fournit du code commun aux pilotes qui le réclament, offre une fonction permettant à un pilote d'en appeler d'autres, gère les tampons des requêtes et les délais, et suit les systèmes de fichiers instables ; le pilote doit convertir les requêtes traitées comme destinées à un fichier en requêtes spécifiques au matériel.
+
+
+   B. Le gestionnaire Plug and Play.
+
+      Le gestionnaire Plug and Play permet à Windows de reconnaître les modifications de configuration matérielle et de s'y adapter, évitant à l'utilisateur les complexités de l'installation et de la suppression des périphériques ; la prise en charge exige la coopération du matériel, du pilote et du système, définie par des normes industrielles comme la norme USB.
+
+      Grâce à la norme Plug and Play, Windows offre la détection automatique des périphériques installés et de leur ajout ou retrait en cours d'exécution, l'allocation des ressources matérielles au démarrage et en fonctionnement, le chargement des pilotes à partir de l'identification d'un périphérique, la détection des modifications de configuration, un espace pour l'état du périphérique de stockage et le maintien du matériel réseau tel que les imprimantes.
+
+      Le Plug and Play découvre les composants par énumération, charge le pilote qui convient, effectue les entrées de Registre d'après les scripts INF et alloue les ressources telles que les IRQ, les ports d'E/S et les canaux DMA ; il installe l'essentiel des nouveaux matériels figurant dans la liste HCL, sinon l'administrateur doit vérifier les allocations et régler les conflits d'adresse et d'IRQ.
+
+
+IV. LA GESTION DE L'ALIMENTATION.
+
+
+   A. Le gestionnaire d'alimentation et ACPI.
+
+      Le gestionnaire d'alimentation interagit dynamiquement avec les composants matériels pour conserver les réserves de batterie et réduire l'usure, par exemple en configurant l'arrêt du disque dur et de l'écran après une période d'inactivité ; ses services prennent en charge l'ACPI, qui garantit une série unique de fonctions pour le contrôle de l'état d'énergie, le système d'exploitation reconnaissant l'état de veille et d'activité et réagissant en conséquence.
+
+      La gestion de l'alimentation nécessite un matériel et un code de BIOS conformes à la norme ACPI, ce qui est le cas de tous les ordinateurs récents.
+
+
+   B. Les états système et l'hibernation.
+
+      ACPI définit six niveaux électriques pour le système, de S0 à S5, caractérisant la consommation, la reprise logicielle et la latence matérielle ; S0 correspond à une consommation maximale sans latence, S1 à S4 sont des états de veille où l'ordinateur semble éteint, et S5 est l'extinction complète.
+
+      En veille, l'ordinateur conserve en mémoire ou sur disque assez d'informations pour repasser à S0 ; en états S1 à S3, un réveil par un utilisateur ou un périphérique permet de reprendre les traitements là où ils s'étaient arrêtés ; avant le passage à S4, le gestionnaire d'alimentation enregistre le contenu compressé de la mémoire dans le fichier Hiberfil.sys du dossier racine du volume système, et au démarrage suivant NTLDR détecte cette image mémoire valide, la charge et reprend l'exécution ; le passage en veille S1 à S4 passe obligatoirement par un réveil à l'état S0.
+
+
+   C. La gestion de l'alimentation des périphériques.
+
+      ACPI ne définit que quatre états pour les périphériques, de D0 entièrement allumé à D3 entièrement éteint, la norme laissant aux pilotes le soin de définir les états progressifs D1 et D2 ; la stratégie de gestion d'alimentation est répartie entre le gestionnaire d'alimentation et les pilotes, mais le gestionnaire est prioritaire pour décider de l'état électrique et du moment de la mise en veille.
+
+      Lors de l'énumération, un pilote signale si ses périphériques gèrent les états D1 et D2 et leurs caractéristiques ; les pilotes de bus retournent une table de mappage entre les états du système et ceux des périphériques ; un pilote peut néanmoins déterminer unilatéralement l'état électrique de ses périphériques, par exemple pour réduire la consommation d'un périphérique inactif ; l'administrateur configure les fonctions supplémentaires via les Options d'alimentation du Panneau de configuration.
+
+      Pour éviter les dysfonctionnements lorsque ACPI est activé, il vaut mieux vérifier la liste de compatibilité matérielle avant tout déploiement ; le Gestionnaire de périphériques, en développant la branche Ordinateur, indique les pilotes chargés par le programme d'installation.
+
+
+V. LES PILOTES ET LEUR VÉRIFICATION.
+
+
+   A. La signature des pilotes.
+
+      Windows Server 2008 supporte pleinement le Plug and Play et détecte immédiatement un nouveau périphérique connecté, installant lui-même les pilotes si possible ; avant l'installation, le gestionnaire PnP vérifie la politique de signature, avec trois options, Ignorer qui installe tout pilote, Avertir qui affiche un avertissement avant un pilote sans signature, et Interdire qui empêche l'installation d'un fichier non signé.
+
+      Les laboratoires WHQL de Microsoft testent les pilotes fournis avec Windows et ceux des fournisseurs de matériels ; un pilote qui réussit le test est signé par Microsoft.
+
+
+   B. Les vérificateurs.
+
+      Le vérificateur de pilotes sert à trouver et isoler les bogues communs des pilotes ou de tout code en mode noyau ; il maintient plusieurs composants système, gestionnaire d'E/S et gestionnaire de mémoire notamment, dont des options s'activent avec le gestionnaire Verifier.exe.
+
+      Le vérificateur de fichiers système repose sur la protection de ressources de Windows, qui préserve l'intégrité des fichiers critiques, bibliothèques et applications du processus de démarrage au moyen de listes de contrôle d'accès ; son utilitaire est Sfc.exe.
+
+
+VI. LE GESTIONNAIRE DE PÉRIPHÉRIQUES.
+
+
+   A. Présentation et fonctions.
+
+      Le Gestionnaire de périphériques est une console MMC accessible depuis le composant Matériel et audio du Panneau de configuration, par la commande mmc devmgmt.msc, ou depuis Gestion de l'ordinateur ; il permet de vérifier le bon fonctionnement de l'ordinateur, de configurer les paramètres des matériels, d'identifier les pilotes chargés, de gérer l'activation et l'installation des périphériques et d'afficher les périphériques cachés utiles à un dépannage avancé.
+
+      À la première connexion d'un périphérique, le système identifie les pilotes associés et ne demande le support des pilotes que s'il n'en dispose pas ; chaque périphérique possède son pilote, en général fourni par le fabricant, beaucoup étant inclus dans le cédérom d'installation de Windows Server 2008.
+
+      Certains périphériques sont permanents, tels que l'écran et le clavier, et ne nécessitent qu'une installation, d'autres sont conçus pour être connectés et déconnectés selon les besoins, telle une clé USB, Windows les reconnaissant et les configurant sans redémarrage une fois le pilote installé ; la prise en charge Plug and Play supervise l'installation, alloue les ressources et enregistre les problèmes dans le journal système ; certains matériels non Plug and Play s'installent sans intervention ou via l'assistant Ajout Suppression de programmes.
+
+
+   B. L'arborescence et la signalétique.
+
+      L'arborescence des périphériques présente les périphériques chargés au démarrage ou pris en charge en cours de fonctionnement, chaque branche définissant un nœud sous lequel sont répertoriés les périphériques configurés ; la liste peut être classée par composants, par ressources ou par ordre de types de connexions.
+
+      Le Gestionnaire n'affiche pas tous les périphériques par défaut ; l'option Afficher les périphériques cachés du menu Affichage les révèle avec une icône grisée ; une branche développée signale un périphérique qui ne fonctionne pas correctement, une icône barrée d'une croix rouge un périphérique désactivé, un point d'exclamation le plus souvent un problème de ressource, périphérique mal configuré ou pilotes manquants.
+
+      Pour gérer un périphérique, l'administrateur accède aux propriétés du composant, visualise l'état dans le volet État du périphérique puis modifie les paramètres ; l'affichage des ressources permet de régler un conflit, et il est parfois plus simple de désinstaller le composant puis d'effectuer une recherche de modifications sur le matériel.
+
+
+VII. LA MODIFICATION DE L'ENVIRONNEMENT MATÉRIEL.
+
+
+   A. Ajout de processeur et de disques.
+
+      L'amélioration du noyau, de la mémoire et du système de fichiers de Windows Server 2008 a permis le branchement à chaud de ces éléments, le processeur et les composants étant vus comme des périphériques Plug and Play.
+
+      Pour des disques IDE, après configuration physique en maître ou esclave et reconnaissance par le CMOS, Windows Server 2008 exploite les pilotes de bus IDE préinstallés et le disque apparaît dans la console de gestion de l'ordinateur ; il vaut mieux un contrôleur IDE par disque car l'interface n'écrit que sur un disque à la fois, et Windows Server 2008 permet la duplication en miroir pour la tolérance de pannes.
+
+      Les disques ATA exigent un contrôleur adapté et parfois des pilotes de fabricants, mais offrent de bien meilleures performances qu'en IDE ; pour les disques SCSI, l'initiateur logiciel iSCSI connecte un ordinateur hôte à un groupe de stockage iSCSI externe via une carte réseau, activant les réseaux SAN à base de blocs sans équipements supplémentaires.
+
+
+   B. Ajout de cartes réseau et de moniteurs.
+
+      Les cartes réseau font appel aux pilotes NDIS pour la prise en charge des réseaux Windows ; l'installation est grandement simplifiée quand la carte est Plug and Play et que le fabricant fournit un fichier INF de configuration et le pilote WDM convenable.
+
+      L'emploi de plusieurs moniteurs permet d'afficher le Bureau sur plusieurs écrans, ce qui nécessite autant de cartes ou de sorties vidéo de type AGP, PCI ou DVI ; Windows accepte de combiner les bus AGP, PCI et DVI, ce qui peut diminuer les performances, l'affichage s'alignant sur l'interface la plus lente.
+
+
+VIII. LES PÉRIPHÉRIQUES D'IMPRESSION LOCAUX ET EN RÉSEAU.
+
+
+   A. Terminologie.
+
+      Un périphérique d'impression est le matériel qui permet d'éditer et d'imprimer des documents, communément appelé imprimante ; une imprimante est l'interface logicielle entre le périphérique d'impression et Windows ; le serveur d'impression gère des imprimantes et contient le pilote propre à chaque périphérique connecté, disponible dans la version de chaque client.
+
+      Une impression locale est demandée par un poste de travail sur un périphérique qui lui est directement relié, une impression réseau se fait à partir d'un serveur d'impression, le périphérique étant raccordé localement ou via le réseau.
+
+
+   B. Ajout, partage et priorités.
+
+      Il faut des privilèges d'Administrateur pour ajouter une imprimante à un serveur ; l'assistant d'Ajout d'imprimante guide la définition du périphérique disponible, du port physique, du pilote et du nom connu sur le réseau, l'ajout étant aussi possible depuis le groupe Matériel et audio du Panneau de configuration.
+
+      Le partage d'une imprimante se fait dans les mêmes conditions, avec choix du nom de partage et ajout des pilotes nécessaires aux clients par Pilotes supplémentaires ; une imprimante partagée est automatiquement publiée dans Active Directory, faute de quoi les utilisateurs doivent parcourir le réseau pour la trouver.
+
+      Les priorités d'impression se fixent en créant plusieurs imprimantes logiques pointant vers le même périphérique et en leur assignant des priorités de un, la plus faible et la valeur par défaut, à quatre-vingt-dix-neuf, la plus forte, dans les paramètres avancés ; Windows Server 2008 télécharge automatiquement les pilotes pour les clients sous Windows 2000, Windows NT 4, Windows NT 3.51 et Windows 95 ou 98.
+
+
+   C. Pool d'impression et impression Internet.
+
+      Le pool d'impression regroupe une ou plusieurs imprimantes identiques, locales ou munies d'une carte réseau, en une seule imprimante logique, un travail reçu par le serveur étant envoyé au premier périphérique disponible ; il se crée dans l'onglet Port en cochant Activer le pool d'imprimante puis en choisissant les ports des périphériques.
+
+      L'impression Internet IPP utilise le protocole http ou https, le serveur d'impression devant disposer d'Internet Information Server, toutes les imprimantes partagées étant visibles sur http barre barre nom_de_serveur barre printers.
+
+
+POINTS D'ATTENTION.
+
+      Winlogon, lsass.exe, smss.exe, csrss.exe et Winit.exe sont des processus critiques qui ne peuvent être arrêtés.
+
+      La SAS Ctrl Alt Suppr est interceptée par Winlogon pour garantir un chemin d'authentification approuvé.
+
+      Un processus Winlogon distinct est créé pour chaque utilisateur connecté.
+
+      Si aucun package d'authentification ne valide la connexion, le processus de connexion est arrêté.
+
+      La plupart des requêtes d'E/S transitent par un paquet IRP, dont le gestionnaire d'E/S assure création et suppression.
+
+      Le gestionnaire d'alimentation est prioritaire sur les pilotes pour décider de l'état électrique et de la mise en veille.
+
+      Le passage en veille S1 à S4 passe obligatoirement par un réveil préalable à l'état S0.
+
+      Avant S4, la mémoire compressée est enregistrée dans Hiberfil.sys, à la racine du volume système, et rechargée par NTLDR au démarrage.
+
+      ACPI définit six états système S0 à S5 mais seulement quatre états périphérique D0 à D3, D1 et D2 étant laissés aux pilotes.
+
+      Le gestionnaire PnP vérifie la politique de signature avant toute installation de pilote, avec les options Ignorer, Avertir et Interdire.
+
+      Un contrôleur IDE ne peut écrire que sur un disque à la fois, d'où l'intérêt d'un contrôleur par disque.
+
+      Combiner les bus vidéo AGP, PCI et DVI aligne l'affichage sur l'interface la plus lente.
+
+      L'échelle des priorités d'impression va de un, valeur par défaut la plus faible, à quatre-vingt-dix-neuf.
+
+      Il faut des privilèges d'Administrateur pour ajouter ou partager une imprimante sur un serveur.
+
+
+EXEMPLES CITES.
+
+      SAS par défaut sous Windows égale à la combinaison Ctrl Alt Suppr.
+
+      Packages d'authentification situés dans le Registre sous HKLM barre SYSTEM barre CurrentControlSet barre Control barre Lsa.
+
+      Shell graphique de travail constitué en général de l'Explorateur Windows explorer.exe.
+
+      Fichier d'hibernation Hiberfil.sys stocké dans le dossier racine du volume système et rechargé par NTLDR.
+
+      Utilitaires Verifier.exe pour la vérification des pilotes et Sfc.exe pour la protection de ressources de Windows.
+
+      Ouverture du Gestionnaire de périphériques par la commande mmc devmgmt.msc.
+
+      Icône barrée d'une croix rouge pour un périphérique désactivé et point d'exclamation pour un problème de ressource.
+
+      Duplication de disques en miroir sous Windows Server 2008 pour la tolérance de pannes.
+
+      Initiateur logiciel iSCSI reliant un hôte à un groupe de stockage iSCSI externe via une carte réseau.
+
+      Publication automatique dans Active Directory d'une imprimante partagée sous Windows Server 2008.
+
+      Imprimantes partagées consultables sur http barre barre nom_de_serveur barre printers avec Internet Information Server.

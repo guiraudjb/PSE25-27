@@ -1,208 +1,427 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 4, thème 4
-SÉCURITÉ DES SI : LA MÉTHODOLOGIE EBIOS
-=======================================================================
+SÉCURITÉ DES SYSTÈMES D'INFORMATION - PRINCIPES, ORGANISATION ET MÉTHODOLOGIE EBIOS.
 
-1. CONTEXTE ET ACTEURS DE LA SÉCURITÉ DES SI
------------------------------------------------------------------------
-- Sécurité des SI = préservation de la disponibilité, de l'intégrité et
-  de la confidentialité de l'information, ainsi que des besoins associés
-  (traçabilité, preuve...).
-- Déclencheur historique : le ver Internet (ver de Morris), novembre 1988,
-  qui paralyse une large part du réseau et conduit à la création du
-  premier CERT.
-- CERT (Computer Emergency Response Team) : équipe de réponse aux
-  incidents. Le premier est le CERT/CC (Coordination Center), hébergé par
-  l'université Carnegie Mellon, financé par la DARPA.
-- FIRST (Forum of Incident Response and Security Teams) : créé en 1990,
-  fédère les CERT dans le monde.
-- CERTA : CERT gouvernemental français, créé en 1999, inauguré le
-  21 février 2000, rattaché à l'ANSSI. Autres CERT français : CERT-IST,
-  CERT-RENATER, CERT d'entreprises (banques, télécoms...).
-- ANSSI : Agence Nationale de la Sécurité des Systèmes d'Information,
-  créée par le décret n° 2009-834 du 7 juillet 2009 (succède à la DCSSI),
-  service à compétence nationale rattaché au SGDSN.
-- CLUSIF : Club de la Sécurité de l'Information Français ; publie MEHARI.
-- Club EBIOS : depuis 2003, réunit experts publics/privés et utilisateurs
-  pour faire vivre et enrichir la méthode.
+LEXIQUE COMPLET.
 
-2. LES MÉTHODES D'ANALYSE DE RISQUES
------------------------------------------------------------------------
-- EBIOS  : ANSSI (France), créée en 1995 par la DCSSI, révisée en 2010.
-- MEHARI : MEthode Harmonisée d'Analyse de RIsques, CLUSIF (France).
-- OCTAVE : Operationally Critical Threat, Asset and Vulnerability
-  Evaluation, Carnegie Mellon (USA), démarche en 3 phases.
-- Normes ISO associées :
-  * Guide ISO 73  : vocabulaire de la gestion des risques.
-  * ISO 31000     : principes et lignes directrices de la gestion des risques.
-  * ISO 27001     : exigences d'un SMSI (système de management de la
-                    sécurité de l'information).
-  * ISO 27002     : code de bonnes pratiques / catalogue de mesures.
-  * ISO 27005     : gestion des risques de sécurité de l'information.
-  * ISO 15408 (Critères Communs) : profils de protection (PP), cibles de
-                    sécurité.
-- EBIOS satisfait les exigences de gestion des risques de l'ISO 27001 et
-  de l'ISO 31000 ; son vocabulaire est aligné sur le Guide ISO 73.
+      Système d'information : ensemble organisé des ressources humaines, matérielles, logicielles et procédurales servant à acquérir, stocker, transformer, diffuser, exploiter et gérer les informations d'une organisation afin de coordonner ses activités et d'atteindre ses objectifs.
 
-3. CONCEPTS FONDAMENTAUX D'EBIOS
------------------------------------------------------------------------
-- EBIOS = Expression des Besoins et Identification des Objectifs de
-  Sécurité.
-- Critères de sécurité : Disponibilité, Intégrité, Confidentialité
-  (D, I, C), éventuellement complétés (traçabilité...).
-- Bien essentiel : information ou processus important pour l'organisme.
-  On apprécie ses BESOINS de sécurité, pas ses vulnérabilités.
-  Responsable = dépositaire.
-- Bien support : élément technique/humain/organisationnel sur lequel
-  repose un bien essentiel (matériel, logiciel, réseau, locaux,
-  personnel, organisation). Porte les VULNÉRABILITÉS.
-  Responsable = propriétaire.
-- Source de menace : élément humain ou environnemental, accidentel ou
-  délibéré, à l'origine d'une menace.
-- Événement redouté = bien essentiel + besoin de sécurité + impacts +
-  sources de menaces. Estimé par un niveau de GRAVITÉ.
-- Scénario de menace = menace + vulnérabilité(s) de biens supports +
-  sources de menaces. Estimé par un niveau de VRAISEMBLANCE.
-- Risque = événement redouté + scénario(s) de menaces qui peuvent le
-  provoquer. Caractérisé par gravité ET vraisemblance.
-- Échelle de gravité      : Négligeable / Limitée / Importante / Critique.
-- Échelle de vraisemblance : Minime / Significative / Forte / Maximale.
-- Estimation brute (sans mesures existantes) puis nette (avec mesures).
-- Options de traitement du risque : RÉDUIRE, TRANSFÉRER (partager),
-  ÉVITER (refuser), PRENDRE (maintenir). Plusieurs options possibles
-  pour un même risque.
-- Risque résiduel : subsiste une fois les objectifs de sécurité atteints
-  et les mesures mises en œuvre ; doit être accepté en connaissance de
-  cause.
-- Mode d'exploitation de sécurité : Exclusif / Dominant / Multi-niveaux.
-- Répartition des rôles : matrice RACI (Responsible, Accountable,
-  Consulted, Informed).
+      Système informatique : moyen technique, au cœur du système d'information, qui automatise le traitement et la circulation des données.
 
-4. LES 5 MODULES DE LA DÉMARCHE EBIOS
------------------------------------------------------------------------
-MODULE 1 — Étude du contexte
-  * Délimiter le périmètre, le cadrer (métier, réglementaire, technique).
-  * Identifier les biens essentiels et les biens supports, leurs liens.
-  * Définir les paramètres à prendre en compte : métriques (échelles de
-    besoins, de gravité, de vraisemblance), sources de menaces, critères
-    de gestion des risques.
-  Livrables amont : note de cadrage.
+      Sécurité informatique : collection d'outils et de procédures conçus pour protéger les fichiers et les informations stockées dans un système accessible par un réseau public.
 
-MODULE 2 — Étude des événements redoutés (phase appréciation)
-  * Activité : « Apprécier les événements redoutés ».
-  * Pour chaque critère de sécurité de chaque bien essentiel : exprimer
-    le besoin de sécurité, identifier les impacts du non-respect,
-    identifier les sources de menaces.
-  * Estimer la GRAVITÉ (valeur du bien + hauteur/nombre des impacts,
-    sans tenir compte des mesures existantes).
-  * Revue de cohérence, puis évaluation/hiérarchisation ; possibilité
-    d'écarter certains événements redoutés (à justifier).
+      Sécurité des réseaux : ensemble des mesures nécessaires pour protéger les données pendant leur transmission entre terminaux et ordinateurs.
 
-MODULE 3 — Étude des scénarios de menaces (phase appréciation)
-  * Activité : « Apprécier les scénarios de menaces » (niveau plutôt
-    technique : on raisonne sur les biens supports).
-  * Choisir une typologie de menaces (bases de connaissances ANSSI).
-  * Pour chaque bien support et chaque menace : déterminer les
-    vulnérabilités et les sources de menaces.
-  * Estimer la VRAISEMBLANCE (existence et facilité d'exploitation des
-    vulnérabilités, exposition aux menaces).
-  * Recenser les mesures de sécurité existantes et ré-estimer la
-    vraisemblance nette. Revue de cohérence, évaluation.
+      Intégrité : garantie que les données sont bien celles attendues et n'ont pas été altérées de façon fortuite ou volontaire.
 
-MODULE 4 — Étude des risques
-  * Activité 1 : « Apprécier les risques » — rapprocher événements
-    redoutés et scénarios de menaces (mêmes biens supports, même critère,
-    mêmes sources), analyser puis évaluer chaque risque (gravité +
-    vraisemblance, brute puis nette).
-  * Activité 2 : « Identifier les objectifs de sécurité » — choisir les
-    options de traitement (éviter / réduire / prendre / transférer) selon
-    les critères de gestion des risques, puis analyser les risques
-    résiduels attendus.
+      Confidentialité : garantie que seules les personnes autorisées accèdent aux informations qui leur sont destinées, tout accès indésirable étant empêché.
 
-MODULE 5 — Étude des mesures de sécurité (phase traitement)
-  * Activité 1 : « Formaliser les mesures de sécurité »
-    - Déterminer les mesures (référentiels, adaptation ou création),
-      en précisant pour chacune la ligne de défense (préventive,
-      protectrice, récupératrice) et le bien support porteur.
-    - Analyser les risques résiduels.
-    - Établir la DÉCLARATION D'APPLICABILITÉ (SoA) : justifier la prise
-      en compte des références, contraintes et hypothèses ; les
-      meilleures pratiques non couvertes par une mesure peuvent être
-      jugées inutiles.
-  * Activité 2 : « Mettre en œuvre les mesures de sécurité »
-    - Élaborer le plan d'action (libellé, priorité, responsable,
-      échéance, coût, avancement, moyens de contrôle).
-    - Analyser les risques résiduels réels.
-    - PRONONCER L'HOMOLOGATION DE SÉCURITÉ.
+      Disponibilité : garantie que le système fonctionne sans faille durant les plages d'utilisation prévues et donne accès aux services et ressources avec le temps de réponse attendu.
 
-5. DÉFENSE EN PROFONDEUR
------------------------------------------------------------------------
-- Au moins 3 lignes de défense par risque :
-  * préventive  : éviter l'apparition des incidents (dissuasion,
-    anticipation, réduction des failles).
-  * protectrice : bloquer, contenir, détecter (confinement, lutte,
-    détection, résistance, résilience).
-  * récupératrice : minimiser les conséquences et revenir à l'état
-    initial (récupération, restauration, compensation).
-- 6 principes : globalité, coordination, dynamisme, suffisance,
-  complétude, démonstration.
-- Complété par des mesures de soutien : alerte, diffusion, corrélation
-  d'événements, protection des mesures de sécurité, réaction.
+      Non-répudiation : impossibilité pour un utilisateur de contester les opérations qu'il a réalisées dans le cadre de ses actions autorisées.
 
-6. HOMOLOGATION DE SÉCURITÉ
------------------------------------------------------------------------
-- Engagement par lequel l'autorité atteste que le SI prend en compte les
-  contraintes opérationnelles, respecte les objectifs de sécurité et est
-  apte à entrer en service avec des risques résiduels acceptés et
-  maîtrisés. Prise avant la mise en service.
-- L'autorité peut s'appuyer sur une commission d'homologation ;
-  homologation collégiale possible.
-- Décisions possibles :
-  * homologation complète, pour une durée déterminée (souvent 3 à 5 ans),
-    éventuellement sous conditions ;
-  * homologation provisoire, avec réserves et délai de mise en conformité ;
-  * refus d'homologation (risques résiduels jugés inacceptables).
-- Toute évolution du SI ayant un impact sur la sécurité impose une
-  nouvelle homologation.
-- FEROS (Fiche d'Expression Rationnelle des Objectifs de Sécurité,
-  Guide 150) : document synthétique de sécurité opérationnelle, support
-  de l'homologation.
+      Imputation : impossibilité pour un tiers de s'attribuer les actions d'un autre utilisateur.
 
-7. APPORTS ET LIMITES D'EBIOS
------------------------------------------------------------------------
-- « Boîte à outils » : activités, niveau de détail et enchaînement
-  adaptés au sujet étudié, aux livrables attendus, à la phase du cycle
-  de vie et au secteur d'activité.
-- Approche par construction (combinaison des composants du risque) et
-  non par catalogue de scénarios : garantit l'exhaustivité.
-- Outil de négociation/arbitrage, de sensibilisation des parties
-  prenantes, réutilisable (études régulièrement mises à jour).
-- Bases de connaissances riches, logiciel libre et gratuit, formations.
-- Validité interne (exactitude des résultats) et validité externe
-  (généralisation) ; démarche reproductible et vérifiable.
-- Point d'attention : nécessite un cadrage rigoureux du périmètre, des
-  itérations, un choix pertinent des activités et livrables, et une
-  vigilance sur les biais des personnes réalisant l'étude.
+      Authentification : vérification de l'identité des utilisateurs, fondement de la gestion des accès et de la confiance dans les échanges.
 
-8. EXEMPLE FIL ROUGE
------------------------------------------------------------------------
-Le cabinet fictif @RCHIMED sert d'illustration tout au long du fascicule :
-définition du périmètre, appréciation des événements redoutés et des
-scénarios de menaces, appréciation des risques, choix des objectifs de
-sécurité, plan d'action, mise en évidence des risques résiduels et
-homologation de sécurité (livrables : note de cadrage, note de stratégie,
-politique de sécurité de l'information).
+      Politique de sécurité : ensemble des stratégies visant à trouver un compromis entre les fonctionnalités offertes aux utilisateurs et la sécurité, à identifier les risques et leurs conséquences et à élaborer les règles et procédures à mettre en œuvre.
 
-=======================================================================
-À RETENIR
-- EBIOS = Expression des Besoins et Identification des Objectifs de
-  Sécurité ; ANSSI ; créée 1995, révisée 2010.
-- 3 critères : D / I / C. Bien essentiel (besoins) vs bien support
-  (vulnérabilités).
-- Événement redouté -> gravité ; scénario de menace -> vraisemblance ;
-  risque = les deux.
-- 4 traitements : réduire, transférer, éviter, prendre.
-- 5 modules : contexte, événements redoutés, scénarios de menaces,
-  risques, mesures de sécurité.
-- Défense en profondeur : 3 lignes (préventive, protectrice,
-  récupératrice), 6 principes.
-- Homologation : complète (3-5 ans) / provisoire / refus.
+      Menace interne : menace dont la source se situe à l'intérieur du système d'information.
+
+      Menace externe : menace dont la source se situe à l'extérieur du système d'information.
+
+      Analyse des risques : démarche consistant à évaluer les risques et leur criticité, puis à rechercher et sélectionner les parades avant de mettre en œuvre les protections et d'en vérifier l'efficacité.
+
+      Cartographie des risques : représentation d'ensemble des risques et menaces pesant sur les activités d'un système d'information, dont la qualité conditionne la qualité de la sécurité mise en œuvre.
+
+      Parade : solution de sécurité retenue pour traiter un risque, dans un contexte de ressources limitées en temps, en compétences et en argent.
+
+      Défense en profondeur : dispositif de protection organisé en plusieurs lignes successives et complémentaires, préventive, protectrice et récupératrice, reposant sur la globalité, la coordination, le dynamisme, la suffisance, la complétude et la démonstration.
+
+      Ver Internet : programme auto-réplicatif lâché en novembre mille neuf cent quatre-vingt-huit par un étudiant de l'Université de Cornell, exploitant des failles du système Unix et considéré comme le premier virus informatique de grande ampleur.
+
+      CERT : Computer Emergency Response Team, organisme officiel de prévention des risques et d'assistance au traitement des incidents, jouant le rôle de centre d'alerte et de réaction aux attaques informatiques.
+
+      CERT slash CC : CERT Coordination Center, structure permanente créée par la DARPA à la suite de l'incident du ver Internet.
+
+      DARPA : Defense Advanced Research Projects Agency, maître d'ouvrage d'Arpanet, à l'origine de la création du CERT Coordination Center.
+
+      FIRST : Forum for Incident Response and Security Teams, créé en mille neuf cent quatre-vingt-dix, fédération mondiale des équipes de réaction aux incidents de sécurité.
+
+      CSIRT : Computer Security Incident Response Team, dénomination générique d'une équipe de réponse aux incidents de sécurité, publique ou privée.
+
+      TF slash CSIRT : coordination des CERT européens, à laquelle participe le CERTA.
+
+      ISO : International Organization for Standardization, organisme international de normalisation créé en mille neuf cent quarante-sept, composé de représentants d'organismes nationaux de plus de cent soixante pays selon le principe d'un membre par pays.
+
+      CERTA : Centre d'expertise gouvernemental de réponse et de traitement des attaques informatiques, antenne française institutionnelle du CERT créée en mille neuf cent quatre-vingt-dix-neuf, rattachée au Secrétariat Général de la Défense Nationale.
+
+      CLUSIF : Club de la sécurité de l'information français, association indépendante de professionnels de la sécurité, à l'origine de la méthode MEHARI, dotée de relais régionaux appelés CLUSIR.
+
+      ANSSI : Agence nationale de la sécurité des systèmes d'information, créée par le décret numéro deux mille neuf-huit cent trente-quatre du sept juillet deux mille neuf, rattachée au Secrétaire général de la défense et de la sécurité nationale, éditrice de la méthode EBIOS.
+
+      SGDSN : Secrétariat général de la défense et de la sécurité nationale, autorité chargée d'assister le Premier ministre en matière de défense et de sécurité nationale.
+
+      Club EBIOS : association indépendante à but non lucratif regroupant des experts publics et privés, français et européens, qui enrichit le référentiel de gestion des risques en collaboration avec l'ANSSI depuis deux mille trois.
+
+      OCTAVE : Operationally Critical Threat, Asset and Vulnerability Evaluation, méthode d'analyse des risques développée par l'Université Carnegie Mellon, réalisée exclusivement avec des ressources internes en trois phases.
+
+      MEHARI : Méthode harmonisée d'analyse des risques développée par le CLUSIF, fournissant un cadre méthodologique, des outils et des bases de connaissance axés sur les objectifs des métiers.
+
+      EBIOS : Expression des Besoins et Identification des Objectifs de Sécurité, méthode française de gestion des risques créée en mille neuf cent quatre-vingt-quinze par l'ANSSI et régulièrement mise à jour.
+
+      ISO 27000 : famille de normes internationales dédiées à la sécurité de l'information.
+
+      ISO 27001 : norme d'octobre deux mille cinq spécifiant un système de gestion de la sécurité des systèmes d'information selon le cycle Plan Do Check Act.
+
+      ISO 27002 : code de bonnes pratiques remplaçant la norme dix-sept mille sept cent quatre-vingt-dix-neuf depuis le premier juillet deux mille sept.
+
+      ISO 27005 : norme de gestion des risques de sécurité de l'information, évolution de l'ISO 27001.
+
+      ISO 31000 : norme générale de management du risque, évolution des normes précédentes.
+
+      ISO Guide 73 : vocabulaire international du management du risque, où le risque est décrit par un événement, ses conséquences et sa vraisemblance.
+
+      SMSI : système de management de la sécurité de l'information, dispositif organisationnel spécifié par l'ISO 27001.
+
+      Bien : toute ressource qui a de la valeur pour l'organisme et qui est nécessaire à la réalisation de ses objectifs, se distinguant en biens essentiels et biens supports.
+
+      Bien essentiel : information ou processus jugé important pour l'organisme, dont on apprécie les besoins de sécurité mais pas les vulnérabilités.
+
+      Bien support : composant technique ou non technique du système d'information sur lequel repose un bien essentiel et qui porte des vulnérabilités exploitables par des sources de menaces.
+
+      Dépositaire : personne ou fonction responsable d'un bien essentiel.
+
+      Propriétaire : personne ou fonction responsable d'un bien support, la mieux placée pour analyser ses vulnérabilités et appliquer les mesures de sécurité.
+
+      Source de menace : chose ou personne, humaine ou non humaine, interne ou externe, susceptible de porter atteinte aux besoins de sécurité exprimés.
+
+      Menace : moyen d'action générique qu'une source de menace peut employer contre un bien support.
+
+      Vulnérabilité : faiblesse ou faille d'un bien support qu'une menace peut exploiter.
+
+      Impact : conséquence d'un sinistre sur les missions, la sécurité des personnes, les finances, le juridique, l'image, l'environnement ou les tiers.
+
+      Événement redouté : situation crainte par l'organisme, formulée à partir d'un bien essentiel, d'un besoin de sécurité, d'impacts et de sources de menaces, sans étudier la manière dont elle survient.
+
+      Scénario de menace : mode opératoire générique combinant une menace, des vulnérabilités exploitables sur un bien support et une source de menace susceptible de l'utiliser.
+
+      Risque : combinaison d'un événement redouté et de tous les scénarios de menaces concernés, caractérisé par une gravité et une vraisemblance.
+
+      Gravité : hauteur des conséquences cumulées d'un sinistre, estimée sur une échelle ordinale de niveaux d'impacts.
+
+      Vraisemblance : possibilité de réalisation d'un scénario de menace ou d'un risque, estimée sur une échelle ordinale de niveaux.
+
+      Échelle de besoins : échelle définie pour chaque critère de sécurité retenu, permettant d'exprimer le besoin de sécurité d'un bien essentiel en choisissant la valeur limite acceptable.
+
+      Objectif de sécurité : choix de la manière de traiter un risque afin que le risque résiduel devienne acceptable, parmi éviter, réduire, prendre ou transférer.
+
+      Mesure de sécurité : moyen technique ou non technique d'atteindre un objectif de sécurité, rattaché à une ligne de défense et à un bien support.
+
+      Risque résiduel : risque qui subsiste une fois les objectifs de sécurité atteints et les mesures de sécurité mises en œuvre, et que l'organisme accepte en connaissance de cause.
+
+      Homologation de sécurité : engagement formel par lequel une autorité atteste que le système est protégé conformément aux objectifs de sécurité et apte à entrer en service avec des risques résiduels acceptés, prononcée de manière provisoire, complète ou refusée, généralement pour une durée de trois à cinq ans.
+
+      Déclaration d'applicabilité : document expliquant comment les références applicables, contraintes et hypothèses ont été prises en compte dans l'étude et justifiant, le cas échéant, de ne pas en avoir tenu compte.
+
+      FEROS : Fiche d'Expression Rationnelle des Objectifs de Sécurité, livrable synthétique produit au sens du Guide cent cinquante, notamment pour homologuer un système d'information.
+
+      RACI : formalisme de répartition des rôles associé à chaque action de la méthode EBIOS, distinguant qui réalise, qui est responsable, qui est consulté et qui est informé.
+
+      Mode d'exploitation de sécurité : contexte de gestion de l'information indiquant comment des utilisateurs de catégories différentes traitent des informations de sensibilités différentes, classé en exclusif, dominant ou multi-niveaux.
+
+      Ligne de défense : catégorie d'appartenance d'une mesure de sécurité, préventive, protectrice ou récupératrice, servant à structurer la défense en profondeur.
+
+      PCA : plan de continuité d'activité, référence interne recensée lors de l'identification des paramètres à prendre en compte.
+
+      PCI : plan de continuité informatique, référence interne de même nature que le PCA.
+
+      IGI 1300 : instruction générale interministérielle définissant la protection des informations relevant du secret de la défense nationale.
+
+      Profil de protection : document de spécification de sécurité au sens de l'ISO quinze mille quatre cent huit, pouvant être élaboré à l'aide d'EBIOS.
+
+COURS DÉTAILLÉ.
+
+I. GÉNÉRALITÉS SUR LA SÉCURITÉ DES SYSTÈMES D'INFORMATION.
+
+   A. Système d'information et système informatique.
+
+      Un système d'information sert à organiser les activités consistant à acquérir, stocker, transformer, diffuser, exploiter et gérer les informations. Il est le véhicule des entités de l'organisation et regroupe l'ensemble des ressources, personnels, matériel, logiciels et procédures, organisées pour collecter, stocker, traiter et communiquer les informations. En structurant les échanges, il coordonne les activités de l'organisation et lui permet d'atteindre ses objectifs.
+
+      Un des moyens techniques pour faire fonctionner un système d'information est d'utiliser un système informatique. Les systèmes informatiques sont donc au cœur des systèmes d'information, et ils sont devenus la cible de ceux qui convoitent l'information. Assurer la sécurité de l'information implique par conséquent d'assurer la sécurité des systèmes informatiques.
+
+      Le changement majeur qui affecte la sécurité est l'introduction de systèmes distribués et l'utilisation de réseaux et de dispositifs de communication pour transporter des données entre un terminal utilisateur et un ordinateur, et entre ordinateurs. Des mesures de sécurité des réseaux deviennent alors nécessaires pour protéger les données durant leur transmission, ce que l'on nomme la sécurité des réseaux.
+
+      La mise en place d'un ensemble de procédures, de modes d'organisation et de méthodes visant à se protéger contre les risques que peut courir un système d'information constitue les enjeux de la sécurité des systèmes informatiques.
+
+   B. Les objectifs de la sécurité informatique.
+
+      Les attaques proviennent autant de menaces internes que de menaces externes au système d'information.
+
+      Cinq objectifs de sécurité sont à garantir. L'intégrité impose que les données ne soient pas altérées de façon fortuite ou volontaire. La confidentialité impose que seules les personnes autorisées accèdent aux informations qui leur sont destinées. La disponibilité impose un fonctionnement sans faille durant les plages d'utilisation prévues, avec le temps de réponse attendu. La non-répudiation et l'imputation imposent qu'aucun utilisateur ne puisse contester ses opérations autorisées et qu'aucun tiers ne puisse s'attribuer les actions d'un autre. L'authentification, enfin, identifie les utilisateurs pour gérer les accès et maintenir la confiance dans les relations d'échange.
+
+   C. L'évolution des risques.
+
+      L'informatique étant un secteur en perpétuelle mutation technologique, les risques sont extrêmement variés et mutent fréquemment. L'interconnexion des systèmes d'information, isolés jusque dans les années quatre-vingt-dix, a démultiplié les risques et les problèmes liés à la sécurité.
+
+      Les risques ont évolué au fur et à mesure des changements, notamment la croissance de l'Internet, la croissance des attaques, les failles des technologies, les failles des configurations, les failles des politiques de sécurité et le changement de profil des pirates.
+
+   D. Les niveaux de sécurisation et la politique de sécurité.
+
+      Plusieurs leviers permettent d'augmenter le niveau de sécurisation du système d'information. Il faut d'abord privilégier la sensibilisation des utilisateurs aux problèmes de sécurité, puis veiller à la sécurisation des données, des applications et des systèmes d'exploitation, ne pas négliger la sécurisation des télécommunications et ne pas oublier la sécurisation physique du matériel et des accès.
+
+      La politique de sécurité consiste à mettre en place des stratégies pour trouver un compromis entre les fonctionnalités offertes et la sécurité, à identifier les risques et leurs conséquences et à élaborer les règles et procédures adaptées. Elle impose également de faire de la veille technologique sur les vulnérabilités découvertes et de préparer à l'avance les actions à entreprendre et les personnes à contacter en cas de détection d'un problème.
+
+   E. La mise en place d'une politique de sécurité.
+
+      Une fois la décision actée et la politique choisie, la mise en place se déroule en plusieurs phases. La phase initiale de mise en œuvre est suivie d'une phase d'audit, qui se décompose en tests d'intrusion et en détection d'incidents. Vient ensuite la phase de tests des exploitants, portant sur les réactions aux attaquants, puis la phase de réparation, qui consiste à restaurer l'état initial.
+
+II. CONTEXTE ET ACTEURS DE LA GESTION DES RISQUES.
+
+   A. La démarche générale de sécurisation.
+
+      La multiplicité des types d'attaques et des types d'attaquants est une donnée croissante, aussi ancienne que le développement quantitatif et qualitatif des réseaux informatiques. Face à cette variété, l'administrateur système et réseaux, le décideur et le responsable de la politique de sécurité sont confrontés à un besoin de cohérence, de structuration et d'efficience dans la gestion des risques.
+
+      De manière générale, la démarche consiste à évaluer les risques et leur criticité, en se demandant quels risques et quelles menaces pèsent sur quelle donnée et quelle activité, avec quelles conséquences. Cette étape produit la cartographie des risques, dont toutes les approches soulignent qu'elle conditionne la qualité de la sécurité. La démarche consiste ensuite à rechercher et sélectionner les parades, en déterminant ce qui sera sécurisé, quand et comment, sachant que dans un contexte de ressources limitées seules certaines solutions pourront être retenues. Elle consiste enfin à mettre en œuvre les protections et à vérifier leur efficacité, une faiblesse fréquente étant d'omettre les tests de fonctionnement en mode dégradé, de reprise de données et d'attaque malveillante.
+
+      Paradoxalement, la définition d'indicateurs sécurité mesurables, pertinents et permettant de fixer des objectifs raisonnables dans le temps s'avère extrêmement délicate tant le périmètre concerné est vaste.
+
+   B. Les origines : le ver Internet et la création des CERT.
+
+      La seconde moitié des années quatre-vingt a vu l'essor du réseau Arpanet, développé par le Département de la Défense américain et rendu indispensable pour de nombreux sites universitaires grâce à des services comme le transfert de fichiers et le courrier électronique.
+
+      En novembre mille neuf cent quatre-vingt-huit, un étudiant de l'Université de Cornell lâcha sur ce réseau un programme qui se propageait et se répliquait tout seul, connu sous le nom de ver Internet, exploitant diverses failles de sécurité du système Unix. Bien que programmé sans intention malveillante, ce premier virus informatique se répandit rapidement en engorgeant les machines par de multiples copies. Le réseau comprenait alors environ soixante mille ordinateurs, et avec seulement trois à quatre pour cent de machines contaminées il devint totalement indisponible pendant plusieurs jours, jusqu'à la déconnexion de nombreuses machines.
+
+      Une équipe d'analyse ad hoc réunissant des experts du MIT, de Berkeley et de Purdue reconstitua et analysa le code du virus, ce qui permit d'identifier et de corriger les failles puis de diffuser des mécanismes d'éradication. À la suite de cet incident, la DARPA décida la mise en place d'une structure permanente, le CERT Coordination Center, semblable à l'équipe réunie pour résoudre l'incident.
+
+   C. Les acteurs internationaux.
+
+      Le FIRST, Forum for Incident Response and Security Teams, fut créé en mille neuf cent quatre-vingt-dix pour fédérer les équipes de réaction aux incidents. Ses buts sont de favoriser la coopération entre équipes pour prévenir, détecter et rétablir un fonctionnement nominal, de fournir un moyen de communication commun pour diffuser bulletins et alertes, d'aider au développement des activités de ses membres et de faciliter le partage des informations, outils, méthodes et techniques. Il organise chaque année une conférence internationale sur le traitement des incidents et regroupe une centaine d'équipes institutionnelles et professionnelles.
+
+      Les CERT, Computer Emergency Response Team, sont issus des actions collectives menées après le ver Internet. Ce sont des organismes officiels de prévention et d'assistance au traitement des incidents, jouant le rôle de centre d'alerte et de réaction. Leurs tâches prioritaires sont la centralisation des demandes d'assistance et la corrélation des incidents, le traitement des alertes et la réaction aux attaques avec échange d'informations entre CERT, l'établissement et la maintenance d'une base de données des vulnérabilités, la prévention par diffusion d'informations sur les précautions à prendre et la coordination avec les autres entités comme les opérateurs et les fournisseurs d'accès.
+
+      L'ISO, Organisation internationale de normalisation, créée en mille neuf cent quarante-sept et composée de représentants de plus de cent soixante pays selon le principe d'un membre par pays, produit des normes internationales dans les domaines industriels et commerciaux, y compris sur le domaine de la sécurité.
+
+   D. Les acteurs nationaux français.
+
+      Le CLUSIF est un club professionnel constitué en association indépendante, ouvert à toute entreprise ou collectivité, dont la finalité est d'agir pour la sécurité de l'information. Il intègre une dimension transversale, management des risques, droit et intelligence économique, dispose de relais régionaux, les CLUSIR, et de partenaires européens, les CLUSI. Il est à l'origine de la méthode MEHARI.
+
+      L'ANSSI, Agence nationale de la sécurité des systèmes d'information, a été créée par le décret du sept juillet deux mille neuf sous la forme d'un service à compétence nationale rattaché au SGDSN. Elle élabore et tient à jour un référentiel méthodologique de méthodes, de meilleures pratiques et de logiciels, diffusés gratuitement, destiné à aider les organismes publics et privés à gérer la sécurité de leurs systèmes d'information.
+
+      Le Club EBIOS est une association indépendante à but non lucratif, composée d'experts individuels et d'organismes des secteurs public et privé, français et européens, qui supporte et enrichit le référentiel de gestion des risques français depuis deux mille trois, en collaboration avec l'ANSSI, par des réunions périodiques d'échange d'expériences et d'homogénéisation des pratiques.
+
+      Le CERTA a été créé sous l'impulsion du Premier ministre en mille neuf cent quatre-vingt-dix-neuf, à l'issue du Comité interministériel pour la société de l'information, pour renforcer la protection des réseaux de l'État contre les attaques. Placé auprès du Secrétariat général de la défense nationale, inauguré en février deux mille, il a pour missions de détecter les vulnérabilités par une veille technologique, de piloter la résolution des incidents, d'aider à la mise en place de moyens de prévention et d'organiser un réseau de confiance. Il est membre du FIRST depuis septembre deux mille et participe à la coordination des CERT européens, la TF-CSIRT.
+
+      De nombreuses émanations de sociétés industrielles et informatiques participent également au réseau des CERT, parmi lesquelles le Cert-IST créé à la fin des années quatre-vingt-dix par Alcatel, le CNES, ELF et France Télécom, le CERT-DEVOTEAM, le CERT-RENATER, le CERT-Société Générale, premier CERT privé français accrédité par le FIRST en deux mille dix, le CERT-XMCO et le CERT La Poste.
+
+III. LES MÉTHODES D'ANALYSE DES RISQUES.
+
+   A. La méthode OCTAVE.
+
+      OCTAVE, Operationally Critical Threat, Asset and Vulnerability Evaluation, a été développée par l'Université Carnegie Mellon aux États-Unis. Elle repose sur la réalisation d'une analyse des risques depuis l'intérieur de l'organisation, exclusivement avec des ressources internes, sur les ressources et informations opérationnelles nommées actifs. Elle se déroule en trois phases : une vue organisationnelle qui identifie les ressources importantes, les menaces associées et les exigences de sécurité ; une vue technique qui identifie les vulnérabilités de l'infrastructure et estime le risque en les couplant aux menaces ; enfin le développement de la stratégie de sécurité et sa planification, protection et plan de réduction des risques.
+
+   B. La méthode MEHARI.
+
+      MEHARI, Méthode harmonisée d'analyse des risques, a été développée par le CLUSIF. Elle fournit un cadre méthodologique, des outils et des bases de connaissance pour analyser les enjeux majeurs en identifiant les dysfonctionnements potentiels causés par un défaut de sécurité et en évaluant leur gravité, pour étudier les vulnérabilités en évaluant quantitativement la qualité des mesures de sécurité, pour réduire la gravité des risques en évaluant la probabilité des situations dangereuses, leurs conséquences et leur caractère acceptable, et pour piloter la sécurité de l'information. Elle insiste sur la focalisation sur les objectifs et attentes des métiers de l'entreprise, gage de pérennité, et ses modules peuvent être combinés pour bâtir des plans d'action ou aider la prise de décision.
+
+   C. La méthode EBIOS.
+
+      EBIOS, Expression des Besoins et Identification des Objectifs de Sécurité, a été développée par l'ANSSI. Largement répandue en France, elle sert de support aux audits et opérations de sécurisation initiées par l'Agence. Elle est présentée en détail dans la suite du cours.
+
+   D. Les normes ISO de la série 27000.
+
+      À ces méthodes issues de clubs s'ajoutent des approches normées de plus en plus suivies. La série ISO 27000 comprend une norme de vocabulaire et de définitions, la norme ISO 27001 d'octobre deux mille cinq qui spécifie un système de gestion de la sécurité des systèmes d'information selon le cycle Plan Do Check Act, la norme ISO 27002 qui remplace la norme dix-sept mille sept cent quatre-vingt-dix-neuf depuis le premier juillet deux mille sept et constitue un code de bonnes pratiques, la norme ISO 27005 qui en est une évolution et la norme ISO 31000 qui prolonge les précédentes. Ces normes internationales peuvent se combiner avec EBIOS pour mêler rigueur et souplesse d'utilisation.
+
+IV. LA MÉTHODE EBIOS - PRINCIPES GÉNÉRAUX.
+
+   A. Finalité et origine.
+
+      Créée en mille neuf cent quatre-vingt-quinze par l'ANSSI et régulièrement mise à jour, EBIOS bénéficie de quinze ans d'expérience dans la gestion du risque. Elle permet d'apprécier et de traiter les risques relatifs à la sécurité des systèmes d'information et de communiquer à leur sujet au sein de l'organisme et vis-à-vis de ses partenaires, constituant ainsi un outil complet de gestion des risques.
+
+      La gestion des risques est née dans le domaine financier dans les années cinquante puis s'est étendue à la gestion de projet, à la sécurité des personnes, à la sûreté de fonctionnement, au marketing, à l'environnement et à la sécurité de l'information. Elle a toujours eu pour objectif de rationaliser des situations pour aider à une prise de décision éclairée, les choix des décideurs pouvant guider l'organisme vers ses objectifs ou faire évoluer sa stratégie.
+
+      Selon les normes internationales, notamment l'ISO Guide 73, le risque est décrit par un événement, ses conséquences et sa vraisemblance, et le processus de gestion des risques comprend une étude du contexte, l'appréciation des risques, leur traitement, la validation du traitement, la communication relative aux risques et le contrôle, dans une amélioration continue.
+
+   B. Les concepts du risque.
+
+      La sécurité de l'information a pour but de protéger le patrimoine informationnel de l'organisme, qui permet son bon fonctionnement et l'atteinte de ses objectifs, et dont la valeur s'apprécie en comparant les opportunités offertes par un bon usage et les conséquences négatives dans le cas contraire. Ce patrimoine naît, vit et disparaît dans des systèmes d'information complexes, changeants et interfacés, d'où le besoin d'une méthode structurée et éprouvée.
+
+      Il y a risque de sécurité de l'information dès lors que sont réunis conjointement une source de menace, une menace, une vulnérabilité et un impact.
+
+      Une approche méthodologique procure des éléments de langage communs, une démarche claire et structurée, un référentiel validé par l'expérience, une assurance d'exhaustivité des actions et la réutilisation de la même approche en amélioration continue sur d'autres périmètres.
+
+   C. Les principes structurants.
+
+      L'établissement du contexte est essentiel : un contexte bien défini permet de gérer les risques de manière appropriée et de réduire les coûts au nécessaire et suffisant, en prenant en compte le cadre de gestion des risques, les critères d'estimation, d'évaluation et de validation, et la description du périmètre et de son environnement.
+
+      L'appréciation des risques s'appuie sur des définitions précises pour détailler ce qui est perçu comme un risque. Le traitement des risques permet, pour tout ou partie de chaque risque, de le réduire, de le transférer par partage des pertes ou de l'éviter en se plaçant dans une situation où le risque n'existe pas ; des mesures de sécurité sont alors proposées et négociées.
+
+      La validation du traitement des risques, généralement appelée homologation de sécurité, est prononcée si possible formellement par une autorité responsable du périmètre, sur la base d'un dossier issu de l'étude. La communication et la concertation relatives aux risques, réalisées avant, pendant et après l'étude, sont un facteur crucial de réussite qui favorise l'implication, la responsabilisation et la sensibilisation des acteurs et le développement d'une culture de sécurité. La surveillance et la revue des risques maintiennent à jour le cadre et les résultats pour prendre en compte les évolutions du contexte.
+
+   D. La démarche itérative en cinq modules.
+
+      EBIOS s'articule autour de cinq modules d'activités spécifiques. La démarche est dite itérative car il est fait plusieurs fois appel à chaque module pour améliorer progressivement son contenu, la démarche globale étant également affinée et tenue à jour de manière continue.
+
+      Le module un, étude du contexte, établit le cadre de la gestion des risques, les métriques et le périmètre, et identifie les biens essentiels, les biens supports et les paramètres à prendre en compte. Le module deux, étude des événements redoutés, identifie et estime les besoins de sécurité des biens essentiels, les impacts en cas de non-respect et les sources de menaces, pour formuler les événements redoutés. Le module trois, étude des scénarios de menaces, identifie et estime les modes opératoires pouvant engendrer les événements redoutés, en étudiant les menaces et les vulnérabilités exploitables. Le module quatre, étude des risques, met en évidence les risques en confrontant événements redoutés et scénarios de menaces, les estime et les évalue, et identifie les objectifs de sécurité. Le module cinq, étude des mesures de sécurité, spécifie les mesures à mettre en œuvre, planifie leur mise en œuvre et valide le traitement des risques et les risques résiduels.
+
+      Chaque action est définie selon le même formalisme, via la répartition de type RACI. L'ensemble de la méthode est illustré par un cas concret issu du site de l'ANSSI, celui de la société @RCHIMED.
+
+V. MODULE 1 - ÉTUDE DU CONTEXTE.
+
+      Ce module collecte les éléments nécessaires à la gestion des risques, formalise le cadre de l'étude, identifie, délimite et décrit le périmètre, ses enjeux, son contexte d'utilisation et ses contraintes. Il comprend trois grandes activités : définir le cadre de la gestion des risques, préparer les métriques et identifier les biens.
+
+   A. Définir le cadre de la gestion des risques.
+
+      Cette activité circonscrit le périmètre d'étude et définit le cadre dans lequel la gestion des risques sera réalisée, pour s'assurer de la légitimité et de la faisabilité des réflexions et orienter les travaux et livrables. Elle se décompose en cinq actions : cadrer l'étude des risques, décrire le contexte général, délimiter le périmètre de l'étude, identifier les paramètres à prendre en compte et identifier les sources de menaces.
+
+      Cadrer l'étude des risques consiste à formaliser le but de l'étude en termes d'intention et de livrables et à définir la démarche employée. Le but peut être d'optimiser les processus métiers en maîtrisant les risques, de mettre en place un système de management de la sécurité de l'information, d'homologuer un système d'information, d'élaborer une politique de sécurité ou de contribuer à la gestion globale des risques. Les livrables attendus, par exemple une politique de sécurité destinée à tout le personnel ou un cahier des charges pour un appel d'offres, sont identifiés, puis la structure de travail est planifiée : actions à entreprendre, ressources et rôle des parties prenantes, calendrier prévisionnel, documents à produire, chemins de décision et mécanismes de communication interne et externe.
+
+      Décrire le contexte général consiste à se familiariser avec l'environnement et la conjoncture du périmètre pour inscrire la gestion des risques dans sa réalité et faciliter son intégration dans la culture, la structure et les processus de l'organisme. On collecte des informations sur le contexte externe, environnement social, culturel, politique, légal, réglementaire, financier, technologique, économique, naturel et concurrentiel, et sur le contexte interne, description de l'organisme, ressources, missions, valeurs, métiers, culture, organisation et processus métiers. On formalise également la définition du risque adaptée au contexte, l'organisation de gestion des risques et l'organisation spécifique à l'étude.
+
+      Délimiter le périmètre de l'étude consiste à circonscrire le périmètre au sein du contexte général, à en expliquer la fonction et les enjeux et à définir les participants. À l'issue, on sait clairement ce qui fait partie du périmètre et ce qui n'en fait pas partie, et on peut le découper en sous-périmètres pour simplifier la démarche, selon l'architecture matérielle, les fonctions ou informations essentielles ou l'autonomie de responsabilité. On identifie aussi le mode d'exploitation de sécurité, qui distingue la catégorie exclusif où toutes les personnes sont habilitées au plus haut niveau avec un besoin d'en connaître identique, la catégorie dominant où toutes sont habilitées au plus haut niveau mais sans besoin d'en connaître identique, et la catégorie multi-niveaux où les personnes ne sont ni toutes habilitées au plus haut niveau ni pourvues d'un besoin d'en connaître identique. On définit enfin la population à l'étude, le type d'échantillonnage et les critères d'inclusion et d'exclusion.
+
+      Identifier les paramètres à prendre en compte consiste à recenser les éléments ayant une incidence sur l'appréciation ou le traitement des risques : références communautaires, légales et réglementaires, références internes de sécurité, contraintes de conformité à des référentiels comme l'ISO 27001, contraintes pesant sur l'organisme et sur le périmètre, et hypothèses. Les références internes incluent les politiques de sécurité et documents d'application, les schémas directeurs, les plans de continuité PCI et PCA et les résultats d'audits. Les contraintes peuvent être d'ordre politique, stratégique, territorial, conjoncturel, structurel, fonctionnel, budgétaire, le coût des mesures ne devant pas dépasser les conséquences des risques, ou spécifiques au périmètre, antériorité, contraintes techniques d'architecture, contraintes financières, de temps et organisationnelles.
+
+      Identifier les sources de menaces consiste à déterminer qui ou quoi pourrait porter atteinte aux besoins de sécurité, en choisissant une typologie proposée par les bases de connaissances. On trie les sources selon leur origine humaine ou non humaine, leur lien interne ou externe avec le périmètre, leur caractère intentionnel et leur motivation ou accidentel, leurs capacités, et pour les sources non humaines leur type naturel, animal ou de contingence. On les caractérise ensuite par leur exposition, leur potentiel, leur motivation, leur capacité à mobiliser de l'énergie, le temps disponible, les compétences techniques, les ressources financières et matérielles et leur capacité de dissimulation.
+
+   B. Préparer les métriques.
+
+      Cette activité fixe l'ensemble des paramètres et des échelles qui serviront à gérer les risques ; elle peut être commune à plusieurs études et garantit l'homogénéité et la répétabilité des estimations. Elle se décompose en quatre tâches : définir les critères de sécurité et élaborer les échelles de besoins, élaborer une échelle de niveaux de gravité, élaborer une échelle de niveaux de vraisemblance et définir les critères de gestion des risques.
+
+      Définir les critères de sécurité consiste à choisir les critères étudiés, à en produire une définition et à élaborer autant d'échelles de besoins que de critères retenus. Trois critères sont incontournables : la disponibilité, exprimée en durée nécessaire pour accéder au bien essentiel, par exemple une heure, une journée ou une semaine, ou en taux, par exemple quatre-vingt-dix-neuf pour cent ; l'intégrité, biens essentiels non altérés, conformes, stables, exacts et complets ; la confidentialité, biens essentiels non compromis ni divulgués. Les niveaux doivent être explicites, non ambigus et à limites claires, et adaptés au contexte.
+
+      Élaborer une échelle de niveaux de gravité consiste à créer une échelle ordinale décrivant tous les niveaux possibles d'impacts, chaque niveau reflétant la hauteur des conséquences cumulées d'un sinistre. Chez @RCHIMED, l'échelle comporte quatre niveaux : négligeable, l'organisme surmonte les impacts sans difficulté ; limitée, il les surmonte malgré quelques difficultés ; importante, il les surmonte avec de sérieuses difficultés ; critique, il ne les surmonte pas et sa survie est menacée.
+
+      Élaborer une échelle de niveaux de vraisemblance consiste à créer une échelle ordinale décrivant la possibilité de réalisation d'un sinistre. Chez @RCHIMED, elle comporte quatre niveaux : minime, cela ne devrait pas se reproduire ; significative, cela pourrait se reproduire ; forte, cela devrait se reproduire un jour ou l'autre ; maximale, cela va certainement se reproduire prochainement.
+
+      Définir les critères de gestion des risques consiste à formaliser les règles servant à faire des choix tout au long de l'étude : la manière dont les événements redoutés, les scénarios de menaces et les risques sont estimés et évalués, et dont les risques sont traités et validés. Il faut vérifier la cohérence de ces critères avec la politique de gestion des risques de l'organisme.
+
+   C. Identifier les biens.
+
+      Cette activité identifie les biens au sein du périmètre pour comprendre son fonctionnement et prendre en compte les mesures de sécurité existantes, formalisées ou non. Elle se structure en quatre actions : identifier les biens essentiels, leurs relations et leurs dépositaires ; identifier les biens supports, leurs relations et leurs propriétaires ; déterminer le lien entre biens essentiels et biens supports ; identifier les mesures de sécurité existantes.
+
+      Les biens essentiels représentent le patrimoine informationnel immatériel que l'on souhaite protéger, soumis au respect de la disponibilité, de l'intégrité et de la confidentialité. Les exemples cités sont les informations et fonctions vitales pour la mission, les traitements secrets ou procédés technologiques de haut niveau, les informations personnelles au sens de la CNIL, les informations stratégiques, les informations coûteuses à collecter ou traiter et les informations relevant du secret de la défense au sens de l'IGI 1300, pour lesquelles l'exigence de sécurité n'est pas négociable. Chaque bien essentiel se voit rattacher un dépositaire.
+
+      Les biens supports sont les composants techniques ou non techniques du système d'information qui portent les biens essentiels ; ils possèdent des vulnérabilités que des sources de menaces pourront exploiter. On leur rattache un propriétaire, le mieux placé pour analyser leurs vulnérabilités et garantir l'application des mesures de sécurité.
+
+      Déterminer le lien entre biens essentiels et biens supports consiste à identifier, pour chaque bien essentiel, les biens supports qui le stockent ou le traitent à un moment de son cycle de vie ; ce lien révèle la criticité des biens supports et les risques réels.
+
+      Identifier les mesures de sécurité existantes consiste à recenser, pour chaque bien support, les mesures techniques ou non techniques déjà en place ou prévues, chacune étant catégorisée selon la ligne de défense, préventive, protectrice ou récupératrice, à laquelle elle appartient, pour préparer la défense en profondeur.
+
+VI. MODULE 2 - ÉTUDE DES ÉVÉNEMENTS REDOUTÉS.
+
+      Ce module identifie de manière systématique les scénarios génériques que l'on souhaite éviter, à un niveau plus fonctionnel que technique, sur des biens essentiels et non sur des biens supports. Il fait émerger les événements redoutés en combinant leurs composantes, estime la valeur de ce que l'on protège via les besoins de sécurité, met en évidence les sources de menaces et les impacts, et estime le niveau de chaque événement redouté, sa gravité et sa vraisemblance. Il recense aussi les mesures de sécurité existantes et ré-estime la gravité une fois ces mesures appliquées. Il comprend une activité, apprécier les événements redoutés, décomposée en deux actions.
+
+      Analyser tous les événements redoutés consiste à identifier et estimer les événements redoutés pour chaque critère de sécurité et chaque bien essentiel, en faisant émerger les besoins de sécurité, les impacts en cas de non-respect et les sources de menaces. Un groupe de travail hétérogène et représentatif, responsable du périmètre, dépositaires des biens essentiels et experts métiers, est constitué. Bien que l'action puisse être menée séquentiellement, expression des besoins puis impacts puis sources de menaces, la réflexion est généralement globale. On exprime le besoin de sécurité en choisissant la valeur limite acceptable de chaque échelle de besoins, et on identifie des exemples de sources de menaces par type. Si un bien essentiel a des besoins qui varient dans le temps, on étudie séparément ses différents états. La gravité est estimée en prenant en compte la valeur du bien essentiel et la hauteur et le nombre des impacts, sans tenir compte des mesures de sécurité existantes. On examine ensuite les résultats pour résoudre les incohérences entre besoins, impacts, sources de menaces et niveaux de gravité, en vérifiant la corrélation entre événements redoutés, l'importance relative des besoins et le niveau de détail des libellés.
+
+      Évaluer chaque événement redouté consiste à juger de leur importance en les hiérarchisant selon les critères de gestion des risques, généralement dans un tableau trié par gravité avec un libellé court et explicite. Certains événements redoutés peuvent être écartés de la suite de l'étude si les critères le prévoient, par exemple lorsque la gravité est très faible, mais cette exclusion doit être dûment justifiée car ils constituent des événements redoutés non traités.
+
+VII. MODULE 3 - ÉTUDE DES SCÉNARIOS DE MENACES.
+
+      Ce module identifie de manière systématique les modes opératoires génériques dangereux pour la sécurité des informations, à un niveau plus technique que fonctionnel, sur des biens supports. Il fait émerger les scénarios de menaces en combinant les menaces, les vulnérabilités exploitables et les sources de menaces susceptibles de les utiliser, estime la vraisemblance de chaque scénario et ré-estime cette vraisemblance après prise en compte des mesures de sécurité existantes. Il comprend une activité, apprécier les scénarios de menaces, décomposée en deux tâches.
+
+      Analyser tous les scénarios de menaces, approche systémique, consiste à identifier les scénarios pour chaque critère de sécurité et chaque bien support et à les estimer en vraisemblance. On choisit une typologie de menaces issue des bases de connaissances, on ne retient que les menaces touchant le critère de sécurité et le bien support considérés, on écarte les menaces inapplicables, puis, pour chaque bien support et chaque menace, on détermine les vulnérabilités associées. La vraisemblance est estimée selon l'existence plus ou moins avérée et la facilité d'exploitation des vulnérabilités et l'exposition aux menaces. On termine par une revue générale pour résoudre les incohérences entre menaces, biens supports, vulnérabilités, sources de menaces et niveaux de vraisemblance.
+
+      Évaluer chaque scénario de menaces, approche analytique, consiste à juger de l'importance de chaque scénario en le hiérarchisant selon les critères de gestion des risques, dans un tableau trié par vraisemblance. Certains scénarios peuvent être écartés si leur vraisemblance est très faible, l'exclusion devant être dûment justifiée.
+
+VIII. MODULE 4 - ÉTUDE DES RISQUES.
+
+      À ce stade, le contexte, les événements redoutés et les scénarios de menaces sont connus. Le module met en lumière de manière systématique les risques réels pesant sur le périmètre par corrélation entre événements redoutés et scénarios de menaces, puis choisit la manière de les traiter. Il comprend deux activités : apprécier les risques et identifier les objectifs de sécurité.
+
+      Analyser les risques consiste à mettre en évidence l'ensemble des risques et à déterminer leur gravité et leur vraisemblance, une première fois sans tenir compte des mesures de sécurité existantes, estimation dite brute, et une seconde fois en les prenant en compte, estimation dite nette. On fait le lien entre événements redoutés et scénarios de menaces en retenant, pour chaque événement redouté, les scénarios qui concernent les biens supports liés au bien essentiel, touchent le même critère de sécurité et sont à l'initiative des mêmes sources de menaces. Un risque est composé d'un événement redouté et de tous les scénarios de menaces concernés. Pour chaque risque, on détermine parmi les mesures de sécurité existantes celles qui protègent les besoins de sécurité, réduisent chaque impact, contrent chaque source de menaces, se protègent contre les menaces ou réduisent les vulnérabilités.
+
+      Évaluer les risques consiste à juger de leur importance en les hiérarchisant selon les critères de gestion des risques. Certains risques peuvent être écartés si leur gravité ou leur vraisemblance est très faible, l'exclusion étant dûment justifiée.
+
+      Choisir les options de traitement des risques consiste à identifier les objectifs de sécurité, c'est-à-dire à choisir, pour tout ou partie de chaque risque, de l'éviter en changeant le contexte, de le réduire par des mesures diminuant l'impact ou la vraisemblance, de le prendre ou le maintenir en assumant les conséquences, ou de le transférer en partageant les pertes avec un tiers. Plusieurs options peuvent être combinées pour un même risque. Le choix se fait au regard des éléments constitutifs du risque, des critères de gestion des risques retenus et des paramètres à prendre en compte, contraintes et hypothèses.
+
+      Analyser les risques résiduels consiste à identifier et estimer les risques qui subsisteront quand chaque objectif de sécurité sera atteint. Un risque évité ne génère aucun risque résiduel s'il est complètement évité, un risque réduit en génère s'il n'est pas totalement réduit, un risque pris constitue un risque résiduel à part entière et un risque transféré n'en induit aucun s'il est totalement transféré. La gravité et la vraisemblance attendues une fois les objectifs satisfaits sont finalement estimées, correspondant au niveau de risque acceptable.
+
+IX. MODULE 5 - ÉTUDE DES MESURES DE SÉCURITÉ.
+
+      Ce module détermine les moyens de traiter les risques et de suivre leur mise en œuvre, en cohérence avec le contexte, de manière conjointe entre niveaux fonctionnel et technique. Il trouve un consensus sur les mesures de sécurité, en démontre la couverture et effectue la planification, la mise en œuvre et la validation du traitement. Il comprend deux activités : formaliser les mesures de sécurité à mettre en œuvre et mettre en œuvre les mesures de sécurité.
+
+   A. Formaliser les mesures de sécurité.
+
+      Cette activité détermine les mesures de sécurité adéquates pour atteindre les objectifs de sécurité, identifie les risques résiduels et valide formellement les choix. Elle se découpe en trois actions : déterminer les mesures de sécurité, analyser les risques résiduels et établir une déclaration d'applicabilité.
+
+      Déterminer les mesures de sécurité consiste à définir les moyens d'atteindre les objectifs de sécurité en tenant compte des contraintes budgétaires et techniques. Les mesures peuvent être issues telles quelles de référentiels, normes, méthodes, bases de connaissances ou catalogues, adaptées d'après ces référentiels, ou créées de toutes pièces. Pour chaque mesure spécifiée, on identifie la ligne de défense à laquelle elle appartient et le bien support qui la porte, dont le propriétaire est responsable de son application. On estime aussi l'impact de sa mise en œuvre, coût financier ou en ressources humaines et conséquences sur les habitudes de travail.
+
+      Analyser les risques résiduels consiste à identifier et estimer les risques qui subsisteront quand chaque mesure sera mise en œuvre, en réalisant pour chaque objectif de sécurité un argumentaire justificatif démontrant que la combinaison des mesures traite le risque conformément à l'objectif, que l'ensemble constitue un tout cohérent et que le niveau de résistance des mesures est cohérent avec les sources de menaces retenues.
+
+      Établir une déclaration d'applicabilité consiste à expliquer comment les références applicables, les contraintes et les hypothèses ont été prises en compte et à justifier de ne pas en avoir tenu compte le cas échéant. Elle permet de démontrer l'applicabilité détaillée des meilleures pratiques en déterminant, pour chacune, les mesures de sécurité qui lui correspondent ; les meilleures pratiques couvertes par aucune mesure peuvent être jugées inutiles.
+
+   B. La défense en profondeur.
+
+      Les principes de la défense en profondeur sont la globalité, la défense englobe les dimensions techniques, organisationnelles et humaines ; la coordination, les moyens agissent grâce à une capacité d'alerte et de diffusion et à la corrélation d'incidents ; le dynamisme, l'organisme considère plusieurs niveaux de risques et dispose d'une capacité de réaction ; la suffisance, chaque mesure bénéficie d'une protection propre, d'un moyen de détection et de procédures de réaction ; la complétude, les biens essentiels sont protégés de manière proportionnée par au minimum trois lignes de défense avec des retours d'expériences formalisés ; la démonstration, le dispositif est justifié par une démonstration de couverture et une stratégie d'homologation.
+
+      La démarche consiste à établir au moins trois lignes de défense pour chaque risque. La ligne préventive évite l'apparition des incidents par des mesures agissant sur les sources de menaces, par dissuasion et déception, sur les besoins de sécurité, par anticipation et prévention, et sur les vulnérabilités, par réduction des failles et préparation. La ligne protectrice bloque, contient et détecte les incidents par des mesures agissant sur les besoins de sécurité, par confinement, sur les sources de menaces, par lutte, sur les menaces, par détection et protection, et sur les vulnérabilités, par résistance et résilience. La ligne récupératrice minimise les conséquences et revient à l'état initial par des mesures agissant sur les besoins de sécurité, par récupération et restauration, sur les sources de menaces, par réaction offensive, et sur les impacts, par compensation. Un ensemble de mesures de soutien, alerte, diffusion, corrélation d'événements, protection des mesures de sécurité et réaction, complète le dispositif.
+
+   C. Mettre en œuvre les mesures et homologuer.
+
+      Cette activité élabore et suit la réalisation du plan de traitement des risques afin de pouvoir prononcer l'homologation de sécurité. Elle se décompose en trois actions : élaborer le plan d'action et suivre la réalisation des mesures, analyser les risques résiduels et prononcer l'homologation de sécurité.
+
+      Le plan d'action indique, pour chaque mesure formalisée non encore appliquée, son libellé, sa priorité déterminée par les critères de gestion des risques, le responsable de la mise en œuvre, le détail des actions, l'échéance prévisionnelle, le coût prévisionnel, l'état d'avancement, non démarré, en cours, terminé ou contrôlé, les moyens de contrôle et les éventuels risques résiduels ou induits mis en évidence au fil de l'avancement.
+
+      L'analyse des risques résiduels est reprise une fois les mesures effectivement mises en œuvre, en complétant la démonstration de couverture et en ré-estimant la gravité et la vraisemblance de chaque risque.
+
+      L'homologation de sécurité est l'engagement par lequel l'autorité atteste que le projet a pris en compte les contraintes opérationnelles, que le système et les informations sont protégés conformément aux objectifs de sécurité et que le système est apte à entrer en service avec des risques résiduels acceptés et maîtrisés. Elle est théoriquement prise avant l'emploi du système, éventuellement par une commission d'homologation, et peut être collégiale. L'autorité peut prononcer une homologation provisoire assortie de réserves et d'un délai de mise en conformité, un refus d'homologation lorsque les risques résiduels sont jugés inacceptables, ou une homologation complète, assortie le cas échéant de conditions, pour une durée déterminée fréquemment comprise entre trois et cinq ans. Toute évolution du système ayant une répercussion sur la sécurité devrait donner lieu à une nouvelle homologation.
+
+X. COMPLÉMENTARITÉ EBIOS - ISO ET BILAN DE LA MÉTHODE.
+
+      La méthode EBIOS permet de satisfaire l'ensemble des exigences relatives à la gestion des risques de l'ISO 27001 mais aussi de l'ISO 31000, et une table de correspondance relie les activités d'EBIOS aux exigences de l'ISO 27001. Le vocabulaire est également commun : l'appréciation des risques est le sous-processus visant à identifier, analyser et évaluer les risques ; le besoin de sécurité est la définition précise et non ambiguë du niveau d'exigences opérationnelles relatives à un bien essentiel pour un critère donné ; le bien est toute ressource ayant de la valeur pour l'organisme, distinguée en biens essentiels et biens supports ; le bien essentiel est une information ou un processus important dont on apprécie les besoins de sécurité mais pas les vulnérabilités.
+
+      EBIOS est une véritable boîte à outils dont les activités, le niveau de détail et le séquencement sont adaptés à l'usage désiré. Elle varie selon le sujet étudié, d'un organisme entier à un composant de produit, selon les livrables attendus, documents fondateurs, spécifications comme les FEROS ou les profils de protection, et autres livrables comme les cartographies des risques et les référentiels d'audit, selon la phase du cycle de vie du sujet, par raffinements successifs depuis les premières réflexions, et selon le secteur, sécurité de l'information, infrastructures vitales ou ergonomie.
+
+      Les apports de la méthode sont d'être un outil de négociation et d'arbitrage grâce aux justifications qu'elle fournit, un outil de sensibilisation de toutes les parties prenantes, un outil réutilisable favorisant la pérennité des analyses et la cohérence globale, une approche exhaustive qui identifie et combine les éléments constitutifs des risques plutôt que de s'appuyer sur un catalogue prédéfini, et un référentiel complet doté de bases de connaissances adaptables, d'un logiciel libre et gratuit et de formations. La rigueur de la méthode repose sur la validité interne, exactitude des résultats, et la validité externe, possibilité de généraliser, ainsi que sur la fidélité à la réalité, garantie par des critères de crédibilité, d'authenticité, de criticisme, d'intégrité, d'explicité, de réalisme, de créativité, d'exhaustivité, de congruence et de sensibilité au contexte socioculturel.
+
+POINTS D'ATTENTION.
+
+      La sécurité de l'information ne se réduit pas à la technique : elle mêle mutations techniques et organisationnelles et commence par la sensibilisation des utilisateurs, avant la sécurisation des données, des télécommunications et des accès physiques.
+
+      Les cinq objectifs de sécurité doivent être cités ensemble et sans confusion : intégrité, confidentialité, disponibilité, non-répudiation et imputation, authentification.
+
+      La qualité de la sécurité mise en œuvre dépend directement de la qualité de la cartographie des risques, point sur lequel toutes les méthodes insistent.
+
+      Une faiblesse fréquente de la phase de mise en œuvre est d'omettre de vérifier l'efficacité réelle des protections par des tests en mode dégradé, de reprise de données et d'attaque malveillante.
+
+      Ne pas confondre les acteurs : le FIRST fédère mondialement les équipes, le CERT est un organisme de réponse aux incidents, l'ANSSI édite EBIOS, le CLUSIF édite MEHARI, l'Université Carnegie Mellon a produit OCTAVE, et le CERTA est l'antenne gouvernementale française du CERT.
+
+      EBIOS date de mille neuf cent quatre-vingt-quinze, OCTAVE est américaine et exclusivement interne, MEHARI est axée sur les métiers de l'entreprise.
+
+      La démarche EBIOS est itérative : chaque module est repris plusieurs fois et l'ensemble est tenu à jour en continu ; elle n'est pas linéaire.
+
+      Distinguer rigoureusement bien essentiel et bien support : on apprécie les besoins de sécurité du bien essentiel mais ses vulnérabilités ne sont étudiées que sur les biens supports.
+
+      Distinguer événement redouté, niveau fonctionnel sur les biens essentiels, et scénario de menace, niveau technique sur les biens supports ; le risque est la combinaison des deux.
+
+      Les quatre options de traitement du risque sont éviter, réduire, prendre et transférer, et peuvent être combinées pour un même risque ; un risque pris est toujours un risque résiduel à part entière.
+
+      L'estimation brute se fait sans les mesures de sécurité existantes, l'estimation nette avec ; toute exclusion d'un événement, d'un scénario ou d'un risque de la suite de l'étude doit être explicitement justifiée.
+
+      Trois lignes de défense au minimum, préventive, protectrice et récupératrice, sont exigées par le principe de complétude de la défense en profondeur.
+
+      L'homologation de sécurité est prononcée avant la mise en service, peut être provisoire, complète ou refusée, dure généralement de trois à cinq ans et doit être renouvelée à chaque évolution ayant un impact sur la sécurité.
+
+      EBIOS et les normes ISO ne s'opposent pas : EBIOS couvre les exigences de gestion des risques de l'ISO 27001 et de l'ISO 31000 et partage leur vocabulaire.
+
+EXEMPLES CITES.
+
+      Le ver Internet de novembre mille neuf cent quatre-vingt-huit, lâché par un étudiant de l'Université de Cornell, exploitant des failles Unix : sur un réseau d'environ soixante mille ordinateurs, trois à quatre pour cent de machines contaminées ont rendu le réseau indisponible plusieurs jours, provoquant la création du CERT Coordination Center par la DARPA.
+
+      L'équipe d'analyse ad hoc du ver Internet, réunissant des experts du MIT, de Berkeley et de Purdue, qui a reconstitué le code du virus.
+
+      Le FIRST créé en mille neuf cent quatre-vingt-dix et sa conférence annuelle Computer Security Incident Handling Conference.
+
+      Le CERTA créé en mille neuf cent quatre-vingt-dix-neuf, inauguré en février deux mille, membre du FIRST depuis septembre deux mille et participant à la TF-CSIRT.
+
+      Les CERT français d'origine industrielle : Cert-IST fondé par Alcatel, le CNES, ELF et France Télécom, CERT-DEVOTEAM, CERT-RENATER, CERT-Société Générale premier CERT privé français accrédité par le FIRST en deux mille dix, CERT-XMCO et CERT La Poste.
+
+      La société @RCHIMED, PME toulonnaise d'une douzaine de personnes, bureau d'ingénierie en architecture réalisant des plans d'usines et d'immeubles, dont le Directeur veut faire gérer en continu les risques de sécurité de l'information et envisage une certification ISO 27001 avec déclaration d'applicabilité au titre de l'ISO 27002.
+
+      L'échelle de gravité d'@RCHIMED à quatre niveaux, de négligeable à critique, et son échelle de vraisemblance à quatre niveaux, de minime à maximale.
+
+      Le risque d'indisponibilité d'un devis au-delà de soixante-douze heures analysé chez @RCHIMED.
+
+      L'homologation de sécurité prononcée par le Directeur d'@RCHIMED, valable un an et renouvelable chaque année, sur la base de la note de cadrage, de la note de stratégie et de la politique de sécurité de l'information.
+
+      Les normes ISO 27001 d'octobre deux mille cinq et ISO 27002 remplaçant la norme dix-sept mille sept cent quatre-vingt-dix-neuf depuis le premier juillet deux mille sept.
+
+      Le décret numéro deux mille neuf-huit cent trente-quatre du sept juillet deux mille neuf portant création de l'ANSSI.

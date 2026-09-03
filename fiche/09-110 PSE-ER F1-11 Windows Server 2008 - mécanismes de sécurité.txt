@@ -1,40 +1,362 @@
-WINDOWS SERVER 2008 : MÉCANISMES DE SÉCURITÉ
+CONNAITRE LES MÉCANISMES DE SÉCURITÉ SOUS WINDOWS SERVER 2008.
 
-1. ARCHITECTURE DU SYSTÈME DE SÉCURITÉ
-But : empêcher les accès non autorisés aux données sensibles dans un environnement multi-utilisateurs. Exigences fondamentales natives : couple login/mot de passe, accès contrôlé aux objets via des ACL, droits et privilèges, contrôle sur les actions des programmes.
-Norme TCSEC (Trusted Computer System Evaluation Criteria). Critères satisfaits : ouverture de session sécurisée, contrôle d'accès discrétionnaire, audit de la sécurité, protection contre la réutilisation des objets (cloisonnement étanche), chemin approuvé (barrière contre l'interception des identifiants), administration approuvée (comptes distincts par fonction).
-Protection du noyau (NT 6.0) : PatchGuard (met fin aux rootkits et attaques modifiant le noyau) ; contrôle d'intégrité et de source des exécutables, en corrélation avec KMCS (Kernel Mode Code Signing) qui vérifie que le code du noyau a une signature d'une autorité de certification approuvée.
 
-2. COMPOSANTS DU SYSTÈME DE SÉCURITÉ
-- SRM (Security Reference Monitor) : composant de l'exécutif Ntoskrnl.exe ; définit la structure du jeton d'accès, effectue les contrôles d'accès sur les objets, manipule les droits utilisateurs, gère les messages d'audit.
-- LSASS (Local Security Authority Subsystem) : processus en mode utilisateur (Lsass.exe) ; stratégie de sécurité locale (identification, stratégies de mot de passe, droits et groupes) ; base dans HKLM\SECURITY.
-- SAM (Security Accounts Manager) : sous-routines (Samsrv.dll, dans LSASS) gérant la base des utilisateurs et groupes locaux, mots de passe et attributs ; stockée sous HKLM\SAM.
-- Active Directory : service d'annuaire, base des objets du domaine (Ntdsa.dll, dans LSASS).
-- Packages d'authentification : DLL contrôlant nom et mot de passe ; en cas de succès, fournissent à LSASS l'identité pour générer un jeton d'accès.
-- Winlogon (Winlogon.exe, mode utilisateur) : gère les sessions, crée le shell.
-- LogonUI : processus fils de Winlogon, présente l'interface d'authentification.
-- Credential providers : objets dans LogonUI, obtiennent nom/mot de passe, PIN de carte à puce, biométrie (authui.dll, SmartcardCredentialProvider.dll).
-- Netlogon : crée le canal sécurisé vers un contrôleur de domaine.
-- KSecDD (Kernel Security Device Driver) : fonctions en mode noyau, interface LPC (Local Procedure Call) ; utilisée par EFS pour communiquer avec LSASS.
+LEXIQUE COMPLET.
 
-3. SERVICES DE SÉCURITÉ ET ACTEURS
-Fonctionnalités : discrimination (besoin d'en connaître), protection d'intégrité obligatoire des ressources partagées, authentification des utilisateurs, prévention de l'accès à des ressources non initialisées libérées par un autre utilisateur.
-Ressources gérées de façon générique comme des objets (File, Process, Key...), protégés par un descripteur de sécurité. Une entité n'accède pas directement à un objet : un processus, sous son identité, y accède ; chaque processus porte un jeton d'accès (access token). Après authentification, une session de connexion (logon session) définit le contexte de sécurité, au sein de laquelle les processus sont lancés.
-Compte utilisateur : nom + élément restrictif (mot de passe). Local (base SAM, ressources de l'ordinateur seulement) ou de domaine (Active Directory, tout ordinateur et toutes les ressources du domaine).
-SID (Security Identifier) : identifiant unique d'un compte au sein d'une autorité, forme S-R-I-XXX-XXX-XXX-RID ; l'Administrateur local a le RID 500. Login : 256 caractères max, non sensible à la casse. Mot de passe : 14 caractères max en base SAM, 127 max en domaine AD.
-Groupes : de sécurité (éléments de sécurité) ou de distribution ; identifiés par des SID. Groupes prédéfinis (builtin) ; identités spéciales / entités de sécurité intégrée (membres contextuels).
-GPO (Group Policy Object) : ensemble de paramètres appliqués automatiquement aux utilisateurs/groupes d'un conteneur (site AD, domaine, unité d'organisation).
-Domaine : espace de confiance où un contrôleur de domaine gère de façon centralisée les comptes et les requêtes d'authentification.
+      Sécurité d'un système informatique : ensemble des dispositions visant à empêcher les accès non autorisés aux données sensibles, en particulier dans un environnement multi-utilisateurs partageant des ressources physiques communes.
 
-4. MISE EN ŒUVRE : AUTHENTIFICATION, CONTRÔLE D'ACCÈS, AUDIT
-Modèle de sécurité Windows : trois services fondamentaux (authentification, contrôle d'accès, audit).
-Authentification : vérifie l'identité d'un utilisateur ouvrant une session ou accédant à des ressources. Ouverture de session unique (single sign-on) : une seule connexion au domaine, authentifié par tout ordinateur du domaine (moins de confusion pour l'utilisateur, un seul compte pour l'administrateur).
-- Ouverture de session interactive : identité confirmée sur l'ordinateur local.
-- Authentification réseau : identité vérifiée auprès d'un service réseau.
-Protocoles : Kerberos V5 (par défaut dans un domaine ; authentification mutuelle : identité de l'utilisateur ET du serveur), SSL/TLS (serveur web sécurisé, choix des chiffrements), NTLM (compatibilité Windows NT 4.0 ; mode mixte = paramètre par défaut), Digest (hachage MD5), Passport (service unique d'inscription pour sites web membres).
-Authentification locale : par la LSA (autorité de sécurité locale) avec la base SAM. Sur un domaine : le système local délègue à un contrôleur de domaine, qui peut lui-même déléguer à un autre DC. En cas de succès, la LSA récupère les attributs d'autorisation pour construire la session de connexion.
-Contrôle d'accès : autorise utilisateurs, groupes et ordinateurs à accéder aux objets. A lieu à l'ouverture de l'objet (obtention d'un handle) ; ensuite plus de contrôle, hors respect des limites autorisées (un fichier ouvert en lecture seule ne pourra pas être écrit même si les droits changent). Rapproche trois éléments : permissions demandées à l'ouverture, descripteur de sécurité de l'objet, jeton du processus.
-Descripteur de sécurité (SD) : SID du propriétaire, DACL (Discretionary ACL) et SACL (System ACL, pour l'audit). Discrétionnaire : le propriétaire peut toujours lire et modifier la DACL de ses objets. DACL = liste d'ACE ; chaque ACE est positive (accorde) ou négative (refuse) un type d'accès via un masque de permissions.
-Jeton : identité et attributs d'autorisation (SID du propriétaire du processus, SID des groupes globaux et locaux), SID du type de session (ex. interactive), SID d'identifiant de session, sécurité par défaut des nouveaux objets.
-Droits et privilèges d'utilisateur : liés au compte (ouverture de session, actions spécifiques), différents des autorisations liées aux objets ; à administrer de préférence dans des groupes.
-Audit : Windows Server 2008 met en œuvre un gestionnaire d'objets (MOM) générant des événements d'audit. La politique d'audit du système local (type d'événements à contrôler) se configure avec l'éditeur de politique de sécurité locale ; les événements sont consignés dans le journal sécurité (security log), consultable via l'Observateur d'événements.
+      Exigences fondamentales de sécurité : mécanismes qu'un système d'exploitation met en œuvre nativement, à savoir le couple login et mot de passe, l'accès contrôlé aux objets par des listes de contrôle d'accès, les droits et privilèges, et le contrôle sur les actions des programmes.
+
+      TCSEC (Trusted Computer System Evaluation Criteria) : norme définissant des exigences de sécurité, dont Windows Server 2008 satisfait les critères d'ouverture de session sécurisée, de contrôle d'accès discrétionnaire, d'audit de la sécurité, de protection contre la réutilisation des objets, de chemin approuvé et d'administration approuvée.
+
+      Ouverture de session sécurisée : identification des utilisateurs et accès accordé seulement après authentification.
+
+      Contrôle d'accès discrétionnaire : accord de permissions et autorisation de types d'accès aux utilisateurs et groupes, laissé à la discrétion du propriétaire de l'objet.
+
+      Protection contre la réutilisation des objets : cloisonnement étanche des données des utilisateurs, empêchant un utilisateur d'accéder à des ressources non initialisées qu'un autre a libérées.
+
+      Chemin approuvé : barrière contre l'interception des noms d'utilisateur et des mots de passe.
+
+      Administration approuvée : usage de comptes distincts pour chaque fonction, administrateur, utilisateur et autres.
+
+      Noyau NT 6.0 : noyau entièrement retravaillé sur lequel se base Windows Server 2008.
+
+      PatchGuard : technologie Microsoft qui protège le système d'exploitation en mettant un terme aux rootkits et aux attaques cherchant à modifier le noyau système.
+
+      Contrôle d'intégrité : mécanisme qui vérifie l'intégrité et la source des exécutables, en corrélation avec les politiques de sécurité du système.
+
+      KMCS (Kernel Mode Code Signing) : politique de sécurité qui vérifie que le code du noyau porte une signature fournie par une autorité de certification approuvée.
+
+      SRM (Security Reference Monitor) : composant de l'exécutif Ntoskrnl.exe chargé de définir la structure de données du jeton d'accès, de réaliser les contrôles d'accès sur les objets, de manipuler les droits utilisateurs et de gérer les messages de l'audit de sécurité.
+
+      LSASS (Local Security Authority Subsystem) : processus du mode utilisateur exécutant l'image Lsass.exe, responsable de la stratégie de sécurité du système local, à savoir l'identification des utilisateurs, les stratégies de mot de passe et les droits des utilisateurs et groupes.
+
+      Base de données des stratégies LSASS : base stockée dans le Registre sous HKLM barre SECURITY, contenant l'identification des entités ayant accès au système et leurs modalités d'accès.
+
+      SAM (Security Accounts Manager) : ensemble de sous-routines, exécuté via Samsrv.dll dans le processus LSASS, qui gère la base des noms d'utilisateurs et de groupes locaux, leurs mots de passe et leurs attributs, stockée dans le Registre sous HKLM barre SAM.
+
+      Active Directory : service d'annuaire contenant la base de données des objets du domaine, exécuté via Ntdsa.dll dans le processus LSASS.
+
+      Domaine : collection d'ordinateurs et de groupes de sécurité associés formant un tout, définissant un espace de confiance où un contrôleur de domaine gère de façon centralisée les comptes et les requêtes d'authentification.
+
+      Packages d'authentification : bibliothèques exécutées dans le contexte du processus de stratégie d'authentification, chargées de contrôler le nom et le mot de passe d'ouverture de session et de fournir à LSASS l'identité de l'utilisateur pour qu'il génère un jeton d'accès.
+
+      Winlogon : processus d'ouverture de session en mode utilisateur, chargé de gérer les sessions, qui crée un shell d'interface utilisateur à l'ouverture d'une session.
+
+      LogonUI : processus fils de Winlogon qui présente l'interface d'authentification aux utilisateurs.
+
+      Credential providers : objets s'exécutant dans le processus LogonUI, utilisés pour obtenir le nom et le mot de passe, le code confidentiel d'une carte à puce ou des informations biométriques, tels que authui.dll et SmartcardCredentialProvider.dll.
+
+      Netlogon : service d'ouverture de session qui crée le canal sécurisé vers un contrôleur de domaine par lequel transitent les requêtes de sécurité.
+
+      KSecDD (Kernel Security Device Driver) : bibliothèque de fonctions en mode noyau implémentant l'interface d'appel de procédure locale, utilisée par EFS pour communiquer avec LSASS en mode utilisateur.
+
+      Descripteur de sécurité (Security Descriptor) : structure associée à tout objet sécurisable, contenant le SID du propriétaire, la liste de contrôle d'accès discrétionnaire et la liste de contrôle d'accès système.
+
+      DACL (Discretionary Access Control List) : liste d'entrées de contrôle d'accès indiquant quels accès sont possibles pour quels SID ; le propriétaire d'un objet a toujours le droit de la lire et de la modifier.
+
+      SACL (System Access Control List) : liste de contrôle d'accès système contenant les informations d'audit.
+
+      ACE (Access Control Entry) : entrée d'une DACL listant les accès accordés ou refusés à un SID, positive si elle accorde un type d'accès, négative si elle le refuse, le type étant exprimé par un masque de permissions.
+
+      Jeton d'accès (access token) : structure attachée à tout processus qui définit son contexte de sécurité, contenant l'identité et les attributs d'autorisation sous forme de SID, la sécurité par défaut des nouveaux objets et divers paramètres, dont un SID de type de session et un SID identifiant la session de connexion.
+
+      Compte utilisateur : ensemble comprenant au minimum un nom d'utilisateur et un élément restreignant son usage par autrui, permettant d'authentifier et d'autoriser un accès à un ordinateur, un réseau et l'annuaire ; il est local si les informations sont dans la base SAM locale, de domaine si elles sont dans Active Directory.
+
+      SID (Security Identifier) : identifiant de sécurité qui identifie de façon unique un compte au sein d'une autorité, de la forme S tiret R tiret I tiret suite de sous-autorités, où R vaut actuellement un et I identifie l'autorité émettrice.
+
+      RID (Relative Identifier) : identifiant relatif terminant un SID, par exemple cinq cents pour le principal Administrateur d'un système local.
+
+      Login : nom unique dans l'espace de noms considéré permettant d'identifier l'utilisateur, d'au plus deux cent cinquante-six caractères, non sensible à la casse.
+
+      Mot de passe : élément secret associé au login, d'au plus quatorze caractères dans une base SAM et d'au plus cent vingt-sept caractères pour un compte de domaine Active Directory.
+
+      Groupe : regroupement d'utilisateurs selon des besoins similaires, dont chaque membre hérite des droits et permissions accordés au groupe, de type Sécurité pour gérer les éléments de sécurité ou Distribution ; certains groupes sont prédéfinis ou builtin, d'autres sont des identités spéciales aux membres contextuels.
+
+      GPO (Group Policy Object) : stratégie de groupe, ensemble de paramètres formant une règle qui s'applique automatiquement aux utilisateurs ou groupes d'un objet conteneur, site Active Directory, domaine ou unité d'organisation.
+
+      Authentification : vérification de l'identité de tout utilisateur cherchant à ouvrir une session sur un domaine ou à accéder à des ressources réseau.
+
+      Ouverture de session unique : mécanisme permettant à un utilisateur de se connecter une seule fois au domaine avec un seul mot de passe ou une seule carte à puce et d'être authentifié par n'importe quel ordinateur du domaine.
+
+      Ouverture de session interactive : authentification qui confirme l'identification de l'utilisateur sur son ordinateur local.
+
+      Authentification réseau : vérification de l'identification de l'utilisateur auprès de tout service réseau auquel il tente d'accéder.
+
+      Kerberos V5 : protocole principal utilisé avec un mot de passe ou une carte à puce pour la connexion interactive et pour les authentifications dans un domaine, assurant une authentification mutuelle du client et du serveur.
+
+      SSL/TLS (Secure Sockets Layer / Transport Layer Security) : protocole utilisé pour accéder à un serveur web sécurisé, permettant de choisir les chiffrements et algorithmes cryptographiques autorisés.
+
+      NTLM : protocole d'authentification utilisé lorsque le client ou le serveur exécute Windows NT 4.0 ou une version antérieure, configuration dite en mode mixte, paramètre par défaut de la famille Windows Server 2008.
+
+      Digest : authentification qui transmet les informations d'identification sur le réseau sous forme de hachage MD5, aussi appelé message résumé.
+
+      Passport : service d'authentification proposant une inscription unique et des services de profil pour des sites web membres.
+
+      LSA (Local Security Authority) : composant réalisant l'authentification locale à partir de la base SAM du système, ou déléguant l'authentification à un contrôleur de domaine, puis récupérant les attributs d'autorisation pour construire la session de connexion.
+
+      Session de connexion (logon session) : contexte de sécurité accordé à tout utilisateur correctement authentifié, au sein duquel des processus sont lancés avec chacun un contexte de sécurité personnalisable par le jeton.
+
+      Contrôle d'accès : processus autorisant utilisateurs, groupes et ordinateurs à accéder à des objets, dont les concepts clés sont les autorisations, les droits de l'utilisateur et l'audit des objets.
+
+      Référence (handle) : identifiant obtenu à l'ouverture d'un objet, par lequel un processus accède ensuite à cet objet.
+
+      Droits et privilèges d'utilisateur : privilèges spécifiques et droits d'ouverture de session accordés par les administrateurs, qui s'appliquent à un compte utilisateur, individuellement ou à un groupe, contrairement aux autorisations qui s'appliquent aux objets.
+
+      Autorisation : type d'accès accordé à un utilisateur ou un groupe sur un objet ou une de ses propriétés, applicable à tous les objets sécurisés et de préférence affectée aux groupes ; certaines sont communes à la plupart des objets, à savoir Lecture, Modification, Changement de propriétaire et Supprimer.
+
+      Appropriation des objets : possibilité de modifier le propriétaire d'un objet, le système affectant par défaut comme propriétaire le créateur de l'objet.
+
+      Héritage : fonction permettant aux objets d'un conteneur d'hériter automatiquement des autorisations de ce conteneur, seules celles marquées en vue d'un héritage étant transmises.
+
+      Audit des objets : fonction relevant l'accès des utilisateurs aux objets, dont les événements sont consignés dans le journal de sécurité et consultés avec l'Observateur d'événements selon une politique d'audit définie au préalable.
+
+      Politique d'audit : type particulier d'événements de sécurité à contrôler, configurable avec l'éditeur de politique de sécurité locale.
+
+      MOM (Microsoft Operation Manager) : gestionnaire d'objets de Windows Server 2008 qui génère les événements d'audit, par exemple le résultat de la vérification d'un accès.
+
+      Observateur d'événements : outil affichant les différents journaux d'événements créés, notamment la sécurité et les applications.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LES OBJECTIFS ET LES MÉCANISMES DE SÉCURITÉ.
+
+
+   A. Le but de la sécurité.
+
+      La sécurité d'un système informatique a pour but d'empêcher les accès non autorisés aux données sensibles, surtout dans un environnement où de multiples utilisateurs ont accès à des ressources physiques communes ; le système d'exploitation doit assurer cette sécurité et protéger les fichiers, la mémoire et la configuration contre les intrusions.
+
+      Les moyens de base sont les comptes d'accès, les mots de passe et la protection des fichiers ; d'autres mécanismes s'y ajoutent, à savoir la protection du système d'exploitation lui-même, l'interdiction de certaines actions ou traitements, et le blocage des programmes perturbateurs.
+
+
+   B. Les exigences fondamentales.
+
+      La sécurité d'un système d'exploitation repose sur des mécanismes mis en œuvre nativement, à savoir le couple login et mot de passe, l'accès contrôlé aux objets par des listes de contrôle d'accès, les droits et privilèges, et le contrôle sur les actions des programmes.
+
+      Windows Server 2008 respecte ces exigences, également définies dans des normes comme la norme TCSEC ; il satisfait aux critères d'ouverture de session sécurisée, de contrôle d'accès discrétionnaire, d'audit de la sécurité, de protection contre la réutilisation des objets, de chemin approuvé et d'administration approuvée.
+
+
+   C. Les caractéristiques de niveau supérieur.
+
+      Windows possède des caractéristiques qui lui accordent une évaluation bien plus haute, à savoir système d'exploitation distribué, système pour système embarqué, protection de données sensibles, pare-feu, administration de bureau, administration de réseau, service d'annuaire, réseau privé virtuel, infrastructure de clé publique, et émission et administration de certificats à clé publique.
+
+
+   D. La protection du noyau.
+
+      Le noyau de Windows Server 2008 a été entièrement retravaillé et se base sur le noyau NT 6.0 ; la technologie PatchGuard protège au maximum le système d'exploitation en mettant un terme aux rootkits et à toute attaque visant à modifier le noyau.
+
+      Le contrôle d'intégrité vérifie l'intégrité et la source des exécutables, en corrélation avec les politiques de sécurité, notamment KMCS qui vérifie que le code du noyau porte une signature fournie par une autorité de certification approuvée.
+
+
+II. LES COMPOSANTS DU SYSTÈME DE SÉCURITÉ.
+
+
+   A. Les composants du mode noyau.
+
+      Le SRM est un composant de l'exécutif Ntoskrnl.exe chargé de définir la structure de données de jeton d'accès pour représenter un contexte de sécurité, de faire les contrôles d'accès sur les objets, de manipuler les droits utilisateurs et de gérer les messages de l'audit de sécurité.
+
+      KSecDD est une bibliothèque de fonctions en mode noyau qui implémente l'interface d'appel de procédure locale ; EFS l'utilise pour communiquer avec LSASS en mode utilisateur.
+
+
+   B. Le processus LSASS et ses bases de données.
+
+      LSASS est le processus du mode utilisateur qui exécute l'image Lsass.exe, chargée de la stratégie de sécurité du système local, à savoir l'identification des utilisateurs, les stratégies de mot de passe, et les droits des utilisateurs et groupes ; sa base de données des stratégies est stockée dans le Registre sous HKLM barre SECURITY et contient l'identification des entités ayant accès au système et leurs modalités d'accès.
+
+      Le service SAM est un ensemble de sous-routines qui gère la base des noms d'utilisateurs et de groupes définis sur l'ordinateur lui-même ; Samsrv.dll est exécuté dans le processus LSASS et la base SAM, contenant les utilisateurs et groupes locaux, leurs mots de passe et leurs attributs, est stockée dans le Registre sous HKLM barre SAM.
+
+      Active Directory est un service d'annuaire qui contient la base de données des objets du domaine, un domaine étant une collection d'ordinateurs et de groupes de sécurité associés formant un tout ; le serveur Ntdsa.dll est exécuté dans le processus LSASS.
+
+      Les packages d'authentification sont des bibliothèques exécutées dans le contexte du processus de stratégie d'authentification Windows ; une bibliothèque d'authentification contrôle le nom et le mot de passe d'ouverture de session et, en cas de contrôle positif, fournit à LSASS l'identité de l'utilisateur pour qu'il génère un jeton d'accès.
+
+
+   C. Les composants d'ouverture de session.
+
+      Winlogon fonctionne en mode utilisateur et gère les sessions ; quand un utilisateur ouvre une session, Winlogon.exe crée un shell, c'est-à-dire l'interface utilisateur.
+
+      LogonUI est un processus fils de Winlogon qui présente les utilisateurs sur l'interface afin qu'ils s'authentifient ; les credential providers sont des objets qui s'exécutent dans le processus LogonUI pour obtenir le nom et le mot de passe, le code confidentiel d'une carte à puce ou des informations biométriques telles que des empreintes digitales, par exemple authui.dll et SmartcardCredentialProvider.dll.
+
+      Netlogon crée le canal sécurisé vers un contrôleur de domaine dans lequel transitent les requêtes de sécurité.
+
+
+III. LES SERVICES DE SÉCURITÉ ET LA GESTION DES OBJETS.
+
+
+   A. Les fonctionnalités offertes.
+
+      Les systèmes Windows offrent la discrimination, c'est-à-dire le besoin d'en connaître, la protection de l'intégrité obligatoire de toutes les ressources partagées, l'authentification des utilisateurs, et la prévention envers un utilisateur voulant accéder à des ressources non initialisées qu'un autre a libérées.
+
+      Windows Server 2008 met en œuvre un contrôle discrétionnaire des activités des utilisateurs et un service d'audit, qui se basent sur la protection d'objets et sur l'authentification ; le service de contrôle d'accès définit qui peut accéder aux ressources et de quelle manière, le service d'authentification permet à une entité de prouver son identité, et le service d'audit donne à l'administrateur une visibilité sur l'état du système.
+
+
+   B. Objets, descripteurs et jetons.
+
+      Sous Windows, toutes les ressources sont gérées de façon générique et centralisée sous forme d'objets tels que File, Process ou Key ; chaque objet est protégé par un descripteur de sécurité qui définit quels types d'accès sont autorisés et de la part de quelles entités.
+
+      Une entité n'accède pas directement à un objet, ce sont des processus fonctionnant sous son identité qui y accèdent ; les attributs d'autorisation sont donc conservés au niveau du processus, chaque processus disposant d'un contexte de sécurité porté par une structure appelée jeton d'accès, ou jeton.
+
+      Avant de lancer des processus, une entité doit s'authentifier ; toute entité correctement authentifiée reçoit une session de connexion qui définit son contexte de sécurité sur le système, session au sein de laquelle les processus sont lancés avec un contexte personnalisable par le jeton.
+
+
+IV. LES ACTEURS ET CONCEPTS DU MODÈLE.
+
+
+   A. Le compte utilisateur.
+
+      Pour se connecter, un utilisateur doit avoir un compte composé au minimum d'un nom d'utilisateur et d'un élément restreignant son usage par d'autres personnes, par exemple un mot de passe ; le compte permet d'authentifier et d'autoriser un accès à un ordinateur, un réseau et l'annuaire de l'entreprise.
+
+      Un compte local a ses informations dans la base SAM locale de l'ordinateur, un compte de domaine a ses informations dans Active Directory ; un compte de domaine peut se connecter sur tout ordinateur et accéder à toutes les ressources du domaine, alors qu'un compte local n'accède qu'aux ressources de l'ordinateur sur lequel il est connecté.
+
+
+   B. Le Security Identifier.
+
+      Un utilisateur est identifié par un SID, représentable sous la forme d'une chaîne S tiret R tiret I tiret suite de valeurs, où S rappelle qu'il s'agit d'un SID, R est le numéro de format binaire actuellement égal à un, I identifie l'autorité émettrice, et la suite de longueur variable est formée d'identifiants de sous-autorités ou d'identifiants relatifs.
+
+      Par exemple, le SID du principal Administrateur d'un système local est de la forme S tiret un tiret cinq tiret vingt et un tiret suite unique tiret cinq cents, l'autorité émettrice ayant l'identifiant cinq et la sous-autorité l'identifiant vingt et un, cinq cents étant le RID de l'Administrateur ; il faut retenir que, quels que soient sa longueur et son format, un SID identifie de façon unique un compte au sein d'une autorité.
+
+
+   C. Le login et le mot de passe.
+
+      Un login est un nom unique dans l'espace de noms considéré permettant d'identifier l'utilisateur, d'au plus deux cent cinquante-six caractères et non sensible à la casse ; associé à un mot de passe, il sécurise l'utilisation des comptes.
+
+      Un mot de passe stocké dans une base SAM comporte au plus quatorze caractères, alors qu'un mot de passe de compte de domaine Active Directory en comporte au plus cent vingt-sept.
+
+
+   D. Les groupes et les stratégies de groupe.
+
+      Pour simplifier la gestion, les utilisateurs sont placés dans des groupes selon des critères tels que des besoins similaires ; l'utilisateur d'un groupe hérite des droits et permissions accordés au groupe.
+
+      Windows Server 2008 fournit des groupes prédéfinis ou builtin pour les tâches d'administration et les opérations standard, ainsi que des identités spéciales aux membres contextuels, l'utilisateur étant placé dans un groupe selon l'objet ou la ressource considérée ; les deux types de groupe sont Sécurité, pour gérer les éléments de sécurité, et Distribution ; tous sont identifiés de façon unique par des SID.
+
+      Une stratégie de groupe est un ensemble de paramètres formant une règle qui s'applique automatiquement aux utilisateurs ou groupes d'un objet conteneur, site Active Directory, domaine ou unité d'organisation, ce qui facilite le travail de l'administrateur, par exemple pour la distribution des applications ou le lancement de scripts.
+
+
+   E. Le domaine.
+
+      Un domaine définit un espace de confiance au sein duquel un contrôleur de domaine gère de façon centralisée les comptes et les requêtes d'authentification ; un utilisateur peut s'authentifier auprès de tout système du domaine, chacun utilisant le service d'authentification fourni par un contrôleur du domaine.
+
+
+V. LA MISE EN ŒUVRE DE LA SÉCURITÉ.
+
+
+   A. Le modèle de sécurité Windows.
+
+      Le modèle de sécurité de Windows est complet et supporte trois services fondamentaux, l'authentification, le contrôle d'accès et l'audit ; bien que complexe à première vue, sa bonne compréhension permet d'envisager une sécurisation efficace du système et des applications qui s'y exécutent.
+
+
+   B. L'authentification.
+
+      L'authentification vérifie l'identité de tout utilisateur qui cherche à ouvrir une session sur un domaine ou à accéder à des ressources réseau ; la famille Windows Server 2008 active l'ouverture de session unique, où un utilisateur se connecte une seule fois au domaine avec un seul mot de passe ou une seule carte à puce et est authentifié par n'importe quel ordinateur.
+
+      L'ouverture de session unique réduit les risques de confusion pour l'utilisateur et améliore son efficacité, et diminue le travail d'exploitation de l'administrateur qui ne gère qu'un compte par utilisateur.
+
+      L'authentification se fait par ouverture de session interactive, qui confirme l'identification sur l'ordinateur local et exige la fourniture d'un nom d'utilisateur et d'un mot de passe à chaque accès à une ressource locale, ou par authentification réseau, qui vérifie l'identification auprès de tout service réseau et peut s'appuyer sur une ouverture de session unique.
+
+
+   C. Les protocoles d'authentification.
+
+      Kerberos V5 est utilisé avec un mot de passe ou une carte à puce pour la connexion interactive et constitue le protocole de sécurité principal des authentifications dans un domaine, avec vérification mutuelle de l'utilisateur et du serveur.
+
+      SSL/TLS est utilisé pour accéder à un serveur web sécurisé et permet de décider des chiffrements autorisés, tous étant utilisables par défaut ; NTLM est utilisé quand le client ou le serveur exécute Windows NT 4.0 ou une version antérieure, configuration dite en mode mixte, paramètre par défaut ; Digest transmet les informations d'identification sous forme de hachage MD5 ; Passport propose une inscription unique et des services de profil pour des sites web membres.
+
+      L'authentification est réalisée par le système local via la LSA à partir de la base SAM, ou déléguée à un contrôleur de domaine qui authentifie le compte s'il appartient au même domaine ou délègue à un autre contrôleur ; en cas de succès, la LSA récupère les attributs d'autorisation du compte pour construire une session de connexion ayant le contexte de sécurité de l'utilisateur.
+
+
+VI. LE CONTRÔLE D'ACCÈS.
+
+
+   A. Le principe et le moment du contrôle.
+
+      Le contrôle d'accès autorise utilisateurs, groupes et ordinateurs à accéder à des objets, ses concepts clés étant les autorisations, les droits de l'utilisateur et l'audit des objets ; il a lieu dans le contexte d'un processus accédant à un objet, l'accès se faisant toujours via une référence obtenue lors de l'ouverture de l'objet.
+
+      Le contrôle d'accès et l'audit ont lieu lors de l'ouverture de l'objet ; une fois l'ouverture validée avec certaines permissions, il n'y a plus de contrôle sauf pour s'assurer que l'objet est utilisé dans les limites autorisées à l'ouverture.
+
+      Ainsi, un fichier ouvert en lecture seule ne peut pas être écrit même si l'utilisateur, membre du groupe Administrateurs, disposait du droit d'écriture au moment de l'ouverture ; réouvert en lecture-écriture, les deux accès restent autorisés tant que le fichier est ouvert, même si le droit d'écriture lui est retiré entre-temps.
+
+      Le contrôle d'accès rapproche trois éléments, les permissions spécifiées à l'ouverture de l'objet, le descripteur de sécurité de l'objet accédé et le jeton du processus réalisant l'accès.
+
+
+   B. Droits, privilèges et autorisations.
+
+      Pour assurer la sécurité d'un ordinateur, il faut tenir compte des droits des utilisateurs, que les administrateurs affectent à des utilisateurs ou groupes spécifiques pour autoriser des actions précises ; à la différence des autorisations qui s'appliquent aux objets, les droits de l'utilisateur s'appliquent à un compte, individuellement ou à un groupe.
+
+      Les autorisations définissent le type d'accès accordé à un utilisateur ou un groupe sur un objet ou une de ses propriétés ; elles s'appliquent à tous les objets sécurisés, fichiers, objets Active Directory, objets du Registre ou objets système comme les processus, et il est de bon usage de les affecter aux groupes.
+
+      On peut affecter des autorisations à des groupes, utilisateurs et identificateurs de sécurité du domaine, à des groupes et utilisateurs du domaine et des domaines approuvés, et à des groupes et utilisateurs locaux de l'ordinateur où réside l'objet ; les autorisations dépendent du type d'objet, un fichier et une clé du Registre n'acceptant pas les mêmes, mais Lecture, Modification, Changement de propriétaire et Supprimer sont communes à la plupart des types.
+
+      Par défaut, le système affecte un propriétaire à chaque objet créé, en général son créateur, et il est possible de le modifier, ce qui constitue l'appropriation des objets ; l'héritage permet aux objets d'un conteneur d'hériter automatiquement des autorisations de ce conteneur, seules celles marquées en vue d'un héritage étant transmises.
+
+
+   C. L'audit des objets.
+
+      L'audit des objets relève l'accès des utilisateurs aux objets afin de consulter ces événements dans le journal de sécurité avec l'Observateur d'événements ; l'administrateur définit au préalable une politique d'audit, c'est-à-dire le type d'événements à surveiller, et ces événements sont consignés dans le journal sécurité lorsqu'ils se produisent.
+
+
+VII. LES STRUCTURES DE DONNÉES DE SÉCURITÉ.
+
+
+   A. Le descripteur de sécurité.
+
+      À tout objet sécurisable est associé un descripteur de sécurité qui contient trois informations principales, le SID du propriétaire de l'objet, sa liste de contrôle d'accès discrétionnaire et sa liste de contrôle d'accès système ; le propriétaire, dont le SID est stocké dans le descripteur, a toujours le droit de lire et de modifier la DACL des objets lui appartenant, ce qui rend le contrôle d'accès discrétionnaire.
+
+      La DACL est une liste d'entrées de contrôle d'accès indiquant quels accès sont possibles pour quels SID, ceux-ci pouvant désigner des sujets uniques, des groupes locaux ou globaux ; une ACE est positive si elle accorde un type d'accès, négative si elle le refuse, le type étant exprimé par un masque de permissions.
+
+
+   B. Le jeton.
+
+      Un jeton est attaché à un processus et définit son contexte de sécurité ; son contenu se subdivise en identité et attributs d'autorisation, sécurité par défaut pour les nouveaux objets créés, et divers paramètres.
+
+      Pour le contrôle d'accès, les attributs d'autorisation sont des SID, au moins celui du propriétaire du processus, puis la liste des SID des groupes globaux au niveau du domaine et des groupes locaux au niveau du système ; sont aussi présents un SID indiquant le type de session de connexion, par exemple interactive, et un SID identifiant la session de connexion.
+
+
+VIII. L'AUDIT DE SÉCURITÉ.
+
+
+   A. Le gestionnaire d'objets et la politique d'audit.
+
+      Windows Server 2008 met en œuvre un gestionnaire d'objets, le MOM, qui génère des événements d'audit comme le résultat de la vérification d'un accès ; l'audit de sécurité permet la détection et la journalisation d'événements liés à la sécurité ou à l'utilisation des ressources système.
+
+      La politique d'audit du système local détermine le type particulier d'événement de sécurité à contrôler et se configure avec l'éditeur de politique de sécurité locale ; l'Observateur d'événements affiche les différents journaux créés, notamment la sécurité et les applications.
+
+
+POINTS D'ATTENTION.
+
+      Le contrôle d'accès et l'audit ont lieu uniquement à l'ouverture de l'objet, pas pendant son utilisation.
+
+      Les permissions accordées à l'ouverture restent valables tant que l'objet est ouvert, même si les droits de l'utilisateur changent entre-temps.
+
+      Un SID identifie de façon unique un compte au sein d'une autorité, quels que soient sa longueur et son format.
+
+      Le RID cinq cents désigne le principal Administrateur d'un système local.
+
+      Un mot de passe SAM est limité à quatorze caractères, un mot de passe de domaine Active Directory à cent vingt-sept caractères.
+
+      Un login peut atteindre deux cent cinquante-six caractères et n'est pas sensible à la casse.
+
+      Le propriétaire d'un objet peut toujours lire et modifier la DACL des objets lui appartenant, d'où le qualificatif discrétionnaire.
+
+      Une ACE négative refuse un type d'accès, une ACE positive l'accorde.
+
+      Le mode mixte, avec NTLM, est le paramètre d'authentification par défaut de la famille Windows Server 2008.
+
+      Seules les autorisations marquées en vue d'un héritage sont héritées par les objets enfants.
+
+      PatchGuard et KMCS protègent spécifiquement le noyau contre les rootkits et le code non signé.
+
+
+EXEMPLES CITES.
+
+      SID du principal Administrateur d'un système local de la forme S tiret un tiret cinq tiret vingt et un tiret suite unique tiret cinq cents.
+
+      Bases de sécurité stockées dans le Registre sous HKLM barre SECURITY pour les stratégies LSASS et HKLM barre SAM pour les comptes locaux.
+
+      Credential providers authui.dll et SmartcardCredentialProvider.dll s'exécutant dans le processus LogonUI.
+
+      Fichier ouvert en lecture seule par un processus alors que l'utilisateur, membre du groupe Administrateurs, disposait de la lecture-écriture, puis tentative d'écriture refusée.
+
+      Autorisations communes Lecture, Modification, Changement de propriétaire et Supprimer applicables à la plupart des types d'objets.
+
+      Protocoles Kerberos V5, SSL/TLS, NTLM, Digest et Passport pris en charge par la famille Windows Server 2008.
+
+      Configuration en mode mixte avec un ordinateur exécutant Windows NT 4.0 ou une version précédente.

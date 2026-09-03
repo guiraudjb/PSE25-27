@@ -1,30 +1,327 @@
-LES TECHNOLOGIES CPL ET SANS FIL
+LES TECHNOLOGIES CPL ET LES RÉSEAUX HERTZIENS SANS FIL.
 
-1. LE CPL (COURANT PORTEUR EN LIGNE)
-Transport d'informations sur le câblage électrique standard existant, sans travaux d'infrastructure. Usage courant : pontage entre réseaux filaires (fournir Ethernet/Wi-Fi à un groupe isolé).
-Histoire : 1950 télécommande de relais et éclairage public (unidirectionnel, 100-1000 Hz, toujours utilisé par EDF pour les heures pleines/creuses) ; années 1980 données unidirectionnelles (5-500 kHz) ; années 1990 bidirectionnel ; 2000 expérimentations EDF R&D. HomePlug Alliance (mars 2000, EDF, Motorola, Sony, Netgear...). Standards : HomePlug 1.0/1.01 (14 Mbit/s), HomePlug 1.1 Turbo (85 Mbit/s), HomePlug AV (200 Mbit/s, HDTV/VoIP, QoS, VLAN, incompatible mais cohabitation possible), UPA (200 Mbit/s), SPiDCOM (224 Mbit/s). IEEE 1901 (fin 2010) : équipements BPL (Broadband over Power Line), > 500 Mb/s en LAN, accès Internet opérateur jusqu'à 1,5 km. OPERA (UE, 2004), HomePlug Access BPL (moyenne tension).
-Technique : au courant 50 Hz, un boîtier ajoute un signal de haute fréquence (1,6-30 MHz pour le haut débit), faible énergie (quelques volts) ; l'autre boîtier reçoit et décode (élimination des basses fréquences). Couche physique : OFDM (Orthogonal Frequency Division Multiplexing, porteuses orthogonales ne se chevauchant pas, signal répété). Couche liaison : CSMA/CA (comme le Wi-Fi) — écoute, DIFS, RTS (Ready To Send), CTS (Clear To Send), ACK. QoS : TDMA (Time Division Multiplex Access) + étiquettes 802.1p (HomePlug AV, UPA DS2).
-Raccordement : couplage capacitif (majoritaire, branchement direct sur prise) ou inductif (plus efficace, -10 à -15 dB d'atténuation). Équipements : injecteurs (au tableau électrique), répéteurs (souvent inutiles : 200-300 m sur câble électrique, 800 m sur coaxial), filtres (bloquer les fréquences perturbatrices ou empêcher le signal de sortir au compteur).
-Mise en œuvre : outdoor (transformateur EDF = point d'entrée, réseau basse tension vers les bâtiments, moyenne tension pour former des grappes ; réduction de la fracture numérique dans les zones blanches) ; indoor (chaque prise devient une prise RJ-45, le compteur joue le rôle de hub ; triphasé : cross-coupling, éventuel coupleur de phase ; Plug and Play). Modes : maître-esclaves (DS2, SPiDCOM), pair-à-pair (HomePlug 1.x), centralisé (HomePlug AV).
-Sécurité : signal crypté — DES 56 bits (HomePlug 1.x) puis AES 128 bits (UPA DS2, HomePlug AV) ; couple nom de réseau / mot de passe (à modifier des valeurs usine, sinon chaque prise est un point d'entrée).
-Inconvénients : bruits fréquents, fortes atténuations (redondance nécessaire), qualité du réseau électrique déterminante ; hauts débits (1200 Mbit/s) et grandes distances nécessitent un câble de terre. Rayonnement jusqu'à ~100 m (circuit non blindé = antenne), perturbe les radio-amateurs (filtres à notches), le matériel radio et réciproquement ; effets santé peu connus ; rayonnement supérieur au Wi-Fi.
 
-2. RÉSEAUX HERTZIENS SANS FIL
-Classification par couverture : WPAN (Wireless Personal Area Network : Bluetooth 802.15.1, UWB 802.15.3), WLAN (Wi-Fi), WMAN (Wireless Metropolitan Area Network : boucle locale radio BLR, WiMax 802.16), WWAN (réseaux étendus : Wi-Mobile 802.20, 3G/4G, Edge, UMTS).
-Régulation : ARCEP (ex-ART) définit canaux et puissances ; toute bande soumise à autorisation et royalties sauf 2,4 GHz en usage privé. RLAN (Radio LAN) : textes fondateurs fin 2002, couvert en France par le Wi-Fi ; conditions techniques (puissances) fixées au niveau européen sur 2,4 GHz et 5,4-5,7 GHz. Seuls les réseaux ouverts au public sont à déclarer. BLR : infrastructure de transmission reliant directement les clients aux équipements de commutation ; substitut aux moyens filaires ; en France occupée par le WiMax (3,4-3,6 GHz, 26 GHz) ; nécessite une autorisation d'utilisation de fréquences + déclaration ARCEP.
-WiMax (Worldwide Interoperability for Microwave Access, IEEE 802.16) : lien radio entre l'antenne de base de l'opérateur (lieu élevé) et l'abonné (antenne). 802.16a : 70 Mbit/s théoriques (10 réels) sur ~50 km sans ligne de vue (20 km en pratique). 802.16b : QoS. 802.16e : roaming. Grant/Request Access : allocation de bande passante à la demande pour éviter les collisions, priorisations TCP/IP. Alternative à l'ADSL pour les zones grises ; coût de déploiement inférieur à l'ADSL mais chiffrement et authentification obligatoires.
-Bluetooth (Ericsson 1994, Bluetooth SIG, IEEE 802.15.1) : portée 1-10/20 m sans vue directe, bande 2,4 GHz, piconet de 8 appareils. v1.x : 720 kbit/s (1 Mbit/s théorique). v2.0/2.1 EDR : 3 Mb/s théoriques. v3.0 HS : connexion par Bluetooth, échange via Wi-Fi (jusqu'à 24 Mb/s). v4.x Low Energy (4.0 faible débit et latence, 4.1 moins d'interférences 4G, 4.2 IPv6/6LoWPAN). v5 (décembre 2016).
+LEXIQUE COMPLET.
 
-3. LE WI-FI (IEEE 802.11)
-Débit d'origine 1-2 Mb/s. Couche physique : DSSS (Direct Sequence Spread Spectrum, plus hauts débits), FHSS (Frequency Hopping Spread Spectrum), infrarouge. Couche LLC : identique à IEEE 802.2 (interconnexion avec tout LAN au même format, même format de trame qu'Ethernet). Couche MAC spécifique : CSMA/CA + fragmentation (support hertzien non fiable).
-Révisions : 802.11a « WiFi 5 » (54 Mbps théoriques / 30 réels, 8 canaux 5 GHz, OFDM, ~30 m, incompatible b sauf dual band) ; 802.11b (1999, 11 Mbps / 6 réels, 2,4 GHz, jusqu'à 300 m dégagé, moins sensible aux obstacles) ; 802.11g (54 Mb/s / 30 réels, 2,4 GHz 13 canaux Europe, 100 m, compatible b) ; 802.11n (2009, 300 Mb/s / 100 réels, 100 m, 2,4 ou 5 GHz, MIMO jusqu'à 4 flux + OFDM) ; 802.11ac (2013, 1300 Mbit/s, 5 GHz, canaux 20-160 MHz, jusqu'à 8 flux MIMO, ~35 m intérieur) ; 802.11ad (60 GHz, 6,75 Gbit/s, 10 m) ; 802.11ay (60 GHz, 20 Gbit/s). Amendements : 802.11d (internationalisation), 802.11e (QoS, WMM), 802.11f (roaming, recommandations), 802.11h (harmonisation HiperLAN2), 802.11i (sécurité, WPA2), 802.11p (véhicules), 802.11r (fast roaming), 802.11s (mesh), 802.11k/v/w (gestion, sécurité des trames de configuration), 802.11af (bandes VHF/UHF TV), 802.1x (authentification).
-Canaux 2,4 GHz : laisser 4 bandes libres entre cellules -> seuls 3-4 canaux exploitables, en général 1, 6 et 11. MIMO (Multiple Input Multiple Output) : plusieurs antennes, double la portée. Débit réel : chute vite entre 2 et 10 Mb/s (nombre d'utilisateurs, points d'accès, norme, distance, obstacles ; alignement des bornes sur le débit le plus bas). VoWiFi : latence < 50 ms requise.
-Sécurité : WEP (Wired Equivalent Privacy, faible) -> WPA (sous-ensemble de 802.11i, authentification 802.1x, protocole TKIP) -> WPA2 (802.11i complet, AES, incompatible première génération).
+      CPL (Courant Porteur en Ligne) : technologie de transport d'informations sur câble électrique standard, dont le support de communication est le réseau électrique existant, ne nécessitant pas de lourds travaux d'infrastructure.
 
-4. CSMA/CA ET TOPOLOGIES
-CSMA/CA (Collision Avoidance) : la détection de collision est impossible en radio (on ne peut pas écouter et transmettre en même temps sur une fréquence). Étapes : (1) écoute de la porteuse, si occupé attente ; les autres stations initialisent le NAV (Network Allocation Vector), temporisateur indiquant quand le support sera libéré (fin de trame + ACK). (2) support libre pendant le DIFS (Distributed Inter Frame Space) -> émission ; la DCF (fonction de coordination distribuée) impose d'attendre le DIFS même si libre, puis un délai aléatoire. (3) acquittement ACK ; un défaut d'ACK impose la retransmission.
-VCS (Virtual Carrier Sense), optionnel, niveau MAC : la source émet un RTS (Request To Send), le destinataire répond CTS (Clear To Send), reçu par toutes les stations à portée qui calculent leur NAV et se taisent. Utile pour les grosses trames et le problème de la station cachée (deux stations qui entendent un intermédiaire mais pas l'une l'autre) : les collisions n'ont alors lieu que sur les petits RTS.
-Topologies : SSID (Service Set Identifier, jusqu'à 32 caractères) identifie le réseau (même SSID pour communiquer) vs BSSID (adresse MAC de l'AP). IBSS / ad-hoc (sans AP, machines routeurs de niveau IP, synchronisation distribuée). BSS (stations rattachées à un même AP ; mode « infrastructure » si port Ethernet vers le filaire ; l'AP achemine toutes les trames). ESS (plusieurs BSS reliés par un Distribution System, même SSID, pas forcément même fréquence). Roaming (itinérance) : changer d'AP sans perte, généralement via des protocoles propriétaires.
-Trois types de trames Wi-Fi (format Ethernet) : données, contrôle (RTS, CTS, ACK), gestion (association/désassociation).
-Alimentation des AP : PoE (802.3af) sur les deux paires libres du RJ45, via un commutateur PoE de niveau 2.
-QoS : 802.11e — EDCF (séparation des flux, pas de scheduling), HCF (séparation + scheduling). HiperLAN 2 (pendant européen de 802.11a) : couche MAC en TDMA/TDD, séparation des flux et scheduling, mais cher et peu répandu.
+      HomePlug Alliance : association d'industriels créée en mars 2000, dont EDF, France Telecom, Motorola et Sony, pour le développement du CPL.
+
+      HomePlug 1.0 et 1.01 : standard CPL de juin 2001 à quatorze mégabits par seconde théoriques.
+
+      HomePlug 1.1 Turbo : évolution compatible du 1.0 à quatre-vingt-cinq mégabits par seconde théoriques.
+
+      HomePlug AV : standard CPL de décembre 2005 à deux cents mégabits par seconde théoriques, développé pour la télévision haute définition et la voix sur IP, incompatible avec les standards précédents mais pouvant cohabiter en créant deux réseaux CPL distincts.
+
+      UPA (Universal Powerline Association) : groupement créé en 2005 promouvant une technologie CPL à deux cents mégabits par seconde.
+
+      DS2 : firme espagnole proposant une technologie CPL à deux cents mégabits par seconde avec qualité de service, base du projet OPERA.
+
+      SPiDCOM : société ayant développé une solution CPL à deux cent vingt-quatre mégabits par seconde sur câble électrique, coaxial ou paire torsadée, ayant rejoint la HomePlug Alliance.
+
+      BPL (Broadband over Power Line) : haut débit sur réseaux électriques, notamment en extérieur pour couvrir les derniers kilomètres avant le bâtiment.
+
+      OPERA (Open PLC European Research Alliance) : projet de l'Union européenne initié le premier janvier 2004 proposant du BPL sur la technologie CPL deux cents mégabits par seconde de DS2, en concurrence ou complément de la fibre et de l'ADSL.
+
+      IEEE 1901-2010 : norme ratifiée fin 2010 définissant les équipements des réseaux BPL, visant plus de cinq cents mégabits par seconde en réseau local et de l'accès Internet sur le réseau électrique jusqu'à mille cinq cents mètres.
+
+      OFDM (Orthogonal Frequency Division Multiplexing) : modulation multi-porteuses divisant le signal en un grand nombre de porteuses orthogonales qui ne se chevauchent pas, le signal étant répété sur plusieurs porteuses pour pallier la destruction de certaines fréquences et limiter les interférences.
+
+      CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance) : méthode d'accès de la couche liaison retenue pour le CPL comme pour le Wi-Fi, où les données ne sont transmises que si le support est disponible, avec échange d'accusés de réception.
+
+      DIFS (Distributed Inter Frame Space) : durée pendant laquelle le support doit rester libre avant qu'une station puisse émettre.
+
+      RTS (Ready To Send / Request To Send) : signal émis par la station émettrice contenant la taille des données et la vitesse de transmission.
+
+      CTS (Clear To Send) : signal de réponse du récepteur autorisant l'émission.
+
+      ACK (Acknowledgment) : signal par lequel le récepteur informe l'émetteur qu'il a reçu toutes les données.
+
+      TDMA (Time Division Multiplex Access) : multiplexage temporel implémenté par HomePlug AV et UPA DS2 pour la qualité de service, permettant à plusieurs stations d'accéder à la même fréquence puis de recevoir les étiquettes 802.1p prioritisant les flux.
+
+      Couplage capacitif : mode de branchement d'un équipement CPL majoritairement utilisé, l'injecteur se branchant directement sur une prise électrique.
+
+      Couplage inductif : mode de branchement plus efficace réduisant l'atténuation de dix à quinze décibels pour certaines fréquences par rapport au couplage capacitif.
+
+      Injecteur : équipement permettant de brancher un équipement CPL sur le réseau électrique, par exemple au tableau électrique d'un bâtiment.
+
+      Répéteur CPL : équipement régénérant le signal CPL atténué, généralement non nécessaire car les équipements diffusent le signal sur deux cents à trois cents mètres de câble électrique et jusqu'à huit cents mètres de câble coaxial.
+
+      Filtre CPL : équipement placé au plus près des perturbateurs pour bloquer les fréquences gênantes, ou utilisé pour empêcher le signal de sortir du réseau électrique délimité par le compteur.
+
+      Cross-coupling : phénomène acheminant le signal CPL sur les autres phases en courant triphasé, pouvant nécessiter un coupleur de phase.
+
+      Mode Maître-Esclaves : mode où un équipement maître gère les échanges entre équipements CPL, utilisé par DS2 et SPiDCOM.
+
+      Mode Pair-à-Pair : mode où tous les équipements CPL ont le même niveau hiérarchique et échangent sans maître, utilisé par HomePlug 1.x.
+
+      Mode Centralisé : mode mixte où un équipement central gère le réseau tout en permettant aux autres d'échanger directement, utilisé par HomePlug AV.
+
+      Réseau sans fil (RSF) : réseau assurant les mêmes services que le câble mais avec des caractéristiques liées à la transmission radio, pour usage domestique, professionnel et hot spots publics.
+
+      ARCEP (Autorité de Régulation des Communications Électroniques et des Postes) : autorité française, ex-ART, qui délivre les autorisations d'émission, définit les canaux et les puissances d'émission.
+
+      WLAN (Wireless LAN) : réseau local sans fil, marché où évolue le Wi-Fi.
+
+      WPAN (Wireless Personal Area Network) : réseau sans fil personnel de faible portée, tel que Bluetooth 802.15.1 ou UWB 802.15.3.
+
+      WMAN (Wireless Metropolitan Area Network) : réseau sans fil métropolitain défini pour la boucle locale radio, tel que WiMax 802.16 ou HiperMAN.
+
+      Wi-Fi (Wireless Fidelity) : protocole de transmission radio de proximité IEEE 802.11 sur canaux préétablis en voie hertzienne, évoluant sur le marché des WLAN.
+
+      RLAN (Radio LAN) : réseau local radioélectrique, couvert en France par la technologie Wi-Fi, dont les textes fondateurs ont été adoptés fin 2002 par l'ARCEP.
+
+      BLR (Boucle Locale Radio) : infrastructures de transmission d'un réseau ouvert au public reliant directement les clients aux équipements de commutation, occupée en France par le WiMax sur les bandes 3,4 à 3,6 gigahertz et 26 gigahertz, soumise à autorisation et déclaration à l'ARCEP.
+
+      WiMax (Worldwide Interoperability for Microwave Access) : technologie IEEE 802.16 établissant un lien radio entre l'antenne de base de l'opérateur et l'abonné muni d'une antenne, à soixante-dix mégabits par seconde théoriques par cellule sur environ cinquante kilomètres sans ligne de vue, en pratique dix mégabits par seconde sur vingt kilomètres.
+
+      Grant/Request Access : mécanisme d'allocation de bande passante à la demande du WiMax, allouant une bande passante à chaque utilisateur du relais pour éviter les collisions.
+
+      Bluetooth : technologie WPAN lancée par Ericsson en 1994, IEEE 802.15.1, de portée dix à vingt mètres sans vue directe, sur la fréquence 2,4 gigahertz, permettant un piconet de huit appareils en communication simultanée.
+
+      Piconet : petit réseau Bluetooth de taille très réduite regroupant jusqu'à huit appareils.
+
+      DSSS (Direct Sequence Spread Spectrum) : technique de codage radio de 802.11 permettant les plus hauts débits.
+
+      FHSS (Frequency Hopping Spread Spectrum) : technique de codage radio de 802.11 par saut de fréquence.
+
+      MIMO (Multiple Input Multiple Output) : technologie s'appuyant sur plusieurs antennes en émission et réception, doublant la portée maximale par rapport à une antenne unique, autorisant jusqu'à quatre flux en 802.11n et huit en 802.11ac.
+
+      NAV (Network Allocation Vector) : temporisateur calculé par chaque station à chaque émission d'une trame, déterminant l'instant où le support sera libéré après la trame en cours et son acquittement.
+
+      DCF (fonction de coordination distribuée) : fonction obligeant une station voulant émettre à patienter pendant le DIFS même si le support est libre.
+
+      VCS (Virtual Carrier Sense) : mécanisme optionnel de niveau MAC reposant sur l'échange de trames RTS et CTS avant l'envoi de données, réservant le support sans risque de collision, utile pour les grosses trames et le problème de la station cachée.
+
+      Station cachée : situation où deux stations entendent chacune une station intermédiaire mais pas l'une l'autre, et peuvent émettre vers l'intermédiaire sans détecter une transmission en cours.
+
+      SSID (Service Set Identifier) : chaîne d'au plus trente-deux caractères identifiant le réseau, que deux stations doivent partager pour communiquer, deux réseaux distincts pouvant utiliser la même fréquence avec des SSID différents.
+
+      BSSID (Basic Service Set Identifier) : adresse MAC de l'équipement Wi-Fi, identifiant de manière unique l'équipement, à ne pas confondre avec le SSID.
+
+      IBSS (Independent Basic Service Set) : architecture ad-hoc où plusieurs machines communiquent directement sans point d'accès, la synchronisation étant distribuée et les machines jouant le rôle de routeurs de niveau IP.
+
+      BSS (Basic Service Set) : topologie où un groupe de stations partageant un même SSID est rattaché à un même point d'accès, aucune ne communiquant sans passer par lui ; appelée infrastructure si le point d'accès a un port Ethernet vers le réseau filaire.
+
+      ESS (Extended Service Set) : regroupement de plusieurs BSS reliés par un système de distribution, filaire ou sans fil, les BSS devant partager le même SSID.
+
+      DS (Distribution System) : infrastructure, souvent Ethernet, reliant les points d'accès entre eux.
+
+      Roaming (itinérance) : possibilité pour une station de changer de point d'accès sans perdre la connectivité, généralement implémentée par des protocoles propriétaires, la norme 802.11f n'apportant que des recommandations.
+
+      WEP (Wired Equivalent Privacy) : ancien protocole de chiffrement Wi-Fi, remplacé par TKIP puis AES.
+
+      WPA (Wi-Fi Protected Access) : sous-ensemble de 802.11i s'appuyant sur l'authentification 802.1x et le protocole TKIP, successeur du WEP.
+
+      802.11i : référentiel de sécurité Wi-Fi avec WPA version 2, incompatible avec les matériels de première génération utilisant WEP ou WPA.
+
+      802.1x : norme de l'IETF, initialement pour les réseaux câblés, devenue un point clé de l'authentification sans fil, un client non authentifié se voyant interdire l'accès au réseau.
+
+      PoE (Power over Ethernet) : norme 802.3af alimentant en électricité de petits équipements de réseau, caméras IP ou bornes radio, par le câble Ethernet via les deux paires libres de la prise RJ45, le câble devant être connecté à un commutateur PoE de niveau 2.
+
+      Hiperlan 2 : pendant européen d'IEEE 802.11a à couche MAC différente, TDMA TDD au lieu de CSMA, intégrant la séparation des flux et le scheduling, mieux conçu mais cher.
+
+      EDCF et HCF : algorithmes de qualité de service du standard 802.11e, EDCF permettant la séparation des flux sans scheduling, HCF permettant les deux.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LE COURANT PORTEUR EN LIGNE.
+
+
+   A. Présentation et histoire.
+
+      Le CPL transporte des informations sur le câble électrique standard, sans lourds travaux d'infrastructure puisque le support est le réseau électrique existant ; critiqué à ses débuts pour ses faibles performances et l'incompatibilité entre fournisseurs, il a progressé avec les équipements à deux cents mégabits par seconde offrant des débits effectifs d'environ soixante mégabits par seconde en TCP/IP.
+
+      Dès 1950, le CPL télécommande des relais et l'éclairage public en mode unidirectionnel sur cent à mille hertz, application encore utilisée par EDF pour le changement heures pleines heures creuses ; les recherches sur les données commencent au milieu des années 1980 sur cinq à cinq cents kilohertz, les premiers tests bidirectionnels apparaissent au milieu des années 1990, la HomePlug Alliance est créée en mars 2000, le standard HomePlug 1.01 à quatorze mégabits par seconde voit le jour en 2001, suivi de HomePlug 1.1 Turbo à quatre-vingt-cinq mégabits par seconde et de HomePlug AV à deux cents mégabits par seconde, puis de la norme IEEE 1901 fin 2010.
+
+
+   B. Les standards intérieur et extérieur.
+
+      En intérieur, dit Indoor, le CPL haut débit résidentiel est utilisé sur le réseau électrique privé de l'abonné pour un réseau local ; les principaux standards sont HomePlug 1.0 et 1.01 à quatorze mégabits par seconde, HomePlug 1.1 Turbo compatible à quatre-vingt-cinq mégabits par seconde, et HomePlug AV à deux cents mégabits par seconde pour la télévision haute définition et la voix sur IP, incompatible avec les précédents mais pouvant cohabiter en créant deux réseaux distincts ; l'UPA propose du deux cents mégabits par seconde, SPiDCOM du deux cent vingt-quatre mégabits par seconde multi-support.
+
+      En extérieur, dit Outdoor, le CPL utilise l'infrastructure électrique moyenne et basse tension publique pour desservir un accès haut débit à Internet ; HomePlug Access BPL couvre les derniers kilomètres en moyenne tension, OPERA propose du BPL sur la technologie DS2, et SPiDCOM propose aussi une technologie d'accès extérieur ; la norme IEEE 1901-2010 définit les équipements BPL, visant plus de cinq cents mégabits par seconde en réseau local et de l'accès Internet jusqu'à mille cinq cents mètres.
+
+
+   C. La technique.
+
+      Le courant électrique est à cinquante hertz en France ; un boîtier CPL ajoute un signal de plus haute fréquence, de 1,6 à trente mégahertz pour le haut débit, et de faible énergie, quelques volts, qui se propage sur le câble puis est décodé à distance par un autre boîtier, les équipements éliminant les basses fréquences.
+
+      En couche physique, le CPL haut débit utilise la modulation multi-porteuses OFDM, qui divise le signal en un grand nombre de porteuses orthogonales ne se chevauchant pas, le signal étant répété sur plusieurs porteuses pour pallier la destruction de certaines fréquences et limiter les interférences ; en couche liaison, la méthode d'accès est CSMA/CA, comme pour le Wi-Fi, où la station émet un RTS après un support libre pendant le DIFS, le récepteur répond par un CTS, le transfert débute et se termine par un ACK, les autres stations patientant ; HomePlug AV et UPA DS2 ajoutent le TDMA et les étiquettes 802.1p pour la qualité de service.
+
+
+   D. Les équipements et les modes de fonctionnement.
+
+      Le branchement se fait par couplage capacitif, majoritaire, l'injecteur se branchant directement sur une prise, ou par couplage inductif, plus efficace, réduisant l'atténuation de dix à quinze décibels ; les équipements sont les injecteurs, les répéteurs, rarement nécessaires car le signal porte sur deux cents à trois cents mètres de câble électrique et jusqu'à huit cents mètres de coaxial, et les filtres, placés près des perturbateurs ou utilisés pour empêcher la fuite du signal hors du compteur.
+
+      En intérieur, chaque prise équipée d'un module CPL devient une prise RJ45 et le compteur joue le rôle de hub ; le signal circule sur la phase et le neutre, le cross-coupling l'acheminant sur les autres phases en triphasé, ce qui peut nécessiter un coupleur de phase ; les modules sont Plug and Play, avec trois modes, Maître-Esclaves utilisé par DS2 et SPiDCOM, Pair-à-Pair utilisé par HomePlug 1.x, et Centralisé utilisé par HomePlug AV.
+
+
+   E. La sécurité et les inconvénients.
+
+      Le signal CPL peut être capté à proximité directe en extérieur, sauf pour les lignes enterrées, et ne s'arrête au compteur que s'il dispose d'un filtre bloquant, d'où l'intérêt d'un filtre pour éviter la fuite vers l'opérateur ; le signal est crypté, les premiers standards en DES 56 bits, les versions récentes UPA DS2 et HomePlug AV en AES 128 bits ; l'appartenance d'un module à un réseau se règle par un couple nom de réseau et mot de passe, renseigné en usine par défaut et à modifier pour la sécurité.
+
+      Le CPL doit composer avec des bruits fréquents et de fortes atténuations, d'où la nécessité de redondance, la qualité et la modernité du réseau électrique étant primordiales, les hauts débits et grandes distances nécessitant un câble de terre utilisé pour transmettre des données ; le circuit électrique non blindé se comporte comme une antenne et rayonne jusqu'à une centaine de mètres, perturbant les radio-amateurs en extérieur, masqués par des filtres à bandes étroites appelés notches, et le matériel radio en intérieur, le rayonnement CPL étant supérieur aux ondes Wi-Fi et proche du DECT ou de la 3G et 4G.
+
+
+II. LES RÉSEAUX HERTZIENS SANS FIL.
+
+
+   A. Classification et réglementation.
+
+      Un réseau sans fil assure les mêmes services que le câble avec des caractéristiques radio ; les usages professionnels classent ces réseaux selon la zone de couverture, du WPAN comme Bluetooth au WMAN pour la boucle locale radio, en passant par le WLAN où évolue le Wi-Fi, jusqu'aux réseaux étendus 3G et 4G.
+
+      En France, le spectre radio est une ressource rare, toute bande de fréquences étant soumise à autorisation et royalties, sauf la bande des 2,4 gigahertz en usage privé, totalement libérée ; l'ARCEP définit les canaux et les puissances, a adopté fin 2002 les textes fondateurs des RLAN, couverts par le Wi-Fi, et impose le respect des conditions techniques des bandes 2,4 gigahertz et 5,4 à 5,7 gigahertz fixées au niveau européen ; seuls les réseaux ouverts au public doivent être déclarés à l'ARCEP.
+
+
+   B. La boucle locale radio et le WiMax.
+
+      La boucle locale radio désigne les infrastructures reliant directement les clients aux équipements de commutation, segment important du réseau d'un opérateur, soumise à autorisation d'utilisation de fréquences et à déclaration précisant l'emplacement de la station de base et la zone desservie ; en France, elle est occupée par le WiMax sur les bandes 3,4 à 3,6 gigahertz et 26 gigahertz.
+
+      Le WiMax IEEE 802.16 établit un lien radio entre l'antenne de base de l'opérateur, placée en hauteur, et l'abonné muni d'une antenne ; la norme 802.16a de 2002 permet des liaisons fixes point à multipoints à soixante-dix mégabits par seconde théoriques par cellule sur environ cinquante kilomètres sans ligne de vue, en pratique dix mégabits par seconde sur vingt kilomètres, 802.16b ajoutant la qualité de service et 802.16e le roaming ; il se différencie du Wi-Fi par l'allocation de bande passante à la demande Grant/Request Access, se positionne en alternative à l'ADSL pour les zones grises rurales, à coût de déploiement inférieur mais avec cryptage et authentification obligatoires.
+
+
+   C. Bluetooth.
+
+      Bluetooth, lancé par Ericsson en 1994 et défini par le Bluetooth Special Interest Group, permet des échanges entre appareils numériques sur une portée de dix à vingt mètres sans vue directe, sur la fréquence 2,4 gigahertz autorisée par l'ARCEP, avec des composants petits et peu onéreux ; il permet un piconet de huit appareils en communication simultanée.
+
+      Les versions vont de Bluetooth 1.x IEEE 802.15.1 à sept cent vingt kilobits par seconde moyens, à Bluetooth 2.x EDR à trois mégabits par seconde théoriques, Bluetooth 3.0 HS utilisant une liaison Wi-Fi pour les données jusqu'à vingt-quatre mégabits par seconde, Bluetooth 4.x Low Energy optimisé pour la très faible consommation avec connectivité IPv6 et 6LoWPAN en 4.2, et Bluetooth 5 rendu public en décembre 2016.
+
+
+III. LA NORME IEEE 802.11 (WI-FI).
+
+
+   A. L'architecture en couches.
+
+      Le Wi-Fi offre à l'origine un à deux mégabits par seconde ; en couche physique, trois codages sont proposés, DSSS et FHSS sur ondes radio et une technique infrarouge, DSSS permettant les plus hauts débits ; en couche liaison, LLC fonctionne comme la norme 802.2, ce qui permet l'interconnexion avec tout autre LAN conforme, le Wi-Fi utilisant le même format de trame qu'Ethernet.
+
+      La couche MAC, spécifique au Wi-Fi, utilise la méthode probabiliste CSMA/CA et se charge de fragmenter les données pour éviter les trames trop grosses, le support hertzien non fiable présentant un plus grand risque de corruption sur de grosses trames et des retransmissions pénalisantes.
+
+
+   B. Les principales révisions.
+
+      La norme 802.11a, dite Wi-Fi 5, offre cinquante-quatre mégabits par seconde théoriques sur huit canaux en bande 5 gigahertz avec OFDM, portée d'une trentaine de mètres, incompatible avec le b sauf matériel dual band ; 802.11b, première norme publiée en 1999, offre onze mégabits par seconde théoriques sur la bande 2,4 gigahertz avec huit canaux, portée jusqu'à trois cents mètres en environnement dégagé, moins sensible aux obstacles que le a.
+
+      802.11g offre cinquante-quatre mégabits par seconde théoriques en bande 2,4 gigahertz divisée en treize canaux en Europe, jusqu'à cent mètres, avec compatibilité ascendante avec 802.11b ; 802.11n, publiée en 2009, prévoit trois cents mégabits par seconde théoriques et cent réels dans un rayon de cent mètres en 2,4 ou 5 gigahertz grâce à MIMO et OFDM ; 802.11ac de 2013 prévoit mille trois cents mégabits par seconde en 5 gigahertz avec une portée réduite à trente-cinq mètres en intérieur ; 802.11ad et 802.11ay utilisent le 60 gigahertz, à 6,75 puis 20 gigabits par seconde.
+
+
+   C. Fréquences et canaux.
+
+      L'ARCEP a retenu les bandes 2,4 et 5 gigahertz, attribuées à des installations utilisant l'étalement de spectre avec limitation de puissance ; chaque bande contient une douzaine de canaux, mais il convient de laisser libres quatre bandes entre cellules limitrophes, si bien que seuls trois ou quatre canaux sont réellement exploitables en entreprise, en général le 1, le 6 et le 11.
+
+      802.11g et 802.11n utilisent OFDM ; 802.11n crée de multiples canaux de vingt mégahertz, 802.11ac porte les canaux de quatre à huit avec une largeur de vingt, quarante, quatre-vingts ou cent soixante mégahertz ; MIMO double la portée maximale, avec jusqu'à quatre flux en 802.11n et huit en 802.11ac.
+
+
+   D. Les débits réels et les usages.
+
+      Tous les débits annoncés sont théoriques ; le débit réel dépend du nombre d'utilisateurs, de points d'accès, de la norme, de la distance et des perturbations physiques, et chute rapidement entre deux et dix mégabits par seconde, sans offrir plus qu'un réseau filaire à dix mégabits ; les bornes s'alignent sur le débit réel le plus bas mesuré, par exemple entre 802.11g et 802.11b ; le Wi-Fi ne se prête pas encore aux gros fichiers, sauf en version n, ni au transport de la voix qui ne supporte pas plus de cinquante millisecondes de latence.
+
+
+IV. LES ASPECTS RADIO ET LES TOPOLOGIES.
+
+
+   A. Notions de transmission radio.
+
+      La transmission radio est une transmission point à multipoints d'ondes électromagnétiques de longueur millimétrique ou inférieure, caractérisée par sa puissance de sortie en milliwatts ; elle a besoin d'une antenne, chaque antenne ayant son diagramme de rayonnement, sa directivité, son gain, son impédance d'entrée, sa polarisation et sa bande passante, caractéristiques interdépendantes dont le choix dépend de l'usage.
+
+      Le gain total d'une solution Wi-Fi dépend de la puissance de l'émetteur, de la perte en ligne selon les obstacles, du gain des antennes d'émission et de réception et de la sensibilité du récepteur ; le débit peut être affecté par l'atténuation due aux interférences, aux chevauchements de canaux et à la propagation multi-trajets appelée fading ; l'implantation idéale des bornes relève d'une étude de site menée par des spécialistes avec mesures.
+
+
+   B. La méthode d'accès CSMA/CA.
+
+      Dans un réseau filaire, Ethernet emploie CSMA/CD, l'absence de signal indiquant que le support est libre et un mécanisme de répétition réglant les collisions ; en radio, la détection de collision est impossible car on ne peut écouter et transmettre en même temps sur une fréquence, il faut donc éviter les collisions avec CSMA/CA.
+
+      Le protocole comprend plusieurs étapes, la station écoute la porteuse et diffère en cas d'occupation, les autres stations initialisant un NAV à chaque émission qui retarde leurs transmissions jusqu'à la libération du support après la trame et son ACK ; une station voulant émettre attend un support libre pendant le DIFS puis un délai aléatoire, la fonction de coordination distribuée DCF imposant cette attente pendant le DIFS ; une trame d'acquittement, prioritaire, est envoyée à la fin de la transmission, un défaut d'acquittement imposant la retransmission.
+
+
+   C. Le VCS et la station cachée.
+
+      Le VCS, mécanisme optionnel de niveau MAC, repose sur l'échange de trames RTS et CTS avant l'envoi de données ; la source émet un RTS, la destination répond par un CTS, et le support est alors réservé pour la transmission et son acquittement sans risque de collision, le NAV étant calculé à réception du RTS puis recalculé à réception du CTS pour couvrir toute la durée future.
+
+      Le VCS est utile pour les grosses trames et pour le problème de la station cachée, où deux stations entendent une station intermédiaire mais pas l'une l'autre ; avec le VCS, les seules collisions possibles portent sur les petites trames RTS, la station qui n'entend pas l'émetteur recevant le CTS de l'intermédiaire, calculant son NAV et attendant.
+
+
+   D. Les topologies 802.11.
+
+      Le réseau est identifié par un SSID d'au plus trente-deux caractères que deux stations doivent partager, deux réseaux distincts pouvant utiliser la même fréquence avec des SSID différents ; le BSSID est l'adresse MAC de l'équipement Wi-Fi et ne doit pas être confondu avec le SSID.
+
+      L'IBSS ou architecture ad-hoc fait communiquer directement plusieurs machines sans point d'accès, la synchronisation étant distribuée et les machines jouant le rôle de routeurs de niveau IP ; le BSS rattache un groupe de stations de même SSID à un même point d'accès qui achemine toutes les trames, mode appelé infrastructure s'il a un port Ethernet ; l'ESS regroupe plusieurs BSS reliés par un système de distribution filaire ou sans fil, avec le même SSID ; l'ad-hoc convient au domestique, le BSS en infrastructure aux réseaux d'entreprise mixtes.
+
+      Le roaming, changement de point d'accès sans perte de connectivité, est généralement implémenté par des protocoles propriétaires ; il existe trois types de trames Wi-Fi au format Ethernet, les trames de données, les trames de contrôle RTS, CTS et ACK, et les trames de gestion pour l'association et la désassociation.
+
+
+V. L'ÉNERGIE, LA QUALITÉ DE SERVICE ET LA SÉCURITÉ.
+
+
+   A. La gestion de l'énergie.
+
+      La mobilité suppose des machines correctement alimentées, la gestion de l'énergie faisant partie de l'étude de site pour les stations, les portables et surtout les points d'accès, souvent installés en hauteur dans les faux plafonds pour la couverture et contre le vol.
+
+      Tirer une ligne 230 volts près de chaque point d'accès est lourd et une rallonge peu satisfaisante ; la norme 802.3af Power over Ethernet alimente les petits équipements par le câble Ethernet via les deux paires libres de la prise RJ45, le câble devant être connecté à un commutateur PoE de niveau 2 conforme.
+
+
+   B. La qualité de service.
+
+      Les données de type texte ne nécessitent pas de temps réel mais pas d'erreurs, alors que la voix et la vidéo exigent des flux garantis mais tolèrent des erreurs, le délai étant important pour la téléphonie, typiquement dix à cent cinquante millisecondes ; la qualité de service comporte l'efficacité, la souplesse et la garantie, et nécessite la séparation des flux et le scheduling.
+
+      Le standard 802.11e propose EDCF, qui sépare les flux sans scheduling, et HCF, qui fait les deux ; Hiperlan 2, pendant européen d'IEEE 802.11a, utilise une couche MAC en TDMA TDD intégrant séparation des flux et scheduling, mieux conçu mais cher.
+
+
+   C. La sécurité.
+
+      Les ondes radioélectriques se propagent dans toutes les directions avec une grande portée même à faible puissance, et les premiers travaux Wi-Fi datent d'une époque où le débit primait sur la sécurité ; avec un équipement adapté, il est facile de découvrir un réseau sans fil à proximité et de s'y connecter, des cartes de géolocalisation des points d'accès circulant sur Internet.
+
+      De nombreuses attaques classiques lancées depuis Internet peuvent viser un réseau sans fil, auxquelles s'ajoutent les menaces spécifiques à la radio ; une bonne sécurité doit protéger les utilisateurs, le réseau, les connexions, l'air et les données ; le WEP a été remplacé par TKIP puis par WPA s'appuyant sur 802.1x, et par WPA version 2 défini dans 802.11i, incompatible avec les matériels de première génération.
+
+
+POINTS D'ATTENTION.
+
+      Le CPL et le Wi-Fi utilisent tous deux la méthode d'accès CSMA/CA, à la différence d'Ethernet filaire en CSMA/CD.
+
+      Le signal CPL ne s'arrête au compteur électrique que si celui-ci comporte un filtre bloquant, ce qui n'est pas le cas de la majorité des compteurs.
+
+      HomePlug AV est incompatible avec les standards HomePlug précédents mais peut cohabiter sur deux réseaux CPL distincts partageant le média.
+
+      La bande des 2,4 gigahertz en usage privé est la seule bande totalement libérée en France, sans autorisation ni royalties.
+
+      Seuls les réseaux sans fil ouverts au public doivent être déclarés à l'ARCEP.
+
+      En radio, il est impossible d'écouter et de transmettre en même temps sur une fréquence, d'où l'évitement des collisions plutôt que leur détection.
+
+      Le VCS est optionnel et particulièrement utile pour les grosses trames et le problème de la station cachée.
+
+      Le SSID identifie le réseau, le BSSID est l'adresse MAC de l'équipement Wi-Fi.
+
+      Les débits Wi-Fi annoncés sont théoriques ; le débit réel chute vite entre deux et dix mégabits par seconde.
+
+      Sur une douzaine de canaux Wi-Fi, seuls trois ou quatre sont réellement exploitables en entreprise, en général le 1, le 6 et le 11.
+
+      Le roaming n'est pas intrinsèque au Wi-Fi, la norme 802.11f n'apportant que des recommandations.
+
+      WPA version 2, défini dans 802.11i, est incompatible avec les matériels de première génération utilisant WEP ou WPA.
+
+
+EXEMPLES CITES.
+
+      Changement heures pleines heures creuses d'EDF encore réalisé aujourd'hui en CPL unidirectionnel.
+
+      HomePlug 1.01 à quatorze mégabits par seconde, HomePlug 1.1 Turbo à quatre-vingt-cinq mégabits par seconde, HomePlug AV à deux cents mégabits par seconde.
+
+      Solution SPiDCOM à deux cent vingt-quatre mégabits par seconde sur câble électrique, coaxial ou paire torsadée.
+
+      Projet OPERA de l'Union européenne initié le premier janvier 2004 sur la technologie DS2.
+
+      Cryptage CPL DES 56 bits pour HomePlug 1.x et AES 128 bits pour UPA DS2 et HomePlug AV.
+
+      Bluetooth lancé par Ericsson en 1994, piconet de huit appareils sur la fréquence 2,4 gigahertz.
+
+      802.11a Wi-Fi 5 à cinquante-quatre mégabits par seconde sur huit canaux en 5 gigahertz, 802.11b à onze mégabits par seconde sur la bande 2,4 gigahertz.
+
+      Canaux Wi-Fi 1, 6 et 11 utilisés pour le dallage des cellules en entreprise.
+
+      WiMax 802.16a de 2002 à soixante-dix mégabits par seconde théoriques par cellule sur cinquante kilomètres sans ligne de vue.
+
+      Power over Ethernet 802.3af alimentant caméras IP et bornes radio par le câble Ethernet via un commutateur PoE de niveau 2.
+
+      Autorisation nationale unique de boucle locale radio détenue par IFW du groupe Iliad-Free après rachat d'Altitude Telecom en 2005.

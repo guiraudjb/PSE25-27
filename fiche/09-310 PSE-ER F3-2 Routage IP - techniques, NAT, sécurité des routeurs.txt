@@ -1,73 +1,214 @@
-ROUTAGE IP : TECHNIQUES, NAT, SÉCURITÉ DES ROUTEURS
+LE ROUTAGE IP : TECHNIQUES, TRANSLATION D'ADRESSE ET SÉCURITÉ DES ROUTEURS.
 
-1. LE ROUTAGE
-Routeur : élément actif qui interconnecte des réseaux (localement ou à distance), agissant au niveau 3 du modèle OSI. Pour chaque datagramme reçu, il consulte sa table de routage à partir de l'adresse de destination contenue dans l'en-tête, pour déterminer l'interface de sortie. Avantage principal : gérer les chemins multiples et tirer parti des boucles des grands réseaux à topologie complexe.
-Routage : processus permettant à un datagramme d'être acheminé vers son destinataire quand celui-ci n'est pas sur le même réseau physique que l'émetteur. Les routeurs forment une structure coopérative : le datagramme transite de routeur en routeur jusqu'à ce que l'un le délivre au destinataire.
-- Routage direct : le routeur délivre le datagramme sur le réseau physique auquel il est connecté (destinataire présent sur ce réseau).
-- Routage indirect : le routeur achemine le datagramme vers un autre routeur, qu'il doit identifier.
-Types de routes :
-- Route statique : définie manuellement par l'administrateur comme seul chemin possible vers une destination.
-- Route par défaut : définie manuellement comme chemin à emprunter quand aucune autre route vers la destination n'est connue.
-- Route dynamique : le routeur met à jour sa table à partir des informations reçues des autres routeurs.
-Les protocoles de routage déterminent le meilleur chemin en termes de durée, de coût de transmission et de fiabilité, et permettent de détecter la panne d'un nœud pour faire passer les données par un autre chemin.
 
-2. LE ROUTAGE IP
-Le routage IP est basé uniquement sur l'adresse du destinataire. Chaque équipement sait atteindre un équipement du même réseau, et un équipement d'un autre réseau s'il existe au moins un équipement de routage.
-Table de routage : chaque entrée contient une paire (adresse réseau, adresse routeur suivant) - l'adresse IP du réseau de destination, et l'adresse du routeur vers lequel envoyer les datagrammes destinés à ce réseau.
-Mise à jour de la table : manuelle (routage statique, commande route sous Unix, ip route sur les routeurs) ou automatique (routage dynamique, processus sur stations et routeurs échangeant des informations de routage).
-Algorithme de routage IP : compare la partie « adresse réseau » de l'adresse IP de destination au champ « adresse réseau » de chaque entrée de la table jusqu'à obtenir une correspondance. Comme l'adresse du routeur suivant doit désigner une machine directement accessible, un seul balayage de la table suffit.
+LEXIQUE COMPLET.
 
-3. STRUCTURATION D'INTERNET ET PROTOCOLES DE ROUTAGE
-Il n'y a pas de gestion centralisée d'Internet, mais des Systèmes Autonomes (SA) : ensemble de réseaux et de leurs routeurs sous le contrôle d'une même autorité administrative, qui décide notamment du protocole de routage. Un SA peut être sous le contrôle d'un FAI ou d'une grande organisation.
-- RIPE-NCC : Regional Internet Registry (RIR) pour l'Europe, en charge de l'attribution des adresses IP et des numéros de SA. L'IANA alloue au niveau mondial des plages de numéros de SA aux différents RIR.
-- ASN (Autonomous System Number) : identifiant unique d'un SA, anciennement sur 16 bits, aujourd'hui sur 32 bits.
-Deux classes de protocoles de routage :
-- IGP (Interior Gateway Protocol) : à l'intérieur d'un même SA (RIP, OSPF).
-- EGP (Exterior Gateway Protocol) : d'un SA à un autre. BGPv4 (Border Gateway Protocol) est quasiment le seul EGP utilisé : gros volumes de données, agrégation des routes pour réduire la taille des tables.
-Les IGP utilisent deux types d'algorithmes : Vector-Distance et Link-State.
+      Routeur : élément actif interconnectant localement ou à distance des réseaux, agissant au niveau 3 du modèle OSI, acheminant les datagrammes reçus par ses interfaces en consultant sa table de routage à partir de l'adresse de destination contenue dans l'en-tête, capable de gérer des chemins multiples et de tirer avantage des boucles des réseaux complexes.
 
-Vector-Distance (vecteur de distance) : RIP (Routing Information Protocol) en est l'implémentation dans TCP/IP, développé à l'université de Berkeley, diffusé comme produit du domaine public.
-- Principe : chemin le plus court en nombre de nœuds traversés (16 maximum). Chaque routeur diffuse à tous ses voisins la liste des réseaux qu'il sait atteindre, le nombre de sauts et l'adresse IP du routeur à utiliser ; chaque routeur met alors à jour sa table.
-- Avantages : simple, interopérable.
-- Inconvénients : temps de convergence long sur un grand réseau (calcul réparti entre tous les routeurs), la distance ne rend pas compte de tout, volume d'informations proportionnel au nombre de réseaux.
+      Routage : processus permettant à un datagramme d'être acheminé vers un destinataire qui n'est pas sur le même réseau physique que l'émetteur, les routeurs formant une structure coopérative où le datagramme transite de routeur en routeur jusqu'à sa livraison.
 
-Link-State (état de liens) : basé sur la technique Shortest Path First (SPF).
-- Principe : chaque routeur surveille l'état de toutes ses liaisons, diffuse cet état à tous les autres routeurs, construit une carte topologique complète du réseau et calcule les routes de plus court chemin (algorithme de Dijkstra).
-- Avantages : calcul local et indépendant à partir des mêmes informations d'état (sans dépendre des calculs intermédiaires) ; volume des informations échangées indépendant du nombre de réseaux (messages d'état portant sur des liens directement accessibles).
-- Inconvénient : calcul potentiellement très complexe.
-- OSPF (Open Shortest Path First) en est l'implémentation dans TCP/IP (version 3) : plus évolué que RIP, adapté aux grands réseaux.
-Remarque : RIP et OSPF ne réalisent PAS le routage des datagrammes ; ils mettent à jour les tables de routage. Le routage est réalisé par IP.
+      Routage direct : livraison d'un datagramme sur le réseau physique auquel le routeur est connecté.
 
-4. TRANSLATION D'ADRESSE (NAT)
-NAT (Network Address Translation) : mis en œuvre historiquement sur les gardes-barrières, implémenté sur les routeurs par divers constructeurs.
-Pourquoi : connecter à Internet des machines sans adresses IP globales uniques ; éviter de renuméroter le réseau ; effectuer une distribution de charge sommaire ; améliorer la sécurité.
-Fonctionnement : correspondance entre adresses publiques et privées. Le routeur maintient une table d'équivalence entre l'adresse IP locale interne (ALI, adresse privée) et l'adresse IP globale interne (AGI, telle qu'elle apparaît à l'extérieur).
-- Traduction statique : une AGI unique associée en permanence à une ALI (utile pour les machines hébergeant des services accessibles de l'extérieur avec une adresse fixe).
-- Traduction dynamique : l'ALI d'une machine qui se connecte est associée à une AGI prise dans un pool (parcouru dans l'ordre croissant jusqu'à une adresse libre). L'entrée (ALI, AGI) reçoit un timeout et est détruite si la machine ne fait plus d'accès externe au-delà. Réécriture de l'adresse source à la sortie, opération inverse au retour.
-- PAT (Port Address Translation) / traduction dynamique étendue : traduit aussi le port source. La table reflète des quadruplets (@IP locale interne, port 1, @IP globale interne, port 2) ; le port avant traduction n'est pas forcément celui après. En excluant les ports réservés, un routeur peut associer environ 4000 ALI à une même AGI.
-- Overlapping : un site utilise en interne une adresse déjà attribuée à un autre site sur Internet ; une table supplémentaire liant adresses locales externes (ALE) et adresses globales externes (AGE) est nécessaire.
-Le NAT est un outil adapté aux petits réseaux aux besoins limités : solution à court terme, en attendant IPv6 et ses adresses de 128 bits.
+      Routage indirect : acheminement d'un datagramme vers un autre routeur, le routeur devant identifier le routeur approprié.
 
-5. CONFIGURATION DU ROUTEUR
-Moyens : port console (liaison RS232) ; terminaux virtuels (routeur déjà sur le réseau) ; téléchargement depuis un serveur TFTP ; station de supervision (logiciel d'administration réseau) ; logiciel de configuration livré avec le routeur (ConfigMaker, Faststep chez Cisco).
-TFTP (Trivial File Transfer Protocol) : protocole de transfert bâti sur UDP, sans notion d'utilisateur ni de mot de passe, donc non sûr par définition. copy running-config tftp (sauvegarde de la configuration sur le PC), copy tftp running-config (transfert d'une configuration vers le routeur).
-Une configuration Cisco type comprend : hostname, mots de passe (enable password, service password-encryption), configuration des interfaces (ip address, masque, helper-address...), processus de routage (router ospf, network ... area), route par défaut (ip route 0.0.0.0 0.0.0.0 ...), listes de contrôle d'accès (access-list), communauté SNMP (snmp-server community), bannière, lignes console/aux/vty avec mots de passe et timeouts.
+      Route statique : route définie manuellement par l'administrateur comme seul chemin possible vers une destination donnée.
 
-6. SÉCURITÉ DES ROUTEURS
-Objectif : prévenir les attaques rendues possibles par le protocole IP - empêcher un adversaire d'espionner les données ou de se faire passer pour autrui afin d'accéder à des ressources protégées.
-Services de sécurité :
-- Confidentialité des données + protection partielle contre l'analyse du trafic : les données ne peuvent être lues par un espion ; aucun mot de passe ni information confidentielle ne circule en clair ; on peut chiffrer les en-têtes IP pour masquer les adresses source et destination réelles (protection contre l'analyse du trafic).
-- Authenticité des données + contrôle d'accès continu : deux services fournis conjointement - authentification de l'origine (les données proviennent de l'expéditeur déclaré) et intégrité (elles n'ont pas été modifiées en transit). L'authenticité de chaque paquet permet un contrôle d'accès fort tout au long de la communication, contrairement à un contrôle simple à l'ouverture de connexion (qui n'empêche pas la reprise d'une communication).
-- Protection contre le rejeu : détecter le renvoi d'un paquet valide intercepté précédemment.
-Ces services reposent sur des mécanismes cryptographiques modernes, de niveau élevé avec des algorithmes forts.
+      Route par défaut : route définie manuellement comme chemin à emprunter quand aucune autre route vers la destination n'est connue.
 
-7. IPsec
-Norme développée depuis 1992 par un groupe de travail du même nom à l'IETF, définissant une extension de sécurité pour IP. Services fournis : confidentialité, authentification, intégrité des données, protection contre le rejeu, contrôle d'accès. La sécurisation se faisant au niveau d'IP, IPsec peut être mis en œuvre sur tous les équipements du réseau (moyen de protection unique pour tous les échanges).
-Usages typiques : création de VPN, sécurisation des accès distants à un intranet, protection d'un serveur sensible.
-Deux extensions du protocole IP :
-- AH (Authentication Header) : assure l'authenticité des datagrammes IP sans chiffrement (pas de confidentialité) ; adjoint un champ supplémentaire permettant de vérifier l'authenticité à la réception ; numéro de séquence pour détecter le rejeu.
-- ESP (Encapsulating Security Payload) : rôle premier = confidentialité (nouveau datagramme dont les données, et éventuellement l'en-tête original, sont chiffrées) ; peut aussi assurer l'authenticité (bloc d'authentification) et la protection contre le rejeu (numéro de séquence).
-AH et ESP s'utilisent séparément ou combinées. Ils ne sont pas restreints à un algorithme particulier : chaque produit est livré avec un ensemble d'algorithmes parmi lesquels l'administrateur choisit (possibilité de limiter la longueur de clé pour des contraintes législatives, ou de ne fournir que de l'authentification sans chiffrement). Le protocole IKE négocie en ligne les algorithmes utilisés ; la norme rend certains algorithmes obligatoires pour garantir l'interopérabilité.
-Deux modes de protection :
-- Mode transport : protège uniquement le contenu du datagramme IP sans toucher à l'en-tête ; utilisable seulement sur les équipements terminaux (postes clients, serveurs).
-- Mode tunnel : encapsule chaque datagramme IP dans un nouveau datagramme ; la protection porte sur tous les champs des datagrammes entrant dans le tunnel, y compris les en-têtes (adresses source et destination).
+      Route dynamique : route où le routeur utilise les informations reçues des autres routeurs pour mettre à jour sa table de routage.
+
+      Protocole de routage : protocole déterminant le meilleur chemin entre un émetteur et un récepteur en termes de durée, de coût et de fiabilité de transmission, et détectant qu'un nœud est en panne pour faire passer les données par un autre chemin.
+
+      Routage IP : routage basé uniquement sur l'adresse du destinataire, chaque équipement sachant atteindre un autre équipement du même réseau et un équipement d'un autre réseau s'il existe au moins un équipement de routage.
+
+      Table de routage : table mémorisant les informations de routage, chaque entrée contenant une paire adresse réseau et adresse routeur suivant, le second champ indiquant l'adresse du routeur où seront envoyés les datagrammes destinés à ce réseau.
+
+      Mise à jour manuelle : gestion de routage statique par la commande route des stations Unix ou le langage de commande des routeurs.
+
+      Mise à jour automatique : gestion de routage dynamique par un processus sur les stations et routeurs, avec échange d'informations de routage.
+
+      Algorithme de routage IP : algorithme consultant la table de routage pour prendre les décisions, comparant la partie adresse réseau de l'adresse IP au champ adresse réseau de chaque entrée jusqu'à une correspondance, un seul balayage suffisant puisque le champ adresse du routeur suivant spécifie une machine directement accessible.
+
+      Système autonome (SA) : ensemble de réseaux et de leurs routeurs sous le contrôle d'une même autorité administrative qui décide du protocole de routage utilisé, pouvant être un fournisseur d'accès ou une grande organisation.
+
+      RIPE-NCC : Regional Internet Registry pour la zone Europe, en charge de l'attribution des adresses IP et des numéros de systèmes autonomes, l'IANA allouant des plages de numéros aux différents registres régionaux.
+
+      ASN (Autonomous System Number) : identifiant unique attribué à chaque système autonome, anciennement sur seize bits, maintenant sur trente-deux bits.
+
+      IGP (Interior Gateway Protocol) : protocole de routage interne utilisé à l'intérieur d'un même système autonome, comme RIP et OSPF.
+
+      EGP (Exterior Gateway Protocol) : protocole de routage externe utilisé d'un système autonome à un autre.
+
+      BGPv4 (Border Gateway Protocol) : quasiment le seul protocole de routage externe utilisé actuellement, supportant l'échange de gros volumes de données et utilisant l'agrégation des routes pour diminuer la taille des tables de routage.
+
+      Vector-Distance (vecteur de distance) : type d'algorithme de routage interne déterminant le chemin le plus court en nombre de nœuds traversés, chaque routeur diffusant à ses voisins la liste des réseaux qu'il sait atteindre, le nombre de sauts et l'adresse du routeur à utiliser.
+
+      RIP (Routing Information Protocol) : implémentation de Vector-Distance dans TCP/IP, développée à l'université de Berkeley, du domaine public d'où sa large diffusion, limitée à seize sauts maximum ; simple et interopérable, mais avec un temps de convergence pouvant être long dans un grand réseau et un volume d'informations proportionnel au nombre de réseaux.
+
+      Link-State (état de liens) : type d'algorithme de routage interne basé sur la technique Shortest Path First, chaque routeur surveillant l'état de ses liaisons, le diffusant à tous les autres, construisant une carte topologique complète et calculant les routes de plus court chemin par l'algorithme de Dijkstra.
+
+      OSPF (Open Shortest Path First) : implémentation de Link-State dans TCP/IP, actuellement en version 3, plus évoluée que RIP et bien adaptée aux réseaux de grande taille, chaque routeur calculant les informations de façon locale et indépendante, le volume des messages ne dépendant pas du nombre de réseaux.
+
+      Nature des protocoles de routage : RIP et OSPF ne réalisent pas le routage des datagrammes, ils mettent à jour les tables de routage, le routage étant réalisé par IP.
+
+      NAT (Network Address Translation) : mécanisme mis en œuvre historiquement sur les gardes-barrières et implémenté sur les routeurs, réalisant une correspondance entre adresses publiques et privées, utilisé pour connecter à Internet des machines sans adresses globales uniques, éviter de renuméroter le réseau, distribuer sommairement la charge et améliorer la sécurité.
+
+      ALI (adresse IP locale interne) : adresse privée d'une machine à l'intérieur du site.
+
+      AGI (adresse IP globale interne) : adresse d'une machine du site telle qu'elle apparaît à l'extérieur.
+
+      Traduction statique : correspondance où une AGI unique est associée à une ALI, utile pour les machines hébergeant des services Internet accessibles de l'extérieur avec une adresse fixe.
+
+      Traduction dynamique : correspondance où, quand une machine sans AGI fixe se connecte à l'extérieur, son ALI est associée à une AGI prise dans un pool parcouru dans le sens croissant jusqu'à une adresse libre, l'entrée étant détruite après un délai d'inactivité.
+
+      PAT (Port Address Translation), traduction dynamique étendue : mode où sont traduits l'ALI et le port source, la table reflétant des quadruplets adresse locale interne, port un, adresse globale interne, port deux, le port avant traduction n'étant pas forcément celui après, un routeur pouvant associer environ quatre mille ALI à une même AGI.
+
+      Overlapping : cas où un site utilise pour son adressage interne une adresse déjà attribuée à un autre site, nécessitant une table de traduction supplémentaire liant les adresses locales externes ALE aux adresses globales externes AGE, pour qu'une machine du site n'interprète pas une adresse externe usurpée comme interne.
+
+      TFTP (Trivial File Transfer Protocol) : protocole de transfert bâti sur UDP, sans notion d'utilisateur ni de mot de passe, donc non sûr, utilisé pour charger ou sauvegarder la configuration d'un routeur avec les commandes copy running-config tftp et copy tftp running-config.
+
+      Configuration d'un routeur : par le port console en liaison RS232, par terminaux virtuels après installation sur le réseau, par téléchargement depuis un serveur TFTP, par une station de supervision, ou par un logiciel de configuration livré avec le routeur.
+
+      Confidentialité des données : service de sécurité garantissant que les données transportées ne peuvent être lues par un adversaire, aucun mot de passe ni information confidentielle ne circulant en clair, avec possibilité de chiffrer les en-têtes IP pour masquer les adresses source et destination, ce qui constitue une protection contre l'analyse du trafic.
+
+      Authenticité des données : service composé de l'authentification de l'origine des données, qui garantit qu'elles proviennent de l'expéditeur déclaré, et de l'intégrité, qui garantit qu'elles n'ont pas été modifiées durant le transfert ; la garantie par paquet permet un contrôle d'accès fort tout au long d'une communication, contrairement à un contrôle simple à l'ouverture.
+
+      Protection contre le rejeu : service détectant une tentative d'attaque consistant à renvoyer un paquet valide intercepté précédemment.
+
+      IPsec : norme développée par un groupe de travail de l'IETF depuis 1992, extension de sécurité pour IP fournissant confidentialité, authentification, intégrité, protection contre le rejeu et contrôle d'accès, mise en œuvre sur tous les équipements du réseau, utilisée pour créer des VPN, sécuriser les accès distants à un intranet et protéger un serveur sensible.
+
+      AH (Authentication Header) : extension d'IPsec assurant l'authenticité des datagrammes IP sans chiffrement, en adjoignant un champ supplémentaire permettant de vérifier l'authenticité, avec un numéro de séquence détectant les tentatives de rejeu.
+
+      ESP (Encapsulating Security Payload) : extension d'IPsec assurant d'abord la confidentialité en générant un nouveau datagramme dont les données et éventuellement l'en-tête original sont chiffrés, pouvant aussi assurer l'authenticité par un bloc d'authentification et la protection contre le rejeu par un numéro de séquence.
+
+      IKE : protocole permettant de négocier en ligne les algorithmes utilisés avec IPsec, la norme rendant certains algorithmes obligatoires pour garantir l'interopérabilité.
+
+      Mode transport : mode de protection IPsec protégeant uniquement le contenu du datagramme IP sans toucher à l'en-tête, utilisable seulement sur les équipements terminaux.
+
+      Mode tunnel : mode de protection IPsec créant des tunnels par encapsulation de chaque datagramme IP dans un nouveau datagramme, la protection portant sur tous les champs y compris les en-têtes.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LE ROUTAGE.
+
+
+   A. Les principes et les types de routes.
+
+      Les routeurs interconnectent des réseaux au niveau 3 du modèle OSI et déterminent le meilleur chemin pour acheminer les informations ; un routeur consulte sa table de routage à partir de l'adresse de destination de l'en-tête pour choisir l'interface de sortie, son avantage principal étant de gérer les chemins multiples et de tirer avantage des boucles des réseaux complexes.
+
+      Le routage achemine un datagramme vers un destinataire hors du réseau physique de l'émetteur, les routeurs formant une structure coopérative ; le routeur distingue le routage direct, où le datagramme est livré sur son propre réseau physique, du routage indirect, où il est acheminé vers un autre routeur qu'il doit identifier ; une route statique est le seul chemin défini manuellement vers une destination, une route par défaut le chemin quand aucune autre n'est connue, et une route dynamique est mise à jour à partir des informations des autres routeurs ; un protocole de routage détermine le meilleur chemin en durée, coût et fiabilité, et détecte les pannes de nœuds.
+
+
+   B. Le routage IP et son algorithme.
+
+      Le routage IP est basé uniquement sur l'adresse du destinataire, chaque équipement sachant atteindre un équipement du même réseau et un équipement d'un autre réseau via un équipement de routage ; les informations sont mémorisées dans la table de routage, chaque entrée contenant une paire adresse réseau et adresse routeur suivant.
+
+      La table est mise à jour manuellement en routage statique par la commande route ou le langage des routeurs, ou automatiquement en routage dynamique par un processus échangeant des informations ; l'algorithme de routage IP compare la partie adresse réseau de l'adresse IP au champ adresse réseau de chaque entrée jusqu'à une correspondance, un seul balayage suffisant puisque le routeur suivant est directement accessible.
+
+
+II. LES ALGORITHMES ET LA STRUCTURATION D'INTERNET.
+
+
+   A. Les systèmes autonomes.
+
+      Il n'y a pas de gestion centralisée d'Internet, mais des structures administrées, les systèmes autonomes, ensembles de réseaux et de leurs routeurs sous le contrôle d'une même autorité qui décide du protocole de routage, pouvant être un fournisseur d'accès ou une grande organisation ; le RIPE-NCC est le registre régional pour l'Europe, en charge des adresses IP et des numéros de systèmes autonomes, l'IANA allouant les plages ; chaque système autonome reçoit un ASN, anciennement sur seize bits, maintenant sur trente-deux bits.
+
+      Il y a deux classes de protocoles, les protocoles internes IGP utilisés à l'intérieur d'un système autonome, comme RIP et OSPF, et les protocoles externes EGP utilisés d'un système autonome à un autre, BGPv4 étant quasiment le seul externe utilisé, supportant de gros volumes et utilisant l'agrégation des routes ; les protocoles internes utilisent deux types d'algorithmes, Vector-Distance et Link-State.
+
+
+   B. Vector-Distance et Link-State.
+
+      Vector-Distance détermine le chemin le plus court en nombre de nœuds traversés, chaque routeur diffusant à ses voisins la liste des réseaux qu'il sait atteindre, le nombre de sauts et l'adresse du routeur à utiliser ; son implémentation dans TCP/IP est RIP, développé à Berkeley, du domaine public, limité à seize sauts, simple et interopérable mais avec un temps de convergence pouvant être long dans un grand réseau, une notion de distance qui ne rend pas compte de tout, et un volume d'informations proportionnel au nombre de réseaux.
+
+      Link-State est basé sur Shortest Path First, chaque routeur surveillant l'état de ses liaisons, le diffusant à tous, construisant une carte topologique complète et calculant les routes de plus court chemin par l'algorithme de Dijkstra ; chaque routeur calcule indépendamment et le volume des messages ne dépend pas du nombre de réseaux, mais le calcul peut être très complexe ; son implémentation est OSPF, en version 3, plus évoluée que RIP et adaptée aux grands réseaux ; RIP et OSPF ne routent pas les datagrammes, ils mettent à jour les tables de routage, le routage étant réalisé par IP.
+
+
+III. LA TRANSLATION D'ADRESSE.
+
+
+   A. Le principe du NAT.
+
+      Le NAT, mis en œuvre historiquement sur les gardes-barrières et implémenté sur les routeurs, réalise une correspondance entre adresses publiques et privées, utilisé pour connecter à Internet des machines sans adresses globales uniques, éviter de renuméroter le réseau, distribuer sommairement la charge et améliorer la sécurité ; le routeur maintient une table d'équivalence entre l'adresse privée locale interne ALI d'une machine et son adresse globale interne AGI telle qu'elle apparaît à l'extérieur.
+
+      Une traduction statique associe une AGI unique à une ALI, utile pour les machines hébergeant des services accessibles de l'extérieur avec une adresse fixe ; une traduction dynamique associe l'ALI à une AGI prise dans un pool parcouru dans le sens croissant jusqu'à une adresse libre, l'entrée étant détruite après un délai d'inactivité ; à l'arrivée d'un datagramme sur l'interface interne, le routeur cherche l'adresse source dans sa table, la remplace par l'AGI associée ou crée l'association, et fait l'opération inverse pour un datagramme arrivant sur une interface externe à destination d'une AGI.
+
+
+   B. Le PAT et l'overlapping.
+
+      En traduction dynamique étendue ou PAT, sont traduits l'ALI et le port source, la table reflétant des quadruplets adresse locale interne, port un, adresse globale interne, port deux, le port avant traduction n'étant pas forcément celui après ; en excluant les ports réservés, un routeur peut associer environ quatre mille ALI à une même AGI.
+
+      L'overlapping survient si un site utilise pour son adressage interne une adresse déjà attribuée à un autre site, nécessitant une table de traduction supplémentaire liant les adresses locales externes ALE aux adresses globales externes AGE, pour qu'une machine du site connectée vers un serveur distant dont l'AGE fait partie de la plage usurpée n'interprète pas cette adresse comme interne ; le NAT convient aux petits réseaux aux besoins limités et doit être envisagé comme une solution à court terme en attendant IPv6.
+
+
+IV. LA CONFIGURATION DU ROUTEUR.
+
+      La configuration s'effectue par le port console en liaison RS232, par terminaux virtuels après installation sur le réseau, par téléchargement depuis un serveur TFTP, par une station de supervision, ou par un logiciel livré avec le routeur ; pour un chargement par TFTP, on prépare à l'avance une configuration type sur le PC puis on la télécharge, en ajoutant les commandes de sécurité des accès et de topologie.
+
+      Le TFTP est bâti sur UDP, sans notion d'utilisateur ni de mot de passe, donc non sûr ; après installation, on sauvegarde la configuration du routeur sur le PC avec copy running-config tftp ou on transfère une configuration du PC vers le routeur avec copy tftp running-config ; des outils constructeurs comme ConfigMaker ou Faststep de Cisco permettent de construire le réseau par glisser-déposer et de générer la configuration téléchargée ensuite sur le routeur ; une configuration Cisco type comprend un hostname, un enable password chiffré, des interfaces Ethernet et Serial avec adresses et masques, un processus router ospf avec des instructions network et area, une route par défaut ip route 0.0.0.0 0.0.0.0, des access-list, une communauté snmp-server, et des lignes con, aux et vty avec mots de passe et délais d'expiration.
+
+
+V. LA SÉCURITÉ DES ROUTEURS.
+
+
+   A. Les services de sécurité.
+
+      La sécurité des routeurs vise à empêcher un adversaire d'espionner les données ou de se faire passer pour autrui ; les services sont la confidentialité, qui garantit que les données ne peuvent être lues, aucun mot de passe ne circulant en clair, avec possibilité de chiffrer les en-têtes IP pour une protection contre l'analyse du trafic, l'authenticité, composée de l'authentification de l'origine et de l'intégrité, permettant un contrôle d'accès fort tout au long d'une communication et non seulement à l'ouverture, et la protection contre le rejeu, qui détecte le renvoi d'un paquet valide intercepté ; ces services reposent sur des mécanismes cryptographiques modernes.
+
+
+   B. La norme IPsec.
+
+      IPsec est une norme de l'IETF développée depuis 1992, extension de sécurité pour IP fournissant confidentialité, authentification, intégrité, protection contre le rejeu et contrôle d'accès, mise en œuvre sur tous les équipements comme moyen de protection unique, utilisée pour créer des VPN, sécuriser les accès distants à un intranet et protéger un serveur sensible.
+
+      Les services sont fournis par deux extensions, AH qui assure l'authenticité sans chiffrement en adjoignant un champ de vérification et un numéro de séquence contre le rejeu, et ESP qui assure d'abord la confidentialité en générant un nouveau datagramme chiffré, pouvant aussi assurer l'authenticité et la protection contre le rejeu ; AH et ESP peuvent être utilisées séparément ou combinées, ne sont pas restreintes à un algorithme, chaque produit étant livré avec un ensemble d'algorithmes choisis par l'administrateur, ce qui permet de se conformer à des contraintes législatives, IKE négociant en ligne les algorithmes et la norme en rendant certains obligatoires ; il existe deux modes, le mode transport qui protège seulement le contenu du datagramme sans toucher l'en-tête et n'est utilisable que sur les équipements terminaux, et le mode tunnel qui encapsule chaque datagramme dans un nouveau, la protection portant sur tous les champs y compris les en-têtes.
+
+
+POINTS D'ATTENTION.
+
+      Le routage IP est basé uniquement sur l'adresse du destinataire.
+
+      Un seul balayage de la table de routage suffit puisque le routeur suivant spécifie une machine directement accessible.
+
+      RIP et OSPF ne routent pas les datagrammes, ils mettent à jour les tables ; le routage est réalisé par IP.
+
+      RIP est limité à seize sauts et son temps de convergence peut être long dans un grand réseau.
+
+      OSPF calcule localement et son volume de messages ne dépend pas du nombre de réseaux.
+
+      BGPv4 est quasiment le seul protocole de routage externe utilisé et repose sur l'agrégation des routes.
+
+      Une traduction statique associe une AGI unique à une ALI, utile pour un service accessible de l'extérieur.
+
+      En PAT, un routeur peut associer environ quatre mille ALI à une même AGI.
+
+      Le NAT est une solution à court terme en attendant IPv6.
+
+      Le TFTP est bâti sur UDP et n'a ni utilisateur ni mot de passe, il est non sûr.
+
+      Un contrôle d'accès simple à l'ouverture de connexion n'empêche pas la récupération d'une communication ; l'authenticité par paquet permet un contrôle d'accès continu.
+
+      Le mode transport d'IPsec ne protège pas l'en-tête et n'est utilisable que sur les équipements terminaux ; le mode tunnel protège tous les champs y compris les en-têtes.
+
+
+EXEMPLES CITES.
+
+      Machine source 120.80.32.10 envoyant un message à la destination 120.120.32.10 via l'algorithme de routage IP.
+
+      RIP développé à l'université de Berkeley, du domaine public.
+
+      Algorithme de Dijkstra utilisé par Link-State et OSPF pour le plus court chemin.
+
+      Traduction dynamique associant l'ALI 10.75.1.1 à l'AGI 193.13.1.1 pour une connexion vers le serveur web 195.5.2.1.
+
+      En PAT, association de la paire 10.75.1.1 port 2000 à la paire 193.13.1.1 port 2000 pour une connexion HTTP.
+
+      Commandes copy running-config tftp et copy tftp running-config pour la configuration d'un routeur.
+
+      Logiciels Cisco ConfigMaker et Faststep pour configurer des routeurs d'agence.
+
+      Configuration Cisco 2500 avec router ospf 1, ip route 0.0.0.0 0.0.0.0 et des access-list.
+
+      Extensions IPsec AH pour l'authenticité sans chiffrement et ESP pour la confidentialité.
+
+      Protocole IKE négociant les algorithmes d'IPsec.

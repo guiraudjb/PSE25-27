@@ -1,45 +1,293 @@
-LINUX / UNIX : GESTION DES UTILISATEURS
+LINUX ET UNIX : LA GESTION DES UTILISATEURS.
 
-1. LE FICHIER /etc/passwd
-Liste des utilisateurs reconnus par le système ; consulté au login pour déterminer l'UID, le répertoire, etc. Peut être prolongé ou remplacé par un service d'annuaire (Active Directory, OpenLDAP, Fedora Directory Server). Sept champs séparés par « : » :
-1. Login (nom de connexion)
-2. Mot de passe crypté (sur les systèmes modernes : x sous Linux/Solaris/HP-UX, ! ou * sous AIX)
-3. UID (identifiant utilisateur)
-4. GID par défaut (identifiant de groupe)
-5. GECOS (nom, prénom, bureau, téléphone)
-6. Répertoire personnel (home)
-7. Shell de connexion
-Exemple : root:x:0:0:root:/root:/bin/bash
-Intégration avec un annuaire (NIS, LDAP) : entrées commençant par + ou - dans passwd ; configuration dans /etc/nsswitch.conf (/etc/nscontrol.conf sur AIX).
 
-2. LES CHAMPS
-Login : unique, sensible à la casse, jamais de « : » ni de fin de ligne ; historiquement 8 caractères alphanumériques ; NIS/NIS+ limite à 8 ; un utilisateur a le même login sur chaque machine (AIX : longueur modifiable par chdev sur sys0, attribut max_logname).
-Mot de passe crypté : algorithmes crypt/DES (13 caractères), MD5 (34 caractères, préfixe $1$, longueurs arbitraires mais faiblesses connues), Blowfish (préfixe $2a$, défaut SUSE), SHA256 (préfixe $5$, défaut OpenSolaris récent), SHA512 (préfixe $6$). Longueur constante quelle que soit la longueur du mot de passe ; « sel » aléatoire (un même mot de passe -> plusieurs formes cryptées). Un x ou * bloque le compte ; un champ vide = trou de sécurité (aucun mot de passe requis).
-UID : entier non signé 32 bits ; root = 0. Pseudo-utilisateurs (bin, daemon) : UID faible + shell fictif (/bin/false), placés au début de passwd. nobody : grande valeur, utilisé quand root accède à des fichiers NFS d'une machine non fiable. Ne jamais réutiliser un UID (confusion à la restauration de sauvegardes). Un UID = un login = une personne sur toutes les machines. Éviter plusieurs comptes UID 0 (trous de sécurité ; utiliser sudo). LDAP populaire pour centraliser les UID (haute disponibilité requise).
-GID : entier 32 bits ; GID 0 = root/system ; groupes prédéfinis non cohérents entre distributions (bin : GID 1 sur Red Hat/SUSE, 2 sur Ubuntu/Solaris/HP-UX/AIX). Groupes aujourd'hui = partage d'accès aux fichiers. /etc/group définit les groupes ; le GID de /etc/passwd est un GID provisoire au login. Héritage du groupe parent : bit setgid (02000) sur le répertoire ou option de montage grpid.
-GECOS : infos personnelles séparées par virgules ; finger les interprète (nom complet — souvent le seul rempli, bureau et bâtiment, poste de bureau, téléphone personnel). chfn permet à l'utilisateur de les modifier (peut être restreint ou désactivé ; ne fonctionne souvent que sur /etc/passwd).
-Home : répertoire par défaut au login. Si manquant : message « aucun répertoire » et mise dans /. Linux : DEFAULT_HOME=no dans /etc/login.defs refuse le login.
-Shell : sh (traditionnel Unix), bash (défaut Linux et Solaris), ksh (défaut AIX), tcsh. Sous Linux, sh et csh sont des liens vers bash et tcsh. chsh change le shell (Linux : limité aux shells de /etc/shells, chemins absolus ; Solaris : superutilisateur seulement, passwd -e ; AIX : /etc/security/login.cfg liste officielle).
+LEXIQUE COMPLET.
 
-3. LE FICHIER /etc/shadow
-Lisible seulement par le superutilisateur ; garde les mots de passe cryptés à l'abri. Non généré à partir de passwd, ni sous-ensemble. AIX : /etc/security/passwd (format différent, blocs identifiant/password/LastUpdate/flags). Neuf champs séparés par « : » :
-1. Login (lien avec passwd)
-2. Mot de passe crypté
-3. Date du dernier changement (rempli par passwd)
-4. Nombre minimum de jours entre changements
-5. Nombre maximum de jours entre changements
-6. Nombre de jours d'avertissement avant expiration
-7. Linux : jours après expiration du mot de passe avant que le login soit expiré ; Solaris/HP-UX : jours d'inactivité avant blocage du compte (via /var/adm/lastlog, peu fiable en réseau)
-8. Date d'expiration du compte (jours depuis 1970-01-01 ; vide = jamais ; usermod -e au format aaaa-mm-jj)
-9. Champ réservé (Solaris : 4 derniers bits pour les tentatives infructueuses)
-Dates en jours (pas en secondes) depuis le 1er janvier 1970 : conversion expr `date +%s` / 86400. pwconv (Solaris, HP-UX, Linux) harmonise passwd et shadow (Linux : défauts de /etc/login.defs). passwd -f (Solaris) / pwdadm (AIX) force le changement à la prochaine connexion.
+      Fichier /etc/passwd : liste des utilisateurs reconnus par le système, consultée au login pour déterminer notamment l'UID et le répertoire d'un utilisateur, chaque ligne représentant un utilisateur avec sept champs séparés par le caractère deux-points.
 
-4. LE FICHIER /etc/group
-Noms de groupes et liste des membres. Quatre champs séparés par « : » : nom du groupe, mot de passe crypté ou espace réservé, numéro GID, liste des membres séparés par des virgules (sans espaces). Noms limités à 8 caractères pour la compatibilité. Mot de passe de groupe (rarement utilisé) : newgrp pour entrer, gpasswd pour le configurer, forme cryptée dans /etc/gshadow. En cas de conflit d'appartenance, /etc/passwd est prioritaire sur /etc/group. Limite de groupes par utilisateur : 8 (histo) -> 16 Solaris, 20 HP-UX, illimité AIX/Linux. Commandes : groupadd, groupmod, groupdel (Linux, Solaris, HP-UX) ; AIX : édition manuelle + grpck.
+      Champs de /etc/passwd : login, mot de passe crypté, UID, GID par défaut, informations GECOS, répertoire personnel et shell de connexion.
 
-5. AJOUT D'UN UTILISATEUR
-Étapes requises : faire signer le contrat de politique d'utilisation ; modifier passwd et shadow ; ajouter l'utilisateur à /etc/group (groupes supplémentaires) ; définir un mot de passe initial (jamais de compte avec shell sans mot de passe) ; créer, chown et chmod le répertoire home ; configurer rôles et permissions.
-Pour l'utilisateur : copier les fichiers de démarrage par défaut dans le home ; configurer le répertoire mail et les alias.
-Pour l'administrateur : vérifier la configuration ; enregistrer les informations de contact et l'état du compte dans une base.
-Outils : useradd, userdel, usermod (mêmes noms sur tous les systèmes, programmes différents) ; il faut être root (privilèges UserAdmin sur AIX). Édition manuelle : vipw (Solaris/Red Hat proposent aussi d'éditer shadow ; SUSE/Ubuntu : vipw -s) ; HP-UX et AIX déconseillent l'édition manuelle (utiliser useradd, SMH, SMIT).
-Fichiers de démarrage : cachés (point initial), terminaison « rc » (run command, hérité de CTSS) ; modèles dans /etc/skel (Linux, Solaris, HP-UX), /etc, /etc/security (AIX) ; Linux utilise aussi /etc/profile.d ; des fichiers de /etc sont traités avant ceux de l'utilisateur selon le shell.
+      Login : nom de connexion, devant être unique, sensible à la casse, ne pouvant contenir ni deux-points ni fin de ligne, limité à huit caractères avec NIS ou NIS+, un utilisateur devant avoir le même login sur chaque machine.
+
+      Mot de passe crypté : valeur du second champ, remplacée par x sur Linux, Solaris et HP-UX et par point d'exclamation ou astérisque sur AIX, le mot de passe réel étant stocké dans un fichier séparé non lisible.
+
+      /etc/shadow : fichier lisible seulement par le superutilisateur qui maintient les mots de passe cryptés à l'abri, sur Linux, Solaris et HP-UX ; /etc/security/passwd sur AIX.
+
+      Algorithme crypt : algorithme de chiffrement historique d'UNIX basé sur le DES, de longueur constante treize caractères, moins sûr que MD5.
+
+      MD5 : algorithme de chiffrement permettant des longueurs arbitraires, de longueur constante trente-quatre caractères, dont les empreintes commencent par dollar un dollar, présentant quelques faiblesses cryptographiques.
+
+      Blowfish, SHA256, SHA512 : algorithmes de chiffrement robustes, les empreintes Blowfish commençant par dollar 2a et les empreintes SHA256 par dollar 5 ; SUSE utilise Blowfish par défaut, OpenSolaris SHA256.
+
+      Sel (ajout aléatoire) : combinaison aléatoire mêlée au mot de passe lors du chiffrement, si bien qu'un même mot de passe peut correspondre à de nombreuses formes cryptées et que deux utilisateurs choisissant le même mot de passe ne peuvent être détectés par inspection.
+
+      UID (identifiant utilisateur) : entier, souvent non signé sur trente-deux bits, identifiant l'utilisateur pour le logiciel et le système de fichiers ; l'UID zéro est celui de root.
+
+      Pseudo-utilisateur : compte tel que bin, placé en début de /etc/passwd avec un UID faible et un shell fictif comme /bin/false pour empêcher toute connexion.
+
+      nobody : pseudo-utilisateur de grande valeur d'UID, utilisé quand root d'une machine accède via NFS à des fichiers d'une machine qui ne lui fait pas confiance.
+
+      sudo : programme permettant d'exécuter des commandes en tant que root sans multiplier les comptes d'UID zéro, qui créeraient des trous de sécurité.
+
+      GID (identifiant de groupe) : entier de trente-deux bits, le GID zéro étant réservé au groupe root ou système, sans cohérence entre distributions ; utilisé aujourd'hui surtout pour partager l'accès aux fichiers.
+
+      Fichier /etc/group : fichier définissant les groupes, chaque ligne contenant le nom du groupe, un mot de passe crypté ou espace réservé, le GID et la liste des membres séparés par des virgules.
+
+      GID provisoire : GID fourni par /etc/passwd au moment du login, le vrai GID n'étant pertinent que pour la création de nouveaux fichiers et répertoires.
+
+      Bit setgid sur répertoire : bit de valeur 02000 posé sur un répertoire, ou option de montage grpid, faisant appartenir les nouveaux fichiers au groupe de leur répertoire parent, ce qui facilite la collaboration.
+
+      newgrp : commande permettant à un utilisateur n'appartenant pas à un groupe d'y entrer si ce groupe a un mot de passe.
+
+      gpasswd : commande définissant un mot de passe de groupe, dont la forme cryptée est stockée dans /etc/gshadow, mots de passe rarement voire jamais utilisés.
+
+      groupadd, groupmod, groupdel : commandes de création, modification et suppression de groupes sur Linux, Solaris et HP-UX ; sur AIX on édite /etc/group à la main et on vérifie sa syntaxe avec grpck.
+
+      GECOS : champ enregistrant des informations personnelles sans syntaxe bien définie, interprété par finger comme nom complet, bureau et bâtiment, poste téléphonique de bureau puis numéro personnel, séparés par des virgules.
+
+      chfn : commande permettant à un utilisateur de changer ses propres informations GECOS, pouvant être restreinte ou désactivée, souvent inopérante avec un service d'annuaire ; sur AIX elle accepte l'option -R pour un module comme LDAP.
+
+      Répertoire personnel (home) : répertoire par défaut au login ; s'il est manquant, le système affiche un message d'absence de répertoire et place l'utilisateur dans la racine, sauf sous Linux si /etc/login.defs fixe DEFAULT_HOME à no, auquel cas le login est refusé.
+
+      Shell de connexion : interpréteur de commandes, sh étant le shell traditionnel d'UNIX, bash le shell par défaut de Linux et Solaris, ksh celui d'AIX, tcsh une amélioration du C shell ; sous Linux sh et csh sont des liens vers bash et tcsh.
+
+      chsh : commande de changement de shell, limitée aux shells de /etc/shells sous Linux, souvent inopérante avec un service d'annuaire ; sur Solaris seul le superutilisateur peut le faire avec passwd -e.
+
+      vipw : commande d'édition sécurisée des fichiers passwd et shadow, demandant sur Solaris et Red Hat si l'on veut aussi éditer shadow, avec l'option -s sur SUSE et Ubuntu ; non installée sur AIX.
+
+      Champs de /etc/shadow : login, mot de passe crypté, date du dernier changement, nombre minimal de jours entre changements, nombre maximal de jours, jours d'avertissement avant expiration, jours de grâce après expiration, date d'expiration du compte, et champ réservé.
+
+      Époque UNIX : référence du premier janvier 1970, les dates de /etc/shadow étant exprimées en jours et non en secondes depuis cette date.
+
+      pwconv : utilitaire harmonisant les contenus de shadow et de passwd sur Solaris, HP-UX et Linux, complétant sous Linux les paramètres par défaut depuis /etc/login.defs.
+
+      passwd -f : commande forçant, sur Solaris, un utilisateur à changer son mot de passe à la prochaine connexion.
+
+      pwdadm : commande AIX forçant un utilisateur à changer son mot de passe à la prochaine connexion ou verrouillant le compte.
+
+      useradd, userdel, usermod : outils de gestion des utilisateurs présents sur chacun des systèmes, sans être nécessairement les mêmes programmes, exigeant les droits root ou le privilège UserAdmin sur AIX.
+
+      newusers : commande Linux créant plusieurs comptes à la fois à partir d'un fichier texte proche de /etc/passwd, le champ mot de passe contenant le mot de passe initial en clair.
+
+      /etc/skel : répertoire contenant les exemples de fichiers de démarrage copiés dans le home d'un nouvel utilisateur, sur Linux, Solaris et HP-UX ; /etc/security sur AIX ; Linux garde aussi des fragments dans /etc/profile.d.
+
+      Fichiers de démarrage : fichiers commençant par un point et se terminant par les lettres RC pour run command, cachés par le point initial, fournissant un environnement par défaut à chaque shell.
+
+      umask : masque de création de fichiers, à fixer à une valeur raisonnable, 077, 027 ou 022 selon la convivialité et la taille du système, 077 étant recommandé sans groupe individuel.
+
+      chown et chmod : commandes attribuant le répertoire home à l'utilisateur et fixant les permissions appropriées, par exemple chown -R sur le home.
+
+      mail home : machine unique sur laquelle un utilisateur reçoit ses courriels, mis en œuvre par une entrée dans /etc/mail/aliases ou l'équivalent postfix ou exim4 sur le serveur de messagerie central.
+
+      RBAC (Role-Based Access Control) : contrôle d'accès basé sur les rôles permettant de donner des privilèges système aux utilisateurs, disponible sur beaucoup de systèmes.
+
+      Désactivation du login : opération consistant à placer une astérisque ou un autre caractère devant le mot de passe crypté dans shadow ou /etc/security/passwd, ou à utiliser usermod -L et -U sous Linux, passwd -l et -u sur Solaris qui ajoute LK au champ.
+
+      SMIT : outil d'interface de gestion système d'AIX pour l'administration, notamment des utilisateurs.
+
+      SMH (System Management Homepage) : outil d'administration système de HP-UX, anciennement appelé SAM (System Administration Manager).
+
+      PAM (Pluggable Authentication Modules) : module d'authentification modulaire centralisant la gestion des authentifications par des routines de bibliothèque standard, si bien que login, sudo et passwd n'ont pas à fournir leur propre module ; il réduit le risque, permet des politiques de sécurité sur tout un site et facilite l'ajout de méthodes d'authentification.
+
+      LDAP (Lightweight Directory Access Protocol) : base de données de type référentiel à structure hiérarchique et modèle client-serveur, stockant la gestion des utilisateurs et pouvant appliquer des UID et GID uniques entre systèmes, son schéma étant exprimé en fichiers XML avec des noms de champs issus de RFC, principalement la RFC 2307 ; il doit être en haute disponibilité pour ce rôle.
+
+      Active Directory : service d'annuaire de Microsoft utilisant LDAP et Kerberos, gérant de nombreux types de données dont les informations utilisateur, ne pouvant se configurer qu'en maître face à un LDAP UNIX ou Linux.
+
+      SSO (authentification unique) : mécanisme permettant à un utilisateur de s'authentifier une seule fois pour plusieurs applications ou machines, le serveur d'authentification étant un goulot d'étranglement critique et l'impact d'un compte compromis étant plus grand ; exemples Kerberos, JOSSO, CAS et LemonLDAP utilisé à la DGFiP.
+
+      Gestion des identités : ensemble consistant à identifier les utilisateurs, authentifier leur identité et octroyer des privilèges selon ces identités, reposant sur une base d'authentification et d'autorisation souvent au format LDAP, avec des groupes UNIX et sudo, orienté vers les exigences réglementaires, d'audit et de suivi ; normes menées par le W3C et The Open Group.
+
+      OpenID et OAuth : systèmes libres de gestion d'identités en plein essor, OAuth étant issu de Twitter.
+
+
+COURS DÉTAILLÉ.
+
+
+I. CONTEXTE ET ENJEUX.
+
+
+   A. La tâche d'administration.
+
+      Ajouter et supprimer des utilisateurs est une tâche simple mais laborieuse et ennuyeuse, si bien que la plupart des administrateurs améliorent les outils fournis pour automatiser le processus puis en délèguent une partie à un assistant ou à l'exploitant ; on assiste à une résurgence des serveurs centralisés avec des comptes pour des centaines de personnes.
+
+      Les administrateurs doivent comprendre en profondeur le système de compte utilisateur pour gérer les services réseau et configurer les comptes selon l'environnement local ; les systèmes d'information actuels ont besoin non seulement d'un outil pour ajouter des utilisateurs à une machine, mais aussi d'un outil de gestion des comptes multiples et des mots de passe à travers tout l'environnement, d'où les services d'annuaire tels qu'Active Directory, OpenLDAP et Fedora Directory Server ; les outils s'appellent useradd, userdel et usermod sur chacun des systèmes, sans être les mêmes programmes, et la plupart des systèmes ont des interfaces graphiques rarement utilisables en mode batch.
+
+
+II. LE FICHIER /etc/passwd.
+
+
+   A. Le rôle et les sept champs.
+
+      Le fichier /etc/passwd est la liste des utilisateurs reconnus, éventuellement prolongée par un service d'annuaire, consultée au login pour déterminer l'UID et le répertoire d'un utilisateur ; chaque ligne contient sept champs séparés par le caractère deux-points, à savoir le login, le mot de passe crypté, l'UID, le GID par défaut, les informations GECOS, le répertoire personnel et le shell de connexion.
+
+      Les mots de passe cryptés du second champ ne sont plus sûrs et sont déplacés dans un fichier séparé non lisible, le champ contenant x sur Linux, Solaris et HP-UX et point d'exclamation ou astérisque sur AIX ; avec NIS ou LDAP, des entrées spéciales commençant par plus ou moins indiquent comment intégrer les données de l'annuaire, cette intégration pouvant aussi être décrite dans /etc/nsswitch.conf.
+
+
+   B. Le login.
+
+      Les logins doivent être uniques, ne peuvent contenir ni deux-points ni fin de ligne car ce sont des séparateurs, et sont limités à huit caractères avec NIS ou NIS+ ; à l'origine, UNIX limitait à huit caractères alphanumériques, aussi faut-il retenir les limites les plus restrictives parmi ses systèmes.
+
+      Les logins sont sensibles à la casse, faciles à retenir de préférence, les surnoms trop génériques étant à proscrire ; ils servent souvent d'adresses e-mail, d'où l'intérêt d'une manière standard de les former et d'ajouter un numéro pour les doublons ; un utilisateur doit avoir le même login sur chaque machine ; AIX permet de modifier la longueur maximale avec chdev sur le périphérique sys0 et prend en charge les caractères multi-octets.
+
+
+   C. Le mot de passe crypté.
+
+      Les systèmes modernes réservent un espace pour le mot de passe crypté puis invitent l'utilisateur à le changer à la première connexion, et supportent plusieurs algorithmes en plus de crypt, à savoir crypt basé sur le DES, MD5, Blowfish et une version itérative de MD5 ; le mot de passe crypté est étiqueté pour identifier la forme de chiffrement.
+
+      Pour créer un compte à la main avec vipw, il faut mettre une astérisque ou un x dans ce champ pour empêcher toute utilisation jusqu'à définition d'un vrai mot de passe, un champ vide étant un trou de sécurité ; MD5 est un peu plus sûr que le DES et autorise des longueurs arbitraires malgré des faiblesses démontrées, SHA256, SHA512 et Blowfish étant robustes ; les mots de passe cryptés sont de longueur constante, trente-quatre caractères pour MD5 et treize pour le DES, et le sel aléatoire fait qu'un même mot de passe correspond à de nombreuses formes.
+
+
+III. LES IDENTIFIANTS UID ET GID.
+
+
+   A. L'UID.
+
+      L'UID identifie l'utilisateur pour le logiciel et le système de fichiers, souvent sur trente-deux bits non signés, root ayant l'UID zéro ; les pseudo-utilisateurs comme bin sont placés en début de fichier avec un UID faible et un shell fictif comme /bin/false, et nobody a une grande valeur, servant quand root d'une machine accède via NFS à des fichiers d'une machine qui ne lui fait pas confiance.
+
+      Il ne faut pas plusieurs comptes d'UID zéro, sudo étant préférable ; il ne faut pas réutiliser un UID même après suppression, pour éviter la confusion lors d'une restauration où les utilisateurs sont identifiés par l'UID ; un UID doit référer au même login et à la même personne sur chaque machine, sous peine de problèmes de sécurité avec NFS ; la meilleure solution est une base centrale ou un serveur d'annuaire, LDAP étant devenu populaire à condition d'être en haute disponibilité.
+
+
+   B. Le GID et le fichier /etc/group.
+
+      Un GID est un entier de trente-deux bits, le GID zéro étant réservé au groupe root ou système, sans cohérence entre distributions ; autrefois utilisés pour la facturation du temps CPU, les groupes servent aujourd'hui surtout à partager l'accès aux fichiers.
+
+      Le fichier /etc/group définit les groupes, le champ GID de /etc/passwd ne fournissant qu'un GID provisoire au login, le vrai GID n'étant pertinent que pour la création de fichiers ; le bit setgid 02000 sur un répertoire ou l'option grpid font appartenir les nouveaux fichiers au groupe du répertoire parent ; chaque ligne de /etc/group contient le nom, un mot de passe crypté ou espace réservé, le GID et la liste des membres séparés par des virgules sans espace ; un mot de passe de groupe permet à un non-membre d'entrer avec newgrp, se configure avec gpasswd et se stocke dans /etc/gshadow, mais est rarement utilisé.
+
+      Si un utilisateur a un groupe par défaut dans /etc/passwd mais n'y figure pas dans /etc/group, /etc/passwd est prioritaire ; le nombre de groupes par utilisateur est limité, huit historiquement, seize sur Solaris, vingt sur HP-UX, apparemment illimité sur AIX et Linux ; les commandes sont groupadd, groupmod et groupdel, AIX imposant une édition manuelle vérifiée par grpck.
+
+
+IV. LES CHAMPS GECOS, HOME ET SHELL.
+
+
+   A. GECOS.
+
+      Le champ GECOS enregistre des informations personnelles sans syntaxe définie, finger interprétant les valeurs séparées par des virgules comme nom complet, bureau et bâtiment, poste téléphonique de bureau puis numéro personnel ; chfn permet à un utilisateur de changer ses informations, peut être restreint ou désactivé, ne concerne que /etc/passwd donc peut être inopérant avec LDAP, et accepte sur AIX l'option -R pour un module comme LDAP.
+
+
+   B. Le répertoire personnel.
+
+      Le home est le répertoire par défaut au login ; s'il est monté sur un système de fichiers réseau, il peut être indisponible en cas de problème serveur, et s'il est manquant le système affiche un message d'absence et place l'utilisateur dans la racine, sauf sous Linux si /etc/login.defs fixe DEFAULT_HOME à no, auquel cas le login est refusé.
+
+
+   C. Le shell.
+
+      Le shell est normalement un interpréteur comme le shell Bourne ou le C shell ; sh est le shell traditionnel d'UNIX, bash celui par défaut de Linux et Solaris, ksh celui d'AIX, tcsh une amélioration du C shell, sh et csh étant sous Linux des liens vers bash et tcsh ; chsh change le shell, limité aux shells de /etc/shells sous Linux, souvent inopérant avec un service d'annuaire, et sur Solaris seul le superutilisateur le fait avec passwd -e ; l'administrateur peut toujours éditer /etc/passwd avec vipw.
+
+
+V. LE FICHIER /etc/shadow.
+
+
+   A. Le rôle et les neuf champs.
+
+      Le fichier shadow, lisible seulement par le superutilisateur, maintient les mots de passe cryptés à l'abri et ajoute des informations de compte absentes du format d'origine, les mots de passe étant désormais masqués par défaut ; IBM l'appelle /etc/security/passwd, le reste du monde /etc/shadow, avec des formats différents.
+
+      Le fichier shadow n'est pas un sous-ensemble de passwd et ne le génère pas ; chaque ligne contient neuf champs séparés par deux-points, à savoir le login qui relie les deux fichiers, le mot de passe crypté, la date du dernier changement remplie par passwd, le nombre minimal de jours entre changements, le nombre maximal de jours, le nombre de jours d'avertissement avant expiration, un septième champ variable selon l'OS, la date d'expiration du compte, et un champ réservé.
+
+      Sous Linux, le septième champ indique combien de jours attendre après l'expiration du mot de passe avant de considérer le login comme expiré ; sur Solaris et HP-UX, il bloque le compte si l'utilisateur ne s'est pas connecté dans le nombre de jours indiqué, mécanisme dépendant de /var/adm/lastlog et peu fiable en réseau ; le huitième champ, en jours depuis le premier janvier 1970, fixe l'expiration du compte, un champ vide signifiant jamais, usermod le définissant au format année-mois-jour ; le neuvième champ est réservé, Solaris utilisant ses quatre derniers bits pour compter les tentatives infructueuses.
+
+
+   B. Les outils associés.
+
+      pwconv harmonise shadow et passwd sur Solaris, HP-UX et Linux, complétant sous Linux les paramètres par défaut depuis /etc/login.defs ; passwd -f sur Solaris force un changement de mot de passe à la prochaine connexion ; AIX n'utilise pas shadow mais un fichier /etc/security/passwd de format différent, avec des entrées séparées par des lignes vides et des champs password, LastUpdate et flags, et la commande pwdadm pour forcer un changement ou verrouiller le compte.
+
+
+VI. LES MODALITÉS PRATIQUES D'AJOUT ET DE SUPPRESSION.
+
+
+   A. Les étapes d'ajout d'un utilisateur.
+
+      Les étapes requises sont de faire signer le contrat de politique d'utilisation, modifier passwd et shadow, ajouter l'utilisateur à /etc/group, définir un mot de passe initial, créer et attribuer le home avec chown et chmod, et configurer les rôles et permissions ; pour l'utilisateur, il faut copier les fichiers de démarrage par défaut et configurer le répertoire mail et les alias ; pour l'administrateur, il faut vérifier la configuration et enregistrer les informations de contact et l'état du compte.
+
+      Il faut être root pour ajouter un utilisateur, ou avoir le privilège UserAdmin sur AIX ; l'édition manuelle se fait avec vipw, qui propose d'éditer shadow sur Solaris et Red Hat et s'invoque avec -s sur SUSE et Ubuntu, HP-UX et AIX recommandant plutôt useradd ou leurs outils SMH et SMIT ; il faut éditer /etc/group pour les groupes supplémentaires.
+
+
+   B. Le mot de passe, le home et les fichiers de démarrage.
+
+      Il ne faut jamais laisser sans mot de passe un compte ayant accès à un shell ; forcer l'utilisateur à définir son mot de passe à la première connexion est pratique mais un trou de sécurité, quiconque pouvant deviner un login récent détournant le compte.
+
+      Le home se crée avec mkdir et les bonnes permissions ; les fichiers de démarrage commencent par un point et se terminent par RC pour run command, relique du système CTSS, et il est recommandé d'en fournir un par shell ; les exemples sont dans /etc/skel sur Linux, Solaris et HP-UX et dans /etc/security sur AIX, Linux gardant des fragments dans /etc/profile.d ; il faut fixer un umask raisonnable, 077, 027 ou 022, 077 étant recommandé sans groupe individuel ; le home est ensuite attribué avec chown -R sur l'utilisateur et son groupe, le mail home est mis en place avec /etc/mail/aliases ou l'équivalent postfix ou exim4, et RBAC permet de donner des privilèges système.
+
+
+   C. La suppression et la désactivation.
+
+      Supprimer un utilisateur implique de le retirer des bases locales, de traiter le fichier d'alias, de supprimer sa crontab et ses travaux d'impression, de tuer ses processus, de le supprimer de passwd, shadow, group et gshadow, de supprimer son home et ses courriels, de nettoyer les calendriers partagés et de transférer la propriété des listes de diffusion ; il faut déplacer les fichiers utilisés par d'autres et sauvegarder le home avant suppression.
+
+      Pour désactiver temporairement un login, on place une astérisque devant le mot de passe crypté dans shadow ou /etc/security/passwd, ce qui empêche la plupart des mots de passe de fonctionner ; usermod -L et -U verrouillent et déverrouillent sous Linux, passwd -l et -u sur Solaris qui ajoute LK au champ, HP-UX se contentant d'une astérisque, AIX verrouillant si le champ de /etc/passwd contient une astérisque au lieu d'un point d'exclamation ; modifier le mot de passe rend seulement les connexions impossibles sans informer l'utilisateur, aussi peut-on remplacer son shell par un programme affichant un message explicatif.
+
+
+VII. LES OUTILS ET LA GESTION CENTRALISÉE.
+
+
+   A. Les outils spécifiques et PAM.
+
+      HP-UX et AIX fournissent un outil d'administration système complet, SMIT sur AIX et SMH sur HP-UX, anciennement SAM, avec des écrans d'ajout et de gestion des utilisateurs en interface graphique ou curses.
+
+      PAM centralise la gestion des authentifications par des routines de bibliothèque standard, si bien que login, sudo et passwd n'ont pas à fournir leur propre module ; il réduit le risque de logiciels sécurisés, permet des politiques de sécurité sur tout un site et facilite l'ajout de méthodes ; l'ajout et la suppression d'utilisateurs n'utilisent pas PAM mais les outils opèrent selon ses règles.
+
+
+   B. La gestion de compte centralisée.
+
+      La gestion centralisée est essentielle pour les grands comptes, chaque utilisateur ayant besoin d'un login, d'un UID et d'un mot de passe uniques sur le site, et les administrateurs d'une propagation instantanée des changements, notamment les révocations ; elle repose sur un annuaire, la plupart, dont Active Directory, impliquant LDAP, avec des solutions open source comme OpenLDAP ou propriétaires coûteuses.
+
+      LDAP est une base de type référentiel à structure hiérarchique et modèle client-serveur, appliquant des UID et GID uniques entre systèmes, fonctionnant bien avec Windows, son schéma étant en fichiers XML avec des noms de champs issus de RFC, principalement la RFC 2307 ; Active Directory utilise LDAP et Kerberos et ne se configure qu'en maître face à un LDAP UNIX ou Linux.
+
+
+   C. SSO et gestion des identités.
+
+      Le SSO permet à un utilisateur de s'authentifier une seule fois pour plusieurs applications, ce qui accroît la commodité mais aussi l'impact d'un compte compromis, le serveur d'authentification étant un goulot d'étranglement critique ; exemples Kerberos, JOSSO, CAS et LemonLDAP utilisé à la DGFiP.
+
+      La gestion des identités consiste à identifier les utilisateurs, authentifier leur identité et octroyer des privilèges selon ces identités, sur une base d'authentification et d'autorisation souvent au format LDAP, avec des groupes UNIX et sudo, orientée vers les exigences réglementaires, de responsabilisation, de suivi et d'audit ; les normes sont menées par le W3C et The Open Group ; il existe des systèmes commerciaux comme ceux d'Oracle, Sun et BMC, et des systèmes libres comme OpenID et OAuth issu de Twitter.
+
+
+POINTS D'ATTENTION.
+
+      Le fichier /etc/passwd contient sept champs séparés par deux-points, le mot de passe réel étant déplacé dans shadow.
+
+      Un champ de mot de passe vide dans passwd ou shadow est un trou de sécurité majeur ; il faut y mettre une astérisque ou un x pour un compte non encore utilisable.
+
+      root a l'UID zéro ; il ne faut pas plusieurs comptes d'UID zéro, sudo étant la bonne solution.
+
+      Un UID ne doit jamais être réutilisé, même après suppression de l'utilisateur, pour éviter la confusion lors des restaurations.
+
+      Si /etc/passwd et /etc/group divergent sur l'appartenance à un groupe par défaut, /etc/passwd est prioritaire.
+
+      Les dates de /etc/shadow sont en jours depuis le premier janvier 1970, pas en secondes.
+
+      Le septième champ de shadow a un sens différent sous Linux et sous Solaris ou HP-UX.
+
+      Le fichier shadow n'est pas un sous-ensemble de passwd et ne le génère pas.
+
+      AIX n'utilise pas /etc/shadow mais /etc/security/passwd, de format différent.
+
+      Forcer la définition du mot de passe à la première connexion est un trou de sécurité, un login récent pouvant être détourné.
+
+      Il faut sauvegarder le répertoire home d'un utilisateur avant de le supprimer et déplacer les fichiers utilisés par d'autres.
+
+      LDAP ne peut servir de référentiel central que s'il est en haute disponibilité.
+
+
+EXEMPLES CITES.
+
+      Lignes de /etc/passwd root:x:0:0:root:/root:/bin/bash et cpam:x:1000:1000:cpam,,,:/home/cpam:/bin/bash.
+
+      Mots de passe MD5 commençant par dollar un dollar, Blowfish par dollar 2a, SHA256 par dollar 5.
+
+      Longueur constante des mots de passe cryptés, trente-quatre caractères pour MD5 et treize pour le DES.
+
+      Pseudo-utilisateur nobody de grande valeur d'UID, utilisé pour les accès NFS non fiables.
+
+      Groupe bin de GID un sur Red Hat et SUSE, de GID deux sur Ubuntu, Solaris, HP-UX et AIX.
+
+      Bit setgid de valeur 02000 sur un répertoire pour l'héritage du groupe parent.
+
+      Outils useradd, userdel, usermod, et newusers sous Linux pour les créations en masse.
+
+      Répertoire /etc/skel pour les fichiers de démarrage sur Linux, Solaris et HP-UX, /etc/security sur AIX.
+
+      Valeurs de umask recommandées 077, 027 ou 022.
+
+      Verrouillage de compte par usermod -L sous Linux, passwd -l sur Solaris ajoutant LK au champ.
+
+      Outils d'administration SMIT sur AIX et SMH, anciennement SAM, sur HP-UX.
+
+      Solutions SSO Kerberos, JOSSO, CAS et LemonLDAP utilisé à la DGFiP.

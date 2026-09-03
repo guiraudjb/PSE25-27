@@ -1,38 +1,438 @@
-TRANSMISSION DE L'INFORMATION : SIGNAL, SUPPORTS, ÉQUIPEMENTS (couche physique OSI)
+LA TRANSMISSION DE L'INFORMATION : SIGNAL, SUPPORTS ET ÉQUIPEMENTS.
 
-1. TRAITEMENT DU SIGNAL
-Communication = partager une information via un support (filaire, hertzien, optique). L'information (suite de bits) est transcrite en signal : variation d'une grandeur physique (tension, fréquence, lumière).
-Signal analogique : variation continue dans le temps. Signal numérique : variation discrète. Numériser un signal analogique permet son traitement informatique.
-Échantillonnage : prélever l'amplitude à des instants espacés par la période T. Théorème de Shannon : F_échantillonnage ≥ 2 × F_signal_max (fréquence de Nyquist). Sous-échantillonnage (T trop grand) -> pertes des hautes fréquences, signal non reconstituable.
-Circuit de données : ETTD (Équipement Terminal de Traitement des Données, ex. PC) relié à un ETCD (Équipement de Terminaison du Circuit de Données, ex. modem) qui module (émission) et démodule (réception). Circuit de données = support + les deux ETCD.
-Transmission synchrone : symboles à intervalles réguliers, horloge transmise via le codage, trame débutant par des caractères de synchronisation. Transmission asynchrone (arythmique, START/STOP) : intervalles variables, ligne au repos entre trames ; cas particulier de la synchrone.
-Full-duplex (deux sens simultanés), half-duplex (deux sens non simultanés), simplex (un seul sens).
-Modulation / codage : adapter le spectre du signal à la bande passante du support.
-Valence et débit : rapidité de modulation R en bauds (nombre d'intervalles élémentaires par seconde). Valence n = nombre de bits par intervalle élémentaire (2^n valeurs). Débit binaire d = n × R (bit/s). Ex. 100 bauds, valence 2 -> 200 bit/s.
-Bruit : signal aléatoire se superposant au signal utile ; rapport signal sur bruit caractérise le canal. Bruit impulsif (bref et intense), bruit blanc gaussien (densité spectrale constante), bruit thermique (électrons, proportionnel à la température), bruit de quantification (conversion A/N). Paradiaphonie : couplage électromagnétique entre paires torsadées (torsade la réduit ; mesure en dB, plus élevée = meilleure). CEM (compatibilité électromagnétique) : fonctionner sans perturber ni être perturbé ; réglementation CEE 89/336 et 92/31.
 
-2. MODES DE TRANSMISSION
-Bande de base : signal numérique non transposé, simplement codé ; bande de 0 à F ; réseaux locaux, courtes distances (dégradation rapide avec la distance -> régénération). Codage Manchester (Ethernet premières versions) : bivalent, bit 0 = front descendant, bit 1 = front montant ; avantages : synchronisation aisée, composante continue nulle, spectre étalé ; inconvénient : câblage rigoureux (inversion des fils = message inversé). Confusion inter-symbole : créneaux déformés par retard et affaiblissement -> régénération nécessaire.
-Onde porteuse : bande centrée sur f0 ; transposition spectrale pour s'insérer dans la bande passante garantie ; modulation. Modulations : amplitude (ASK), fréquence (FSK, Frequency Shift Keying), phase (PSK, Phase Shift Keying) ; peuvent s'appliquer à n états. MAQ (modulation d'amplitude en quadrature) : combine amplitude + saut de phase, jusqu'à 4 bits par état, deux porteuses en quadrature.
-Multiplexage : plusieurs signaux sur un même support, récupérables à l'arrivée. Multiplexage fréquentiel (FDMA / AMRF) : découpe statique de la bande passante en canaux séparés par des bandes de garde ; taux d'occupation non optimal ; téléphonie, radio/TV analogique. PDH (Plesiochronous Digital Hierarchy, ITU) : 4 niveaux en Europe (TN1 à TN4 : 2,048 / 8,448 / 34,368 / 139,264 Mbit/s), chaque multiplexeur a sa propre horloge (plésiochrone), signalisation hors-bande. SDH (Synchronous Digital Hierarchy, IUT-T) / SONET (Synchronous Optical NETwork) : synchrone (horloge à 10^-9 s), insertion/extraction de voies sans multiplexage complet ; SDH sur-ensemble de SONET (STM-1 = 155,52 Mbit/s...).
-Point-à-point : deux entités, une à chaque extrémité. Multipoint : communication de groupe (ex. bus, station maître en polling-selecting).
+LEXIQUE COMPLET.
 
-3. SUPPORTS
-Paires de cuivre torsadées : LAN et WAN ; câblage facile, connectique peu chère. Norme ISO 11801 : dénomination blindage_global/blindage_paires (U/UTP non écranté, F/UTP écran général, S/UTP tresse générale, U/FTP écran par paires, S/FTP tresse générale + écran par paires...). Impédances 100 / 120 / 150 ohms. Catégorie (1-7) = composant isolé ; classe (A-F) = système installé (classe E exige des composants cat. 6). Classe C / cat. 3 / 16 MHz -> 10base-T ; classe D / cat. 5 / 100 MHz -> 100base-TX ; classe E / cat. 6 / 250 MHz -> 1000base-T ; classe EA / cat. 6A / 500 MHz -> 10Gbase-T. Connectique RJ45 jusqu'à la catégorie 6A. Blindage feuillard (F) efficace en HF, tresse (S) en BF. Contraintes de pose : rayon de courbure > 6 × diamètre, lovage > 1 m, détorsadage minimal, maillage des masses, séparation courants forts/faibles, croisements à 90°, chemins de câble métalliques mis à la terre, éloignement des perturbateurs.
-Câble coaxial : deux conducteurs concentriques (âme + tresse), diélectrique, gaine. 50 ohms (bande de base) : ~1 Gbit/s sur 1 km, numérisation des réseaux téléphoniques. 75 ohms (large bande, CATV) : image de la TV câblée, multiplexage fréquentiel, sous-canaux de 6 MHz, amplificateurs unidirectionnels. Supplanté par la fibre sur les longues distances.
-Liaisons hertziennes : ondes électromagnétiques (champ électrique + magnétique orthogonaux, vitesse de la lumière), réflexion selon les lois de l'optique.
-Infrarouge : longueur d'onde > 0,8 micron ; courte distance, arrêté par les obstacles, incompatible avec la lumière du soleil ; pas d'autorisation en France pour l'optique sans fil.
-Fibre optique : fil de verre (silice), cœur (propagation de la lumière) + gaine ; impulsion lumineuse = 1, absence = 0 ; émetteur LED, diode laser ou laser. Deux fibres pour le bidirectionnel simultané. Multimode : saut d'indice (50 MHz/km), gradient d'indice (500 MHz/km). Monomode : cœur ~5 microns, un seul rayon, jusqu'à 100 GHz/km, très faible affaiblissement, immunité électromagnétique. Multiplexage WDM (Wavelength Division Multiplexing) : longueurs d'onde différentes simultanées. Câbles type A (extérieur), B (distribution primaire), C (distribution capillaire). Raccordement par épissure fusion (soudure) ou mécanique.
-Laser : lumière cohérente, monochromatique, unidirectionnelle ; interconnexion de LAN entre immeubles en vue directe, alignement précis, perturbé par la pluie, la neige, les courants de convection.
-Précâblage d'immeuble : topologie étoile ; du T.O. (Telecommunications Outlet, prise terminale) au F.D. (Floor Distributor, sous-répartiteur d'étage) par câblage horizontal, puis câblage vertical vers le répartiteur d'immeuble. Lien : câble horizontal ≤ 90 m + 3 points de connexion + cordon ≤ 5 m. Canal : ensemble des matériels entre le terminal et l'équipement actif du F.D.
+      Communication : action de partager une information.
 
-4. ÉQUIPEMENTS DES RÉSEAUX LOCAUX
-- Prises / connecteurs : connexion mécanique, dépend du support (ex. RJ-45 pour Ethernet à paire torsadée).
-- Adaptateur (transceiver) : connexion électrique, sérialisation/désérialisation, adaptation des signaux ; sur la carte réseau.
-- Coupleur (carte réseau) : contrôle des transmissions, formatage, détection d'erreur.
-- Répéteur (couche 1) : régénération du signal (amplification, remise en forme) pour relier des segments et étendre le LAN ; contribue à la détection de collisions ; isole automatiquement un segment au-delà de 30 collisions consécutives.
-- Pont / bridge (couches 1 et 2 MAC, IEEE 802.1d) : filtre les trames (pas de diffusion si émetteur et destinataire sur le même segment), table (port, adresse) par autoapprentissage, écarte les trames erronées via le FCS, limite les collisions au segment concerné ; règle du 80/20 ; PPP pour la sécurisation WAN ; compression sur les en-têtes ; Spanning Tree Algorithm (topologie sans boucle, BPDU) pour les ponts transparents.
-- Concentrateur / hub (couche 1) : duplique chaque signal reçu sur tous les autres ports ; étoile physique, bus logique ; bande passante partagée ; port de connexion au backbone.
-- Switch / commutateur Ethernet (couche 2) : filtre sur adresse MAC, mémorise les adresses par port, partitionne le réseau en autant de segments que de ports, limite broadcast et trafic ; plusieurs dizaines de Mbit/s par port.
-- B-routeur : routeur basculant en mode pont quand le protocole réseau lui est étranger.
-- Routeur (couche 3) : au moins 2 ports (adresse physique + logique par port) ; transmet les datagrammes (IP) via des tables (réseau distant, next hop) ; ARP/RARP pour la correspondance IP-MAC ; les adresses MAC ne traversent pas le routeur ; listes de contrôle (ACL) possibles par port.
+      Support ou canal de transmission : milieu permettant d'échanger des informations entre deux éléments d'un système, de nature filaire, hertzienne ou optique.
+
+      Information : suite ordonnée de bits à zéro ou à un, définie et comprise par la machine.
+
+      Signal : transcription de l'information sous une forme physique compatible avec le support, consistant en la variation d'une grandeur physique telle que la tension électrique, la fréquence ou la lumière.
+
+      Signal analogique : signal qui varie de manière continue dans le temps.
+
+      Signal numérique : signal qui varie de façon discrète dans le temps.
+
+      Échantillonnage : technique de numérisation d'un signal analogique consistant à prélever son amplitude à des instants précis espacés par la période d'échantillonnage.
+
+      Sous-échantillonnage : cas où la période d'échantillonnage est trop grande, où les hautes fréquences ne sont pas prises en compte et où le signal ne peut plus être reconstitué correctement.
+
+      Théorème de Shannon : la fréquence minimale d'échantillonnage d'un signal doit valoir au moins le double de la fréquence maximale du signal, cette fréquence maximale étant appelée fréquence de Nyquist.
+
+      ETTD (Équipement Terminal de Traitement des Données) : équipement qui génère les données à transmettre et traite les données reçues, par exemple un ordinateur.
+
+      ETCD (Équipement de Terminaison du Circuit de Données) : équipement relié à l'ETTD et au support, qui module le signal à une extrémité et le démodule à l'autre, par exemple un modem.
+
+      Modulation du signal : adaptation par l'ETCD de la suite de données binaire au support de transmission.
+
+      Démodulation du signal : opération inverse consistant à extraire une suite de données binaires du signal propagé dans le support.
+
+      Circuit de données : ensemble constitué du support de transmission et des deux ETCD placés à chaque extrémité.
+
+      Transmission synchrone : émission des symboles binaires séparés par un intervalle de temps régulier coïncidant avec la période du signal d'horloge, l'horloge de l'émetteur étant transmise avec les données grâce au codage.
+
+      Transmission asynchrone : émission des symboles séparés par des intervalles de temps variables, aussi appelée transmission arythmique ou START STOP, la ligne étant au repos entre deux trames ; c'est un cas particulier de la transmission synchrone.
+
+      Trame : ensemble de bits regroupés par caractères ou octets, dont le début est annoncé en transmission synchrone par un ou plusieurs caractères de synchronisation.
+
+      Diviseur de fréquence : circuit d'un oscillateur à quartz spécialisé émission ou réception, permettant d'insérer l'information dans le signal à chaque intervalle de temps à l'émission et de fournir un rythme d'échantillonnage à la réception.
+
+      Full-duplex (duplex intégral) : circuit permettant la transmission simultanée dans les deux sens.
+
+      Half-duplex (semi-duplex) : circuit ne permettant pas la transmission dans les deux sens à un même moment.
+
+      Simplex : circuit ne permettant la transmission que dans un seul sens.
+
+      Bande passante : plage de fréquences pouvant être transportées sur un support sans atténuation trop importante.
+
+      Codage en ligne : transformation du signal numérique adaptée aux transmissions en bande de base.
+
+      Modulation : transformation du signal réservée aux transmissions sur onde porteuse.
+
+      Rapidité de modulation : nombre d'intervalles élémentaires contenus dans une seconde, exprimée en bauds, l'intervalle élémentaire étant le temps entre deux tops d'horloge successifs.
+
+      Valence : nombre n de bits transportés dans un intervalle de temps élémentaire, le nombre de valeurs transportées entre deux tops d'horloge valant deux puissance n.
+
+      Débit binaire : débit de la ligne en bits par seconde valant la valence multipliée par la rapidité de modulation, soit d égale n multiplié par R.
+
+      Bruit : ensemble des perturbations affectant la voie de transmission, signal électrique aléatoire se superposant au signal d'information et pouvant rendre l'information incohérente pour le récepteur.
+
+      Rapport signal sur bruit : caractéristique d'un canal égale au rapport de l'énergie du signal sur l'énergie du bruit.
+
+      Bruit impulsif : bruit de puissance moyenne faible mais concentrée dans des intervalles de temps brefs où elle atteint des valeurs très élevées.
+
+      Bruit blanc gaussien : signal aléatoire de densité spectrale de puissance constante en fréquence et dans le temps.
+
+      Bruit externe : bruit généré par tout dispositif produisant des champs électriques et magnétiques, moteurs, tubes au néon, parasites du secteur, foudre, décharges électrostatiques, émetteurs haute fréquence, ainsi que la diaphonie et la paradiaphonie.
+
+      Compatibilité électromagnétique (CEM) : aptitude d'un équipement à fonctionner dans un environnement électromagnétique donné sans générer de champs susceptibles de le perturber.
+
+      Immunité ou susceptibilité : aptitude d'un équipement à fonctionner sans dégradation en présence d'une perturbation électromagnétique.
+
+      Bruit thermique : bruit interne résultant du mouvement des électrons dans les conducteurs, de type blanc mais de densité spectrale proportionnelle à la température absolue.
+
+      Bruit de quantification : bruit interne résultant de la conversion analogique-numérique et de la précision limitée de la représentation numérique, par exemple sur huit bits soit deux cent cinquante-six échantillons.
+
+      Écho : réflexion partielle du signal due à une désadaptation d'impédance, corrigée par des annulateurs d'écho à atténuateurs variables et lignes à retard.
+
+      Paradiaphonie : interférence créée par les couplages électromagnétiques d'une paire torsadée sur l'autre, mesurée par le rapport signal émis sur une paire sur signal reçu sur une autre paire ; plus elle est faible, plus sa mesure en décibels est élevée, et la torsade la diminue.
+
+      Transmission en bande de base : transmission où la bande de fréquence allouée est comprise entre une fréquence nulle et une fréquence donnée, sans transformation du signal numérique en signal analogique, principalement rencontrée dans les réseaux locaux.
+
+      Codage Manchester : codage bivalent utilisé par les premières versions d'Ethernet, où un bit à zéro correspond à un front descendant et un bit à un à un front montant, offrant une synchronisation aisée des horloges et une composante continue nulle.
+
+      Critère de Nyquist : la rapidité de modulation maximale d'un support vaut au plus deux fois sa bande passante, soit R inférieur ou égal à deux multiplié par BP.
+
+      Confusion inter-symbole : recouvrement de symboles voisins dû à l'aplatissement et à l'élargissement des créneaux, les lignes métalliques retardant et affaiblissant les signaux proportionnellement à leur fréquence.
+
+      Régénération : reconstitution d'un signal affaibli, perturbé ou déformé dans une forme aussi proche que possible de l'originale.
+
+      Transmission sur onde porteuse : transmission où la bande de fréquence est centrée autour d'une fréquence f0, aussi appelée transmission en bande transposée, avec transposition spectrale du signal.
+
+      Porteuse : sinusoïde de fréquence élevée dont on fait varier une caractéristique lors de la modulation.
+
+      Modulation d'amplitude : modulation utilisant deux amplitudes différentes pour coder le zéro et le un.
+
+      Modulation de fréquence (FSK) : modulation utilisant deux fréquences de part et d'autre de la porteuse, le un étant représenté par f plus d et le zéro par f moins d.
+
+      Modulation de phase (PSK) : modulation utilisant des valeurs différentes de déphasage pour coder le zéro et le un.
+
+      MAQ (modulation d'amplitude en quadrature) : modulation combinant amplitude et saut de phase, codant jusqu'à quatre bits par état, avec deux porteuses en quadrature occupant la même bande de fréquence.
+
+      Multiplexage : procédé consistant à transmettre plusieurs signaux sur un même support, chaque signal étant totalement récupérable à l'extrémité réceptrice.
+
+      Multiplexage fréquentiel (FDMA, AMRF) : découpage statique de la bande passante du support en canaux réservés à l'usage exclusif d'un utilisateur, séparés par des bandes de garde.
+
+      PDH (hiérarchie numérique plésiochrone) : hiérarchie normalisée par l'ITU comportant quatre niveaux en Europe, numérotés TN1 à TN4, chaque multiplexeur fonctionnant avec sa propre horloge.
+
+      Signalisation hors-bande : circulation des informations de signalisation sur des canaux indépendants des données qu'elles supervisent, par opposition à la signalisation in-band.
+
+      SDH / SONET : hiérarchie numérique synchrone permettant d'insérer ou d'extraire des voies sans opération de multiplexage ou de démultiplexage, SDH étant un sur-ensemble de SONET piloté par une horloge à la nanoseconde.
+
+      Communication point à point : communication entre deux entités seulement, chacune à une extrémité du support.
+
+      Communication multipoint : communication de groupe entre une ou plusieurs entités émettrices et plusieurs entités réceptrices, par exemple un bus à station maître interrogeant des stations asservies par polling-selecting.
+
+      Paire de cuivre torsadée : support utilisé dans les réseaux LAN et WAN, de réalisation facile et de connectique peu coûteuse, sa dénomination étant fixée par la norme ISO 11801.
+
+      Norme ISO 11801-2002 : dénomination des câbles en deux parties séparées par une barre oblique, la première désignant le blindage global du câble, la seconde les paires prises individuellement, par exemple U barre UTP non écranté ou S barre FTP à blindage général par tresse et écran par paires.
+
+      Catégorie : niveau de performance propre à un élément d'un système de câblage pris indépendamment, de un à sept.
+
+      Classe : niveau de performance globale du système de câblage installé, de A à F, une classe E exigeant que chaque composant soit au moins de catégorie 6.
+
+      Câble coaxial : câble à deux conducteurs concentriques, âme et tresse, séparés par un diélectrique et entourés d'une gaine, offrant une bonne protection contre le bruit ; à cinquante ohms pour la bande de base, à soixante-quinze ohms et appelé CATV pour la télévision câblée.
+
+      Liaison hertzienne : liaison par ondes électromagnétiques omnidirectionnelles constituées de deux champs orthogonaux se déplaçant à la vitesse de la lumière et se réfléchissant suivant les lois de l'optique.
+
+      Liaison infrarouge : liaison de longueur d'onde supérieure à 0,8 micron, hors du spectre visible, peu coûteuse à très courte distance, arrêtée par les obstacles et incompatible avec la lumière du soleil, non assujettie à autorisation en France.
+
+      Fibre optique : fil de verre très fin à base de silice où se produit une réflexion totale, constitué d'un cœur où se propage la lumière et d'une gaine protectrice, une impulsion lumineuse représentant le un et l'absence de lumière le zéro.
+
+      Fibre multimode : fibre laissant se propager de nombreux rayons réfléchis, à saut d'indice jusqu'à cinquante mégahertz sur un kilomètre, à gradient d'indice jusqu'à cinq cents mégahertz sur un kilomètre.
+
+      Fibre monomode : fibre à cœur de très faible diamètre, de l'ordre de cinq microns, où un seul rayon se propage, à bande passante pouvant atteindre cent gigahertz sur un kilomètre, à très faible affaiblissement et bonne protection électromagnétique.
+
+      WDM (multiplexage en longueur d'onde) : méthode émettant simultanément sur la fibre des signaux de longueurs d'onde différentes, employée dans les cœurs de réseau des opérateurs.
+
+      Laser : source de lumière cohérente, monochromatique et unidirectionnelle produisant un faisceau très étroit, utilisée avec un photodétecteur pour l'interconnexion de réseaux locaux entre immeubles en vue directe, perturbée par la pluie, la neige et les courants de convection.
+
+      Pré-câblage d'immeuble : système de câblage en topologie physique étoile, toutes les liaisons étant en point à point depuis une prise terminale jusqu'à un sous-répartiteur d'étage par câblage horizontal, puis vers le répartiteur d'immeuble par câblage vertical.
+
+      Lien : liaison normalisée constituée d'un câble horizontal de quatre-vingt-dix mètres maximum, de trois points de connexion et d'un cordon de brassage de cinq mètres maximum.
+
+      Canal : ensemble des matériels de câblage compris entre le terminal utilisateur et l'équipement électronique installé dans le sous-répartiteur d'étage.
+
+      Prise ou connecteur : élément réalisant la connexion mécanique sur le support, dont le type dépend du support physique, par exemple le RJ45 pour Ethernet à paire torsadée en catégorie inférieure à sept.
+
+      Adaptateur (transceiver) : composant de la carte réseau chargé de la connexion électrique, de la sérialisation et de la désérialisation des informations et de l'adaptation des signaux au support.
+
+      Coupleur (carte réseau) : équipement contrôlant les transmissions sur le câble, assurant le formatage des informations et la détection d'erreur.
+
+      Répéteur : dispositif reliant deux segments ou plus au niveau de la couche 1, dont la fonction principale est la régénération du signal, permettant d'étendre un réseau local et contribuant à la détection des collisions.
+
+      Pont : équipement opérant aux couches 1 et 2 sous-couche MAC selon la norme IEEE 802.1d, qui filtre les trames selon une table constituée par autoapprentissage et n'en diffuse pas quand émetteur et destinataire sont sur le même segment.
+
+      Spanning Tree Algorithm : méthode par laquelle le pont transparent construit une table de chemins optimisés sans boucle, un pont asservissant les autres par le protocole Bridge Protocol Data Units.
+
+      Concentrateur (hub) : nœud d'interconnexion qui duplique tout signal reçu sur un port vers chacun des autres ports, formant une étoile physique et un bus logique, le trafic induit étant fonction du nombre de ports.
+
+      Commutateur Ethernet (switch) : équipement à structure de hub qui filtre sur adresse de bas niveau, segmente le réseau, limite le broadcast et le trafic général, stocke les adresses des périphériques par port et partitionne le réseau en autant de segments que de ports.
+
+      B-routeur : routeur capable de basculer en mode pont quand le protocole réseau de la trame lui est étranger.
+
+      Routeur : équipement d'interconnexion muni d'au moins deux ports, chacun avec une adresse physique et logique, opérant à la couche réseau et assurant la transmission des datagrammes vers leur destination à l'aide de tables de routage.
+
+      Passerelle : équipement qui n'est pas d'interconnexion de réseaux locaux, reliant des stations d'un réseau local à un ordinateur hôte par conversion de protocoles et émulation de terminaux passifs, souvent matérialisée par une carte de communication faisant fonction de serveur de communications.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LE TRAITEMENT DU SIGNAL.
+
+
+   A. Généralités et notion de signal.
+
+      La communication est l'action de partager une information ; pour échanger des informations entre deux éléments d'un système, il faut un support ou canal de transmission, qui peut être filaire, hertzien ou optique.
+
+      Une information est une suite ordonnée de bits à zéro ou à un, définie et comprise par la machine ; pour être transmise, elle doit être transcrite sous une forme physique compatible avec le support, c'est le signal, qui consiste en la variation d'une grandeur physique telle que la tension électrique, la fréquence ou la lumière.
+
+      Ce chapitre traite les principaux aspects de la première couche du modèle OSI, la couche physique, dont la mission est de permettre une transmission fiable, rapide, parfois sur de longues distances, dans des environnements soumis à des perturbations.
+
+
+   B. L'échantillonnage et le théorème de Shannon.
+
+      La transmission peut être analogique, le signal variant de manière continue dans le temps, ou numérique, le signal variant de façon discrète ; un même support peut porter des canaux analogiques ou numériques, l'intérêt de numériser un signal analogique comme la voix étant la possibilité de le traiter informatiquement.
+
+      Numériser un signal analogique consiste à prélever son amplitude à des instants précis espacés par la période d'échantillonnage ; l'échantillonnage induit une perte d'information qui doit rester faible, sans quoi le signal ne peut être reconstitué et l'on parle de sous-échantillonnage.
+
+      Le théorème de Shannon assure que le signal peut être reconstitué à partir de ses échantillons si la fréquence d'échantillonnage vaut au moins le double de la fréquence maximale du signal, appelée fréquence de Nyquist.
+
+
+   C. Le circuit de données.
+
+      L'ETTD génère les données à transmettre et traite les données reçues ; il est relié à un ETCD, lui-même relié au support ; à une extrémité, l'ETCD adapte la suite de données binaire au support, c'est la modulation, et à l'autre extrémité, il extrait une suite de données binaires du signal propagé, c'est la démodulation, ce qui rend la nature du support transparente.
+
+      L'ETTD peut être un ordinateur et l'ETCD un modem ; le circuit de données est l'ensemble constitué du support de transmission et des deux ETCD placés à chaque extrémité.
+
+
+   D. Transmission synchrone et asynchrone.
+
+      L'ETTD délivre ses symboles binaires soit séparés par un intervalle de temps régulier, c'est la transmission synchrone, soit séparés par des intervalles de temps variables, c'est la transmission asynchrone.
+
+      En transmission synchrone, les intervalles alloués à chaque symbole coïncident avec la période du signal d'horloge, émetteur et récepteur devant être synchronisés ; l'horloge de l'émetteur est transmise avec les données grâce au codage, une trame débutant par un ou plusieurs caractères de synchronisation, et l'ETTD délivrant un sur T symboles.
+
+      La transmission asynchrone, aussi appelée arythmique ou START STOP, transmet les symboles seulement lorsqu'ils sont générés, la ligne étant au repos entre deux trames pour une durée quelconque ; c'est un cas particulier de la transmission synchrone, prise en charge par des convertisseurs à diviseurs de fréquences dans un oscillateur piloté par quartz, chaque diviseur étant spécialisé émission ou réception.
+
+
+   E. Les sens de transmission.
+
+      Le circuit est full-duplex ou duplex intégral lorsque la transmission simultanée dans les deux sens est possible, half-duplex ou semi-duplex lorsqu'elle n'est pas possible dans les deux sens à un même moment, et simplex lorsqu'elle n'est possible que dans un seul sens.
+
+
+   F. La valence et le débit binaire.
+
+      Tout support est caractérisé par sa bande passante, qui définit la plage de fréquences transportables sans atténuation trop importante ; il faut adapter le spectre du signal à cette plage par la modulation et le codage.
+
+      La vitesse d'horloge donne la rapidité de modulation en bauds, égale au nombre d'intervalles élémentaires par seconde, l'intervalle élémentaire étant le temps entre deux tops d'horloge ; une ligne à cent bauds compte cent intervalles élémentaires par seconde.
+
+      Sur un intervalle élémentaire, on peut transmettre plus d'un bit ; un signal a une valence n s'il transporte n bits par intervalle, le nombre de valeurs entre deux tops valant deux puissance n ; le débit binaire vaut d égale n multiplié par R, ainsi une ligne à cent bauds de valence 2 a un débit de deux cents bits par seconde.
+
+
+   G. Le bruit et les altérations du canal.
+
+      Le bruit est l'ensemble des perturbations affectant la voie de transmission, provenant de la qualité de la ligne et des éléments intermédiaires ; c'est un signal électrique aléatoire se superposant au signal d'information et pouvant le rendre incohérent ; le rapport signal sur bruit est le rapport de l'énergie du signal sur celle du bruit.
+
+      Le bruit impulsif a une puissance moyenne faible mais concentrée dans de brefs intervalles où elle est très élevée ; le bruit blanc gaussien a une densité spectrale de puissance constante en fréquence et dans le temps.
+
+      Le bruit externe est généré par les moteurs, tubes au néon, parasites du secteur, foudre, décharges électrostatiques et émetteurs haute fréquence, ainsi que par la diaphonie et la paradiaphonie ; on le réduit par un blindage des circuits et des câbles avec mise à la masse aux deux extrémités, dans le cadre de la compatibilité électromagnétique, aptitude d'un équipement à fonctionner sans perturber son environnement, l'immunité étant l'aptitude à fonctionner sans dégradation en présence d'une perturbation.
+
+      Le bruit interne comprend le bruit thermique, dû au mouvement des électrons et de densité spectrale proportionnelle à la température absolue, et le bruit de quantification, dû à la précision limitée de la conversion analogique-numérique ; les désadaptations d'impédance provoquent des échos, corrigés par des annulateurs d'écho à atténuateurs variables et lignes à retard, la période de repos atteignant six cents millisecondes sur une liaison par satellite.
+
+      La paradiaphonie, spécifique aux câbles à paires torsadées, exprime l'interférence entre paires ; plus elle est faible, plus sa mesure en décibels est élevée, et la torsade la diminue tout en réduisant l'atténuation ; une mesure inférieure à vingt décibels indique probablement des paires divisées, et il ne faut pas détorsader les paires après le dénudage.
+
+
+II. LES MODES DE TRANSMISSION.
+
+
+   A. La transmission en bande de base.
+
+      Lorsque la bande de fréquence allouée est comprise entre une fréquence nulle et une fréquence donnée, la transmission est dite en bande de base : les informations sont transmises sans transformation du signal numérique en signal analogique, principalement dans les réseaux locaux où la liaison ne dépasse pas quelques centaines de mètres.
+
+      Le codage le plus simple associe une valeur positive au bit un et une valeur nulle au bit zéro, mais ce signal n'est pas transmis directement à cause des risques de perte de synchronisation sur les longues suites de bits identiques, d'un spectre concentré autour de la fréquence nulle et très large, de fortes perturbations quand le signal est à zéro, et de l'ambiguïté entre un zéro et une absence de transmission.
+
+
+   B. Le codage en bande de base.
+
+      Les codages en bande de base modifient la largeur de bande du signal et la transposent vers des fréquences plus élevées en introduisant des alternances supplémentaires ; le codage Manchester, utilisé par les premières versions d'Ethernet, est bivalent, un bit à zéro correspondant à un front descendant et un bit à un à un front montant.
+
+      Ses avantages sont un changement d'état à chaque bit permettant une synchronisation aisée des horloges, une composante continue nulle et un spectre étalé vers les hautes fréquences ; son inconvénient est l'exigence d'un câblage rigoureux, l'inversion des fils conduisant à recevoir le message inversé.
+
+
+   C. Le choix d'un codage.
+
+      Le choix dépend du support, du lieu d'implantation et du type d'informations, selon plusieurs critères, la bande passante du support, la sensibilité au bruit qui croît avec le nombre d'états significatifs, les problèmes d'horloge liés aux longues suites de bits identiques, et le débit maximal limité par les déformations du signal.
+
+      Le critère de Nyquist fixe la rapidité de modulation maximale d'un support à deux fois sa bande passante, soit R inférieur ou égal à deux multiplié par BP, d'où se déduit le débit maximal selon le nombre d'états par transition.
+
+
+   D. La confusion inter-symbole et la régénération.
+
+      Dans une ligne métallique, les signaux subissent un retard et un affaiblissement proportionnels à leur fréquence, si bien qu'un créneau s'aplatit et s'élargit, produisant des confusions inter-symboles et une diaphonie sur les liaisons multiplexes.
+
+      La régénération reconstitue un signal affaibli, perturbé ou déformé dans une forme proche de l'originale ; la dégradation rapide des signaux avec la distance est le principal problème de la bande de base, réservée aux très courtes distances et aux réseaux locaux à fort débit sur câbles à grande bande passante ; sur de plus longues distances, on utilise un signal sinusoïdal qui reste décodable même affaibli.
+
+
+   E. La transmission sur onde porteuse et la modulation.
+
+      Si la bande de fréquence allouée est centrée autour d'une fréquence f0, on parle de transmission sur onde porteuse ou en bande transposée, avec transposition spectrale ; le terme modulation est réservé à l'onde porteuse et le terme codage en ligne à la bande de base.
+
+      La modulation fait varier une caractéristique d'une porteuse de fréquence élevée, l'amplitude en modulation d'amplitude, la fréquence en modulation de fréquence FSK avec f plus d pour le un et f moins d pour le zéro, ou la phase en modulation de phase PSK ; la MAQ combine amplitude et saut de phase, code jusqu'à quatre bits par état et utilise deux porteuses en quadrature occupant la même bande de fréquence.
+
+
+   F. Le multiplexage.
+
+      Le multiplexage transmet plusieurs signaux sur un même support, chacun restant totalement récupérable à la réception, pour réaliser une communication full-duplex ou plusieurs canaux indépendants.
+
+      Le multiplexage fréquentiel, aussi appelé FDMA ou AMRF, découpe statiquement la bande passante en canaux réservés séparés par des bandes de garde ; son débit croît avec le nombre de canaux mais il exige une large bande passante et occupe un canal pendant toute la transmission, d'où un taux d'occupation non optimal ; il est très utilisé en téléphonie et en radiodiffusion analogique.
+
+      La hiérarchie PDH, normalisée par l'ITU, comporte quatre niveaux en Europe numérotés TN1 à TN4, chaque multiplexeur fonctionnant avec sa propre horloge, d'où le terme plésiochrone ; la signalisation circule hors-bande, sur des canaux indépendants des données, contrairement à la signalisation in-band ; la hiérarchie SDH, sur-ensemble de SONET et pilotée par une horloge à la nanoseconde, permet d'insérer ou d'extraire des voies sans multiplexage ni démultiplexage.
+
+
+   G. Les communications point à point et multipoint.
+
+      La communication point à point relie deux entités seulement, chacune à une extrémité du support, la paire émission de l'une étant reliée à la paire réception de l'autre ; la communication multipoint est une communication de groupe entre une ou plusieurs entités émettrices et plusieurs entités réceptrices, par exemple un bus où une station maître interroge à tour de rôle des stations asservies par polling-selecting à partir d'une table statique d'adresses.
+
+
+III. LES SUPPORTS DE TRANSMISSION.
+
+
+   A. Les paires de cuivre torsadées.
+
+      Les paires de cuivre torsadées sont utilisées dans les réseaux LAN et WAN pour leur facilité de câblage, leur connectique peu coûteuse et leurs performances électromagnétiques, la moindre longueur de segment étant compensée par des équipements actifs ; en WAN, la transmission en bande de base est possible jusqu'à des distances fonction du diamètre et du débit, l'effort de recherche portant sur la transmission deux fils en full duplex synchrone.
+
+      La norme ISO 11801-2002 nomme les câbles en deux parties séparées par une barre oblique, la gauche désignant le blindage global et la droite les paires individuelles, par exemple U barre UTP non écranté, F barre UTP à écran général, ou S barre FTP à blindage par tresse et écran par paires ; les impédances caractéristiques sont cent, cent vingt ou cent cinquante ohms, une impédance plus élevée réduisant l'affaiblissement.
+
+      Les composants sont classés en catégories de un à sept et les systèmes en classes A à F, l'ordre croissant correspondant à de meilleures performances ; la catégorie s'applique à un élément pris isolément, la classe à l'ensemble installé, une classe E exigeant des composants au moins de catégorie 6 ; les classes courantes vont de C avec la catégorie 3 à seize mégahertz pour le 10base-T, à EA avec la catégorie 6A à cinq cents mégahertz pour le 10Gbase-T, toutes utilisant le connecteur RJ45 jusqu'à la catégorie 6A ; la pose impose de respecter le rayon de courbure, d'au moins six fois le diamètre, de ne pas marcher sur les câbles, de limiter le détorsadage et d'assurer la continuité d'écran et la mise à la terre.
+
+
+   B. Le câble coaxial.
+
+      Le câble coaxial est composé de deux conducteurs concentriques, l'âme au centre et la tresse à l'extérieur, séparés par un diélectrique et entourés d'une gaine ; il offre une bonne protection contre le bruit et peut recevoir un blindage supplémentaire, mais ses contraintes mécaniques et la difficulté de raccordement sans couper le câble en augmentent le coût par rapport aux paires torsadées.
+
+      Le câble bande de base à cinquante ohms permet environ un gigabit par seconde sur un kilomètre et a servi à la numérisation des réseaux téléphoniques, de plus en plus supplanté par la fibre ; le câble large bande à soixante-quinze ohms, appelé CATV, sert à la télévision câblée, les signaux analogiques étant transposés jusqu'à trois cents mégahertz sur une centaine de kilomètres avec un multiplexage fréquentiel et des amplificateurs unidirectionnels.
+
+
+   C. Les liaisons hertziennes et infrarouge.
+
+      Les ondes électromagnétiques omnidirectionnelles sont constituées d'un champ électrique et d'un champ magnétique se déplaçant dans deux plans orthogonaux à la vitesse de la lumière, l'onde se réfléchissant suivant les lois de l'optique.
+
+      L'infrarouge, de longueur d'onde supérieure à 0,8 micron et hors du spectre visible, apporte une solution peu coûteuse à très courte distance, utilisée pour la télécommande à vue à l'intérieur des bâtiments car elle est arrêtée par les obstacles et incompatible avec la lumière du soleil ; en France, les réseaux optiques sans fil ne sont pas assujettis à autorisation.
+
+
+   D. La fibre optique.
+
+      Une fibre optique est un fil de verre très fin à base de silice où se produit une réflexion totale selon l'angle d'incidence, constituée d'un cœur où la lumière se propage et d'une gaine protectrice ; une impulsion lumineuse représente le un et l'absence de lumière le zéro, l'émetteur pouvant être une LED, une diode laser ou un laser, et deux fibres étant nécessaires pour une transmission bidirectionnelle simultanée.
+
+      La fibre multimode laisse se propager de nombreux rayons réfléchis, jusqu'à cinquante mégahertz sur un kilomètre à saut d'indice et cinq cents mégahertz sur un kilomètre à gradient d'indice ; la fibre monomode a un cœur de l'ordre de cinq microns où un seul rayon se propage, une bande passante pouvant atteindre cent gigahertz sur un kilomètre, un très faible affaiblissement et une bonne protection électromagnétique.
+
+      Le multiplexage en longueur d'onde WDM émet simultanément sur la fibre des signaux de longueurs d'onde différentes et se rencontre dans les cœurs de réseau des opérateurs ; un câble optique contient plusieurs fibres, l'isolant évitant la diaphonie, avec le type A pour l'extérieur entre bâtiments, le type B pour la distribution primaire intérieure et le type C pour la distribution capillaire ; le raccordement permanent se fait par épissure fusion ou épissure mécanique, les câbles optiques étant légers, peu encombrants, insensibles à la température et sans rayonnement.
+
+
+   E. L'onde lumineuse et le laser.
+
+      Le laser est une source de lumière cohérente, monochromatique et unidirectionnelle produisant un faisceau très étroit qui concentre toute l'énergie ; utilisé avec un photodétecteur pour interconnecter des réseaux locaux entre immeubles en vue directe, il exige un alignement très précis de l'émetteur et du récepteur et est perturbé par la pluie, la neige et les courants de convection dégagés par le sol après échauffement solaire.
+
+
+   F. Le pré-câblage d'immeuble.
+
+      Les systèmes de pré-câblage utilisent une topologie physique en étoile, toutes les liaisons étant en point à point depuis une prise terminale jusqu'à un sous-répartiteur d'étage par câblage horizontal, un câblage vertical reliant les sous-répartiteurs au répartiteur d'immeuble ; il faut prévoir un sous-répartiteur de six mètres carrés par étage pour mille mètres carrés de bureaux.
+
+      Les normes définissent le lien, constitué d'un câble horizontal de quatre-vingt-dix mètres maximum, de trois points de connexion et d'un cordon de brassage de cinq mètres maximum, et le canal, ensemble des matériels compris entre le terminal utilisateur et l'équipement électronique du sous-répartiteur ; les performances de la connectique de brassage doivent être identiques à celles de la prise terminale.
+
+
+IV. LES ÉQUIPEMENTS DES RÉSEAUX LOCAUX.
+
+
+   A. Les éléments de connexion.
+
+      La transmission des signaux met en jeu les supports physiques, les prises qui assurent la connexion sur le support, les adaptateurs qui traitent le signal et les coupleurs qui gèrent la communication.
+
+      Les prises réalisent la connexion mécanique, leur type dépendant du support, par exemple le RJ45 pour Ethernet à paire torsadée en catégorie inférieure à sept ; l'adaptateur, situé sur la carte réseau, assure la connexion électrique, la sérialisation et la désérialisation et l'adaptation des signaux ; le coupleur, aussi appelé carte réseau, contrôle les transmissions, assure le formatage des informations et la détection d'erreur.
+
+
+   B. Le répéteur.
+
+      Un répéteur relie deux segments ou plus au niveau de la couche 1, même de types de support différents ; sa fonction principale est la régénération du signal, ce qui permet d'étendre un réseau local en mettant bout à bout deux supports, avec amplification et remise en créneaux en bande de base.
+
+      Il contribue à la détection des collisions, allongeant à quatre-vingt-seize bits au moins les trames tronquées par des collisions dont il n'est pas l'auteur et émettant des trames de renforcement de collision sans retransmettre la trame en défaut ; le taux moyen de collision ne doit pas excéder trente pour cent des trames émises sur cinq minutes, et au-delà de trente collisions consécutives le répéteur isole automatiquement le segment défectueux.
+
+
+   C. Le pont.
+
+      Le pont opère aux couches 1 et 2 sous-couche MAC selon la norme IEEE 802.1d ; il filtre les trames, une trame n'étant pas diffusée aux autres segments si son destinataire est sur le même segment que l'émetteur, de façon transparente pour les stations, la table de routage port-adresse étant constituée par autoapprentissage, avec pour règle générale que quatre-vingts pour cent du trafic reste dans un réseau.
+
+      L'analyse du FCS indique si la trame a été altérée, auquel cas le pont l'écarte, limitant les collisions au segment incidenté contrairement au répéteur ; les ponts ne décident pas du routage des paquets et conviennent pour relier en point à point un petit nombre de réseaux, à l'aide d'interfaces WAN, avec parfois le protocole PPP, de la compression sur les en-têtes et des algorithmes de routage sur les modèles évolués ; le pont transparent construit sa table à partir de chemins optimisés selon le Spanning Tree Algorithm, un pont asservissant les autres par le protocole Bridge Protocol Data Units et imposant une topologie sans boucle.
+
+
+   D. Le concentrateur Ethernet.
+
+      Le concentrateur ou hub concentre le trafic des supports connectés à ses ports ; quand un signal arrive sur un port, il le duplique sur chacun des autres ports, les nœuds se partageant la bande passante totale, la structure physique étant une étoile et la topologie logique un bus pour Ethernet.
+
+      Sauf en bas de gamme, il dispose d'un port de connexion au reste du réseau ou au backbone et peut recevoir plusieurs types de modules ; son trafic induit est lié à son nombre n de ports puisqu'il duplique chaque signal en n moins un signaux, en général en ré-amplifiant le signal.
+
+
+   E. Le commutateur Ethernet.
+
+      Le commutateur Ethernet, ou switch, filtre sur adresse de bas niveau, permet la segmentation des réseaux, limite le broadcast et le trafic sur le réseau général, autorise des cascades de quatre hubs sur chacun de ses brins et interconnecte des réseaux locaux différents comme 10base-T et 100base-T.
+
+      Il a une structure de hub offrant sur chaque port un accès à plusieurs dizaines de mégabits par seconde, mais agit comme un pont car il stocke les adresses des périphériques connectés à chaque port et partitionne le réseau en autant de segments que de ports.
+
+
+   F. Le B-routeur et le routeur.
+
+      Le B-routeur est un routeur capable de basculer en mode pont quand le protocole réseau de la trame lui est étranger.
+
+      Un routeur, muni d'au moins deux ports ayant chacun une adresse physique et logique, opère à la couche réseau et assure la transmission des datagrammes vers leur destination à l'aide de tables contenant les couples adresse du réseau distant et adresse du routeur suivant ; la correspondance entre adresse IP et adresse MAC est faite par ARP et RARP par requêtes locales, les adresses MAC n'étant pas transmises d'un segment à l'autre ; des listes de contrôle filtrent les adresses source et destination, la traduction d'adresses un vers n est souvent implémentée, et de nombreux protocoles de routage dynamique comme RIP et OSPF rendent les routeurs adaptés à l'interconnexion des réseaux TCP/IP étendus.
+
+
+   G. La passerelle.
+
+      La passerelle n'est pas un équipement d'interconnexion de réseaux locaux ; elle relie des stations de travail d'un réseau local à un ordinateur hôte en effectuant des conversions de protocoles et en utilisant des émulateurs propriétaires de terminaux passifs, et se matérialise typiquement par une carte de communication insérée dans un micro-ordinateur faisant fonction de serveur de communications.
+
+
+POINTS D'ATTENTION.
+
+      Le théorème de Shannon impose une fréquence d'échantillonnage au moins double de la fréquence maximale du signal, sous peine de sous-échantillonnage.
+
+      La transmission asynchrone est un cas particulier de la transmission synchrone.
+
+      Débit binaire d égale valence n multipliée par rapidité de modulation R, la rapidité s'exprimant en bauds et le débit en bits par seconde.
+
+      Le critère de Nyquist limite la rapidité de modulation à deux fois la bande passante du support.
+
+      La transmission en bande de base ne transforme pas le signal numérique en analogique et se limite aux courtes distances des réseaux locaux.
+
+      Le codage Manchester exige un câblage rigoureux, l'inversion des fils inversant le message reçu.
+
+      Plus la paradiaphonie est faible, plus sa mesure en décibels est élevée ; une valeur inférieure à vingt décibels révèle probablement des paires divisées.
+
+      La hiérarchie PDH est plésiochrone car chaque multiplexeur a sa propre horloge, à la différence de SDH/SONET synchrone.
+
+      Une classe de câblage exige que chaque composant soit au moins de la catégorie correspondante, par exemple catégorie 6 pour la classe E.
+
+      La fibre monomode dépasse largement la multimode en bande passante et en portée grâce à son cœur de très faible diamètre.
+
+      Le répéteur agit en couche 1 et ne filtre pas les collisions, le pont agit en couche 2 et écarte les trames erronées en limitant les collisions au segment incidenté.
+
+      Le hub duplique tout signal sur tous les ports, le switch partitionne le réseau en autant de segments que de ports.
+
+      La passerelle n'interconnecte pas des réseaux locaux mais fait de la conversion de protocoles vers un ordinateur hôte.
+
+
+EXEMPLES CITES.
+
+      Remastérisation d'un disque compact sur seize bits offrant deux puissance seize égale soixante-cinq mille cinq cent trente-six valeurs de quantification.
+
+      Codage Manchester employé par les premières versions d'Ethernet.
+
+      Multiplexage fréquentiel utilisé en téléphonie, en télévision câblée CATV et en radiodiffusion analogique.
+
+      Hiérarchie PDH européenne du niveau 1 à 2,048 mégabits par seconde au niveau 4 à 139,264 mégabits par seconde.
+
+      Correspondances SONET et SDH, STS-1 à 51,84 mégabits par seconde, STS-3 et STM-1 à 155,52 mégabits par seconde, STS-48 et STM-16 à 2488,32 mégabits par seconde.
+
+      Dénominations ISO 11801 U barre UTP, F barre UTP, S barre FTP, U barre FTP, F barre FTP et SF barre UTP.
+
+      Classe C catégorie 3 pour le 10base-T, classe D catégorie 5 pour le 100base-TX, classe E catégorie 6 pour le 1000base-T, classe EA catégorie 6A pour le 10Gbase-T.
+
+      Câble coaxial à cinquante ohms pour la bande de base et à soixante-quinze ohms CATV pour la télévision câblée.
+
+      En 10base-T, à seize mégahertz sur les paires 1-2 et 3-6, rapport signal sur bruit supérieur à quinze, paradiaphonie supérieure à trente-six et affaiblissement sur cent mètres inférieur à six.
+
+      Systèmes de pré-câblage BULL Cabling System et IBM Cabling System en topologie étoile.
+
+      Protocoles de routage dynamique RIP et OSPF pour l'interconnexion des réseaux TCP/IP étendus.

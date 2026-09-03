@@ -1,37 +1,330 @@
-PRINCIPALES COMMANDES LINUX / UNIX
+LES COMMANDES ESSENTIELLES LINUX ET UNIX.
 
-1. INTERPRÉTEUR ET MODE CONSOLE
-Historique des shells : Bourne Shell, puis ksh (plus rapide et puissant), puis bash (Bourne Again Shell, libre, standard GNU). Un serveur n'a pas besoin d'interface graphique : la ligne de commande est plus puissante, flexible, scriptable, économe en ressources réseau, et réduit la surface d'attaque.
-Consoles : souvent 7 consoles virtuelles (6 texte + 1 graphique), accès par Ctrl+Alt+F(numéro). En graphique on lance un terminal (xterm, gnome-terminal...), simple émulation de console. Connexions distantes : SSH (chiffré) remplace Telnet.
 
-2. SYNTAXE ET ENVIRONNEMENT
-Commandes internes (primitives du shell, ex. cd) ou externes (exécutables du PATH, ex. less) ; la commande type l'indique. Syntaxe : commande -options arguments ; options précédées d'un tiret ; -h / --help pour l'aide.
-Identifier son shell : echo $SHELL (défaut), echo $0 ou ps -p $$ (courant réel).
-Commandes utiles : & (tâche de fond), tty (terminal courant, /dev/tty1 en console, /dev/pts/0 en graphique), whoami (nom), id (UID, GID, groupes), which (chemin d'un exécutable), echo (affichage ; $PATH, $PWD, $OLDPWD, $$ = PID du shell), set (variables du shell), clear (efface l'écran), reset (efface aussi le buffer de défilement).
-Historique : history, !n (ré-exécute la commande n), flèches haut/bas, Tab (complétion), Ctrl+R (recherche par mot-clé) ; fichier ~/.bash_history. Copier/coller dans un terminal : Shift+Ctrl+C / Shift+Ctrl+V (Ctrl+C interrompt la commande).
+LEXIQUE COMPLET.
 
-3. TROUVER DE L'AIDE
-man : manuel électronique. 9 (ou 10) sections : 1 commandes utilisateur, 2 appels système, 3 bibliothèque C, 4 fichiers spéciaux (/dev), 5 formats de fichiers, 6 jeux, 7 divers, 8 administration, 9 noyau. Options : man -k / apropos (recherche par mot-clé), man -f / whatis (description succincte), man -t cmd | lpr (PostScript imprimable). Configuration : /etc/manpath.config ; bases whatis/locate rafraîchies par cron.
-info : documentation Texinfo (GNU), navigation hypertexte.
-locate : recherche rapide via une base (locatedb) mise à jour par updatedb (cron).
+      Interpréteur de commandes (shell) : programme qui dialogue avec la machine ; le Bourne shell a longtemps été l'interpréteur d'Unix, souvent remplacé par ksh plus rapide et puissant, et sous GNU Linux le plus fréquent est bash, de puissance proche de ksh, plus ergonomique et libre.
 
-4. JOURNAUX ET PLANIFICATION
-syslog : /var/log/<application>/<type>. Consultation : tail /var/log/syslog (10 dernières), tail -200, tail -f (temps réel), cat ... | grep -i motif.
-cron : exécution périodique. crontab -e (éditer), crontab -l (lister). Syntaxe d'une ligne : mm hh jj MMM JJJ commande [> log] — minutes 0-59, heure 0-23, jour du mois 1-31, mois 1-12, jour de semaine 0-6 (0 = dimanche). Notations : * (chaque unité), 2-4 (intervalle), */5 (toutes les 5 unités), 2,8 (liste). Sans « > log », cron envoie un mail ; « > /dev/null » l'évite.
+      Mode console : installation serveur sans interface graphique, où la ligne de commande suffit, les erreurs sont moins fréquentes car les commandes sont standardisées, l'automatisation est possible et le contrôle à distance consomme très peu de ressources réseau.
 
-5. DÉMARRAGE / MATÉRIEL
-dmesg : messages du noyau au démarrage (matériel détecté : processeurs, disques hda/hdb, interfaces eth0...). ps -edf : lister les processus, dont init (PID 1) et sched (PID 0).
+      Mode terminal : usage sur poste de bureau ou portable avec interface graphique, où l'on ouvre un terminal comme xterm, kterm ou gnome-terminal, un terminal n'étant qu'une émulation de console.
 
-6. GESTION DES FICHIERS
-Navigation : pwd (répertoire courant), cd (home), cd ~ , cd / , cd .. , cd chemin (absolu si commence par /, sinon relatif).
-Lister : ls, ls -l (format long : type + droits + nb liens + propriétaire + groupe + taille + date + nom ; type = -, d, l, s, b, c), ls -a (fichiers cachés), ls -t (tri date récent d'abord), ls -tr (inverse), ls -i (numéro d'inode), ls -R (récursif), ls -ld (le répertoire, pas son contenu). ll = alias de « ls -l » ou « ls -la ».
-Inodes : df -i (inodes utilisées/libres), ls -i, stat fichier (taille, inode, dates access/modify/change, permissions, nombre de liens).
-Créer / voir : > fichier ou touch fichier (création ; touch -t modifie la date), more / less (affichage page par page ; less amélioré, recherche, navigation), cat (affiche et concatène).
-Manipuler : mkdir (créer un répertoire), cp (copier ; -r récursif, -p conserve les propriétés, -v verbeux ; ne conserve pas la date par défaut), mv (déplacer/renommer ; conserve la date), rm (supprimer ; -r récursif, -rf sans confirmation = dangereux), alias (voir/créer des alias).
-Redirections et enchaînement : < (entrée), > (sortie, écrase), >> (ajoute), | (pipe : sortie d'une commande vers l'entrée de la suivante). Enchaînement : ; (sans condition), && (si succès), || (si échec) ; echo $? donne le code retour (0 = succès).
+      Console virtuelle : on trouve souvent sept consoles, six en mode texte et une graphique, accessibles par Contrôle-Alt-F suivi du numéro.
 
-7. MONTAGE ET SYSTÈMES DE FICHIERS
-mount -a : monte tous les volumes de /etc/fstab (ou /etc/vfstab sous Solaris). vfstab : 6 champs (fichier spécial, point de montage, type de SF, options, champ dump, ordre fsck). mount fichier-spécial point-de-montage (le point de montage doit exister ; son contenu devient invisible ; le SF doit être marqué cohérent). umount point-de-montage : impossible si la partition est utilisée (commande, fichier ouvert, répertoire courant) ; fuser identifie les processus ; mount & / df & si risque de blocage.
-df : partitions montées et espace libre (df -k en kilo-octets, df -t type sous Linux, df -F type sous Solaris).
-fsck : contrôle et répare un système de fichiers. 5 phases (blocs et tailles, chemins d'accès, connectivité, compteurs de références, groupes de cylindres). Options -y (oui à tout), -n (non à tout), -p (oui aux corrections anodines, utilisé au boot). Règles : jamais sur une partition montée/active ; de préférence en single-user ; après un fsck sur /, redémarrer sans sauver le buffer cache.
-LVM : préfixes pv (volumes physiques), vg (groupes de volumes), lv (volumes logiques), lvm (global). Créer : pvcreate, vgcreate, lvcreate -n nom -L taille groupe, mkfs. Agrandir : pvcreate, vgextend, lvextend -L +taille, resize2fs. Réduire : fsck -f, resize2fs taille, lvreduce -L taille.
+      Commande interne : commande propre au shell, comme cd, exécutée directement par l'interpréteur.
+
+      Commande externe : commande appelée depuis l'arborescence prédéfinie par la variable PATH, comme less ; la commande type indique si une commande est interne ou externe.
+
+      Variable PATH : liste des répertoires dans lesquels le shell recherche les exécutables des commandes externes.
+
+      Option : élément de la ligne de commande précédé d'un tiret, dont la liste figure dans les pages de manuel et, dans la plupart des cas, avec les options tiret h ou tiret tiret help.
+
+      Argument (ou paramètre) : élément passé à la commande après le nom et les options.
+
+      Variable d'environnement : variable du shell consultable par echo ou printenv, affichable en totalité par set, comme SHELL, PATH, PWD ou OLDPWD.
+
+      STDIN, STDOUT et STDERR : entrée standard, sortie standard et sortie d'erreur, la commande echo écrivant sur STDOUT.
+
+      Redirection : le chevron entrant redirige l'entrée depuis un fichier, le chevron sortant écrit la sortie dans un fichier en l'écrasant, et le double chevron sortant ajoute la sortie à la fin d'un fichier existant ou le crée.
+
+      Pipe (tube, barre verticale) : mécanisme qui fournit la sortie d'une commande à l'entrée de la commande suivante.
+
+      Opérateurs d'enchaînement : le point-virgule exécute les commandes en séquence sans dépendance, le double esperluette n'exécute la seconde que si la première a réussi, et la double barre verticale n'exécute la seconde que si la première a échoué ; echo dollar point d'interrogation donne le code retour, zéro signifiant succès.
+
+      Alias : nom de substitution d'une commande, visualisé ou créé par la commande alias.
+
+      Historique : la commande history affiche les commandes passées, conservées dans le fichier caché point bash_history du répertoire personnel désigné par le tilde ; le point d'exclamation suivi d'un numéro réexécute une commande, les flèches haut et bas naviguent dans l'historique et Contrôle-R y recherche par mot-clé.
+
+      Complétion : la touche de tabulation complète les commandes et chemins présents dans l'historique ou dans le PATH.
+
+      tty et pts : la commande tty affiche le terminal courant, un terminal virtuel de type /dev/tty en mode console et un pseudo-terminal /dev/pts en mode graphique.
+
+      man : manuel électronique documentant la quasi-totalité des commandes de l'interpréteur, structuré en neuf ou dix sections, chaque page comportant le nom, la syntaxe, la description avec les options et les commandes complémentaires.
+
+      apropos et whatis : synonymes respectifs de man tiret k pour la recherche par mot-clé et de man tiret f pour la description succincte d'une commande, s'appuyant sur des bases mises à jour par cron, parfois à reconstruire avec makewhatis.
+
+      info : commande de navigation dans la documentation Texinfo de la communauté GNU, la tabulation passant d'un lien à l'autre et la touche q terminant l'exécution.
+
+      locate : commande de recherche des chemins complets d'un fichier à partir d'une base de données maintenue par le processus updatedb via une tâche périodique cron.
+
+      syslog : les journaux se consultent selon une organisation /var/log par application et par type ; tail affiche les dernières lignes, l'option tiret f actualisant en temps réel.
+
+      cron et crontab : cron exécute périodiquement des programmes et des scripts, crontab tiret e édite la table et crontab tiret l la liste ; la syntaxe comprend cinq champs, minutes, heure, jour du mois, mois et jour de la semaine, suivis de l'action, avec les notations étoile, plage, pas et liste.
+
+      dmesg : commande affichant les messages du noyau, notamment les informations matérielles au démarrage.
+
+      ps : commande d'affichage des processus, qui montre notamment le super-processus init de PID un et le processus sched de PID zéro sur les Unix.
+
+      pwd, cd et ls : afficher le répertoire courant, changer de répertoire et lister ; ls tiret l donne le format long, tiret a les fichiers cachés, tiret t un tri par date, tiret r un tri inversé, tiret i le numéro d'inode, tiret R un listage récursif et tiret d les propriétés d'un répertoire et non son contenu.
+
+      touch, cat, more, less, mkdir : touch modifie les dates d'un fichier et le crée s'il n'existe pas, cat concatène et affiche, more et less affichent page par page, less étant une version améliorée de more, mkdir crée des répertoires.
+
+      cp, mv, rm : copier, déplacer et supprimer, avec les options tiret v verbeux, tiret r récursif et tiret p pour conserver les propriétés ; cp ne conserve pas la date de modification sans tiret p, mv la conserve, et rm tiret rf supprime récursivement sans confirmation, ce qui est dangereux.
+
+      stat : commande affichant la taille, l'inode, les dates d'accès, de modification et de changement, le périphérique, les permissions et le nombre de liens d'un fichier.
+
+      df : commande affichant l'espace libre et les montages ; tiret i affiche les inodes utilisées et libres, tiret k force l'affichage en kilo-octets, tiret t ou tiret F limite l'affichage à un type de système de fichiers.
+
+      mount, umount et mount tiret a : monter un système de fichiers, le démonter, et monter au démarrage tous les volumes du fichier /etc/fstab ou /etc/vfstab.
+
+      Fichier /etc/fstab (ou /etc/vfstab) : file system table dont les champs sont le fichier spécial, le point de montage, le type de système de fichiers, les options de montage, l'usage par dump et le numéro d'ordre de vérification par fsck.
+
+      fuser : commande qui identifie les processus utilisant une partition que l'on ne peut démonter parce qu'elle est occupée.
+
+      fsck (File System Check) : commande de contrôle et de réparation d'un système de fichiers corrompu, qui vérifie successivement le super bloc, les blocs de données, la structure des inodes et l'organisation des répertoires ; ses options tiret y et tiret n répondent oui ou non à toutes les questions et tiret p répond oui aux questions anodines, ce qui est utilisé au boot.
+
+      LVM : gestion par volumes logiques dont les commandes commencent par pv pour les volumes physiques, vg pour les groupes de volumes, lv pour les volumes logiques et lvm pour tout le système, avec pvcreate, vgcreate, lvcreate, vgextend, lvextend et lvreduce, complétées par resize2fs pour agrandir ou réduire le système de fichiers.
+
+
+COURS DÉTAILLÉ.
+
+
+I. L'INTERPRÉTEUR DE COMMANDES ET LES MODES D'ACCÈS.
+
+
+   A. L'interpréteur de commandes.
+
+      Avant Unix, on dialoguait déjà avec la machine par un interpréteur de commandes ; sous Unix, cet interpréteur a longtemps été le Bourne shell, souvent remplacé ensuite par ksh plus rapide et puissant, ksh93 offrant plus de fonctionnalités mais n'étant pas toujours installé.
+
+      Sous GNU Linux, l'interpréteur libre le plus fréquent est bash, dont la puissance est proche de ksh, plus ergonomique, libre et présent sur toutes les plates-formes.
+
+
+   B. Le mode console.
+
+      Un serveur ne nécessite pas d'interface graphique : la ligne de commande suffit une fois le service lancé, les erreurs y sont moins fréquentes car les commandes sont standardisées, elle est plus puissante et plus flexible, permet l'automatisation par scripts et le contrôle à distance en consommant très peu de ressources réseau, et l'absence de serveur graphique libère des ressources.
+
+      L'interface graphique est consommatrice de ressources, source de bugs et accroît la surface d'attaque car elle comporte des vulnérabilités ; plusieurs consoles sont accessibles, et les connexions distantes sont possibles si les services adéquats sont ouverts, autrefois telnet non chiffré, désormais SSH avec le service ssh-serveur en fonctionnement.
+
+
+   C. Le mode terminal.
+
+      Sur un poste avec interface graphique, la ligne de commande ou la connexion à un serveur distant se fait via un terminal, qui n'est qu'une émulation de console ; on trouve souvent sept consoles virtuelles, six en mode texte et une graphique, accessibles par Contrôle-Alt-F suivi du numéro, et en mode graphique on lance un terminal comme xterm, kterm ou gnome-terminal, avec multi-onglet, transparence et grands tampons.
+
+
+II. LA SYNTAXE DE LA LIGNE DE COMMANDE.
+
+
+   A. Commandes internes et externes.
+
+      Une commande peut être interne au shell, comme cd, ou externe, c'est-à-dire appelée depuis l'arborescence définie par le PATH, comme less ; la commande type indique de quel cas il s'agit.
+
+
+   B. La forme d'une commande.
+
+      La syntaxe est le nom de la commande, qui doit figurer dans le PATH, suivi éventuellement d'options précédées d'un tiret, puis d'arguments ; les pages de manuel et, dans la plupart des cas, les options tiret h ou tiret tiret help donnent la liste des options, et si une option est inconnue l'affichage par défaut liste les options usuelles.
+
+
+III. IDENTIFIER SON ENVIRONNEMENT.
+
+
+   A. Le shell utilisé.
+
+      Le plus simple est de consulter la variable d'environnement SHELL avec echo ou printenv, mais la réponse est erronée si l'on a changé de shell sans utiliser le shell par défaut ; echo dollar zéro ou l'observation des processus avec ps sur le PID du shell courant, obtenu par dollar dollar, donnent le shell réellement utilisé.
+
+
+   B. Utilisateur et identité.
+
+      whoami affiche l'utilisateur connecté, id affiche l'UID, le GID et les groupes avec leurs droits, which affiche l'emplacement de l'exécutable d'une commande, echo affiche les valeurs de PATH, PWD pour le répertoire courant et OLDPWD pour le dernier répertoire visité, set affiche toutes les variables d'environnement.
+
+      clear efface l'écran et revient en haut, reset efface aussi le tampon d'affichage, tty affiche le terminal courant, un terminal virtuel /dev/tty en mode console et un pseudo-terminal /dev/pts en mode graphique.
+
+
+IV. UTILISER LE TERMINAL.
+
+
+   A. Tâches de fond, historique et complétion.
+
+      L'esperluette lance une application en tâche de fond ; history affiche l'historique conservé dans le fichier caché point bash_history du répertoire personnel désigné par le tilde, le point d'exclamation suivi d'un numéro réexécute une commande, les flèches haut et bas naviguent dans l'historique, la tabulation complète les commandes et chemins de l'historique ou du PATH, et Contrôle-R recherche dans l'historique par mot-clé.
+
+
+   B. Le copier-coller.
+
+      Contrôle-C ne peut servir au copier-coller car il arrête l'exécution d'une commande ; la copie se fait par clic droit ou Majuscule-Contrôle-C, le collage par clic droit ou Majuscule-Contrôle-V, le surlignage au bouton gauche copiant dans un tampon et le bouton du milieu collant depuis un autre tampon.
+
+
+V. OÙ TROUVER DE L'INFORMATION.
+
+
+   A. La commande man.
+
+      man affiche le mode d'emploi de la commande passée en argument, chaque page comportant le nom, la syntaxe appelée synopsis, la description détaillée avec les options et les commandes complémentaires ; le manuel est structuré en neuf ou dix sections, les commandes utilisateur, les appels système, la bibliothèque C, les fichiers spéciaux, les formats de fichiers, les jeux, les divers, les commandes d'administration et les routines du noyau.
+
+      man tiret k suivi d'un mot-clé, synonyme d'apropos, liste les commandes dont la description contient ce mot ; man tiret f, synonyme de whatis, donne la description succincte ; man tiret t produit une sortie PostScript envoyée à l'impression ; on quitte man par la touche q, et la configuration se fait dans le fichier manpath.config qui liste les répertoires de recherche, l'ordre des sections et le programme d'affichage.
+
+
+   B. Les autres outils.
+
+      info navigue dans la documentation Texinfo de la communauté GNU, la tabulation passant d'un lien à l'autre et la touche q terminant l'exécution ; locate recherche les chemins complets d'un fichier à partir d'une base maintenue par updatedb via une tâche cron ; les HOWTO et FAQ complètent ces sources sur Internet.
+
+
+VI. LA COMMANDE FIND.
+
+
+   A. Rôle et critères.
+
+      find cherche des fichiers dans un ou plusieurs répertoires de début, selon des critères, et peut exécuter une action ; ses critères permettent la recherche par nom, par type, par propriétaire, par groupe, par taille, par date de dernier accès, par date de dernière modification, par autorisation d'accès et par nombre de liens, une valeur pouvant être précédée du signe plus pour supérieur à, du signe moins pour inférieur à, ou de rien pour égal à.
+
+
+   B. Actions.
+
+      L'action print affiche le chemin d'accès, l'action ls affiche la liste détaillée, l'action tiret exec exécute une commande sur chaque fichier trouvé et l'action tiret ok demande confirmation pour chaque fichier ; find est extrêmement puissant mais peut être coûteux en ressources, aussi faut-il éviter de lancer une recherche couvrant toute l'arborescence.
+
+
+VII. LES JOURNAUX ET LA PLANIFICATION.
+
+
+   A. syslog et la consultation des journaux.
+
+      Les journaux se consultent selon une organisation /var/log par application et par type de journaux ; tail affiche les dix dernières lignes d'un fichier, un nombre en option en affiche davantage, l'option tiret f actualise en temps réel, et un tube vers grep tiret i filtre les lignes contenant une chaîne indépendamment de la casse.
+
+
+   B. cron.
+
+      cron exécute périodiquement des programmes, des scripts et des processus ; crontab tiret e édite la table et crontab tiret l liste les tâches ; la syntaxe comprend cinq champs, minutes de zéro à cinquante-neuf, heure de zéro à vingt-trois, jour du mois de un à trente et un, mois de un à douze et jour de la semaine de zéro pour dimanche à six, suivis de l'action puis éventuellement d'une redirection vers un fichier journal, faute de quoi cron envoie un courrier de confirmation, évité par une redirection vers le périphérique nul.
+
+      Chaque champ de temps admet l'étoile pour chaque unité, une plage avec un tiret, un pas avec une barre oblique, et une liste séparée par des virgules ; on peut ainsi vérifier automatiquement l'espace disque libre avec df à un horaire précis, tous les jours, tous les premiers du mois, tous les lundis ou une plage de jours.
+
+
+VIII. LES COMMANDES DE DÉMARRAGE ET D'ARRÊT.
+
+
+   A. dmesg et ps.
+
+      dmesg affiche les seuls messages du noyau au démarrage, notamment les informations sur le processeur, les disques et les interfaces réseau ; ps avec les options adaptées liste les processus initiaux et montre la présence du super-processus init de PID un et, sur les Unix, du processus sched de PID zéro et des processus comme pageout et fsflush.
+
+
+IX. LA GESTION DES FICHIERS.
+
+
+   A. Se déplacer et lister.
+
+      pwd affiche le répertoire de travail courant ; cd sans argument revient au répertoire personnel, cd suivi du tilde a le même effet mais est scriptable, cd suivi d'une barre oblique va à la racine, un chemin commençant par une barre oblique est absolu et sinon relatif, cd point-point remonte d'un niveau et une suite de point-point-barre remonte de plusieurs niveaux.
+
+      ls liste les répertoires et fichiers ; ls tiret l donne un format long où la première lettre indique le type, tiret pour un fichier, d pour un répertoire, l pour un lien symbolique et s pour un socket, suivie des permissions, du nombre de liens, du propriétaire, du groupe, de la taille, de la date de dernière modification et du nom ; tiret a affiche les fichiers cachés commençant par un point, tiret t trie du plus récent au plus ancien, tiret r inverse le tri, tiret i affiche le numéro d'inode, tiret R liste récursivement, et tiret ld affiche les propriétés d'un répertoire et non son contenu ; ll n'est pas une commande mais un alias courant pour ls tiret l ou ls tiret la.
+
+
+   B. Créer et visualiser.
+
+      Le chevron sortant crée un nouveau fichier ou remplace un fichier existant, le double chevron sortant ajoute à la fin d'un fichier ; touch crée un fichier lorsqu'il n'existe pas et sert d'abord à modifier ses dates, par exemple avec l'option tiret t suivie d'un horodatage année, mois, jour, heure et minute.
+
+      more et less affichent un fichier page par page, more affichant le pourcentage parcouru et less permettant en plus un mode ligne par ligne, des recherches et une navigation simplifiée ; cat affiche le contenu d'un fichier ou concatène plusieurs fichiers vers la sortie standard ou un nouveau fichier ; mkdir crée des répertoires.
+
+
+   C. Copier, déplacer, supprimer.
+
+      cp copie des fichiers sans conserver la date de modification par défaut, ses options étant tiret v verbeux, tiret r récursif et tiret p pour conserver les propriétés ; mv déplace des fichiers ou dossiers en conservant la date d'origine, avec les mêmes options ; rm supprime des fichiers ou des répertoires, tiret r supprimant récursivement et tiret rf sans confirmation, ce qui est dangereux.
+
+
+   D. Informations sur un fichier et sur les inodes.
+
+      stat affiche la taille, l'inode, les dates d'accès, de modification et de changement, le périphérique, les permissions et le nombre de liens, au moins un liant l'inode au fichier ; ls tiret i affiche le numéro d'inode, unique pour chaque fichier au sein de la partition ; df tiret i affiche le nombre d'inodes utilisées ou libres, avec la même option tiret F sous Solaris.
+
+
+   E. Les alias.
+
+      alias sans argument affiche les alias actuels, comme grep ou ls avec la couleur automatique, et alias suivi d'une définition en crée un, par exemple ll pour ls tiret l ou ls tiret la.
+
+
+   F. Redirections et pipes.
+
+      Le chevron entrant redirige explicitement l'entrée depuis un fichier, nécessaire si le programme ne lit pas de fichier par défaut ; le chevron sortant écrit la sortie dans un fichier en l'écrasant, aussi faut-il être prudent ; le double chevron sortant ajoute à la suite ou crée le fichier.
+
+      Le point-virgule enchaîne les commandes sans dépendance, le double esperluette n'exécute la seconde que si la première a réussi, la double barre verticale que si la première a échoué, et echo dollar point d'interrogation teste manuellement le code retour, zéro signifiant succès ; le pipe fournit la sortie d'une commande à l'entrée de la suivante, par exemple cat de deux fichiers vers sort puis vers grep pour ne garder que certaines lignes.
+
+
+X. LE MONTAGE DES SYSTÈMES DE FICHIERS.
+
+
+   A. mount et fstab.
+
+      Au démarrage, mount tiret a monte tous les volumes mentionnés dans /etc/fstab, ou /etc/vfstab sous Solaris, dont les champs sont le fichier spécial, le point de montage, le type de système de fichiers, les options, l'usage par dump et le numéro d'ordre de vérification par fsck ; une fois ce fichier renseigné, on peut monter toutes les partitions avec mount tiret a ou une seule en précisant le point de montage.
+
+
+   B. Montage manuel et démontage.
+
+      mount suivi du fichier spécial et du point de montage effectue un montage manuel, éventuellement avec des options de type et de mode ; le point de montage doit exister au préalable, son contenu devient invisible après le montage et un système de fichiers ne peut être monté que si sa structure interne est marquée cohérente, sinon un fsck est demandé.
+
+      umount suivi du point de montage démonte, mais une partition ne peut être démontée si une commande s'y exécute, si des fichiers y sont ouverts ou si le répertoire courant s'y trouve, ce qui revient à avoir un descripteur de fichier ouvert ; le message d'erreur classique est « Device busy », et la commande fuser identifie alors les processus concernés.
+
+
+   C. Lister les systèmes de fichiers montés.
+
+      mount sans option liste les systèmes de fichiers montés avec leur périphérique et leurs options ; df liste les montages avec l'occupation, l'option tiret k forçant l'affichage en kilo-octets car certains Unix affichent en blocs de cinq cent douze octets, l'option tiret t sous Linux ou tiret F sous Solaris limitant à un type de système de fichiers ; mount et df peuvent bloquer sur un montage défaillant, aussi est-il conseillé de les lancer en tâche de fond en cas de risque.
+
+
+   D. La vérification fsck.
+
+      La perte du contenu du tampon cache peut imposer des réparations par fsck, qui n'est pas lancé sur un système de fichiers marqué propre à la suite d'un arrêt propre ; fsck vérifie successivement le super bloc, les blocs de données, la structure des inodes et l'organisation des répertoires, dont la présence dans chaque répertoire d'une entrée point et d'une entrée point-point.
+
+      Les options tiret y et tiret n répondent oui ou non à toutes les questions et tiret p répond oui aux questions anodines, ce qui est utilisé au boot ; on ne doit jamais lancer fsck sur une partition active et montée, de préférence en mode single-user, et après un fsck sur la racine il faut redémarrer immédiatement sans sauver le tampon cache ; en cas d'incohérence inattendue, le système demande le mot de passe root ou un Contrôle-D pour passer en multi-utilisateur.
+
+
+XI. LA GESTION PAR VOLUMES LOGIQUES.
+
+
+   A. Les familles de commandes LVM.
+
+      Les commandes LVM commencent par deux lettres indiquant le niveau d'abstraction, pv pour les volumes physiques, vg pour les groupes de volumes, lv pour les volumes logiques et lvm pour l'ensemble du système.
+
+
+   B. Créer et redimensionner.
+
+      On crée un volume physique par partition avec pvcreate, on concatène ces volumes physiques dans un groupe de volumes avec vgcreate, on crée un volume logique de taille donnée avec lvcreate, puis on crée et monte le système de fichiers avec mkfs.
+
+      Pour agrandir, on crée un nouveau volume physique avec pvcreate, on l'ajoute au groupe de volumes avec vgextend, on agrandit le volume logique avec lvextend puis le système de fichiers avec resize2fs ; pour réduire, on procède dans l'ordre inverse en réduisant d'abord le système de fichiers après un fsck avec resize2fs, puis le volume logique avec lvreduce.
+
+
+POINTS D'ATTENTION.
+
+      La variable SHELL peut être trompeuse : elle indique le shell par défaut, pas nécessairement le shell utilisé.
+
+      Le chevron sortant écrase le fichier de destination ; utiliser le double chevron pour ajouter à la suite.
+
+      Le double esperluette et la double barre verticale exécutent la seconde commande selon le succès ou l'échec de la première.
+
+      find peut consommer beaucoup de ressources : éviter une recherche sur toute l'arborescence.
+
+      rm tiret rf supprime récursivement sans confirmation et est particulièrement dangereux.
+
+      Greffer une partition sur un répertoire non vide rend son contenu invisible.
+
+      Une partition ne peut être démontée tant qu'un descripteur de fichier y reste ouvert, y compris un simple répertoire courant.
+
+      Ne jamais lancer fsck sur une partition montée ; le faire de préférence en single-user, et redémarrer immédiatement après un fsck sur la racine.
+
+      mount et df peuvent se bloquer sur un montage défaillant : les lancer en tâche de fond en cas de risque.
+
+      Pour réduire un volume logique, réduire d'abord le système de fichiers, jamais l'inverse.
+
+
+EXEMPLES CITES.
+
+      type cd renvoyant qu'il s'agit d'une primitive du shell, type less renvoyant /usr/bin/less.
+
+      cp tiret rp fichier1 fichier2 pour une copie récursive préservant les propriétés.
+
+      echo dollar SHELL et printenv passé à grep SHELL pour identifier le shell, ps tiret p dollar dollar pour le shell courant.
+
+      ps tiret edf sous Solaris montrant sched en PID zéro, init en PID un, pageout et fsflush.
+
+      man mkdir affichant le nom, le synopsis et les options tiret m, tiret p et tiret v.
+
+      man tiret k compilation pour lister les commandes dont la description contient ce mot, man tiret t passwd envoyé à l'impression.
+
+      find point tiret mtime tiret 3 tiret print pour les fichiers modifiés il y a moins de trois jours, find point tiret type f tiret exec ls tiret l sur chaque fichier, find point tiret name core tiret ok rm pour une suppression confirmée.
+
+      tail tiret f de /var/log/syslog pour un suivi en temps réel, cat de syslog passé à grep tiret i toto.
+
+      Entrées crontab telles que 30 21 étoile étoile étoile df ajouté à un fichier journal, 22 22 étoile étoile 1 pour tous les lundis, 00 10 2-10 étoile étoile pour une plage de jours.
+
+      ls tiret l montrant tiret pour un fichier, d pour un répertoire, l pour un lien, s pour un socket.
+
+      touch tiret t 200812211530 pour dater un fichier au vingt et un décembre deux mille huit à quinze heures trente.
+
+      stat 1.txt affichant taille, inode, périphérique, permissions et nombre de liens.
+
+      mount tiret t cdfs tiret o rrip,ro sur un lecteur de CD-ROM, message « Device busy » suivi de fuser sur le point de montage.
+
+      Sortie de fsck en cinq phases avec le message « CLEAN FLAG NOT SET IN SUPERBLOCK » puis « FILE SYSTEM WAS MODIFIED ».
+
+      Séquence LVM pvcreate sur deux partitions, vgcreate testPSE, lvcreate tiret n lvmtest tiret L 117G, mkfs tiret t ext4, puis vgextend, lvextend tiret L plus 320G et resize2fs pour agrandir, lvreduce pour réduire.

@@ -1,84 +1,322 @@
-WINDOWS SERVER 2008 : ADMINISTRATION ET OPTIMISATION DU SYSTÈME
+WINDOWS SERVER 2008 : L'ADMINISTRATION ET L'OPTIMISATION DU SYSTÈME.
 
-Deux familles d'outils : interface graphique et ligne de commande. La liste d'outils a été simplifiée (moins d'outils, optimisés, nouveaux ajoutés).
 
-1. OUTILS D'ADMINISTRATION GRAPHIQUES
-Trois principaux : le Gestionnaire de serveur, la console MMC (et ses composants enfichables), l'accès distant.
-Gestionnaire de serveur : outil local principal, centralise la gestion et la configuration : configuration du serveur, ajout/suppression de rôle ou fonctionnalité, état d'un rôle ou service, événements, pilotes et matériel, goulets d'étranglement et optimisation, stockage, sécurité du pare-feu, tâches planifiées, utilisateurs locaux, dépannage.
-Rôles, services de rôle, fonctionnalités : un rôle regroupe des fonctions serveur ; un service de rôle est un sous-ensemble d'un rôle (un rôle fonctionne dès que plusieurs services de rôle sont activés) ; une fonctionnalité complète les possibilités (35 par défaut sous 2008, 41 sous R2 ; aucune installée à l'installation ; installation manuelle ou automatique avec un rôle).
-Console MMC (Microsoft Management Console) : console commune hébergeant des composants logiciels enfichables ; permet l'administration à distance, la délégation, le regroupement logique des outils.
-- Consoles préconfigurées (installées par défaut ou avec un rôle) / personnalisées (créées par l'administrateur ; combiner un ou plusieurs composants, enregistrer, distribuer, fournir sur mesure lors de la délégation ; ex. cacher l'option de suppression à un administrateur de comptes).
-- Composants enfichables autonomes (tâches administratives par eux-mêmes) / d'extension (complémentaires, ne fonctionnent qu'avec un autonome ; seules les extensions compatibles sont affichées). Extension de fichier : .msc.
-- Modes : Auteur (défaut, sans restriction) / Utilisateur (restreint ; délégation, partage). Trois types d'accès Utilisateur : accès total, accès limité avec fenêtres multiples, accès limité avec fenêtre unique.
-- Création d'une console : Démarrer -> mmc -> Fichier -> Ajouter/Supprimer un composant logiciel enfichable.
-RSAT (Remote Server Administration Tools) : composants enfichables pour gérer à distance rôles et fonctionnalités de Windows Server 2008 ; remplace l'adminpak ; natif seulement sous 2008 R2 (téléchargement sinon) ; configuration via le Gestionnaire de serveur (Ajout de fonctionnalités). Outils pour les rôles (AD CS, AD LDS, DHCP, DNS, fichiers, NPAS, Terminal Server, UDDI) et pour les fonctionnalités (BitLocker, clustering, GPMC, NLB, SMTP, gestionnaire SAN, WSRM).
-Administration à distance (version Terminal Server réservée à l'administration) : activation sur le serveur + client requis ; deux administrateurs simultanés sans licences supplémentaires ; accès à tout le serveur ; protocole RDP (Remote Desktop Protocol) amélioré.
+LEXIQUE COMPLET.
 
-2. OUTILS D'ADMINISTRATION EN LIGNE DE COMMANDE
-- ServerManagerCmd : gère rôles, services de rôle et fonctionnalités (-q liste, -p fichier XML, -install, -remove, -v version, -? aide).
-- PowerShell : options -PSConsoleFile, -Version, -NoLogo, -NoExit, -Sta, -NoProfile, -NonInteractive, -InputFormat / -OutputFormat (Text ou XML CLIXML), -WindowStyle, -EncodedCommand (Base64), -File, -ExecutionPolicy, -Command, -Help.
-- Invite de commande : centaines de commandes, scripts batch ou vbs (Bloc-notes sans caractères accentués ; Wordpad en enregistrant en MS-DOS).
-- ocsetup (remplace Sysocmgr) : installe/supprime des packages MSI ou composants optionnels ; pkgmgr : installe/supprime/met à jour des packages. Plus difficiles à mettre en œuvre que le Gestionnaire de serveur, mais seuls moyens sous Server Core. Options ocsetup : /log, /norestart, /passive, /quiet, /unattendfile, /uninstall, /x. Options pkgmgr : /ip, /l (journaux dans %WINDIR%\logs\cbs\cbs.log ; Setupact.log complet, Setuperr.log erreurs), /iu.
-- Netsh : configurer et surveiller des ordinateurs locaux ou distants ; commandes hiérarchisées par contexte (advfirewall, interface, ipsec, ras, trace, wlan, winsock...) ; utilisable en scripts.
-- WinRS / WinRM : WinRM (Windows Remote Management) est le service à activer sur l'ordinateur distant ; WinRS (Windows Remote Shell) y exécute des commandes. Messages chiffrés par défaut (clés Kerberos ou NTLM ; -unencrypted ; ignoré en HTTPS). Options : -r (point de terminaison), -u / -p, -d (répertoire), -env, -noprofile, -allowdelegate, -compression (désactivée par défaut), -usessl.
-- WMIC (Windows Management Instrumentation Command-line) : interroger des objets WMI via des alias ; natif sous Windows Server 2008. Paramètres /NAMESPACE, /NODE, /USER, /PASSWORD, /OUTPUT, /TRACE, /RECORD...
+      Gestionnaire de serveur : outil local principal de l'administrateur, centralisant la configuration du serveur, l'ajout ou la suppression de rôles et fonctionnalités, l'état des rôles et services, l'affichage des événements, la gestion des pilotes et du matériel, la détection des goulets d'étranglement, la gestion du stockage, du pare-feu et des utilisateurs locaux, la planification de tâches et le dépannage.
 
-3. SAUVEGARDE ET RESTAURATION
-Fonctionnalités : clichés instantanés de dossiers partagés ; outils de sauvegarde de Windows Server (console MMC, Wbadmin en ligne de commande, commandes PowerShell) ; environnement de récupération Windows (restauration complète du PC, diagnostic mémoire, invite de commandes). Ntbackup.exe supprimé.
-La sauvegarde peut porter, localement ou à distance, sur : l'intégralité du serveur (tous les volumes), des volumes, l'état du système, des dossiers ou fichiers ; de manière manuelle ou planifiée.
-WinRE : environnement de récupération et de dépannage, accessible via « Options de récupération du système » de l'assistant d'installation ; récupération (à partir de sauvegardes préalables) du système d'exploitation, de l'état du système, des volumes, des applications et données, du catalogue de sauvegardes, des fichiers et dossiers locaux.
+      Rôle : notion introduite pour faciliter le travail de l'administrateur, regroupant des tâches d'administration réseau, pouvant fonctionner de manière autonome dès que plusieurs services de rôle sont activés.
 
-4. SÉCURISER UN CONTRÔLEUR DE DOMAINE
-Système de fichiers : NTFS obligatoire (jamais FAT/FAT32) ; toujours formater en NTFS à l'installation. convert <unité> /fs:ntfs pour convertir a posteriori, mais les ACL ne sont alors pas appliquées automatiquement (contrairement à un formatage NTFS d'origine).
-Mot de passe administrateur (ANSSI) : 12 caractères minimum (16 si possible), types différents, sans lien avec soi, changé régulièrement, non retenu par les logiciels, non stocké près de l'ordinateur, limiter les tentatives.
-Option Core : installation minimaliste (éléments et packages fondamentaux ; ni framework ni bureau) ; administration locale uniquement en ligne de commande ; installation demandant 4 informations (langue/paramètres régionaux, clé de licence, acceptation du contrat, disque/partition cible).
-Comptes : désactiver ou supprimer régulièrement les comptes inutiles ; compte invité désactivé par défaut (le vérifier). Compte administrateur : le renommer par un nom non évocateur, créer un leurre « administrateur » sans privilège avec audit des ouvertures de session, désactiver le vrai compte (comptes de domaine et locaux).
-Fichiers et répertoires : ACL NTFS pour restreindre précisément les actions ; propriétés dans l'onglet Sécurité.
-Registre : accès distant limité par défaut aux Administrateurs ; clé \winreg sous HKLM\SYSTEM\CurrentControlSet\Control\SecurePipeServers pour ajuster (Contrôle Total au groupe Administrateurs, retirer les autres).
-Politique de mot de passe et verrouillage de compte : via la console de gestion des stratégies de groupes (Stratégie de mot de passe, Stratégie de verrouillage de compte).
-Cacher une machine : valeur Hidden (REG_DWORD) = 1 sous ...\Services\LanmanServer\Parameters (environnements hautement sécurisés).
-Partages : supprimer les partages inutiles ; nouveaux partages créés par défaut avec « Contrôle Total » pour « Tout le monde » -> restreindre. Désactiver les partages administratifs : AutoShareServer (REG_DWORD) = 0 sous ...\Services\lanmanserver\parameters.
-Post-configuration : antivirus à jour (ne détecte que les virus connus, pas les attaques 0-day) ; service packs (chacun inclut les mises à jour des précédents) ; Windows Update (mises à jour importantes le 2e ou 4e mardi du mois ; vérifier une fois par semaine). Référentiels : ssi.gouv.fr, cert.ssi.gouv.fr.
-Configuration de la sécurité : composant « Configuration et analyse de la sécurité » (console MMC personnalisée uniquement), basé sur un modèle de sécurité (composant « Modèle de Sécurité ») ; version ligne de commande secedit.exe. Options : forcer Ctrl-Alt-Suppr, Verrouiller la station / Se déconnecter, mot de passe à la sortie de veille, suppression de pagefile.sys à l'arrêt (Éditeur de Stratégie Locale, non actif par défaut, empêche l'extraction d'informations du fichier de pagination, arrêt plus long), ne pas afficher le nom du dernier utilisateur.
-Audit (Stratégie de sécurité locale -> Stratégies locales -> Stratégies d'audit) : accès au service d'annuaire, accès aux objets, utilisation des privilèges, gestion des comptes, suivi des processus, événements de connexion, événements de connexion aux comptes, événements système, modifications de stratégies. Redémarrage nécessaire.
-BitLocker : chiffrement de disque de tout un volume de l'OS ; utilise le TPM (module de plateforme sécurisée) et assure l'intégrité des composants de démarrage. Fonctionnalité « Chiffrement de lecteur BitLocker » à installer (redémarrage) ; mot de passe de récupération à enregistrer (plusieurs supports possibles). Peut impacter les performances.
-EFS (Encrypting File System) : depuis Windows 2000 ; partitions NTFS v.5+ ; transparent. Algorithme asymétrique (clé privée/publique) pour encoder les clés symétriques qui chiffrent les fichiers. Agent de récupération obligatoire (départ d'un employé, perte de clé privée). Clés dans un pool de mémoire non paginé du noyau (non extractibles du fichier de pagination). Cryptage 56 bits par défaut, jusqu'à 128 bits ; fichier compressé jamais chiffré (et inversement). Windows Server 2008 : certificats sur carte à puce, chiffrement par utilisateur du cache côté client, options GPO, Assistant de changement de clé. Partage impossible pour un fichier d'un dossier crypté.
-IPSec : protection des paquets IP, sécurité de bout en bout. Déployable via Active Directory ou la Sécurité Locale. Agent de stratégie IPSec = service dans lsass.exe (visible dans le composant MMC Services), démarré à la mise en route ; récupère la stratégie dans Active Directory ou le registre local (clés ...\Services\PolicyAgent\Policy\Cache ou \Local). Moniteur de sécurité IPSec : ipsecmon.exe ; paquets AH et ESP visibles avec l'analyseur de trames ; logs dans ipsecpa.log.
-Exécuter en tant que : tester des réglages avec un autre compte que celui connecté (similaire à su sous Unix) ; clic droit sur l'icône de l'application.
+      Service de rôle : sous-ensemble d'un rôle donné, amélioration de sécurité et de simplicité.
 
-5. LES PARTAGES
-Partage d'une ressource (imprimante, dossier, disque) pour l'accès par le réseau ; toute l'arborescence sous le point de partage est accessible (restrictions possibles). Syntaxe : \\NomDuServeur\NomDuPartage ; ajouter $ à la fin du nom pour cacher le partage. Création via l'assistant (clic droit -> Partager ; niveau par défaut « Lecteur ») ou l'outil Gestion de l'ordinateur (nœud « Partages »). Autorisations de partage (analogues aux permissions NTFS) : Contrôle Total, Modifier, Lire (autorisation ou refus). Propriétés avancées : onglet Partage -> Partage Avancé.
+      Fonctionnalité : élément complémentaire à un rôle, trente-cinq définies par défaut sous Windows Server 2008 et quarante et une sous R2, aucune installée par défaut, installable manuellement ou automatiquement avec un rôle.
 
-6. CLICHÉS INSTANTANÉS
-Copies à un instant donné de fichiers de ressources partagées ; récupération sans aide d'un fichier supprimé ou écrasé par inadvertance, comparaison de versions. Inclus dans la console MMC de gestion des dossiers partagés. Activation uniquement pour un volume entier ; ne remplace pas les sauvegardes régulières. Configuration : clic droit sur le lecteur -> « Clichés instantanés », ou commande vssadmin.
+      MMC (Microsoft Management Console) : console commune d'administration hébergeant des composants logiciels enfichables qui prennent en charge la gestion, permettant aussi l'administration à distance et le regroupement logique des outils.
 
-7. QUOTAS DE DISQUE
-Limiter la quantité de données par utilisateur pour répartir l'espace équitablement. S'appliquent uniquement aux volumes NTFS, indépendamment des structures de dossiers : le quota d'un volume s'applique collectivement à tous ses dossiers ; chaque volume d'un disque a son quota indépendant ; un volume s'étendant sur plusieurs disques a un quota global. Activation : propriétés du lecteur -> onglet « Quotas » (désactiver ne supprime pas les données). Windows peut empêcher toute nouvelle utilisation au dépassement de la limite (et enregistrer un événement) et/ou enregistrer un événement au dépassement du niveau d'avertissement.
+      Console préconfigurée : console installée par défaut à l'installation ou à l'ajout de rôles, contenant les composants enfichables des tâches les plus utilisées.
 
-8. PERFORMANCE, MÉTROLOGIE, OPTIMISATION
-Observateur d'événements (Outils d'administration) : journaux Applications (par les applications), Système (par Windows), Sécurité (audits succès/échecs), Événements transmis (autres ordinateurs), Configuration (installation d'applications), Applications et services (sous-journaux Administration, Opérationnel, Analyse, Débogage - visibles si « Afficher les journaux d'analyse et de débogage »). Taille max par défaut 512 Ko ; options : remplacer les événements, remplacer seulement les plus anciens (X jours), ne pas remplacer (nettoyage manuel). Enregistrement au format .evt (pour l'observateur) ou texte. Vues personnalisées (filtre ou XML).
-Moniteur de fiabilité et de performances (remplace l'analyseur de Windows Server 2003) : analyseur de performances, moniteur de fiabilité, collecteurs, rapports.
-- Moniteur de ressources : visualisation et analyse en temps réel du processeur, des disques, du réseau et de la mémoire (vision centralisée pour l'optimisation) ; lancement perfmon /res.
-- Analyseur de performances : surveiller et mesurer l'activité d'un ou plusieurs ordinateurs ; objets associés à des compteurs, éventuellement plusieurs instances (ex. bi-processeur = 2 instances Processeur) ; graphes, alertes (dépassement de seuil : journal d'alerte, journal d'application, alerte réseau, exécution d'un programme), rapports, archives. Export au format HTML ou TSV. Goulets d'étranglement : une activité disque élevée peut venir d'une fragmentation, d'un transfert trop long, ou d'un manque de RAM (pagination excessive).
-- Moniteur de fiabilité : rapports de stabilité classés (installation/désinstallation de logiciels, défaillances d'applications, défaillances matérielles, échecs Windows, échecs divers).
-- Collecteurs de données : quatre types - personnalisés (configurables), système (prédéfinis, non modifiables), sessions de suivi d'événements, sessions de traces d'événements Startup (au démarrage).
-Gestionnaire des tâches (Ctrl+Alt+Suppr ou Ctrl+Maj+Échap) : démarrer/fermer des applications, tuer des processus, données processeur/mémoire. Onglets : applications et leur état, processus, services (activer/désactiver), performances (mémoire, processeur, moniteur de processus), charge réseau par carte, utilisateurs connectés (déconnexion).
+      Console personnalisée : console créée par un administrateur combinant un ou plusieurs composants enfichables, enregistrable, distribuable et partageable, utile pour la délégation de tâches.
 
-9. SNMP (Simple Network Management Protocol)
-Standard Internet pour la gestion de nœuds de réseaux hétérogènes TCP/IP. Agents SNMP sur les nœuds -> informations d'état dans des bases MIB (Management Information Base) -> collectées par une station NMS (Network Management Station). Usages : configurer des périphériques distants, surveiller les performances, détecter erreurs et accès inappropriés, auditer l'utilisation. Sous Windows Server 2008 : fonctionnalité non installée par défaut (Gestionnaire de serveur -> Fonctionnalités -> Service SNMP). Configuration via la console MMC Services (clic droit sur Services SNMP -> Propriétés) : onglet Agent (contact, type de services), onglet Interruptions (communautés ; « publique » par défaut), onglet Sécurité (ne répondre qu'aux communautés explicitement identifiées).
+      Composant enfichable autonome : composant exécutant les tâches administratives du système, Windows Server 2008 en ayant un jeu plus étendu que les systèmes personnels.
 
-10. WMI (Windows Management Instrumentation)
-Mise en œuvre pour Windows de l'initiative WBEM de la DMTF, étendant le modèle de données CIM (Common Information Model). Interface unique, cohérente, extensible et orientée objet pour configurer, gérer et interroger les ressources d'un ordinateur (localement ou à distance de façon transparente). Fonctionnalités : API d'écriture de script uniforme, administration à distance, recherche et navigation (énumération des classes), fonctionnalité de requête (données traitées comme une base relationnelle, requêtes SQL), publication d'événements et abonnements.
-Outils : WMI Control (wmimgmt.msc, console MMC de configuration), WMI Tester (wbemtest.exe, outil graphique), WMI Commandline (wmic.exe, ligne de commande) ; outil tiers WMIEXPLORER.
+      Composant enfichable d'extension : composant fournissant des fonctionnalités complémentaires ne fonctionnant qu'avec un composant autonome, seules les extensions compatibles étant affichées ; l'extension des fichiers de console est .msc.
 
-11. COMMANDES NET
-Nombreuses actions d'administration des serveurs et des connexions réseau, en ligne de commande ou dans des fichiers BATCH.
+      Mode Auteur : mode par défaut d'une console MMC, sans restriction.
 
-12. COMMUNICATION - SERVICES TERMINAL SERVER
-Le rôle Services Terminal Server permet d'accéder à des programmes Windows installés sur un serveur, ou au Bureau Windows, depuis un réseau d'entreprise ou Internet. L'exécution a lieu sur le serveur ; seuls clavier, souris et affichage transitent ; chaque utilisateur ne voit que sa session. Avantages : déploiement rapide et centralisé, moins de bande passante pour les applications distantes, meilleures performances pour les succursales.
-Services de rôle : Terminal Server (héberge programmes ou Bureau Windows), TS Web Access (programmes RemoteApp et Bureau à distance via un site Web), Gestionnaire de licences des services Terminal Server (licences d'accès client par périphérique ou utilisateur), Passerelle des services Terminal Server (accès distant à des ressources internes depuis Internet), TS Session Broker (équilibrage de charge des sessions et reconnexion à une session existante).
-RemoteApp (TS RemoteApp) : programme accessible à distance qui se comporte comme s'il était local ; intégré au Bureau du client, dans sa propre fenêtre redimensionnable avec sa propre entrée dans la barre des tâches. Plusieurs RemoteApp d'un même serveur partagent la même session. Accès via TS Web Access (lien web), fichier .rdp, ou package Windows Installer (.msi) / association d'extension. Signature numérique des .rdp (certificat SSL, de signature de code ou de signature RDP dédié) pour éviter les fichiers falsifiés ; nécessite RDC 6.1.
-Passerelle des services Terminal Server : encapsule RDP dans HTTPS et transmet le trafic vers le port 443 (tunnel TLS/SSL) au lieu du port 3389 souvent bloqué ; connexion chiffrée aux ressources internes derrière pare-feu et NAT sans VPN, connexion RDP point-à-point, stratégies d'autorisation (qui, vers quelles ressources, appartenance à des groupes AD, redirection de périphérique/disque, carte à puce ou mot de passe). Peut utiliser NAP et Microsoft ISA Server (hébergement sur réseau privé, ISA sur le réseau de périmètre).
-TS Session Broker : suivi des sessions d'une batterie à charge équilibrée (ID de session, utilisateur, serveur hébergeur) ; redirige un utilisateur ayant une session existante vers son serveur ; avec l'équilibrage activé, dirige les nouveaux utilisateurs vers le serveur ayant le moins de sessions.
-Connexion Bureau à distance : accéder à un ordinateur Windows depuis un autre (même réseau ou Internet) ; l'ordinateur cible doit être allumé, connecté, Bureau à distance activé, avec autorisations. Installée par défaut sous Windows Server 2008. Deux connexions à distance simultanées maximum, sans licence d'accès client Terminal Server. Les membres du groupe Administrateurs local peuvent se connecter sans figurer dans la liste. Pour de l'administration seule, activer le Bureau à distance suffit (pas besoin d'un serveur Terminal Server).
-Paramètres RemoteApp : RDP personnalisés (redirection audio...) ; « Exiger l'authentification du serveur » -> certificat SSL nécessaire pour des clients Windows XP SP2 / Server 2003 SP1 (pas de certificat auto-signé) ; inutile en intranet si tous les clients sont Windows Vista / Server 2008 (authentification au niveau du réseau, NLA).
+      Mode Utilisateur : mode restreignant les actions, avec trois niveaux, l'accès total interdisant l'ajout ou la suppression de composants, la modification des options et la création de favoris ou de tâches, l'accès limité avec fenêtres multiples empêchant d'ouvrir de nouvelles fenêtres ou d'accéder à une partie non présente de l'arborescence mais autorisant plusieurs fenêtres, et l'accès limité avec fenêtre unique avec une seule fenêtre.
+
+      RSAT (Remote Server Administration Tools) : composants enfichables de gestion à distance des rôles et fonctionnalités de Windows Server 2008, remplaçant l'adminpak, natif seulement sous R2, à télécharger et configurer via le Gestionnaire de serveur pour les versions antérieures.
+
+      Administration à distance : version de Terminal Server réservée à l'administration, permettant la connexion simultanée de deux administrateurs sans licences supplémentaires, avec un accès total au serveur, utilisant une version améliorée du protocole RDP.
+
+      ServerManagerCmd : outil en ligne de commande gérant les rôles, services de rôle et fonctionnalités, avec -q pour la liste, -p pour un fichier de réponses XML, install, remove, et -v pour la version.
+
+      Powershell : utilitaire de script d'administration, avec des options comme PSConsoleFile, NoLogo, NoProfile, NonInteractive, EncodedCommand acceptant une commande en Base64, File pour un script, ExecutionPolicy pour la stratégie d'exécution, et Command.
+
+      ocsetup : outil remplaçant Sysocmgr, installant ou supprimant des packages MSI ou composants optionnels, avec /norestart, /passive, /quiet et /uninstall.
+
+      pkgmgr : outil installant, supprimant ou mettant à jour des packages, avec /ip pour un package, /l pour le journal et /iu pour activer une fonctionnalité ; ocsetup et pkgmgr sont plus difficiles que le Gestionnaire de serveur mais sont les seuls moyens d'installer des rôles sous un Server Core.
+
+      Netsh : outil en ligne de commande de configuration et de surveillance d'ordinateurs locaux ou distants, hiérarchisé en contextes comme advfirewall, interface, ipsec, http, ras, wlan, avec dump pour afficher un script de configuration et exec pour l'exécuter.
+
+      WinRM (Windows Remote Management) : service permettant l'exécution de commandes distantes, utilisable pour des scripts et des applications de gestion.
+
+      WinRS (Windows Remote Shell) : utilitaire exécutant des commandes sur un ordinateur distant où WinRM est activé, avec -r pour la cible, -un pour désactiver le chiffrement Kerberos ou NTLM, -u et -p pour les identifiants, -ad pour la délégation et -ssl.
+
+      WMIC (Windows Management Instrumentation Commandline) : outil en ligne de commande interrogeant des objets WMI via des alias, natif sous Windows Server 2008, avec /NAMESPACE, /NODE, /USER, /OUTPUT et /RECORD.
+
+      Fonctionnalité de sauvegarde : ensemble d'assistants et d'outils de Windows Server 2008 pour la sauvegarde et la récupération, remplaçant Ntbackup.exe, portant sur l'intégralité du serveur, des volumes, l'état du système ou des dossiers et fichiers, manuellement ou de façon planifiée.
+
+      Outils de sauvegarde de Windows Server : console MMC de sauvegarde, outil en ligne de commande Wbadmin et commandes Windows PowerShell.
+
+      WinRE (Windows Recovery Environment) : environnement de récupération et de dépannage accessible via la boîte de dialogue Options de récupération du système de l'assistant d'installation, permettant la récupération du système d'exploitation, de l'état du système, des volumes, des applications et données, du catalogue de sauvegardes et des fichiers et dossiers locaux.
+
+      convert : commande passant un système de fichiers FAT32 en NTFS avec la syntaxe convert unité /fs:ntfs ; une conversion a posteriori n'applique pas automatiquement les ACL, contrairement à un formatage NTFS à l'installation, d'où la recommandation de toujours formater en NTFS.
+
+      Recommandations de mot de passe de l'ANSSI : au moins douze caractères, si possible seize, de types différents, sans lien avec soi, changé régulièrement, non retenu par les logiciels, non stocké près de l'ordinateur, avec limitation du nombre de tentatives.
+
+      Option Core (Server Core) : installation minimale n'installant que les éléments et packages fondamentaux, sans framework ni bureau, l'administration locale ne se faisant qu'en ligne de commande, exigeant à l'installation la langue, la clé de licence, l'acceptation du contrat et le disque.
+
+      Sécurisation du compte administrateur : renommer le compte administrateur par un nom non évocateur, créer un compte leurre nommé administrateur sans privilège avec un audit des ouvertures de session, et désactiver le véritable compte.
+
+      Partages administratifs : partages créés automatiquement, désactivables via la valeur AutoShareServer à zéro dans la clé CurrentControlSet/Services/lanmanserver/parameters ; par défaut, un nouveau partage est en Contrôle total pour le groupe Tout le monde.
+
+      Configuration et analyse de la sécurité : composant enfichable configurant et analysant la sécurité à partir d'un modèle de sécurité, avec une version en ligne de commande secedit.exe, permettant de forcer Ctrl-Alt-Suppr, de verrouiller ou fermer la station, de supprimer pagefile.sys à l'arrêt pour empêcher l'extraction d'informations, et de ne pas afficher le nom du dernier utilisateur.
+
+      Stratégie d'audit : nœud des Stratégies locales permettant d'auditer l'accès au service d'annuaire, l'accès aux objets, l'utilisation des privilèges, la gestion des comptes, le suivi des processus, les événements de connexion, les événements de connexion aux comptes, les événements système et les modifications de stratégies, avec redémarrage nécessaire pour la prise d'effet.
+
+      BitLocker : mécanisme de chiffrement de disque cryptant toutes les données d'un volume du système d'exploitation, utilisant le module de plateforme sécurisée TPM et assurant l'intégrité des composants de démarrage, exigeant l'installation de la fonctionnalité et un redémarrage, pouvant impacter les performances.
+
+      EFS (Encrypting File System) : système de cryptage de fichiers depuis Windows 2000, exigeant NTFS version 5 ou ultérieur, transparent, utilisant un algorithme asymétrique pour encoder des clés symétriques de chiffrement des fichiers, exigeant un agent de récupération, stockant ses clés dans un pool de mémoire non paginé ; chiffrement par défaut sur cinquante-six bits, poussé à cent vingt-huit bits dans les États l'autorisant ; un fichier compressé n'est pas crypté et inversement, et le partage de fichiers d'un dossier crypté est impossible ; les clés peuvent être stockées sur cartes à puce.
+
+      IPSec : protocole de protection des paquets IP à modèle de sécurité de bout en bout, seuls l'émetteur et le récepteur devant connaître la protection, implémentable via Active Directory ou la Sécurité locale ; l'agent de stratégie IPSec tourne dans lsass.exe, récupère la stratégie dans Active Directory ou le Registre local et l'applique à tout le trafic IP ; le moniteur ipsecmon.exe montre le statut, l'analyseur de trames voit les paquets AH et ESP, et le journal est ipsecpa.log.
+
+      Exécuter en tant que : commande de second service de connexion permettant de tester des réglages avec un compte particulier tout en étant connecté avec un autre, analogue à su sous UNIX, accessible par clic droit sur l'icône d'une application.
+
+      Partage : mise à disposition d'une ressource par le réseau, imprimante, dossier ou disque, toute l'arborescence sous le point de partage étant accessible ; syntaxe deux antislash NomDuServeur antislash NomDuPartage ; l'ajout du signe dollar en fin de nom cache le partage.
+
+      Autorisations de partage : autorisations du point de partage protégeant les volumes, analogues aux permissions NTFS, à savoir Contrôle total, Modifier et Lire, en autorisation ou refus.
+
+      Clichés instantanés de dossiers partagés : copies ponctuelles à un instant donné de fichiers de ressources partagées, permettant à l'utilisateur de récupérer sans aide un fichier supprimé ou écrasé et de comparer des versions, activables seulement pour un volume entier, configurables par clic droit sur le lecteur ou par la commande vssadmin ; ils ne remplacent pas les sauvegardes régulières.
+
+      Quota de disque : limite de la quantité de données qu'un utilisateur peut stocker, ne s'appliquant qu'aux volumes NTFS et indépendamment de la structure de dossiers, un quota de volume s'appliquant collectivement à tous les dossiers du volume et à la totalité d'un volume étendu sur plusieurs disques ; l'administrateur peut empêcher toute nouvelle utilisation au dépassement de la limite et enregistrer un événement au niveau d'avertissement.
+
+      Observateur d'événements : outil d'administration affichant les journaux Applications, Système, Sécurité, événements transmis, configuration, et Applications et services avec les journaux d'administration, opérationnel, d'analyse et de débogage ; taille maximale de journal de cinq cent douze kilo-octets par défaut, avec les options de remplacer les événements, remplacer les plus anciens ou ne pas remplacer, et enregistrement en .evt ou en texte ; les vues personnalisées permettent un filtrage par filtre XML.
+
+      Moniteur de fiabilité et de performances : outil remplaçant l'analyseur de performances de Windows Server 2003, composé de l'analyseur de performances, du moniteur de fiabilité, des collecteurs et de l'affichage des rapports.
+
+      Moniteur de ressources : outil de visualisation et d'analyse en temps réel de quatre sous-ensembles, le processeur, les disques, le réseau et la mémoire, démarrable par perfmon /res.
+
+      Analyseur de performances : outil graphique surveillant l'activité d'un ou plusieurs ordinateurs par des objets associés à des compteurs, fournissant graphes, alertes au dépassement de seuil et rapports, avec exportation en HTML ou TSV ; l'objectif d'une analyse détaillée est de trouver les goulets d'étranglement, une activité disque élevée pouvant traduire une fragmentation ou un manque de mémoire vive imposant une pagination excessive.
+
+      Moniteur de fiabilité : outil enregistrant la stabilité du système en rapports classés en installation et désinstallation de logiciels, défaillances d'applications, défaillances matérielles, échecs Windows et échecs divers.
+
+      Ensemble de collecteurs de données : outil enregistrant les données pour un usage ultérieur et créant des rapports, avec quatre types, personnalisés, système prédéfinis non modifiables, sessions de suivi d'événements et sessions de traces au démarrage.
+
+      Gestionnaire des tâches : outil lançant ou fermant des applications, terminant des processus, affichant l'usage du processeur et de la mémoire, avec les onglets applications, processus, services, performances, réseau et utilisateurs, lancé par Ctrl-Alt-Suppr ou Ctrl-Maj-Échap.
+
+      SNMP (Simple Network Management Protocol) : standard Internet de gestion de nœuds de réseau depuis une station de gestion NMS, l'agent SNMP remontant des informations dans des bases MIB collectées par la NMS, servant à configurer des périphériques distants, surveiller les performances, détecter les erreurs et auditer l'utilisation ; non installé par défaut, présenté comme une fonctionnalité, configuré via la console MMC des services, avec un onglet Agent pour le contact, un onglet Interruptions pour les communautés, la communauté publique par défaut, et un onglet Sécurité.
+
+      MIB (Management Information Base) : conteneur d'objets représentant un type particulier d'informations, comme le nombre de sessions actives ou la quantité de disque disponible, le service SNMP acceptant différents formats internationaux ou propriétaires.
+
+      WMI (Windows Management Instrumentation) : mise en œuvre pour Windows de l'initiative WBEM de la DMTF, étendant le modèle CIM pour représenter les objets de gestion, offrant une interface unique, cohérente, extensible et orientée objet, accessible localement ou à distance par des applications et scripts, permettant de gérer, exécuter, arrêter, redémarrer une machine, voir les ressources et s'abonner à des événements.
+
+      Outils WMI : WMI Control wmimgmt.msc pour configurer les propriétés WMI, WMI Tester wbemtest.exe pour interagir avec l'infrastructure, et WMI Commandline wmic.exe pour l'interface en ligne de commande.
+
+      Commandes NET : commandes en ligne de commande ou dans des fichiers batch pour de nombreuses actions d'administration des serveurs et des connexions réseau.
+
+      Services Terminal Server : rôle permettant aux utilisateurs d'accéder à des programmes Windows installés sur un serveur ou au Bureau Windows depuis un réseau d'entreprise ou Internet, l'exécution se faisant sur le serveur et seules les informations de clavier, souris et affichage transitant, chaque utilisateur ne voyant que sa session.
+
+      Services de rôle de Terminal Server : Terminal Server hébergeant programmes et bureau, TS Web Access donnant accès via un site web, Gestionnaire de licences gérant les licences d'accès client, Passerelle des services Terminal Server permettant la connexion d'utilisateurs distants autorisés à des ressources internes depuis Internet, et Session Broker TS équilibrant la charge des sessions dans une batterie.
+
+      RemoteApp TS : programmes accessibles à distance via Terminal Server se comportant comme s'ils étaient exécutés localement, intégrés au bureau du client dans leur propre fenêtre redimensionnable avec une entrée dans la barre des tâches, plusieurs programmes du même serveur partageant la même session ; distribués par un fichier .rdp, un package Windows Installer ou TS Web Access.
+
+      Passerelle des services Terminal Server : service encapsulant le protocole RDP via HTTPS pour une connexion sécurisée entre Internet et les ressources internes, sans VPN, transmettant le trafic RDP vers le port 443 au lieu du port 3389 généralement bloqué, avec un Gestionnaire des passerelles TS définissant des stratégies d'autorisation, pouvant utiliser la protection d'accès réseau NAP et Microsoft ISA Server.
+
+      Session Broker TS : service suivant les sessions utilisateur d'une batterie de serveurs à charge équilibrée, redirigeant un utilisateur avec une session existante vers le serveur qui l'héberge, et, si l'équilibrage est activé, redirigeant les nouveaux utilisateurs vers le serveur ayant le moins de sessions.
+
+      Connexion Bureau à distance : outil d'accès à un ordinateur Windows depuis un autre, installé par défaut sous Windows Server 2008, ne prenant en charge que deux connexions simultanées sans licences d'accès client, l'ordinateur cible devant être allumé, connecté, avec le Bureau à distance activé et l'utilisateur figurant dans la liste ou membre du groupe Administrateurs local.
+
+      NLA (authentification au niveau du réseau) : authentification utilisée pour RemoteApp par intranet quand tous les clients exécutent Windows Server 2008 ou Windows Vista, sans certificat SSL, un certificat SSL non auto-signé étant en revanche requis pour des clients Windows Server 2003 SP1 ou Windows XP SP2.
+
+      Signature numérique des programmes RemoteApp : signature des fichiers .rdp avec un certificat d'authentification serveur SSL, de signature de code ou de signature RDP, fournissant des informations vérifiables sur l'éditeur et évitant l'usage de fichiers .rdp falsifiés, le client devant exécuter RDC 6.1.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LES OUTILS D'ADMINISTRATION GRAPHIQUES.
+
+
+   A. Le Gestionnaire de serveur et les rôles.
+
+      Sous Windows Server 2008, la liste des outils a été simplifiée, avec deux grandes familles, graphiques et en ligne de commande ; les trois outils graphiques principaux sont le Gestionnaire de serveur, la MMC avec ses composants enfichables, et l'accès distant.
+
+      Le Gestionnaire de serveur est l'outil local principal, centralisant la configuration du serveur, l'ajout et la suppression de rôles et fonctionnalités, l'état des rôles et services, l'affichage des événements, la gestion des pilotes, la détection des goulets d'étranglement, la gestion du stockage, du pare-feu et des utilisateurs locaux, la planification et le dépannage ; un rôle regroupe des tâches et peut fonctionner de manière autonome dès que plusieurs services de rôle sont activés ; trente-cinq fonctionnalités sont définies par défaut, aucune n'étant installée, installables manuellement ou avec un rôle.
+
+
+   B. La console MMC.
+
+      La MMC fournit une console commune d'administration hébergeant des composants enfichables et permet l'administration à distance ; les consoles préconfigurées sont installées à l'installation ou à l'ajout de rôles, les consoles personnalisées sont créées par l'administrateur en combinant des composants, enregistrables et partageables, utiles pour la délégation.
+
+      Les composants enfichables autonomes exécutent les tâches administratives, les composants d'extension apportent des fonctionnalités complémentaires ne fonctionnant qu'avec un autonome, l'extension des fichiers étant .msc ; le mode Auteur est sans restriction, le mode Utilisateur restreint avec trois niveaux, accès total, accès limité avec fenêtres multiples et accès limité avec fenêtre unique ; on crée une console personnalisée par la commande mmc puis Ajouter ou supprimer un composant logiciel enfichable.
+
+
+   C. L'administration à distance.
+
+      RSAT est l'ensemble de composants enfichables de gestion à distance des rôles et fonctionnalités, remplaçant l'adminpak, natif seulement sous R2 et à télécharger puis configurer via le Gestionnaire de serveur pour les versions antérieures ; l'administration à distance est une version de Terminal Server réservée à l'administration, autorisant deux administrateurs simultanés sans licences supplémentaires, avec un accès total, sur le protocole amélioré RDP.
+
+
+II. LES OUTILS D'ADMINISTRATION EN LIGNE DE COMMANDE.
+
+      ServerManagerCmd gère les rôles, services de rôle et fonctionnalités, avec -q pour la liste, -p pour un fichier XML, install, remove et -v ; Powershell sert à créer des scripts, avec des options comme NoProfile, NonInteractive, EncodedCommand en Base64, File, ExecutionPolicy et Command ; l'invite de commande exécute des scripts batch ou vbs, les scripts se créant au Bloc-notes sans caractères accentués.
+
+      ocsetup remplace Sysocmgr et installe ou supprime des packages MSI et composants optionnels, pkgmgr installe, supprime ou met à jour des packages, ces deux outils étant plus difficiles que le Gestionnaire de serveur mais les seuls moyens d'installer des rôles sous un Server Core ; Netsh configure et surveille des ordinateurs locaux ou distants, hiérarchisé en contextes, avec dump et exec ; WinRS exécute des commandes sur un ordinateur distant où WinRM est activé, avec chiffrement Kerberos ou NTLM par défaut ; WMIC interroge des objets WMI par alias, natif sous Windows Server 2008.
+
+
+III. LA SAUVEGARDE ET LA RESTAURATION.
+
+      Windows Server 2008 offre les clichés instantanés de dossiers partagés, les outils de sauvegarde de Windows Server, console MMC, outil en ligne de commande Wbadmin et commandes PowerShell, et l'environnement de récupération Windows avec la restauration complète du PC, l'outil de diagnostic mémoire et l'invite de commandes.
+
+      La fonctionnalité de sauvegarde remplace Ntbackup.exe, se fait localement ou à distance sur l'intégralité du serveur, des volumes, l'état du système ou des dossiers et fichiers, manuellement ou de façon planifiée ; WinRE, accessible via les Options de récupération du système de l'assistant d'installation, permet la récupération du système d'exploitation, de l'état du système, des volumes, des applications et données, du catalogue de sauvegardes et des fichiers et dossiers locaux.
+
+
+IV. LA SÉCURISATION D'UN CONTRÔLEUR DE DOMAINE.
+
+
+   A. Les opérations au niveau du système d'exploitation.
+
+      Il ne faut formater aucune partition en FAT ou FAT32 mais en NTFS, l'idéal étant de toujours formater en NTFS à l'installation ; la commande convert unité /fs:ntfs passe une partition FAT32 en NTFS, mais une conversion a posteriori n'applique pas automatiquement les ACL, contrairement à un formatage à l'installation.
+
+      La qualité du mot de passe de l'administrateur est cruciale, l'ANSSI recommandant au moins douze caractères, si possible seize, de types différents, sans lien avec soi, changés régulièrement, non retenus par les logiciels et avec limitation des tentatives ; l'option Core limite les attaques en n'installant que les éléments fondamentaux sans framework ni bureau, l'administration locale se faisant en ligne de commande ; il faut désactiver ou supprimer les comptes non indispensables, vérifier que le compte invité est désactivé, restreindre les fichiers et répertoires par les ACL NTFS, protéger l'accès distant au Registre par la valeur winreg de la clé SecurePipeServers avec Contrôle total pour les seuls Administrateurs, et définir une politique de mot de passe et une stratégie de verrouillage de compte via les stratégies de groupe.
+
+      Pour cacher une machine du réseau dans un environnement hautement sécurisé, on met la valeur Hidden de la clé LanmanServer/Parameters à un ; pour sécuriser le compte administrateur, on le renomme par un nom non évocateur, on crée un compte leurre nommé administrateur sans privilège avec un audit des ouvertures de session, et on désactive le véritable compte ; il faut supprimer les partages inutiles, définir des autorisations appropriées puisque tout nouveau partage est en Contrôle total pour Tout le monde, et on peut désactiver les partages administratifs par la valeur AutoShareServer à zéro.
+
+
+   B. L'installation post-configuration.
+
+      Il est impératif d'installer un antivirus à jour, qui ne détecte que les virus connus et ne protège pas des attaques jour zéro ; il faut maintenir à jour les services packs, chacun incluant les mises à jour de sécurité des précédents, et vérifier Windows Update une fois par semaine, Microsoft publiant d'importantes mises à jour le deuxième ou quatrième mardi du mois ; des référentiels de sécurité existent, dont le site de l'ANSSI et le CERT gouvernemental.
+
+      Le composant enfichable Configuration et analyse de la sécurité, avec sa version en ligne de commande secedit.exe, configure et analyse la sécurité à partir d'un modèle, permettant de forcer Ctrl-Alt-Suppr, de verrouiller ou fermer la station, de configurer l'économiseur d'écran pour redemander le mot de passe, de supprimer pagefile.sys à l'arrêt pour empêcher l'extraction d'informations au prix d'un arrêt plus long, et de ne pas afficher le nom du dernier utilisateur ; la stratégie d'audit, dans les Stratégies locales, permet d'auditer l'accès au service d'annuaire, l'accès aux objets, l'utilisation des privilèges, la gestion des comptes, le suivi des processus, les événements de connexion et de connexion aux comptes, les événements système et les modifications de stratégies, un redémarrage étant nécessaire.
+
+
+   C. Le chiffrement.
+
+      BitLocker crypte toutes les données d'un volume du système d'exploitation en utilisant le TPM et assure l'intégrité des composants de démarrage, exige l'installation de la fonctionnalité et un redémarrage, et peut impacter les performances ; l'activation propose plusieurs options d'enregistrement du mot de passe de récupération.
+
+      EFS, depuis Windows 2000, exige NTFS version 5, est transparent, utilise un algorithme asymétrique pour encoder des clés symétriques de chiffrement des fichiers, exige un agent de récupération pour le départ d'un employé ou la perte d'une clé, et stocke ses clés dans un pool de mémoire non paginé ; le chiffrement est par défaut sur cinquante-six bits, poussé à cent vingt-huit bits dans les États l'autorisant, un fichier compressé n'étant pas crypté et inversement, et le partage de fichiers d'un dossier crypté étant impossible ; Windows Server 2008 ajoute le stockage des clés sur cartes à puce, le chiffrement du cache côté client et un assistant de changement de clé.
+
+      IPSec protège les paquets IP avec un modèle de bout en bout, seuls l'émetteur et le récepteur connaissant la protection, implémentable via Active Directory ou la Sécurité locale ; l'agent de stratégie IPSec tourne dans lsass.exe, récupère la stratégie dans Active Directory ou le Registre local et l'applique à tout le trafic IP, le moniteur ipsecmon.exe montrant le statut et le journal étant ipsecpa.log ; la commande Exécuter en tant que teste des réglages avec un compte particulier, à l'image de su sous UNIX.
+
+
+V. LES PARTAGES, LES CLICHÉS ET LES QUOTAS.
+
+
+   A. Les partages.
+
+      Le partage donne accès à une ressource par le réseau, toute l'arborescence sous le point de partage étant accessible, avec la syntaxe deux antislash NomDuServeur antislash NomDuPartage, l'ajout du signe dollar cachant le partage ; on crée un partage par clic droit puis Partager, avec le niveau Lecteur par défaut, ou par l'outil de gestion de l'ordinateur au nœud Partages, la modification exigeant aussi d'être administrateur.
+
+      Les autorisations de partage protègent les volumes, analogues aux permissions NTFS, à savoir Contrôle total, Modifier et Lire, en autorisation ou refus ; les propriétés avancées sont accessibles par l'onglet Partage puis Partage avancé.
+
+
+   B. Les clichés instantanés et les quotas.
+
+      Les clichés instantanés de dossiers partagés offrent des copies ponctuelles de fichiers de ressources partagées, permettant à l'utilisateur de récupérer sans aide un fichier supprimé ou écrasé et de comparer des versions, activables seulement pour un volume entier, configurables par clic droit sur le lecteur ou par vssadmin, sans remplacer les sauvegardes régulières.
+
+      Les quotas limitent la quantité de données stockée par utilisateur pour répartir l'espace équitablement, ne s'appliquent qu'aux volumes NTFS indépendamment de la structure de dossiers, un quota de volume s'appliquant à tous ses dossiers et à la totalité d'un volume étendu sur plusieurs disques, les quotas de deux volumes d'un même disque étant gérés indépendamment ; on les active par l'onglet Quotas des propriétés du lecteur, la désactivation n'effaçant pas les données ; l'administrateur peut empêcher toute nouvelle utilisation au dépassement de la limite et enregistrer un événement, ou seulement au niveau d'avertissement.
+
+
+VI. LA PERFORMANCE, LA MÉTROLOGIE ET L'OPTIMISATION.
+
+
+   A. L'Observateur d'événements.
+
+      Windows Server 2008 journalise de nombreux événements dans les journaux Applications mis à jour par les développeurs, Système mis à jour par Windows, Sécurité pour les audits de succès et d'échecs, événements transmis d'autres ordinateurs, configuration pour l'installation des applications, et Applications et services avec les journaux d'administration pour l'utilisateur final, opérationnel pour le diagnostic, d'analyse pour le fonctionnement d'un programme et de débogage caché pour les développeurs.
+
+      La taille maximale d'un journal est de cinq cent douze kilo-octets par défaut, avec les options de remplacer les événements, de remplacer les plus anciens selon un nombre de jours ou de ne pas remplacer, un fichier plein sans effacement prévu ne recevant plus de nouveaux événements ; l'enregistrement se fait en .evt ou en texte, et une vue personnalisée permet un filtrage par éléments et par filtre XML.
+
+
+   B. Le moniteur de fiabilité et de performances.
+
+      Cet outil remplace l'analyseur de performances de Windows Server 2003 et comprend l'analyseur de performances, le moniteur de fiabilité, les collecteurs et l'affichage des rapports ; le moniteur de ressources visualise en temps réel le processeur, les disques, le réseau et la mémoire, démarrable par perfmon /res, avec pour chaque sous-ensemble l'image de l'exécutable, le PID, et des indicateurs comme l'UC moyenne sur soixante secondes, les débits en octets par minute, le FQDN ou les défauts de page.
+
+      L'analyseur de performances surveille des objets associés à des compteurs, fournit graphes, alertes au dépassement de seuil et rapports, exporte en HTML ou TSV, l'objectif étant de trouver les goulets d'étranglement, une activité disque élevée pouvant traduire une fragmentation ou un manque de mémoire vive imposant une pagination excessive ; le moniteur de fiabilité classe la stabilité en installation et désinstallation de logiciels, défaillances d'applications, défaillances matérielles, échecs Windows et échecs divers ; l'ensemble de collecteurs de données enregistre les données et crée des rapports, avec quatre types, personnalisés, système, sessions de suivi d'événements et sessions de traces au démarrage.
+
+
+   C. Le Gestionnaire des tâches.
+
+      Le Gestionnaire des tâches lance ou ferme des applications, termine des processus, affiche l'usage du processeur et de la mémoire, avec les onglets applications et leur état, processus modifiables ou tuables, services activables, performances avec accès au moniteur de processus, charge réseau par carte, et utilisateurs déconnectables ; il se lance par Ctrl-Alt-Suppr ou Ctrl-Maj-Échap et sert notamment à interrompre une application bloquée.
+
+
+VII. SNMP, WMI ET LES COMMANDES NET.
+
+
+   A. SNMP.
+
+      SNMP est un standard Internet de gestion de nœuds depuis une station NMS, l'agent SNMP remontant des informations dans des bases MIB collectées par la NMS, servant à configurer des périphériques distants, surveiller les performances, détecter les erreurs et auditer l'utilisation ; la station NMS et les agents ne s'exécutent pas forcément sur le même ordinateur, tout ordinateur équipé d'un logiciel SNMP constituant un agent que l'administrateur configure.
+
+      Une MIB est un conteneur d'objets représentant un type d'informations, le service SNMP acceptant différents formats internationaux ou propriétaires ; SNMP n'est pas installé par défaut, est présenté comme une fonctionnalité, se configure via la console MMC des services, avec un onglet Agent pour le contact et le type de services, un onglet Interruptions pour les communautés, la communauté publique par défaut, et un onglet Sécurité pour ne répondre qu'aux communautés identifiées.
+
+
+   B. WMI et les commandes NET.
+
+      WMI est la mise en œuvre pour Windows de l'initiative WBEM de la DMTF, étendant le modèle CIM pour représenter les objets de gestion, offrant une interface unique, cohérente, extensible et orientée objet accessible localement ou à distance, permettant de gérer, exécuter, arrêter, redémarrer une machine, voir les ressources et s'abonner à des événements, avec une API d'écriture de script uniforme, la recherche et la navigation dans les classes, une fonctionnalité de requête SQL et une publication d'événements souple ; les outils sont wmimgmt.msc, wbemtest.exe et wmic.exe.
+
+      Les commandes NET permettent de nombreuses actions d'administration des serveurs et des connexions réseau, en ligne de commande ou dans des fichiers batch.
+
+
+VIII. LA COMMUNICATION AVEC TERMINAL SERVER.
+
+
+   A. Les services de rôle.
+
+      Le rôle Services Terminal Server permet d'accéder à des programmes Windows installés sur un serveur ou au Bureau Windows depuis un réseau d'entreprise ou Internet, l'exécution se faisant sur le serveur et seules les informations de clavier, souris et affichage transitant, chaque utilisateur ne voyant que sa session gérée indépendamment ; il déploie rapidement des programmes centralisés, réduit la bande passante d'accès aux applications distantes et améliore les performances pour les succursales accédant à des données centralisées.
+
+      Les services de rôle sont Terminal Server hébergeant programmes et bureau, TS Web Access donnant accès via un site web, le Gestionnaire de licences gérant et surveillant les licences d'accès client, la Passerelle des services Terminal Server et le Session Broker TS.
+
+
+   B. RemoteApp, la Passerelle et le Session Broker.
+
+      RemoteApp TS fait se comporter les programmes distants comme s'ils étaient locaux, intégrés au bureau du client dans leur propre fenêtre redimensionnable avec une entrée dans la barre des tâches, plusieurs programmes du même serveur partageant la même session, distribués par un fichier .rdp, un package Windows Installer ou TS Web Access ; l'authentification NLA est utilisée par intranet quand tous les clients exécutent Windows Server 2008 ou Vista, un certificat SSL non auto-signé étant requis pour Windows Server 2003 SP1 ou Windows XP SP2, et les fichiers .rdp peuvent être signés numériquement avec un certificat SSL, de signature de code ou de signature RDP, le client devant exécuter RDC 6.1.
+
+      La Passerelle des services Terminal Server encapsule RDP via HTTPS pour une connexion sécurisée entre Internet et les ressources internes sans VPN, transmettant le trafic RDP vers le port 443 au lieu du port 3389 généralement bloqué, avec un Gestionnaire des passerelles TS définissant des stratégies d'autorisation sur les utilisateurs, les ressources, l'appartenance à des groupes Active Directory, la redirection de périphérique et le mode d'authentification, pouvant utiliser la protection d'accès réseau NAP et Microsoft ISA Server sur un réseau de périmètre.
+
+      Le Session Broker TS suit les sessions d'une batterie à charge équilibrée dans une base contenant les identifiants de session, les noms d'utilisateurs et le serveur hébergeur, redirige un utilisateur avec une session existante vers le serveur qui l'héberge, et, si l'équilibrage est activé, redirige les nouveaux utilisateurs vers le serveur ayant le moins de sessions ; la Connexion Bureau à distance, installée par défaut, ne prend en charge que deux connexions simultanées sans licences d'accès client, l'utilisateur devant figurer dans la liste ou être membre du groupe Administrateurs local, et s'active par control system puis Paramètres d'utilisation à distance.
+
+
+POINTS D'ATTENTION.
+
+      Aucune fonctionnalité n'est installée par défaut sous Windows Server 2008.
+
+      L'extension des fichiers de console MMC est .msc ; le mode Auteur est sans restriction, le mode Utilisateur restreint.
+
+      ocsetup et pkgmgr sont les seuls moyens d'installer des rôles sous un Server Core.
+
+      La fonctionnalité de sauvegarde remplace Ntbackup.exe, supprimé.
+
+      Une conversion FAT32 vers NTFS a posteriori n'applique pas automatiquement les ACL, contrairement à un formatage NTFS à l'installation.
+
+      L'ANSSI recommande un mot de passe d'au moins douze caractères, si possible seize, de types différents.
+
+      Tout nouveau partage est créé en Contrôle total pour le groupe Tout le monde et doit être restreint.
+
+      EFS exige NTFS version 5, chiffre par défaut sur cinquante-six bits, et un fichier compressé ne peut pas être crypté et inversement.
+
+      Le partage de fichiers d'un dossier crypté par EFS est impossible.
+
+      Les clichés instantanés ne s'activent que pour un volume entier et ne remplacent pas les sauvegardes régulières.
+
+      Les quotas ne s'appliquent qu'aux volumes NTFS et un quota de volume s'applique à tous ses dossiers et à un volume étendu sur plusieurs disques.
+
+      La taille maximale par défaut d'un journal de l'Observateur d'événements est de cinq cent douze kilo-octets.
+
+      La Connexion Bureau à distance ne prend en charge que deux connexions simultanées sans licences d'accès client.
+
+      La Passerelle des services Terminal Server fait passer le trafic RDP par le port 443 au lieu du port 3389.
+
+
+EXEMPLES CITES.
+
+      Trente-cinq fonctionnalités par défaut sous Windows Server 2008 et quarante et une sous R2.
+
+      Commande mmc puis Ajouter ou supprimer un composant logiciel enfichable pour une console personnalisée.
+
+      ServerManagerCmd avec -q, -p, install, remove et -v.
+
+      Commande convert unité /fs:ntfs pour passer une partition FAT32 en NTFS.
+
+      Valeur Hidden à un dans la clé LanmanServer/Parameters pour cacher un contrôleur de domaine.
+
+      Valeur AutoShareServer à zéro dans lanmanserver/parameters pour désactiver les partages administratifs.
+
+      secedit.exe comme version en ligne de commande de Configuration et analyse de la sécurité.
+
+      Démarrage du moniteur de ressources par perfmon /res.
+
+      Outils WMI wmimgmt.msc, wbemtest.exe et wmic.exe.
+
+      Passerelle des services Terminal Server encapsulant RDP via HTTPS sur le port 443.
+
+      Session Broker TS redirigeant un utilisateur vers le serveur hébergeant sa session existante.
+
+      Lancement de la Connexion Bureau à distance sur un client par la commande control system puis Paramètres d'utilisation à distance.

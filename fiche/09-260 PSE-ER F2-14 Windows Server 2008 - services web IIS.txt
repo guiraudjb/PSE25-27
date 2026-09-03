@@ -1,67 +1,267 @@
-WINDOWS SERVER 2008 : SERVICES WEB - INTERNET INFORMATION SERVICES (IIS)
+LES SERVICES WEB SOUS WINDOWS SERVER : INTERNET INFORMATION SERVICES.
 
-1. GÉNÉRALITÉS
-IIS est le service Web de Windows Server ; il fonctionne comme un service d'entreprise et s'appuie sur d'autres services de l'OS (sécurité, Active Directory).
-Architecture : IIS 6.0 formait un seul bloc (installation complète obligatoire ; extension uniquement par filtres ISAPI, ASP.NET...). IIS 7.0 est entièrement repensé, découpé en modules qui s'intègrent dans une procédure de traitement : on n'installe que les modules nécessaires (plus de 40 fonctionnalités). Avantages : performances (serveur allégé), installation ciblée, sécurité (surface d'attaque réduite), maintenance facilitée (seuls les modules installés à mettre à jour).
-Concepts : Internet = réseau des réseaux, client-serveur, adresse IP publique ; IANA a réservé des plages d'adresses privées (bloquées par les routeurs Internet) ; IPv6 vise la pénurie d'adresses. Intranet = déploiement interne des technologies Internet. Extranet = intranet accessible sous conditions via Internet (portail public + zone privée sécurisée).
-Serveur Web : machine qui reçoit des requêtes URL HTTP/HTTPS et renvoie les documents HTML correspondants.
 
-2. COMPOSANTS D'IIS
-- Services d'écoute de protocole (protocol listeners) : reçoivent les demandes propres à un protocole, les envoient à IIS, retournent les réponses. HTTP.sys est fourni par défaut (HTTP et HTTPS/SSL).
-- Services : publication WWW (service WWW).
-- Service d'activation de processus Windows (WAS).
-HTTP.sys : fait partie du sous-système réseau Windows, implémenté comme pilote de périphérique en mode noyau (pile de protocole HTTP). Introduit dans IIS 6.0, il y a remplacé Winsock (composant mode utilisateur des versions précédentes). Avantages : mise en cache en mode noyau (réponses en cache servies sans passer en mode utilisateur), mise en file d'attente en mode noyau (le noyau transmet au processus de travail adéquat, ou garde en file), pré-traitement et filtrage de sécurité.
-WCF (Windows Communication Foundation) : pour les protocoles autres que HTTP/HTTPS ; ses adaptateurs d'écoute fournissent l'écoute d'un protocole spécifique (ex. NetTcpActivator pour net.tcp).
-Service WWW : dans IIS 7.0, réparti avec WAS dans Svchost.exe. Ne gère plus les processus ; il est l'adaptateur d'écouteur pour HTTP.sys : configuration et mise à jour de HTTP.sys, notification à WAS quand une demande entre en file d'attente, collecte des compteurs de performance HTTP (spécifiques aux sites Web, ne s'appliquent pas à WAS). Lit la métabase / ApplicationHost.config.
-WAS (Windows Process Activation Service) : gère la configuration des pools d'applications et les processus de travail à la place du service WWW, pour HTTP et non-HTTP (même modèle de processus). Lit ApplicationHost.config au démarrage, transmet aux adaptateurs d'écoute (lien entre auditeurs WAS et protocoles). Peut s'exécuter sans le service WWW si aucune fonctionnalité HTTP n'est requise. À réception d'une demande, démarre un processus de travail dans le pool d'applications si aucun n'est disponible. Types d'informations de configuration : globale, HTTP et non-HTTP, pool d'applications (comptes), site (liaisons, applications), application (protocoles activés, pools).
+LEXIQUE COMPLET.
 
-3. MODULES IIS
-Fonctionnalités individuelles pour traiter les demandes.
-- Modules HTTP : contenu statique (HTML, images), document par défaut, exploration de répertoire, erreurs HTTP personnalisées, redirection HTTP, publication WebDAV.
-- Développement d'applications : ASP.NET (programmation orientée objet côté serveur, code managé, framework .NET), extension .NET, ASP (script côté serveur, VBScript/JScript natifs), CGI (transmission d'informations à un programme externe, ex. formulaire), extensions ISAPI (code compilé, s'exécute sur demande, plus rapide qu'ASP ou COM+), filtres ISAPI (examinent chaque demande jusqu'à en trouver une à traiter ; étendent ou modifient IIS), SSI (Server-Side Includes : script exécuté sur le serveur avant l'envoi, insertion d'un fichier dans un autre).
-- État de santé et diagnostics : journalisation HTTP (journaux dans le système de fichiers, en plus de ceux de l'OS), outils de journalisation, observateur de demandes, suivi (tracing, jusqu'à la réponse), journalisation personnalisée, journal ODBC (base conforme ODBC).
-- Sécurité : authentification de base, authentification Windows (faible coût, sites internes, infrastructure du domaine), authentification Digest (hash du mot de passe envoyé au contrôleur de domaine), mappage de certificat client (un-à-un via Active Directory), mappage de certificat client IIS (un-à-un ou plusieurs-à-un, meilleures performances), autorisation d'URL (règles limitant l'accès), filtrage des demandes entrantes, restrictions IP et domaine.
-- Performances : compression du contenu statique et du contenu dynamique (économise la bande passante mais coûte du processeur : ralentissement possible si CPU déjà élevé).
-- Outils d'administration : console de gestion IIS (interface graphique), scripts et outils de gestion, service de gestion (gestion à distance), compatibilité IIS 6 (ABO, ADSI, métabase, WMI, outils de script, console IIS 6).
-- Serveur FTP : serveur FTP, service FTP, extension FTP.
-- Instance principale Web IIS : composants réutilisables ou hébergeables par d'autres applications.
+      IIS (Internet Information Services) : service web de Windows Server fonctionnant comme un service d'entreprise, utilisant les services de sécurité et le service d'annuaire Active Directory du système d'exploitation.
 
-4. GESTION D'IIS
-Installation : non installé par défaut sur Windows Server 2008 ; Assistant « Ajout de rôles » du Gestionnaire de serveur (minimum de composants par défaut).
-Administration centralisée : composant enfichable MMC, Gestionnaire des services IIS ; commande inetmgr.
-Administration à distance : outils basés sur le Web (Gestionnaire de services Internet HTMLA, via Internet ou proxy) ou composant enfichable MMC (nécessite Windows sur le client + pare-feu configuré) ; possible via Terminal Server (TSAC).
-Administration déléguée : délégation de fonctionnalité à des utilisateurs du Gestionnaire des services Internet ; la délégation d'un niveau parent est transmise aux enfants.
-Surveillance des processus : indicateurs d'utilisation du processeur et objets tâches ; supervision et consignation de l'usage des ressources CPU par site (refacturation, détection de scripts/CGI défaillants). IIS 7.0 : remontées d'état en temps réel (pools, processus de travail, sites, domaines d'application, demandes en cours) + événements de suivi détaillé (jusqu'à la réponse, journaux XML selon le temps écoulé ou les codes d'erreur). Activée serveur par serveur, enregistrement séparé par site.
-Sauvegarde et restauration : le composant enfichable MMC sauvegarde les paramètres de la métabase pour restaurer une configuration antérieure. Ne sauvegarde pas les fichiers de contenu ni le registre ; ne fonctionne pas après une réinstallation d'IIS ; les fichiers ne servent pas à restaurer une configuration sur un autre ordinateur. La restauration doit se faire avec le composant enfichable IIS (pas le gestionnaire navigateur).
+      Architecture IIS 6.0 : architecture en un seul bloc obligeant l'installation complète du serveur web, l'extension passant uniquement par des filtres ISAPI comme ASP.NET.
 
-5. PUBLICATION DE DOCUMENTS
-WebDAV (Web-based Distributed Authoring and Versioning) : extension de HTTP 1.1 pour afficher des supports de stockage (système de fichiers) via HTTP. Permet aux créateurs distants de déplacer, rechercher, éditer, supprimer des fichiers et répertoires (et leurs propriétés) ; verrouillage/déverrouillage (plusieurs lecteurs, un seul rédacteur à la fois) ; résout les problèmes d'autorisations, de travail hors connexion, d'intégrité et de conflits d'édition. Configuré par les autorisations du serveur Web ; répertoire de publication aussi simple à créer qu'un répertoire virtuel. Accès client : Ajout d'un favori réseau (jusqu'à Windows 2003), Ajouter un lecteur réseau via l'explorateur (à partir de Windows Server 2008), Internet Explorer 8 (URI \\serveur@SSL@port\fichier\), Office 2000.
-Dossiers Web / dossiers HTTP : raccourcis vers des fichiers partagés créés avec WebDAV, générés automatiquement à l'ouverture de ressources sur un serveur compatible WebDAV avec autorisations lecture/écriture ; le dossier apparaît comme dans l'espace de noms local (glisser-déplacer, propriétés...).
-Système de fichiers DFS : IIS utilise le DFS de Windows Server pour présenter une vue hiérarchisée unique de plusieurs serveurs de fichiers ; l'utilisateur n'a plus besoin de connaître l'emplacement physique des fichiers.
-FTP : protocole standard de publication, intégré à Windows Server. FTP Restart : reprise d'un téléchargement interrompu à son point d'interruption, sans retélécharger tout le fichier.
+      Architecture IIS 7.0 : architecture repensée et découpée en plus de quarante modules qui s'intègrent dans une procédure de traitement, permettant de n'installer que les modules nécessaires, ce qui améliore les performances par allégement, réduit la surface d'attaque et facilite la maintenance.
 
-6. SÉCURITÉ D'IIS
-Protocoles de sécurité (IIS 7.0) :
-- SSL 3.0 : authentification, intégrité des messages, confidentialité, chiffrement des transmissions ; repose sur des certificats.
-- Authentification de base : spécification HTTP 1.0 ; mots de passe encodés en Base64 mais NON chiffrés (interception facile) ; à réserver aux connexions sûres (câble direct, ligne spécialisée, chiffrement SSL/TLS).
-- Authentification Digest : depuis IIS 5.0 ; mêmes fonctions que la base mais hachage unilatéral des autorisations (texte original non déchiffrable) + ajout serveur avant hachage (pas de rejeu du hash) ; conçue pour proxys et pare-feu, fait partie de WebDAV ; domaines avec contrôleur de domaine Windows uniquement, Internet Explorer 5+.
-Mécanismes : authentification, autorisations, cryptage (chiffrement).
-Méthodes d'authentification (IIS 7) :
-- Basées sur les stimulations (challenge) : réponse correcte à une stimulation du serveur.
-  * Anonyme : accès aux domaines publics sans identifiants ; essayée en premier si activée ; compte Windows IUSR_nom_ordinateur (plusieurs comptes anonymes possibles).
-  * Intégrée Windows (ex-NTLM / question-réponse) : nom et mot de passe non envoyés sur le réseau, échange cryptographique ; protocole question/réponse et Kerberos v5 si Active Directory + navigateur compatible. Kerberos v5 remplace NTLM comme premier protocole. Limites : Internet Explorer 2.0+ uniquement, ne fonctionne pas via proxy HTTP (adapté à l'intranet).
-  * Emprunt d'identité ASP.NET : exécution d'une application ASP.NET sous un autre contexte de sécurité (utilisateur authentifié par IIS 7, ou compte arbitraire) ; désactivé par défaut.
-- Basées sur les redirections de connexion :
-  * Authentification de base (redirection).
-  * Authentification par formulaire : redirection côté client vers un formulaire HTML, puis retour à la page demandée.
-- Basées sur un certificat client : nécessite la configuration de SSL.
-  * Certificats : documents d'identification numériques ; certificat serveur (infos entreprise + AC), certificat client (infos utilisateur + AC) ; établissement d'une connexion SSL chiffrée. Créés via les services de certificats Microsoft ou une autorité tierce (AC).
-  * Mappage de certificats client : association certificat client <-> compte utilisateur Windows ; authentification automatique sans base/Digest/intégrée ; un ou plusieurs certificats par compte.
-  * Stockage des certificats : intégré au stockage CryptoAPI de Windows (Gestionnaire de certificats : stocker, sauvegarder, configurer).
-Autorisations :
-- AzMan (autorisation basée sur les règles) introduit dans IIS 6.0, retiré dans IIS 7 au profit d'un modèle proche d'ASP.NET.
-- Autorisation d'URL (depuis 7.0) : modèle ASP.NET (règles dans <system.web>) ou nouveau modèle IIS (règles indépendantes de l'ordre, règles de refus en haut, traitement grand-parent -> parent -> enfant ; ASP.NET traite en sens inverse : enfant -> parent -> grand-parent).
-Cryptage : SSL comme base ; certificats contenant une paire de clés publique/privée ; à l'échange, création d'une clé de session (clé de cryptage) pour chiffrer/déchiffrer ; puissance en bits (40 bits par défaut, jusqu'à 128 bits ; plus de bits = plus sûr mais plus de ressources). SGC (Server Gated Cryptography) : extension de SSL pour un chiffrement 128 bits ; nécessite un certificat SGC spécial (High Encryption Pack). Serveur configurable pour exiger 128 bits minimum sur toutes les sessions SSL.
+      Internet : réseau des réseaux, à architecture client-serveur sur TCP/IP, où les ordinateurs doivent posséder une adresse IP publique, l'IANA ayant réservé des plages d'adresses privées bloquées par les routeurs de l'infrastructure Internet.
 
-7. CONFIGURATION ET GESTION
-Gestionnaire des services Internet (IIS) : gérer IIS et ASP.NET dans un seul outil, afficher les informations de fonctionnement et de diagnostic (demandes en cours en temps réel), configurer l'autorisation de rôle et d'utilisateur, déléguer la configuration à des non-administrateurs, se connecter à distance en HTTP. Ouverture : Démarrer -> Panneau de configuration -> Système et maintenance -> Outils d'administration -> Gestionnaire des services Internet (IIS), ou commande inetmgr.
+      Intranet : déploiement interne à une entreprise des technologies d'Internet.
+
+      Extranet : intranet accessible sous certaines conditions via Internet, avec un portail public et une zone privée sécurisée vers le réseau local.
+
+      Serveur web : machine recevant des requêtes URL de type HTTP ou HTTPS et renvoyant les documents au format HTML correspondants.
+
+      Services d'écoute de protocole : composants recevant les demandes spécifiques à un protocole, les envoyant à IIS pour traitement et retournant les réponses, tels que HTTP.sys.
+
+      HTTP.sys : écouteur HTTP faisant partie du sous-système réseau de Windows, implémenté comme un pilote en mode noyau appelé pile de protocole HTTP, écoutant les requêtes HTTP et HTTPS, ayant remplacé l'API Winsock dans IIS 6.0 ; il offre la mise en cache et la mise en file d'attente en mode noyau ainsi que le pré-traitement et le filtrage de sécurité des demandes.
+
+      WCF (Windows Communication Foundation) : ensemble utilisable pour les services et applications employant des protocoles autres que HTTP et HTTPS, avec des adaptateurs d'écoute fournissant l'écoute d'un protocole spécifique, comme NetTcpActivator pour net.tcp.
+
+      Service WWW (World Wide Web Publishing Service) : service gérant l'administration et la configuration HTTP, le suivi des performances et, avant IIS 7.0, la gestion des processus ; dans IIS 7.0 il devient l'adaptateur d'écouteur pour HTTP.sys, le configurant, le mettant à jour et notifiant WAS quand une demande entre dans la file d'attente, et collecte les compteurs spécifiques à HTTP.
+
+      WAS (Windows Process Activation Service) : nouveau service d'IIS 7.0 gérant la configuration du pool d'applications et les processus de travail à la place du service WWW, pour les sites HTTP et non HTTP, exécutable sans le service WWW si aucune fonctionnalité HTTP n'est requise ; les deux services fonctionnent dans le processus Svchost.exe.
+
+      ApplicationHost.config : fichier lu par WAS au démarrage, contenant la configuration globale, celle des protocoles HTTP et non HTTP, du pool d'applications, du site et de l'application, WAS mettant à jour les adaptateurs d'écouteur à toute modification.
+
+      Adaptateur d'écoute : élément faisant le lien entre les auditeurs WAS et les protocoles, configurant les auditeurs et les préparant à l'écoute ; dans le cas de WCF, il comprend les fonctionnalités d'un écouteur de protocole.
+
+      Module IIS : caractéristique individuelle que le serveur utilise pour traiter les demandes, par exemple les modules d'authentification ou de mémoire cache.
+
+      Modules HTTP : modules réalisant des tâches spécifiques à HTTP, dont le contenu statique, le document par défaut retourné quand aucun fichier n'est spécifié, l'exploration de répertoire, les erreurs HTTP personnalisées, la redirection HTTP et la publication WebDAV.
+
+      ASP.NET : environnement de programmation orientée objet côté serveur créant des sites et applications web en code managé sur le framework .NET.
+
+      ASP (Active Server Pages) : environnement de script côté serveur fournissant à IIS la prise en charge native de VBScript et JScript.
+
+      CGI (Common Gateway Interface) : définition de la façon dont un serveur web transmet des informations à un programme externe, par exemple un formulaire.
+
+      Extension ISAPI : code compilé s'exécutant sur demande comme un fichier statique ou ASP, mais traité beaucoup plus rapidement que les fichiers ASP ou appelant des composants COM+.
+
+      Filtre ISAPI : fichier étendant ou modifiant les fonctionnalités d'IIS, qui examine chaque demande faite au serveur jusqu'à en trouver une qu'il doit traiter.
+
+      SSI (Server-Side Includes) : langage de script générant dynamiquement des pages HTML, exécuté sur le serveur avant l'envoi au client, impliquant généralement l'insertion d'un fichier dans un autre.
+
+      Modules d'état de santé et de diagnostics : modules dont la journalisation HTTP qui enregistre l'activité des sites en plus des journaux du système d'exploitation, les outils de journalisation, l'observateur de demandes, le suivi, la journalisation personnalisée et le journal ODBC vers une base conforme ODBC.
+
+      Modules de sécurité : modules dont l'authentification de base, l'authentification Windows de faible coût pour les sites internes, l'authentification Digest par hachage du mot de passe vers un contrôleur de domaine, le mappage de certificat client par Active Directory ou par IIS, l'autorisation d'URL, le filtrage des demandes et les restrictions IP et domaine.
+
+      Compression du contenu : fonctionnalités de performance, statique configurant la compression HTTP du contenu statique, et dynamique qui utilise mieux la bande passante mais peut ralentir un site si le processeur est déjà très chargé.
+
+      Outils d'administration IIS : console de gestion graphique, scripts et outils de gestion, service de gestion pour l'administration à distance, compatibilité avec la gestion IIS 6, avec la métabase, avec WMI IIS 6, avec les outils de script IIS 6 et avec la console de gestion IIS 6.
+
+      Serveur FTP dans IIS : modules serveur FTP pour le transfert de fichiers, service FTP pour la publication FTP, et extension FTP pour les fournisseurs personnalisés et les utilisateurs ASP.NET ou du Gestionnaire des services Internet.
+
+      Instance principale web IIS : composants utilisables ou hébergés par d'autres applications, permettant à celles-ci de traiter directement des demandes HTTP.
+
+      inetmgr : commande ouvrant le Gestionnaire des services Internet ; IIS n'est pas installé par défaut sur Windows Server 2008 et s'installe par l'assistant Ajout de rôles du Gestionnaire de serveur.
+
+      Administration à distance : gestion d'IIS depuis un navigateur via HTMLA, ou via un composant enfichable MMC qui nécessite Windows sur le client et un pare-feu adéquat, ou via Terminal Server avec le client avancé TSAC.
+
+      Administration déléguée : délégation de fonctionnalité permettant de configurer les fonctionnalités d'un site ou d'une application à des utilisateurs non administrateurs du Gestionnaire des services Internet, la délégation d'un niveau parent étant transmise à ses enfants.
+
+      Surveillance des processus : fonction utilisant des indicateurs d'utilisation du processeur et des objets tâches pour superviser et consigner l'usage des ressources par les sites, activée serveur par serveur et enregistrée séparément pour chaque site, utile pour identifier les sites trop gourmands ou refacturer l'hébergement.
+
+      Sauvegarde de la configuration IIS : sauvegarde des paramètres de la métabase IIS par le composant enfichable MMC, ne couvrant ni les fichiers de contenu ni le Registre, inutilisable après réinstallation d'IIS ou sur un autre ordinateur, la restauration devant se faire par le composant enfichable IIS.
+
+      WebDAV (Web-based Distributed Authoring and Versioning) : extension de HTTP 1.1 affichant des supports de stockage comme un système de fichiers via une connexion HTTP, permettant à des créateurs distants de déplacer, rechercher, éditer ou supprimer fichiers et répertoires, avec verrouillage et déverrouillage des ressources pour que plusieurs personnes lisent un fichier mais qu'une seule le modifie à la fois, s'appuyant sur la sécurité et l'accès aux fichiers de Windows Server.
+
+      Dossier web : raccourci vers des fichiers partagés créé avec WebDAV et stocké sur un serveur web, créé automatiquement à l'ouverture de ressources sur un serveur compatible WebDAV avec des autorisations en lecture et écriture, affichant le contenu d'un dossier comme s'il faisait partie de l'espace de noms local.
+
+      FTP Restart : prise en charge par Windows Server permettant à un téléchargement FTP interrompu de reprendre à son point d'interruption sans retélécharger le fichier entier.
+
+      SSL 3.0 (Secure Sockets Layer) : protocole de sécurité largement utilisé pour l'authentification, l'intégrité des messages et la confidentialité, reposant sur des certificats, permettant de crypter les transmissions réseau.
+
+      Authentification de base : méthode de la spécification HTTP 1.0, prise en charge par la plupart des navigateurs et fonctionnant sur pare-feu et proxy, mais transmettant les mots de passe encodés en Base64 non chiffrés, à n'utiliser que sur une connexion sûre, par câble direct, ligne spécialisée ou chiffrement SSL et TLS.
+
+      Authentification Digest : méthode d'IIS 5.0 offrant les mêmes fonctions que l'authentification de base mais transmettant les autorisations sous forme de hash unilatéral, le serveur ajoutant des informations avant le hachage pour empêcher la réutilisation du hash, conçue pour les proxy et pare-feu, faisant partie de WebDAV, non prise en charge par tous les navigateurs, limitée aux domaines dotés d'un contrôleur de domaine Windows et à Internet Explorer 5 ou ultérieur.
+
+      Authentification anonyme : méthode donnant accès aux domaines publics sans nom ni mot de passe ; si activée, IIS l'essaie toujours en premier, affectant le compte IUSR_nom_ordinateur, plusieurs comptes anonymes pouvant être créés.
+
+      Authentification intégrée Windows : méthode sûre où le nom et le mot de passe ne sont pas envoyés sur le réseau, le navigateur prouvant qu'il connaît le mot de passe par échange cryptographique ; anciennement authentification par question/réponse NTLM, elle peut utiliser Kerberos v5 si Active Directory est installé et le navigateur compatible ; limitée à Internet Explorer 2.0 ou ultérieur et ne fonctionnant pas avec les proxy HTTP, elle convient mieux à l'intranet.
+
+      Kerberos v5 : protocole d'authentification de l'architecture de services distribués de Windows Server, permettant une connexion rapide et unique et remplaçant NTLM comme premier protocole de sécurité, exigeant une connexion sécurisée avec le centre KDC et la compatibilité Active Directory.
+
+      Emprunt d'identité ASP.NET : exécution d'une application ASP.NET sous un contexte de sécurité autre que le contexte par défaut, en tant qu'utilisateur authentifié par IIS ou compte arbitraire, désactivé par défaut.
+
+      Authentification par formulaire : méthode utilisant la redirection côté client vers un formulaire HTML de saisie des informations d'identification, puis redirigeant vers la page demandée à l'origine.
+
+      Certificat : document d'identification numérique permettant au serveur et au client de s'authentifier mutuellement et d'établir une connexion SSL, un certificat de serveur contenant des informations sur l'entreprise et l'autorité émettrice, un certificat de client sur l'utilisateur et l'autorité de certification.
+
+      Mappage de certificat client : association de certificats client à des comptes utilisateurs Windows, le serveur associant automatiquement l'utilisateur au compte correspondant à chaque connexion, un ou plusieurs certificats pouvant être mappés à un même compte ; le stockage des certificats IIS est intégré au stockage CryptoAPI de Windows.
+
+      Autorisation d'URL : depuis IIS 7.0, deux modèles, celui d'ASP.NET défini dans la configuration system.web, et la nouvelle architecture IIS où les règles ne dépendent pas de l'ordre, les règles de refus sont en haut et les règles sont traitées de grand-parent à parent puis enfant, à l'inverse d'ASP.NET.
+
+      Cryptage : chiffrement des informations avant envoi et déchiffrement après réception, fondé sur SSL dans IIS, utilisant une paire de clés publique et privée pour établir la connexion, puis une clé de session dont la puissance se mesure en bits, en général quarante bits mais pouvant atteindre cent vingt-huit bits.
+
+      SGC (Server Gated Cryptography) : extension de SSL permettant un chiffrement élevé sur cent vingt-huit bits, nécessitant un certificat SGC spécial intégré au High Encryption Pack pour Windows.
+
+
+COURS DÉTAILLÉ.
+
+
+I. PRÉSENTATION D'IIS ET DES CONCEPTS INTERNET.
+
+
+   A. IIS et son évolution.
+
+      IIS est le service web de Windows Server, fonctionnant comme un service d'entreprise qui utilise les services de sécurité et Active Directory ; l'architecture IIS 6.0 était en un seul bloc imposant l'installation complète, l'extension passant par des filtres ISAPI, alors que l'architecture IIS 7.0 est découpée en plus de quarante modules intégrés dans une procédure de traitement, permettant de n'installer que le nécessaire, ce qui améliore les performances, réduit la surface d'attaque et facilite la maintenance.
+
+
+   B. Les concepts Internet.
+
+      Internet est le réseau des réseaux à architecture client-serveur sur TCP/IP où les ordinateurs doivent posséder une adresse IP publique, l'IANA ayant réservé des plages privées bloquées par les routeurs de l'infrastructure ; l'intranet est un déploiement interne des technologies d'Internet, l'extranet un intranet accessible via Internet avec un portail public et une zone privée sécurisée.
+
+      Les services Internet incluent la messagerie électronique, les services web donnant accès à des pages HTML, Flash ou PDF, le chat en temps réel, les news devenues flux RSS, et FTP pour la publication de fichiers ; un serveur web reçoit des requêtes URL HTTP ou HTTPS et renvoie les documents HTML correspondants.
+
+
+II. LES COMPOSANTS D'IIS.
+
+
+   A. Les services d'écoute de protocole.
+
+      Les services d'écoute reçoivent les demandes spécifiques à un protocole, les envoient à IIS et retournent les réponses ; HTTP.sys fait partie du sous-système réseau de Windows, implémenté comme un pilote en mode noyau appelé pile de protocole HTTP, écoutant les requêtes HTTP et HTTPS, ayant remplacé l'API Winsock dans IIS 6.0.
+
+      HTTP.sys offre la mise en cache en mode noyau, où les réponses en cache sont servies sans passer en mode utilisateur, la mise en file d'attente en mode noyau, où la demande est gardée jusqu'à ce qu'un processus de travail la récupère, et le pré-traitement et le filtrage de sécurité des demandes ; pour les protocoles autres que HTTP, WCF fournit des adaptateurs d'écoute comme NetTcpActivator pour net.tcp.
+
+
+   B. Le service WWW et le service WAS.
+
+      Le service WWW et le service WAS fonctionnent dans le processus Svchost.exe ; le service WWW gère l'administration et la configuration HTTP en lisant la métabase et en configurant HTTP.sys, ainsi que le suivi des performances par des compteurs pour les sites et le cache ; dans IIS 7.0, il ne gère plus les processus mais devient l'adaptateur d'écouteur de HTTP.sys, le configurant, le mettant à jour et notifiant WAS quand une demande entre dans la file d'attente.
+
+      WAS gère la configuration du pool d'applications et les processus de travail à la place du service WWW, pour les sites HTTP et non HTTP, et peut s'exécuter sans le service WWW si aucune fonctionnalité HTTP n'est requise ; au démarrage il lit ApplicationHost.config, contenant la configuration globale, celle des protocoles, du pool d'applications, du site et de l'application, et transmet ces informations aux adaptateurs d'écoute qui configurent les auditeurs, se mettant à jour à toute modification ; quand un écouteur reçoit une demande, WAS transmet à un processus de travail existant ou en démarre un.
+
+
+III. LES MODULES D'IIS.
+
+
+   A. Les modules HTTP et de développement.
+
+      Les modules HTTP réalisent le contenu statique, le document par défaut, l'exploration de répertoire, les erreurs HTTP personnalisées, la redirection HTTP et la publication WebDAV ; les modules de développement comprennent ASP.NET en code managé sur le framework .NET, l'extension .NET, ASP pour VBScript et JScript, CGI pour transmettre des informations à un programme externe, les extensions ISAPI en code compilé plus rapide que l'ASP, les filtres ISAPI examinant chaque demande, et SSI générant dynamiquement des pages HTML par insertion de fichier.
+
+
+   B. Les modules de diagnostic, de sécurité et de performance.
+
+      Les modules d'état de santé et de diagnostics comprennent la journalisation HTTP en plus des journaux du système, les outils de journalisation, l'observateur de demandes, le suivi, la journalisation personnalisée et le journal ODBC ; les modules de sécurité comprennent l'authentification de base, l'authentification Windows de faible coût pour les sites internes, Digest, le mappage de certificat client par Active Directory ou par IIS, l'autorisation d'URL, le filtrage des demandes et les restrictions IP et domaine.
+
+      Les fonctionnalités de performance sont la compression du contenu statique et la compression du contenu dynamique, cette dernière économisant la bande passante mais pouvant ralentir un site si le processeur est déjà très chargé ; les outils d'administration comprennent la console graphique, les scripts, le service de gestion à distance et plusieurs modules de compatibilité avec IIS 6 ; le serveur FTP est fourni en modules serveur, service et extension, et l'instance principale web permet à d'autres applications de traiter directement des demandes HTTP.
+
+
+IV. LA GESTION D'IIS.
+
+
+   A. L'installation et l'administration.
+
+      IIS n'est pas installé par défaut et s'installe par l'assistant Ajout de rôles du Gestionnaire de serveur, un minimum de composants seulement étant installé ; il se gère par le composant enfichable MMC ouvert par la commande inetmgr ou par les Outils d'administration.
+
+      L'administration à distance se fait depuis un navigateur via HTMLA, via un composant enfichable MMC qui exige Windows sur le client et un pare-feu adéquat, ou via Terminal Server avec le client avancé TSAC ; la délégation de fonctionnalité permet de confier la configuration d'un site à des utilisateurs non administrateurs, la délégation d'un parent étant transmise à ses enfants.
+
+
+   B. La surveillance et la sauvegarde.
+
+      La surveillance des processus utilise des indicateurs d'utilisation du processeur et des objets tâches pour superviser et consigner l'usage des ressources par site, activée serveur par serveur, utile pour identifier les sites trop gourmands ou refacturer l'hébergement ; IIS 7.0 ajoute la remontée d'informations en temps réel sur les pools, processus, sites et demandes, et des événements de suivi détaillé d'une demande jusqu'à la réponse, capturés dans des journaux XML selon le temps écoulé ou les codes d'erreur.
+
+      Le composant enfichable MMC permet de sauvegarder les paramètres de la métabase pour restaurer une configuration antérieure, mais pas les fichiers de contenu ni le Registre, cette sauvegarde étant inutilisable après réinstallation d'IIS ou sur un autre ordinateur, la restauration devant se faire par le composant enfichable IIS.
+
+
+V. LA PUBLICATION DE DOCUMENTS.
+
+
+   A. WebDAV.
+
+      IIS est totalement compatible avec WebDAV, extension de HTTP 1.1 affichant des supports de stockage comme un système de fichiers via HTTP, permettant à des créateurs distants de déplacer, rechercher, éditer ou supprimer fichiers et répertoires et leurs propriétés, avec verrouillage et déverrouillage des ressources pour que plusieurs personnes lisent un fichier mais qu'une seule le modifie à la fois.
+
+      WebDAV s'appuie sur la sécurité et l'accès aux fichiers de Windows Server, résout les problèmes d'autorisations, de travail hors connexion, d'intégrité des fichiers et de conflits, et se configure comme un répertoire virtuel par le composant enfichable IIS ; on y accède depuis Windows par l'Assistant Ajout d'un favori réseau jusqu'à Windows 2003, par Ajouter un lecteur réseau de l'Explorateur à partir de Windows Server 2008, par une URI dédiée dans Internet Explorer 8, ou depuis une application Office 2000.
+
+
+   B. Les dossiers web, DFS et FTP.
+
+      Un dossier web est un raccourci vers des fichiers partagés créé avec WebDAV, créé automatiquement à l'ouverture de ressources sur un serveur compatible WebDAV avec des autorisations en lecture et écriture, affichant le contenu comme s'il faisait partie de l'espace de noms local ; IIS utilise le DFS de Windows Server pour réunir les fichiers d'ordinateurs différents dans un seul espace de noms, l'utilisateur n'ayant plus besoin de connaître l'emplacement physique des fichiers.
+
+      Le service FTP publie des informations sur un serveur web ; FTP Restart, pris en charge par Windows Server, permet à un téléchargement interrompu de reprendre à son point d'interruption sans retélécharger le fichier entier.
+
+
+VI. LA SÉCURITÉ D'IIS.
+
+
+   A. Les normes de sécurité.
+
+      Les protocoles de sécurité d'IIS 7.0 sont SSL 3.0, largement utilisé pour l'authentification, l'intégrité et la confidentialité et reposant sur des certificats, l'authentification de base de la spécification HTTP 1.0 qui transmet les mots de passe encodés en Base64 non chiffrés et n'est conseillée que sur une connexion sûre, et l'authentification Digest d'IIS 5.0 qui transmet un hash unilatéral avec des informations ajoutées par le serveur pour empêcher la réutilisation du hash, conçue pour les proxy et faisant partie de WebDAV, limitée aux domaines avec contrôleur de domaine Windows et à Internet Explorer 5 ou ultérieur.
+
+
+   B. Les mécanismes d'authentification.
+
+      Les mécanismes de sécurité d'IIS sont l'authentification pour vérifier l'identité, les autorisations et le cryptage contre la falsification ; les méthodes d'authentification sont basées sur les stimulations, où le client répond à une stimulation du serveur, sur les redirections de connexion vers une page de connexion comme l'authentification par formulaire, ou sur un certificat client exigeant SSL.
+
+      L'authentification anonyme donne accès aux domaines publics sans identifiants, IIS l'essayant toujours en premier si elle est activée et affectant le compte IUSR_nom_ordinateur ; l'authentification intégrée Windows est sûre car le mot de passe n'est pas envoyé, le navigateur prouvant qu'il le connaît par échange cryptographique, pouvant utiliser Kerberos v5 si Active Directory est installé et le navigateur compatible, mais limitée à Internet Explorer 2.0 ou ultérieur et ne fonctionnant pas avec les proxy HTTP, d'où sa vocation intranet ; l'emprunt d'identité ASP.NET, désactivé par défaut, exécute une application sous un contexte autre que le contexte par défaut ; l'authentification de base et l'authentification par formulaire sont des méthodes basées sur les redirections.
+
+
+   C. Les certificats, les autorisations et le cryptage.
+
+      Les certificats sont des documents d'identification numériques permettant l'authentification mutuelle et l'établissement d'une connexion SSL, un certificat de serveur portant des informations sur l'entreprise et l'autorité émettrice, un certificat de client sur l'utilisateur ; le mappage de certificat client associe des certificats à des comptes Windows, le serveur associant automatiquement l'utilisateur au compte à chaque connexion, sans recourir à l'authentification de base, Digest ou intégrée ; le stockage des certificats IIS est intégré au stockage CryptoAPI de Windows.
+
+      IIS 6.0 avait introduit AzMan, remplacé dans IIS 7.0 par un modèle proche de l'autorisation ASP.NET ; l'autorisation d'URL propose le modèle ASP.NET défini dans system.web, et la nouvelle architecture IIS où les règles ne dépendent pas de l'ordre, les règles de refus sont en haut et les règles sont traitées de grand-parent à parent puis enfant, à l'inverse d'ASP.NET.
+
+      Le cryptage chiffre les informations avant envoi et les déchiffre après réception, fondé sur SSL qui confirme l'authenticité du site et éventuellement l'identité des utilisateurs ; le serveur et le navigateur établissent une connexion avec une paire de clés publique et privée, puis créent une clé de session dont la puissance se mesure en bits, en général quarante mais pouvant atteindre cent vingt-huit ; SGC est une extension de SSL permettant un chiffrement sur cent vingt-huit bits avec un certificat spécial du High Encryption Pack.
+
+
+   D. Le Gestionnaire des services Internet.
+
+      Le Gestionnaire des services Internet est la nouvelle interface d'IIS 7.0, gérant IIS et ASP.NET dans un seul outil, affichant les informations de fonctionnement et les demandes en cours en temps réel, configurant l'autorisation de rôle et utilisateur, déléguant la configuration à des non-administrateurs et se connectant à distance en HTTP ; il s'ouvre par les Outils d'administration ou la commande inetmgr.
+
+
+POINTS D'ATTENTION.
+
+      L'architecture modulaire d'IIS 7.0 réduit la surface d'attaque et n'oblige à mettre à jour que les modules installés.
+
+      Les adresses IP privées de l'IANA sont bloquées par les routeurs de l'infrastructure Internet.
+
+      HTTP.sys est un pilote en mode noyau qui a remplacé l'API Winsock dans IIS 6.0.
+
+      Dans IIS 7.0, le service WWW ne gère plus les processus ; c'est WAS qui gère le pool d'applications et les processus de travail.
+
+      WAS peut fonctionner sans le service WWW si aucune fonctionnalité HTTP n'est requise.
+
+      Les extensions ISAPI, code compilé, sont plus rapides que les fichiers ASP ou appelant COM+.
+
+      L'authentification de base transmet les mots de passe en Base64 non chiffrés et n'est sûre qu'avec SSL ou une ligne dédiée.
+
+      L'authentification intégrée Windows ne fonctionne pas à travers les proxy HTTP et convient donc à l'intranet.
+
+      Kerberos v5 remplace NTLM comme premier protocole de sécurité et exige la compatibilité Active Directory et le centre KDC.
+
+      Dans la nouvelle autorisation d'URL d'IIS, les règles sont traitées de grand-parent à enfant, à l'inverse d'ASP.NET.
+
+      La clé de session SSL fait quarante bits par défaut, cent vingt-huit bits avec SGC et le High Encryption Pack.
+
+      La sauvegarde de la métabase IIS ne couvre ni les fichiers de contenu ni le Registre et est inutilisable après réinstallation ou sur un autre ordinateur.
+
+      Dans WebDAV, plusieurs personnes peuvent lire un fichier mais une seule le modifier à la fois.
+
+
+EXEMPLES CITES.
+
+      IIS 7.0 offrant plus de quarante fonctionnalités modulaires contre l'installation en un bloc d'IIS 6.0.
+
+      Écouteur HTTP.sys récupérant une demande de page web et la renvoyant au navigateur après traitement par IIS.
+
+      Adaptateur d'écoute WCF NetTcpActivator écoutant les requêtes en net.tcp.
+
+      Fichier ApplicationHost.config lu par WAS au démarrage.
+
+      Compte anonyme IUSR_nom_ordinateur affecté par l'authentification anonyme.
+
+      Authentification Digest limitée à Internet Explorer 5 ou ultérieur et aux domaines avec contrôleur de domaine.
+
+      Recherche dans un répertoire WebDAV de tous les fichiers contenant un mot ou écrits par une personne.
+
+      Connexion à un serveur WebDAV par Ajouter un lecteur réseau de l'Explorateur à partir de Windows Server 2008.
+
+      Clé de session SSL de quarante bits par défaut, portée à cent vingt-huit bits avec SGC.
+
+      Ouverture du Gestionnaire des services Internet par la commande inetmgr.

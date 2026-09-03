@@ -1,46 +1,356 @@
-LES RÉSEAUX LOCAUX : ETHERNET ET VLAN
+LES RÉSEAUX LOCAUX : ETHERNET ET LES VLAN.
 
-1. TOPOLOGIES
-Topologie physique : répartition spatiale des équipements, régit le câblage. Topologie logique : mode de circulation des données (méthode d'accès).
-- Bus : raccordement sur un même câble linéaire, tout signal présenté à tous ; pas de chemin alternatif en cas de rupture ; chaque équipement raccordé atténue le signal ; utilisé par 10Base2 et l'accès de base NUMERIS.
-- Anneau : équipements en boucle, accessibles par deux chemins ; la rupture du support n'isole pas un équipement.
-- Étoile : chaque station en point à point vers un équipement central (commutation/concentration) ; la panne d'une station n'affecte pas le réseau, mais celle de l'équipement central si.
-Topologies logiques : bus (trames diffusées à toutes les stations), anneau (relais d'une station à l'autre dans un sens), étoile (diffusion depuis un point central). Les LAN sont le plus souvent physiquement en étoile et logiquement en bus (Ethernet via un hub).
 
-2. HISTORIQUE ETHERNET
-1970 ALOHA (université de Hawaï). 1973 Metcalfe et Boggs (Xerox PARC). 1975 premier Ethernet, 2,94 Mb/s, coaxial épais, CSMA/CD. 1980 standard DIX (Digital, Intel, Xerox) = 10Base5. 1982 première norme IEEE (sous-comité 802.3) et Ethernet v2. 1984 Token Ring (IBM). 1990 802.3i (paires torsadées, étoile). 1995 802.3u Fast Ethernet (100 Mb/s). 1997 802.3x full-duplex -> fin de CSMA/CD. 1998 802.3z Gigabit. 1999 802.3ab (1 Gb/s sur UTP cat. 5). 2002 802.3ae (10 Gb/s, dorsales WAN). 2006 802.3an (10 Gb/s cat. 6). 2010 802.3ba (40/100 Gb/s).
+LEXIQUE COMPLET.
 
-3. NORMES DES COUCHES 1-2 (série 802)
-ISO (Genève) élabore l'OSI ; l'IEEE (New Jersey) forme des groupes de travail ad hoc ; le groupe 802 (février 1980) normalise les réseaux locaux ; normes reprises en ISO IS 8802 dès 1988. La norme 802.1 précise l'organisation des couches 1 et 2.
-Couche 1 (physique) : PMD (Physical Medium Dependent, dépendante du support, transfert au niveau bit) et PMI (Physical Medium Independent, protocole physique : écoute, synchronisation, codage/décodage, émission/réception).
-Couche 2 (liaison) : MAC (Medium Access Control : accès partagé au support, contrôle d'erreur, adressage MAC autonome, dépendante de la technologie) et LLC (Logical Link Control : lien logique, masque le type de réseau, indépendante du réseau physique). Unité d'échange : la trame (longueur maximale imposée, champs formés par regroupement de bits).
-LLC (IEEE 802.2), 3 services : LLC-1 (sans connexion ni acquittement, le seul quasi utilisé en LAN, point à point ou diffusion) ; LLC-2 (sur connexion, acquittement, contrôle d'ordre, correction d'erreur, contrôle de flux, point à point) ; LLC-3 (datagramme sans connexion mais acquitté, sans retransmission).
-Encapsulation LLC : identificateur du protocole de niveau 3 dans un LPDU ; @DSAP (destination) et @SSAP (source) = valeurs de LSAP (Link Service Access Point) permettant le démultiplexage vers le bon protocole réseau (0x06 IP, 0xF0 NetBIOS, 0xAA SNAP). Mécanismes analogues : NSAP (réseau/transport), TSAP (transport/session).
-Encapsulation SNAP : LLC n'identifie pas tous les protocoles de niveau 3 (ARP) et son codage sur 3 octets nuit aux performances. SNAP (SubNetwork Access Protocol) = 5 octets (champ OUI + champ PI) gérant plus de 128 protocoles ; signalé par DSAP/SSAP = 0xAA et contrôle = 0x03 ; PI peut être un Ethertype (0x0806 ARP, 0x0800 IP), OUI = 00:00:00.
+      Réseau local (LAN) : ensemble de stations de calcul reliées entre elles pour échanger des informations et partager des ressources matérielles ou logicielles ; l'accroissement de sa portée conduit à parler plutôt de réseau local d'entreprise ou RLE.
 
-4. ETHERNET
-Adresses MAC (IEEE 802.1) : 48 bits (6 octets), attribuées par le constructeur, uniques mondialement. 1er bit : individuelle (unicast) ou de groupe (multicast/broadcast). 2e bit : universelle ou gérée localement. 22 bits : identifiant constructeur (IEEE). 24 bits : numéro de série. Source toujours unicast ; destination = unicast, broadcast (FF:FF:FF:FF:FF:FF, non transmis par un routeur) ou multicast (abonnement, dérivé d'une adresse IP de classe D). Adressage « à plat » (position non déductible, atteint par diffusion) vs hiérarchique (IP, routable). Utilisées aussi sur ATM, Wi-Fi, Token Ring.
-Trame Ethernet V2 (DIX) : préambule 8 octets (7 × 10101010 pour la synchro + 1 × 10101011), MAC destination puis source (6 octets chacune), Ethertype, données (max 1500 = MTU), FCS. FCS = CRC (reste de la division polynomiale) calculé hors préambule et FCS ; trame détruite si différence à la réception. Ethertype permet le démultiplexage vers le protocole de niveau 3 sans LLC.
-Trame 802.3 : Ethertype remplacé par un champ « Longueur des données ». Toutes les valeurs d'Ethertype > 1500 -> champ < 1500 = trame 802.3, sinon V2. Encapsulation LLC/SNAP en début des données. Padding jusqu'à 46 octets pour atteindre 64 octets minimum (CSMA/CD).
-Service : sans connexion et non fiable (l'expéditeur n'est pas alerté d'une trame détruite par le CRC ; retransmission à la charge des couches supérieures, cf. TCP). Simplicité et rapidité = clés du succès (comme IP et UDP).
-CSMA/CD (Carrier Sense Multiple Access / Collision Detection), mode partagé : circuit carrier sense (écoute du support) + circuit collision detection (comparaison émission/réception). Sur collision : arrêt, jamming (32 bits à 1), attente aléatoire (Binary Exponential Backoff), retransmission ; reprise par la couche MAC, 16 tentatives max. Fenêtre de collision : temps minimal d'émission pour détecter une collision au point le plus éloigné (aller-retour maximal). Longueur minimale de trame : 64 octets (51,2 µs à 10 Mb/s sur 2500 m). Temps inter-trame : 9,6 µs à 10 Mb/s. Protocole probabiliste (délai imprévisible, dépend du nombre de stations, de la charge, de l'étendue). Quand le débit augmente, la fenêtre de collision diminue -> jusqu'à 100 Mb/s trame de 64 octets mais brins de 250 m ; à 1 Gb/s trame minimale de 512 octets ; au-delà CSMA/CD abandonné.
-Normes CSMA/CD (format « débit »BASE« support ») :
-- 10Base5 : coaxial épais 50 ohms, 5 × 500 m, 100 stations, transceiver MAU + prise vampire.
-- 10Base2 : coaxial fin, segments 185 m, 30 stations, T vissé BNC.
-- 10BaseT : UTP cat. 3/4/5, 100 m entre équipements.
-- 100BaseTX (2 paires cat. 5, codage 4B/5B), 100BaseT4 (cat. 3/4, 8B/6T, 4 paires), 100BaseFX (fibre multimode 400 m).
-Mode commuté : station en point à point vers un port de switch (support non partagé) -> plus de collisions, plus de CSMA/CD, plus de limite de distance ; le switch ne retransmet qu'au destinataire. Table de commutation (MAC -> port) + autoapprentissage (non standardisé ; MPLS sur les grands réseaux). FDSE (Full Duplex Switched Ethernet, années 1990). Normes commutées : 1000BaseX (fibre, 500 m multimode SX à 5 km monomode LX), 1000BaseT (4 paires cat. 5, 200 m, encodage 5 niveaux, 250 Mb/s par paire), 10Gbase-F (jusqu'à 40 km monomode), 10Gbase-T (cuivre 100 m), 40/100 Gigabit (802.3ba), EFM (802.3ah, Ethernet dans la boucle locale, remplace ATM), PoE (802.3af, 48 V sur RJ45, 12 W max, pour téléphones IP et bornes Wi-Fi).
+      Modèle peer-to-peer : modèle réseau d'égal à égal permis par des stations puissantes, offrant de la souplesse mais compliquant le partage des ressources par rapport à un modèle à ordinateur central et terminaux passifs.
 
-5. AUTRES TECHNOLOGIES
-Token Bus (802.4) : industriel, coaxial TV 75 ohms, 1,5-10 Mb/s, bus physique / anneau logique, jeton déterministe.
-Token Ring (802.5, IBM) : coaxial/paire torsadée/fibre, jusqu'à 4 (ou 16) Mb/s, anneau logique, physique en anneau ou étoile (MAU), jeton déterministe.
-100VG-AnyLAN (802.12) : méthode DPAM (Demand Priority Access Method), déterministe par priorité, concentrateur intelligent en polling.
-DQDB (802.6) : deux bus en sens inverse, cellules (slots) vides/occupées, services asynchrone sans/avec connexion et isochrone, compteurs RQ et CD.
-CSMA/CA (802.11, Wi-Fi) : nœud caché -> pas de détection de collision -> réservation du canal par RTS (Request To Send) / CTS (Clear To Send), toutes les stations concurrentes arment une temporisation.
+      Topologie physique : description de la répartition spatiale des équipements sur les supports, qui régit le câblage.
 
-6. VLAN (Virtual LAN)
-Trois enjeux d'un LAN Ethernet : domaine de collision (niveau 2, CSMA/CD moins efficace avec le nombre de stations), domaine de diffusion (niveau 3, bande passante partagée et broadcast reçu par tous), sécurité (diffusion -> sniffing, MAC attack, ARP attack/hijacking/CAM overflow, Spanning Tree Attack, DHCP spoofing).
-VLAN : réseau local regroupant des stations de façon logique et non physique. Base : commutateur (niveau 2, multiport) aiguillant selon des règles (table de commutation ou étiquetage).
-Types : VLAN par port (niveau 1, statique) ; par adresse MAC (niveau 2, tables port/MAC saisies par l'administrateur) ; par adresse IP (niveau 3, plus lent) ; par protocole, par application (port TCP), par mot de passe (dynamique au login).
-Étiquetage : ISL (Cisco, propriétaire, 30 octets, VoIP Cisco, incompatible IEEE) ; IEEE 802.1Q (tag 4 octets : VPID = 0x8100 ; TCI = 3 bits de priorité 802.1p pour la QoS, 1 bit CFI, 12 bits d'identifiant de VLAN = 4094 VLAN). L'ajout/retrait du tag impose de recalculer le FCS ; les équipements non compatibles reçoivent les trames dé-taggées. Sous Linux (> 2.4.18) : module 8021q, utilitaires vconfig et ifconfig ; ports « Tagged » (station Aware) vs « Untagged » (station Legacy).
-Avantages : souplesse d'administration (paramétrage des commutateurs, groupes de travail sans modification physique), gain en sécurité (encapsulation supplémentaire, droits au niveau du commutateur), contrôle des échanges inter-VLAN, réduction de la diffusion du trafic.
+      Topologie logique : mode de circulation des données sur les supports, c'est-à-dire la méthode d'accès.
+
+      Bus : topologie où les équipements sont raccordés en tout point d'un même câble linéaire, tout signal leur étant présenté ; sans chemin alternatif en cas de rupture, avec un signal non régénéré dont l'atténuation limite la longueur, chaque équipement même inactif atténuant le signal.
+
+      Anneau : topologie où tous les équipements sont reliés en point à point en boucle, tout équipement étant accessible par deux chemins, si bien qu'une rupture n'isole pas un équipement, une paire métallique suffisant pour un signal unidirectionnel.
+
+      Étoile : topologie où chaque station est reliée en point à point à un équipement central de commutation ou de concentration ; la panne d'une station n'impacte pas le réseau, celle de l'équipement central peut l'impacter en entier.
+
+      Hub (concentrateur) : équipement central qui fait fonctionner une topologie logique en bus sur une topologie physique en étoile, en dupliquant tout signal reçu vers tous les autres ports.
+
+      ALOHA : réseau étendu créé en 1970 à l'université de Hawaï, embryon des réseaux Ethernet actuels.
+
+      CSMA/CD (Carrier Sense Multiple Access with Collision Detection) : méthode d'accès historique d'Ethernet, où la station écoute le support puis émet, et détecte et gère les collisions.
+
+      DIX standard : standard publié en 1980 par Intel, Digital et Xerox, correspondant à la version 10Base5 ou Ethernet épais, faisant d'Ethernet une marque déposée par ces trois sociétés.
+
+      IEEE 802.3 : première norme Ethernet publiée en 1982 par le sous-comité IEEE 802.3.
+
+      IEEE 802.3x : norme de 1997 définissant le mode full-duplex réservant une paire par sens de communication, marquant avec les commutateurs la fin de CSMA/CD.
+
+      ISO : organisme international de Genève qui élabore les normes, dont l'OSI, avec des correspondants locaux tels que ANSI, IEEE, BSI, AFNOR et DIN.
+
+      IEEE : organisme professionnel d'ingénieurs américains situé dans le New Jersey, divisé en groupes de travail ad hoc, dont le groupe 802 créé en février 1980 pour les réseaux locaux.
+
+      ISO IS 8802 : série de normes internationales reprenant des normes 802 dès 1988.
+
+      Sous-couche PMD (Physical Medium Dependent) : sous-couche physique la plus basse, dépendante du support, qui adapte les organes d'émission et assure le transfert des données au niveau bit.
+
+      Sous-couche PMI (Physical Medium Independent) : sous-couche physique au-dessus de PMD qui gère le protocole physique, écoute du support, détection d'erreurs, synchronisation, codage et décodage, émission et réception des bits.
+
+      Sous-couche MAC (Medium Access Control) : sous-couche liaison la plus basse, chargée du contrôle de l'accès partagé au support, du contrôle d'erreur et de l'adressage univoque par adresse MAC, dépendante de la technologie réseau.
+
+      Sous-couche LLC (Logical Link Control) : sous-couche liaison au-dessus de MAC, qui établit un lien logique entre équipements, masque le type de réseau à la couche supérieure et correspond à la norme IEEE 802.2.
+
+      Trame : unité d'échange de la couche liaison, suite de bits possédant une longueur maximale et des champs à positions particulières, transportée entre un émetteur et un récepteur sur un support physique.
+
+      LLC-1 : service LLC minimum sans connexion ni acquittement, détruisant simplement une trame erronée, autorisant point à point et diffusion, quasiment le seul utilisé dans les réseaux locaux.
+
+      LLC-2 : service LLC sur connexion avec acquittement, contrôle de l'ordre, correction d'erreur, détection des doubles et contrôle de flux, limité au point à point.
+
+      LLC-3 : service LLC de type datagramme, sans connexion mais avec acquittement et sans retransmission.
+
+      LSAP (Link Service Access Point) : point d'accès au service liaison pour la couche réseau, dont les valeurs DSAP et SSAP dans le LPDU permettent le démultiplexage des trames vers le bon protocole de niveau 3.
+
+      LPDU (Link Protocol Data Unit) : unité de données de protocole de la couche liaison contenant les champs DSAP et SSAP.
+
+      Encapsulation SNAP (SubNetwork Access Protocol) : trame de cinq octets accolée à la trame LLC, composée d'un champ OUI et d'un champ PI, permettant de gérer plus de cent vingt-huit protocoles ; signalée par DSAP et SSAP à la valeur hexadécimale AA et contrôle à trois.
+
+      Adresse MAC : adresse physique ou matérielle codée sur quarante-huit bits, attribuée à chaque carte réseau par son constructeur pour l'identifier de manière unique, normalisée par IEEE 802.1, dont le premier bit distingue unicast et groupe, le deuxième universelle ou locale, vingt-deux bits l'identifiant constructeur et vingt-quatre bits le numéro de série.
+
+      Unicast : adresse individuelle ; une adresse source est toujours de type unicast.
+
+      Broadcast : adresse de diffusion large FF:FF:FF:FF:FF:FF dont toutes les stations sont destinataires, non relayée par un routeur.
+
+      Multicast : adresse de diffusion restreinte, construite à partir d'une plage réservée et de l'adresse IP de classe D encapsulée, les stations devant s'abonner aux groupes.
+
+      Adressage à plat : adressage global de MAC où chaque machine a une adresse unique dont on ne peut déduire la position, atteinte par diffusion, par opposition à l'adressage hiérarchique qui permet le routage.
+
+      Trame Ethernet V2 : trame du standard DIX antérieure à IEEE 802, avec préambule, adresses MAC, champ Ethertype, données et FCS, sans padding.
+
+      Préambule : huit octets en début de trame, sept à 10101010 pour synchroniser l'horloge du destinataire et un à 10101011 dont les deux derniers bits indiquent la fin ; ajouté par la sous-couche MAC.
+
+      FCS (Frame Check Sequence) : en-queue correspondant au CRC, reste de la division polynomiale du bloc de données par un polynôme générateur, calculé hors préambule et FCS, permettant de détecter les erreurs de transmission, une différence entraînant la destruction de la trame.
+
+      Ethertype : champ de la trame V2 permettant de démultiplexer vers le bon protocole de niveau 3 sans utiliser LLC, toutes ses valeurs étant supérieures à mille cinq cents.
+
+      MTU (Maximum Transfer Unit) : longueur maximale des données d'une trame, fixée à mille cinq cents octets pour Ethernet, au-delà de laquelle la couche réseau doit fragmenter les datagrammes.
+
+      Trame 802.3 : trame Ethernet normalisée où le champ Ethertype est remplacé par un champ Longueur des données, l'encapsulation LLC et SNAP se plaçant au début du bloc de données ; un champ inférieur à mille cinq cents indique une trame 802.3, sinon une trame V2.
+
+      Padding (bourrage) : octets ajoutés par la couche MAC en 802.3, jusqu'à quarante-six, pour atteindre la taille minimale de soixante-quatre octets nécessaire à CSMA/CD.
+
+      Service non fiable : propriété d'Ethernet, l'expéditeur n'étant pas alerté quand une trame échoue au contrôle CRC du destinataire ; la fiabilité relève des couches supérieures.
+
+      Service sans connexion : propriété d'Ethernet, les stations ne définissant pas de paramètres communs avant l'échange, les données étant envoyées directement au moment et au débit choisis par l'expéditeur, comme pour IP et UDP.
+
+      Jamming : séquence de trente-deux bits à un émise par les stations responsables d'une collision pour renforcer le brouillage.
+
+      Binary Exponential Backoff : algorithme fixant la durée aléatoire d'attente passive avant retransmission après collision, la reprise étant assurée par la couche MAC dans la limite de seize tentatives.
+
+      Fenêtre de collision : temps minimal d'émission d'une station pour pouvoir détecter une collision survenue au point le plus éloigné, égal au temps d'aller-retour maximal ; elle diminue quand le débit augmente.
+
+      Longueur minimale de trame : soixante-quatre octets, complétés par du bourrage si nécessaire, portée à cinq cent douze octets à un gigabit par seconde ; à dix mégabits par seconde, le temps de réception de soixante-quatre octets sur un aller-retour de deux mille cinq cents mètres est de 51,2 microsecondes.
+
+      Temps de repos inter-trames : intervalle de 9,6 microsecondes à dix mégabits par seconde entre deux trames consécutives, dissipant les réflexions et séparant les trames.
+
+      Protocole probabiliste : qualificatif d'Ethernet avec CSMA/CD, la durée avant émission réelle d'une trame étant imprévisible car le temps d'attente après collision est aléatoire, dépendant du nombre de stations, de la charge et de l'étendue du réseau.
+
+      10Base5 : IEEE 802.3, dix mégabits par seconde sur câble coaxial épais cinquante ohms, jusqu'à cinq segments de cinq cents mètres et cent stations, connexion par transceiver ou MAU fixé par prise vampire.
+
+      10Base2 : IEEE 802.3a, dix mégabits par seconde sur câble coaxial fin, segments de cent quatre-vingt-cinq mètres et trente stations, connexion par T BNC.
+
+      10BaseT : IEEE 802.3i, dix mégabits par seconde sur paires torsadées UTP de catégories 3, 4 ou 5, cent mètres maximum entre équipements et quatre cents mètres entre stations.
+
+      Fast Ethernet : IEEE 802.3u, cent mégabits par seconde, avec les variantes 100BaseTX sur deux paires de catégorie 5 en codage 4B/5B, 100BaseT4 sur quatre paires de catégorie 3 ou 4 en codage 8B/6T, et 100BaseFX sur fibre multimode jusqu'à quatre cents mètres.
+
+      Mode partagé : mode où les stations partagent le support et où CSMA/CD limite les collisions sans les éviter.
+
+      Mode commuté : mode où chaque station est reliée en point à point à un port d'un commutateur, sans support partagé, donc sans collision ni CSMA/CD ni limite de distance interne.
+
+      Commutateur (switch) : équipement actif de niveau 2 multiport qui ne retransmet une trame qu'à son seul destinataire, mémorisant une table de commutation associant adresses MAC et ports, alimentée par autoapprentissage non standardisé.
+
+      FDSE (Full Duplex Switched Ethernet) : terme des années 1990 désignant le mode commuté.
+
+      Gigabit Ethernet : 1000BaseX sur IEEE 802.3z, un gigabit par seconde sur fibre, de cinq cents mètres en multimode 1000BaseSX à cinq kilomètres en monomode 1000BaseLX ; 1000BaseT sur IEEE 802.3ab, un gigabit par seconde sur quatre paires de catégorie 5 sur deux cents mètres avec un encodage à cinq niveaux.
+
+      10 Gigabit Ethernet : IEEE 802.3ae 10GBaseF sur fibre jusqu'à quarante kilomètres en monomode et environ cent mètres en multimode ; IEEE 802.3an 10GBaseT sur paire torsadée cuivre sur cent mètres.
+
+      40 et 100 Gigabit Ethernet : IEEE 802.3ba, de quarante gigabits par seconde sur fibre ou paires torsadées à cent gigabits par seconde sur fibre seulement.
+
+      EFM (Ethernet in the First Mile) : IEEE 802.3ah, Ethernet dans la boucle locale, dix mégabits par seconde sur sept cent cinquante mètres de paires torsadées ou un gigabit par seconde sur dix kilomètres de fibre, évitant la conversion Ethernet vers ATM.
+
+      PoE (Power over Ethernet) : IEEE 802.3af, alimentation électrique en quarante-huit volts sur le câble de données RJ45, puissance terminale limitée à douze watts, pour téléphones IP, points d'accès Wi-Fi et bornes Bluetooth.
+
+      Token Bus : IEEE 802.4, réseau industriel sur câble coaxial soixante-quinze ohms, un et demi à dix mégabits par seconde, topologie physique bus et logique anneau, accès déterministe par jeton circulant de la plus faible à la plus forte adresse.
+
+      Token Ring : IEEE 802.5, technologie IBM sur coaxial, paire torsadée ou fibre, jusqu'à quatre puis seize mégabits par seconde, topologie logique toujours anneau, accès déterministe par jeton, répartiteur MAU pour une étoile physique.
+
+      DPAM (Demand Priority Access Method) : IEEE 802.12, méthode d'accès de 100VG-AnyLAN par priorité déterministe sans collision, un concentrateur intelligent scrutant ses ports et allouant le support.
+
+      QDBC / DQDB : IEEE 802.6, deux bus en sens inverse gérés par une tête de bus émettant des cellules marquées vide ou occupé, avec services asynchrone sans connexion, asynchrone connecté et isochrone, les stations tenant des compteurs de requêtes et de décompte.
+
+      CSMA/CA (Collision Avoidance) : méthode d'accès du Wi-Fi IEEE 802.11, où une station émet un Request To Send réservant le canal, la destination répondant par un Clear To Send, les stations concurrentes armant une temporisation, ce qui pallie l'impossibilité de détecter toutes les collisions en radio.
+
+      VLAN (Virtual LAN) : réseau local regroupant un ensemble de stations de façon logique et non physique, construit sur des commutateurs qui aiguillent les trames selon des règles.
+
+      Domaine de collision : au niveau 2, ensemble des machines partageant un support unique arbitré par CSMA/CD, dont l'efficacité décroît avec le nombre de stations.
+
+      Domaine de diffusion : au niveau 3, périmètre délimité par l'adressage IP au sein duquel la communication se fait par diffusion, les stations se partageant la bande passante à droits égaux.
+
+      VLAN par port : VLAN de niveau 1 défini selon les ports du commutateur, au prix d'une configuration statique, un port pouvant appartenir à plusieurs VLAN.
+
+      VLAN par adresse MAC : VLAN de niveau 2 défini par les adresses MAC des stations via des tables de correspondance saisies par l'administrateur.
+
+      VLAN par adresse IP : VLAN de niveau 3 défini par la valeur de l'adresse IP ou du masque, plus lent car il faut accéder à l'adresse de niveau 3.
+
+      ISL (Inter-Switch Link) : encapsulation propriétaire Cisco ajoutant trente octets en treize champs, très utilisée en VoIP Cisco, incompatible avec IEEE 802.1Q.
+
+      IEEE 802.1Q : mécanisme d'encapsulation standard multi-constructeurs ajoutant une balise de quatre octets à l'en-tête de trame, avec un champ VPID à la valeur hexadécimale 8100, deux octets TCI dont trois bits de priorité définis par 802.1p, un bit Canonical Format Identifier et douze bits d'identifiant de VLAN, soit quatre mille quatre-vingt-quatorze VLAN adressables.
+
+      Mode Aware / mode Legacy : une station connectée à un port Tagged est en mode Aware et peut tagguer ses trames, une station connectée à un port Untagged est en mode Legacy et ne le peut pas.
+
+      Trunk : canal entre commutateurs ou entre routeur et commutateur par lequel transitent les trames de plusieurs VLAN, regroupant plusieurs liens logiques sur une même liaison physique.
+
+      VTP (VLAN Trunking Protocol) : protocole étendant une même configuration de VLAN sur plusieurs commutateurs via un domaine hiérarchique, un serveur VTP diffusant sa configuration aux clients.
+
+      Routage inter-VLAN : mécanisme permettant à des stations de VLAN différents de communiquer, le commutateur encapsulant la trame vers la passerelle, le routeur la désencapsulant puis la réencapsulant pour le VLAN de destination sur la sous-interface correspondante.
+
+
+COURS DÉTAILLÉ.
+
+
+I. GÉNÉRALITÉS SUR LES RÉSEAUX LOCAUX.
+
+
+   A. Définition et modèle.
+
+      Un réseau local est un ensemble de stations de calcul reliées entre elles pour échanger des informations et partager des ressources matérielles, imprimantes ou scanners, ou logicielles, programmes, fichiers et bases de données ; l'extension de sa portée conduit à parler de réseau local d'entreprise.
+
+      Les stations puissantes permettent un modèle peer-to-peer d'égal à égal, souple pour l'utilisateur mais compliquant le partage des ressources par rapport à un modèle à ordinateur central et terminaux passifs ; le RLE a adapté le modèle OSI, conçu pour du point à point, à sa spécificité d'un support unique et partagé où l'information est diffusée, en modifiant les couches basses ; l'immense majorité des RLE reposent sur Ethernet, et le VLAN les sécurise par un cloisonnement virtuel.
+
+
+   B. Topologies physiques et logiques.
+
+      La topologie physique décrit la répartition spatiale des équipements et régit le câblage, la topologie logique décrit le mode de circulation des données ; les trois topologies physiques principales sont le bus, l'étoile et l'anneau.
+
+      Dans le bus, les équipements se raccordent en tout point d'un même câble linéaire, tout signal leur est présenté, il n'y a pas de chemin alternatif en cas de rupture, le signal n'est pas régénéré et chaque équipement même inactif l'atténue ; dans l'anneau, tous les équipements sont reliés en point à point en boucle, chacun étant accessible par deux chemins, une paire métallique suffisant pour un signal unidirectionnel ; dans l'étoile, chaque station est reliée en point à point à un équipement central, la panne d'une station n'impactant pas le réseau mais celle de l'équipement central pouvant l'impacter en entier.
+
+      La topologie logique en bus diffuse les trames à toutes les stations, l'anneau les relaie d'une station à l'autre dans un seul sens, l'étoile les diffuse depuis un point central ; la topologie physique des réseaux locaux est le plus souvent l'étoile pour la facilité de câblage et la tolérance aux pannes, la topologie logique étant le plus souvent le bus comme Ethernet, plus rarement l'anneau comme Token Ring, un hub faisant fonctionner un bus logique sur une étoile physique.
+
+
+   C. Repères historiques.
+
+      En 1970, le réseau ALOHA de l'université de Hawaï est l'embryon d'Ethernet ; en 1973, Robert Metcalfe et David Boggs conçoivent pour Xerox un système de câbles et de signalisations, premier réseau Ethernet en 1975 à 2,94 mégabits par seconde reliant cent ordinateurs sur un kilomètre, avec CSMA/CD.
+
+      En 1980, le DIX standard d'Intel, Digital et Xerox correspond au 10Base5 ; en 1982, l'IEEE publie la première norme Ethernet via le sous-comité 802.3 ; les jalons suivants sont 1990 avec 802.3i sur paires torsadées en étoile qui fait décliner les autres technologies, 1995 avec 802.3u Fast Ethernet à cent mégabits par seconde, 1997 avec 802.3x full-duplex qui met fin à CSMA/CD, puis les normes Gigabit, 10, 40 et 100 Gigabit jusqu'aux normes de 2016 sur catégories 5, 6 et 8.
+
+
+II. LES NORMES DES DEUX PREMIÈRES COUCHES OSI.
+
+
+   A. Les organismes et la série 802.
+
+      L'ISO, à Genève, élabore les normes dont l'OSI, avec des correspondants locaux tels que ANSI, IEEE, AFNOR et DIN ; l'IEEE, dans le New Jersey, est un organisme professionnel d'ingénieurs, divisé en groupes de travail ad hoc, dont le groupe 802 créé en février 1980 pour les réseaux locaux, dont plusieurs normes ont été reprises dans la série ISO IS 8802 dès 1988 ; les réseaux 802 sont définis sur les couches liaison et physique, la norme 802.1 précisant l'organisation générale des couches 1 et 2.
+
+
+   B. La couche physique et ses sous-couches.
+
+      La couche physique est scindée en PMD, la plus basse, dépendante du support, qui adapte les organes d'émission et assure le transfert au niveau bit, et PMI, au-dessus, qui gère le protocole physique, écoute du support, détection d'erreurs, synchronisation, codage et décodage, émission et réception des bits.
+
+
+   C. La couche liaison et ses sous-couches.
+
+      La couche liaison est scindée en MAC, la plus basse, chargée du contrôle de l'accès partagé, du contrôle d'erreur et de l'adressage univoque par adresse MAC sans passer par le niveau 3, dépendante de la technologie, et LLC, au-dessus, qui établit un lien logique et masque le type de réseau à la couche supérieure.
+
+      La trame, unité d'échange de la couche liaison, a une longueur maximale, car un équipement ne doit pas monopoliser le support, les mémoires tampon sont limitées et retransmettre une longue trame erronée est plus pénalisant, la fragmentation relevant de la couche réseau ; elle comporte des champs porteurs d'informations pour une couche OSI donnée, par encapsulation d'un en-tête et d'une en-queue de contrôle ; la couche liaison reconnaît les débuts et fins de trames, la correction d'erreur étant de plus en plus déléguée à la couche application sur des supports de plus en plus fiables.
+
+
+   D. Les services et l'encapsulation LLC et SNAP.
+
+      LLC correspond à IEEE 802.2 et offre trois services, LLC-1 minimum sans connexion ni acquittement, quasiment le seul utilisé dans les réseaux locaux, LLC-2 sur connexion avec acquittement et contrôle de flux limité au point à point, et LLC-3 de type datagramme avec acquittement mais sans retransmission.
+
+      Le destinataire doit déterminer le protocole de niveau 3 de chaque trame ; l'encapsulation LLC place dans le LPDU un identificateur, les champs DSAP et SSAP correspondant à des valeurs de LSAP associées aux protocoles de niveau 3, par exemple la valeur hexadécimale F0 pour NetBIOS, 06 pour IP et AA pour SNAP ; l'encapsulation LLC n'identifie pas tous les protocoles et son codage sur trois octets nuit aux performances, d'où l'encapsulation SNAP, trame de cinq octets à champs OUI et PI gérant plus de cent vingt-huit protocoles, le champ PI pouvant être codé comme un Ethertype avec un OUI nul, par exemple la valeur hexadécimale 0806 pour ARP et 0800 pour IP.
+
+
+III. LA TECHNOLOGIE ETHERNET.
+
+
+   A. Les adresses MAC.
+
+      Ethernet diffuse les informations à toutes les stations d'un même support, chacune devant reconnaître les trames qui lui sont destinées, d'où les adresses MAC ; normalisées par IEEE 802.1, elles sont attribuées à chaque carte réseau par son constructeur pour l'identifier de manière unique dans le monde, d'où le terme d'adresse physique ou matérielle.
+
+      Codées sur quarante-huit bits, elles se découpent en quatre champs, le premier bit distinguant unicast et groupe, le deuxième universelle ou locale, vingt-deux bits l'identifiant constructeur attribué par l'IEEE et vingt-quatre bits le numéro de série ; une adresse source est toujours unicast, une adresse destination peut être unicast, broadcast FF:FF:FF:FF:FF:FF non relayé par un routeur, ou multicast construite à partir d'une plage réservée et de l'adresse IP de classe D encapsulée avec abonnement ; l'adressage MAC est dit à plat car on ne peut déduire la position d'une machine, atteinte par diffusion, contrairement à l'adressage hiérarchique qui permet le routage ; les adresses MAC servent aussi sur ATM, Wi-Fi et Token Ring.
+
+      Quand une carte reçoit une trame, si l'adresse destination est la sienne et qu'aucune erreur n'est détectée, les données remontent à la couche supérieure, sinon la trame est détruite ou ignorée.
+
+
+   B. Les deux versions de trames.
+
+      La trame Ethernet V2 du standard DIX comporte un préambule de huit octets, sept à 10101010 pour synchroniser l'horloge et un à 10101011, puis les adresses MAC destination et source sur six octets, le champ Ethertype, les données et le FCS ; le préambule et le FCS sont ajoutés par la sous-couche MAC, le FCS étant le CRC calculé hors préambule et FCS, une différence à la réception entraînant la destruction de la trame ; les données sont le datagramme de la couche réseau, limité à la MTU de mille cinq cents octets, au-delà de laquelle il faut fragmenter ; l'Ethertype démultiplexe vers le bon protocole de niveau 3 sans LLC, et en 1982 plus de cent cinquante protocoles étaient ainsi gérés.
+
+      La trame 802.3 remplace l'Ethertype par un champ Longueur des données, la divergence venant de l'impossibilité pour l'IEEE d'ouvrir un standard mondial tout en passant par Xerox pour valider un protocole ; comme toutes les valeurs d'Ethertype sont supérieures à mille cinq cents, un champ inférieur à mille cinq cents identifie une trame 802.3, sinon une trame V2 ; l'encapsulation LLC et SNAP se place au début du bloc de données, et le padding, jusqu'à quarante-six octets, complète la trame à soixante-quatre octets minimum pour CSMA/CD.
+
+
+   C. Un service sans connexion non fiable.
+
+      Ethernet est non fiable car l'expéditeur n'est pas alerté quand une trame échoue au contrôle CRC, la fiabilité relevant des couches supérieures par retransmission, par exemple TCP ; il est sans connexion car les stations ne définissent pas de paramètres communs avant l'échange, les données étant envoyées directement au moment et au débit choisis par l'expéditeur, comme pour IP et UDP ; cette simplicité et cette rapidité sont deux clés du succès d'Ethernet.
+
+
+   D. La méthode d'accès CSMA/CD.
+
+      En mode partagé, les stations adoptent le principe d'une discussion entre gens polis, mais une émission simultanée reste possible ; CSMA/CD repose sur deux circuits, carrier sense qui écoute le support avant d'émettre ou d'attendre, et collision detection qui, en cas de collision, fait cesser l'émission, envoyer une séquence de jamming de trente-deux bits à un, puis attendre une durée aléatoire selon l'algorithme Binary Exponential Backoff avant de retransmettre, la reprise étant assurée par la couche MAC dans la limite de seize tentatives.
+
+      La fenêtre de collision est le temps minimal d'émission pour détecter une collision au point le plus éloigné, égal au temps d'aller-retour maximal ; deux stations éloignées émettant un seul bit ne détectent pas la collision avant la fin de la transmission et l'information est perdue, d'où une longueur minimale de trame de soixante-quatre octets, complétée par du bourrage, correspondant à 51,2 microsecondes à dix mégabits par seconde sur un aller-retour de deux mille cinq cents mètres ; un temps de repos de 9,6 microsecondes sépare deux trames.
+
+      Quand le débit augmente, la fenêtre de collision diminue ; jusqu'à cent mégabits par seconde on garde soixante-quatre octets en réduisant la longueur des brins de deux mille cinq cents à deux cent cinquante mètres, à un gigabit par seconde la trame minimale passe à cinq cent douze octets pour des brins de quatre cents mètres, et au-delà CSMA/CD n'est plus utilisé ; Ethernet est dit probabiliste car la durée avant émission réelle est imprévisible, dépendant du nombre de stations, de la charge et de l'étendue du réseau.
+
+
+   E. Les normes en mode partagé et en mode commuté.
+
+      Les premières normes suivent le modèle débit BASE support, avec 10Base5 sur coaxial épais cinquante ohms jusqu'à cinq segments de cinq cents mètres et cent stations par transceiver MAU à prise vampire, 10Base2 sur coaxial fin sur cent quatre-vingt-cinq mètres et trente stations par T BNC, 10BaseT sur paires torsadées UTP catégories 3 à 5, et Fast Ethernet 100BaseTX, 100BaseT4 et 100BaseFX.
+
+      En mode commuté, chaque station est reliée en point à point à un port d'un commutateur qui ne retransmet une trame qu'à son destinataire, sans support partagé donc sans collision ni CSMA/CD ni limite de distance interne, ce qui autorise des réseaux très étendus ; les deux modes sont compatibles sur un même réseau ; tous les commutateurs doivent mémoriser une table de commutation associant adresses MAC et ports, complexe à gérer à grande échelle et alimentée par autoapprentissage non standardisé, d'où le passage à la commutation MPLS dans les grands réseaux ; le mode commuté, né dans les années 1990 sous le terme FDSE, s'appuie sur les normes Gigabit Ethernet 1000BaseX et 1000BaseT, 10 Gigabit Ethernet 10GBaseF et 10GBaseT, et 40 et 100 Gigabit Ethernet 802.3ba.
+
+      Ethernet s'étend aussi avec EFM 802.3ah dans la boucle locale, évitant la conversion vers ATM, et PoE 802.3af qui alimente en quarante-huit volts sur le câble RJ45 des équipements consommant au plus douze watts, tels que téléphones IP et bornes Wi-Fi.
+
+
+IV. LES AUTRES TECHNOLOGIES DE RÉSEAUX LOCAUX.
+
+
+   A. Les technologies à accès déterministe historiques.
+
+      Token Bus IEEE 802.4, conçu pour le milieu industriel, utilise du câble coaxial soixante-quinze ohms à un et demi à dix mégabits par seconde, avec topologie physique bus et logique anneau, l'accès se faisant par un jeton circulant de la plus faible à la plus forte adresse, seule la station détenant le jeton libre pouvant émettre.
+
+      Token Ring IEEE 802.5, d'IBM, occupait la moitié du marché dans les années 1980 puis a décliné face à Ethernet ; sur coaxial, paire torsadée ou fibre, jusqu'à quatre puis seize mégabits par seconde, avec topologie logique toujours anneau et accès déterministe par jeton, un répartiteur MAU permettant une étoile physique.
+
+
+   B. Les autres méthodes d'accès.
+
+      DPAM IEEE 802.12, de 100VG-AnyLAN, est une méthode par priorité déterministe sans collision, un concentrateur intelligent scrutant ses ports en polling et allouant le support ; QDBC IEEE 802.6 utilise deux bus en sens inverse gérés par une tête de bus émettant des cellules marquées vide ou occupé, avec des services asynchrone sans connexion, asynchrone connecté et isochrone, les stations tenant des compteurs de requêtes et de décompte pour respecter les réservations.
+
+      CSMA/CA IEEE 802.11 est la méthode d'accès du Wi-Fi, où une station émet un Request To Send réservant le canal, la destination répondant par un Clear To Send, les stations concurrentes armant une temporisation ; elle pallie l'impossibilité de détecter toutes les collisions en radio, deux stations pouvant émettre vers une troisième sans se détecter.
+
+
+V. LE RÉSEAU LOCAL VIRTUEL (VLAN).
+
+
+   A. Les motivations.
+
+      La connexion de machines à une même ligne soulève trois points de vue, le domaine de collision au niveau 2, arbitré par CSMA/CD dont l'efficacité décroît avec le nombre de stations, le domaine de diffusion au niveau 3, délimité par l'adressage IP et à bande passante partagée à droits égaux, et la sécurité, la diffusion rendant les informations disponibles en tout point et facilitant les sniffeurs et les attaques MAC, ARP, Spanning Tree ou DHCP spoofing ; le VLAN offre une solution simple et abordable face aux équipements haut de gamme coûteux.
+
+
+   B. Définition et types de VLAN.
+
+      Un VLAN est un réseau local regroupant des stations de façon logique et non physique, construit sur des commutateurs de niveau 2 multiport qui analysent les trames en entrée et les aiguillent selon des règles de table ou d'étiquetage.
+
+      Les VLAN non taggués se déclinent en VLAN par port de niveau 1, à configuration statique, un port pouvant appartenir à plusieurs VLAN, configurés par outils graphiques ou en ligne de commande, en VLAN par adresse MAC de niveau 2 via des tables saisies par l'administrateur, et en VLAN par adresse IP de niveau 3, plus lents ; il existe aussi des VLAN par protocole, par application selon le port TCP, et par mot de passe construits dynamiquement au login.
+
+
+   C. Les VLAN taggués.
+
+      L'encapsulation ISL, propriétaire Cisco, ajoute trente octets en treize champs, très utilisée en VoIP Cisco mais incompatible avec IEEE 802.1Q.
+
+      IEEE 802.1Q est un mécanisme standard multi-constructeurs ajoutant une balise de quatre octets à l'en-tête, avec un champ VPID à la valeur hexadécimale 8100, deux octets TCI dont trois bits de priorité définis par 802.1p, un bit Canonical Format Identifier et douze bits d'identifiant de VLAN, soit quatre mille quatre-vingt-quatorze VLAN adressables ; un commutateur insère le tag en entrée et le retire en sortie vers un équipement non compatible, en recalculant le FCS ; le noyau Linux prend en charge 802.1Q via le module 8021q et les utilitaires vconfig et ifconfig, un port Tagged plaçant la station en mode Aware autorisé à tagguer, un port Untagged en mode Legacy.
+
+
+   D. Les avantages et le routage inter-VLAN.
+
+      Le VLAN apporte de la souplesse d'administration puisque l'architecture se modifie par paramétrage des commutateurs, un gain de sécurité par encapsulation supplémentaire, un contrôle des échanges entre VLAN attribué au commutateur, une réduction de la diffusion par segmentation virtuelle des domaines de collision et de diffusion, un maintien au niveau 2 suffisant pour un réseau local, et une répartition de la bande passante selon les besoins.
+
+      Le cloisonnement empêche deux stations de VLAN différents de communiquer sans routeur dont une interface appartient aux deux VLAN ; entre deux stations d'un même VLAN sur deux commutateurs, le VTP étend la configuration via un trunk et un domaine hiérarchique serveur-client ; entre deux stations de VLAN différents séparées par un routeur, le commutateur est renseigné avec l'adresse du routeur passerelle, la liaison routeur-commutateur est un trunk regroupant un trafic VLAN par sous-interface avec une adresse IP et un étiquetage propres, le commutateur encapsulant la trame vers la passerelle et le routeur la désencapsulant puis la réencapsulant pour le VLAN de destination.
+
+
+POINTS D'ATTENTION.
+
+      La topologie physique des réseaux locaux est le plus souvent l'étoile, la topologie logique le plus souvent le bus.
+
+      Un champ de deux octets après l'adresse MAC source inférieur à mille cinq cents indique une trame 802.3, une valeur supérieure une trame Ethernet V2.
+
+      La MTU d'Ethernet est de mille cinq cents octets, au-delà la couche réseau doit fragmenter.
+
+      La longueur minimale de trame est de soixante-quatre octets, portée à cinq cent douze octets à un gigabit par seconde en mode partagé.
+
+      Le padding de la trame 802.3 peut atteindre quarante-six octets pour garantir la taille minimale de soixante-quatre octets exigée par CSMA/CD.
+
+      Ethernet fournit un service sans connexion et non fiable ; la fiabilité incombe aux couches supérieures.
+
+      CSMA/CD est une méthode probabiliste, à la différence des méthodes déterministes à jeton de Token Bus et Token Ring.
+
+      En mode commuté, il n'y a plus de collision ni de CSMA/CD ni de limite de distance interne au réseau.
+
+      Un routeur ne relaie pas les trames de broadcast ; une adresse source est toujours unicast.
+
+      IEEE 802.1Q offre quatre mille quatre-vingt-quatorze VLAN adressables et impose de recalculer le FCS à l'ajout et au retrait du tag.
+
+      Un port de commutateur Untagged place la station en mode Legacy et lui interdit de tagguer ses trames.
+
+      Deux stations de VLAN différents ne peuvent communiquer que par un routeur dont une interface appartient aux deux VLAN.
+
+
+EXEMPLES CITES.
+
+      Premier réseau Ethernet de 1975 à 2,94 mégabits par seconde reliant cent ordinateurs sur un kilomètre.
+
+      Valeurs de SAP hexadécimales F0 pour NetBIOS, 06 pour IP et AA pour SNAP, et Ethertype 0806 pour ARP et 0800 pour IP.
+
+      Préambule de sept octets à 10101010 suivi d'un octet à 10101011.
+
+      Séquence de jamming de trente-deux bits à un et reprise sur collision limitée à seize tentatives par la couche MAC.
+
+      À dix mégabits par seconde, réception de soixante-quatre octets en 51,2 microsecondes sur un aller-retour de deux mille cinq cents mètres, temps de repos inter-trames de 9,6 microsecondes.
+
+      10Base5 sur coaxial épais avec transceiver MAU à prise vampire, 10Base2 sur coaxial fin avec T BNC.
+
+      Fast Ethernet 100BaseTX en codage 4B/5B, 100BaseT4 en codage 8B/6T sur quatre paires, 100BaseFX sur fibre multimode.
+
+      1000BaseSX sur fibre multimode jusqu'à cinq cents mètres, 1000BaseLX sur fibre monomode jusqu'à cinq kilomètres.
+
+      Power over Ethernet en quarante-huit volts, puissance terminale limitée à douze watts, pour téléphones IP et bornes Wi-Fi.
+
+      Champ VPID 802.1Q à la valeur hexadécimale 8100 et douze bits d'identifiant de VLAN.
+
+      Prise en charge de 802.1Q sous Linux par le module 8021q avec vconfig et ifconfig.
+
+      Routeur Cisco 1721 assurant un routage inter-VLAN normalisé 802.1Q.

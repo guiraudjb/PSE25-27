@@ -1,40 +1,407 @@
-WINDOWS SERVER 2008 : SYSTÈMES DE FICHIERS NTFS ET AUTORISATIONS
+WINDOWS SERVER 2008 : LES SYSTÈMES DE FICHIERS NTFS ET LES AUTORISATIONS.
 
-1. SYSTÈMES DE FICHIERS SUPPORTÉS
-Rôle : organiser et optimiser l'implantation des données sur les disques (goulet d'étranglement : accès en ms contre ns en mémoire). Windows Server 2008 supporte FAT, FAT32 et NTFS (natif). Choix selon l'OS, la sécurité, la taille des partitions et fichiers, le multiboot.
-MBR (secteur de démarrage) : cylindre 0, tête 0, secteur 1 ; contient la table des partitions, le code d'amorçage (bootstrap) et les informations du disque (fabricant, numéro de série, octets/secteur, secteurs/cluster). Sans lui le disque est inutilisable : cible privilégiée des virus. Appelé « boot manager » sous Windows NT.
-FAT : la File Allocation Table est un tableau, une case par cluster, indiquant si le cluster est utilisé et pointant vers le suivant (chaîne FAT). Valeurs : 0000 non utilisé, FFF7 défectueux, FFF8-FFFF fin de fichier. Deux copies stockées pour la récupération. Les répertoires stockent nom, taille, date, attributs, premier cluster.
-FAT16 : entrées 16 bits, 65 535 clusters max, partition de 2 Go max (clusters de 32 ko). FAT32 : entrées 32 bits, jusqu'à 268 millions de clusters, partitions jusqu'à 2 To, clusters plus petits (4 ko) donc moins de gaspillage.
 
-2. NTFS
-Système natif de Windows 2008. Avantages : noms de fichiers de 255 caractères (sauf * ? ^ ; < > |), fichiers et partitions jusqu'à 16 Eo (offsets 64 bits), attributs étendus, sécurité (autorisations, chiffrement EFS), compression fichier par fichier (depuis NT 3.51, sans logiciel tiers), indexation, mise à jour des liens lors d'un déplacement de volume. Lisible uniquement par les systèmes Windows NT/2000/2003/XP/2008.
-Structure : partitions listées dans le MBR ; secteur d'amorçage du volume (formaté différemment) ; fichiers système répartis n'importe où sur le volume (un dommage localisé n'empêche pas tout l'accès). Adressage : LCN (Logical Cluster Number, depuis le début du volume) et VCN (Virtual Cluster Number, offset dans un fichier).
-MFT (Master File Table) : structure de stockage primaire ; un enregistrement (record) par fichier, regroupant des attributs. Un petit fichier (< ~1500 octets) tient entièrement dans son enregistrement (attributs résidents) ; sinon les données vont dans des clusters externes (extensions, attributs non résidents). 16 premiers enregistrements = metafiles créés automatiquement : $MFT (0), $MFTMirr (1, copie de secours), $LogFile (2, journal des transactions), $Volume (3), $AttrDef (4), $. (5, racine), $Bitmap (6, clusters utilisés), $Boot (7), $BadClus (8), $Quota (9, NTFS 5), $UpCase (10). Localisation de la MFT et de sa copie dans le secteur de boot ; copie du secteur de boot au centre logique du disque.
+LEXIQUE COMPLET.
 
-3. CONTRÔLE D'ACCÈS
-Processus autorisant utilisateurs, groupes et ordinateurs à accéder aux objets. Éléments : objets (fichiers, imprimantes...), jetons d'accès (identité du sujet, recréés à chaque connexion), ACL / ACE, sujets (utilisateurs ou applications), autorisations, droits et privilèges.
-Le sous-système de sécurité compare le jeton d'accès aux ACE de l'objet ; il parcourt l'ACL jusqu'à une ACE qui autorise ou refuse ; à la fin de l'ACL sans réponse explicite -> accès refusé (refus implicite).
-Autorisations : type d'accès accordé sur un objet ou une propriété ; à affecter de préférence aux groupes (meilleures performances). Communes à la plupart des objets : Lecture, Modification, Changement de propriétaire, Supprimer. Un autre type existe : les autorisations de partage (onglet Partage).
-Propriétaire : par défaut le créateur ; il peut toujours modifier les autorisations.
-Héritage : les objets d'un conteneur héritent des autorisations héritables du conteneur à leur création (seules celles marquées pour l'héritage). Autorisations explicites (définies directement) vs héritées (transmises par le parent). Les explicites sont prioritaires sur les héritées, y compris sur une Refuser héritée. En cas d'héritage contradictoire de parents différents, le parent le plus proche l'emporte.
-Droits d'utilisateur : liés au compte (ouverture de session interactive, sauvegarde...), gérés via la Stratégie de sécurité locale (Attribution des droits utilisateur) ; différents des autorisations liées aux objets.
-Audit des objets : nécessite d'activer « Auditer l'accès aux objets » (Stratégie d'audit) ; événements visibles dans le journal de sécurité via l'Observateur d'événements.
+      Système de fichiers : structure qui organise et optimise l'implantation des données sur les disques et mémoires externes ; le disque est un goulet d'étranglement des performances, son temps d'accès se mesurant en millisecondes contre des nanosecondes en mémoire.
 
-4. GESTION DES AUTORISATIONS
-Descripteur de sécurité : ensemble d'informations de contrôle d'accès créé avec l'objet ; contient la DACL (Discretionary ACL : groupes/utilisateurs autorisés et accès accordés) et la SACL (System ACL : informations d'audit — qui, quelles opérations, réussite/échec).
-Partage vs NTFS sur un serveur de fichiers : ensembles indépendants ; l'accès effectif retient les autorisations les plus restrictives des deux. Les autorisations NTFS s'appliquent en local et à distance quel que soit le protocole ; les autorisations de partage seulement aux accès réseau. Approche fréquente : partage en Contrôle total pour Tout le monde, restriction par les autorisations NTFS.
-Autorisations effectives : outil calculant les autorisations d'un utilisateur/groupe (appartenance aux groupes, héritage) ; évaluation locale, approximative (dépend du mode de connexion). « Afficher le contenu du dossier » (héritée par les dossiers seulement) et « Lecture & exécution » (héritée par fichiers et dossiers) semblent identiques mais s'héritent différemment. Le groupe Tout le monde n'inclut pas Ouverture de session anonyme par défaut.
-Gestionnaire d'autorisations (Authorization Manager) : composant MMC, administration basée sur les rôles. Rôle = ensemble d'autorisations correspondant à une fonction (héritable). Tâche = ensemble d'opérations (et parfois d'autres tâches). Opération = petite action de niveau système/API (numéro entre 1 et 2^31-1). Rôles/tâches/opérations se définissent en mode développeur. Groupes : utilisateurs et groupes Windows ; groupes d'application (de base, de requêtes LDAP calculés en temps réel, de règle métier définis par script VBScript/JScript). Dans un groupe d'application de base, la non-appartenance prime sur l'appartenance.
+      FAT (File Allocation Table) : système de fichiers historique très répandu dans le monde micro Windows, décliné en FAT16 et FAT32.
 
-5. EFS (Encrypting File System)
-Chiffrement des fichiers et dossiers sur volumes NTFS (postes clients et serveurs de fichiers distants). Au premier chiffrement, EFS assigne au compte de l'utilisateur une paire de clés (privée et publique). Chiffrement via les attributs avancés (Explorateur) ou l'utilitaire en ligne de commande CIPHER ; propagation possible aux sous-dossiers. Sans la clé EFS, aucun accès au fichier chiffré même avec les autorisations. Chiffrement et compression NTFS mutuellement exclusifs.
+      MBR (secteur de démarrage) : situé au cylindre zéro, tête zéro, secteur un, il contient la table des partitions, le code d'amorçage et toutes les informations relatives au disque dur ; sans lui le disque est inutilisable, ce qui en fait une cible des virus, appelé boot manager sous Windows NT.
 
-6. COMPRESSION
-Réduit la taille en supprimant les longues chaînes de zéros ; ne concerne que les données utilisateur (pas les métadonnées). Deux types :
-- Compression NTFS : uniquement sur lecteur NTFS (fichiers, dossiers, volumes entiers) ; transparente (décompression/recompression automatique) mais baisse possible des performances. Règles de déplacement/copie identiques aux autorisations NTFS : toute copie ou déplacement depuis un autre lecteur NTFS compresse ; seul un déplacement au sein du même lecteur NTFS conserve l'état d'origine. Incompatible avec le chiffrement.
-- Dossiers compressés (zippés) : sur FAT et NTFS ; restent compressés partout ; exécution de programmes et ouverture de fichiers directement possibles ; protection par mot de passe ; pas de baisse de performances ; compatibles avec d'autres logiciels de compression ; icône « tirette ».
+      Répertoire : fichier particulier qui stocke pour chaque fichier son nom, sa taille, la date de dernière modification, les attributs, le numéro du premier cluster et le répertoire parent.
 
-7. QUOTAS, CLICHÉS INSTANTANÉS, DFS
-Gestion de quota (Gestionnaire de ressources du serveur de fichiers, FSRM) : quotas limitant l'espace d'un volume ou dossier avec notifications ; quotas automatiques appliqués à tous les sous-dossiers présents et futurs ; modèles de quotas réutilisables. Seuils de notification (ex. 85 %) : courriel, journalisation, commande/script (dirquota.exe), rapport. Aucune notification par défaut.
-Clichés instantanés de dossiers partagés : copies ponctuelles des fichiers d'une ressource partagée ; permettent de récupérer un fichier supprimé ou écrasé et de comparer des versions antérieures.
-Espaces de noms DFS : représentation virtuelle des dossiers partagés d'une organisation (chemin de type UNC). Composants : serveur d'espaces de noms (membre ou contrôleur de domaine), racine (espace de noms de domaine : métadonnées dans AD DS ; peut être hébergée sur plusieurs serveurs), dossiers (avec ou sans cibles), cibles de dossiers (chemins UNC réels vers les données). Un client parcourant un dossier avec cibles reçoit une référence le redirigeant de manière transparente vers une cible (selon son site). Administration : composant Gestion DFS, commande DfsUtil, scripts WMI.
+      Répertoire racine : répertoire situé à un endroit spécifique du disque, représenté par la lettre de lecteur suivie du deux-points et de l'antislash, qui stocke les informations sur les sous-répertoires et fichiers.
+
+      Table d'allocation de fichiers : cœur du système FAT, tableau dont chaque case correspond à un cluster et indique s'il est utilisé et où se trouve le cluster suivant du fichier, formant une chaîne FAT ; deux copies contiguës en sont conservées, la valeur zéro indiquant un cluster libre, une valeur particulière un cluster défectueux et une plage de valeurs la fin d'un fichier.
+
+      Cluster (bloc, unité d'allocation) : nombre fixe de secteurs contigus de cinq cent douze octets ; plus petite unité gérée par le système.
+
+      FAT16 : système seize bits pouvant repérer au maximum deux puissance seize clusters, soit environ soixante-cinq mille, d'où une partition maximale de deux giga-octets avec des clusters de trente-deux kilo-octets.
+
+      FAT32 : système utilisant des entrées de trente-deux bits, portant le nombre maximal de clusters à plus de deux cent soixante-huit millions et autorisant des partitions jusqu'à deux téra-octets avec des clusters plus petits, limitant le gaspillage.
+
+      NTFS (Windows NT File System) : système de fichiers natif de Windows Server 2008, offrant des noms de fichier longs jusqu'à deux cent cinquante-cinq caractères, des fichiers et partitions jusqu'à seize exaoctets, des attributs étendus, la compression fichier par fichier depuis Windows NT 3.51, et une sécurité accrue ; aucun système d'exploitation non fondé sur Windows NT ne peut lire une partition NTFS.
+
+      LCN (Logical Cluster Number) : numéro de cluster compté depuis le début du volume NTFS.
+
+      VCN (Virtual Cluster Number) : offset d'un fichier en clusters, de zéro à sa taille.
+
+      MFT (Master File Table) : structure centrale d'un volume NTFS, table qui se comporte comme une base de données, chaque enregistrement rassemblant les attributs d'un fichier ou d'un répertoire et, pour les petits fichiers, le fichier lui-même.
+
+      Metafichiers (metadata files) : les seize premiers enregistrements de la MFT, réservés à la structure du système et créés automatiquement à la création du système de fichiers, notamment $mft qui référence la MFT, $mftmir sa copie de récupération, $logfile le journal des transactions, $volume les informations du volume, $attrdef la définition des attributs, l'enregistrement de la racine, $bitmap l'image des clusters utilisés, $boot le premier secteur, $badclus les clusters défectueux, $quota les quotas de NTFS 5 et $upcase la table de conversion en majuscules Unicode.
+
+      Attribut résident : attribut d'un fichier contenu dans l'enregistrement de la MFT lui-même.
+
+      Attribut non résident : attribut enregistré dans des clusters externes appelés extensions, vers lesquels l'enregistrement de la MFT contient des pointeurs.
+
+      Contrôle d'accès : processus autorisant des utilisateurs, groupes et ordinateurs à accéder à des objets du réseau ou de l'ordinateur.
+
+      Objet : ressource protégée telle qu'un fichier, une imprimante, une clé du Registre ou un processus.
+
+      Jeton d'accès : identité d'un sujet, recréée à chaque connexion, comparée par le système d'exploitation aux entrées de contrôle d'accès de l'objet.
+
+      Sujet : utilisateur ou application demandant l'accès à un objet.
+
+      ACL (liste de contrôle d'accès) : ensemble des entrées de contrôle d'accès d'un objet, parcourue jusqu'à trouver une entrée qui autorise ou refuse l'accès ; si la fin est atteinte sans décision explicite, l'accès est refusé.
+
+      ACE (entrée de contrôle d'accès) : entrée qui autorise ou refuse un comportement selon le type d'objet, par exemple Lecture, Écriture et Exécution pour un fichier, Imprimer et Gérer les documents pour une imprimante.
+
+      DACL (Discretionary Access Control List) : partie du descripteur de sécurité qui spécifie les groupes et utilisateurs autorisés à accéder à un objet et les autorisations accordées.
+
+      SACL (System Access Control List) : partie du descripteur de sécurité qui contient les informations d'audit, à savoir quels comptes auditer, quelles opérations et l'attribut de réussite ou d'échec.
+
+      Autorisation : type d'accès accordé à un utilisateur ou un groupe sur un objet ou une de ses propriétés, il est recommandé de les affecter aux groupes pour les performances.
+
+      Droit d'utilisateur (privilège) : privilège spécifique ou droit d'ouverture de session accordé à un compte, comme ouvrir une session interactive ou sauvegarder des fichiers ; il s'applique au compte alors que l'autorisation est liée à l'objet, et s'administre via la Stratégie de sécurité locale.
+
+      Appropriation : à la création d'un objet, le système lui affecte un propriétaire, par défaut son créateur, qui peut toujours modifier les autorisations quelles qu'elles soient.
+
+      Héritage : mécanisme par lequel les objets d'un conteneur héritent automatiquement des autorisations héritables de ce conteneur, seules les autorisations marquées pour un héritage étant transmises.
+
+      Autorisations NTFS de dossier : Contrôle total, Modification, Lecture et exécution, Afficher le contenu du dossier, Lecture et Écriture, chacune constituée d'un groupe d'autorisations spéciales.
+
+      Afficher le contenu du dossier et Lecture et exécution : autorisations qui semblent identiques mais s'héritent différemment, la première étant héritée par les dossiers mais pas par les fichiers, la seconde par les deux.
+
+      Autorisations explicites : autorisations définies par défaut à la création d'un objet non enfant ou par une action de l'utilisateur.
+
+      Autorisations héritées : autorisations communiquées à un objet par son parent, plus faciles à gérer et cohérentes sur tout un conteneur.
+
+      Case Inclure les autorisations pouvant être héritées du parent : case dont la désactivation coupe l'héritage, rendant possible la modification des autorisations sans que l'objet hérite plus du parent.
+
+      Autorisations de partage : autorisations définies sur un dossier partagé, qui ne s'appliquent qu'aux accès réseau, indépendantes des autorisations NTFS.
+
+      Autorisations effectives : ensemble des autorisations réellement accordées, calculées par un outil à partir de l'appartenance aux groupes et de l'héritage, qui fournit seulement une évaluation approximative car l'octroi peut dépendre du mode de connexion.
+
+      Stockage d'instance unique : fonctionnalité qui permet aux services de domaine Active Directory de ne stocker qu'une copie de listes de contrôle d'accès identiques, ce qui protège les performances du réseau.
+
+      Audit : suivi des accès réussis ou infructueux aux objets, activé via la stratégie d'audit et consulté dans le journal de sécurité de l'Observateur d'événements.
+
+      Gestionnaire d'autorisations : composant enfichable MMC permettant l'administration basée sur les rôles.
+
+      Groupe d'application : dans le Gestionnaire d'autorisations, groupe d'utilisateurs, d'ordinateurs ou d'autres principaux de sécurité, à ne pas confondre avec un groupe d'applications ; il peut être un groupe de requêtes LDAP, un groupe d'applications de base ou un groupe d'applications de règle métier.
+
+      Groupe de requêtes LDAP : groupe d'application dont l'appartenance est calculée en temps réel par une requête LDAP.
+
+      Groupe d'applications de base : groupe défini par la spécification des membres puis des non-membres, la non-appartenance primant sur l'appartenance.
+
+      Groupe d'applications de règle métier : groupe dont l'appartenance est déterminée dynamiquement par un script VBScript ou JScript.
+
+      Rôle : ensemble d'autorisations qu'un utilisateur doit détenir pour effectuer une tâche, correspondant à une catégorie de travail ; les rôles peuvent hériter d'autres rôles.
+
+      Tâche : ensemble d'opérations et parfois d'autres tâches, représentant un élément de travail reconnaissable.
+
+      Opération : petite action de niveau système ou API servant de bloc de construction des tâches, identifiée par un numéro d'opération entier entre un et deux puissance trente et un moins un, un numéro erroné entraînant des violations de sécurité ou un comportement inattendu ; les opérations ne se définissent qu'en mode développeur.
+
+      EFS (Encrypting File System) : technologie de chiffrement qui chiffre les fichiers et dossiers stockés sur des volumes NTFS, assignant à la première utilisation une paire de clés privée et publique au compte de l'utilisateur.
+
+      CIPHER : utilitaire en ligne de commande de chiffrement et déchiffrement des fichiers et dossiers.
+
+      Compression NTFS : compression possible uniquement sur un lecteur NTFS, de fichiers, de dossiers ou de lecteurs entiers, transparente pour l'utilisateur mais pouvant diminuer les performances, incompatible avec le chiffrement.
+
+      Dossiers compressés (zippés) : compression restant active sur les lecteurs FAT comme NTFS, compatible avec d'autres logiciels de compression, permettant la protection par mot de passe et sans impact sur les performances, identifiée par une icône de tirette.
+
+      Quota : limite d'espace autorisé pour un volume ou un dossier, créée à partir d'un modèle ou de propriétés personnalisées, avec des quotas automatiques appliqués à tous les sous-dossiers existants et futurs et des seuils de notification.
+
+      dirquota : commande utilisable dans un script pour augmenter automatiquement une limite de quota lorsqu'un seuil est atteint.
+
+      Cliché instantané de dossiers partagés : copie ponctuelle de fichiers d'une ressource partagée permettant aux utilisateurs de récupérer des fichiers supprimés ou écrasés et de comparer des versions.
+
+      Espace de noms DFS : représentation virtuelle des dossiers partagés d'une organisation, dont le chemin ressemble à un chemin UNC ; il comprend un serveur d'espaces de noms, une racine, des dossiers avec ou sans cibles et des cibles de dossier qui sont des chemins UNC de dossiers partagés.
+
+      DfsUtil : commande d'administration des espaces de noms, avec le composant Gestion du système de fichiers distribués DFS ou des scripts appelant WMI.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LES SYSTÈMES DE FICHIERS SUPPORTÉS.
+
+
+   A. Généralités et choix.
+
+      Le système de fichiers organise et optimise l'implantation des données sur les disques ; connaître ces techniques permet de comprendre l'organisation des données, de corriger une zone corrompue et de récupérer des fichiers, de repérer certains virus et d'optimiser les performances par la défragmentation ou la compression.
+
+      Le choix se fait d'abord selon le système d'exploitation, un système plus récent supportant plus de systèmes de fichiers ; sous DOS et les premiers Windows 95 la FAT16 est de rigueur, à partir de Windows 95 OSR2 le choix est possible entre FAT16 et FAT32, la FAT étant exclue au-delà de deux giga-octets et la FAT16 recommandée sous cinq cents méga-octets ; Windows NT jusqu'à la version quatre choisit entre FAT16 et NTFS sans FAT32, et NTFS est conseillé pour sa sécurité et ses performances, Microsoft recommandant une petite partition FAT de deux cent cinquante à cinq cents méga-octets pour pouvoir démarrer depuis une disquette DOS en cas de problème.
+
+
+   B. Cohabitation de plusieurs systèmes.
+
+      Quand plusieurs systèmes d'exploitation cohabitent, le système de fichiers étant lié au système d'exploitation, il faut choisir pour chacun le système le plus adapté et dédier une partition FAT16 aux données partagées, ou bien utiliser des partitions FAT de moins de deux giga-octets pour tous.
+
+
+   C. La table des partitions.
+
+      Le secteur de démarrage MBR contient la table des partitions et le code qui, chargé en mémoire, détermine sur quelle partition le système s'amorce et lance le programme d'amorçage du système d'exploitation ; il contient aussi toutes les informations du disque, sert au setup du BIOS à reconnaître le disque et, sans lui, le disque est inutilisable, ce qui en fait une cible des virus.
+
+
+   D. Les répertoires et le répertoire racine.
+
+      Les répertoires stockent pour chaque fichier son nom, sa taille, la date de dernière modification, les attributs, le numéro du premier cluster et, pour les répertoires non racine, le répertoire parent ; ils sont gérés comme des fichiers particuliers, le répertoire racine étant situé à un endroit spécifique du disque et stockant les informations sur ses sous-répertoires et fichiers.
+
+
+   E. La table d'allocation de fichiers.
+
+      La FAT, localisée au cylindre zéro, est un tableau dont chaque case correspond à un cluster et indique s'il est utilisé et l'emplacement du cluster suivant du fichier, formant une chaîne FAT jusqu'au cluster de fin ; chaque entrée fait seize ou trente-deux bits, les deux premières stockant des informations sur la table, une valeur nulle indiquant un cluster libre, une valeur particulière un cluster défectueux, une plage de valeurs une fin de fichier ; deux copies contiguës sont conservées pour la récupération, le répertoire principal commençant derrière la seconde copie.
+
+
+   F. FAT16 et FAT32.
+
+      FAT16 est un système seize bits, ne pouvant repérer que deux puissance seize clusters, soit environ soixante-cinq mille, si bien qu'avec des clusters de trente-deux kilo-octets la partition maximale est de deux giga-octets.
+
+      FAT32 utilise des entrées de trente-deux bits, portant le nombre maximal de clusters à plus de deux cent soixante-huit millions et autorisant des partitions jusqu'à deux téra-octets ; il permet des clusters plus petits, par exemple quatre kilo-octets au lieu de trente-deux pour une partition de deux giga-octets, ce qui divise le gaspillage par huit, la taille maximale dépendant de la taille des clusters.
+
+
+II. LE SYSTÈME DE FICHIERS NTFS.
+
+
+   A. Caractéristiques.
+
+      NTFS est le système natif de Windows Server 2008 ; il offre des noms de fichier longs jusqu'à deux cent cinquante-cinq caractères, sauf quelques caractères réservés, et, ses offsets ayant soixante-quatre bits, des fichiers et partitions jusqu'à seize exaoctets ; il compresse fichier par fichier depuis Windows NT 3.51 sans programme tiers.
+
+      Aucun système d'exploitation non fondé sur Windows NT ne peut lire une partition NTFS, ce qui impose de conserver une possibilité de démarrage en invite de commande MS-DOS pour les réparations urgentes.
+
+
+   B. Architecture et structure disque.
+
+      En interne, les partitions NTFS diffèrent des partitions FAT mais sont listées dans la table de partitionnement principale du MBR et disposent d'un secteur d'amorçage de volume formaté différemment ; les fichiers système sont créés dans le répertoire racine du volume et peuvent être à n'importe quel emplacement physique, si bien qu'un dommage localisé ne rend probablement pas toute la partition inaccessible.
+
+      NTFS s'adresse au disque par deux terminologies, le LCN qui est le numéro de cluster depuis le début du volume, et le VCN qui est l'offset d'un fichier en clusters.
+
+
+   C. La Master File Table et les metafichiers.
+
+      Une partition NTFS repose sur la MFT, table qui étend le concept de la FAT en contenant des informations bien plus détaillées et, dans certains cas, les fichiers et répertoires eux-mêmes ; chaque entrée rassemble un ensemble d'attributs.
+
+      NTFS réserve les seize premiers enregistrements, appelés metafichiers, à la structure du système, créés automatiquement, notamment $mft qui référence la MFT, $mftmir sa copie pour la récupération, $logfile qui enregistre les transactions, $volume, $attrdef qui définit les attributs, l'enregistrement de la racine, $bitmap qui indique les clusters utilisés, $boot qui contient le premier secteur, $badclus les clusters défectueux, $quota pour NTFS 5 et $upcase pour la conversion en majuscules Unicode ; la localisation de la MFT et de sa copie est enregistrée dans le secteur de boot, dont une copie se trouve au centre logique du disque.
+
+
+   D. Attributs résidents et non résidents.
+
+      Un fichier ou répertoire relativement petit, inférieur à environ mille cinq cents octets, peut être enregistré entièrement dans la MFT ; pour les quantités plus importantes, l'enregistrement de la MFT contient des pointeurs vers des clusters externes appelés extensions ; les attributs contenus dans l'enregistrement de la MFT sont dits résidents, ceux enregistrés dans des extensions sont dits non résidents.
+
+
+III. LE CONTRÔLE D'ACCÈS.
+
+
+   A. Vue d'ensemble.
+
+      Windows Server 2008 protège les fichiers, applications et autres ressources contre l'utilisation non autorisée en mettant en correspondance les comptes d'utilisateurs et les appartenances aux groupes avec les droits, privilèges et autorisations associés ; comprendre cette notion aide à gérer efficacement les ressources partagées, à éliminer les risques inutiles et à résoudre les problèmes d'accès.
+
+
+   B. Le processus de vérification.
+
+      Pour accéder à un objet, un sujet doit s'identifier auprès du sous-système de sécurité, son identité étant contenue dans un jeton d'accès recréé à chaque connexion ; avant d'autoriser l'accès, le système compare les informations du jeton aux entrées de contrôle d'accès de l'objet.
+
+      Les entrées de contrôle d'accès autorisent ou refusent des comportements selon le type d'objet et sont combinées dans une liste de contrôle d'accès ; le sous-système parcourt chaque entrée qui s'applique à l'utilisateur ou à ses groupes jusqu'à en trouver une qui autorise ou refuse l'accès, ou jusqu'à la fin de la liste, auquel cas l'accès est refusé faute de décision explicite.
+
+
+   C. Les autorisations.
+
+      Les autorisations définissent le type d'accès accordé sur un objet ou une de ses propriétés ; elles peuvent être accordées à tout utilisateur, groupe ou ordinateur, mais il est recommandé de les affecter aux groupes pour les performances de la vérification.
+
+      Les autorisations dépendent du type d'objet, mais certaines sont communes à la plupart des types, à savoir Lecture, Modification, Changement de propriétaire et Supprimer ; on modifie les autorisations d'un fichier via l'onglet Sécurité de ses propriétés, les autorisations de partage se définissant sur l'onglet Partage d'un dossier.
+
+
+   D. L'appropriation des objets.
+
+      À la création d'un objet, le système lui affecte un propriétaire, par défaut son créateur, qui peut toujours modifier les autorisations quelles qu'elles soient ; l'octroi de l'autorisation Contrôle total sur un dossier permet à l'utilisateur de s'approprier ce dossier, aussi doit-il s'effectuer avec prudence.
+
+
+   E. L'héritage des autorisations.
+
+      L'héritage permet aux objets d'un conteneur d'hériter automatiquement des autorisations héritables de ce conteneur, seules les autorisations marquées pour un héritage étant transmises ; ainsi les fichiers d'un dossier héritent des autorisations de ce dossier à leur création, les autorisations du dossier étant explicites et celles des fichiers héritées.
+
+
+   F. Les droits et privilèges d'utilisateurs.
+
+      Les droits d'utilisateur accordent des privilèges spécifiques et des droits d'ouverture de session, comme ouvrir une session interactive ou sauvegarder des fichiers et répertoires ; ils s'appliquent au compte alors que les autorisations sont liées aux objets, et s'administrent de préférence dans des comptes de groupe via la Stratégie de sécurité locale sous l'attribution des droits utilisateur.
+
+
+   G. L'audit des objets.
+
+      Avec des droits d'administrateur, on peut auditer l'accès réussi ou infructueux aux objets, après avoir activé la stratégie d'audit en sélectionnant Auditer l'accès aux objets dans la Stratégie de sécurité locale ; les événements liés à la sécurité s'affichent ensuite dans le journal de sécurité de l'Observateur d'événements.
+
+
+IV. LA GESTION DES AUTORISATIONS.
+
+
+   A. Descripteur de sécurité, DACL et SACL.
+
+      Chaque conteneur et objet du réseau est lié à un descripteur de sécurité, créé automatiquement, qui contrôle le type d'accès autorisé ; chaque affectation d'autorisations à un utilisateur ou groupe est représentée par une entrée de contrôle d'accès, l'ensemble des entrées formant la liste de contrôle d'accès.
+
+      La partie du descripteur qui spécifie les groupes et utilisateurs autorisés et leurs autorisations est la DACL, et la partie qui contient les informations d'audit, à savoir quels comptes et quelles opérations auditer avec un attribut de réussite ou d'échec, est la SACL ; un audit peut être hérité par les objets enfants, et l'audit de fichiers et dossiers requiert d'être membre du groupe Administrateurs.
+
+
+   B. Autorisations explicites et héritées.
+
+      Les autorisations explicites sont définies par défaut à la création d'un objet non enfant ou par une action de l'utilisateur ; les autorisations héritées sont communiquées par le parent, plus faciles à gérer et cohérentes sur tout un conteneur, les objets d'un conteneur héritant à leur création des autorisations du conteneur.
+
+      Les autorisations Refuser héritées n'empêchent pas l'accès si l'objet dispose d'une autorisation Autoriser explicite, les autorisations explicites étant prioritaires sur les autorisations héritées, y compris les Refuser héritées ; en cas de paramètres contradictoires hérités de parents différents, celui du parent le plus proche l'emporte.
+
+
+   C. Autorisations de fichier et de dossier.
+
+      Les titulaires de l'autorisation Contrôle total peuvent supprimer tous les fichiers d'un dossier quelles que soient les autorisations qui les protègent ; les autorisations Afficher le contenu du dossier et Lecture et exécution semblent identiques mais s'héritent différemment, la première par les dossiers seulement, la seconde par les fichiers et les dossiers.
+
+      Pour empêcher l'héritage des nouveaux fichiers et sous-dossiers, on sélectionne Ce dossier seulement dans la zone Appliquer à ; pour un objet précis, on désactive la case Inclure les autorisations pouvant être héritées du parent, ce qui coupe l'héritage ; des cases grisées signifient que l'objet a hérité du parent ; les modifications d'autorisations héritées se font en substituant l'autorisation opposée, en coupant l'héritage ou en modifiant le parent.
+
+      Par défaut, dans Windows Server 2008, le groupe Tout le monde ne comprend pas le groupe Ouverture de session anonyme, si bien que les autorisations appliquées à Tout le monde n'affectent pas ce groupe.
+
+
+   D. Partage et autorisations NTFS.
+
+      L'accès à un dossier sur un serveur de fichiers peut être défini par les autorisations de partage sur le dossier et par les autorisations NTFS sur le dossier et les fichiers ; ces deux ensembles sont indépendants, et les autorisations finales retiennent les entrées les plus restrictives des deux.
+
+      Les autorisations NTFS s'appliquent quel que soit le protocole, en local comme à distance, tandis que les autorisations de partage ne s'appliquent qu'aux partages réseau et n'offrent aucune confidentialité entre utilisateurs locaux ou Terminal Server ; une approche courante consiste à donner Contrôle total en partage au groupe Tout le monde et à ne se fier qu'aux autorisations NTFS.
+
+
+   E. Les autorisations effectives.
+
+      L'onglet Autorisations effectives répertorie les autorisations qui seraient accordées uniquement sur la base des appartenances aux groupes et de l'héritage ; il ne prend pas en compte les autorisations de partage ni certains identificateurs de sécurité comme l'ouverture de session anonyme, l'interactif, le réseau ou le système.
+
+      Pour les objets accessibles à distance, l'appartenance à un groupe local, les privilèges locaux et les autorisations de partage ne sont pas utilisés ; l'outil fournit seulement une évaluation approximative, car l'octroi peut dépendre du mode de connexion et il ne connaît pas les informations d'ouverture de session si l'utilisateur n'est pas connecté ; il faut vérifier les autorisations effectives localement sur l'ordinateur hébergeant la ressource, avec un compte administratif du même domaine.
+
+      Le stockage d'instance unique permet aux services de domaine Active Directory de ne stocker qu'une copie de listes de contrôle d'accès identiques, ce qui protège les performances du réseau.
+
+
+V. LE GESTIONNAIRE D'AUTORISATIONS.
+
+
+   A. Types de groupes.
+
+      Le Gestionnaire d'autorisations est un composant enfichable MMC pour l'administration basée sur les rôles ; les destinataires d'une stratégie sont des utilisateurs et groupes Windows ou des groupes d'application.
+
+      Un groupe d'application est un groupe d'utilisateurs, d'ordinateurs ou d'autres principaux de sécurité, à ne pas confondre avec un groupe d'applications ; un groupe de requêtes LDAP a une appartenance calculée en temps réel par requête LDAP, un groupe d'applications de base se définit en spécifiant les membres puis les non-membres, la non-appartenance primant sur l'appartenance, et un groupe d'applications de règle métier a une appartenance déterminée dynamiquement par un script VBScript ou JScript ; les appartenances circulaires ne sont pas autorisées.
+
+
+   B. Rôles, tâches et opérations.
+
+      Un rôle est un ensemble d'autorisations nécessaires pour effectuer une tâche, correspondant à une catégorie de travail et pouvant hériter d'autres rôles ; une tâche est un ensemble d'opérations et parfois d'autres tâches, représentant un élément de travail reconnaissable ; une opération est une petite action de niveau système ou API servant de bloc de construction, identifiée par un numéro d'opération entier entre un et deux puissance trente et un moins un, un numéro erroné entraînant des violations de sécurité.
+
+      Les rôles, tâches et opérations ne se définissent qu'en mode développeur ; si plusieurs règles d'autorisation sont associées à un rôle, elles s'exécutent simultanément et leur ordre n'a aucune incidence.
+
+
+VI. LE CHIFFREMENT AVEC EFS.
+
+
+   A. Principe.
+
+      Le chiffrement est un moyen supplémentaire de protéger les données ; le système de fichiers EFS chiffre les fichiers stockés sur des volumes NTFS, sur les clients comme sur les serveurs de fichiers distants, et empêche l'accès non autorisé par d'autres utilisateurs ou des pirates ; à la première utilisation, EFS assigne une paire de clés privée et publique au compte de l'utilisateur.
+
+      EFS intéresse les administrateurs et professionnels de la sécurité chargés d'éviter la divulgation de données confidentielles, ainsi que les utilisateurs qui partagent leur ordinateur ; Windows Server 2008 chiffre automatiquement tous les fichiers d'un répertoire désigné comme chiffré.
+
+
+   B. Mise en œuvre.
+
+      Le chiffrement et le déchiffrement se font depuis l'Explorateur Windows, l'attribut de chiffrement exigeant des droits de lecture et écriture sur le dossier, via les attributs avancés des propriétés ; il peut être propagé aux sous-dossiers, et pour un fichier isolé EFS propose de chiffrer le fichier et son dossier parent ou le fichier seul.
+
+      Les fichiers peuvent aussi être chiffrés avec l'utilitaire en ligne de commande CIPHER, et les Options de dossiers permettent d'afficher les fichiers chiffrés dans une couleur différente ; on ne peut accéder à un fichier chiffré sans la clé EFS, même en disposant des autorisations.
+
+
+VII. LA COMPRESSION DE DONNÉES.
+
+
+   A. Principes.
+
+      La compression fait diminuer la taille des fichiers, dossiers et programmes en supprimant les longues chaînes de zéros ; elle peut s'appliquer au fichier, au dossier ou au volume, ne concerne que les données utilisateur et non les métadonnées, et suit les mêmes règles de conservation que les autorisations NTFS ; son efficacité varie selon la nature des données, le taux étant important pour les textes et les graphiques ; Windows prend en charge la compression NTFS et les Dossiers compressés zippés.
+
+
+   B. La compression NTFS.
+
+      La compression NTFS n'est possible que sur un lecteur NTFS, pour des fichiers, dossiers ou lecteurs entiers, transparente pour l'utilisateur mais pouvant diminuer les performances car Windows décompresse à l'usage et recompresse à la fermeture.
+
+      La compression d'un dossier ne compresse pas obligatoirement son contenu, les fichiers ne restent compressés que sur un lecteur NTFS et ne peuvent pas être chiffrés en même temps ; le déplacement ou la copie dans un dossier compressé compresse le fichier, ainsi qu'un déplacement depuis un autre lecteur NTFS, mais un déplacement au sein du même lecteur NTFS conserve l'état initial du fichier ; changer l'état d'un dossier ou d'un volume impacte tout son contenu présent et futur.
+
+
+   C. Les Dossiers compressés.
+
+      Les fichiers compressés avec la fonctionnalité Dossiers compressés zippés restent compressés sur les lecteurs FAT comme NTFS, sont compatibles avec d'autres logiciels de compression et peuvent être déplacés vers n'importe quel lecteur, sur Internet ou sur le réseau ; on peut en exécuter certains programmes ou en ouvrir des fichiers sans décompresser, protéger un dossier zippé par mot de passe, et cette compression ne diminue pas les performances ; ces dossiers sont identifiés par une icône de tirette.
+
+
+VIII. LA GESTION DE QUOTA.
+
+
+   A. Les quotas du Gestionnaire de ressources du serveur de fichiers.
+
+      Dans le nœud Gestion de quota, on crée des quotas pour limiter l'espace d'un volume ou d'un dossier et générer des notifications, des quotas automatiques appliqués à tous les sous-dossiers existants et futurs, et des modèles de quotas faciles à appliquer ; il faut d'abord configurer les options générales pour les notifications par courrier électronique et les rapports.
+
+      À la création d'un quota, on choisit un chemin d'accès, puis un quota unique qui limite l'espace d'un volume ou d'un dossier, ou un quota automatique qui applique un modèle à un dossier parent, générant automatiquement les quotas des sous-dossiers, chacun gérable séparément ; c'est utile pour les profils itinérants ou les nouveaux utilisateurs.
+
+
+   B. Les seuils de notification.
+
+      Quand le stockage atteint un seuil défini, le Gestionnaire peut envoyer des messages électroniques, enregistrer un événement, exécuter une commande ou un script, ou générer des rapports ; par défaut aucune notification n'est générée ; on peut par exemple notifier à quatre-vingt-cinq pour cent de la limite puis à cent pour cent, ou exécuter un script utilisant la commande dirquota pour augmenter automatiquement la limite.
+
+
+IX. LES CLICHÉS INSTANTANÉS.
+
+
+   A. Les clichés instantanés de dossiers partagés.
+
+      Cette fonction fournit des copies ponctuelles des fichiers d'une ressource partagée, comme un serveur de fichiers, permettant d'afficher le contenu à différents moments ; les utilisateurs peuvent ainsi récupérer un fichier supprimé accidentellement en ouvrant une version antérieure, récupérer un fichier écrasé, le nombre de versions dépendant du nombre de clichés créés, et comparer différentes versions d'un fichier en cours de travail.
+
+
+X. LES ESPACES DE NOMS DFS.
+
+
+   A. Vue d'ensemble.
+
+      Un espace de noms est une représentation virtuelle des dossiers partagés d'une organisation, dont le chemin ressemble à un chemin UNC pointant vers un dossier partagé ; il permet d'offrir aux utilisateurs un emplacement unique alors que les données sont hébergées sur différents serveurs pour la disponibilité et les performances.
+
+
+   B. Les éléments d'un espace de noms.
+
+      Le serveur d'espaces de noms héberge l'espace de noms et peut être un serveur membre ou un contrôleur de domaine ; la racine représente le point de départ, un espace de noms de domaine commençant par un nom de domaine et stockant ses métadonnées dans Active Directory, hébergeable sur plusieurs serveurs pour la disponibilité.
+
+      Les dossiers sans cible ajoutent une structure et une hiérarchie, les dossiers avec cibles fournissent un contenu réel, l'ordinateur client recevant une référence qui le redirige de façon transparente vers l'une des cibles ; une cible de dossier est un chemin UNC d'un dossier partagé ou d'un autre espace de noms, correspondant à l'emplacement où les données sont stockées, un même dossier pouvant avoir plusieurs cibles sur des sites différents ; on administre les espaces de noms avec le composant Gestion du système de fichiers distribués DFS, la commande DfsUtil ou des scripts appelant WMI.
+
+
+POINTS D'ATTENTION.
+
+      Le secteur MBR est le secteur le plus important du disque et une cible privilégiée des virus.
+
+      FAT16 est limitée à des partitions de deux giga-octets, FAT est exclue au-delà de deux giga-octets.
+
+      Aucun système d'exploitation non fondé sur Windows NT ne peut lire une partition NTFS.
+
+      Un petit fichier peut être entièrement contenu dans son enregistrement de la MFT.
+
+      Si aucune entrée de la liste de contrôle d'accès n'autorise ni ne refuse explicitement l'accès, l'accès est refusé.
+
+      Les autorisations explicites priment sur les autorisations héritées, y compris les Refuser héritées.
+
+      Les autorisations de partage ne s'appliquent qu'aux accès réseau et n'offrent aucune confidentialité entre utilisateurs locaux.
+
+      Pour un accès à un dossier partagé, ce sont les autorisations les plus restrictives entre partage et NTFS qui s'appliquent.
+
+      L'outil Autorisations effectives ne fournit qu'une évaluation approximative et doit être exécuté localement, avec un compte du même domaine que la ressource.
+
+      Un fichier compressé avec la compression NTFS ne peut pas être chiffré, et inversement.
+
+      Un fichier déplacé au sein du même lecteur NTFS conserve son état de compression, contrairement à une copie ou à un déplacement inter-lecteur.
+
+      On ne peut accéder à un fichier chiffré par EFS sans la clé, même en disposant des autorisations.
+
+      Un numéro d'opération erroné dans le Gestionnaire d'autorisations peut entraîner des violations de sécurité.
+
+
+EXEMPLES CITES.
+
+      Partition FAT16 de deux giga-octets avec des clusters de trente-deux kilo-octets, ramenés à quatre kilo-octets en FAT32.
+
+      Metafichiers de la MFT $mft, $mftmir, $logfile, $volume, $attrdef, $bitmap, $boot, $badclus, $quota, $upcase.
+
+      Autorisations Lecture et Écriture du groupe Comptabilité sur un fichier Paye.dat, autorisations du groupe Administrateurs intégrés et du groupe Opérateurs de sauvegarde sur un fichier Temp.dat.
+
+      Modification des autorisations d'un fichier via l'onglet Sécurité de ses propriétés dans l'Explorateur Windows.
+
+      Autorisation de partage Contrôle total pour le groupe Tout le monde combinée à des autorisations NTFS restrictives.
+
+      Utilitaire en ligne de commande CIPHER pour chiffrer et déchiffrer.
+
+      Script utilisant la commande dirquota pour augmenter automatiquement une limite de quota atteinte.
+
+      Chemin UNC d'espace de noms tel que serveur, Public, Logiciels, Outils, avec des cibles de dossier à Londres et à New York.
+
+      Administration des espaces de noms avec la commande DfsUtil ou des scripts appelant WMI.

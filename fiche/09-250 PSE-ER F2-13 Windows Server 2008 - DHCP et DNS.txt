@@ -1,57 +1,331 @@
-WINDOWS SERVER 2008 : SERVICES DHCP ET DNS
+WINDOWS SERVER 2008 : LES SERVICES DHCP ET DNS.
 
-Depuis Windows 2000, Microsoft a choisi le DNS comme espace de noms stratégique en remplacement de NetBIOS ; sans DNS, Windows Server et Active Directory ne peuvent fonctionner. DHCP y est intégré : à chaque attribution d'adresse, le serveur DHCP peut inscrire le nom du client dans le DNS.
 
-1. DHCP - GÉNÉRALITÉS
-Origine : dérivé de BOOTP (RFC 951 et 1084 ; attribution dynamique d'adresses + démarrage à distance de stations sans disque). DHCP fournit en plus toutes les données de configuration TCP/IP.
-Processus DHCPv4 en quatre étapes (messages en UDP) : découverte (DHCPDISCOVER, par diffusion) -> offre (DHCPOFFER) -> requête (DHCPREQUEST) -> accusé de réception (DHCPACK). Bail (lease) : durée fixée par l'administrateur ; renouvellement demandé à la moitié du bail ; à l'expiration, l'adresse retourne au pool.
-Composants : serveurs DHCP (base de données des attributions et options ; adresse IP fixe obligatoire ; RFC 2132 pour les options), clients DHCP (RFC 2131), agents de relais DHCP/BOOTP (RFC 1542 ; routeur ou hôte qui relaie les diffusions vers des serveurs désignés, évitant un serveur par segment).
-Base de données DHCP :
-- Étendue (scope) : groupement administratif des plages consécutives d'adresses IP d'un sous-réseau physique ; à définir avant utilisation.
-- Plage d'exclusion : adresses d'une étendue jamais proposées aux clients.
-- Pool d'adresses : adresses restantes après exclusions, attribuées dynamiquement.
-- Réservation : adresse à bail illimité liée à l'adresse MAC du périphérique (toujours la même IP).
-- Options DHCP : paramètres supplémentaires attribués avec les baux (passerelle par défaut, serveurs WINS/DNS...) ; prédéfinies par la RFC 2132 ou personnalisées.
+LEXIQUE COMPLET.
 
-2. FONCTIONNALITÉS DHCP DANS WINDOWS SERVER
-Intégration DHCP-DNS : le serveur DHCP peut agir en relais mandataire (proxy) et inscrire les RR A (directe) et PTR (inversée) pour ses clients, via l'option n°81 « Client FQDN » (le client communique son nom complet) et un message UPDATE. Modes : mise à jour suivant les requêtes des clients ; toujours mettre à jour (prioritaire sur le client) ; mise à jour pour clients non dynamiques (Windows 95/98/NT 4). Suppression des enregistrements à l'expiration du bail (par défaut).
-Analyse et statistiques : alertes de seuil (ex. 90 % des adresses d'une étendue attribuées, pool épuisé) ; affichage graphique (adresses disponibles/épuisées, baux/s, offres, requêtes, ACK, NACK, refus, libérations).
-Classes utilisateur : le client spécifie son type (bureau, portable...) ; le serveur attribue des options différentes (durée de bail, WINS, DNS...).
-Attribution d'adresse multidiffusion : service MADCAP (adresses IP multicast partagées par un groupe).
-Sécurité : un serveur DHCP doit être autorisé dans Active Directory (par l'administrateur du domaine) ; sinon aucune réponse aux requêtes.
-Tolérance de panne : le fractionnement d'étendues fait perdre la moitié des adresses en cas de panne ; le clustering gère deux serveurs comme un seul système virtuel (un seul actif, base sur disque distant, reprise transparente).
-Configuration automatique du client (depuis Windows 2000) : si aucun serveur DHCP n'est trouvé, le client s'auto-configure ; avec un ancien bail, il PING la passerelle par défaut du bail (succès = conserve le bail ; échec = déplacé, s'auto-configure et refait une recherche toutes les cinq minutes).
-DHCPv6 : IPv6 configure ses adresses seul, mais DHCPv6 fournit une configuration d'adresse avec état ou d'autres paramètres. Drapeaux du routeur : M (à 1 : utiliser le protocole pour des adresses dynamiques), O (à 1 : pour d'autres paramètres). Infrastructure : clients, serveurs, agents de relais DHCPv6. Échange avec état (M et O à 1) : sollicitation -> information (le serveur peut fournir) -> demande -> réponse.
-Déploiement : estimer le nombre de serveurs (routeurs, un serveur aux deux extrémités des liens WAN lents), délimiter les étendues (une par réseau physique, ou étendue globale pour multiréseaux), réservations pour serveurs WINS/DNS/contrôleurs de domaine/serveurs d'impression/clients Unix, tables BOOTP pour stations sans disque. Installation via le Gestionnaire de serveur -> Rôles -> Ajouter des rôles -> Serveur DHCP.
+      DHCP (Dynamic Host Configuration Protocol) : protocole dérivé de BOOTP, défini par les RFC 951 et 1084, qui attribue dynamiquement des adresses IP et fournit toutes les données de configuration TCP/IP, ne laissant à configurer manuellement que le serveur DHCP.
 
-3. DNS - PRINCIPES
-Résolution de noms = conversion noms d'hôtes <-> adresses IP. Avant 1984 : fichier HOSTS maintenu par le NIC, transmis par FTP (limites : bande passante, manque d'autonomie des organismes). DNS (1984) : base de données répartie, hiérarchique + protocoles (requête/mise à jour, réplication, schéma). Implémentation Microsoft : RFC 1034/1035 (NT 4.0) ; + RFC 1886, 1996, 1995, 2136, 2308, 2052 depuis Windows 2000.
-Hiérarchie : racine (point), TLD (.com, .fr...), nœuds = noms de domaine, étiquette de 63 caractères max. FQDN = toutes les étiquettes séparées par des points, terminé par un point final ; profondeur max 127 niveaux, longueur max 255 caractères. « Domaine » = suffixe (sans l'hôte). Norme ISO 3166 pour les TLD pays.
-Enregistrement de ressources (RR) : Nom de domaine (FQDN sinon relatif) ; TTL (durée de vie en cache, en secondes) ; type (16 bits) ; classe (IN = Internet, CH = chaotique) ; RDATA (données propres au type).
-Types principaux : A (nom -> IPv4 32 bits), AAAA (nom -> IPv6 128 bits), CNAME (alias -> nom canonique), HINFO (descriptif CPU/OS, à éviter pour la sécurité), MX (serveur de messagerie, priorité 0-65535, plusieurs pour la redondance), NS (serveur de noms d'autorité), PTR (pointeur, résolution inverse), SOA (serveur d'autorité sur la zone + e-mail du contact, @ remplacé par un point). Spécifiques Windows : WINS, WINS-R.
-Zones DNS : sections de la base réparties sur les serveurs de noms ; découpage par classes et par « coupes » dans l'espace de noms ; chaque zone a un nœud de plus haut niveau qui l'identifie. Données de zone : nœuds généraux, nœud supérieur, sous-zones, accès aux serveurs des sous-zones. RR clés : liste des serveurs de noms + RR SOA.
-Types de serveurs (un serveur physique peut cumuler les rôles) :
-- Primaire (maître) : autorité, fichier de zone en lecture-écriture, un par zone.
-- Secondaire : données obtenues par transfert de zone, fichier en lecture seule, répond aux requêtes, secours du primaire, nombre illimité.
-- Cache : base constituée des seules réponses reçues, aucune autorité, cache limité par le TTL.
-Transfert de zone : les secondaires comparent le champ SERIAL du RR SOA (format année-mois-jour-version) avec le leur ; s'il a augmenté, ils rechargent. Types : total (toute la zone, trafic important), incrémental / IXFR (seuls les enregistrements modifiés), notification DNS (le primaire signale, le secondaire lance un transfert total ou incrémental).
-Résolution de nom : le résolveur (intégré à l'OS) interface les applications aux serveurs de noms ; consulte son cache local ou des serveurs distants. Requête standard (RFC 1035) : champs QTYPE, QCLASS, QNAME ; UDP ou TCP.
-- Mode itératif : le serveur répond sur ses seules informations locales (la réponse ou la référence d'un autre serveur) ; mode général sur Internet.
-- Mode récursif : le premier serveur devient résolveur et fait toutes les requêtes ; mode des réseaux locaux, le plus sûr. Bits : RD (Récursion Désirée, marqué par le client), RA (Récursion Admissible, marqué par le serveur : disponibilité du service).
-- Requêtes inverses : renvoient le nom d'hôte d'une IP connue ; domaine spécial in-addr.arpa (IP6.ARPA pour IPv6), enregistrements PTR. Requête PTR = question explicite « qui est a.b.c.d ? ».
+      Cycle DHCPv4 : quatre étapes, la découverte par diffusion où le client demande une adresse, l'offre où un serveur en propose une, la requête où le client accepte l'offre et demande l'adresse, et l'accusé de réception où l'adresse est officiellement attribuée ; tous les messages passent par UDP.
 
-4. FONCTIONNALITÉS DNS DANS WINDOWS SERVER
-Ordre de résolution des noms d'hôtes (NetBIOS activé) : nom d'hôte local -> cache client DNS -> serveurs DNS configurés -> LLMNR (multidiffusion IPv4 et IPv6) -> cache de noms NetBIOS -> serveurs WINS -> diffusions NetBIOS -> fichier LMHOSTS. Arrêt à la première adresse trouvée.
-Fonctionnalités du service DNS : conformité et interopérabilité RFC (BIND) ; implémentation pour Active Directory ; stockage des zones dans les partitions d'annuaire ; redirecteur conditionnel (transmet selon le nom de domaine de la requête) ; zones de stub (copie ne contenant que les RR identifiant les serveurs d'autorité d'une zone) ; intégration avec WINS et DHCP ; interface graphique (composant enfichable DNS, dnsmgmt.msc) et Dnscmd (scripts, administration distante) ; mise à jour dynamique (RFC 2136) ; transfert de zone incrémental ; mise à jour dynamique sécurisée (zones intégrées à Active Directory) ; nouveaux RR (SRV, ATMA) ; vieillissement et nettoyage des enregistrements ; chargement de zone en arrière-plan ; gestion IPv6 ; RODC ; zone GlobalNames.
-Intégration DNS - Active Directory : les RR deviennent des objets de l'annuaire ; le transfert de zone est assuré par la réplication multi-maître d'Active Directory (plus de serveur primaire ; tout serveur DNS accepte les mises à jour) ; réplication sécurisée (zones plus en clair) ; permissions de sécurité sur les objets DNS ; seuls les serveurs DNS sur contrôleurs de domaine chargent ces zones. Représentation : objet conteneur DnsZone -> objets feuilles DnsNode -> attribut multi-valué DnsRecord.
-Transfert de zone par incrément (IXFR) : par défaut sous Windows Server 2008 ; retour automatique au transfert complet avec un serveur DNS non compatible.
-Mise à jour dynamique DNS (DDNS, RFC 2136) : OPCODE UPDATE, ajout/suppression de RR et test de prérequis, atomique. Nécessaire à cause de l'adressage IP dynamique (DHCP). La mise à jour doit être validée sur un serveur primaire (sauf zone intégrée à Active Directory, multi-maître). Le service client DHCP génère les mises à jour sur chaque poste (client DHCP ou IP fixe) ; par défaut le client met à jour A, le serveur DHCP met à jour PTR. Scénarios : client DHCP, client à configuration statique (met à jour A et PTR lui-même), client RAS (idem, tente de supprimer les RR avant de fermer la connexion). Réenregistrement : le serveur DHCP réinscrit ses RR au renouvellement du bail ; les clients Windows 2000+ réinscrivent toutes les 24 heures.
-Mise à jour dynamique sécurisée (DNS intégré à Active Directory) : après refus d'une mise à jour non sécurisée, négociation d'un contexte de sécurité via Kerberos, vérification d'identité mutuelle, demande signée ; le serveur n'accepte que si le client a les autorisations. Réponses signées (une réponse usurpée est rejetée).
-Enregistrement SRV (Emplacement du service, RFC 2052) : identifie les hôtes exécutant des services spéciaux. Sous Windows : LDAP (TCP 389), Kerberos (TCP 88), Kerberos Change Password (464), Global Catalog (TCP 3268/3286) et ports UDP correspondants. Inscrits dynamiquement par le service NETLOGON des contrôleurs de domaine. Champs : priorité (bas = prioritaire ; 0 pour Active Directory), poids (départage à priorité égale ; 100 pour Active Directory), port, FQDN de l'hôte. Localisateur de domaine (service Netlogon) : localise un contrôleur de domaine via le localisateur compatible IP/DNS (requête DNS puis LDAP UDP de vérification, mise en cache), sinon localisateur compatible Windows NT 4.
-Chargement de zone en arrière-plan : threads de chargement des zones Active Directory pendant que le serveur répond déjà ; extraction ciblée depuis Active Directory pour une zone non encore chargée (évite l'indisponibilité, jusqu'à une heure, des grandes zones).
-Gestion IPv6 : adresses 128 bits en notation hexadécimale ; résolution directe par AAAA, inverse par le domaine IP6.ARPA (chaque chiffre hexadécimal, inversé, = un niveau). dnscmd /config /EnableIPv6 nécessaire sous Windows Server 2003 ; IPv6 par défaut sous Windows Server 2008 (requêtes récursives vers serveurs IPv6, liste de transfert IPv4 + IPv6).
-RODC (Read Only Domain Controller) : informations Active Directory en lecture seule, plus robuste aux attaques, installable sans sécurité physique garantie. Zone primaire DNS en lecture seule (modification uniquement sur un contrôleur non RODC).
-Zone GlobalNames (Noms Globaux) : résolution de nom à étiquette unique via le DNS seul, pour un ensemble limité de serveurs centraux/critiques, en remplacement des enregistrements WINS statiques ; généralement des CNAME vers un FQDN ; unique dans la forêt, intégrée à Active Directory, copie locale sur chaque serveur d'autorité ; ne stocke pas les postes de bureau, pas de mises à jour dynamiques ; tous les serveurs DNS d'autorité doivent exécuter Windows Server 2008.
-Choix des noms DNS : séparer les espaces de noms interne (privé, invisible de l'extérieur) et externe (public) pour éviter les ambiguïtés ; exclure le nom public enregistré pour l'usage interne (utiliser un suffixe différent ou un sous-domaine). Un domaine Active Directory porte un nom DNS ; les domaines enfants ont un nom immédiatement subordonné. Caractères DNS (RFC 1123) : A-Z, a-z, 0-9 et « - », insensible à la casse ; NetBIOS en admet davantage. Un poste Windows 2000+ a un nom NetBIOS (interopérabilité) et un nom complet DNS (nom d'hôte + suffixe DNS principal, par défaut le nom de domaine Active Directory).
-Installation : adresse IP fixe obligatoire ; Gestionnaire de serveur -> Rôles -> Ajouter des rôles -> Serveur DNS ; console dnsmgmt.msc. Recommandations matérielles (2008) : Pentium II 400 MHz, 512 Mo de RAM par processeur, 4 Go de disque, carte réseau ; ~100 octets de RAM par enregistrement de ressource.
-Pannes et diagnostics : NSLOOKUP (vérifier l'existence d'un serveur DNS, ses zones, la présence d'un RR, parcourir tous les enregistrements).
+      Bail : terme défini par l'administrateur pendant lequel une adresse est attribuée, renouvelé à la moitié de sa durée, l'adresse retournant au pool à son expiration.
+
+      Serveur DHCP : composant possédant la base de données des attributions et des options de configuration, dont la RFC 2132 définit une trentaine, devant obligatoirement posséder une adresse IP fixe et écoutant sur le port UDP 68 en IPv4.
+
+      Client DHCP : composant exécutant automatiquement les quatre étapes au premier démarrage, tout paramètre entré manuellement dans sa configuration TCP/IP ayant priorité sur les paramètres dynamiques, écoutant sur le port UDP 67, défini par la RFC 2131.
+
+      Agent de relais BOOTP/DHCP : routeur ou hôte configuré pour écouter les diffusions DHCP/BOOTP et les diriger vers des serveurs DHCP désignés, ainsi que renvoyer les réponses, ce qui évite un serveur par segment ; défini par la RFC 1542 et écoutant sur les ports UDP 67 et 68 ; sur les réseaux modernes on utilise des routeurs conformes RFC 2131 plutôt qu'un service de relais logiciel.
+
+      Étendue DHCP : groupement administratif identifiant les plages consécutives d'adresses IP possibles pour tous les clients d'un sous-réseau physique, définissant un sous-réseau logique et devant être définie avant toute utilisation.
+
+      Plage d'exclusion : séquence d'adresses d'une étendue exclues de l'offre DHCP.
+
+      Pool d'adresses : adresses restantes d'une étendue après application des exclusions, attribuables dynamiquement.
+
+      Réservation : attribution d'une adresse avec bail illimité garantissant qu'un périphérique utilisera toujours la même adresse IP, fixée à partir de l'adresse MAC de sa carte réseau, utile pour serveurs WINS, contrôleurs de domaine, serveurs d'impression TCP/IP, clients UNIX et serveurs DNS.
+
+      Option DHCP : paramètre de configuration supplémentaire attribué avec le bail, par exemple l'adresse d'un routeur, d'un serveur WINS ou DNS, beaucoup étant prédéfinies par la RFC 2132, avec possibilité d'options personnalisées.
+
+      Intégration DHCP-DNS : configuration du serveur DHCP comme relais mandataire inscrivant pour ses clients leurs enregistrements A et PTR, à l'aide de l'option Client FQDN numéro 81 par laquelle le client informe le serveur de son nom complet, le serveur envoyant alors un message UPDATE au serveur DNS.
+
+      Options de mise à jour DNS par DHCP : mise à jour suivant les requêtes des clients, mise à jour toujours prioritaire sur la configuration du client, et mise à jour pour les clients non dynamiques comme Windows 95, 98 et NT 4 ; le serveur DHCP supprime les enregistrements qu'il a créés à l'expiration du bail.
+
+      Classe utilisateur : moyen pour un client DHCP de spécifier son type, bureau ou portable par exemple, l'administrateur configurant des options différentes selon le type, comme des baux plus courts pour les portables.
+
+      MADCAP : service de serveur de Windows Server 2008 pour l'affectation dynamique et la configuration d'adresses IP multicast, les étendues de multidiffusion fournissant des plages d'adresses réservées à la transmission d'un émetteur vers plusieurs destinataires.
+
+      Autorisation du serveur DHCP : étape par laquelle un serveur DHCP doit être autorisé dans Active Directory, en général par l'administrateur du domaine, avant de pouvoir distribuer des adresses ; un serveur non autorisé ne répond à aucune requête, ce qui empêche les serveurs pirates de générer des conflits.
+
+      Clustering DHCP : technique gérant deux serveurs comme un seul système virtuel, l'espace de noms et les services étant reconstitués de façon transparente sur un autre serveur en cas de panne, une base de données de clustering sur disque distant suivant les attributions, un seul serveur fonctionnant à la fois ; plus efficace que le fractionnement d'étendues où une panne perd la moitié des adresses.
+
+      Configuration automatique de client (APIPA) : capacité du client DHCP à partir de Windows 2000 de se configurer avec une adresse IP et un masque sur un petit réseau privé sans serveur DHCP ; le client tente de localiser un serveur, sinon se configure lui-même, tente de renouveler ses baux non expirés, pingue la passerelle par défaut du bail pour vérifier qu'il n'a pas été déplacé, et sinon réitère sa recherche toutes les cinq minutes.
+
+      DHCPv6 : protocole inutile pour configurer les adresses IPv6 mais utile pour une configuration avec état ou pour d'autres paramètres, l'hôte IPv6 utilisant la configuration automatique sans état par sollicitation du routeur, ou avec état selon le drapeau M pour les adresses dynamiques et le drapeau O pour les autres paramètres ; défini par la RFC 3315, avec clients, serveurs et agents de relais, l'échange avec état comprenant sollicitation, information, demande et réponse.
+
+      DNS (Domain Name System) : base de données répartie et hiérarchique et ensemble de protocoles définissant un mécanisme de requête et de mise à jour, un mécanisme de réplication et un schéma de base de données ; espace de noms stratégique choisi par Microsoft depuis Windows 2000 en remplacement de NetBIOS, sans lequel Active Directory ne peut fonctionner.
+
+      Historique du DNS : jusqu'en 1984, la transcription des noms reposait sur un fichier HOSTS maintenu par le NIC et transmis par FTP, dont les limites étaient la mise à jour encombrant la bande passante et le manque d'autonomie des organismes ; le DNS introduit en 1984 apporte l'évolutivité, l'administration décentralisée et divers types de données, la mise en œuvre Microsoft étant apparue dans Windows NT Server 4.0 sur les RFC 1034 et 1035.
+
+      TLD (Top Level Domain) : domaine de niveau supérieur tel que .com, .fr ou .uk, rattaché à un nœud racine représenté par un point.
+
+      Nom de domaine : nœud de l'arbre DNS, portant une étiquette d'au plus soixante-trois caractères, les nœuds étant séparés par un point.
+
+      FQDN (Fully Qualified Domain Name) : nom absolu ou canonique, ensemble des étiquettes des nœuds séparées par des points et terminé par un point final, repérant de façon unique une machine ; la profondeur maximale de l'arbre est de cent vingt-sept niveaux et la longueur maximale d'un FQDN de deux cent cinquante-cinq caractères.
+
+      Enregistrement de ressource (RR) : entrée d'une base DNS identifiant une ressource, comportant un nom de domaine FQDN, un TTL exprimé en secondes qui est la durée de validité en cache, un type sur seize bits, une classe et un champ RDATA.
+
+      Type A : enregistrement de base établissant la correspondance entre un nom d'hôte canonique et une adresse IP sur trente-deux bits, plusieurs A pouvant exister.
+
+      Type AAAA : enregistrement établissant la correspondance entre un nom d'hôte canonique et une adresse IPv6 sur cent vingt-huit bits.
+
+      Type CNAME (Canonical Name) : enregistrement faisant correspondre un alias au nom canonique, plusieurs noms désignant la même machine.
+
+      Type HINFO : champ descriptif du matériel et du système d'exploitation, généralement laissé vide pour ne pas fournir d'informations aux pirates.
+
+      Type MX (Mail eXchange) : enregistrement désignant le serveur de gestion du courrier, avec une valeur de priorité de 0 à 65 535, plusieurs MX offrant une redondance.
+
+      Type NS : enregistrement désignant le serveur de noms ayant autorité sur le domaine.
+
+      Type PTR : pointeur vers une autre partie de l'espace de noms, utilisé pour la résolution inverse.
+
+      Type SOA (Start Of Authority) : enregistrement décrivant le serveur de noms ayant autorité sur la zone et l'adresse électronique du contact technique, dont le caractère arobase est remplacé par un point, et contenant le champ SERIAL de numéro de version.
+
+      Types WINS et WINS-R : enregistrements spécifiques à Windows, WINS indiquant un serveur WINS à interroger pour une portion hôte et WINS-R utilisant un message NetBIOS pour déterminer le nom d'hôte d'une zone identifiée par une adresse IPv4.
+
+      Classe : valeur d'un RR, soit IN pour les protocoles Internet, soit CH pour le système chaotique.
+
+      Zone DNS : section de la base DNS distribuée sur les serveurs de noms, sphère d'autorisation pour tout nom à l'intérieur, chaque zone ayant au moins un nœud pour lequel elle fait autorité et un nœud de plus haut niveau qui l'identifie.
+
+      Serveur DNS primaire (maître) : serveur d'autorité sur sa zone, tenant à jour le fichier de zone, chaque zone ayant un serveur primaire.
+
+      Serveur DNS secondaire : serveur obtenant les données de zone par transfert de zone depuis un autre serveur, avec un fichier de zone en lecture seule, répondant aux requêtes pour le partage de charge et le secours, sans limite de nombre par zone.
+
+      Serveur DNS cache : serveur ne construisant sa base qu'à partir des réponses des serveurs de noms, avec un cache à durée de validité limitée par le TTL, sans autorité sur le domaine.
+
+      Transfert de zone : obtention des informations de zone par un serveur secondaire depuis le primaire, les secondaires comparant le numéro SERIAL du RR SOA, avec transfert total, transfert incrémental des seuls enregistrements modifiés, ou notification DNS où le primaire informe d'une modification.
+
+      Résolveur : programme, généralement intégré au système d'exploitation, interfaçant les applications aux serveurs DNS, situé sur la même machine que l'application, consultant des serveurs distants ou son cache local.
+
+      Mode itératif : mode où le serveur répond sur la base de ses seules informations locales, éventuellement en donnant la référence d'un autre serveur, utilisé en général sur Internet.
+
+      Mode récursif : mode où le premier serveur prend le rôle de résolveur, négocié par les bits RA de récursion admissible marqué par le serveur pour signaler la disponibilité du service, et RD de récursion désirée marqué par le requérant ; utilisé sur les réseaux locaux et le plus sûr en sécurité.
+
+      Requête inverse : demande à un serveur de noms de renvoyer le nom d'hôte associé à une adresse IP connue, utile pour la sécurité, réalisée par requête DNS inversée ou requête PTR explicite ; le domaine spécial in-addr.arpa a été créé pour y répondre sans recherche exhaustive.
+
+      Redirecteur conditionnel : serveur DNS transmettant les demandes selon le nom de domaine indiqué dans la requête, par exemple toutes les requêtes se terminant par un domaine donné vers des serveurs précis.
+
+      Zone de stub : copie d'une zone ne contenant que les enregistrements nécessaires pour identifier les serveurs DNS faisant autorité pour cette zone.
+
+      DNS intégré à Active Directory : mode où les RR DNS deviennent des objets de l'annuaire, le transfert de zone étant assuré par la réplication multi-maître d'Active Directory sans topologie distincte ni serveur primaire, avec sécurité par permissions et réplication chiffrée ; chaque zone est un objet conteneur DnsZone contenant des objets DnsNode à attribut multivalué DnsRecord ; seuls les serveurs DNS sur contrôleurs de domaine chargent les zones intégrées.
+
+      IXFR (transfert de zone par incrément) : mode par défaut de Windows Server 2008, ne transférant que les informations modifiées, le serveur repassant automatiquement en transfert complet face à un serveur DNS non compatible.
+
+      DDNS (Dynamic DNS) : mise à jour dynamique définie par la RFC 2136, introduisant l'OPCODE UPDATE qui ajoute et supprime des RR de façon atomique, validée sur le serveur primaire ou sur n'importe quel serveur d'une zone intégrée à Active Directory ; le service DHCP client, exécuté sur chaque poste, génère les mises à jour, le client proposant l'enregistrement A et le serveur DHCP mettant à jour le PTR.
+
+      Mise à jour dynamique sécurisée : configuration possible quand le DNS est intégré à Active Directory, où seuls les utilisateurs autorisés peuvent mettre à jour, avec négociation d'un contexte de sécurité Kerberos, signature des transactions et rejet des réponses usurpées.
+
+      RR SRV (emplacement du service) : enregistrement introduit par la RFC 2052 identifiant les hôtes exécutant des services spéciaux, alimenté par le service NETLOGON des contrôleurs de domaine, comportant les champs priorité, poids, port et nom FQDN de l'hôte ; sous Windows il sert à trouver LDAP au port TCP 389, Kerberos au port TCP 88, Kerberos Change Password au port 464 et le catalogue global au port TCP 3268.
+
+      Localisateur de domaine : service du NETLOGON permettant à un client de localiser un contrôleur de domaine, avec des localisateurs compatibles IP/DNS et compatibles Windows NT 4.0, le client collectant le nom DNS du domaine, le GUID et le nom de site, la disponibilité étant vérifiée par une recherche LDAP UDP et le résultat mis en cache.
+
+      Chargement de zone en arrière-plan : capacité de Windows Server 2008 à créer des threads de chargement des zones intégrées à Active Directory, permettant au service DNS de répondre aux requêtes pendant le chargement en récupérant à la demande les données non encore chargées.
+
+      RODC (Read Only Domain Controller) : contrôleur de domaine en lecture seule, plus robuste aux attaques, installable où la sécurité physique n'est pas garantie, avec un type de zone primaire accessible en lecture seule reproduisant l'arborescence complète des partitions d'annuaire DNS, les modifications devant se faire sur un contrôleur qui n'est pas un RODC.
+
+      Zone de noms globaux : zone de Windows Server 2008 stockant les noms uniques, généralement des enregistrements CNAME mappant un nom unique à un FQDN, pour un ensemble limité de serveurs centraux et critiques, répliquée à l'échelle d'une forêt, devant être unique dans la forêt et intégrée à Active Directory, ne supportant pas les mises à jour dynamiques, alternative gérable aux enregistrements statiques WINS.
+
+      Suffixe DNS principal : partie de la configuration de base d'un poste, égale par défaut au nom de domaine DNS de l'annuaire Active Directory auquel il est joint, modifiable, formant avec le nom d'hôte le nom complet d'ordinateur DNS.
+
+      Espace de noms interne et externe : parties privée invisible et publique exposée à Internet de l'espace de noms d'une organisation, qu'il vaut mieux distinguer pour simplifier la résolution et éviter les ambiguïtés.
+
+      dnscmd : utilitaire en ligne de commande réalisant la plupart des tâches du composant enfichable DNS, utilisable pour des scripts et l'administration à distance.
+
+      NSLOOKUP : utilitaire en ligne de commande de diagnostic DNS, permettant de vérifier l'existence d'un serveur, les zones prises en charge, la présence d'un RR ou de parcourir tous les enregistrements.
+
+
+COURS DÉTAILLÉ.
+
+
+I. GÉNÉRALITÉS SUR DHCP.
+
+
+   A. La vue d'ensemble et le cycle.
+
+      DHCP est dérivé de BOOTP, défini par les RFC 951 et 1084, et attribue dynamiquement des adresses IP tout en fournissant toutes les données de configuration TCP/IP, ne laissant à configurer manuellement que le serveur DHCP ; chaque nouvel hôte demande une adresse et le serveur l'attribue depuis un pool.
+
+      Le cycle DHCPv4 comprend quatre étapes, la découverte par diffusion, l'offre par un serveur, la requête où le client accepte, et l'accusé de réception ; tous les messages passent par UDP ; le serveur fixe un bail défini par l'administrateur, renouvelé à la moitié de sa durée, l'adresse retournant au pool à son expiration.
+
+
+   B. Les composants.
+
+      Le serveur DHCP possède la base des attributions et des options, dont la RFC 2132 définit une trentaine, doit avoir une adresse IP fixe et communique l'adresse IPv4, le masque, la passerelle par défaut et des paramètres supplémentaires comme les serveurs DNS ou WINS ; il écoute sur le port UDP 68 et son fonctionnement est défini par la RFC 2132.
+
+      Le client DHCP exécute automatiquement les quatre étapes au premier démarrage, tout paramètre manuel ayant priorité sur les paramètres dynamiques, écoute sur le port UDP 67 et est défini par la RFC 2131 ; l'agent de relais BOOTP/DHCP, routeur ou hôte, écoute les diffusions et les dirige vers des serveurs désignés puis renvoie les réponses, ce qui évite un serveur par segment, défini par la RFC 1542 et écoutant sur les ports UDP 67 et 68, les réseaux modernes utilisant des routeurs conformes RFC 2131.
+
+
+   C. La base de données DHCP.
+
+      Une étendue DHCP est un groupement administratif identifiant les plages consécutives d'adresses possibles pour tous les clients d'un sous-réseau physique et doit être définie avant toute utilisation ; une plage d'exclusion en retire des adresses, et les adresses restantes forment le pool attribuable dynamiquement.
+
+      Une réservation attribue une adresse avec bail illimité garantissant la même adresse IP à un périphérique, fixée à partir de son adresse MAC ; un bail est la période d'utilisation autorisée, renouvelée à la moitié de sa durée, décrit comme actif ; une option DHCP est un paramètre supplémentaire attribué avec le bail, beaucoup prédéfinies par la RFC 2132 avec possibilité d'options personnalisées.
+
+
+II. LES FONCTIONNALITÉS DE DHCP DANS WINDOWS SERVER.
+
+
+   A. L'intégration DHCP-DNS.
+
+      Pour éviter que chaque client dialogue avec le serveur DNS avec des droits en écriture, on configure le serveur DHCP en relais mandataire inscrivant les enregistrements A et PTR de ses clients, à l'aide de l'option Client FQDN numéro 81 par laquelle le client informe le serveur de son nom complet, le serveur envoyant alors un message UPDATE au serveur DNS.
+
+      Quand la mise à jour est activée, on peut mettre à jour suivant les requêtes des clients, si l'option d'enregistrement est désactivée côté client, toujours mettre à jour en priorité sur la configuration du client, ou mettre à jour pour les clients non dynamiques Windows 95, 98 et NT 4 ; par défaut, le serveur DHCP supprime les enregistrements qu'il a créés à l'expiration du bail pour garder un DNS propre.
+
+
+   B. Les autres fonctionnalités.
+
+      Une fonction d'analyse et de statistiques notifie quand les adresses distribuées atteignent un seuil, par exemple quatre-vingt-dix pour cent d'une étendue, puis quand le pool est épuisé, le gestionnaire DHCP affichant graphiquement le nombre d'adresses disponibles et épuisées, les baux par seconde, les offres, requêtes, accusés positifs et négatifs et libérations.
+
+      Les classes utilisateurs permettent à un client de spécifier son type, bureau ou portable, l'administrateur attribuant des options différentes comme des baux plus courts pour les portables ; MADCAP affecte dynamiquement des adresses IP multicast, réservées à la transmission d'un émetteur vers plusieurs destinataires ; un serveur DHCP doit être autorisé dans Active Directory, en général par l'administrateur du domaine, avant de distribuer des adresses, un serveur non autorisé ne répondant à aucune requête.
+
+      Pour la tolérance de panne, le fractionnement d'étendues sur deux serveurs perd la moitié des adresses en cas de panne, aussi le clustering est-il préférable, gérant deux serveurs comme un seul système virtuel avec une base de clustering sur disque distant, un seul serveur fonctionnant à la fois et l'espace de noms étant reconstitué de façon transparente ; la configuration automatique de client, depuis Windows 2000, permet à un client sans serveur DHCP de se configurer, après tentative de localisation d'un serveur, de renouvellement des baux non expirés et de ping de la passerelle par défaut du bail pour vérifier qu'il n'a pas été déplacé, avec une nouvelle recherche toutes les cinq minutes.
+
+
+   C. DHCPv6.
+
+      DHCP est inutile pour configurer les adresses IPv6 mais utile pour une configuration avec état ou pour d'autres paramètres ; un hôte IPv6 utilise la configuration automatique sans état par sollicitation du routeur, ou avec état selon le drapeau M qui commande l'obtention d'adresses dynamiques et le drapeau O qui commande l'obtention des autres paramètres.
+
+      DHCPv6, défini par la RFC 3315, comprend clients, serveurs et agents de relais ; un échange avec état, quand M et O valent un, comprend une sollicitation du client, une information d'un serveur, une demande à un serveur spécifique et une réponse contenant les adresses et paramètres, un agent de relais encapsulant les messages entre client et serveur.
+
+
+III. LE DÉPLOIEMENT DE DHCP.
+
+      Avant de déployer DHCP, il faut estimer le nombre de serveurs en tenant compte de l'emplacement des routeurs et de la vitesse des liens, un serveur étant en général déployé aux deux extrémités d'un lien WAN ou d'accès à distance ; un réseau physique ne peut avoir qu'une étendue, ou une étendue globale contenant plusieurs plages, les étendues globales prenant en charge les segments multiréseaux et, via les agents de relais, les clients distants.
+
+      Les réservations sont utiles pour les serveurs WINS, contrôleurs de domaine, serveurs d'impression TCP/IP, clients UNIX et serveurs DNS ; le serveur DHCP doit avoir une adresse IP fixe, s'installe par le Gestionnaire de serveur en ajoutant le rôle Serveur DHCP, puis se configure via l'assistant, liaisons de connexion réseau, paramètres DNS et WINS IPv4, étendues DHCP et mode DHCPv6 sans état ; le serveur nettoie le DNS en supprimant les enregistrements des baux expirés et doit être autorisé dans Active Directory.
+
+
+IV. GÉNÉRALITÉS SUR DNS.
+
+
+   A. Le rôle et l'historique.
+
+      Le DNS assure la conversion entre noms d'hôtes et adresses IP ; c'est à la fois une base de données répartie et hiérarchique et un ensemble de protocoles définissant un mécanisme de requête et de mise à jour, un mécanisme de réplication et un schéma ; jusqu'en 1984, un fichier HOSTS maintenu par le NIC et transmis par FTP servait à cela, mais sa mise à jour encombrait la bande passante et les organismes manquaient d'autonomie.
+
+      Le DNS introduit en 1984 apporte l'évolutivité, l'administration décentralisée et divers types de données, sa taille étant illimitée par la répartition ; la mise en œuvre Microsoft est apparue dans Windows NT Server 4.0 sur les RFC 1034 et 1035, Windows 2000 Server ajoutant de nombreuses RFC dont la 2136.
+
+
+   B. La hiérarchie et les enregistrements.
+
+      Le DNS est une arborescence de nœuds appelés noms de domaine, avec des TLD comme .com, .fr ou .uk rattachés à un nœud racine représenté par un point, chaque étiquette faisant au plus soixante-trois caractères ; l'extrémité d'une branche est un hôte, le domaine est le suffixe hors hôte, et le FQDN est le nom absolu terminé par un point, la profondeur maximale de l'arbre étant de cent vingt-sept niveaux et la longueur d'un FQDN de deux cent cinquante-cinq caractères.
+
+      Une base DNS est composée d'enregistrements de ressources comportant un nom de domaine FQDN, un TTL en secondes qui est la durée de validité en cache, un type sur seize bits, une classe IN ou CH et un champ RDATA ; les principaux types sont A pour un nom vers une adresse IPv4, AAAA vers une adresse IPv6, CNAME pour un alias, HINFO descriptif à laisser vide, MX pour le serveur de courrier avec priorité de 0 à 65 535, NS pour le serveur de noms d'autorité, PTR pour un pointeur, et SOA décrivant le serveur d'autorité et le contact technique avec le champ SERIAL ; Windows ajoute les types WINS et WINS-R.
+
+
+   C. Les zones et les serveurs de noms.
+
+      La base DNS est divisée en zones distribuées sur les serveurs de noms, chaque zone étant la sphère d'autorisation pour ses noms, ayant au moins un nœud d'autorité et un nœud de plus haut niveau qui l'identifie, décrite par des enregistrements dont les plus importants sont les NS de la zone et le SOA de gestion.
+
+      On distingue le serveur primaire ou maître, d'autorité sur sa zone et tenant à jour le fichier de zone, unique par zone, le serveur secondaire obtenant les données par transfert de zone avec un fichier en lecture seule pour le partage de charge et le secours, sans limite de nombre, et le serveur cache ne construisant sa base qu'à partir des réponses avec un cache limité par le TTL, sans autorité ; le transfert de zone se fait après comparaison du numéro SERIAL, en transfert total, transfert incrémental des seuls enregistrements modifiés, ou notification DNS où le primaire informe d'une modification.
+
+
+V. LA RÉSOLUTION DE NOM DNS.
+
+
+   A. Les résolveurs et les modes.
+
+      Le résolveur, généralement intégré au système d'exploitation, interface les applications aux serveurs DNS, situé sur la même machine que l'application, consultant des serveurs distants ou son cache local, ce qui élimine le temps d'acheminement et décharge les serveurs.
+
+      En mode itératif, le serveur répond sur la base de ses seules informations locales, éventuellement en donnant la référence d'un autre serveur, mode utilisé en général sur Internet ; en mode récursif, le premier serveur prend le rôle de résolveur, négocié par le bit RA de récursion admissible marqué par le serveur pour signaler la disponibilité du service et le bit RD de récursion désirée marqué par le requérant, mode utilisé sur les réseaux locaux et le plus sûr en sécurité.
+
+      Une requête inverse demande le nom d'hôte associé à une adresse IP connue, utile pour la sécurité, réalisée par requête inversée qui demande toutes les questions conduisant à une réponse, ou par requête PTR explicite ; le domaine spécial in-addr.arpa a été créé pour y répondre sans recherche exhaustive, avec des enregistrements PTR.
+
+
+   B. La résolution sous Windows.
+
+      Si NetBIOS est activé, Windows tente successivement, si les méthodes standard échouent, le cache de noms NetBIOS, les serveurs WINS, les diffusions et le fichier LMHOSTS ; l'ordre complet est la vérification du nom local, le cache du client DNS, les serveurs DNS configurés, jusqu'à deux séries de requêtes LLMNR pour un nom unique en IPv4 et IPv6, puis la conversion en nom NetBIOS de seize octets par mise en majuscules et remplissage d'espaces avec 0x00 en dernier octet, le cache NetBIOS, les serveurs WINS, jusqu'à trois requêtes broadcast, et enfin le fichier LMHOSTS ; le processus s'arrête à la première adresse IP trouvée, un nom de plus de seize caractères ou un FQDN ne pouvant être converti en nom NetBIOS.
+
+
+VI. LES FONCTIONNALITÉS DE DNS DANS WINDOWS SERVER 2008.
+
+
+   A. La conformité, l'intégration et le transfert conditionnel.
+
+      Le service DNS est conforme aux RFC de l'IETF, interopère avec les autres implémentations comme BIND, est nécessaire à Active Directory et peut y stocker ses zones dans une partition d'annuaire ; le redirecteur conditionnel transmet les demandes selon le nom de domaine de la requête, et la zone de stub est une copie ne contenant que les enregistrements identifiant les serveurs faisant autorité pour une zone.
+
+      Le service DNS s'intègre avec Active Directory, WINS et DHCP, s'administre par un composant enfichable graphique, des assistants et l'utilitaire dnscmd, gère la mise à jour dynamique conforme à la RFC 2136, le transfert de zone incrémental, la sécurisation des mises à jour pour les zones intégrées à Active Directory, de nouveaux types de RR comme SRV et ATMA, et le vieillissement et le nettoyage des enregistrements obsolètes.
+
+
+   B. L'intégration dans Active Directory.
+
+      En mode conventionnel, un serveur primaire fait autorité et des secondaires ont une copie en lecture seule, les RR étant dans un fichier texte chargé en mémoire au démarrage ; en mode intégré à Active Directory, les RR deviennent des objets de l'annuaire, le transfert étant assuré par la réplication multi-maître sans topologie distincte ni serveur primaire, avec sécurité par permissions et réplication chiffrée.
+
+      Chaque zone est un objet conteneur DnsZone contenant un objet feuille DnsNode par nom unique, celui-ci ayant un attribut multivalué DnsRecord ; seuls les serveurs DNS sur contrôleurs de domaine chargent les zones intégrées ; le transfert par incrément IXFR est le mode par défaut, le serveur repassant automatiquement en transfert complet face à un serveur non compatible.
+
+
+   C. Les mises à jour dynamiques.
+
+      La mise à jour dynamique, définie par la RFC 2136, introduit l'OPCODE UPDATE qui ajoute et supprime des RR de façon atomique, validée sur le serveur primaire ou sur n'importe quel serveur d'une zone intégrée à Active Directory ; un transfert de zone verrouille la zone et met en file d'attente les demandes de mise à jour reçues pendant le transfert.
+
+      Le client localise par requête SOA un serveur primaire, vérifie l'absence de l'enregistrement par un prérequis exclusif puis l'inscrit, retentant sur un autre serveur si la zone est multi-maître, avec des délais de cinq minutes, dix minutes puis cinquante minutes en cas d'échecs répétés ; c'est le service client DHCP, exécuté sur chaque poste même à adresse fixe, qui génère les mises à jour, le client DHCP proposant l'enregistrement A et le serveur DHCP mettant à jour le PTR, le serveur DHCP pouvant être configuré pour ne mettre à jour que sur demande, par défaut, ou toujours ; les clients Windows 2000 ou supérieur réinscrivent leurs enregistrements toutes les vingt-quatre heures, et un client à configuration statique ou RAS met à jour lui-même les RR A et PTR.
+
+      Le DNS dynamique a plusieurs avantages sur WINS, un espace de noms hiérarchisé, une localisation plus facile, un standard ouvert multi-plateforme évitant une base WINS séparée, et l'intégration à Active Directory pour la réplication automatique, WINS restant utile en secours ; la mise à jour dynamique sécurisée, possible avec l'intégration Active Directory, négocie un contexte de sécurité Kerberos, signe les transactions et rejette les réponses usurpées.
+
+
+   D. Les enregistrements SRV et les autres améliorations.
+
+      Le RR SRV, introduit par la RFC 2052, identifie les hôtes exécutant des services spéciaux, alimenté par le service NETLOGON des contrôleurs de domaine, avec les champs priorité de plus basse valeur la plus haute et toujours zéro pour Active Directory, poids toujours cent pour Active Directory, port TCP ou UDP et nom FQDN de l'hôte ; sous Windows il sert à trouver LDAP au port TCP 389, Kerberos au port TCP 88, Kerberos Change Password au port 464 et le catalogue global au port TCP 3268.
+
+      Le localisateur de domaine du NETLOGON permet à un client de localiser un contrôleur, avec des localisateurs compatibles IP/DNS et Windows NT 4.0, le client collectant le nom DNS du domaine, le GUID et le nom de site, la disponibilité étant vérifiée par une recherche LDAP UDP et le résultat mis en cache ; le chargement de zone en arrière-plan crée des threads pour les zones Active Directory afin de répondre aux requêtes pendant le chargement en récupérant à la demande les données non chargées.
+
+      Pour IPv6, la résolution utilise l'enregistrement AAAA, la résolution inverse le domaine IP6.ARPA où chaque chiffre hexadécimal devient un niveau, et Windows Server 2008 active les opérations IPv6 par défaut, contrairement à Windows 2003 qui exigeait dnscmd config EnableIPv6 ; le RODC, contrôleur en lecture seule plus robuste aux attaques, dispose d'un type de zone primaire en lecture seule reproduisant l'arborescence complète, les modifications se faisant sur un contrôleur non RODC ; la zone de noms globaux stocke des noms uniques, généralement des CNAME vers un FQDN, pour les serveurs centraux et critiques, répliquée à l'échelle d'une forêt, unique dans la forêt, intégrée à Active Directory et ne supportant pas les mises à jour dynamiques.
+
+
+VII. L'IMPLÉMENTATION DE DNS DANS WINDOWS SERVER 2008.
+
+
+   A. Le choix des noms.
+
+      Quand DNS accompagne Active Directory, on conçoit d'abord la structure des domaines Active Directory puis on en déduit l'architecture DNS, un domaine Active Directory devant correspondre à un domaine DNS ; l'espace de noms d'une organisation a une partie privée interne invisible et une partie publique externe exposée à Internet, à distinguer pour simplifier la résolution et éviter les ambiguïtés.
+
+      Il vaut mieux exclure le nom de domaine enregistré public et utiliser en interne un suffixe différent ou un sous-domaine du domaine externe, combiné à un nom d'emplacement pour former des noms uniques, les domaines enfants ayant des noms immédiatement subordonnés à leur parent ; les caractères standards de DNS, selon la RFC 1123, sont les lettres, les chiffres et le tiret, sans distinction de casse, alors que NetBIOS en permet davantage, d'où un ajustement parfois long des conventions, le serveur DNS prenant en charge les caractères ASCII et Unicode étendus ; un ordinateur Windows 2000 ou supérieur a un nom NetBIOS pour l'interopérabilité et un nom complet d'ordinateur DNS concaténant le nom d'hôte et le suffixe DNS principal, égal par défaut au nom de domaine de l'annuaire.
+
+
+   B. L'installation et le diagnostic.
+
+      Les recommandations matérielles sont un monoprocesseur Pentium II à quatre cents mégahertz, cinq cent douze mégaoctets de mémoire vive par processeur et au moins quatre gigaoctets d'espace disque, un serveur DNS utilisant environ cent octets de mémoire vive par enregistrement de ressource.
+
+      Le serveur DNS doit avoir une adresse IP fixe, s'installe par le Gestionnaire de serveur en ajoutant le rôle Serveur DNS, se configure par une console dédiée ou la commande dnsmgmt.msc ; en cas de problème, l'utilitaire NSLOOKUP permet de vérifier qu'un serveur existe, quelles zones il prend en charge, la présence d'un RR précis ou de parcourir tous ses enregistrements.
+
+
+POINTS D'ATTENTION.
+
+      Un serveur DHCP, comme un serveur DNS, doit obligatoirement posséder une adresse IP fixe.
+
+      Le cycle DHCPv4 comprend découverte, offre, requête et accusé de réception, tous les messages passant par UDP.
+
+      Les diffusions DHCP ne franchissent pas les routeurs, d'où la nécessité d'un agent de relais.
+
+      Un serveur DHCP doit être autorisé dans Active Directory avant de distribuer des adresses ; un serveur non autorisé ne répond à rien.
+
+      Le fractionnement d'étendues perd la moitié des adresses en cas de panne d'un serveur, contrairement au clustering.
+
+      DHCPv6 ne sert pas à configurer les adresses IPv6 elles-mêmes, mais une configuration avec état ou d'autres paramètres, selon les drapeaux M et O.
+
+      Un FQDN se termine par un point ; sans le point, le nom est relatif et le domaine principal est ajouté en suffixe.
+
+      Le mode itératif est utilisé sur Internet, le mode récursif sur les réseaux locaux et il est le plus sûr.
+
+      Dans une zone intégrée à Active Directory, il n'y a plus de serveur DNS primaire, tous les serveurs pouvant recevoir des mises à jour.
+
+      Seuls les serveurs DNS sur contrôleurs de domaine peuvent charger les zones intégrées à l'annuaire.
+
+      C'est le service client DHCP, présent même sur un poste à adresse fixe, qui génère les mises à jour dynamiques du DNS.
+
+      Les enregistrements SRV d'Active Directory utilisent toujours la priorité zéro et le poids cent.
+
+      La zone de noms globaux ne supporte pas les mises à jour dynamiques et doit être unique dans la forêt.
+
+
+EXEMPLES CITES.
+
+      Découpage du cycle DHCPv4 en découverte, offre, requête et accusé de réception.
+
+      Option Client FQDN numéro 81 permettant au serveur DHCP d'inscrire les A et PTR de ses clients.
+
+      Alerte DHCP à quatre-vingt-dix pour cent des adresses d'une étendue puis à l'épuisement du pool.
+
+      Réservations pour serveurs WINS, contrôleurs de domaine, serveurs d'impression TCP/IP et serveurs DNS.
+
+      FQDN www.bercy.gouv.fr, service web dans le domaine bercy.gouv.fr sous le TLD .fr.
+
+      Types de RR A, AAAA, CNAME, HINFO, MX avec priorité, NS, PTR et SOA.
+
+      Domaine spécial in-addr.arpa pour la résolution inverse IPv4 et IP6.ARPA pour IPv6.
+
+      Enregistrements SRV pour LDAP au port TCP 389, Kerberos au port TCP 88, catalogue global au port TCP 3268.
+
+      Adresse IPv6 FD91:2ADD:715A:2111:DD48:AB34:D07C:3914 et son nom de recherche inversée en IP6.ARPA.
+
+      Suffixes DNS internes bercy.fr ou intranet.finances.gouv.fr distincts du suffixe externe.
+
+      Recommandations matérielles Pentium II à quatre cents mégahertz, cinq cent douze mégaoctets de mémoire vive par processeur.
+
+      Utilitaires dnscmd, dnsmgmt.msc et NSLOOKUP pour l'administration et le diagnostic du DNS.

@@ -1,38 +1,380 @@
-RÉSEAUX INFORMATIQUES : HISTOIRE ET MODÈLES EN COUCHES (OSI et DoD)
+LES RÉSEAUX INFORMATIQUES : HISTOIRE ET MODÈLES EN COUCHES OSI ET DOD.
 
-1. NOTIONS GÉNÉRALES
-Le but d'un réseau est de faire communiquer des entités ; pour un réseau informatique, ce sont des ordinateurs. Un protocole est une description formelle des règles et conventions d'un échange d'informations (analogie : une langue commune, ou l'adresse et la présentation d'une lettre postale). La suite TCP-IP est le standard « de fait » du monde des réseaux.
-Échelles géographiques : PAN (une maison), LAN (un bâtiment, dizaines à milliers d'équipements), MAN (une ville), WAN (région, pays, monde) ; équivalents sans fil : WPAN, WLAN, WMAN, WWAN.
-Enjeux qui ont motivé les réseaux : mutualiser les ressources et l'accès à l'information, étendre l'espace de communication (Intranet, Extranet), fédérer les pratiques (ToIP, VoIP), étoffer l'offre de services (web).
 
-2. MISE EN PERSPECTIVE HISTORIQUE
-ARPANET : réseau de l'ARPA (agence du DoD américain), fondé sur la commutation par paquets. Premier lien le 21 novembre 1969 entre UCLA et Stanford Research Institute ; réseau à 4 nœuds fin 1969 ; 213 hôtes en 1981.
-Trois composantes « préhistoriques » :
-- Normes de communication : les RFC (Request For Comments), documentation ouverte, non hiérarchique, devenue la mémoire collective d'Internet. RFC n°1 en avril 1969 (Steve Crocker, définition de la machine hôte).
-- Le NWG (Network Working Group) : doctorants des 4 sites, protocoles de connexion et premières applications (Telnet, FTP).
-- BBN (Bolt Beranek and Newman) : construction des IMP (Interface Message Processor), petits ordinateurs de commutation des messages, ancêtres des routeurs.
-Deux « lectures » de l'origine, toutes deux trop mono-causales : la lecture militaire (réseau indestructible) et la lecture communicationnelle (village mondial). IBM et AT&T sont restés à l'écart d'ARPANET. L'essor du DNS accompagne la croissance exponentielle du nombre de machines ; au début des années 90, intégration d'ARPANET dans Internet (web : HTML, HTTP, premiers navigateurs).
-L'incompatibilité des réseaux propriétaires des années 1970 (SNA d'IBM 1974, DNA de Digital 1975, DSA de Bull) crée un besoin d'interopérabilité, d'où les travaux sur OSI (ISO, dès 1977) et sur TCP/IP (ARPANET, dès 1974).
+LEXIQUE COMPLET.
 
-3. PRINCIPE DES MODÈLES EN COUCHES
-Les données traversent successivement des couches ; chaque couche ajoute un en-tête (encapsulation) puis transmet à la couche suivante ; l'en-tête est retiré à l'arrivée (désencapsulation). Chaque couche fournit un service aux couches supérieures en s'appuyant sur les couches inférieures. Intérêt : diviser un problème complexe, favoriser l'interopérabilité indépendamment des fabricants et technologies.
-Dans le modèle DoD : données (utilisateur), message (application-transport), segment (transport-réseau), datagramme (réseau-accès réseau), trame ou paquet (accès réseau).
+      Serveur lame (blade) : serveur plat enfichable dans un châssis, sorte d'armoire spécifique, qui mutualise avec les autres lames les alimentations, les ventilateurs et les commutateurs.
 
-4. LE MODÈLE OSI (7 couches, ISO)
-1. Physique : liaison physique, connecteurs, niveaux de tension, codage (Manchester).
-2. Liaison de données : connexion logique, trames, détection et correction d'erreurs, accès au support.
-3. Réseau : acheminement et routage entre systèmes d'extrémité, taille des blocs.
-4. Transport : transfert de bout en bout, découpage en paquets et reconstitution, transparence pour les couches hautes.
-5. Session : synchronisation et séquencement du dialogue, reprise sur erreur (jeton pour Token Ring).
-6. Présentation : mise en forme, conversion de codes (ASCII, EBCDIC), chiffrement, compression.
-7. Application : communication entre les couches basses et les applications utilisateur (elle ne contient pas les applications).
-Couches basses (transport de l'information) et couches hautes (traitement).
+      Châssis : armoire recevant les serveurs lames dans sa partie basse, la station d'administration dans sa partie haute et les éléments partageables à l'arrière.
 
-5. LE MODÈLE DoD / TCP-IP (4 couches)
-- Application : reprend Application + Présentation + Session d'OSI ; protocoles Telnet, FTP, TFTP, SMTP, HTTP.
-- Transport : TCP (fiable, orienté connexion, contrôle de flux, remise ordonnée) et UDP (non fiable, sans connexion, ex. voix).
-- Réseau : envoi de paquets à un hôte distant, adresses IP et routage ; protocoles IP, ARP, RARP, ICMP.
-- Accès réseau : regroupe Physique + Liaison d'OSI ; adresses physiques, erreurs matérielles ; Ethernet le plus fréquent en LAN. Parfois découpée en deux (modèle à 5 couches).
+      Station d'administration : ensemble matériel et logiciel qui fournit l'état matériel et logiciel des lames, permet de les arrêter et de les démarrer et journalise les messages de la console système.
 
-6. COMPARAISON
-La correspondance OSI / DoD n'est pas parfaite : OSI est théorique, complet mais complexe ; DoD part d'un standard existant. Le modèle OSI reste la référence intellectuelle et normative ; le modèle TCP/IP, pragmatique et réactif, s'est imposé comme standard de fait et est au cœur d'Internet.
+      Réseau : ensemble d'entités que l'on fait communiquer ; pour un réseau informatique, ces entités sont des ordinateurs.
+
+      Protocole : description formelle des règles et conventions à suivre dans un échange d'information ; il s'apparente à une langue commune entre les interlocuteurs.
+
+      RFC (Request For Comments) : document de documentation ouverte du réseau, à l'origine document de travail du Network Working Group, devenu la mémoire collective consignant toutes les normes techniques adoptées.
+
+      ARPANET : réseau de télécommunication conçu par l'ARPA, agence de recherche du ministère américain de la défense, premier réseau à commutation par paquets.
+
+      ARPA (Advanced Research Projects Agency) : agence de recherche du DOD à l'origine d'ARPANET.
+
+      DOD (Department Of Defense) : ministère américain de la défense, commanditaire d'ARPANET et à l'origine du modèle DOD.
+
+      IPTO : bureau des techniques de traitement de l'information, émanation de l'ARPA.
+
+      NWG (Network Working Group) : groupe des doctorants des quatre premiers sites d'ARPANET, pères fondateurs des protocoles, à l'origine des premières applications comme Telnet et FTP et du dispositif des RFC.
+
+      IETF (Internet Engineering Task Force) : successeur du NWG.
+
+      IEEE : Institute of Electrical and Electronics Engineers, à l'origine des normes Ethernet et Wi-Fi.
+
+      ISO (International Standard Organization) : organisme international dépendant de l'ONU, auteur du modèle OSI.
+
+      BBN (Bolt Beranek and Newman) : entreprise qui remporte en mille neuf cent soixante-huit l'appel d'offres de l'ARPA et réalise l'infrastructure matérielle d'ARPANET, notamment les IMP.
+
+      IMP (Interface Message Processor) : petit ordinateur spécialisé dans la commutation des messages, ancêtre du routeur, assurant la compatibilité des connexions entre ordinateurs hétérogènes.
+
+      Commutation par paquets (mode datagramme) : technique de transmission dans laquelle l'information est découpée en paquets acheminés indépendamment, choisie pour ARPANET car plus résistante qu'une liaison téléphonique commutée.
+
+      DNS (Domain Name System) : service névralgique qui référence les machines et assure la résolution entre noms de domaine et adresses IP, mis en place sur Internet en mille neuf cent quatre-vingt-quatre.
+
+      Modèle en couches : architecture dans laquelle les données traversent successivement plusieurs niveaux de protocoles, chaque couche ajoutant une information puis transmettant à la couche suivante.
+
+      Encapsulation : ajout par une couche d'un en-tête aux données reçues de la couche supérieure.
+
+      Désencapsulation : retrait par une couche de l'en-tête ajouté par la couche de même niveau de l'hôte distant.
+
+      Communication horizontale : dialogue logique entre deux couches de même niveau situées sur des hôtes différents, au moyen d'en-têtes.
+
+      Communication verticale : passage des données d'une couche à la couche adjacente sur un même hôte.
+
+      Système ouvert : système dont l'ajout ou la suppression ne modifie pas le comportement global du réseau.
+
+      Modèle OSI (Open Systems Interconnection) : modèle de référence théorique de l'ISO en sept couches, qui décrit ce que doivent faire les couches sans imposer les protocoles.
+
+      Modèle DOD (ou modèle TCP/IP) : modèle en quatre couches issu de l'implémentation de TCP et IP, devenu le standard de fait des réseaux.
+
+      TCP (Transmission Control Protocol) : protocole de transport fiable, orienté connexion, qui assure l'acheminement sans erreur des paquets et le contrôle de flux.
+
+      UDP (User Datagram Protocol) : protocole de transport non fiable et sans connexion, employé quand le contrôle de flux et l'ordre de remise ne sont pas nécessaires, par exemple pour la transmission de la voix.
+
+      IP (Internet Protocol) : protocole de la couche réseau du modèle DOD qui gère les adresses IP et le routage, avec ARP, RARP et ICMP.
+
+      ARP (Address Resolution Protocol) : protocole de résolution d'une adresse IP en adresse physique MAC.
+
+      RARP (Reverse Address Resolution Protocol) : protocole de résolution inverse d'une adresse physique en adresse IP.
+
+      ICMP (Internet Control Message Protocol) : protocole de gestion des erreurs et de test de connectivité de la couche réseau.
+
+      PAN : réseau à l'échelle de quelques équipements, par exemple une maison.
+
+      LAN (Local Area Network) : réseau à l'échelle d'un bâtiment ou plus, de plusieurs dizaines à quelques milliers d'équipements.
+
+      MAN : réseau à l'échelle d'une ville, de plusieurs milliers à quelques dizaines de milliers d'équipements.
+
+      WAN : réseau à l'échelle d'une région, d'un pays ou du monde, de plusieurs dizaines de milliers à plusieurs millions d'équipements.
+
+      Données, message, segment, datagramme, trame ou paquet : noms successifs de l'information dans le modèle DOD selon les couches traversées et les en-têtes présents.
+
+      Couches hautes et couches basses : les couches basses s'occupent du transport de l'information, les couches hautes de son traitement.
+
+      SNA (System Network Architecture) : architecture réseau propriétaire d'IBM de mille neuf cent soixante-quatorze visant à diminuer le nombre de procédures utilisables dans le monde IBM.
+
+      DNA (Digital Network Architecture) : architecture propriétaire de Digital de mille neuf cent soixante-quinze, devenue conforme au modèle OSI à partir de la phase cinq.
+
+      DSA (Distributed System Architecture) : architecture de Bull conforme au modèle de référence OSI, à sept couches mais avec des protocoles propriétaires, reposant sur le DATANET faisant fonction de frontal, concentrateur, commutateur et passerelle.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LES SERVEURS LAMES.
+
+
+   A. Constitution physique.
+
+      Les serveurs lames, appelés blades en anglais, se présentent sous forme de serveurs plats enfichables dans le bas d'un châssis, verticalement ou horizontalement, la station d'administration occupant la partie haute et les éléments partageables, à savoir les alimentations électriques, les ventilateurs et les commutateurs, étant logés à l'arrière, presque toujours redondants et remplaçables à chaud.
+
+      Chaque lame et la station d'administration possèdent en propre un ou plusieurs processeurs, l'architecture à deux processeurs étant la plus courante, une carte mère, une mémoire centrale, des disques durs internes et des cartes réseau.
+
+      L'ensemble est connecté à un réseau IP privé, interne et local, la connectique étant souvent réalisée en Ethernet Gigabit sur un ou deux commutateurs redondants qui possèdent des interfaces externes vers le réseau local ou global.
+
+
+   B. Rôles de la station d'administration.
+
+      La station d'administration fournit des informations sur les états matériel et logiciel des serveurs lames, arrête et démarre les lames en exploitation ou en maintenance et journalise les messages envoyés à la console système.
+
+      Elle comprend des éléments matériels que sont un écran, un clavier et une souris, ainsi que des éléments logiciels que sont un système d'exploitation et des logiciels spécifiques.
+
+      Le logiciel d'administration supervise l'ensemble des lames du châssis et assure la gestion des événements, la surveillance de l'exploitation, la collecte des informations, la gestion du matériel et le pilotage des systèmes d'exploitation, tandis que le logiciel de déploiement permet le déploiement et le redéploiement d'images sur les lames pour un service en serveurs répliqués.
+
+      La redondance des matériels assure la continuité des services applicatifs en cas de panne, et un outil d'administration permet le remplacement à chaud et la configuration dynamique des périphériques ; les systèmes d'exploitation les plus courants sont Linux et Windows Server, et les architectures de processeurs les plus courantes sont x86, ARM et Power d'IBM.
+
+
+II. PRÉSENTATION GÉNÉRALE DU RÉSEAU INFORMATIQUE.
+
+
+   A. De quoi s'agit-il.
+
+      Le but d'un réseau est de faire communiquer ensemble des entités qui, pour un réseau informatique, sont des ordinateurs, et si l'on compare ces échanges à des conversations humaines, le protocole réseau s'apparente à une langue.
+
+      Un protocole est une description formelle des règles et conventions à suivre dans un échange d'information, comparable à la façon dont on écrit une adresse sur une enveloppe et dont on met en forme une lettre, la suite protocolaire TCP/IP étant aujourd'hui un standard de fait.
+
+
+   B. Qui sont les acteurs.
+
+      Les organismes gouvernementaux ou internationaux comprennent le DOD et l'IPTO, l'INRIA avec le réseau Cyclades qui fut l'ARPANET à la française, et l'ISO.
+
+      Les collectivités scientifiques peu institutionnelles comprennent le NWG, groupe historique des pères fondateurs d'ARPANET, l'IETF qui lui a succédé et l'IEEE, à l'origine des normes Ethernet et Wi-Fi.
+
+      Les acteurs sociaux et économiques comprennent des constructeurs comme IBM et Cisco, des opérateurs comme Orange Business Service, SFR ou Completel, une tendance à l'infogérance et l'émergence des acteurs anonymes des réseaux sociaux.
+
+
+   C. Où s'inscrit le réseau.
+
+      Dans le monde filaire, on distingue le PAN à l'échelle de quelques équipements, le LAN à l'échelle d'un bâtiment avec plusieurs dizaines à quelques milliers d'équipements, le MAN à l'échelle d'une ville avec plusieurs milliers à quelques dizaines de milliers d'équipements et le WAN à l'échelle d'une région, d'un pays ou du monde avec plusieurs dizaines de milliers à plusieurs millions d'équipements.
+
+      Dans le monde sans fil, on retrouve les équivalents WPAN, WLAN, WMAN et WWAN.
+
+
+   D. Quand : un contexte évolutif.
+
+      Les réseaux informatiques sont omniprésents dans la sphère publique avec Internet, professionnelle avec l'intranet et privée avec les réseaux locaux familiaux, mais leur histoire est récente, avec environ quarante ans de préhistoire et une vingtaine d'années de généralisation massive.
+
+
+   E. Comment : structuration et langage.
+
+      Le fonctionnement repose sur un langage fait d'aspects protocolaires et de grammaires illustrées par les RFC, et sur un modèle de communication en couches reposant sur la communication horizontale et verticale, l'encapsulation et la désencapsulation, avec une grande évolutivité des principes théoriques et matériels.
+
+
+   F. Pourquoi : les enjeux.
+
+      Le réseau permet de mutualiser les ressources et de favoriser l'accès aux informations, aux fichiers et aux impressions, la liste des ressources partagées ne cessant de croître avec les périphériques, la mémoire et les processeurs.
+
+      Il permet aussi d'étendre l'espace de communication avec l'intranet et l'extranet, de fédérer les pratiques avec la convergence entre téléphonie et informatique, à savoir la ToIP et la VoIP, et d'étoffer l'offre de services web.
+
+
+III. MISE EN PERSPECTIVE HISTORIQUE.
+
+
+   A. La préhistoire : ARPANET.
+
+      ARPANET devait connecter des réseaux hétérogènes et résister à une éventuelle attaque nucléaire, contrairement au réseau téléphonique jugé trop vulnérable, et il fut convenu qu'il utiliserait la commutation par paquets en mode datagramme.
+
+      Le premier lien fut établi entre l'université de Californie à Los Angeles et le Stanford Research Institute le vingt et un novembre mille neuf cent soixante-neuf, et en décembre de la même année l'ajout de l'université d'Utah et de l'université de Californie à Santa Barbara formait un réseau à quatre nœuds ; à partir de mille neuf cent soixante-douze le réseau se développa rapidement jusqu'en mille neuf cent quatre-vingt-un, date à laquelle le nombre d'hôtes s'élevait à deux cent treize.
+
+
+   B. Les normes de communication : NWG et RFC.
+
+      Pour échanger sur le projet, un système ouvert et égalitaire d'information, de communication et d'innovation est mis en place, dont le point fort est la production des RFC, conçues comme une documentation ouverte qui structure le réseau des chercheurs, accélère les recherches collectives sur les protocoles et devient la mémoire technique interne du réseau.
+
+      La première RFC, d'avril mille neuf cent soixante-neuf, est l'œuvre d'un membre du NWG et définit la machine hôte ; le NWG, créé à l'été mille neuf cent soixante-huit, rassemble les doctorants des quatre sites d'ARPANET sous la responsabilité de Steve Crocker et aboutit aux premiers protocoles et aux premières applications comme Telnet et FTP.
+
+      Le NWG passe de cinq membres en mille neuf cent soixante-neuf à près d'une centaine de chercheurs en mille neuf cent soixante et onze et répand des valeurs de liberté d'expression et de méritocratie informelle ; les RFC restent consultables et ouvertes aujourd'hui.
+
+
+   C. Les normes techniques : BBN et les IMP.
+
+      La firme BBN, d'abord constituée de consultants en acoustique, se réoriente dans les années soixante vers l'informatique interactive et le time-sharing, conception qui s'oppose au traitement par lots différé, puis remporte en mille neuf cent soixante-huit l'appel d'offres de l'ARPA pour construire le réseau et devient responsable de l'infrastructure matérielle.
+
+      BBN spécifie et connecte les IMP, petits ordinateurs spécialisés dans la commutation des messages, ancêtres des routeurs, dont l'idée revient à Wes Clark qui propose en mille neuf cent soixante-sept de décharger les ordinateurs des universités des tâches de commutation, les IMP assurant la compatibilité des connexions entre ordinateurs hétérogènes des quatre premières universités connectées fin mille neuf cent soixante-neuf.
+
+      En mille neuf cent soixante et onze, ARPANET compte vingt-trois ordinateurs sur quinze sites reliés par des liaisons à cinquante kilobits par seconde.
+
+
+   D. L'émergence du réseau des réseaux.
+
+      Douze ans après mille neuf cent soixante et onze, en mille neuf cent quatre-vingt-trois, le nombre de machines connectées est multiplié par vingt-cinq et dépasse cinq cents unités, puis mille l'année suivante, et le service de référencement des machines, le DNS, est implémenté.
+
+      Au début des années quatre-vingt-dix, le nombre de machines connectées, aux États-Unis et en Europe principalement, dépasse le million d'unités, ce qui correspond à l'intégration de l'ancêtre ARPANET dans le réseau Internet en cours d'affirmation, avec une architecture en toile de nœuds maillés reposant sur l'hypertexte, le langage HTML, le protocole HTTP et les premières interfaces de navigation appelées navigateurs.
+
+
+   E. Les deux lectures de l'origine des réseaux.
+
+      La lecture militaire présente ARPANET comme un réseau militaire indestructible donné ensuite aux universités, ce qui repose sur la confusion entre ARPANET et le projet largement avorté de réseau en étoile de Paul Baran.
+
+      La lecture communicationnelle présente ARPANET comme le produit de l'utopie cybernétique du village mondial et survalorise le rôle de l'imaginaire technique ; ces deux lectures sont trop mono-causales et trop linéaires alors que l'émergence des réseaux relève d'une multiplicité d'origines et de processus complexes, hétérogènes et antagonistes.
+
+      Les grands acteurs de l'informatique comme IBM et de la téléphonie comme AT&T se sont tenus à l'écart de l'informatique interactive et d'ARPANET, IBM refusant même de participer à l'appel d'offres de mille neuf cent soixante-huit, ce qui crée une opposition durable entre les acteurs gouvernementaux et universitaires partisans d'une conception ouverte et les grands groupes industriels.
+
+
+   F. Le besoin croissant d'interopérabilité.
+
+      Pendant les années soixante-dix, les réseaux propriétaires à commutation de paquets se multiplient sans être interopérables, dans un monde cloisonné où chaque mode de communication est associé à une technologie propriétaire, et la gestion de l'hétérogénéité devient un problème criant.
+
+      Cette période correspond à un puissant processus de modélisation des réseaux en couches : l'ISO lance ses premiers travaux sur le modèle OSI en mille neuf cent soixante-dix-sept, propose une version provisoire en mille neuf cent soixante-dix-huit sous la norme ISO IS7498 et publie la version officielle en mille neuf cent quatre-vingt-quatre ; parallèlement, les chercheurs d'ARPANET produisent les premières versions de TCP et IP en mille neuf cent soixante-quatorze, intégrées ensuite de façon normalisée dans les systèmes Unix.
+
+      Les architectures propriétaires de l'époque sont notamment SNA d'IBM en mille neuf cent soixante-quatorze, DNA de Digital en mille neuf cent soixante-quinze, propriétaire jusqu'à la phase quatre puis conforme à OSI, et DSA de Bull, conforme au modèle OSI à sept couches mais avec des protocoles propriétaires, reposant sur le DATANET.
+
+
+IV. LES MODÈLES EN COUCHES : PRINCIPES.
+
+
+   A. Principe général.
+
+      Le terme de couche signifie que les données traversent plusieurs niveaux de protocoles, chaque couche traitant successivement les données, ajoutant un élément d'information puis transmettant l'ensemble à la couche suivante.
+
+      Chaque couche communique avec une couche adjacente, utilise les services des couches inférieures et fournit un service aux couches supérieures, ce qui permet de segmenter la transmission selon le niveau d'abstraction.
+
+
+   B. Intérêt.
+
+      Les services nécessaires à une communication entre deux hôtes distants sont séparés et répartis entre les couches, chaque couche fournissant un service indépendamment des autres et s'appuyant sur les services des couches inférieures.
+
+      Le découpage en couches divise les problèmes complexes de communication en questions plus faciles à gérer et facilite l'interopérabilité des réseaux en les rendant indépendants des fabricants, des technologies et des protocoles employés.
+
+
+   C. En-têtes et nommage de l'information dans le modèle DOD.
+
+      Dans la station émettrice, chaque couche ajoute un en-tête lorsque les données la traversent, et dans la station réceptrice chaque couche enlève cet en-tête ; l'en-tête n'est pas transmis à la couche supérieure et est considéré par la couche inférieure comme faisant partie des données, établissant une communication logique entre couches de même niveau.
+
+      Les données sont issues de l'utilisateur, le message est échangé entre la couche application et la couche transport, le segment entre la couche transport et la couche réseau, le datagramme entre la couche réseau et la couche d'accès réseau, et la trame ou le paquet est échangé par les couches d'accès réseau via le support physique.
+
+      Les couches se regroupent en couches basses qui transportent l'information et couches hautes qui la traitent.
+
+
+V. LE MODÈLE OSI.
+
+
+   A. Introduction et historique.
+
+      L'ISO, organisme dépendant de l'ONU, a développé le modèle OSI pour rendre compatibles des solutions d'interconnexion propriétaires hétérogènes sans favoriser un fournisseur, ce modèle décrivant ce que doivent faire les couches sans préciser les services et protocoles, l'ISO ayant par ailleurs écrit ses propres normes pour chaque couche.
+
+      Les premiers travaux datent de mille neuf cent soixante-dix-sept, une version est proposée en mille neuf cent soixante-dix-huit sous la norme ISO IS7498, douze constructeurs européens adoptent le standard en mille neuf cent quatre-vingt-quatre, rejoints par les grands constructeurs américains en mille neuf cent quatre-vingt-cinq ; on aborde le modèle de la couche la plus basse vers la couche la plus haute.
+
+
+   B. La couche un, physique.
+
+      Elle suppose que les systèmes soient physiquement connectés par un canal, assure l'établissement et le maintien de la liaison physique, comprend les spécifications mécaniques des connecteurs et les spécifications électriques de niveau de tension, et réalise le codage et le décodage des données ainsi que l'attachement au support physique.
+
+
+   C. La couche deux, liaison de données.
+
+      Elle assure le maintien de la connexion logique, le transfert des blocs de données que sont les trames et les paquets, la détection et la correction des erreurs, au moyen de l'encapsulation et de la désencapsulation des données sous forme de trames, et gère l'accès au support.
+
+
+   D. La couche trois, réseau.
+
+      Elle assure l'acheminement et le routage des blocs de données entre les deux systèmes d'extrémité à travers des relais, en choisissant le chemin à partir des adresses, définit la taille de ses blocs et réalise l'interconnexion entre réseaux hétérogènes.
+
+
+   E. La couche quatre, transport.
+
+      Elle assure le contrôle du transfert de bout en bout des informations entre les deux systèmes d'extrémité afin de rendre le transport transparent pour les couches supérieures, découpe les messages trop longs en segments pour la couche réseau et les reconstitue pour les couches supérieures.
+
+
+   F. La couche cinq, session.
+
+      Elle assure l'échange des données et la transaction entre deux applications distantes, et surtout la synchronisation et le séquencement de l'échange avec détection et reprise en cas d'erreur, cette gestion du dialogue étant par exemple assurée par jeton dans le réseau Token Ring.
+
+
+   G. La couche six, présentation.
+
+      Elle assure la mise en forme des données et la conversion des codes tels qu'ASCII ou EBCDIC pour délivrer à la couche application un message dans une syntaxe compréhensible, et peut aussi assurer le chiffrement et la compression ; c'est la première couche non impliquée dans le mécanisme de transfert d'informations.
+
+
+   H. La couche sept, application.
+
+      Elle ne contient pas les applications utilisateur mais assure, à l'aide de processus, la communication entre les couches inférieures et les applications utilisateur comme le transfert de fichiers et le courrier électronique, et désigne le type d'information à transférer.
+
+
+VI. LE MODÈLE DOD, ÉGALEMENT APPELÉ MODÈLE TCP/IP.
+
+
+   A. Introduction.
+
+      TCP/IP désigne deux protocoles étroitement liés, un protocole de transport TCP et un protocole réseau IP, et par abus de langage la même expression désigne à la fois le modèle et la suite de deux protocoles ; le modèle comporte quatre couches, dont TCP et IP sont l'implémentation la plus courante, son origine remontant à ARPANET et aux premières versions des protocoles créées au milieu des années soixante-dix.
+
+
+   B. La couche application.
+
+      Elle reprend les fonctionnalités des couches application, présentation et session du modèle OSI, assure la gestion de la communication, la mise en forme des données reçues et la liaison avec les applications, et contient tous les protocoles de haut niveau comme Telnet, FTP, TFTP, SMTP et HTTP.
+
+
+   C. La couche transport.
+
+      Elle a le même rôle que la couche transport du modèle OSI et a principalement deux implémentations : TCP, protocole fiable et orienté connexion qui assure l'acheminement sans erreur des paquets et le contrôle de flux et qu'utilise HTTP, et UDP, protocole non fiable et sans connexion utilisé quand le contrôle de flux et l'ordre de remise ne sont pas nécessaires, par exemple pour la transmission de la voix où la perte d'informations n'est pas rédhibitoire.
+
+
+   D. La couche réseau.
+
+      Elle correspond à la couche réseau du modèle OSI, permet l'envoi de paquets à un hôte distant et leur acheminement indépendant jusqu'à destination sans connexion préalable, si bien que les paquets peuvent arriver dans le désordre ou ne pas arriver, l'ordonnancement et les réémissions étant gérés par les couches supérieures ; elle gère les adresses IP et le routage et est représentée par IP, ARP, RARP et ICMP.
+
+
+   E. La couche accès réseau.
+
+      Elle regroupe les couches physique et liaison de données du modèle OSI, permet à un hôte d'envoyer des paquets IP sur le réseau, gère les adresses physiques des équipements et les erreurs matérielles de transmission, son implémentation dépendant de la technologie du réseau local, le plus souvent Ethernet ; lorsqu'elle est découpée en deux, le modèle DOD compte cinq couches au lieu de quatre.
+
+
+   F. Comparaison OSI et DOD.
+
+      La correspondance entre les deux modèles n'est pas parfaite car le modèle OSI est un modèle théorique complet mais complexe tandis que le modèle DOD est parti d'un standard et a fait correspondre les protocoles existants aux couches d'un modèle.
+
+      Le modèle OSI a beaucoup apporté à la conceptualisation et à la normalisation des couches et fonctions de communication, mais il a rarement abouti à des utilisations concrètes car il est cher, complexe, non libre et lent à émerger du fait de son origine administrative internationale.
+
+      Le modèle TCP/IP, plus souple et plus réactif, s'est imposé comme standard de fait : natif rapidement sur Unix dans le monde Berkeley, avec des sources et spécifications accessibles, robuste, éprouvé, évolutif et peu cher, il a été porté à partir des années quatre-vingt-dix par le succès d'Internet et l'essor du web.
+
+
+VII. ILLUSTRATION PRATIQUE : L'ENVOI D'UN COURRIER ÉLECTRONIQUE.
+
+
+   A. Le scénario.
+
+      On suppose que la station est connectée au réseau local Ethernet d'une direction, relié par un routeur au réseau d'accès d'un opérateur qui offre le transport dans son intranet privatif, le serveur SMTP étant sur un site d'exploitation en France.
+
+      La connexion au réseau local nécessite d'abord l'attribution d'une adresse IP à la station, service rendu par le protocole DHCP sous forme d'un bail dont la durée est généralement fixée à trois jours.
+
+
+   B. La descente et la remontée des couches.
+
+      L'utilisateur ouvre son client de messagerie, saisit un objet et un destinataire, le domaine du destinataire étant traité en premier pour acheminer le message, et une requête ARP peut être nécessaire pour connaître l'adresse MAC de la passerelle de sortie.
+
+      Sur le client, le message descend les couches : application avec le client SMTP, transport avec un port TCP supérieur à mille vingt-quatre côté client, réseau avec l'adresse IP de la machine, accès réseau avec la carte Ethernet et l'adresse MAC.
+
+      Si le destinataire appartient au même domaine, le message est envoyé via le serveur SMTP sur le port vingt-cinq vers le serveur de réception POP ou IMAP sur le port cent dix ou cent quarante-trois, où il est stocké jusqu'à son chargement ; sur le serveur, le message remonte les couches : accès réseau, réseau avec l'adresse IP du serveur, transport avec le port vingt-cinq à l'écoute, application avec le serveur SMTP qui route ou délivre le message.
+
+
+   C. Le cas d'un domaine extérieur et la résolution DNS.
+
+      Si le domaine est extérieur à l'intranet, le serveur SMTP utilise sa sortie par défaut et doit effectuer une résolution DNS pour définir le cheminement du courrier, car la couche réseau ne communique que par adresses IP source et destination et ignore le nom de domaine.
+
+      La résolution de noms peut se faire par un fichier hosts local qui résout statiquement le nom en adresse IP, sinon la requête est adressée au serveur DNS configuré sur le poste en UDP, et si ce serveur ne connaît pas le site il interroge les autres serveurs DNS par une requête en TCP puis renvoie l'adresse IP.
+
+      Lorsque le message arrive sur le bon serveur SMTP, la partie gauche de l'adresse est vérifiée, éventuellement par une requête LDAP : si le destinataire existe le message est acheminé vers le serveur POP ou IMAP, sinon il est rejeté ou détruit selon les règles en place ; les protocoles SMTP, POP et IMAP s'appuient sur TCP en mode connecté pour établir la session.
+
+
+POINTS D'ATTENTION.
+
+      Le modèle OSI est essentiellement théorique tandis que le modèle DOD est pragmatique et issu de l'implémentation de TCP/IP.
+
+      Un en-tête ajouté par une couche est vu comme de simples données par la couche inférieure et n'est jamais transmis à la couche supérieure.
+
+      La couche présentation est la première couche non impliquée dans le mécanisme de transfert d'informations.
+
+      UDP n'assure ni contrôle de flux ni ordre de remise ; ces fonctions, si elles sont nécessaires, incombent à la couche application.
+
+      Sans connexion préalable dans le modèle DOD, les paquets IP peuvent arriver dans le désordre ou se perdre, la fiabilité étant assurée par les couches supérieures.
+
+      Les lectures purement militaire ou purement communicationnelle de l'histoire des réseaux sont réductrices et mono-causales.
+
+      L'épuisement des adresses IPv4 est constaté au niveau mondial en deux mille douze.
+
+
+EXEMPLES CITES.
+
+      Réseau Cyclades de l'INRIA présenté comme l'ARPANET à la française.
+
+      Première RFC d'avril mille neuf cent soixante-neuf de Steve Crocker sur le logiciel de la machine hôte, consultable à l'adresse indiquée par le cours.
+
+      RFC quatre mille six cent quatre-vingt-six de deux mille six sur la mise en place de DKIM contre l'usurpation d'identité entre serveurs de messagerie.
+
+      Gestion du dialogue par jeton dans le réseau Token Ring pour la couche session.
+
+      Conversion de codes ASCII et EBCDIC par la couche présentation.
+
+      Attribution d'une adresse IP par DHCP sous forme d'un bail d'environ trois jours.
+
+      Ports usuels vingt-cinq pour SMTP, cent dix pour POP et cent quarante-trois pour IMAP.
+
+      Dates repères : deux cent treize hôtes ARPANET en mille neuf cent quatre-vingt-un, cinq cent soixante-deux machines en mille neuf cent quatre-vingt-trois, mille vingt-quatre en mille neuf cent quatre-vingt-quatre avec mise en place du DNS, apparition du World Wide Web en mille neuf cent quatre-vingt-dix, plus d'un million de machines en mille neuf cent quatre-vingt-douze, création de l'AFNIC en mille neuf cent quatre-vingt-seize, épuisement des adresses IPv4 en deux mille douze, trois virgule vingt-cinq milliards d'internautes en deux mille quinze.

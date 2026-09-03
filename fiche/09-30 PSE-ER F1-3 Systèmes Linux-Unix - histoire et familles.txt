@@ -1,27 +1,270 @@
-SYSTÈMES LINUX ET UNIX : HISTOIRE ET FAMILLES
+LES SYSTÈMES LINUX ET UNIX : HISTOIRE ET FAMILLES.
 
-1. PRÉHISTOIRE ET NAISSANCE D'UNIX
-Premier Unix mis au point par Ken Thompson aux laboratoires Bell d'AT&T (fin des années 1960), à partir du projet MULTICS. Rejoint par Dennis Ritchie, Thompson réécrit une version réduite pour un DEC PDP-7 : UNICS, contracté en Unix. Date de naissance retenue : 1er janvier 1970 (epoch des horloges Unix).
-1973 : Unix entièrement réécrit en langage C (créé par Ritchie et Kernighan), d'où sa portabilité. Un décret de 1956 interdisant à AT&T de commercialiser hors télécoms, les sources sont distribuées aux universités à des fins éducatives : c'est l'origine de la popularité universitaire d'Unix.
-Fin 1977 : l'université de Californie à Berkeley redéveloppe Unix à partir des sources AT&T pour ses VAX : BSD (Berkeley Software Distribution). Ce travail s'inscrit dans un projet DARPA sur le réseau expérimental TCP/IP : d'où la compatibilité native des Unix avec TCP/IP. Apparition des Unix commerciaux (AIX, HP-UX, SunOS) ; Microsoft lance même Xenix.
 
-2. LE SCHISME ET LES TENTATIVES DE STANDARDISATION
-À partir de 1983, AT&T commercialise Unix System V : séparation en deux écoles rivales, souche System V (entreprise) et souche BSD (recherche, université, réseaux). Les différences sont plus idéologiques que techniques. Sun passe de BSD à System V sous le nom Solaris (d'où « Unix hybride »).
-Deux grandes familles subsistent : System V (influence sur AIX, HP-UX, Solaris) et BSD (FreeBSD, NetBSD, OpenBSD).
-Standards : SVID (AT&T, 1983, décrit System V) ; POSIX / IEEE P1003 (1984, portabilité entre Unix) ; X/Open Portability Guide (XPG3, consortium de constructeurs, localisation géographique). Malgré une forte homogénéité conceptuelle (et la cohésion native avec TCP/IP), il n'existe pas de standard Unix unique.
+LEXIQUE COMPLET.
 
-3. L'AFFIRMATION D'UN OS LIBRE : LINUX
-1984 : Richard Stallman fonde la Free Software Foundation et lance le projet GNU (« GNU's Not Unix »), système libre de type Unix, sous licence GPL (copyleft : copie, modification et distribution autorisées si le produit final reste sous GPL).
-Il manque un noyau. 1991 : Linus Torvalds, étudiant finlandais, lance le développement d'un noyau compatible Unix pour la famille x86 (version 0.02 exécutant déjà bash, gcc, gnu-make...). Versions 0.03, 0.10, 0.95, 0.99 puis 2.2 stable (fin des années 90), 2.6 (années 2010).
-Linux doit beaucoup aux outils GNU (compilateur gcc) et à BSD (utilitaires, démons et commandes réseau issus de portages). Linux est reconnu conforme à POSIX .1 et .2.
+      MULTICS (Multiplexed Information and Computing System) : système d'exploitation interactif développé à partir de la seconde moitié des années soixante par un consortium réunissant le MIT, General Electric et Bell Labs, à l'origine du projet Unix.
 
-4. LES PRINCIPAUX UNIX COMMERCIAUX
-- AIX : IBM, basé sur System V, processeurs POWER ; originalité l'ODM (Object Data Manager, base de données système orientée objet) ; interface d'administration smit ; système de fichiers journalisé.
-- HP-UX : Hewlett-Packard, System V et BSD ; PA-RISC puis Itanium ; interface d'administration SAM ; paquetages appelés « dépôts ».
-- Solaris : Sun, hybride (4.1BSD puis System V R4) ; SPARC, x86, x86-64 ; SMP, multithreading, noyau 64 bits depuis Solaris 7 (1998) ; snapshots ; racheté par Oracle (licence fermée).
-- Autres : Ultrix (DEC), IRIX (SGI), UnixWare (Novell), SCO Unix, Tru64 (Compaq), Mac OS X (Apple).
+      GECOS (General Electric Comprehensive Operating System) : système propriétaire adopté par AT&T en avril mille neuf cent soixante-neuf à la place de Multics pour les environnements massifs.
 
-5. LES PRINCIPAUX LINUX
-Évolution des noyaux : 2.0 (fonctions Unix de base, génération 1 réseau) ; 2.2 (stabilisation, génération 2 réseau) ; 2.4 (multiprocesseurs, RAM jusqu'à 64 Go, génération 3 réseau avec filtrage et QoS, systèmes de fichiers journalisés ext3/reiserfs/xfs/jfs) ; 2.6 (noyau préemptible, nouvel ordonnanceur, multithreading amélioré, 64 bits, ACL, NFSv4, ext4) ; 3.x (nftables, LXC, Wi-Fi 802.11ac/ad, Btrfs) ; 4.x (livepatch : mise à jour du noyau à la volée).
-Distributions : Slackware (la première, format tgz, proche BSD) ; Red Hat (commerciale, format rpm, certification RHCE) ; Fedora (communautaire, base de test de RHEL) ; CentOS (serveurs, recompilée depuis RHEL) ; SuSE (Europe, rpm) ; Mandriva (France, rpm) ; Debian (non commercial, format deb, esprit GNU) ; Ubuntu (dérivé Debian, Canonical) ; Mint (base Ubuntu/Debian, interface Cinnamon) ; Gentoo (système sur mesure via des « ports », proche BSD).
-Socle commun à tous les Unix/Linux : logiciels autour du shell, intégration native TCP/IP, multithreading, systèmes de fichiers optimisés et étendus, virtualisation, philosophie « tout est fichier ».
+      UNICS (UNiplexed Information and Computing Service) : version réduite de Multics réécrite par Ken Thompson et Dennis Ritchie pour un DEC PDP-7, rapidement contractée en Unix.
+
+      Langage C : langage défini notamment par Dennis Ritchie et Brian Kernighan, dans lequel l'ensemble du système Unix fut réécrit dès mille neuf cent soixante-treize, apportant une meilleure portabilité.
+
+      Unix Time-Sharing System (TSS) : nom du système Unix après sa réécriture complète en langage C.
+
+      BSD (Berkeley Software Distribution) : version d'Unix redéveloppée à partir de fin mille neuf cent soixante-dix-sept par l'Université de Californie à Berkeley pour ses plates-formes VAX, dans le cadre d'un financement de la DARPA pour le réseau expérimental TCP/IP.
+
+      DARPA : agence de recherche de l'armée américaine ayant financé les centres de recherche contribuant au développement de TCP/IP, ce qui explique la compatibilité native des Unix avec TCP/IP.
+
+      System V : version commerciale d'Unix qu'AT&T a le droit de commercialiser à partir de mille neuf cent quatre-vingt-trois, qui influence fortement les Unix commerciaux AIX, HP-UX et Solaris.
+
+      Schisme : séparation historique du monde Unix en deux écoles rivales, la souche System V d'AT&T et la souche BSD de Berkeley, davantage idéologique que technique.
+
+      SVID (System V Interface Definition) : première définition de standard publiée par AT&T en mille neuf cent quatre-vingt-trois pour décrire System V.
+
+      POSIX (aussi connu sous le nom IEEE P1003) : série de standards publiée en mille neuf cent quatre-vingt-quatre sous couvert de l'IEEE pour assurer la portabilité entre systèmes Unix.
+
+      X/Open Portability Guide Issue 3 (XPG3) : standard publié par un consortium de constructeurs, traitant particulièrement des différences liées à la localisation géographique comme la date et l'alphabet.
+
+      FSF (Free Software Foundation) : fondation créée en mille neuf cent quatre-vingt-quatre par Richard Stallman au MIT pour inventer un système d'exploitation libre et gratuit de type Unix, baptisé GNU.
+
+      GNU : acronyme récursif de « GNU's not Unix », nom du projet de système libre de la FSF.
+
+      Copyleft : principe qui autorise la copie, la modification et la distribution d'un logiciel libre à condition que le produit final soit lui-même sous licence libre, ce qui empêche son appropriation par une seule société.
+
+      GPL (General Public License, ou Licence Publique Générale) : licence appliquant le principe du copyleft.
+
+      Noyau (kernel) : brique élémentaire d'un système d'exploitation, dont le développement pour un système GNU fut lancé en mille neuf cent quatre-vingt-onze par l'étudiant finlandais Linus Torvalds.
+
+      Linux : noyau compatible Unix pour les processeurs de la famille x86, distribué gratuitement sur le web, reconnu conforme au standard POSIX grâce à la société Lasermoon.
+
+      Distribution GNU/Linux : mise en forme du système GNU et du noyau Linux par un éditeur, avec un système de paquets et une organisation propres.
+
+      Runlevel : niveau d'exécution issu de la tradition System V, absent des distributions proches de BSD comme Slackware.
+
+      Paquet : forme de distribution des logiciels d'une distribution, au format tgz pour Slackware, rpm et srpm pour Red Hat et dérivés, deb pour Debian et Ubuntu.
+
+      AIX (Advanced Interactive eXecutive) : Unix commercial d'IBM basé sur System V Release 2, lancé en mille neuf cent quatre-vingt-six, généralement associé aux processeurs POWER.
+
+      ODM (Object Data Manager) : base de données système orientée objet fournie en standard avec AIX, qui stocke les caractéristiques des ressources et leurs mécanismes de configuration.
+
+      SMIT : interface pseudo-graphique d'administration d'AIX.
+
+      HP-UX : Unix commercial propriétaire de Hewlett-Packard de type System V et BSD, développé à partir de mille neuf cent quatre-vingt-six, initialement pour les processeurs PA-RISC puis pour Itanium 2.
+
+      SAM : interface pseudo-graphique d'administration de HP-UX, les logiciels y étant distribués sous forme de dépôts.
+
+      Solaris : Unix commercial hybride de Sun héritier des deux familles, dont la première version de mille neuf cent quatre-vingt-un était basée sur 4.1BSD et la deuxième version de mille neuf cent quatre-vingt-douze sur System V Release 4.
+
+      SunOS : nom du noyau de Sun, distinct du nom commercial Solaris à partir de février mille neuf cent quatre-vingt-onze.
+
+      SPARC : architecture de processeur de Sun, adoptée à partir de mille neuf cent quatre-vingt-neuf après le Motorola 68000.
+
+      SMP (Symmetric MultiProcessing) : architecture de serveur intégrant plusieurs processeurs, gérée par Solaris depuis les années quatre-vingt-dix.
+
+      Snapshot : mécanisme de sauvegarde en ligne intégré au système de fichiers de Solaris.
+
+      LFS (Linux From Scratch) : projet permettant de construire son propre système GNU/Linux.
+
+
+COURS DÉTAILLÉ.
+
+
+I. PRÉHISTOIRE ET HISTOIRE.
+
+
+   A. La genèse : Multics et la naissance d'Unix.
+
+      Le premier système Unix fut mis au point par Ken Thompson dans les laboratoires Bell d'AT&T, à Murray Hill dans le New Jersey, dans la seconde moitié des années soixante, l'objectif étant un système d'exploitation interactif simple nommé Multics, avec pour motivation cachée de faire tourner un jeu de simulation du système solaire nommé space travel.
+
+      Un consortium réunissant le MIT, General Electric et Bell Labs se forma autour de Multics, mais en avril mille neuf cent soixante-neuf AT&T décida d'utiliser le système propriétaire GECOS à sa place pour les environnements massifs, tandis que Ken Thompson, rejoint par Dennis Ritchie, avait besoin de faire fonctionner son jeu sur une plus petite machine, un DEC PDP-7 disposant de seulement quatre kilo-octets de mémoire pour les programmes utilisateur.
+
+      De cette contrainte naquit le projet de réécriture réduite de Multics, appelé UNICS puis contracté en Unix, et la date du premier janvier mille neuf cent soixante-dix est considérée comme la naissance d'Unix, ce qui explique pourquoi les horloges système des Unix démarrent à cette époque.
+
+      Dès cette période proto-historique apparaît l'opposition forte entre les besoins industriels, illustrés par le système propriétaire GECOS, et le souci d'interopérabilité des fondateurs d'Unix.
+
+
+   B. La réécriture en langage C et l'essor.
+
+      Dennis Ritchie participa à la définition du langage C, dont il est considéré comme un des créateurs avec Brian Kernighan, et dès mille neuf cent soixante-treize l'ensemble du système fut réécrit en langage C et baptisé Unix Time-Sharing System.
+
+      Le passage à la version sept en mille neuf cent soixante-dix-neuf s'accompagna de la suppression des limites de taille des fichiers, d'une meilleure portabilité permettant le fonctionnement sur de nombreuses plates-formes matérielles et de l'ajout de nombreux utilitaires.
+
+      Dans les années soixante et soixante-dix, les ordinateurs étaient de gros calculateurs peu puissants, très chers et incapables de communiquer entre eux, chaque constructeur produisant son propre système incompatible, si bien qu'Unix se détachait déjà par sa capacité à fonctionner sur tout type de machine.
+
+
+   C. La mise à disposition des sources et la naissance de BSD.
+
+      Un décret de mille neuf cent cinquante-six empêchait AT&T de commercialiser autre chose que des équipements téléphoniques ou télégraphiques, aussi la décision fut prise en mille neuf cent soixante-treize de distribuer les sources d'Unix dans les universités à des fins éducatives, ce qui est à l'origine de la popularité d'Unix dans le monde universitaire.
+
+      Fin mille neuf cent soixante-dix-sept, des chercheurs de l'Université de Californie redéveloppèrent une version d'Unix à partir des sources d'AT&T pour leurs plates-formes VAX et la baptisèrent BSD, cette naissance s'intégrant dans un projet financé par la DARPA pour le réseau expérimental TCP/IP, ce qui explique la compatibilité native des Unix avec TCP/IP.
+
+      À partir de mille neuf cent soixante-dix-sept, AT&T mit aussi à disposition les sources d'Unix aux autres entreprises moyennant finances, ce qui donna les premiers Unix commerciaux comme AIX, HP-UX et Sun OS, Microsoft lançant même au début des années quatre-vingt son Unix-like nommé Xenix, Bill Gates considérant alors Unix comme le système d'exploitation de l'avenir pour les micro-ordinateurs.
+
+
+II. ÉVOLUTIONS RÉCENTES DES FAMILLES UNIX.
+
+
+   A. Le schisme entre System V et BSD.
+
+      L'affirmation d'Unix s'accompagna d'un essor considérable du nombre d'Unix à partir de la fin des années soixante-dix, la souche BSD manifestant une certaine indépendance par rapport à l'orthodoxie AT&T.
+
+      À partir de mille neuf cent quatre-vingt-trois, AT&T obtint le droit de commercialiser son Unix, ce qui donna Unix System V, version commerciale qui influença fortement les Unix commerciaux comme AIX, HP-UX et Solaris, et l'on date de cette époque la séparation des deux écoles rivales, celle issue de System V et celle issue de BSD dans sa version 4.2BSD de mille neuf cent quatre-vingt-trois.
+
+      Les différences étaient plus idéologiques que techniques : le monde de la recherche et de l'université, ouvert sur les réseaux, penchait pour BSD, tandis que le monde de l'entreprise se méfiait d'Internet et se tournait vers System V ; en mille neuf cent quatre-vingt-douze, Sun, porte-drapeau du monde BSD avec SunOS 4.1.3, conclut avec AT&T des accords aux termes desquels il passa à System V sous le nom de Solaris, honni par les puristes BSD, ce qui fait de Solaris un Unix hybride.
+
+      Ces luttes de clans ont beaucoup nui à la diffusion d'Unix et contribué au succès des systèmes Windows de Microsoft entre le milieu des années quatre-vingt et des années quatre-vingt-dix, même si des liens ont continué de se nouer entre les deux familles.
+
+
+   B. Typologie sommaire.
+
+      Il reste deux grandes familles d'Unix issues du schisme : l'Unix de type System V, avec une large influence sur les Unix commerciaux AIX, HP-UX et Solaris, et l'Unix de type BSD, issu de Berkeley, dont dérivent FreeBSD, NetBSD et OpenBSD.
+
+
+   C. Les tentatives de standardisation.
+
+      La question d'un standard Unix s'est posée dès mille neuf cent quatre-vingt-un pour assurer une portabilité maximale, et parmi les tentatives on cite le SVID publié par AT&T en mille neuf cent quatre-vingt-trois pour décrire System V, la norme POSIX publiée en mille neuf cent quatre-vingt-quatre sous couvert de l'IEEE et aussi connue sous le nom IEEE P1003, et le standard X/Open Portability Guide Issue 3 publié par un consortium de constructeurs, qui traite particulièrement des différences de localisation géographique.
+
+      À la fin des années quatre-vingt, on peut insister à la fois sur l'homogénéité du monde Unix, avec un panel de concepts communs très fort et une cohésion native avec TCP/IP, et sur l'absence de standard Unix effectif, un nouvel élan étant donné au début des années quatre-vingt-dix, associé à la transformation du monde des réseaux.
+
+
+III. L'AFFIRMATION D'UN SYSTÈME LIBRE : LINUX.
+
+
+   A. La Free Software Foundation et le projet GNU.
+
+      Alors que les Unix propriétaires se multipliaient, Richard Stallman, informaticien au MIT, créa en mille neuf cent quatre-vingt-quatre la Free Software Foundation avec pour projet, qualifié d'utopique à l'époque, d'inventer un système d'exploitation libre et gratuit de type Unix baptisé GNU, acronyme récursif de « GNU's not Unix ».
+
+
+   B. Le copyleft et la licence GPL.
+
+      Stallman s'oppose au logiciel propriétaire copyrighté et propose des logiciels copyleftés sous la licence GPL : on peut copier, modifier et distribuer, gratuitement ou non, un logiciel libre à condition que le produit final soit lui-même sous licence GPL, ce qui lève tout obstacle à la diffusion tout en empêchant l'appropriation par une seule société privée, comme cela était arrivé à Unix.
+
+
+   C. Linus Torvalds et le noyau Linux.
+
+      Le projet GNU avance dans l'ombre jusqu'en mille neuf cent quatre-vingt-dix sans parvenir à faire fonctionner un ordinateur complet, jusqu'à l'appel lancé en mille neuf cent quatre-vingt-onze par Linus Torvalds, étudiant finlandais de vingt et un ans, qui lance le développement d'un noyau pour un système GNU, brique élémentaire qui manquait à l'édifice, aidé par une communauté très active sur le jeune Internet.
+
+      L'idée est d'adapter aux processeurs compatibles IBM-PC de la famille x86 un noyau compatible Unix reprenant ses caractéristiques, la version 0.02 étant déjà capable d'exécuter bash, gcc, gnu-make, gnu-sed et compress, et les numéros de version évoluant rapidement jusqu'à 0.95 puis 0.99, avec une diffusion gratuite sur le web et un succès fulgurant dans la seconde moitié des années quatre-vingt-dix.
+
+      La version dite « 2.2 stable » apparaît à l'extrême fin des années quatre-vingt-dix, la version présentée dans le cours comme actuelle correspondant à la série 2.6.
+
+
+   D. Le rôle des outils GNU et de BSD.
+
+      Linux n'aurait pu naître sans les outils GNU de la Free Software Foundation, en particulier le compilateur gcc, les programmes GNU et le développement de Linux étant intimement liés depuis l'origine.
+
+      La version BSD d'Unix a aussi joué un rôle important, principalement par la mise à disposition de ses outils, notamment pour le système de fichiers, beaucoup d'utilitaires des distributions provenant de portages de programmes BSD ; la partie réseau de Linux a été entièrement développée, mais ses démons et commandes réseau émanent en droite ligne de BSD, et Linux fut reconnu conforme au standard POSIX grâce aux efforts de la société Lasermoon.
+
+
+IV. LES PRINCIPAUX UNIX COMMERCIAUX.
+
+
+   A. AIX.
+
+      AIX est l'Unix commercial d'IBM basé sur Unix System V Release 2, dont la première version fut lancée en mille neuf cent quatre-vingt-six avec l'ordinateur IBM RT-PC, puis porté sur les IBM PS/2, la version trois sortant en mille neuf cent quatre-vingt-dix avec les IBM RS/6000 ; à la suite d'une alliance, Bull produit des ordinateurs PowerPC et POWER utilisant AIX, généralement associé aux processeurs POWER d'IBM.
+
+      L'ODM est une originalité d'AIX : c'est une base de données système orientée objet fournie en standard qui contient les caractéristiques des ressources et leurs mécanismes de configuration, ainsi que les informations d'installation et de mise à jour ; le système de fichiers intègre la journalisation et l'administration s'effectue via l'interface pseudo-graphique SMIT.
+
+      Les jalons de versions vont d'AIX 1 en mille neuf cent quatre-vingt-six à AIX 5L en deux mille, AIX version six en deux mille sept, version sept en deux mille dix et version 7.2 en deux mille quinze, avec des certifications de sécurité successives.
+
+
+   B. HP-UX.
+
+      HP-UX est un système propriétaire de type Unix, à la fois System V et BSD, développé par Hewlett-Packard à partir de mille neuf cent quatre-vingt-six, utilisé sur serveurs et stations de travail, initialement pour les processeurs PA-RISC en trente-deux et soixante-quatre bits puis pour les processeurs Itanium 2 conçus avec Intel.
+
+      L'administration s'effectue via l'interface pseudo-graphique SAM et les logiciels sont distribués sous forme de paquetages appelés dépôts ; HP-UX utilise XFree86, l'environnement de bureau CDE et de nombreux logiciels libres, dont Bastille.
+
+      Les jalons de versions vont de la version 2.0 en mille neuf cent quatre-vingt-huit à la version 10.20 en PA-RISC 2.0 en mille neuf cent quatre-vingt-seize, la version 11.00 en soixante-quatre bits avec Fibre Channel et NFS version trois en mille neuf cent quatre-vingt-dix-sept, puis les versions 11i successives avec support d'Itanium 2, d'IPv6, d'IPSec, de l'hyperthreading et de la virtualisation.
+
+
+   C. Solaris.
+
+      La première version de l'Unix de Sun fut développée à partir de juin mille neuf cent quatre-vingt-un sous la direction de Bill Joy à partir de 4.1BSD, et en février mille neuf cent quatre-vingt-onze le système complet fut nommé commercialement Solaris 1 tandis que SunOS ne désignait plus que le noyau ; la deuxième version, développée à partir de juillet mille neuf cent quatre-vingt-douze, était basée sur Unix System V Release 4 et nommée Solaris 2, d'où la notion de système hybride héritier des deux familles.
+
+      Solaris fut développé pour les stations Sun à base de Motorola 68000, puis SPARC à partir de mille neuf cent quatre-vingt-neuf, ainsi que pour les architectures PPC et x86 ; depuis les années quatre-vingt-dix, il intègre la gestion des threads et les architectures SMP, et depuis la version sept de mille neuf cent quatre-vingt-dix-huit il supporte les noyaux soixante-quatre bits, le multithreading et les multiprocesseurs, jusqu'à cent vingt-huit processeurs sur les serveurs SPARC V9, x86 et x86-64.
+
+      Le système de fichiers intègre la sauvegarde en ligne par snapshot ; Solaris commençait à s'ouvrir avec quelques licences open source en deux mille dix, puis le rachat par Oracle a entraîné un passage à une licence fermée, l'OS supportant principalement les processeurs SPARC d'Oracle et aussi les processeurs x86-64.
+
+
+   D. Les autres Unix.
+
+      Parmi la myriade d'Unix-like apparus dès la fin des années soixante-dix, on cite Ultrix de DEC, IRIX de SGI, UnixWare de Novell, Unix SCO basé sur System V développé dès mille neuf cent soixante-dix-neuf par Santa Cruz Operations et Hewlett-Packard, et Tru64 Unix de Compaq ; MacOS X d'Apple est également un système de type Unix.
+
+
+V. LES PRINCIPAUX LINUX.
+
+
+   A. Évolution des noyaux Linux.
+
+      La série 2.0 des années mille neuf cent quatre-vingt-treize à mille neuf cent quatre-vingt-dix-sept implémente les fonctions Unix de base, développe des pilotes de périphériques, étend la portabilité à d'autres processeurs et apporte la première génération du support réseau.
+
+      La série 2.2 des années mille neuf cent quatre-vingt-dix-sept à deux mille stabilise les fonctions Unix de base, poursuit les pilotes, apporte la deuxième génération du support réseau et les premières fonctionnalités propres à Linux.
+
+      La série 2.4 des années deux mille à deux mille trois n'est plus limitée en nombre de processus que par la mémoire, apporte le support multiprocesseurs, une mémoire vive jusqu'à soixante-quatre gigaoctets, le support USB, FireWire et I2O, la troisième génération du support réseau avec filtrage des trames et des paquets et la qualité de service, ainsi que les systèmes de fichiers journalisés ext3, reiserfs, xfs et jfs.
+
+      La série 2.6 à partir de deux mille quatre apporte l'USB 2.0, le multimédia avec le support audio ALSA intégré au noyau et la diffusion vidéo numérique, l'intégration de JFS et XFS en soixante-quatre bits, ext3 et ext2 avec support des ACL et des attributs étendus, NTFS version cinq, Reiserfs version quatre, CIFS successeur de SMB, NFS version quatre et ext4, ainsi qu'un noyau préemptible, un nouvel ordonnanceur, un meilleur support du multithreading et le support des processeurs soixante-quatre bits.
+
+      La série 3.x des années deux mille onze à deux mille quinze apporte des pilotes NFC, le mode réparation pour TCP, la gestion du Wi-Fi 802.11ac et ad, la sécurité de niveau quatre en Bluetooth, la sortie audio via HDMI, l'intégration de libgcrypt, le remplacement d'iptables par nftables, une meilleure intégration de Btrfs, le système de fichiers F2FS, l'intégration des pilotes Android, le support de l'architecture ARM soixante-quatre bits et de la virtualisation, ainsi que les conteneurs LXC.
+
+      La série 4.x à partir de deux mille quinze apporte la mise à jour du noyau à la volée sans redémarrer, sous le nom livepatch, une amélioration sensible de la consommation électrique sur portables et le choix par destinataire de l'algorithme TCP d'évitement de congestion via la table de routage.
+
+
+   B. Les distributions GNU/Linux.
+
+      Le noyau Linux est téléchargeable sur kernel.org, tandis que le système GNU/Linux fait l'objet d'une mise en forme propre à chaque distribution, un projet Linux From Scratch permettant de construire son propre système.
+
+      Slackware est la première distribution, lancée dans la seconde moitié des années quatre-vingt-dix pour populariser GNU/Linux, très proche de la branche BSD sans runlevel System V, avec des paquets binaires au format tgz.
+
+      Red Hat est la première distribution commerciale en parts de marché, liée à IBM, Oracle et Sun, avec des paquets au format rpm et des sources au format srpm, orientée grand public et surtout professionnelle avec des services payants et un label de certification RH Certified Engineer.
+
+      Fedora est une distribution communautaire bâtie sur RPM, soutenue par Red Hat et servant en partie de test aux futures versions commerciales.
+
+      CentOS est une distribution destinée aux serveurs dont tous les paquets sont compilés à partir des sources de Red Hat Enterprise, troisième distribution la plus utilisée sur les serveurs web.
+
+      SuSE est une distribution commerciale allemande populaire en Europe, au format rpm, orientée grand public et professionnelle, liée aux certifications LPI ; Mandriva est son équivalent commercial français.
+
+      Debian est un projet non commercial animé par des volontaires, le plus proche de l'esprit GNU, avec le format de paquets deb, première distribution sur les serveurs web ; Ubuntu, dérivé de Debian commandité par Canonical, s'appuie sur la version testing de Debian, possède l'interface graphique Unity et est très diffusée pour l'usage personnel, deuxième sur les serveurs web.
+
+      Mint est une distribution basée sur Ubuntu ou Debian, la plus téléchargée, dont le succès tient en grande partie à l'interface graphique Cinnamon ; Gentoo permet de se faire un système sur mesure, en installant et optimisant uniquement le nécessaire, la plus proche de l'esprit des projets BSD avec un système de ports pour compiler et installer les applications.
+
+
+POINTS D'ATTENTION.
+
+      Les horloges système des Unix démarrent au premier janvier mille neuf cent soixante-dix, date de naissance d'Unix.
+
+      La réécriture d'Unix en langage C en mille neuf cent soixante-treize est ce qui a rendu le système portable.
+
+      Les Unix sont nativement compatibles avec TCP/IP parce que BSD fut développé dans le cadre d'un financement DARPA lié à TCP/IP.
+
+      Le schisme System V contre BSD est davantage idéologique que technique.
+
+      Solaris est un Unix hybride car héritier successif de BSD puis de System V Release 4.
+
+      GNU n'est pas Unix : c'est un système libre de type Unix, et Linux en est le noyau manquant fourni par Linus Torvalds.
+
+      Le copyleft de la licence GPL impose que tout produit dérivé reste sous licence GPL.
+
+      Malgré POSIX, SVID et X/Open, il n'existe pas de standard Unix unique effectif en pratique.
+
+
+EXEMPLES CITES.
+
+      Jeu space travel de Ken Thompson à l'origine du portage sur DEC PDP-7.
+
+      Unix commerciaux issus de System V : AIX, HP-UX, Solaris.
+
+      Dérivés BSD : FreeBSD, NetBSD, OpenBSD.
+
+      Xenix de Microsoft lancé au début des années quatre-vingt.
+
+      Compilateur gcc de GNU ayant aidé la naissance du code de Linus Torvalds.
+
+      Interfaces d'administration SMIT pour AIX et SAM pour HP-UX.
+
+      Base ODM orientée objet d'AIX.
+
+      Distributions Slackware, Red Hat, Fedora, CentOS, Debian, Ubuntu, Mint, SuSE, Mandriva, Gentoo.
+
+      Formats de paquets tgz pour Slackware, rpm et srpm pour Red Hat, deb pour Debian et Ubuntu.

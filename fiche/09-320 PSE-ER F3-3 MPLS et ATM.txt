@@ -1,72 +1,202 @@
-MPLS ET ATM
+LES TECHNOLOGIES MPLS ET ATM.
 
-PARTIE 1 - MPLS (MULTIPROTOCOL LABEL SWITCHING)
 
-1. CONTEXTE ET PRINCIPE
-Au milieu des années 1990, les opérateurs ont exprimé le besoin de simplifier et d'améliorer (réduction des congestions) le modèle IP over ATM dans les grands réseaux. MPLS est la réponse : protocole normalisé par l'IETF, qui utilise des labels de 32 bits insérés entre les en-têtes de couche 2 et de couche 3.
-MPLS combine la commutation de niveau 2 (ATM : rapidité de passage des nœuds) et le routage de niveau 3 (IP : souplesse dans le choix du chemin). Il améliore la rentabilité des équipements de routage, l'efficacité du routage et les services de routage (ajout de nouveaux services transparent pour la commutation de label, déploiement sans modification du cœur du réseau). Pour les opérateurs, MPLS permet de : supporter les VPN, supporter la QoS, gérer efficacement la bande passante.
-MPLS s'intercale entre un protocole de niveau 3 (IP) et un réseau commuté (Ethernet, ATM, SDH). Il est indépendant du niveau supérieur (labels sans information sur le protocole de niveau 3 ; en théorie tout protocole, en pratique seul IP) et indépendant de la technologie de niveau 2 (déployable sur des réseaux commutés hétérogènes).
-Traversée : le routeur d'entrée détermine le routeur de sortie et le chemin par routage de niveau 3 (plus court, ou tenant compte de la réservation de ressources) ; une connexion est établie entre routeurs d'entrée et de sortie, puis les données sont transmises uniquement par commutation de références. Le chemin est défini à l'avance et connu des routeurs d'entrée.
-Insertion de la référence : si le réseau commuté sous-jacent gère les références (ATM, dans la partie VPI/VCI de l'en-tête), la référence MPLS y est insérée ; sinon MPLS insère son en-tête entre l'en-tête IP et l'en-tête du réseau commuté (Ethernet). Dans tous les cas, les nœuds MPLS ne remontent pas jusqu'à la couche 3 pour commuter.
-Le chemin MPLS n'est pas toujours le plus court : gestion de plusieurs chemins pour une même destination, meilleure répartition du trafic, reprise plus rapide en cas de panne, prise en compte des ressources disponibles.
+LEXIQUE COMPLET.
 
-2. COMMUTATION DE RÉFÉRENCES
-- LER (Label Edge Router) : point d'entrée ; consulte sa table, associe une référence et une interface de sortie selon la destination et la QoS demandée ; découpe le message au format du réseau commuté, ajoute la référence, envoie la cellule.
-- LSR (Label Switched Router) : nœud interne ; consulte sa table de commutation LIB (Label Information Base) ; détermine la nouvelle référence et l'interface de sortie ; remplace l'ancienne référence par la nouvelle ; expédie.
-- Routeur de sortie : supprime la référence, concatène les cellules pour reformer le datagramme IP, l'émet.
-- LSP (Label Switching Path) : chemin = enchaînement de LSR + succession de références.
-Les références ne sont pas communes à l'ensemble des LSR : une référence n'a de signification que pour un LSR et ses équipements directement connectés ; le même numéro peut se retrouver sur deux LSR distincts, ou sur deux interfaces d'un même LSR (chaque interface a sa liste de références d'entrée/sortie).
-Un chemin s'établit vers une destination sans tenir compte de l'expéditeur : plusieurs émetteurs vers la même destination entrant par le même LER utilisent le même chemin, sans possibilité de séparation. Le chemin est unidirectionnel : le retour peut emprunter un chemin différent (administration, disponibilité des ressources).
-Agrégation : un LSR peut regrouper sous une même référence des données de plusieurs LSR vers le même point de sortie. Plus on se rapproche du LER de sortie, moins il y a de chemins et de références : arbre dont les branches partent des LER d'entrée et dont la base est le LER de sortie. Cela diminue le nombre de références et la taille des tables.
+      MPLS (MultiProtocol Label Switching) : protocole normalisé par l'IETF utilisant des labels de trente-deux bits insérés entre les en-têtes de couche 2 et de couche 3, répondant au besoin des opérateurs du milieu des années 1990 de simplifier et d'améliorer le modèle IP sur ATM dans les grands réseaux ; il combine les mécanismes de la commutation de niveau 2 et les fonctionnalités du routage de niveau 3.
 
-3. ÉTABLISSEMENT DES CHEMINS
-Basé sur l'adresse IP du destinataire + facteurs (bande passante, QoS) -> classe d'équivalence FEC (Forwarding Equivalency Class) : regroupe les flux ayant les mêmes propriétés (même destinataire, même classe de service). C'est la FEC qui est associée à un chemin ; la granularité de la demande détermine le nombre de FEC.
-Le chemin est fixé à l'entrée du réseau MPLS et n'est PAS recalculé pendant la traversée (gain de temps à chaque nœud).
-Deux méthodes :
-1. Basée sur le routage IP : message de signalisation routé vers la destination indépendamment par chaque LSR, à l'aide de sa table de routage (OSPF ou BGP modifiés pour les références MPLS). Chemin réutilisé lors de l'envoi des données.
-2. Message de signalisation vers le LER de sortie, routé au niveau IP, tenant compte de la QoS (pas toujours le plus court). Message de réponse par le même chemin indiquant à chaque LSR la référence à envoyer au LSR suivant : attribution des références « par l'aval ». Utilise RSVP modifié ou CR-LDP pour réserver des ressources. LDP (Label Distribution Protocol) tient compte de la QoS demandée par la source et de celle disponible sur les nœuds. Les LSP ont des attributs (besoin minimum en bande passante, priorité, préemption).
-Interaction avec le VPN : dans un VPN de niveau 3 (couche IP), les adresses IP des équipements sont remplacées par des adresses IP du VPN, considérées comme des adresses IP standard par le réseau MPLS et utilisées pour l'établissement des chemins -> mise en place du VPN facilitée.
-GMPLS (Generalized MPLS) : la notion de références est étendue à tout ce qui peut servir de référence (numéro de longueur d'onde sur fibre optique, tranche de temps en multiplexage temporel, numéro de fibre). Peu utilisé hors fibres optiques ; problèmes d'ouverture de connexion sans mémoire tampon dans les nœuds optiques.
-La plupart des grands opérateurs ont adopté MPLS : gestion de la QoS et facilité de mise en place de VPN offrent des possibilités commerciales intéressantes.
+      Apports de MPLS : améliorer la rentabilité des équipements de routage, l'efficacité du routage et enrichir les services de routage, l'ajout de nouveaux services étant transparent pour la commutation de label ; il permet aux opérateurs de supporter les VPN, la qualité de service et de gérer efficacement la bande passante.
 
-PARTIE 2 - LA TECHNOLOGIE ATM
+      Indépendance de MPLS : MPLS s'intercale entre un protocole de niveau 3 comme IP et un réseau commuté comme Ethernet, ATM ou SDH, indépendamment du niveau supérieur, les labels ne contenant aucune information sur le protocole de niveau 3, et indépendamment de la technologie de niveau 2, permettant un déploiement sur des réseaux commutés hétérogènes ; actuellement seul IP est pris en charge.
 
-1. PRÉSENTATION GÉNÉRALE
-ATM (Asynchronous Transfer Mode, méthode de transmission asynchrone) : créé au début des années 1980 en France par le CNET, pour les réseaux étendus. Norme adoptée en 1989 par l'UIT-T pour les réseaux longue distance, débits de 155 à 622 Mbit/s. Interconnexion de réseaux sur grandes distances (réseau à haut débit comme Ethernet 100 Mbit/s, Token-Ring commuté, 100BaseT, CDDI, Frame Relay, FDDI).
-Commutation de cellules (commutation par paquets particulière), mode connecté (contrairement à Ethernet) : la station émettrice gère la connexion sur un circuit virtuel point à point ; les commutateurs ATM utilisent une commutation rapide matérielle basée sur le circuit virtuel ; les cellules sont dirigées vers le seul destinataire.
-Cellule ATM : 53 octets fixes (5 octets d'en-tête + 48 octets d'information).
-ATM offre des débits importants et variés en mode circuit ou paquet ; le support physique lui est transparent (sauf la sous-couche PM, Physical Media) ; l'indépendance temporelle service-réseau permet à l'application d'émettre à son rythme grâce à des files d'attente, mais peut induire de la gigue ; le transport des cellules est sémantiquement neutre (son, image, données).
+      Insertion du label MPLS : si le réseau commuté sous-jacent gère les références, le label MPLS est inséré dans l'en-tête du réseau commuté, par exemple dans la partie VPI/VCI de l'en-tête ATM ; sinon MPLS insère son en-tête entre l'en-tête IP et l'en-tête du réseau commuté, par exemple sur Ethernet ; dans tous les cas, les nœuds MPLS ne remontent pas jusqu'à la couche 3 pour commuter.
 
-2. MODÈLE PRM (PROTOCOL REFERENCE MODEL)
-Modèle en trois dimensions.
-Vue de dessus : plan USAGER (fonctions du réseau de transfert), plan COMMANDE (établissement des connexions par la signalisation), plan de GESTION (en couches : gestion individuelle des couches ; non découpé : gestion d'ensemble, coordination entre couches).
-Vue de face :
-- Couche physique PHY : traite un flux de bits ; en réception, délimite la cellule dans la sous-couche de convergence CS à partir du champ de contrôle d'erreurs HEC (recalculé).
-- Couche ATM : couche commune pour le transport des cellules ; multiplexage / démultiplexage ; commutation à partir de la traduction de l'en-tête ; ne vérifie pas l'intégrité du champ d'information ; mode connecté, aiguillage sans modification de séquence des cellules de 53 octets vers les commutateurs (switchs) ; analyse de l'en-tête (5 octets) pour le routage de proche en proche, conforme à la QdS négociée avant l'établissement. Routage : soit sur le conduit VP (Virtual Path) seul (réseau régi uniquement par le plan de gestion, sans signalisation), soit sur le couple (VP, VC / Virtual Channel), identifiants codés dans l'en-tête.
-- Couche AAL (ATM Adaptation Layer), deux sous-couches : sous-couche de convergence (CS, spécifique de l'application, restaure la qualité temporelle requise, corrige la gigue) ; sous-couche de segmentation et réassemblage (SAR, découpe les messages avec bourrage éventuel pour constituer un train de cellules, reconstitue en sens inverse).
-Quatre types d'AAL : AAL 1 et 2 pour le temps réel (son, vidéo) - débit fixe pour AAL 1, variable pour AAL 2 ; AAL 3/4 et 5 sans exigence temps réel - AAL 3/4 pour les services orientés connexion (numérotage des cellules modulo 16, délimiteurs de messages), AAL 5 pour les services sans connexion reposant sur IP. Correction sur le message : sous-couche de convergence (AAL 5) ou SAR (AAL 3/4). En pratique, seules AAL 3/4 et AAL 5 sont réellement utilisées.
+      LER (Label Edge Router) : routeur de bordure d'entrée du réseau MPLS qui consulte sa table, associe une référence et une interface de sortie au datagramme selon la destination et la qualité de service demandée, découpe le message au format du réseau commuté sous-jacent, ajoute la référence et envoie la cellule ; au routeur de sortie, la référence est supprimée et les cellules concaténées pour reformer le datagramme IP.
 
-3. PARAMÈTRES DE QUALITÉ DE SERVICE
-Cellules OAM (Operation And Maintenance) : renseignent sur la QoS de la couche ATM ; fonctions assurées indépendamment dans chaque couche ; activation dans la couche ATM à la demande pour un nombre restreint de connexions ; bouclages (de bout en bout, de type segment).
-Deux catégories de QoS : détection et mesure des erreurs de transmission (couches physique et ATM, recommandations G.826 de l'UIT-T) ; classes de la sous-couche de convergence AAL (I.356).
-Paramètres d'erreur : CLR (taux de perte de cellules résultant d'erreurs non corrigées dans l'en-tête ou de débordement de files d'attente) ; CMR (taux d'insertion de cellules étrangères provenant d'erreurs non détectées dans l'en-tête) ; CER (taux de cellules erronées) ; SECBR (taux de blocs de cellules gravement erronées, encadrées par deux cellules OAM).
-Classes de service AAL :
-- CBR (Constant Bit Rate) : débit garanti = PCR (Peak Cell Rate), variance du temps de transit (CDV) nulle (compensation par AAL1 récepteur), émulation du mode circuit.
-- VBR (Variable Bit Rate) : débit garanti = SCR (Sustained Cell Rate, débit moyen), images codées MPEG.
-- ABR (Available Bit Rate) : débit garanti = MCR (Minimum Cell Rate), débit dicté par le réseau et porté à la connaissance de l'usager par des cellules RM (Resource Management).
-- UBR (Unspecified Bit Rate) : aucune garantie, best effort (ftp, smtp).
+      LSR (Label Switched Router) : nœud du réseau MPLS qui consulte sa table de commutation LIB, détermine la nouvelle référence et l'interface de sortie, remplace l'ancienne référence par la nouvelle dans l'en-tête et expédie la cellule.
 
-4. GESTION DU TRAFIC
-Multiplexage ATM : découplage, grâce à des files d'attente, entre le rythme des sources et le débit autorisé par le support. Des cellules régulièrement espacées perdent cet espacement selon le taux d'occupation de la file : c'est la gigue, corrigée dans les étages d'entrée des commutateurs par adaptation à leur horloge interne. Nécessité de connaître a priori (approche prédictive) le débit des affluents.
-L'usager déclare un couple [(T, intervalle inter-arrivées des cellules) ; (t, tolérance de gigue sur le débit)]. L'algorithme GCRA (normalisé par l'ITU-T sous la référence I.371) écarte les cellules non conformes à l'entrée. Pour les cellules non conformes, l'opérateur a ses propres critères pour appliquer ou non des garanties de QoS.
-T est une caractéristique de bout en bout de l'affluent ATM, fournie à tous les opérateurs sans modification le long de la connexion ; la tolérance de gigue est un paramètre local.
-Politique de trafic : régulation permanente, cellule après cellule, par les modules d'entrée UPC (User Parameter Control) ou NPC (Network Parameter Control) situés devant les étages de multiplexage du PoP des opérateurs. Interface UNI (User Network Interface) : utilisateur <-> réseau opérateur. Interface ICI : entre deux réseaux opérateur (U = User, N = Network, I = Interface).
-La commande SETUP contient un descripteur des paramètres d'usage de la connexion associés à une classe de service. Une tolérance sur T (0,19 %) permet de déclarer conformes les cellules agrégées par la gigue résiduelle de multiplexage.
-T se déduit du débit-crête négocié PCR : T = 424 / PCR. Valeurs discrètes du débit-crête normalisées : 16384 valeurs (de 424 bit/s à 1,8 Gbit/s) ; tolérance de gigue : 1024 valeurs (de 0,1 µs à 504 s).
-Gestion statistique du débit : à partir du rapport PCR / SCR (sporadicité), on déduit la bande passante nécessaire allouée globalement à n affluents (gain statistique par rapport à une allocation crête).
+      LIB (Label Information Base) : table de commutation d'un LSR contenant ses références d'entrée et de sortie.
 
-5. CONTRÔLE DE CONGESTION
-Les indications de congestion par sens de trafic ne sont utiles qu'à l'utilisateur de la classe ABR.
-Pour les autres classes : le bit CLP (Cell Loss Priority) de l'en-tête, positionné à 0 par l'usager, force l'entrée de la cellule dans une file d'attente saturée en opérant une destruction sélective d'une autre cellule ayant son bit CLP à 1.
-CLR : taux de perte de cellules « conformes » maximal du contrat de trafic, valeur par défaut 10^-10, garanti par le réseau en cas de congestion, y compris pour les cellules marquées CLP à 1. Les délais de traversée bout en bout (CTD, Cell Transfer Delay) et leur dispersion (CDV, Cell Delay Variation, générée par la gigue cellule) font aussi partie du contrat de trafic.
-Contrôle de flux de la classe ABR : préventif, signalisation dans la bande. Une cellule spéciale RM (Resource Management) émise par le DTE effectue un rebouclage de bout en bout et spécifie le débit souhaité pour les k prochaines cellules ATM ; le réseau retourne au DTE une valeur ER (Explicit Rate), éventuellement révisée à la baisse par un commutateur chargé, avec la contrainte MCR < ER < PCR.
+      LSP (Label Switching Path) : chemin déterminé par un enchaînement de LSR et une succession de références, établi vers une destination sans tenir compte de l'expéditeur, non bidirectionnel, le chemin de retour pouvant être différent de l'aller.
+
+      Localité des références : une référence n'a de signification que pour un LSR et les équipements directement connectés, le même numéro pouvant se retrouver sur deux LSR distincts ou sur deux interfaces d'un même LSR.
+
+      Agrégation des chemins : regroupement par un LSR de données expédiées par plusieurs LSR vers le même point de sortie sous une même référence, ce qui diminue le nombre de références et la taille des tables ; l'ensemble des LSP menant à un LER de sortie forme un arbre dont les branches partent des LER d'entrée et dont la base est le LER de sortie.
+
+      FEC (Forwarding Equivalency Classes) : classe d'équivalence regroupant les flux ayant les mêmes propriétés, même destinataire et même classe de service, associée à un chemin ; le nombre de FEC dépend de la granularité de la demande, par exemple une FEC pour toutes les communications d'un site vers un autre, ou deux FEC pour séparer la téléphonie sur IP temps réel et les flux applicatifs.
+
+      Fixation du chemin : le chemin est fixé au moment d'entrer sur le réseau MPLS et n'est pas recalculé pendant la traversée, d'où un gain de temps important à chaque nœud.
+
+      Établissement des chemins par le routage IP : première méthode où un message de signalisation est routé vers la destination indépendamment par chaque LSR à partir de sa table de routage établie par OSPF ou BGP modifiés pour les références MPLS.
+
+      Établissement des chemins par signalisation avec qualité de service : seconde méthode où un message de signalisation détermine le meilleur chemin vers le LER de sortie en tenant compte de la qualité de service, un message de réponse indiquant à chaque LSR la référence à utiliser, l'attribution des références étant faite par l'aval puisque c'est la réponse qui les fixe ; elle utilise RSVP modifié ou CR-LDP pour réserver des ressources.
+
+      LDP (Label Distribution Protocol) : protocole déterminant un chemin en tenant compte de la qualité de service demandée par la source et de celle disponible sur les nœuds, les LSP disposant d'attributs sur le besoin minimum en bande passante, la priorité pour l'allocation des ressources et la possibilité de préemption.
+
+      Interaction MPLS et VPN : dans un VPN de niveau 3, les adresses IP des équipements sont remplacées par des adresses IP du VPN considérées par MPLS comme standard et utilisées pour l'établissement des chemins, ce qui facilite la mise en place d'un VPN de niveau IP sur un réseau MPLS.
+
+      GMPLS (Generalized MPLS) : généralisation de MPLS étendant la notion de références à tout ce qui peut servir de référence, numéro de longueur d'onde sur une fibre, tranche de temps dans un multiplexage temporel ou numéro de fibre, peu utilisée pour le moment en dehors des fibres optiques.
+
+      ATM (Asynchronous Transfer Mode) : méthode de transmission asynchrone créée au début des années 1980 en France par le CNET pour les réseaux étendus, normalisée en 1989 par l'UIT-T pour les réseaux longue distance, supportant des débits de cent cinquante-cinq à six cent vingt-deux mégabits par seconde, utilisée pour l'interconnexion de réseaux sur grandes distances.
+
+      Commutation de cellules : mode de commutation par paquets particulier d'ATM, fonctionnant en mode connecté contrairement à Ethernet, la station émettrice gérant une connexion sur un circuit virtuel point à point, les commutateurs utilisant une commutation rapide de type matériel basée sur le circuit virtuel, les cellules étant dirigées vers le seul destinataire.
+
+      Cellule ATM : unité de taille fixe de cinquante-trois octets, cinq octets d'en-tête et quarante-huit octets d'information, le transport étant sémantiquement neutre par rapport au contenu, son, image ou données, l'indépendance temporelle service-réseau via des files d'attente pouvant induire de la gigue.
+
+      PRM (Protocol Reference Model) : modèle de protocole en trois dimensions d'ATM, avec le plan usager regroupant les fonctions du réseau de transfert, le plan commande établissant les connexions par la signalisation, et le plan de gestion en deux parties, une gestion individuelle des couches et une gestion d'ensemble coordonnant les couches.
+
+      Couche physique PHY d'ATM : couche traitant un flux de bits et réalisant à la réception la délimitation de la cellule dans la sous-couche de convergence à partir du champ de contrôle d'erreurs HEC recalculé, comprenant aussi la sous-couche dépendante du support physique PM.
+
+      Couche ATM : couche commune de transport des cellules assurant le multiplexage et démultiplexage et la commutation à partir de la traduction de l'en-tête, sans vérifier l'intégrité du champ d'information, aiguillant sans modification de séquence les cellules de cinquante-trois octets vers les commutateurs.
+
+      VP (Virtual Path) et VC (Virtual Channel) : identifiants codés dans l'en-tête de la cellule, le routage s'appuyant soit sur le seul conduit VP régi par le plan de gestion sans signalisation, soit sur le couple VP et VC.
+
+      Couche AAL (ATM Adaptation Layer) : couche d'adaptation divisée en une sous-couche de convergence spécifique de l'application qui restaure la qualité temporelle et corrige la gigue, et une sous-couche de segmentation et réassemblage SAR qui découpe les messages en cellules avec bourrage éventuel et les reconstitue.
+
+      Types d'AAL : AAL 1 et 2 pour les applications temps réel, débit fixe pour AAL 1 et variable pour AAL 2 ; AAL 3/4 pour les services orientés connexion sans exigence de temps réel, avec numérotage des cellules modulo seize et délimiteurs de messages ; AAL 5 pour les services sans connexion reposant sur IP ; en pratique, seules AAL 3/4 et AAL 5 sont réellement utilisées.
+
+      OAM (Operation And Maintenance) : cellules de gestion administrative renseignant sur la qualité de service de la couche ATM, avec différents types de bouclage de bout en bout ou de segment, activées à la demande pour un nombre restreint de connexions.
+
+      Classes de service ATM : CBR à débit constant égal au débit crête PCR avec variance du temps de transit nulle grâce à la compensation par AAL1, pour l'émulation de mode circuit ; VBR à débit variable de moyenne le débit soutenu SCR, pour les images MPEG ; ABR à débit disponible de minimum le débit minimal MCR, dicté par le réseau via des cellules RM ; UBR à débit non spécifié, best effort sans garantie pour FTP et SMTP.
+
+      Paramètres de qualité de service en erreurs de transmission : CLR taux de perte de cellules, CER taux de cellules erronées, CMR taux d'insertion de cellules étrangères par erreurs non détectées dans l'en-tête, et SECBR taux de blocs de cellules gravement erronées encadrés par deux cellules OAM.
+
+      Gigue : perte de la régularité de l'espacement des cellules selon le taux d'occupation instantané de la file d'attente, à corriger dans les étages d'entrée des commutateurs par adaptation à l'horloge interne, d'où la nécessité de connaître à priori le débit des affluents.
+
+      Contrat de trafic : déclaration par l'usager d'un couple intervalle inter-arrivées des cellules T et tolérance de gigue t, permettant au réseau d'ajuster les ressources mémoire et d'écarter à l'entrée les cellules non conformes par l'algorithme GCRA normalisé par l'ITU-T ; T est une caractéristique de bout en bout fournie sans modification à tous les opérateurs, alors que la tolérance de gigue est un paramètre local.
+
+      GCRA : algorithme normalisé par l'ITU-T sous la référence I.371, écartant à l'entrée les cellules non conformes au contrat de trafic.
+
+      UPC et NPC : modules d'entrée situés devant les étages de multiplexage du point de présence des opérateurs, exerçant en permanence la régulation du trafic cellule après cellule.
+
+      Interface UNI : interface reliant l'utilisateur au réseau opérateur ; l'interface ICI se trouve entre deux réseaux opérateur.
+
+      PCR (Peak Cell Rate), débit crête : débit négocié dont se déduit l'intervalle inter-arrivées par la formule T égale quatre cent vingt-quatre divisé par PCR, avec seize mille trois cent quatre-vingt-quatre valeurs discrètes normalisées de quatre cent vingt-quatre bits par seconde à 1,8 gigabit par seconde, et mille vingt-quatre valeurs de tolérance de gigue.
+
+      Multiplexage statistique : gestion du débit en mode statistique permettant, à partir du rapport PCR sur SCR, de déduire la bande passante à allouer globalement à n affluents, la sporadicité unitaire valant PCR sur SCR et la charge du multiplex crête son inverse.
+
+      CLP (Cell Loss Priority) : bit de l'en-tête de cellule qui, positionné à zéro par l'usager, force l'entrée de la cellule dans une file saturée en détruisant sélectivement une autre cellule ayant son bit CLP à un ; en cas d'encombrement, la destruction de cellules prioritaires reste possible.
+
+      CLR (Cell Loss Ratio) : taux de perte de cellules conformes maximal prévu par le contrat de trafic, de valeur par défaut dix puissance moins dix, garanti par le réseau en cas de congestion y compris pour les cellules marquées CLP à un.
+
+      CTD (Cell Transfer Delay) et CDV (Cell Delay Variation) : délai de traversée de bout en bout et sa dispersion générée par la gigue, faisant partie du contrat de trafic.
+
+      Contrôle de flux ABR : contrôle préventif utilisant la signalisation dans la bande, une cellule spéciale RM émise par le DTE effectuant un rebouclage de bout en bout et spécifiant le débit souhaité, le réseau retournant une valeur ER de débit explicite révisée à la baisse si un commutateur est chargé, avec la contrainte MCR inférieur à ER inférieur à PCR.
+
+
+COURS DÉTAILLÉ.
+
+
+I. MPLS.
+
+
+   A. Le principe et l'indépendance.
+
+      Au milieu des années 1990, les opérateurs ont voulu simplifier et désengorger le modèle IP sur ATM dans les grands réseaux ; MPLS, normalisé par l'IETF, utilise des labels de trente-deux bits insérés entre les en-têtes de couche 2 et de couche 3, combinant la commutation de niveau 2, rapide au passage des nœuds, et le routage de niveau 3, souple dans le choix du chemin, sa mise en œuvre ayant accompagné la montée en puissance des routeurs.
+
+      MPLS améliore la rentabilité et l'efficacité du routage et enrichit ses services de façon transparente pour la commutation de label, et permet aux opérateurs de supporter les VPN, la qualité de service et une gestion efficace de la bande passante ; il s'intercale entre un protocole de niveau 3 comme IP et un réseau commuté comme Ethernet, ATM ou SDH, indépendamment du niveau supérieur, les labels ne portant aucune information sur le protocole de niveau 3, et indépendamment de la technologie de niveau 2, ce qui autorise des réseaux commutés hétérogènes ; seul IP est actuellement pris en charge.
+
+      Quand un message doit être envoyé, le routeur d'entrée détermine le routeur de sortie et le chemin par le routage de niveau 3, en fonction du plus court chemin ou de la réservation de ressources, puis les données sont transmises uniquement par commutation ; si le réseau commuté gère les références, le label MPLS est inséré dans son en-tête, par exemple dans la partie VPI/VCI d'ATM, sinon MPLS insère son en-tête entre l'en-tête IP et l'en-tête du réseau commuté, les nœuds MPLS ne remontant jamais jusqu'à la couche 3 pour commuter ; MPLS gère plusieurs chemins pour une même destination, ce qui répartit mieux le trafic et accélère la reprise en cas de panne, le chemin n'étant pas toujours le plus court.
+
+
+   B. La commutation de références.
+
+      Quand un datagramme IP arrive au LER, celui-ci associe une référence et une interface de sortie selon la destination et la qualité de service, découpe le message au format du réseau commuté et ajoute la référence ; la cellule arrive ensuite sur un LSR qui consulte sa table de commutation LIB, détermine la nouvelle référence et l'interface de sortie, remplace l'ancienne référence et expédie la cellule ; au routeur de sortie, la référence est supprimée et les cellules concaténées pour reformer le datagramme.
+
+      Un chemin, appelé LSP, est un enchaînement de LSR et de références ; les références ne sont pas communes à tout le réseau, une référence n'ayant de signification que pour un LSR et ses voisins directs, le même numéro pouvant se retrouver sur deux LSR ou deux interfaces d'un même LSR ; un chemin s'établit vers une destination sans tenir compte de l'expéditeur, si bien que plusieurs émetteurs vers la même destination entrant par le même LER utilisent le même chemin sans pouvoir être séparés ; le chemin n'est déterminé que dans un sens, le chemin de retour pouvant être différent pour des raisons d'administration ou de disponibilité des ressources.
+
+      Un LSR peut regrouper sous une même référence des données de plusieurs LSR vers le même point de sortie, ce qui diminue le nombre de références et la taille des tables ; l'ensemble des LSP menant à un LER de sortie forme un arbre dont les branches partent des LER d'entrée et dont la base est le LER de sortie.
+
+
+   C. L'établissement des chemins.
+
+      L'établissement se base sur l'adresse IP du destinataire, éventuellement complétée par la bande passante disponible et la qualité de service, ces facteurs déterminant une classe d'équivalence FEC qui regroupe les flux de mêmes propriétés et est associée à un chemin, le nombre de FEC dépendant de la granularité de la demande ; le chemin est fixé à l'entrée du réseau MPLS et n'est pas recalculé pendant la traversée, d'où un gain de temps à chaque nœud.
+
+      Deux méthodes sont proposées, la première basée sur le routage IP où un message de signalisation est routé vers la destination indépendamment par chaque LSR à partir de sa table établie par OSPF ou BGP modifiés pour les références MPLS, la seconde où un message de signalisation détermine le meilleur chemin vers le LER de sortie en tenant compte de la qualité de service, un message de réponse indiquant à chaque LSR la référence à utiliser, l'attribution étant faite par l'aval ; cette seconde méthode utilise RSVP modifié ou CR-LDP pour réserver des ressources, LDP tenant compte de la qualité de service demandée et disponible, les LSP ayant des attributs de bande passante minimale, de priorité et de préemption.
+
+      Dans un VPN de niveau 3, les adresses IP des équipements sont remplacées par des adresses IP du VPN considérées comme standard et utilisées pour l'établissement des chemins, ce qui facilite la mise en place d'un VPN de niveau IP sur MPLS ; GMPLS généralise la notion de références à tout ce qui peut servir de référence, longueur d'onde, tranche de temps ou fibre, mais reste peu utilisé hors fibre optique ; MPLS a un bel avenir, la plupart des grands opérateurs l'ayant adopté pour la qualité de service et la facilité de mise en place de VPN.
+
+
+II. LA TECHNOLOGIE ATM.
+
+
+   A. La présentation générale.
+
+      ATM, méthode de transmission asynchrone, a été créée au début des années 1980 en France par le CNET pour les réseaux étendus, normalisée en 1989 par l'UIT-T pour les réseaux longue distance, supportant cent cinquante-cinq à six cent vingt-deux mégabits par seconde ; elle utilise la commutation de cellules, commutation par paquets particulière en mode connecté, la station émettrice gérant une connexion sur un circuit virtuel point à point, les commutateurs utilisant une commutation matérielle rapide, les cellules étant dirigées vers le seul destinataire.
+
+      Une cellule ATM fait cinquante-trois octets, cinq d'en-tête et quarante-huit d'information, le transport étant sémantiquement neutre par rapport au contenu, l'indépendance temporelle service-réseau via des files d'attente permettant à l'application d'émettre à son rythme mais pouvant induire de la gigue.
+
+
+   B. Le modèle PRM et les couches.
+
+      Le modèle PRM est en trois dimensions, avec le plan usager regroupant les fonctions du réseau de transfert, le plan commande établissant les connexions par la signalisation, et le plan de gestion divisé en gestion individuelle des couches et gestion d'ensemble coordonnant les couches.
+
+      La couche physique PHY traite un flux de bits et délimite à la réception la cellule dans la sous-couche de convergence à partir du champ de contrôle d'erreurs HEC recalculé ; la couche ATM transporte les cellules, assure le multiplexage et démultiplexage et la commutation à partir de la traduction de l'en-tête, sans vérifier l'intégrité du champ d'information, aiguillant sans modification de séquence les cellules de cinquante-trois octets vers les commutateurs selon la qualité de service négociée, le routage s'appuyant sur le seul conduit VP ou sur le couple VP et VC codés dans l'en-tête.
+
+      La couche AAL est divisée en une sous-couche de convergence spécifique de l'application qui restaure la qualité temporelle et corrige la gigue, et une sous-couche de segmentation et réassemblage SAR qui découpe les messages en cellules avec bourrage éventuel et les reconstitue ; quatre types sont définis, AAL 1 et 2 pour le temps réel à débit fixe puis variable, AAL 3/4 pour les services orientés connexion avec numérotage modulo seize et délimiteurs, et AAL 5 pour les services sans connexion sur IP, seules AAL 3/4 et AAL 5 étant réellement utilisées.
+
+
+   C. La qualité de service.
+
+      Les cellules OAM renseignent sur la qualité de service de la couche ATM, avec des bouclages de bout en bout ou de segment, activées à la demande pour un nombre restreint de connexions ; deux catégories de qualité de service existent, la première relative à la détection et à la mesure des erreurs de transmission des couches physique et ATM, la seconde en relation avec les classes de la sous-couche de convergence AAL.
+
+      Les paramètres d'erreurs sont le CLR taux de perte de cellules, le CER taux de cellules erronées, le CMR taux d'insertion de cellules étrangères par erreurs non détectées dans l'en-tête, et le SECBR taux de blocs gravement erronés encadrés par deux cellules OAM ; les classes de service sont CBR à débit constant égal au PCR avec variance nulle par compensation d'AAL1 pour l'émulation de circuit, VBR à débit variable de moyenne le SCR pour les images MPEG, ABR à débit disponible de minimum le MCR dicté par le réseau via des cellules RM, et UBR à débit non spécifié best effort sans garantie pour FTP et SMTP.
+
+
+   D. La gestion du trafic.
+
+      Le multiplexage ATM découple par des files d'attente le rythme des sources du débit autorisé par le support, ce qui fait perdre aux cellules régulièrement espacées cette régularité, c'est la gigue, à corriger dans les étages d'entrée des commutateurs par adaptation à l'horloge interne ; l'usager déclare un couple intervalle inter-arrivées T et tolérance de gigue t, ce qui permet au réseau d'ajuster les ressources mémoire et d'écarter à l'entrée les cellules non conformes par l'algorithme GCRA normalisé par l'ITU-T.
+
+      T est une caractéristique de bout en bout fournie sans modification à tous les opérateurs, alors que la tolérance de gigue est un paramètre local ; la régulation est exercée en permanence, cellule après cellule, par les modules d'entrée UPC ou NPC devant les étages de multiplexage du point de présence ; l'interface UNI relie l'utilisateur au réseau opérateur, l'interface ICI se trouve entre deux réseaux opérateur ; T se déduit du débit crête PCR par T égale quatre cent vingt-quatre divisé par PCR, avec seize mille trois cent quatre-vingt-quatre valeurs discrètes normalisées et mille vingt-quatre valeurs de tolérance de gigue ; le multiplexage statistique déduit du rapport PCR sur SCR la bande passante à allouer à n affluents.
+
+      Les indications de congestion par sens ne servent qu'à l'utilisateur de la classe ABR ; pour les autres, le bit CLP positionné à zéro par l'usager force l'entrée de la cellule dans une file saturée en détruisant sélectivement une autre cellule ayant son CLP à un ; le contrat de trafic prévoit un taux de perte maximal de cellules conformes, le CLR de valeur par défaut dix puissance moins dix, garanti même pour les cellules CLP à un, ainsi que le délai de traversée CTD et sa dispersion CDV ; le contrôle de flux ABR est préventif, une cellule RM émise par le DTE effectuant un rebouclage de bout en bout et spécifiant le débit souhaité, le réseau retournant une valeur de débit explicite ER révisée à la baisse si nécessaire, avec MCR inférieur à ER inférieur à PCR.
+
+
+POINTS D'ATTENTION.
+
+      MPLS insère un label de trente-deux bits entre les en-têtes de couche 2 et de couche 3.
+
+      Les nœuds MPLS ne remontent jamais jusqu'à la couche 3 pour commuter.
+
+      Une référence MPLS n'a de signification que pour un LSR et ses voisins directs ; le même numéro peut se retrouver ailleurs.
+
+      Un LSP n'est pas bidirectionnel ; le chemin de retour peut différer de l'aller.
+
+      Le chemin MPLS est fixé à l'entrée du réseau et n'est pas recalculé pendant la traversée.
+
+      L'attribution des références par la seconde méthode est faite par l'aval, puisque c'est la réponse qui les fixe.
+
+      Une cellule ATM fait toujours cinquante-trois octets, cinq d'en-tête et quarante-huit d'information.
+
+      La couche ATM ne vérifie pas l'intégrité du champ d'information, seulement l'en-tête.
+
+      Seules les couches AAL 3/4 et AAL 5 sont réellement utilisées aujourd'hui.
+
+      L'intervalle T est une caractéristique de bout en bout, la tolérance de gigue est locale.
+
+      Le CLR par défaut est de dix puissance moins dix, garanti même pour les cellules CLP à un.
+
+      Les indications de congestion par sens ne servent qu'à la classe de service ABR.
+
+
+EXEMPLES CITES.
+
+      Insertion de la référence MPLS dans la partie VPI/VCI de l'en-tête ATM, ou entre l'en-tête IP et l'en-tête d'un réseau Ethernet commuté.
+
+      Chemin du LER1 au LER5 utilisant les références 64, 987, 32, 71, 63 et 245, agrégé avec celui du LER2 sur les références 71, 63 et 245.
+
+      FEC unique pour toutes les communications du site de Lyon vers Toulouse, ou deux FEC pour séparer téléphonie sur IP et flux applicatifs.
+
+      Protocoles OSPF et BGP modifiés pour les références MPLS, RSVP modifié et CR-LDP pour la réservation de ressources.
+
+      GMPLS étendant les références aux longueurs d'onde et tranches de temps sur fibre optique.
+
+      ATM créé par le CNET, normalisé en 1989 par l'UIT-T, à cent cinquante-cinq à six cent vingt-deux mégabits par seconde.
+
+      Classes de service CBR pour l'émulation de circuit, VBR pour les images MPEG, ABR piloté par cellules RM, UBR best effort pour FTP et SMTP.
+
+      Formule T égale quatre cent vingt-quatre divisé par PCR, avec seize mille trois cent quatre-vingt-quatre valeurs de débit crête normalisées.
+
+      Application de cinq cents connexions simultanées à seize kilobits par seconde de PCR et quatre kilobits de SCR, sporadicité unitaire quatre, débit crête composite de 3,2 mégabits par seconde.
+
+      Contrainte MCR inférieur à ER inférieur à PCR pour le contrôle de flux ABR.

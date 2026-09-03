@@ -1,42 +1,364 @@
-DÉMARRAGE ET ARRÊT D'UN SYSTÈME UNIX / LINUX
+LE DÉMARRAGE ET L'ARRÊT D'UN SYSTÈME UNIX ET LINUX.
 
-1. LE BOOTSTRAPPING
-Objectif : partir de rien pour arriver à un système 100 % fonctionnel, par étapes successives (effet boule de neige). Le bootstrapping monte le noyau en mémoire et l'exécute, puis enchaîne de nombreuses phases d'initialisation. Période cruciale et vulnérable : une erreur de configuration, un équipement manquant ou un système de fichiers endommagé empêche le démarrage.
-Phases (étape BIOS mise à part) :
-1. Lecture du boot loader depuis le MBR (Master Boot Record, 512 premiers octets du disque).
-2. Chargement et initialisation du noyau.
-3. Détection et configuration des périphériques.
-4. Création des processus du noyau.
-5. Intervention de l'administrateur si mode single-user.
-6. Exécution des scripts systèmes de démarrage.
 
-2. DU MONITEUR AU NOYAU
-Moniteur / boot code : programme en mémoire non volatile (ROM, PROM, EEPROM, FLASH) qui sait démarrer le noyau, vérifie le matériel, initie le processus init. Peut être protégé par mot de passe.
-Chargeur primaire (boot block) : secteur de boot du disque, chargé en RAM par le moniteur via les seuls firmwares (aucun pilote logiciel). Chargeur secondaire : connaît partiellement la structure du disque, charge le noyau (ex. Solaris : /kernel/unix). Sur les Unix/Linux actuels, étapes 2 et 3 fusionnées.
-Chargement du noyau à 2 étages : la ROM lit un petit programme (boot loader) depuis le disque, qui sélectionne le noyau à charger (souvent /boot/vmlinuz sous Linux, /unix ou /vmunix sous Unix). Le noyau teste la RAM disponible et se réserve une zone mémoire.
-GRUB (Grand Unified Boot Loader, projet GNU) : boot loader par défaut sur x86. GRUB Legacy (1) vs GRUB 2 (réécriture modulaire et portable, plus de systèmes de fichiers reconnus). Config : /boot/grub/grub.conf (Red Hat) ou menu.lst (Solaris, SUSE, Debian/Ubuntu). Paramètres : default (entrée par défaut), timeout (délai de choix), (hd0,0) = 1re partition du 1er disque. Options de noyau : acpi=off, init=/bin/bash, root=/dev/..., single. Non persistantes hors fichiers GRUB. Multiboot : GRUB avant le boot loader Windows ; chainloader +1 et rootnoverify pour Windows.
+LEXIQUE COMPLET.
 
-3. INITIALISATION DU NOYAU ET PROCESSUS
-Configuration matérielle : le noyau analyse l'environnement, affiche chaque périphérique trouvé (consultable via dmesg), charge des pilotes en modules. Noyaux modulaires ; parfois configuration manuelle nécessaire.
-Processus du noyau : le noyau crée des processus « spontanés » (sans fork standard), PID bas, entre crochets dans ps. init a le PID 1 ; sched le PID 0 (Unix). Processus noyau Linux : kthreadd, kjournald (journaux du SGF), kswapd (swap), ksoftirqd (interruptions), khubd (USB).
+      Bootstrapping : ensemble des processus de démarrage d'un système d'exploitation de type Unix ou Linux, du chargement du noyau en mémoire jusqu'à un système pleinement opérationnel.
 
-4. MODE SINGLE-USER (recovery / maintenance)
-Charge la console sans monter tous les périphériques ni activer le réseau : présence en salle machine requise. Accès root ; utile pour consulter les logs et corriger des fichiers de configuration. Depuis un système déjà démarré : shutdown ou telinit S. Racine souvent en lecture seule -> mount -o rw,remount /. fsck (vérification/réparation du SGF) doit souvent être lancée à la main. Argument init=/bin/sh pour passer en single-user avant init.
+      Firmware, moniteur ou boot code : programme stocké en mémoire non volatile, ROM, PROM, EEPROM ou FLASH, qui sait quand et comment démarrer le noyau, vérifie le matériel et lance le processus init.
 
-5. SCRIPTS RC ET NIVEAUX D'EXÉCUTION
-Scripts rc (run commands) lancés par init depuis /etc, en 4 étapes :
-- Réveiller le système : fsck de la racine, montage via /sbin/mount et /etc/fstab, activation du swap, nettoyage de /tmp.
-- Configurer le système : réseau, planification (crond), journaux (syslogd).
-- Lancer les services : ftpd, messagerie, web...
-- Donner la main aux multi-utilisateurs : consoles getty (ou startX en graphique).
-Niveaux d'exécution (run levels), au moins 7 : 0 = arrêt ; 1 ou S = single-user ; 2 à 5 = services réseau ; 6 = reboot. Défaut serveur 2 ou 3 ; niveau 5 = graphique (serveur X) sous Linux. Fichier /etc/inittab ; commande telinit (telinit 3 ; -q relit inittab).
-Organisation System V : scripts dans /etc/init.d, liens dans /etc/rcN.d nommés Snn<service> (Start, ordre croissant) ou Knn<service> (Kill, ordre décroissant). Commande chkconfig (Red Hat, SUSE) pour ajouter/retirer un script d'un niveau.
+      BIOS (Basic Input/Output System) : programme de boot initial en ROM d'un PC, très simple, qui connaît les composants de la carte mère et permet de choisir le périphérique de démarrage.
 
-6. SPÉCIFICITÉS PAR DISTRIBUTION
-- Red Hat : /etc/rc.d/rc, verrous dans /var/lock/subsys, chkconfig, /etc/rc.d/rc.local (dernier script), configuration dans /etc/sysconfig ; depuis la v7, systemd.
-- systemd (Lennart Poettering) : gestion des dépendances, démarrage parallèle et à la demande, cgroups pour suivre et tuer proprement les processus d'un service, moins de scripts shell ; commande systemctl ; outil systemd-cgls.
-- SUSE : organisation proche de Red Hat, /etc/init.d et /etc/sysconfig (variables lues par Yast) ; systemd depuis SLE 12.
-- Debian / Ubuntu : Upstart (2007), fonctionnement par événements (starting, started, stopping, stopped), config dans /etc/init (fichiers .conf, commandes exec/script/respawn), initctl, update-rc.d pour la compatibilité rcN.d ; puis abandon d'Upstart au profit de systemd.
-- HP-UX : scripts dans /sbin/init.d, configuration dans /etc/rc.config.d, journaux /etc/rc.log.
-- AIX : /sbin/rc.boot (ksh) en 3 phases (matériel, montage, /etc/init via /etc/inittab) ; commandes mkitab, chitab, lsitab, rmitab ; s'appuie fortement sur inittab.
-- Solaris : SMF (Service Management Facility) ; chaque service identifié par un FMRI, catégories application/périphérique/réseau/système, milestones à la place des niveaux ; commandes svcs (statut : online, disabled, degraded, maintenance, offline...), svcadm (changer le statut) ; manifests XML dans /var/svc/manifest, dépôt SQLite /etc/svc/repository.db ; démon svc.startd.
+      PXE : mécanisme de démarrage réseau proposé par le BIOS.
+
+      MBR (Master Boot Record) : les cinq cent douze premiers octets du périphérique de démarrage, qui contiennent un programme décrivant depuis quelle partition lire le boot loader.
+
+      Boot loader : programme chargé de sélectionner et de charger le noyau à exécuter.
+
+      Chargeur primaire (boot block) : secteur de boot d'un périphérique, chargé en mémoire vive par le moniteur puis exécuté, qui charge à son tour un programme plus gros.
+
+      Chargeur secondaire : programme chargé depuis le secteur de boot, qui a une connaissance partielle de la structure d'un disque Unix et charge le noyau en mémoire vive puis l'exécute.
+
+      GRUB (Grand Unified Boot Loader) : boot loader par défaut de nombreuses distributions Unix et Linux sur x86, développé par le projet GNU, qui permet de choisir un noyau dans une liste et de lui passer des options.
+
+      GRUB Legacy et GRUB 2 : GRUB 1 est la version historique, GRUB 2 est une réécriture totale plus modulaire et portable, reconnaissant plus de systèmes de fichiers dès le démarrage.
+
+      chainloader : option de GRUB qui charge le boot loader d'un autre système, par exemple Windows, depuis un emplacement défini.
+
+      Noyau : programme chargé en mémoire au démarrage, dont le chemin est souvent /unix ou /vmunix sous Unix et /boot/vmlinuz sous Linux.
+
+      dmesg : commande permettant de consulter les messages du noyau.
+
+      Processus spontanés : processus créés par le noyau dans l'espace utilisateur sans utiliser la technique standard du fork, dont init qui a toujours le PID un et sched qui est le processus zéro sur les Unix.
+
+      Démon : processus système lancé par init pour rendre un service.
+
+      Mode single-user (recovery, maintenance) : mode qui charge la console sans monter tous les périphériques ni activer les connexions réseau, pour consulter les journaux et modifier les fichiers de configuration en présence physique en salle machine.
+
+      telinit : commande qui permet de changer de niveau d'exécution, par exemple telinit 3, l'option de relecture d'inittab étant tiret q.
+
+      shutdown : commande la plus sûre pour arrêter correctement un système, qui prévient les utilisateurs connectés par des messages paramétrables et peut passer en single-user ou redémarrer.
+
+      halt : commande simple qui éteint la machine proprement, arrête les journaux et les processus secondaires, exécute sync, attend la fin des écritures sur les disques et arrête le noyau.
+
+      reboot : commande proche de halt qui redémarre la machine après l'extinction.
+
+      Scripts rc (init scripts) : simples scripts shell exécutés en séquence par le processus init pour vérifier et monter les systèmes de fichiers puis lancer les démons ; rc signifie run commands.
+
+      Répertoire /etc/init.d : répertoire où sont conservés les scripts de démarrage des services.
+
+      Répertoires /etc/rc0.d, /etc/rc1.d et suivants : répertoires contenant des liens vers les scripts d'init.d, dont le nom commence par S pour Start ou K pour Kill, suivi d'un numéro d'ordre et du nom du service.
+
+      Fichier /etc/inittab : fichier décrivant ce qu'effectue chaque niveau d'exécution et les étapes de transition entre niveaux.
+
+      Niveau d'exécution (run level) : état du système correspondant à un ensemble de services ; init définit au moins sept niveaux.
+
+      chkconfig : commande des distributions Red Hat, et une variante sous SUSE, pour ajouter ou enlever un script de démarrage d'un ou de tous les niveaux d'exécution et lister les services par niveau.
+
+      Fichier /etc/rc.d/rc.local : dernier script exécuté au démarrage sur Red Hat, pratique pour ajouter une configuration particulière.
+
+      Répertoire /etc/sysconfig : répertoire où Red Hat place la plus grande partie de sa configuration, horloge, localisation, clavier, réseau et autres.
+
+      systemd : administrateur de système et de services pour Linux, alternative au démon init de System V, compatible avec les scripts SysV et LSB, offrant parallélisation, activation par socket et D-Bus, démarrage à la demande et suivi des processus par cgroups.
+
+      systemctl : commande permettant d'interroger l'état de tous les services, systemd comme SysV ou LSB.
+
+      cgroup (groupe de contrôle) : groupe de processus classables hiérarchiquement et étiquetés, dans lequel systemd place chaque processus d'un service, ce qui permet de tuer proprement un service et tous ses descendants.
+
+      Upstart : service de démarrage de Debian et Ubuntu fonctionnant à l'aide d'événements plutôt que d'une séquence de scripts, apparu début deux mille sept avec Ubuntu Feisty Fawn.
+
+      Répertoire /etc/init : répertoire des fichiers de configuration d'Upstart, d'extension point conf, qui réagissent à l'événement startup.
+
+      initctl : commande permettant de déclencher manuellement des événements Upstart ; sous Ubuntu, restart, reload, status, start et stop en sont des alias.
+
+      update-rc.d : commande de l'administrateur Debian et Ubuntu pour maintenir les liens entre les scripts de démarrage et les répertoires de type rc.
+
+      SMF (Service Management Facility) : mécanisme de Sun puis Oracle qui modernise le démarrage de Solaris en prenant en charge les dépendances et les erreurs des processus au chargement.
+
+      FMRI (fault management resource identifier) : identifiant unique de chaque service dans SMF.
+
+      svcs et svcadm : commandes de SMF, svcs pour vérifier le statut des services, svcadm pour changer le statut d'un service.
+
+      milestone : dans SMF, catégorie équivalente aux niveaux d'exécution.
+
+      manifest : fichier XML de SMF qui décrit les propriétés d'un service, ses dépendances et les instructions de démarrage et d'arrêt, situé dans /var/svc/manifest.
+
+      fsck : commande qui vérifie et répare un système de fichiers endommagé, lancée automatiquement au boot normal mais souvent à lancer à la main en mode single-user.
+
+      mount et fichier /etc/fstab (ou vfstab) : commande de montage des partitions et fichier de paramètres décrivant comment monter les systèmes de fichiers.
+
+      swap : partition dédiée à la pagination, activée par les scripts rc telle que définie à l'installation.
+
+      ISL : invite du mode single-user sous HP-UX, obtenue en interrompant le démarrage.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LE PROCESSUS DE DÉMARRAGE.
+
+
+   A. Objectif et vue d'ensemble.
+
+      L'objectif du démarrage est d'arriver à un système entièrement fonctionnel à partir de rien, en procédant par étapes successives qui appellent progressivement les services essentiels.
+
+      À partir de la mise sous tension, on détecte le matériel de base, on exécute le programme d'initialisation du firmware, on localise et exécute le programme de démarrage initial généralement situé à un emplacement spécifique du disque, on localise et lance le noyau Unix qui est le programme de démarrage de premier niveau, le noyau s'initialise et effectue les dernières vérifications du matériel, puis le noyau démarre le processus init qui lance les démons et initialise les sous-systèmes, après quoi le système accepte les ouvertures de session.
+
+      Ces étapes se retrouvent dans tous les environnements POSIX et se résument à quatre ou cinq étapes dans les Unix de type System V.
+
+      Le terme bootstrapping décrit l'ensemble de ces processus ; la période de bootstrapping est cruciale et le système y est vulnérable, une erreur de configuration, un équipement manquant ou un système de fichiers endommagé pouvant empêcher le démarrage, et la configuration du démarrage est une tâche primordiale mais difficile, surtout lors de l'ajout de matériel.
+
+
+   B. Les six phases du bootstrapping classique.
+
+      Un bootstrapping classique, l'étape BIOS étant mise à part, se décompose en six phases : la lecture du boot loader provenant du MBR, le chargement et l'initialisation du noyau, la détection et la configuration des périphériques, la création des processus du noyau, l'intervention éventuelle de l'administrateur en mode single-user et l'exécution des scripts systèmes de démarrage.
+
+      Avant que le système soit totalement démarré, le système de fichiers doit être vérifié et monté puis les démons lancés, ces procédures étant supervisées par des scripts shell exécutés en séquence dont le contenu varie d'un système à l'autre ; en cas de problème au chargement, le système donne accès à un script shell, et l'administrateur a besoin d'outils de réparation du système de fichiers.
+
+
+   C. Le moniteur.
+
+      Au démarrage, le serveur exécute d'abord le moniteur ou boot code stocké en mémoire non volatile, qui vérifie le matériel et initie le processus init toujours appelé en premier ; l'utilisateur ne peut pas beaucoup intervenir durant cette étape, l'administrateur pouvant seulement éditer les fichiers de configuration du démarrage ou changer les options passées au noyau.
+
+      Certains constructeurs permettent de protéger le moniteur par mot de passe, la perte de ce mot de passe pouvant imposer un retour en usine à moins d'un super mot de passe connu du constructeur.
+
+
+   D. Les chargeurs primaire et secondaire.
+
+      Le chargeur primaire est en général le secteur de boot d'un disque dur, chargé en mémoire vive par le moniteur puis exécuté, qui charge et exécute un programme plus gros ; ce secteur de boot rend le disque stratégique, son chargement faisant appel uniquement aux firmwares des périphériques sans aucun pilote logiciel, et sa création est propre à chaque constructeur.
+
+      Le chargeur secondaire, chargé depuis le secteur de boot, a une connaissance partielle de la structure d'un disque Unix, charge en mémoire vive le noyau Unix et les modules nécessaires jusqu'à ce que le noyau puisse monter des systèmes de fichiers, puis l'exécute ; sur les Unix et Linux actuels, les étapes du chargeur primaire et du chargeur secondaire sont fusionnées.
+
+
+   E. L'initialisation du noyau.
+
+      La première tâche du bootstrapping est de charger le noyau en mémoire pour l'exécuter, la plupart des systèmes implémentant un chargement à deux étages, le premier lisant depuis un disque un petit programme de démarrage, le boot loader, qui sélectionne au second étage le noyau à charger, cette procédure n'étant pas standardisée entre Unix et Linux.
+
+      Le noyau teste le matériel ou lit une valeur en ROM pour connaître la taille de la mémoire vive disponible, réserve de la mémoire pour lui-même, mémoire inutilisable par un niveau d'exécution, et envoie à la console un message indiquant la mémoire disponible pour l'utilisateur et la mémoire totale.
+
+
+   F. La configuration matérielle.
+
+      Une des premières tâches du noyau est d'analyser l'environnement matériel, en affichant des informations sur chaque périphérique trouvé et en chargeant le plus souvent les pilotes en tant que modules indépendants du noyau.
+
+      Sur Linux et les Unix pour PC, le noyau prend en charge un maximum de périphériques pour fonctionner sans intervention de l'utilisateur, les noyaux étant modulaires et détectant une grande variété de matériel, même si une intervention reste parfois nécessaire pour certains pilotes ; les messages du noyau sont consultables via la commande dmesg.
+
+
+   G. La création des processus du noyau.
+
+      Une fois l'initialisation terminée, le noyau crée plusieurs processus dans l'espace utilisateur appelés processus spontanés car ils n'utilisent pas le fork standard ; le processus init a toujours le PID un et les Unix ont sched comme processus zéro, ce PID zéro n'étant pas visible sous Linux.
+
+      Le noyau fournit une bibliothèque d'appels système pour les processus, comme ouvrir un fichier, lire, réserver de la mémoire ou lancer un processus ; sous Linux, init est accompagné de processus mémoire et noyau à PID bas, identifiables par des crochets entourant leur nom dans la sortie de ps, parfois suivis d'un slash et du numéro du cœur utilisé sur une machine multiprocesseur, comme kjournald pour les journaux du système de fichiers, kswapd pour la pagination, ksoftirqd pour les interruptions système et khubd pour les périphériques USB.
+
+
+   H. Le mode single-user et maintenance.
+
+      Dans ce mode, l'utilisateur a accès à la ligne de commande, une option lors de l'appel du noyau permettant d'y passer, et il doit s'identifier pour accéder à la console root, un Contrôle-D au lieu du couple identifiant et mot de passe faisant repasser en démarrage normal.
+
+      Seule la partition root est montée, souvent en lecture seule, si bien qu'il faut monter manuellement les autres partitions et remonter la partition root en lecture et écriture pour éditer les fichiers de configuration ; on consulte le fichier fstab ou vfstab pour savoir comment monter le système de fichiers.
+
+      Sur les Linux de Red Hat, tous les systèmes de fichiers tentent de se monter même en single-user, et fsck, lancé automatiquement lors d'un boot normal, doit souvent être lancé à la main dans ce mode, après quoi le système peut poursuivre son démarrage normal ; sous HP-UX, on interrompt le démarrage pour obtenir l'invite ISL, sous AIX le mode est appelé maintenance et se sélectionne au menu de boot ou via telinit S.
+
+
+   I. L'exécution des scripts de démarrage.
+
+      Les scripts de démarrage sont de simples scripts shell appelés par le processus init, qui donnent accès à la pleine utilisation du système ; init exécute depuis /etc un ou plusieurs scripts rc.
+
+      La première étape réveille le système en vérifiant que la partition racine n'a pas souffert d'un arrêt brutal, avec réparation éventuelle par fsck, en ouvrant l'accès aux partitions usuelles via mount et /etc/fstab, en activant le swap, en chargeant les pilotes optionnels si le noyau le supporte et en nettoyant les fichiers temporaires de /tmp.
+
+      La deuxième étape configure le système en veillant au bon paramétrage du réseau, de la planification des tâches et des journaux d'activité, avec des démons comme crond et syslogd.
+
+      La troisième étape lance les services qui font la richesse du système, comme FTP, la messagerie et le web, avec des démons comme ftpd.
+
+      La quatrième étape donne la main aux utilisateurs en proposant un service de console de type getty ou une session graphique via un script de type startX, après quoi le système est totalement opérationnel et les démons réseau et système peuvent accepter les connexions.
+
+
+II. ILLUSTRATIONS PRATIQUES : LE PC x86 ET GRUB.
+
+
+   A. BIOS, MBR et boot loader.
+
+      Sur une machine propriétaire Unix, le firmware en ROM connaît le matériel, sait se connecter au réseau en DHCP et comprend le système de fichiers des disques, tandis que sur un PC le programme de boot initial est le BIOS, très simple, plusieurs firmwares cohabitant, un pour la machine, un pour la carte vidéo, un pour la carte SCSI et d'autres pour les cartes réseau.
+
+      Le BIOS permet de choisir le périphérique de démarrage, y compris le boot réseau par PXE, puis lit le premier bloc du périphérique, les cinq cent douze premiers octets formant le MBR, qui contient un programme indiquant depuis quelle partition lire le boot loader, certains MBR plus sophistiqués permettant de choisir entre plusieurs systèmes ou versions de noyau.
+
+
+   B. GRUB : rôle, versions et configuration.
+
+      GRUB, développé par le projet GNU, est le boot loader par défaut de nombreuses distributions Unix et Linux sur x86 ainsi que de Solaris sur x86 depuis la version dix ; son rôle est de choisir un noyau dans une liste et de le lire avec des options éventuelles.
+
+      GRUB Legacy est la version historique et GRUB 2 une réécriture totale plus modulaire et portable, reconnaissant plus de systèmes de fichiers dès le démarrage, mais identique sur de nombreux concepts, seuls la syntaxe et le nom des fichiers de configuration variant, GRUB 2 exigeant en outre de générer son fichier de configuration.
+
+      Par défaut, GRUB lit sa configuration dans /boot/grub/menu.lst ou /boot/grub/grub.conf à chaque démarrage, avec la possibilité de la modifier dynamiquement ; Red Hat et assimilés utilisent grub.conf, tandis que Solaris, SUSE, Debian et Ubuntu utilisent menu.lst.
+
+
+   C. La ligne de commande GRUB et les options de noyau.
+
+      En appuyant sur la touche c depuis l'écran GRUB, on entre en mode ligne de commande pour démarrer un système non décrit dans grub.conf, afficher des informations système ou tester les systèmes de fichiers, la touche Tab donnant la liste des commandes comme reboot, find, root, kernel, help et boot.
+
+      GRUB permet de passer des options au noyau pour modifier ses paramètres, lui demander de prendre en charge certains périphériques, changer le chemin de la partition root ou changer de disque de démarrage, par exemple acpi=off pour désactiver la gestion avancée de l'alimentation, init=/bin/bash pour ne démarrer que bash, root=/dev/foo pour choisir la partition racine ou single pour démarrer en single-user ; ces options ne sont pas persistantes et doivent être inscrites dans les fichiers de GRUB pour être pérennisées, GRUB permettant de choisir un nouveau noyau ou de revenir à un ancien en cas d'instabilité.
+
+
+   D. Le multiboot.
+
+      Plusieurs systèmes peuvent cohabiter sur un même PC, un seul étant choisi au démarrage ; le boot loader doit reconnaître les différents systèmes, chaque partition ayant son propre boot loader de deuxième niveau alors que le disque n'a qu'un MBR, si bien qu'il faut choisir un boot loader maître, GRUB devant toujours précéder le boot loader de Windows qui ne reconnaît pas les systèmes Unix ou Linux.
+
+      Pour démarrer Windows depuis GRUB, on utilise l'option chainloader qui charge son boot loader depuis le premier secteur de la première partition du premier disque, et l'option rootnoverify qui indique à GRUB de ne pas monter cette partition.
+
+
+III. LE PROCESSUS INIT ET LES NIVEAUX D'EXÉCUTION.
+
+
+   A. Le processus init.
+
+      Le processus init est le premier processus lancé au démarrage, le plus important, avec le PID un, son implémentation variant selon les systèmes ; il définit au moins sept niveaux d'exécution représentant chacun un ensemble de services.
+
+
+   B. Les niveaux d'exécution.
+
+      On retrouve généralement le niveau zéro, système complètement arrêté, le niveau un ou S, single-user ou maintenance, les niveaux deux à cinq supportant les services réseau et le niveau six pour le redémarrage ; les niveaux zéro et six sont spéciaux et inaccessibles comme état stable, le niveau par défaut est le deux ou le trois, et sous Linux le niveau cinq lance l'affichage graphique et le serveur X ; dix niveaux sont prévus mais certains ne sont pas définis.
+
+
+   C. Le fichier inittab et la commande telinit.
+
+      Le fichier /etc/inittab décrit ce qu'effectue chaque niveau d'exécution et les étapes de transition, la machine passant du niveau zéro au niveau final choisi ; la commande telinit change de niveau, telinit 3 passant au niveau trois, l'option tiret q faisant relire inittab, et des interfaces existent pour configurer les niveaux, peu déployées sous AIX qui s'appuie sur inittab ; sur SUSE, le niveau cinq par défaut est indiqué dans inittab par la ligne id deux points cinq deux points initdefault.
+
+
+   D. Organisation des scripts init.d et des liens S et K.
+
+      Les scripts de démarrage, interprétés en sh, ksh ou bash, sont conservés dans /etc/init.d, avec des liens dans /etc/rc0.d, /etc/rc1.d et suivants ; ces liens commencent par S pour Start ou K pour Kill, suivis d'un numéro d'ordre et du nom du service.
+
+      Quand init passe d'un niveau inférieur à un niveau supérieur, il exécute tous les scripts S dans l'ordre croissant des numéros avec l'argument start, et quand il descend il exécute tous les scripts K dans l'ordre inverse avec l'argument stop ; pour qu'un démon démarre à un niveau, on place un lien symbolique adéquat, par exemple un lien S80cups dans rc2.d pour démarrer l'impression et un lien K80cups dans rc0.d pour l'arrêter proprement.
+
+      Les scripts de démarrage sont verbeux et affichent ce qu'ils réalisent, ce qui est utile en cas de difficulté ; l'administrateur ne doit pas les modifier mais agir sur les scripts de configuration de /etc, et les systèmes récents s'en éloignent, Solaris utilisant SMF et Debian et Ubuntu ayant utilisé Upstart.
+
+
+IV. LES VARIANTES SELON LES SYSTÈMES.
+
+
+   A. Red Hat.
+
+      À chaque niveau, init appelle /etc/rc.d/rc avec le nouveau niveau en argument, en mode normal qui démarre les scripts de contrôle, ou en mode confirmation qui demande la confirmation de l'utilisateur pour chaque script, ce mode n'étant actif qu'à partir du niveau trois.
+
+      Les scripts verrouillent des fichiers dans /var/lock/subsys, la présence d'un fichier verrouillé du même nom qu'un script indiquant que le service est déjà démarré ; la commande chkconfig aide à superviser les services, ajouter ou enlever un script d'un ou de tous les niveaux et lister les services par niveau, et le script /etc/rc.d/rc.local est le dernier exécuté au démarrage.
+
+      La configuration se fait en grande partie dans /etc/sysconfig, dont les fichiers principaux concernent l'horloge, les arguments de cron, la localisation, l'affichage des messages des scripts, le clavier, la souris et le réseau.
+
+
+   B. systemd.
+
+      Red Hat utilise systemd depuis sa version sept ; systemd est un administrateur de système et de services conçu pour le noyau Linux, alternative au démon init de System V, compatible avec les scripts SysV et LSB, qui offre un meilleur cadre pour les dépendances, le chargement parallèle des services et la réduction des appels aux scripts shell.
+
+      Il fournit une parallélisation poussée, utilise l'activation par socket et par D-Bus, offre un démarrage à la demande des démons, implémente une logique transactionnelle des dépendances, piste les processus par cgroups, supporte les snapshots et maintient les points de montage.
+
+      La commande systemctl interroge l'état de tous les services, la colonne ACTIVE montrant l'état général ; systemd place chaque processus d'un service dans un cgroup nommé d'après le service, ce qui permet d'étiqueter tous ses processus indépendamment des forks et de tuer proprement le service et tous ses descendants, ps et systemd-cgls affichant la hiérarchie des cgroups.
+
+
+   C. SUSE.
+
+      Les scripts de démarrage SUSE ressemblent à ceux de Red Hat, init appelant /etc/init.d/rc à chaque niveau, les scripts étant dans /etc/init.d et les fichiers de configuration dans /etc/sysconfig sous forme de variables d'environnement du shell précédées d'informations destinées au gestionnaire Yast, par exemple la variable DEFAULT_WM du fichier windowmanager qui fixe le gestionnaire de fenêtres du serveur X ; SUSE possède aussi une commande chkconfig, différente de celle de Red Hat, et utilise systemd depuis SUSE Linux Enterprise 12.
+
+
+   D. Debian, Ubuntu et Upstart.
+
+      Upstart, apport de la communauté Ubuntu apparu début deux mille sept avec Feisty Fawn, remplace le démon init par un service fonctionnant par événements plutôt que par une séquence de scripts, ce qui est plus souple et réduit le temps de chargement ; il détecte les changements matériels, coordonne les événements entre services dépendants et émule les niveaux d'exécution pour la compatibilité.
+
+      Upstart utilise des fichiers du répertoire /etc/init d'extension point conf qui réagissent à l'événement startup généré par init au tout début du démarrage, avec des événements automatiques starting, started, stopping et stopped, des événements personnalisés via emits, un exécutable lancé par exec ou un bloc script, et un redémarrage automatique par respawn ; on déclenche des événements manuellement via initctl, restart, reload, status, start et stop en étant des alias.
+
+      L'administrateur utilise update-rc.d pour maintenir les liens entre les scripts de démarrage et les répertoires rc, la syntaxe indiquant les séquences et les niveaux de start et de stop ; Ubuntu a depuis adopté systemd et abandonné Upstart, suivant le choix de Debian.
+
+
+   E. HP-UX.
+
+      Sous HP-UX, les scripts de démarrage sont dans /sbin/init.d, les répertoires de niveaux dans /sbin et les fichiers de configuration dans /etc/rc.config.d avec des noms correspondant aux scripts ; par exemple, le script SnmpMaster récupère sa configuration de /etc/rc.config.d/SnmpMaster et est appelé par les liens S560SnmpMaster et K440SnmpMaster.
+
+      Les scripts de démarrage d'HP-UX utilisent les journaux de /etc/rc.log, particularité utile, et les fichiers de /etc/rc.config.d couramment modifiés concernent SNMP, le process accounting, l'audit système, l'environnement de bureau CDE, les interfaces Ethernet, le spouleur d'impression, le serveur de messagerie, le serveur de noms, les paramètres noyau, les périphériques et démons réseau, NFS, SSH et le serveur de polices X.
+
+
+   F. AIX.
+
+      AIX a une approche plus simple : pendant le démarrage il exécute le script /sbin/rc.boot écrit en ksh, qui s'exécute en trois phases, initialisation du matériel, montage des systèmes de fichiers et démarrage de /etc/init décrit dans /etc/inittab.
+
+      AIX s'appuie davantage sur inittab que les autres Unix, init lisant chaque ligne et l'exécutant dans l'ordre, en démarrant parfois directement un démon comme cron avec l'action respawn, ou en lançant une commande via un script comme rc.tcpip avec l'action wait, init attendant la fin du script ; l'administration d'inittab se fait avec mkitab pour ajouter, chitab pour modifier, lsitab pour lister et rmitab pour effacer, l'édition directe du fichier restant possible.
+
+
+   G. Solaris et SMF.
+
+      Solaris s'appuie sur le Service Management Facility pour moderniser le démarrage, avec prise en charge des dépendances et des erreurs au chargement ; chaque service est identifié par un FMRI, SMF répertoriant les catégories application, périphérique, réseau et système, ainsi qu'une catégorie milestone équivalente aux niveaux d'exécution.
+
+      La commande svcs vérifie le statut des services, svcs tiret a affichant tous les services définis, svcs tiret l affichant les détails et l'emplacement des journaux, les états possibles étant online, disabled, degraded, legacy_run pour les services encore sur des scripts init.d, uninitialized, maintenance nécessitant l'intervention de l'administrateur, et offline ; la commande svcadm change le statut, par exemple svcadm disable ssh.
+
+      SMF configure les services par des fichiers XML, les manifests décrivant les propriétés, dépendances et méthodes de démarrage et d'arrêt dans /var/svc/manifest, les instances étant décrites dans /var/svc/profile et les configurations sauvegardées dans une base SQLite dans /etc/svc/repository.db.
+
+      Le démarrage avec SMF est proche du bootstrapping normal : lecture du boot record dans la PROM pour les processeurs SPARC, lecture du noyau qui examine /etc/system pour charger ses modules, puis lancement du processus svc.startd qui est le démon de SMF, les niveaux d'exécution subsistant pour la compatibilité avec des scripts encore présents dans /etc/rc.d.
+
+
+V. L'ARRÊT ET LE REDÉMARRAGE.
+
+
+   A. La commande shutdown.
+
+      La commande shutdown est la plus sûre pour arrêter correctement le système ; le système ne se ferme pas instantanément, la commande envoyant des messages paramétrables aux utilisateurs connectés, et la plupart des versions permettent de passer en single-user ou de redémarrer, parfois de lancer fsck après un reboot.
+
+      Les options varient selon les systèmes : sous Linux le chemin est /sbin/shutdown avec un argument d'heure et les options tiret r pour redémarrer, tiret h pour arrêter et tiret f pour éviter fsck, cette dernière n'étant pas disponible sous Debian et Ubuntu ; une heure relative peut être fixée, par exemple une extinction dans quinze minutes assortie d'un message d'explication.
+
+
+   B. Les commandes halt et reboot.
+
+      halt et reboot sont des méthodes plus simples : halt éteint la machine proprement mais avec moins d'options, appelée directement ou via l'option tiret h de shutdown, elle arrête les journaux et les processus secondaires, exécute sync pour les disques, attend la fin des écritures et arrête le noyau ; reboot est proche de halt mais redémarre la machine après l'extinction, appelée directement ou via l'option tiret r de shutdown.
+
+
+POINTS D'ATTENTION.
+
+      La période de bootstrapping est courte mais critique et le système y est vulnérable à une erreur de configuration, un équipement manquant ou un système de fichiers endommagé.
+
+      Le chargement des chargeurs primaire et secondaire ne fait appel qu'aux firmwares, sans aucun pilote logiciel.
+
+      Le mode single-user désactive les connexions réseau : il faut être physiquement présent en salle machine, et la partition root y est souvent montée en lecture seule.
+
+      Les options passées au noyau via GRUB ne sont pas persistantes ; il faut les inscrire dans les fichiers de GRUB pour les pérenniser.
+
+      GRUB doit toujours précéder le boot loader de Windows en multiboot.
+
+      L'administrateur ne doit pas modifier les scripts de démarrage eux-mêmes mais leurs fichiers de configuration, généralement dans /etc.
+
+      Les systèmes récents remplacent init par systemd, ou l'ont fait par Upstart pour Debian et Ubuntu, ou par SMF pour Solaris.
+
+      Toujours utiliser shutdown, halt ou reboot pour arrêter un système, jamais une coupure brutale.
+
+
+EXEMPLES CITES.
+
+      Création d'un secteur de boot sous Solaris avec installboot appliqué à bootblk sur le périphérique concerné.
+
+      Chemins de noyau /unix ou /vmunix sous Unix et /boot/vmlinuz sous Linux.
+
+      Sortie de ps affichant les processus noyau entre crochets comme kthreadd, ksoftirqd, migration et kworker, suivis du numéro de cœur.
+
+      Processus noyau kjournald, kswapd, ksoftirqd et khubd et leurs fonctions respectives.
+
+      Remontage de la partition racine en lecture et écriture avec mount tiret o rw remount slash.
+
+      Configuration GRUB Legacy avec default égale zéro, timeout égale dix, une entrée title, la ligne root entre parenthèses hd zéro virgule zéro et la ligne kernel pointant vers un fichier vmlinuz.
+
+      Entrée GRUB pour Windows XP avec rootnoverify hd zéro virgule zéro et chainloader plus un.
+
+      Invite ISL de HP-UX et commande hpux tiret i S sur /stand/vmunix pour le single-user.
+
+      Passage en maintenance sous AIX avec telinit S.
+
+      Script de démarrage du démon sshd gérant les arguments start, stop et restart via une structure case.
+
+      Liens ln tiret s de /etc/init.d/cups vers /etc/rc2.d/S80cups et vers /etc/rc0.d/K80cups.
+
+      Commande update-rc.d cups start 80 aux niveaux 2, 3, 4 et 5 et stop 20 aux niveaux S, 1 et 6.
+
+      Entrée d'inittab AIX cron deux-points 23456789 deux-points respawn démarrant /usr/sbin/cron.
+
+      Vérification d'un service Solaris avec svcs tiret l sur svc slash network slash ssh deux-points default.
+
+      Désactivation du serveur SSH sous Solaris avec svcadm disable ssh.
+
+      Extrait de manifest SMF avec une méthode start invoquant /lib/svc/method/sshd start.
+
+      Arrêt planifié Linux avec shutdown tiret h plus quinze suivi d'un message.

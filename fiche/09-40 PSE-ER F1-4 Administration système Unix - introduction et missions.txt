@@ -1,31 +1,287 @@
-ADMINISTRATION SYSTÈME UNIX : INTRODUCTION ET MISSIONS
+L'ADMINISTRATION SYSTÈME UNIX ET LINUX : INTRODUCTION ET MISSIONS.
 
-1. CONSIDÉRATIONS PRATIQUES
-Unix a fondé sa force sur des modalités d'accès simples et robustes en ligne de commande (les outils du shell ont même été adoptés ailleurs, cf. PowerShell côté Windows Server). L'administrateur doit maîtriser le clavier (AZERTY / QWERTY, touches Shift, Alt Gr).
-Terminal / émulateur de terminal : fenêtre exécutant un shell qui affiche un prompt, base du système. Consoles système : point d'entrée d'administration lors de l'installation de serveurs. Consoles virtuelles : clients légers simulant un terminal passif (VT100 de DEC, PuTTY sous Windows) ; Unix en ouvre plusieurs. Variable TERM = type de terminal.
-Connexions distantes : Telnet permet la prise en main à distance mais fait circuler login et mot de passe EN CLAIR sur le réseau : on lui préfère SSH, qui chiffre les données dans un tunnel.
 
-2. UTILISATEURS ET CARACTÉRISTIQUES D'UN UNIX
-Deux catégories : l'utilisateur (le système est un outil, droits limités) et l'administrateur système (installation, configuration, bon fonctionnement, tous les droits). Le super-utilisateur s'appelle root ; on limite volontairement leur nombre.
-Missions d'un OS Unix : mise à disposition des ressources matérielles ; partage équitable entre utilisateurs (multi-utilisateurs) ; gestion de la mémoire ; gestion des fichiers. Aucun processus n'accède directement au matériel : il passe par un fichier spécial de périphérique. « Mémoire » = mémoire volatile (RAM) par convention (la mémoire statique est le disque).
-Terminologie : mono/multi-utilisateur ; mono/multi-tâche ; multitâche préemptif (l'OS décide quand un processus a eu assez de CPU) vs non préemptif (le processus décide). Unix est multi-utilisateurs et multi-tâches (et multithread).
+LEXIQUE COMPLET.
 
-3. NOYAU, SHELL, ÉDITEUR
-Noyau (kernel) : ensemble de programmes, cœur de l'OS ; les processus y accèdent par appels système. Deux composantes : le gestionnaire de processus (scheduler) et le système de gestion de fichiers (droits d'accès).
-Shell : interpréteur de commandes ; interprète les commandes avant transmission au noyau ; porte d'entrée vers les ressources.
-Shells courants : sh (Bourne Shell, 1979, Steven Bourne, shell de base) ; bash (Bourne Again Shell, standard GNU, sur-ensemble de sh, défaut sous Linux) ; csh / tcsh (syntaxe proche du C) ; ksh (Korn Shell, fin 1980, synthèse Bourne + C) ; POSIX shell (standardisation IEEE). Le fichier /etc/shells liste les shells connus. On change de shell en tapant son nom.
-Éditeurs : vi (Visual interface) = seul éditeur standard, tout terminal texte, deux modes (commande/édition et insertion, bascule par ESC) ; emacs (GNU Emacs de Stallman) = environnement de travail complet, apprentissage long ; nedit, nano = simples et intuitifs.
+      Shell (coquille, interpréteur de commandes) : utilitaire dont la fonction première est d'interpréter les commandes de l'utilisateur avant transmission au noyau, porte d'entrée vers les ressources du système.
 
-4. MISSIONS DE L'ADMINISTRATEUR
-Gérer les comptes utilisateurs ; assister et éduquer les utilisateurs ; gérer les logiciels (installation, configuration, mise à jour) ; gérer le matériel (panne, remplacement, ajout de disque) ; assurer la sécurité (sauvegardes fiables et régulières, contrôle d'accès, usage abusif de ressources) ; vérifier l'adéquation matériel/usage (goulets d'étranglement) ; maintenance de premier niveau ; gestion quotidienne. Autres facettes : diplomatie, aspects légaux (chiffrement), enquêtes judiciaires, politique d'utilisation des machines.
-Règles de prudence : se méfier de soi ; ne rien faire si l'on est fatigué ; pas de modification importante un vendredi après-midi ; pouvoir revenir en arrière (copie .orig) ; documenter ; attention à l'expansion des caractères génériques (rm -rf .*).
+      Prompt (invite) : chaîne affichée par le shell qui indique qu'il attend une commande.
 
-5. OUTILS D'ADMINISTRATION
-Tout est fichier : les paramètres de configuration sont dans des fichiers, le plus souvent sous /etc (/etc/hosts, /etc/group...).
-Scripting : le shell offre des outils simples et puissants, enchaînés dans des tubes (pipes) ; utilitaires clés grep, sed, awk, find, commandes de tri.
-Recherche d'information et supervision :
-- man : manuel électronique ; documentation en 3 volumes (utilisation sections 1-6, administration 1M/7/8, programmeur 2-5) ; 4 sections par page (nom, synopsis, description avec options, voir aussi). Autres : info, locate.
-- find : recherche par name, type, user, group, size, atime, mtime, perm, links ; action possible avec -exec.
-- syslog / démon syslogd : journaux système et applicatifs, organisés en /var/log/<application>/<type>.
-- cron : démon d'exécution périodique ; la crontab liste les tâches planifiées.
-Outils graphiques intégrés selon l'éditeur : SMIT (AIX), SAM (HP-UX). Sources externes : documentation constructeur, HOWTO, FAQ, Linux Documentation Project.
+      Terminal (ou émulateur de terminal) : fenêtre, accessible en mode console comme en mode graphique, dans laquelle s'exécute un shell qui affiche un prompt.
+
+      Console système : terminal permettant l'administration de base, notamment lors de l'installation de serveurs, souvent point d'entrée de l'administration d'une plateforme de machines Unix.
+
+      Console virtuelle : client léger simulant un terminal passif physique, plusieurs pouvant être ouvertes en même temps sous Unix pour permettre à plusieurs utilisateurs de se connecter.
+
+      VT100 : terminal virtuel développé par DEC pour se connecter à ses mainframes, à l'origine de la virtualisation des terminaux ; putty en est un équivalent moderne sous Windows.
+
+      Variable TERM : variable d'environnement dont la valeur permet de connaître le type de terminal utilisé.
+
+      Telnet : utilitaire et protocole permettant de prendre la main à distance sur un serveur Unix, mais faille de sécurité importante car le couple identifiant et mot de passe circule en clair sur le réseau.
+
+      SSH : version sécurisée de connexion et de prise en main à distance, qui chiffre les données dans un tunnel.
+
+      Utilisateur : personne qui se sert du système pour produire quelque chose, avec des droits limités, certaines commandes lui étant interdites et certaines parties du système inaccessibles.
+
+      Administrateur (root, super-utilisateur) : personne chargée de l'installation, de la configuration et de la bonne marche du système, disposant de tous les droits ; leur nombre est volontairement limité.
+
+      Noyau (kernel) : ensemble de programmes et de sous-programmes constituant le cœur du système d'exploitation, par lequel les processus passent pour accéder aux ressources matérielles.
+
+      Appel système : mécanisme par lequel un processus demande au noyau l'accès à une ressource.
+
+      Gestionnaire de processus (scheduler) : composante du noyau qui fait en sorte que les processus s'exécutent et accèdent à la mémoire de manière équitable.
+
+      Système de gestion de fichiers : composante du noyau qui gère le système de fichiers, notamment les droits d'accès.
+
+      Fichier spécial : fichier vu comme un fichier classique mais qui donne accès à une ressource matérielle ; écrire sur un périphérique revient à écrire dans son fichier spécial.
+
+      Multitâche : capacité à exécuter plusieurs processus en parallèle ; Unix et Linux sont multitâches.
+
+      Multitâche préemptif : le système d'exploitation détermine quand un processus a eu assez de temps processeur.
+
+      Multitâche non préemptif : le processus détermine lui-même quand il a eu assez de temps processeur.
+
+      Mono-utilisateur et multi-utilisateur : une seule personne utilise l'ordinateur, ou plusieurs personnes l'utilisent en même temps, le système s'assurant qu'aucun utilisateur n'interfère avec un autre.
+
+      Mémoire volatile et mémoire statique : la mémoire volatile, la mémoire vive, perd son contenu à l'extinction, la mémoire statique, le disque dur, le conserve ; dans le vocabulaire Unix, mémoire désigne la mémoire volatile.
+
+      Système de fichiers (file system) : ensemble d'outils fournis par le système pour stocker les données, les retrouver rapidement, les visualiser et les protéger.
+
+      Éditeur de texte : utilitaire vital pour interagir via le shell avec le système d'exploitation.
+
+      VI (Visual interface) : seul éditeur de texte standard sous Unix et Linux, fonctionnant sur tout terminal texte, puissant mais exigeant de la pratique et disposant de deux modes de fonctionnement.
+
+      Mode édition et mode insertion de VI : le mode édition sert à saisir des commandes à appliquer au texte, le mode insertion sert à saisir le texte, la touche ESC faisant passer du second au premier.
+
+      emacs : éditeur très puissant et complexe, datant de la fin des années soixante-dix, davantage un environnement de travail complet qu'un simple éditeur, exigeant un long apprentissage.
+
+      Répertoire /etc : répertoire où sont le plus souvent localisés les fichiers de configuration du système.
+
+      Fichier /etc/hosts : fichier définissant les noms de machines connus via le réseau.
+
+      Fichier /etc/group : fichier définissant les groupes d'utilisateurs.
+
+      Fichier /etc/shells : fichier donnant un aperçu des shells connus du système.
+
+      Scripting : automatisation et chaînage de commandes dans un fichier texte auquel on accorde les droits d'exécution, pour disposer de procédures automatisées.
+
+      Pipe (tube) : mécanisme du shell qui envoie la sortie d'une commande en entrée d'une autre commande.
+
+      grep, sed et awk : utilitaires puissants de recherche et de manipulation de texte fréquemment employés dans les scripts.
+
+      man : outil d'affichage des pages de manuel, manuel électronique documentant l'ensemble des commandes de l'interpréteur.
+
+      Sections du manuel : la documentation est répartie en trois volumes, utilisation du système, administration du système et programmeur, et chaque page comporte le nom de la commande, la syntaxe, la description détaillée avec les options et les commandes complémentaires.
+
+      find : commande qui cherche des fichiers selon des critères et peut exécuter une action sur les fichiers trouvés.
+
+      info et locate : autres outils de recherche rapide d'informations.
+
+      syslog et démon syslogd : service consacré à la recherche et au stockage d'informations système et applicatives dans les journaux d'activité.
+
+      Répertoire /var/log : emplacement des journaux, organisés par application et par type de journaux.
+
+      cron et crontab : démon d'exécution périodique de programmes et de scripts, et table des tâches planifiées dont la consultation est un outil utile de recherche d'informations.
+
+      SMIT et SAM : outils intégrés d'administration graphique, SMIT pour AIX d'IBM et SAM pour HP-UX de Hewlett-Packard.
+
+      HOWTO et FAQ : documentations pratiques et listes de questions fréquentes produites par les communautés Unix et Linux, souvent utilisables sur d'autres Unix après adaptation.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LE CONTEXTE : LA LIGNE DE COMMANDE UNIX.
+
+
+   A. Généralités et importance du clavier.
+
+      Les systèmes Unix sont anciens et robustes tout en étant modernes, et ont fondé leur force sur des modalités d'accès simples, sans faire la part belle au tout graphique et au clic souris, les outils issus du shell ayant même été adoptés par d'autres systèmes réticents, comme l'illustre l'apparition du PowerShell dans le monde Windows Server.
+
+      Un administrateur Unix doit savoir se servir d'un clavier, qu'il soit américain ou français ; sur un clavier AZERTY, une même touche donne un caractère seul, un autre avec la touche Majuscule et un troisième avec la touche Alt Gr, la touche Alt étant absente des claviers américains, et certains recommandent de ne pas utiliser le verrouillage majuscule ni le pavé numérique.
+
+
+   B. Terminaux et consoles.
+
+      Sous Unix et Linux, en mode console comme en mode graphique, l'utilisateur accède à un ou plusieurs terminaux ou émulateurs de terminal, base de ce type de système, à savoir une fenêtre dans laquelle s'exécute un shell qui affiche un prompt.
+
+      À l'origine était le terminal passif relié aux mainframes ; les consoles système Unix jouent ce rôle et permettent l'administration de base, notamment lors de l'installation de serveurs, et constituent souvent le point d'entrée de l'administration d'une plateforme.
+
+      Vint ensuite la virtualisation avec le VT100 de DEC, client léger qui simule un terminal passif ; les consoles virtuelles, multiples sous Unix, permettent à plusieurs utilisateurs de se connecter et d'accéder aux ressources, et il existe des équivalents comme putty sous Windows ; la valeur de la variable d'environnement TERM indique le terminal utilisé.
+
+
+   C. Les connexions distantes.
+
+      L'administrateur gère souvent des serveurs distants, et l'accès ne repose alors plus seulement sur une console physiquement reliée mais aussi sur des technologies réseau compatibles avec TCP/IP nativement associé à Unix.
+
+      Telnet, utilitaire et protocole, permet de prendre la main à distance sur un serveur Unix si la configuration réseau le permet, mais il constitue une faille de sécurité importante car toutes les informations, notamment le couple identifiant et mot de passe, circulent en clair sur le réseau ; on lui préfère nettement SSH, version sécurisée qui chiffre les données dans un tunnel.
+
+
+II. INTRODUCTION À L'ADMINISTRATION SYSTÈME.
+
+
+   A. Utilisateurs et administrateurs.
+
+      Sur un système Unix ou Linux, on trouve d'un côté les utilisateurs, qui se servent du système comme d'un outil pour produire quelque chose, par exemple les programmeurs ou les utilisateurs de bases de données, et de l'autre les administrateurs système, chargés de l'installation, de la configuration et de la bonne marche du système.
+
+      Les utilisateurs ont des droits limités, certaines commandes leur étant interdites et certaines parties du système inaccessibles, tandis que les administrateurs ont tous les droits ; on limite volontairement le nombre d'administrateurs, appelé root ou super-utilisateur.
+
+
+   B. Les missions fondamentales d'un système d'exploitation.
+
+      Le système met à disposition les ressources matérielles que sont l'espace disque, le temps d'exécution sur le microprocesseur central et l'espace mémoire, et partage équitablement ces ressources entre les utilisateurs, ce qui rend le système multi-utilisateurs.
+
+      Unix et Linux veillent à ce que toutes les ressources, imprimante, mémoire et autres, soient partagées équitablement entre tous les processus, de sorte qu'un second processus lancé n'attende pas la fin du premier pour s'exécuter, ce qui définit le multitâche.
+
+      Aucun processus n'accède directement à une ressource matérielle : on passe par des fichiers spéciaux, vus comme des fichiers classiques, si bien qu'écrire sur un périphérique revient à écrire dans son fichier spécial et lire sur un disque revient à lire son fichier spécial.
+
+      Pour la gestion de la mémoire, tout processus a besoin de mémoire pour stocker les données qu'il manipule, mais la quantité est limitée et non extensible ; le système doit donc partager la mémoire entre tous les processus et empêcher qu'un processus n'accapare toute la mémoire ou n'y accède directement, la mémoire étant traitée comme une ressource matérielle.
+
+      Pour la gestion des fichiers, le système fournit les outils pour stocker et retrouver rapidement les données sur le disque dur, pour visualiser l'ensemble des fichiers simplement et pour les protéger, chaque utilisateur disposant de ses fichiers et pouvant accorder ou non à d'autres le droit d'y accéder.
+
+
+   C. Terminologie du multitâche et du multi-utilisateur.
+
+      Un système est mono-utilisateur si une seule personne l'utilise et multi-utilisateur si plusieurs personnes l'utilisent en même temps sans interférer entre elles.
+
+      Un système est monotâche si un seul processus tourne à un instant et multitâche si plusieurs processus donnent l'impression de tourner en même temps ; le multitâche est préemptif si le système d'exploitation détermine quand un processus a eu assez de temps processeur, et non préemptif si le processus le détermine lui-même.
+
+
+   D. Le noyau et ses deux composantes.
+
+      Le système d'exploitation est lui-même un ensemble de programmes et de sous-programmes regroupés dans un noyau, et les processus, ne pouvant accéder directement aux ressources matérielles, passent par le noyau au moyen d'appels système.
+
+      Le noyau comporte deux composantes principales : le gestionnaire de processus, aussi appelé scheduler, qui fait en sorte que les processus s'exécutent et accèdent à la mémoire équitablement, et le système de gestion de fichiers, qui gère le système de fichiers et notamment les droits d'accès.
+
+
+   E. Le rôle du shell.
+
+      Pour faire fonctionner l'ordinateur, l'utilisateur dispose d'un utilitaire de saisie directe des commandes appelé shell, dont la fonction première est d'interpréter les commandes avant transmission au noyau, ce qui lui vaut le nom d'interpréteur de commandes ; tous les systèmes en disposent, l'équivalent sous Windows NT étant le DOS puis le PowerShell.
+
+      Le shell est la porte d'entrée vers les ressources du système, à savoir les commandes, les processus, les fichiers et les périphériques, et les commandes tapées par l'utilisateur sont nécessairement interprétées par un shell.
+
+
+   F. Les principaux shells.
+
+      Le Bourne-Shell, du nom de son créateur Steven Bourne, est le premier shell historiquement, inclus dès mille neuf cent soixante-dix-neuf dans la première version populaire issue de la branche Bell Labs, si bien que certaines commandes d'administration en dépendent.
+
+      Le C-Shell s'apparente au langage C et est le premier shell alternatif au Bourne-Shell ; le POSIX shell est issu de l'effort de standardisation autour de la norme du même nom sous couvert de l'IEEE ; le Korn Shell, produit commercial de la fin des années quatre-vingt, réalise une synthèse du Bourne et du C shell.
+
+      Concrètement, un système Unix offre plusieurs shells : sh, le Bourne Shell originel, petit programme aux possibilités réduites, toujours disponible par souci de compatibilité ; bash, le Bourne Again Shell, shell standard de GNU et de l'utilisateur courant sous Linux, sur-ensemble du Bourne Shell, si bien que les commandes reconnues par sh le sont aussi par bash sans que l'inverse soit toujours vrai ; csh, le C Shell, et tcsh son sur-ensemble parfois appelé Turbo Shell C ; ksh, le Korn Shell, sur-ensemble du Bourne Shell dont la configuration standard rebute les débutants.
+
+      Le fichier /etc/shells donne un aperçu des shells connus, et pour permuter d'un shell à un autre il suffit d'entrer le nom du nouveau shell dans le terminal, le système le localisant au moyen de la variable PATH puis l'activant, une nouvelle invite propre à ce shell étant souvent affichée.
+
+
+   G. Le rôle de l'éditeur de texte.
+
+      Au sommet de la pile applicative se trouve un éditeur de texte, logiciel vital pour interagir via le shell avec le système ; il existe beaucoup d'éditeurs mais seuls quelques-uns sont assez robustes, comme VI, seul éditeur standard sous Unix, emacs et sa variante graphique xemacs, ainsi que nedit et nano, plus simples.
+
+      VI fonctionne sur tout terminal texte et sur tout Unix, il est puissant avec de nombreuses possibilités en mode insertion, mais il demande beaucoup de pratique et possède deux modes déroutants pour les débutants, le mode édition pour les commandes à appliquer au texte et le mode insertion pour la saisie, la touche ESC faisant repasser en mode édition.
+
+      emacs date de la fin des années soixante-dix et n'a cessé d'évoluer, ce qui en fait l'un des éditeurs les plus puissants ; c'est bien plus qu'un éditeur, c'est un environnement de travail complet incluant édition, programmation, courrier, forums et shell, mais son apprentissage est long.
+
+
+III. LES PRINCIPALES MISSIONS DE L'ADMINISTRATEUR.
+
+
+   A. La liste des missions.
+
+      L'administrateur gère les comptes utilisateurs, tâche simple et automatisable, assiste et éduque les utilisateurs en répondant à leurs questions et en tenant la documentation à jour, gère les logiciels par leur installation, leur configuration et leur mise à jour, et gère le matériel en cas de panne, de remplacement ou d'ajout de disque ou de périphérique.
+
+      Il assure la sécurité du système et des utilisateurs par des sauvegardes fiables et régulières, le contrôle d'accès et la surveillance des utilisations abusives, vérifie l'adéquation du matériel avec son utilisation en identifiant les goulets d'étranglement, assure la maintenance de premier niveau en diagnostiquant les pannes et en appelant la maintenance constructeur, et assure la gestion quotidienne faite de multiples tâches.
+
+
+   B. Les autres facettes du métier.
+
+      Le métier comporte aussi de la diplomatie et un rôle de police, des aspects légaux comme le chiffrement, des enquêtes judiciaires en cas de piratage informatique, des relations commerciales et la définition d'une politique d'utilisation des machines ; la charge de travail dépend de la taille du site, et l'administrateur est en première ligne et naturellement incriminé lorsqu'un problème surgit.
+
+
+   C. Les fichiers de configuration.
+
+      Dans un environnement où tout est fichier, de nombreux paramètres de configuration sont définis dans des fichiers le plus souvent localisés dans le répertoire /etc, et l'administrateur doit connaître au moins leur localisation et leur existence.
+
+      Parmi les fichiers couramment consultés figurent celui qui définit le nom de la machine, /etc/hosts qui définit les noms de machines connus via le réseau et /etc/group qui définit les groupes d'utilisateurs.
+
+
+   D. Le scripting et les outils intégrés.
+
+      Le shell, langage interprété offert aux utilisateurs et au super-utilisateur, propose des outils d'administration et de supervision simples et puissants ; le recours à des scripts, c'est-à-dire l'automatisation et le chaînage de commandes, s'appuie sur des commandes comme find et les commandes de tri et de manipulation de fichiers, ainsi que sur des utilitaires comme grep, sed et awk, notamment dans des tubes.
+
+      Chaque grand éditeur apporte en outre des outils intégrés d'administration graphique, comme SMIT pour AIX d'IBM et SAM pour HP-UX de Hewlett-Packard.
+
+
+   E. Les connaissances de base.
+
+      Un administrateur Unix doit bien connaître l'environnement utilisateur, l'aide en ligne, le système de fichiers, l'utilisation du shell, l'utilisation d'un éditeur de texte, les commandes de base et la programmation shell ; en synthèse, c'est un utilisateur Unix expert qui fait preuve de bon sens.
+
+
+IV. OÙ CHERCHER L'INFORMATION SUR LES COMMANDES.
+
+
+   A. L'outil man.
+
+      L'administrateur dispose nativement de la commande man, manuel électronique documentant la quasi-totalité des commandes de l'interpréteur ; la documentation est répartie en trois volumes, utilisation du système, administration du système et programmeur, et il est possible de connaître les rubriques par mot-clé sans connaître le nom exact de la commande.
+
+      Chaque page de documentation comporte généralement le nom de la commande, la syntaxe appelée synopsis, la description détaillée avec les options, parfois très nombreuses, et les commandes complémentaires à consulter ; man se trouve à un emplacement prévisible comme /usr/share/man, mais il suffit de l'appeler, et il y a toujours quelque chose à apprendre même sur les commandes les plus ordinaires.
+
+
+   B. L'outil find et les autres outils de recherche.
+
+      La commande find cherche des fichiers dans un ou plusieurs répertoires de début, selon des critères, et peut exécuter une action sur les fichiers trouvés ; ses options permettent la recherche par nom, par type, par propriétaire, par groupe, par taille, par date de dernier accès, par date de dernière modification, par autorisation d'accès et par nombre de liens.
+
+      D'autres outils de recherche rapide existent comme info et locate.
+
+
+   C. Les journaux : syslog.
+
+      La consultation des répertoires de journaux d'activité est l'une des clés de voûte du travail d'administrateur pour la surveillance et le diagnostic préventif ou curatif ; le démon syslogd est consacré à la recherche et au stockage d'informations système et applicatives, la consultation des fichiers suivant une organisation de répertoire du type /var/log par application et par type de journaux.
+
+
+   D. Le planificateur : cron et crontab.
+
+      Le démon cron permet l'exécution périodique de programmes, de scripts et d'autres processus, et la consultation de la table des processus planifiés, la crontab, est un outil utile de recherche d'informations sur les activités du système et doit devenir un réflexe dans l'organisation des tâches d'administration.
+
+
+   E. Les sources externes de documentation.
+
+      L'administrateur peut recourir à Internet et aux moteurs de recherche, aux bases d'informations des Unix propriétaires comme celles de HP-UX et d'AIX, aux FAQ, bases de connaissances et forums d'entraide souvent linuxiens mais utilisables après adaptation, et aux HOWTO du web.
+
+      Le monde Unix et Linux s'est construit sur des communautés de passionnés renforcées par les outils de communication permis par TCP/IP, avec pour maxime que le malheur passé des autres, documenté quelque part sur la toile, peut faire votre bonheur ; on cite aussi le site du Linux Documentation Project, des magazines en ligne comme Linux Gazette et le O'Reilly Network, ainsi que le Unix Guru Universe.
+
+
+POINTS D'ATTENTION.
+
+      Telnet fait circuler l'identifiant et le mot de passe en clair sur le réseau : lui préférer nettement SSH.
+
+      Aucun processus n'accède directement au matériel ni à la mémoire : tout passe par le noyau via des appels système et par des fichiers spéciaux.
+
+      bash est compatible avec sh, mais l'inverse n'est pas toujours vrai.
+
+      VI possède deux modes distincts ; oublier dans quel mode on se trouve est la principale source d'erreur pour un débutant.
+
+      Se méfier de soi-même : ne rien faire quand on est fatigué, éviter les modifications importantes un vendredi après-midi, se garantir de pouvoir revenir en arrière, documenter ses actions et se méfier de l'expansion des caractères génériques.
+
+      La crontab et les journaux de /var/log doivent être consultés systématiquement lors d'un diagnostic.
+
+      Une commande find avec exécution d'action doit être terminée par un point-virgule précédé du caractère d'échappement.
+
+
+EXEMPLES CITES.
+
+      Prise en main à distance avec la syntaxe telnet suivie du nom de machine ou de l'adresse IP.
+
+      Contenu du fichier /etc/shells listant /bin/bash, /bin/sh, /bin/tcsh et /bin/csh.
+
+      Bascule de shell en tapant tcsh, qui affiche une nouvelle invite.
+
+      Commandes VI : i pour insérer à la position du curseur, a pour insérer à la position suivante, ESC pour sortir du mode insertion, un nombre suivi de G pour aller à une ligne, Contrôle-G pour afficher le numéro de ligne courant.
+
+      Consultation d'une page de manuel avec man mkdir, qui affiche le nom, la syntaxe et les options de la commande mkdir.
+
+      Recherche avec find point tiret print redirigé vers less pour lister les fichiers du répertoire courant.
+
+      Redirection des erreurs de find vers le périphérique nul.
+
+      Recherche et suppression combinées avec find point tiret name suivi d'un motif puis tiret exec rm terminé par accolades et point-virgule échappé.
+
+      Règles de prudence citées : mv fichier vers fichier point orig, puis cp fichier point orig vers fichier avant d'éditer.

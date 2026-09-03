@@ -1,32 +1,299 @@
-LINUX / UNIX : GESTION DES PROCESSUS ET DONNÉES APPLICATIVES
+LINUX ET UNIX : LA GESTION DES PROCESSUS ET DES DONNÉES APPLICATIVES.
 
-1. GÉNÉRALITÉS
-Linux gère plusieurs programmes simultanément : le multitâche. Programme = objet statique (suite d'instructions dans un fichier). Processus = objet dynamique (programme en cours d'exécution + son contexte).
-Changement de contexte (context switching) : sauvegarder le contexte du processus courant, rétablir celui du suivant pour qu'il reprenne là où il a été interrompu. Assuré en grande partie par les couches matérielles (pour la rapidité). Survient : après chaque quantum, chaque fois que le noyau prend la main, chaque fois qu'un processus est dessaisi avant la fin de son quantum (attente d'E/S).
-Ordonnancement : ordre d'attribution du processeur aux processus pour un quantum. La politique reflète l'usage de la machine (calcul intensif : grands quantums ; interactif : petits quantums). Cinq critères historiques (souvent contradictoires) : efficacité (processeur jamais inoccupé), rendement (max de programmes en un temps donné), temps d'exécution (le plus vite possible), interactivité (faible temps de réponse), équité (autant de quantums pour chacun). Algorithmes : round robin, par priorités, par durées variables.
-Pseudo-parallélisme : l'ordonnanceur (scheduler) bascule très vite d'un processus à l'autre ; un seul processus a réellement le processeur à un instant (monoprocesseur). Réentrance : plusieurs processus exécutent la même copie d'un même programme. Multiprogrammation : introduite pour éviter qu'un programme en attente d'E/S ne monopolise le processeur.
-Trois notions structurelles : espace mémoire d'un processus, table des processus, liste des états d'un processus. La MMU assure la correspondance adresses virtuelles / adresses physiques.
 
-2. HIÉRARCHIE ET CYCLE DE VIE
-Père / fils : tout processus est créé par un autre ; chaque fils a un seul père, un père peut avoir plusieurs fils -> arborescence dont init (PID 1) est l'ancêtre. init crée des processus interactifs (associés à un terminal) et des processus non interactifs (daemons). Un processus interactif exécute un interpréteur de commandes (shell), qui démarre un processus par commande.
-Mécanisme fork-et-exec (inspiré du C) :
-- fork() : duplication / clonage du processus. Allocation d'une entrée dans la table des processus, duplication de la zone u, copy-on-write. L'exécution continue dans les deux processus. Retour : PID du fils dans le père, 0 dans le fils, -1 en cas d'échec (manque de mémoire, trop de processus).
-- exec() (execlp...) : recouvrement du processus par un autre exécutable. On libère tout sauf l'entrée dans la table des processus et la zone u, puis allocation des zones texte, données, pile, tas. PID conservé.
-- wait() : attente de la terminaison d'un fils, récupération du code de sortie, disparition définitive du fils.
-- exit(n) : termine le processus appelant (état zombie : seule l'entrée dans la table subsiste), retourne un code de sortie n récupérable par le père.
-Threads (lightweight process) : fork() est coûteux (duplication de toutes les structures mémoire). Un thread = compteur ordinal + pile + jeu de registres ; tout le reste partagé avec le processus. Création ~60 % plus rapide. Avantages : applications concurrentes transparentes (mono/multiprocesseur), applications non bloquantes (E/S), meilleur temps de réponse (ex. Apache 2.x). Risques : race conditions, non-réentrance (variables statiques/globales bannies), deadlocks ; le code doit être thread safe. Classes de base fournies par C++, Java...
+LEXIQUE COMPLET.
 
-3. TYPES ET ATTRIBUTS DES PROCESSUS
-Types : interactifs (associés à un terminal, avant-plan ou arrière-plan) ; en lots / batch (non associés à un terminal, file d'attente exécutée en séquence) ; daemons / processus serveurs (tournent en permanence, démarrés par les scripts d'initialisation ; crond, syslogd).
-Attributs : PID (attribué par fork, conservé par exec), PPID (père), UID/EUID/SUID (propriétaire : réel / effectif / sauvegardé), GID/EGID/SGID (groupe), tty (terminal d'attachement), pri (priorité), s (état : endormi, en attente, en exécution...), stime (date de lancement), time (temps CPU utilisé), size (mémoire allouée).
+      Multitâche : capacité de Linux à gérer plusieurs programmes simultanément, plus évidente en environnement graphique par la présence de plusieurs fenêtres, mais concernant aussi la ligne de commande.
 
-4. EXÉCUTION ET SURVEILLANCE
-Modes : synchrone (avant-plan / foreground : le père attend la fin du fils, exécution en séquence ; défaut du shell) ; asynchrone (arrière-plan / background, avec & : le père n'attend pas, exécution en parallèle). Le shell crée un processus par commande (fork/exec).
-Descripteurs de fichiers : chaque processus a une table de descripteurs. 0 = entrée standard (clavier), 1 = sortie standard (écran), 2 = sortie d'erreur (écran).
-Redirections : > fichier (sortie standard, écrase), >> fichier (ajoute à la fin), < fichier (entrée standard), <> fichier (entrée et sortie), n> fichier (sortie du descripteur n ; commande 2> erreurs), n< fichier, >&n (duplique la sortie standard vers le descripteur n), <&n, &> fichier (sortie standard et erreur vers un même fichier), 2>&1 (erreur vers la même destination que la sortie standard), > /dev/null 2>&1 (tout ignoré ; fréquent dans la crontab). Les périphériques sont des fichiers spéciaux dans /dev.
-Surveillance : ps liste les processus. Options différentes selon le système : ps -aux (BSD), ps -edf (AT&T / System V). limit indique la taille maximale de la pile.
-Signaux : rôle des exceptions et interruptions au niveau du processeur ; avertissent d'un événement synchrone (programme) ou asynchrone (extérieur). Correspondances numéro/nom dans /usr/include/signal.h. Principaux : SIGHUP (rupture de ligne ; aujourd'hui relecture de la configuration des démons), SIGINT (Ctrl-C), SIGFPE (division par zéro), SIGKILL (tue le processus), SIGBUS (erreur de bus), SIGSEGV (violation de segment, pointeur nul), SIGPIPE (écriture dans un tube sans lecteur), SIGALRM (chronomètre), SIGTERM (terminaison propre), SIGCHLD (fils terminé), SIGWINCH (fenêtre redimensionnée). Commande kill : envoie n'importe quel signal à n'importe quel processus du même propriétaire ; kill -l liste les signaux.
+      Programme : suite d'instructions placée dans un fichier, que le système doit faire accomplir aux processeurs pour résoudre un problème ; objet statique.
 
-5. PLANIFICATION DES PROCESSUS
-at : lancement différé à une date donnée (at parametre_temporel commande ; Ctrl-D pour sortir ; at -l liste les travaux en attente).
-crontab : commandes à intervalles réguliers ou à certaines dates. crontab -e pour éditer (éditeur vi par défaut), crontab -l pour lister. cron reconnaît $USER, $HOME, $SHELL ; un script peut remplacer une commande ; utile avec la messagerie pour envoyer des informations à l'administrateur système.
+      Processus : déroulement de l'exécution d'un programme par le système dans un environnement particulier ; objet dynamique constitué d'un programme en exécution et de son contexte.
+
+      Contexte d'exécution : ensemble des informations propres à un processus, sauvegardées quand il est interrompu et rétablies quand il reprend la main.
+
+      Changement de contexte (context switching) : opération consistant à sauvegarder le contexte d'un processus puis à rétablir le contexte du suivant, essentiellement assurée par les couches matérielles, garantissant à un processus de retrouver toutes ses informations pour reprendre là où il a été interrompu.
+
+      Quantum : laps de temps pendant lequel un processus dispose du processeur pour exécuter des instructions avant d'être interrompu.
+
+      Ordonnancement des processus : ordre dans lequel le système d'exploitation attribue le processeur aux processus pour un quantum, selon une politique reflétant l'usage de la machine.
+
+      Critères d'ordonnancement : efficacité, ne jamais laisser le processeur inoccupé ; rendement, exécuter le maximum de programmes en un temps donné ; temps d'exécution, exécuter chaque programme le plus vite possible ; interactivité, faible temps de réponse des programmes interactifs ; équité, autant de quantums pour chaque programme.
+
+      Algorithmes d'ordonnancement : algorithmes tels que le round robin, par priorités ou par durées variables, nécessaires face au caractère contradictoire des critères.
+
+      Pseudo-parallélisme : simulation d'une exécution simultanée de plusieurs processus par un ordonnanceur, ou scheduler, qui bascule d'un processus à l'autre très rapidement.
+
+      Réentrance : situation où plusieurs processus exécutent simultanément la même copie d'un même programme.
+
+      Multiprogrammation : exécution simultanée de plusieurs processus, introduite pour éviter qu'un programme en attente d'entrées-sorties ne monopolise le processeur ; sur un système monoprocesseur, un seul processus a accès au processeur à un instant donné.
+
+      MMU (Memory Management Unit) : composant matériel assurant la correspondance entre les adresses mémoire utilisées par un processus, qui a l'illusion de disposer de toute la mémoire, et les adresses physiques.
+
+      Structures de gestion des processus : l'espace mémoire d'un processus, la table des processus et la liste des états d'un processus.
+
+      Processus père : processus qui en crée un autre.
+
+      Processus fils : processus créé par un processus père, n'ayant qu'un seul père, d'où une hiérarchie en arbre.
+
+      init : programme exécuté par l'unique processus existant au démarrage, ancêtre de tous les autres, qui crée des processus interactifs associés à un terminal et des processus non interactifs de type daemon rattachés à aucun terminal.
+
+      Shell : interpréteur de commandes exécuté par un processus interactif, qui démarre un processus pour chacune des commandes de l'utilisateur.
+
+      fork : appel système créant un nouveau processus par duplication ou clonage d'un autre, avec allocation d'une entrée dans la table des processus, duplication de la zone u, portage du code et des données et copy on write ; l'exécution continue dans les deux processus, fork retournant le PID du fils dans le père et zéro dans le fils, et moins un en cas d'échec.
+
+      copy on write : mécanisme ne copiant effectivement le processus qu'au moment où une modification intervient.
+
+      exec : appel système recouvrant un processus par un autre exécutable, libérant tout sauf l'entrée dans la table des processus et la zone u, puis allouant les zones texte, données, pile et tas ; le PID est conservé.
+
+      wait : appel système attendant la terminaison d'un fils, récupérant les informations de terminaison et son code de sortie, puis faisant disparaître définitivement le fils.
+
+      exit : fonction qui ne retourne jamais et termine le processus appelant, libérant tout sauf l'entrée dans la table des processus, le processus passant en état zombie, et retournant un code de sortie récupérable par le père.
+
+      Processus zombie : processus terminé dont seule l'entrée dans la table des processus subsiste, en attente de récupération par le père.
+
+      Thread (lightweight process) : sous-processus constitué d'un compteur ordinal, d'une pile et d'un jeu de registres, tout le reste étant partagé avec le processus, développé sous Linux et Unix dans les années 1980 pour un coût moindre que fork.
+
+      Race condition : situation d'accès concurrent problématique due au fait que les threads sont ordonnancés et exécutés au hasard par le système.
+
+      Code thread safe : code réentrant, sans variables statiques ou globales, nécessaire à la programmation de threads.
+
+      Deadlock (étreinte fatale) : blocage mutuel de threads dû à un problème de synchronisation.
+
+      Processus interactif : processus lancé et contrôlé par un terminal, pouvant fonctionner en avant-plan ou en arrière-plan.
+
+      Processus en lots (batch) : processus non associé à un terminal, placé dans une file d'attente d'où les tâches sont exécutées en séquence.
+
+      Démon (daemon) ou processus serveur : super-processus tournant en permanence, dont le démarrage est planifié via les scripts d'initialisation, par exemple crond ou syslogd.
+
+      PID : nombre identifiant un processus, attribué lors du fork et conservé lors de l'exec, utilisé par le noyau pour l'administration du processus.
+
+      PPID : identité du processus père créateur.
+
+      UID, EUID, SUID : identifiants du ou des propriétaires, à savoir l'UID réel du créateur, l'UID effectif et l'UID sauvegardé.
+
+      GID, EGID, SGID : identifiants du groupe, à savoir le GID réel, le GID effectif et le GID sauvegardé.
+
+      Attributs d'un processus : tty terminal d'attachement, pri priorité, s état, stime date de lancement, time temps d'unité centrale utilisé, size taille de mémoire allouée.
+
+      Mode asynchrone : mode où le père n'attend pas la fin de son fils pour continuer, les processus s'exécutant en parallèle, aussi appelé tâche de fond, background ou arrière-plan.
+
+      Mode synchrone : mode où le père ne fait rien tant que son fils n'a pas terminé, les processus s'exécutant en séquence, aussi appelé avant-plan ou foreground ; c'est le mode par défaut du shell.
+
+      Descripteur de fichiers : index de la table stockant les noms des fichiers utilisés par un processus ; par convention, zéro est l'entrée standard, un la sortie standard et deux la sortie d'erreur, par défaut le terminal.
+
+      Redirection : détournement des entrées-sorties d'un programme vers autre chose que le clavier ou l'écran, par exemple un fichier ou une imprimante, les périphériques étant des fichiers spéciaux du répertoire /dev.
+
+      Opérateurs de redirection : le chevron simple redirige la sortie en écrasant, le double chevron ajoute à la fin, le chevron ouvrant spécifie l'entrée standard, n suivi d'un chevron redirige un descripteur donné, esperluette suivie d'un chevron redirige sortie et erreur ensemble.
+
+      /dev/null : périphérique vers lequel on dirige une sortie pour l'ignorer efficacement, souvent avec l'expression redirigeant la sortie puis dupliquant l'erreur vers elle.
+
+      ps : commande listant les processus, avec des options différentes selon le système, ps -aux sur les systèmes BSD et ps -edf sur les systèmes AT&T.
+
+      Signal : mécanisme jouant au niveau des processus le rôle des exceptions et interruptions au niveau du processeur, avertissant un processus d'un événement synchrone ou asynchrone, chaque signal ayant un nom, un comportement par défaut et un événement générateur, avec un numéro associé défini dans un fichier d'en-tête signal.h.
+
+      SIGHUP : signal de rupture de ligne, aujourd'hui utilisé pour demander à un démon de relire son fichier de configuration.
+
+      SIGINT : signal d'interruption envoyé par Ctrl-C.
+
+      SIGKILL : signal qui tue le processus.
+
+      SIGSEGV : signal de violation de segment, généralement dû à un pointeur nul.
+
+      SIGTERM : signal demandant au processus de se terminer proprement.
+
+      SIGCHLD : signal indiquant au père qu'un de ses fils vient de se terminer.
+
+      kill : commande et appel système permettant d'envoyer n'importe quel signal à n'importe quel processus du même propriétaire ; kill -l liste les signaux du système.
+
+      at : commande de lancement différé d'un processus, attendant en argument un paramètre de date ; at -l liste les processus en attente d'exécution.
+
+      crontab : commande lançant des commandes à intervalles réguliers ou à certaines dates, éditée avec l'option -e dans l'éditeur par défaut, listée avec l'option -l ; cron reconnaît les variables d'environnement et peut lancer un script, et sert notamment à envoyer par messagerie des informations sur les ressources à l'administrateur.
+
+      Fileset : sous HP-UX, regroupement de tous les fichiers composant un logiciel, lui-même composé de Sub Products.
+
+      Product : sous HP-UX, ensemble logiciel composé de filesets et éventuellement de Sub Products.
+
+      Bundle : sous HP-UX, collection de filesets équivalente à un Product mais que seul HP peut créer, tous les composants d'HP-UX 10.20 étant sous forme de Bundles.
+
+      swlist, swinstall, swremove : commandes HP-UX listant, installant et supprimant les filesets, les packages étant au format swpackage.
+
+      Paquet : archive compressée comprenant les programmes nécessaires à l'installation d'un logiciel, avec des dépendances fonctionnelles entre paquets.
+
+      APT : gestionnaire de paquets de Debian qui recherche les logiciels dans des dépôts recensant les logiciels disponibles pour la version, s'affranchissant du téléchargement, de la compilation et de l'installation manuelle des sources.
+
+
+COURS DÉTAILLÉ.
+
+
+I. GÉNÉRALITÉS SUR LES PROCESSUS.
+
+
+   A. Programme et processus.
+
+      Linux gère plusieurs programmes simultanément, c'est le multitâche ; l'analogie classique est celle d'un informaticien préparant un gâteau, la recette étant le programme, l'informaticien le processeur, les ingrédients les données, et le processus l'activité de lecture de la recette et de cuisson ; si son fils arrive piqué par une guêpe, il marque sa place dans la recette, ce qui illustre la sauvegarde du contexte, et passe à une tâche plus prioritaire, ce qui illustre le changement de processus.
+
+      Un programme est une suite d'instructions placée dans un fichier, objet statique ; un processus est le déroulement de son exécution dans un environnement particulier, objet dynamique constitué du programme en exécution et de son contexte.
+
+
+   B. Le changement de contexte.
+
+      À un instant donné, un seul processus dispose du processeur ; quand il est interrompu et qu'un autre est choisi, il faut d'abord rétablir le contexte de ce dernier, c'est-à-dire remettre le système dans l'état où il était quand ce processus a été interrompu.
+
+      Le changement de contexte sauvegarde le contexte d'un processus puis rétablit celui du suivant, il garantit à un processus de retrouver toutes ses informations pour reprendre là où il a été interrompu ; il survient très souvent, après chaque quantum, chaque fois que le noyau prend la main, et chaque fois qu'un processus est dessaisi avant la fin de son quantum, par exemple pour une entrée-sortie, aussi doit-il être très rapide, ce qui explique son support matériel.
+
+
+   C. L'ordonnancement.
+
+      L'ordonnancement est l'ordre dans lequel le système attribue le processeur aux processus pour un quantum ; sa politique reflète l'usage de la machine, un système de calcul sans interaction utilisant de longs quantums, un système interactif interrompant très souvent les processus.
+
+      Cinq critères historiques émergent, l'efficacité qui vise à ne jamais laisser le processeur inoccupé, le rendement qui vise le maximum de programmes en un temps donné, le temps d'exécution le plus court, l'interactivité par un faible temps de réponse, et l'équité qui donne autant de quantums à chacun ; ces critères étant contradictoires, un bon algorithme d'ordonnancement est parfois nécessaire, comme le round robin, par priorités ou par durées variables.
+
+
+   D. Le pseudo-parallélisme.
+
+      Dans un système multitâche, plusieurs processus semblent s'exécuter simultanément et se partagent le processeur grâce à un ordonnanceur ou scheduler qui bascule très rapidement de l'un à l'autre, cette commutation simulant le parallélisme.
+
+      Plusieurs processus peuvent exécuter des instances d'un même programme, ou la même copie, on parle alors de réentrance ; sur un système monoprocesseur, un seul processus a accès au processeur à un instant donné, si bien qu'un programme en exécution peut avoir plusieurs états ; la multiprogrammation a été introduite pour éviter qu'un programme en attente d'entrées-sorties ne monopolise le processeur ; un processus a l'illusion de disposer de toute la mémoire, la MMU assurant la correspondance avec les adresses physiques, et sa gestion fait appel à l'espace mémoire du processus, à la table des processus et à la liste des états.
+
+
+II. HIÉRARCHIE ET CYCLE DE VIE DES PROCESSUS.
+
+
+   A. Père et fils.
+
+      Tout processus est créé par un autre, d'où une filiation qui se traduit en arbre puisque chaque fils n'a qu'un seul père, un père pouvant avoir plusieurs fils, la notion de père et de fils étant relative ; au démarrage, un seul processus existe, ancêtre de tous les autres, qui exécute init.
+
+      init crée des processus interactifs associés à un terminal et des processus non interactifs de type daemon rattachés à aucun terminal ; les processus utilisateur sont démarrés par un processus interactif exécutant un shell, qui démarre un processus pour chaque commande, chaque processus pouvant lui-même en démarrer d'autres.
+
+
+   B. Le mécanisme fork et exec.
+
+      Un nouveau processus est créé par duplication ou clonage avec fork, puis par écrasement du programme et des données du clone avec exec ; fork alloue une entrée dans la table des processus, duplique la zone u, porte le code et les données et applique le copy on write, l'exécution continuant dans les deux processus, fork retournant le PID du fils dans le père et zéro dans le fils, et moins un en cas d'échec par manque de mémoire ou excès de processus.
+
+      exec libère tout sauf l'entrée dans la table des processus et la zone u puis alloue les zones texte, données, pile et tas ; wait attend la terminaison d'un fils, récupère ses informations de terminaison et son code de sortie puis le fait disparaître ; exit ne retourne jamais, termine le processus appelant, libère tout sauf l'entrée dans la table, le processus passant en état zombie, et retourne un code de sortie récupérable par le père.
+
+
+   C. Les threads.
+
+      Créer un processus par fork duplique toutes les structures mémoire, mécanisme coûteux, d'où l'apparition des threads ; un thread est constitué d'un compteur ordinal, d'une pile et d'un jeu de registres, tout le reste étant partagé avec le processus, développé sous Linux et Unix dans les années 1980.
+
+      Les threads sont environ soixante pour cent plus rapides à créer qu'un processus, permettent des applications concurrentes transparentes sur machines mono ou multiprocesseurs et des applications non bloquantes améliorant le temps de réponse, comme le serveur web Apache 2 ; en contrepartie, ils exigent de penser le code en profondeur pour éviter les race conditions dues à l'ordonnancement aléatoire, la non-réentrance du code qui doit être thread safe sans variables statiques ou globales, et les deadlocks de synchronisation ; de nombreux outils objet fournissent des classes de base pour programmer des threads plus simplement.
+
+
+III. TYPOLOGIE ET ATTRIBUTS DES PROCESSUS.
+
+
+   A. Les catégories de processus.
+
+      Les processus interactifs sont lancés et contrôlés par un terminal, en avant-plan avec attente de l'affichage ou en arrière-plan, l'ordonnancement gérant l'arrêt temporaire et la relance ; les processus en lots ne sont pas associés à un terminal et sont exécutés en séquence depuis une file d'attente, Linux offrant parfois une commande batch rudimentaire ; les démons ou processus serveurs tournent en permanence, planifiés par les scripts d'initialisation, comme crond ou syslogd.
+
+
+   B. Les attributs.
+
+      Les attributs significatifs sont le PID, attribué au fork et conservé à l'exec, le PPID identité du père, les identifiants de propriétaire UID réel, EUID effectif et SUID sauvegardé, les identifiants de groupe GID, EGID et SGID, le tty terminal d'attachement, la priorité pri, l'état s, la date de lancement stime, le temps d'unité centrale time, et la taille de mémoire allouée size.
+
+
+IV. EXÉCUTION ET SURVEILLANCE DES PROCESSUS.
+
+
+   A. Modes synchrone et asynchrone.
+
+      Si le père n'attend pas la fin de son fils, il le crée en tâche de fond, en mode asynchrone, les processus s'exécutant en parallèle ; si le père ne fait rien tant que son fils n'a pas terminé, le fils est en avant-plan, en mode synchrone, les processus s'exécutant en séquence ; pour chaque commande, le shell crée un processus par fork et exec, et par défaut il exécute les commandes en mode synchrone.
+
+
+   B. Les entrées-sorties et les redirections.
+
+      Chaque processus gère une table des fichiers utilisés, chaque index étant un descripteur de fichiers ; par convention, zéro est l'entrée standard lue par le programme, un la sortie standard où il écrit, deux la sortie d'erreur, par défaut le terminal.
+
+      La redirection détourne les entrées-sorties vers autre chose que le clavier ou l'écran, les périphériques étant des fichiers spéciaux de /dev ; le chevron simple redirige la sortie en écrasant le fichier, le double chevron ajoute à la fin, le chevron ouvrant spécifie l'entrée, n suivi d'un chevron redirige un descripteur donné, par exemple deux pour l'erreur standard, et l'esperluette suivie d'un chevron redirige sortie et erreur ensemble ; l'expression redirigeant vers /dev/null puis dupliquant l'erreur vers la sortie, souvent présente dans les crontab, ignore efficacement toute la sortie.
+
+
+   C. La surveillance et le contrôle.
+
+      La commande ps liste les processus, avec des options différentes selon le système, ps -aux sur BSD et ps -edf sur AT&T, affichant l'utilisateur, le PID, l'usage CPU et mémoire, le terminal, l'état, l'heure de démarrage, le temps CPU et la commande.
+
+      Les signaux avertissent un processus d'un événement synchrone ou asynchrone, chacun ayant un nom, un comportement par défaut et un événement générateur, la norme POSIX en spécifiant certains, avec un numéro associé défini dans signal.h ; parmi les signaux communs, SIGHUP demande à un démon de relire sa configuration, SIGINT est envoyé par Ctrl-C, SIGKILL tue le processus, SIGSEGV signale une violation de segment, SIGTERM demande une terminaison propre et SIGCHLD indique au père la fin d'un fils.
+
+      La commande kill, et l'appel système associé, envoie n'importe quel signal à n'importe quel processus du même propriétaire, et kill -l liste les signaux ; la commande limit indique les limites modifiables du système, dont la taille maximale de la pile.
+
+
+V. LA PLANIFICATION DES PROCESSUS.
+
+
+   A. La commande at.
+
+      La commande at lance un processus de façon différée, attendant en argument un paramètre de date ; at -l liste les processus en attente d'exécution ; Ctrl-D sort de la zone de commande.
+
+
+   B. La crontab.
+
+      La commande crontab lance des commandes à intervalles réguliers ou à certaines dates ; on l'édite avec l'option -e, ce qui appelle l'éditeur par défaut où l'on saisit les champs dans un ordre particulier, et on la liste avec l'option -l ; cron reconnaît les variables d'environnement telles que USER, HOME et SHELL, peut lancer un script à la place d'une commande, et est très utile avec les fonctionnalités de messagerie pour envoyer des informations sur les ressources applicatives à l'administrateur.
+
+
+VI. LA GESTION DES PACKAGES.
+
+
+   A. Le principe et le cas HP-UX.
+
+      L'empaquetage facilite l'ajout et la suppression de logiciels, mais il n'y a pas vraiment de tronc commun entre systèmes tant les spécificités sont nombreuses ; sous HP-UX, les ressources sont regroupées en filesets, chacun composé de Sub Products, les Products étant des ensembles de filesets et les Bundles des collections que seul HP peut créer, tous les composants d'HP-UX 10.20 étant sous forme de Bundles.
+
+      La commande swlist liste les filesets, swinstall les installe et swremove les supprime, les packages étant au format swpackage ; l'installation par swinstall se fait automatiquement, à partir d'un dépôt comme un DAT sélectionné dans le menu Change Source, en marquant les filesets pour installation, puis en lançant une analyse des dépendances et de la place mémoire, et enfin en contrôlant le fichier journal swinstall.log.
+
+
+   B. La synthèse et APT.
+
+      Chaque système a ses commandes, swlist et swinstall sous HP-UX, pkginfo, pkgadd et pkgrm sous Solaris, lslpp et installp sous AIX, rpm sous Linux, avec des interfaces graphiques comme SMIT, SAM, admintool ou YaST ; un paquet est une archive compressée comprenant les programmes d'installation d'un logiciel, avec des dépendances fonctionnelles.
+
+      Avant, on téléchargeait les sources sur le site du développeur, on les compilait et on installait les paquets manquants ; APT, gestionnaire de paquets de Debian, s'affranchit de ces tâches en recherchant le logiciel dans des dépôts recensant les logiciels disponibles pour la version.
+
+
+POINTS D'ATTENTION.
+
+      Un programme est un objet statique, un processus est un objet dynamique fait d'un programme en exécution et de son contexte.
+
+      Le changement de contexte est très fréquent et doit être très rapide, d'où son support par les couches matérielles.
+
+      fork retourne le PID du fils dans le père et zéro dans le fils, et moins un en cas d'échec.
+
+      Le PID est attribué au fork et conservé lors de l'exec.
+
+      Un processus terminé dont le père n'a pas récupéré le code de sortie reste en état zombie.
+
+      Les threads partagent tout avec le processus sauf le compteur ordinal, la pile et les registres, d'où les risques de race conditions et de deadlocks.
+
+      Le shell exécute les commandes en mode synchrone par défaut.
+
+      Les descripteurs zéro, un et deux sont respectivement l'entrée standard, la sortie standard et la sortie d'erreur.
+
+      Le double chevron ajoute à la fin d'un fichier, le chevron simple l'écrase.
+
+      Les options de ps diffèrent entre systèmes BSD et AT&T, ps -aux contre ps -edf.
+
+      kill peut envoyer n'importe quel signal à n'importe quel processus du même propriétaire.
+
+      Un Bundle HP-UX ne peut être créé que par HP, contrairement à un Product.
+
+
+EXEMPLES CITES.
+
+      Analogie de l'informaticien préparant un gâteau, interrompu pour soigner son fils piqué par une guêpe.
+
+      Processus A, B et C se partageant le processeur par quantums avec changement de contexte.
+
+      Serveur web Apache 2 utilisant les threads pour traiter plus de connexions en parallèle.
+
+      Démons crond et syslogd lancés au démarrage et tournant en tâche de fond.
+
+      Descripteurs de fichiers zéro pour l'entrée standard, un pour la sortie standard, deux pour la sortie d'erreur.
+
+      Commandes cat test, cat test > test2 et cat test > /dev/lp0 pour illustrer la redirection.
+
+      Redirection vers /dev/null suivie de la duplication de l'erreur vers la sortie dans les crontab.
+
+      Signaux SIGHUP, SIGINT, SIGKILL, SIGSEGV, SIGTERM et SIGCHLD.
+
+      Commande at -t suivie d'une date pour planifier l'exécution de /bin/date.
+
+      Commandes HP-UX swlist, swinstall et swremove sur des filesets, Products et Bundles.
+
+      Gestionnaire de paquets APT de Debian recherchant les logiciels dans des dépôts.

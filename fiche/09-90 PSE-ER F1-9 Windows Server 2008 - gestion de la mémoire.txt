@@ -1,35 +1,395 @@
-WINDOWS SERVER 2008 : GESTION DE LA MÉMOIRE
+WINDOWS SERVER 2008 : LA GESTION DE LA MÉMOIRE, LES PROCESSUS ET LES DISQUES.
 
-1. CONCEPT DE MÉMOIRE VIRTUELLE
-Windows met en œuvre une mémoire virtuelle activée à la demande : illusion d'une mémoire physique plus grande que la réalité. Double hiérarchie : cache / mémoire principale et mémoire principale / mémoire auxiliaire (disque).
-Repose sur la page : programmes et données segmentés automatiquement en blocs de longueur fixe. Adresses translatables (déplacement relatif dans la page). Seules les parties actives sont en mémoire principale ; les pages nécessaires sont chargées à la demande, les inactives recouvertes (swapping). Translation dynamique des adresses. La taille d'une mémoire virtuelle n'est limitée que par les capacités d'adressage du système.
 
-2. DU 32 BITS AU 64 BITS
-Architecture définie par la taille des registres généraux (GPR). 1985 : Intel 80386, premier 32 bits. 2003 : AMD Athlon 64, premier 64 bits pour PC sous Windows (compatible x86 32 bits). Intel : Itanium (IA-64) entièrement 64 bits, incompatible avec l'existant (OS et applications 64 bits dédiés, peu de succès) ; puis EMT64 / x64 (registres 32 bits + extensions 64 bits, OS 32 ou 64 bits sur le même serveur).
-Un processeur 64 bits n'adresse pas réellement 64 bits : 36 à 40 bits en pratique (AMD K8/K10 : 40 bits = 1 To ; Intel Core 2 : 36 bits). Windows Server 2008 64 bits gère 128 Go ; il n'exécute pas les programmes 16 bits, exécute les 32 bits dans WoW64 (couche de compatibilité, registres 32 bits, impact négligeable).
-Espace d'adressage virtuel : 32 bits -> 2 Go par application. x64 (adressage virtuel sur 43 bits) -> 8 To pour le noyau et 8 To pour les processus 64 bits ; une application 32 bits passe de 2 Go à 4 Go. Indicateur /LARGEADDRESSAWARE (mode PAE) requis au compilateur pour qu'une application 32 bits utilise 4 Go ; commutateur /3GB non pris en charge en 64 bits.
+LEXIQUE COMPLET.
 
-3. GESTIONNAIRE DE MÉMOIRE
-Deux rôles : allouer l'espace virtuel du processus et le traduire en mémoire physique ; paginer vers le disque quand la mémoire est surengagée. Services : fichiers mappés (objets section), copy-on-write, grands espaces clairsemés.
-Chaque processus voit son propre espace virtuel (pas d'accès au noyau, aux autres processus, ni à la mémoire physique). Pages indivisibles de 4096 octets. Seul le noyau accède à la mémoire physique. Au lancement : mapping du code et des données depuis l'image PE du fichier exécutable, de la pile (paramètres, variables locales, adresses de retour ; agrandie automatiquement par le noyau), du tas (allocation dynamique ; agrandi par la bibliothèque C), des DLL. Sécurité : les mappings ne doivent pas se chevaucher (tas qui monte / pile qui descend).
+      Mémoire virtuelle : système activé à la demande qui donne aux applications l'illusion que l'ordinateur a plus de mémoire physique qu'il n'en a réellement, née du besoin d'accroître artificiellement la taille mémoire et de soulager l'utilisateur de la gestion des relations entre mémoires.
 
-4. CARTOGRAPHIE DE LA MÉMOIRE VIRTUELLE
-Trois catégories : données du processus, de la session, du système.
-Espace système : image de l'OS + HAL + pilotes de démarrage ; hyperspace (mapping de la liste des processus, mapping temporaire de pages) ; Working Set List ; cache système (fichiers ouverts mappés) ; réserve paginée (déplaçable entre mémoire et disque ; 2 sur monoprocesseur, 4 sur multiprocesseur pour réduire les blocages) ; réserve non paginée (garantie en permanence en mémoire physique, accès sans E/S de pages) ; PTE système (espace E/S, piles noyau) ; informations de crash ; mémoire HAL.
-Deux tailles de pages selon l'architecture (petite / grande ; la grande accélère la traduction d'adresses).
+      Mémoire principale, auxiliaire et cache : la mémoire principale est la mémoire vive, la mémoire auxiliaire est le disque, la mémoire cache est la plus rapide et stocke les informations les plus fréquemment utilisées ; la mémoire virtuelle repose sur une double hiérarchie cache vers principale et principale vers auxiliaire.
 
-5. PAGINATION
-Le gestionnaire de pages (pager) traite les défauts de page, maintient les structures, protège les pages. TLB (Translation Look-aside Buffer) : mémoire associative de couples page virtuelle / page physique.
-Pagination à la demande avec regroupement : au défaut de page, chargement de la page demandée + quelques pages voisines (principe de localité). Stratégie de placement (case libre si mémoire non pleine), sinon stratégie de remplacement (FIFO local : retire la page chargée depuis le plus longtemps). Jeu de pages de travail (working set) : ensemble des pages physiques d'un processus, taille minimale attribuée à la création.
-Base de données des pages physiques : chaque entrée = une case ; six états (Valide, À zéro, Libre, En attente, Modifié, Mauvais) ; cinq listes des pages non utilisées. Thread modified page writer : réveillé sous un seuil, écrit les pages modifiées sur disque et les place en attente. Automatic working-set trimming quand les pages modifiées deviennent trop nombreuses. Sécurité C2 : threads utilisateur ne reçoivent que des pages à zéro.
+      Page : bloc de longueur fixe, généralement quatre mille quatre-vingt-seize octets, dans lequel sont automatiquement segmentés les programmes et les données, unité de traitement dont la situation physique en mémoire principale ou auxiliaire est déterminée automatiquement.
 
-6. PROCESSUS ET THREADS
-Noyau WIN32 (32 bits) / WIN64 (64 bits, fonctionnalités quasi identiques, applications portables). Processus = instance d'une application active ; processus racine (père) et processus fils ; représenté par un block d'attributs + structures de données (dans l'espace système), sauf le PEB (Process Environment Block, dans l'espace du processus). PID visible dans le Gestionnaire de tâches.
-IPC : le plus souvent via des fichiers mappés en mémoire. SMP : chaque processeur gère une liste de processus. Changement de contexte (ordonnanceur) : suspendre P0, mettre à jour son PCB, restaurer le PCB de P1, reconfigurer l'espace mémoire et la MMU, démarrer P1.
-Thread (tâche) : entité programme au sein d'un processus ; il faut au moins un thread (principal) pour exécuter du code ; composé de registres, deux tas (kernel mode / user mode), une zone TLS (Thread Local Storage), un identifiant, éventuellement un contexte de sécurité. Threads = « processus légers » (pas d'espace mémoire propre, ressources partagées). Un processus sans thread actif est éliminé.
-Ordonnancement : temps partagé depuis Windows 3.1 ; WIN32 ajoute des priorités préemptives, 32 niveaux (0 à 31). Un thread actif préempte immédiatement tout thread de priorité inférieure ; entre threads de même priorité, round robin (tranche fixe de CPU). Priorité implémentée sur les threads (pas les processus), combinée à une classe de priorité du processus (7 classes, fixée à la création).
+      Adresse translatable : adresse déterminée par un déplacement relatif à l'intérieur d'une page, indépendante de l'adresse physique.
 
-7. GESTION DES DISQUES
-Style de partition : MBR (Master Boot Record) sur tous les x86/64 ; volumes jusqu'à 4 To, 4 partitions principales (ou 3 + 1 étendue avec lecteurs logiques). GPT (GUID Partition Table) sur Itanium et x86/64 récents ; volumes jusqu'à 18-28 Eo, 128 partitions, tables de partition primaire et de sauvegarde redondantes ; conseillé au-delà de 2 To. Itanium exige un disque GPT avec partition EFI.
-Disque de base : partitions principales/étendues, lecteurs logiques -> volumes de base (extensibles si NTFS, dans un espace contigu). Disque dynamique : volumes s'étendant sur plusieurs disques (agrégés, fractionnés) et volumes à tolérance de pannes (miroir, RAID-5). Cinq types de volumes dynamiques : simple, fractionné, agrégé par bandes, en miroir, RAID-5. Jusqu'à 2000 volumes dynamiques (32 recommandés). Non pris en charge sur portables, disques amovibles USB / IEEE 1394, bus SCSI partagés. Outils : Gestion des disques, DiskPart.exe, mountvol /p. La conversion MBR <-> GPT n'est possible que si le disque est vide.
-Cluster (unité d'allocation ou bloc) : plus petite unité de disque gérée par l'OS, constituée d'un ou plusieurs secteurs ; un fichier occupe un ou plusieurs clusters. Cluster plus grand = plus de gaspillage possible mais moins d'entités à gérer.
+      Swapping (échange) : transfert des pages entre mémoire principale et mémoires auxiliaires, les pages nécessaires étant chargées à la demande et les pages inactives recouvertes.
+
+      Translation dynamique d'adresses : conversion automatique des adresses virtuelles en adresses physiques.
+
+      Registre général (GPR) : réceptacle au cœur du processeur servant au stockage temporaire des données, adresses et instructions ; la taille des registres généraux définit l'architecture du processeur, seize, trente-deux ou soixante-quatre bits.
+
+      x86 : architecture au noyau trente-deux bits issue du 80386 d'Intel, conservée deux décennies pour la compatibilité descendante et étendue par des jeux d'instructions comme MMX, SSE et 3DNow.
+
+      Itanium (IA-64) : processeur entièrement soixante-quatre bits d'Intel, incompatible avec les architectures précédentes, nécessitant son propre système d'exploitation et ses propres applications soixante-quatre bits, sans le succès commercial espéré.
+
+      x64 (EMT64) : architecture mélangeant soixante-quatre bits et trente-deux bits, initiée par l'Athlon 64 d'AMD en deux mille trois, compatible avec le noyau x86 trente-deux bits, permettant de déployer un système trente-deux ou soixante-quatre bits.
+
+      WoW64 : environnement de la version x64 de Windows Server 2008 dans lequel les applications trente-deux bits s'exécutent nativement avec les registres trente-deux bits, avec un impact négligeable sur les performances.
+
+      PAE (Physical Address Extension) : mode d'utilisation qui permet à une application trente-deux bits marquée de l'indicateur LARGEADDRESSAWARE de tirer parti d'un espace d'adressage de quatre giga-octets ; les versions soixante-quatre bits de Windows ne prennent pas en charge le commutateur trois giga-octets.
+
+      Espace d'adressage virtuel : ensemble des adresses identifiant les emplacements dans la mémoire virtuelle, propre à chaque processus.
+
+      Gestionnaire de mémoire : composant qui alloue la mémoire virtuelle, la traduit en mémoire physique et pagine le contenu vers le disque quand la mémoire est surengagée.
+
+      Surengagement : situation où les processus sollicitent plus de mémoire que celle disponible.
+
+      Objet section : fichier alloué en mémoire, service supplémentaire du gestionnaire de mémoire.
+
+      Copy-on-write : mécanisme du gestionnaire de mémoire qui ne recopie une page qu'au moment d'une écriture.
+
+      Fichier d'échange : partie du disque utilisée pour étendre la quantité de mémoire disponible, le gestionnaire de mémoire traitant comme un cache les données les plus récemment utilisées.
+
+      Pile (stack) : zone de mémoire où sont stockés temporairement les paramètres, les variables locales et les adresses de retour des fonctions, agrandie automatiquement par le noyau.
+
+      Tas (heap) : zone d'allocation dynamique de mémoire, agrandie non pas automatiquement mais par la bibliothèque C.
+
+      Format PE : format du fichier exécutable sous Windows qui spécifie les adresses auxquelles le code et les données doivent être mappés.
+
+      DLL (bibliothèque dynamique) : bibliothèque que le noyau mappe dans l'espace mémoire virtuel du processus et dont il lance les fonctions d'initialisation avant le point d'entrée du programme.
+
+      Mapping : zone de mémoire allouée, pour le code et les données de l'application, la pile, le tas ou une bibliothèque ; la sécurité de l'application dépend du fait que les mappings ne se chevauchent pas.
+
+      Gestionnaire de pages (pager) : composant qui assure le transfert des pages entre le disque et la mémoire, traite les défauts de page, maintient les structures de données et protège les pages.
+
+      Défaut de page : évènement survenant quand un thread référence une page qui n'est pas chargée en mémoire physique ou n'est pas directement accessible.
+
+      TLB (translation look-aside buffer) : mémoire associative, tampon des pages récemment utilisées, contenant des couples numéro de page virtuelle et numéro de page physique.
+
+      Pagination à la demande avec regroupement : algorithme qui charge une page lors d'un défaut de page ainsi que quelques pages voisines, afin de diminuer le nombre de défauts de page.
+
+      Stratégie de placement : recherche d'une page physique libre lors d'un défaut de page quand la mémoire physique n'est pas pleine.
+
+      Stratégie de remplacement : désignation de la page à extraire de la mémoire pour faire de la place, locale quand un nombre fixe de pages est alloué à chaque processus, globale quand n'importe quelle page physique peut être utilisée ; Windows utilise une stratégie de remplacement locale de type premier entré premier sorti.
+
+      Jeu de pages de travail (working set) : ensemble des pages en mémoire mémorisées pour chaque processus, dont une taille minimale garantie est attribuée à la création du processus.
+
+      Base de données des pages physiques : table dont chaque entrée correspond à une case de la mémoire physique et indique son état, valide, à zéro, libre, en attente, modifié ou mauvais, les entrées étant chaînées en cinq listes selon l'état.
+
+      Niveau C2 : niveau de sécurité imposant que les threads en mode utilisateur ne reçoivent que des pages physiques initialisées à zéro, pour qu'ils ne puissent pas lire la mémoire d'un thread précédent.
+
+      Modified page writer (unité d'écriture de pages modifiées) : thread réveillé quand le nombre de pages à zéro, libres ou en attente passe sous un seuil, qui écrit le contenu des pages modifiées sur le disque et les place dans la liste des pages en attente.
+
+      Automatic working-set trimming : réduction automatique du jeu de pages de travail de chaque processus jusqu'à la taille minimale quand le nombre de pages modifiées devient trop faible.
+
+      Hyperspace : région système utilisée pour mapper la liste des processus en cours et mapper temporairement d'autres pages physiques.
+
+      Working set list, cache système, réserve paginée, réserve non paginée, PTE système : composants de l'espace mémoire réservé au système, la réserve paginée pouvant être paginée sur le disque et la réserve non paginée étant garantie en permanence en mémoire physique.
+
+      HAL : couche d'abstraction du matériel, dont une zone mémoire est réservée pour des structures spécifiques.
+
+      PID (identifiant de processus) : entier identifiant un processus, visible dans le Gestionnaire de tâches.
+
+      PEB (Process Environment Block) : bloc représentant l'environnement du processus, situé dans l'espace mémoire du processus et non dans l'espace système.
+
+      PCB (bloc de contrôle du processus) : structure mise à jour lors d'un changement de contexte.
+
+      Thread (tâche) : entité programme exécutée au sein d'un processus, composée d'un ensemble de registres, de deux tas en mode noyau et en mode utilisateur, d'une zone d'adressage privée TLS, d'un identifiant et éventuellement d'un contexte de sécurité.
+
+      TLS (Thread Local Storage) : zone d'adressage privée d'un thread.
+
+      Processus léger : autre nom du thread, qui ne possède pas d'espace mémoire propre mais utilise celui du processus auquel il est attaché.
+
+      Changement de contexte : basculement d'un processus à l'autre décidé par l'ordonnanceur, qui suspend le processus courant, met à jour son bloc de contrôle, restaure celui du suivant, reconfigure l'espace mémoire et l'unité de gestion mémoire puis démarre le nouveau processus.
+
+      MMU (Memory Management Unit) : unité de gestion mémoire reconfigurée lors d'un changement de contexte.
+
+      SMP (Symmetric MultiProcessor) : architecture dans laquelle chaque processeur gère une liste de processus qui s'exécutent à tour de rôle.
+
+      Multitâche et multithread : le multitâche permet à plusieurs threads de s'exécuter sur un seul processeur, le multithread permet à un processus de posséder plusieurs threads se déroulant en parallèle, réel sur multiprocesseur ou apparent sur monoprocesseur.
+
+      Priorités préemptives : Windows attribue à chaque thread un niveau parmi trente-deux, du plus faible zéro au plus fort trente et un ; tout thread actif est préemptif par rapport aux threads de niveau inférieur qu'il interrompt immédiatement.
+
+      Round robin (temps partagé) : technique d'ordonnancement des threads de même priorité, le système leur allouant cycliquement une tranche fixe de temps processeur.
+
+      Classe de priorité : niveau de priorité par défaut attribué à tous les threads d'un processus, fixé à la création parmi sept classes distinctes.
+
+      MBR (Master Boot Record) : style de partition contenant une table qui décrit l'emplacement des partitions, seul style disponible sur les ordinateurs x86 antérieurs à Windows Server 2003 SP1, prenant en charge des volumes jusqu'à deux ou quatre téra-octets et quatre partitions principales, ou trois partitions principales et une étendue.
+
+      GPT (GUID Partition Table) : style de partition prenant en charge des volumes jusqu'à dix-huit exaoctets et jusqu'à cent vingt-huit partitions, avec des tables de partition primaire et de sauvegarde redondantes et des données critiques dans des partitions plutôt que dans des secteurs cachés, conseillé pour les disques de plus de deux téra-octets.
+
+      Partition EFI (Extensible Firmware Interface) : partition requise sur un disque GPT d'un ordinateur Itanium, contenant les fichiers nécessaires au démarrage.
+
+      Disque de base : disque physique contenant des partitions principales, des partitions étendues ou des lecteurs logiques, dont les partitions et lecteurs logiques sont appelés volumes de base.
+
+      Disque dynamique : disque offrant des fonctionnalités absentes des disques de base, comme les volumes s'étendant sur plusieurs disques et les volumes à tolérance de pannes, tous ses volumes étant appelés volumes dynamiques.
+
+      Types de volumes dynamiques : simple, fractionné, agrégé par bandes, en miroir et RAID-5, les volumes en miroir et RAID-5 étant à tolérance de pannes.
+
+      Cluster (unité d'allocation, bloc) : plus petite unité de disque que le système d'exploitation peut gérer, constituée d'un ou plusieurs secteurs ; un fichier occupe un nombre entier de clusters, un cluster non totalement rempli n'étant plus disponible pour un autre fichier.
+
+      Secteur : quartier d'un support de cinq cent douze octets.
+
+      Piste : zone concentrique écrite de part et d'autre d'un plateau, découpée en secteurs.
+
+      Cylindre : ensemble des données situées sur une même piste de plateaux différents.
+
+      Gap : trou laissé par la tête entre deux pistes et entre deux secteurs.
+
+      Préfixe et suffixe : zones réservées aux informations du système au début et à la fin de chaque secteur, écrites en usine.
+
+      Formatage de bas niveau (physique) : division de la surface du disque en pistes, secteurs et cylindres, indépendant du système d'exploitation, permettant de marquer les secteurs défectueux.
+
+      Formatage de haut niveau (logique) : création d'un système de gestion de fichiers sur une partition, avec écriture du secteur d'amorçage, enregistrement de l'octet d'identification système, informations sur l'espace disponible et repérage des zones endommagées.
+
+      Partition principale : partition dont une seule peut être active sur un disque MBR ; un disque MBR contient jusqu'à quatre partitions principales, ou trois principales et une étendue.
+
+      Partition étendue : partition mise au point pour dépasser la limite des quatre partitions principales, ne pouvant stocker de données directement mais contenant des lecteurs logiques.
+
+      Partition active : partition sur laquelle un système d'exploitation est démarré au lancement de l'ordinateur, les autres partitions étant cachées au moment du démarrage.
+
+      Lecteur logique : subdivision d'une partition étendue donnant l'impression de plusieurs disques de taille moindre.
+
+      mountvol : commande permettant de démonter et de déconnecter un volume avec l'option de purge, ou de le monter et le mettre en ligne.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LES PRINCIPES DE LA MÉMOIRE VIRTUELLE.
+
+
+   A. Origine et hiérarchie.
+
+      Windows met en œuvre une mémoire virtuelle activée à la demande qui donne aux applications l'illusion d'avoir plus de mémoire physique qu'en réalité ; le concept est né du besoin d'accroître artificiellement la taille mémoire et de soulager l'utilisateur de la gestion des relations entre mémoires auxiliaires et mémoire principale ou entre celle-ci et la mémoire cache.
+
+      Les mémoires cache, apparues vers mille neuf cent soixante-cinq avec les mémoires bloc-note, stockent les informations les plus fréquemment utilisées et améliorent les performances globales ; la double hiérarchie combine une hiérarchie cache vers mémoire principale et une hiérarchie mémoire principale vers mémoire auxiliaire.
+
+
+   B. Le concept de page.
+
+      Les programmes et les données sont automatiquement segmentés en blocs de longueur fixe appelés pages, dont les adresses sont translatables, c'est-à-dire déterminées par un déplacement relatif à l'intérieur de la page.
+
+      Les pages sont des unités de traitement dont la situation physique en mémoire principale ou auxiliaire est déterminée automatiquement ; l'ensemble des informations excède la capacité de la mémoire, d'où une différence entre les adresses physiques réelles et les adresses virtuelles théoriques.
+
+      La taille d'une mémoire virtuelle n'est limitée que par les capacités d'adressage du système et non par la capacité réelle de la machine, seules les parties actives des programmes et des données étant en mémoire principale à un instant donné ; les pages nécessaires sont chargées à la demande, les pages inactives recouvertes, par swapping entre mémoire principale et mémoires auxiliaires, l'adressage étant résolu par translation dynamique.
+
+
+   C. L'adressage trente-deux et soixante-quatre bits.
+
+      L'architecture d'un processeur est définie par la taille de ses registres généraux ; au milieu des années quatre-vingt, le 80386 d'Intel a introduit le noyau trente-deux bits, conservé deux décennies pour la compatibilité descendante et étendu par des jeux d'instructions comme MMX et SSE avec leurs propres registres.
+
+      La miniaturisation des transistors montrant ses limites, AMD a sorti en deux mille trois le premier processeur soixante-quatre bits pour PC sous Windows, l'Athlon 64, en conservant la compatibilité avec le noyau x86 trente-deux bits ; Intel a d'abord conçu l'Itanium, entièrement soixante-quatre bits et incompatible, puis a développé l'architecture x64 mélangeant trente-deux et soixante-quatre bits, présente sur les Pentium 4 séries six cents et huit cents.
+
+
+   D. Les limites d'espace d'adressage physique.
+
+      Un processeur soixante-quatre bits ne gère pas sa mémoire sur soixante-quatre bits en pratique : l'adressage réel est de quarante bits chez AMD, soit un téra-octet, et de trente-six à quarante bits chez Intel selon les gammes, alors que soixante-quatre bits permettraient en théorie seize exaoctets.
+
+      Windows Server 2008 soixante-quatre bits gère cent vingt-huit giga-octets de mémoire physique ; une version soixante-quatre bits nécessite des pilotes soixante-quatre bits, n'exécute pas les programmes seize bits et exécute les programmes trente-deux bits dans une couche de compatibilité pouvant rarement poser problème.
+
+
+   E. Adaptation au trente-deux bits et environnement WoW64.
+
+      Microsoft a introduit une version soixante-quatre bits de Windows avec Windows 2000 en deux mille un, pour Itanium, plate-forme essentiellement adaptée aux applications soixante-quatre bits, les applications trente-deux bits y étant moins performantes que sur trente-deux bits natif et le matériel Itanium représentant un investissement significatif.
+
+      Sur la plate-forme x64, les applications trente-deux bits s'exécutent dans l'environnement WoW64 avec les registres trente-deux bits et un impact négligeable, généralement plus performantes qu'un serveur trente-deux bits comparable ; Windows x64 utilise quarante-trois bits pour l'adressage virtuel et alloue par défaut la moitié aux processus, soit huit téra-octets pour le noyau et huit téra-octets pour les processus utilisateur soixante-quatre bits, l'espace d'adressage d'une application trente-deux bits passant de deux à quatre giga-octets puisque le noyau ne partage plus l'espace trente-deux bits.
+
+      Pour qu'une application trente-deux bits utilise les quatre giga-octets, l'indicateur LARGEADDRESSAWARE doit être spécifié à la compilation, ce qui correspond au mode PAE, IIS six point zéro l'ayant par défaut dans WoW64 ; les versions soixante-quatre bits ne prennent pas en charge le commutateur trois giga-octets.
+
+
+II. LE GESTIONNAIRE DE MÉMOIRE.
+
+
+   A. Rôles.
+
+      Le gestionnaire de mémoire alloue la mémoire virtuelle, détermine l'espace privé nécessaire à un processus, traduit la mémoire virtuelle en mémoire physique et pagine le contenu vers le disque quand la mémoire est surengagée.
+
+      Il fournit des services supplémentaires comme les fichiers alloués en mémoire appelés objets section, la mémoire copy-on-write, la gestion de grands espaces mémoire clairsemés et la possibilité d'allouer plus de mémoire que ce qui peut être mappé dans la mémoire virtuelle du processus.
+
+
+   B. La mémoire d'un processus.
+
+      Chaque processus voit un espace de mémoire virtuelle dédié, sans accès à la zone du noyau, aux espaces des autres processus ni à la mémoire physique ; la mémoire est allouée par pages indivisibles de quatre mille quatre-vingt-seize octets, seul le noyau accédant directement à la mémoire physique et faisant le lien entre pages virtuelles et pages physiques.
+
+      Le noyau lance un nouveau processus dans un espace virtuel vierge de quatre giga-octets sur trente-deux bits, une zone haute étant réservée au noyau ; il mappe le code et les données depuis l'image PE sur le disque, crée un mapping pour la pile et le tas, la pile stockant temporairement paramètres, variables locales et adresses de retour et étant agrandie automatiquement, le tas servant à l'allocation dynamique et étant agrandi par la bibliothèque C.
+
+      Le noyau mappe si nécessaire des DLL dans l'espace du processus, lance leurs fonctions d'initialisation puis passe la main au point d'entrée du programme ; la sécurité dépend du fait que les mappings ne se chevauchent pas, le tas montant et la pile descendant pouvant se rencontrer, ce qu'un mécanisme de protection permet de détecter.
+
+
+   C. La cartographie de la mémoire virtuelle.
+
+      On identifie trois grandes catégories de données mappées, celles relatives à un processus, à la session et au système, les informations de traduction d'adresse d'un processus étant une information système.
+
+      L'espace système comprend l'image du système d'exploitation, la couche d'abstraction du matériel et les pilotes de démarrage, l'hyperspace qui mappe la liste des processus et temporairement d'autres pages, la working set list, le cache système qui mappe les fichiers ouverts, la réserve paginée qui peut être paginée sur le disque, avec deux réserves sur un monoprocesseur et quatre sur un multiprocesseur pour réduire les blocages, la réserve non paginée garantie en permanence en mémoire physique, les PTE système qui mappent les pages système, les informations de crash et une zone mémoire réservée à la couche d'abstraction du matériel.
+
+      La mémoire virtuelle est divisée en pages, la traduction se faisant à la granularité d'une page, avec deux tailles de pages selon l'architecture, une grande page accélérant la traduction pour les données de la même page.
+
+
+III. LA PAGINATION.
+
+
+   A. Principes et TLB.
+
+      Le gestionnaire de pages assure le transfert des pages entre le disque et la mémoire, traite les défauts de page, maintient les structures de données et protège les pages ; il s'appuie sur une mémoire associative appelée tampon des pages récemment utilisées, le TLB, qui contient des couples numéro de page virtuelle et numéro de page physique.
+
+
+   B. Pagination à la demande avec regroupement.
+
+      Le gestionnaire de mémoire charge une page lorsqu'un défaut de page se produit, c'est-à-dire lorsqu'un thread référence une page qui n'est pas en mémoire physique ; il charge aussi quelques pages voisines, ce qui diminue les défauts de page en s'appuyant sur le principe qu'un programme ne s'exécute que dans une région localisée de son espace d'adressage à un instant donné.
+
+
+   C. Stratégies de placement et de remplacement.
+
+      Lors d'un défaut de page, le gestionnaire utilise d'abord la stratégie de placement, qui alloue une case libre quand la mémoire physique n'est pas pleine ; si elle échoue, il fait appel à la stratégie de remplacement.
+
+      Une stratégie de remplacement locale alloue un nombre fixe, ajustable dynamiquement, de pages physiques à chaque processus, l'algorithme de remplacement entrant en action quand elles sont toutes occupées ; une stratégie globale peut utiliser n'importe quelle page physique ; Windows utilise une stratégie locale premier entré premier sorti, retirant la page chargée depuis le plus longtemps, et doit pour cela mémoriser le jeu de pages de travail de chaque processus, dont la taille minimale est garantie à la création.
+
+
+   D. La base de données des pages physiques.
+
+      Cette table, dont chaque entrée correspond à une case de la mémoire physique, indique l'état de chaque page : valide quand elle est utilisée par un processus, à zéro quand elle est libre et initialisée à zéro, libre quand elle est libre mais non initialisée, en attente quand un processus l'utilisait mais qu'elle a été retirée de son jeu de pages de travail tout en restant valide en transition, modifié quand le processus a en plus écrit dans la page non encore recopiée sur le disque, et mauvais quand la page a généré des erreurs physiques.
+
+      Les entrées sont chaînées en cinq listes selon l'état, à zéro, libres, en attente, modifiées et mauvaises ; le niveau de sécurité C2 impose que les threads en mode utilisateur ne reçoivent que des pages initialisées à zéro pour ne pas lire la mémoire d'un thread précédent.
+
+
+   E. Modified page writer et working-set trimming.
+
+      Quand le nombre de pages à zéro, libres ou en attente passe sous un seuil, un thread appelé unité d'écriture de pages modifiées est réveillé, écrit le contenu des pages modifiées sur le disque et les place dans la liste des pages en attente.
+
+      Si le nombre de pages modifiées devient trop faible, le gestionnaire de mémoire réduit automatiquement le jeu de pages de travail de chaque processus jusqu'à la taille minimale, les pages libérées étant placées dans les listes des pages modifiées ou en attente pour être réutilisées à la demande.
+
+
+IV. LES PROCESSUS ET LES THREADS.
+
+
+   A. WIN32 et WIN64.
+
+      Les versions NT et supérieures de Windows utilisent le même noyau parfois appelé WIN32, conçu pour les plates-formes trente-deux bits, capable de traiter les configurations multiprocesseurs de manière transparente et supportant un vrai multitâche préemptif à priorités, apte dans certaines limites au temps réel ; le noyau adapté aux processeurs soixante-quatre bits, souvent appelé WIN64, ne diffère pas notablement, les applications WIN32 étant en général portables sans modification.
+
+
+   B. La notion de processus.
+
+      Un processus est une instance d'une application active, en cours d'exécution ou en attente ; une application possède un processus racine ou père, à partir duquel peuvent être créés des processus fils, la fenêtre principale appartenant au processus père.
+
+      Un processus est représenté par un bloc contenant ses attributs et des pointeurs vers des structures associées, et comprend un espace d'adressage virtuel, un programme exécutable définissant le code et les données mappés, différentes ressources système, un contexte de sécurité, un identifiant et au moins une tâche en exécution ; le bloc et ses structures sont dans l'espace système, sauf le bloc d'environnement du processus qui se trouve dans l'espace mémoire du processus ; les identifiants sont visibles dans le Gestionnaire de tâches.
+
+
+   C. La communication inter-processus.
+
+      L'espace d'adressage d'un processus est protégé contre l'intrusion d'un autre processus ; Windows Server 2008 intègre des mécanismes d'échange de données entre deux processus, le plus souvent fondés sur des fichiers mappés en mémoire, dont le contenu est dans la mémoire vive et non sur une mémoire de masse.
+
+
+   D. Processus, processeur et changement de contexte.
+
+      Dans une architecture SMP, chaque processeur gère une liste de processus qui s'exécutent à tour de rôle ; le basculement d'un processus à l'autre est décidé et réalisé par l'ordonnanceur, qui suspend le processus courant, met à jour son bloc de contrôle, restaure celui du suivant, reconfigure l'espace mémoire et l'unité de gestion mémoire puis démarre le nouveau processus.
+
+
+   E. La notion de thread.
+
+      Un thread est une entité programme exécutée au sein d'un processus ; un processus nouvellement créé est inerte, et il faut que l'ordonnanceur lance l'exécution du thread, en lui attribuant le flot de contrôle du processeur ; un processus doit posséder au moins un thread principal, chaque thread étant composé d'un ensemble de registres, de deux tas en mode noyau et en mode utilisateur, d'une zone d'adressage privée TLS, d'un identifiant et éventuellement d'un contexte de sécurité.
+
+
+   F. Multitâche et multithread.
+
+      Le multitâche permet à plusieurs threads de s'exécuter sur un seul processeur, plusieurs pouvant s'exécuter simultanément si l'ordinateur a plusieurs processeurs ; le noyau WIN32 exécute plusieurs threads en parallèle, réel sur multiprocesseur ou apparent sur monoprocesseur, les ressources du processus, en particulier son espace mémoire, étant partagées par tous ses threads, une pile étant allouée à chaque thread ; un thread ne possède pas d'espace mémoire propre, d'où le nom de processus léger, et quand un processus n'a plus aucun thread actif il est éliminé et ses ressources libérées.
+
+
+   G. L'ordonnancement à priorités préemptives.
+
+      Les systèmes Windows sont à la base des systèmes en temps partagé depuis Windows 3.1, auxquels WIN32 ajoute un multitâche à priorités préemptives, une notion de priorité étant associée au traitement des threads par l'ordonnanceur avec trente-deux niveaux, de zéro au plus faible à trente et un au plus fort.
+
+      Tout thread actif est préemptif par rapport aux threads de niveau inférieur, qu'il interrompt immédiatement dès qu'il devient actif ; l'ordonnancement de threads de même priorité se fait en temps partagé, le système allouant cycliquement à chacun une tranche fixe de temps processeur selon la technique du tourniquet ; ainsi, si un thread de priorité plus élevée devient actif pendant la plage d'un thread en cours, il l'interrompt immédiatement, sinon le thread en cours va au bout de sa plage puis laisse place à un autre thread de même priorité ou, à défaut, de priorité inférieure.
+
+      La priorité préemptive est implantée au niveau des threads et non des processus, un processus n'étant actif que s'il possède au moins un thread actif ; l'attribution des priorités aux threads se combine avec la classe de priorité du processus, fixée à sa création parmi sept classes, chaque classe définissant un niveau de priorité attribué par défaut à tous les threads du processus.
+
+
+V. LA GESTION DES DISQUES.
+
+
+   A. Les styles de partition MBR et GPT.
+
+      Tous les ordinateurs x86 et soixante-quatre bits utilisent le style MBR, qui contient une table de partition décrivant l'emplacement des partitions ; les ordinateurs Itanium et x86 sous Windows Server 2003 SP1 ainsi que les ordinateurs soixante-quatre bits peuvent utiliser MBR ou GPT.
+
+      Avec MBR, un disque exploite des volumes jusqu'à quatre téra-octets et accepte quatre partitions principales, ou trois principales et une étendue ; GPT prend en charge des volumes jusqu'à dix-huit exaoctets et jusqu'à cent vingt-huit partitions, avec des tables primaire et de sauvegarde redondantes et des données critiques dans des partitions plutôt que dans des secteurs cachés, et il est conseillé au-delà de deux téra-octets ; les ordinateurs Itanium nécessitent un disque GPT contenant une partition EFI, et sur les autres architectures le système d'exploitation doit résider sur un disque MBR.
+
+      La conversion d'un disque MBR en GPT et inversement n'est possible que si le disque est vide, et la Gestion des disques requiert NTFS sur tous les disques dynamiques et GPT ; les partitions des disques GPT de base se créent avec DiskPart, la Gestion des disques ou Diskpart.efi.
+
+
+   B. Disques et volumes de base.
+
+      Un disque de base contient des partitions principales, des partitions étendues ou des lecteurs logiques, appelés volumes de base ; sur un disque MBR on crée jusqu'à quatre partitions principales, ou au moins trois principales et une étendue contenant un nombre illimité de lecteurs logiques, tandis que sur un disque GPT on crée jusqu'à cent vingt-huit partitions principales sans besoin de partition étendue.
+
+      Un volume de base au format NTFS peut être étendu dans un espace non alloué contigu et adjacent du même disque ; il faut toujours utiliser des volumes de base sur les ordinateurs exécutant d'anciens systèmes qui ne peuvent accéder aux volumes dynamiques.
+
+
+   C. Disques et volumes dynamiques.
+
+      Les disques dynamiques offrent des volumes s'étendant sur plusieurs disques, agrégés et fragmentés, et des volumes à tolérance de pannes, en miroir et RAID-5 ; il existe cinq types de volumes dynamiques, simple, fractionné, agrégé par bandes, en miroir et RAID-5, les deux derniers étant à tolérance de pannes et disponibles uniquement sur Windows 2000 Server et versions serveur ultérieures ; on peut créer jusqu'à deux mille volumes dynamiques, mais il est recommandé de ne pas dépasser trente-deux.
+
+
+   D. Précautions avec les disques dynamiques.
+
+      Une nouvelle installation de Windows Server 2008 sur un volume dynamique n'est possible que si ce volume a été converti à partir d'un volume de démarrage ou système de base, le programme d'installation ne reconnaissant que les volumes dynamiques ayant une entrée dans la table de partition.
+
+      Il ne faut pas convertir en dynamique un disque de base contenant plusieurs installations de Windows, sous peine de ne plus pouvoir démarrer ; les disques dynamiques ne sont pas pris en charge sur les portables, les disques amovibles USB ou FireWire ni sur les bus SCSI partagés ; un disque de base contenant les partitions système ou de démarrage peut être converti, ces partitions devenant des volumes simples après redémarrage, et si ce disque est ensuite mis en miroir sur un autre disque dynamique, l'ordinateur pourra démarrer depuis la copie en cas de défaillance.
+
+      Après conversion en dynamique, il n'est pas possible de reconvertir les volumes en partitions sans les supprimer d'abord ; pour une zone de stockage de clichés instantanés, il faut démonter et déconnecter le volume des fichiers d'origine avec mountvol avant la conversion et le remettre en ligne dans un délai de vingt minutes, sauf si les clichés se trouvent sur un volume de démarrage.
+
+      La mise en miroir de la partition système EFI n'est pas prise en charge, il faut la cloner avec bootcfg, et GPT ne peut être utilisé sur un média amovible ni sur des disques de cluster partagés.
+
+
+   E. Le cluster.
+
+      Le système de fichiers repose sur la gestion de clusters, plus petite unité de disque que le système d'exploitation peut gérer, constitué d'un ou plusieurs secteurs ; un fichier occupe un nombre entier de clusters, un cluster non totalement rempli n'étant plus disponible pour un autre fichier, si bien qu'une grande taille de cluster gaspille de l'espace mais réduit le nombre d'entités à gérer et améliore les performances d'accès ; le choix du système de fichiers détermine la taille des clusters.
+
+
+   F. Le formatage physique et logique.
+
+      Le formatage de bas niveau divise la surface des plateaux en pistes concentriques, elles-mêmes découpées en secteurs de cinq cent douze octets séparés par des trous, chaque secteur commençant par un préfixe et se terminant par un suffixe ; il est réalisé en usine, ne dépend pas du système d'exploitation et permet de marquer les secteurs défectueux, un cylindre étant l'ensemble des pistes situées à la verticale sur des plateaux différents.
+
+      Le formatage de haut niveau, effectué après le formatage de bas niveau et le partitionnement, crée un système de gestion de fichiers sur la partition, avec écriture du secteur d'amorçage, enregistrement de l'octet d'identification système dans la table des partitions, informations sur l'espace disponible et l'emplacement des fichiers, et repérage des zones endommagées.
+
+
+   G. Le partitionnement.
+
+      Une fois formaté physiquement, le disque peut être divisé en partitions, chacune fonctionnant comme une unité individuelle et devenant un volume une fois formatée logiquement ; le partitionnement écrit les secteurs de la table de partition qui contient la taille en nombre de secteurs, la position, les types de partitions et les systèmes installés, et l'on donne à la partition un nom de volume.
+
+      Il y a au minimum autant de partitions que de systèmes d'exploitation utilisant des systèmes de gestion de fichiers différents ; on distingue les partitions principales, la partition étendue et les lecteurs logiques, un disque MBR contenant jusqu'à quatre partitions principales dont une seule active, ou trois principales et une étendue.
+
+      La partition active est celle sur laquelle un système d'exploitation démarre, les autres étant cachées au démarrage ; la partition étendue permet de dépasser la limite des quatre partitions principales et exige au moins un lecteur logique car elle ne stocke pas de données directement ; créer plusieurs partitions permet d'installer plusieurs systèmes, d'économiser de l'espace, d'augmenter la sécurité et d'organiser les données.
+
+
+POINTS D'ATTENTION.
+
+      Un processeur soixante-quatre bits n'adresse pas la mémoire sur soixante-quatre bits en pratique, mais sur trente-six à quarante bits selon les gammes.
+
+      Windows Server 2008 soixante-quatre bits n'exécute pas les programmes seize bits et exécute les programmes trente-deux bits dans WoW64.
+
+      L'indicateur LARGEADDRESSAWARE est nécessaire pour qu'une application trente-deux bits utilise quatre giga-octets ; le commutateur trois giga-octets n'est pas pris en charge en soixante-quatre bits.
+
+      La sécurité d'une application dépend du fait que la pile qui descend et le tas qui monte ne se rencontrent pas.
+
+      Le niveau de sécurité C2 impose de ne fournir aux threads utilisateur que des pages initialisées à zéro.
+
+      La priorité préemptive s'applique aux threads, pas aux processus ; un processus n'est actif que s'il a au moins un thread actif.
+
+      Le système d'exploitation doit résider sur un disque MBR sur les architectures non Itanium ; sur Itanium il faut un disque GPT avec partition EFI.
+
+      La conversion MBR vers GPT ou l'inverse n'est possible que sur un disque vide.
+
+      Les disques dynamiques ne sont pas pris en charge sur les portables, les disques amovibles USB ou FireWire ni les bus SCSI partagés.
+
+      Plus le cluster est grand, meilleures sont les performances d'accès mais plus le gaspillage d'espace est important.
+
+
+EXEMPLES CITES.
+
+      Jeux d'instructions x86 MMX, SSE et 3DNow disposant de leurs propres registres.
+
+      Athlon 64 d'AMD en deux mille trois, premier processeur soixante-quatre bits pour PC sous Windows, et Itanium d'Intel sans le succès espéré.
+
+      IIS six point zéro configuré par défaut avec l'indicateur de grand espace d'adressage dans WoW64.
+
+      Espace virtuel d'un processus trente-deux bits de quatre giga-octets, adresses de zéro à la valeur maximale sur quatre octets.
+
+      Format PE des fichiers exécutables Windows spécifiant les adresses de mapping.
+
+      États des pages physiques : valide, à zéro, libre, en attente, modifié, mauvais, et leurs cinq listes chaînées.
+
+      Sept classes de priorité de processus fixées à la création.
+
+      Disque MBR limité à quatre partitions principales dont une active, GPT jusqu'à cent vingt-huit partitions.
+
+      Commande mountvol avec l'option de purge pour démonter un volume avant conversion en disque dynamique.
+
+      Commande bootcfg pour cloner la partition système EFI.
