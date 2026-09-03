@@ -1,0 +1,208 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 4, thème 4
+SÉCURITÉ DES SI : LA MÉTHODOLOGIE EBIOS
+=======================================================================
+
+1. CONTEXTE ET ACTEURS DE LA SÉCURITÉ DES SI
+-----------------------------------------------------------------------
+- Sécurité des SI = préservation de la disponibilité, de l'intégrité et
+  de la confidentialité de l'information, ainsi que des besoins associés
+  (traçabilité, preuve...).
+- Déclencheur historique : le ver Internet (ver de Morris), novembre 1988,
+  qui paralyse une large part du réseau et conduit à la création du
+  premier CERT.
+- CERT (Computer Emergency Response Team) : équipe de réponse aux
+  incidents. Le premier est le CERT/CC (Coordination Center), hébergé par
+  l'université Carnegie Mellon, financé par la DARPA.
+- FIRST (Forum of Incident Response and Security Teams) : créé en 1990,
+  fédère les CERT dans le monde.
+- CERTA : CERT gouvernemental français, créé en 1999, inauguré le
+  21 février 2000, rattaché à l'ANSSI. Autres CERT français : CERT-IST,
+  CERT-RENATER, CERT d'entreprises (banques, télécoms...).
+- ANSSI : Agence Nationale de la Sécurité des Systèmes d'Information,
+  créée par le décret n° 2009-834 du 7 juillet 2009 (succède à la DCSSI),
+  service à compétence nationale rattaché au SGDSN.
+- CLUSIF : Club de la Sécurité de l'Information Français ; publie MEHARI.
+- Club EBIOS : depuis 2003, réunit experts publics/privés et utilisateurs
+  pour faire vivre et enrichir la méthode.
+
+2. LES MÉTHODES D'ANALYSE DE RISQUES
+-----------------------------------------------------------------------
+- EBIOS  : ANSSI (France), créée en 1995 par la DCSSI, révisée en 2010.
+- MEHARI : MEthode Harmonisée d'Analyse de RIsques, CLUSIF (France).
+- OCTAVE : Operationally Critical Threat, Asset and Vulnerability
+  Evaluation, Carnegie Mellon (USA), démarche en 3 phases.
+- Normes ISO associées :
+  * Guide ISO 73  : vocabulaire de la gestion des risques.
+  * ISO 31000     : principes et lignes directrices de la gestion des risques.
+  * ISO 27001     : exigences d'un SMSI (système de management de la
+                    sécurité de l'information).
+  * ISO 27002     : code de bonnes pratiques / catalogue de mesures.
+  * ISO 27005     : gestion des risques de sécurité de l'information.
+  * ISO 15408 (Critères Communs) : profils de protection (PP), cibles de
+                    sécurité.
+- EBIOS satisfait les exigences de gestion des risques de l'ISO 27001 et
+  de l'ISO 31000 ; son vocabulaire est aligné sur le Guide ISO 73.
+
+3. CONCEPTS FONDAMENTAUX D'EBIOS
+-----------------------------------------------------------------------
+- EBIOS = Expression des Besoins et Identification des Objectifs de
+  Sécurité.
+- Critères de sécurité : Disponibilité, Intégrité, Confidentialité
+  (D, I, C), éventuellement complétés (traçabilité...).
+- Bien essentiel : information ou processus important pour l'organisme.
+  On apprécie ses BESOINS de sécurité, pas ses vulnérabilités.
+  Responsable = dépositaire.
+- Bien support : élément technique/humain/organisationnel sur lequel
+  repose un bien essentiel (matériel, logiciel, réseau, locaux,
+  personnel, organisation). Porte les VULNÉRABILITÉS.
+  Responsable = propriétaire.
+- Source de menace : élément humain ou environnemental, accidentel ou
+  délibéré, à l'origine d'une menace.
+- Événement redouté = bien essentiel + besoin de sécurité + impacts +
+  sources de menaces. Estimé par un niveau de GRAVITÉ.
+- Scénario de menace = menace + vulnérabilité(s) de biens supports +
+  sources de menaces. Estimé par un niveau de VRAISEMBLANCE.
+- Risque = événement redouté + scénario(s) de menaces qui peuvent le
+  provoquer. Caractérisé par gravité ET vraisemblance.
+- Échelle de gravité      : Négligeable / Limitée / Importante / Critique.
+- Échelle de vraisemblance : Minime / Significative / Forte / Maximale.
+- Estimation brute (sans mesures existantes) puis nette (avec mesures).
+- Options de traitement du risque : RÉDUIRE, TRANSFÉRER (partager),
+  ÉVITER (refuser), PRENDRE (maintenir). Plusieurs options possibles
+  pour un même risque.
+- Risque résiduel : subsiste une fois les objectifs de sécurité atteints
+  et les mesures mises en œuvre ; doit être accepté en connaissance de
+  cause.
+- Mode d'exploitation de sécurité : Exclusif / Dominant / Multi-niveaux.
+- Répartition des rôles : matrice RACI (Responsible, Accountable,
+  Consulted, Informed).
+
+4. LES 5 MODULES DE LA DÉMARCHE EBIOS
+-----------------------------------------------------------------------
+MODULE 1 — Étude du contexte
+  * Délimiter le périmètre, le cadrer (métier, réglementaire, technique).
+  * Identifier les biens essentiels et les biens supports, leurs liens.
+  * Définir les paramètres à prendre en compte : métriques (échelles de
+    besoins, de gravité, de vraisemblance), sources de menaces, critères
+    de gestion des risques.
+  Livrables amont : note de cadrage.
+
+MODULE 2 — Étude des événements redoutés (phase appréciation)
+  * Activité : « Apprécier les événements redoutés ».
+  * Pour chaque critère de sécurité de chaque bien essentiel : exprimer
+    le besoin de sécurité, identifier les impacts du non-respect,
+    identifier les sources de menaces.
+  * Estimer la GRAVITÉ (valeur du bien + hauteur/nombre des impacts,
+    sans tenir compte des mesures existantes).
+  * Revue de cohérence, puis évaluation/hiérarchisation ; possibilité
+    d'écarter certains événements redoutés (à justifier).
+
+MODULE 3 — Étude des scénarios de menaces (phase appréciation)
+  * Activité : « Apprécier les scénarios de menaces » (niveau plutôt
+    technique : on raisonne sur les biens supports).
+  * Choisir une typologie de menaces (bases de connaissances ANSSI).
+  * Pour chaque bien support et chaque menace : déterminer les
+    vulnérabilités et les sources de menaces.
+  * Estimer la VRAISEMBLANCE (existence et facilité d'exploitation des
+    vulnérabilités, exposition aux menaces).
+  * Recenser les mesures de sécurité existantes et ré-estimer la
+    vraisemblance nette. Revue de cohérence, évaluation.
+
+MODULE 4 — Étude des risques
+  * Activité 1 : « Apprécier les risques » — rapprocher événements
+    redoutés et scénarios de menaces (mêmes biens supports, même critère,
+    mêmes sources), analyser puis évaluer chaque risque (gravité +
+    vraisemblance, brute puis nette).
+  * Activité 2 : « Identifier les objectifs de sécurité » — choisir les
+    options de traitement (éviter / réduire / prendre / transférer) selon
+    les critères de gestion des risques, puis analyser les risques
+    résiduels attendus.
+
+MODULE 5 — Étude des mesures de sécurité (phase traitement)
+  * Activité 1 : « Formaliser les mesures de sécurité »
+    - Déterminer les mesures (référentiels, adaptation ou création),
+      en précisant pour chacune la ligne de défense (préventive,
+      protectrice, récupératrice) et le bien support porteur.
+    - Analyser les risques résiduels.
+    - Établir la DÉCLARATION D'APPLICABILITÉ (SoA) : justifier la prise
+      en compte des références, contraintes et hypothèses ; les
+      meilleures pratiques non couvertes par une mesure peuvent être
+      jugées inutiles.
+  * Activité 2 : « Mettre en œuvre les mesures de sécurité »
+    - Élaborer le plan d'action (libellé, priorité, responsable,
+      échéance, coût, avancement, moyens de contrôle).
+    - Analyser les risques résiduels réels.
+    - PRONONCER L'HOMOLOGATION DE SÉCURITÉ.
+
+5. DÉFENSE EN PROFONDEUR
+-----------------------------------------------------------------------
+- Au moins 3 lignes de défense par risque :
+  * préventive  : éviter l'apparition des incidents (dissuasion,
+    anticipation, réduction des failles).
+  * protectrice : bloquer, contenir, détecter (confinement, lutte,
+    détection, résistance, résilience).
+  * récupératrice : minimiser les conséquences et revenir à l'état
+    initial (récupération, restauration, compensation).
+- 6 principes : globalité, coordination, dynamisme, suffisance,
+  complétude, démonstration.
+- Complété par des mesures de soutien : alerte, diffusion, corrélation
+  d'événements, protection des mesures de sécurité, réaction.
+
+6. HOMOLOGATION DE SÉCURITÉ
+-----------------------------------------------------------------------
+- Engagement par lequel l'autorité atteste que le SI prend en compte les
+  contraintes opérationnelles, respecte les objectifs de sécurité et est
+  apte à entrer en service avec des risques résiduels acceptés et
+  maîtrisés. Prise avant la mise en service.
+- L'autorité peut s'appuyer sur une commission d'homologation ;
+  homologation collégiale possible.
+- Décisions possibles :
+  * homologation complète, pour une durée déterminée (souvent 3 à 5 ans),
+    éventuellement sous conditions ;
+  * homologation provisoire, avec réserves et délai de mise en conformité ;
+  * refus d'homologation (risques résiduels jugés inacceptables).
+- Toute évolution du SI ayant un impact sur la sécurité impose une
+  nouvelle homologation.
+- FEROS (Fiche d'Expression Rationnelle des Objectifs de Sécurité,
+  Guide 150) : document synthétique de sécurité opérationnelle, support
+  de l'homologation.
+
+7. APPORTS ET LIMITES D'EBIOS
+-----------------------------------------------------------------------
+- « Boîte à outils » : activités, niveau de détail et enchaînement
+  adaptés au sujet étudié, aux livrables attendus, à la phase du cycle
+  de vie et au secteur d'activité.
+- Approche par construction (combinaison des composants du risque) et
+  non par catalogue de scénarios : garantit l'exhaustivité.
+- Outil de négociation/arbitrage, de sensibilisation des parties
+  prenantes, réutilisable (études régulièrement mises à jour).
+- Bases de connaissances riches, logiciel libre et gratuit, formations.
+- Validité interne (exactitude des résultats) et validité externe
+  (généralisation) ; démarche reproductible et vérifiable.
+- Point d'attention : nécessite un cadrage rigoureux du périmètre, des
+  itérations, un choix pertinent des activités et livrables, et une
+  vigilance sur les biais des personnes réalisant l'étude.
+
+8. EXEMPLE FIL ROUGE
+-----------------------------------------------------------------------
+Le cabinet fictif @RCHIMED sert d'illustration tout au long du fascicule :
+définition du périmètre, appréciation des événements redoutés et des
+scénarios de menaces, appréciation des risques, choix des objectifs de
+sécurité, plan d'action, mise en évidence des risques résiduels et
+homologation de sécurité (livrables : note de cadrage, note de stratégie,
+politique de sécurité de l'information).
+
+=======================================================================
+À RETENIR
+- EBIOS = Expression des Besoins et Identification des Objectifs de
+  Sécurité ; ANSSI ; créée 1995, révisée 2010.
+- 3 critères : D / I / C. Bien essentiel (besoins) vs bien support
+  (vulnérabilités).
+- Événement redouté -> gravité ; scénario de menace -> vraisemblance ;
+  risque = les deux.
+- 4 traitements : réduire, transférer, éviter, prendre.
+- 5 modules : contexte, événements redoutés, scénarios de menaces,
+  risques, mesures de sécurité.
+- Défense en profondeur : 3 lignes (préventive, protectrice,
+  récupératrice), 6 principes.
+- Homologation : complète (3-5 ans) / provisoire / refus.

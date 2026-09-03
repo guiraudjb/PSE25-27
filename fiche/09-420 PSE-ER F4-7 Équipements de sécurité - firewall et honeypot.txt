@@ -1,0 +1,101 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 4, thème 7
+ÉQUIPEMENTS DE SÉCURITÉ : FIREWALL ET HONEYPOT
+=======================================================================
+
+1. LE FIREWALL (PARE-FEU)
+-----------------------------------------------------------------------
+RÔLES :
+- Protéger le réseau du monde extérieur (Internet, autres services de
+  l'entreprise).
+- Maintenir les utilisateurs à l'intérieur du réseau.
+- Restreindre le nombre de machines à surveiller avec attention.
+- Laisser ouvertes certaines machines nécessaires (serveur web, DNS).
+
+INDISPENSABLE MAIS JAMAIS SUFFISANT :
+- Pas de protection contre le monde intérieur (menaces internes).
+- Pas de protection contre les mots de passe faibles.
+- Ne dispense pas de : protéger/administrer chaque machine, structurer le
+  réseau, éduquer et sensibiliser les utilisateurs, faire signer une
+  charte de bonne utilisation, assurer une surveillance quotidienne.
+
+POLITIQUE DE SÉCURITÉ (deux approches) :
+- Tout autoriser puis interdire progressivement (liste noire).
+- Tout interdire puis ouvrir sélectivement (liste blanche — plus sûr).
+
+Le firewall contrôle les accès entrants et sortants :
+- par service (port) ;
+- par adresse IP ;
+- (selon le type) par contenu du paquet.
+
+TYPES DE FIREWALL :
+- Filtre de paquets : trie selon adresses IP, ports source/destination,
+  contenu. PAS de notion de contexte : décision d'après le paquet en
+  cours uniquement.
+  * Problème des fragments IP : pas de numéro de port dans les fragments.
+  * Protocoles difficiles à filtrer : FTP (plusieurs ports à synchroniser).
+- Passerelle de circuits : relaie les connexions TCP. L'appelant se
+  connecte à un port TCP de la passerelle, elle-même connectée au port du
+  service de la machine destination.
+- Passerelle d'applications : un programme spécifique par application
+  (relai courrier, relai HTTP) ; sectionne les flux ; plus complexe à
+  mettre en œuvre.
+- Combinaison des trois.
+- Firewall « stateful multilayer » : inspection avec état + inspection
+  applicative multicouche.
+
+FONCTIONNALITÉS D'UN FIREWALL RÉCENT :
+- Filtrage IP / protocole.
+- Inspection stateful et applicative ; détection de trafic anormal (IA).
+- Filtrage applicatif : HTTP (restriction d'URL), antispam, antivirus,
+  anti-malware.
+- Translation d'adresses (NAT).
+- Tunnels IPsec, PPTP, L2TP.
+- Identification des connexions.
+- Interface web de configuration.
+- Relai applicatif (proxy).
+- Détection d'intrusion (IDS) et prévention d'intrusion (IPS).
+
+EXEMPLES : Checkpoint ; Cisco PIX et ASA ; serveur BSD/Linux avec
+iptables (Linux) ou Packet Filter (BSD).
+
+PROTECTION DU POSTE DE TRAVAIL (partie intégrante de la sécurité du
+site) : antivirus, anti-spyware, firewall personnel, application des
+correctifs de vulnérabilités.
+
+2. LES HONEYPOTS (POTS DE MIEL)
+-----------------------------------------------------------------------
+DÉFINITION : machine connectée au réseau et VOLONTAIREMENT de sécurité
+faible, conçue pour attirer les attaquants.
+
+OBJECTIFS :
+- Distraire un attaquant pour protéger des machines plus sensibles.
+- Découvrir de nouvelles techniques d'attaque et de nouveaux outils.
+
+PROJETS : Honeynet (honeynet.org) ; NoAH — European Network of Affined
+Honeypots.
+
+HONEYPOTS À FAIBLE INTERACTION :
+- Récolte d'informations à MOINDRE RISQUE (services seulement simulés).
+- Exemples : honeyd, honeytrap, nepenthes, Specter (commercial).
+
+HONEYPOTS À FORTE INTERACTION :
+- Donnent de VÉRITABLES ACCÈS aux attaquants.
+- Risques bien plus importants -> déploiement prudent.
+- Exemple : ROO HoneyWall.
+
+=======================================================================
+À RETENIR
+- Firewall = indispensable mais jamais suffisant (rien contre l'interne
+  ni les mots de passe faibles).
+- 2 politiques : liste noire (tout ouvrir puis fermer) / liste blanche
+  (tout fermer puis ouvrir).
+- Types : filtre de paquets (sans état), passerelle de circuits (relai
+  TCP), passerelle d'applications (proxy par appli), stateful multilayer.
+- Fragments IP et FTP = cas difficiles pour le filtrage.
+- Firewall récent : NAT, VPN (IPsec/PPTP/L2TP), proxy, IDS/IPS, filtrage
+  applicatif.
+- Poste de travail : antivirus + anti-spyware + firewall personnel +
+  correctifs.
+- Honeypot : machine-leurre à sécurité faible ; faible interaction
+  (simulation, peu de risque) vs forte interaction (vrais accès, risque
+  élevé).

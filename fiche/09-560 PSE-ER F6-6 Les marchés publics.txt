@@ -1,0 +1,243 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 6, thème 6
+LES MARCHÉS PUBLICS
+=======================================================================
+
+1. LES PRINCIPES FONDAMENTAUX DE LA COMMANDE PUBLIQUE
+-----------------------------------------------------------------------
+- LIBERTÉ D'ACCÈS : toute personne peut se porter candidate ; on ne peut
+  écarter un candidat que sur des conditions du code, des cahiers des
+  charges (capacité, garanties financières) ou des caractéristiques de
+  l'offre.
+- ÉGALITÉ DE TRAITEMENT : même information à tous ; une question posée
+  par une société est transmise, avec sa réponse, à TOUS les candidats
+  ayant retiré les cahiers des charges (ou refus de répondre).
+- TRANSPARENCE : mise en œuvre par la PUBLICITÉ.
+  * PUBLICATION = diffusion d'un avis via les organismes officiels
+    (BOAMP — Bulletin Officiel des Annonces des Marchés Publics).
+  * PUBLICITÉ = tous les moyens de faire connaître le marché. La
+    publication est une modalité de publicité, la publicité ne s'y
+    limite pas.
+  * Publicité en principe dès le 1er euro ; dispense en dessous de
+    20 000 puis 25 000 € HT. PUBLICATION obligatoire à partir de
+    133 000 € HT (fournitures et services).
+
+2. LES ACTEURS
+-----------------------------------------------------------------------
+- POUVOIR ADJUDICATEUR / ENTITÉ ADJUDICATRICE : acheteurs soumis à
+  l'ordonnance n° 2015-899 du 23 juillet 2015 (marchés) et n° 2016-65 du
+  29 janvier 2016 (concessions).
+  Pouvoirs adjudicateurs = 3 catégories : personnes morales de droit
+  public ; personnes morales de droit privé poursuivant une mission
+  d'intérêt général financées principalement sur fonds publics ;
+  personnes morales de droit privé constituées par des pouvoirs
+  adjudicateurs.
+- SAE (Service des Achats de l'État) : décret du 19 mars 2009 (RGPP),
+  remplace l'Agence centrale des Achats. 3 NIVEAUX : globalisation des
+  achats, maîtrise des consommations, simplification des procédures.
+- CAO (Commission d'Appel d'Offres) : dépouillement des candidatures /
+  offres, choix du titulaire. Modifications du CMP de décembre 2008 :
+  CAO des collectivités MAINTENUE, CAO des marchés de l'État SUPPRIMÉE
+  (art. 21) -> remplacée de fait par un comité d'expertise.
+- CMPE (Commission des Marchés Publics de l'État) : 1er février 2005,
+  remplace la CSMI. Contrôle les marchés informatiques à partir de
+  6 M€ HT. Contrôle FACULTATIF.
+
+3. LES DOCUMENTS CONTRACTUELS
+-----------------------------------------------------------------------
+- Cahiers des charges = documents GÉNÉRAUX (clauses d'une catégorie) +
+  documents PARTICULIERS (dispositions propres au marché).
+- CCAG (Cahier des Clauses Administratives Générales) : 4 CCAG ;
+  2 informatiques : CCAG FCS (Fournitures Courantes et Services —
+  consommables, logiciels « sur étagère ») et CCAG PI (Prestations
+  Intellectuelles — études, développements). Dérogeable via un article
+  du CCAP.
+  * Nouveau CCAG FCS : arrêté du 19 janvier 2009. L'ancien CHAPITRE VII
+    (marchés informatiques) a disparu -> intégré dans le CCAG TIC
+    (Techniques de l'Informatique et de la Communication), publié 2009.
+  * Marché mêlant matériels + intégration : CCAG FCS si l'ACQUISITION
+    domine financièrement, CCAG PI si le DÉVELOPPEMENT domine.
+- CCTG (Cahier des Clauses Techniques Générales) : PAS de CCTG
+  informatique.
+- Cahier des clauses PARTICULIÈRES : partie du DCE (Dossier de
+  Consultation des Entreprises).
+  * CCAP : engagements contractuels du titulaire (nature, durée,
+    modalités d'exécution, paiement, obligations).
+  * CCTP : description PRÉCISE des prestations, par référence à des
+    normes ou en termes de performance / exigences fonctionnelles.
+    PAS discriminatoire : pas de mode de fabrication, pas de marque
+    (sauf « ou équivalent » si justifié par l'objet).
+- ACTE D'ENGAGEMENT : pièce signée par le candidat (offre + adhésion aux
+  clauses), puis par la personne publique. Les BONS DE COMMANDE ne font
+  PLUS partie des pièces constitutives du marché.
+
+4. LES ÉTAPES DE L'ACHAT PUBLIC
+-----------------------------------------------------------------------
+DÉTERMINATION DES BESOINS (préalable indispensable) : « la nature et
+l'étendue des besoins sont déterminées avec précision avant tout appel
+à la concurrence ». 4 considérations : analyse des besoins fonctionnels,
+connaissance des fournisseurs, distinction achats standard / spécifiques,
+démarche en COÛT GLOBAL (prix + fonctionnement + maintenance ; vrai en
+informatique : logiciel + redevance + maintenance).
+
+MARCHÉS FRACTIONNÉS (2 catégories) :
+- MARCHÉ À BONS DE COMMANDE : besoin connu, date inconnue (biens
+  consommables). Durée MAX 4 ANS. Conclu avec un MINIMUM et un MAXIMUM.
+  Publicité / mise en concurrence sur le MAXIMUM. Acheteur tenu de
+  commander au moins le MINIMUM et de s'adresser exclusivement au
+  titulaire.
+- MARCHÉ À TRANCHES CONDITIONNELLES : tranche FERME (réalisée) + tranches
+  CONDITIONNELLES (affermies au choix). Acheteur engagé sur la seule
+  tranche ferme. Seuils appréciés sur l'ENSEMBLE des tranches.
+
+MULTI-ATTRIBUTION : plusieurs titulaires remis en compétition à chaque
+bon de commande. Pour les biens à fortes variations techniques/prix
+(matériel micro-informatique).
+
+FORME DU MARCHÉ :
+- ALLOTISSEMENT : division en LOTS selon la nature des fournitures /
+  prestations -> étend la concurrence.
+- MARCHÉ UNIQUE : un SEUL titulaire. Si l'acheteur ne peut coordonner
+  les lots ou si économies d'échelle. Marché global construction +
+  exploitation -> coûts séparés.
+- Distinction marché unique / à lots = sur le TITULAIRE ; marché à
+  tranches / à bons de commande = sur les MODALITÉS d'acquisition.
+
+ACHAT GROUPÉ : acheter seul, se grouper, ou recourir à une centrale
+d'achat.
+- COORDINATION (au sein d'une personne publique) : un seul marché + bons
+  de commande, ou plusieurs marchés (convention de prix + marché-type).
+- GROUPEMENT DE COMMANDE (entre personnes publiques) : convention
+  constitutive. Le COORDONNATEUR signe et notifie (ou signe, notifie et
+  exécute) au nom des membres. La CAO peut être celle du coordonnateur.
+- CENTRALE D'ACHAT : doit respecter les règles de publicité et de mise
+  en concurrence. ACCORD-CADRE = sélectionne des prestataires remis en
+  concurrence ultérieurement (survenance du besoin / périodicité).
+  Durée MAX 4 ANS. Caractéristiques essentielles fixées, complétées par
+  les marchés SUBSÉQUENTS sans modification substantielle.
+
+5. LES PROCÉDURES SELON LE MONTANT (marchés de l'État, fournitures et
+   services)
+-----------------------------------------------------------------------
+Plus le montant est élevé, plus les obligations (publicité, contrôle,
+traçabilité) sont grandes. 3 SEUILS.
+- Article 40 CMP 2015 : dispense de publicité / procédure passe de
+  20 000 à 25 000 € HT. Décret n° 2016-360 du 25 mars 2016 : marchés
+  < 25 000 € HT dispensés de publicité ET de mise en concurrence.
+- MARCHÉ DE GRÉ À GRÉ : < 25 000 € HT. Absence de publicité. Soumis aux
+  principes de la commande publique (art. 1er).
+- PROCÉDURE ADAPTÉE (MAPA / MPA) : entre 25 000 et 134 000 € HT.
+  L'acheteur détermine LUI-MÊME la procédure de publicité et de mise en
+  concurrence, adaptée à l'objet, au montant et à sa taille. Favorise la
+  négociation et les échanges dématérialisés.
+- APPEL D'OFFRES : OBLIGATOIRE au-dessus de 134 000 € HT. 2 variantes :
+  * OUVERT : nombre de candidats NON limité ; UNE SEULE enveloppe
+    (candidature + offre) depuis le CMP 2009 ; délai de réception des
+    offres >= 52 JOURS.
+  * RESTREINT : séparation nette candidatures / offres ; sélection
+    préalable des candidatures (délai >= 37 JOURS) ; seuls les candidats
+    sélectionnés reçoivent les cahiers des charges et peuvent remettre
+    une offre.
+- PROCÉDURE NÉGOCIÉE : choix après négociation, cas limitativement
+  énumérés (art. 35). 3 formes : avec publicité et mise en concurrence ;
+  sans publicité préalable mais avec mise en concurrence ; sans
+  publicité ni mise en concurrence. Utilisée pour les matériels /
+  logiciels protégés par DROITS D'AUTEUR (packs Microsoft).
+- DIALOGUE COMPÉTITIF : combine négociation et appel d'offres. Possible
+  UNIQUEMENT si marché COMPLEXE : le pouvoir adjudicateur ne peut définir
+  seul les moyens techniques, ou établir le montage juridique/financier.
+  Programme fonctionnel ; autant de phases de dialogue que nécessaire.
+
+6. LE CHOIX DU TITULAIRE
+-----------------------------------------------------------------------
+- Principe : OFFRE ÉCONOMIQUEMENT LA PLUS AVANTAGEUSE = « MIEUX-DISANT »
+  (pas « moins-disant »). Le prix est un critère parmi d'autres.
+- Offre ANORMALEMENT BASSE : prix ne correspondant pas à une réalité
+  économique.
+- 2 types d'informations : CRITÈRES DE CANDIDATURE (capacité, références,
+  potentialités) et CRITÈRES DE CHOIX (comparaison des offres). Les
+  critères doivent être connus à l'avance.
+- CRITÈRES DE CAPACITÉ (ancienne 1re enveloppe) : capacités TECHNIQUES
+  (moyens matériels et humains), FINANCIÈRES (chiffre d'affaires,
+  attestations bancaires, bilans), PROFESSIONNELLES (qualifications).
+- CRITÈRES DE CHOIX (liste du CMP) : coût d'utilisation, valeur
+  technique, caractère innovant, performances environnementales, délai
+  d'exécution, qualités esthétiques et fonctionnelles, SAV et assistance
+  technique, date et délai de livraison, prix.
+- PONDÉRATION : SEULEMENT pour les critères de choix (pas pour les
+  critères de candidature). Ex. validité technique 60 % / prix 40 %.
+  Notes chiffrées précisées dès le cahier des charges.
+- Les références et potentialités ne peuvent PAS être un critère de
+  choix des offres. Aucun critère nouveau, supprimé ou modifié dans le
+  rapport de choix.
+- AVIS D'ATTRIBUTION : publié pour les marchés > 133 000 € HT (nom de
+  la société, montant).
+
+7. LA VÉRIFICATION DES PRESTATIONS
+-----------------------------------------------------------------------
+MARCHÉS DE FOURNITURES COURANTES ET SERVICES (CCAG FCS puis CCAG TIC) :
+- MOM (Mise en Ordre de Marche) : installation par le titulaire, délai
+  d'UN MOIS à compter de la date contractuelle de livraison ;
+  procès-verbal.
+- VA (Vérification d'Aptitude) : après la MOM ; constate que les
+  prestations ont les caractéristiques techniques les rendant APTES à
+  remplir les fonctions. VA positive -> la VSR débute.
+- VSR (Vérification de Service Régulier) : constate que les prestations
+  assurent un SERVICE RÉGULIER en conditions normales ; s'observe
+  pendant UN MOIS. Service réputé régulier si les indisponibilités
+  cumulées par élément de matériel <= 2 % de la durée d'utilisation
+  effective (8 h - 18 h, du lundi au vendredi, jours fériés exclus).
+- ADMISSION : VSR positive. En règle générale, LA VSR VAUT ADMISSION.
+
+MARCHÉS DE PRESTATIONS INTELLECTUELLES (CCAG PI) : vérification pour
+chaque lot / tranche. RECETTE PROVISOIRE + RECETTE DÉFINITIVE.
+Notification du titulaire (avis de présentation). Décision (PV) :
+RÉCEPTION / AJOURNEMENT (motivé + délai) / RÉCEPTION AVEC RÉFACTION /
+REJET. En règle générale, LA RECETTE DÉFINITIVE VAUT ADMISSION.
+
+8. SOUS-TRAITANCE, MODIFICATION, DÉMATÉRIALISATION
+-----------------------------------------------------------------------
+SOUS-TRAITANCE : le titulaire d'un marché de travaux, de services ou
+industriel peut sous-traiter certaines parties, à condition d'obtenir
+l'ACCEPTATION de chaque sous-traitant par le pouvoir adjudicateur. Le
+titulaire demeure PERSONNELLEMENT RESPONSABLE (pas de relation
+contractuelle maître d'ouvrage <-> sous-traitant). Acceptation au dépôt
+de l'offre ou pendant l'exécution. PAIEMENT DIRECT si le contrat de
+sous-traitance >= 600 € TTC.
+
+MODIFICATION : AVENANT = acte modifiant / complétant des clauses. NE
+PEUT PAS bouleverser l'économie du marché, ni en changer l'objet, ni
+toucher au PRIX. Seuil au-delà duquel il constitue un nouveau marché :
+apprécié AU CAS PAR CAS par le juge administratif. Marché complémentaire
+et marché de prestations similaires.
+
+DÉMATÉRIALISATION :
+- Depuis le 1er janvier 2010, marchés > 90 000 € HT : publication
+  électronique des AAPC (avis d'appel public à la concurrence) et du
+  DCE sur une plateforme ; le pouvoir adjudicateur PEUT imposer la
+  transmission électronique ; RÉPONSE ÉLECTRONIQUE OBLIGATOIRE pour les
+  candidats du secteur informatique.
+- Depuis le 1er janvier 2012, le pouvoir adjudicateur NE PEUT PLUS
+  refuser les documents transmis par voie électronique.
+
+=======================================================================
+À RETENIR
+- 3 principes : liberté d'accès, égalité de traitement, transparence
+  (publicité != publication ; BOAMP).
+- Acteurs : SAE (2009, RGPP), CAO de l'État supprimée (2008), CMPE
+  (marchés info > 6 M€, contrôle facultatif).
+- Documents : CCAG FCS / CCAG PI / CCAG TIC (2009) ; DCE = CCAP + CCTP.
+- Marchés fractionnés : bons de commande (min/max, 4 ans max) / tranches
+  (ferme + conditionnelles) ; multi-attribution (micro-informatique) ;
+  accord-cadre (4 ans max).
+- Seuils État (fournitures/services) : gré à gré < 25 000 € ; MAPA
+  25 000-134 000 € ; appel d'offres > 134 000 € (ouvert : 1 enveloppe,
+  52 j ; restreint : 37 j) ; négociée (droits d'auteur) ; dialogue
+  compétitif (marché complexe).
+- Choix : mieux-disant ; critères de candidature (technique / financière
+  / professionnelle) ; pondération = choix seulement (ex. 60/40).
+- Vérification FCS : MOM (1 mois) -> VA -> VSR (1 mois, 2 % d'indispo)
+  -> admission. PI : recette provisoire + définitive.
+- Sous-traitance : acceptation du PA, titulaire responsable, paiement
+  direct >= 600 € TTC. Avenant : pas de bouleversement de l'économie.
+- Démat : > 90 000 € en 2010 ; réception électronique obligatoire pour
+  le PA en 2012.

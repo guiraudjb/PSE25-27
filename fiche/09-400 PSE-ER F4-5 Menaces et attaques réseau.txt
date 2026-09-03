@@ -1,0 +1,220 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 4, thème 5
+MENACES ET ATTAQUES RÉSEAU : TYPOLOGIE, PRINCIPES, MODALITÉS
+=======================================================================
+
+1. TECHNIQUES D'ATTAQUE NON TECHNIQUES
+-----------------------------------------------------------------------
+- Ingénierie sociale (social engineering) : acquisition déloyale
+  d'information exploitant les failles humaines (confiance, ignorance,
+  crédulité). Pirate emblématique : Kevin Mitnick.
+- MICE / VICE : leviers de manipulation d'un agent — Money/Vénal,
+  Ideology/Idéologie, Compromise/Compromission, Ego.
+- Récupération informelle des déchets (dumpster diving) : tri des
+  poubelles et décharges pour trouver des informations.
+- Shoulder surfing : observation directe d'une saisie (par-dessus
+  l'épaule, jumelles).
+- Sniffing : capture/décodage des paquets d'un réseau local NON commuté
+  (mots de passe en clair interceptables).
+- Scanning / port scan : recherche des ports ouverts ; sur un tiers,
+  assimilé à une tentative d'intrusion.
+- Stéganographie : dissimulation d'information dans un support anodin
+  (texte, image, son). Cas particulier : watermarking. Outils : Steganos,
+  outguess, MP3Stego.
+
+2. FAMILLES DE MENACES ET CODES MALVEILLANTS
+-----------------------------------------------------------------------
+- Menaces ACTIVES : panne, virus, vers, spyware, spam, phishing, chevaux
+  de Troie / backdoors, déni de service, intrusions, bombes logiques.
+- Menaces PASSIVES : écoute des lignes, analyse de trafic.
+
+VIRUS : code capable de se reproduire et se propager.
+  Types : boot, dans les exécutables, macro-virus.
+  Contamination : clés USB, pièces jointes, exécutables téléchargés.
+
+VERS : se propagent seuls sur d'autres ordinateurs via le réseau
+  (carnet d'adresses de messagerie — ex. « I Love You »).
+  Exemples : Code Red (faille IIS, défiguration), Blaster (faille Windows
+  DCOM RPC), Sapphire, Waledac.
+
+CHEVAL DE TROIE : logiciel d'apparence légitime exécutant des actions à
+  l'insu de l'utilisateur ; ouvre souvent une PORTE DÉROBÉE (backdoor)
+  = accès distant secret. Ex. anciens : Back Orifice, Sockets23.
+  Attaques réelles : Bercy (déc. 2010), AREVA (29 sept. 2011).
+
+SPYWARE (espiogiciel) : collecte des infos et les envoie à l'insu de
+  l'utilisateur. Terme nommé par Microsoft en 1995. Décliné en adware
+  (publicité) et malware. Installation par bundles ou failles de
+  navigateur. 1er antispyware : OptOut (Gibson Research, 2000).
+
+BOTNET (robot + réseau) : machines infectées pilotées par un
+  « bot herder » / « botmaster » via IRC, HTTP, DNS, messagerie
+  instantanée, P2P, Skype. Estimation : 1 machine sur 4 (V. Cerf, Davos
+  2007). Usages : spam, vol d'infos (keylogger), spyware, DDoS, phishing,
+  fraude au clic.
+
+3. SPAM, PHISHING, SCAM
+-----------------------------------------------------------------------
+SPAM (pourriel) — déf. CNIL : envoi massif et répété de courriers non
+  sollicités à des personnes jamais contactées, dont l'adresse a été
+  captée irrégulièrement. Origine du mot : Spiced Pork And Meat (sketch
+  Monty Python). ~90 % des courriers échangés ; ~99 % relayé par des
+  machines de particuliers.
+  Parades utilisateur : ne jamais répondre ni acheter, encoder les
+  adresses sur les sites, adresses jetables, filtrage « indésirables ».
+  Parades serveur : ne pas être open relay ; listes blanches ; listes
+  noires (bases de relais ouverts, ex. Spamhaus) ; LISTES GRISES
+  (greylisting = rejet temporaire par code de refus provisoire au MTA
+  émetteur) ; filtres SpamAssassin, bogofilter, PureMessage (Sophos).
+
+PHISHING (hameçonnage) : contraction de PHreaking + fISHING ; ingénierie
+  sociale de masse depuis 2003 ; but = faire cliquer un lien pour
+  récupérer identifiants, mots de passe, n° de carte.
+  Parades : ne jamais cliquer un lien (taper l'adresse), se méfier des
+  formulaires, vérifier chiffrement + certificat valide, se méfier des
+  « Cher utilisateur » génériques.
+
+SCAM : arnaque à l'extorsion de fonds d'origine africaine (« ruse »),
+  connue sous le nom « 419 » (article du code pénal nigérian). Prétexte
+  classique : héritage d'un riche défunt à transférer.
+
+Conséquences des codes malveillants : perte de données, de temps de
+  travail, d'image de marque, de fonctionnalités, de confidentialité.
+
+4. VULNÉRABILITÉS DE LA PILE TCP/IP ET ATTAQUES RÉSEAU
+-----------------------------------------------------------------------
+- Établissement TCP = Three Way Handshake (3 temps).
+- Attaques historiques sur IP :
+  * Fragmentation : teardrop (fragments qui se chevauchent).
+  * Land : adresses IP source = destination.
+  * Ping of death : ping malformé > 65 535 octets -> crash.
+  * UDP Flood : « UDP Packet Storm » ; UDP sans contrôle de congestion
+    devient prioritaire sur TCP et sature la bande passante.
+- Sniffer : visualise les trames d'un segment ; droits admin ; mode
+  promiscuous ; socket RAW. Outils : tcpdump (Unix/Linux), Wireshark
+  (multiplateforme). Attention aux aspects juridiques.
+- IP spoofing : usurpation d'adresse IP ; contourne l'authentification
+  par IP (rlogin, rsh), numéros de séquence TCP prévisibles.
+
+DÉNI DE SERVICE (DoS / DDoS) : empêcher l'usage d'une machine ou d'un
+  service. Souvent plus facile de paralyser que d'obtenir un accès.
+  * DoS LOCAL : saturation disque, répertoires récursifs, boucle de
+    fork().
+  * DoS RÉSEAU : SYN flood, réassemblage de fragments, flags TCP
+    illégaux, DDoS.
+  * SYN FLOOD : inondation de SYN à source usurpée/inaccessible ; cible
+    saturée de connexions SYN_RECV (visibles par netstat -an).
+    Parades : file d'attente allongée, temporisation réduite, SYN cookie,
+    SYN cache.
+  * DDoS (Distributed Denial of Service) : nombreuses machines
+    corrompues. Popularisé le 14 février 2000 (eBay, CNN, Amazon...) ;
+    Michael Calce alias « Mafiaboy », 15 ans, 8 mois de détention, pertes
+    ~1,7 Md$. Outils : TFN, Trinoo, TFN2K, Trinity (IRC). Parade de
+    l'expert réseau : surveiller les ports ouverts.
+- ARP spoofing : pollution des caches ARP (fausses associations MAC/IP)
+  -> man in the middle, DoS, contournement de firewall. Outils : arp-sk,
+  Cain & Abel. Parades : associations statiques, arpwatch / WinARPWatch.
+- TCP hijacking (vol de session) : interception d'une session TCP
+  établie ; l'authentification n'ayant lieu qu'à l'ouverture, l'attaquant
+  garde la main. Outil : hunt.
+- Smurf : ICMP echo request vers une adresse de diffusion, adresse de la
+  victime usurpée ; 3 rôles (attaquant, intermédiaire, victime).
+- DNS cache poisoning : empoisonnement du cache DNS pour rerouter un nom
+  légitime vers un site pirate. BIND vulnérable en juillet 2007
+  (générateur d'identifiants de requêtes prévisible, CVE-2007-2926).
+
+5. VULNÉRABILITÉS APPLICATIVES ET SYSTÈMES
+-----------------------------------------------------------------------
+- Buffer overflow : ~2/3 des vulnérabilités ; écriture hors de la zone
+  allouée (pile/tas) ; « stack smashing attack » pour exécuter du code
+  pirate ; langage C particulièrement exposé.
+  Parades : audit de code (RATS = Rough Auditing Tool for Security),
+  pile non exécutable, canary / StackGuard (repère aléatoire devant
+  l'adresse de retour, vérifié avant le retour de fonction).
+- Chaînes de format : problème connu depuis juin 1999, exploité depuis
+  juin 2000 ; fonctions printf, syslog... ; vulnérabilités remote root.
+- Race condition : ressource manipulée simultanément par plusieurs
+  processus/threads ; besoin d'opérations atomiques et de droits précis.
+- Fichiers temporaires (/tmp) : nom prévisible + binaire root suid ->
+  lien symbolique vers un fichier critique (/etc/shadow).
+- Erreurs de décodage d'URL : caractère échappé %XX ; test de sécurité
+  effectué AVANT décodage ; IIS : double codage ..%255c.. , caractère
+  %00 traité comme fin de chaîne.
+- XSS (Cross Site Scripting) : connu depuis février 2000 ; exécution de
+  scripts dans le navigateur de la victime (vol de cookie de session).
+  À distinguer de CSS (Cascading Style Sheet). HTTP sans session ->
+  session portée par cookie / URL / paramètres.
+  Remède : ne jamais afficher une saisie telle quelle, filtrer < et >
+  (htmlspecialchars).
+- .htaccess (Apache) : authentification login/mot de passe par
+  répertoire, vulnérable aux écoutes car non chiffrée.
+- Injection SQL : valeurs de formulaire utilisées dans une requête sans
+  vérification.
+- Disponibilité : grappe / cluster -> haute disponibilité, répartition
+  de charge, montée en charge.
+- Virtualisation : plusieurs OS/applications isolés sur une machine.
+  Avantages : optimisation des ressources, green computing, clonage /
+  déplacement. Risques : panne d'une ressource commune = tout est
+  bloqué ; défaut de cloisonnement = fuite d'informations ; copie non
+  souhaitée de VM. Logiciels : VMware, Citrix XenServer, Vserver,
+  VirtualBox.
+
+6. OUTILS D'ATTAQUE ET DE DÉFENSE
+-----------------------------------------------------------------------
+ANATOMIE D'UNE ATTAQUE :
+  1. Récolte d'informations (whois, moteurs de recherche).
+  2. Analyse détaillée : cartographie du réseau, recherche des services
+     ouverts, recherche des vulnérabilités.
+
+- Cartographie : ping peu efficace ; fping, hping3 ; transfert de zone
+  DNS (dig ... axfr) sur DNS mal configurés.
+- nmap : outil de référence de scan de ports. Techniques : TCP connect
+  (-sT, défaut), SYN half-open (-sS), FIN stealth (-sF), Xmas (-sX),
+  Null (-sN), UDP (-sU), bounce FTP (-b). Options : -P0 (sans ICMP),
+  -O (fingerprinting OS), -D (decoy scanning), -T (timing
+  Paranoid..Insane).
+- Fingerprinting passif : n'émet aucune information, analyse les trames
+  reçues (p0f, analyse de logs).
+- Association port-processus : netstat -anp, lsof -i (Unix) ;
+  Active Ports, tcpview (Windows).
+- Recherche de versions : telnet sur un port -> bannière (ex.
+  Apache/1.3.34).
+- Faille = vulnérabilité donnant un accès non autorisé ; à tous les
+  niveaux (routeurs, client/serveur, OS, firewalls).
+- ~7000 failles publiées en 2011 ; 0 day = divulgation immédiate ;
+  « vulnerability business » ; listes BugTraq / SecurityFocus.
+- Scanners de vulnérabilités : SATAN (1995, Dan Farmer & Wietse Venema) ;
+  Nessus (client/serveur, plug-ins, langage NASL). Attention légale et
+  éthique ; traces dans les fichiers d'audit.
+- Référencements : BID (SecurityFocus), CVE (cve.mitre.org).
+- IDS : approche comportementale (profils) + approche par
+  scénario/signatures ; éviter les faux positifs ; NIDS. Snort = NIDS
+  (IP/TCP/UDP/ICMP, stealth scan, OS fingerprinting...).
+- IPS : peut stopper un trafic suspect ; sur routeur, firewall ou boîtier
+  en rupture. Éditeurs : Cisco, ISS, McAfee.
+- Métrologie : extra, MRTG, vigilog (détection d'usage anormal, pics,
+  scan massif).
+- Craquage de mots de passe : Crack, John the Ripper (Unix/Linux),
+  L0phtCrack (Windows). Coffres-forts de mots de passe, SSO.
+- Rootkit (déf. NSA) : outils donnant une backdoor persistante et furtive
+  ; cas classique de cheval de Troie ; remplace ps, netstat, ls ; nettoie
+  les logs. Premières alertes : février 1994. Détection : chkrootkit
+  (Unix), RootkitRevealer (Windows) ; prévention par intégrité : tripwire.
+
+=======================================================================
+À RETENIR
+- Ingénierie sociale = faille humaine ; MICE/VICE ; Kevin Mitnick.
+- Actif (virus, ver, cheval de Troie, DoS...) vs passif (écoute, analyse
+  de trafic).
+- Ver = propagation autonome par le réseau ; cheval de Troie = backdoor.
+- Spam : déf. CNIL ; greylisting = rejet temporaire au MTA ; éviter
+  l'open relay.
+- Phishing = PHreaking + fISHING, depuis 2003 ; ne jamais cliquer un
+  lien.
+- Ping of death (> 65 535 o), SYN flood (SYN_RECV / netstat -an), DDoS
+  (14 février 2000, Mafiaboy).
+- ARP spoofing -> MITM ; Smurf -> ICMP broadcast ; DNS cache poisoning
+  -> reroutage.
+- Buffer overflow ~2/3 des failles ; parade : canary / StackGuard.
+- XSS : script dans le navigateur de la victime ; filtrer < et >.
+- nmap (scan), Nessus/SATAN (vulnérabilités), Snort (NIDS), tripwire
+  (intégrité) ; CVE / BID.

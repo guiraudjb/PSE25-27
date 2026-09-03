@@ -1,0 +1,73 @@
+PRINCIPAUX PROTOCOLES APPLICATIFS DE LA PILE TCP/IP
+
+Les protocoles de la couche Application sont très nombreux, car ils répondent aux besoins très divers des applications.
+
+1. SNMP (Simple Network Management Protocol)
+Protocole simple d'administration et de gestion d'équipements (distants ou non, à condition qu'ils soient adressables). Type question/réponse asynchrone. Encapsulé dans des trames UDP.
+Fonctionnement : SNMP est le langage que les agents et les stations de gestion (managers) utilisent pour communiquer. Les stations interrogent les agents pour observer leur fonctionnement et leur envoient des commandes ; les agents renvoient les informations requises. Certains événements (erreurs de transmission) peuvent déclencher des alarmes vers les stations, mais l'envoi spontané de l'agent vers le manager est limité : les stations interrogent périodiquement les agents pour vérifier leur état.
+Trois types de requêtes SNMP :
+- GET : la station interroge un agent (GET request), l'agent répond (GET response).
+- SET : la station modifie une variable d'un agent.
+- TRAP : un agent notifie un événement.
+Informations : structurées suivant la SMI (Structure of Management Information), stockées dans la MIB (Management Information Base). La MIB regroupe l'ensemble des variables relatives aux matériels et logiciels du réseau et définit les objets de gestion en environnement TCP/IP. La SMI définit comment les informations sont représentées dans la MIB et comment elles sont obtenues. Cette normalisation est indispensable pour savoir à quoi correspond une information et où elle est stockée.
+Atouts et limites : SNMP est simple. Les versions 1 et 2 ont des capacités de sécurité très limitées (surtout l'authentification). SNMPv3 apporte l'authentification et le cryptage, mais est plus difficile à implémenter.
+
+2. DHCP (Dynamic Host Configuration Protocol)
+Sert principalement à distribuer des adresses IP associées à un masque de sous-réseau sur un réseau local. Un serveur DHCP (à adresse IP fixe) gère et distribue les adresses. Au démarrage, une machine émet en broadcast un segment contenant certaines informations (adresse physique...) ; le serveur DHCP lui renvoie son adresse IP et toutes les informations nécessaires (masque de sous-réseau, passerelle par défaut, serveur DNS...), après un échange de requêtes et de réponses.
+Le serveur DHCP doit être sur le même lien que ses clients (les requêtes de broadcast ne passent pas les routeurs) ; sinon il faut installer un relais DHCP.
+DHCP a été conçu comme complément du protocole BOOTP (Bootstrap Protocol, utilisé lors de l'installation d'une machine à travers un réseau). Il attribue dynamiquement une adresse IP parmi un pool d'adresses disponibles, en optimisant l'utilisation de ce pool.
+Bail : adresse IP allouée avec une date de début et une date de fin de validité. À son terme, le client peut demander une prolongation ; sinon, l'adresse est rendue disponible pour un nouveau client.
+
+3. HTTP (HyperText Transfer Protocol)
+Le protocole le plus utilisé sur Internet. HTTPS est la variante sécurisée, basée sur SSL ou TLS. HTTP s'appuie sur TCP et utilise le port 80 (443 pour HTTPS).
+But : permettre le transfert de fichiers (essentiellement au format HTML) localisés grâce à une URL, entre un navigateur (client) et un serveur Web. Communication en deux temps : requête HTTP, puis réponse HTTP.
+Requête HTTP :
+- Ligne de requête : document demandé (URL), méthode (le plus souvent GET ou POST), version du protocole.
+- Champs d'en-tête (facultatifs) : informations sur la requête et/ou le client (navigateur, système d'exploitation).
+- Corps de la requête (optionnel, séparé par une ligne vide) : par exemple envoi de données par la méthode POST après un formulaire.
+Réponse HTTP :
+- Ligne de statut : version du protocole, code retour, texte explicatif.
+- Champs d'en-tête (facultatifs) : informations sur la réponse et/ou le serveur.
+- Corps de la réponse : le document demandé.
+Méthodes HTTP : HEAD (requête de l'en-tête de la ressource), POST (envoi de données au programme pour demander un traitement), PUT (envoi de données à l'URL sans serveur FTP), DELETE (suppression de la ressource sans serveur FTP), OPTIONS et TRACE (demande d'informations au serveur), CONNECT (utilisation du serveur comme proxy). Pour des raisons de sécurité, PUT, DELETE, OPTIONS, TRACE et CONNECT sont rarement implémentées.
+Codes retour (3 chiffres) : 20x connexion réussie ; 30x redirection ; 40x erreur due au client (403 requête rejetée, 404 serveur non trouvé) ; 50x erreur due au serveur.
+
+4. FTP (File Transfer Protocol)
+Transfert de fichiers entre machines distantes. S'appuie sur TCP. Mode full-duplex (transfert dans les deux sens). Permet : télécharger du serveur vers le client (download), du client vers le serveur (upload), et transférer entre deux serveurs distants via le client (utile en administration).
+Mode client-serveur : un client est lancé localement, un serveur FTP sur la machine distante. FTP nom_machine, puis login et mot de passe, vérification des droits.
+Deux connexions TCP en parallèle : port 21 (contrôle : contrôle de flux, commandes, informations de connexion login et mot de passe) et port 20 (transferts de données). Connexion de contrôle indépendante de celle des données -> signalisation hors bande.
+La connexion de contrôle (port 21) est persistante ; la connexion de données (port 20) est coupée après chaque transfert de fichier et recréée pour le suivant.
+Principales commandes : dir ou ls (contenu du répertoire), bin (mode binaire), ascii (mode ascii), put (envoie un fichier), get (récupère un fichier), mput (plusieurs fichiers en envoi), mget (plusieurs fichiers en réception), close (ferme la connexion), bye (termine la connexion FTP).
+TFTP (Trivial FTP) : version simplifiée utilisant UDP, employée en particulier pour mettre à jour les logiciels des équipements réseau.
+
+5. DNS (Domain Name System)
+Annuaire distribué traduisant les noms de serveurs en adresses IP et réciproquement. Repose sur une hiérarchie de serveurs de noms exploitant une base de données distribuée. Le protocole DNS est utilisé pour la communication entre serveurs de noms et pour l'interrogation par les clients. Transport : UDP ; port du serveur DNS : 53.
+Deux types de résolution : classique (adresse IP à partir d'un nom) et inverse (nom à partir d'une adresse IP, via le domaine in-addr.arpa où les adresses IP forment un arbre, les octets étant dans l'ordre inverse).
+DNS est utilisé par HTTP (web), SMTP (messagerie) et FTP : sa disponibilité doit être assurée, ce qui est réalisé par le grand nombre de serveurs de noms organisés hiérarchiquement (chacun ne gère qu'une partie des données mondiales - des « zones » - avec des niveaux de responsabilité différents - « délégation »). Chaque serveur utilise un cache pour enregistrer les dernières résolutions et répondre plus vite.
+Les serveurs DNS ne traitent que des noms de domaine complets (à partir de la racine). Le client dispose d'un nom de domaine par défaut, ajouté automatiquement à un nom incomplet, et d'une liste de serveurs de noms à contacter.
+Enregistrements de ressources (RR) : quatre éléments - le nom, la valeur, le type, le TTL (durée de conservation en cache). Classe toujours IN (Internet).
+Types de RR courants :
+- A (Address) : nom d'un serveur -> adresse IPv4 (AAAA pour IPv6).
+- CNAME (Canonical Name) : alias -> nom canonique d'un serveur.
+- MX (Mail eXchanger) : alias -> nom canonique d'un serveur de messagerie.
+- PTR (PoinTeR) : nom de domaine -> autre nom de domaine ; principalement pour la résolution inverse (ex. 15.24.18.192.in-addr.arpa IN PTR monserveur.mondomaine.fr).
+- NS (Name Server) : nom d'un domaine constituant une zone -> nom du serveur de noms délégué (au moins un par zone, souvent plusieurs pour la disponibilité).
+- SOA (Start Of Authority) : nom de domaine d'une zone -> paramètres de la zone (dont le nom du serveur ayant autorité) ; obligatoire pour définir une zone.
+Zones et délégation : une zone contient un ensemble de noms de domaine d'une branche de l'arbre de nommage. La délégation de zone donne la responsabilité d'une branche à un serveur, qui peut à son tour déléguer.
+Serveur primaire : obtient les informations de sa zone dans un fichier de configuration (n'interroge personne). Serveur secondaire : obtient les informations d'un serveur primaire, qu'il doit contacter régulièrement pour rester à jour.
+Messages DNS : requête et réponse (la réponse contient le ou les RR correspondants). Requêtes récursives (le serveur sollicité effectue les recherches successives pour le compte du client et lui renvoie la correspondance) ou itératives (le serveur sollicité renvoie l'adresse IP du prochain serveur à contacter). Combinables ; de nombreux messages successifs peuvent être échangés.
+Répartition de charge rudimentaire : plusieurs adresses IP de serveurs identiques sous un même nom ; la réponse est une liste dont l'ordre varie aléatoirement, le client utilise la première adresse.
+
+6. RTP, RTCP ET RSVP
+IP n'est pas nativement adapté à la transmission de données en temps réel. Des protocoles spécifiques sont implémentés au-dessus d'UDP.
+- RTP (Real-Time Transfer Protocol) : donne à IP la possibilité de véhiculer des données à contraintes temps réel (audio, vidéo). Rôle principal : mettre en œuvre des numéros de séquence de datagrammes IP pour reconstituer voix ou vidéo même si le réseau change l'ordre. Ajoute un en-tête spécifique aux segments UDP : identifier le type de média, ajouter des marqueurs temporels et des numéros de séquence (séquencement et synchronisation), contrôler l'arrivée des paquets, reconstituer un flux continu en cas de perte. Peut être véhiculé en multicast (1 à n).
+- RTCP (Real-Time Transfer Control Protocol) : protocole de contrôle des flux RTP ; véhicule des informations basiques sur les participants d'une session et sur la QoS, par transmissions périodiques de paquets de contrôle de tous les participants.
+- RSVP (Resources Reservation Protocol) : protocole de réservation de bande passante. RTP et RTCP règlent les problèmes de bout en bout mais pas le trafic sur le réseau ni la congestion dans les routeurs (IP traite tous les paquets en best-effort ; gigue et temps de transmission variables). RSVP alloue dynamiquement de la bande passante et la réserve à certaines applications.
+
+7. AUTRES PROTOCOLES DE LA FAMILLE TCP/IP
+- BOOTP : stations sans disque, pour acquérir une adresse IP.
+- SMTP (Simple Mail Transfer Protocol) : protocole standard d'échange de courrier électronique sur réseau TCP/IP.
+- TELNET : connexion sur un terminal distant (visualiser en local un environnement lancé à distance). S'appuie sur TCP ; deux processus (local et distant). Port 23. Non sécurisé (informations en clair) -> SSH.
+- RPC (Remote Procedure Call) : mécanisme d'appel à des procédures distantes se comportant quasiment comme des appels à des procédures locales. Créé par Sun Microsystems.
+- RLOGIN (Remote login) : comme Telnet, connexion sur un terminal distant, mais plus performant. Démon rlogind, port 513. Informations, identifiant et mot de passe en clair -> plus utilisé en pratique.
+- SSH (Secure Shell) : protocole sécurisé imposant un échange de clés de chiffrement (ou certificat) en début de connexion ; conçu pour remplacer telnet, rlogin et rsh, le plus souvent pour administrer une machine distante ; tous les flux sont chiffrés. Port 22. Version 1 insuffisamment sécurisée, remplacée par la version 2 ; version 3 (double échange de clés) pour des applications spécifiques.

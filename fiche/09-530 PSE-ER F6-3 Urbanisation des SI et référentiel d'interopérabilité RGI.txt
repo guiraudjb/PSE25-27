@@ -1,0 +1,207 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 6, thème 3
+URBANISATION DES SI ET RÉFÉRENTIEL D'INTEROPÉRABILITÉ (RGI)
+=======================================================================
+
+1. URBANISATION DES SI : DÉFINITION ET PRINCIPES
+-----------------------------------------------------------------------
+- URBANISME informatique = la MÉTHODE (démarche, concepts, règles) de
+  construction et d'aménagement des SI.
+  URBANISATION = le fait d'APPLIQUER la méthode à un SI donné.
+- Souci principal : SI MODULAIRE et ÉVOLUTIF -> rénovation par quartiers
+  sans bouleverser l'ensemble.
+- Principes :
+  * connaissance précise de l'existant + objectifs d'évolution ;
+  * organisation spatiale en ZONES / QUARTIERS / BLOCS FONCTIONNELS,
+    appuyée sur les grands invariants ;
+  * règles d'urbanisme -> découpage optimal (composants, modèles
+    d'architecture, règles d'échanges) pour LIMITER LES FLUX et
+    FACILITER LA RÉUTILISATION ;
+  * INDÉPENDANCE des applications entre elles et vis-à-vis de
+    l'infrastructure.
+- Rôle : activité SUPPORT (pas un projet autonome) — connaître
+  l'existant, orienter les réflexions stratégiques, conseiller la MOA,
+  aider les équipes de projet. Se situe EN AMONT des projets ; juge
+  l'opportunité d'un projet et son impact sur le SI. Tâche de fond
+  PERMANENTE.
+
+CARTOGRAPHIE : représentation globale des composants du SI et de leurs
+interactions. Cartographie de l'EXISTANT vs cartographie CIBLE.
+
+VOCABULAIRE :
+- DOMAINE : groupement d'applications contribuant à un objectif commun /
+  à la même mission (Production, Ventes, Comptabilité...).
+- SOUS-DOMAINE : subdivision d'un domaine ; n'appartient qu'à UN SEUL
+  domaine.
+- FONCTION : ensemble d'actions/tâches élémentaires indissociables
+  réalisées par le SI en support d'un acteur ; associée au PROCESSUS
+  (plus haut niveau de décomposition de l'application).
+- TYPE D'ACTEURS : personnes utilisant le système, exerçant des tâches
+  homogènes.
+- UNITÉ FONCTIONNELLE : unité de référence de la structure
+  organisationnelle regroupant tâches homogènes et types d'acteurs.
+- OBJET DE GESTION : entité / ensemble de données manipulées lors de
+  l'exécution d'une fonction.
+- MODULE APPLICATIF COMMUN : application maintenue en un seul endroit,
+  utilisée par plusieurs applications.
+- COMPOSANT : module logiciel identifié, défini par ses interfaces,
+  réutilisable (composant métier / composant logiciel).
+
+2. CONCEPTS D'URBANISATION
+-----------------------------------------------------------------------
+- ZONE : découpage d'un domaine selon les niveaux de préoccupations de
+  temps et de métier. 3 ZONES FONDAMENTALES :
+  * ACQUISITION : recueillir l'information venant de l'extérieur du
+    domaine (plusieurs protocoles).
+  * OPÉRATIONNELLE : traiter l'information.
+  * ÉMISSION : restituer l'information à l'extérieur du domaine.
+- QUARTIER : au sein d'une zone, répartition des traitements selon la
+  NATURE des informations traitées ; assimilable au sous-domaine.
+- BLOC FONCTIONNEL : composant de base de l'urbanisme, PLUS PETITE UNITÉ
+  manipulée ; ensemble homogène de données ET de traitements dans un
+  quartier.
+  * déclenché par un ÉVÉNEMENT (flux externe ou flux interne) ;
+  * produit un CRE (Compte Rendu après traitement de l'Événement) ->
+    autre bloc ou extérieur du domaine ;
+  * règles : appartenance à UN SEUL quartier, AUTONOMIE, ASYNCHRONISME,
+    donnée MONO-PROPRIÉTAIRE.
+- SERVEUR LOGIQUE CONSOLIDÉ : regroupe 1..n blocs fonctionnels d'un même
+  quartier (données communes, mêmes unités fonctionnelles, liens forts) ;
+  à rapprocher du serveur applicatif.
+- APPLICATION : modèle de DONNÉES + modèle de TRAITEMENTS (services
+  applicatifs) + modèle de PRÉSENTATION (IHM).
+
+- SI du Trésor public : 8 GRANDS DOMAINES — recouvrement, dépense,
+  comptabilité, trésorerie/épargne, secteur public local, redevance,
+  ressources et moyens généraux, services communs.
+- Orientations SDI : « une application unique par mission » ; « une
+  saisie unique » ; « réduction du nombre d'identifiants » ;
+  « indépendance des choix techniques » ; « composants réutilisables » ;
+  « dématérialiser les échanges » ; « se doter d'une cartographie » ;
+  « indépendance des applications ».
+
+3. LA DÉMARCHE D'URBANISATION (4 PHASES)
+-----------------------------------------------------------------------
+1. CARTOGRAPHIE DU SI EXISTANT : périmètre du domaine ; fiche « domaine »
+   (processus métier, sans les implémentations) ; fiches « application » ;
+   recensement des fonctions et des informations ; dictionnaire
+   sémantique (glossaire).
+2. URBANISATION DE L'EXISTANT + DIAGNOSTIC : appliquer les concepts
+   d'urbanisme ; regrouper les fonctions en blocs (unicité, autonomie,
+   asynchronisme, donnée mono-propriétaire) ; regrouper les blocs en
+   quartiers (données de référence / gestion opérationnelle / pilotage-
+   valorisation) ; séparer la gestion de l'information de son acquisition
+   et de sa restitution ; SCHÉMA GÉNÉRAL D'URBANISATION -> critique de
+   l'existant (incohérences, chevauchements, imbrications, doublons ;
+   maintenabilité, évolutivité, pérennité).
+3. PLAN D'URBANISME CIBLE : étude des besoins d'évolution (MOA + équipes
+   de maintenance) regroupés par axes et degrés d'urgence ; SCHÉMA
+   CIBLE ; chemins de migration (CONSERVATION, RÉÉCRITURE, REMPLACEMENT,
+   SERVEUR D'ÉCHANGES, DÉSIMBRICATION) ; PLUSIEURS SCÉNARIOS cibles.
+4. TRAJECTOIRE DE MIGRATION : planifier année par année ; identifier les
+   responsabilités ; cibles intermédiaires + chantiers. Cette phase
+   relève des ÉQUIPES DE PROJET, pas de l'étude d'urbanisation.
+
+Livrables : cartographie détaillée + diagnostic de capacité d'évolution ;
+plan d'urbanisme (SI cible + règles de découpage/échanges) ; trajectoire
+de migration.
+
+CAS DGFiP RECOUVREMENT (étude 1999, suite du SDI, puis programme
+Copernic) : scénario 1 (6 quartiers = 6 applications par ligne de
+produits), scénario 2 (4 quartiers, produits locaux + impôt + produits
+divers regroupés), scénario 3 (quartier unique, produit unique de
+recouvrement).
+
+Références : « Urbanisation des systèmes d'information », Jacques Sassoon
+(Hermès) ; Cadre Commun d'Urbanisation du SI de l'État ; Plan
+d'Occupation des Sols du SI des Services Publics Français ; Cadre Commun
+d'Architecture des Référentiels de Données ; RZF (Responsable de Zone
+Fonctionnelle).
+
+4. LE RÉFÉRENTIEL GÉNÉRAL D'INTEROPÉRABILITÉ (RGI)
+-----------------------------------------------------------------------
+- Créé par l'ORDONNANCE DU 8 DÉCEMBRE 2005 (réforme portée par la DGME).
+  Annoncé par le comité RGI (communiqué de presse, juillet 2007).
+- 3 VOLETS : SÉMANTIQUE, TECHNIQUE, ORGANISATIONNEL. Complété par le RGS
+  et le RGAA (parus en 2009).
+- INTEROPÉRABILITÉ (déf.) : « possibilité pour des moyens logiciels et
+  matériels appartenant à plusieurs plates-formes dotées de systèmes
+  hétérogènes de communiquer et de travailler ensemble ».
+- Objectif : se démarquer des FORMATS PROPRIÉTAIRES au profit de formats
+  OUVERTS, libres de droits (mouvance open source).
+- Historique : 2 circulaires de 2002 (21 janvier, 4 décembre) ;
+  septembre 2003 = CCI (Cadre Commun d'Interopérabilité) v2.1. Le CCI ne
+  donnait que des RECOMMANDATIONS ; le RGI, au sens de l'ordonnance du
+  8 décembre 2005, a FORCE D'OBLIGATION.
+- Dates : décret n° 2007-284 (mars 2007) ; ARRÊTÉ DU 11 NOVEMBRE 2009
+  (v1.0) ; actualisation lancée en 2013 ; ARRÊTÉ DU 20 AVRIL 2016 (v2.0,
+  EN VIGUEUR). Avant publication : projet soumis à l'UE (directive
+  98/34), avis de la CCEN puis CNEN.
+
+PÉRIMÈTRE :
+- « AUTORITÉ ADMINISTRATIVE » (AA) = organisation publique au sens large
+  (administration, service déconcentré, établissement public,
+  collectivité, organisme social ou hospitalier).
+- 3 CAS D'ÉCHANGES : A2A (entre AA), A2B (AA <-> entreprise / unité
+  légale), A2C (AA <-> citoyen).
+- Pour leurs besoins INTERNES, les AA restent libres du choix des normes
+  (mais suivre le RGI par défaut est souhaitable).
+- Contexte européen : EIF (European Interoperability Framework) ->
+  favoriser les EPS (European Public Services) ; recommandations
+  organisationnel / sémantique / technique. Alignement des cadres
+  nationaux sur l'EIF ; observatoire NIFO (National Interoperability
+  Framework Observatory).
+
+VOLET TECHNIQUE : ~14 chapitres (dont 8 intéressent les PSE) ; ~90 fiches
+thématiques ; ~100 règles techniques. Chapitres 3-10 :
+- formats de données ; formats de documents ; IHM (ergonomie des
+  services en ligne) ; messageries électroniques ; services d'annuaire ;
+  services techniques (compression, DNS, transfert de fichiers, QoS,
+  forums) ; sécurisation des échanges (chiffrement XML, web services,
+  certificats) ; protocoles (HTTP, TCP/UDP, IP, IPSec, horodatage,
+  téléphonie, réseaux locaux).
+
+Chaque fiche : DESCRIPTION ; NORMES ET RECOMMANDATIONS (RIT = Règle
+d'Interopérabilité Technique) ; PRINCIPES DE MISE EN ŒUVRE ; COMPOSANTS
+(mutualisés/réutilisables) ; PROCÉDURES DE VÉRIFICATION DE CONFORMITÉ
+(facultative) ; PRATIQUES SECTORIELLES.
+
+4 NIVEAUX DE PRÉCONISATION DES RIT :
+- OBLIGATOIRE : exigence absolue.
+- RECOMMANDÉ : peut être ignoré dans des circonstances particulières
+  (conséquences à mesurer).
+- DÉCONSEILLÉ : prohibition sauf circonstances exceptionnelles.
+- INTERDIT : prohibition absolue.
+Non-respect de Recommandé/Déconseillé -> spécifier et JUSTIFIER.
+Dérogation à Obligatoire/Interdit -> DOSSIER DE JUSTIFICATION transmis à
+la DGME.
+
+EXEMPLES :
+- Fiche 3.4 (images fixes non photographiques) : RIT0003 (RECOMMANDÉ) =
+  PNG v1.2 (norme ISO 15948, format ouvert basé sur une version publique
+  de LZW, promu W3C, normalisé ISO, compression sans perte 5-25 %
+  meilleure que GIF, couche alpha, pas d'images animées -> MNG/APNG).
+  RIT0005 (DÉCONSEILLÉ) = GIF (propriétaire Unisys, 8 bits / 256
+  couleurs).
+- Fiche 10.2 (TCP et UDP) : RIT0077 (OBLIGATOIRE) = utiliser TCP ou UDP
+  pour transporter les flux des couches applicatives. RFC 768 (UDP),
+  793 (TCP), 1323 (extensions performance haut débit). UDP -> temps réel
+  (multimédia, visioconférence, VoIP : retransmissions inutiles) ;
+  TCP -> fiabiliser HTTP, SMTP, FTP.
+
+=======================================================================
+À RETENIR
+- Urbanisme = méthode ; urbanisation = son application. But : SI
+  modulaire et évolutif.
+- Découpage : DOMAINE > ZONE (acquisition / opérationnelle / émission) >
+  QUARTIER (nature de l'info) > BLOC FONCTIONNEL (plus petite unité,
+  événement -> CRE, autonome, asynchrone, mono-propriétaire).
+- Application = données + traitements + présentation (IHM).
+- Démarche en 4 phases : cartographie existant / urbanisation +
+  diagnostic / plan cible (scénarios) / trajectoire de migration.
+- RGI : ordonnance 8 déc. 2005 ; 3 volets (sémantique / technique /
+  organisationnel) ; FORCE D'OBLIGATION (vs CCI) ; v1.0 (2009), v2.0
+  (arrêté 20 avr. 2016).
+- Échanges A2A / A2B / A2C ; EIF européen, observatoire NIFO.
+- RIT : 4 niveaux (Obligatoire / Recommandé / Déconseillé / Interdit) ;
+  ex. PNG recommandé vs GIF déconseillé ; TCP/UDP obligatoires
+  (RIT0077).

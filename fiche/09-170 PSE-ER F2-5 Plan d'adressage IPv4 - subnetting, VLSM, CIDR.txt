@@ -1,0 +1,40 @@
+PLAN D'ADRESSAGE IPv4 : SUBNETTING, VLSM, CIDR
+
+1. ESPACE D'ADRESSAGE PRIVÉ (RFC 1918)
+Motivation : saturation du schéma d'adressage originel ; IPv6 est la solution de fond mais la transition est longue, d'où des améliorations d'IPv4. De nombreux organismes utilisent TCP/IP en interne sans se connecter à Internet : leurs adresses n'ont pas besoin d'être uniques mondialement.
+Trois plages réservées, non routées sur Internet, utilisables librement sans déclaration :
+- 10.0.0.0/8 (classe A)
+- 172.16.0.0 à 172.31.255.255 (classe B)
+- 192.168.0.0/16 (classe C)
+Masques par défaut : A 255.0.0.0 ; B 255.255.0.0 ; C 255.255.255.0. Avantages : conservation de l'espace global, flexibilité et évolutivité pour les organisations. Pour faire communiquer deux réseaux privés : NAT (Network Address Translation), aucune unicité n'étant garantie.
+
+2. NOTIONS FONDAMENTALES ET ADRESSES SPÉCIALES
+Classes A, B, C (individuelles), D (diffusion), E (réservée). Notation /X : X = nombre de bits à 1 du Network-id (ex. 100.10.5.1/8 -> 255.0.0.0). Une adresse IP est indissociable de son masque : communiquer une adresse sans masque est une information incomplète.
+Adresse du réseau = adresse d'hôte ET (logique) masque de sous-réseau (1∧1=1, sinon 0). Le masque détermine si deux équipements sont sur le même segment / sous-réseau.
+Adresses de diffusion :
+- Dirigée : host-id tout à 1 (X.255.255.255 en A, X.Y.255.255 en B, X.Y.Z.255 en C) ; tous les équipements du réseau ; jamais source, toujours destination.
+- Limitée : 255.255.255.255 ; réduit la diffusion au réseau local, sans franchir de routeur.
+- Multidiffusion : adresse de classe D en destination ; protocole IGMP (Internet Group Management Protocol), à ne pas confondre avec ICMP.
+Adresse 0.0.0.0 : (1) avec DHCP, un hôte requiert une adresse ; (2) dans une table de routage, entrée du routeur (passerelle) par défaut. Ne peut être qu'une adresse source.
+
+3. SUBNETTING (RFC 950)
+Le système des classes fige la longueur des masques et est trop rigide (classe C : 254 hôtes, trop peu ; classe B : 65 534, rarement atteint ; plus aucune classe disponible). Le subnetting ajoute un 3e niveau hiérarchique en divisant le champ host-id en subnetwork-id (identifie le segment comme un réseau unique) + host-id (adresse les équipements). Invisible de l'extérieur : Internet route sur le Network-id parent aligné sur l'octet ; tous les sous-réseaux partagent le même Network-id, avec des subnetwork-id différents ; seul le routeur local différencie les sous-réseaux.
+Détermination du masque à partir du nombre de sous-réseaux : 2^n >= nombre de sous-réseaux -> n bits d'extension. Ex. 8 sous-réseaux -> 3 bits, 192.168.1.0/24 -> /27 (255.255.255.224). Pas (nombre d'adresses par sous-réseau) = 256 - valeur du dernier octet du masque (256 - 224 = 32). Méthode par division : 256 / nb sous-réseaux = adresses/sous-réseau ; 256 - ce résultat = valeur du dernier octet.
+Détermination du masque à partir du nombre d'hôtes : puissance de 2 immédiatement supérieure au besoin (+2 adresses de service). Ex. 70 hôtes -> 2^7 = 128 -> 7 bits d'hôte (126 hôtes adressables), masque 255.255.255.128 ou /25 ; valeur du dernier octet = 256 - 128 = 128. Séquence : adresse du dernier hôte + 1 = adresse de diffusion ; adresse de diffusion + 1 = adresse du sous-réseau suivant.
+Avantages : pas besoin de nouvelles classes, sécurité améliorée, tables de routage Internet non impactées ; inconvénient : adresses de service (sous-réseau + diffusion) proportionnelles au nombre de sous-réseaux.
+Sous-réseau 0 et dernier : RFC 950 recommandait de ne pas les utiliser (confusion : 195.1.1.0/24 et 195.1.1.0/27 s'écrivent pareil). RIPv1 ne les permet pas. Cisco : instruction ip subnet-zero. RIPv2 et OSPF les gèrent (ils véhiculent les masques).
+
+4. VLSM (Variable Length Subnet Masking, RFC 1878)
+Inconvénient du subnetting : un seul masque, organisation figée en un nombre fixe de sous-réseaux de taille fixe. Le VLSM applique récursivement le sous-adressage : le réseau est divisé en sous-réseaux, dont un ou plusieurs sont eux-mêmes divisés en sous-réseaux plus petits, etc. Exemple : 130.10.0.0/16 -> 8 sous-réseaux (3 bits, /19, 255.255.224.0) ; le sous-réseau 3 (130.10.96.0/19) -> 16 sous-réseaux (+4 bits, /23) ; le sous-sous-réseau 14 (130.10.124.0/23) -> 8 sous-réseaux (+3 bits, /26, 255.255.255.192). Adresse de diffusion = adresse du sous-réseau suivant - 1 ; les hôtes sont entre l'adresse réseau et l'adresse de diffusion.
+Route aggregation : regroupement de plusieurs routes de sous-réseaux proches en une seule -> tables de routage réduites, à condition d'implémenter la plus grande occurrence du masque sur tous les routeurs de la chaîne.
+Protocoles : RIPv1 ne supporte pas le VLSM (masque unique par réseau) ; RIPv2 et OSPF le supportent (transport du masque à chaque signalisation, authentification MD5). Méfiance vis-à-vis du « théoriquement supportable » qui peut devenir « pratiquement inexploitable ».
+
+5. CIDR / SUPERNETTING (Classless Inter-Domain Routing)
+Sur-adressage utilisé par les fournisseurs d'accès Internet (FAI/ISP) pour attribuer de grands blocs d'adresses de classe C aux très grandes organisations. Créé par l'IETF en 1992 (RFC 1338, 1517-1520) face au proche épuisement des classes B, à la taille croissante des tables de routage et à l'éventuelle saturation de l'adressage 32 bits. À ne pas confondre avec le CIRD (Code d'Identification de Réseau pour Données) de X25.
+Un Supernet est un bloc d'adresses ayant le même préfixe réseau (bits de poids forts contigus identiques). Avantages : élimine les concepts de classe A/B/C, distribution plus efficace de l'espace, route agrégation. Les routeurs utilisent la longueur du préfixe réseau (dont chaque routeur est averti), et non les 3 bits de début des classes, pour séparer numéro de réseau et numéro d'hôte. Ex. /20 -> 4096 adresses (2^12), soit 16 classes C ; /22 -> 4 classes C.
+Utilisation en blocs égaux ou inégaux (un FAI possédant un /21 sert des clients ayant besoin de 800, 500, 250 adresses en allongeant progressivement le préfixe).
+Distinction fondamentale : VLSM = besoins internes à une organisation ; CIDR = orienté fournisseurs d'accès Internet. Pour appliquer ces techniques, tous les équipements du réseau doivent s'y conformer, sous peine de dysfonctionnement du routage. En pratique, la technique la plus utilisée reste le subnetting.
+Rappel : 16 384 réseaux de classe B, 2 097 152 réseaux de classe C.
+
+6. MÉTHODOLOGIE DE RÉSOLUTION D'UN PLAN D'ADRESSAGE
+Constituer et actualiser des bases de connaissances (équipements, paramétrages, plan d'adressage) pour une réactivité maximale face à un blocage. Face à un problème : déterminer s'il concerne tout un réseau local ou un seul équipement final, puis si un matériel est défectueux ou si une liaison est coupée, et vérifier segment par segment.

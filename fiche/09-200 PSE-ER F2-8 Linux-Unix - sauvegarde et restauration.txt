@@ -1,0 +1,75 @@
+LINUX / UNIX : SAUVEGARDE ET RESTAURATION
+
+1. GÉNÉRALITÉS
+Sous Unix/Linux, rien ne permet de récupérer un fichier une fois supprimé : la sauvegarde est une assurance contre la perte de données. On peut sauvegarder vers n'importe quel périphérique accessible en mode caractère, vers un simple fichier, vers un autre disque ou vers une autre machine.
+Sauvegarde vs archivage :
+- Sauvegarde = recopie des données de production, applicatives ou système, sur un média (magnétique ou numérique) compatible avec les moyens de restauration, pour faire face à un incident majeur (restauration sur le site nominal ou sur un site de secours).
+- Archivage = conservation des données pour des besoins propres à l'entreprise ou pour des raisons juridiques, fiscales, administratives ou sociales (archivage « légal » : contrôle fiscal, statistiques, preuve en cas de litige). Implique aussi la conservation des équipements (logiciel et matériel) nécessaires à l'exploitation de ces données.
+
+2. POLITIQUE GLOBALE DE SAUVEGARDE
+Questions de base : Quoi ? Où ? Qui ? Comment ? Quand ?
+- Quoi : en principe tous les fichiers sauf les temporaires (nuances : OS déjà sur CD...).
+- Modalités et contraintes : contraintes matérielles/physiques (sur quelle machine), organisationnelles (à quelle heure sans perturber la production), stratégiques (fréquence, délai de restauration, durée de conservation et d'archivage).
+Évaluation du support nécessaire : quantité de données à sauvegarder (estimation), délai de restauration ultérieur acceptable, périphériques de stockage disponibles, degré d'automatisation (assistance humaine ou sans assistance), temps disponible pour réaliser la sauvegarde.
+Planification :
+- Établir d'abord un plan idéal théorique, hors contraintes : données cibles, fréquence, découpage des sauvegardes globales et différentielles.
+- Adapter aux contraintes organisationnelles et techniques réelles du site.
+- Affiner par des tests répétés (jeux de test portant sur des volumétries estimées), voire réviser le plan initial.
+
+3. STRATÉGIE DE SAUVEGARDE
+Données à sauvegarder pour restaurer tout un système après effacement total : tous les fichiers utilisateur, les fichiers système personnalisés (ex. /etc/passwd), les fichiers système ajoutés depuis l'installation initiale, tous les produits additionnels intégrés depuis.
+Fréquence : évaluer les applications exécutées et le niveau de dépendance des utilisateurs vis-à-vis du système.
+Terminologie HP-UX :
+- Fichiers inclus : répertoires et fichiers faisant partie de la sauvegarde (un répertoire inclut tous ses fichiers et sous-répertoires).
+- Fichiers exclus : exceptions situées dans un répertoire inclus mais non sauvegardées.
+- Diagrammes : fichiers texte contenant la liste exhaustive des répertoires et fichiers à sauvegarder (zone cible).
+Sauvegardes locales : sauvegardes de travail, disponibles rapidement, restent sur le site de production ; servent à restaurer quelques fichiers altérés/supprimés ou d'anciennes versions ; durée de conservation = durée de vie des données.
+Sauvegardes externalisées : destinées à la reprise d'activité après sinistre majeur ; stockées sur un site éloigné (société spécialisée ou site de secours) pour qu'un même sinistre ne les atteigne pas en même temps que la production ; transportées aussitôt après réalisation.
+
+4. TYPOLOGIE DES SAUVEGARDES
+- Complète (intégrale) : tous les fichiers sont sauvegardés sans tenir compte d'une sauvegarde antérieure. « Intégrale » = tous les fichiers de la liste des fichiers inclus, pas l'ensemble des fichiers du système.
+- Différentielle : uniquement ce qui a changé depuis la dernière sauvegarde complète. Restauration = complète + dernière différentielle.
+- Incrémentale : uniquement ce qui a changé depuis la dernière sauvegarde quelle qu'elle soit (complète, différentielle ou incrémentale). Restauration = dernière complète + toutes les incrémentales suivantes, dans l'ordre.
+Niveaux de sauvegarde (0 à 9) : niveau 0 = sauvegarde intégrale ; niveau 1 = fichiers modifiés depuis le dernier niveau 0 ; niveau 2 = depuis le dernier niveau 1 ; etc. Un niveau est associé à une date.
+Surveillance : sécuriser la bande en cours d'écriture (éviter l'accès au lecteur pendant l'opération, choisir un lecteur disponible voire dédié).
+Vérification des données : rejeu de l'opération précédente (doublement de la sauvegarde), comparaison des résultats avec l'original, relecture de la bande.
+Vérification des modalités de stockage : localiser efficacement les médias, les protéger en écriture, tenir compte de l'environnement (humidité, hygrométrie, chaleur).
+
+5. MÉDIAS DE SAUVEGARDE
+Trois grandes familles : bandes magnétiques, stockage optique, stockage sur disque.
+Bandes magnétiques :
+- Technologies anciennes/obsolètes : bande ronde, QIC (QIC 60, QIC 150), Exabyte (8 mm), DDS (4 mm : DDS1 à DDS5), DLT (en cours d'obsolescence).
+- Moins en vogue : Super DLT (SDLT), AIT (Sony), Super AIT (2003 : 500 Go/bande, 30 Mo/s).
+- Les plus utilisées : Ultrium LTO, lancé début des années 2000, leader du marché moyenne gamme.
+  LTO-1 (2000) : 100 Go natif, 20 Mo/s.
+  LTO-2 (2002) : 200 Go, 40 Mo/s.
+  LTO-3 (2005) : 400 Go, 80 Mo/s ; fonctionnalité WORM pour l'archivage légal ; écrit plus vite que la plupart des disques durs de l'époque.
+  LTO-4 (2007) : 800 Go, 120 Mo/s ; ajout du chiffrement matériel 256-bit AES-GCM et gestion des clés.
+  LTO-5 (2008-2010) : 1,5 To, 140 Mo/s.
+  LTO-6 (2012) : 2,5 To, 160 Mo/s.
+  LTO-7 (2015) : 6,4 To, 300 Mo/s.
+  LTO-8 (annoncé) : 12,8 To, 472 Mo/s prévus.
+  Capacités/débits donnés en non compressé ; ratio pratique 2:1 pour les cinq premières générations, 2,5:1 à partir de la sixième.
+  Durée de vie du média ~30 ans, ~20 000 chargements/déchargements, temps de positionnement moyen ~75 s.
+Stockage optique (CD-Rom, DVD-Rom, Mini-Disk) : onéreux, usage unique en écriture ou réécriture partielle avec risques d'intégrité ; adapté aux quantités peu importantes ; limite physique de stockage.
+Supports hybrides : magnéto-optique (réécriture avancée des disques magnétiques + durée de vie des médias optiques, mais vitesse d'écriture en retrait).
+Robots / juke-boxes (librairie, bibliothèque, silo, autoloader) : bras mécanique avec pince, lecteurs multiples et chargement automatique des bandes ; capacité de quelques centaines de Go à plusieurs dizaines de To ; interconnexion SCSI directe, I-SCSI ou réseau de stockage SAN dédié ; identification des médias par codes-barres.
+Bilan :
+- Bande magnétique : + faible coût du média ; - temps d'écriture potentiellement important.
+- Disque : + simplicité d'utilisation, haute disponibilité (accès et écriture), durée de vie en réécriture (média universel à moyen terme) ; - plus onéreux que la bande.
+- Optique : + adapté aux petites quantités, durée de vie (contestée) ; - usage unique en écriture, limite de capacité.
+
+6. OUTILS DE SAUVEGARDE ET DE RESTAURATION
+Compresser = réduire l'espace disque en évitant les redondances. Archiver = rassembler plusieurs fichiers en un seul pour faciliter leur manipulation (ne réduit pas l'espace). On peut compresser des archives et archiver des fichiers compressés ; il faut décoder pour réutiliser.
+Outils de base :
+- tar : archive/désarchive en accédant normalement au filesystem ; disponible sur toutes les plateformes Linux-Unix.
+- cpio : programme traditionnel ; lit les noms de fichiers à traiter sur l'entrée standard (opérateurs de redirection), travaille en mode caractères, gère les fichiers multi-volumes (stdin, stdout, stderr).
+- dd : transfert de données brutes, notamment entre systèmes différents, avec conversion possible (ex. dd if=/dev/rfd0 of=/u/bob conv=ascii pour EBCDIC vers ASCII).
+- mt : pas une commande de sauvegarde ; manipule les bandes magnétiques (avancer, reculer, rembobiner, écrire des marques de fin de fichier). Ex. mt -f /dev/rmt/0 (statut), mt -f /dev/rmt/0n fsf 1 (avancer d'un fichier).
+Utilitaires évolués :
+- HP-UX : SAM (interface semi-graphique : Backup and Recovery, Automated Backups) ; fbackup / frecover pour sauvegarder et restaurer des systèmes de fichiers entiers (ex. fbackup -f /dev/rmt/0m -i -v ; fbackup ne franchit pas les limites NFS sauf indication contraire) ; HP OmniBack II pour les sauvegardes réseau de nombreux systèmes (nécessite un serveur de bases de données pour le pilotage et l'enregistrement) ; make_net_recovery et make_tape_recovery (Ignite-UX), plus souples, permettant de récupérer des systèmes non amorçables. make_net_recovery crée une archive de restauration spécifique sur un autre système du réseau ; make_tape_recovery crée une bande de restauration amorçable pour un volume LVM ou un système de fichiers entier pendant son utilisation.
+- Solaris : ufsdump / ufsrestore.
+- dump / restore : dump consulte la structure interne du filesystem via le fichier spécial en mode caractère de la partition (dump 0f archive partition) ; points forts : sauvegardes incrémentales par niveau (0 = complète), sauvegarde des fichiers spéciaux en tant que tels, sauvegarde des fichiers à trous à l'identique (seuls blocs utilisés). Restauration totale : cd partition-vide puis restore -r -f archive.
+- AIX : mksysb (bande bootable, ex. mksysb -i /dev/rmt0) ; restore -tx /dev/rmt0 /bin/sh.
+- AMANDA (Université du Maryland) : application client/serveur ; un seul serveur puissant (grand espace disque rapide, périphérique de sauvegarde) sauvegarde de nombreux clients (logiciel client seulement) ; administration centralisée ; rotation d'un ensemble de supports ; interfaçable avec des robots ; s'appuie sur tar ou dump.
+- rsync : proche de rcp mais avec beaucoup plus d'options ; protocole de mise à jour à distance accélérant le transfert quand le fichier de destination existe déjà ; premier passage = tous les fichiers, ensuite seulement les fichiers modifiés ; supprime sur la destination les fichiers absents de la source ; conserve les permissions.

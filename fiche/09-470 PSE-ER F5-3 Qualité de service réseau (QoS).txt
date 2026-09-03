@@ -1,0 +1,200 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 5, thème 3
+QUALITÉ DE SERVICE RÉSEAU (QoS / QdS)
+=======================================================================
+
+1. INTRODUCTION : POURQUOI ADMINISTRER ?
+-----------------------------------------------------------------------
+- Finalité principale de l'administration réseau : apporter une QUALITÉ
+  DE SERVICE (QdS / QoS, Quality of Service) aux utilisateurs.
+- Deux approches, en tension :
+  * fournisseurs / opérateurs / constructeurs : satisfaire diverses
+    populations à COÛT MINIMAL ; mesurent la QdS des ressources
+    (capacité d'un routeur), surveillent les protocoles pour tous les
+    clients.
+  * utilisateur final : service en adéquation avec ses besoins, de façon
+    transparente, à coût minimal ; ne s'intéresse qu'aux flux entre SES
+    composants applicatifs ; a besoin de la qualité pour CHAQUE
+    transaction (pas d'une moyenne).
+- Un réseau fiable à 98 % satisfait les techniciens, pas l'utilisateur
+  dont le flux est dans les 2 % de défaillances.
+- Les critères de QdS doivent être MESURABLES et NÉGOCIABLES ; un
+  CONTRAT par service définit la responsabilité de chacun.
+
+2. NORMES ET DÉFINITIONS (RECOMMANDATION E.800 DE L'UIT-T)
+-----------------------------------------------------------------------
+E.800 distingue deux notions :
+- QUALITÉ DE SERVICE (attendue par l'utilisateur) : effet global produit
+  par les caractéristiques d'un service, qui déterminent le degré de
+  satisfaction de l'usager. Ne désigne PAS un degré d'excellence
+  comparatif. Mesures quantifiables au SAP (Service Access Point).
+- QUALITÉ DE FONCTIONNEMENT (point de vue fournisseur) : aptitude d'un
+  réseau à assurer les fonctions de communication entre usagers.
+  S'applique à la planification, au développement, à l'exploitation et à
+  la maintenance.
+- L'évaluation globale d'un service = OPINION des utilisateurs (degré de
+  satisfaction).
+- Points de vue : fournisseur de service (capacité de transfert),
+  opérateur (performance à coût minimal), concepteur (réseau robuste et
+  maintenable), utilisateur (service adéquat).
+
+3. LES QUATRE CRITÈRES DE LA QdS
+-----------------------------------------------------------------------
+Un critère : permet de porter un jugement à partir d'une MESURE
+contrôlable (sondes logicielles, agents).
+- Caractéristiques de l'information transportée : volume, durée de vie,
+  confidentialité, niveau de priorité.
+- Transfert : capacité des liens, capacité de traitement des nœuds,
+  temps de transfert max = temps de transit + temps de traitement =
+  temps de réponse global.
+- 3 phases du transfert : ACCÈS (établissement) / MAINTIEN / LIBÉRATION
+  (restitution des ressources).
+- 3 niveaux graduels de fonctionnement : indisponibilité totale /
+  fonctionnement défectueux (fiabilité) / disponible et fiable mais pas
+  « fidèle » (délais non garantis en pointe de trafic).
+
+LES 4 CRITÈRES :
+  1. DISPONIBILITÉ (conditionne le dimensionnement et la configuration).
+  2. FIABILITÉ (aptitude à fonctionner sans incident ; pour
+     l'utilisateur : probabilité de mener une session à terme sans
+     interruption).
+  3. DÉLAI (= temps de réponse, mesuré DE BOUT EN BOUT ; somme des temps
+     élémentaires de traitement et de traversée).
+  4. CAPACITÉ (dépend de tous les nœuds et liens).
+
+Évaluation par COMPOSANT + par AGRÉGATION -> vision globale (proche du
+besoin utilisateur) + vision fine (localisation des défaillances).
+3 valeurs par critère : CONCEPTION (max) / COURANTE (exploitation) /
+SEUIL (alarmes).
+
+PARAMÈTRES PAR CRITÈRE :
+- Disponibilité : mode connecté (réserve les ressources via une commande
+  d'appel) vs non connecté (envoi direct). Paramètre « taux de rejet » /
+  « taux d'accessibilité ». 3 accessibilités : d'un SERVICE (probabilité
+  d'obtention), d'un RÉSEAU (signal d'invitation à numéroter), d'une
+  CONNEXION (chaîne de connexion établie).
+- Fiabilité : taux de perte (par nœud), taux de dé-séquencement et de
+  duplication, taux d'erreurs (qualité des liens).
+- Délai : temps d'acheminement et de traitement, durée de vie de
+  l'information ; vision utilisateur = temps de réponse des transactions.
+- Capacité : taux de charge (mémoire, bande passante) ; vision
+  utilisateur = volume par unité de temps.
+
+4. QdS D'UN ÉQUIPEMENT, D'UN RÉSEAU, D'UN SERVICE, D'UNE APPLICATION
+-----------------------------------------------------------------------
+- ÉQUIPEMENT : puissance-machine en Mips (Millions d'Instructions Par
+  Seconde) + espace mémoire.
+- RÉSEAU : 3 couches basses OSI entre 2 éléments — Physique (1), Liaison
+  (2), Réseau (3).
+  * Physique : disponibilité de la mise en relation ; fiabilité (taux de
+    perte de bits, taux d'erreur / altération du signal) ; délai et
+    capacité de transmission.
+  * Liaison (niv. 2) : corrige les erreurs du niveau 1. Nœud :
+    disponibilité de l'automate, fiabilité (perte / duplication /
+    dé-séquencement de trames), délai (temps de traitement), capacité
+    (trames/s). Lien : disponibilité de la liaison logique, fiabilité
+    (taux d'erreur, champ de détection par trame), délai (temps de
+    transmission), débit.
+    Ex. commutateur LAN : dispo = accessibilité des processus MAC aux
+    ports ; fiabilité = pertes sur dimensionnement des buffers ; délai =
+    temps de mise en mémoire ; capacité = trames relayées/s.
+  * Réseau (niv. 3) : 3 fonctions = contrôle de congestion, routage,
+    adressage. Gère les PAQUETS d'un datagramme (vs trames en niv. 2).
+- SERVICE : contrats entre parties. 3 types :
+  * contrat de service offert par le RÉSEAU (vision externe globale,
+    valeurs moyennes) ;
+  * contrat de service offert par un ÉQUIPEMENT (nœud) ;
+  * contrat de DIALOGUE (dialogue entre éléments de service = niveau
+    lien).
+- APPLICATION : disponibilité des composants ; fiabilité (taux de perte
+  de messages max, taux d'erreur max) ; délai (temps de réponse global
+  qui régit le dimensionnement de tout le réseau) ; débit applicatif
+  (volume utile / unité de temps, augmenté des informations de contrôle
+  de toutes les couches = notion de PAYLOAD, à différencier du débit
+  normalisé des câbles).
+
+5. LA QdS APPLIQUÉE À INTERNET
+-----------------------------------------------------------------------
+- Débuts : acheminer les paquets ; TCP gère pertes/congestion. Depuis
+  les années 1990 : FAI / ISP confrontés à la croissance explosive et à
+  la stabilité.
+- Le SURDIMENSIONNEMENT ne peut plus s'appliquer indéfiniment ; nature
+  d'Internet (sans connexion, BEST-EFFORT) -> ni QdS constante ni
+  priorités.
+- QoS Internet = DISCRIMINATION des services = classes différenciées ;
+  garantir un service = RÉSERVER des ressources. Mécanismes : trafic
+  shaping, admission control, gestion de la congestion. Prédiction du
+  comportement -> métriques pour choisir le meilleur chemin (routage).
+
+4 CRITÈRES DE MESURE INTERNET :
+  * DÉLAI : temps entre envoi et réception (transmission + temps dans les
+    files d'attente).
+  * GIGUE : variation du délai de bout en bout.
+  * BANDE PASSANTE : débit maximum maintenu entre deux points.
+  * DISPONIBILITÉ : taux moyen d'erreurs sur une liaison.
+
+Implémentation : QoS par routeur (règles locales selon l'en-tête du
+paquet) ou MPLS (commutation de label).
+
+MÉCANISMES ET PROTOCOLE :
+- Gestion des files d'attente : FIFO (First In First Out), Priority
+  queuing, Class-based queuing, Weighted Fair Queuing.
+- Trafic shaping : contrôle le volume entrant et le débit de
+  transmission.
+- Prévention de la congestion.
+- RSVP (ReSerVation Protocol) : établit un état logiciel entre les nœuds
+  du chemin réservé. Le DESTINATAIRE est responsable de la réservation :
+  l'émetteur envoie ses exigences, le destinataire renvoie par le même
+  chemin un message fixant la réservation dans chaque nœud.
+
+APPROCHE ALTERNATIVE : la couche TRANSPORT est garante de la QdS de la
+couche réseau — si celle-ci est sans faille, travail simple ; sinon elle
+comble le fossé. Paramètres transport : temps d'établissement de la
+connexion, probabilité d'échec d'établissement, débit, temps de transit,
+taux d'erreur résiduel, protection, priorité, résiliation (valeurs
+désirées + minimales acceptables).
+
+TERMINOLOGIE : nœud (objet de traitement : commutateur, ordinateur,
+processus) ; lien (transfert entre nœuds : câble, faisceau hertzien,
+circuit virtuel) ; réseau (nœuds + liens de même nature coopérant pour
+un service).
+
+6. ÉVALUATION QUALITATIVE D'UN RÉSEAU D'ENTREPRISE
+-----------------------------------------------------------------------
+- Réseau d'entreprise vs réseau d'opérateur : pas les mêmes critères de
+  rentabilité économique.
+- « Performance » : pas de définition normalisée -> jauge = conformité
+  aux objectifs de QoS du CAHIER DES CHARGES.
+- Le critère de COÛT n'est pas retenu (dépend de la stratégie de
+  l'entreprise) ; « savoir négocier » impacte fortement le budget de
+  fonctionnement.
+- Interopérabilité : harmoniser les plans de numérotation + garantir une
+  qualité minimale de bout en bout. Internet = référence ; RFC (Request
+  for Comments) = « Internet Standards » (processus inspiré de l'ISO).
+- NIC (Network Information Center), dépendant de l'ISOC (Internet
+  Society), attribue les adresses IP officielles ; réseaux privés
+  (10.0.0.0 classe A) non routés par les FAI.
+- NAT (Network Address Translation) « une pour une » au niveau des
+  routeurs ; PAT (Port Address Translation) associe (IP officielle, port
+  dynamique) aux adresses privées -> écarter les mises en session
+  fondées sur la reconnaissance de l'IP source.
+- Sécurité : points d'entrées/sorties réduits au minimum ; segmentation
+  en sous-réseaux par routeurs FILTRANTS (IP, ports, applications :
+  TELNET, HTTP, POP, SMTP, LDAP) ; pare-feux (alerte/riposte,
+  journalisation) ; authentification de bout en bout renforcée par
+  cryptage. Plans de numérotation à garder CONFIDENTIELS (contre
+  l'usurpation d'adresses).
+
+=======================================================================
+À RETENIR
+- QoS = finalité de l'administration ; 2 points de vue (fournisseur /
+  utilisateur) ; critères mesurables et négociables (contrat).
+- E.800 (UIT-T) : qualité de service (utilisateur, mesurée au SAP) vs
+  qualité de fonctionnement (fournisseur).
+- 4 critères : DISPONIBILITÉ, FIABILITÉ, DÉLAI (bout en bout), CAPACITÉ ;
+  3 valeurs : conception / courante / seuil.
+- Appliqués aux 3 couches basses (Physique / Liaison / Réseau) et aux
+  4 niveaux (équipement / réseau / service / application).
+- Internet best-effort -> QoS = classes différenciées ; 4 mesures :
+  délai, GIGUE, bande passante, disponibilité ; files d'attente (FIFO,
+  WFQ...), trafic shaping, RSVP (réservation par le destinataire), MPLS.
+- Couche transport = garante de la QdS de la couche réseau.

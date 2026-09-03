@@ -1,0 +1,49 @@
+WINDOWS SERVER 2008 : OUVERTURE DE SESSION ET GESTION DES PÉRIPHÉRIQUES
+
+1. L'OUVERTURE DE SESSION WINDOWS
+Winlogon gère l'ouverture et la fermeture de session interactive : création de la fenêtre interactive (clavier, souris, écran), du descripteur de sécurité de la station de travail (aucun processus non autorisé ne peut y accéder), de deux bureaux (un pour les applications, accessible aux utilisateurs ; un réservé à Winlogon, invisible tant qu'aucun utilisateur n'est connecté), gestion des time-out. Un processus Winlogon par utilisateur connecté ; réauthentification possible après verrouillage.
+Processus système critiques (non arrêtables) : winlogon.exe, lsass.exe (sécurité locale), smss.exe (gestionnaire de session), csrss.exe (Client/Server Runtime SubSystem), wininit.exe.
+SAS (Secure Attention Sequence) : par défaut Ctrl-Alt-Suppr ; interceptée par Winlogon, qui exécute LogonUI (vérification du nom et du mot de passe via les credential providers) et crée un SID de session unique local.
+Si authentification réussie : LSASS vérifie autorisations et privilèges dans la base des politiques locales, les ajoute au jeton, crée le jeton d'accès, le duplique pour Winlogon, audite si nécessaire, renvoie un succès. Si échec : LSASS termine la session, nettoie les structures, renvoie un échec ; Winlogon affiche une erreur.
+Après authentification : shell graphique (en général explorer.exe). Écran de veille sécurisé -> Winlogon verrouille la session et redemande l'authentification.
+
+2. SYSTÈME D'ENTRÉE-SORTIE (E/S)
+Objectif : fournir aux applications une couche d'abstraction pour les périphériques. Fonctionnalités : uniformisation de la protection des ressources, E/S asynchrones et performantes, services aux pilotes interopérables, fonctionnement en couches et extensibilité, chargement/déchargement dynamique des pilotes, PnP, gestion de l'alimentation, multiples systèmes de fichiers, surveillance via WMI.
+Composants :
+- Gestionnaire d'E/S : cœur du système ; relie applications et composants système aux périphériques virtuels, logiques, physiques ; crée et supprime les IRP.
+- Pilotes : interface d'E/S pour un type de périphérique ; reçoivent les commandes du gestionnaire d'E/S et signalent leur achèvement.
+- Gestionnaire PnP : travaille avec le gestionnaire d'E/S et le pilote de bus ; allocation des ressources, ajout/retrait de périphériques, chargement du pilote (ou appel d'un gestionnaire d'installation en mode utilisateur s'il ne l'a pas).
+- Gestionnaire d'alimentation : transitions d'états d'alimentation.
+- Routines WMI (WMI WDM) : dialogue indirect des pilotes avec le service WMI en mode utilisateur.
+- Registre : descriptions des périphériques, paramètres d'initialisation et de configuration des pilotes.
+- Fichiers INF (.inf) : installation de pilote, description du périphérique. Fichiers CAT (.cat) : signatures numériques de certification.
+- HAL (Hardware Abstraction Layer) : isole les pilotes des spécificités du processeur et du contrôleur d'interruptions, API masquant les différences de plateformes ; pilote de bus de tous les périphériques non contrôlés par d'autres pilotes.
+Fichiers virtuels : les threads font leurs E/S sur des fichiers virtuels même pour du matériel ; le gestionnaire d'E/S redirige dynamiquement vers le pilote concerné.
+IRP (Input-Output Request Packet) : représente la plupart des requêtes d'E/S ; le gestionnaire d'E/S crée l'IRP, passe un pointeur au pilote, le pilote effectue l'opération et repasse l'IRP, le gestionnaire le supprime. Le gestionnaire d'E/S gère aussi tampons, timeouts, et permet à un pilote d'en appeler d'autres.
+
+3. PLUG AND PLAY ET ALIMENTATION
+PnP : reconnaît les modifications de configuration matérielle. Coopération matériel + pilote + OS ; normes industrielles (USB). Fonctions : détection automatique, ajout/retrait à chaud, allocation des ressources (IRQ, ports d'E/S, canaux DMA) au démarrage et en fonctionnement, chargement du pilote d'après l'identification, détection des changements de configuration. Procédure d'énumération des composants ; entrées de registre d'après les scripts INF. Matériel dans la HCL (Hardware Compatibility List) -> installation quasi automatique ; sinon l'administrateur règle les conflits d'adresse et d'IRQ.
+Gestionnaire d'alimentation : interaction dynamique pour conserver la batterie et réduire l'usure (arrêt disque/écran après inactivité) ; prend en charge l'ACPI (Advanced Configuration and Power Interface). Le matériel et le BIOS doivent être conformes ACPI.
+États système ACPI : six, de S0 à S5. S0 = consommation maximale, aucune latence ; S1 à S4 = veille (l'ordinateur semble éteint) ; S5 = entièrement éteint. En S1-S3, réveil et reprise à l'endroit d'arrêt. Avant S4 (hibernation) : enregistrement du contenu compressé de la mémoire dans Hiberfil.sys (racine du volume système) ; au démarrage le chargeur détecte l'image mémoire et reprend l'exécution.
+États périphériques ACPI : quatre, D0 (allumé) à D3 (éteint) ; D1 et D2 définis par les pilotes. Le gestionnaire d'alimentation est prioritaire sur les pilotes pour décider de l'état électrique et de la mise en veille ; les pilotes de bus fournissent une table de mappage entre états système et états périphériques ; un pilote peut baisser unilatéralement la consommation d'un périphérique inactif.
+Configuration : Panneau de configuration -> Options d'alimentation.
+
+4. PILOTES ET SIGNATURE
+Windows Server 2008 supporte pleinement le PnP : détection immédiate d'un nouveau périphérique et installation automatique du pilote si disponible. Avant l'installation, le gestionnaire PnP vérifie la politique de signature : Ignorer (installe tout), Avertir (message avant un pilote non signé), Interdire (bloque un pilote non signé). WHQL (Windows Hardware Quality Labs) teste les pilotes ; ceux qui réussissent sont signés par Microsoft.
+Vérificateur de pilotes : Verifier.exe, active des options de contrôle sur des composants système (gestionnaire d'E/S, gestionnaire de mémoire...) pour isoler les bugs des pilotes en mode noyau. Vérificateur de fichiers système : WRP (Windows Resource Protection), protège les fichiers système critiques par des ACL ; utilitaire Sfc.exe.
+
+5. GESTIONNAIRE DE PÉRIPHÉRIQUES
+Console MMC accessible via le Panneau de configuration (Matériel et audio), la commande mmc devmgmt.msc, ou Gestion de l'ordinateur. Permet de vérifier le bon fonctionnement, configurer les paramètres, identifier les pilotes chargés, gérer l'activation et l'installation, afficher les périphériques cachés (menu Affichage). Signalétique : branche développée = dysfonctionnement ; croix rouge = périphérique désactivé ; point d'exclamation = problème de ressource ou pilotes manquants. Arborescence des périphériques : chaque branche est un nœud de périphérique.
+
+6. MODIFICATION DE L'ENVIRONNEMENT
+- Ajout de processeur ou de mémoire : branchement à chaud, vus comme des périphériques Plug and Play.
+- Disques IDE : un contrôleur IDE par disque recommandé (écriture sur un seul disque à la fois) ; miroir possible pour la tolérance de pannes. Disques ATA : contrôleur adapté, meilleures performances. Disques SCSI : initiateur logiciel iSCSI reliant un hôte à un groupe de stockage iSCSI externe via une carte réseau (SAN à base de blocs).
+- Cartes réseau : pilotes NDIS (Network Driver Interface Specification) ; installation simplifiée si PnP + fichier INF + pilote WDM.
+- Plusieurs moniteurs : autant de sorties vidéo AGP/PCI/DVI ; combinaison possible mais l'affichage s'aligne sur l'interface la plus lente.
+
+7. IMPRESSION LOCALE ET RÉSEAU
+Terminologie : périphérique d'impression = matériel ; imprimante = interface logicielle entre le périphérique et Windows ; serveur d'impression = serveur gérant des imprimantes, contenant le pilote de chaque périphérique. Impression locale (poste relié directement au périphérique) vs impression réseau (via un serveur d'impression).
+Ajout / partage d'imprimante : privilèges d'Administrateur requis ; assistant d'ajout ; l'imprimante partagée est automatiquement publiée dans Active Directory (sinon parcours du réseau) ; pilotes supplémentaires pour les clients (téléchargement automatique pour Windows 2000/NT4/NT3.51/95/98).
+Priorités : plusieurs imprimantes logiques vers le même périphérique, priorités individuelles de 1 (faible, par défaut) à 99 (forte).
+Pool d'impression (Print Pooling) : une imprimante logique reliée à plusieurs périphériques identiques (locaux ou réseau) ; le travail va au premier périphérique disponible ; activé dans l'onglet Port.
+Impression Internet IPP : http/https ; serveur d'impression avec Internet Information Server ; imprimantes visibles sur http://nom_de_serveur/printers.

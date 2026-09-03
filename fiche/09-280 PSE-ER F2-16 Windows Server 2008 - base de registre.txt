@@ -1,0 +1,49 @@
+WINDOWS SERVER 2008 : LA BASE DE REGISTRE
+
+1. INTRODUCTION
+Depuis Windows NT, les informations de configuration sont centralisées dans une base de données unique : le registre. Il remplace les fichiers de configuration .ini, .sys et .com. Il est dynamique (l'accès aux informations varie selon le service : les données d'une application ne sont lues qu'à son démarrage, d'où la nécessité de redémarrer l'application après un changement). Organisation hiérarchique : sous-arbres, clés, sous-clés et valeurs ; une clé peut contenir des sous-clés.
+
+2. FONCTIONNEMENT
+Quatre principaux moments de lecture des données de configuration :
+- Démarrage initial : le chargeur de boot lit la liste des pilotes de périphériques de démarrage à charger en mémoire avant d'initialiser le noyau.
+- Lancement du noyau : paramètres des pilotes à charger, configuration des sous-systèmes (gestionnaire de mémoire, gestionnaire des processus), optimisation du système.
+- Ouverture de session : lecture d'Explorer et des personnalisations de l'utilisateur (lecteurs réseau, fond d'écran, économiseur d'écran, comportement des menus, placement des icônes).
+- Démarrage des applications : composants optionnels installés, données de licence, paramètres de l'utilisateur (menus, barres d'outils, documents récents).
+Le registre peut aussi être lu à la modification d'une valeur ou d'une clé. Sur un système inactif, il ne devrait y avoir aucune activité de registre. Certaines applications scrutent le registre en boucle alors qu'elles devraient utiliser RegNotifyChangeKey (qui met un thread en veille jusqu'à un changement dans la région surveillée).
+Cas de modification fréquents : structure initiale copiée depuis une version prototype des supports d'installation ; utilitaires d'installation d'applications (paramètres par défaut) ; installation d'un pilote (Plug and Play crée les paramètres pour le gestionnaire d'E/S) ; modifications via les interfaces utilisateur.
+
+3. STRUCTURE - LES SIX CLÉS RACINE (HKEY)
+Chaque nom commence par HKEY_ (descripteur utilisé dans les programmes).
+- HKEY_CURRENT_USER (HKCU) : préférences et configuration logicielle de l'utilisateur connecté localement ; associe l'utilisateur à son profil \Users\<username>\Ntuser.dat. À chaque chargement de profil, HKCU est créée pour correspondre à la clé de l'utilisateur sous HKEY_USERS.
+- HKEY_USERS (HKU) : une sous-clé par profil utilisateur + base d'enregistrement de la classe de l'utilisateur ; sous-clé HKU\.DEFAULT liée au profil pour le système (utilisée par Winlogon, ex. fond d'écran de l'écran de connexion). Un nouveau compte local reçoit un profil basé sur %SystemDrive%\Users\Default (un profil de domaine viendrait d'un contrôleur de domaine).
+- HKEY_CLASSES_ROOT (HKCR) : trois types d'information : associations d'extensions de fichiers, enregistrements de classe COM, racine du registre virtualisée pour l'UAC (User Account Control). Une clé par extension enregistrée ; la plupart contiennent une valeur REG_SZ pointant vers une autre clé de HKCR avec les informations d'association de la classe de fichiers.
+- HKEY_LOCAL_MACHINE (HKLM) : toutes les sous-clés de configuration du système : BCD, COMPOSANTS, HARDWARE, SAM, SECURITY, SOFTWARE, SYSTEM. HKLM\BCD contient la Boot Configuration Data, qui remplace Boot.ini (plus flexible ; isole données d'installation, de configuration et de démarrage).
+- HKEY_CURRENT_CONFIG : simple lien vers le profil matériel actif, sous HKLM\SYSTEM\CurrentControlSet\Hardware profiles\Current ; les profils matériels permettent de configurer les paramètres système de base des pilotes ; les applications référencent leur profil actif via cette clé.
+- HKEY_PERFORMANCE_DATA : accès aux compteurs de performance de Windows (OS ou applications serveur). Avantage : le suivi à distance fonctionne « gratuitement » car le registre est accessible à distance via une API normée.
+
+4. TYPES DE DONNÉES
+Chaque clé ou sous-clé peut contenir des rubriques valuées. Une rubrique = nom + type de données + valeur (REG_SZ, REG_DWORD, REG_BINARY, REG_MULTI_SZ, REG_EXPAND_SZ...).
+
+5. LES FICHIERS DU REGISTRE (RUCHES / HIVES)
+Le registre comprend des données dynamiques (reconstruites à chaque démarrage) et des informations stockées dans des fichiers appelés ruches (hives), non accessibles en lecture pendant une session.
+Chaque ruche contient un arbre de registre avec une clé racine ; sous-clés et valeurs sous la racine. Les chemins de toutes les ruches sont codés dans le gestionnaire de configuration, sauf ceux des profils utilisateur. Le gestionnaire de configuration charge les ruches, note leur chemin sous HKLM\SYSTEM\CurrentControlSet\Control\Hivelist (et le supprime au déchargement), et crée les clés racine reliant les ruches pour construire la structure du registre.
+Ruches volatiles : pas de fichier associé ; temporaires ; entièrement créées et gérées en mémoire ; recréées à chaque démarrage. Exemple : HKLM\HARDWARE (périphériques physiques et ressources, redétectés à chaque démarrage pour ne pas être stockés sur disque).
+
+6. REGISTRE TRANSACTIONNEL (TxR)
+Avant Windows Server 2008, pas de moyen simple d'opérations transactionnelles sur le registre, ni de les lier à des opérations hors registre (fichiers). TxR s'appuie sur le Kernel Transaction Manager pour des capacités robustes de reprise en cas d'erreur. Trois API : RegCreateKeyTransacted, RegOpenKeyTransacted, RegDeleteKeyTransacted.
+
+7. FILTRAGE DU REGISTRE
+Le gestionnaire de configuration (noyau Windows) implémente un modèle de filtrage permettant de surveiller l'activité du registre (ex. Process Monitor). Mécanisme de callback : le pilote enregistre une fonction de rappel ; le gestionnaire de configuration l'exécute avant et après les services du registre -> visibilité et contrôle complets sur les accès. Utilisé aussi par les antivirus (recherche de virus, blocage des modifications non autorisées).
+Notion de profondeur : chaque fournisseur enregistre un niveau dans la pile de filtrage pour que l'ordre d'appel des routines de rappel soit déterministe et correct (ex. un produit de chiffrement déchiffre une clé avant qu'un antivirus ne l'analyse). Les éditeurs doivent s'inscrire auprès de Microsoft pour éviter les collisions.
+Capacités du modèle : traiter complètement l'opération (contourner le gestionnaire de configuration), rediriger l'opération vers une autre, modifier les paramètres de sortie et la valeur de retour, marquer des informations par clé ou par opération.
+
+8. OPTIMISATION DU REGISTRE
+- Descripteurs de sécurité : les mêmes paramètres s'appliquant souvent à des sous-arbres entiers, le gestionnaire de configuration partage un descripteur existant -> au plus un exemplaire de chaque descripteur de sécurité unique par ruche.
+- Noms de clés : registre entièrement Unicode, mais si un nom ne contient que des caractères ASCII il est stocké en ASCII dans la ruche (converti en Unicode en mémoire à la lecture).
+- Blocs de contrôle de clés : ne stockent que le nom de la clé, pas le chemin complet (ex. \Registry\System\Control -> nom « Control »). Toutes les clés utilisant le même nom partagent le même bloc de contrôle de nom, stocké dans une table de hachage pour des recherches rapides. Table de cache (hachage) pour les blocs fréquents ; table différée pour rouvrir rapidement une clé récemment fermée (les blocs les plus anciens y sont supprimés, les plus récents ajoutés).
+
+9. ÉDITEUR DE REGISTRE
+En principe, ne jamais modifier le registre directement : les paramètres devant être modifiables doivent avoir une interface utilisateur. Certains paramètres avancés ou de débogage n'en ont pas.
+- Regedit.exe : outil graphique principal.
+- Reg.exe : ligne de commande ; import, export, sauvegarde, restauration, comparaison, modification et suppression de clés et de valeurs.
+- Regini.exe : import de données du registre depuis des fichiers texte contenant des données de configuration ASCII ou Unicode.

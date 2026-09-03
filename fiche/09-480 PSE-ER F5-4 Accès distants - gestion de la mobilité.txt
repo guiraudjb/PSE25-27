@@ -1,0 +1,163 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 5, thème 4
+ACCÈS DISTANTS : GESTION DE LA MOBILITÉ
+=======================================================================
+
+1. ENJEUX ET ASPECTS ORGANISATIONNELS
+-----------------------------------------------------------------------
+- La MOBILITÉ = enjeu majeur : retrouver son environnement informatique
+  (ressources, accès, applications métier) en tous lieux et à tout
+  instant.
+- Prérequis : modifications des comportements humains ET de
+  l'infrastructure.
+- Définition : permettre à un collaborateur nomade (ponctuel ou
+  permanent) de reconstituer à distance son univers d'information et de
+  communication -> VHE (Virtual Home Environment).
+- Corollaire : optimiser les processus métier, accélérer la prise de
+  décision, dégager des gains de PRODUCTIVITÉ (marketing : flexibilité
+  puis agilité de l'entreprise).
+- Périmètre fondé sur le métier et les besoins des employés. Pour une
+  société commerciale, 4 axes :
+  * supply chain (chaîne d'approvisionnement),
+  * sales force (fonctions commerciales),
+  * field force (intervention sur le terrain),
+  * fonctions managériales (pilotage).
+
+2. ASPECTS FONCTIONNELS : LES TERMINAUX
+-----------------------------------------------------------------------
+- Choix du terminal selon les usages :
+  * SMARTPHONE : communications téléphoniques + quelques fonctions
+    avancées.
+  * PDA / Pocket PC : saisie et consultation d'informations ;
+    synchronisation régulière à un portable via Bluetooth.
+  * ULTRA PORTABLE (cartes PCMCIA Edge / 3G+) : coûts plus élevés,
+    couvre beaucoup de besoins, y compris partiellement la téléphonie.
+- OS de l'époque : Symbian OS v9 (consortium Psion, Nokia, Ericsson,
+  Panasonic, Motorola) ; Windows Mobile v5 (Microsoft) ; Palm OS (Palm
+  Source — Cobalt, Garnet).
+- Fonctions : lecteur MP3, appareil photo, GPS (Tom Tom), bureau mobile,
+  messagerie, USB 2.0, lecteur SD/miniSD.
+- Fonctions communicantes (3 portées) :
+  * PROXIMITÉ : Bluetooth (impression locale, échange de fichiers,
+    synchronisation).
+  * BUREAU : WiFi (impression réseau, synchronisation métier).
+  * ÉTENDUE : GSM (téléphonie), GPRS/Edge/UMTS (connexion à distance au
+    réseau d'entreprise).
+
+3. DÉFIS TECHNIQUES
+-----------------------------------------------------------------------
+Conditions de réussite : augmentation des débits, amélioration de la QoS,
+baisse des tarifs, banalisation des terminaux et applications,
+normalisation, sécurité sans failles.
+
+RÉSEAUX SANS FIL (connectivité universelle) :
+- WPAN : Bluetooth.
+- WLAN : normes 802.11 (WiFi), HyperLan2.
+- WWAN : opérateurs mobiles (GSM/GPRS/Edge, puis UMTS/HSDPA) ;
+  opérateurs de transport (BLR, WiMax).
+
+DÉBITS :
+- Edge multiplie les débits du GPRS par 4 (modification des équipements
+  GSM).
+- HSDPA (3G+) multiplie les débits de l'UMTS : jusqu'à 14,4 Mbit/s
+  (vs 1,92 Mbit/s UMTS, 473 kbit/s Edge) ; soutient l'ADSL / ADSL 2+.
+  Passage UMTS -> HSDPA : ajout de la modulation 16QAM (2x plus rapide) +
+  mises à jour logicielles sur stations de base et contrôleurs.
+- Tests Motorola (nov. 2005) : pas encore mature (2,3 Mbit/s réels en
+  déplacement, latence trop forte, streaming vidéo restreint).
+
+ROAMING : changer de réseau d'opérateurs sans perdre la communication.
+Les hauts débits UMTS se dégradent vite en GPRS/GSM hors zone haut débit.
+Sécurisation du transport : VPN + CHIFFREMENT largement employés.
+
+GESTION DES TERMINAUX :
+- OS de plus en plus lourd -> configuration complexe, intégrité critique
+  (bogues, virus).
+- À intégrer dans l'INVENTAIRE matériel et logiciel ; maintenance par une
+  équipe technique (configuration et mise à jour à distance en temps
+  réel).
+- CLIENT DE GESTION sur le périphérique (léger ou intelligent : alertes
+  vers un serveur central en cas de dysfonctionnement ou de VOL).
+- Ergonomie des applications adaptée au terminal (écran ~3 pouces,
+  affichage, son) et contenus allégés.
+- Applications : bureau mobile (messagerie + applications métier
+  synchrones ou asynchrones), géo-localisation GPS (flotte logistique),
+  triangulation GSM (Device Management).
+- FACTURATION : au volume de données échangées (PAY PER USE), plus au
+  temps de connexion.
+- Infrastructure : solution MUTUALISÉE UNIQUE pour tous les applicatifs
+  (sinon coûts prohibitifs).
+
+4. SPÉCIFICATIONS D'UN PROJET DE MOBILITÉ (4 VOLETS)
+-----------------------------------------------------------------------
+VOLET FONCTIONNEL :
+- Population concernée : VIP, agents de terrain/d'investigation,
+  utilisateurs partenaires, utilisateurs techniques (admins).
+  L'EMPLACEMENT GÉOGRAPHIQUE est déterminant pour le choix de l'opérateur
+  (couverture métropole + DOM-TOM).
+- Périmètre : MOBILITÉ RÉDUITE (accès aux fichiers en mode déconnecté +
+  synchronisation à la reconnexion) vs MOBILITÉ COMPLÈTE (accès fichiers
+  + applications métier en temps réel + synchronisations régulières).
+- Services : messagerie, applications métier et mutualisées, accès
+  fichiers, Intranet ministériel (Alizé) ou directionnel, Internet
+  (passage obligatoire par une infrastructure centralisée de filtrage),
+  accès techniques, géo-localisation.
+
+VOLET ORGANISATIONNEL :
+- Composants télécoms : réseau d'accès (filaire xDSL/RTC/CPL, cellulaire
+  GSM/GPRS/Edge/UMTS/HSDPA, hertzien WiFi/WiMax) ; réseau de collecte
+  (par Internet ou réseau privatif opérateur) ; méthode de transport
+  (VPN SSL ou VPN IPsec ; chiffrement ou non) ; migration des accès
+  distants existants aux normes du projet.
+- Contrôles d'accès : authentification utilisateur ET machine, faible
+  (login/mot de passe) ou forte (par certificat) ; VÉRIFICATION DE
+  CONFORMITÉ du poste (antivirus, mises à jour de sécurité, pare-feu) ;
+  adéquation avec l'annuaire de l'entité.
+- Architecture DMZ : espace multi-applications métier ; DMZ déléguée à
+  une appliance ou composants intégrés par la DI ; sécurité des données
+  (sauvegarde des configs, réplication, nettoyage des caches, répartition
+  de charge, redondance des équipements d'accès).
+
+VOLET TECHNIQUE :
+- Postes : qualification des terminaux (portables entreprise, micros
+  banalisés/personnels, PDA, smartphones) et des OS (Windows XP/Vista,
+  distributions libres, Palm OS, Symbian OS, Windows Mobile). Options :
+  niveau de sécurité du poste, autonomie/gestion d'énergie, DURCISSEMENT
+  DU NOYAU, mise à jour et reset à distance, logiciels de sécurité
+  (pare-feu, clé d'authentification, antivirus, client de chiffrement de
+  bout en bout) ; intégration dans une OU dédiée à la mobilité dans
+  Active Directory.
+- Privilèges : utilisateurs = droits utilisateurs EXCLUSIVEMENT ;
+  administrateurs = répartition et détermination d'un niveau de droits
+  sur l'ensemble du SI.
+- Composants DMZ : bastion IPS (contrôle de conformité des postes),
+  pare-feu applicatif, reverse proxy, cache, serveur d'authentification,
+  fonction VPN, antivirus, rupture protocolaire + NAT.
+- Accès aux ressources : Intranet (reverse proxy), messagerie (serveur
+  principal <-> serveur frontal), métier, applications .NET (middleware).
+- Maintenance : exploitation/supervision (incidents, analyse des traces,
+  disponibilité, protection des accès, rapports, gestion de crise) ;
+  maintenance des configurations (terminaux, solution centralisée) ;
+  documentation. Tests : volumes/bande passante, temps d'accès et
+  latence, sécurité des connexions.
+
+VOLET APPLICATIF :
+- Mode d'accès : vérifier par type d'application la fourniture, en mode
+  distant, d'un service ÉQUIVALENT à celui du réseau local.
+- Étude d'intégration dans l'architecture et la DMZ.
+- Formalisation des mécanismes de sécurité par type d'application.
+- Maintenance applicative : anticiper les évolutions (réécriture de
+  modules adaptés à la taille des écrans PDA/smartphones).
+
+=======================================================================
+À RETENIR
+- Mobilité = reconstituer son univers d'information à distance (VHE) ;
+  4 axes (supply chain, sales force, field force, management).
+- Réduite (déconnecté + synchro) vs complète (temps réel).
+- Réseaux : WPAN (Bluetooth) / WLAN (802.11, HyperLan2) / WWAN
+  (GSM-GPRS-Edge, UMTS-HSDPA, BLR-WiMax).
+- Edge = GPRS x4 ; HSDPA (3G+) = UMTS jusqu'à 14,4 Mbit/s (16QAM).
+- Roaming = changer d'opérateur sans coupure ; pay per use (au volume) ;
+  VPN + chiffrement pour le transport.
+- Projet : 4 volets (fonctionnel, organisationnel, technique,
+  applicatif) ; contrôle de conformité du poste, bastion IPS en DMZ,
+  authentification faible/forte, solution mutualisée unique.

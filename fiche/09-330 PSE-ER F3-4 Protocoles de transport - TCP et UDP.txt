@@ -1,0 +1,59 @@
+PROTOCOLES DE LA COUCHE TRANSPORT : TCP ET UDP
+
+1. LA FAMILLE TCP/IP - EMPILEMENT DES COUCHES
+La couche Transport est intermédiaire entre les couches supérieures (utilisatrices des services de transport) et les couches inférieures (qui fournissent ces services). Modèle de référence : DOD.
+Chemin des données (PC1 vers PC2 via TCP) : les données de l'application du PC1 passent par les couches TCP, IP puis physique, sont véhiculées sur le réseau, puis traversent les couches physique, IP, TCP du PC2 avant d'être interprétées par l'application. Chaque couche du PC1 encapsule les données et y ajoute ses informations pour que la couche correspondante du PC2 sache quoi faire.
+Datagramme transitant sur le réseau : données de l'application + en-tête TCP + en-tête IP + informations des couches physiques.
+Champ Ethertype : informe du type de protocole qui suit ; pour TCP/IP, valeur décimale 80 (0800 en hexadécimal). Correspondance valeur / protocole : document « Assigned Internet Protocol Numbers ».
+
+2. LE PROTOCOLE TCP (Transmission Control Protocol)
+But : assurer des communications fiables entre deux hôtes, sur un même réseau physique ou sur des réseaux différents. Transport sûr, orienté connexion (mode connecté), ordonné, bidirectionnel. Pallie les carences d'IP (service best-effort à la couche Transport).
+TCP coupe le flot de données de la couche supérieure en segments (unités de données de TCP). La couche transport achemine de bout en bout, c'est-à-dire de processus à processus (et pas seulement d'hôte à hôte comme IP) : mécanisme de numéro de port codé sur 16 bits.
+Défini comme base pour la standardisation des processus d'intercommunication de données du DoD américain. Fournit une communication fiable entre deux tâches exécutées sur deux ordinateurs autonomes. S'affranchit le plus possible de la fiabilité intrinsèque des couches inférieures : suppose uniquement un service de transmission de paquets simples, sans qualité garantie. Support d'une large gamme d'implémentations (filaire, réseaux commutés, asynchrones). Communication « host to host » (maître à maître, par opposition à central-terminal).
+
+En-tête TCP :
+- Port source (16 bits) : numéro de port de la source. Liste de ports standards (HTTP = 80, Telnet = 23).
+- Port destination (16 bits) : numéro de port du destinataire.
+- Numéro de séquence (32 bits) : numéro du premier octet de données par rapport au début de la transmission (sauf si SYN marqué).
+- Accusé de réception (32 bits) : si ACK marqué, numéro de séquence du prochain octet attendu par le récepteur ; toujours renseigné une fois la connexion établie.
+- Data Offset (4 bits) : taille de l'en-tête TCP en nombre de mots de 32 bits ; indique où commencent les données.
+- Réservé (6 bits) : à 0.
+- Bits de contrôle (6 bits) : URG (pointeur de données urgentes), ACK (accusé de réception), PSH (fonction Push), RST (réinitialisation de la connexion), SYN (synchronisation des numéros de séquence ; SYN = 1 : demande d'ouverture), FIN (fin de transmission ; FIN = 1 : demande de fermeture).
+- Fenêtre (16 bits) : nombre d'octets, à partir de la position de l'accusé de réception, que le récepteur est capable de recevoir (principe du contrôle de flux).
+- Checksum (16 bits) : calculé sur l'en-tête, les données et un pré-en-tête (pseudo-en-tête) contenant l'adresse IP source, l'adresse IP destinataire, le code de protocole et la longueur du segment. Le pré-en-tête n'existe pas dans le segment transmis.
+- Pointeur de données urgentes (16 bits) : position d'une donnée urgente (décalage par rapport au numéro de séquence), pointant sur l'octet suivant la donnée urgente ; interprété seulement si URG marqué.
+- Options : taille variable en fin d'en-tête, toujours multiple de 8 bits. Option « taille maximale de segment » (MSS) : communique à l'émetteur la taille maximale des segments qu'il peut envoyer, à envoyer dans la requête de connexion initiale (SYN marqué) ; absente, le segment peut être de n'importe quelle taille.
+- Bourrage (padding) : termine l'en-tête TCP pour que sa taille soit toujours multiple de 4 octets (32 bits).
+
+Connexions, ports et sockets : identificateur de port (16 bits) choisi indépendamment par chaque extrémité (peut être identique des deux côtés). Socket = numéro de port + adresse IP de l'hôte -> unique dans l'ensemble du réseau. Connexion de base = couple de sockets (émetteur, récepteur). Un socket est l'extrémité d'une ou plusieurs connexions. Connexion bidirectionnelle = full-duplex. Sockets « réservés » associés à des processus bien identifiés. Deux classes de ports : « well known ports » (< 1024, réservés), autres (> 1024, libres, attribués dynamiquement).
+
+Fiabilité de TCP :
+- Numéros de séquence des octets : ce sont les octets qui sont numérotés (pas les segments), pour éviter les doublons et conserver l'ordre.
+- Accusés de réception cumulatifs : l'acquittement d'un numéro de séquence confirme que tous les octets précédant ce numéro ont été reçus.
+- Retransmissions de segments : temporisateur armé à chaque envoi, retransmission si l'acquittement n'arrive pas avant expiration. Le calcul de la temporisation tient compte du temps de trajet aller-retour (RTT, Round Trip Time).
+- « Go back n » : un accusé de réception est envoyé après N segments (optimisation du flux) ; si un segment parmi les N est perdu, tous les segments sont retransmis à partir du segment perdu.
+- Piggybacking : un segment de données transporte aussi l'acquittement de segments précédents, au lieu d'un segment d'acquittement dédié.
+
+Établissement et rupture de connexion :
+- Établissement (three-way handshake / négociation ternaire), bit SYN, 3 messages : le client émet SYN + son numéro de séquence ; le serveur renvoie SYN + ACK + son numéro de séquence ; le client acquitte par ACK. Générateur du premier SYN = ouverture active ; autre extrémité = ouverture passive. Échange des numéros de séquence initiaux.
+- Rupture : 4 segments : FIN puis ACK depuis une extrémité, FIN puis ACK depuis l'autre (immédiatement ou plus tard). Extrémité qui ferme la première = fermeture active ; autre = fermeture passive. Fermeture active simultanée possible. Si le dernier ACK n'est jamais reçu, la connexion est libérée à la fin d'une temporisation.
+
+Communication de données : flux d'octets. Chaque extrémité a un tampon d'émission et un tampon de réception (taille limitée). Le récepteur indique dans le champ Fenêtre la place vide restante -> l'émetteur sait combien d'octets envoyer : contrôle de flux.
+- Contrôle de flux : adaptation de l'émission à la vitesse du récepteur (éviter la saturation de son tampon, sinon les données arrivant sont perdues).
+- Contrôle de congestion : adaptation à la vitesse du réseau (files d'attente des équipements intermédiaires pleines -> pertes) ; TCP ajuste son débit à la capacité du réseau.
+- Flag PUSH : l'émetteur force l'envoi immédiat de toutes les données non émises ; le récepteur passe immédiatement toutes les données collectées à l'application, même tampon non plein. Sinon TCP stocke les données à sa convenance.
+- Flag URG : avertit l'application que des données urgentes sont apparues au-delà de la position de lecture courante. TCP ne définit pas leur traitement ; c'est l'implémentation de l'application qui décide.
+
+3. LE PROTOCOLE UDP (User Datagram Protocol)
+Protocole de la couche transport, non fiable, en mode non connecté.
+Assure la détection d'erreur mais pas la reprise sur erreur. Pas d'accusés de réception, pas de reséquencement des segments reçus, pas de contrôle de flux. Les datagrammes UDP peuvent être perdus, dupliqués ou déséquencés ; c'est aux couches supérieures de gérer si nécessaire (selon la nature des données).
+Atouts : simplicité (pas de contexte de connexion, très peu de contrôles) et rapidité (l'absence de connexion accélère l'échange). Convient aux échanges simples de messages courts (DNS), aux applications multimédia qui ont besoin de rapidité et tolèrent la perte (streaming, voix sur IP, temps réel), et fonctionne très bien en réseau local (fiable, peu d'erreurs). Mécanisme de numéro de port identique à celui de TCP. Les applications nécessitant une transmission fiabilisée et ordonnée implémentent plutôt TCP.
+
+En-tête UDP : 4 champs de 2 octets (16 bits) chacun.
+- Port source : optionnel ; s'il est significatif, indique le port du processus émetteur (toute réponse y est dirigée) ; sinon vaut 0.
+- Port destinataire : démultiplexage à l'arrivée ; si le port n'est pas utilisé sur la machine destinatrice, le segment est détruit et un message ICMP « port inaccessible » est envoyé.
+- Longueur : nombre d'octets du datagramme entier, en-tête compris ; minimum 8 octets (4 x 2) sans données ; codé sur 16 bits -> taille maximale d'un segment UDP = 2^16 = 64 ko.
+- Checksum : même principe de calcul que pour TCP, mais facultatif.
+Interface utilisateur : ouverture de ports de réception, réception et transmission des données et de l'adresse source, commande d'émission d'un datagramme (données, adresses et ports source et destination).
+Interface avec IP : le module UDP extrait les adresses source et destination de l'en-tête IP et vérifie le numéro de protocole ; il peut passer à IP un datagramme complet avec en-tête IP, IP n'ayant plus qu'à vérifier la cohérence des champs et calculer le checksum.
+Applications principales : serveurs de noms de domaine (DNS) et protocole Trivial File Transfer (TFTP).

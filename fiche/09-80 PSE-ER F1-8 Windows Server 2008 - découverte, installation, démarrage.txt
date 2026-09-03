@@ -1,0 +1,46 @@
+WINDOWS SERVER 2008 : DÉCOUVERTE, INSTALLATION, DÉMARRAGE
+
+1. HISTORIQUE ET ÉDITIONS
+Première version de Windows en 1985 (poste de travail) ; premier serveur avec Windows NT. NT 3.1 (1993), NT 4.0 (1996), Windows 2000 (2000), Server 2003, Server 2008 (février 2008), Server 2008 R2 (octobre 2009 : premier Windows uniquement 64 bits).
+Éditions 2008 : Standard, Enterprise, Datacenter, Web, Itanium (Itanium 64 bits seulement ; les autres en 32 et 64 bits). Autres : HPC, Foundation (64 bits), Small Business Server, Essential Business Server.
+Limites principales :
+- Standard : 4 CPU, 32 Go RAM, 1 VM + hôte.
+- Enterprise : 8 CPU, 2 To RAM, 4 VM, ajout mémoire à chaud, DFS-R, ADFS, AD Certificate Services, Failover Clustering.
+- Datacenter : 64 CPU, 2 To RAM, virtualisation illimitée, ajout/remplacement à chaud mémoire et CPU, Failover Clustering.
+- Web : 4 CPU, 32 Go RAM, rôles Web (IIS) et DNS uniquement.
+- Foundation : 1 CPU 64 bits, 15 utilisateurs max, 8 Go RAM, préinstallée uniquement. HPC : 4 CPU 64 bits, 128 Go RAM, super-calculateur.
+Server Core : installation minimale, même noyau, ligne de commande uniquement (pas de GUI, navigateur, panneau de configuration) ; ~2 Go de disque (vs 8 Go), 512 Mo RAM ; packages installés à la demande.
+
+2. ARCHITECTURE
+Noyau = fusion Windows Vista + nouveau code. Fondamentaux : sécurité, virtualisation, Web.
+Deux couches : mode utilisateur (sous-systèmes, applications, services ; priorité basse, espace d'adressage propre, pas d'accès direct aux ressources, appels système) et mode noyau (accès direct aux données système et au matériel, zone mémoire protégée, priorités des threads et des interruptions).
+Mode exécutif : composants s'exécutant en mode noyau, prioritaires sur le CPU ; fonctions : gestion mémoire, ordonnancement des processus, communication avec les périphériques.
+Sous-systèmes du mode utilisateur : intégraux (sécurité, service poste de travail, service serveur) et environnementaux (émulent d'autres OS via leurs API).
+Composants du mode noyau : ensemble Executive (system service dispatcher, interfaces du mode noyau, gestionnaire d'E/S, moniteur de sécurité, gestionnaire IPC, gestionnaire de mémoire virtuelle VMM, gestionnaire de processus, gestionnaire PnP, gestionnaire d'alimentation, GDI, gestionnaire d'objets) ; HAL (couche d'abstraction du matériel : DLL avec le code matériel spécifique) ; pilotes de mode noyau conformes à l'architecture WDM (Windows Driver Model).
+
+3. CARACTÉRISTIQUES
+Flexibilité : rôles et fonctionnalités, PowerShell, Windows Remote Shell, services de déploiement WDS.
+Robustesse : cluster failover, Server Core, nouvelle pile réseau.
+Sécurité : contrôleurs de domaine en lecture seule (RODC), Network Access Protection (NAP), Active Directory Federation Services (ADFS).
+Virtualisation : machines virtuelles (Hyper-V), Terminal Server.
+Web : IIS7 réécrit, modulaire (surface d'attaque réduite) ; fondation de SharePoint V3, du WCF (Framework 3.0), du service de streaming.
+
+4. INSTALLATION
+Planification : identification des rôles, option d'installation (complète ou Core), virtualisation, édition, version 32 ou 64 bits, matériel.
+Rôle serveur : fonction du serveur après installation ; plusieurs rôles possibles ; rôle prédéfini ou applicatif. Server Core ne peut pas utiliser ASP.NET (pas de Framework).
+Choix de version : matériel neuf en 64 bits ; certains pilotes seulement en 32 bits ; Hyper-V exige du matériel x64 ; en 64 bits (sauf Itanium), tous les pilotes en mode noyau doivent être signés. Mises à niveau interplateformes (32↔64) non prises en charge ; Core↔complète impossible sans réinstallation. Microsoft recommande toujours une nouvelle installation.
+Installation manuelle : 4 informations seulement (langue et paramètres régionaux, numéro de licence, acceptation du contrat, disque ou partition) ; le reste dans la configuration initiale. Format d'image WIM (Windows Imaging Format). Partitions primaires uniquement, amorçables. Activation : 60 jours de grâce ; slmgr -rearm prolonge 3 fois (240 jours). Journaux d'installation : Setupapi.log, Setup.etl dans %WINDIR%\Panther (Observateur d'événements, wevtutil, tracerpt).
+
+5. SYSTÈMES DE FICHIERS
+NTFS (privilégié) : correction automatique de certaines erreurs de disque, grands disques, sécurité (autorisations, chiffrement EFS), compression, indexation, liens mis à jour lors d'un déplacement de volume ; support de 10 Mo à 2 To, taille de fichier limitée à celle du support ; accessible seulement par Windows NT/2000/2003/2008.
+FAT32 : aucune sécurité, partition de 32 Go max (dans cette version), fichier de 4 Go max ; utile pour un multiboot avec Windows 95/98/ME.
+FAT / FAT16 : ancien, rare. Critères de choix : sécurité, OS à installer, taille des partitions et fichiers, administration, accès aux ressources partagées, capacité du support.
+Licences : une licence Windows Server par instance + une CAL par utilisateur ou périphérique. Deux types de CAL : de poste de travail (économique si plusieurs utilisateurs par poste) ou d'utilisateur (mieux pour les nomades). Deux modes : Par utilisateur/Par périphérique (irréversible, une CAL par utilisateur ou périphérique sur l'ensemble des serveurs) ou Par serveur (une CAL par connexion simultanée à un serveur donné ; un passage unique vers le mode Par utilisateur/périphérique autorisé). Exceptions : accès Internet sans authentification, édition Web Server, connecteur externe, ≤ 2 accès d'administration, hôte de virtualisation uniquement.
+
+6. DÉMARRAGE
+Environnement repensé, prise en charge BIOS et UEFI. Magasin BCD (Boot Configuration Data) à la place de Boot.ini ; nouveau gestionnaire de démarrage et chargeur remplaçant Ntldr.exe. Modification via bcdedit.exe (droits d'administration ; sauvegarde par bcdedit /export) ; outils graphiques VistaBootPro, EasyBCD.
+Séquence : mise sous tension -> le CMOS charge le BIOS, exécute le POST -> lecture du MBR -> chargement de bootmgr.exe (racine de la partition active) -> lecture du magasin BCD (répertoire boot) -> chargement de winload.exe (%systemroot%\system32) pour Vista/2008, ou ntoskrnl pour Windows 2000/2003, ou winresume.exe si hibernation -> winload charge les pilotes de boot -> transfert du contrôle au noyau ntoskrnl.exe -> le shell affiche l'écran de connexion.
+Dépannage :
+- Dernière configuration valide connue (F8) : revient à l'état du registre du dernier démarrage réussi ; écrasée dès qu'un utilisateur se connecte ; utile après un pilote critique provoquant un écran bleu.
+- Options de démarrage avancées (F8) : mode sans échec (services et pilotes minimaux, VGA ; 3 variantes : invite de commandes, bureau local sans réseau, bureau local avec réseau), journalisation du démarrage (ntbtlog.txt), démarrage VGA (640x480), mode restauration des services d'annuaire (DC sans AD), mode débogage, empêcher le redémarrage automatique, désactiver le contrôle des signatures de pilotes.
+- BIOS ACPI (Advanced Configuration and Power Interface), inventaire des périphériques Plug and Play, pilotes de stockage de masse (contrôleur SCSI/RAID/Fibre Channel), restauration de l'OS ou du serveur complet via le DVD d'installation (« Réparer votre ordinateur » -> « Restauration de l'ordinateur Windows ») et une sauvegarde Windows Server Backup.

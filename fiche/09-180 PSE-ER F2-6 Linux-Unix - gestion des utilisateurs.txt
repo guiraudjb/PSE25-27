@@ -1,0 +1,45 @@
+LINUX / UNIX : GESTION DES UTILISATEURS
+
+1. LE FICHIER /etc/passwd
+Liste des utilisateurs reconnus par le système ; consulté au login pour déterminer l'UID, le répertoire, etc. Peut être prolongé ou remplacé par un service d'annuaire (Active Directory, OpenLDAP, Fedora Directory Server). Sept champs séparés par « : » :
+1. Login (nom de connexion)
+2. Mot de passe crypté (sur les systèmes modernes : x sous Linux/Solaris/HP-UX, ! ou * sous AIX)
+3. UID (identifiant utilisateur)
+4. GID par défaut (identifiant de groupe)
+5. GECOS (nom, prénom, bureau, téléphone)
+6. Répertoire personnel (home)
+7. Shell de connexion
+Exemple : root:x:0:0:root:/root:/bin/bash
+Intégration avec un annuaire (NIS, LDAP) : entrées commençant par + ou - dans passwd ; configuration dans /etc/nsswitch.conf (/etc/nscontrol.conf sur AIX).
+
+2. LES CHAMPS
+Login : unique, sensible à la casse, jamais de « : » ni de fin de ligne ; historiquement 8 caractères alphanumériques ; NIS/NIS+ limite à 8 ; un utilisateur a le même login sur chaque machine (AIX : longueur modifiable par chdev sur sys0, attribut max_logname).
+Mot de passe crypté : algorithmes crypt/DES (13 caractères), MD5 (34 caractères, préfixe $1$, longueurs arbitraires mais faiblesses connues), Blowfish (préfixe $2a$, défaut SUSE), SHA256 (préfixe $5$, défaut OpenSolaris récent), SHA512 (préfixe $6$). Longueur constante quelle que soit la longueur du mot de passe ; « sel » aléatoire (un même mot de passe -> plusieurs formes cryptées). Un x ou * bloque le compte ; un champ vide = trou de sécurité (aucun mot de passe requis).
+UID : entier non signé 32 bits ; root = 0. Pseudo-utilisateurs (bin, daemon) : UID faible + shell fictif (/bin/false), placés au début de passwd. nobody : grande valeur, utilisé quand root accède à des fichiers NFS d'une machine non fiable. Ne jamais réutiliser un UID (confusion à la restauration de sauvegardes). Un UID = un login = une personne sur toutes les machines. Éviter plusieurs comptes UID 0 (trous de sécurité ; utiliser sudo). LDAP populaire pour centraliser les UID (haute disponibilité requise).
+GID : entier 32 bits ; GID 0 = root/system ; groupes prédéfinis non cohérents entre distributions (bin : GID 1 sur Red Hat/SUSE, 2 sur Ubuntu/Solaris/HP-UX/AIX). Groupes aujourd'hui = partage d'accès aux fichiers. /etc/group définit les groupes ; le GID de /etc/passwd est un GID provisoire au login. Héritage du groupe parent : bit setgid (02000) sur le répertoire ou option de montage grpid.
+GECOS : infos personnelles séparées par virgules ; finger les interprète (nom complet — souvent le seul rempli, bureau et bâtiment, poste de bureau, téléphone personnel). chfn permet à l'utilisateur de les modifier (peut être restreint ou désactivé ; ne fonctionne souvent que sur /etc/passwd).
+Home : répertoire par défaut au login. Si manquant : message « aucun répertoire » et mise dans /. Linux : DEFAULT_HOME=no dans /etc/login.defs refuse le login.
+Shell : sh (traditionnel Unix), bash (défaut Linux et Solaris), ksh (défaut AIX), tcsh. Sous Linux, sh et csh sont des liens vers bash et tcsh. chsh change le shell (Linux : limité aux shells de /etc/shells, chemins absolus ; Solaris : superutilisateur seulement, passwd -e ; AIX : /etc/security/login.cfg liste officielle).
+
+3. LE FICHIER /etc/shadow
+Lisible seulement par le superutilisateur ; garde les mots de passe cryptés à l'abri. Non généré à partir de passwd, ni sous-ensemble. AIX : /etc/security/passwd (format différent, blocs identifiant/password/LastUpdate/flags). Neuf champs séparés par « : » :
+1. Login (lien avec passwd)
+2. Mot de passe crypté
+3. Date du dernier changement (rempli par passwd)
+4. Nombre minimum de jours entre changements
+5. Nombre maximum de jours entre changements
+6. Nombre de jours d'avertissement avant expiration
+7. Linux : jours après expiration du mot de passe avant que le login soit expiré ; Solaris/HP-UX : jours d'inactivité avant blocage du compte (via /var/adm/lastlog, peu fiable en réseau)
+8. Date d'expiration du compte (jours depuis 1970-01-01 ; vide = jamais ; usermod -e au format aaaa-mm-jj)
+9. Champ réservé (Solaris : 4 derniers bits pour les tentatives infructueuses)
+Dates en jours (pas en secondes) depuis le 1er janvier 1970 : conversion expr `date +%s` / 86400. pwconv (Solaris, HP-UX, Linux) harmonise passwd et shadow (Linux : défauts de /etc/login.defs). passwd -f (Solaris) / pwdadm (AIX) force le changement à la prochaine connexion.
+
+4. LE FICHIER /etc/group
+Noms de groupes et liste des membres. Quatre champs séparés par « : » : nom du groupe, mot de passe crypté ou espace réservé, numéro GID, liste des membres séparés par des virgules (sans espaces). Noms limités à 8 caractères pour la compatibilité. Mot de passe de groupe (rarement utilisé) : newgrp pour entrer, gpasswd pour le configurer, forme cryptée dans /etc/gshadow. En cas de conflit d'appartenance, /etc/passwd est prioritaire sur /etc/group. Limite de groupes par utilisateur : 8 (histo) -> 16 Solaris, 20 HP-UX, illimité AIX/Linux. Commandes : groupadd, groupmod, groupdel (Linux, Solaris, HP-UX) ; AIX : édition manuelle + grpck.
+
+5. AJOUT D'UN UTILISATEUR
+Étapes requises : faire signer le contrat de politique d'utilisation ; modifier passwd et shadow ; ajouter l'utilisateur à /etc/group (groupes supplémentaires) ; définir un mot de passe initial (jamais de compte avec shell sans mot de passe) ; créer, chown et chmod le répertoire home ; configurer rôles et permissions.
+Pour l'utilisateur : copier les fichiers de démarrage par défaut dans le home ; configurer le répertoire mail et les alias.
+Pour l'administrateur : vérifier la configuration ; enregistrer les informations de contact et l'état du compte dans une base.
+Outils : useradd, userdel, usermod (mêmes noms sur tous les systèmes, programmes différents) ; il faut être root (privilèges UserAdmin sur AIX). Édition manuelle : vipw (Solaris/Red Hat proposent aussi d'éditer shadow ; SUSE/Ubuntu : vipw -s) ; HP-UX et AIX déconseillent l'édition manuelle (utiliser useradd, SMH, SMIT).
+Fichiers de démarrage : cachés (point initial), terminaison « rc » (run command, hérité de CTSS) ; modèles dans /etc/skel (Linux, Solaris, HP-UX), /etc, /etc/security (AIX) ; Linux utilise aussi /etc/profile.d ; des fichiers de /etc sont traités avant ceux de l'utilisateur selon le shell.

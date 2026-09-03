@@ -1,0 +1,65 @@
+LINUX / UNIX : CONFIGURATION RÉSEAU ET PRINCIPAUX SERVICES
+
+1. TCP/IP ET INTERNET
+Gouvernance : l'ICANN (siège en Californie, société sans but lucratif, protocole d'entente avec le Département américain du Commerce) contrôle l'attribution des adresses IP, des noms de domaine et des numéros de port. L'ISOC (Internet Society) représente les utilisateurs et est l'organisation mère de l'IETF (travaux techniques). L'IGF (créé par l'ONU en 2005) traite des politiques liées à Internet.
+RFC (Request for Comments) : documents numérotés séquentiellement (~8000) ; les normes de protocoles y aboutissent après passage à l'état de brouillon (draft). Le contenu d'une RFC publiée n'est jamais modifié : une mise à jour est une nouvelle RFC. Répartiteur central : RFC-editor.org. Processus de normalisation : RFC2026.
+Suite de protocoles : IP (RFC791, achemine les paquets), ICMP (792, erreurs et soutien bas niveau), ARP (RFC826, IP vers MAC), UDP (RFC768, non vérifié, sens unique), TCP (RFC793, fiable, complet, full duplex, débit contrôlé, correction d'erreurs). Pile décrite sur cinq couches mais TCP/IP réel n'en utilise que trois.
+IPv4 (adresses 4 octets) / IPv6 (16 octets = 128 bits, sécurité et authentification intégrées). Différence principale = les adresses.
+Paquets et encapsulation : chaque protocole traversé ajoute son en-tête (encapsulation) ; opération inversée à la réception. Unité : trame (liaison), paquet (IP), segment (TCP). MTU (Maximum Transfer Unit) : taille maximale d'un paquet, liée à la couche liaison ; Ethernet standard = 1500 octets de charge utile. Fragmentation : découpage IP pour respecter le MTU ; en IPv4 assurée par les routeurs, en IPv6 par l'hôte expéditeur.
+
+2. ADRESSAGE
+Adresse MAC : 6 octets attribués à la fabrication, en hexadécimal séparés par « : ». 3 premiers octets = fabricant (OUI, identifiant unique organisationnel IEEE), 3 derniers = série unique. Souvent modifiable aujourd'hui.
+Adresse IP : globalement unique, indépendante du matériel. En IPv6, l'adresse MAC peut servir de partie de l'adresse IP.
+Hostname : raccourci commode pour une adresse IP ; se réfère à une interface réseau, pas à un ordinateur. Résolution via /etc/hosts, LDAP ou DNS.
+Ports : numéro sur 16 bits étendant l'adresse IP pour désigner un service (canal de communication). Ports bien connus dans /etc/services. Sous Unix, seuls les programmes root peuvent écouter sur un port < 1024 (restriction sur le programme à l'écoute, pas sur les clients).
+Classes IPv4 : historiques (bits de poids fort de l'octet gauche) ; aujourd'hui masque explicite.
+Subnetting : réaffecter une partie de la portion hôte à la portion réseau via un masque explicite. Un /26 laisse 6 bits d'hôte : 64 adresses, 62 utilisables (réseau + diffusion réservées). Outil ipcalc (Debian/Ubuntu, Red Hat).
+CIDR (RFC1519) : prolongement du subnetting à masque explicite, mais la portion réseau peut être plus courte qu'une classe ; un masque court agrège plusieurs réseaux (supernetting) et réduit les entrées de routage. Tous les hôtes d'un réseau doivent avoir le même masque.
+Attribution : l'ICANN délègue des blocs aux cinq registres Internet régionaux, qui les distribuent aux FAI, qui les subdivisent pour les clients.
+Adresses privées (RFC1918) : 1 réseau de classe A, 16 de classe B, 256 de classe C ; jamais montrées à Internet. Le routeur de bordure exécute le NAT (réécriture de l'adresse source, parfois du port, table de correspondances).
+IPv6 : adresses sur 128 bits ; le FAI attribue un préfixe ; frontière réseau/hôte fixée à /64 (plus de subnetting).
+
+3. ROUTAGE
+Le routage dirige un paquet de sa source à sa destination ; deux sens : chercher une route dans la table, et construire la table. Table examinée avec netstat -r (netstat -rn pour du numérique).
+Routes statiques : entrées explicites via la commande route, persistantes tant que le système fonctionne, souvent posées au démarrage. Efficaces sur un réseau local stable ; exigent une topologie connue et peu changeante. Beaucoup de LAN n'ont qu'une sortie : une route par défaut suffit (fournie aussi par DHCP).
+Routage dynamique : nécessaire pour les topologies complexes ; assuré par un démon qui découvre la topologie et modifie les tables.
+Redirections ICMP : un routeur signale à l'expéditeur que ses tables de routage sont inexactes (paquet transmis à une machine du même réseau). Acceptées par défaut sur la plupart des Unix/Linux (variable accept_redirects sous /proc pour Linux ; ndd sur Solaris/HP-UX ; no sur AIX).
+
+4. SERVICES ET SÉCURITÉ RÉSEAU
+ARP (RFC826) : découvre l'adresse MAC d'une adresse IP sur le LAN. Cache ARP en mémoire ; requête diffusée « qui a l'adresse MAC de X ? », réponse avec l'adresse Ethernet. Commande arp (arp -a). Utile surtout pour le débogage et les conflits d'adresse IP.
+DHCP : attribue une adresse IP en bail (lease) et fournit les paramètres associés (masque, passerelles, DNS, syslog, NTP, WINS, TFTP...). Pratique pour machines éteintes et clients de passage. Extension rétro-compatible de BOOTP. Implémentation ISC : démon dhcpd, fichier dhcpd.conf ; agent de relais dhcrelay ; client stockant son état dans /var/lib/dhcp ou /var/lib/dhclient.
+PPP (RFC1331) : canal point à point vu comme une interface réseau virtuelle entre deux hôtes. Asynchrone : accès Internet par lignes téléphoniques/série. Synchrone : encapsulation haut débit (routeurs, DSL, câble) avec authentification et contrôle d'accès du lien.
+Menaces et parades :
+- IP forwarding : à désactiver si l'hôte n'est pas un routeur (aide les paquets d'un intrus à contourner scanners et filtrage).
+- Redirections ICMP : peuvent rediriger malicieusement le trafic et manipuler les tables de routage.
+- Routage source : série explicite de passerelles ; à ne pas accepter (un attaquant peut faire croire qu'un paquet vient de votre réseau).
+- Pings de diffusion / diffusions dirigées : utilisés dans des attaques par déni de service ; à ignorer (icmp_echo_ignore_broadcasts).
+- IP spoofing : usurpation de l'adresse source via une socket raw ; au routeur de bordure, bloquer les paquets sortants dont la source n'est pas dans votre espace, et rejeter les paquets externes prétendant venir de l'interne.
+- Pare-feu host-based : Unix/Linux ont un pare-feu intégré au noyau.
+- VPN : Internet utilisé comme réseau privé via tunnels chiffrés (IPsec, normalisé IETF 1998 ; ou TLS/SSL au-dessus de TCP). OpenVPN ne fonctionne pas sur HP-UX ni AIX.
+
+5. CONFIGURATION RÉSEAU SUR LINUX ET UNIX
+Étapes d'ajout d'une machine : adresse IP unique + hostname ; interfaces configurées au démarrage ; route par défaut et routage ; interface à un serveur DNS. Avec DHCP, l'essentiel est fait par le serveur.
+Fichiers communs : /etc/hosts (mappage nom/IP le plus ancien, à réserver au démarrage), /etc/resolv.conf (client DNS : domaines de recherche + jusqu'à 3 nameserver contactés dans l'ordre).
+Commandes : hostname (nom pleinement qualifié, FQDN) ; ifconfig (active/désactive une interface, fixe IP, masque, options ; ifconfig -a résume, netstat -i sur HP-UX ; plumb obligatoire sous Solaris) ; route (routes statiques, mot-clé default, route delete, option -p sous Solaris pour la persistance dans /etc/inet/static_routes).
+Options matérielles : cartes 10/100/1000/10000 Mb/s, half/full duplex, auto-négociation par défaut ; en cas de pertes de paquets, verrouiller vitesse et duplex sur serveurs et ports de commutateur.
+Spécifique aux systèmes :
+- Debian/Ubuntu : /etc/hostname ; /etc/network/interfaces (lignes iface, mots-clés inet et static) ; ifup/ifdown ; NetworkManager par défaut mais config statique possible.
+- SUSE : choix NetworkManager ou config traditionnelle via YaST ; fichiers ifcfg-interface dans /etc/sysconfig/network.
+- NetworkManager : service de fond, config par interface, pensé pour les utilisateurs (portables) ; Red Hat Enterprise Linux ne le lance pas par défaut.
+- ethtool (remplace mii-tool) : vitesse, duplex ; modifications transitoires, à rendre permanentes via la config réseau (ETHTOOL_OPTS Red Hat, script post-up Debian).
+- /proc/sys/net/ipv4 : variables du noyau (lecture cat, écriture echo) ; persistance via /etc/sysctl.conf (format variable = valeur), lu par sysctl au démarrage ; net.ipv4.ip_forward = 0 désactive le routage.
+- Linux NAT : iptables applique NAT (en fait du PAT / Port Address Translation) et filtrage ; activer ip_forward, charger iptable_nat, ip_conntrack... Ex. iptables -t nat -A POSTROUTING -o eth1 -j SNAT --to <IP publique>.
+- Solaris : /etc/nodename (nom), /etc/hostname.interface (adresse), /etc/nsswitch.conf (ordre files/dns), /etc/defaultrouter, /etc/netmasks ; mode traditionnel ou NWAM (démon nwamd) ; svcs/svcadm ; client DHCP via ifconfig interface dhcp (dhcpagent) ; ndd pour la pile TCP/IP ; IPFilter (ipf, ipnat) pour filtrage et NAT.
+- HP-UX : tout dans /etc/rc.config.d/netconf (HOSTNAME, INTERFACE_NAME[0], IP_ADDRESS[0], SUBNET_MASK[0], ROUTE_*) ; lanscan pour lister les interfaces (ifconfig -a inopérant), lanadmin pour les statistiques, SMH pour l'administration ; DHCP via DHCP_ENABLE[0] ; ndd (nddconf) ; IPFilter dans /etc/opt/ipf.
+- AIX : configuration dans l'ODM (attribut/valeur) ; mktcpip, chdev/lsattr (périphériques), no -p -o (options système, >125 variables) ; SMIT.
+
+6. PRINCIPAUX SERVICES RÉSEAU
+DNS : résolution de noms = corrélation adresses IP / noms de domaine. Base répartie, petite, peu changeante, hiérarchisée, en consultation seule. Nœud = étiquette de 63 caractères max ; nom absolu terminé par un point = FQDN. Zone = partie contiguë de l'arbre ; une zone parente délègue une zone fille à des serveurs de noms (nameservers). Démon named (implémentations BIND) ; config /etc/named.conf ou /etc/bind/named.conf (blocs zone avec type master, file ...) ; résolution inverse via zone <réseau inversé>.in-addr.arpa.
+Fichier de zone : commence par un champ SOA (serveur de référence, e-mail du responsable avec le premier point valant @, numéro de série AAAAMMJJxx, refresh, retry, expire, TTL minimum), puis NS (serveur de noms), MX (serveur de messagerie avec priorité, la plus petite prioritaire), A (nom vers IPv4). Le point final est indispensable (sinon BIND ajoute le nom de zone).
+Outils : nslookup ; dig (remplaçant bas niveau de nslookup ; dig serveur version.bind chaos txt).
+DHCP (RFC2131/2132, ports 67 serveur / 68 réponse) : serveur (distribue des plages), relay agent (route les paquets DHCP), client. Étapes : INIT, DHCPDISCOVER, DHCPOFFER (adresse + options), sélection d'un serveur, DHCPREQUEST, DHCPACK, bail (lease). Au redémarrage : état INIT-REBOOT, DHCPREQUEST de l'ancienne adresse, DHCPACK ou DHCPNACK (retour au DISCOVER). Détection d'adresse dupliquée (ICMP Echo côté serveur, ARP côté client, DHCPDECLINE). Faiblesses : DoS, single point of failure, pas d'authentification mutuelle, MAC inadéquate comme identifiant.
+FTP : ports ftp 21/tcp (commandes) et ftp-data 20/tcp (données) ; dialogue bidirectionnel, commande PORT du client, connexion de données fermée après transfert. Service activé via inetd.conf. Contrôle d'accès : /etc/ftpusers (interdits, root inclus), /etc/shells (shells autorisés). Démons évolués : proftpd, pure-ftpd (ftpwho, ftpstats, /etc/proftpd.conf). Modes ascii (défaut) / binary.
+NTP : synchronise l'horloge système sur le temps local à partir de machines de référence (horloges atomiques), en tenant compte des délais réseau. Temps Unix : début 1er janvier 1970, fin le 19 janvier 2038 à 4h14m07s GMT (2147483647 s, 0x7fffffff). En pratique : choisir des serveurs, désigner un serveur d'heure du service, lancer xntpd, faire ntpdate serveur-ntp régulièrement ; garde-fou si l'écart est trop grand. Fuseau via la variable TZ (France : MET-1DST).
+Messagerie : MUA (composition/envoi), MTA (routage selon la destination ; analogie du centre de tri ; Sendmail, Postfix), MDA (acheminement final, spécialisé, synonyme mailer). Protocoles : SMTP (envoi), POP et IMAP (consultation). POP transfère les messages vers le poste et le serveur s'en débarrasse (perte si panne du client) ; IMAP conserve les messages sur le serveur (aucune perte, adapté aux nomades, gestion de disque plus stricte). Agent de base : mailx. Postfix : /etc/postfix/main.cf (paramètres) et /etc/postfix/master.cf (démons réseau).
+rsync : proche de rcp mais bien plus d'options ; protocole de mise à jour à distance accélérant le transfert quand la destination existe déjà ; utilise ssh par défaut (rsync -a source/ login@serveur:/destination/) ; premier passage complet puis seulement les fichiers modifiés, suppression sur la destination des fichiers absents de la source, permissions conservées.

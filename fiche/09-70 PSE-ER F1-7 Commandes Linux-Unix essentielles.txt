@@ -1,0 +1,37 @@
+PRINCIPALES COMMANDES LINUX / UNIX
+
+1. INTERPRÉTEUR ET MODE CONSOLE
+Historique des shells : Bourne Shell, puis ksh (plus rapide et puissant), puis bash (Bourne Again Shell, libre, standard GNU). Un serveur n'a pas besoin d'interface graphique : la ligne de commande est plus puissante, flexible, scriptable, économe en ressources réseau, et réduit la surface d'attaque.
+Consoles : souvent 7 consoles virtuelles (6 texte + 1 graphique), accès par Ctrl+Alt+F(numéro). En graphique on lance un terminal (xterm, gnome-terminal...), simple émulation de console. Connexions distantes : SSH (chiffré) remplace Telnet.
+
+2. SYNTAXE ET ENVIRONNEMENT
+Commandes internes (primitives du shell, ex. cd) ou externes (exécutables du PATH, ex. less) ; la commande type l'indique. Syntaxe : commande -options arguments ; options précédées d'un tiret ; -h / --help pour l'aide.
+Identifier son shell : echo $SHELL (défaut), echo $0 ou ps -p $$ (courant réel).
+Commandes utiles : & (tâche de fond), tty (terminal courant, /dev/tty1 en console, /dev/pts/0 en graphique), whoami (nom), id (UID, GID, groupes), which (chemin d'un exécutable), echo (affichage ; $PATH, $PWD, $OLDPWD, $$ = PID du shell), set (variables du shell), clear (efface l'écran), reset (efface aussi le buffer de défilement).
+Historique : history, !n (ré-exécute la commande n), flèches haut/bas, Tab (complétion), Ctrl+R (recherche par mot-clé) ; fichier ~/.bash_history. Copier/coller dans un terminal : Shift+Ctrl+C / Shift+Ctrl+V (Ctrl+C interrompt la commande).
+
+3. TROUVER DE L'AIDE
+man : manuel électronique. 9 (ou 10) sections : 1 commandes utilisateur, 2 appels système, 3 bibliothèque C, 4 fichiers spéciaux (/dev), 5 formats de fichiers, 6 jeux, 7 divers, 8 administration, 9 noyau. Options : man -k / apropos (recherche par mot-clé), man -f / whatis (description succincte), man -t cmd | lpr (PostScript imprimable). Configuration : /etc/manpath.config ; bases whatis/locate rafraîchies par cron.
+info : documentation Texinfo (GNU), navigation hypertexte.
+locate : recherche rapide via une base (locatedb) mise à jour par updatedb (cron).
+
+4. JOURNAUX ET PLANIFICATION
+syslog : /var/log/<application>/<type>. Consultation : tail /var/log/syslog (10 dernières), tail -200, tail -f (temps réel), cat ... | grep -i motif.
+cron : exécution périodique. crontab -e (éditer), crontab -l (lister). Syntaxe d'une ligne : mm hh jj MMM JJJ commande [> log] — minutes 0-59, heure 0-23, jour du mois 1-31, mois 1-12, jour de semaine 0-6 (0 = dimanche). Notations : * (chaque unité), 2-4 (intervalle), */5 (toutes les 5 unités), 2,8 (liste). Sans « > log », cron envoie un mail ; « > /dev/null » l'évite.
+
+5. DÉMARRAGE / MATÉRIEL
+dmesg : messages du noyau au démarrage (matériel détecté : processeurs, disques hda/hdb, interfaces eth0...). ps -edf : lister les processus, dont init (PID 1) et sched (PID 0).
+
+6. GESTION DES FICHIERS
+Navigation : pwd (répertoire courant), cd (home), cd ~ , cd / , cd .. , cd chemin (absolu si commence par /, sinon relatif).
+Lister : ls, ls -l (format long : type + droits + nb liens + propriétaire + groupe + taille + date + nom ; type = -, d, l, s, b, c), ls -a (fichiers cachés), ls -t (tri date récent d'abord), ls -tr (inverse), ls -i (numéro d'inode), ls -R (récursif), ls -ld (le répertoire, pas son contenu). ll = alias de « ls -l » ou « ls -la ».
+Inodes : df -i (inodes utilisées/libres), ls -i, stat fichier (taille, inode, dates access/modify/change, permissions, nombre de liens).
+Créer / voir : > fichier ou touch fichier (création ; touch -t modifie la date), more / less (affichage page par page ; less amélioré, recherche, navigation), cat (affiche et concatène).
+Manipuler : mkdir (créer un répertoire), cp (copier ; -r récursif, -p conserve les propriétés, -v verbeux ; ne conserve pas la date par défaut), mv (déplacer/renommer ; conserve la date), rm (supprimer ; -r récursif, -rf sans confirmation = dangereux), alias (voir/créer des alias).
+Redirections et enchaînement : < (entrée), > (sortie, écrase), >> (ajoute), | (pipe : sortie d'une commande vers l'entrée de la suivante). Enchaînement : ; (sans condition), && (si succès), || (si échec) ; echo $? donne le code retour (0 = succès).
+
+7. MONTAGE ET SYSTÈMES DE FICHIERS
+mount -a : monte tous les volumes de /etc/fstab (ou /etc/vfstab sous Solaris). vfstab : 6 champs (fichier spécial, point de montage, type de SF, options, champ dump, ordre fsck). mount fichier-spécial point-de-montage (le point de montage doit exister ; son contenu devient invisible ; le SF doit être marqué cohérent). umount point-de-montage : impossible si la partition est utilisée (commande, fichier ouvert, répertoire courant) ; fuser identifie les processus ; mount & / df & si risque de blocage.
+df : partitions montées et espace libre (df -k en kilo-octets, df -t type sous Linux, df -F type sous Solaris).
+fsck : contrôle et répare un système de fichiers. 5 phases (blocs et tailles, chemins d'accès, connectivité, compteurs de références, groupes de cylindres). Options -y (oui à tout), -n (non à tout), -p (oui aux corrections anodines, utilisé au boot). Règles : jamais sur une partition montée/active ; de préférence en single-user ; après un fsck sur /, redémarrer sans sauver le buffer cache.
+LVM : préfixes pv (volumes physiques), vg (groupes de volumes), lv (volumes logiques), lvm (global). Créer : pvcreate, vgcreate, lvcreate -n nom -L taille groupe, mkfs. Agrandir : pvcreate, vgextend, lvextend -L +taille, resize2fs. Réduire : fsck -f, resize2fs taille, lvreduce -L taille.

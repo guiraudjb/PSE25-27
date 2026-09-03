@@ -1,0 +1,39 @@
+LINUX / UNIX : GESTION DES PÉRIPHÉRIQUES ET DES IMPRESSIONS
+
+1. AUTRES SERVICES RÉSEAU COURANTS
+Telnet : service activé dans inetd.conf. Demande toujours un login et un mot de passe, mais les mots de passe circulent en clair. Danger des connexions root distantes : préférer SSH (version sécurisée).
+RLOGIN : service login activé dans inetd.conf. Pas de mot de passe demandé si la machine d'origine est dans /etc/hosts.equiv avec la même identité au départ et à l'arrivée (ne s'applique pas à root), ou si l'identité et la machine figurent dans le fichier .rhosts de l'utilisateur d'arrivée ; sinon un mot de passe est demandé.
+NFS : protocole standard de serveur de fichiers sous Unix. Deux volets : exportation (serveur : offrir un espace disque) et montage (client : y accéder). Mis en œuvre via le démon nfs, les fichiers /etc/fstab et /etc/exports, les commandes mount et umount.
+
+2. GESTION DES PÉRIPHÉRIQUES
+Principe : sous Unix tout est fichier ; les périphériques sont des fichiers spéciaux servant d'interface au pilote réel intégré au noyau. Deux types courants : périphériques de type bloc et de type caractère.
+Modes d'accès :
+- Mode caractère : E/S caractère par caractère, données transférées directement à chaque appel système de lecture/écriture (claviers, écrans, imprimantes, mémoire).
+- Mode bloc : E/S bloc par bloc (blocs de 4 ko ou 8 ko selon le SGF Berkeley ou AT&T), via des zones de tampon avec assemblage préalable des données avant transfert d'un bloc entier (disques, bandes magnétiques).
+Numéros majeur et mineur : figurent à la place de la taille du fichier. Le numéro majeur identifie le pilote et donc le contrôleur de périphérique. Le numéro mineur identifie le périphérique, ou une particularité (partition d'un disque, emplacement, numéro de carte contrôleur).
+Fichiers de /dev communs : /dev/audio (carte son), /dev/console (console texte), /dev/kmem (mémoire du noyau), /dev/log (messages système), /dev/mem (mémoire de la machine), /dev/null (trou noir), /dev/tty (terminal texte virtuel), /dev/zero (générateur de caractères ASCII 0).
+Cas particuliers :
+- /dev/null : périphérique poubelle ; tout ce qui y est écrit disparaît. Redirection : application > /dev/null. Fichier spécial (crw-rw-rw-), indispensable à l'administrateur.
+- Consoles et terminaux virtuels.
+Nommage des disques et ports (Linux) : fd0/fd1 (lecteurs de disquette) ; hda/hdb (premier port IDE maître/esclave), hdc/hdd (second port), partitions hda1... ; sda, sdb, sdc (disques SCSI par identificateur croissant), partitions sda1... ; sr0, sr1 (cédéroms SCSI) ; ttyS0/ttyS1 (ports série, COM1/COM2) ; psaux (souris PS/2) ; liens symboliques cdrom, mouse.
+Terminaux : deux mécanismes de description des capacités.
+- termcap : fichier texte, généralement dans /etc.
+- terminfo : hiérarchie de répertoires sous /usr/lib ; chaque définition compilée est rangée dans le répertoire dont le nom est l'initiale du terminal (vt100 -> /usr/lib/terminfo/v). terminfo est généralement le plus utilisé.
+Les deux coexistent. Des logiciels standards (vi) y trouvent les informations de gestion de l'écran ; d'autres (emacs) ont leur propre définition.
+Positionnement du type de terminal : variable d'environnement TERM (TERM=vt100 ; export TERM). Le terminal doit être reconnu, c'est-à-dire présent dans terminfo.
+
+3. IMPRIMANTES ET SOUS-SYSTÈME D'IMPRESSION
+Problématique : comment l'imprimante comprend-elle le fichier envoyé, quels formats nativement, comment gérer ses caractéristiques, éviter le mélange des impressions simultanées, gérer les délais d'attente. Un système d'impression n'est pas une simple application mais une application client/serveur complexe traitant les demandes locales et distantes.
+Systèmes d'impression sous Linux/Unix :
+- Berkeley : démon lpd.
+- LPRng : version améliorée du système Berkeley.
+- CUPS : démon cupsd ; actuellement le plus utilisé.
+Langage et filtres : historiquement les imprimantes Unix supportaient un langage commun, le PostScript. Beaucoup d'imprimantes bon marché l'ont abandonné pour leur propre langage. Les filtres (APS Filter, Magic Filter) transforment le PostScript en un langage compréhensible par l'imprimante. Information sur les imprimantes supportées : site LinuxPrinting.org.
+Système lp et spoulage (SPOOL = Simultaneous Peripheral Operation On-Line) : ensemble de programmes, scripts shell et répertoires, basé sur une file d'attente, historiquement le plus répandu. Analogie de la tuyauterie d'eau : les données à imprimer sont l'eau, les files d'attente sont les bacs de retenue, les scripts d'interface (scripts shell) sont les pompes.
+- Acceptation / rejet : contrôlent le flux des demandes vers les répertoires des demandes (files d'attente). Commandes accept et reject (le robinet d'accès à la file).
+- Activation / désactivation : contrôlent le flux des demandes vers les imprimantes.
+Ordonnanceur lpsched : achemine les demandes vers les imprimantes physiques selon le modèle FIFO ou un système de priorités ; évite le mélange des listages (intercalage de pages de demandes différentes) ; détermine les priorités des imprimantes et des documents ; modifie l'état de l'imprimante ; enregistre l'activité de LP.
+Commandes : lpmove (rerouter une demande d'une imprimante bloquée vers une autre) ; cancel (éliminer les données superflues du spoulage).
+Schéma simplifié : lp -> spool -> lpsched -> script d'interface -> impression.
+Destinations : une requête est dirigée (via le démon lp) vers une destination = un réservoir (file d'attente). Une file peut être associée à une imprimante isolée (cas le plus fréquent) ou à un groupe d'imprimantes appelé classe (requêtes envoyées indifféremment sur n'importe laquelle des imprimantes de la classe).
+Spécification d'une destination, par ordre de priorité : 1. option -d ; 2. variable d'environnement LPDEST ; 3. aucune destination nommée -> destination par défaut.

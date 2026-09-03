@@ -1,0 +1,373 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 6, thème 5
+ASPECTS JURIDIQUES DE L'INFORMATIQUE
+=======================================================================
+
+1. PROTECTION DES DONNÉES PERSONNELLES (CNIL)
+-----------------------------------------------------------------------
+- 1974 : révélation du projet SAFARI (Système Automatisé pour les
+  Fichiers Administratifs et le Répertoire des Individus) -> création de
+  la CNIL par la LOI n° 78-17 DU 6 JANVIER 1978.
+- LOI DU 6 AOÛT 2004 : transpose la directive 95/46 du 24 octobre 1995 ;
+  passe des « données nominatives » aux « données PERSONNELLES »
+  (identification indirecte incluse) ; supprime la référence au seul
+  « traitement automatisé » ; accroît les pouvoirs de la CNIL.
+- Champ : traitements automatisés + non automatisés dans des fichiers ;
+  inclut sécurité publique / défense / sûreté de l'État ; exclut les
+  activités exclusivement personnelles.
+- ARTICLE 6 (licéité) : collecte loyale et licite ; finalité déterminée
+  et spécifique ; données pertinentes, adéquates et non excessives ;
+  exactes et à jour ; conservation proportionnée ; INTERDICTION de tout
+  traitement ultérieur incompatible avec les finalités (sauf fins
+  statistiques ou scientifiques).
+- ARTICLE 8 (données SENSIBLES : origines raciales, opinions politiques /
+  philosophiques / religieuses, mœurs) : collecte et traitement en
+  principe INTERDITS. Dérogations : consentement exprès, sauvegarde de la
+  vie humaine, associations religieuses/politiques/syndicales pour leur
+  objet, statistiques de l'INSEE.
+
+RÉGIMES :
+- DÉCLARATION = droit commun (plus de distinction public/privé).
+- Données sensibles = contrôle A PRIORI :
+  * DEMANDE D'AUTORISATION (article 25 : données génétiques,
+    condamnations, interconnexions, NIR) ; CNIL se prononce dans 2 MOIS ;
+    silence = REJET.
+  * AUTORISATION APRÈS AVIS : traitements de « souveraineté de la
+    personne publique » (sûreté, sécurité, défense de l'État,
+    impositions, statistiques) ; autorisation par ARRÊTÉ ministériel
+    après avis motivé et publié de la CNIL, avis NON contraignant.
+
+LA CNIL :
+- Autorité administrative INDÉPENDANTE. Collège pluraliste de 18
+  personnalités, mandat de 5 ans, élit son Président, ne reçoit
+  d'instruction d'aucune autorité.
+- 4 MISSIONS : Informer/protéger ; Accompagner/conseiller (CIL, labels,
+  packs de conformité, BCR = Binding Corporate Rules) ; Contrôler et
+  sanctionner ; Anticiper (veille, laboratoire, privacy by design,
+  comité de la prospective).
+- DROITS : information (art. 32, 39) ; opposition pour raisons légitimes
+  (art. 38, sauf obligation légale ex. impôts) ; accès direct ou
+  indirect via la CNIL (art. 39 s.) ; rectification.
+- POUVOIRS : contrôles sur pièces / sur place (agents : accès de 6h à
+  21h, hors domicile privé). Sanctions ADMINISTRATIVES (avertissement,
+  sanction pécuniaire sauf traitements de l'État, injonction de cesser,
+  retrait d'autorisation) et PÉNALES (Code pénal art. 226-16 à 226-24 :
+  non-respect des formalités = 5 ANS de prison + 300 000 € d'amende ;
+  même sanction pour défaut de sécurité, collecte déloyale, traitement
+  de données sensibles sans consentement, détournement de finalité).
+- CORRESPONDANT à la protection des données (CIL), créé par la loi du 6
+  août 2004 : collaborateur désigné en interne, notifié à la CNIL (pas
+  d'agrément), tient une LISTE des traitements accessible à tous ->
+  exonère de la DÉCLARATION préalable des traitements ordinaires (pas de
+  ceux soumis à autorisation). Existe déjà en Allemagne, Pays-Bas,
+  Suède, Luxembourg.
+- SITES WEB : depuis juillet 2006, plus de déclaration spécifique -> la
+  FINALITÉ détermine les démarches. Commerce collectant des données ->
+  déclaration simplifiée ; site vitrine / blog personnel / association
+  non lucrative -> dispensés.
+
+2. PROTECTION DE LA MESSAGERIE ÉLECTRONIQUE
+-----------------------------------------------------------------------
+- SPAM = « Spiced Pork and Meat ». SPAMMING = envoi massif et répété de
+  courriers non sollicités (pourriels) à des personnes jamais
+  contactées, dont l'adresse a été captée de façon irrégulière.
+  Critères d'un courriel abusif : quantité, défaut de consentement,
+  contenu.
+- OPT-IN (consentement préalable) vs OPT-OUT (opposition a posteriori).
+  CNIL : case à cocher. UE : opt-out minimal ; opt-in adopté par
+  Autriche, Italie, Allemagne, Finlande, Danemark.
+- France : ordonnance du 23 août 2001 (contrats à distance) ; LCEN du
+  21 juin 2004 (art. L. 33-4-1 CPCE) : prospection par courriel
+  subordonnée à l'ACCORD PRÉALABLE d'une personne physique (opt-in),
+  sauf coordonnées fournies lors d'une vente ; interdiction de masquer
+  l'identité de l'expéditeur, adresse de réponse obligatoire.
+- LOI DU 10 JUILLET 1991 : secret des correspondances émises par voie de
+  communications électroniques. Jurisprudence : le courrier électronique
+  = une correspondance -> relève du secret.
+- ARRÊT NIKON (Cass., 2 octobre 2001) : arrêt de PRINCIPE. Le salarié a
+  droit au respect de sa vie privée sur son lieu de travail (secret des
+  correspondances). Message marqué « personnel » -> non consultable par
+  l'employeur ; absence de mention -> caractère PROFESSIONNEL par défaut.
+- Code pénal art. 226-15 : 1 AN de prison + 45 000 € d'amende pour
+  interception/détournement/divulgation de mauvaise foi de
+  correspondances.
+- Rapports CNIL cybersurveillance : 1er (mars 2001, transparence) ;
+  2e (5 février 2002) : 3 PRINCIPES = PROPORTIONNALITÉ, INFORMATION
+  PRÉALABLE des salariés, CONSULTATION du comité d'entreprise.
+- Fichiers de journalisation (logs) : mesure de sécurité préconisée par
+  la CNIL, pas un outil de contrôle ; un logiciel d'analyse des journaux
+  destiné à contrôler l'activité des utilisateurs doit être DÉCLARÉ à la
+  CNIL.
+- Administrateurs réseau : accès à toutes les infos des utilisateurs
+  pour le fonctionnement/la sécurité ; tenus au SECRET PROFESSIONNEL ;
+  interdiction de détourner la finalité.
+- Agents publics : obligations déontologiques y compris dans la sphère
+  privée -> secret professionnel (loi du 13 juillet 1983, Code pénal
+  art. 226-13), dignité, neutralité et devoir de réserve.
+
+3. PROTECTION DES DROITS D'AUTEUR
+-----------------------------------------------------------------------
+- ARTICLE L.111-1 du CPI : l'auteur d'une œuvre de l'esprit jouit d'un
+  droit de propriété INCORPORELLE exclusif et opposable à tous ->
+  attributs INTELLECTUELS ET MORAUX + attributs PATRIMONIAUX.
+- Propriété INCORPORELLE : porte sur la création, pas sur le support ;
+  la vente du support (tableau, CD, CD-ROM) n'emporte PAS cession des
+  droits.
+- DROITS PATRIMONIAUX : droit de REPRODUCTION (édition), droit de
+  COMMUNICATION (représentation). Cessibles / concessibles. Logiciels
+  standard -> LICENCES d'utilisation (contrats d'adhésion).
+  * CESSION = cession des droits patrimoniaux sur les CODES SOURCES.
+  * LICENCE/CONCESSION = simple droit d'usage, non exclusif, souvent
+    1 poste ; l'auteur conserve les codes sources, ne remet que le code
+    objet/exécutable.
+- DROITS MORAUX : divulgation, PATERNITÉ, INTÉGRITÉ de l'œuvre,
+  opposition à toute atteinte à l'honneur/réputation. Ne peuvent pas
+  être cédés entièrement.
+- PROTECTION SANS FORMALITÉ : conférée du simple fait de la création.
+  Le dépôt facilite seulement la preuve.
+- DURÉE : droit moral = PERPÉTUEL ; droits d'exploitation = vie de
+  l'auteur + année en cours + 70 ANS (loi du 27 mars 1997) au profit
+  des ayants droit -> puis domaine public.
+- Autres protections : propriété INDUSTRIELLE (brevets, marques,
+  appellations d'origine, dessins et modèles) ; droits de la
+  PERSONNALITÉ (vie privée, honneur, image). Cumulables.
+- FONCTIONNAIRES : avis Ofrateme du Conseil d'État (21 novembre 1972 :
+  droits mis à disposition du service) -> renversé (avis du Conseil
+  supérieur de la propriété intellectuelle et artistique, décembre
+  2001) -> LOI DADVSI 2004 (art. 16 à 18) : l'agent public a la QUALITÉ
+  D'AUTEUR même dans le cadre de ses fonctions, mais l'administration a
+  le droit d'exploitation à des fins NON COMMERCIALES pour sa mission de
+  service public.
+- Logiciels de la personne publique : « sur étagère » -> droit d'usage
+  (concession) ; développé par l'administration -> droit d'exploitation ;
+  développé par un prestataire -> le CCAP détermine le titulaire (3 cas).
+  CCAG informatiques : CCAG FCS (Fournitures Courantes et Services) et
+  CCAG PI (Prestations Intellectuelles) — aucun ne traite bien du
+  logiciel libre.
+- Directive du 14 mai 1991 : programmes d'ordinateur protégés par le
+  droit d'auteur (logiciel + matériel de conception préparatoire), à la
+  condition d'ORIGINALITÉ.
+- CONTREFAÇON = reproduction/représentation/diffusion d'une œuvre en
+  violation des droits d'auteur. « Piratage » (non défini par le CPI) :
+  duplication artisanale (graveurs), copie sur plusieurs ordinateurs
+  (licences insuffisantes), téléchargement (sauf freeware/shareware).
+- LOI DADVSI (Droit d'Auteur et Droits Voisins dans la Société de
+  l'Information), adoptée le 30 JUIN 2006 ; transpose la directive du
+  22 MAI 2001 (EUCD) — droit de reproduction / communication /
+  distribution.
+  * Reconnaissance des DRM ; règle d'INTEROPÉRABILITÉ imposée ; le
+    Conseil constitutionnel a censuré des dispositions favorables à
+    l'interopérabilité.
+  * Copie privée + « collège de médiateurs » (3 membres dont 2
+    magistrats).
+  * Téléchargement illégal : sanctions graduées (38 € usage personnel,
+    150 € mise à disposition) ; éditeurs de logiciels d'échange ->
+    3 ans + 300 000 €. Le Conseil constitutionnel a jugé contraire au
+    principe d'ÉGALITÉ un régime pénal particulier pour le peer-to-peer.
+  * Création de l'Autorité de Régulation des Mesures Techniques.
+- RAPPORT OLIVENNES (Denis Olivennes, FNAC), novembre 2007 : rendre
+  l'offre légale plus attractive ; désinciter l'offre illégale (pas de
+  sanction pour le streaming, contravention pour le téléchargement
+  modéré, délit pour la mise à disposition massive) ; filtrage ;
+  système contractuel d'avertissement et de sanction (base de la RIPOSTE
+  GRADUÉE).
+- LOI HADOPI (Haute Autorité pour la Diffusion des Œuvres et la
+  Protection des droits sur Internet), projet « Création et Internet ».
+  TRIPLE MISSION : encouragement à l'offre légale + observation ;
+  protection des œuvres ; régulation/veille sur les mesures techniques.
+  Composée d'un COLLÈGE (9 membres) et d'une COMMISSION (3 membres :
+  Cour de cassation, Conseil d'État, Cour des comptes).
+  * Recommandation à l'abonné par voie électronique via le FAI ; en cas
+    de renouvellement dans les 6 mois -> 2e recommandation + LRAR.
+  * CONSEIL CONSTITUTIONNEL (10 juin 2009) : censure — une autorité
+    administrative ne peut couper l'accès à Internet (décision
+    JUDICIAIRE requise) ; censure aussi les « mouchards filtrants ».
+    La riposte graduée en 3 phases (email / LRAR / suspension) n'a pu
+    voir le jour en l'état.
+
+LOGICIELS LIBRES :
+- « free software » (free = gratuit OU libre). ≠ gratuiciels (freeware)
+  et partagiciels (shareware), distribués en BINAIRE (code exécutable
+  seul, sans code source), licence = simple droit d'exécution.
+- Logiciel = CODE SOURCE (fichiers texte) + CODE EXÉCUTABLE. Langages
+  interprétés (PHP, Perl) vs compilés (Java, C++ -> compilation).
+- Free Software Foundation (4 libertés) / Open Source Initiative (10
+  conditions).
+- 4 LIBERTÉS : exécuter pour tous les usages ; étudier et adapter
+  (accès au code source) ; redistribuer des copies (avec ou sans
+  contrepartie) ; modifier. « Libre » ≠ « gratuit ».
+- COPYLEFT (« gauche d'auteur ») : conditions de distribution
+  empêchant de rendre propriétaire un logiciel libre (interdit d'ajouter
+  des restrictions). Mise en œuvre : GPL (General Public License).
+
+4. SIGNATURE ÉLECTRONIQUE
+-----------------------------------------------------------------------
+- LOI DU 13 MARS 2000 : valeur juridique de la signature électronique
+  sous conditions ; modifie le CODE CIVIL et le droit de la preuve.
+  Contexte : directive du 13 décembre 1999. Décrets : 30 mars 2001,
+  13 décembre 2001.
+- Directive du 13 décembre 1999 (art. 5), 2 catégories recevables en
+  justice :
+  * SIGNATURE SIMPLE : donnée servant de méthode d'authentification ;
+    élément de preuve, PAS la valeur d'une signature manuscrite (bas
+    niveau).
+  * SIGNATURE AVANCÉE : certificat qualifié + dispositif sécurisé de
+    création ; ÉQUIVALENTE à la signature manuscrite si : liée
+    uniquement au signataire, identifie le signataire, moyens sous
+    contrôle EXCLUSIF, lien avec les données rendant toute modification
+    DÉTECTABLE (haut niveau).
+- 4 CONDITIONS d'équivalence électronique / papier : identification par
+  procédé fiable ; création intègre ; conservation intègre ; procédé
+  fiable garantissant le lien signature-acte.
+- 2 NIVEAUX (loi du 13 mars 2000) : signature SIMPLE (procédé non
+  présumé fiable -> prouver la fiabilité en cas de contestation) ;
+  signature PRÉSUMÉE FIABLE (fiabilité présumée -> au DEMANDEUR de
+  prouver l'inverse ; même valeur que la manuscrite).
+- Décret du 30 mars 2001 (art. 2) : procédé fiable si signature
+  sécurisée (propre au signataire, contrôle exclusif, modification
+  détectable) + dispositif sécurisé de création + vérification par
+  CERTIFICAT ÉLECTRONIQUE QUALIFIÉ fourni par un prestataire de service
+  de certification déclaré auprès de la DCSSI.
+- 3 ÉLÉMENTS : CHIFFREMENT (algorithme + clé ; loi française : clé
+  limitée à 128 bits) ; EMPREINTE (hash, fonction de hachage, version
+  synthétique et unique) ; CERTIFICAT électronique (fichier public de
+  8 à 10 Ko, identifie l'émetteur + clé publique). PSCE = Prestataire de
+  Service de Certification Électronique.
+- Symétrique : inconvénient = échanger la clé à l'avance sur un canal
+  sûr. Asymétrique : clé PRIVÉE (jamais révélée) + clé PUBLIQUE
+  (divulguée, dans le certificat).
+
+5. LES NOUVEAUX RISQUES
+-----------------------------------------------------------------------
+- ESPIOGICIEL (spyware) : programme installé le plus souvent À L'INSU de
+  l'utilisateur, collecte des données et les transmet à son créateur
+  (ciblage publicitaire) ; souvent associé aux logiciels gratuits (P2P).
+  « Web bugs » = pixel invisible dans des pages/courriers HTML (mesure
+  d'audience). PAS illégal en soi -> licéité conditionnée au
+  CONSENTEMENT EXPRÈS.
+- RFID (Radio Frequency Identification) : puces à antenne (« radio
+  tags », « étiquettes intelligentes ») dans les étiquettes des
+  produits ; depuis 1990 ; applications (anti-vol, péage sans arrêt,
+  accès aux immeubles). RISQUE : lecture À DISTANCE des informations.
+
+6. NOUVEAU CADRE JURIDIQUE DES COMMUNICATIONS ÉLECTRONIQUES
+-----------------------------------------------------------------------
+- LOI n° 2004-669 DU 9 JUILLET 2004 : transpose le « PAQUET TÉLÉCOMS »
+  (6 directives + 1 décision de 2003 ; réforme européenne engagée en
+  1999). Le code des postes et télécommunications devient le CODE DES
+  POSTES ET DES COMMUNICATIONS ÉLECTRONIQUES.
+- Points clés : concurrence effective ; renforcement des ARN (autorités
+  de réglementation nationales) ; rapprochement du droit de la
+  concurrence ; cadre HARMONISÉ pour les « réseaux de communications
+  électroniques » (audiovisuel + télécoms), contenus soumis à des
+  régimes distincts ; « DROIT DE VETO » de la Commission européenne sur
+  certaines décisions des ARN.
+- SIMPLIFICATION : suppression des autorisations pour installer les
+  réseaux / offrir les services -> simple DÉCLARATION auprès de l'ART.
+  Régime de liberté pour les réseaux indépendants. Seules subsistent les
+  autorisations pour les FRÉQUENCES radioélectriques assignées.
+- Réseaux CÂBLÉS -> code des postes et communications électroniques.
+  Radiodiffusion hertzienne terrestre/satellite (bandes du CSA) ->
+  régime spécifique (loi du 30 septembre 1986).
+- RÉGULATION (loi n° 96-659 du 26 juillet 1996) : notion de « position
+  dominante » / « influence significative sur le marché ». Démarche en
+  3 ÉTAPES : identification des marchés pertinents ; détermination des
+  opérateurs à influence significative ; définition des obligations
+  spécifiques. Confiée à l'ART.
+- ART : pouvoirs d'ENQUÊTE (locaux des opérateurs) ; SANCTION (mesures
+  conservatoires sans mise en demeure) ; RÈGLEMENT DE DIFFÉRENDS ;
+  obligations de discrétion des membres.
+- SERVICE PUBLIC des télécoms = SERVICE UNIVERSEL + SERVICES
+  OBLIGATOIRES + MISSIONS D'INTÉRÊT GÉNÉRAL. Service universel : débit
+  suffisant pour un accès fonctionnel à Internet ; retrait du télex.
+- France Télécom, seul opérateur capable d'assurer le service universel
+  -> lois du 31 décembre 2003 et du 9 juillet 2004 : APPEL À
+  CANDIDATURES du ministre ; chaque composante attribuée au NIVEAU
+  NATIONAL ; financement selon le CHIFFRE D'AFFAIRES des opérateurs
+  (avant : volume de trafic).
+- FRÉQUENCES : répartition par le PREMIER MINISTRE entre ministères et
+  autorités affectataires (ART et CSA). Attribution par l'ART via appels
+  à candidatures ; possibilité d'ENCHÈRES et de MARCHÉS SECONDAIRES pour
+  les fréquences confiées à l'ART. ICANN pour l'adressage par noms de
+  domaine.
+- ANFR (Agence Nationale des Fréquences), créée en 1997 : gestion des
+  fréquences ; rôle SANTÉ PUBLIQUE -> peut s'opposer à toute installation
+  de station radioélectrique ne respectant pas les valeurs limites
+  d'exposition aux champs électromagnétiques (décret n° 2002-775 du
+  3 mai 2002).
+
+7. LES LOIS
+-----------------------------------------------------------------------
+- Loi n° 2004-669 du 9 juillet 2004 modifie la LOI n° 86-1067 DU 30
+  SEPTEMBRE 1986 (liberté de communication) : le CSA devient compétent
+  pour TOUS les services de radio et de télévision quel que soit le mode
+  de diffusion ; régulation des contenus (pluralisme, protection des
+  mineurs) ; règlement des litiges éditeurs/distributeurs ; procédures
+  d'attribution modernisées (délai d'instruction max 8 mois) ; fin de
+  l'autorisation préalable des communes pour les réseaux câblés ;
+  obligation « MUST CARRY ». TNT lancée depuis 2002 (97 % des habitants,
+  19 chaînes nationales gratuites).
+- LOI n° 2004-575 DU 21 JUIN 2004 pour la CONFIANCE DANS L'ÉCONOMIE
+  NUMÉRIQUE (LCEN) : transpose la directive 2000/31/CE du 8 juin 2000
+  sur le commerce électronique. 5 TITRES : liberté de communication en
+  ligne ; commerce électronique ; sécurité dans l'économie numérique ;
+  systèmes satellitaires ; développement des TIC.
+  * « Communication au public par voie électronique » = communication
+    publique en ligne + communication audiovisuelle.
+  * RESPONSABILITÉ DES HÉBERGEURS : engagée seulement en cas de
+    connaissance effective d'un contenu illicite non retiré promptement ;
+    AUCUNE obligation générale de surveiller.
+  * Responsabilité du « cache » : absente si obligation de neutralité
+    respectée.
+  * Commerce électronique : prestataire soumis à la loi de l'État
+    membre où il est établi ; obligation d'identification ; distinction
+    messages publicitaires / non commerciaux ; prospection par courriel
+    = accord préalable d'une personne physique (opt-in), sauf
+    coordonnées fournies lors d'une vente ; interdiction de masquer
+    l'identité de l'expéditeur.
+  * CONTRATS SOUS FORME ÉLECTRONIQUE (nouveau chapitre du code civil) :
+    formalisme papier PRÉSERVÉ pour 3 catégories — sûretés (sauf
+    professionnel), contrats soumis à autorisation/homologation
+    judiciaire, contrats sous seing privé du droit de la famille et des
+    personnes.
+  * Art. 1369-4 du code civil : acceptation par « DOUBLE CLIC » +
+    accusé de réception rapide. Contrats > un certain montant archivés
+    par le professionnel.
+- LOI n° 2003-1365 DU 31 DÉCEMBRE 2003 (obligations de service public
+  des télécoms et France Télécom) :
+  * France Télécom : DGT (années 1980) -> EXPLOITANT PUBLIC (loi du 2
+    juillet 1990, personnalité juridique) -> SOCIÉTÉ ANONYME (loi de
+    juillet 1996) -> fin de la DÉTENTION MAJORITAIRE par l'État
+    (art. 7, loi du 31 décembre 2003) -> décret n° 2004-387 du 3 mai
+    2004 (transfert au secteur privé).
+  * Loi du 2 juillet 1990 : interdiction de recruter des fonctionnaires
+    depuis le 1er janvier 2002 ; corps en extinction depuis cette date.
+  * Fonctionnaires volontaires : contrat de travail de droit privé ;
+    les autres conservent leur statut. Sanctions les plus lourdes
+    (révocation, mise à la retraite d'office) : ministre chargé des
+    communications électroniques.
+
+=======================================================================
+À RETENIR
+- CNIL : loi 6 janvier 1978 (SAFARI), loi 6 août 2004 (données
+  personnelles, déclaration = droit commun) ; autorité indépendante,
+  18 membres, 4 missions ; sanctions pénales jusqu'à 5 ans + 300 000 € ;
+  CIL exonère de déclaration.
+- Messagerie : opt-in (LCEN), loi 10 juillet 1991 (secret des
+  correspondances), arrêt Nikon (2 oct. 2001, mention « personnel »),
+  Code pénal 226-15 (1 an + 45 000 €).
+- Droit d'auteur : art. L.111-1 CPI ; patrimoniaux (reproduction,
+  communication, cessibles) / moraux (divulgation, paternité, intégrité,
+  incessibles) ; sans formalité ; vie + 70 ans ; DADVSI (30 juin 2006,
+  DRM) ; HADOPI (Conseil const. 10 juin 2009 : coupure = juge).
+- Logiciel libre : 4 libertés, copyleft = GPL ; libre ≠ gratuit.
+- Signature électronique : loi 13 mars 2000 (code civil) ; simple vs
+  présumée fiable ; 4 conditions ; chiffrement + empreinte + certificat
+  qualifié (PSCE, DCSSI) ; clé <= 128 bits.
+- Nouveaux risques : spyware (consentement exprès), RFID (lecture à
+  distance).
+- Communications électroniques : loi 9 juillet 2004 (paquet télécoms),
+  déclaration auprès de l'ART, service universel par appel à
+  candidatures, ANFR (1997, champs électromagnétiques).
+- Lois : loi 30 sept. 1986 (CSA, must carry) ; LCEN 21 juin 2004
+  (hébergeurs, double clic) ; loi 31 déc. 2003 (privatisation de France
+  Télécom).

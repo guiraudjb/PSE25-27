@@ -1,0 +1,168 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 6, thème 4
+L'ADMINISTRATION ÉLECTRONIQUE
+=======================================================================
+
+1. DU PAGSI AU RE/SO
+-----------------------------------------------------------------------
+- Années 90 : téléservices peu généralisés, initiatives NON coordonnées
+  (reproduisent la complexité administrative).
+- PAGSI (août 1997, Lionel Jospin) : Programme d'Action Gouvernemental
+  pour la Société de l'Information -> généralisation des sites internet
+  publics + mise en ligne de formulaires.
+- RE/SO 2007 (novembre 2002, Jean-Pierre Raffarin) : « Pour une
+  RÉpublique numérique dans la SOciété de l'information ». 3 VOLETS :
+  * action sur l'OFFRE (climat de confiance -> LCEN 2004, création
+    d'entreprise) ;
+  * action sur la DEMANDE (équipement des ménages, accès rapide) ;
+  * intervention directe de l'ÉTAT (éducation, santé...).
+- 3 PHASES de l'administration électronique : 1) informations statiques ;
+  2) formulaires téléchargeables ; 3) téléprocédures.
+- Grande-Bretagne : l'« e-envoy » coordonne la politique britannique.
+
+2. LE PILOTAGE
+-----------------------------------------------------------------------
+- Décret du 27 août 1998 : MTIC (mission interministérielle de soutien
+  technique pour les TIC dans l'administration), 3 ans.
+- Décret du 22 août 2001 : ATICA succède à la MTIC, 3 ans.
+- Décret du 21 février 2003 : ADAE (Agence pour le Développement de
+  l'Administration Électronique), conformément à RE/SO 2007. Service
+  interministériel auprès du PM, mis à disposition du ministre de la
+  réforme de l'État. Née de la FUSION DE 3 SERVICES : ATICA + mission
+  TIC de la DIRE + pôle formulaires/téléprocédures de la COSA.
+- Décret du 30 décembre 2005 : ADAE intégrée à la DGME, rattachée au
+  MINEFI.
+- La DGME intègre : ADAE ; DMGPSE (Délégation à la Modernisation des
+  Structures de l'État, reprend la DIRE) ; DUSA (Délégation aux usagers
+  et aux simplifications administratives, reprend la COSA ; charte
+  MARIANNE, COSLA) ; DRB (Direction de la Réforme Budgétaire).
+- DGME = 3 SERVICES : qualité et simplification ; modernisation de la
+  gestion publique ; développement de l'administration électronique.
+- Autres comités : CIACT (aménagement et compétitivité des territoires,
+  haut débit) ; CISI (Comité Interministériel pour la Société de
+  l'Information — PAGSI adopté par le 1er CISI en 1998) ; MEN (Mission
+  pour l'Économie Numérique, commerce électronique) ; DDM (Direction du
+  Développement des Médias, ministère de la Culture) ; CSTI (innovation,
+  recherche) ; Délégation aux usages de l'Internet (reprend la MAPI) ;
+  SGDN + DCSSI (sécurité des SI) ; DIACT (remplace la DATAR).
+
+3. LE PROGRAMME ADELE
+-----------------------------------------------------------------------
+- ADELE (ADministration ELEctronique), annoncé en février 2004.
+- Cadre pluriannuel : 140 mesures (Adèle 1 à 140). PSAE (Plan Stratégique
+  de l'Administration Électronique) 2004-2007 + P2AE (Plan d'action).
+- 2 OBJECTIFS : services plus nombreux, faciles, accessibles à tous et à
+  tout moment ; modernisation en synergie avec les partenaires européens
+  + pilotage.
+
+SERVICES PHARES :
+- 3939 « Allô service public » : numéro unique, réponse ou orientation en
+  MOINS DE 3 MINUTES.
+- mon.service-public.fr : accès personnalisé, depuis service-public.fr
+  (lancé octobre 2000).
+- CNIE (Carte Nationale d'Identité Électronique) : se substitue
+  progressivement à la CNI classique ; authentification + signature
+  électronique ; simplifie l'obtention d'autres titres (passeport).
+- Carte d'agent public : habilitations, signature de pièces, accès aux
+  locaux et services (cantine).
+- Dématérialisation du Journal Officiel : une ordonnance donne valeur
+  légale à la version électronique.
+- Dématérialisation des achats publics : ARTICLE 56 du Code des marchés
+  publics 2004 (réaffirmé 2006). SAD (Système d'Acquisition Dynamique /
+  Dynamic Purchasing System) = acquisition entièrement électronique pour
+  achats d'usage courant. ENCHÈRE ÉLECTRONIQUE = sélection par voie
+  électronique, révision du prix à la baisse ; EXCLUE pour les marchés
+  de fournitures et services < 133 000 € HT.
+- Dématérialisation du contrôle de légalité : projet ACTES (Aide au
+  Contrôle de légalité dématErialiSé).
+
+4. LE SCHÉMA DIRECTEUR DE L'ADMINISTRATION ÉLECTRONIQUE (SDAE)
+-----------------------------------------------------------------------
+- Couvre l'ENSEMBLE des SI de l'administration centrale et déconcentrée.
+  Élément incontournable des schémas directeurs des ministères.
+- FINALITÉS : synchroniser/mutualiser les travaux (éviter la
+  redondance) ; pilotage consolidé par INDICATEURS ; vision cible du SI.
+- Objectif double : suivi de l'avancement du P2AE + définir les
+  indicateurs de progression.
+- SYSTÈME CIBLE ADÈLE : grille de lecture commune définissant les
+  concepts d'urbanisme à l'échelle de l'État ; architecture PAR
+  COMPOSANTS favorisant l'interopérabilité et la réutilisation.
+- INITIATIVES : regroupements de projets et d'actions communes formant
+  un ensemble cohérent sur un domaine. 47 initiatives (2006-2010). But :
+  généraliser les bonnes pratiques. Chef de file par initiative.
+  3 DOMAINES :
+  * SOCLE COMMUN : fonctionnel (gestion de crise, archivage, conduite du
+    changement), infrastructure (réseaux, production), services de
+    confiance (politique de sécurité), informatique (développement,
+    pilotage, gestion de contenu, postes).
+  * DOMAINES SECTORIELS : aspects métier de chaque ministère (Fiscalité,
+    Défense, Santé Publique).
+  * NOUVEAUX SERVICES : services usagers globaux (TPE, déménagement).
+  * Ex. : initiative IT 06 (développement informatique), chef de file =
+    MINEFI et COPERNIC.
+- PHASES : PARTAGE (non formalisée, comité de partage) et PILOTAGE
+  (convention + plan d'action).
+- INSTANCES : Comité des Secrétaires Généraux (plus haut niveau, désigne
+  le chef de file) ; comité de pilotage de l'initiative (seule instance
+  décisionnelle interne) ; chef de file.
+- RÉFÉRENTIELS : RGI (interopérabilité), RGS (sécurité), RGAA
+  (accessibilité), R2GA (Référentiel Général de Gestion des Archives),
+  Charte Internet de l'État (CIE), SILL.
+- Contrôle par INDICATEURS (LOLF) : pérennes, mesurés de façon
+  récurrente, périmètre et mode de calcul constants, fiables (principe
+  de SINCÉRITÉ de la LOLF).
+
+5. AUTRES PROJETS
+-----------------------------------------------------------------------
+- Programme AdER (Administration En Réseau), lancé par le CISI du 19
+  janvier 1999 : « INTRANET GLOBAL » inter-administrations pour
+  décloisonner et faire coopérer les services de l'État. Outils :
+  méta-annuaire MAIA, service d'interconnexion de messagerie
+  interministérielle, service de transport SETI.
+- Vit@min : EXTRANET interministériel de travail coopératif, décidé par
+  le CIRE du 12 octobre 2000 ; thèmes de travail = « sites web » avec
+  outils coopératifs (bibliothèque, forum, agenda, FAQ).
+- SIT (Systèmes d'Information Territoriaux) : « EXTRANET des services de
+  l'État » dans un département/région ; décidé par le CISI du 19 janvier
+  1999 ; chaque département et région en dispose fin 2000.
+
+6. PROTECTION DES DONNÉES PERSONNELLES
+-----------------------------------------------------------------------
+- Cadre : LOI DU 6 JANVIER 1978 modifiée par la loi du 6 août 2004.
+- INTERCONNEXION DES FICHIERS : ni interdite ni libre, STRICTEMENT
+  ENCADRÉE. Assimilée à un traitement -> AVIS DE LA CNIL. Doit être
+  portée à la connaissance des personnes. Ne peut utiliser le NIR
+  (Numéro d'Inscription au Répertoire National d'Identification des
+  Personnes Physiques, détenu par l'INSEE) que si les DEUX
+  administrations y sont autorisées. Interconnexions autorisées assez
+  limitées, souvent par la loi, justifiées par le contrôle des fonds
+  publics.
+- CAHIER DES CHARGES DES TÉLÉSERVICES (CNIL, depuis 1997), 5 POINTS :
+  1. IDENTIFICATION de l'usager (télédéclaration de revenus : identifiant
+     spécifique annuel NON SIGNIFIANT plutôt que le numéro FIP, non
+     confidentiel car porté sur les avis d'imposition) ;
+  2. AUTHENTIFICATION (confrontation des infos communiquées et des
+     données détenues) ;
+  3. SIGNATURE ÉLECTRONIQUE (ex. carte du professionnel de santé pour les
+     feuilles de soins) ;
+  4. CHIFFREMENT pour la CONFIDENTIALITÉ (impératif pour les données
+     sensibles santé/financières transmises sur Internet) ;
+  5. INFORMATION et DROIT D'ACCÈS des usagers.
+
+=======================================================================
+À RETENIR
+- PAGSI (1997, Jospin) -> RE/SO 2007 (2002, Raffarin, 3 volets :
+  offre / demande / État) -> 3 phases (statique / formulaires /
+  téléprocédures).
+- Pilotage : MTIC (1998) -> ATICA (2001) -> ADAE (2003) -> DGME (2005).
+  DGME = ADAE + DMGPSE + DUSA + DRB, en 3 services.
+- ADELE (2004) : 140 mesures, PSAE + P2AE. Services : 3939, mon.service-
+  public.fr, CNIE, carte d'agent, JO dématérialisé, achat public
+  (article 56, SAD, enchère électronique < 133 000 € HT exclue), ACTES.
+- SDAE : 47 initiatives (socle commun / sectoriel / nouveaux services) ;
+  Comité des Secrétaires Généraux ; référentiels RGI / RGS / RGAA / R2GA
+  / CIE / SILL.
+- AdER (intranet global, CISI 1999), Vit@min (extranet coopératif),
+  SIT (extranet des services de l'État).
+- Données personnelles : loi 6 janvier 1978 modifiée 2004 ;
+  interconnexion sur avis CNIL ; NIR encadré ; 5 points CNIL des
+  téléservices.

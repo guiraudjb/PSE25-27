@@ -1,0 +1,203 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 6, thème 2
+LE SI DES MINISTÈRES ÉCONOMIQUES ET FINANCIERS (MEF)
+=======================================================================
+
+1. CONTEXTE INSTITUTIONNEL ET BUDGÉTAIRE
+-----------------------------------------------------------------------
+- Spécificité MEF : multiplicité et variété des missions -> autonomie
+  des directions.
+- LOLF (2001) : les directeurs de PROGRAMME sont responsables de la mise
+  en œuvre. Allocations budgétaires globalisées séparant SEULEMENT les
+  dépenses de personnel des autres -> FONGIBILITÉ ASYMÉTRIQUE
+  (redéploiement vers le personnel possible, pas l'inverse).
+  -> Un programme budgétaire par direction (incluant son SI). PAS de
+  programme support identifié aux MEF (contrairement à d'autres
+  ministères).
+- PAP (Projet Annuel de Performances) : budget prévisionnel, voté dans
+  la LOI DE FINANCES (dernier trimestre), plafonds pour N+1. Mentionne
+  effectifs, valorisation Titre 2, crédits Titre 3 (fonctionnement) et
+  Titre 5 (investissement).
+- RAP (Rapport Annuel de Performances) : bilan stratégique, réalisation
+  des objectifs/indicateurs, exécution des crédits, JUSTIFICATION AU
+  PREMIER EURO, analyse des coûts par action. Voté dans la LOI DE
+  RÈGLEMENT (fin du 1er semestre), exécution de N-1.
+  -> les ressources du RAP ne peuvent EXCÉDER celles du PAP.
+- À partir de 2015, le programme 221 (surtout CHORUS) devient une action
+  du programme 218.
+- MEF : ~145 000 agents (31/12/2014), 13 Md€ de crédits de paiement.
+- Directions à SERVICES DÉCONCENTRÉS : DGFiP, DGDDI, INSEE, DGCCRF, DG
+  Trésor, DGE. Directions D'ÉTAT-MAJOR : DB, SG, IGF, CGEFI, CGEIET,
+  CBCM, TRACFIN, AIFE.
+- DSI (Délégation aux Systèmes d'Information) auprès du secrétaire
+  général : impulsion, coordination, mutualisation -> rôle de « DSI
+  groupe » ; relations avec la CNIL ; représentation dans l'inter-
+  ministériel. Décret n° 2010-444 du 30 avril 2010.
+
+2. HISTORIQUE
+-----------------------------------------------------------------------
+- Avant 2000 : informatique de production, mainframes, centres
+  d'exploitation régionalisés (Impôts, Trésor public), « en silo », peu
+  communicante, internalisée, peu documentée.
+- Charnière an 2000 : téléprocédures, dématérialisation, simplification
+  pour l'usager, outils collaboratifs internet, suppression des ruptures
+  du SI interne.
+- 2000-2010 : grands PROGRAMMES de transformation organisationnelle —
+  COPERNIC, HELIOS, SIRHIUS, DELTA (ministériels) ; CHORUS, ONP
+  (interministériels). Gains surtout par économies d'emplois.
+- PROGICIELS intégrés : PeopleSoft (ACCORD), SAP (CHORUS), HR Access
+  (SIRHIUS). Risques : dépendance aux prestataires, couple
+  éditeur-intégrateur, absence de version « publique ».
+- Dématérialisation : télé-déclaration des revenus (12,8 M / 34 M foyers
+  en 2012, 14,6 M en 2015) ; immobilisation des marchandises via Delt@
+  13 min (2004) -> 6 min (2011) -> 4 min (2014) ; ~80 % des
+  télé-déclarations/règlements TVA. Poste + intranet pour chaque agent
+  dès 2002.
+- Virage du numérique : effacement des limites de géographie/temps,
+  mobilité, multi-canal, BYOD, instantanéité ; ouverture des SI (notaires
+  -> publicité foncière et cadastre). Fraudes fiscales + sociales
+  ~13 Md€ -> DLNUF (« Dites-Le Nous Une seule Fois »).
+- data.gouv.fr ouvert décembre 2011 (300 000 fichiers). INSEE = premier
+  contributeur d'ETALAB. Big data : INSEE exploite les données des
+  caisses de la grande distribution pour l'indice des prix (dès 2016).
+- Management « ORGANIQUE » en réseau (non hiérarchique) : ne repose plus
+  sur la détention de l'information mais sur la capacité à la relayer,
+  l'interpréter, lui donner du sens.
+
+3. SCHÉMAS DIRECTEURS
+-----------------------------------------------------------------------
+- Décret 86-1301 du 22 décembre 1986 : schéma directeur de
+  l'informatique, de la bureautique et des réseaux, sous la
+  responsabilité du MINISTRE ; bilan d'exécution annuel ; présenté au
+  CIIBA.
+- Circulaire du 16 septembre 1996 : constat d'une informatique en silo ;
+  impose un schéma directeur PLURIANNUEL en 3 VOLETS — STRATÉGIQUE
+  (Ministre), ORGANISATIONNEL (relations entre services), TECHNIQUE
+  (choix retenus).
+- Les MEF n'ont PAS produit un schéma directeur unique (la partie métier
+  reste des directions) ; chaque direction produit sa trajectoire /
+  feuille de route.
+- SIM (Schéma Informatique Ministériel), décidé par le ministre en 2001,
+  support de « l'e-ministère » : simplifier la relation à l'usager,
+  moderniser l'environnement de travail de l'agent, accroître
+  l'efficacité de l'action de l'État.
+  * 3 axes : répondre aux nouvelles attentes des usagers ; travailler
+    plus efficacement ; mieux anticiper.
+  * Mise en œuvre par le COMITÉ DES TIC (sous-directeurs informatiques).
+  * 3 chantiers : cadre technique commun ; démarche applicative commune
+    SIRH ; mutualisation des expertises et compétences.
+  * Résultats : 1er objectif atteint mi-2002 (poste + messagerie +
+    intranet ALIZE + internet) ; charte d'utilisation des TIC (2e
+    semestre 2002) ; OpenOffice à la DGDDI ; première IGC ministérielle ;
+    convergence des SIRH.
+  * La démarche SIM s'efface après 2003 (montée de l'interministériel).
+- Palier de MATURITÉ 1 (livré février 2011, actualisé février 2012) :
+  maturité du SI selon 10 COMPOSANTES + fiches actions.
+- CONTRATS DE PROGRÈS signés en juin 2013.
+- Le schéma directeur est jugé TROP LOURD (document formalisé et
+  littéraire, circuits de validation, projection à 5 ans difficile,
+  actualisation régulière).
+- Décret n° 2014-879 du 1er août 2014 : chaque ministre établit un PLAN
+  D'INVESTISSEMENT SIC transmis pour information au DISIC ; projets
+  > 9 M€ -> avis conforme.
+
+4. LE RÔLE PARTICULIER DE LA DSI
+-----------------------------------------------------------------------
+- CIIBA créé en 1981 ; aux MEF, commission CDIB (contrôle des dépenses
+  informatiques) puis Délégation aux Systèmes d'Information (début des
+  années 90). La DSI a favorisé TEDECO (protocole EDI, norme
+  expérimentale française Z 71-347).
+- Service des systèmes d'information rattaché au SG créé fin juillet 2006
+  (suppression de la DSI, du chef de service TIC, de la MEN).
+- DSI organisée en 3 PÔLES :
+  * animation et synthèse du SI ministériel (cohérence, relations avec
+    les partenaires : administration électronique, CNIL, DGAFP) ;
+  * coordination des technologies de l'information (ToIP, réseaux,
+    sécurité) ;
+  * convergence des SIRH des directions (SIRHIUS).
+- ~17-20 ETP. COSTRAT SI (Comité stratégique des SI) créé par arrêté du
+  23 décembre 2013, présidé par le directeur de cabinet du ministre,
+  1re réunion le 13 février 2014.
+
+5. RESSOURCES FINANCIÈRES SI
+-----------------------------------------------------------------------
+- Modèle de coûts DISIC (depuis 2012) : RESSOURCES – ACTIVITÉS –
+  SERVICES.
+  * Ressources : ce que la DSI mobilise (nature de la dépense).
+  * Activités : ce que la DSI réalise (projets, maintenance).
+  * Services : ce que la DSI délivre (services du catalogue).
+  * 3 niveaux de maille : grosse (tous ministères), moyenne (ambition
+    interministérielle), fine (par ministère).
+- Fiabiliser l'imputation comptable par des arbres de décision univoques
+  partagés métiers / comptables.
+- Dépense SI : BAISSE de ~42 % en moyenne depuis 2008 (fin de projets
+  COPERNIC, CHORUS ; marchés baissiers). Restitution fiable depuis 2012
+  (crédits de paiement via CHORUS).
+- Postes principaux : INFRASTRUCTURES 37 %, APPLICATIFS MÉTIER 32 %,
+  bureautique 20 % (2014).
+- Budget SI triennal 2015-2017 (CP) : ~382 M€ / 357 M€ / 350 M€.
+
+6. RESSOURCES HUMAINES SI
+-----------------------------------------------------------------------
+- Cartographies interministérielles 2011 et 2012. Enquête DISIC :
+  23 000 agents SI (hors militaires et opérateurs), 69 corps concernés,
+  ~10 % de contractuels en moyenne. Approche 2014 inspirée du référentiel
+  CIGREF 2011.
+- MEF : peu de contractuels (DGFiP, AIFE surtout), ressources internes
+  importantes avec qualification informatique.
+- 3 grandes compétences des titulaires (~29 % chacune) : études et
+  développement ; exploitation production ; assistance utilisateurs.
+- Cadre juridique RH SI : décrets de février 1971 toilettés en 1980.
+  Refonte du concours des ingénieurs SIC du ministère de l'Intérieur
+  (bac +5) -> recrutement ouvert aux autres ministères fin 2015.
+- PFR (Prime de Fonctions et de Résultats) -> remplacée en 2016 par le
+  RIFSEEP (Régime Indemnitaire tenant compte des Fonctions, des
+  Sujétions, de l'expertise et de l'Engagement Professionnel).
+- SILL (socle interministériel de logiciels libres) conçu par les
+  groupes MIMx : MIMO (poste de travail et gestion de parc), MIMDEV
+  (développement), MIMPROD (serveur et base de données). SILL annuel.
+
+7. QUELQUES ÉLÉMENTS PAR DIRECTION
+-----------------------------------------------------------------------
+- DGFiP : ~5 000 ETP internes, budget 212 M€ 2014 (hors T2). Service SI
+  central (SI1 Études, SI2 Production) ; 9 DISI (directions
+  inter-régionales) ; 47 ESI (établissements = ex-CRI de la DGI + ex-
+  départements informatiques de la DGCP). PSI 2011-2013 en 4 axes.
+- DGDDI : 500 ETP, budget 41 M€ 2014. Sous-Direction C (C1 AMOA, C2
+  infrastructure, C3 budget) ; 2 centres : CID (Osny) et DNSCE
+  (Toulouse). Dématérialisation du dédouanement 86 % ; immobilisation
+  moyenne 4 min (2014). Portage administratif/financier du projet
+  interministériel API-PNR (Passenger Name Record), sous l'autorité du
+  Premier ministre, cofinancé par l'UE.
+- INSEE : ~630 agents (plan vers 500), budget 20 M€ 2014. Secrétariat
+  Général Informatique (DPA Projets et Applications, DPII Production et
+  infrastructures) ; 4 Centres Nationaux Informatique (Metz -> toute la
+  production). Schéma Directeur SI 2011-2015 ; projet HOMERE (télé-
+  service de recensement).
+- DGCCRF : SICCRF (SCN), ~70-80 ETP, budget 1,9 M€ 2014 ; 3 centres
+  (Paris, Lyon dev, Montpellier technique).
+- SG-SEP : SG SEP1 (Service de l'Environnement Professionnel –
+  Informatique), ~250 agents, budget 27,4 M€ 2014. Passerelle de
+  l'administration centrale vers l'extérieur, gestion de l'intranet
+  ALIZE, animation du réseau des GRID.
+- DG Trésor : service central + réseau des missions économiques à
+  l'étranger, budget 2,7 M€ 2014.
+- AIFE : 154 internes + 58 contractuels + 207 prestataires, budget
+  63 M€ 2014. Porte CHORUS (SI financière, budgétaire et comptable de
+  l'État, support de la LOLF, sur SAP ; déploiement achevé début 2012 ;
+  crédits 2006-2015 ~898 M€). CPP = CHORUS Portail Pro.
+
+=======================================================================
+À RETENIR
+- LOLF -> fongibilité asymétrique ; PAP (loi de Finances, N+1) / RAP
+  (loi de Règlement, N-1, RAP <= PAP).
+- MEF : ~145 000 agents, 13 Md€ ; DSI = « DSI groupe » (3 pôles :
+  synthèse SI / technologies / SIRH), relations CNIL.
+- Schéma directeur : décret 1986 (au ministre, CIIBA) ; circulaire 1996
+  (3 volets stratégique / organisationnel / technique) ; SIM 2001
+  (e-ministère, ALIZE).
+- Progiciels : ACCORD = PeopleSoft, CHORUS = SAP (AIFE), SIRHIUS = HR
+  Access.
+- Coûts DISIC : modèle ressources / activités / services ; dépense SI
+  -42 % depuis 2008 (infra 37 %, applis métier 32 %).
+- GRID = gestionnaires des ressources informatiques déconcentrées ;
+  SILL par MIMO / MIMDEV / MIMPROD.

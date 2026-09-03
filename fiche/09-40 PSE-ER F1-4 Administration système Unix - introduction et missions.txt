@@ -1,0 +1,31 @@
+ADMINISTRATION SYSTÈME UNIX : INTRODUCTION ET MISSIONS
+
+1. CONSIDÉRATIONS PRATIQUES
+Unix a fondé sa force sur des modalités d'accès simples et robustes en ligne de commande (les outils du shell ont même été adoptés ailleurs, cf. PowerShell côté Windows Server). L'administrateur doit maîtriser le clavier (AZERTY / QWERTY, touches Shift, Alt Gr).
+Terminal / émulateur de terminal : fenêtre exécutant un shell qui affiche un prompt, base du système. Consoles système : point d'entrée d'administration lors de l'installation de serveurs. Consoles virtuelles : clients légers simulant un terminal passif (VT100 de DEC, PuTTY sous Windows) ; Unix en ouvre plusieurs. Variable TERM = type de terminal.
+Connexions distantes : Telnet permet la prise en main à distance mais fait circuler login et mot de passe EN CLAIR sur le réseau : on lui préfère SSH, qui chiffre les données dans un tunnel.
+
+2. UTILISATEURS ET CARACTÉRISTIQUES D'UN UNIX
+Deux catégories : l'utilisateur (le système est un outil, droits limités) et l'administrateur système (installation, configuration, bon fonctionnement, tous les droits). Le super-utilisateur s'appelle root ; on limite volontairement leur nombre.
+Missions d'un OS Unix : mise à disposition des ressources matérielles ; partage équitable entre utilisateurs (multi-utilisateurs) ; gestion de la mémoire ; gestion des fichiers. Aucun processus n'accède directement au matériel : il passe par un fichier spécial de périphérique. « Mémoire » = mémoire volatile (RAM) par convention (la mémoire statique est le disque).
+Terminologie : mono/multi-utilisateur ; mono/multi-tâche ; multitâche préemptif (l'OS décide quand un processus a eu assez de CPU) vs non préemptif (le processus décide). Unix est multi-utilisateurs et multi-tâches (et multithread).
+
+3. NOYAU, SHELL, ÉDITEUR
+Noyau (kernel) : ensemble de programmes, cœur de l'OS ; les processus y accèdent par appels système. Deux composantes : le gestionnaire de processus (scheduler) et le système de gestion de fichiers (droits d'accès).
+Shell : interpréteur de commandes ; interprète les commandes avant transmission au noyau ; porte d'entrée vers les ressources.
+Shells courants : sh (Bourne Shell, 1979, Steven Bourne, shell de base) ; bash (Bourne Again Shell, standard GNU, sur-ensemble de sh, défaut sous Linux) ; csh / tcsh (syntaxe proche du C) ; ksh (Korn Shell, fin 1980, synthèse Bourne + C) ; POSIX shell (standardisation IEEE). Le fichier /etc/shells liste les shells connus. On change de shell en tapant son nom.
+Éditeurs : vi (Visual interface) = seul éditeur standard, tout terminal texte, deux modes (commande/édition et insertion, bascule par ESC) ; emacs (GNU Emacs de Stallman) = environnement de travail complet, apprentissage long ; nedit, nano = simples et intuitifs.
+
+4. MISSIONS DE L'ADMINISTRATEUR
+Gérer les comptes utilisateurs ; assister et éduquer les utilisateurs ; gérer les logiciels (installation, configuration, mise à jour) ; gérer le matériel (panne, remplacement, ajout de disque) ; assurer la sécurité (sauvegardes fiables et régulières, contrôle d'accès, usage abusif de ressources) ; vérifier l'adéquation matériel/usage (goulets d'étranglement) ; maintenance de premier niveau ; gestion quotidienne. Autres facettes : diplomatie, aspects légaux (chiffrement), enquêtes judiciaires, politique d'utilisation des machines.
+Règles de prudence : se méfier de soi ; ne rien faire si l'on est fatigué ; pas de modification importante un vendredi après-midi ; pouvoir revenir en arrière (copie .orig) ; documenter ; attention à l'expansion des caractères génériques (rm -rf .*).
+
+5. OUTILS D'ADMINISTRATION
+Tout est fichier : les paramètres de configuration sont dans des fichiers, le plus souvent sous /etc (/etc/hosts, /etc/group...).
+Scripting : le shell offre des outils simples et puissants, enchaînés dans des tubes (pipes) ; utilitaires clés grep, sed, awk, find, commandes de tri.
+Recherche d'information et supervision :
+- man : manuel électronique ; documentation en 3 volumes (utilisation sections 1-6, administration 1M/7/8, programmeur 2-5) ; 4 sections par page (nom, synopsis, description avec options, voir aussi). Autres : info, locate.
+- find : recherche par name, type, user, group, size, atime, mtime, perm, links ; action possible avec -exec.
+- syslog / démon syslogd : journaux système et applicatifs, organisés en /var/log/<application>/<type>.
+- cron : démon d'exécution périodique ; la crontab liste les tâches planifiées.
+Outils graphiques intégrés selon l'éditeur : SMIT (AIX), SAM (HP-UX). Sources externes : documentation constructeur, HOWTO, FAQ, Linux Documentation Project.

@@ -1,0 +1,32 @@
+LINUX / UNIX : GESTION DES PROCESSUS ET DONNÉES APPLICATIVES
+
+1. GÉNÉRALITÉS
+Linux gère plusieurs programmes simultanément : le multitâche. Programme = objet statique (suite d'instructions dans un fichier). Processus = objet dynamique (programme en cours d'exécution + son contexte).
+Changement de contexte (context switching) : sauvegarder le contexte du processus courant, rétablir celui du suivant pour qu'il reprenne là où il a été interrompu. Assuré en grande partie par les couches matérielles (pour la rapidité). Survient : après chaque quantum, chaque fois que le noyau prend la main, chaque fois qu'un processus est dessaisi avant la fin de son quantum (attente d'E/S).
+Ordonnancement : ordre d'attribution du processeur aux processus pour un quantum. La politique reflète l'usage de la machine (calcul intensif : grands quantums ; interactif : petits quantums). Cinq critères historiques (souvent contradictoires) : efficacité (processeur jamais inoccupé), rendement (max de programmes en un temps donné), temps d'exécution (le plus vite possible), interactivité (faible temps de réponse), équité (autant de quantums pour chacun). Algorithmes : round robin, par priorités, par durées variables.
+Pseudo-parallélisme : l'ordonnanceur (scheduler) bascule très vite d'un processus à l'autre ; un seul processus a réellement le processeur à un instant (monoprocesseur). Réentrance : plusieurs processus exécutent la même copie d'un même programme. Multiprogrammation : introduite pour éviter qu'un programme en attente d'E/S ne monopolise le processeur.
+Trois notions structurelles : espace mémoire d'un processus, table des processus, liste des états d'un processus. La MMU assure la correspondance adresses virtuelles / adresses physiques.
+
+2. HIÉRARCHIE ET CYCLE DE VIE
+Père / fils : tout processus est créé par un autre ; chaque fils a un seul père, un père peut avoir plusieurs fils -> arborescence dont init (PID 1) est l'ancêtre. init crée des processus interactifs (associés à un terminal) et des processus non interactifs (daemons). Un processus interactif exécute un interpréteur de commandes (shell), qui démarre un processus par commande.
+Mécanisme fork-et-exec (inspiré du C) :
+- fork() : duplication / clonage du processus. Allocation d'une entrée dans la table des processus, duplication de la zone u, copy-on-write. L'exécution continue dans les deux processus. Retour : PID du fils dans le père, 0 dans le fils, -1 en cas d'échec (manque de mémoire, trop de processus).
+- exec() (execlp...) : recouvrement du processus par un autre exécutable. On libère tout sauf l'entrée dans la table des processus et la zone u, puis allocation des zones texte, données, pile, tas. PID conservé.
+- wait() : attente de la terminaison d'un fils, récupération du code de sortie, disparition définitive du fils.
+- exit(n) : termine le processus appelant (état zombie : seule l'entrée dans la table subsiste), retourne un code de sortie n récupérable par le père.
+Threads (lightweight process) : fork() est coûteux (duplication de toutes les structures mémoire). Un thread = compteur ordinal + pile + jeu de registres ; tout le reste partagé avec le processus. Création ~60 % plus rapide. Avantages : applications concurrentes transparentes (mono/multiprocesseur), applications non bloquantes (E/S), meilleur temps de réponse (ex. Apache 2.x). Risques : race conditions, non-réentrance (variables statiques/globales bannies), deadlocks ; le code doit être thread safe. Classes de base fournies par C++, Java...
+
+3. TYPES ET ATTRIBUTS DES PROCESSUS
+Types : interactifs (associés à un terminal, avant-plan ou arrière-plan) ; en lots / batch (non associés à un terminal, file d'attente exécutée en séquence) ; daemons / processus serveurs (tournent en permanence, démarrés par les scripts d'initialisation ; crond, syslogd).
+Attributs : PID (attribué par fork, conservé par exec), PPID (père), UID/EUID/SUID (propriétaire : réel / effectif / sauvegardé), GID/EGID/SGID (groupe), tty (terminal d'attachement), pri (priorité), s (état : endormi, en attente, en exécution...), stime (date de lancement), time (temps CPU utilisé), size (mémoire allouée).
+
+4. EXÉCUTION ET SURVEILLANCE
+Modes : synchrone (avant-plan / foreground : le père attend la fin du fils, exécution en séquence ; défaut du shell) ; asynchrone (arrière-plan / background, avec & : le père n'attend pas, exécution en parallèle). Le shell crée un processus par commande (fork/exec).
+Descripteurs de fichiers : chaque processus a une table de descripteurs. 0 = entrée standard (clavier), 1 = sortie standard (écran), 2 = sortie d'erreur (écran).
+Redirections : > fichier (sortie standard, écrase), >> fichier (ajoute à la fin), < fichier (entrée standard), <> fichier (entrée et sortie), n> fichier (sortie du descripteur n ; commande 2> erreurs), n< fichier, >&n (duplique la sortie standard vers le descripteur n), <&n, &> fichier (sortie standard et erreur vers un même fichier), 2>&1 (erreur vers la même destination que la sortie standard), > /dev/null 2>&1 (tout ignoré ; fréquent dans la crontab). Les périphériques sont des fichiers spéciaux dans /dev.
+Surveillance : ps liste les processus. Options différentes selon le système : ps -aux (BSD), ps -edf (AT&T / System V). limit indique la taille maximale de la pile.
+Signaux : rôle des exceptions et interruptions au niveau du processeur ; avertissent d'un événement synchrone (programme) ou asynchrone (extérieur). Correspondances numéro/nom dans /usr/include/signal.h. Principaux : SIGHUP (rupture de ligne ; aujourd'hui relecture de la configuration des démons), SIGINT (Ctrl-C), SIGFPE (division par zéro), SIGKILL (tue le processus), SIGBUS (erreur de bus), SIGSEGV (violation de segment, pointeur nul), SIGPIPE (écriture dans un tube sans lecteur), SIGALRM (chronomètre), SIGTERM (terminaison propre), SIGCHLD (fils terminé), SIGWINCH (fenêtre redimensionnée). Commande kill : envoie n'importe quel signal à n'importe quel processus du même propriétaire ; kill -l liste les signaux.
+
+5. PLANIFICATION DES PROCESSUS
+at : lancement différé à une date donnée (at parametre_temporel commande ; Ctrl-D pour sortir ; at -l liste les travaux en attente).
+crontab : commandes à intervalles réguliers ou à certaines dates. crontab -e pour éditer (éditeur vi par défaut), crontab -l pour lister. cron reconnaît $USER, $HOME, $SHELL ; un script peut remplacer une commande ; utile avec la messagerie pour envoyer des informations à l'administrateur système.

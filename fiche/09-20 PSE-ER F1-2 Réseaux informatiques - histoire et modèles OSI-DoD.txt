@@ -1,0 +1,38 @@
+RÉSEAUX INFORMATIQUES : HISTOIRE ET MODÈLES EN COUCHES (OSI et DoD)
+
+1. NOTIONS GÉNÉRALES
+Le but d'un réseau est de faire communiquer des entités ; pour un réseau informatique, ce sont des ordinateurs. Un protocole est une description formelle des règles et conventions d'un échange d'informations (analogie : une langue commune, ou l'adresse et la présentation d'une lettre postale). La suite TCP-IP est le standard « de fait » du monde des réseaux.
+Échelles géographiques : PAN (une maison), LAN (un bâtiment, dizaines à milliers d'équipements), MAN (une ville), WAN (région, pays, monde) ; équivalents sans fil : WPAN, WLAN, WMAN, WWAN.
+Enjeux qui ont motivé les réseaux : mutualiser les ressources et l'accès à l'information, étendre l'espace de communication (Intranet, Extranet), fédérer les pratiques (ToIP, VoIP), étoffer l'offre de services (web).
+
+2. MISE EN PERSPECTIVE HISTORIQUE
+ARPANET : réseau de l'ARPA (agence du DoD américain), fondé sur la commutation par paquets. Premier lien le 21 novembre 1969 entre UCLA et Stanford Research Institute ; réseau à 4 nœuds fin 1969 ; 213 hôtes en 1981.
+Trois composantes « préhistoriques » :
+- Normes de communication : les RFC (Request For Comments), documentation ouverte, non hiérarchique, devenue la mémoire collective d'Internet. RFC n°1 en avril 1969 (Steve Crocker, définition de la machine hôte).
+- Le NWG (Network Working Group) : doctorants des 4 sites, protocoles de connexion et premières applications (Telnet, FTP).
+- BBN (Bolt Beranek and Newman) : construction des IMP (Interface Message Processor), petits ordinateurs de commutation des messages, ancêtres des routeurs.
+Deux « lectures » de l'origine, toutes deux trop mono-causales : la lecture militaire (réseau indestructible) et la lecture communicationnelle (village mondial). IBM et AT&T sont restés à l'écart d'ARPANET. L'essor du DNS accompagne la croissance exponentielle du nombre de machines ; au début des années 90, intégration d'ARPANET dans Internet (web : HTML, HTTP, premiers navigateurs).
+L'incompatibilité des réseaux propriétaires des années 1970 (SNA d'IBM 1974, DNA de Digital 1975, DSA de Bull) crée un besoin d'interopérabilité, d'où les travaux sur OSI (ISO, dès 1977) et sur TCP/IP (ARPANET, dès 1974).
+
+3. PRINCIPE DES MODÈLES EN COUCHES
+Les données traversent successivement des couches ; chaque couche ajoute un en-tête (encapsulation) puis transmet à la couche suivante ; l'en-tête est retiré à l'arrivée (désencapsulation). Chaque couche fournit un service aux couches supérieures en s'appuyant sur les couches inférieures. Intérêt : diviser un problème complexe, favoriser l'interopérabilité indépendamment des fabricants et technologies.
+Dans le modèle DoD : données (utilisateur), message (application-transport), segment (transport-réseau), datagramme (réseau-accès réseau), trame ou paquet (accès réseau).
+
+4. LE MODÈLE OSI (7 couches, ISO)
+1. Physique : liaison physique, connecteurs, niveaux de tension, codage (Manchester).
+2. Liaison de données : connexion logique, trames, détection et correction d'erreurs, accès au support.
+3. Réseau : acheminement et routage entre systèmes d'extrémité, taille des blocs.
+4. Transport : transfert de bout en bout, découpage en paquets et reconstitution, transparence pour les couches hautes.
+5. Session : synchronisation et séquencement du dialogue, reprise sur erreur (jeton pour Token Ring).
+6. Présentation : mise en forme, conversion de codes (ASCII, EBCDIC), chiffrement, compression.
+7. Application : communication entre les couches basses et les applications utilisateur (elle ne contient pas les applications).
+Couches basses (transport de l'information) et couches hautes (traitement).
+
+5. LE MODÈLE DoD / TCP-IP (4 couches)
+- Application : reprend Application + Présentation + Session d'OSI ; protocoles Telnet, FTP, TFTP, SMTP, HTTP.
+- Transport : TCP (fiable, orienté connexion, contrôle de flux, remise ordonnée) et UDP (non fiable, sans connexion, ex. voix).
+- Réseau : envoi de paquets à un hôte distant, adresses IP et routage ; protocoles IP, ARP, RARP, ICMP.
+- Accès réseau : regroupe Physique + Liaison d'OSI ; adresses physiques, erreurs matérielles ; Ethernet le plus fréquent en LAN. Parfois découpée en deux (modèle à 5 couches).
+
+6. COMPARAISON
+La correspondance OSI / DoD n'est pas parfaite : OSI est théorique, complet mais complexe ; DoD part d'un standard existant. Le modèle OSI reste la référence intellectuelle et normative ; le modèle TCP/IP, pragmatique et réactif, s'est imposé comme standard de fait et est au cœur d'Internet.

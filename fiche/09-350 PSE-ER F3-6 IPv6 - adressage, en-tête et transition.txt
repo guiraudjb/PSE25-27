@@ -1,0 +1,76 @@
+IPv6 : ADRESSAGE, EN-TÊTE ET TRANSITION
+
+Nouvelles fonctionnalités d'IPv6 : espace d'adressage beaucoup plus important ; plan d'adressage hiérarchique basé sur les préfixes plutôt que sur les classes (routage plus efficace, tables de routage de taille limitée) ; classes de service différenciées pour la QoS ; authentification et chiffrement ; auto-configuration des interfaces réseau ; compatibilité avec les réseaux IPv4.
+Terminologie des RFC IPv6 : « packet » plutôt que « datagram » ; « node » (nœud) pour désigner les systèmes qui implémentent IPv6 (stations ou routeurs).
+
+1. LES ADRESSES IPv6
+Représentation : 128 bits décomposés en 8 groupes de 16 bits écrits en hexadécimal et séparés par « : ». Une suite de groupes nuls (« :0000: ») peut être remplacée par « :: », mais une seule fois par adresse.
+Adresses unicast (une unique interface), multicast (un groupe d'interfaces, paquet transmis à toutes), anycast (interfaces sur plusieurs nœuds, paquet transmis à la seule interface la plus proche, distance déterminée par les routeurs ; n'existait pas en IPv4 ; même format que l'unicast).
+Types d'adresses unicast :
+- loopback (::1) : équivalent de 127.0.0.1 en IPv4.
+- non spécifiée (::) : adresse source quand un nœud s'auto-configure.
+- site local / ULA (adresse locale unique, préfixe FC00::/7) : équivalent des adresses non-routables sur Internet d'IPv4.
+- lien local (préfixe FE80::/64) : utilisable sur le même réseau sans routeur intermédiaire.
+- compatible IPv4 (::<adresse IPv4>) : trafic IPv6 transporté dans un tunnel à travers un réseau IPv4.
+- mappée IPv4 (::FFFF:<adresse IPv4>) : nœud IPv6 communiquant avec un hôte implémentant seulement IPv4.
+Format global des adresses unicast (comme CIDR : agrégation par longueur de préfixe arbitraire, 3 niveaux d'agrégation pour réduire la taille des tables de routage) :
+- Global Prefix, 48 bits (« 001 » + 45 bits) : structuré hiérarchiquement par les RIR (Regional Internet Register) et les ISP.
+- Subnet ID (SID), 16 bits : l'administrateur du site structure l'espace alloué.
+- Interface ID, 64 bits : identifiant unique d'une interface sur un sous-réseau, dérivé de l'adresse MAC.
+Multicast : pas d'adresse broadcast en IPv6, la diffusion passe par le multicast. Groupes prédéfinis : FF02::1 (tous les nœuds du lien), FF02::2 (tous les routeurs du lien), FF02::1:FFXX:XXXX (adresse « multicast sollicité », XX:XXXX = 24 derniers bits de l'adresse unicast de l'interface ; utilisée par le protocole de découverte des voisins).
+
+2. FORMAT DE L'EN-TÊTE IPv6
+40 octets (contre 20 en IPv4) mais simplifié : 32 octets pour les adresses source et destination, 8 octets pour les autres informations de contrôle.
+- Version (4 bits) : valeur 6 (0110).
+- Classe de trafic (8 bits) : priorité pour le trafic généré.
+- Identificateur de flux (20 bits) : un « flow » est une série de paquets d'une source vers une destination nécessitant un traitement particulier des routeurs (ex. temps réel) ; tous les paquets du même flux ont les mêmes adresses source/destination et la même étiquette de flux, ce qui permet au routeur de choisir la route sans examiner le reste de l'en-tête. En pratique très peu utilisé : les opérateurs utilisent MPLS.
+- Longueur des données (16 bits) : taille des données utiles seulement (IPv4 prenait aussi l'en-tête).
+- En-tête suivant (8 bits) : valeur du prochain en-tête (protocole UDP, ICMP... ou extension).
+- Nombre de sauts (8 bits) : équivalent du TTL d'IPv4.
+- Adresse IP source (128 bits), Adresse IP destination (128 bits).
+- Extensions à la suite (elles ne font pas partie de l'en-tête).
+Champs d'IPv4 supprimés : « identification », « fragmentation flags », « fragment offset » (la fragmentation utilise désormais une extension) ; « header checksum » (IPv6 n'intègre plus de contrôle d'erreur ; en-tête d'authentification optionnel pour l'intégrité).
+Fragmentation : seulement à la source (Path MTU), pas en cours de route ; un routeur recevant un datagramme trop long renvoie un message ICMP à la source avec la MTU admise.
+TCP et UDP utilisent un pseudo-en-tête IP pour leur contrôle d'erreurs ; son format différant en IPv6, l'implémentation de TCP/UDP au-dessus d'IPv6 doit être modifiée. Les autres protocoles (ICMP, IGMP) utilisent aussi un pseudo-en-tête IPv6.
+
+3. LES EXTENSIONS IPv6
+Dans la plupart des cas, l'en-tête IPv6 n'est pas suivi d'extensions. Elles permettent d'ajouter des informations pour l'acheminement et sont placées juste après l'en-tête.
+Elles sont « chaînées » : le premier champ de chaque extension contient un champ « en-tête suivant » de 8 bits identifiant le type de la prochaine extension ; les extensions suivent un ordre précis (facilite le travail des routeurs). Si le champ « en-tête suivant » ne correspond pas à une extension, c'est la dernière : il contient alors la valeur du protocole des données transportées (TCP ou UDP).
+Excepté l'extension « hop by hop », les extensions ne sont pas traitées par les routeurs intermédiaires.
+
+4. PROTOCOLES AUTOUR D'IPv6
+ICMPv6 (numéro de protocole 58) : assure des tâches supplémentaires par rapport à ICMPv4 - il remplace IGMP (Internet Group Management Protocol) pour la gestion des groupes multicast, et reprend les fonctions d'ARP pour la résolution d'adresse.
+Format des messages : champ type (valeurs < 127 = messages d'erreur ; autres = messages d'information) et champ code (cause du message). Un message d'erreur contient une partie seulement des données du datagramme fautif (pour éviter les problèmes de fragmentation).
+Principaux types :
+- Type 1 « destination inaccessible » : code 0 (pas de route), code 1 (pare-feu interdit le transit), code 2 (destination inatteignable avec l'adresse source fournie, ex. adresse source lien-local et destination hors lien).
+- Type 2 « datagramme trop grand » : découverte de la MTU ; contient la MTU acceptée par le routeur. Ces messages ne doivent JAMAIS être filtrés (sans eux, un émetteur ne peut pas fragmenter et enverra des datagrammes trop grands qui seront détruits, problème difficile à diagnostiquer).
+- Type 3 « temps dépassé » : code 0 (nombre de sauts atteint), code 1 (perte d'un fragment et temps de réassemblage dépassé).
+- Type 4 « erreur de paramètre » : champ pointeur ; code 0 (erreur dans l'en-tête), code 1 (erreur dans « en-tête suivant »), code 2 (option d'extension non reconnue).
+- Types 128 et 129 : commande ping (accessibilité d'un hôte, comme en IPv4).
+
+Protocole de découverte de voisins (Neighbour Discovery) : résolution d'adresse et redirection (déjà présentes en IPv4), + découverte de préfixe et détection de voisin inatteignable (nouveautés). Cache de voisinage (NDP Cache), même fonction que le cache ARP : correspondances adresse physique / adresse IP avec durée de vie (l'entrée est supprimée à l'expiration).
+- Résolution d'adresse : message « sollicitation de voisins » (Neighbor Solicitation, NS), requête contenant l'adresse IPv6 de la cible, envoyée à l'adresse de multicast sollicité associée (pas un broadcast comme ARP). Message « annonce de voisin » (Neighbor Advertisement, NA), réponse contenant l'adresse physique. La résolution inverse utilise aussi des messages ICMPv6.
+- Découverte de préfixe : le nœud doit connaître l'adresse du routeur de sortie et le(s) préfixe(s) du lien. Les routeurs envoient périodiquement des « annonces de routeur » (router advertisement). Un nœud peut envoyer une « sollicitation de routeur » (router solicitation) à FF02::2 (tous les routeurs du lien) ; les routeurs répondent par une annonce de routeur.
+- Détection d'inaccessibilité de voisinage : le nœud envoie périodiquement des « sollicitations de voisin » ; après plusieurs tentatives sans réponse, il supprime l'entrée du cache.
+- Découverte du MTU : à réception d'un ICMPv6 « paquet trop grand », l'émetteur fragmente le paquet pour respecter le MTU indiqué ; il recommence tant qu'il reçoit ce type de message. C'est l'émetteur qui fragmente, pas les routeurs.
+- Redirection : quand plusieurs routeurs existent, le routeur par défaut n'est pas toujours le plus adapté. ICMPv6 permet la redirection : le routeur utilisé transmet le paquet mais envoie aussi un message ICMPv6 « redirect » à l'expéditeur, indiquant l'adresse IP d'un routeur plus approprié (et en option son adresse MAC pour éviter une résolution d'adresse).
+
+5. PROTOCOLE D'AUTO-CONFIGURATION
+Une machine obtient toutes les informations nécessaires à sa connexion sans intervention. Processus : création d'une adresse de lien local, vérification de son unicité, détermination de l'adresse unicast globale.
+Création de l'adresse de lien local : préfixe FE80::/64 + identifiant d'interface ; doit être unique sur le lien.
+Détection d'adresse dupliquée : tant que son unicité n'est pas confirmée, l'adresse est « provisoire » (elle permet de recevoir les messages « sollicitation d'un voisin » et « annonce d'un voisin »). Le nœud envoie une « sollicitation d'un voisin » avec l'adresse provisoire :
+- une « annonce d'un voisin » est reçue -> l'adresse est déjà utilisée par une autre machine (pas unique, non retenue).
+- une « sollicitation d'un voisin » est reçue -> une autre machine utilise aussi cette adresse comme provisoire (aucune ne peut la garder).
+- rien n'est reçu au bout d'une seconde -> l'adresse est unique, elle passe de « provisoire » à « valide » et est assignée.
+Remarque : sur des supports peu sûrs (liaisons radio), la perte d'un message « annonce de voisin » pourrait faire conclure à tort qu'une adresse est unique.
+Auto-configuration de l'adresse unicast globale : deux méthodes - sans état et avec état. Préfixe réseau + identifiant d'interface. La machine émet une « sollicitation du routeur » à ff02::2.
+- Auto-configuration sans état : le routeur répond par une « annonce de routeur » avec l'option « information sur le préfixe » indiquant le préfixe réseau.
+- Auto-configuration avec état : l'annonce de routeur porte un flag indiquant à la machine de demander explicitement son adresse à un serveur d'adresses (DHCPv6).
+En l'absence de routeur : la machine tente l'auto-configuration avec état ; si elle échoue, les communications se font uniquement sur le lien local avec l'adresse de lien local.
+
+6. LA TRANSITION IPv4 - IPv6
+Les deux versions cohabitent et continueront de cohabiter : des mécanismes de transition progressive sont nécessaires.
+- Double pile protocolaire (Dual Stack) : les deux versions du protocole IP cohabitent sur les routeurs et les équipements terminaux ; un nœud a deux adresses IP (une IPv4, une IPv6). Pour communiquer, il utilise le DNS afin de connaître le protocole implémenté sur le système cible : les nœuds IPv4 ont des enregistrements de type A (adresses IPv4), les nœuds IPv6 des enregistrements de type AAAA (adresses IPv6), les nœuds à double pile voulant joindre des nœuds IPv4 ont à la fois des AAAA (adresses IPv4 compatibles IPv6) et des A. Le serveur DNS doit supporter les enregistrements AAAA même s'il n'utilise pas IPv6.
+- Tunnel IPv6 sur IPv4 (IPv6-over-IPv4 tunneling) : quand des systèmes IPv6 non connectés au même réseau doivent communiquer via l'infrastructure IPv4 existante, leurs datagrammes IPv6 sont encapsulés dans des datagrammes IPv4 (ajout d'un en-tête IPv4).
+- Translation d'adresse / traduction d'en-tête (NAT-PT, Network Address Translation - Protocol Translation) : traduction à la volée des en-têtes IPv4 en en-têtes IPv6 ; permet de raccorder un réseau encore intégralement en IPv4 à un réseau déjà intégralement en IPv6 (sans double pile de part et d'autre) ; réalisée par un routeur à double pile placé à la frontière, qui fait alors office de véritable passerelle.
+Aucun de ces mécanismes n'est réellement satisfaisant (vulnérabilités de performances et de sécurité) : ce sont des mécanismes temporaires, en place uniquement pendant la migration.

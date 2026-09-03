@@ -1,0 +1,257 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 5, thème 5
+ARCHITECTURES INTERNET / INTRANET / EXTRANET ET ESSOR DU WEB
+=======================================================================
+
+1. INTERNET / INTRANET / EXTRANET
+-----------------------------------------------------------------------
+- Internet = contraction de Interconnection + Network : système reliant
+  des réseaux + ensemble de normes et de services.
+  * INTRANET : collectivité = salariés d'une entreprise.
+  * EXTRANET : + fournisseurs et clients.
+- Historique : initialement ARPANET, créé en 1969 par l'armée américaine
+  (DARPA) ; Web développé par le CERN en 1992. Internet n'appartient à
+  personne, régi par des organismes de normalisation.
+- Pour se connecter : moyen de connexion (box ADSL) + protocole TCP/IP.
+- Internet = réseaux d'opérateurs (louant surtout les liaisons ;
+  équipements Cisco, Nortel). POINTS DE CONCENTRATION (ATM, FDDI,
+  Ethernet commuté sur fibre), 4 types :
+  * MAE (Metropolitan Area Exchange) — Worldcom (filiale MFS) ;
+  * NAP (Network Access Point) — NSF, gérés par des opérateurs privés ;
+  * PPP (Private Peering Point) — ISP associés pour contourner MAE/NAP ;
+  * ISP (Internet Service Provider) — se raccordent aux MAE/NAP/PPP
+    moyennant redevance ; l'ensemble = Internet.
+- AUCUNE GARANTIE DE SERVICE : temps de réponse fonction de la charge,
+  pannes réelles.
+
+INTRANET (détail)
+- Infrastructure sur les standards Internet + services accompagnant le
+  travail. Terme proposé par Jim Clark (Netscape).
+- Déf. Commission générale de terminologie : « réseau destiné à l'usage
+  exclusif d'un organisme et utilisant les mêmes protocoles et techniques
+  que l'internet ».
+- Fonctionnel : PORTAIL d'accès aux ressources (communication,
+  coopération, coordination) ; ressources multimédia.
+- Technique : unification de l'accès via HTML/HTTP/TCP/IP ; le NAVIGATEUR
+  devient le seul outil -> accès indépendant du matériel/logiciel.
+  CLIENT LÉGER (Thin Client) = machine qui ne fait qu'interpréter
+  l'affichage de pages web.
+- Architecture 3 NIVEAUX : client (navigateur) / serveur web + serveur
+  d'application / serveur de base de données. (Sans base : client-serveur
+  classique.)
+- Protocoles : HTTP (hypertexte), FTP (fichiers), SMTP/POP/IMAP
+  (messagerie), NNTP (forums).
+- Services : généraux (identité, plan du site, portail, messagerie,
+  visioconférence, annuaire, moteur de recherche, formation...) ; métier
+  (applications par profil via LDAP, PGI/ERP) ; organisationnels
+  (groupware, workflow, GED, Business Intelligence sur data warehouse,
+  knowledge management) ; techniques (CMS / ECM).
+- Enjeux : stratégiques (mise en commun des savoirs, réactivité ;
+  motiver l'adhésion par l'ergonomie) ; organisationnels (réorganisation
+  des processus, décloisonnement hiérarchique, communications
+  transversales, gérer la qualité et l'épuration de l'info) ; financiers
+  (réseaux privés existants, client léger, postes banalisés, moins de
+  maintenance et de papier) ; techniques (uniformisation par chartes
+  graphiques, technologies standardisées, documents XML) ; sécurité
+  (utilisateurs via ACL, firewall + proxy, certificats, DMZ, virus par
+  la messagerie et les accès Internet, hausse de la charge réseau).
+- Travail collaboratif (TCAO) et GROUPWARE (collecticiel) : messageries
+  (chats si instantanées), forums/newsgroups (fils), visioconférences,
+  agendas partagés, bases documentaires (GED, wiki type mediawiki),
+  outils de workflow. 3 fonctions groupware : COMMUNICATION, COOPÉRATION,
+  COORDINATION. Outils : Lotus Notes/Domino, Outlook/Exchange, Open
+  Source.
+- PGI / ERP : modules applicatifs (briques) sur une BASE DE DONNÉES
+  UNIQUE ; solution métier transversale ; mise en place 6 mois à 3 ans ;
+  grands comptes SAP, Oracle, PeopleSoft ; plus légers Sage, Cegid ;
+  Open Source Compiere ; « progiciels intégrateurs » ; souvent avec BPR
+  (Business Process Reengineering).
+- KNOWLEDGE MANAGEMENT : sauvegarder et restituer les savoirs ; repose
+  sur des systèmes de gestion documentaire (identifier les connaissances)
+  et des annuaires du savoir (localiser les compétences).
+- Contraintes : résistance au changement, outils perçus comme
+  surveillance (éviter les fonctions de contrainte), management par la
+  qualité centré sur les compétences, anticipation des coûts,
+  accompagnement par la formation.
+
+EXTRANET
+- Première définition par Bob Metcalfe (créateur d'Ethernet).
+  Site Internet = vitrine (tout-venant) ; Intranet = salariés ;
+  Extranet = collaborateurs extérieurs (espace privilégié).
+- Extranet = connexion Internet réservée aux partenaires ; VPN pour
+  authentification + confidentialité.
+- Internet : infrastructures PUBLIQUES, communauté INCONNUE.
+  Intranet/Extranet : partie publique + partie privée, communauté
+  IDENTIFIÉE.
+- Fonctionnement : architecture 3 tiers SÉCURISÉE (client navigateur /
+  serveur extranet / base de données ou serveur de fichiers) ; échanges
+  sécurisés, authentification, documents chiffrés.
+- Sécurité : authentifier les utilisateurs (simple/forte), le serveur
+  extranet (certificat signé), confidentialité (SSL : HTTPS, FTPS ; VPN),
+  empêcher les intrusions (firewall-IPS), intégrité (fichiers chiffrés).
+- Architectures (dans la DMZ) :
+  * STANDARD : 1 firewall ; SSL + certificat signé ; login/mot de passe.
+  * SÉCURISÉE : 2 firewalls (1er protège tous les serveurs, 2e dédié à
+    l'extranet, architecture VPN) ; le client authentifié auprès du
+    firewall se ré-authentifie par login/mdp ; vérification VPN
+    (via RADIUS possible) ; accès aux documents surveillés.
+  * AVEC ICP / PKI : certificats clients certifiés par le serveur,
+    lui-même certifié par un organisme (Thawte, Verisign). Une PKI gère :
+    autorité de certification, annuaire de certificats, système de
+    révocation, sauvegarde et récupération de clés. Objectifs :
+    confidentialité, contrôle d'accès, intégrité, authentification,
+    non-répudiation.
+- Avantages : partage avec les partenaires uniquement, collaboration,
+  facilité, évolutivité.
+  Inconvénients : temps de développement, coût de revient, hausse des
+  risques (vol de données, usurpation d'identité).
+- Exemples : téléservices (télédéclaration, télépaiement), portail de
+  l'élu, application Hélios.
+- PRÉCONISATION : architecture STANDARD (1 firewall, sans VPN) ;
+  authentification (login/mdp) et confidentialité (HTTPS) IMPÉRATIVES.
+
+2. L'ESSOR D'INTERNET : LE WEB
+-----------------------------------------------------------------------
+- WWW = principal acteur du développement d'Internet ; repose sur
+  l'HYPERTEXTE ; page en HTML sur un serveur web ; protocole HTTP.
+- 3 concepts : LOCALISATION (URL), PROTOCOLE (HTTP), LANGAGE (HTML).
+- URL (Uniform Resource Locator) : 3 parties — protocole (comment),
+  nom DNS (où), nom du document (quoi). Forme :
+  protocole://nom_d'hôte:port/path/extrapath?arguments. La racine « / »
+  de path = config du serveur (≠ racine du système de fichiers).
+  URI (Uniform Resource Identifier) = SUR-ENSEMBLE des URL.
+- URL relative : le navigateur reconstruit l'URL absolue ; balise
+  <BASE href="url"> positionne la racine absolue.
+- Serveurs web : Apache (majoritaire, libre), nginx, cherokee, nodeJS,
+  MS IIS. Navigateurs : Firefox, IE, Opera, Chrome, Safari.
+- Côté client : le navigateur analyse l'URL, demande l'IP au DNS, ouvre
+  une connexion TCP (port 80 par défaut), formule la requête.
+- Pages dynamiques : le serveur exécute un programme qui génère la
+  réponse HTML.
+
+3. LE PROTOCOLE HTTP
+-----------------------------------------------------------------------
+- Origine : Tim Berners-Lee, hypertexte, 1989 (naissance du WWW). HTTP
+  conçu en 1990 : simple, indépendant de la nature des informations et
+  de la couche transport.
+- HTTP/0.9 : verbe GET seul, URL, code de retour, format MIME, PAS
+  D'ÉTAT (connexion fermée à chaque échange). Séquence : ouverture ->
+  requête -> réponse -> fermeture.
+  Lacunes : connexions éphémères, une page = de nombreux documents
+  (images, applets, frames) -> attente, saturation.
+- Intermédiaires : proxies, gateway, tunnel ; CACHES (client, serveur,
+  intermédiaire) pour optimiser la charge et le confort.
+- HTTP/1.0 : RFC 1945 (mai 1996). 3 MÉTHODES : GET, HEAD, POST. Messages
+  = en-tête (méta-infos) + corps. Info de statut obligatoire.
+  Authentification (user/password). Cache côté client déjà prévu
+  (Last-Modified, Pragma, Expires) + compression.
+  * 3 types d'en-têtes : générique / requête-réponse / entité.
+  * En-têtes de requête : From, Referer, User-Agent.
+  * En-têtes d'entité : Content-Type (types IANA : text/html, image/gif,
+    image/jpeg...), Content-Length (obligatoire avec POST),
+    Content-Encoding.
+  * HEAD : réponse sans corps mais avec les en-têtes d'un GET (tester
+    l'existence/la modification sans charger le réseau).
+  * GET conditionnel (If-Modified-Since) -> 304 Not Modified si inchangé.
+  * Non cachable : Pragma: no-cache ou Expires <= Date.
+  * Authentification BASIC = base64(user_id:password) — NON SÛRE
+    (encodée mais non chiffrée).
+
+CODES DE STATUT :
+  1xx Informational (réservé) ; 2xx Success (200 Ok, 201 Created,
+  202 Accepted, 204 No Content) ; 3xx Redirection (300, 301 Moved
+  Permanently, 302 Moved Temporarily) ; 4xx Client Error (400 Bad
+  Request, 401 Unauthorized, 403 Forbidden, 404 Not Found) ;
+  5xx Server Error (500, 501 Not Implemented, 502 Bad Gateway,
+  503 Service Unavailable).
+
+- HTTP/1.1 : RFC 2068 (1997) puis RFC 2616 (1999). Ajoute OPTIONS,
+  CONNECT, TRACE ; en-tête HOST OBLIGATOIRE (sinon 400) ; négociation de
+  contenu/langage (Accept, Accept-Language, Accept-Charset) ; pipelining
+  via Keep-Alive ; Transfer-Encoding: chunked. Résout : connexions
+  multiples, serveurs virtuels, caching primitif.
+  * Connexions PERSISTANTES par défaut ; max 2 connexions parallèles par
+    couple client-serveur ; fermeture par Connection: close ou timeout.
+  * MÉTHODES SÛRES ET IDEMPOTENTES : sûre = rien d'irréversible ;
+    idempotente = même résultat si répétée. GET, HEAD, OPTIONS, TRACE =
+    sûres et idempotentes. PUT, DELETE = pas sûres mais idempotentes.
+    POST = ni sûre ni idempotente.
+  * PUT : publier/mettre à jour une ressource. DELETE : supprimer.
+    TRACE : voir la requête telle que reçue par le serveur (Max-Forwards).
+  * Caches : Range / Content-Range (entité partielle), If-Range, ETag +
+    If-None-Match, Cache-Control (public / private / no-cache / no-store ;
+    max-age, s-maxage, must-revalidate, min-fresh, max-stale,
+    only-if-cached). Warning : 110 Response is stale, 111 Revalidation
+    failed, 112 Disconnected operation.
+- Évolutions : HTTPS standardisé en 2000 ; ETag/Vary ; PURGE (proxies,
+  non normalisé) ; PATCH (RFC 5789) ; TLS SNI (fin de l'IP unique par
+  site HTTPS).
+- SPDY (Google, 2009) : bi-couche compatible HTTP, entre HTTP et SSL ;
+  multiplexage des flux sur une connexion TCP, priorité des requêtes,
+  compression des en-têtes, Server Push et Server Hints. Implémenté
+  Chromium/Firefox/Apache (mod_spdy) ; adopté par Twitter. Défaut :
+  plus exposé au DÉNI DE SERVICE (compression des en-têtes).
+- Speed+Mobility (Microsoft) : SPDY optimisé pour les nomades
+  (batteries, websockets).
+- httpbis Network Friendly (Tarreau/HAProxy, Kamp/Varnish, de Croy/
+  WinGate, Jeffries/Squid) : codage binaire des en-têtes, groupement des
+  en-têtes communs, multiplexage requêtes/réponses, modèle en couche.
+  -> HTTP/2.0 (question centrale : le PUSH).
+
+4. HTML ET CSS
+-----------------------------------------------------------------------
+- 1994 : création du W3C par le CERN et le MIT (www.w3.org).
+- HTML (Hyper Text Markup Language) : structure et affiche des objets
+  (texte, tableaux, images, vidéos) via des BALISES ; implémentation
+  simple de SGML. Types : HTML, DHTML, XHTML.
+  * <BALISE>...</BALISE> ; imbrication autorisée, pas de chevauchement ;
+    casse indifférente.
+  * Structure minimale : <HTML><HEAD><TITLE>...</TITLE></HEAD><BODY>...
+    </BODY></HTML>. HEAD contient les titres ; TITLE affiché en haut de
+    la fenêtre et dans les signets ; BODY = le document.
+  * Attributs de cœur : class, id, lang (ISO639) ; attributs d'événements
+    (onclick, onmouseover...).
+  * Balises : <OL>/<LI>, <P>, <Hn> (0<n<8), <TABLE>, <FORM>, <IMG SRC>,
+    <B>/<IT>/<TT>.
+- CSS (Cascading Style Sheet, 1996) : sépare structuration et
+  typographie ; styles dans la page ou dans un fichier séparé (chargé une
+  fois -> accélère). 2 langages : déclaratif type HTML, ou JASS (issu de
+  JavaScript).
+  * Mise en cascade : héritage des propriétés non définies ; un style
+    interne à la page est PLUS PRIORITAIRE qu'un style externe.
+  * CSS3 en MODULES (modèle de boîtes, listes, hyperliens, vocal,
+    arrières-plans/bords, effets de texte, multi-colonnes) ; modules
+    terminés : SVG (Scalable Vector Graphics), Media Queries, Namespaces ;
+    RÉTRO-COMPATIBILITÉ complète avec CSS2.
+- HTML5 : conditions des sélecteurs dans le HTML (sans JavaScript) ;
+  cache côté client pour l'usage HORS LIGNE sans JavaScript ; fonctions
+  multimédias -> plus besoin de Flash ; Server Sent Events
+  (text/event-stream) et API websocket.
+
+5. ÉVOLUTIONS DES ARCHITECTURES
+-----------------------------------------------------------------------
+- RÉPARTITION DE CHARGE (load balancing) : matérielle ou logicielle ;
+  toutes les machines ACTIVES ; un équipement intermédiaire reçoit les
+  requêtes et les répartit sur les serveurs (masqués pour le client).
+- TOLÉRANCE DE PANNE (fail over) : 1 équipement ACTIF + 1 PASSIF, tous
+  deux dimensionnés à 100 % de la charge ; l'autre prend le relais en
+  cas de panne. Protocoles de bascule propriétaires : CARP, VRRP, HSRP,
+  FSRP — peu interopérables.
+- Recopie de données par les couches basses : DRBD.
+
+=======================================================================
+À RETENIR
+- Internet (public, communauté inconnue) / Intranet (salariés) /
+  Extranet (partenaires) ; les deux derniers = partie publique + privée.
+- Intranet : architecture 3 niveaux, client léger, groupware
+  (communication/coopération/coordination), ERP sur base unique,
+  knowledge management.
+- Extranet : DMZ, architecture 3 tiers sécurisée, SSL/VPN, PKI ;
+  préconisation = 1 firewall + HTTPS + login/mdp.
+- Web : URL/HTTP/HTML ; URI = sur-ensemble d'URL ; Tim Berners-Lee 1989.
+- HTTP/1.0 (GET/HEAD/POST, sans état, Basic non sûr) ; HTTP/1.1 (Host
+  obligatoire, connexions persistantes, méthodes sûres/idempotentes,
+  Cache-Control, chunked) ; codes 2xx/3xx/4xx/5xx.
+- SPDY (Google 2009) : multiplexage + compression des en-têtes -> HTTP/2.
+- HTML = implémentation de SGML ; CSS 1996, cascade (interne > externe),
+  CSS3 en modules ; HTML5 = hors ligne + multimédia sans Flash.
+- Load balancing (tous actifs) vs fail over (actif + passif à 100 %).

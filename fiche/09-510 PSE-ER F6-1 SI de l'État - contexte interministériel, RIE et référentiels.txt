@@ -1,0 +1,213 @@
+FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 6, thème 1
+SI DE L'ÉTAT : CONTEXTE INTERMINISTÉRIEL, RIE ET RÉFÉRENTIELS
+=======================================================================
+
+1. QUELQUES CHIFFRES CLÉS (fonction publique d'État)
+-----------------------------------------------------------------------
+- Dépense annuelle : ~2 Md€ hors T2 (dépenses de personnel).
+- 2 millions d'agents avec boîte mail et poste de travail.
+- Plus de 20 000 implantations géographiques.
+- ~20 000 agents « métier SIC » (hors militaires) ; ~10 % de
+  contractuels (vs 15 % en moyenne dans la fonction publique d'État).
+- Plus de 130 centres informatiques principaux (13 000 m²), dont 7 de
+  plus de 500 m². Éléments déterminants : PUISSANCE ÉLECTRIQUE et
+  CAPACITÉ DE CLIMATISATION (plus la superficie).
+- 6 réseaux ministériels principaux -> convergence vers le RIE :
+  backbone de 17 tronçons, 12 points d'interconnexion backbone (PIB)
+  dans des DC ministériels, 12 000 km de fibre optique, dimensionnement
+  initial 10 Gb/s, technologie MPLS + IPv4 + IPv6, 17 000 sites cible
+  (métropole + DOM-COM), une quinzaine de SI ministériels transportés.
+
+2. STRUCTURES INTERMINISTÉRIELLES (chronologie)
+-----------------------------------------------------------------------
+- 1998 : unité TIC de la Délégation Interministérielle à la Réforme de
+  l'État (DIRE3-UTIC) + mission MTIC. La MTIC a piloté les premiers
+  réseaux (ADER) et méta-annuaire (MAIA).
+- 2001 : ATICA (Agence des Technologies de l'Information et de la
+  Communication dans l'Administration) remplace la MTIC.
+- 2002 : l'ATICA présente le premier CADRE GÉNÉRAL D'INTEROPÉRABILITÉ
+  (circulaire PM) ; officialise la charte de nommage internet de
+  l'administration.
+- 2003 : rapport HYPER RÉPUBLIQUE (Pierre de La Coste) : « révolution
+  copernicienne » -> l'administration s'organise autour de l'usager ;
+  logique de silo -> logique en réseau ; 1 373 formulaires CERFA.
+- Février 2003 : ADAE (Agence de Développement de l'Administration
+  Électronique). Plans ADELE 2004-2007 (140 mesures) et ADELE 2006-2010.
+- Novembre 2002 : RE/SO 2007 (Raffarin), approche offre/demande.
+- Décembre 2005 : DGME (Direction Générale de la Modernisation de
+  l'État), créée à Bercy ; l'ADAE est supprimée. Recréée le 3 janvier
+  2008 (post-RGPP 2007) : « faire mieux avec moins ».
+- Rapport CARCENAC (2011) : 4 étapes de l'administration électronique
+  citoyenne — dialogue/information / interaction simple sur le web /
+  gestion complète en ligne / guichet unique. Propose PUGNACE.
+- PAGSI (janvier 1998, Jospin) : 6 chantiers — école, culture, service
+  public, entreprise, innovation, régulation.
+- 21 février 2011 : DISIC (Direction interministérielle des SIC de
+  l'État), décret n° 2011-193, auprès du PM/SGG. Directeurs : Jérôme
+  Filippini puis Jacques Marzin (ex-Helios puis CHORUS, le PGI unifié
+  interministériel sur SAP).
+  * 3 services : 1. stratégie, urbanisation et innovation ;
+    2. performance et maîtrise des risques ; 3. programmes et opérations
+    (RIE, transformation des centres informatiques, SIC territoriaux).
+  * Comitologie : CSIC (Conseil des SIC — secrétaires généraux, DGSIC
+    Défense, DGME, DB, ANSSI, SAE ; 2x/an) et CTSIC (Comité Technique
+    des SIC — DSI ministériels ; mensuel).
+  * Article 7 : information au-delà de 5 M€, avis au-delà de 9 M€.
+- Octobre 2012 : SGMAP (Secrétariat Général pour la Modernisation de
+  l'Action Publique), rattaché au PM. Entités : mission ETALAB (créée
+  février 2011, ouverture des données publiques), DIMAP (remplace la
+  DGME), DISIC.
+- CIMAP (Comité Interministériel pour la Modernisation de l'Action
+  Publique) : instance de décision/arbitrage. 1er CIMAP 18 décembre
+  2012 (50 décisions, 5 domaines). 4e CIMAP 18 décembre 2013.
+- 21 septembre 2015 : DISIC + Etalab + pôle Innovation fusionnés dans la
+  DINSIC (décret n° 2015-1165).
+- Novembre 2017 : le SGMAP laisse place à la DITP (Direction
+  Interministérielle de la Transformation Publique) et à la DINSIC
+  (décrets du 20 novembre 2017).
+
+3. PLANS D'ACTION ET CONCRÉTISATIONS
+-----------------------------------------------------------------------
+- Circulaires Juppé 1996 : 15 mai (site internet ministériel
+  institutionnel obligatoire) ; 16 septembre (schéma directeur
+  ministériel SI et télécoms obligatoire).
+- PAGSI (1998), RE/SO 2007 (2002), ADELE (2004 : simplifier la vie de
+  l'usager, améliorer l'efficience du service public, valoriser l'agent).
+- Schéma directeur pour l'administration électronique 2006-2010 :
+  47 initiatives thématiques.
+- service-public.fr (octobre 2000), mon.service-public.fr (identité
+  citoyenne, coffre-fort de documents), administration24h24.gouv.fr
+  (janvier 2007, fondu ensuite), GéoPortail.
+- Plan Numérique 2012 (octobre 2008). Rapport Riester (février 2010) :
+  réduire le nombre de sites internet publics. Plateforme data.gouv.fr
+  (décembre 2011).
+- France Connect : fédération d'identités, démarrée automne 2014,
+  démonstrateur janvier 2015. Règlement européen e-IDAS (28 août 2014) :
+  identification électronique interopérable dans l'UE d'ici 2018.
+- SIDSIC (Services Interministériels Départementaux des SIC, engagés en
+  2011) : équipes informatiques des préfectures et DDI regroupées sous
+  l'autorité des secrétaires généraux des préfectures (~1 150 agents,
+  soutien de 55 000 agents).
+
+4. ZOOM SUR LE RIE
+-----------------------------------------------------------------------
+- Décidé par le Conseil des ministres du 25 mai 2011 : réseau
+  interministériel SÉCURISÉ regroupant les réseaux des ministères,
+  assurant la CONTINUITÉ de l'action gouvernementale en cas de
+  dysfonctionnement grave d'Internet.
+- Cœur de réseau haut débit, IPv6, résilience forte (maillage fin),
+  souplesse des modes de raccordement.
+- S'appuie sur l'infrastructure optique de RENATER (Réseau national de
+  télécommunications pour la technologie, l'enseignement et la
+  recherche). RENATER 6 : capacité du cœur de réseau 10 -> 100 Gbit/s.
+- Remplace AdER/SIGMA (dernières prestations résiliées le 7 juin 2016,
+  3,6 M€/an).
+- GOUVERNANCE : SCN RIE (service à compétence nationale), intégré au
+  SGMAP. 6 pôles opérationnels : Relations clients, Pilotage de
+  l'exploitation, Expertise, SUPERVISION (NOC — Network Operations
+  Center, 24h/24 7j/7), SÉCURITÉ (SOC — Security Operations Center),
+  Support et gestion.
+- SERVICES : accès à internet ; nommage (DNS) ; échanges
+  interministériels du réseau AdER (intranet interministériel) ;
+  service de temps (NTP, ouvert fin 2016). 18 ministères clients,
+  450 000 agents couverts fin 2016.
+- Interconnexion avec TESTA-ng (réseau protégé de l'UE, ex s-TESTA) via
+  le TAP (TESTA Access Point) sur le PIB de Paris 4 (Osny), janvier 2016.
+- Adressage interministériel : 100.65.0.0/16 + sous-domaine rie.gouv.fr
+  (remplace AdER 161.48.0.0/19 + ader.gouv.fr).
+- Sécurisation croisée des datacenters hébergeant des PIB : liaison de
+  secours mutualisée vers un PIB secondaire.
+
+5. TEXTES JURIDIQUES CLÉS
+-----------------------------------------------------------------------
+- Directive 1999/93/CE (13/12/1999) : cadre communautaire pour la
+  signature électronique.
+- LOI n° 2000-230 du 13 mars 2000 : adaptation du droit de la preuve.
+  L'écrit électronique est admis en preuve au même titre que l'écrit
+  papier, sous réserve d'IDENTIFICATION de l'émetteur et de conditions
+  garantissant l'INTÉGRITÉ. Décret n° 2001-272 du 30 mars 2001 (art.
+  1316-4 du code civil).
+- Loi du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN).
+- Loi n° 2005-102 du 11 février 2005 (égalité des droits des personnes
+  handicapées) : art. 47 -> base du RGAA.
+- ORDONNANCE n° 2005-1516 du 8 décembre 2005 (échanges électroniques
+  usagers <-> autorités administratives) : définit les termes (SI,
+  prestataire de services de confiance, produit de sécurité,
+  téléservice) ; systématise l'accusé de réception/enregistrement
+  électronique ; crée mon.service-public.fr ; institue RGI (art. 11),
+  RGS (art. 9) et RGAA.
+- Décret n° 2007-284 du 2 mars 2007 : modalités d'élaboration du RGI.
+- Décret n° 2009-834 du 7 juillet 2009 : création de l'ANSSI.
+- Décret n° 2011-193 du 21 février 2011 : création de la DISIC.
+- Circulaire PM 19 septembre 2012 : logiciels libres ; SILL (socle
+  interministériel de logiciels libres).
+- DÉCRET n° 2014-879 du 1er août 2014 : renforce l'UNICITÉ du SI de
+  l'État, placé sous la responsabilité du Premier ministre. 4 services
+  NON délégables sauf décision du PM : infrastructures informatiques,
+  réseaux de communication, services numériques d'usage partagé, SI de
+  fonctions transversales. Projets > 9 M€ -> avis conforme du DISIC.
+- ORDONNANCE n° 2014-1330 du 6 novembre 2014 (SVE) : droit de saisir
+  l'administration par voie électronique à partir du 7 novembre 2015.
+- Circulaire n° 5764/SG PM du 20 janvier 2015 : optimisation des
+  dépenses SI (objectif -500 à 800 M€ en 3 à 5 ans, base 2013).
+
+6. RGI, RGS, RGAA
+-----------------------------------------------------------------------
+RGI (Référentiel Général d'Interopérabilité)
+- Cadre de recommandations référençant les normes et standards
+  favorisant l'INTEROPÉRABILITÉ au sein des SI de l'administration ;
+  détermine les répertoires de données, normes et standards à utiliser.
+- V1.0 : 12 juin 2009. V2.0 : arrêté du 20 avril 2016. Débat sur
+  l'exclusion d'Open XML (Microsoft) à côté d'ODF.
+
+RGS (Référentiel Général de Sécurité)
+- Recueil de règles et bonnes pratiques SSI ; destiné aux autorités
+  administratives ET aux professionnels qui les assistent.
+- Propriété de l'État ; rédigé conjointement par l'ANSSI et la DGME.
+- Préconise une DÉMARCHE D'AMÉLIORATION CONTINUE de type ISO 27001.
+- Produits de sécurité et PSCo (prestataires de services de confiance)
+  qualifiés -> référencés par l'État pour les téléservices requérant ce
+  niveau.
+- V1.0 : 6 mai 2010. V2.0 : 13 juin 2014 (applicable depuis le 1er
+  juillet 2014).
+
+RGAA (Référentiel Général d'Accessibilité pour les Administrations)
+- Traduction opérationnelle des critères d'accessibilité + méthodologie
+  de vérification ; aligné sur les WCAG 2.0 (Web Content Accessibility
+  Guidelines, 11 décembre 2008, W3C). N'EST PAS une nouvelle norme.
+- 4 PRINCIPES FONDAMENTAUX : PERCEPTIBLE, UTILISABLE, COMPRÉHENSIBLE,
+  ROBUSTE.
+- Niveau légalement exigé : DOUBLE A (AA), aussi préconisé par le
+  Parlement européen. Délai de 18 mois pour migrer vers une nouvelle
+  version.
+- V3.0 : arrêté du 29 avril 2015 (capitalise sur AccessiWeb, référentiel
+  HTML5/ARIA).
+- 2 DOCUMENTS à publier : page d'aide (langage non technique, contact +
+  coordonnées du défenseur des droits, accessible depuis toutes les
+  pages) ET déclaration de conformité (niveau précis + dérogations
+  justifiées).
+- Sanction : à défaut de correction dans les 6 mois suivant une mise en
+  demeure, ajout à une liste de services non-conformes publiée.
+- Portée : uniquement les applications et contenus web consultables via
+  un navigateur (y compris sur smartphone) ; PAS les applications
+  mobiles natives, PAS les logiciels de bureau, PAS les postes de
+  travail.
+- Charte internet de l'État V1.0 (circulaire PM n° 5574 du 16 février
+  2012) ; label « e-accessible » (5 niveaux) ; FIPHFP (finance audits et
+  mise en conformité dans la limite de 50 %, ~1,5 M€/an).
+
+=======================================================================
+À RETENIR
+- SI de l'État : ~2 Md€/an hors T2, 2 M d'agents, RIE en convergence des
+  6 réseaux ministériels (MPLS, IPv4/IPv6, 12 000 km de fibre).
+- Chronologie : MTIC -> ATICA (2001) -> ADAE (2003) -> DGME (2005/2008)
+  -> DISIC (21 fév. 2011) -> SGMAP (2012) -> DINSIC (2015) -> DITP +
+  DINSIC (2017).
+- RIE : décidé le 25 mai 2011, sur RENATER, remplace AdER/SIGMA,
+  gouverné par le SCN RIE (NOC + SOC), adressage 100.65.0.0/16.
+- Textes : loi 13 mars 2000 (preuve électronique), ordonnance 8 déc.
+  2005 (crée RGI/RGS/RGAA), décret 1er août 2014 (unicité du SI),
+  ordonnance SVE 6 nov. 2014.
+- RGI (interopérabilité, arrêté 20 avr. 2016) ; RGS (sécurité, ANSSI +
+  DGME, ISO 27001, PSCo) ; RGAA (accessibilité, WCAG 2.0, principes
+  P-U-C-R, niveau AA, web via navigateur seulement).

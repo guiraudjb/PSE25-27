@@ -1,0 +1,27 @@
+SYSTÈMES LINUX ET UNIX : HISTOIRE ET FAMILLES
+
+1. PRÉHISTOIRE ET NAISSANCE D'UNIX
+Premier Unix mis au point par Ken Thompson aux laboratoires Bell d'AT&T (fin des années 1960), à partir du projet MULTICS. Rejoint par Dennis Ritchie, Thompson réécrit une version réduite pour un DEC PDP-7 : UNICS, contracté en Unix. Date de naissance retenue : 1er janvier 1970 (epoch des horloges Unix).
+1973 : Unix entièrement réécrit en langage C (créé par Ritchie et Kernighan), d'où sa portabilité. Un décret de 1956 interdisant à AT&T de commercialiser hors télécoms, les sources sont distribuées aux universités à des fins éducatives : c'est l'origine de la popularité universitaire d'Unix.
+Fin 1977 : l'université de Californie à Berkeley redéveloppe Unix à partir des sources AT&T pour ses VAX : BSD (Berkeley Software Distribution). Ce travail s'inscrit dans un projet DARPA sur le réseau expérimental TCP/IP : d'où la compatibilité native des Unix avec TCP/IP. Apparition des Unix commerciaux (AIX, HP-UX, SunOS) ; Microsoft lance même Xenix.
+
+2. LE SCHISME ET LES TENTATIVES DE STANDARDISATION
+À partir de 1983, AT&T commercialise Unix System V : séparation en deux écoles rivales, souche System V (entreprise) et souche BSD (recherche, université, réseaux). Les différences sont plus idéologiques que techniques. Sun passe de BSD à System V sous le nom Solaris (d'où « Unix hybride »).
+Deux grandes familles subsistent : System V (influence sur AIX, HP-UX, Solaris) et BSD (FreeBSD, NetBSD, OpenBSD).
+Standards : SVID (AT&T, 1983, décrit System V) ; POSIX / IEEE P1003 (1984, portabilité entre Unix) ; X/Open Portability Guide (XPG3, consortium de constructeurs, localisation géographique). Malgré une forte homogénéité conceptuelle (et la cohésion native avec TCP/IP), il n'existe pas de standard Unix unique.
+
+3. L'AFFIRMATION D'UN OS LIBRE : LINUX
+1984 : Richard Stallman fonde la Free Software Foundation et lance le projet GNU (« GNU's Not Unix »), système libre de type Unix, sous licence GPL (copyleft : copie, modification et distribution autorisées si le produit final reste sous GPL).
+Il manque un noyau. 1991 : Linus Torvalds, étudiant finlandais, lance le développement d'un noyau compatible Unix pour la famille x86 (version 0.02 exécutant déjà bash, gcc, gnu-make...). Versions 0.03, 0.10, 0.95, 0.99 puis 2.2 stable (fin des années 90), 2.6 (années 2010).
+Linux doit beaucoup aux outils GNU (compilateur gcc) et à BSD (utilitaires, démons et commandes réseau issus de portages). Linux est reconnu conforme à POSIX .1 et .2.
+
+4. LES PRINCIPAUX UNIX COMMERCIAUX
+- AIX : IBM, basé sur System V, processeurs POWER ; originalité l'ODM (Object Data Manager, base de données système orientée objet) ; interface d'administration smit ; système de fichiers journalisé.
+- HP-UX : Hewlett-Packard, System V et BSD ; PA-RISC puis Itanium ; interface d'administration SAM ; paquetages appelés « dépôts ».
+- Solaris : Sun, hybride (4.1BSD puis System V R4) ; SPARC, x86, x86-64 ; SMP, multithreading, noyau 64 bits depuis Solaris 7 (1998) ; snapshots ; racheté par Oracle (licence fermée).
+- Autres : Ultrix (DEC), IRIX (SGI), UnixWare (Novell), SCO Unix, Tru64 (Compaq), Mac OS X (Apple).
+
+5. LES PRINCIPAUX LINUX
+Évolution des noyaux : 2.0 (fonctions Unix de base, génération 1 réseau) ; 2.2 (stabilisation, génération 2 réseau) ; 2.4 (multiprocesseurs, RAM jusqu'à 64 Go, génération 3 réseau avec filtrage et QoS, systèmes de fichiers journalisés ext3/reiserfs/xfs/jfs) ; 2.6 (noyau préemptible, nouvel ordonnanceur, multithreading amélioré, 64 bits, ACL, NFSv4, ext4) ; 3.x (nftables, LXC, Wi-Fi 802.11ac/ad, Btrfs) ; 4.x (livepatch : mise à jour du noyau à la volée).
+Distributions : Slackware (la première, format tgz, proche BSD) ; Red Hat (commerciale, format rpm, certification RHCE) ; Fedora (communautaire, base de test de RHEL) ; CentOS (serveurs, recompilée depuis RHEL) ; SuSE (Europe, rpm) ; Mandriva (France, rpm) ; Debian (non commercial, format deb, esprit GNU) ; Ubuntu (dérivé Debian, Canonical) ; Mint (base Ubuntu/Debian, interface Cinnamon) ; Gentoo (système sur mesure via des « ports », proche BSD).
+Socle commun à tous les Unix/Linux : logiciels autour du shell, intégration native TCP/IP, multithreading, systèmes de fichiers optimisés et étendus, virtualisation, philosophie « tout est fichier ».
