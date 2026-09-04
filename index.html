@@ -567,7 +567,7 @@
         .auto-btn { background: var(--text-main); border-color: var(--text-main); color: var(--bg-container); }
         .auto-btn.active { background: var(--accent); border-color: var(--accent); animation: pulse 2s infinite; }
 
-        .info-layout { display: flex; flex-direction: column; height: 100%; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); }
+        .info-layout, .musique-layout { display: flex; flex-direction: column; height: 100%; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); }
         .podcast-container { flex-shrink: 0; padding: 1vh; border-bottom: 1px solid var(--border); background: var(--bg-container); display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%;}
         audio { width: 90%; max-width: 600px; height: 4vh; filter: var(--audio-filter); margin: 0 auto; display: block; }
         .info-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; background: #111; overflow: hidden; position: relative; touch-action: none; }
@@ -704,6 +704,7 @@
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-flashcard" id="btn-flashcard" onclick="userSwitchTab('flashcard')">FLASHCARD<span class="tab-badge" id="badge-flashcard"></span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-infographie" id="btn-infographie" onclick="userSwitchTab('infographie')">INFOGRAPHIE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-fiche" id="btn-fiche" onclick="userSwitchTab('fiche')">FICHE</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-musique" id="btn-musique" onclick="userSwitchTab('musique')">MUSIQUE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tp" id="btn-tp" onclick="userSwitchTab('tp')">TP<span class="tab-badge" id="badge-tp"></span></button>
         </div>
 
@@ -850,6 +851,18 @@
             </div>
         </div>
 
+        <div id="tab-musique" class="tab-content" role="tabpanel" aria-labelledby="btn-musique">
+            <div class="musique-layout">
+                <div class="podcast-container">
+                    <audio id="musique-player" controls aria-label="Lecteur audio de la chanson">
+                        Votre navigateur ne supporte pas l'élément audio.
+                    </audio>
+                </div>
+                <div class="fiche-text" id="musique-content" style="flex-grow:1; border:none; border-radius:0;" tabindex="0" aria-label="Paroles de la chanson">
+                </div>
+            </div>
+        </div>
+
         <div id="tab-tp" class="tab-content" role="tabpanel" aria-labelledby="btn-tp">
             <div style="text-align:center; color:var(--secondary);">
                 <span id="tp-progress">Exercice 1/10</span>
@@ -920,9 +933,9 @@
     }
 
     // --- VARIABLES ---
-    const PATHS = { 
-        quiz: './quizz/', flash: './flashcard/', info: './infographie/', 
-        podcast: './podcast/', tp: './tp/', fiche: './fiche/'
+    const PATHS = {
+        quiz: './quizz/', flash: './flashcard/', info: './infographie/',
+        podcast: './podcast/', tp: './tp/', fiche: './fiche/', chanson: './chanson/'
     };
     
     let quizData = [], flashData = [], tpData = [], allModules = [];
@@ -997,8 +1010,11 @@
         // Arrête le timer quiz (question OU feedback)
         clearInterval(qTimerInterval);
         
+        const musiqueAudio = document.getElementById('musique-player');
+        if(musiqueAudio) musiqueAudio.pause();
+
         clearTimeout(fAutoplayTimeout);
-        isAutoplay = false; 
+        isAutoplay = false;
         const fcBtn = document.getElementById('btn-fc-autoplay');
         if(fcBtn) {
             fcBtn.classList.remove('active'); fcBtn.textContent = "▶ AUTO";
@@ -1092,6 +1108,9 @@
         document.getElementById('info-image').style.transform = ''; zoomLevel = 1; panX = 0; panY = 0;
         document.getElementById('info-placeholder').classList.remove('hidden');
         document.getElementById('podcast-player').src = "";
+        document.getElementById('musique-player').src = "";
+        document.getElementById('musique-player').style.display = '';
+        document.getElementById('musique-content').textContent = "";
         document.getElementById('quiz-end').classList.remove('active');
         document.getElementById('quiz-feedback').classList.remove('active');
         document.getElementById('quiz-game').classList.add('active');
@@ -1108,8 +1127,9 @@
         const pFlash = fetch(PATHS.flash + filename).then(r => r.ok ? r.text() : null);
         const pTp = fetch(PATHS.tp + filename).then(r => r.ok ? r.text() : null);
         const pFiche = fetch(PATHS.fiche + filename.replace('.csv', '.txt')).then(r => r.ok ? r.text() : null);
-        
-        Promise.all([pQuiz, pFlash, pTp, pFiche]).then(([txtQuiz, txtFlash, txtTp, txtFiche]) => {
+        const pChanson = fetch(PATHS.chanson + filename.replace('.csv', '.txt')).then(r => r.ok ? r.text() : null).catch(() => null);
+
+        Promise.all([pQuiz, pFlash, pTp, pFiche, pChanson]).then(([txtQuiz, txtFlash, txtTp, txtFiche, txtChanson]) => {
             if(txtQuiz) parseQuizCSV(txtQuiz);
             if(txtFlash) parseFlashCSV(txtFlash); else if(txtQuiz) flashData = quizData.map(q => ({ front: q.question, back: q.correctAnswer }));
             if(txtTp) parseTpCSV(txtTp); else tpData = [];
@@ -1126,6 +1146,13 @@
             audio.onerror = () => { audio.style.display = 'none'; document.getElementById('podcast-msg').style.display = 'block'; };
             audio.onloadeddata = () => { audio.style.display = 'block'; document.getElementById('podcast-msg').style.display = 'none'; };
             audio.src = PATHS.podcast + filename.replace('.csv', '.m4a');
+
+            // Musique (chanson) : silencieux si absente, pas de message d'erreur
+            document.getElementById('musique-content').textContent = txtChanson ? txtChanson : "";
+            const musiqueAudio = document.getElementById('musique-player');
+            musiqueAudio.onerror = () => { musiqueAudio.style.display = 'none'; };
+            musiqueAudio.onloadeddata = () => { musiqueAudio.style.display = ''; };
+            musiqueAudio.src = PATHS.chanson + filename.replace('.csv', '.mp3');
 
             document.getElementById('status-msg').textContent = "Chargement terminé.";
             userSwitchTab('infographie');
