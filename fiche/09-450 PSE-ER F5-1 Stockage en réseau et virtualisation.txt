@@ -1,140 +1,203 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 5, thème 1
-STOCKAGE EN RÉSEAU ET VIRTUALISATION
-=======================================================================
+LE STOCKAGE EN RÉSEAU ET LA VIRTUALISATION DU STOCKAGE.
 
-CONTEXTE
-- Le stockage est un poste de coût important mais incontournable
-  (pérennité, intégrité, sécurité du SI). Levier d'économie : augmenter
-  le taux d'utilisation du stockage.
-- Achats publics : via les marchés publics, configurations tirées des
-  CCTP (marché interministériel de stockage).
+LEXIQUE COMPLET.
 
-1. PRÉSENTATION PHYSIQUE : ARCHITECTURES ET ACCÈS
------------------------------------------------------------------------
-Trois architectures : DAS, NAS, SAN.
+      DAS : Direct Attached Storage, stockage en attachement direct où un seul serveur accède au support, le plus souvent un disque ou une baie SCSI ou SAS, utilisé pour de petites volumétries, sites déconcentrés ou serveurs de développement.
 
-DAS (Direct Attached Storage)
-- Attachement direct (disque interne SCSI, baie SCSI/SAS).
-- UN SEUL serveur accède au stockage. Petite volumétrie.
-- De moins en moins utilisé ; reste privilégié pour sites déconcentrés
-  et serveurs de développement.
+      NAS : Network Attached Storage, serveur dédié et optimisé pour le stockage, parfois appelé Filer, connecté au réseau local et mettant les données à disposition sous forme de répertoires partagés.
 
-NAS (Network Attached Storage)
-- Serveur dédié (Filer), spécialisé et optimisé pour le stockage,
-  connecté au réseau LOCAL. OS propriétaire ou open source, ou appliance
-  (micro-noyau, système de fichiers, cache lecture/écriture).
-- Données mises à disposition en répertoires partagés (petite/moyenne
-  volumétrie, quelques To).
-- Inconvénient : PARTAGE la bande passante du LAN -> dégradations de
-  temps de réponse possibles (atténué par le 10 Gb/s Ethernet).
-- Avantage : FINANCIER (seul le serveur NAS à budgéter, pas de réseau
-  dédié).
+      Filer : autre nom du serveur NAS.
 
-SAN (Storage Area Network)
-- Réseau DÉDIÉ au stockage. Protocoles : Fibre Channel, FCoE (Fibre
-  Channel over Ethernet, 1 à 8 Gb/s, plusieurs km), iSCSI (commandes SCSI
-  encapsulées dans des trames IP).
-- 3 topologies : point à point, fabric (à base de commutateurs), boucle
-  arbitrée (Arbitrated Loop).
-- Fabric : grandes entités ; switches reliés entre eux par des ISL
-  (Inter Switch Link). Deux fabrics séparées + deux cartes FC (HBA) sur
-  serveurs et baies -> architecture redondante SANS SPOF (Single Point
-  Of Failure) + MULTI-PATHING (plusieurs chemins d'accès).
-- Chaque serveur : carte HBA (Host Bus Adapter), deux recommandées ;
-  connexion en fibre optique.
-- FCoE : LAN et SAN sur les mêmes cartes, mais cartes/switches
-  spécifiques.
+      Appliance : NAS livré comme boîtier intégrant des mécanismes propriétaires, micro-noyau, système de fichiers, cache en lecture et écriture, et le support natif de plusieurs protocoles.
 
-STOCKAGE (RAID et disques)
-- RAID 0 : stripping sans copie -> rapidité, AUCUNE sécurité.
-- RAID 1 : mirroring -> protection par duplication, capacité réduite.
-- RAID 5 : stripping + parité répartie, >= 3 disques, très bon niveau de
-  sécurité. Logiciel = moins cher ; matériel = meilleurs débits (carte
-  dédiée qui décharge le CPU des E/S et de la parité).
-- RAID 6 : deux disques de parité. RAID DP : spécifique NetApp.
-- Disque de SPARE : remplace automatiquement un disque en panne.
-  HOT-PLUG : ajout/changement à chaud.
-- Disques :
-  * SATA : haute capacité (jusqu'à 2 To), 7500 tr/min -> test / dev.
-  * SAS : capacité moindre (500-600 Go), 15 000 tr/min -> production,
-    bases de données.
-  * SSD : petite capacité (~100 Go), très rapide, très cher.
-- Haute dispo : Metro-Cluster (NetApp) = 2 contrôleurs sur sites
-  distants par fibre optique ; liens SRDF sur baies EMC Symmetrix.
+      SAN : Storage Area Network, réseau dédié au stockage s'appuyant sur Fibre Channel, FCoE ou iSCSI, permettant à de nombreux serveurs d'accéder à un stockage mutualisé.
 
-2. PRÉSENTATION LOGIQUE : ADMINISTRATION CENTRALISÉE
------------------------------------------------------------------------
-- Administration historiquement par outils constructeurs (interface
-  Java/HTTP, ou SSH en ligne de commande). Lacune : peu
-  d'interopérabilité entre constructeurs.
-- Virtualisation du stockage + cloud -> solutions logicielles globales
-  (Omnivision, VMware vCloud/vCenter, HP Cloud System, IBM SmartCloud),
-  interfaçant plusieurs constructeurs via des plugins (module NetApp dans
-  vCenter). Les VM accèdent à des volumétries hétérogènes sans se
-  soucier de l'emplacement.
+      Fibre Channel : protocole de SAN défini par la norme ANSI X3T11, utilisant habituellement la fibre optique, autorisant plusieurs kilomètres entre périphériques.
 
-OPTIMISATION DES VOLUMÉTRIES
-- Dé-duplication : un seul bloc écrit, partagé par pointeurs ; blocs
-  redondants éliminés.
-- Thin provisioning (surbooking) : mise à disposition de l'espace
-  réellement occupé + promesse de la volumétrie prévue.
+      FCoE : Fibre Channel over Ethernet, encapsulation des trames Fibre Channel sur un support Ethernet, faisant cohabiter LAN et SAN sur les mêmes cartes serveur mais exigeant cartes et commutateurs spécifiques.
 
-FONCTIONS DES BAIES ACTUELLES
-- Compression (réduction sans perte).
-- Snapshots : copies instantanées totales ou incrémentales (sauvegardes).
-- Clones : copies identiques d'un volume, LUN ou VM.
-- Réplication (synchrone/asynchrone) vers un site de secours.
-- Extension à chaud des volumes.
-- HSM (Hierarchical Storage Management) : migre les données peu
-  sollicitées vers des supports longue durée type VTL (Virtual Tape
-  Library).
+      iSCSI : protocole encapsulant des commandes SCSI dans des paquets IP, permettant un SAN de moyenne volumétrie à prix réduit mais peu performant car reposant sur le réseau existant.
 
-PROTOCOLES
-- NDMP (Network Data Management Protocol) : protocole réseau, réduit le
-  trafic, améliore les fenêtres de sauvegarde -> sauvegarde des NAS.
-- Systèmes de fichiers : SMB/CIFS (Windows), NFS (Unix/Linux), NCP
-  (Novell) ; s'appuient sur TCP/IP et standards LAN.
-- SMI-S : protocole d'architecture.
-- Fibre Channel : norme ANSI X3T11 ; média = fibre optique ; « fibres
-  noires » WDM (Wavelength Division Multiplexing) pour de longues
-  distances.
-  Couches : FC_0 (adaptation au médium), FC_1 (encodage 8b/10b), FC_2
-  (cœur : découpage/réassemblage, ordre, trames manquantes) regroupées
-  dans FC_PH ; FC_3 (multicast, stripping) ; FC_4 (interface applis) ;
-  au-dessus : ULP (Upper Layer Protocol) — SCSI, IP, AAL5, IPI.
-- FCoE : remplace FC-0/FC-1 pour encapsuler FC-2 sur Ethernet 10 Gbit/s ;
-  cartes et switches spécifiques.
-- iSCSI : commandes SCSI dans des paquets IP ; moyenne volumétrie à prix
-  réduit, peu performant (NetApp, DELL).
+      Topologie point à point : mode SAN où des serveurs sont reliés en attachement direct par fibre optique à une baie.
 
-3. ASPECTS ENVIRONNEMENTAUX
------------------------------------------------------------------------
-- Protection électrique souvent négligée. Consommation des processeurs :
-  de 40 W à plus de 250 W -> forts flux caloriques.
-- Secours par groupe électrogène : puissance effective -40 % à cause de
-  la POLLUTION HARMONIQUE -> norme PFC (Power Factor Correction)
-  obligatoire pour tous les matériels.
-- Norme ANSI/TIA 942 : règles réparties en QUATRE niveaux de
-  disponibilité.
-- Sauvegardes de secours sur SITE ÉLOIGNÉ ; restauration depuis le site
-  de secours en cas d'impact majeur (incendie, crue, cyber-terrorisme).
-- Vérifier régulièrement l'état des données (un virus peut toucher le
-  site principal ET le secours). Le PCA (Plan de Continuité d'Activités)
-  n'élimine pas toutes les menaces mais fournit des solutions de secours.
+      Topologie fabric : mode SAN à base de commutateurs reliés entre eux, réservé aux grandes entités, permettant plusieurs gigabits par seconde.
 
-=======================================================================
-À RETENIR
-- DAS (1 serveur, direct) / NAS (serveur dédié sur le LAN, partage la
-  bande passante, économique) / SAN (réseau dédié, FC/FCoE/iSCSI).
-- SAN : topologies point à point / fabric / boucle ; 2 fabrics + 2 HBA
-  = sans SPOF + multi-pathing ; ISL entre switches.
-- RAID 0 (perf, 0 sécurité) / 1 (miroir) / 5 (parité répartie, >= 3
-  disques) / 6 (2 parités) / DP (NetApp). Spare + hot-plug.
-- SATA (capacité, lent, dev) / SAS (15 000 tr/min, production) / SSD
-  (rapide, cher).
-- Déduplication, thin provisioning, snapshots, clones, réplication, HSM
-  vers VTL.
-- FC = ANSI X3T11 ; couches FC_0/1/2 = FC_PH. NDMP pour sauvegarder les
-  NAS. SMB-CIFS / NFS / NCP.
-- Électrique : conso CPU 40->250 W ; groupe électrogène -40 % (harmoniques,
-  norme PFC) ; TIA 942 = 4 niveaux ; sauvegarde hors site + PCA.
+      Arbitrated Loop : topologie SAN en boucle.
+
+      HBA : Host Bus Adapter, carte spécifique équipant chaque serveur connecté au SAN, à installer en double pour la bascule en cas de panne.
+
+      ISL : Inter Switch Link, liaison raccordant entre eux plusieurs commutateurs pour constituer une fabric.
+
+      SPOF : Single Point Of Failure, point de défaillance unique, éliminé en créant deux fabrics et en équipant serveurs et baies de deux cartes Fibre Channel.
+
+      Multi-pathing : fourniture de plusieurs chemins d'accès aux données, permise par une architecture redondante.
+
+      RAID 0 : entrelacement de bandes sans copie, sans sécurité mais autorisant lectures et écritures simultanées et accélérant le sous-système.
+
+      RAID 1 : miroir, duplication des données sur des disques distincts, offrant une protection suffisante mais divisant la capacité par deux.
+
+      RAID 5 : entrelacement de bandes avec parité répartie sur chaque disque, exigeant au moins trois disques, offrant un très bon niveau de sécurité.
+
+      RAID 6 : variante à deux disques de parité.
+
+      RAID DP : RAID spécifique du constructeur NetApp, à double parité.
+
+      RAID matériel : gestion du RAID par une carte physique dédiée, déchargeant totalement le processeur des entrées-sorties et du contrôle de parité, offrant les meilleurs débits.
+
+      RAID logiciel : gestion du RAID par le système, nettement moins onéreuse, aux performances acceptables pour des solutions économiques.
+
+      Disque de spare : disque de secours qui reprend automatiquement la place d'un disque en panne dans une baie de forte capacité.
+
+      Hot-plug : fonction d'ajout et de changement de disque à chaud.
+
+      SATA : Serial ATA, disque de haute capacité, jusqu'à deux téraoctets, mais lent, environ sept mille cinq cents tours par minute, adapté au test et au développement.
+
+      SAS : Serial Attached SCSI, disque de moindre capacité, jusqu'à cinq à six cents gigaoctets, tournant à quinze mille tours par minute, adapté à la production, bases de données.
+
+      SSD : Solid-State Drive, disque à mémoire, de petite capacité, à accès très rapide mais très onéreux.
+
+      Metro-Cluster : technologie NetApp de haute disponibilité séparant deux contrôleurs sur des sites distants par liaisons fibre optique.
+
+      SRDF : Symmetrix Remote Data Facility, liens de réplication distante des baies EMC Symmetrix.
+
+      Dé-duplication : écriture d'un seul exemplaire d'un bloc partagé par des pointeurs, élimination des blocs redondants, optimisant l'espace occupé.
+
+      Thin provisioning : surbooking, mise à disposition de l'espace réellement occupé avec la promesse de fournir la volumétrie prévue.
+
+      Snapshot : copie instantanée, totale ou incrémentale, des données pour permettre les sauvegardes.
+
+      Clone : copie identique d'un volume, d'un LUN ou d'une machine virtuelle.
+
+      Réplication : copie des données à distance, en synchrone ou en asynchrone, vers un site de secours.
+
+      HSM : Hierarchical Storage Management, stockage hiérarchisé migrant les données peu sollicitées vers des supports de longue durée de type VTL.
+
+      VTL : Virtual Tape Library, bibliothèque de bandes virtuelle utilisée comme support de longue durée.
+
+      NDMP : Network Data Management Protocol, protocole réseau réduisant le trafic et améliorant l'utilisation des fenêtres de sauvegarde, adapté à la sauvegarde des NAS.
+
+      SMB slash CIFS : Server Message Block, Common Internet File System, protocole de partage de fichiers du monde Windows.
+
+      NFS : Network File System, protocole de partage de fichiers du monde Unix et Linux.
+
+      NCP : Network Core Protocol, protocole de partage de fichiers du monde Novell.
+
+      SMI-S : protocole d'architecture de gestion du stockage favorisant l'interopérabilité entre constructeurs.
+
+      Couche FC-PH : regroupement logique des couches FC-0, FC-1 et FC-2 de Fibre Channel, dite couche physique.
+
+      ULP : Upper Layer Protocol, protocole de niveau supérieur encapsulé dans Fibre Channel au-dessus de FC-4, comme SCSI, IP, AAL5 ou IPI.
+
+      WDM : Wavelength Division Multiplexing, multiplexage en longueur d'onde permettant de longues distances sur fibres noires.
+
+      PFC : Power Factor Correction, norme de correction du facteur de puissance que doivent respecter serveurs et onduleurs.
+
+      ANSI TIA 942 : norme américaine fixant des règles d'infrastructure de centre de données réparties en quatre niveaux de disponibilité.
+
+      PCA : Plan de Continuité d'Activité, offrant des solutions de secours en cas de sinistre sans éliminer toutes les menaces.
+
+      PRA : Plan de Reprise d'Activité.
+
+COURS DÉTAILLÉ.
+
+I. LES ENJEUX DU STOCKAGE EN RÉSEAU.
+
+      Pour les entreprises et les ministères, le stockage des données représente un coût important du budget informatique mais est incontournable pour la pérennité, l'intégrité et la sécurité du système d'information. Il faut réduire les coûts, et augmenter le taux d'utilisation du stockage est un levier d'économie : en organisant différemment l'accessibilité aux données, on obtient une utilisation plus fine des ressources. Les ministères achètent les matériels par les marchés publics, ce qui réduit les coûts par mise en concurrence mais restreint le choix aux configurations tirées des cahiers des clauses techniques particulières, normalement adaptées aux besoins définis.
+
+      Pour les exploitants, c'est une activité technique à part entière concentrant les compétences des équipes système et réseau : environnements mutualisés complexes, volumes exponentiels, réduction des fenêtres de sauvegarde et importance du temps de reprise en cas de sinistre exigent une expertise approfondie avant de migrer vers une architecture de stockage en réseau.
+
+II. LES ARCHITECTURES DE STOCKAGE ET LEURS MÉTHODES D'ACCÈS.
+
+   A. Le DAS.
+
+      La mutualisation du stockage propose trois grands types d'architectures, le DAS, le NAS et le SAN. Le DAS, stockage en attachement direct, est de moins en moins utilisé avec la consolidation mais reste privilégié pour des sites déconcentrés ou des serveurs de développement. L'attachement le plus courant est le disque interne SCSI, voire une baie SCSI ou SAS ; un seul serveur accède au stockage, pour de petites volumétries.
+
+   B. Le NAS.
+
+      Le NAS est le plus souvent un serveur dédié, spécialisé et optimisé pour le stockage, parfois appelé Filer, connecté au réseau local avec des fonctions d'administration et de sécurisation. Il s'appuie sur des systèmes d'exploitation réseau propriétaires ou libres, Windows, Linux, Unix, BSD, ou se présente comme une appliance intégrant micro-noyau, système de fichiers, cache et support natif de plusieurs protocoles. Il est rattaché à une baie de petite ou moyenne volumétrie, jusqu'à quelques téraoctets, mise à disposition sous forme de répertoires partagés. Cette architecture partage la bande passante réseau avec toutes les autres connexions, d'où de possibles dégradations de temps de réponse, atténuées par l'Ethernet à dix gigabits par seconde. Son avantage est financier : seul le coût du serveur NAS est à budgéter, le réseau Ethernet étant déjà présent, sans surcoût de réseau dédié.
+
+   C. Le SAN.
+
+      Le SAN est un réseau dédié au stockage s'appuyant sur Fibre Channel, sur FCoE, qui transporte de un à huit gigabits par seconde jusqu'à plusieurs kilomètres, ou sur iSCSI qui encapsule des commandes SCSI dans des trames IP. Trois topologies sont proposées : point à point, fabric à base de commutateurs, et boucle, Arbitrated Loop. La topologie point à point relie des serveurs en attachement direct par fibre optique à une baie, par exemple deux serveurs IBM X3850 sur une baie DS3400 à deux contrôleurs, disques SAS de trois cents gigaoctets en RAID 5, pour deux à quatre téraoctets utilisables. La topologie fabric, réservée aux grandes entités, rattache les périphériques à des commutateurs reliés entre eux, accès par fibre optique jusqu'à huit gigabits par seconde théoriques ; en créant deux fabrics et en intégrant deux cartes Fibre Channel sur serveurs et baies, on obtient une architecture redondante sans point de défaillance unique et permettant le multi-pathing.
+
+      La migration des réseaux vers le tout IP remet en cause les SAN Fibre Channel. Le FCoE fait cohabiter LAN et SAN sur les mêmes cartes serveur, mais exige des cartes spécifiques, avec un impact budgétaire et technique sur la migration. Le choix d'une architecture et d'une topologie est essentiel dans un projet de consolidation, en dimensionnant bien la volumétrie et l'organisation logique d'accès, stockage dédié serveur, partages de fichiers, nombre de serveurs, haute disponibilité.
+
+III. LES MATÉRIELS ASSOCIÉS.
+
+   A. Le réseau du SAN.
+
+      En complément d'une baie mutualisée, l'équipement d'un SAN est très coûteux mais indispensable à la disponibilité attendue. On configure le cœur de réseau par des fabrics en raccordant plusieurs commutateurs par des liaisons inter-commutateurs, et pour la haute disponibilité on crée deux fabrics séparées sur lesquelles les serveurs sont raccordés par des accès multiples, permettant le multi-pathing, par exemple avec un commutateur Brocade 5100. Chaque serveur est équipé d'une carte HBA, de préférence en double pour basculer en cas de panne, la connexion physique se faisant en fibre optique, par exemple une carte QLogic. Pour une solution NAS, les équipements réseau sont déjà installés, seul l'achat de la baie ou de l'appliance est à chiffrer.
+
+   B. Le stockage et les disques.
+
+      Deux points sont à noter : la présence et le type de RAID, et le type de disques. Les fabricants offrent du RAID 0 et 1 pour les moins chers, jusqu'aux RAID 5, 6 et DP matériels, en passant par le RAID logiciel économique. Le RAID 0, entrelacement sans copie, n'offre aucune sécurité mais accélère l'ensemble. Le RAID 1, miroir, protège suffisamment par duplication mais diminue la capacité. Le RAID 5, entrelacement avec parité répartie, exige au moins trois disques et offre un très bon niveau de sécurité ; la version logicielle est moins onéreuse, encore proposée par IBM et HP sur leurs Unix, tandis que seule la version matérielle offre les meilleurs débits en déchargeant le processeur, une carte physique étant dédiée. Il existe des RAID 6 à deux disques de parité et des RAID propriétaires comme le RAID DP de NetApp. Les baies de forte capacité intègrent des disques de spare et la fonction hot-plug.
+
+      Deux grandes sortes de disques : les SATA de haute capacité, jusqu'à deux téraoctets, mais lents, environ sept mille cinq cents tours par minute, pour le test et le développement ; les SAS de moindre capacité, jusqu'à cinq à six cents gigaoctets, à quinze mille tours par minute, pour la production, bases de données. Certains constructeurs proposent des SSD de petite capacité, cent gigaoctets, très rapides mais extrêmement onéreux. Des technologies de haute disponibilité sont mises en œuvre, comme le Metro-Cluster de NetApp séparant deux contrôleurs sur sites distants par fibre optique, ou les liens SRDF des baies EMC Symmetrix.
+
+IV. LA PRÉSENTATION LOGIQUE ET LA VIRTUALISATION DU STOCKAGE.
+
+   A. Vers une administration centralisée.
+
+      L'administration des SAN et NAS se fait encore par les outils constructeurs de chaque couche, interface Java par HTTP pour un commutateur Brocade ou du stockage NetApp, ou ligne de commande par SSH, par exemple les interfaces NetApp OnCommand, IBM DS Storage Manager ou l'administration des commutateurs Brocade. Les outils d'administration étaient la grande lacune du stockage, faute d'interopérabilité entre constructeurs, trop proches du matériel et sans vision générale de la chaîne de traitement. Avec la virtualisation du stockage et l'informatique en nuage, de nombreux éditeurs proposent des solutions logicielles globales à interfaces communes, comme Omnivision, VMware vCloud, HP Cloud System ou IBM SmartCloud, interfaçant les produits de plusieurs constructeurs par des greffons, par exemple un module de pilotage des baies NetApp dans la console VMware vCenter.
+
+      On touche alors la virtualisation, du serveur mais surtout du stockage, car des machines virtuelles peuvent accéder à des volumétries de baies hétérogènes sans se soucier de leur emplacement ni de leur nature.
+
+   B. Les technologies d'optimisation.
+
+      La dé-duplication écrit un seul exemplaire d'un bloc commun, proposé à tous par des pointeurs, et élimine les blocs redondants, optimisant l'espace. Le thin provisioning, ou surbooking, met à disposition l'espace réellement occupé avec la promesse de fournir la volumétrie prévue. Les baies actuelles offrent aussi la compression sans perte pour stocker et transporter plus efficacement, les snapshots, copies instantanées totales ou incrémentales pour les sauvegardes, les clones, copies identiques d'un volume, d'un LUN ou d'une machine virtuelle, la réplication synchrone ou asynchrone vers un site de secours, l'extension à chaud des volumes et le stockage hiérarchisé HSM migrant les données peu sollicitées vers des supports de longue durée de type VTL.
+
+V. LES PROTOCOLES DU STOCKAGE.
+
+   A. Protocoles réseau et systèmes de fichiers.
+
+      Le monde du stockage propose plusieurs types de protocoles : gestion du réseau avec NDMP, systèmes de fichiers avec SMB/CIFS, NFS et NCP, et architecture avec SMI-S. Le NDMP réduit significativement le trafic réseau et améliore l'utilisation des fenêtres de sauvegarde ; c'est une bonne solution pour sauvegarder les NAS en répartissant les délais dans le temps. Dès qu'une entreprise possède plus d'un système d'exploitation, elle jongle avec plusieurs systèmes de fichiers : SMB/CIFS pour Windows, NFS pour Unix et Linux, NCP pour Novell. Ces protocoles partagent des fichiers sous forme de répertoires entre serveurs et clients et s'appuient uniquement sur les couches TCP/IP et les standards LAN.
+
+   B. Le protocole Fibre Channel.
+
+      Fibre Channel est défini par la norme ANSI X3T11, sur fibre optique, avec des distances de plusieurs kilomètres, voire davantage par liaisons fibres noires WDM. Les couches FC-0, FC-1 et FC-2 sont regroupées dans la couche physique FC-PH : FC-0 adapte au médium, FC-1 implémente l'encodage et le décodage en codage 8b/10b, FC-2 est le cœur du protocole, responsable du découpage et du réassemblage, du contrôle de l'ordre et de la détection des trames manquantes. FC-3 propose des services comme le multicast ou l'entrelacement pour multiplier la bande passante sur plusieurs liens, et FC-4 sert d'interface pour les applications encapsulées. Au-dessus de FC-4, les protocoles de niveau supérieur ULP : la norme prévoit l'encapsulation de SCSI, IP, AAL5 ou IPI.
+
+   C. FCoE et iSCSI.
+
+      Le FCoE fait transiter des trames Fibre Channel sur Ethernet par encapsulation ; il remplace les couches FC-0 et FC-1 pour encapsuler FC-2. L'Ethernet à dix gigabits par seconde laisse entrevoir de très bonnes performances sur les SAN FCoE, mais l'infrastructure doit être modifiée, cartes, commutateurs et baies spécifiques. L'iSCSI, qui encapsule des commandes SCSI dans des paquets IP, permet un stockage de moyenne volumétrie à prix réduit mais peu performant car reposant sur le réseau existant ; NetApp et Dell fournissent des baies compatibles.
+
+VI. LES ASPECTS ENVIRONNEMENTAUX DU STOCKAGE.
+
+      La protection électrique est une ressource souvent oubliée. La multiplication des baies au format réduit, la surconsommation des équipements et la climatisation accroissent les risques de rupture électrique ; la consommation des processeurs est passée de quarante à plus de deux cent cinquante watts, générant des flux caloriques importants. En cas de secours par groupe électrogène, la puissance effective peut diminuer de quarante pour cent du fait de la pollution harmonique des alimentations ; tous les matériels, serveurs, onduleurs, doivent respecter la norme PFC. Dans les grands centres de données, une véritable stratégie énergétique est nécessaire ; la norme américaine ANSI TIA 942 fixe des règles réparties en quatre niveaux de disponibilité.
+
+      La sécurité des installations doit protéger le patrimoine informationnel : aux sauvegardes locales, permanentes ou différées, doivent être associées des sauvegardes de secours stockées sur un site éloigné, la restauration étant lancée depuis le site de secours en cas d'incendie, de crue ou d'attaque. La vérification régulière de l'état des données est primordiale, un virus ayant parfois affecté site principal et site de secours en même temps. Le plan de continuité d'activité n'élimine pas toutes les menaces mais offre des solutions de secours en cas de sinistre.
+
+POINTS D'ATTENTION.
+
+      Trois architectures : DAS, un seul serveur en attachement direct, petites volumétries ; NAS, serveur de fichiers sur le réseau local, répertoires partagés, avantage financier ; SAN, réseau dédié au stockage, coûteux, haute disponibilité.
+
+      SAN sur Fibre Channel, FCoE, ou iSCSI ; topologies point à point, fabric à commutateurs et boucle ; deux fabrics et deux cartes Fibre Channel éliminent le point de défaillance unique et permettent le multi-pathing.
+
+      Carte HBA côté serveur pour le SAN, en double ; NAS ne demande aucun équipement réseau supplémentaire.
+
+      RAID 0 sans sécurité mais rapide, RAID 1 miroir, RAID 5 parité répartie, au moins trois disques ; RAID matériel décharge le processeur, RAID logiciel économique.
+
+      SATA lent et gros pour test et développement, SAS rapide pour la production, SSD très rapide mais très cher.
+
+      Systèmes de fichiers partagés : SMB/CIFS pour Windows, NFS pour Unix et Linux, NCP pour Novell, sur TCP/IP ; NDMP pour sauvegarder les NAS.
+
+      Virtualisation du stockage : machines virtuelles accédant à des baies hétérogènes sans se soucier de l'emplacement ; dé-duplication et thin provisioning optimisent l'espace.
+
+      Fibre Channel : couche physique FC-PH regroupant FC-0, FC-1, FC-2 ; codage 8b/10b en FC-1 ; encapsulation de SCSI, IP, AAL5, IPI au-dessus de FC-4.
+
+      Aspects environnementaux : norme PFC pour les alimentations, ANSI TIA 942 à quatre niveaux de disponibilité, sauvegardes de secours sur site éloigné, vérification régulière de l'état des données.
+
+EXEMPLES CITES.
+
+      SAN point à point : deux serveurs IBM X3850 sur une baie DS3400 à deux contrôleurs, disques SAS trois cents gigaoctets en RAID 5, deux à quatre téraoctets utilisables.
+
+      Commutateur SAN Brocade 5100, carte HBA QLogic.
+
+      RAID propriétaire RAID DP de NetApp ; RAID 5 logiciel encore proposé sur les Unix d'IBM et de HP.
+
+      Haute disponibilité : Metro-Cluster de NetApp, liens SRDF des baies EMC Symmetrix.
+
+      Outils d'administration : NetApp OnCommand, IBM DS Storage Manager, administration des commutateurs Brocade ; solutions globales Omnivision, VMware vCloud, HP Cloud System, IBM SmartCloud ; module NetApp dans VMware vCenter.
+
+      Baies iSCSI de NetApp et Dell.
+
+      Norme Fibre Channel ANSI X3T11 ; norme de centre de données ANSI TIA 942.

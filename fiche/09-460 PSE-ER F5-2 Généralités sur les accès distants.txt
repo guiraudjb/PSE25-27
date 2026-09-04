@@ -1,137 +1,157 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 5, thème 2
-GÉNÉRALITÉS SUR LES ACCÈS DISTANTS
-=======================================================================
+GÉNÉRALITÉS SUR LES ACCÈS DISTANTS AU SYSTÈME D'INFORMATION.
 
-1. ACCÈS DISTANT VIA UN RÉSEAU D'OPÉRATEUR TÉLÉCOM (RTC)
------------------------------------------------------------------------
-- Accès par MODEM : technique populaire et éprouvée.
-- Équipement d'interface = NAS (Network Access Server) : termine les
-  connexions distantes, composé de modems numériques/analogiques
-  (nombre = connexions simultanées, défini au dimensionnement).
-- Débit : max 56 kbit/s (liaison analogique) -> limite SMB, NFS.
-- L'utilisateur compose le numéro du NAS depuis un logiciel de pilotage
-  de son modem, via le réseau d'un opérateur (RTC = Réseau Téléphonique
-  Commuté).
-- Système sécurisé « par nature » : interception ou usurpation du NAS
-  techniquement difficile, le RTC étant physiquement sécurisé
-  (liaison dédiée non partagée).
+LEXIQUE COMPLET.
 
-Protocole machine <-> NAS = PPP (Point to Point Protocol) :
-- bas niveau, encapsule IP, offre des mécanismes d'authentification.
+      Accès distant : connexion d'un utilisateur nomade aux applications de l'entreprise depuis l'extérieur, historiquement par modem via le réseau téléphonique, aujourd'hui de plus en plus via Internet.
 
-AUTHENTIFICATION (3 éléments : client de l'utilisateur, NAS, serveur
-d'authentification) :
-- Sous-protocoles PPP : PAP (Password Authentication Protocol — mot de
-  passe EN CLAIR) et CHAP (Challenge Handshake Authentication Protocol —
-  mot de passe HACHÉ). => CHAP privilégié.
-- Dialogue PAP/CHAP entre le modem de l'utilisateur et le NAS uniquement.
-- Le NAS est CLIENT RADIUS -> dialogue avec le PROXY RADIUS -> lui-même
-  client du SERVEUR RADIUS (qui n'accepte que les requêtes du proxy).
-- Protocole plus récent côté client : EAP (Extensible Authentication
-  Protocol).
+      NAS : Network Access Server, serveur d'accès distant assurant l'interface entre le réseau de l'entreprise et l'utilisateur nomade, composé de modems analogiques ou numériques et jouant le rôle de client RADIUS.
 
-CONFIDENTIALITÉ :
-- PPP ECP (Encryption Control Protocol) = version chiffrée de PPP, peu
-  implémentée par les clients.
-- Confidentialité « naturellement » bonne (réseau opérateur difficile à
-  espionner).
+      RTC : Réseau Téléphonique Commuté, support physiquement sécurisé de l'accès distant par modem, difficile à espionner car jamais partagé par plusieurs terminaux.
 
-2. ACCÈS DISTANT VIA INTERNET
------------------------------------------------------------------------
-- Internet tend à remplacer le RTC (débits croissants depuis fin 1990s).
-- Internet = MILIEU HOSTILE -> fortes contraintes sur l'authentification
-  (usurpation d'identité) et la confidentialité (données interceptées).
-- VPN-RAS (Virtual Private Network – Remote Access Service) = connexion
-  à distance au réseau de l'entreprise via Internet. Type étudié :
-  tunnel VPN sur IPSec.
-- Client nomade : logiciel client VPN -> tunnel IPSec vers le serveur
-  VPN de l'entreprise.
-- Réseau d'accès : n'importe quelle couche physique supportant IP +
-  ouverture Internet — ADSL domicile (jusqu'à 20 Mbit/s), Ethernet d'une
-  entreprise externe, WiFi d'un hôtel, modem GPRS/UMTS (jusqu'à
-  384 kbit/s).
-- Serveur VPN = équipement de terminaison : plusieurs centaines de
-  connexions simultanées selon CPU/mémoire ; CLIENT RADIUS.
-- Fonctionnellement identique au cas RTC ; seuls les moyens d'accès et
-  l'environnement changent.
+      PPP : Point to Point Protocol, protocole de bas niveau entre la machine de l'utilisateur et le NAS, encapsulant IP et offrant des mécanismes d'authentification.
 
-MENACES (absentes du RTC) :
-- Interception de trafic : support partagé (WiFi), support commuté
-  (Ethernet).
-- Usurpation d'identité : MAC par ARP-spoofing, DNS par DNS-spoofing.
-- Attaques « homme du milieu » à partir d'une usurpation d'identité.
-- Outils : nmap (scan), Nessus (vulnérabilités), Cain & Abel (mots de
-  passe, VoIP).
+      PAP : Password Authentication Protocol, sous-protocole d'authentification de PPP transmettant le mot de passe en clair, à éviter.
 
-ÉTABLISSEMENT DU TUNNEL VPN :
-- ISAKMP (Internet Security Association and Key Management Protocol)
-  négocie : algorithme de chiffrement (3DES, AES), algorithme
-  d'intégrité (MD5, SHA1), trafic à protéger (IP, port TCP/UDP), durée
-  de vie des clés.
-- Paramètres négociés = ASSOCIATION DE SÉCURITÉ (SA).
-- Trafic dans le tunnel = ESP (Encryption Security Payload) : chiffrement
-  + intégrité par paquet, d'après la SA.
+      CHAP : Challenge Handshake Authentication Protocol, sous-protocole d'authentification de PPP transmettant le mot de passe sous forme hachée, à privilégier sur PAP.
 
-AUTHENTIFICATION VPN (client nomade, serveur VPN, serveur RADIUS) :
-- Authentification MUTUELLE machine <-> serveur VPN durant ISAKMP,
-  reposant sur des CERTIFICATS signés par une AC locale à l'entreprise
-  -> limite l'usurpation du serveur VPN.
-- Puis authentification de l'utilisateur par login/mot de passe.
-- Ensemble = authentification FORTE (double) et FLEXIBLE (pas de gestion
-  de PKI).
+      EAP : Extensible Authentication Protocol, protocole d'authentification plus récent utilisable depuis le client.
 
-CONFIDENTIALITÉ VPN : interception possible (WiFi WEP, Ethernet commuté),
-mais le chiffrement issu de la SA rend les données inexploitables.
+      PPP ECP : Encryption Control Protocol, version chiffrée de PPP assurant la confidentialité entre l'utilisateur nomade et le NAS, peu implémentée par les logiciels clients.
 
-3. RÉSEAU ACCÉDÉ, ÉQUIPEMENTS DE TERMINAISON, RADIUS
------------------------------------------------------------------------
-- Faille sur NAS / serveur VPN publiée (CERT) -> corrigée par mise à jour
-  de l'OS de l'équipement.
-- Problèmes sur les équipements d'accès = principalement DISPONIBILITÉ
-  (attaques DoS), notamment sur routeurs Cisco IOS -> mise à jour
-  régulière de l'IOS.
-- RADIUS : mode sécurisé natif pour échanger les mots de passe ;
-  renforcement possible par tunnels SSH client RADIUS <-> serveur RADIUS.
+      RADIUS : protocole du serveur d'authentification centralisée, assurant authentification, autorisation et traçabilité, dont le NAS et le serveur VPN sont clients.
 
-SÉCURITÉ PHYSIQUE :
-- Local sécurisé (badge/code) ; courant stabilisé, autonomie 3 heures ;
-  lecteur CD-ROM et ports USB désactivés (contre Live CD type Knoppix) ;
-  bases d'authentification illisibles hors super-utilisateur ; sauvegarde
-  quotidienne des disques.
+      Proxy RADIUS : mandataire seul habilité à dialoguer avec le serveur RADIUS, pouvant servir plusieurs clients RADIUS.
 
-AUTORISATION D'ACCÈS — RADIUS assure (AAA) :
-- Authentification.
-- Autorisation (vérification de l'habilitation).
-- Trace / accounting (tickets à chaque connexion/déconnexion).
-- Couplé à LDAP / SQL -> solution robuste.
-- Selon le constructeur : audit du poste de l'utilisateur (détection de
-  virus) -> refus d'accès si besoin.
+      Serveur RADIUS primaire et secondaire : deux serveurs configurés sur le NAS et le serveur VPN, le secondaire prenant le relais en cas d'indisponibilité du primaire.
 
-EXEMPLES D'ÉQUIPEMENTS :
-- NAS : routeur Cisco 3725, carte E1 (RNIS PRI) + 12 modems numériques
-  (12 communications simultanées) ; modulaire.
-- Serveur VPN : routeur Cisco 3745 + module de CHIFFREMENT MATÉRIEL
-  (évite la saturation CPU).
-- Serveur d'authentification : 2 PC Linux, logiciel RADIUS Livingston.
+      VPN-RAS : Virtual Private Network - Remote Access Service, connexion à distance au réseau de l'entreprise à travers Internet.
 
-SERVEURS D'AUTHENTIFICATION :
-- 2 serveurs RADIUS (primaire + SECONDAIRE qui prend le relais).
-- Proxy RADIUS : seul habilité à dialoguer avec le serveur RADIUS, sert
-  plusieurs clients (NAS, serveurs VPN).
-- Le serveur RADIUS doit être ISOLÉ, accessible uniquement par les
-  clients RADIUS et les proxies.
+      Serveur VPN : équipement de terminaison des tunnels VPN des utilisateurs distants, supportant plusieurs centaines de connexions simultanées et participant à l'authentification comme client RADIUS.
 
-=======================================================================
-À RETENIR
-- RTC : NAS + PPP (56 kbit/s), PAP (clair) vs CHAP (haché), NAS = client
-  RADIUS, sécurité « naturelle » du réseau opérateur.
-- Internet : VPN-RAS sur IPSec ; menaces = interception, ARP/DNS-spoofing,
-  MITM.
-- Tunnel : ISAKMP négocie -> SA ; données = ESP (chiffrement + intégrité
-  par paquet).
-- Auth VPN = mutuelle par certificats (AC locale) + login/mdp =
-  authentification forte et flexible (sans PKI).
-- RADIUS = AAA (authentification / autorisation / trace), couplé LDAP-SQL,
-  serveur isolé + secondaire + proxy.
-- Équipements : DoS = menace principale, IOS à jour, chiffrement matériel
-  sur le serveur VPN, sécurité physique (USB/CD désactivés, autonomie 3 h).
+      Tunnel IPsec : canal chiffré établi entre la machine de l'utilisateur et le serveur VPN avant tout accès au réseau.
+
+      ISAKMP : Internet Security Association and Key Management Protocol, protocole permettant de négocier les paramètres du tunnel IPsec, algorithme de chiffrement, algorithme d'intégrité, trafic à protéger, durée de vie des clés.
+
+      Association de Sécurité : SA, ensemble des paramètres négociés définissant le contexte de protection entre le client et le serveur VPN.
+
+      ESP : Encryption Security Payload, format du trafic échangé dans le tunnel, appliquant chiffrement et intégrité à chaque paquet à partir des informations de la SA.
+
+      Authentification mutuelle ISAKMP : authentification bas niveau entre la machine de l'utilisateur et le serveur VPN durant la négociation, reposant sur des certificats signés par une autorité de certification locale à l'entreprise.
+
+      Authentification forte : combinaison de l'authentification mutuelle ISAKMP par certificats et de l'authentification de l'utilisateur par identifiant et mot de passe, dite double authentification.
+
+      ARP spoofing : usurpation d'identité au niveau MAC sur un réseau Ethernet commuté.
+
+      DNS spoofing : usurpation d'identité au niveau DNS.
+
+      Attaque de l'homme du milieu : interposition d'un attaquant à partir d'une usurpation d'identité.
+
+      IOS : Internet Operating System, système d'exploitation des routeurs Cisco servant de NAS ou de serveur VPN, mis à jour régulièrement contre les attaques par déni de service.
+
+      Module de chiffrement matériel : carte insérée dans le serveur VPN pour réaliser le chiffrement sans saturer le processeur.
+
+      Live CD : support amovible permettant de démarrer un système externe, comme Knoppix, contre lequel on désactive lecteur CDROM et ports USB des équipements.
+
+COURS DÉTAILLÉ.
+
+I. L'ACCÈS DISTANT VIA UN RÉSEAU D'OPÉRATEUR TÉLÉCOM.
+
+   A. Principe et équipements.
+
+      L'accès distant par modem est une technique populaire et éprouvée d'accès aux applications de l'entreprise. L'équipement assurant l'interface entre le réseau de l'entreprise et l'utilisateur est le serveur d'accès NAS. Les débits sont faibles, au maximum cinquante-six kilobits par seconde sur une liaison analogique, ce qui limite les applications exigeant un débit supérieur et une latence faible, comme le partage de fichiers SMB ou NFS. Le système est cependant sécurisé : l'interception de données par un tiers et l'usurpation de l'identité du serveur NAS sont techniquement difficiles, l'accès par le réseau téléphonique commuté étant physiquement sécurisé.
+
+      L'utilisateur nomade accède au réseau interne via le réseau d'un opérateur de télécommunications en composant le numéro de téléphone du NAS depuis un logiciel de pilotage de son modem. Le NAS est l'équipement de terminaison des connexions des utilisateurs distants, composé d'un nombre de modems numériques ou analogiques défini lors du dimensionnement, qui détermine le nombre de connexions simultanées ; il participe au processus d'authentification en tant que client RADIUS. Le protocole de communication entre la machine de l'utilisateur et le NAS est PPP, protocole de bas niveau qui encapsule IP et offre des mécanismes d'authentification.
+
+   B. Authentification.
+
+      Le processus d'authentification est critique. Trois éléments y sont impliqués : le client logiciel de l'utilisateur nomade, le NAS et le serveur d'authentification. L'authentification de l'utilisateur est assurée par un des sous-protocoles associés à PPP, PAP ou CHAP ; le dialogue n'a lieu qu'entre le modem de l'utilisateur et le NAS, ce dernier faisant office de client RADIUS pour échanger avec le proxy RADIUS, lui-même client du serveur RADIUS d'authentification configuré pour n'accepter que les requêtes du proxy. CHAP est privilégié sur PAP car le mot de passe y est transmis sous forme hachée, alors que PAP le transmet en clair, exposant à un risque majeur de vol. Des protocoles plus récents comme EAP peuvent aussi être utilisés depuis le client.
+
+   C. Confidentialité.
+
+      PPP existe dans une version chiffrée, PPP ECP, assurant la confidentialité entre l'utilisateur nomade et le NAS, mais peu de logiciels clients l'implémentent. La confidentialité est cependant naturellement d'un bon niveau du fait de la nature du réseau traversé : le réseau d'un opérateur téléphonique, boucle locale incluse, est difficile à espionner, une écoute sur une liaison dédiée étant plus difficile à mettre en place qu'un sniffing sur un réseau local commuté.
+
+II. L'ACCÈS DISTANT VIA LE RÉSEAU INTERNET.
+
+   A. Introduction.
+
+      Les techniques d'accès à Internet ont beaucoup évolué depuis la fin des années quatre-vingt-dix, avec des débits croissants, de sorte qu'Internet tend à remplacer le réseau téléphonique commuté pour l'accès à distance. Du point de vue de la sécurité, Internet est un milieu hostile. L'utilisateur s'appuie sur des outils supportant des contraintes fortes sur l'authentification, contre l'usurpation d'identité, et la confidentialité, contre l'exploitation de données interceptées. On désigne par VPN-RAS une connexion à distance au réseau de l'entreprise à travers Internet, et l'on étudie le tunnel VPN reposant sur la suite protocolaire IPsec.
+
+   B. Utilisateur nomade et serveur VPN.
+
+      L'utilisateur nomade dispose d'un logiciel client VPN établissant un tunnel IPsec vers le serveur VPN de l'entreprise. Une quelconque couche physique peut constituer le réseau d'accès, seuls comptent le support d'IP et l'ouverture sur Internet : connexion ADSL depuis le domicile, jusqu'à vingt mégabits par seconde, connexion Ethernet d'une entreprise externe, accès Wi-Fi depuis un hôtel, modem GPRS ou UMTS, jusqu'à trois cent quatre-vingt-quatre kilobits par seconde. Ces moyens offrent des débits supérieurs à l'accès par réseau téléphonique commuté, mais la sécurisation d'ensemble requiert des outils adaptés. Le serveur VPN termine les connexions et, selon son processeur et sa mémoire, peut gérer plusieurs centaines de tunnels simultanés ; il participe à l'authentification en tant que client RADIUS.
+
+      Fonctionnellement, il n'y a pas de différence avec l'architecture par réseau téléphonique : les utilisateurs accèdent au réseau privé par un équipement de concentration ; seuls les moyens d'accès et l'environnement changent. Mais à l'inverse du cas précédent, les moyens d'accès au serveur VPN sont multiples et les menaces externes non négligeables : interception de trafic sur support partagé, Wi-Fi, ou commuté, Ethernet ; usurpation d'identité au niveau MAC par ARP spoofing ou au niveau DNS par DNS spoofing ; attaques de l'homme du milieu à partir d'une usurpation d'identité. Ces techniques sont plus simples à mettre en œuvre que sur le réseau téléphonique, dont le support n'est jamais partagé, et de nombreux logiciels libres les mettent en application, servant aussi aux audits de sécurité, comme nmap pour le scan, Nessus pour l'analyse de vulnérabilités et Cain et Abel pour le cassage de mots de passe et l'enregistrement de conversations en voix sur IP.
+
+   C. Établissement de la connexion VPN.
+
+      Avant tout accès au réseau, un tunnel IPsec est établi entre la machine de l'utilisateur et le serveur VPN. Le protocole ISAKMP permet de négocier les paramètres du tunnel : algorithme de chiffrement, Triple DES ou AES, algorithme de vérification d'intégrité des paquets, MD5 ou SHA-1, caractérisation du trafic à protéger, par adresse IP, port TCP ou UDP, durée de vie des clés associées. L'ensemble des paramètres négociés définit une Association de Sécurité entre le client et le serveur VPN. Une fois le tunnel établi, le trafic échangé est de type ESP, les fonctions de chiffrement et d'intégrité étant appliquées à chaque paquet à partir des informations de la SA.
+
+   D. Authentification.
+
+      Trois éléments sont impliqués : la machine de l'utilisateur nomade, le serveur VPN et le serveur RADIUS. Une authentification mutuelle a lieu durant la négociation ISAKMP ; elle limite fortement la probabilité d'une usurpation de l'identité du serveur VPN, car elle repose sur des certificats signés par une autorité de certification locale à l'entreprise. Cette phase bas niveau précède l'authentification de l'utilisateur par un couple identifiant et mot de passe. L'ensemble constitue un système d'authentification fort, double authentification, et flexible, sans gestion d'infrastructure de gestion de clés.
+
+   E. Confidentialité.
+
+      Un attaquant peut facilement intercepter le trafic entre le client et le serveur VPN, sur une connexion Wi-Fi peu sécurisée en WEP ou sur un réseau Ethernet commuté par ARP spoofing. Cependant, le chiffrement des données à partir des éléments de l'Association de Sécurité assure la confidentialité : si les données sont interceptées, elles ne peuvent être exploitées.
+
+III. SÉCURITÉ DU RÉSEAU ACCÉDÉ ET DES ÉQUIPEMENTS DE TERMINAISON.
+
+   A. Disponibilité et mise à jour.
+
+      Une faille de sécurité sur les équipements de terminaison, NAS ou serveur VPN, détectée et publiée par le constructeur ou un organisme spécialisé comme le CERT, est corrigée par une mise à jour du système d'exploitation. Les problèmes rencontrés sur les équipements d'accès via le réseau téléphonique relèvent principalement de la disponibilité, attaques par déni de service. De nombreuses attaques par déni de service via Internet apparaissent, notamment sur les routeurs Cisco IOS ; une procédure de mise à jour du système d'exploitation du NAS est effectuée régulièrement.
+
+   B. Confidentialité des échanges RADIUS.
+
+      Le protocole RADIUS propose nativement un mode sécurisé pour échanger les mots de passe des utilisateurs, offrant un niveau de confidentialité satisfaisant ; l'administrateur peut renforcer les échanges client-serveur RADIUS par des tunnels SSH.
+
+   C. Sécurité physique.
+
+      L'accès physique aux équipements NAS, serveurs VPN et serveurs RADIUS est protégé, local sécurisé, accès par badge ou code. La sécurisation électrique repose sur un courant stabilisé offrant une autonomie de trois heures. Les périphériques comme le lecteur CDROM et le port USB sont désactivés pour empêcher la lecture du disque via un système de type Live CD, Knoppix par exemple. Les fichiers des bases d'authentification sont interdits en lecture aux utilisateurs autres que le super-utilisateur, et une sauvegarde quotidienne des disques des serveurs est assurée.
+
+IV. L'AUTORISATION D'ACCÈS PAR RADIUS.
+
+   A. Les services rendus.
+
+      Le protocole RADIUS assure lors d'une connexion externe l'authentification, l'autorisation, vérification de l'habilitation de l'utilisateur, et la trace, par enregistrement de tickets à chaque connexion et déconnexion. Couplé à des bases classiques, LDAP ou SQL, un service RADIUS permet une solution cohérente et robuste d'accès distant. Selon le constructeur des équipements de terminaison, il est possible de réaliser un audit du système de l'utilisateur qui se connecte, pour détecter un virus sur le poste distant et refuser l'accès le cas échéant.
+
+   B. Architecture d'authentification.
+
+      Deux serveurs d'authentification RADIUS sont configurés sur le NAS et sur le serveur VPN, un serveur secondaire prenant le relais du primaire en cas d'indisponibilité. Pour sécuriser le service, on insère un proxy RADIUS, seul habilité à dialoguer avec le serveur RADIUS et pouvant servir plusieurs clients, NAS ou serveur VPN. Dans tous les cas, le serveur RADIUS doit être isolé des différents réseaux, de façon à n'être accessible que par les clients RADIUS et les proxies.
+
+   C. Exemples d'équipements.
+
+      NAS : routeur Cisco 3725 muni d'une carte E1 pour un lien RNIS PRI et de douze modems numériques autorisant douze communications simultanées, l'équipement étant modulaire pour ajouter des cartes modems. Serveur VPN : routeur Cisco 3745 muni d'un module de chiffrement matériel, nécessaire pour des performances acceptables car il évite des opérations de chiffrement coûteuses qui satureraient le processeur. Serveur d'authentification : deux serveurs Linux exécutant le logiciel RADIUS Livingston.
+
+POINTS D'ATTENTION.
+
+      Accès par réseau téléphonique commuté : débit faible, cinquante-six kilobits par seconde, mais support physiquement sécurisé et non partagé, donc difficile à espionner et à usurper.
+
+      Protocole PPP entre client et NAS ; privilégier CHAP, mot de passe haché, à PAP, mot de passe en clair ; EAP est plus récent.
+
+      Accès par Internet : milieu hostile, menaces d'interception, d'ARP spoofing, de DNS spoofing et d'homme du milieu, plus simples à mener que sur le réseau téléphonique.
+
+      Le tunnel IPsec se négocie par ISAKMP, qui fixe l'Association de Sécurité, puis le trafic passe en ESP, chiffré et intègre à chaque paquet.
+
+      Authentification forte du VPN-RAS = authentification mutuelle ISAKMP par certificats plus identifiant et mot de passe de l'utilisateur ; solution flexible sans infrastructure de gestion de clés.
+
+      Même chiffré, le trafic VPN est interceptable, mais inexploitable pour l'attaquant grâce au chiffrement issu de la SA.
+
+      NAS et serveur VPN sont clients RADIUS ; le serveur RADIUS est isolé et n'est accessible que par ses clients et proxies ; un secondaire assure la disponibilité.
+
+      RADIUS rend trois services : authentification, autorisation, trace ; il peut s'appuyer sur LDAP ou SQL.
+
+      Sécurité physique des équipements : local protégé, courant stabilisé trois heures, CDROM et USB désactivés contre les Live CD, bases d'authentification en lecture réservée au super-utilisateur, sauvegarde quotidienne.
+
+EXEMPLES CITES.
+
+      Opérateur France Télécom pour l'accès par réseau téléphonique commuté.
+
+      Accès Internet : ADSL domicile jusqu'à vingt mégabits par seconde, Ethernet d'entreprise externe, Wi-Fi d'hôtel, modem GPRS ou UMTS jusqu'à trois cent quatre-vingt-quatre kilobits par seconde.
+
+      Outils libres d'attaque et d'audit : nmap, Nessus, Cain et Abel.
+
+      Algorithmes négociés par ISAKMP : chiffrement Triple DES et AES, intégrité MD5 et SHA-1.
+
+      Système Knoppix comme Live CD contre lequel on désactive CDROM et USB.
+
+      Équipements : NAS routeur Cisco 3725 avec carte E1 et douze modems numériques, serveur VPN routeur Cisco 3745 avec module de chiffrement matériel, serveurs d'authentification Linux exécutant le logiciel RADIUS Livingston.

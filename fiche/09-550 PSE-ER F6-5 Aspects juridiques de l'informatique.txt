@@ -1,373 +1,317 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 6, thème 5
-ASPECTS JURIDIQUES DE L'INFORMATIQUE
-=======================================================================
+LES ASPECTS JURIDIQUES DE L'INFORMATIQUE.
 
-1. PROTECTION DES DONNÉES PERSONNELLES (CNIL)
------------------------------------------------------------------------
-- 1974 : révélation du projet SAFARI (Système Automatisé pour les
-  Fichiers Administratifs et le Répertoire des Individus) -> création de
-  la CNIL par la LOI n° 78-17 DU 6 JANVIER 1978.
-- LOI DU 6 AOÛT 2004 : transpose la directive 95/46 du 24 octobre 1995 ;
-  passe des « données nominatives » aux « données PERSONNELLES »
-  (identification indirecte incluse) ; supprime la référence au seul
-  « traitement automatisé » ; accroît les pouvoirs de la CNIL.
-- Champ : traitements automatisés + non automatisés dans des fichiers ;
-  inclut sécurité publique / défense / sûreté de l'État ; exclut les
-  activités exclusivement personnelles.
-- ARTICLE 6 (licéité) : collecte loyale et licite ; finalité déterminée
-  et spécifique ; données pertinentes, adéquates et non excessives ;
-  exactes et à jour ; conservation proportionnée ; INTERDICTION de tout
-  traitement ultérieur incompatible avec les finalités (sauf fins
-  statistiques ou scientifiques).
-- ARTICLE 8 (données SENSIBLES : origines raciales, opinions politiques /
-  philosophiques / religieuses, mœurs) : collecte et traitement en
-  principe INTERDITS. Dérogations : consentement exprès, sauvegarde de la
-  vie humaine, associations religieuses/politiques/syndicales pour leur
-  objet, statistiques de l'INSEE.
+LEXIQUE COMPLET.
 
-RÉGIMES :
-- DÉCLARATION = droit commun (plus de distinction public/privé).
-- Données sensibles = contrôle A PRIORI :
-  * DEMANDE D'AUTORISATION (article 25 : données génétiques,
-    condamnations, interconnexions, NIR) ; CNIL se prononce dans 2 MOIS ;
-    silence = REJET.
-  * AUTORISATION APRÈS AVIS : traitements de « souveraineté de la
-    personne publique » (sûreté, sécurité, défense de l'État,
-    impositions, statistiques) ; autorisation par ARRÊTÉ ministériel
-    après avis motivé et publié de la CNIL, avis NON contraignant.
+      SAFARI : Système automatisé pour les fichiers administratifs et le répertoire des individus, projet révélé par la presse en mille neuf cent soixante-quatorze, première ébauche d'un ensemble de fichiers interconnectés par un identifiant unique, à l'origine de la création de la CNIL.
 
-LA CNIL :
-- Autorité administrative INDÉPENDANTE. Collège pluraliste de 18
-  personnalités, mandat de 5 ans, élit son Président, ne reçoit
-  d'instruction d'aucune autorité.
-- 4 MISSIONS : Informer/protéger ; Accompagner/conseiller (CIL, labels,
-  packs de conformité, BCR = Binding Corporate Rules) ; Contrôler et
-  sanctionner ; Anticiper (veille, laboratoire, privacy by design,
-  comité de la prospective).
-- DROITS : information (art. 32, 39) ; opposition pour raisons légitimes
-  (art. 38, sauf obligation légale ex. impôts) ; accès direct ou
-  indirect via la CNIL (art. 39 s.) ; rectification.
-- POUVOIRS : contrôles sur pièces / sur place (agents : accès de 6h à
-  21h, hors domicile privé). Sanctions ADMINISTRATIVES (avertissement,
-  sanction pécuniaire sauf traitements de l'État, injonction de cesser,
-  retrait d'autorisation) et PÉNALES (Code pénal art. 226-16 à 226-24 :
-  non-respect des formalités = 5 ANS de prison + 300 000 € d'amende ;
-  même sanction pour défaut de sécurité, collecte déloyale, traitement
-  de données sensibles sans consentement, détournement de finalité).
-- CORRESPONDANT à la protection des données (CIL), créé par la loi du 6
-  août 2004 : collaborateur désigné en interne, notifié à la CNIL (pas
-  d'agrément), tient une LISTE des traitements accessible à tous ->
-  exonère de la DÉCLARATION préalable des traitements ordinaires (pas de
-  ceux soumis à autorisation). Existe déjà en Allemagne, Pays-Bas,
-  Suède, Luxembourg.
-- SITES WEB : depuis juillet 2006, plus de déclaration spécifique -> la
-  FINALITÉ détermine les démarches. Commerce collectant des données ->
-  déclaration simplifiée ; site vitrine / blog personnel / association
-  non lucrative -> dispensés.
+      CNIL : Commission nationale de l'informatique et des libertés, autorité administrative indépendante instituée par la loi du six janvier mille neuf cent soixante-dix-huit, chargée de contrôler et d'informer et de permettre aux citoyens d'exercer leurs droits sur les fichiers.
 
-2. PROTECTION DE LA MESSAGERIE ÉLECTRONIQUE
------------------------------------------------------------------------
-- SPAM = « Spiced Pork and Meat ». SPAMMING = envoi massif et répété de
-  courriers non sollicités (pourriels) à des personnes jamais
-  contactées, dont l'adresse a été captée de façon irrégulière.
-  Critères d'un courriel abusif : quantité, défaut de consentement,
-  contenu.
-- OPT-IN (consentement préalable) vs OPT-OUT (opposition a posteriori).
-  CNIL : case à cocher. UE : opt-out minimal ; opt-in adopté par
-  Autriche, Italie, Allemagne, Finlande, Danemark.
-- France : ordonnance du 23 août 2001 (contrats à distance) ; LCEN du
-  21 juin 2004 (art. L. 33-4-1 CPCE) : prospection par courriel
-  subordonnée à l'ACCORD PRÉALABLE d'une personne physique (opt-in),
-  sauf coordonnées fournies lors d'une vente ; interdiction de masquer
-  l'identité de l'expéditeur, adresse de réponse obligatoire.
-- LOI DU 10 JUILLET 1991 : secret des correspondances émises par voie de
-  communications électroniques. Jurisprudence : le courrier électronique
-  = une correspondance -> relève du secret.
-- ARRÊT NIKON (Cass., 2 octobre 2001) : arrêt de PRINCIPE. Le salarié a
-  droit au respect de sa vie privée sur son lieu de travail (secret des
-  correspondances). Message marqué « personnel » -> non consultable par
-  l'employeur ; absence de mention -> caractère PROFESSIONNEL par défaut.
-- Code pénal art. 226-15 : 1 AN de prison + 45 000 € d'amende pour
-  interception/détournement/divulgation de mauvaise foi de
-  correspondances.
-- Rapports CNIL cybersurveillance : 1er (mars 2001, transparence) ;
-  2e (5 février 2002) : 3 PRINCIPES = PROPORTIONNALITÉ, INFORMATION
-  PRÉALABLE des salariés, CONSULTATION du comité d'entreprise.
-- Fichiers de journalisation (logs) : mesure de sécurité préconisée par
-  la CNIL, pas un outil de contrôle ; un logiciel d'analyse des journaux
-  destiné à contrôler l'activité des utilisateurs doit être DÉCLARÉ à la
-  CNIL.
-- Administrateurs réseau : accès à toutes les infos des utilisateurs
-  pour le fonctionnement/la sécurité ; tenus au SECRET PROFESSIONNEL ;
-  interdiction de détourner la finalité.
-- Agents publics : obligations déontologiques y compris dans la sphère
-  privée -> secret professionnel (loi du 13 juillet 1983, Code pénal
-  art. 226-13), dignité, neutralité et devoir de réserve.
+      Loi du six janvier mille neuf cent soixante-dix-huit : loi Informatique et libertés, modifiée par la loi du six août deux mille quatre pour transposer la directive européenne 95/46 du vingt-quatre octobre mille neuf cent quatre-vingt-quinze relative à la protection des données à caractère personnel.
 
-3. PROTECTION DES DROITS D'AUTEUR
------------------------------------------------------------------------
-- ARTICLE L.111-1 du CPI : l'auteur d'une œuvre de l'esprit jouit d'un
-  droit de propriété INCORPORELLE exclusif et opposable à tous ->
-  attributs INTELLECTUELS ET MORAUX + attributs PATRIMONIAUX.
-- Propriété INCORPORELLE : porte sur la création, pas sur le support ;
-  la vente du support (tableau, CD, CD-ROM) n'emporte PAS cession des
-  droits.
-- DROITS PATRIMONIAUX : droit de REPRODUCTION (édition), droit de
-  COMMUNICATION (représentation). Cessibles / concessibles. Logiciels
-  standard -> LICENCES d'utilisation (contrats d'adhésion).
-  * CESSION = cession des droits patrimoniaux sur les CODES SOURCES.
-  * LICENCE/CONCESSION = simple droit d'usage, non exclusif, souvent
-    1 poste ; l'auteur conserve les codes sources, ne remet que le code
-    objet/exécutable.
-- DROITS MORAUX : divulgation, PATERNITÉ, INTÉGRITÉ de l'œuvre,
-  opposition à toute atteinte à l'honneur/réputation. Ne peuvent pas
-  être cédés entièrement.
-- PROTECTION SANS FORMALITÉ : conférée du simple fait de la création.
-  Le dépôt facilite seulement la preuve.
-- DURÉE : droit moral = PERPÉTUEL ; droits d'exploitation = vie de
-  l'auteur + année en cours + 70 ANS (loi du 27 mars 1997) au profit
-  des ayants droit -> puis domaine public.
-- Autres protections : propriété INDUSTRIELLE (brevets, marques,
-  appellations d'origine, dessins et modèles) ; droits de la
-  PERSONNALITÉ (vie privée, honneur, image). Cumulables.
-- FONCTIONNAIRES : avis Ofrateme du Conseil d'État (21 novembre 1972 :
-  droits mis à disposition du service) -> renversé (avis du Conseil
-  supérieur de la propriété intellectuelle et artistique, décembre
-  2001) -> LOI DADVSI 2004 (art. 16 à 18) : l'agent public a la QUALITÉ
-  D'AUTEUR même dans le cadre de ses fonctions, mais l'administration a
-  le droit d'exploitation à des fins NON COMMERCIALES pour sa mission de
-  service public.
-- Logiciels de la personne publique : « sur étagère » -> droit d'usage
-  (concession) ; développé par l'administration -> droit d'exploitation ;
-  développé par un prestataire -> le CCAP détermine le titulaire (3 cas).
-  CCAG informatiques : CCAG FCS (Fournitures Courantes et Services) et
-  CCAG PI (Prestations Intellectuelles) — aucun ne traite bien du
-  logiciel libre.
-- Directive du 14 mai 1991 : programmes d'ordinateur protégés par le
-  droit d'auteur (logiciel + matériel de conception préparatoire), à la
-  condition d'ORIGINALITÉ.
-- CONTREFAÇON = reproduction/représentation/diffusion d'une œuvre en
-  violation des droits d'auteur. « Piratage » (non défini par le CPI) :
-  duplication artisanale (graveurs), copie sur plusieurs ordinateurs
-  (licences insuffisantes), téléchargement (sauf freeware/shareware).
-- LOI DADVSI (Droit d'Auteur et Droits Voisins dans la Société de
-  l'Information), adoptée le 30 JUIN 2006 ; transpose la directive du
-  22 MAI 2001 (EUCD) — droit de reproduction / communication /
-  distribution.
-  * Reconnaissance des DRM ; règle d'INTEROPÉRABILITÉ imposée ; le
-    Conseil constitutionnel a censuré des dispositions favorables à
-    l'interopérabilité.
-  * Copie privée + « collège de médiateurs » (3 membres dont 2
-    magistrats).
-  * Téléchargement illégal : sanctions graduées (38 € usage personnel,
-    150 € mise à disposition) ; éditeurs de logiciels d'échange ->
-    3 ans + 300 000 €. Le Conseil constitutionnel a jugé contraire au
-    principe d'ÉGALITÉ un régime pénal particulier pour le peer-to-peer.
-  * Création de l'Autorité de Régulation des Mesures Techniques.
-- RAPPORT OLIVENNES (Denis Olivennes, FNAC), novembre 2007 : rendre
-  l'offre légale plus attractive ; désinciter l'offre illégale (pas de
-  sanction pour le streaming, contravention pour le téléchargement
-  modéré, délit pour la mise à disposition massive) ; filtrage ;
-  système contractuel d'avertissement et de sanction (base de la RIPOSTE
-  GRADUÉE).
-- LOI HADOPI (Haute Autorité pour la Diffusion des Œuvres et la
-  Protection des droits sur Internet), projet « Création et Internet ».
-  TRIPLE MISSION : encouragement à l'offre légale + observation ;
-  protection des œuvres ; régulation/veille sur les mesures techniques.
-  Composée d'un COLLÈGE (9 membres) et d'une COMMISSION (3 membres :
-  Cour de cassation, Conseil d'État, Cour des comptes).
-  * Recommandation à l'abonné par voie électronique via le FAI ; en cas
-    de renouvellement dans les 6 mois -> 2e recommandation + LRAR.
-  * CONSEIL CONSTITUTIONNEL (10 juin 2009) : censure — une autorité
-    administrative ne peut couper l'accès à Internet (décision
-    JUDICIAIRE requise) ; censure aussi les « mouchards filtrants ».
-    La riposte graduée en 3 phases (email / LRAR / suspension) n'a pu
-    voir le jour en l'état.
+      Donnée à caractère personnel : information relative à une personne physique identifiée ou identifiable, directement ou indirectement, notion élargie par la loi de deux mille quatre par rapport à la donnée nominative de la loi de mille neuf cent soixante-dix-huit.
 
-LOGICIELS LIBRES :
-- « free software » (free = gratuit OU libre). ≠ gratuiciels (freeware)
-  et partagiciels (shareware), distribués en BINAIRE (code exécutable
-  seul, sans code source), licence = simple droit d'exécution.
-- Logiciel = CODE SOURCE (fichiers texte) + CODE EXÉCUTABLE. Langages
-  interprétés (PHP, Perl) vs compilés (Java, C++ -> compilation).
-- Free Software Foundation (4 libertés) / Open Source Initiative (10
-  conditions).
-- 4 LIBERTÉS : exécuter pour tous les usages ; étudier et adapter
-  (accès au code source) ; redistribuer des copies (avec ou sans
-  contrepartie) ; modifier. « Libre » ≠ « gratuit ».
-- COPYLEFT (« gauche d'auteur ») : conditions de distribution
-  empêchant de rendre propriétaire un logiciel libre (interdit d'ajouter
-  des restrictions). Mise en œuvre : GPL (General Public License).
+      Traitement : toute opération portant sur des données à caractère personnel, quel que soit le procédé technique utilisé, la loi de deux mille quatre ne se limitant plus au traitement automatisé.
 
-4. SIGNATURE ÉLECTRONIQUE
------------------------------------------------------------------------
-- LOI DU 13 MARS 2000 : valeur juridique de la signature électronique
-  sous conditions ; modifie le CODE CIVIL et le droit de la preuve.
-  Contexte : directive du 13 décembre 1999. Décrets : 30 mars 2001,
-  13 décembre 2001.
-- Directive du 13 décembre 1999 (art. 5), 2 catégories recevables en
-  justice :
-  * SIGNATURE SIMPLE : donnée servant de méthode d'authentification ;
-    élément de preuve, PAS la valeur d'une signature manuscrite (bas
-    niveau).
-  * SIGNATURE AVANCÉE : certificat qualifié + dispositif sécurisé de
-    création ; ÉQUIVALENTE à la signature manuscrite si : liée
-    uniquement au signataire, identifie le signataire, moyens sous
-    contrôle EXCLUSIF, lien avec les données rendant toute modification
-    DÉTECTABLE (haut niveau).
-- 4 CONDITIONS d'équivalence électronique / papier : identification par
-  procédé fiable ; création intègre ; conservation intègre ; procédé
-  fiable garantissant le lien signature-acte.
-- 2 NIVEAUX (loi du 13 mars 2000) : signature SIMPLE (procédé non
-  présumé fiable -> prouver la fiabilité en cas de contestation) ;
-  signature PRÉSUMÉE FIABLE (fiabilité présumée -> au DEMANDEUR de
-  prouver l'inverse ; même valeur que la manuscrite).
-- Décret du 30 mars 2001 (art. 2) : procédé fiable si signature
-  sécurisée (propre au signataire, contrôle exclusif, modification
-  détectable) + dispositif sécurisé de création + vérification par
-  CERTIFICAT ÉLECTRONIQUE QUALIFIÉ fourni par un prestataire de service
-  de certification déclaré auprès de la DCSSI.
-- 3 ÉLÉMENTS : CHIFFREMENT (algorithme + clé ; loi française : clé
-  limitée à 128 bits) ; EMPREINTE (hash, fonction de hachage, version
-  synthétique et unique) ; CERTIFICAT électronique (fichier public de
-  8 à 10 Ko, identifie l'émetteur + clé publique). PSCE = Prestataire de
-  Service de Certification Électronique.
-- Symétrique : inconvénient = échanger la clé à l'avance sur un canal
-  sûr. Asymétrique : clé PRIVÉE (jamais révélée) + clé PUBLIQUE
-  (divulguée, dans le certificat).
+      Conditions de licéité : exigences de l'article 6 de la loi, collecte loyale et licite, finalité déterminée, données pertinentes, adéquates et non excessives, exactes et mises à jour, conservées de manière proportionnée, sans traitement ultérieur incompatible avec les finalités.
 
-5. LES NOUVEAUX RISQUES
------------------------------------------------------------------------
-- ESPIOGICIEL (spyware) : programme installé le plus souvent À L'INSU de
-  l'utilisateur, collecte des données et les transmet à son créateur
-  (ciblage publicitaire) ; souvent associé aux logiciels gratuits (P2P).
-  « Web bugs » = pixel invisible dans des pages/courriers HTML (mesure
-  d'audience). PAS illégal en soi -> licéité conditionnée au
-  CONSENTEMENT EXPRÈS.
-- RFID (Radio Frequency Identification) : puces à antenne (« radio
-  tags », « étiquettes intelligentes ») dans les étiquettes des
-  produits ; depuis 1990 ; applications (anti-vol, péage sans arrêt,
-  accès aux immeubles). RISQUE : lecture À DISTANCE des informations.
+      Donnée sensible : donnée tenant aux origines raciales, aux opinions politiques, philosophiques, religieuses ou syndicales, à la santé ou aux mœurs, dont la collecte et le traitement sont en principe interdits par l'article 8, sauf dérogations.
 
-6. NOUVEAU CADRE JURIDIQUE DES COMMUNICATIONS ÉLECTRONIQUES
------------------------------------------------------------------------
-- LOI n° 2004-669 DU 9 JUILLET 2004 : transpose le « PAQUET TÉLÉCOMS »
-  (6 directives + 1 décision de 2003 ; réforme européenne engagée en
-  1999). Le code des postes et télécommunications devient le CODE DES
-  POSTES ET DES COMMUNICATIONS ÉLECTRONIQUES.
-- Points clés : concurrence effective ; renforcement des ARN (autorités
-  de réglementation nationales) ; rapprochement du droit de la
-  concurrence ; cadre HARMONISÉ pour les « réseaux de communications
-  électroniques » (audiovisuel + télécoms), contenus soumis à des
-  régimes distincts ; « DROIT DE VETO » de la Commission européenne sur
-  certaines décisions des ARN.
-- SIMPLIFICATION : suppression des autorisations pour installer les
-  réseaux / offrir les services -> simple DÉCLARATION auprès de l'ART.
-  Régime de liberté pour les réseaux indépendants. Seules subsistent les
-  autorisations pour les FRÉQUENCES radioélectriques assignées.
-- Réseaux CÂBLÉS -> code des postes et communications électroniques.
-  Radiodiffusion hertzienne terrestre/satellite (bandes du CSA) ->
-  régime spécifique (loi du 30 septembre 1986).
-- RÉGULATION (loi n° 96-659 du 26 juillet 1996) : notion de « position
-  dominante » / « influence significative sur le marché ». Démarche en
-  3 ÉTAPES : identification des marchés pertinents ; détermination des
-  opérateurs à influence significative ; définition des obligations
-  spécifiques. Confiée à l'ART.
-- ART : pouvoirs d'ENQUÊTE (locaux des opérateurs) ; SANCTION (mesures
-  conservatoires sans mise en demeure) ; RÈGLEMENT DE DIFFÉRENDS ;
-  obligations de discrétion des membres.
-- SERVICE PUBLIC des télécoms = SERVICE UNIVERSEL + SERVICES
-  OBLIGATOIRES + MISSIONS D'INTÉRÊT GÉNÉRAL. Service universel : débit
-  suffisant pour un accès fonctionnel à Internet ; retrait du télex.
-- France Télécom, seul opérateur capable d'assurer le service universel
-  -> lois du 31 décembre 2003 et du 9 juillet 2004 : APPEL À
-  CANDIDATURES du ministre ; chaque composante attribuée au NIVEAU
-  NATIONAL ; financement selon le CHIFFRE D'AFFAIRES des opérateurs
-  (avant : volume de trafic).
-- FRÉQUENCES : répartition par le PREMIER MINISTRE entre ministères et
-  autorités affectataires (ART et CSA). Attribution par l'ART via appels
-  à candidatures ; possibilité d'ENCHÈRES et de MARCHÉS SECONDAIRES pour
-  les fréquences confiées à l'ART. ICANN pour l'adressage par noms de
-  domaine.
-- ANFR (Agence Nationale des Fréquences), créée en 1997 : gestion des
-  fréquences ; rôle SANTÉ PUBLIQUE -> peut s'opposer à toute installation
-  de station radioélectrique ne respectant pas les valeurs limites
-  d'exposition aux champs électromagnétiques (décret n° 2002-775 du
-  3 mai 2002).
+      Régime de déclaration : régime de droit commun des traitements depuis deux mille quatre, sans distinction public-privé, consistant à remplir un formulaire, avec des normes simplifiées et des possibilités d'exonération.
 
-7. LES LOIS
------------------------------------------------------------------------
-- Loi n° 2004-669 du 9 juillet 2004 modifie la LOI n° 86-1067 DU 30
-  SEPTEMBRE 1986 (liberté de communication) : le CSA devient compétent
-  pour TOUS les services de radio et de télévision quel que soit le mode
-  de diffusion ; régulation des contenus (pluralisme, protection des
-  mineurs) ; règlement des litiges éditeurs/distributeurs ; procédures
-  d'attribution modernisées (délai d'instruction max 8 mois) ; fin de
-  l'autorisation préalable des communes pour les réseaux câblés ;
-  obligation « MUST CARRY ». TNT lancée depuis 2002 (97 % des habitants,
-  19 chaînes nationales gratuites).
-- LOI n° 2004-575 DU 21 JUIN 2004 pour la CONFIANCE DANS L'ÉCONOMIE
-  NUMÉRIQUE (LCEN) : transpose la directive 2000/31/CE du 8 juin 2000
-  sur le commerce électronique. 5 TITRES : liberté de communication en
-  ligne ; commerce électronique ; sécurité dans l'économie numérique ;
-  systèmes satellitaires ; développement des TIC.
-  * « Communication au public par voie électronique » = communication
-    publique en ligne + communication audiovisuelle.
-  * RESPONSABILITÉ DES HÉBERGEURS : engagée seulement en cas de
-    connaissance effective d'un contenu illicite non retiré promptement ;
-    AUCUNE obligation générale de surveiller.
-  * Responsabilité du « cache » : absente si obligation de neutralité
-    respectée.
-  * Commerce électronique : prestataire soumis à la loi de l'État
-    membre où il est établi ; obligation d'identification ; distinction
-    messages publicitaires / non commerciaux ; prospection par courriel
-    = accord préalable d'une personne physique (opt-in), sauf
-    coordonnées fournies lors d'une vente ; interdiction de masquer
-    l'identité de l'expéditeur.
-  * CONTRATS SOUS FORME ÉLECTRONIQUE (nouveau chapitre du code civil) :
-    formalisme papier PRÉSERVÉ pour 3 catégories — sûretés (sauf
-    professionnel), contrats soumis à autorisation/homologation
-    judiciaire, contrats sous seing privé du droit de la famille et des
-    personnes.
-  * Art. 1369-4 du code civil : acceptation par « DOUBLE CLIC » +
-    accusé de réception rapide. Contrats > un certain montant archivés
-    par le professionnel.
-- LOI n° 2003-1365 DU 31 DÉCEMBRE 2003 (obligations de service public
-  des télécoms et France Télécom) :
-  * France Télécom : DGT (années 1980) -> EXPLOITANT PUBLIC (loi du 2
-    juillet 1990, personnalité juridique) -> SOCIÉTÉ ANONYME (loi de
-    juillet 1996) -> fin de la DÉTENTION MAJORITAIRE par l'État
-    (art. 7, loi du 31 décembre 2003) -> décret n° 2004-387 du 3 mai
-    2004 (transfert au secteur privé).
-  * Loi du 2 juillet 1990 : interdiction de recruter des fonctionnaires
-    depuis le 1er janvier 2002 ; corps en extinction depuis cette date.
-  * Fonctionnaires volontaires : contrat de travail de droit privé ;
-    les autres conservent leur statut. Sanctions les plus lourdes
-    (révocation, mise à la retraite d'office) : ministre chargé des
-    communications électroniques.
+      Régime d'autorisation : régime des traitements présentant des risques, énumérés par l'article 25, données génétiques, condamnations, interconnexions, numéro d'inscription au répertoire, la CNIL se prononçant dans un délai de deux mois.
 
-=======================================================================
-À RETENIR
-- CNIL : loi 6 janvier 1978 (SAFARI), loi 6 août 2004 (données
-  personnelles, déclaration = droit commun) ; autorité indépendante,
-  18 membres, 4 missions ; sanctions pénales jusqu'à 5 ans + 300 000 € ;
-  CIL exonère de déclaration.
-- Messagerie : opt-in (LCEN), loi 10 juillet 1991 (secret des
-  correspondances), arrêt Nikon (2 oct. 2001, mention « personnel »),
-  Code pénal 226-15 (1 an + 45 000 €).
-- Droit d'auteur : art. L.111-1 CPI ; patrimoniaux (reproduction,
-  communication, cessibles) / moraux (divulgation, paternité, intégrité,
-  incessibles) ; sans formalité ; vie + 70 ans ; DADVSI (30 juin 2006,
-  DRM) ; HADOPI (Conseil const. 10 juin 2009 : coupure = juge).
-- Logiciel libre : 4 libertés, copyleft = GPL ; libre ≠ gratuit.
-- Signature électronique : loi 13 mars 2000 (code civil) ; simple vs
-  présumée fiable ; 4 conditions ; chiffrement + empreinte + certificat
-  qualifié (PSCE, DCSSI) ; clé <= 128 bits.
-- Nouveaux risques : spyware (consentement exprès), RFID (lecture à
-  distance).
-- Communications électroniques : loi 9 juillet 2004 (paquet télécoms),
-  déclaration auprès de l'ART, service universel par appel à
-  candidatures, ANFR (1997, champs électromagnétiques).
-- Lois : loi 30 sept. 1986 (CSA, must carry) ; LCEN 21 juin 2004
-  (hébergeurs, double clic) ; loi 31 déc. 2003 (privatisation de France
-  Télécom).
+      Autorisation après avis : régime des traitements de souveraineté d'une personne publique, sûreté, sécurité, défense, impositions, statistiques, l'autorisation étant délivrée par arrêté ministériel après avis motivé et publié de la CNIL, avis non contraignant.
+
+      Correspondant informatique et libertés : acteur créé par la loi de deux mille quatre, désigné au sein de l'organisme, chargé d'assurer de manière indépendante le respect de la loi et tenant la liste des traitements, sa désignation exonérant de la déclaration préalable des traitements ordinaires.
+
+      Droit d'information : obligation pour le responsable de traitement d'informer la personne de son identité, de la finalité, du caractère obligatoire ou facultatif des réponses, des conséquences d'un refus et de l'existence des droits d'opposition et d'accès.
+
+      Droit d'opposition : droit de toute personne de s'opposer, pour des raisons légitimes, à un traitement de ses données, sauf obligation légale, comme les traitements fiscaux.
+
+      Droit d'accès : droit d'obtenir communication de ses données, directement auprès de l'organisme ou indirectement par l'intermédiaire de la CNIL.
+
+      Droit de rectification : droit de faire rectifier, compléter, mettre à jour ou effacer les données inexactes, incomplètes, équivoques ou périmées.
+
+      Spam : envoi massif et parfois répété de courriers électroniques non sollicités à des personnes dont l'adresse a été captée de façon irrégulière, appelé pourriel, la pratique étant le spamming.
+
+      Opt-in : consentement préalable de l'internaute à recevoir des sollicitations.
+
+      Opt-out : possibilité pour l'internaute de s'opposer a posteriori à l'envoi de sollicitations.
+
+      Secret des correspondances : principe garanti par la loi du dix juillet mille neuf cent quatre-vingt-onze, la jurisprudence assimilant le courrier électronique à une correspondance.
+
+      Arrêt Nikon : arrêt de la Cour de cassation du deux octobre deux mille un, arrêt de principe reconnaissant au salarié le droit au respect de sa vie privée et au secret des correspondances sur le lieu de travail, l'employeur ne pouvant consulter les messages identifiés comme personnels.
+
+      Charte d'utilisation : document formalisant les règles d'usage du matériel informatique, des connexions Internet et de la messagerie, encouragé par la CNIL.
+
+      Principe de proportionnalité : principe de la cybersurveillance rappelé par la CNIL en deux mille deux, avec l'information préalable des salariés et la consultation des représentants du personnel.
+
+      Droit d'auteur : droit posé par l'article L.111-1 du code de la propriété intellectuelle, propriété incorporelle exclusive de l'auteur d'une œuvre de l'esprit, comportant des attributs d'ordre intellectuel et moral et d'ordre patrimonial.
+
+      Droits patrimoniaux : droit de reproduction ou d'édition et droit de communication ou de représentation, permettant à l'auteur de tirer un bénéfice économique, cessibles ou concessibles.
+
+      Droits moraux : droit de divulgation, droit de paternité, droit à l'intégrité de l'œuvre et droit de s'opposer à toute atteinte à l'honneur et à la réputation, perpétuels et non cessibles entièrement.
+
+      Cession : transfert des droits patrimoniaux, portant pour un logiciel sur les codes sources.
+
+      Concession ou licence : simple droit d'usage sur l'œuvre, généralement non exclusif et sur un seul poste, l'auteur conservant les codes sources et ne remettant qu'un code exécutable.
+
+      Durée de protection : la vie de l'auteur puis l'année civile en cours et les soixante-dix ans suivant son décès, après quoi l'œuvre tombe dans le domaine public, le droit moral restant perpétuel.
+
+      Avis Ofrateme : avis du Conseil d'État du vingt et un novembre mille neuf cent soixante-douze, jugeant que les fonctionnaires mettaient leurs droits d'auteur à disposition du service, principe renversé par la loi DADVSI.
+
+      DADVSI : loi du trente juin deux mille six relative au droit d'auteur et aux droits voisins dans la société de l'information, transposant la directive du vingt-deux mai deux mille un, reconnaissant aux agents publics la qualité d'auteur, légalisant les mesures techniques de protection et rendant illégal le téléchargement d'œuvres protégées.
+
+      Contrefaçon : reproduction, représentation ou diffusion d'une œuvre de l'esprit en violation des droits d'auteur ; le piratage informatique en est une forme, par duplication, copie multiple ou téléchargement non autorisé.
+
+      DRM : mesure technique de protection, système légalisé par la loi DADVSI destiné à empêcher ou limiter les utilisations non autorisées, assorti d'une obligation d'interopérabilité.
+
+      Autorité de régulation des mesures techniques : autorité administrative indépendante créée par la loi DADVSI, chargée de veiller à ce que les mesures techniques n'engendrent pas de restrictions excédant les objectifs de protection.
+
+      Rapport Olivennes : rapport remis au gouvernement en novembre deux mille sept, proposant de rendre l'offre légale plus attractive et de désinciter l'offre illégale par des sanctions adaptées et un système contractuel d'avertissement et de sanction.
+
+      HADOPI : Haute Autorité pour la diffusion des œuvres et la protection des droits sur Internet, créée par la loi Création et Internet, à triple mission, encouragement à l'offre légale, protection des œuvres, régulation des mesures techniques, composée d'un collège de neuf membres et d'une commission de trois membres.
+
+      Riposte graduée : dispositif prévoyant un avertissement par courrier électronique, un avertissement par lettre recommandée, puis la suspension de l'abonnement, la coupure d'accès hors décision judiciaire ayant été censurée par le Conseil constitutionnel le dix juin deux mille neuf.
+
+      Logiciel libre : logiciel permettant l'exécution pour tous les usages, l'étude et l'adaptation du fonctionnement avec accès au code source, la redistribution de copies et la modification du programme ; libre ne signifie pas gratuit.
+
+      Copyleft : gauche d'auteur, utilisation des lois du droit d'auteur pour garantir que le logiciel reste libre pour quiconque en possède une copie, sans permettre d'ajouter des restrictions, mis en œuvre par la licence publique générale GPL.
+
+      Signature électronique : donnée sous forme électronique servant de méthode d'authentification, dont la loi du treize mars deux mille, transposant la directive du treize décembre mille neuf cent quatre-vingt-dix-neuf, affirme la valeur juridique sous conditions.
+
+      Signature électronique simple : usage d'un procédé fiable d'identification garantissant le lien avec l'acte, recevable comme preuve mais non présumée fiable.
+
+      Signature électronique présumée fiable : signature sécurisée, établie par un dispositif sécurisé de création et vérifiée grâce à un certificat électronique qualifié, dont la fiabilité est présumée, définie par le décret du trente mars deux mille un.
+
+      Empreinte : condensat obtenu par une fonction de hachage, version synthétique et unique du document permettant de déceler toute modification.
+
+      Certificat électronique : fichier public identifiant l'émetteur en associant son nom à une clé publique, certifié par un prestataire de services de certification électronique.
+
+      PSCE : prestataire de services de certification électronique, devant se déclarer auprès de la Direction centrale de la sécurité des systèmes d'information pour délivrer des certificats qualifiés.
+
+      Espiogiciel : spyware, petit programme installé souvent à l'insu de l'utilisateur, collectant des données sur son comportement et sa machine et les transmettant à son créateur, généralement à des fins publicitaires, licite seulement avec le consentement exprès de l'utilisateur.
+
+      Web bug : image invisible d'un unique pixel insérée dans une page ou un courrier au format HTML, le plus souvent à des fins de mesure d'audience.
+
+      RFID : identification par radiofréquence, micro-puces insérées dans des étiquettes apposées sur les produits, permettant la lecture à distance et perçues comme un risque pour la vie privée.
+
+      Paquet télécoms : ensemble de six directives et une décision adoptées en deux mille trois au niveau européen, transposé par la loi du neuf juillet deux mille quatre.
+
+      Autorité de régulation des télécommunications : autorité chargée d'identifier les marchés pertinents, de déterminer les opérateurs exerçant une influence significative et de définir leurs obligations, à qui la loi de deux mille quatre confère des pouvoirs élargis.
+
+      Influence significative sur le marché : notion rapprochée de la position dominante du droit de la concurrence, servant à définir les opérateurs auxquels s'imposent des obligations spécifiques.
+
+      Service universel : composante du service public des télécommunications, service téléphonique permettant un accès fonctionnel à Internet, attribué au niveau national par appel à candidatures, financé par les opérateurs selon leur chiffre d'affaires.
+
+      ANFR : Agence nationale des fréquences, créée en mille neuf cent quatre-vingt-dix-sept, gérant les fréquences, effectuant les déclarations à l'Union internationale des télécommunications et contrôlant l'exposition du public aux champs électromagnétiques.
+
+      Marché secondaire des fréquences : possibilité pour des entreprises d'acquérir des droits d'usage sur le spectre auprès d'autres entreprises, toute cession étant notifiée à l'Autorité de régulation des télécommunications.
+
+      LCEN : loi du vingt et un juin deux mille quatre pour la confiance dans l'économie numérique, transposant la directive du huit juin deux mille sur le commerce électronique, organisée en cinq titres.
+
+      Responsabilité de l'hébergeur : responsabilité limitée à la connaissance effective d'une activité ou d'une information illicite et à l'absence d'action prompte pour la retirer, l'hébergeur n'ayant aucune obligation générale de surveillance.
+
+      Double clic : forme exigée par l'article 1369-4 du code civil pour l'acceptation d'une offre par un consommateur, avec informations récapitulatives et accusé de réception rapide.
+
+      Itinérance locale : autorisation donnée à un opérateur mobile de partager son réseau avec un autre opérateur sur une zone non couverte à l'origine.
+
+COURS DÉTAILLÉ.
+
+I. L'ORIGINE DU CADRE JURIDIQUE.
+
+      La révélation dans la presse, en mille neuf cent soixante-quatorze, du projet SAFARI, première ébauche d'un ensemble de fichiers interconnectés par un identifiant unique, a ému l'opinion et conduit le gouvernement à instituer une commission chargée de proposer des mesures garantissant le développement de l'informatique dans le respect de la vie privée et des libertés. Cette commission a proposé la création d'une autorité indépendante, la CNIL, ce qu'a permis la loi du six janvier mille neuf cent soixante-dix-huit. Pour transposer la directive européenne 95/46 du vingt-quatre octobre mille neuf cent quatre-vingt-quinze, la France a adopté la nouvelle loi Informatique et libertés du six août deux mille quatre. La CNIL s'est dotée en deux mille douze d'un plan triennal, puis a engagé fin deux mille quinze une réflexion pour la période deux mille seize-deux mille dix-huit, dans un contexte de forte pression liée au basculement de la société dans l'ère numérique et au règlement européen à venir.
+
+II. LA PROTECTION DES DONNÉES PERSONNELLES.
+
+   A. Le champ d'application et les définitions.
+
+      La loi du six janvier mille neuf cent soixante-dix-huit modifiée s'applique aux traitements automatisés de données à caractère personnel et aux traitements non automatisés contenus dans des fichiers, y compris pour la sécurité publique, la défense ou la sûreté de l'État, mais exclut les traitements pour des activités exclusivement personnelles. La loi de deux mille quatre élargit l'éventail des données concernées, passant des données nominatives aux données personnelles, incluant les données permettant une identification indirecte, par exemple par le numéro de sécurité sociale, et retient une définition large du traitement, toute opération portant sur des données personnelles quel que soit le procédé technique.
+
+   B. Les conditions de licéité et les données sensibles.
+
+      L'article 6 fixe les conditions de licéité : collecte loyale et licite, finalité déterminée de manière spécifique, données pertinentes, adéquates et non excessives, exactes et mises à jour, conservées de manière proportionnée à leur utilisation. La loi interdit tout traitement ultérieur incompatible avec les finalités de collecte, avec une exception pour les fins statistiques ou scientifiques. L'article 8 énumère les données sensibles, origines raciales, opinions politiques, philosophiques ou religieuses, mœurs, dont la collecte et le traitement sont en principe interdits, sauf dérogations, consentement exprès de la personne, sauvegarde de la vie humaine, traitements des associations religieuses, politiques ou syndicales pour leurs seuls membres, traitements statistiques de l'INSEE.
+
+   C. Les modalités d'application.
+
+      Avant deux mille quatre, la loi soumettait tout projet de traitement à formalité et distinguait selon un critère organique, avis favorable de la CNIL pour le secteur public, simple déclaration pour le secteur privé. La loi du six août deux mille quatre fait de la déclaration le régime de droit commun, sans distinction public-privé, et prévoit un régime spécifique pour les données sensibles, contrôlé a priori, soit par autorisation, soit par autorisation après avis. Le régime de déclaration consiste à remplir un formulaire décrivant les fonctionnalités et la nature des données ; le responsable peut mettre en œuvre le traitement dès que la CNIL justifie la réception. La CNIL édicte des normes simplifiées, formulaires pré-remplis pour les traitements courants, et une exonération de formalités est possible d'office ou par décision de la CNIL. Le régime de la demande d'autorisation concerne les traitements de l'article 25 présentant des risques, la CNIL se prononçant dans un délai de deux mois, l'absence de réponse valant rejet. Le régime de l'autorisation après avis concerne les traitements de souveraineté d'une personne publique, sûreté, sécurité, défense, impositions, statistiques ; l'autorisation est délivrée par arrêté ministériel après avis motivé et publié de la CNIL, avis non contraignant.
+
+   D. La structure et les missions de la CNIL.
+
+      La CNIL est une autorité administrative indépendante, composée d'un collège pluraliste de dix-huit personnalités, parlementaires, membres du Conseil économique et social, représentants des hautes juridictions, personnalités qualifiées, dont le mandat est de cinq ans ; elle élit son président et ne reçoit d'instruction d'aucune autorité. Elle assure quatre missions. Informer et protéger : elle informe les particuliers et les professionnels, met à leur disposition des outils, anime des actions de formation et promeut les technologies protectrices de la vie privée. Accompagner et conseiller : avis sur les projets de loi ou de décret, autorisation des traitements sensibles, recommandations fixant une doctrine, cadres juridiques simplifiés, correspondants informatique et libertés, labels, packs de conformité, règles contraignantes d'entreprise pour les transferts hors de l'Union. Contrôler et sanctionner : le contrôle sur place, sur pièces, sur audition ou en ligne, avec un programme des contrôles élaboré selon l'actualité et les plaintes, la CNIL étant compétente pour la vidéoprotection autorisée par les préfectures. Anticiper : veille sur les technologies et usages nouveaux, laboratoire d'expérimentation, conseil en amont dans une logique de protection de la vie privée dès la conception, comité de la prospective et réflexion éthique.
+
+   E. Les droits garantis et les pouvoirs de la CNIL.
+
+      La loi garantit le droit d'information, articles 32 et 39, le droit d'opposition, article 38, écarté en cas d'obligation légale comme les impôts, le droit d'accès, articles 39 et suivants, direct ou indirect par la CNIL, et le droit de rectification. La CNIL réalise des contrôles sur pièces et sur place, ses agents ayant accès de six heures à vingt et une heures aux lieux servant à un traitement, à l'exclusion du domicile privé, pouvant accéder aux programmes et aux données. Elle dispose d'un pouvoir de sanction administratif : avertissement, sanction pécuniaire, sauf pour les traitements des services de l'État, injonction de cesser le traitement pour le régime déclaratif, retrait d'autorisation. Le code pénal, articles 226-16 à 226-24, prévoit des sanctions pénales pour le non-respect des formalités préalables, de l'obligation de sécurité, la collecte frauduleuse, le traitement malgré l'opposition, le traitement de données sensibles sans consentement exprès, la conservation au-delà de la durée prévue, le détournement de finalité ou la divulgation, la sanction de référence étant cinq ans d'emprisonnement et trois cent mille euros d'amende.
+
+   F. Le correspondant et la déclaration des sites Web.
+
+      La loi de deux mille quatre a créé le correspondant à la protection des données, désigné au sein de chaque organisme parmi ses collaborateurs, dont la désignation est notifiée à la CNIL sans agrément ; il tient une liste de tous les traitements, immédiatement accessible, pour limiter les fichiers clandestins, l'organisme étant alors exonéré de la déclaration préalable, sauf pour les traitements soumis à autorisation. Depuis juillet deux mille six, la CNIL a mis fin à la déclaration spécifique des sites Web ; c'est désormais la finalité du site qui détermine les démarches : un site de commerce électronique collectant des données fait une déclaration simplifiée, un site vitrine d'information et un blog personnel sont dispensés de déclaration, les autres sites font une télédéclaration normale.
+
+III. LA PROTECTION DE LA MESSAGERIE ÉLECTRONIQUE ET L'USAGE DES OUTILS INFORMATIQUES.
+
+   A. La lutte contre le spam.
+
+      Le spam est l'envoi massif de courriers non sollicités, ou pourriels, à des personnes dont l'adresse a été captée irrégulièrement ; il est présenté comme un fléau, treize milliards de pourriels circulant chaque jour. La régulation est envisagée par deux approches, l'opt-in, consentement préalable, et l'opt-out, opposition a posteriori. La CNIL recommande une case à cocher permettant d'exprimer le consentement ou le refus dès la collecte. L'ordonnance du vingt-trois août deux mille un fixe trois règles aux prospecteurs : arrêter les envois en cas d'opposition, consulter les registres d'opt-out et rendre les communications commerciales identifiables. La collecte sauvage d'adresses sur les espaces publics de l'Internet est interdite ; le spamming peut faire l'objet de poursuites pénales, comme l'illustre la condamnation d'un internaute à dix mois de prison avec sursis en deux mille trois.
+
+   B. L'usage des outils informatiques dans la sphère professionnelle.
+
+      Les outils fournis par l'administration servent aux activités professionnelles, une certaine tolérance permettant un usage privé. La CNIL considère qu'une interdiction générale et absolue d'un usage non professionnel d'Internet n'est pas réaliste et qu'un usage raisonnable est socialement admis. Les fichiers créés par un salarié et expressément identifiés comme personnels ne peuvent en principe être consultés par l'employeur, sauf en présence du salarié, s'il en a été informé, ou en cas de risque ou d'événement particulier ; toutefois, un fichier à caractère pornographique peut être consulté même identifié comme personnel, la consultation de sites pornographiques pendant le service étant une faute disciplinaire même sans charte, et le stockage de photos pédophiles engage la responsabilité pénale, tout agent ayant l'obligation de dénoncer les crimes ou délits au titre de l'article 40 du code de procédure pénale.
+
+   C. Le secret des correspondances.
+
+      La loi du dix juillet mille neuf cent quatre-vingt-onze garantit le secret des correspondances émises par voie de communications électroniques, auquel il ne peut être porté atteinte que par l'autorité publique dans les cas prévus par la loi ; la jurisprudence assimile le courrier électronique à une correspondance. En l'absence de définition légale du courrier professionnel, le caractère personnel peut être établi par une mention dans l'objet ou le nom du répertoire, comme « personnel » ou « privé ». Un message privé garde son caractère à l'égard des tiers mais non de l'expéditeur ni du destinataire ; ni un supérieur ni un collègue ne peut prendre connaissance d'un message privé sans porter atteinte au secret. L'arrêt Nikon de la Cour de cassation du deux octobre deux mille un est un arrêt de principe : le salarié a droit au respect de sa vie privée sur son lieu de travail, l'absence de mention « personnel » conférant par défaut un caractère professionnel consultable. Le Conseil d'État a par ailleurs confirmé en deux mille trois la sanction d'un agent ayant utilisé son adresse professionnelle pour des correspondances relatives à une secte, au titre du préjudice subi par l'État. Les sanctions encourues sont pénales, article 226-15 du code pénal, un an d'emprisonnement et quarante-cinq mille euros d'amende pour l'interception ou la divulgation de correspondances, et administratives.
+
+   D. Les limites à l'utilisation de la messagerie professionnelle.
+
+      Les messages d'un agent public doivent respecter les dispositions applicables et ses obligations déontologiques. La jurisprudence a sanctionné le manquement à la discrétion professionnelle, la diffusion de critiques violentes contre la hiérarchie caractérisant le manquement au devoir de réserve, l'envoi de messages injurieux caractérisant le manquement à la dignité, le harcèlement moral et sexuel par courrier électronique, l'envoi de courriels antisémites permettant d'identifier l'employeur constituant une faute grave, la désobéissance hiérarchique au non-respect d'une note de service, et l'utilisation abusive à titre privatif, une salariée écrivant jusqu'à vingt messages par jour. Les pétitions électroniques adressées en nombre aux supérieurs sont interdites ; l'utilisation de la messagerie par les organisations syndicales peut être autorisée par accord d'entreprise, le droit syndical étant garanti aux fonctionnaires, une autorité territoriale ne pouvant interdire la diffusion de messages syndicaux.
+
+   E. La position de la CNIL et la charte d'utilisation.
+
+      Un premier rapport de mars deux mille un alertait sur les possibilités de traçage. Le rapport du cinq février deux mille deux sur la cybersurveillance pose trois principes : proportionnalité, information préalable des salariés, consultation préalable des représentants du personnel ; l'ordinateur mis à disposition ne relève pas de la vie privée, mais une information préalable n'autorise pas tous les modes de surveillance. La charte d'utilisation, encouragée par la CNIL, formalise les règles d'usage du matériel, des connexions et de la messagerie, rappelle les dispositions applicables et informe des contrôles mis en œuvre. Les contrôles possibles portent sur les connexions à Internet, avec des dispositifs de filtrage de sites non autorisés associés au pare-feu, sur l'usage de la messagerie, mesure de la fréquence et de la taille des pièces jointes, sur les fichiers de journalisation, mesure de sécurité préconisée par la CNIL, la mise en œuvre d'un logiciel d'analyse des journaux à des fins de contrôle individuel devant être déclarée, et sur le rôle des administrateurs réseaux, qui ont accès à toutes les informations et utilisent des outils de télémaintenance, mais sont tenus au secret professionnel et ne doivent pas détourner la finalité de ces applications. La désignation d'un correspondant informatique et libertés allège les formalités. Dans la sphère privée, les obligations déontologiques des agents publics s'imposent, secret professionnel, dignité, neutralité et devoir de réserve, y compris sur les forums, les blogs et les réseaux sociaux.
+
+IV. LA PROTECTION DES DROITS D'AUTEUR.
+
+   A. Les principes.
+
+      L'article L.111-1 du code de la propriété intellectuelle pose que l'auteur d'une œuvre de l'esprit jouit d'un droit de propriété incorporelle exclusif et opposable à tous, comportant des attributs d'ordre intellectuel et moral et d'ordre patrimonial. Le droit confère une propriété privative permettant de déterminer les conditions d'exploitation, avec un droit de destination sur les copies distribuées. La propriété est incorporelle : elle porte sur la création et non sur l'objet matériel, la vente du support n'emportant pas cession des droits.
+
+   B. Les droits patrimoniaux et moraux.
+
+      Les droits patrimoniaux organisent la communication et l'exploitation : le droit de reproduction ou d'édition et le droit de communication ou de représentation ; ils peuvent faire l'objet d'une cession ou d'une concession, les logiciels standard faisant rarement l'objet de cession exclusive mais de licences d'utilisation par contrat d'adhésion. La cession de logiciel emporte cession des droits sur les codes sources, la concession ou licence ne confère qu'un droit d'usage, généralement non exclusif et sur un seul poste, l'auteur ne remettant qu'un code objet. Les droits moraux protègent la personnalité de l'auteur : droit de divulgation, droit de paternité, droit à l'intégrité de l'œuvre et droit de s'opposer à toute atteinte préjudiciable à l'honneur ; ils ne peuvent être cédés entièrement.
+
+   C. Formalités et durée.
+
+      La protection est conférée du simple fait de la création, sans formalité de dépôt, un dépôt facilitant seulement la preuve de la paternité et de la date. Contrairement au droit moral, perpétuel, les droits d'exploitation persistent la vie de l'auteur puis l'année civile en cours et les soixante-dix ans suivant le décès, après quoi l'œuvre tombe dans le domaine public, sous réserve du droit moral. La protection par le droit d'auteur ne se confond pas avec les droits de propriété industrielle, brevets, marques, dessins et modèles, ni avec les droits de la personnalité, qui peuvent s'exercer cumulativement.
+
+   D. Le droit d'auteur des fonctionnaires et les logiciels de la personne publique.
+
+      L'avis Ofrateme du Conseil d'État du vingt et un novembre mille neuf cent soixante-douze jugeait que les fonctionnaires mettaient leurs droits d'auteur à disposition du service, sauf pour les œuvres sans rapport avec le service. Le Conseil supérieur de la propriété intellectuelle et artistique a renversé ce principe en deux mille un, et la loi DADVSI de deux mille six, articles 16 à 18, reconnaît aux agents publics la qualité d'auteur pour les œuvres qu'ils créent dans le cadre de leurs fonctions, l'administration conservant le droit d'exploitation à des fins non commerciales pour sa mission de service public. Les droits de la personne publique sur les logiciels dépendent de la situation contractuelle : un logiciel sur étagère est concédé, un logiciel développé en interne est exploité librement, un logiciel développé par un prestataire est régi par le cahier des clauses administratives particulières, l'administration bénéficiant de tous les droits, le prestataire de tous les droits, ou les droits étant partagés. Les cahiers des clauses administratives générales fournitures courantes et services et prestations intellectuelles ne traitent pas de façon satisfaisante la cession des droits pour une mutualisation sous licence libre, d'où la nécessité de prévoir un mécanisme spécifique dans le cahier des clauses administratives particulières.
+
+   E. Le droit d'auteur appliqué à l'informatique et la contrefaçon.
+
+      La directive européenne du quatorze mai mille neuf cent quatre-vingt-onze consacre la protection des programmes d'ordinateur par le droit d'auteur ; le logiciel et le matériel de conception préparatoire sont des œuvres de l'esprit à la seule condition d'être originaux. Le droit d'auteur protège les logiciels du piratage, notion non définie par la loi, assimilée à la contrefaçon, reproduction, représentation ou diffusion en violation des droits. Le piratage prend plusieurs formes : duplication artisanale à l'aide de graveurs, copie du logiciel original sur plusieurs ordinateurs sans les licences correspondantes, piraterie sur Internet par téléchargement sans autorisation, sauf pour les catégories freeware et shareware. Tout ce que le titulaire n'a pas expressément permis est interdit.
+
+   F. La loi DADVSI.
+
+      La loi du trente juin deux mille six transpose la directive du vingt-deux mai deux mille un sur l'harmonisation du droit d'auteur, qui aborde le droit de reproduction, de communication et de distribution. Après l'abandon de la licence globale, le texte met en place la reconnaissance des mesures techniques de protection, dont le rôle est d'empêcher ou de limiter les utilisations non autorisées, avec des sanctions pour le contournement et une obligation d'interopérabilité et d'information des consommateurs ; l'exception pour copie privée est réaffirmée, un collège de médiateurs fixant le nombre de copies, mais le Conseil constitutionnel a permis aux éditeurs de limiter, voire d'interdire de fait toute copie privée. Le téléchargement et la diffusion d'œuvres protégées sont rendus illégaux, avec des sanctions graduées, les plus lourdes amendes visant les fournisseurs de solutions techniques, les éditeurs de logiciels d'échange risquant trois ans d'emprisonnement et trois cent mille euros d'amende, le juge constitutionnel ayant écarté un régime pénal particulier pour le pair-à-pair. La loi a créé l'Autorité de régulation des mesures techniques, chargée de veiller à ce que ces mesures n'excèdent pas les objectifs de protection, et de nouvelles infractions de contournement.
+
+   G. Le rapport Olivennes et la loi HADOPI.
+
+      Le rapport Olivennes de novembre deux mille sept propose de rendre l'offre légale plus attractive, contenu, disponibilité, prix, et de désinciter l'offre illégale par des sanctions adaptées au type de piratage, pas de sanction pour le streaming, contravention pour le téléchargement modéré, délit pour la mise à disposition massive, ainsi que par le filtrage et un système contractuel d'avertissement et de sanction. La loi Création et Internet crée la Haute Autorité pour la diffusion des œuvres et la protection des droits sur Internet, à triple mission, encouragement à l'offre légale et observation des usages, protection des œuvres, régulation et veille sur les mesures techniques ; elle comprend un collège de neuf membres et une commission de trois membres issus de la Cour de cassation, du Conseil d'État et de la Cour des comptes. La commission de protection des droits peut envoyer à l'abonné une recommandation par voie électronique, puis une seconde en cas de renouvellement dans les six mois. Par sa décision du dix juin deux mille neuf, le Conseil constitutionnel a censuré la possibilité de confier à une autorité administrative le pouvoir de restreindre l'accès à Internet hors décision judiciaire, ainsi que les mouchards filtrants, empêchant la riposte graduée à trois phases.
+
+   H. Les logiciels libres.
+
+      Le terme de logiciel libre vient de free software, free signifiant à la fois gratuit et libre, d'où des confusions avec les gratuiciels et les partagiciels, distribués sous forme binaire sans code source. Un logiciel est libre s'il permet l'exécution pour tous les usages, la liberté d'étudier et d'adapter le fonctionnement avec accès au code source, la liberté de redistribuer des copies avec ou sans contrepartie financière, et la liberté de modifier le programme ; libre ne signifie pas gratuit. Le copyleft, ou gauche d'auteur, utilise les lois du droit d'auteur en les retournant pour empêcher de transformer du logiciel libre en logiciel propriétaire : il donne à quiconque la permission d'exécuter, copier, modifier et redistribuer, mais non d'ajouter des restrictions, ces libertés devenant des droits inaliénables ; sa mise en œuvre la plus courante est la licence publique générale GPL.
+
+V. LA SIGNATURE ÉLECTRONIQUE.
+
+   A. Le cadre.
+
+      La loi du treize mars deux mille affirme la valeur juridique de la signature électronique sous conditions ; elle s'inscrit dans le contexte de la directive du treize décembre mille neuf cent quatre-vingt-dix-neuf et est complétée par le décret du treize décembre deux mille un. La directive reconnaît deux catégories de signatures, toutes deux recevables en justice : la signature classique ou simple, donnée électronique servant de méthode d'authentification, reconnue comme élément de preuve mais sans la valeur d'une signature manuscrite, bas niveau de reconnaissance ; la signature avancée, fondée sur un certificat qualifié et créée par un dispositif sécurisé, équivalente à la signature manuscrite dès lors qu'elle est liée uniquement au signataire, permet de l'identifier, est créée par des moyens sous son contrôle exclusif et liée aux données de telle sorte que toute modification soit détectable, haut niveau de reconnaissance.
+
+   B. La transposition française.
+
+      La loi du treize mars deux mille modifie le droit de la preuve en reconnaissant l'équivalence du support papier et du support numérique, l'écrit électronique ayant la même force probante sous quatre conditions : la personne dont émane l'écrit peut être identifiée par un procédé fiable, l'écrit est créé et conservé dans des conditions garantissant son intégrité, et un procédé fiable garantit le lien de la signature avec l'acte. La loi distingue la signature électronique simple, procédé fiable d'identification non présumé fiable, la fiabilité devant être prouvée en cas de contestation, et la signature présumée fiable, définie par le décret du trente mars deux mille un : elle doit être sécurisée, propre au signataire, créée par des moyens sous son contrôle exclusif, garantir la détection de toute modification, être établie par un dispositif sécurisé de création garantissant que les données ne peuvent être créées qu'une fois et sont protégées, et être vérifiée grâce à un certificat électronique qualifié fourni par un prestataire déclaré auprès de la Direction centrale de la sécurité des systèmes d'information.
+
+   C. Chiffrement, empreinte et certificat.
+
+      Une signature électronique fait intervenir trois éléments. Le chiffrement applique un algorithme à un message pour en coder la signification, sa force dépendant de la nature de l'algorithme, symétrique ou asymétrique, et de la taille de la clé, la loi française autorisant une clé limitée à cent vingt-huit bits. L'empreinte, obtenue par une fonction de hachage, est une version synthétique et unique du document, toute différence étant décelée en comparant les empreintes. Le certificat électronique, petit fichier public de huit à dix kilo-octets voyageant avec les envois certifiés, identifie l'émetteur en associant son nom à une clé publique, certifiée par un prestataire de services de certification électronique. L'inconvénient de la cryptologie symétrique est que l'expéditeur et le destinataire doivent convenir à l'avance de la clé et disposer d'un canal sûr, d'où le recours aux algorithmes asymétriques où chaque utilisateur dispose d'une clé privée jamais révélée et d'une clé publique divulguée.
+
+VI. LES NOUVEAUX RISQUES.
+
+      L'espiogiciel, ou spyware, est un petit programme installé souvent à l'insu de l'utilisateur, qui collecte des données sur son comportement et sa machine et les transmet à son créateur, généralement à des fins publicitaires ; il est fréquemment associé aux logiciels de téléchargement gratuit. Les web bugs, images invisibles d'un unique pixel insérées dans des pages ou courriers HTML, servent surtout à la mesure d'audience sans installation permanente. L'espiogiciel n'est pas illégal en soi, sa licéité étant conditionnée au consentement exprès de l'utilisateur, souvent mal informé. L'identification par radiofréquence, ou RFID, utilise des micro-puces insérées dans des étiquettes apposées sur les produits ; elle a de multiples applications, lutte contre le vol, péage sans arrêt, contrôle d'accès, mais est perçue comme un risque important pour la vie privée du fait de la lecture à distance.
+
+VII. LE NOUVEAU CADRE JURIDIQUE DES COMMUNICATIONS ÉLECTRONIQUES.
+
+   A. Le régime des réseaux et services.
+
+      La loi du neuf juillet deux mille quatre relative aux communications électroniques et aux services de communication audiovisuelle transpose le paquet télécoms, six directives et une décision de deux mille trois, dont les points clés sont l'objectif d'une concurrence effective, le renforcement de la régulation sectorielle et du rôle des autorités de réglementation nationales, le rapprochement avec le droit de la concurrence, un cadre réglementaire harmonisé pour l'ensemble des réseaux, et un droit de veto de la Commission européenne sur certaines décisions. La loi transforme le code des postes et télécommunications en code des postes et des communications électroniques, supprime les autorisations pour installer les réseaux et offrir les services, remplacées par une simple déclaration auprès de l'Autorité de régulation des télécommunications, avec un régime de liberté pour les réseaux indépendants, seules subsistant les autorisations pour les fréquences radioélectriques assignées. Grâce à la numérisation, la loi harmonise le régime des infrastructures audiovisuelles et de télécommunications sous l'appellation de réseaux de communications électroniques, les services fournis restant soumis à des régimes distincts ; les réseaux câblés relèvent du code des postes et des communications électroniques, la radiodiffusion hertzienne dans les bandes affectées au Conseil supérieur de l'audiovisuel restant régie par la loi du trente septembre mille neuf cent quatre-vingt-six.
+
+   B. La régulation.
+
+      La définition des obligations des opérateurs exerçant une influence significative sur le marché, notion rapprochée de la position dominante, s'effectue en trois étapes : identification des marchés pertinents, détermination des opérateurs exerçant une influence significative, définition de leurs obligations spécifiques, confiées à l'Autorité de régulation des télécommunications. Ces obligations portent en priorité sur l'interconnexion et l'accès au réseau, l'accès couvrant la boucle locale, les bâtiments, gaines et pylônes, les équipements et logiciels. La loi marque l'entrée dans une nouvelle phase de la régulation devant conduire au remplacement des règles sectorielles par le droit général de la concurrence. Elle renforce les pouvoirs de l'Autorité de régulation, pouvoirs d'enquête dans les locaux des opérateurs, mesures conservatoires sans mise en demeure préalable, règlement de différends élargi, et impose à ses membres des obligations de discrétion.
+
+   C. Le service public et le service universel.
+
+      Le service public reste constitué du service universel, des services obligatoires et des missions d'intérêt général. Le service téléphonique du service universel doit permettre un accès fonctionnel à Internet, le télex étant retiré des services obligatoires. Les lois du trente et un décembre deux mille trois et du neuf juillet deux mille quatre retiennent le principe de l'appel à candidatures lancé par le ministre, portant sur les conditions de fourniture et le coût, chaque composante étant attribuée au niveau national ; en cas d'appel infructueux, le gouvernement peut désigner un opérateur. Le financement du service universel par les opérateurs est reconduit, la clé de répartition passant du volume de trafic au chiffre d'affaires.
+
+   D. La gestion des fréquences.
+
+      Les dispositions générales relatives aux fréquences sont regroupées dans le code des postes et des communications électroniques, le Premier ministre répartissant les fréquences entre les ministères et autorités affectataires. Seule l'utilisation de fréquences assignées à un utilisateur est soumise à autorisation administrative de l'État, ministre compétent, Conseil supérieur de l'audiovisuel ou Autorité de régulation des télécommunications. En cas de rareté, le nombre de titulaires peut être limité, les conditions étant fixées par le ministre sur proposition de l'Autorité, à l'issue d'appels à candidatures, avec la possibilité de recourir à des enchères pour les fréquences assignées par l'Autorité. La loi ouvre des marchés secondaires pour certaines bandes affectées à l'Autorité, permettant d'acquérir des droits d'usage sur le spectre, toute cession étant notifiée à l'Autorité. La loi traite aussi du système d'adressage par noms de domaine, en évolution dans le cadre de l'ICANN, le ministre désignant les organismes autorisés à attribuer et gérer les noms de domaine. L'Agence nationale des fréquences, créée en mille neuf cent quatre-vingt-dix-sept, gère les fréquences et contrôle l'exposition du public aux champs électromagnétiques, pouvant s'opposer à toute installation ne respectant pas les valeurs limites du décret du trois mai deux mille deux.
+
+VIII. LES PRINCIPALES LOIS.
+
+   A. La loi du trente septembre mille neuf cent quatre-vingt-six modifiée.
+
+      La loi du neuf juillet deux mille quatre adapte la loi relative à la liberté de communication au nouveau cadre communautaire, assouplit le régime des opérateurs et modernise la régulation du Conseil supérieur de l'audiovisuel. Le Conseil devient compétent pour tous les services de radio et de télévision quel que soit le mode de diffusion, la régulation des contenus, pluralisme, protection des mineurs, s'appliquant à tous les réseaux transportant des programmes. Le Conseil se voit confier des pouvoirs de règlement des litiges entre éditeurs et distributeurs, dans le respect des prérogatives du Conseil de la concurrence et de l'Autorité de régulation des télécommunications. Les procédures d'attribution de la ressource radioélectrique sont modernisées, avec un délai d'instruction plafonné à huit mois et une consultation publique préalable. Le régime d'autorisation préalable des réseaux câblés par les communes est supprimé au profit du régime de l'article L. 33-1 ; toute offre de services audiovisuels sur ces réseaux est soumise à simple déclaration auprès du Conseil, qui vérifie le respect du pluralisme et de la protection des mineurs, mettant fin aux différences entre câble et satellite et prenant en compte les technologies ADSL et courant porteur en ligne. La loi définit l'obligation de reprise, ou must carry, limitée aux réseaux utilisés par un nombre significatif de téléspectateurs. Depuis deux mille deux, la télévision numérique terrestre couvre quatre-vingt-dix-sept pour cent des habitants, avec dix-neuf chaînes nationales gratuites et une cinquantaine de télévisions locales.
+
+   B. La loi du vingt et un juin deux mille quatre pour la confiance dans l'économie numérique.
+
+      La loi n'crée pas un droit spécifique mais adapte les règles à l'économie numérique et transpose la directive du huit juin deux mille sur le commerce électronique ; elle s'articule en cinq titres : liberté de communication via les réseaux numériques, règles du commerce électronique, sécurité, systèmes satellitaires, développement des technologies de l'information. La communication au public par voie électronique regroupe la communication publique en ligne et la communication audiovisuelle, permettant de traiter de façon unifiée la responsabilité éditoriale. La responsabilité des hébergeurs qui assurent le stockage est limitée aux seuls cas de connaissance effective de l'activité ou de l'information illicite et à l'absence d'action prompte pour la retirer ; les personnes assurant la transmission ou la fourniture d'accès ne sont responsables que si elles sont à l'origine de la demande, et les opérateurs assurant le stockage de cache ne sont pas responsables tant qu'ils respectent leur obligation de neutralité ; les prestataires techniques n'ont aucune obligation générale de surveillance.
+
+      La loi organise le commerce électronique : libre circulation dans la Communauté, chaque prestataire étant soumis à la loi de l'État où il est établi, avec une clause de sauvegarde ; transparence des activités commerciales en ligne, identification de toute personne exerçant une activité commerciale, mentions obligatoires facilement accessibles ; principes de la publicité en ligne, distinction claire des messages publicitaires et identification de l'annonceur ; renforcement de la protection contre la prospection directe par courrier électronique, l'article L. 33-4-1 du code des postes et des communications électroniques subordonnant celle-ci à l'accord préalable de la personne, sauf coordonnées fournies lors d'une vente, et interdisant les messages à identité masquée ou sans adresse de réponse. Il est créé dans le code civil un chapitre sur les contrats sous forme électronique : la reconnaissance de l'écrit électronique est étendue aux cas où l'écrit est exigé pour la validité de l'acte, sauf pour les contrats de sûretés, ceux soumis à autorisation judiciaire et ceux du droit de la famille ; l'article 1369-3 exige la mise à disposition des moyens de conserver et reproduire le contrat avant sa conclusion, et l'article 1369-4 exige que l'acceptation du consommateur prenne la forme d'un double clic avec informations récapitulatives et accusé de réception rapide, une exception étant prévue pour les contrats conclus exclusivement par échange de courriers électroniques. Les systèmes satellitaires, dont les assignations de fréquences sont déclarées par l'Agence nationale des fréquences à l'Union internationale des télécommunications, font l'objet d'une procédure d'autorisation d'exploitation délivrée par le ministre. La loi introduit l'article L. 1425-1 du code général des collectivités territoriales permettant aux collectivités d'établir des réseaux, sous le contrôle de l'Autorité de régulation, et impose le principe d'itinérance locale pour la téléphonie mobile.
+
+   C. La loi du trente et un décembre deux mille trois relative à France Télécom.
+
+      La loi tire les enseignements de l'ouverture à la concurrence ; France Télécom, ancienne direction générale des télécommunications, est devenue en quinze ans un groupe employant deux cent quarante mille collaborateurs dans plus de trente-neuf pays. L'évolution du statut est passée par le statut d'exploitant public en mille neuf cent quatre-vingt-dix, la transformation en société anonyme en mille neuf cent quatre-vingt-seize, puis la fin de l'obligation de détention majoritaire du capital par l'État. Cette évolution repose sur deux principes : garantir la continuité du service public, les missions attribuées à France Télécom étant maintenues, seul leur mode d'attribution étant modifié par un mécanisme transparent et ouvert ; et assurer la continuité du statut des personnels restant fonctionnaires, ceux qui le souhaitent pouvant opter pour un contrat de droit privé au moins équivalent, les autres conservant leur statut. La procédure désignant France Télécom comme opérateur du service universel est abrogée au profit d'un mécanisme de désignation efficace, objectif, transparent et non discriminatoire par appel à candidatures. La loi interdit à France Télécom de recruter des fonctionnaires depuis le premier janvier deux mille deux, place ses corps en extinction, applique le code du travail pour l'hygiène et la sécurité et harmonise les rémunérations, tout en maintenant le statut des fonctionnaires par ailleurs, le pouvoir de prononcer les sanctions les plus lourdes restant au ministre. Le décret du trois mai deux mille quatre autorise le transfert du secteur public au secteur privé de la société.
+
+POINTS D'ATTENTION.
+
+      La CNIL, autorité administrative indépendante née de l'affaire SAFARI de mille neuf cent soixante-quatorze, collège de dix-huit membres, quatre missions : informer et protéger, accompagner et conseiller, contrôler et sanctionner, anticiper.
+
+      La loi de deux mille quatre fait de la déclaration le régime de droit commun, sans distinction public-privé ; régime d'autorisation pour les traitements à risque de l'article 25, autorisation après avis pour les traitements de souveraineté.
+
+      Données sensibles de l'article 8 en principe interdites, sauf consentement exprès, sauvegarde de la vie humaine, associations pour leurs membres, statistiques de l'INSEE.
+
+      Quatre droits garantis : information, opposition sauf obligation légale, accès direct ou indirect, rectification ; sanction pénale de référence, cinq ans et trois cent mille euros.
+
+      L'arrêt Nikon de deux mille un : le salarié a droit au secret des correspondances sur son lieu de travail ; l'absence de mention « personnel » rend le message professionnel et consultable.
+
+      Cybersurveillance : trois principes de la CNIL, proportionnalité, information préalable, consultation des représentants du personnel ; l'ordinateur mis à disposition ne relève pas de la vie privée.
+
+      Droit d'auteur : pas de formalité, protection dès la création ; droits moraux perpétuels, droits patrimoniaux limités à la vie de l'auteur plus soixante-dix ans.
+
+      Distinguer cession, transfert des droits sur les codes sources, et licence, simple droit d'usage sur le code exécutable.
+
+      La loi DADVSI de deux mille six reconnaît la qualité d'auteur aux agents publics, légalise les mesures techniques de protection et rend illégal le téléchargement d'œuvres protégées.
+
+      La coupure d'accès à Internet hors décision judiciaire prévue par la loi HADOPI a été censurée par le Conseil constitutionnel le dix juin deux mille neuf.
+
+      Logiciel libre : quatre libertés, exécuter, étudier et adapter avec le code source, redistribuer, modifier ; libre ne veut pas dire gratuit ; le copyleft, mis en œuvre par la GPL, empêche la réappropriation propriétaire.
+
+      Signature électronique : simple, recevable mais non présumée fiable ; présumée fiable, sécurisée, dispositif sécurisé de création, certificat qualifié, décret du trente mars deux mille un ; clé de chiffrement limitée à cent vingt-huit bits.
+
+      Loi du neuf juillet deux mille quatre : suppression des autorisations d'installation des réseaux au profit d'une déclaration à l'Autorité de régulation des télécommunications ; harmonisation sous le terme de réseaux de communications électroniques.
+
+      Responsabilité de l'hébergeur limitée à la connaissance effective de l'illicéité et à l'absence de retrait prompt ; pas d'obligation générale de surveillance ; acceptation par double clic pour le consommateur.
+
+      Loi du trente et un décembre deux mille trois : fin de l'obligation de détention majoritaire du capital de France Télécom par l'État, maintien du statut des fonctionnaires restants, extinction des corps depuis deux mille deux.
+
+EXEMPLES CITES.
+
+      Projet SAFARI révélé par la presse en mille neuf cent soixante-quatorze ; directive européenne 95/46 du vingt-quatre octobre mille neuf cent quatre-vingt-quinze transposée par la loi du six août deux mille quatre.
+
+      Sanction pénale de référence de la loi Informatique et libertés : cinq ans d'emprisonnement et trois cent mille euros d'amende, articles 226-16 à 226-24 du code pénal.
+
+      Fin de la déclaration spécifique des sites Web par la CNIL en juillet deux mille six ; déclaration simplifiée pour le commerce électronique, dispense pour un site vitrine.
+
+      Ordonnance du vingt-trois août deux mille un fixant trois règles aux prospecteurs commerciaux ; condamnation d'un internaute à dix mois avec sursis pour mail-bombing en deux mille trois.
+
+      Loi du dix juillet mille neuf cent quatre-vingt-onze sur le secret des correspondances ; arrêt Nikon de la Cour de cassation du deux octobre deux mille un ; article 226-15 du code pénal, un an et quarante-cinq mille euros.
+
+      Article L.111-1 du code de la propriété intellectuelle ; avis Ofrateme du Conseil d'État du vingt et un novembre mille neuf cent soixante-douze ; loi DADVSI du trente juin deux mille six, articles 16 à 18.
+
+      Directive européenne du quatorze mai mille neuf cent quatre-vingt-onze sur la protection des programmes d'ordinateur.
+
+      Rapport Olivennes remis au gouvernement en novembre deux mille sept ; décision du Conseil constitutionnel du dix juin deux mille neuf sur la loi HADOPI.
+
+      Licence publique générale GPL pour la mise en œuvre du copyleft ; distinction gratuiciel et partagiciel distribués sans code source.
+
+      Loi du treize mars deux mille et décret du trente mars deux mille un sur la signature électronique ; clé de chiffrement limitée à cent vingt-huit bits par la loi française ; certificat électronique de huit à dix kilo-octets.
+
+      Paquet télécoms de six directives et une décision de deux mille trois ; Agence nationale des fréquences créée en mille neuf cent quatre-vingt-dix-sept ; décret du trois mai deux mille deux sur les champs électromagnétiques.
+
+      Télévision numérique terrestre lancée en deux mille deux, couvrant quatre-vingt-dix-sept pour cent des habitants, dix-neuf chaînes nationales gratuites.
+
+      France Télécom passée du statut d'exploitant public en mille neuf cent quatre-vingt-dix à la société anonyme en mille neuf cent quatre-vingt-seize ; décret du trois mai deux mille quatre autorisant le transfert au secteur privé.

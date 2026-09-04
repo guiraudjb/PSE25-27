@@ -1,136 +1,117 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 5, thème 6
-CLOUD COMPUTING (INFORMATIQUE EN NUAGE)
-=======================================================================
+L'INFORMATIQUE EN NUAGE - CLOUD COMPUTING.
 
-1. DÉFINITION ET CRITÈRES
------------------------------------------------------------------------
-- Cloud Computing = déport vers INTERNET de données, d'applications et de
-  services auparavant situés sur les ordinateurs des entreprises ou des
-  particuliers.
-- 5 CRITÈRES du NIST (National Institute of Standards and Technology,
-  USA — « The NIST definition of Cloud computing ») :
-  * simplicité d'un service à la demande,
-  * extrême flexibilité,
-  * accès léger,
-  * virtualisation des ressources,
-  * paiement à l'usage.
-- Rupture technologique majeure. TROISIÈME RÉVOLUTION des plates-formes :
-  1. informatique traditionnelle centralisée (mainframe + terminaux
-     passifs),
-  2. informatique personnelle (PC, réseaux locaux + internet,
-     architectures client/serveur),
-  3. informatique en nuage (réseaux sociaux, mobilité, caractéristiques
-     du cloud).
+LEXIQUE COMPLET.
 
-2. LES TROIS MODÈLES DE SERVICES
------------------------------------------------------------------------
-- SaaS (Software as a Service) : fourniture de LOGICIEL en ligne.
-  Concept des années 2000, prend la suite du service ASP (Application
-  Service Provider). Applicatif standardisé : outils collaboratifs, CRM,
-  force de vente, comptabilité/gestion, trésorerie.
-  -> davantage destiné aux MÉTIERS de l'entreprise.
-- IaaS (Infrastructure as a Service) : fourniture d'INFRASTRUCTURES de
-  calcul et de stockage en ligne. Solution très technique.
-- PaaS (Platform as a Service) : fourniture d'une PLATEFORME de
-  développement d'applications en ligne. Solution très technique.
+      Cloud computing : informatique en nuage, déport vers Internet de données, d'applications et de services auparavant situés sur les ordinateurs des entreprises ou des particuliers.
 
-3. LES TROIS ENVIRONNEMENTS DE DÉPLOIEMENT
------------------------------------------------------------------------
-- CLOUD PUBLIC : accès à un service mutualisé, hébergé chez un
-  fournisseur.
-- CLOUD INTERNE : déploiement en interne d'un service géré par
-  l'entreprise. PAS d'innovation majeure — se limite à la mutualisation
-  et à la virtualisation de ressources gérées en interne.
-- CLOUD PRIVÉ (ou hybride) : version privatisée du service déployée en
-  interne mais gérée à distance par le fournisseur, OU datacenter privé
-  exploité spécifiquement pour l'entreprise par un fournisseur tiers.
-- CLOUD COMMUNAUTAIRE : Cloud privé partagé plus largement, mutualisé
-  par plusieurs organisations d'un même secteur économique.
-- Le Cloud privé est choisi pour des besoins de CONFIDENTIALITÉ, pour
-  « garder la main » sur l'infrastructure, voire par rejet du Cloud
-  public.
+      Définition du NIST : cadre du National Institute of Standards and Technology américain caractérisant le cloud par la simplicité d'un service à la demande, l'extrême flexibilité, l'accès léger, la virtualisation des ressources et le paiement à l'usage.
 
-4. CLOUD ET ORGANISATIONS
------------------------------------------------------------------------
-Questions posées : sécurité, localisation des données, auditabilité,
-gestion des licences, gestion du changement, modalités de mise en œuvre,
-impact budgétaire.
+      SaaS : Software as a Service, fourniture de logiciel en ligne, successeur du service ASP, offrant une informatique applicative standardisée, outils collaboratifs, gestion de la relation client, forces de vente, comptabilité, destinée aux métiers de l'entreprise.
 
-LÉGISLATION :
-- Safe Harbor Agreement : protège les données européennes hébergées chez
-  des fournisseurs américains, mais rendu INOPÉRANT par le Patriot Act.
-- Autorité norvégienne : a interdit Google Docs pour les données à
-  caractère personnel.
-- Autorité danoise : a interdit Google Docs pour les données sensibles.
+      ASP : Application Service Provider, fournisseur de service applicatif, concept des années deux mille précédant le SaaS.
 
-ÉTUDE IDC / HP (juin 2012) : 93 % des entreprises françaises connaissent,
-évaluent ou ont mis en place des services Cloud -> la FRANCE est le pays
-d'Europe où la pénétration du Cloud est la plus forte.
+      IaaS : Infrastructure as a Service, fourniture d'infrastructures de calcul et de stockage en ligne, solution très technique.
 
-5. PRINCIPES DE MISE EN ŒUVRE ET RECOMMANDATIONS
------------------------------------------------------------------------
-- Constat : adoption souvent OPPORTUNISTE (SaaS surtout), sans réflexion
-  stratégique globale.
-- La démarche vers le Cloud est un VRAI PROJET D'ENTREPRISE : à
-  concevoir, piloter, mettre en œuvre et accompagner comme tout projet
-  de SI.
-- CNIL : réflexion sur le partage des responsabilités CLIENT /
-  PRESTATAIRE.
+      PaaS : Platform as a Service, fourniture d'une plateforme de développement d'applications en ligne, solution très technique.
 
-RECOMMANDATIONS PRINCIPALES :
-- Identifier clairement les données et traitements qui passeront dans le
-  Cloud (confidentialité, interfaçage, réglementation).
-- Définir ses propres exigences de sécurité technique et juridique.
-- Conduire une ANALYSE DE RISQUES : perte de gouvernance, dépendance
-  technologique vis-à-vis du fournisseur, failles dans la gestion des
-  données, failles dans la chaîne de sous-traitance, gestion des droits
-  d'accès, non-conformité réglementaire.
-- Identifier le type de Cloud pertinent (SaaS/IaaS/PaaS ;
-  Public/Privé/Hybride).
-- Choisir un prestataire présentant des garanties suffisantes.
-- Élaborer un CONTRAT DÉTAILLÉ :
-  * traitements (respect des principes français de protection des
-    données, remontée des plaintes et failles, sous-traitance) ;
-  * garanties (durée de conservation limitée, destruction/restitution
-    des données, coopération avec les autorités, audits) ;
-  * localisation et transferts (pays hébergeant les serveurs, protection
-    adéquate, limitation des transferts, information en cas de requête
-    d'une autorité étrangère) ;
-  * formalités auprès de la CNIL ;
-  * sécurité et confidentialité (politique de sécurité, certification,
-    RÉVERSIBILITÉ / PORTABILITÉ des données, traçabilité, continuité de
-    service, sauvegardes et intégrité, engagements de niveau de service
-    / SLA).
-- Revoir la politique de sécurité interne ; surveiller les évolutions.
+      Cloud public : accès à un service mutualisé hébergé chez un fournisseur.
 
-6. IMPACTS SUR LES COMPÉTENCES D'UNE DSI
------------------------------------------------------------------------
-- Compétences RENFORCÉES : veille et expertise Cloud ; management de
-  projet et AMOA ; architecture et urbanisation ; pilotage de contrat.
-- Compétences DÉLAISSÉES : développement (hormis les interfaçages) ;
-  recette et gestion d'infrastructure.
-- Transformation progressive (externalisation ni instantanée ni
-  complète ; tendance à tester les apports fonctionnels du Cloud).
+      Cloud interne : déploiement en interne d'un service géré par l'entreprise, se limitant à la mutualisation et à la virtualisation des ressources internes, sans innovation majeure.
 
-7. IMPACT BUDGÉTAIRE
------------------------------------------------------------------------
-Le Cloud modifie la structure du budget : RÉDUCTION des dépenses
-d'investissement de capital (CAPEX, capital expenditure) au profit des
-dépenses de fonctionnement / d'exploitation (OPEX, operational
-expenditure).
+      Cloud privé : cloud hybride, version privatisée d'un service déployée en interne mais gérée à distance par le fournisseur, ou centre de données privé exploité pour l'entreprise par un tiers.
 
-=======================================================================
-À RETENIR
-- Cloud = déport de données/applications/services vers Internet ; 5
-  critères NIST (à la demande, flexible, accès léger, virtualisation,
-  paiement à l'usage).
-- 3 services : SaaS (logiciel, métiers), IaaS (infrastructure, technique),
-  PaaS (plateforme de dev, technique).
-- 3 déploiements : public (mutualisé chez un fournisseur), interne (géré
-  en interne, pas d'innovation majeure), privé/hybride ; + communautaire.
-- Cadre : Safe Harbor neutralisé par le Patriot Act ; France = 1re
-  d'Europe pour la pénétration du Cloud.
-- Vrai projet d'entreprise ; recommandations CNIL ; contrat détaillé
-  (localisation, réversibilité, SLA, analyse de risques).
-- DSI : + expertise Cloud / pilotage de contrat / urbanisation ;
-  - développement / infrastructure. Budget : CAPEX -> OPEX.
+      Cloud communautaire : cloud privé partagé plus largement, mutualisé par plusieurs organisations opérant en général dans le même secteur économique.
+
+      Safe Harbor Agreement : accord prévoyant de protéger les données européennes hébergées chez des fournisseurs américains, rendu inopérant par le Patriot Act.
+
+      Patriot Act : loi américaine rendant inopérant le Safe Harbor Agreement.
+
+      CAPEX : capital expenditure, dépenses d'investissement de capital, réduites par le passage au cloud.
+
+      OPEX : operational expenditure, dépenses de fonctionnement ou d'exploitation, augmentées par le passage au cloud.
+
+      AMOA : assistance à maîtrise d'ouvrage, compétence renforcée par le cloud avec la veille, l'architecture, l'urbanisation et le pilotage de contrat.
+
+      Réversibilité : capacité à récupérer et à porter ses données hors du service du prestataire, à formaliser dans le contrat.
+
+COURS DÉTAILLÉ.
+
+I. DÉFINITIONS ET MODÈLES.
+
+   A. Définition.
+
+      De façon schématique, le cloud computing, ou informatique en nuage, désigne le déport vers Internet de données, d'applications et de services auparavant situés sur les ordinateurs des entreprises ou des particuliers. Face à la multitude de définitions, on s'appuie sur les critères du National Institute of Standards and Technology américain : simplicité d'un service à la demande, extrême flexibilité, accès léger, virtualisation des ressources et paiement à l'usage. Le cloud computing est considéré comme une rupture technologique majeure.
+
+   B. La troisième révolution des plates-formes.
+
+      Au niveau de la gestion des plates-formes, le cloud computing est vu comme la troisième révolution. La première est l'informatique traditionnelle et centralisée des grands systèmes et des terminaux passifs. La deuxième est l'informatique personnelle, avec l'évolution des réseaux, réseaux locaux et Internet, et les architectures client-serveur. La troisième est l'informatique en nuage, plate-forme industrielle intégrant les réseaux sociaux, la mobilité et les caractéristiques du cloud computing.
+
+   C. Les trois modèles de services.
+
+      On distingue trois modèles. Le SaaS, Software as a Service, est la fourniture de logiciel en ligne ; apparu dans les années deux mille, il prend la suite du service ASP et offre une informatique applicative standardisée, outils collaboratifs, gestion de la relation client, forces de vente, comptabilité, gestion, trésorerie. L'IaaS, Infrastructure as a Service, est la fourniture d'infrastructures de calcul et de stockage en ligne. Le PaaS, Platform as a Service, est la fourniture d'une plateforme de développement d'applications en ligne. Le PaaS et l'IaaS sont des solutions très techniques, tandis que le SaaS est davantage destiné aux métiers de l'entreprise.
+
+   D. Les modèles de déploiement.
+
+      Chaque modèle de service peut exister dans un environnement public, interne ou privé. Le cloud public est l'accès à un service mutualisé hébergé chez un fournisseur. Le cloud interne est le déploiement en interne d'un service géré par l'entreprise ; il n'apporte pas d'innovation majeure car il se limite à la mutualisation et à la virtualisation des ressources internes. Le cloud privé, ou hybride, est le déploiement en interne d'une version privatisée du service, toujours gérée à distance par le fournisseur, ou la mise à disposition d'un centre de données privé exploité pour l'entreprise par un tiers. Apparaît aussi la notion de cloud communautaire, cloud privé partagé plus largement, mutualisé par plusieurs organisations d'un même secteur économique.
+
+II. CLOUD ET ORGANISATIONS.
+
+   A. Les questions posées.
+
+      Le cloud computing pose de nombreuses questions aux entreprises : sécurité, localisation des données, auditabilité, gestion des licences, gestion du changement, modalités de mise en œuvre, pré-requis, impact budgétaire. Certains gouvernements ont légiféré : le Safe Harbor Agreement prévoit de protéger les données européennes hébergées chez des fournisseurs américains mais est rendu inopérant par le Patriot Act ; l'autorité norvégienne a interdit l'utilisation de Google Docs dans plusieurs cas, notamment pour des données à caractère personnel ; l'autorité danoise l'a interdit pour des données sensibles.
+
+   B. Adoption et choix.
+
+      Selon une analyse d'IDC et HP de juin deux mille douze, avec quatre-vingt-treize pour cent des entreprises françaises connaissant, évaluant ou ayant mis en place des services cloud, la France est le pays d'Europe où la pénétration du cloud computing est la plus forte dans la stratégie informatique des entreprises. Les organisations choisissent le cloud privé lorsqu'elles ont des besoins de confidentialité, ou par volonté de garder la main sur l'infrastructure, voire par rejet du cloud public.
+
+III. LES PRINCIPES DE MISE EN ŒUVRE.
+
+   A. Un projet d'entreprise.
+
+      La plupart des entreprises ont mis en œuvre des services cloud, essentiellement du SaaS, de façon opportuniste, sans réflexion stratégique globale intégrant l'ensemble des composantes de l'organisation, y compris la direction générale. La démarche vers le cloud est un vrai projet d'entreprise qui doit se concevoir, se piloter, se mettre en œuvre et s'accompagner comme tout projet de système d'information ; les phases classiques de mise en œuvre, telles que présentées par des opérateurs comme Microsoft, HP ou SFR, sont représentées à l'identique.
+
+   B. Recommandations.
+
+      La mise en œuvre induit de redéfinir les rôles et responsabilités des acteurs ; la CNIL a engagé une réflexion sur les notions de client et de prestataire et suggère un partage des responsabilités. Les principales recommandations sont : identifier clairement les données et traitements qui passeront dans le cloud, confidentialité, interfaçage, réglementation ; définir ses propres exigences de sécurité technique et juridique ; conduire une analyse de risques pour identifier les mesures essentielles, perte de gouvernance, dépendance technologique au fournisseur, failles dans la gestion des données ou dans la chaîne de sous-traitance, gestion des droits d'accès, non-conformité réglementaire ; identifier le type de cloud pertinent, SaaS, IaaS, PaaS, public, privé, hybride ; choisir un prestataire présentant des garanties suffisantes, qualification juridique, niveau de protection des données ; élaborer un contrat de prestation détaillé.
+
+      Le contrat reprend des clauses sur les informations relatives aux traitements, respect des principes français de protection des données personnelles, remontée des plaintes et failles, sous-traitance, respect des droits des personnes ; les garanties du prestataire, durée de conservation limitée, destruction ou restitution des données, coopération avec les autorités, audits ; la localisation et les transferts, indication claire des pays hébergeant les serveurs, protection adéquate à l'étranger, limitation des transferts aux pays tiers assurant un niveau adéquat, information du client en cas de requête d'une autorité étrangère ; les formalités auprès de la CNIL ; la sécurité et la confidentialité, politique de sécurité, certification, réversibilité et portabilité des données, traçabilité, continuité de service, sauvegardes, engagements de niveau de service. Il faut enfin revoir la politique de sécurité interne et surveiller les évolutions dans le temps.
+
+IV. LES IMPACTS SUR LA DIRECTION DES SYSTÈMES D'INFORMATION.
+
+   A. Impacts sur les compétences.
+
+      Le cloud computing impacte le fonctionnement et le rôle des services informatiques, en externalisant l'infrastructure et en imposant de nouvelles compétences techniques liées à l'interfaçage des solutions cloud avec l'existant. Ces impacts sont moins transversaux que ceux du SaaS, qui bouleverse probablement les relations de la direction des systèmes d'information avec son environnement. Le curseur des compétences se déplace : sont renforcées la veille et l'expertise cloud, le management de projet et l'assistance à maîtrise d'ouvrage, l'architecture et l'urbanisation, le pilotage de contrat ; sont délaissés le développement, hors interfaçages, la recette et la gestion d'infrastructure. Cette transformation s'opère progressivement, l'externalisation vers le cloud n'étant ni instantanée ni complète, le marché tendant surtout à tester les apports fonctionnels du cloud.
+
+   B. Impacts budgétaires.
+
+      La démarche modifie la structure classique du budget en réduisant les dépenses d'investissement de capital, CAPEX, au profit des dépenses de fonctionnement ou d'exploitation, OPEX.
+
+POINTS D'ATTENTION.
+
+      Le cloud selon le NIST : service à la demande, extrême flexibilité, accès léger, virtualisation des ressources, paiement à l'usage.
+
+      Trois modèles de services : SaaS pour les métiers, IaaS et PaaS très techniques ; trois modèles de déploiement : public, interne, privé ou hybride, plus le cloud communautaire.
+
+      Le cloud interne n'est qu'une mutualisation et virtualisation des ressources internes, sans innovation majeure.
+
+      Le Safe Harbor Agreement, censé protéger les données européennes chez des fournisseurs américains, est rendu inopérant par le Patriot Act.
+
+      La démarche vers le cloud est un vrai projet d'entreprise, à ne pas mener de façon opportuniste ; la CNIL cadre le partage de responsabilité entre client et prestataire.
+
+      Recommandations : identifier données et traitements, définir ses exigences, analyse de risques, choix du type de cloud, choix d'un prestataire garanti, contrat détaillé, révision de la politique de sécurité.
+
+      Le cloud déplace les compétences de la direction des systèmes d'information vers la veille, l'architecture et le pilotage de contrat, au détriment du développement et de la gestion d'infrastructure.
+
+      Le cloud fait passer le budget du CAPEX vers l'OPEX.
+
+EXEMPLES CITES.
+
+      Définition de référence du National Institute of Standards and Technology américain.
+
+      Interdictions de Google Docs par les autorités norvégienne et danoise pour données personnelles ou sensibles.
+
+      Analyse IDC et HP de juin deux mille douze : quatre-vingt-treize pour cent des entreprises françaises concernées par le cloud, la France en tête de l'Europe.
+
+      Démarches de mise en œuvre présentées par Microsoft, HP et SFR ; réflexion de la CNIL sur les rôles de client et de prestataire.
+
+      Risques types : perte de gouvernance, dépendance technologique au fournisseur, failles dans la chaîne de sous-traitance, non-conformité réglementaire.

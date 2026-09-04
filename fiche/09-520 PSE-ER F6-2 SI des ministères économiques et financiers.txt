@@ -1,203 +1,231 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 6, thème 2
-LE SI DES MINISTÈRES ÉCONOMIQUES ET FINANCIERS (MEF)
-=======================================================================
+LE SYSTÈME D'INFORMATION DES MINISTÈRES ÉCONOMIQUES ET FINANCIERS.
 
-1. CONTEXTE INSTITUTIONNEL ET BUDGÉTAIRE
------------------------------------------------------------------------
-- Spécificité MEF : multiplicité et variété des missions -> autonomie
-  des directions.
-- LOLF (2001) : les directeurs de PROGRAMME sont responsables de la mise
-  en œuvre. Allocations budgétaires globalisées séparant SEULEMENT les
-  dépenses de personnel des autres -> FONGIBILITÉ ASYMÉTRIQUE
-  (redéploiement vers le personnel possible, pas l'inverse).
-  -> Un programme budgétaire par direction (incluant son SI). PAS de
-  programme support identifié aux MEF (contrairement à d'autres
-  ministères).
-- PAP (Projet Annuel de Performances) : budget prévisionnel, voté dans
-  la LOI DE FINANCES (dernier trimestre), plafonds pour N+1. Mentionne
-  effectifs, valorisation Titre 2, crédits Titre 3 (fonctionnement) et
-  Titre 5 (investissement).
-- RAP (Rapport Annuel de Performances) : bilan stratégique, réalisation
-  des objectifs/indicateurs, exécution des crédits, JUSTIFICATION AU
-  PREMIER EURO, analyse des coûts par action. Voté dans la LOI DE
-  RÈGLEMENT (fin du 1er semestre), exécution de N-1.
-  -> les ressources du RAP ne peuvent EXCÉDER celles du PAP.
-- À partir de 2015, le programme 221 (surtout CHORUS) devient une action
-  du programme 218.
-- MEF : ~145 000 agents (31/12/2014), 13 Md€ de crédits de paiement.
-- Directions à SERVICES DÉCONCENTRÉS : DGFiP, DGDDI, INSEE, DGCCRF, DG
-  Trésor, DGE. Directions D'ÉTAT-MAJOR : DB, SG, IGF, CGEFI, CGEIET,
-  CBCM, TRACFIN, AIFE.
-- DSI (Délégation aux Systèmes d'Information) auprès du secrétaire
-  général : impulsion, coordination, mutualisation -> rôle de « DSI
-  groupe » ; relations avec la CNIL ; représentation dans l'inter-
-  ministériel. Décret n° 2010-444 du 30 avril 2010.
+LEXIQUE COMPLET.
 
-2. HISTORIQUE
------------------------------------------------------------------------
-- Avant 2000 : informatique de production, mainframes, centres
-  d'exploitation régionalisés (Impôts, Trésor public), « en silo », peu
-  communicante, internalisée, peu documentée.
-- Charnière an 2000 : téléprocédures, dématérialisation, simplification
-  pour l'usager, outils collaboratifs internet, suppression des ruptures
-  du SI interne.
-- 2000-2010 : grands PROGRAMMES de transformation organisationnelle —
-  COPERNIC, HELIOS, SIRHIUS, DELTA (ministériels) ; CHORUS, ONP
-  (interministériels). Gains surtout par économies d'emplois.
-- PROGICIELS intégrés : PeopleSoft (ACCORD), SAP (CHORUS), HR Access
-  (SIRHIUS). Risques : dépendance aux prestataires, couple
-  éditeur-intégrateur, absence de version « publique ».
-- Dématérialisation : télé-déclaration des revenus (12,8 M / 34 M foyers
-  en 2012, 14,6 M en 2015) ; immobilisation des marchandises via Delt@
-  13 min (2004) -> 6 min (2011) -> 4 min (2014) ; ~80 % des
-  télé-déclarations/règlements TVA. Poste + intranet pour chaque agent
-  dès 2002.
-- Virage du numérique : effacement des limites de géographie/temps,
-  mobilité, multi-canal, BYOD, instantanéité ; ouverture des SI (notaires
-  -> publicité foncière et cadastre). Fraudes fiscales + sociales
-  ~13 Md€ -> DLNUF (« Dites-Le Nous Une seule Fois »).
-- data.gouv.fr ouvert décembre 2011 (300 000 fichiers). INSEE = premier
-  contributeur d'ETALAB. Big data : INSEE exploite les données des
-  caisses de la grande distribution pour l'indice des prix (dès 2016).
-- Management « ORGANIQUE » en réseau (non hiérarchique) : ne repose plus
-  sur la détention de l'information mais sur la capacité à la relayer,
-  l'interpréter, lui donner du sens.
+      LOLF : Nouvelle loi organique relative aux lois de finances de deux mille un, qui rend les directeurs de programme responsables de la mise en œuvre des programmes d'action publique et instaure la fongibilité asymétrique.
 
-3. SCHÉMAS DIRECTEURS
------------------------------------------------------------------------
-- Décret 86-1301 du 22 décembre 1986 : schéma directeur de
-  l'informatique, de la bureautique et des réseaux, sous la
-  responsabilité du MINISTRE ; bilan d'exécution annuel ; présenté au
-  CIIBA.
-- Circulaire du 16 septembre 1996 : constat d'une informatique en silo ;
-  impose un schéma directeur PLURIANNUEL en 3 VOLETS — STRATÉGIQUE
-  (Ministre), ORGANISATIONNEL (relations entre services), TECHNIQUE
-  (choix retenus).
-- Les MEF n'ont PAS produit un schéma directeur unique (la partie métier
-  reste des directions) ; chaque direction produit sa trajectoire /
-  feuille de route.
-- SIM (Schéma Informatique Ministériel), décidé par le ministre en 2001,
-  support de « l'e-ministère » : simplifier la relation à l'usager,
-  moderniser l'environnement de travail de l'agent, accroître
-  l'efficacité de l'action de l'État.
-  * 3 axes : répondre aux nouvelles attentes des usagers ; travailler
-    plus efficacement ; mieux anticiper.
-  * Mise en œuvre par le COMITÉ DES TIC (sous-directeurs informatiques).
-  * 3 chantiers : cadre technique commun ; démarche applicative commune
-    SIRH ; mutualisation des expertises et compétences.
-  * Résultats : 1er objectif atteint mi-2002 (poste + messagerie +
-    intranet ALIZE + internet) ; charte d'utilisation des TIC (2e
-    semestre 2002) ; OpenOffice à la DGDDI ; première IGC ministérielle ;
-    convergence des SIRH.
-  * La démarche SIM s'efface après 2003 (montée de l'interministériel).
-- Palier de MATURITÉ 1 (livré février 2011, actualisé février 2012) :
-  maturité du SI selon 10 COMPOSANTES + fiches actions.
-- CONTRATS DE PROGRÈS signés en juin 2013.
-- Le schéma directeur est jugé TROP LOURD (document formalisé et
-  littéraire, circuits de validation, projection à 5 ans difficile,
-  actualisation régulière).
-- Décret n° 2014-879 du 1er août 2014 : chaque ministre établit un PLAN
-  D'INVESTISSEMENT SIC transmis pour information au DISIC ; projets
-  > 9 M€ -> avis conforme.
+      Fongibilité asymétrique : principe budgétaire séparant uniquement les dépenses de personnel des autres dépenses de fonctionnement et d'investissement, les crédits de personnel pouvant abonder les autres mais non l'inverse.
 
-4. LE RÔLE PARTICULIER DE LA DSI
------------------------------------------------------------------------
-- CIIBA créé en 1981 ; aux MEF, commission CDIB (contrôle des dépenses
-  informatiques) puis Délégation aux Systèmes d'Information (début des
-  années 90). La DSI a favorisé TEDECO (protocole EDI, norme
-  expérimentale française Z 71-347).
-- Service des systèmes d'information rattaché au SG créé fin juillet 2006
-  (suppression de la DSI, du chef de service TIC, de la MEN).
-- DSI organisée en 3 PÔLES :
-  * animation et synthèse du SI ministériel (cohérence, relations avec
-    les partenaires : administration électronique, CNIL, DGAFP) ;
-  * coordination des technologies de l'information (ToIP, réseaux,
-    sécurité) ;
-  * convergence des SIRH des directions (SIRHIUS).
-- ~17-20 ETP. COSTRAT SI (Comité stratégique des SI) créé par arrêté du
-  23 décembre 2013, présidé par le directeur de cabinet du ministre,
-  1re réunion le 13 février 2014.
+      Programme budgétaire : unité de crédits couvrant, pour chaque direction des ministères économiques et financiers, ses ressources humaines et budgétaires dont celles du système d'information, sans programme support identifié pour les fonctions support.
 
-5. RESSOURCES FINANCIÈRES SI
------------------------------------------------------------------------
-- Modèle de coûts DISIC (depuis 2012) : RESSOURCES – ACTIVITÉS –
-  SERVICES.
-  * Ressources : ce que la DSI mobilise (nature de la dépense).
-  * Activités : ce que la DSI réalise (projets, maintenance).
-  * Services : ce que la DSI délivre (services du catalogue).
-  * 3 niveaux de maille : grosse (tous ministères), moyenne (ambition
-    interministérielle), fine (par ministère).
-- Fiabiliser l'imputation comptable par des arbres de décision univoques
-  partagés métiers / comptables.
-- Dépense SI : BAISSE de ~42 % en moyenne depuis 2008 (fin de projets
-  COPERNIC, CHORUS ; marchés baissiers). Restitution fiable depuis 2012
-  (crédits de paiement via CHORUS).
-- Postes principaux : INFRASTRUCTURES 37 %, APPLICATIFS MÉTIER 32 %,
-  bureautique 20 % (2014).
-- Budget SI triennal 2015-2017 (CP) : ~382 M€ / 357 M€ / 350 M€.
+      PAP : Projet annuel de performances, forme de budget prévisionnel voté par le Parlement dans la loi de finances au dernier trimestre, intégrant les plafonds d'autorisation budgétaire pour l'année à venir.
 
-6. RESSOURCES HUMAINES SI
------------------------------------------------------------------------
-- Cartographies interministérielles 2011 et 2012. Enquête DISIC :
-  23 000 agents SI (hors militaires et opérateurs), 69 corps concernés,
-  ~10 % de contractuels en moyenne. Approche 2014 inspirée du référentiel
-  CIGREF 2011.
-- MEF : peu de contractuels (DGFiP, AIFE surtout), ressources internes
-  importantes avec qualification informatique.
-- 3 grandes compétences des titulaires (~29 % chacune) : études et
-  développement ; exploitation production ; assistance utilisateurs.
-- Cadre juridique RH SI : décrets de février 1971 toilettés en 1980.
-  Refonte du concours des ingénieurs SIC du ministère de l'Intérieur
-  (bac +5) -> recrutement ouvert aux autres ministères fin 2015.
-- PFR (Prime de Fonctions et de Résultats) -> remplacée en 2016 par le
-  RIFSEEP (Régime Indemnitaire tenant compte des Fonctions, des
-  Sujétions, de l'expertise et de l'Engagement Professionnel).
-- SILL (socle interministériel de logiciels libres) conçu par les
-  groupes MIMx : MIMO (poste de travail et gestion de parc), MIMDEV
-  (développement), MIMPROD (serveur et base de données). SILL annuel.
+      RAP : Rapport annuel de performances, voté dans la loi de règlement à la fin du premier semestre, présentant le bilan stratégique, la réalisation des objectifs, l'exécution des crédits et la justification au premier euro, portant sur l'exercice écoulé.
 
-7. QUELQUES ÉLÉMENTS PAR DIRECTION
------------------------------------------------------------------------
-- DGFiP : ~5 000 ETP internes, budget 212 M€ 2014 (hors T2). Service SI
-  central (SI1 Études, SI2 Production) ; 9 DISI (directions
-  inter-régionales) ; 47 ESI (établissements = ex-CRI de la DGI + ex-
-  départements informatiques de la DGCP). PSI 2011-2013 en 4 axes.
-- DGDDI : 500 ETP, budget 41 M€ 2014. Sous-Direction C (C1 AMOA, C2
-  infrastructure, C3 budget) ; 2 centres : CID (Osny) et DNSCE
-  (Toulouse). Dématérialisation du dédouanement 86 % ; immobilisation
-  moyenne 4 min (2014). Portage administratif/financier du projet
-  interministériel API-PNR (Passenger Name Record), sous l'autorité du
-  Premier ministre, cofinancé par l'UE.
-- INSEE : ~630 agents (plan vers 500), budget 20 M€ 2014. Secrétariat
-  Général Informatique (DPA Projets et Applications, DPII Production et
-  infrastructures) ; 4 Centres Nationaux Informatique (Metz -> toute la
-  production). Schéma Directeur SI 2011-2015 ; projet HOMERE (télé-
-  service de recensement).
-- DGCCRF : SICCRF (SCN), ~70-80 ETP, budget 1,9 M€ 2014 ; 3 centres
-  (Paris, Lyon dev, Montpellier technique).
-- SG-SEP : SG SEP1 (Service de l'Environnement Professionnel –
-  Informatique), ~250 agents, budget 27,4 M€ 2014. Passerelle de
-  l'administration centrale vers l'extérieur, gestion de l'intranet
-  ALIZE, animation du réseau des GRID.
-- DG Trésor : service central + réseau des missions économiques à
-  l'étranger, budget 2,7 M€ 2014.
-- AIFE : 154 internes + 58 contractuels + 207 prestataires, budget
-  63 M€ 2014. Porte CHORUS (SI financière, budgétaire et comptable de
-  l'État, support de la LOLF, sur SAP ; déploiement achevé début 2012 ;
-  crédits 2006-2015 ~898 M€). CPP = CHORUS Portail Pro.
+      Titre 2 : catégorie budgétaire des dépenses de personnel.
 
-=======================================================================
-À RETENIR
-- LOLF -> fongibilité asymétrique ; PAP (loi de Finances, N+1) / RAP
-  (loi de Règlement, N-1, RAP <= PAP).
-- MEF : ~145 000 agents, 13 Md€ ; DSI = « DSI groupe » (3 pôles :
-  synthèse SI / technologies / SIRH), relations CNIL.
-- Schéma directeur : décret 1986 (au ministre, CIIBA) ; circulaire 1996
-  (3 volets stratégique / organisationnel / technique) ; SIM 2001
-  (e-ministère, ALIZE).
-- Progiciels : ACCORD = PeopleSoft, CHORUS = SAP (AIFE), SIRHIUS = HR
-  Access.
-- Coûts DISIC : modèle ressources / activités / services ; dépense SI
-  -42 % depuis 2008 (infra 37 %, applis métier 32 %).
-- GRID = gestionnaires des ressources informatiques déconcentrées ;
-  SILL par MIMO / MIMDEV / MIMPROD.
+      Titre 3 : catégorie budgétaire des dépenses de fonctionnement.
+
+      Titre 5 : catégorie budgétaire des dépenses d'investissement.
+
+      DSI : Délégation aux systèmes d'information auprès du secrétaire général, jouant le rôle d'une direction des systèmes d'information de groupe, avec un rôle d'impulsion, de coordination et de mutualisation.
+
+      Directions à services déconcentrés : DGFiP, DGDDI, INSEE, DGCCRF, DG Trésor et DGE.
+
+      Directions d'état-major : Direction du budget, secrétariat général, Inspection générale des finances, contrôle général économique et financier, TRACFIN, AIFE.
+
+      COPERNIC : programme de refonte du système d'information fiscal, exemple de grand programme de transformation des années deux mille.
+
+      HELIOS : programme de refonte du système d'information comptable des collectivités locales.
+
+      CHORUS : progiciel de gestion intégré interministériel du système d'information budgétaire et comptable de l'État, fondé sur SAP, support de la LOLF, déploiement achevé début deux mille douze, porté par l'AIFE.
+
+      SIRHIUS : programme ministériel de convergence des systèmes d'information des ressources humaines, fondé sur HR Access, devenant l'application maître de gestion administrative et de paye pour plusieurs directions.
+
+      ONP : Opérateur national de paye, programme interministériel de refonte du système d'information de la paye de l'État, réorienté en deux mille quatorze.
+
+      DELTA : téléservice de dédouanement de la DGDDI, réduisant le délai d'immobilisation des marchandises de treize minutes en deux mille quatre à quatre minutes en deux mille quatorze.
+
+      ALIZE : intranet des ministères économiques et financiers.
+
+      BYOD : Bring Your Own Device, connexion des équipements personnels au système d'information professionnel.
+
+      DLNUF : dispositif « dites-le-nous une fois », visant à ne demander qu'une seule fois une information à l'usager.
+
+      Open data : ouverture des données publiques, avec le portail data.gouv.fr ouvert en décembre deux mille onze, l'INSEE étant le premier contributeur de la plate-forme Etalab.
+
+      Big data : notion encore mal définie, illustrée par l'exploitation par l'INSEE des données des caisses de la grande distribution pour enrichir le calcul de l'indice des prix à la consommation à partir de deux mille seize.
+
+      Schéma directeur informatique : document pluriannuel prévu par le décret du vingt-deux décembre mille neuf cent quatre-vingt-six, révisé par la circulaire du seize septembre mille neuf cent quatre-vingt-seize en trois volets, stratégique, organisationnel et technique.
+
+      CIIBA : Comité interministériel de l'informatique et de la bureautique dans l'administration, créé en mille neuf cent quatre-vingt-un, devant lequel les schémas directeurs étaient présentés.
+
+      SIM : Schéma informatique ministériel, décidé en deux mille un, document commun aux directions pour la politique de l'e-ministère, autour de trois axes, répondre aux attentes des usagers, travailler plus efficacement et mieux anticiper.
+
+      Palier de maturité 1 : exercice mené par la DGME puis la DISIC, analysant la maturité du système d'information selon dix composantes avec des fiches actions ministérielles et directionnelles.
+
+      Contrat de progrès : engagement entre la DISIC et le ministère sur la mise sous contrôle du système d'information, signé en juin deux mille treize.
+
+      COSTRAT SI : Comité stratégique des systèmes d'information des ministères économiques et financiers, créé par arrêté du vingt-trois décembre deux mille treize, présidé par le directeur de cabinet, clé de voûte de la gouvernance ministérielle.
+
+      CDIB : commission ministérielle chargée principalement de contrôler les dépenses informatiques, bureautiques et réseaux, à laquelle la Délégation aux systèmes d'information a succédé au début des années quatre-vingt-dix.
+
+      Modèle ressources, activités, services : modèle de coûts partagé adopté par la DISIC depuis deux mille douze, articulé autour de trois axes d'imputation, ce que la direction des systèmes d'information mobilise, réalise et délivre.
+
+      Référentiel CIGREF : référentiel de macro-compétences de deux mille onze, servant de base à l'exercice de cartographie des ressources humaines des systèmes d'information relancé en deux mille quatorze.
+
+      GRID : gestionnaires de ressources informatiques déconcentrées, réseau d'agents assurant l'assistance aux utilisateurs dans les directions.
+
+      RIFSEEP : Régime indemnitaire tenant compte des fonctions, des sujétions, de l'expertise et de l'engagement professionnel, qui remplace en deux mille seize la prime de fonctions et de résultats.
+
+      SILL : socle interministériel de logiciels libres, annuel, identifiant pour chaque fonctionnalité du poste de travail une solution libre privilégiée et une entité référente, conçu par les groupes thématiques MIMO, MIMDEV et MIMPROD.
+
+      RGAA : Référentiel général d'accessibilité pour les administrations, dont la DSI suit la refonte et le label administration numérique accessible.
+
+      SCN : service à compétence nationale, structure dédiée à la réalisation d'un grand projet interministériel, comme pour CHORUS ou l'ONP.
+
+      DISI : directions interrégionales des systèmes d'information de la DGFiP, au nombre de neuf, avec quarante-sept établissements de services informatiques.
+
+      PNR : Passenger Name Record, projet interministériel de plateforme des données des passagers aériens à des fins de lutte contre le terrorisme, cofinancé par l'Union européenne, porté administrativement par la DGDDI.
+
+COURS DÉTAILLÉ.
+
+I. LE CONTEXTE MINISTÉRIEL.
+
+   A. Spécificité et contexte budgétaire.
+
+      La spécificité des ministères économiques et financiers réside dans la multiplicité et la variété des missions des directions, qui conduit à une véritable autonomie de ces dernières. La LOLF de deux mille un rend les directeurs de programme responsables de la mise en œuvre des programmes d'action publique et instaure la fongibilité asymétrique, qui ne sépare que les dépenses de personnel des autres dépenses ; il en résulte un programme budgétaire spécifique par direction couvrant ses ressources humaines et budgétaires, dont le système d'information, sans programme support pour les fonctions support, à la différence d'autres ministères. À partir de deux mille quinze, le programme 221, principalement CHORUS, disparaît et devient une action du programme 218.
+
+      Le Projet annuel de performances présente les faits marquants et la réflexion stratégique ; il mentionne, par programme, les effectifs, leur valorisation en titre 2 et les crédits de fonctionnement en titre 3 et d'investissement en titre 5. Voté au dernier trimestre dans la loi de finances, il intègre les plafonds pour l'année à venir. Le Rapport annuel de performances comprend le bilan stratégique, la réalisation des objectifs, l'exécution des crédits et la justification au premier euro commentant les écarts, ainsi qu'une analyse des coûts par action. Voté à la fin du premier semestre dans la loi de règlement, il porte sur l'exercice écoulé ; il est ainsi possible, six mois après la réalisation, de comparer les valeurs aux prévisions faites près de deux ans avant, les ressources du rapport ne pouvant excéder celles du projet.
+
+   B. Chiffres et organisation.
+
+      Les ministères économiques et financiers comptent cent quarante-cinq mille agents et treize milliards d'euros de crédits de paiement, avec des directions à services déconcentrés, DGFiP, DGDDI, INSEE, DGCCRF, DG Trésor et DGE, et des directions d'état-major. Une réorganisation du secrétariat général a été effectuée fin avril deux mille dix pour renforcer le pilotage et la coordination des politiques ministérielles. La Délégation aux systèmes d'information auprès du secrétaire général a un rôle d'impulsion, de coordination et de mutualisation, jouant le rôle d'une direction des systèmes d'information de groupe comme dans les grandes entreprises ; la majorité des actions de la DISIC au plan interministériel ont des répercussions ministérielles dont elle assure la coordination.
+
+II. L'HISTORIQUE DES SYSTÈMES D'INFORMATION MINISTÉRIELS.
+
+   A. Avant deux mille.
+
+      Le système d'information reposait sur une informatique de production, dépenses essentiellement d'infrastructure, grands systèmes et bureautique, centres d'exploitation régionalisés aux Impôts et au Trésor public. C'était une informatique cloisonnée, en silo, peu communicante et peu ouverte, à grande inertie, quasi exclusivement internalisée et peu documentée.
+
+   B. Les années deux mille-deux mille dix.
+
+      L'an deux mille marque une montée en puissance des enjeux de la société de l'information : émergence des téléprocédures et de la dématérialisation, simplification pour l'usager, appropriation des outils collaboratifs de l'internet et suppression progressive des ruptures du système d'information interne par nationalisation des applications et concentration des infrastructures. Les grands projets ne sont plus de simples projets informatiques mais des programmes de transformation organisationnelle de très grande ampleur, COPERNIC, HELIOS, SIRHIUS, DELTA, dont certains interministériels comme CHORUS et l'ONP, la plupart des gains provenant des économies d'emplois. Ils reposent souvent sur des progiciels intégrés, PeopleSoft pour ACCORD, SAP pour CHORUS, HR Access pour SIRHIUS, avec les ambiguïtés du couple éditeur-intégrateur, du choix entre développements standard et spécifiques et du risque de dépendance aux prestataires. La démarche de dématérialisation se généralise pour les déclarations fiscales, douanières et de recensement, le recouvrement, les contrôles et les téléservices ; la télédéclaration des revenus concerne douze virgule huit millions des trente-quatre millions de foyers fiscaux en deux mille douze, quatorze virgule six millions en deux mille quinze, et l'on obtient quatre-vingts pour cent de télédéclarations et télérèglements de TVA. Cette démarche impose de lever des limites juridiques comme la signature et l'archivage, d'améliorer l'accessibilité et de maintenir des contacts au guichet pour les publics fragiles.
+
+   C. Le virage du numérique.
+
+      L'administration est confrontée au virage du numérique, révolution technologique et sociale. L'effacement des limites de géographie et de temps rend la mobilité nécessaire, avec une approche multicanal, l'accès à distance, le télétravail et le BYOD, l'estompement de la frontière entre vie professionnelle et vie privée et l'exigence d'instantanéité. L'ouverture des systèmes d'information ministériels vers leur environnement se traduit par l'accès partiel de certaines professions, notaires pour la publicité foncière et le cadastre, la mise à jour directe de certaines données par les usagers et la sollicitation des internautes pour l'élaboration de textes. Les grands chantiers liés aux données répondent à des contraintes nouvelles, multiplication des échanges entre administrations, vision unifiée des personnes, lutte contre la fraude estimée à treize milliards d'euros, dispositif « dites-le-nous une fois », regard extérieur critique lié à l'ouverture des données publiques et meilleure utilisation des données de gestion pour l'aide à la décision. L'ouverture des données publiques fait partie de la modernisation de l'action publique, avec le portail data.gouv.fr et trois cent mille fichiers à l'ouverture, l'INSEE étant le premier contributeur d'Etalab. Le big data reste mal défini, illustré par l'exploitation par l'INSEE des données des caisses de la grande distribution pour l'indice des prix à partir de deux mille seize. Les missions des administrations financières se repositionnent vers des tâches à plus forte valeur ajoutée, conception, contrôles complexes, conseil, à mesure que la gestion courante s'automatise. Le management est à réinventer sur un modèle organique en réseau plutôt que hiérarchique ; les nouvelles technologies fonctionnent par communautés qui se dotent de méthodes et d'outils, plateformes collaboratives, réseaux sociaux, événements ouverts, laboratoires d'idées, le management reposant non plus sur la détention de l'information mais sur la capacité à la relayer et à lui donner du sens.
+
+III. LES SCHÉMAS DIRECTEURS DES SYSTÈMES D'INFORMATION MINISTÉRIELS.
+
+   A. Le cadre réglementaire.
+
+      Le décret du vingt-deux décembre mille neuf cent quatre-vingt-six impose un schéma directeur de l'informatique, de la bureautique et des réseaux de communication sous la responsabilité du ministre, avec un bilan d'exécution annuel et une éventuelle révision, couvrant les services centraux et extérieurs et présenté au CIIBA. Il comprend les objectifs, un plan de développement, les programmes de recrutement et de formation et une analyse des coûts et avantages, et prend en compte le respect des normes, l'ouverture à la concurrence, la sécurité et la protection des libertés individuelles. La circulaire du seize septembre mille neuf cent quatre-vingt-seize constate une informatique en silo reproduisant les schémas organisationnels et impose un schéma directeur pluriannuel porté au plus haut niveau, construit autour de trois volets, stratégique au niveau du ministre, organisationnel sur les relations entre services, et technique sur les choix retenus.
+
+      Les ministères économiques et financiers n'ont pas produit un tel schéma, la partie métiers relevant des directions, sauf pour les fonctions support et les applicatifs transverses ; chaque direction a produit une trajectoire à moyen terme. Seule une tentative au début des années deux mille a rassemblé des préoccupations sur un cadre général.
+
+   B. Le schéma informatique ministériel.
+
+      Dès deux mille deux, le ministère s'engage dans la voie de l'e-ministère, avec pour objectifs de simplifier la relation avec l'usager, moderniser l'environnement de travail de l'agent et accroître l'efficacité de l'action de l'État, un objectif opérationnel affiché étant de doter chaque agent d'un micro-ordinateur, d'une messagerie et d'un accès à l'intranet. Le schéma informatique ministériel, décidé en deux mille un, est le document commun aux directions, autour de trois axes, répondre aux attentes des usagers par l'accessibilité, la personnalisation et la sécurisation des échanges, travailler plus efficacement par l'accès généralisé à l'intranet et le travail en réseau, et mieux anticiper par le renouvellement des systèmes de gestion budgétaire et de ressources humaines. Il distingue les domaines d'intervention, coordination des téléprocédures, bouquets de services aux agents dont l'intranet ALIZE, fonctions pluridirectionnelles, parties ministérielles des ressources humaines et des finances, et pilotage. Sa mise en œuvre stratégique relève du comité des technologies de l'information et de la communication réunissant les sous-directeurs informatiques.
+
+      Le schéma a identifié trois chantiers, la construction d'un cadre technique commun, l'adoption d'une démarche applicative commune en matière de systèmes d'information des ressources humaines, et la mutualisation des expertises et compétences stratégiques. Après deux mille trois, la démarche a cessé progressivement de faire référence, du fait de la montée de la démarche interministérielle et de la complexité du pilotage, mais elle a produit des résultats positifs, dotation de chaque agent d'un poste ouvert sur la messagerie et l'intranet dès mi-deux mille deux, charte d'utilisation des technologies de l'information et de la communication, savoir-faire autour du logiciel libre OpenOffice déployé à la DGDDI, première infrastructure à gestion de clés ministérielle avec des infrastructures filles, et lancement de la convergence des systèmes d'information des ressources humaines.
+
+   C. Du palier de maturité au plan d'investissement.
+
+      Les prévisions de schémas directeurs pour plusieurs directions ne se sont pas concrétisées, l'exercice du palier de maturité 1, livré en février deux mille onze puis actualisé en février deux mille douze, et les contrats de progrès signés en juin deux mille treize s'y étant substitués. L'exercice du palier de maturité 1 analyse la maturité du système d'information selon dix composantes, chaque item donnant lieu à la désignation d'un responsable ministériel ou directionnel avec une échéance. L'exercice du schéma directeur est jugé trop lourd, exigeant un document formalisé et littéraire, des circuits de relecture importants, et la projection à cinq ans reste difficile faute de visibilité. Le décret du premier août deux mille quatorze prévoit désormais que chaque ministre établit un plan d'investissement transmis pour information au directeur interministériel, les projets dépassant un seuil de coût étant soumis pour avis conforme.
+
+IV. LE RÔLE PARTICULIER DE LA DÉLÉGATION AUX SYSTÈMES D'INFORMATION.
+
+   A. Historique et missions.
+
+      À côté du CIIBA créé en mille neuf cent quatre-vingt-un, des commissions ministérielles ont été mises en place, dont la CDIB aux ministères économiques et financiers, chargée de contrôler les dépenses informatiques ; la Délégation aux systèmes d'information lui a succédé au début des années quatre-vingt-dix, prenant en charge les relations avec la CNIL et favorisant les téléprocédures. Le Service des systèmes d'information, rattaché au secrétaire général, est créé fin juillet deux mille six, entraînant la suppression de plusieurs structures et une simplification administrative. Le service est organisé en trois pôles : animation et synthèse du système d'information ministériel, coordination des technologies de l'information, et convergence des systèmes d'information des ressources humaines, SIRHIUS.
+
+      Le décret du trente avril deux mille dix précise que le secrétaire général veille à la coordination et à la convergence des systèmes d'information des directions et impulse une gouvernance ministérielle ; l'arrêté du même jour précise que la Délégation aux systèmes d'information veille à cette coordination, représente les ministères dans les instances interministérielles, notamment auprès de la CNIL, organise la remontée et l'analyse des informations prévisionnelles et de bilan, développe la mutualisation de l'expertise, pilote des projets structurants de convergence et coordonne la politique de sécurité relative aux téléprocédures. La délégation compte une vingtaine d'agents issus de toutes les directions.
+
+   B. La gouvernance et les chantiers.
+
+      L'année deux mille quatorze a marqué un déblocage dans les relations avec les directions, la réunion mensuelle des responsables des systèmes d'information devenant l'organe de décision, accélération liée à la création du Comité stratégique des systèmes d'information par arrêté du vingt-trois décembre deux mille treize, clé de voûte de la gouvernance, au positionnement de la délégation comme responsable de la préparation des arbitrages du triennal deux mille quinze-deux mille dix-sept et à la dialectique entre gouvernance ministérielle et interministérielle renforcée par le décret du premier août deux mille quatorze et la circulaire du vingt janvier deux mille quinze. La délégation dispose d'un effectif théorique de dix-sept équivalents temps plein.
+
+      Elle assure l'animation et la synthèse du système d'information ministériel, le suivi du contrat de progrès dit palier 2, la dynamique d'ouverture des données publiques avec un chantier sur les mots-clés, la participation aux dynamiques interministérielles, la mutualisation des fonctions support et le secrétariat du comité stratégique, le suivi des coûts informatiques, les relations avec la CNIL avec quatre-vingt-onze dossiers en deux mille quatorze, les travaux sur les métiers, la coordination de la cartographie des ressources humaines des systèmes d'information et le plan d'action pour le recrutement. Elle mène l'animation transverse, suivi des grands projets CHORUS, SIRHIUS, ENSAP, et urbanisation du système d'information ministériel avec la cartographie de mille trois cents applications, coordonne la démarche MAREVA2 pour plusieurs projets, assure la maîtrise d'ouvrage de l'annuaire ANAÏS et de l'application IDFINANCES, coordonne les questions relatives au poste de travail et aux logiciels libres en co-animant le groupe MIMO du socle interministériel de logiciels libres, et suit l'accessibilité numérique, refonte du RGAA, label administration numérique accessible, accord-cadre Helen Keller pour équiper les postes des agents handicapés.
+
+   C. La maîtrise d'ouvrage du système d'information des ressources humaines.
+
+      La délégation assure la maîtrise d'ouvrage stratégique du programme SIRHIUS et participe au programme de modernisation RH-Paye de l'État, et mène le projet DIADEM de dématérialisation des dossiers individuels des agents. La construction de SIRHIUS version 1 s'est achevée avec la version 1.5 en novembre deux mille quatorze, l'application devenant maître de gestion administrative et de paye pour la DGCCRF, l'administration centrale, l'INSEE, la DGDDI et le ministère des affaires étrangères. La coordination des systèmes d'information des ressources humaines et de la paye est assurée par la direction de programme rattachée à la DISIC, la feuille de route des ministères économiques et financiers comportant quatre projets, SIRHIUS versions 1 et 2, DIADEM et l'urbanisation des infocentres.
+
+   D. La coordination des technologies de l'information.
+
+      La délégation optimise les infrastructures en cohérence avec la DISIC : projet de transformation des centres informatiques avec concentration des salles sur le centre d'Osny début deux mille seize, industrialisation de la production posant les bases d'un cloud ministériel, rationalisation des réseaux dans le cadre du RIE et du réseau d'interconnexion ministériel RIDIR, services mutualisés de visiocommunication et de messagerie collaborative, cadre de cohérence technique adopté par les directions, pilotage du projet de gestion sécurisée des terminaux mobiles et définition d'une stratégie ministérielle sur les infrastructures à gestion de clés.
+
+   E. Le comité stratégique et les projets sensibles.
+
+      Le premier comité stratégique s'est tenu le treize février deux mille quatorze, consacré au lancement du triennal budgétaire, et le comité du neuf juillet deux mille quinze a traité de la sécurité, de l'actualisation du triennal deux mille quinze-deux mille dix-sept, de la modernisation des infrastructures avec le schéma de regroupement des centres informatiques et le centre d'Osny, et de la gouvernance avec le plan d'investissement ministériel. Un projet informatique mobilisant des ressources importantes ne doit être lancé qu'à l'issue d'un processus rigoureux appréciant les objectifs, la fiabilité des évaluations, la valeur du projet par une étude de retour sur investissement selon MAREVA2, la pertinence des choix d'architecture, l'existence d'un financement, l'existence de scénarios alternatifs et la possibilité de s'appuyer sur des services déjà mis en œuvre ailleurs. La liste des seize projets sensibles des ministères représente une dépense en coûts complets de deux cent quarante millions d'euros, dont un tiers de ressources humaines.
+
+V. LES RESSOURCES FINANCIÈRES DES SYSTÈMES D'INFORMATION.
+
+   A. Le modèle de coûts et l'imputation.
+
+      L'évaluation et la priorisation des chantiers relèvent du directeur de programme au titre de la stratégie de sa direction et des échelons ministériels et interministériels au titre de la mutualisation. La mise sous contrôle des coûts suppose un modèle partagé ; les travaux de la DISIC depuis deux mille douze ont conduit au modèle ressources, activités, services, articulé autour de trois axes d'imputation, ce que la direction des systèmes d'information mobilise, réalise et délivre, décliné en trois niveaux, grosse maille pour tous les ministères, maille moyenne pour l'ambition interministérielle commune et maille fine ajustable par chaque ministère. L'analyse des coûts passe par la fiabilisation des imputations comptables, non homogènes d'un service à l'autre, la fonction comptable ne connaissant pas les questionnements métiers et la fonction métier ne connaissant pas le raisonnement comptable ; il faut donc expliquer les enjeux comptables aux services et élaborer des arbres de décision univoques partagés.
+
+   B. L'évolution de la dépense.
+
+      Les dépenses des systèmes d'information se réduisent fortement depuis plusieurs années, en partie par la fin de projets comme COPERNIC et CHORUS passés en phase opérationnelle et par des marchés baissiers, mais cette réduction rend congrue la part laissée aux nouveaux projets. Depuis deux mille huit, la baisse atteint quarante-deux pour cent en moyenne, la restitution étant plus fiable depuis deux mille douze car établie sur des crédits de paiement issus de CHORUS. Les postes les plus importants sont les infrastructures, trente-sept pour cent de la dépense, et les applicatifs métier, trente-deux pour cent, la bureautique ne comptant que pour vingt pour cent en deux mille quatorze. Les arbitrages du début de l'été deux mille quinze orientent vers trois cent quatre-vingt-deux millions d'euros de crédits de paiement pour deux mille quinze, trois cent cinquante-sept pour deux mille seize et trois cent cinquante pour deux mille dix-sept, soit plus de vingt pour cent de diminution par rapport aux demandes initiales, le contexte de réduction des dépenses publiques et la lutte contre le terrorisme opérant des ponctions supplémentaires. Le socle des dépenses d'infrastructure, plus de cent millions d'euros à la DGFiP, étant difficile à remettre en cause, le risque est que les projets nouveaux contribuant à la stratégie numérique soient retardés.
+
+VI. LES RESSOURCES HUMAINES DES SYSTÈMES D'INFORMATION.
+
+      Sous l'impulsion de la DISIC, un exercice de cartographie interministérielle a été effectué en deux mille onze puis deux mille douze, visant à identifier les ressources par corps et à les ventiler par grandes catégories de fonctions ; l'absence de mention précise des informaticiens dans les systèmes d'information des ressources humaines rend l'exercice compliqué. Les ministères économiques et financiers se caractérisent par un nombre réduit de contractuels, principalement à la DGFiP et à l'AIFE, et des ressources internes importantes dont la très grande majorité dispose d'une qualification informatique. L'enquête de la DISIC recensait vingt-trois mille agents hors militaires et opérateurs, soixante-neuf corps concernés et dix pour cent de contractuels en moyenne. L'exercice relancé en deux mille quatorze utilise une approche en macro-compétences inspirée du référentiel CIGREF de deux mille onze, avec un périmètre élargi aux gestionnaires de ressources informatiques déconcentrées. On constate une forte stabilité des titulaires et une augmentation de sept pour cent des contractuels, majoritairement de catégorie A ; trois grandes compétences rassemblent les plus gros effectifs de titulaires, études et développement, exploitation et production, assistance aux utilisateurs, chacune vingt-neuf pour cent. Les principaux points d'attention sont un cadre juridique interministériel très ancien, décrets de février mille neuf cent soixante et onze toilettés en mille neuf cent quatre-vingt, la refonte du concours des ingénieurs des systèmes d'information et de communication du ministère de l'Intérieur ouverte aux autres ministères fin deux mille quinze, les quatre qualifications spécialisées des ministères économiques et financiers depuis mille neuf cent quatre-vingt-dix-neuf, le passage de la prime de fonctions et de résultats au RIFSEEP en deux mille seize, l'arbitrage entre réinternalisation et compétences rares, le vieillissement de la population et l'émergence de communautés d'urbanistes et de directeurs de projet.
+
+VII. QUELQUES ÉLÉMENTS DE CHAQUE DIRECTION.
+
+      Chaque grande direction comprend une structure système d'information autonome : DGFiP cinq mille équivalents temps plein internes, DGDDI cinq cents, INSEE six cent trente, DGCCRF soixante-dix, AIFE trente équivalents temps plein et cent vingt contractuels. L'administration centrale et certaines fonctions ministérielles sont prises en charge par le service de l'environnement professionnel, cent soixante-dix informaticiens, complété du réseau des gestionnaires de ressources informatiques déconcentrées. Des services à compétence nationale dédiés ont été créés pour la refonte du système d'information budgétaire et comptable, CHORUS, et de la paye, ONP.
+
+   A. La DGFiP.
+
+      Le service des systèmes d'information de la DGFiP comporte deux sous-directions, études et production, neuf directions interrégionales et quarante-sept établissements de services informatiques issus des anciens centres régionaux de la Direction générale des impôts et des départements informatiques de la Direction générale de la comptabilité publique. Il compte cinq mille agents, deux cent trente-huit applications et un budget consommé de deux cent douze millions d'euros en deux mille quatorze hors titre 2. Le plan stratégique des systèmes d'information s'articule autour des utilisateurs, des agents de l'informatique, du pilotage et de l'optimisation. En deux mille quatorze, la généralisation au premier octobre du recours obligatoire aux téléprocédures pour la TVA et les autres impôts des professionnels aboutit à une démarche engagée depuis deux mille neuf, avec un mini-guichet unique de TVA depuis le vingt-six novembre ; plus de quinze millions de déclarations de revenus ont été déposées en ligne, en hausse de dix pour cent, et le paiement dématérialisé progresse. L'actualisation du triennal sanctuarise les projets PAYSAGE, réécriture de la paye, et DFT2, avec un socle d'infrastructures évalué à quatre-vingt-dix-sept millions d'euros pour deux mille quinze, plusieurs projets comme le centre de contacts, l'espace numérique sécurisé usagers et la dématérialisation de la chaîne comptable étant décalés ; les marges de manœuvre à court terme sont inexistantes.
+
+   B. La DGDDI.
+
+      La sous-direction C de la DGDDI comporte trois bureaux, maîtrise d'ouvrage, infrastructure, budget et assistance, et deux centres, celui d'Osny et le centre de Toulouse, cinq cents agents et un budget de quarante et un millions d'euros en deux mille quatorze. La trajectoire triennale porte sur la rationalisation, la transformation des centres informatiques, notamment de gros travaux à Osny, et les services aux utilisateurs dans un contexte européen. L'indice global de dématérialisation du dédouanement est de quatre-vingt-six pour cent et le délai moyen d'immobilisation des marchandises est de quatre minutes en deux mille quatorze. Les principaux projets concernent le commerce international avec les téléprocédures DELTA, la fiscalité indirecte et la lutte contre la fraude. La DGDDI assure le portage administratif et financier du projet interministériel PNR de plateforme des données des passagers aériens, cofinancé par l'Union européenne, à des fins de lutte contre le terrorisme.
+
+   C. L'INSEE, la DGCCRF et le service de l'environnement professionnel.
+
+      Le secrétariat général informatique de l'INSEE comporte deux départements, projets et applications et production et infrastructures, quatre centres nationaux informatiques dont Metz destiné à accueillir toute la production, six cent vingt agents avec un plan de réduction vers cinq cents, et un budget de vingt millions d'euros en deux mille quatorze. Le schéma directeur deux mille onze-deux mille quinze porte sur la rationalisation, le système technique, les services aux utilisateurs et l'organisation ; les projets importants concernent l'équipement des enquêteurs, le déploiement du téléservice de recensement HOMERE et l'adaptation au projet « dites-le-nous une fois ».
+
+      Le service informatique de la DGCCRF, service à compétence nationale, compte quatre-vingts équivalents temps plein, trois centres, Paris, Lyon et Montpellier, et un budget de un virgule neuf million d'euros ; la direction est très impactée par la nouvelle organisation territoriale. Le service de l'environnement professionnel du secrétariat général comporte quatre bureaux, budget et marchés, applications de pilotage, infrastructures, poste de travail et assistance, deux cent cinquante agents et un budget de vingt-sept virgule quatre millions d'euros ; il assure la passerelle de l'administration centrale vers l'extérieur, la gestion de l'intranet ALIZE et l'animation du réseau des gestionnaires de ressources informatiques déconcentrées.
+
+   D. La DG Trésor et l'AIFE.
+
+      La DG Trésor comporte un service central et un réseau de missions économiques à l'étranger, avec un budget de deux virgule sept millions d'euros. L'AIFE comprend cent cinquante-quatre agents internes, cinquante-huit contractuels et deux cent sept prestataires, et un budget de soixante-trois millions d'euros en deux mille quatorze. Elle poursuit l'amélioration des services rendus par CHORUS, système d'information financier, budgétaire et comptable de l'État support de la LOLF, dont le déploiement s'est achevé début deux mille douze. La consommation des crédits du projet CHORUS de deux mille six à deux mille quinze s'établit à huit cent quatre-vingt-dix-huit millions d'euros ; l'actualisation du triennal est calibrée à un peu plus de soixante-quinze millions d'euros par an, dont un socle de maintien en conditions opérationnelles de quarante-trois millions et une part projet intégrant le portail CHORUS Pro et une montée de version SAP obligatoire.
+
+POINTS D'ATTENTION.
+
+      La spécificité des ministères économiques et financiers : autonomie forte des directions, un programme budgétaire par direction, pas de programme support pour les fonctions support, contrairement à d'autres ministères.
+
+      La fongibilité asymétrique de la LOLF ne sépare que les dépenses de personnel ; le PAP est prévisionnel et voté en loi de finances, le RAP est un bilan voté en loi de règlement.
+
+      La Délégation aux systèmes d'information joue le rôle d'une direction des systèmes d'information de groupe, sans autorité hiérarchique sur les directions.
+
+      Grands programmes des années deux mille : COPERNIC et HELIOS à Bercy, CHORUS et ONP interministériels ; ils reposent souvent sur des progiciels, PeopleSoft, SAP, HR Access, avec un risque de dépendance aux prestataires.
+
+      Le schéma directeur de deux mille dix-sept, jugé trop lourd, a été remplacé par le palier de maturité 1, dix composantes, puis par les contrats de progrès et le plan d'investissement du décret du premier août deux mille quatorze.
+
+      Le Comité stratégique des systèmes d'information, créé fin deux mille treize, présidé par le directeur de cabinet, est la clé de voûte de la gouvernance ministérielle.
+
+      Modèle de coûts DISIC : trois axes orthogonaux, ressources, activités, services, et trois niveaux de maille.
+
+      La dépense des systèmes d'information a baissé de quarante-deux pour cent depuis deux mille huit ; infrastructures trente-sept pour cent, applicatifs métier trente-deux pour cent, bureautique vingt pour cent.
+
+      Cartographie des ressources humaines : macro-compétences inspirées du référentiel CIGREF ; trois compétences majeures des titulaires, études et développement, exploitation et production, assistance aux utilisateurs.
+
+      Passage de la prime de fonctions et de résultats au RIFSEEP en deux mille seize.
+
+      Effectifs des structures des systèmes d'information : DGFiP cinq mille, DGDDI cinq cents, INSEE six cent trente, DGCCRF soixante-dix, AIFE trente plus cent vingt contractuels.
+
+EXEMPLES CITES.
+
+      Programmes de transformation : COPERNIC, HELIOS, SIRHIUS, DELTA, CHORUS interministériel fondé sur SAP, ONP.
+
+      Progiciels intégrés : PeopleSoft pour ACCORD, SAP pour CHORUS, HR Access pour SIRHIUS.
+
+      Télédéclaration des revenus : douze virgule huit millions de foyers en deux mille douze, quatorze virgule six millions en deux mille quinze ; quatre-vingts pour cent des télédéclarations et télérèglements de TVA.
+
+      Délai d'immobilisation des marchandises via DELTA passé de treize minutes en deux mille quatre à quatre minutes en deux mille quatorze ; indice de dématérialisation du dédouanement à quatre-vingt-six pour cent.
+
+      Portail data.gouv.fr ouvert en décembre deux mille onze avec trois cent mille fichiers ; INSEE premier contributeur d'Etalab ; exploitation des caisses de la grande distribution pour l'indice des prix à partir de deux mille seize.
+
+      SIRHIUS version 1.5 en novembre deux mille quatorze, application maître pour la DGCCRF, l'administration centrale, l'INSEE, la DGDDI et le ministère des affaires étrangères.
+
+      Consommation des crédits de CHORUS de deux mille six à deux mille quinze : huit cent quatre-vingt-dix-huit millions d'euros.
+
+      Seize projets sensibles des ministères économiques et financiers : deux cent quarante millions d'euros en coûts complets, dont un tiers de ressources humaines.
+
+      Accord-cadre interministériel Helen Keller du vingt-cinq juillet deux mille quatorze pour équiper les postes des agents handicapés ; projet PNR de plateforme des données des passagers aériens porté par la DGDDI.

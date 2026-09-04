@@ -1,221 +1,301 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 4, thème 9
-LES RÈGLES D'HYGIÈNE DE LA SÉCURITÉ DES SI (GUIDE ANSSI)
-=======================================================================
+LES QUARANTE RÈGLES DE BASE DE L'HYGIÈNE DE SÉCURITÉ DES SYSTÈMES D'INFORMATION.
 
-Le guide d'hygiène de la sécurité des SI de l'ANSSI regroupe ses règles
-de base (« commandements ») en 9 DOMAINES :
-  I.   Sensibiliser et former
-  II.  Connaître le système d'information
-  III. Authentifier et contrôler les accès
-  IV.  Sécuriser les postes
-  V.   Sécuriser le réseau
-  VI.  Sécuriser l'administration
-  VII. Gérer le nomadisme
-  VIII.Maintenir le système d'information à jour
-  IX.  Superviser, auditer, réagir
+LEXIQUE COMPLET.
 
-I. SENSIBILISER ET FORMER
------------------------------------------------------------------------
-- Former les ÉQUIPES OPÉRATIONNELLES (accès privilégiés) : à la prise de
-  poste puis à intervalles réguliers — législation, risques et menaces,
-  maintien en condition de sécurité, authentification/contrôle d'accès,
-  durcissement, cloisonnement réseau, journalisation. Clauses de
-  formation dans les contrats de prestation (infogérants).
-- Sensibiliser les UTILISATEURS : chaque utilisateur est un maillon ;
-  dès l'arrivée, régulièrement — enjeux SSI, infos sensibles,
-  obligations légales, règles quotidiennes (pas d'équipement personnel
-  sur le réseau, non-divulgation des mots de passe, pas de réutilisation
-  pro/privé, signalement des événements suspects), verrouillage de
-  session.
-- Maîtriser les risques de l'INFOGÉRANCE : évaluer les risques en amont ;
-  exiger réversibilité du contrat, audits, sauvegarde/restitution des
-  données en FORMAT OUVERT NORMALISÉ, maintien à niveau de la sécurité ;
-  document contractuel (plan d'assurance sécurité).
+      Guide d'hygiène de la sécurité : synthèse de l'ANSSI, actualisée en deux mille dix-sept, rassemblant les principes élémentaires à respecter en matière de sécurité des systèmes d'information, organisée en neuf domaines et une quarantaine de règles.
 
-II. CONNAÎTRE LE SI
------------------------------------------------------------------------
-- Identifier les INFOS SENSIBLES et CARTOGRAPHIER le réseau : liste des
-  données sensibles -> composants (serveurs/postes critiques) -> mesures
-  spécifiques (sauvegarde, journalisation, accès). Schéma simplifié à
-  jour : zones IP, plan d'adressage, équipements de routage/sécurité,
-  interconnexions avec l'extérieur, localisation des serveurs sensibles.
-- INVENTORIER LES COMPTES SENSIBLES (cibles privilégiées) : comptes
-  administrateurs, accès aux répertoires des responsables, postes non
-  administrés. Revue périodique. Nomenclature claire pour les comptes de
-  service et d'administration.
-- Gestion des DÉPARTS, ARRIVÉES, CHANGEMENTS, en lien avec les RH :
-  création/suppression des comptes et BAL, droits à attribuer/retirer,
-  accès physiques (badges, clés), équipements mobiles, mots de passe.
-- Accès au réseau limité aux ÉQUIPEMENTS AUTORISÉS : seuls les terminaux
-  maîtrisés par l'entité (filaire et Wi-Fi). SSID dédié pour les
-  terminaux personnels et visiteurs.
+      Équipe opérationnelle : administrateurs réseau, sécurité et système, chefs de projet, développeurs et responsable de la sécurité des systèmes d'information, disposant d'accès privilégiés au système d'information.
 
-III. AUTHENTIFIER ET CONTRÔLER LES ACCÈS
------------------------------------------------------------------------
-- IDENTIFICATION NOMINALE : comptes nominatifs ; comptes génériques
-  (admin, user) marginaux et rattachés à peu de personnes ; comptes de
-  service liés à un processus (apache, mysqld) admis.
-- GESTION DES DROITS d'accès aux ressources sensibles : liste précise ;
-  définir la population autorisée, contrôler strictement l'accès
-  (utilisateurs authentifiés), éviter la dispersion/duplication ; revue
-  régulière.
-- POLITIQUE DE MOT DE PASSE : sensibiliser (mot de passe devinable,
-  réutilisation) ; blocage après échecs, désactivation de la connexion
-  anonyme, outil d'audit de robustesse ; protéger les mots de passe
-  stockés par un COFFRE-FORT NUMÉRIQUE et du chiffrement.
-- ÉQUIPEMENTS D'AUTHENTIFICATION : les configs par défaut sont réputées
-  connues des attaquants -> les modifier dès l'installation ; secret
-  « en dur » -> signaler au distributeur. AUTHENTIFICATION FORTE = 2
-  facteurs parmi : ce que je sais (mot de passe), ce que je possède
-  (carte à puce, jeton USB, RFID, téléphone/SMS), ce que je suis
-  (biométrie).
+      Infogérance : externalisation du système d'information ou des données à un prestataire, dont les risques doivent être évalués en amont et encadrés contractuellement.
 
-IV. SÉCURISER LES POSTES
------------------------------------------------------------------------
-- NIVEAU DE SÉCURITÉ MINIMAL du parc : limiter les applications et
-  modules de navigateur ; pare-feu local + antivirus ; chiffrer les
-  partitions de données ; désactiver l'autorun. Postes en dérogation
-  isolés du système.
-- SUPPORTS AMOVIBLES : proscrire les clés USB inconnues (ramassées) ;
-  limiter les clés non maîtrisées, sinon inspection antivirus.
-- GESTION CENTRALISÉE (sécurité du maillon le plus faible) : outil de
-  gestion centralisée (postes + serveurs) ; durcissement depuis un point
-  central ; réactivité en cas de crise.
-- PARE-FEU LOCAL activé : freine le déplacement latéral (rebond) ; les
-  flux poste à poste sont très rares en bureautique.
-- CHIFFREMENT des données sensibles transmises par Internet/Cloud :
-  chiffrement systématique avant envoi/hébergement ; secret de
-  déchiffrement transmis par un canal de confiance ou distinct
-  (main propre, téléphone).
+      Réversibilité du contrat : exigence imposée à l'infogérant de restituer les données dans un format ouvert normalisé et de permettre le retour à une exploitation interne.
 
-V. SÉCURISER LE RÉSEAU
------------------------------------------------------------------------
-- SEGMENTER ET CLOISONNER : un réseau « à plat » -> compromission d'une
-  machine = tout le réseau menacé (rebond). Zones = systèmes à besoins de
-  sécurité homogènes (serveurs d'infra, serveurs métier, postes
-  utilisateurs, postes administrateurs), avec VLAN + sous-réseaux IP
-  dédiés et filtrage IP par pare-feu entre zones ; cloisonner
-  particulièrement l'administration.
-- WI-FI : risques (disponibilité, zone de couverture, config par
-  défaut). Chiffrement robuste WPA2 / AES CCMP + authentification
-  centralisée (certificats clients) ; mot de passe unique partagé
-  déconseillé ; SSID/VLAN distincts pour personnels/visiteurs ; points
-  d'accès administrés de façon sécurisée.
-- PROTOCOLES SÉCURISÉS : reposent sur TLS, souvent reconnaissables au
-  « s » (https, IMAPS, SMTPS, POP3S) ; SSH remplace Telnet et Rlogin.
-- SERVICES VISIBLES DEPUIS INTERNET : administrateurs compétents et
-  disponibles (sinon externaliser) ; infrastructure d'hébergement
-  physiquement cloisonnée ; flux entrants via un REVERSE PROXY (serveur
-  mandataire inverse).
-- MESSAGERIE (principal vecteur d'infection) : sensibiliser (expéditeur
-  connu ? lien cohérent ? vérifier par un autre canal) ; mesures
-  organisationnelles contre la fraude au président ; proscrire la
-  redirection pro -> perso (fuite irrémédiable) ; antivirus en amont des
-  BAL ; chiffrement TLS entre serveurs et entre postes et serveurs.
-- INTERCONNEXION AVEC LES PARTENAIRES : tunnel site à site (de préférence
-  IPsec) si via Internet ; partenaire réputé non sûr -> filtrage IP au
-  plus près de l'entrée ; matrice des flux réduite au juste besoin.
-- ACCÈS PHYSIQUE aux salles serveurs / locaux techniques : serrures ou
-  badges ; pas d'accès non accompagnés des prestataires (sauf traçage
-  strict + plages horaires) ; revue des droits ; retrait au départ ;
-  prises réseau des zones publiques restreintes ou désactivées.
+      Cartographie du réseau : schéma simplifié et tenu à jour représentant les zones IP et le plan d'adressage, les équipements de routage et de sécurité, les interconnexions avec l'extérieur et les serveurs détenant des informations sensibles.
 
-VI. SÉCURISER L'ADMINISTRATION
------------------------------------------------------------------------
-- Poste d'administration SANS ACCÈS À INTERNET (risques navigation +
-  messagerie) ; poste distinct pour les autres usages ; l'accès distant
-  à l'administration depuis un poste bureautique est déconseillé
-  (élévation de privilèges).
-- RÉSEAU D'ADMINISTRATION DÉDIÉ, cloisonné vis-à-vis du réseau
-  bureautique : priorité au cloisonnement physique ; à défaut,
-  cloisonnement logique cryptographique par tunnels IPsec ; au minimum,
-  VLAN.
-- LIMITATION DES DROITS D'ADMINISTRATION sur les postes utilisateurs :
-  par défaut, aucun utilisateur (quelle que soit sa position) n'a de
-  privilèges d'administration ; magasin d'applications validées ;
-  délégation ponctuelle tracée, limitée dans le temps, retirée à
-  échéance.
+      Compte sensible : compte administrateur ou disposant de droits supérieurs à ceux d'un utilisateur standard, cible privilégiée des attaquants, à inventorier et à revoir périodiquement.
 
-VII. GÉRER LE NOMADISME
------------------------------------------------------------------------
-- SÉCURISATION PHYSIQUE des terminaux : garder à portée de vue ;
-  banaliser (pas de logo de l'entité) ; filtre de confidentialité sur
-  l'écran.
-- CHIFFREMENT des données sensibles sur matériel « perdable » : ne
-  stocker que des données chiffrées (portable, ordiphone, clé USB,
-  disque externe) ; secret = mot de passe, carte à puce, code PIN.
-  COMMENCER par le chiffrement complet du disque avant archives/fichiers
-  (restes non chiffrés possibles).
-- CONNEXION RÉSEAU en nomadisme : tunnel VPN IPsec vers une passerelle de
-  l'entité (plutôt que VPN SSL/TLS), établi automatiquement et NON
-  DÉBRAYABLE (aucun flux hors tunnel) ; dérogation possible pour les
-  portails captifs (connexion à la demande, partage de connexion sur
-  téléphone de confiance).
-- POLITIQUE DÉDIÉE AU NOMADISME : ne pas mutualiser usages perso/pro sur
-  un même terminal ; solution de gestion centralisée des équipements
-  mobiles (MDM) ; configuration homogène (déverrouillage, magasin
-  d'applications validées).
+      Compte de service : compte rattaché à un processus informatique, comme apache ou mysqld, distinct d'un compte générique.
 
-VIII. MAINTENIR LE SI À JOUR
------------------------------------------------------------------------
-- POLITIQUE DE MISE À JOUR : s'informer des vulnérabilités (CERT-FR) ;
-  appliquer les correctifs DANS LE MOIS suivant leur publication ;
-  procédures : inventaire des composants, sources d'information, outils
-  de déploiement (WSUS pour Microsoft), qualification et déploiement
-  progressif. Composants obsolètes non supportés -> ISOLÉS (filtrage
-  strict des flux + secrets d'authentification dédiés).
-- ANTICIPER LES FINS DE MAINTENANCE : un système obsolète augmente les
-  possibilités d'attaque. Inventaire à jour ; solutions au support
-  assuré ; suivi des dates de fin de support ; parc homogène ; limiter
-  les adhérences logicielles (dépendances) ; clauses contractuelles ;
-  planifier délais et ressources de migration (tests de non-régression,
-  sauvegarde, migration des données).
+      Compte nominatif : compte d'accès rattaché à une personne physique identifiée, permettant d'attribuer une action en cas d'incident.
 
-IX. SUPERVISER, AUDITER, RÉAGIR
------------------------------------------------------------------------
-- JOURNALISATION des composants essentiels : identifier les composants
-  critiques ; adapter la config (format, rotation, taille, catégories) ;
-  événements critiques conservés AU MOINS UN AN. Journaliser : pare-feu
-  (paquets bloqués) ; systèmes/applications (authentifications et
-  autorisations en échec ET en succès, arrêts inopinés) ; services
-  (erreurs de protocole 403/404/500 HTTP, traçabilité des flux aux
-  interconnexions). Source de temps NTP IDENTIQUE pour corréler.
-- POLITIQUE DE SAUVEGARDE : sauvegardes conservées en lieu sûr.
-  Formaliser : liste des données vitales, types de sauvegarde (dont hors
-  ligne), fréquence, procédure, stockage et restrictions d'accès, tests
-  de restauration, destruction des supports. Tests de restauration :
-  systématique (ordonnanceur), ponctuelle, générale.
-- AUDITS RÉGULIERS (au moins 1/an) : évaluent l'efficacité des mesures
-  et leur maintien, mesurent les écarts règle/pratique ; internes ou
-  externes ; actions correctives planifiées + suivi ; indicateurs dans
-  un tableau de bord pour la direction. Un audit ne prouve JAMAIS
-  l'absence de vulnérabilité.
-- RÉFÉRENT SSI désigné et connu de tous : soutenu par la direction ;
-  premier contact ; définit et vérifie les règles, sensibilise, forme,
-  centralise et traite les incidents ; formé à la SSI et à la gestion de
-  crise ; peut être le relais du RSSI.
-- PROCÉDURE DE GESTION DES INCIDENTS : signes (connexion impossible,
-  activité importante, services non autorisés, fichiers modifiés,
-  alertes antivirus). Bon réflexe : DÉCONNECTER du réseau, MAINTENIR
-  SOUS TENSION, NE PAS REDÉMARRER ; prévenir la hiérarchie et le référent
-  SSI ; contact avec un PRIS (Prestataire de Réponse aux Incidents de
-  Sécurité) pour les opérations techniques (copie physique du disque,
-  analyse mémoire/journaux/codes malveillants) ; changer les mots de
-  passe compromis ; consigner dans un registre centralisé ; plainte
-  possible.
+      Compte générique : compte partagé comme admin ou user, dont l'usage doit rester marginal et rattachable à un nombre limité de personnes.
 
-=======================================================================
-À RETENIR
-- 9 domaines : sensibiliser/former, connaître le SI, authentifier,
-  sécuriser les postes, sécuriser le réseau, sécuriser l'administration,
-  nomadisme, mise à jour, superviser/auditer/réagir.
-- Comptes nominatifs ; authentification forte = 2 facteurs (savoir /
-  posséder / être).
-- Réseau segmenté en zones (VLAN + sous-réseaux), réseau d'administration
-  cloisonné (physique > IPsec > VLAN), poste d'admin sans Internet.
-- Postes : pare-feu local + antivirus + chiffrement + autorun désactivé ;
-  utilisateur sans droits d'admin.
-- Nomadisme : chiffrement complet du disque, VPN IPsec non débrayable.
-- Correctifs dans le mois (CERT-FR) ; composants obsolètes isolés.
-- Journaux critiques ≥ 1 an, NTP commun ; audit ≥ 1/an ; référent SSI ;
-  incident = déconnecter sans éteindre, PRIS, registre centralisé.
+      Authentification forte : authentification exigeant deux facteurs différents parmi ce que je sais, ce que je possède et ce que je suis.
+
+      Facteur d'authentification : élément prouvant l'identité, de type connaissance (mot de passe), possession (carte à puce, jeton, téléphone) ou inhérence (empreinte biométrique).
+
+      Coffre-fort numérique : outil chiffré de stockage des mots de passe, protégé par un mot de passe unique, robuste et mémorisé, le seul que l'utilisateur ait à retenir.
+
+      Configuration par défaut : réglage d'usine d'un équipement, réputé connu des attaquants et souvent trivial, dont les éléments d'authentification doivent être modifiés dès l'installation.
+
+      Support amovible : clé USB, disque dur externe ou média mobile pouvant propager un virus, voler des informations ou compromettre le réseau ; le branchement de supports inconnus est à proscrire.
+
+      Autorun : exécution automatique au branchement d'un support, à désactiver sur les postes.
+
+      Gestion centralisée : outil appliquant depuis un point central les politiques de sécurité à l'ensemble du parc, pour l'homogénéité et la réactivité en cas de crise.
+
+      Déplacement latéral : progression d'un attaquant d'un poste compromis vers d'autres postes, freinée par l'activation du pare-feu local.
+
+      Segmentation du réseau : découpage en zones regroupant des systèmes aux besoins de sécurité homogènes, caractérisées par des VLAN et des sous-réseaux IP dédiés.
+
+      Cloisonnement : filtrage IP par pare-feu entre zones, empêchant la compromission d'une zone de se propager aux autres.
+
+      Réseau à plat : réseau sans mécanisme de cloisonnement, où chaque machine peut accéder à toute autre, permettant à un attaquant de rebondir jusqu'aux serveurs critiques.
+
+      WPA2 : mode de chiffrement Wi-Fi robuste recommandé, avec l'algorithme AES CCMP et une authentification centralisée si possible par certificats clients.
+
+      Protocole réseau sécurisé : protocole reposant sur TLS, souvent identifié par un s final comme HTTPS, IMAPS, SMTPS ou POP3S, ou conçu sécurisé dès l'origine comme SSH remplaçant Telnet et Rlogin.
+
+      Reverse proxy : serveur mandataire inverse imposé en entrée des flux vers les services visibles depuis Internet, embarquant des mécanismes de sécurité.
+
+      Tunnel site à site : liaison chiffrée, de préférence IPsec, établie sur Internet entre l'entité et un partenaire considéré par défaut comme non sûr.
+
+      Matrice des flux : tableau des flux entrants et sortants autorisés, réduit au juste besoin opérationnel et maintenu dans le temps.
+
+      Poste d'administration : poste ou serveur dédié aux actions d'administration, qui ne doit en aucun cas avoir accès à Internet.
+
+      Réseau d'administration dédié : réseau interconnectant postes, serveurs et interfaces d'administration, cloisonné du réseau bureautique, de préférence physiquement, sinon par tunnels IPsec, au minimum par VLAN.
+
+      Moindre privilège : principe selon lequel un utilisateur ne dispose que des droits strictement nécessaires ; par défaut, aucun utilisateur n'est administrateur de son poste.
+
+      Magasin d'applications validées : catalogue d'applications approuvées du point de vue de la sécurité, mis à disposition des utilisateurs pour couvrir leurs besoins sans privilèges d'administration.
+
+      Terminal nomade : ordinateur portable, tablette ou ordiphone exposé à la perte et au vol, à banaliser, à munir d'un filtre de confidentialité et à chiffrer.
+
+      Filtre de confidentialité : dispositif placé sur un écran pour empêcher la lecture latérale dans les transports ou les lieux d'attente.
+
+      Chiffrement complet du disque : chiffrement de l'ensemble du support, à privilégier avant le chiffrement d'archives ou de fichiers qui peuvent laisser des données non chiffrées.
+
+      VPN IPsec non débrayable : tunnel établi automatiquement entre le poste nomade et une passerelle de l'entité, hors duquel aucun flux ne peut transiter.
+
+      Portail captif : page d'authentification d'un réseau public, cas particulier pouvant justifier une connexion à la demande ou un partage de connexion sur un téléphone de confiance.
+
+      MDM : solution de gestion centralisée des équipements mobiles, configurant de façon homogène le déverrouillage et la limitation du magasin d'applications.
+
+      Politique de mise à jour : procédure définissant l'inventaire des composants, les sources d'information sur les vulnérabilités, les outils de déploiement des correctifs et leur qualification, les correctifs de sécurité devant être appliqués dans le mois suivant leur publication.
+
+      WSUS : outil de déploiement des mises à jour des composants Microsoft sur le parc.
+
+      Composant obsolète : système ou logiciel qui n'est plus supporté par son fabricant, à isoler du reste du système au niveau réseau et au niveau des secrets d'authentification.
+
+      Adhérence logicielle : dépendance de fonctionnement d'un logiciel par rapport à un autre, à limiter, surtout lorsque le support de ce dernier arrive à son terme.
+
+      NTP : Network Time Protocol, source de synchronisation de temps commune indispensable pour corréler les événements journalisés entre composants.
+
+      Politique de sauvegarde : document formalisé listant les données vitales, les types et la fréquence de sauvegarde, les procédures d'exécution, de stockage, de test de restauration et de destruction des supports.
+
+      Audit de sécurité : contrôle technique ou organisationnel réalisé au moins une fois par an, interne ou externe, mesurant l'efficacité des mesures et les écarts entre la règle et la pratique, sans jamais prouver l'absence de vulnérabilité.
+
+      Référent en sécurité des systèmes d'information : interlocuteur connu de tous les utilisateurs, premier contact pour les questions de sécurité, formé à la sécurité et à la gestion de crise, relais du responsable de la sécurité des systèmes d'information.
+
+      PRIS : prestataire de réponse aux incidents de sécurité, sollicité pour les opérations techniques comme la copie physique du disque et l'analyse de la mémoire et des journaux.
+
+      Registre des incidents : journal centralisé où tout incident de sécurité doit être consigné.
+
+COURS DÉTAILLÉ.
+
+I. SENSIBILISER ET FORMER.
+
+   A. Former les équipes opérationnelles.
+
+      Les équipes opérationnelles, administrateurs réseau, sécurité et système, chefs de projet, développeurs et responsable de la sécurité, ont des accès privilégiés et peuvent, par inadvertance ou méconnaissance, générer des vulnérabilités, par exemple des comptes trop privilégiés ou des mots de passe faibles sur des comptes privilégiés. Elles doivent suivre, à la prise de poste puis à intervalles réguliers, des formations sur la législation en vigueur, les principaux risques et menaces, le maintien en condition de sécurité, l'authentification et le contrôle d'accès, le paramétrage fin et le durcissement des systèmes, le cloisonnement réseau et la journalisation, précisées selon le métier. Des clauses de formation régulière doivent figurer dans les contrats de prestation, notamment pour les infogérants.
+
+   B. Sensibiliser les utilisateurs.
+
+      Chaque utilisateur est un maillon de la chaîne. Dès son arrivée, il doit être informé des enjeux, des règles et des bons comportements par des actions régulières et adaptées, courriers, affichage, réunions, intranet, portant au minimum sur les objectifs de l'entité en matière de sécurité, les informations sensibles, les réglementations, les règles quotidiennes, respect de la politique de sécurité, non-connexion d'équipements personnels, non-divulgation et non-réutilisation des mots de passe entre sphères, signalement des événements suspects, et les moyens disponibles, verrouillage systématique de la session, outil de protection des mots de passe.
+
+   C. Maîtriser les risques de l'infogérance.
+
+      Avant d'externaliser, l'entité évalue les risques spécifiques, maîtrise du système, actions à distance, hébergement mutualisé, et intègre les mesures de sécurité dès la rédaction des exigences. Il faut étudier les conditions des offres et les limites de responsabilité du prestataire, et imposer des exigences précises, réversibilité du contrat, réalisation d'audits, sauvegarde et restitution des données dans un format ouvert normalisé, maintien du niveau de sécurité dans le temps. Le prestataire fournit un document contractuel décrivant les dispositions qu'il s'engage à mettre en œuvre.
+
+II. CONNAÎTRE LE SYSTÈME D'INFORMATION.
+
+   A. Identifier les informations sensibles et cartographier le réseau.
+
+      Chaque entité possède des données sensibles, sur son activité propre ou sur ses clients et usagers, qu'il faut d'abord identifier. À partir de cette liste, on détermine les composants qui les hébergent, bases de données, partages, postes, qui deviennent les serveurs et postes critiques à protéger spécifiquement, sauvegarde, journalisation, accès. Il faut créer et maintenir à jour un schéma simplifié du réseau représentant les zones IP et le plan d'adressage, les équipements de routage et de sécurité, les interconnexions avec l'extérieur et les partenaires, et localisant les serveurs détenteurs d'informations sensibles.
+
+   B. Inventorier les comptes sensibles.
+
+      Les comptes à droits spécifiques sont des cibles privilégiées. Il faut en dresser un inventaire tenu à jour, renseignant les utilisateurs disposant d'un compte administrateur ou de droits supérieurs, ceux pouvant accéder aux répertoires des responsables ou de tous les utilisateurs, et ceux utilisant un poste non administré par le service informatique. Une revue périodique permet de vérifier la maîtrise des accès sensibles et de supprimer les accès obsolètes après un départ. Une nomenclature simple et claire distingue les comptes de service et d'administration.
+
+   C. Gérer les arrivées, départs et changements.
+
+      Les droits et accès doivent suivre les évolutions d'effectifs ; tous les droits d'une personne sont révoqués à son départ ou à un changement de fonction. Les procédures, définies avec les ressources humaines, prennent en compte la création et suppression des comptes et boîtes aux lettres, les droits à attribuer ou retirer, les accès physiques aux locaux, badges et clés, l'affectation des équipements mobiles et la gestion des documents sensibles, transfert ou changement des mots de passe.
+
+   D. Autoriser sur le réseau les seuls équipements maîtrisés.
+
+      Chaque équipement connecté est un point d'entrée potentiel. Les équipements personnels et ceux des visiteurs échappent au contrôle de l'entité. Seule la connexion de terminaux maîtrisés doit être autorisée sur les réseaux filaires et sans fil ; y déroger fragilise le réseau. La sensibilisation s'accompagne de solutions pragmatiques, comme un réseau Wi-Fi à SSID dédié pour les terminaux personnels et visiteurs.
+
+III. AUTHENTIFIER ET CONTRÔLER LES ACCÈS.
+
+   A. Identification nominale.
+
+      Les comptes d'accès doivent être nominatifs, pour attribuer une action ou identifier un compte compromis. Les comptes génériques, admin, user, doivent rester marginaux et rattachables à un nombre limité de personnes. Les comptes de service rattachés à un processus, apache, mysqld, restent autorisés.
+
+   B. Gérer les droits d'accès aux ressources.
+
+      Certaines ressources sont précieuses pour un attaquant, répertoires de données sensibles, bases, boîtes aux lettres. Il faut en établir la liste et, pour chacune, définir la population autorisée, contrôler strictement l'accès en s'assurant que les utilisateurs sont authentifiés et ciblés, et éviter la dispersion et la duplication vers des endroits moins contrôlés. Une revue régulière des droits identifie les accès non autorisés.
+
+   C. Politique de mot de passe.
+
+      L'ANSSI énonce des règles de choix et de dimensionnement, la plus critique étant la sensibilisation aux risques d'un mot de passe facile à deviner et à la réutilisation entre applications, surtout entre messageries personnelles et professionnelles. L'entité peut recourir au blocage des comptes après plusieurs échecs, à la désactivation de la connexion anonyme et à un outil d'audit de robustesse, précédés d'un effort de communication. Les mots de passe complexes ou peu utilisés poussent au stockage sur mémo, post-it ou fichier ; comme ils sont une cible privilégiée, ils doivent être protégés par des solutions sécurisées, au premier rang un coffre-fort numérique et le chiffrement, dont le mot de passe respecte les mêmes règles et est le seul à mémoriser.
+
+   D. Gérer les équipements d'authentification.
+
+      Il faut partir du principe que les configurations par défaut sont connues des attaquants et souvent triviales, mot de passe égal à l'identifiant, mal dimensionné, commun à tous les équipements. Les éléments d'authentification par défaut sont modifiés dès l'installation et conformes aux recommandations ; si un identifiant par défaut ne peut être changé, mot de passe ou certificat en dur, le problème est signalé au distributeur. Il est vivement recommandé de mettre en œuvre une authentification forte à deux facteurs différents parmi ce que je sais, mot de passe, tracé, signature, ce que je possède, carte à puce, jeton USB, carte magnétique, RFID, téléphone recevant un code par SMS, et ce que je suis, empreinte biométrique.
+
+IV. SÉCURISER LES POSTES.
+
+   A. Niveau de sécurité minimal du parc.
+
+      L'utilisateur est souvent la première porte d'entrée. Un niveau minimal doit être appliqué à tout le parc, postes, serveurs, imprimantes, téléphones, périphériques USB : limiter les applications et modules de navigateur aux nécessaires, doter les postes d'un pare-feu local et d'un antivirus, chiffrer les partitions de données des utilisateurs, désactiver l'autorun. En cas de dérogation nécessaire, incompatibilité empêchant une mise à jour, le poste est isolé du système.
+
+   B. Supports amovibles.
+
+      Les supports amovibles propagent des virus, volent des informations ou compromettent le réseau. Sans les interdire totalement, il faut traiter le risque et sensibiliser : proscrire le branchement de clés USB inconnues, ramassées dans un lieu public, et limiter au maximum les clés non maîtrisées, sauf à faire inspecter leur contenu par l'antivirus du poste.
+
+   C. Gestion centralisée et pare-feu local.
+
+      La sécurité repose sur le maillon le plus faible ; il faut homogénéiser la gestion des politiques sur tout le parc au moyen d'un outil de gestion centralisée incluant postes et serveurs, ce qui peut nécessiter une harmonisation préalable des matériels et systèmes. Les politiques de durcissement s'appliquent alors depuis un point central avec réactivité en cas de crise. Après avoir pris le contrôle d'un poste, un attaquant cherche à s'étendre aux autres ; il faut activer le pare-feu local des postes, les flux de poste à poste étant très rares dans un réseau bureautique où les fichiers sont sur des serveurs de fichiers et les applications sur des serveurs métier.
+
+   D. Chiffrer les données sensibles transmises par Internet.
+
+      Sur Internet, le trajet des données n'est pas garanti et un attaquant peut s'y trouver ; les données envoyées par courriel ou hébergées en ligne sont vulnérables. Il faut les chiffrer systématiquement avant envoi ou hébergement. Le secret de déchiffrement, s'il doit être transmis, l'est via un canal de confiance ou au moins distinct de celui des données, remise en main propre ou par téléphone si les données ont été envoyées par courriel.
+
+V. SÉCURISER LE RÉSEAU.
+
+   A. Segmenter et cloisonner.
+
+      Sur un réseau à plat, la compromission d'une machine met en péril toutes les autres, un attaquant pouvant rebondir jusqu'aux serveurs critiques. Dès la conception, on raisonne par segmentation en zones aux besoins de sécurité homogènes, serveurs d'infrastructure, serveurs métiers, postes utilisateurs, postes administrateurs, chaque zone ayant des VLAN et sous-réseaux IP dédiés, voire des infrastructures dédiées selon sa criticité, avec un filtrage IP par pare-feu entre zones et un cloisonnement particulier des tâches d'administration. Pour les réseaux existants, la démarche est intégrée à toute extension ou renouvellement d'équipements.
+
+   B. Sécuriser le Wi-Fi.
+
+      Le Wi-Fi présente des risques spécifiques, disponibilité faible, zone de couverture non maîtrisée, attaque hors du périmètre géographique, configuration par défaut peu sûre. La segmentation limite les conséquences d'une intrusion radio ; les flux des postes Wi-Fi sont filtrés et restreints au nécessaire. Il faut un chiffrement robuste, mode WPA2 et algorithme AES CCMP, et une authentification centralisée si possible par certificats clients. Le mot de passe Wi-Fi unique et partagé est déconseillé, à défaut complexe, renouvelé et jamais diffusé à des tiers. Les points d'accès sont administrés de façon sécurisée, interface dédiée, changement du mot de passe administrateur par défaut. Les connexions Wi-Fi des terminaux personnels et visiteurs sont séparées, SSID et VLAN distincts, accès Internet dédié.
+
+   C. Privilégier les protocoles sécurisés.
+
+      La sécurité n'a pas toujours été native ; de nombreux protocoles ont évolué pour la confidentialité et l'intégrité. Les protocoles sécurisés sont utilisés dès que possible, sur réseaux publics comme sur le réseau interne. Les plus courants reposent sur TLS et s'identifient par un s final, HTTPS pour le web, IMAPS, SMTPS, POP3S pour la messagerie ; d'autres sont sécurisés dès la conception, comme SSH qui remplace Telnet et Rlogin.
+
+   D. Cloisonner les services visibles depuis Internet.
+
+      Un service interne visible sur Internet, site web, serveur de messagerie, exige un haut niveau de protection avec des administrateurs compétents, formés en continu et disponibles ; sinon, l'hébergement externalisé auprès de professionnels est à privilégier. Les infrastructures d'hébergement Internet sont physiquement cloisonnées des infrastructures qui n'ont pas vocation à être visibles. Une infrastructure d'interconnexion filtre les flux de ces services distinctement des autres et impose le passage des flux entrants par un reverse proxy embarquant des mécanismes de sécurité.
+
+   E. Protéger la messagerie.
+
+      La messagerie est le principal vecteur d'infection, pièce jointe malveillante ou clic sur un lien. Les utilisateurs sont sensibilisés, expéditeur connu, information attendue, lien cohérent, vérification par un autre canal en cas de doute. Des mesures organisationnelles strictes préviennent les escroqueries, faux ordre de virement d'un dirigeant. La redirection de messages professionnels vers une messagerie personnelle est à proscrire, fuite irrémédiable. L'entité s'assure d'un antivirus en amont des boîtes aux lettres et de l'activation du chiffrement TLS entre serveurs de messagerie et entre postes et serveurs.
+
+   F. Sécuriser l'interconnexion avec les partenaires.
+
+      Une interconnexion réseau dédiée avec un fournisseur ou un client peut passer par le réseau privé ou par Internet ; dans ce dernier cas, on établit un tunnel site à site, de préférence IPsec, selon les préconisations de l'ANSSI. Le partenaire étant par défaut non sûr, un filtrage IP par pare-feu est placé au plus près de l'entrée des flux, la matrice des flux entrants et sortants réduite au juste besoin et maintenue dans le temps.
+
+   G. Contrôler l'accès physique aux salles serveurs.
+
+      Les mécanismes de sécurité physique font partie intégrante de la sécurité et doivent être à l'état de l'art. Les accès aux salles serveurs et locaux techniques sont contrôlés par serrures ou badges ; les accès non accompagnés des prestataires sont à proscrire sauf traçabilité stricte et limitation horaire ; une revue régulière des droits est réalisée, et au départ d'un collaborateur ou changement de prestataire les droits sont retirés ou les codes changés. Les prises réseau des zones ouvertes au public, salle de réunion, hall, couloirs, sont restreintes ou désactivées.
+
+VI. SÉCURISER L'ADMINISTRATION.
+
+   A. Interdire Internet depuis les postes d'administration.
+
+      Un poste ou serveur d'administration ne doit jamais avoir accès à Internet, en raison des risques de la navigation et de la messagerie sur son intégrité. Pour les autres usages, un poste distinct est fourni, ou à défaut un accès à une infrastructure bureautique virtualisée distante ; l'inverse, accès distant à l'administration depuis un poste bureautique, est déconseillé car il peut mener à une élévation de privilèges en cas de vol des authentifiants d'administration.
+
+   B. Réseau d'administration dédié.
+
+      Le réseau d'administration interconnecte postes, serveurs et interfaces d'administration ; il doit être cloisonné du réseau bureautique pour éviter la compromission par rebond. On privilégie un cloisonnement physique, coûteux et long, sinon un cloisonnement logique cryptographique par tunnels IPsec assurant intégrité et confidentialité, au minimum un cloisonnement logique par VLAN.
+
+   C. Limiter les droits d'administration sur les postes utilisateurs.
+
+      Par défaut, aucun utilisateur, quelle que soit sa position hiérarchique, ne dispose de privilèges d'administration sur son poste, afin de limiter les conséquences de l'exécution d'un code malveillant. Un magasin étoffé d'applications validées couvre la majorité des besoins. Seuls les administrateurs des postes disposent de ces droits lors de leurs interventions ; une délégation de privilèges pour un besoin ponctuel est tracée, limitée dans le temps et retirée à échéance.
+
+VII. GÉRER LE NOMADISME.
+
+   A. Sécurité physique des terminaux.
+
+      Les terminaux nomades sont exposés à la perte et au vol et peuvent contenir des informations sensibles ou servir de point d'entrée. Les utilisateurs sont sensibilisés à conserver leurs équipements à portée de vue, toute entité pouvant être visée. Les terminaux sont banalisés, sans mention de l'entité, et un filtre de confidentialité est posé sur chaque écran contre l'indiscrétion dans les transports.
+
+   B. Chiffrer les données sur matériel perdable.
+
+      Les déplacements et la miniaturisation conduisent à des pertes et vols dans l'espace public. On ne stocke que des données préalablement chiffrées sur tout matériel nomade, portable, ordiphone, clé USB, disque externe, l'accès étant conditionné à un secret, mot de passe, carte à puce, code PIN. Selon les besoins, chiffrement de partition, d'archives ou de fichier, avec un secret unique et robuste ; commencer de préférence par le chiffrement complet du disque, le chiffrement d'archives pouvant laisser des données non chiffrées, fichiers de restauration bureautique.
+
+   C. Sécuriser la connexion réseau des postes nomades.
+
+      Pour se connecter au système d'information depuis l'extérieur, il est fortement recommandé d'établir un tunnel VPN IPsec entre le poste nomade et une passerelle de l'entité, plutôt qu'un VPN SSL ou TLS. Ce tunnel est établi automatiquement et non débrayable, aucun flux ne pouvant transiter en dehors. Pour l'authentification aux portails captifs, l'entité peut autoriser une connexion à la demande ou encourager le partage de connexion sur un téléphone de confiance.
+
+   D. Politique de sécurité dédiée au nomadisme.
+
+      Ne pas mutualiser les usages personnel et professionnel sur un même terminal, ne pas synchroniser simultanément comptes professionnels et personnels de messagerie, réseaux sociaux, agendas. Les terminaux fournis par l'entité et connectés au système d'information ou contenant des informations sensibles font l'objet d'une sécurisation à part entière, de préférence via une solution de gestion centralisée des équipements mobiles configurant de façon homogène le déverrouillage et la limitation du magasin d'applications ; à défaut, configuration préalable avant remise et séance de sensibilisation.
+
+VIII. MAINTENIR LE SYSTÈME D'INFORMATION À JOUR.
+
+   A. Politique de mise à jour.
+
+      De nouvelles failles sont régulièrement découvertes. Il faut s'informer de l'apparition de vulnérabilités, via le CERT-FR, et appliquer les correctifs de sécurité sur tous les composants dans le mois suivant leur publication par l'éditeur. Une politique de mise à jour, déclinée en procédures, précise la manière de réaliser l'inventaire des composants, les sources d'information sur les mises à jour, les outils de déploiement, WSUS pour Microsoft, des outils tiers pour les autres composants, et l'éventuelle qualification des correctifs avec déploiement progressif. Les composants obsolètes non supportés sont isolés du reste du système, au niveau réseau par un filtrage strict et au niveau des secrets d'authentification.
+
+   B. Anticiper les fins de maintenance.
+
+      Un système obsolète augmente les possibilités d'attaque dès que les correctifs ne sont plus proposés. Précautions : établir et tenir à jour un inventaire des systèmes et applications, choisir des solutions dont le support couvre la durée d'utilisation, suivre les mises à jour et les dates de fin de support, maintenir un parc logiciel homogène, limiter les adhérences logicielles, inclure dans les contrats des clauses de suivi des correctifs et de gestion des obsolescences, et identifier les délais et ressources nécessaires à la migration de chaque logiciel en fin de vie, tests de non-régression, sauvegarde, migration des données.
+
+IX. SUPERVISER, AUDITER, RÉAGIR.
+
+   A. Activer la journalisation des composants essentiels.
+
+      Des journaux pertinents sont nécessaires pour détecter dysfonctionnements et accès illicites. On détermine d'abord les composants critiques, équipements réseau et de sécurité, serveurs critiques, postes d'utilisateurs sensibles, puis on adapte la configuration des éléments journalisés, format, rotation, taille, catégories. Les événements critiques pour la sécurité sont gardés au moins un an, davantage selon les obligations légales. Doivent être journalisés : les paquets bloqués par le pare-feu, les authentifications et autorisations en échec et succès et les arrêts inopinés des systèmes et applications, les erreurs de protocole des services, erreurs HTTP 403, 404, 500, et la traçabilité des flux aux interconnexions. Pour corréler les événements, la source de synchronisation de temps NTP doit être identique.
+
+   B. Politique de sauvegarde.
+
+      Après un incident ou une intrusion, des sauvegardes conservées en lieu sûr sont indispensables. Une politique de sauvegarde formalisée et à jour définit la liste des données vitales et des serveurs concernés, les types de sauvegarde dont le mode hors ligne, la fréquence, la procédure d'administration et d'exécution, le stockage et les restrictions d'accès, les procédures de test de restauration et la destruction des supports. Les tests de restauration peuvent être systématiques par ordonnanceur pour les applications importantes, ponctuels en cas d'erreur, ou généraux pour une restauration entière.
+
+   C. Audits réguliers.
+
+      Un audit au moins annuel évalue l'efficacité des mesures et leur maintien dans le temps et mesure les écarts entre la règle et la pratique. Réalisé par des équipes internes ou des sociétés externes, technique ou organisationnel selon le périmètre, il est d'autant plus nécessaire que l'entité est soumise à des obligations légales. À l'issue, des actions correctives sont identifiées, planifiées et suivies, avec des indicateurs d'avancement dans un tableau de bord pour la direction. Un audit ne prouve jamais l'absence de vulnérabilité et ne dispense pas d'autres contrôles.
+
+   D. Désigner un référent en sécurité.
+
+      Toute entité dispose d'un référent en sécurité des systèmes d'information soutenu par la direction, connu de tous les utilisateurs, premier contact pour la définition et la vérification des règles, la sensibilisation et le plan de formation, et la centralisation et le traitement des incidents. Il est formé à la sécurité et à la gestion de crise ; dans les grandes entités, il est le relais du responsable de la sécurité des systèmes d'information.
+
+   E. Procédure de gestion des incidents.
+
+      Un comportement inhabituel d'un poste ou serveur, connexion impossible, activité importante ou inhabituelle, services ouverts non autorisés, fichiers modifiés sans autorisation, alertes antivirus multiples, peut signaler une intrusion. Une mauvaise réaction aggrave la situation : le bon réflexe est de déconnecter la machine du réseau pour stopper l'attaque, en la maintenant sous tension et sans la redémarrer pour ne pas perdre d'informations d'analyse, puis de prévenir la hiérarchie et le référent en sécurité. Celui-ci peut faire appel à un prestataire de réponse aux incidents de sécurité pour la copie physique du disque, l'analyse de la mémoire, des journaux et des codes malveillants, déterminer l'étendue de la compromission, supprimer les codes et accès de l'attaquant et changer les mots de passe compromis. Tout incident est consigné dans un registre centralisé, et une plainte peut être déposée auprès du service judiciaire compétent.
+
+POINTS D'ATTENTION.
+
+      Le guide d'hygiène de l'ANSSI, actualisé en deux mille dix-sept, s'organise en neuf domaines : sensibiliser et former, connaître le système d'information, authentifier et contrôler les accès, sécuriser les postes, sécuriser le réseau, sécuriser l'administration, gérer le nomadisme, maintenir à jour, superviser, auditer, réagir.
+
+      La sécurité repose sur le maillon le plus faible : d'où l'homogénéisation par gestion centralisée et l'attention portée à l'utilisateur, première porte d'entrée.
+
+      Comptes nominatifs partout, comptes génériques marginaux, inventaire et revue périodique des comptes sensibles.
+
+      Authentification forte = deux facteurs différents parmi ce que je sais, ce que je possède, ce que je suis ; changer tous les éléments d'authentification par défaut dès l'installation.
+
+      Segmenter en zones à besoins homogènes avec VLAN et sous-réseaux dédiés ; un réseau à plat permet le rebond jusqu'aux serveurs critiques.
+
+      Le poste d'administration n'a jamais accès à Internet ; le réseau d'administration est cloisonné, physiquement de préférence, sinon par IPsec, au minimum par VLAN.
+
+      Par défaut, aucun utilisateur n'est administrateur de son poste ; un magasin d'applications validées couvre les besoins.
+
+      Nomadisme : terminaux banalisés, filtre de confidentialité, chiffrement complet du disque d'abord, VPN IPsec automatique et non débrayable.
+
+      Correctifs de sécurité appliqués dans le mois suivant leur publication ; composants obsolètes isolés au niveau réseau et au niveau des secrets d'authentification.
+
+      Journaux des composants critiques conservés au moins un an, horloges synchronisées par une même source NTP pour permettre la corrélation.
+
+      En cas d'incident : déconnecter du réseau, maintenir sous tension, ne pas redémarrer, prévenir hiérarchie et référent sécurité, consigner dans un registre centralisé.
+
+      Un audit ne prouve jamais l'absence de vulnérabilité.
+
+EXEMPLES CITES.
+
+      Comptes de service rattachés à un processus : apache, mysqld ; comptes génériques : admin, user.
+
+      Facteurs d'authentification forte : mot de passe, tracé, signature ; carte à puce, jeton USB, carte magnétique, RFID, téléphone recevant un SMS ; empreinte biométrique.
+
+      Chiffrement Wi-Fi : mode WPA2, algorithme AES CCMP, authentification par certificats clients.
+
+      Protocoles sécurisés : HTTPS, IMAPS, SMTPS, POP3S reposant sur TLS ; SSH remplaçant Telnet et Rlogin.
+
+      Outils de déploiement de correctifs : WSUS pour les composants Microsoft ; source de veille CERT-FR.
+
+      Erreurs de service à journaliser : codes HTTP 403, 404 et 500 ; synchronisation de temps par le protocole NTP.
+
+      Escroquerie par faux ordre de virement émanant vraisemblablement d'un dirigeant.
+
+      Prestataire de réponse aux incidents de sécurité pour la copie physique du disque et l'analyse de la mémoire et des journaux.

@@ -1,258 +1,251 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 4, thème 8
-BONNES PRATIQUES DE SÉCURITÉ OPÉRATIONNELLE
-=======================================================================
+BONNES PRATIQUES ET CONSEILS EN MATIÈRE DE SÉCURITÉ OPÉRATIONNELLE.
 
-1. BONNES PRATIQUES EN CAS D'INTRUSION
------------------------------------------------------------------------
-DÉTECTER une intrusion :
-- Outils « host-based » : analysent les journaux des équipements.
-- Outils « network-based » : capturent/analysent le trafic à des points
-  du réseau. Les deux ensemble = meilleure efficacité.
-- Suivre les avis et alertes des CERT.
-- Comportements anormaux : connexion impossible, fichiers disparus,
-  système de fichiers endommagé, connexions/activités inhabituelles,
-  services ouverts non autorisés, présence d'un sniffer, modification du
-  fichier de mots de passe, création/destruction de comptes, fichiers
-  cachés.
+LEXIQUE COMPLET.
 
-RÉAGIR (ANSSI + CERT) :
-1. Déconnecter la machine du réseau SANS l'éteindre ni la redémarrer
-   (préserver l'état des processus pour l'analyse).
-2. Prévenir le responsable sécurité et la hiérarchie, par téléphone ou
-   de vive voix (l'intrus peut lire les courriels).
-3. Prévenir le CERT dont on dépend (administrations françaises : CERTA /
-   CERT-FR, contact@cert.ssi.gouv.fr).
+      Détection d'intrusion host-based : outil qui analyse les journaux des événements se produisant sur un équipement pour repérer une compromission.
 
-APRÈS (analyse) :
-- Faire une COPIE PHYSIQUE de bas niveau du disque (secteurs non occupés
-  inclus ; dd sous Unix ; image jamais stockée sur le disque étudié).
-- Rechercher les traces sur les autres équipements (pare-feu, routeurs,
-  IDS), puis les copier, dater, signer numériquement.
-- NE PAS contacter l'attaquant : laisser le CERT le faire (contacts,
-  outils, autorité neutre).
-- Méthodologie d'analyse CERT : 1) modifications système et config,
-  2) modifications de données, 3) outils/données laissés par l'intrus,
-  4) examen des journaux, 5) recherche d'un sniffer, 6) vérification des
-  autres machines.
+      Détection d'intrusion network-based : outil qui capture et analyse le trafic en certains points du réseau pour repérer une compromission.
 
-APRÈS (remédiation) :
-- RÉINSTALLER entièrement l'OS depuis une version saine (noyau, binaires,
-  données, processus, mémoire ont pu être modifiés). Appliquer tous les
-  correctifs AVANT reconnexion. Tester avec un scanner de vulnérabilités
-  (Nessus). Supprimer seulement la vulnérabilité exploitée = insuffisant.
-- Supprimer tous les services inutiles (ne démarrer que le nécessaire).
-- Appliquer tous les correctifs de sécurité (OS + logiciels).
-- Changer TOUS les mots de passe du SI.
+      CERT : Computer Emergency Response Team, autorité de veille qui publie avis et alertes sur les failles ; en France, le CERTA est le CERT dont dépendent les administrations.
 
-APRÈS (retour d'expérience) :
-- Se poser les bonnes questions -> réponses techniques (filtrage,
-  détection d'intrusion, journalisation) et organisationnelles (politique
-  de sécurité suffisante/respectée ? procédure écrite ? relations
-  humaines ?).
-- Garder une trace écrite chronologique complète, en version papier.
+      Copie physique de disque : copie exacte de bas niveau d'un disque, secteurs non occupés compris, réalisée sous Unix avec la commande dd, jamais stockée sur le disque à étudier.
 
-ASPECTS LÉGAUX :
-- Seule la DIRECTION de l'organisme (autorité morale) peut déposer
-  plainte.
-- Dégâts causés à des tiers depuis le SI -> responsabilité pénale et
-  civile possible.
-- Services spécialisés : OCLCTIC (Office Central de Lutte contre la
-  Criminalité liée aux TIC), BEFTI (Brigade d'Enquêtes sur les Fraudes
-  aux Technologies de l'Information), DCRI.
+      Valeur probatoire : force juridique d'un élément de preuve, renforcée pour un journal par sa signature et son horodatage dès la création.
 
-2. BONNES PRATIQUES : MOTS DE PASSE
------------------------------------------------------------------------
-ATTAQUES :
-- Force brute : toutes les combinaisons.
-- Dictionnaire : mots d'un dictionnaire + règles (majuscule, S->5, ajout
-  d'un chiffre).
-- Compromis temps/mémoire : chaînes hachage/réduction (tables
-  arc-en-ciel) ; efficace sur algos faibles (hash LM Windows = 2 mots de
-  7 caractères). Chaînes de Markov pour optimiser.
-- Indirectes : filoutage (phishing), keyloggers, supercherie.
+      OCLCTIC : Office central de lutte contre la criminalité liée aux technologies de l'information et de la communication, service auprès duquel déposer plainte.
 
-BON MOT DE PASSE = fort (longueur + variété : minuscules, majuscules,
-chiffres, spéciaux) MAIS facile à retenir (paradoxe : sinon post-it).
-- Méthode phonétique : « Usain Bolt a Couru le 100 en moins de 10
-  Secondes cet après-midi » -> « UBaClsansMe-2102nde7am ».
-- Méthode des premières lettres : « un tiens vaut mieux que deux tu
-  l'auras » -> « 1tvmQ2tl'A ».
+      BEFTI : Brigade d'enquêtes sur les fraudes aux technologies de l'information.
 
-POLITIQUE DE GESTION (technique + organisationnelle) :
-- Sensibilisation (un mot de passe faible fragilise tout le SI).
-- Mot de passe initial sur canal sûr, changé à la 1re connexion.
-- Critères : longueur minimale, non-réutilisation des n derniers, nombre
-  de tentatives avant verrouillage, déblocage automatique après délai
-  (éviter le DoS), veille automatique.
-- Confidentialité : ne pas divulguer/partager ; stockage papier possible
-  en lieu sûr (enveloppe cachetée, coffre ignifugé).
-- Ne pas laisser les logiciels/navigateurs retenir les mots de passe.
-- Mots de passe différents par service ; changer régulièrement depuis
-  une machine saine.
-- OTP (One Time Password) : non rejouable, mais vulnérable au MITM.
-- Contrôle de robustesse par l'administrateur (si autorisé).
-- Préférer un certificat + clé privée sur CARTE À PUCE qualifiée ANSSI
-  (ex. Gendarmerie Nationale dès 2014).
+      Attaque par force brute : test de toutes les combinaisons possibles d'un mot de passe.
 
-8 RECOMMANDATIONS MINIMALES ANSSI :
-1. Mots de passe différents par système (messagerie pro != perso).
-2. Pas lié à l'identité (nom de société, date de naissance...).
-3. Ne jamais faire créer son mot de passe par un tiers.
-4. Changer les mots de passe par défaut au plus tôt.
-5. Renouveler à fréquence raisonnable (90 jours pour données sensibles).
-6. Ne pas stocker dans un fichier exposé ni sur un papier accessible.
-7. Ne pas se les envoyer sur sa messagerie personnelle.
-8. Configurer les logiciels et le navigateur pour ne pas les retenir.
+      Attaque par dictionnaire : test d'une série de mots issus d'un dictionnaire, éventuellement transformés par des règles automatiques comme le remplacement d'une lettre par un chiffre ou l'ajout d'un chiffre.
 
-3. BONNES PRATIQUES FACE AUX ATTAQUES DDoS
------------------------------------------------------------------------
-- DoS = rendre indisponible un ou plusieurs services (exploitation d'une
-  vulnérabilité, saturation de bande passante = attaque volumétrique,
-  épuisement de ressources : sessions TCP, traitements BDD).
-- DDoS = réseau de machines souvent compromises.
-- Cibles privilégiées : e-commerce, institutions financières,
-  gouvernements, hébergeurs. Motivations : idéologie, vengeance,
-  extorsion, DIVERSION (couvrir une fraude).
+      Attaque par compromis temps-mémoire : méthode intermédiaire entre force brute et dictionnaire, utilisant des chaînes construites par hachage et réduction, efficace contre les algorithmes faibles comme le hash LM de Windows.
 
-TYPOLOGIE :
-- Botnets : outils en ligne ; services DDoS = « booter » / « stresser »
-  (tarifs abordables, particuliers).
-- Réflexion : paquets envoyés à des réflecteurs avec l'IP usurpée de la
-  victime -> réponses non sollicitées la saturent (UDP surtout, aussi
-  TCP SYN -> SYN-ACK).
-- Amplification : protocoles dont la réponse >> la requête (DNS, NTP,
-  SNMP, SSDP). Souvent réflexion + amplification. Victime possible même
-  sans offrir ce service.
+      Chaîne de Markov : méthode statistique calculant la probabilité d'apparition d'une lettre selon la précédente, utilisée pour optimiser les attaques de mot de passe.
 
-PROTECTIONS TECHNIQUES (3 catégories) :
-- Filtrage en bordure : pare-feux, répartiteurs de charge (trafic
-  faible ; filtrage protocole/ports, limitation requêtes/IP).
-  ATTENTION : pas de suivi de connexions entrantes devant un serveur à
-  forte audience -> le pare-feu devient le point de défaillance.
-  Augmenter la taille des tables d'état. Équipements dédiés : filtrage
-  géographique, regex sur contenu, seuils de détection.
-- Externalisées : hébergeurs (protection limitée) ; opérateurs de transit
-  (« blackholing » par destination = rend le DoS effectif ; filtrage) ;
-  CDN (Content Delivery Network : serveurs répartis, cache, géolocalisation
-  IP + ANYCAST, répartition de charge).
-- Dédiées : redirection DNS (trafic du domaine vers l'IP du fournisseur
-  qui filtre puis redirige ; limites : IP réelle découvrable, trafic pas
-  forcément routé par le fournisseur) ; déroutement par annonces BGP
-  (tout le trafic d'un bloc d'IP vers le fournisseur ; meilleure
-  protection, plus cher).
+      Attaque indirecte : capture du mot de passe au moment de sa saisie ou par supercherie, notamment le filoutage et les enregistreurs de frappe.
 
-PROTECTIONS ORGANISATIONNELLES / PRATIQUES :
-- Segmentation du réseau (défense en profondeur) ; réseau
-  d'administration dédié ou QoS de priorisation.
-- Filtrage en bordure : n'autoriser que les flux nécessaires.
-- À la détection : blocage des IP sources, blocage du type de trafic,
-  limitation des connexions concurrentes/IP, réduction des délais de
-  garde TCP, blocage du trafic vers les cibles.
-- Supervision et cartographie exhaustives ; annuaire de contacts et de
-  partenaires externes à jour.
-- Ces pratiques limitent aussi la participation involontaire à un DDoS.
+      Mot de passe fort : mot de passe difficile à retrouver même avec des outils automatisés, dont la force dépend de la longueur et du nombre de possibilités par caractère.
 
-4. BONNES PRATIQUES : JOURNALISATION
------------------------------------------------------------------------
-- Journaux = composante indispensable de la sécurité des SI.
-  Usage a priori (temps réel, détection) et a posteriori (comprendre le
-  cheminement, évaluer l'impact).
-- Moyen de DÉTECTION et d'ANALYSE, PAS de protection (complémentaire).
-- Pré-requis : fonctionnalité native (dès la conception) ; horodatage de
-  TOUS les événements ; synchronisation des horloges (plusieurs sources
-  internes cohérentes, calées sur des sources externes fiables) ;
-  dimensionnement du stockage.
-- Architecture :
-  * export automatique sur une machine physique DIFFÉRENTE de celle qui
-    génère ; transfert vers serveur(s) central(aux) dédié(s), redondé(s).
-  * transfert temps réel, sans traitement préalable, mode connecté (TCP
-    plutôt qu'UDP), bande passante maîtrisée.
-  * réseau d'administration dédié ou zone interne non exposée.
-  * partition disque dédiée ; arborescence par thèmes/services.
-  * rotation : séparation par thèmes, rotation journalière + nommage/
-    horodatage, compression après délai, effacement local sur les
-    serveurs clients.
-  * archivage soumis à contraintes légales.
-  * accès en lecture limité (RSSI, admin habilité) ; processus de
-    collecte peu privilégiés ; consultation via outil dédié et rôles.
-- Juridique : signer + horodater dès la création -> intégrité + valeur
-  probatoire. Principe d'effacement/anonymisation des données de
-  connexion. FAI et hébergeurs : conservation MINIMALE 1 AN. Associer les
-  personnels et leurs instances représentatives (usage disciplinaire).
+      Méthode phonétique : moyen mnémotechnique fabriquant un mot de passe à partir des sons des syllabes d'une phrase facile à retenir.
 
-5. SÉCURISATION D'UN SYSTÈME LINUX
------------------------------------------------------------------------
-- MINIMISATION : supprimer tous les éléments logiciels superflus
-  (userland + noyau + modules). Éliminer les services inutiles en écoute,
-  les services root non nécessaires, le serveur X sur un serveur
-  (« éliminer » = empêcher le lancement automatique). Désinstaller
-  compilateur, débogueur (gdb).
-- DÉFENSE EN PROFONDEUR (Vauban, bastions) : ne pas satisfaire une
-  exigence par un seul mécanisme ; pare-feu local en complément.
-- PARTITIONNEMENT rationnel : éviter la saturation (partition dédiée pour
-  journaux, spool, files), simplifier la sauvegarde, options de montage
-  (ro, nodev, noexec, nosuid).
-- 5 RECOMMANDATIONS ANSSI DE DURCISSEMENT :
-  1) Réduire la surface d'attaque : MAJ régulières ; supprimer les
-     logiciels inutiles (netstat --programs --listening) ; limiter les
-     services en écoute par interface ; désactiver le chargement
-     dynamique des modules (/etc/sysctl.conf) ; moindre privilège ;
-     contrôle d'accès par rôles (Tomoyo, AppArmor, ACL grsecurity) ;
-     adapter le noyau.
-  2) Défense en profondeur : pare-feu local (iptables ou ufw) ;
-     partitionnement + options de montage (/etc/fstab, noexec) ; droits
-     fichiers après analyse fine ; chiffrer les données.
-  3) Cloisonnement : LXC, VServer, OpenVZ (plus robustes qu'un chroot).
-  4) Rédiger/appliquer des procédures d'administration sécurisées
-     (connexions des exploitants, supervision, MAJ, sauvegardes).
-  5) Politique de journalisation cohérente (niveaux de criticité,
-     remontée d'alertes).
+      Méthode des premières lettres : moyen mnémotechnique conservant les premières lettres des mots d'une phrase, sans se limiter aux minuscules.
 
-6. DURCISSEMENT LOGICIEL SOUS WINDOWS 7 ET +
------------------------------------------------------------------------
-- SRP (Software Restriction Policies) : depuis Windows XP / 2003 Server ;
-  liste blanche de règles ; efficaces mais lourdes à maintenir sur un
-  grand parc ; impactent TOUS les utilisateurs de la machine.
-- AppLocker : évolution des SRP ; peut CIBLER un utilisateur précis
-  d'une machine ou d'un domaine -> à privilégier.
-  * autorise/refuse : exécutables (.exe, .com), Windows Installer
-    (.msi, .mst), scripts (.ps1, .bat, .cmd, .vbs, .js), bibliothèques
-    (.dll, .ocx).
-  * privilégier les règles « AUTORISER » avec exceptions.
-  * 3 types de règles : chemin d'accès ; signature électronique d'un
-    éditeur (nom, version) ; empreinte SHA-256 d'un fichier.
-  * PRIVILÉGIER la signature électronique (certificats et AC de
-    confiance) = compromis sécurité/souplesse.
-  * fonctionnalité d'AUDIT pour identifier les applications inconnues.
-  * service AppIdSvc à démarrage automatique ; comptes utilisateurs
-    STANDARD (jamais admin local).
-  * supprimer la règle par défaut sur c:\Program Files -> règles
-    explicites par application ; supprimer les règles autorisant les
-    scripts depuis c:\Windows.
-- LIMITES d'AppLocker :
-  * ActiveX peut instancier un programme bloqué (ex. session RDP depuis
-    un document Word) -> bloquer aussi les DLL/OCX.
-  * aucun contrôle sur le comportement d'un programme une fois lancé.
-  * ne contrôle pas les codes interprétés (Perl, macros) -> macros
-    signées seulement, désactiver l'éditeur de macros.
-  * applications 16 bits non contrôlées (exécutées via NTVDM) ->
-    désactiver NTVDM si inutile.
+      One Time Password : mot de passe non rejouable, utilisable une seule fois, qui reste vulnérable à l'attaque par interception.
 
-=======================================================================
-À RETENIR
-- Intrusion : déconnecter sans éteindre, prévenir (téléphone) RSSI + CERT,
-  copie physique du disque, réinstaller l'OS, changer tous les mots de
-  passe ; seule la direction dépose plainte.
-- Mots de passe : force brute / dictionnaire / temps-mémoire / indirectes ;
-  fort + mémorisable ; 8 règles ANSSI (différents, non liés à l'identité,
-  90 jours...).
-- DDoS : réflexion + amplification (DNS/NTP/SNMP/SSDP) ; protections
-  bordure / externalisées (opérateur, CDN, blackholing) / dédiées
-  (redirection DNS, BGP) ; segmentation + supervision.
-- Journalisation : détection + analyse (pas protection) ; horloges
-  synchronisées ; export sur machine distincte ; signer/horodater ;
-  FAI/hébergeurs 1 an.
-- Linux : minimisation, défense en profondeur, partitionnement
-  (ro/nodev/noexec/nosuid), cloisonnement LXC/OpenVZ, 5 recos ANSSI.
-- Windows : AppLocker > SRP (ciblage utilisateur) ; règles par
-  signature ; limites ActiveX, macros, 16 bits/NTVDM.
+      Certificat d'authentification sur carte à puce : dispositif préférable au mot de passe, avec clé privée stockée sur une carte à puce qualifiée par l'ANSSI.
+
+      Déni de service : DOS, attaque rendant indisponible un ou plusieurs services, souvent par exploitation d'une vulnérabilité ou par saturation d'une ressource ou de la bande passante.
+
+      Déni de service distribué : DDoS, déni de service faisant intervenir un réseau de machines souvent compromises.
+
+      Botnet : réseau de machines compromises servant à lancer des attaques DDoS, exploitable via des outils en ligne et des services payants dits booter ou stresser.
+
+      Attaque par réflexion : envoi de paquets à des serveurs réflecteurs en usurpant l'adresse IP de la victime, dont les réponses non sollicitées saturent les liens de la victime.
+
+      Attaque par amplification : réflexion exploitant des protocoles générant une réponse bien plus volumineuse que la requête, souvent DNS, NTP, SNMP ou SSDP.
+
+      Blackholing : mesure d'un opérateur consistant à router vers le néant tout le trafic destiné à la victime, ce qui rend le déni de service effectif.
+
+      CDN : Content Delivery Network, infrastructure de serveurs répartie dans plusieurs centres de données, avec fonction de cache, utilisant géolocalisation et adressage anycast, qui améliore la résistance aux DDoS.
+
+      Anycast : technique d'adressage partageant une même adresse IP entre plusieurs serveurs, le routage dirigeant l'utilisateur vers le nœud le plus proche.
+
+      Redirection DNS anti-DDoS : protection dirigeant le trafic d'un domaine vers un serveur du fournisseur de protection qui filtre puis réachemine, à condition que l'adresse IP réelle ne soit pas trivialement découvrable.
+
+      Déroutement par annonces BGP : protection dirigeant tout le trafic d'un bloc d'adresses IP vers le fournisseur de protection, plus efficace mais plus onéreuse que la redirection DNS.
+
+      Journalisation : génération, collecte et conservation des journaux d'événements, moyen de détection en temps réel et d'analyse a posteriori, complémentaire et non substitut des mécanismes de protection.
+
+      Horodatage : datation d'un événement journalisé, indispensable à son exploitation.
+
+      Synchronisation des horloges : mise à l'heure cohérente des équipements sur plusieurs sources de temps internes, elles-mêmes calées sur des sources externes fiables.
+
+      Rotation des journaux : politique formalisée de séparation par thèmes, rotation journalière avec nommage horodaté, compression après délai et effacement local sur les serveurs clients.
+
+      Réduction de la surface d'attaque : minimisation consistant à supprimer tout élément logiciel superflu, au niveau utilisateur comme au niveau noyau, car tout ce qui est inutile ne sert qu'à l'attaquant.
+
+      Défense en profondeur : principe consistant à ne pas satisfaire une exigence de sécurité par un seul mécanisme mais à multiplier les barrières.
+
+      Partitionnement rationnel : découpage disque isolant les répertoires susceptibles d'être remplis de l'extérieur, simplifiant la sauvegarde et permettant des options de montage ro, nodev, noexec et nosuid.
+
+      SRP : Software Restriction Policies, politique de restrictions logicielles introduite par Microsoft à partir de Windows XP et Windows 2003, appliquée indifféremment à tous les utilisateurs d'une machine.
+
+      AppLocker : évolution des SRP permettant de cibler un utilisateur ou un groupe précis et d'autoriser ou refuser exécutables, installeurs, scripts et bibliothèques.
+
+      Règle AppLocker : condition d'autorisation ou de refus, fondée sur le chemin d'accès, sur la signature électronique d'un éditeur ou sur l'empreinte cryptographique SHA-256 d'un fichier.
+
+      AppIdSvc : service Identité de l'application, à démarrer automatiquement pour activer AppLocker.
+
+      NTVDM : NT Virtual Dos Machine, processus exécutant les applications seize bits, non contrôlées par AppLocker, à désactiver en l'absence de telles applications.
+
+COURS DÉTAILLÉ.
+
+I. BONNES PRATIQUES EN CAS D'INTRUSION.
+
+   A. Déterminer si l'on est victime d'une intrusion.
+
+      Il n'y a pas de réponse unique, mais quelques conseils simples s'appliquent. Recourir à des outils de détection d'intrusion, ceux qui analysent les journaux des équipements, dits host-based, et ceux qui capturent et analysent le trafic en certains points du réseau, dits network-based, l'usage des deux améliorant l'analyse. Prendre au sérieux et suivre les conseils du CERT, car un élément du système d'information visé par une compromission signalée dans une alerte du CERT a de fortes chances d'être aussi repéré par un attaquant, et l'attaque subie peut avoir déjà fait l'objet d'une fiche du CERT.
+
+      Mettre en évidence des comportements inhabituels : impossibilité de se connecter à la machine, fichiers disparus, système de fichiers endommagé, connexions ou activités inhabituelles, activité importante, services ouverts non autorisés, présence d'un renifleur de mots de passe, modification intempestive du fichier de mots de passe ou date de modification suspecte, création ou destruction de comptes, création de fichiers y compris cachés.
+
+   B. Actions en cas de détection ou de suspicion.
+
+      L'ANSSI et le CERT préconisent de déconnecter la machine du réseau sans l'éteindre ni la redémarrer, sous peine de perdre des informations d'analyse comme l'état des processus en cours. Prévenir un responsable de sécurité et la hiérarchie, de préférence par téléphone ou de vive voix car l'intrus peut lire les courriers échangés depuis une autre machine ; le responsable sécurité doit avoir été clairement identifié par tous les administrateurs avant l'incident. Prévenir le CERT dont on dépend, en France le CERTA pour les administrations.
+
+   C. Actions « après » - premières étapes.
+
+      Faire une copie physique du disque : en l'absence de copie, l'altération des données par l'analyse rendrait inefficace toute procédure judiciaire, et disposer d'une copie exacte de l'état au moment de la découverte est utile même sans action judiciaire. Une simple sauvegarde de fichiers ne suffit pas ; il faut une copie de bas niveau incluant les secteurs non occupés, réalisée sous Unix avec la commande dd, sous Windows avec une application dédiée ; l'image produite ne doit jamais être stockée, même temporairement, sur le disque à étudier.
+
+      Rechercher les traces disponibles, un équipement n'étant jamais isolé : il existe des traces dans les autres équipements, gardes-barrière, routeurs, outils de détection, qu'il faut copier, dater et signer numériquement. Ne pas contacter l'attaquant, laisser le CERT le faire, car les CERT disposent d'outils et de contacts, leurs messages sont pris plus au sérieux et ils constituent une autorité neutre.
+
+      La méthodologie d'analyse du CERT comprend la recherche des modifications dans le système et les fichiers de configuration, la recherche des modifications de données, la recherche des outils et données laissés par l'intrus, l'examen des fichiers de journalisation, la recherche d'un renifleur sur le réseau et la vérification des autres machines connectées.
+
+   D. Actions « après » - suite.
+
+      Réinstaller complètement le système d'exploitation à partir d'une version saine, car sur une machine compromise n'importe quelle partie peut avoir été modifiée, noyau, binaires, données, processus et mémoire ; c'est la seule manière d'être sûr qu'il ne reste ni porte dérobée ni modification de l'intrus. Appliquer ensuite tous les correctifs de sécurité avant reconnexion, tester la machine avec un scanner de vulnérabilités à jour comme Nessus et corriger les failles ; se contenter de supprimer la vulnérabilité utilisée par l'intrus est très insuffisant. Supprimer tous les services inutiles, la configuration normale étant de ne démarrer que les services nécessaires, en désactivant tout au départ puis en activant au besoin. Appliquer tous les correctifs préconisés pour le système d'exploitation et les logiciels. Changer tous les mots de passe du système d'information une fois toutes les vulnérabilités connues supprimées.
+
+   E. Actions « après » - fin et aspects légaux.
+
+      Se poser les bonnes questions pour lister les informations et procédures qui ont manqué, afin de mieux protéger, détecter, réagir plus calmement et reconstituer l'historique de l'intrusion. En déduire les améliorations : réponses techniques, outils de protection, de détection et de journalisation, et réponses organisationnelles, procédures plus claires, politique de sécurité suffisante et respectée, recherche systématique d'intrusion prévue, marche à suivre écrite et disponible. Garder une trace écrite complète et chronologique, avec une version papier.
+
+      Aspects légaux : seule la direction de l'organisme, qui en porte l'autorité morale, est habilitée à déposer plainte. En cas de dégâts causés à des tiers depuis le système d'information compromis, l'organisation peut être considérée comme pénalement et civilement responsable. Les services spécialisés sont l'OCLCTIC, la BEFTI et la DCRI, cette dernière compétente sur les atteintes à la sûreté de l'État.
+
+II. BONNES PRATIQUES EN MATIÈRE DE MOT DE PASSE.
+
+   A. Les attaques de mot de passe.
+
+      L'utilisation de mots de passe forts est une brique de base, pourtant souvent peu apparente dans la politique de sécurité, d'où des comptes à mot de passe trivial, par défaut ou sans mot de passe. L'attaque par force brute teste toutes les combinaisons possibles ; plus il y a de combinaisons, plus le temps moyen est long. L'attaque par dictionnaire teste des mots issus de dictionnaires, prénoms, auteurs, marques ; un mot sans signification la met en échec, mais des règles de transformation augmentent les combinaisons, remplacement d'un caractère par une majuscule, d'une lettre par un chiffre, ajout d'un chiffre au début ou à la fin, ajout des mots de passe déjà découverts.
+
+      L'attaque par compromis temps-mémoire est intermédiaire, plus rapide que la force brute et moins gourmande en mémoire que le dictionnaire, réalisée à partir de chaînes construites par hachage et réduction ; elle est efficace contre les algorithmes faibles comme le hash LM de Windows, antérieur au NTLM, fondé sur deux mots de sept caractères. Les chaînes de Markov, qui calculent la probabilité d'une lettre selon la précédente, optimisent les attaques. Les attaques indirectes, très pratiquées, capturent le mot de passe à la saisie, par filoutage ou enregistreur de frappe, ou par supercherie ; elles imposent des mesures organisationnelles, procédures robustes de création de compte et de réinitialisation, sensibilisation des utilisateurs et non-réutilisation d'un même mot de passe sur des systèmes différents.
+
+   B. Un bon mot de passe.
+
+      Un bon mot de passe est d'abord fort, difficile à retrouver même avec des outils automatisés ; sa force dépend de sa longueur et du nombre de possibilités par caractère, un mélange de minuscules, majuscules, caractères spéciaux et chiffres étant plus difficile qu'uniquement des minuscules. Paradoxe de la force : un bon mot de passe doit rester facile à retenir, sinon l'utilisateur l'inscrit sur un papier. Des moyens mnémotechniques permettent de concilier les deux : la méthode phonétique utilise les sons des syllabes d'une phrase, la méthode des premières lettres conserve les initiales des mots d'une phrase sans se limiter aux minuscules.
+
+   C. La politique de gestion des mots de passe.
+
+      Les mots de passe étant souvent la seule protection d'une station, une politique de gestion technique et organisationnelle, intégrée à la politique de sécurité, est indispensable. Elle comprend la sensibilisation à l'usage de mots de passe forts, en faisant comprendre qu'un mot de passe faible met en danger tout le système d'information et pas seulement le poste. Le mot de passe initial doit être fourni sur un canal sûr et changé dès la première connexion s'il a été communiqué autrement ; l'administrateur qui l'a fourni sur un canal non sûr doit rester vigilant. Des critères peuvent être imposés : longueur minimale, interdiction de réutiliser les n derniers mots de passe, nombre de tentatives avant verrouillage, déverrouillage automatique après délai pour éviter les dénis de service, veille automatique déverrouillée par le mot de passe.
+
+      Confidentialité : ne jamais divulguer ni partager son mot de passe, ni le stocker sans protection ; la politique peut imposer un stockage papier en lieu sûr, enveloppe cachetée dans un coffre ignifugé. Configuration des logiciels : la case « retenir le mot de passe » des navigateurs pose des problèmes de sécurité. Utiliser des mots de passe différents et les changer régulièrement à partir de machines saines, car un enregistreur de frappe capture tous les mots de passe, même forts, et l'impact dure tant qu'ils n'ont pas été changés. Les mots de passe non rejouables, One Time Password, ne peuvent être réutilisés s'ils sont découverts, mais restent vulnérables à l'interception. Un contrôle systématique de la robustesse des mots de passe, si l'administrateur y est autorisé, est utile pour la sensibilisation. Préférer, si possible, un certificat d'authentification et une clé privée sur carte à puce qualifiée par l'ANSSI, comme déployé à la Gendarmerie nationale à partir de deux mille quatorze.
+
+   D. Les huit recommandations minimales de l'ANSSI.
+
+      Utiliser des mots de passe différents pour des systèmes distincts, le même mot de passe pour la messagerie professionnelle et personnelle étant à proscrire. Choisir un mot de passe non lié à son identité. Ne jamais demander à un tiers de créer son mot de passe. Modifier au plus tôt les mots de passe par défaut. Renouveler avec une fréquence raisonnable, tous les quatre-vingt-dix jours pour les données sensibles. Ne pas stocker les mots de passe dans un fichier sur un poste exposé ni sur un papier accessible. Ne pas s'envoyer ses mots de passe sur sa messagerie personnelle. Configurer les logiciels et le navigateur pour qu'ils ne retiennent pas les mots de passe.
+
+III. BONNES PRATIQUES FACE AUX ATTAQUES DE TYPE DDOS.
+
+   A. Contexte et enjeux.
+
+      Une attaque par déni de service rend indisponible un ou plusieurs services, en exploitant une vulnérabilité, en saturant la bande passante, on parle alors d'attaque volumétrique, ou en sollicitant jusqu'à épuisement une ressource, ouverture massive de sessions TCP ou traitements concurrents d'une base de données. On parle de déni de service distribué lorsque l'attaque fait intervenir un réseau de machines souvent compromises. Toute entité dont l'activité dépend d'une infrastructure connectée à Internet peut être visée ; le commerce en ligne, les institutions financières, les gouvernements et les hébergeurs sont plus exposés. Les motivations vont de l'idéologie à la vengeance, l'extorsion et la rançon, certaines attaques servant à détourner l'attention pour couvrir des transactions frauduleuses. L'ANSSI insiste sur la prévision de protections dès le début des projets.
+
+   B. Typologie des attaques.
+
+      Les botnets, réseaux de machines compromises, servent à lancer des DDoS ; des outils en ligne les exploitent, et les services de DDoS en ligne, dits booter ou stresser, à tarif accessible aux particuliers, ont promu ce type d'attaque. Les attaques par réflexion envoient des paquets à des serveurs réflecteurs en usurpant l'adresse IP de la victime, dont les réponses non sollicitées la saturent ; elles utilisent souvent UDP mais aussi TCP par paquets SYN. Les attaques par amplification exploitent des protocoles générant une réponse bien plus volumineuse que la requête ; la plupart des attaques volumétriques combinent réflexion et amplification et visent des protocoles d'infrastructure ou de supervision comme DNS, NTP, SNMP et SSDP, si bien qu'une entité peut être victime d'une amplification via un protocole qu'elle n'utilise pas.
+
+   C. Protections techniques.
+
+      Trois catégories : le filtrage en bordure, les solutions externalisées et les solutions dédiées. En bordure, les pare-feu et répartiteurs de charge absorbent les attaques à trafic faible, mais il ne faut pas activer le suivi de connexions entrantes sur un pare-feu placé devant un serveur à forte audience, sous peine d'effondrer l'équipement filtrant et tout le système d'information ; augmenter la taille des tables d'état améliore la résistance. Les équipements dédiés ajoutent le filtrage géographique, le filtrage sur contenu par expressions régulières, la limitation du nombre de requêtes par ressource et des seuils de détection, mais souffrent des variations de trafic légitimes, du délai de déploiement des contre-mesures et d'un coût qui augmente avec les mises à jour.
+
+      Solutions externalisées : les hébergeurs proposent une protection souvent limitée mais parfois suffisante. L'opérateur de transit peut intervenir quand le lien du client est saturé, notamment par blackholing du trafic destiné à la victime, mesure qui rend toutefois le déni de service effectif, ou par un service de filtrage opéré par lui ou par le client. Un CDN, infrastructure de serveurs répartie avec fonction de cache, dirige l'utilisateur vers le serveur le plus proche par géolocalisation de l'adresse IP source des requêtes DNS et par adressage anycast, et sa répartition de ressources améliore la résistance aux DDoS.
+
+      Solutions dédiées : la redirection DNS dirige le trafic d'un domaine vers un serveur du fournisseur de protection qui filtre puis réachemine, à condition que l'adresse IP réelle ne soit pas trivialement découvrable, par exemple via des messages d'erreur ou un oubli de la changer ; sa limite est que le trafic ne transite pas forcément par le fournisseur. Le déroutement par annonces BGP dirige tout le trafic d'un bloc d'adresses vers le fournisseur, offrant un bien meilleur niveau de protection mais plus onéreux.
+
+   D. Protections organisationnelles et pratiques.
+
+      Segmenter le réseau de l'entité pour faciliter le filtrage et isoler des sous-réseaux ou serveurs, ce qui suppose un réseau d'administration dédié ou au moins une QoS de priorisation. Filtrer à la bordure pour n'autoriser que les flux nécessaires ; à la détection, bloquer les adresses IP sources identifiées, bloquer le type de trafic impliqué et non nécessaire, limiter les connexions concurrentes par adresse IP source, réduire les délais de garde des connexions TCP, bloquer le trafic vers les cibles selon l'impact. Disposer d'outils de supervision et de cartographie exhaustifs et d'un annuaire de contacts, dont les partenaires externes, régulièrement mis à jour. Ces pratiques limitent aussi le risque de participation involontaire à un déni de service.
+
+IV. BONNES PRATIQUES EN MATIÈRE DE JOURNALISATION.
+
+   A. Rôle et pré-requis.
+
+      Les journaux d'événements sont une composante indispensable de la gestion de la sécurité. Ils servent a priori à détecter des incidents par analyse en temps réel, et a posteriori à retrouver les traces d'un incident et comprendre le cheminement d'une attaque. La journalisation est un moyen de détection et d'analyse, complémentaire et non substitut des mécanismes de protection ; son architecture doit suivre l'évolution du système d'information.
+
+      Pré-requis : utiliser des systèmes et applicatifs disposant nativement d'une fonction de journalisation, prise en compte dès la conception ; activer l'horodatage de tous les événements, un événement n'étant pertinent que situé dans le temps ; synchroniser les horloges des équipements sur plusieurs sources internes cohérentes, elles-mêmes calées sur des sources externes fiables sauf réseaux isolés ; dimensionner l'espace de stockage local et la tenue de charge des composants.
+
+   B. Architecture de journalisation.
+
+      Exporter automatiquement les journaux sur une machine physique différente de celle qui les a générés, et transférer les journaux de tous les équipements vers un ou plusieurs serveurs centraux dédiés, redondés selon la taille du parc, éventuellement en organisation hiérarchique. Privilégier un transfert en temps réel, sans traitement préalable, en mode connecté avec contrôle des flux, TCP de préférence à UDP, en maîtrisant la bande passante utilisée. Effectuer le transfert sur un réseau d'administration dédié quand le besoin de sécurité est important, ou au moins placer les serveurs de journalisation dans une zone interne non exposée. Dédier une partition disque au stockage des journaux et adopter une arborescence par thèmes ou services. Formaliser une politique de rotation : séparation par thèmes, rotation journalière avec nommage horodaté, compression après délai, effacement local sur les serveurs clients. Prendre connaissance des contraintes légales de durée de conservation pour définir l'archivage. Limiter l'accès aux journaux en lecture à un petit nombre de comptes ayant le besoin d'en connaître, exécuter les processus de journalisation avec des comptes peu privilégiés et associer les comptes de consultation à des rôles prédéterminés.
+
+   C. Aspects juridiques.
+
+      Les éléments juridiques sont structurants et pris en compte dès la conception. Signer et horodater les journaux dès leur création assure leur intégrité et accroît leur valeur probatoire. La réglementation pose un principe général d'effacement ou d'anonymisation des données de connexion, avec des régimes distincts selon l'opérateur ou le cadre ; les fournisseurs d'accès à Internet et les hébergeurs conservent leurs journaux au minimum un an. Les personnels et leurs instances représentatives doivent être associés à la définition des processus de journalisation, surtout s'ils servent à des fins disciplinaires.
+
+V. BONNES PRATIQUES EN MATIÈRE DE SÉCURISATION D'UN SYSTÈME LINUX.
+
+   A. Réduire la surface d'attaque.
+
+      La minimisation guide la configuration sécurisée : supprimer tous les éléments logiciels superflus car tout ce qui est inutile aux utilisateurs légitimes ne sert qu'à l'attaquant. Le principe s'applique à la couche utilisateur comme au noyau et à ses modules dynamiques. En pratique, éliminer les services inutiles en écoute sur le réseau et les services tournant sous root non nécessaires, et sur un serveur éliminer le serveur X, service complexe et privilégié ; éliminer signifie empêcher le lancement automatique, pas forcément désinstaller. Désinstaller aussi les programmes inutiles au contexte légitime et non requis par les dépendances, comme un compilateur ou un débogueur, qui facilitent la tâche de l'attaquant.
+
+   B. Défense en profondeur et partitionnement.
+
+      Éviter de satisfaire une exigence de sécurité par un seul mécanisme, multiplier les barrières, à l'image des bastins de Vauban. Ajouter un pare-feu local en complément de la suppression des services, pour contrôler les connexions initiées depuis un serveur. Partitionner rationnellement : placer sur une partition distincte tout répertoire susceptible d'être rempli de l'extérieur, journaux, file d'impression, file de messages ou base d'un serveur web, surtout si le service tourne sous root ; cela évite la saturation, simplifie la sauvegarde et permet des options de montage ro, nodev, noexec et nosuid.
+
+   C. Les cinq recommandations de durcissement de l'ANSSI.
+
+      Réduire la surface d'attaque en mettant à jour régulièrement, en supprimant les logiciels inutiles au niveau utilisateur, la commande netstat en écoute inventoriant les programmes sur socket, comme au niveau noyau, en limitant les services en écoute par interface, en désactivant le chargement dynamique des modules via des directives dans le fichier sysctl, en appliquant le moindre privilège, en utilisant un contrôle d'accès par rôles comme Tomoyo, AppArmor ou grsecurity, et en adaptant le noyau. Appliquer la défense en profondeur avec un pare-feu local, iptables ou ufw, un schéma de partitionnement et des options de montage adaptées, des droits fins sur les fichiers avec attention aux scripts automatiques, et le chiffrement des données. Mettre en place du cloisonnement pour isoler les éléments applicatifs, en privilégiant lxc, vservers ou openvz, plus robustes qu'un chroot. Rédiger et appliquer des procédures d'administration sécurisées, enregistrement des connexions des exploitants, supervision, mises à jour, sauvegardes. Définir une politique de journalisation cohérente distinguant des niveaux de criticité et permettant la remontée d'alertes.
+
+VI. DURCISSEMENT LOGICIEL SOUS WINDOWS 7 ET SUIVANTS.
+
+   A. Des SRP à AppLocker.
+
+      À partir de Windows XP et Windows 2003, Microsoft a introduit les SRP, Software Restriction Policies, permettant de restreindre l'exécution de programmes par une liste blanche de règles ; bien configurées, elles protègent efficacement mais sont lourdes à maintenir sur un grand parc. AppLocker, leur évolution, apporte des améliorations, la principale étant le champ d'application : les SRP touchent tous les utilisateurs d'une machine indifféremment, AppLocker permet de cibler un utilisateur précis d'une machine ou d'un domaine. Pour une politique fine, privilégier AppLocker.
+
+      AppLocker autorise ou refuse à un utilisateur ou un groupe le lancement d'exécutables .exe et .com, d'installeurs .msi et .mst, de scripts .ps1, .bat, .cmd, .vbs et .js, et de bibliothèques .dll et .ocx. Pour la lisibilité, n'utiliser que des règles « autoriser » avec exceptions. Trois types de règles existent : sur le chemin d'accès, AppLocker utilisant ses propres variables, distinctes des variables d'environnement ; sur la signature électronique, n'autorisant que les fichiers signés par un éditeur donné ; sur l'empreinte cryptographique SHA-256, n'autorisant que le fichier correspondant. Privilégier les règles fondées sur la signature, après s'être assuré que les certificats et autorités sont de confiance.
+
+   B. Stratégie de restrictions avec AppLocker.
+
+      En l'absence d'inventaire exhaustif des applications, utiliser le mode audit d'AppLocker pour identifier les applications inconnues. Configurer le service AppIdSvc, Identité de l'application, pour un démarrage automatique. Utiliser un compte utilisateur standard, sans privilèges d'administration locaux. Pour une règle de chemin, le dossier et ses sous-dossiers ne doivent être accessibles en écriture qu'aux administrateurs et à SYSTEM, et les sous-répertoires de Windows accessibles en écriture par les utilisateurs doivent faire l'objet d'exceptions. Supprimer la règle par défaut sur Program Files et la remplacer par des règles autorisant explicitement chaque application. Supprimer les règles autorisant les scripts depuis Windows, n'autoriser que des scripts signés ou désignés par empreinte. Activer si possible les règles sur les DLL. Compléter les règles par défaut par des exceptions sur les sous-répertoires accessibles en écriture.
+
+   C. Les limites d'AppLocker.
+
+      Les composants ActiveX peuvent instancier des programmes normalement bloqués, par exemple lancer une session RDP en insérant le contrôle client RDP dans un document Word ; les composants permettant d'instancier un programme bloqué doivent aussi être bloqués par des règles sur leurs DLL et OCX. AppLocker contrôle le lancement mais pas le comportement d'un programme une fois lancé ; un programme peut lancer des exécutables via des paramètres spéciaux ou des greffons, aussi les programmes autorisés doivent être vérifiés et les utilisateurs ne doivent pas installer de modules d'extension. AppLocker ne contrôle pas tous les codes interprétés, scripts Perl ou macros ; les logiciels offrant du scripting doivent être paramétrés pour restreindre l'exécution, une suite bureautique n'exécutant que les macros signées et de confiance, l'éditeur de macros étant désactivé. Les applications seize bits, exécutées par le processus NTVDM, ne sont pas contrôlées ; en l'absence de telles applications, désactiver NTVDM via l'éditeur de stratégie de groupe.
+
+POINTS D'ATTENTION.
+
+      En cas d'intrusion : déconnecter du réseau sans éteindre ni redémarrer, prévenir de vive voix, prévenir le CERT ; ne jamais contacter l'attaquant soi-même.
+
+      La copie physique du disque se fait avec dd, secteurs non occupés compris, et l'image ne doit jamais être écrite sur le disque analysé.
+
+      Une machine compromise se réinstalle entièrement à partir d'une source saine ; supprimer la seule vulnérabilité exploitée est insuffisant.
+
+      Seule la direction de l'organisme peut déposer plainte ; l'organisation peut être responsable des dégâts causés à des tiers depuis son système.
+
+      Force du mot de passe = longueur et diversité des caractères, mais il doit rester mémorisable ; méthodes phonétique et des premières lettres.
+
+      Les huit règles ANSSI mot de passe : mots de passe distincts par système, sans lien avec l'identité, jamais créés par un tiers, pas de mot de passe par défaut, renouvellement raisonnable, pas de stockage exposé, pas d'envoi sur messagerie personnelle, navigateur qui ne retient rien.
+
+      Un enregistreur de frappe capture même les mots de passe forts ; changer régulièrement depuis une machine saine limite la durée de l'impact.
+
+      DDoS : distinguer volumétrique par saturation de bande passante, et par épuisement de ressource ; réflexion = usurpation de l'IP victime vers des réflecteurs, amplification = réponse plus grosse que la requête, souvent DNS, NTP, SNMP, SSDP.
+
+      Le blackholing opérateur protège l'infrastructure mais rend le déni de service effectif pour la victime.
+
+      Ne pas activer le suivi de connexions sur un pare-feu placé devant un serveur à forte audience : il devient lui-même la cible du DDoS.
+
+      Journalisation : horodatage de tous les événements, horloges synchronisées, export sur une machine distincte, transfert TCP temps réel, partition dédiée, rotation formalisée, accès en lecture restreint ; FAI et hébergeurs conservent un an.
+
+      Durcissement Linux : minimiser la surface d'attaque (utilisateur et noyau), défense en profondeur, partitionnement avec options ro, nodev, noexec, nosuid, cloisonnement par lxc, vservers ou openvz plutôt que chroot.
+
+      Windows : préférer AppLocker aux SRP pour cibler un utilisateur ; règles « autoriser » fondées de préférence sur la signature électronique ; désactiver NTVDM si aucune application seize bits.
+
+EXEMPLES CITES.
+
+      Le CERTA comme CERT des administrations françaises, contact par courrier électronique ; services de dépôt de plainte OCLCTIC, BEFTI, DCRI.
+
+      La commande dd sous Unix pour la copie physique de disque ; le scanner Nessus pour tester une machine réinstallée.
+
+      Le hash LM de Windows, antérieur au NTLM, fondé sur deux mots de sept caractères, vulnérable au compromis temps-mémoire ; les chaînes de Markov pour optimiser les attaques.
+
+      Les exemples de mots de passe mnémotechniques : phrase sur Usain Bolt transformée en « UBaClsansMe-2102nde7am », citation « un tiens vaut mieux que deux tu l'auras » transformée en « 1tvmQ2tl'A ».
+
+      Le déploiement de certificats sur carte à puce à la Gendarmerie nationale à partir de deux mille quatorze.
+
+      Renouvellement des mots de passe tous les quatre-vingt-dix jours pour les données sensibles.
+
+      Outils de DDoS en ligne Silent-DdoSer et Sniff DdoSer ; services booter et stresser ; protocoles d'amplification DNS, NTP, SNMP, SSDP ; adresse d'exemple ANSSI 203.0.113.2 pour la victime.
+
+      Contrôles d'accès Linux Tomoyo, AppArmor, grsecurity ; pare-feu iptables et ufw ; cloisonnement lxc, vservers, openvz.
+
+      AppLocker : extensions contrôlées .exe, .com, .msi, .mst, .ps1, .bat, .cmd, .vbs, .js, .dll, .ocx ; service AppIdSvc ; contournement par contrôle RDP inséré dans un document Word ; processus NTVDM pour les applications seize bits.

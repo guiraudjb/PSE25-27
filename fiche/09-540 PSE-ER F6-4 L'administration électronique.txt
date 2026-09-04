@@ -1,168 +1,217 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 6, thème 4
-L'ADMINISTRATION ÉLECTRONIQUE
-=======================================================================
+L'ADMINISTRATION ÉLECTRONIQUE EN FRANCE.
 
-1. DU PAGSI AU RE/SO
------------------------------------------------------------------------
-- Années 90 : téléservices peu généralisés, initiatives NON coordonnées
-  (reproduisent la complexité administrative).
-- PAGSI (août 1997, Lionel Jospin) : Programme d'Action Gouvernemental
-  pour la Société de l'Information -> généralisation des sites internet
-  publics + mise en ligne de formulaires.
-- RE/SO 2007 (novembre 2002, Jean-Pierre Raffarin) : « Pour une
-  RÉpublique numérique dans la SOciété de l'information ». 3 VOLETS :
-  * action sur l'OFFRE (climat de confiance -> LCEN 2004, création
-    d'entreprise) ;
-  * action sur la DEMANDE (équipement des ménages, accès rapide) ;
-  * intervention directe de l'ÉTAT (éducation, santé...).
-- 3 PHASES de l'administration électronique : 1) informations statiques ;
-  2) formulaires téléchargeables ; 3) téléprocédures.
-- Grande-Bretagne : l'« e-envoy » coordonne la politique britannique.
+LEXIQUE COMPLET.
 
-2. LE PILOTAGE
------------------------------------------------------------------------
-- Décret du 27 août 1998 : MTIC (mission interministérielle de soutien
-  technique pour les TIC dans l'administration), 3 ans.
-- Décret du 22 août 2001 : ATICA succède à la MTIC, 3 ans.
-- Décret du 21 février 2003 : ADAE (Agence pour le Développement de
-  l'Administration Électronique), conformément à RE/SO 2007. Service
-  interministériel auprès du PM, mis à disposition du ministre de la
-  réforme de l'État. Née de la FUSION DE 3 SERVICES : ATICA + mission
-  TIC de la DIRE + pôle formulaires/téléprocédures de la COSA.
-- Décret du 30 décembre 2005 : ADAE intégrée à la DGME, rattachée au
-  MINEFI.
-- La DGME intègre : ADAE ; DMGPSE (Délégation à la Modernisation des
-  Structures de l'État, reprend la DIRE) ; DUSA (Délégation aux usagers
-  et aux simplifications administratives, reprend la COSA ; charte
-  MARIANNE, COSLA) ; DRB (Direction de la Réforme Budgétaire).
-- DGME = 3 SERVICES : qualité et simplification ; modernisation de la
-  gestion publique ; développement de l'administration électronique.
-- Autres comités : CIACT (aménagement et compétitivité des territoires,
-  haut débit) ; CISI (Comité Interministériel pour la Société de
-  l'Information — PAGSI adopté par le 1er CISI en 1998) ; MEN (Mission
-  pour l'Économie Numérique, commerce électronique) ; DDM (Direction du
-  Développement des Médias, ministère de la Culture) ; CSTI (innovation,
-  recherche) ; Délégation aux usages de l'Internet (reprend la MAPI) ;
-  SGDN + DCSSI (sécurité des SI) ; DIACT (remplace la DATAR).
+      Administration électronique : usage des technologies de l'information pour moderniser le fonctionnement de l'administration et améliorer le service rendu au public, structurée en trois phases, information statique, formulaires téléchargeables, puis téléprocédures.
 
-3. LE PROGRAMME ADELE
------------------------------------------------------------------------
-- ADELE (ADministration ELEctronique), annoncé en février 2004.
-- Cadre pluriannuel : 140 mesures (Adèle 1 à 140). PSAE (Plan Stratégique
-  de l'Administration Électronique) 2004-2007 + P2AE (Plan d'action).
-- 2 OBJECTIFS : services plus nombreux, faciles, accessibles à tous et à
-  tout moment ; modernisation en synergie avec les partenaires européens
-  + pilotage.
+      PAGSI : Programme d'action gouvernemental pour la société de l'information, annoncé en août mille neuf cent quatre-vingt-dix-sept par Lionel Jospin, ayant programmé la généralisation des sites internet publics et la mise en ligne des formulaires.
 
-SERVICES PHARES :
-- 3939 « Allô service public » : numéro unique, réponse ou orientation en
-  MOINS DE 3 MINUTES.
-- mon.service-public.fr : accès personnalisé, depuis service-public.fr
-  (lancé octobre 2000).
-- CNIE (Carte Nationale d'Identité Électronique) : se substitue
-  progressivement à la CNI classique ; authentification + signature
-  électronique ; simplifie l'obtention d'autres titres (passeport).
-- Carte d'agent public : habilitations, signature de pièces, accès aux
-  locaux et services (cantine).
-- Dématérialisation du Journal Officiel : une ordonnance donne valeur
-  légale à la version électronique.
-- Dématérialisation des achats publics : ARTICLE 56 du Code des marchés
-  publics 2004 (réaffirmé 2006). SAD (Système d'Acquisition Dynamique /
-  Dynamic Purchasing System) = acquisition entièrement électronique pour
-  achats d'usage courant. ENCHÈRE ÉLECTRONIQUE = sélection par voie
-  électronique, révision du prix à la baisse ; EXCLUE pour les marchés
-  de fournitures et services < 133 000 € HT.
-- Dématérialisation du contrôle de légalité : projet ACTES (Aide au
-  Contrôle de légalité dématErialiSé).
+      RE/SO 2007 : programme « pour une République numérique dans la société de l'information », présenté en novembre deux mille deux par Jean-Pierre Raffarin, en trois volets, action sur l'offre, action sur la demande et intervention directe de l'État.
 
-4. LE SCHÉMA DIRECTEUR DE L'ADMINISTRATION ÉLECTRONIQUE (SDAE)
------------------------------------------------------------------------
-- Couvre l'ENSEMBLE des SI de l'administration centrale et déconcentrée.
-  Élément incontournable des schémas directeurs des ministères.
-- FINALITÉS : synchroniser/mutualiser les travaux (éviter la
-  redondance) ; pilotage consolidé par INDICATEURS ; vision cible du SI.
-- Objectif double : suivi de l'avancement du P2AE + définir les
-  indicateurs de progression.
-- SYSTÈME CIBLE ADÈLE : grille de lecture commune définissant les
-  concepts d'urbanisme à l'échelle de l'État ; architecture PAR
-  COMPOSANTS favorisant l'interopérabilité et la réutilisation.
-- INITIATIVES : regroupements de projets et d'actions communes formant
-  un ensemble cohérent sur un domaine. 47 initiatives (2006-2010). But :
-  généraliser les bonnes pratiques. Chef de file par initiative.
-  3 DOMAINES :
-  * SOCLE COMMUN : fonctionnel (gestion de crise, archivage, conduite du
-    changement), infrastructure (réseaux, production), services de
-    confiance (politique de sécurité), informatique (développement,
-    pilotage, gestion de contenu, postes).
-  * DOMAINES SECTORIELS : aspects métier de chaque ministère (Fiscalité,
-    Défense, Santé Publique).
-  * NOUVEAUX SERVICES : services usagers globaux (TPE, déménagement).
-  * Ex. : initiative IT 06 (développement informatique), chef de file =
-    MINEFI et COPERNIC.
-- PHASES : PARTAGE (non formalisée, comité de partage) et PILOTAGE
-  (convention + plan d'action).
-- INSTANCES : Comité des Secrétaires Généraux (plus haut niveau, désigne
-  le chef de file) ; comité de pilotage de l'initiative (seule instance
-  décisionnelle interne) ; chef de file.
-- RÉFÉRENTIELS : RGI (interopérabilité), RGS (sécurité), RGAA
-  (accessibilité), R2GA (Référentiel Général de Gestion des Archives),
-  Charte Internet de l'État (CIE), SILL.
-- Contrôle par INDICATEURS (LOLF) : pérennes, mesurés de façon
-  récurrente, périmètre et mode de calcul constants, fiables (principe
-  de SINCÉRITÉ de la LOLF).
+      MTIC : mission interministérielle de soutien technique pour le développement des technologies de l'information dans l'administration, créée par le décret du vingt-sept août mille neuf cent quatre-vingt-dix-huit pour trois ans.
 
-5. AUTRES PROJETS
------------------------------------------------------------------------
-- Programme AdER (Administration En Réseau), lancé par le CISI du 19
-  janvier 1999 : « INTRANET GLOBAL » inter-administrations pour
-  décloisonner et faire coopérer les services de l'État. Outils :
-  méta-annuaire MAIA, service d'interconnexion de messagerie
-  interministérielle, service de transport SETI.
-- Vit@min : EXTRANET interministériel de travail coopératif, décidé par
-  le CIRE du 12 octobre 2000 ; thèmes de travail = « sites web » avec
-  outils coopératifs (bibliothèque, forum, agenda, FAQ).
-- SIT (Systèmes d'Information Territoriaux) : « EXTRANET des services de
-  l'État » dans un département/région ; décidé par le CISI du 19 janvier
-  1999 ; chaque département et région en dispose fin 2000.
+      ATICA : Agence pour les technologies de l'information et de la communication dans l'administration, créée par le décret du vingt-deux août deux mille un, ayant succédé à la MTIC.
 
-6. PROTECTION DES DONNÉES PERSONNELLES
------------------------------------------------------------------------
-- Cadre : LOI DU 6 JANVIER 1978 modifiée par la loi du 6 août 2004.
-- INTERCONNEXION DES FICHIERS : ni interdite ni libre, STRICTEMENT
-  ENCADRÉE. Assimilée à un traitement -> AVIS DE LA CNIL. Doit être
-  portée à la connaissance des personnes. Ne peut utiliser le NIR
-  (Numéro d'Inscription au Répertoire National d'Identification des
-  Personnes Physiques, détenu par l'INSEE) que si les DEUX
-  administrations y sont autorisées. Interconnexions autorisées assez
-  limitées, souvent par la loi, justifiées par le contrôle des fonds
-  publics.
-- CAHIER DES CHARGES DES TÉLÉSERVICES (CNIL, depuis 1997), 5 POINTS :
-  1. IDENTIFICATION de l'usager (télédéclaration de revenus : identifiant
-     spécifique annuel NON SIGNIFIANT plutôt que le numéro FIP, non
-     confidentiel car porté sur les avis d'imposition) ;
-  2. AUTHENTIFICATION (confrontation des infos communiquées et des
-     données détenues) ;
-  3. SIGNATURE ÉLECTRONIQUE (ex. carte du professionnel de santé pour les
-     feuilles de soins) ;
-  4. CHIFFREMENT pour la CONFIDENTIALITÉ (impératif pour les données
-     sensibles santé/financières transmises sur Internet) ;
-  5. INFORMATION et DROIT D'ACCÈS des usagers.
+      ADAE : Agence pour le développement de l'administration électronique, créée par le décret du vingt et un février deux mille trois conformément au programme RE/SO 2007, service interministériel placé auprès du Premier ministre, née de la fusion de l'ATICA, de la mission technologies de l'information de la DIRE et du pôle formulaires et téléprocédures de la COSA.
 
-=======================================================================
-À RETENIR
-- PAGSI (1997, Jospin) -> RE/SO 2007 (2002, Raffarin, 3 volets :
-  offre / demande / État) -> 3 phases (statique / formulaires /
-  téléprocédures).
-- Pilotage : MTIC (1998) -> ATICA (2001) -> ADAE (2003) -> DGME (2005).
-  DGME = ADAE + DMGPSE + DUSA + DRB, en 3 services.
-- ADELE (2004) : 140 mesures, PSAE + P2AE. Services : 3939, mon.service-
-  public.fr, CNIE, carte d'agent, JO dématérialisé, achat public
-  (article 56, SAD, enchère électronique < 133 000 € HT exclue), ACTES.
-- SDAE : 47 initiatives (socle commun / sectoriel / nouveaux services) ;
-  Comité des Secrétaires Généraux ; référentiels RGI / RGS / RGAA / R2GA
-  / CIE / SILL.
-- AdER (intranet global, CISI 1999), Vit@min (extranet coopératif),
-  SIT (extranet des services de l'État).
-- Données personnelles : loi 6 janvier 1978 modifiée 2004 ;
-  interconnexion sur avis CNIL ; NIR encadré ; 5 points CNIL des
-  téléservices.
+      DGME : Direction générale de la modernisation de l'État, créée par le décret du trente décembre deux mille cinq, rattachée au ministère de l'Économie, intégrant l'ADAE, la DMGPSE, la DUSA et la DRB, organisée en trois services.
+
+      DMGPSE : Délégation à la modernisation de la gestion publique et des structures de l'État, promouvant le contrôle de gestion, la mise en place de la LOLF et les systèmes d'information budgétaires et comptables.
+
+      DUSA : Délégation aux usagers et aux simplifications administratives, coordonnant la simplification du droit et des procédures, promouvant la charte de qualité dite charte Marianne et le langage administratif accessible.
+
+      Charte Marianne : charte générique de la qualité des services rendus aux usagers.
+
+      CISI : Comité interministériel pour la société de l'information, ayant adopté le PAGSI lors de son premier comité en mille neuf cent quatre-vingt-dix-huit.
+
+      CIACT : Comité interministériel d'aménagement et de compétitivité des territoires, traitant de l'accès de tous les territoires à la société de l'information et du haut débit.
+
+      DCSSI : Direction centrale de la sécurité des systèmes d'information, chargée avec le Secrétariat général de la défense nationale de la sécurité des systèmes d'information.
+
+      ADELE : programme d'administration électronique annoncé en février deux mille quatre, cadre pluriannuel de cent quarante mesures numérotées, décliné dans le plan stratégique et le plan d'action deux mille quatre-deux mille sept.
+
+      PSAE : Plan stratégique de l'administration électronique deux mille quatre-deux mille sept, cadre définissant les objectifs qualitatifs et quantitatifs et les moyens.
+
+      P2AE : Plan d'action de l'administration électronique, précisant pour chaque décision du plan stratégique les principaux projets menés jusqu'en deux mille sept.
+
+      Numéro 3939 : « Allo service public », numéro de téléphone unique permettant d'obtenir en moins de trois minutes une réponse ou une orientation sur tout renseignement administratif.
+
+      mon.service-public.fr : portail offrant aux usagers un accès personnalisé à l'ensemble des services électroniques, accessible depuis service-public.fr, site lancé en octobre deux mille regroupant tous les sites publics.
+
+      CNIE : carte nationale d'identité électronique, ayant vocation à se substituer à la carte classique, permettant de s'authentifier et de signer électroniquement.
+
+      Carte d'agent public : carte gérant des habilitations pour l'accès aux dossiers, la signature de pièces dématérialisées et la sécurisation de l'accès aux locaux et services.
+
+      Dématérialisation du Journal Officiel : ordonnance ayant donné valeur légale à la version électronique, alors que la version papier représentait six virgule deux tonnes de papier livrées chaque jour et un virgule quatre million d'euros d'affranchissement annuel en deux mille trois.
+
+      SAD : système d'acquisition dynamique, en anglais Dynamic Purchasing System, processus d'acquisition entièrement électronique pour des achats d'usage courant, mis en place à la suite d'un appel d'offres ouvert.
+
+      Enchère électronique : procédure de sélection des offres par voie électronique permettant aux candidats de réviser leur prix à la baisse, non utilisable pour les marchés de fournitures et de services inférieurs à cent trente-trois mille euros hors taxes.
+
+      Projet ACTES : Aide au contrôle de légalité dématérialisé, dématérialisant les actes des collectivités locales soumis au contrôle de légalité du représentant de l'État, pour alléger les tâches matérielles et concentrer le contrôle sur les actes à enjeu majeur.
+
+      Schéma directeur de l'administration électronique : cadre pluriannuel couvrant les systèmes d'information de l'administration centrale et déconcentrée, élément incontournable des schémas directeurs ministériels, structurant les travaux deux mille six-deux mille dix en quarante-sept initiatives.
+
+      Système cible Adèle : grille de lecture commune définissant les concepts d'urbanisme à l'échelle de l'État, outil de travail et de communication entre acteurs, favorisant l'interopérabilité et la réutilisation de composants mutualisés.
+
+      Initiative : regroupement de projets et d'actions communes d'expertise technique, fonctionnelle, juridique ou organisationnelle formant un ensemble cohérent sur un domaine, garantissant la mutualisation des développements ; quarante-sept initiatives pour deux mille six-deux mille dix.
+
+      Socle commun : domaine d'initiatives portant les objectifs stratégiques communs à tous les pouvoirs publics, fonctionnel, infrastructure, services de confiance et informatique.
+
+      Domaine sectoriel : domaine d'initiatives couvrant les aspects métier de chaque ministère, intégrées au schéma directeur et bénéficiant des travaux du socle commun.
+
+      Nouveaux services : domaine d'initiatives couvrant la création de services usagers globaux impliquant plusieurs acteurs, autour de cibles d'usagers ou d'événements de vie.
+
+      Chef de file : responsable désigné pour chaque initiative, chargé du périmètre, de l'homogénéité des travaux, de l'élaboration et du suivi du plan d'action et de la validation des livrables, présidant le comité de pilotage.
+
+      Comité des secrétaires généraux : instance de plus haut niveau du dispositif de décision du schéma directeur, approuvant le passage d'une initiative en phase de pilotage et désignant le chef de file.
+
+      Comité de pilotage de l'initiative : seule instance décisionnelle de la vie interne de l'initiative, définissant par consensus des orientations pour les maîtres d'ouvrage.
+
+      RGI : Référentiel général d'interopérabilité, spécifiant les règles s'imposant à tous pour rendre cohérents les systèmes d'information du service public, ayant force d'obligation au sens de l'ordonnance du huit décembre deux mille cinq.
+
+      RGS : Référentiel général de sécurité, apportant des méthodologies de conception, développement et exploitation, spécifiant les règles des fonctions de sécurité et définissant des niveaux de sécurité.
+
+      RGAA : Référentiel général d'accessibilité pour les administrations.
+
+      R2GA : Référentiel général de gestion des archives.
+
+      CIE : Charte internet de l'État, définissant un ensemble de règles ergonomiques communes aux interfaces des sites internet publics.
+
+      SILL : socle interministériel de logiciels libres, référençant des solutions libres préconisées organisées par cas d'usage, utile notamment aux tests d'interopérabilité.
+
+      Programme ADER : Administration en réseau, intranet global inter-administrations lancé par le CISI du dix-neuf janvier mille neuf cent quatre-vingt-dix-neuf, articulé autour du méta-annuaire MAIA, d'applications interministérielles, d'un service d'interconnexion de messagerie et d'un service de transport.
+
+      Vit@min : extranet interministériel de travail coopératif, dont l'ouverture a été décidée par le comité interministériel à la réforme de l'État du douze octobre deux mille, permettant de générer des thèmes de travail indépendants avec leurs outils collaboratifs.
+
+      SIT : système d'information territorial, extranet des services de l'État dans un département ou une région, décidé par le CISI du dix-neuf janvier mille neuf cent quatre-vingt-dix-neuf, généralisé aux départements métropolitains fin octobre deux mille un.
+
+      Loi du six janvier mille neuf cent soixante-dix-huit : loi Informatique et libertés, modifiée par la loi du six août deux mille quatre, cadre légal strict de la protection des données personnelles.
+
+      Interconnexion de fichiers : pratique non interdite mais strictement encadrée, assimilée à un traitement soumis à l'avis de la CNIL, ne pouvant utiliser le numéro d'inscription au répertoire national d'identification des personnes physiques que si les deux administrations y sont autorisées.
+
+COURS DÉTAILLÉ.
+
+I. L'ÉMERGENCE DE L'ADMINISTRATION ÉLECTRONIQUE.
+
+   A. Le contexte.
+
+      Dans les années quatre-vingt-dix, les téléservices sur Internet étaient loin d'être généralisés en France comme chez les voisins, et les rares initiatives n'étaient pas coordonnées, reproduisant la complexité administrative plutôt que la simplifiant, plusieurs structures ayant été créées sans cohérence d'ensemble. Les pouvoirs publics ont mis en place plusieurs programmes.
+
+   B. Du PAGSI à RE/SO 2007.
+
+      Le Programme d'action gouvernemental pour la société de l'information, annoncé en août mille neuf cent quatre-vingt-dix-sept par Lionel Jospin, visait à préparer l'entrée de la France dans la société de l'information et a programmé la généralisation des sites internet publics et la mise en ligne de formulaires. Le programme RE/SO 2007, présenté en novembre deux mille deux par Jean-Pierre Raffarin, comprend trois volets : une action sur l'offre, pour un environnement favorable au développement des infrastructures, contenus et services et un climat de confiance, avec la loi pour la confiance dans l'économie numérique de deux mille quatre ; une action sur la demande, pour que tous les Français utilisent les services de l'Internet en s'équipant et en accélérant l'accès rapide et permanent ; et une intervention directe de l'État comme acteur de la société de l'information, dans l'éducation et la santé, avec le passage à la troisième phase de l'administration électronique, les téléprocédures, après la mise à disposition d'informations statiques puis de formulaires téléchargeables. Une agence de l'administration électronique était prévue pour accompagner ces passages, comme la fonction d'e-envoy en Grande-Bretagne.
+
+II. LE PILOTAGE DE L'ADMINISTRATION ÉLECTRONIQUE.
+
+   A. Des premières structures à la DGME.
+
+      Le décret du vingt-sept août mille neuf cent quatre-vingt-dix-huit crée pour trois ans la mission interministérielle de soutien technique MTIC, qui reprend une compétence exercée par le commissariat à la réforme de l'État. Le décret du vingt-deux août deux mille un crée l'ATICA, qui lui succède pour trois ans ; la compétence interministérielle restant éclatée, une agence de l'administration électronique s'imposait. L'Agence pour le développement de l'administration électronique est créée par le décret du vingt et un février deux mille trois, service interministériel auprès du Premier ministre mis à la disposition du ministre chargé de la réforme de l'État, chargée notamment de favoriser le développement des systèmes d'information modernisant l'administration et de proposer des mesures de dématérialisation et d'interopérabilité. Elle naît de la fusion de l'ATICA, de la mission technologies de l'information de la Délégation interministérielle à la réforme de l'État et du pôle formulaires et téléprocédures de la Commission pour les simplifications administratives.
+
+      L'ADAE est intégrée à la Direction générale de la modernisation de l'État par le décret du trente décembre deux mille cinq, rattachée au ministère de l'Économie, des Finances et de l'Industrie, chargée de coordonner et d'inciter les administrations à moderniser leurs modes de fonctionnement. La DGME intègre l'ADAE, la Délégation à la modernisation de la gestion publique et des structures de l'État, qui promeut le contrôle de gestion, la LOLF et les systèmes budgétaires et comptables, la Délégation aux usagers et aux simplifications administratives, qui coordonne la simplification du droit et des procédures et promeut la charte Marianne et le langage administratif accessible, et la Direction de la réforme budgétaire. La DGME est organisée en trois services : qualité et simplification, modernisation de la gestion publique, développement de l'administration électronique.
+
+   B. Les comités de pilotage.
+
+      Le fonctionnement de la DGME est complexe du fait de la diversité des chantiers, et de nombreuses structures demeurent : le Comité interministériel d'aménagement et de compétitivité des territoires, sur l'accès des territoires à la société de l'information et le haut débit ; le Comité interministériel pour la société de l'information, qui a adopté le PAGSI en mille neuf cent quatre-vingt-dix-huit et décidé, à son quatrième comité en deux mille trois, la création d'un conseil consultatif de l'internet ; la Mission pour l'économie numérique, sur le commerce électronique ; la Direction du développement des médias au ministère de la Culture ; le Conseil stratégique des technologies de l'information, sur l'innovation et la recherche ; la délégation aux usages de l'Internet, sur la généralisation de l'accès et de la formation ; le Secrétariat général de la défense nationale et la Direction centrale de la sécurité des systèmes d'information, sur la sécurité des systèmes d'information ; la Délégation interministérielle de l'aménagement et de la compétitivité des territoires, qui remplace la DATAR et est chargée de l'aménagement du territoire et du haut débit.
+
+III. LES PROGRAMMES D'ADMINISTRATION ÉLECTRONIQUE.
+
+   A. Le programme ADELE, le plan stratégique et le plan d'action.
+
+      Le Premier ministre annonce en février deux mille quatre le programme ADELE, cadre pluriannuel et coordonné reprenant cent quarante mesures numérotées, réunies dans le plan d'action de l'administration électronique pour quatre ans. L'ADAE avait préparé, en concertation avec les ministères, un plan stratégique et un plan d'action pour deux mille quatre-deux mille sept, dans le prolongement de RE/SO 2007, visant à intensifier la création de services dématérialisés et à faire évoluer les services existants. Le plan stratégique constitue le cadre des actions des administrations, définit les objectifs qualitatifs et quantitatifs et les moyens, est complété par un plan d'action annexant les mesures sous forme de fiches, et fait l'objet d'un bilan annuel avec actualisation. Le plan d'action précise, pour chaque décision, les principaux projets menés jusqu'en deux mille sept, répartis selon deux objectifs, proposer des services plus nombreux, faciles d'emploi, accessibles à tous et à tout moment, et contribuer à la modernisation des services publics en synergie avec les partenaires européens.
+
+   B. Les services phares.
+
+      Le numéro 3939, « Allo service public », est un numéro unique permettant d'obtenir en moins de trois minutes une réponse ou une orientation sur tout renseignement administratif. Le portail mon.service-public.fr offre un accès personnalisé à l'ensemble des services électroniques, accessible depuis service-public.fr, lancé en octobre deux mille, qui regroupe tous les sites publics et permet de gérer des dossiers par téléprocédures. La carte nationale d'identité électronique a vocation à se substituer à la carte classique, à simplifier et sécuriser la délivrance du titre par collecte dématérialisée en mairie, à faciliter l'obtention d'autres titres comme le passeport, et à permettre à ses détenteurs de s'authentifier et de signer électroniquement. La carte d'agent public gère des habilitations pour l'accès aux dossiers, autorise la signature de pièces dématérialisées et peut sécuriser l'accès aux locaux et aux services.
+
+      La dématérialisation du Journal Officiel : en deux mille trois, sur trente-six mille abonnés à la version papier, les exemplaires destinés à l'administration représentaient six virgule deux tonnes de papier livrées chaque jour et un virgule quatre million d'euros d'affranchissement annuel ; une ordonnance a donné valeur légale à la version électronique et garanti son authenticité. La dématérialisation des procédures d'achat public a été mise en œuvre par l'article 56 du code des marchés publics de deux mille quatre, réaffirmé par le nouveau code de deux mille six : les documents peuvent être envoyés par message électronique ou sur support, et les offres présentées par voie électronique accompagnées d'un certificat de signature. Le système d'acquisition dynamique est un processus d'acquisition entièrement électronique pour des achats d'usage courant, à la suite d'un appel d'offres ouvert, avec publication d'un avis précisant qu'il s'agit d'un système d'acquisition dynamique et accès libre, direct et complet aux documents jusqu'à l'expiration du système. L'enchère électronique permet aux candidats de réviser leur prix à la baisse ; elle ne peut être mise en œuvre pour les marchés de fournitures et de services inférieurs à cent trente-trois mille euros hors taxes.
+
+      La dématérialisation du contrôle de légalité et des circuits comptables et financiers : l'exercice du contrôle de légalité reste une fonction régalienne des représentants de l'État dans les départements et les régions ; il doit être simplifié par la limitation des types d'actes soumis et modernisé par le projet ACTES, Aide au contrôle de légalité dématérialisé, qui allège les tâches matérielles, rationalise le contrôle par l'automatisation des tâches répétitives, concentre le contrôle sur les actes à enjeu majeur et renforce la sécurité juridique en fournissant expertise et conseil aux collectivités.
+
+IV. LE SCHÉMA DIRECTEUR DE L'ADMINISTRATION ÉLECTRONIQUE.
+
+   A. Finalités et système cible.
+
+      Le schéma directeur exprime la volonté de donner un cadre pluriannuel, cohérent et coordonné et de donner de la visibilité aux acteurs. Il couvre les systèmes d'information de l'administration centrale et déconcentrée et devient un élément incontournable des schémas directeurs ministériels. Il permet une synchronisation et une mutualisation des travaux pour minimiser la redondance des investissements, apporte un pilotage consolidé par indicateurs et s'inscrit dans une vision cible du système d'information ; son objectif est de suivre l'avancement du plan d'action et de définir les indicateurs de progression. Il définit un système cible Adèle, grille de lecture commune définissant les concepts d'urbanisme à l'échelle de l'État, précisant des spécifications d'architecture fonctionnelle et technique et des préconisations de conception, sur la base desquelles des composants mutualisés peuvent être développés. L'architecture par composants favorise l'interopérabilité et la réutilisation, permettant une offre de services riches sans multiplication des systèmes d'information, et associe les collectivités.
+
+   B. Les initiatives et leurs domaines.
+
+      Il faut inscrire les projets dans des ensembles plus larges ayant un sens à long terme. L'initiative est un regroupement de projets et d'actions communes d'expertise technique, fonctionnelle, juridique ou organisationnelle formant un ensemble cohérent sur un domaine ; quarante-sept initiatives structurent les travaux pour deux mille six-deux mille dix. Elles définissent un périmètre, assurent la cohérence, garantissent la mutualisation des développements et permettent de mobiliser la force de travail de tous les acteurs. Elles sont regroupées en domaines : le socle commun, qui met en œuvre les objectifs stratégiques communs, couvrant le domaine fonctionnel, gestion de crise, archivage, conduite du changement, l'infrastructure, réseaux et production, les services de confiance, politique de sécurité, et l'informatique, développement, pilotage, production, postes terminaux ; les domaines sectoriels, qui couvrent les aspects métier de chaque ministère, fiscalité, défense, santé publique, intégrés au schéma directeur et bénéficiant du socle commun ; les nouveaux services, qui couvrent la création de services usagers globaux impliquant plusieurs acteurs, autour de cibles d'usagers ou d'événements de vie comme le déménagement. Un chef de file est désigné pour chaque initiative, par exemple le ministère de l'Économie et le programme COPERNIC pour l'initiative de développement informatique transverse.
+
+   C. Le formalisme et les instances.
+
+      Le formalisme impose le respect des phases de la procédure, l'intervention des instances de décision et la prise en compte des référentiels. La phase de partage, non formalisée, organise le travail en commun au sein d'un comité de partage réunissant les acteurs intéressés. La phase de pilotage engage les acteurs par une convention et un plan d'action pris en compte au plus haut niveau. Les instances sont le Comité des secrétaires généraux, instance de plus haut niveau qui approuve le passage d'une initiative en phase de pilotage et désigne le chef de file, le comité de pilotage de l'initiative, seule instance décisionnelle de sa vie interne définissant par consensus des orientations pour les maîtres d'ouvrage, et le chef de file, qui coordonne l'initiative, préside le comité de pilotage, élabore et suit le plan d'action et valide les livrables.
+
+   D. Les référentiels et les indicateurs.
+
+      Le schéma directeur met en place des référentiels. Le Référentiel général d'interopérabilité spécifie les règles s'imposant à tous pour rendre cohérents les systèmes d'information du service public, faciliter l'intégration de nouveaux systèmes et pérenniser les investissements ; il a force d'obligation au sens de l'ordonnance du huit décembre deux mille cinq, à la différence du Cadre commun d'interopérabilité, et établit les règles de sélection et d'utilisation des normes et standards, modèles de données, nomenclatures et politiques de mise en œuvre. Le Référentiel général de sécurité apporte des méthodologies de conception, développement et exploitation, spécifie les règles des fonctions de sécurité, identification, authentification, signature, et définit des niveaux de sécurité. S'y ajoutent le Référentiel général d'accessibilité pour les administrations et le Référentiel général de gestion des archives. La Charte internet de l'État définit des règles ergonomiques communes aux sites publics, et le socle interministériel de logiciels libres référence des solutions libres préconisées par cas d'usage, utiles aux tests d'interopérabilité.
+
+      Dans le cadre de la LOLF, les indicateurs vérifient avec des données chiffrées l'application des principes du schéma directeur, leur efficacité et leurs résultats ; ils doivent être pérennes, mesurés de manière récurrente à périmètre et mode de calcul constants, et fiables au titre du principe de sincérité. Les critiques habituelles, déconnexion de la réalité, difficulté de respect, s'appliquent, et le schéma directeur y répond en permettant de modifier et d'adapter les initiatives et leurs indicateurs.
+
+V. LES AUTRES PROJETS.
+
+   A. Le programme ADER.
+
+      Le programme Administration en réseau s'articule autour du méta-annuaire inter-administrations MAIA, d'applications interministérielles, d'un service d'interconnexion de messagerie interministérielle et d'un service de transport. Lancé par le comité interministériel pour la société de l'information du dix-neuf janvier mille neuf cent quatre-vingt-dix-neuf, c'est un intranet global inter-administrations visant à décloisonner et faire coopérer les services de l'État par un outil sûr et rapide.
+
+   B. Vit@min et les systèmes d'information territoriaux.
+
+      Vit@min est un extranet interministériel de travail coopératif, dont l'ouverture a été décidée par le comité interministériel à la réforme de l'État du douze octobre deux mille ; il permet de générer des thèmes de travail indépendants, chacun étant un site web avec ses outils, bibliothèque, forum, liste de diffusion, agenda, foire aux questions, sa facilité d'utilisation permettant de se passer de webmestre ; en deux mille trois, il comptait environ quarante-huit thèmes opérationnels, un annuaire de près de mille six cents utilisateurs et environ mille quatre cent cinquante visites par mois. Le système d'information territorial, décidé par le même comité du dix-neuf janvier mille neuf cent quatre-vingt-dix-neuf, est un extranet des services de l'État dans un département ou une région proposant des dossiers thématiques à accès restreint ; fin octobre deux mille un, tous les départements métropolitains avaient ouvert leur système d'information territorial, en cours de généralisation outre-mer et au niveau régional, l'enjeu étant de multiplier les contenus et les usages avec les partenaires, notamment les collectivités locales.
+
+VI. LA PROTECTION DES DONNÉES PERSONNELLES.
+
+   A. Le cadre.
+
+      Le déploiement des téléservices intégrés et la mise en place d'un compte administratif personnalisé donnent lieu à de nouveaux flux de données personnelles, qui s'inscrivent dans le cadre légal strict de la loi du six janvier mille neuf cent soixante-dix-huit, modifiée par la loi du six août deux mille quatre.
+
+   B. L'interconnexion des fichiers.
+
+      L'interconnexion n'est pas interdite mais strictement encadrée : elle est assimilée à un traitement soumis à l'avis de la CNIL. La commission s'assure d'abord que l'échange peut légalement avoir lieu, vérifie que l'interconnexion répond aux grands principes, notamment des données adéquates, pertinentes et non excessives, contrôle la liste des bénéficiaires et exige que l'interconnexion soit portée à la connaissance des personnes. L'interconnexion ne peut utiliser le numéro d'inscription au répertoire national d'identification des personnes physiques, détenu par l'INSEE, que si les deux administrations y sont autorisées chacune pour leurs fichiers. Compte tenu de la jurisprudence restrictive, les interconnexions autorisées sont limitées, le plus souvent par la loi, nécessaire pour lever le secret, et se justifient généralement par un impératif de contrôle des fonds publics.
+
+   C. Le cahier des charges des téléservices.
+
+      Depuis mille neuf cent quatre-vingt-dix-sept, la CNIL s'est prononcée sur de nombreuses téléprocédures, télédéclarations sociales, feuilles de soins, revenus, TVA, extraits de casier judiciaire, et des projets locaux, inscription scolaire, fiches d'état civil. Il en ressort un cahier des charges en cinq points. L'identification de l'usager peut s'effectuer selon les dispositifs propres à chaque service, comme le matricule allocataire, la CNIL recommandant toutefois pour la télédéclaration de revenus un identifiant spécifique, annuel et non signifiant plutôt que le numéro de foyer fiscal, non confidentiel. L'authentification ne peut se faire que par confrontation des informations communiquées et des données détenues par l'organisme. Le recours à la signature électronique est admis, la CNIL s'étant prononcée favorablement sur la carte du professionnel de santé pour signer les feuilles de soins, la plupart des téléservices reposant toutefois sur une identification classique par code et mot de passe. Le recours au chiffrement pour la confidentialité est un impératif dès qu'il s'agit de transmettre par des réseaux ouverts des informations sensibles, données de santé ou financières, le chiffrement étant l'une des seules garanties réellement efficaces. Enfin, l'information et le droit d'accès imposent une information claire des usagers sur la sécurité du dispositif et les conditions d'exercice des droits d'accès et de rectification prévus par la loi du six janvier mille neuf cent soixante-dix-huit.
+
+VII. CONCLUSION.
+
+      L'administration électronique représente un enjeu pour la qualité du service aux usagers et pour la réforme de l'administration, ce qui explique qu'elle soit un chantier de la Direction générale de la modernisation de l'État. Elle apporte de vraies avancées, mais doit tenir compte des différentes situations des usagers et ne saurait apparaître comme l'unique mode de fonctionnement des services publics, afin que les usagers ne disposant pas des supports matériels bénéficient également d'un service public de qualité.
+
+POINTS D'ATTENTION.
+
+      Trois phases de l'administration électronique : information statique, formulaires téléchargeables, téléprocédures ; le PAGSI de mille neuf cent quatre-vingt-dix-sept, RE/SO 2007 en trois volets, offre, demande, intervention directe de l'État.
+
+      Chaîne des structures de pilotage : MTIC, puis ATICA en deux mille un, ADAE en deux mille trois, intégrée à la DGME en deux mille cinq.
+
+      Le programme ADELE de deux mille quatre : cent quarante mesures, plan stratégique et plan d'action deux mille quatre-deux mille sept.
+
+      Services phares : numéro 3939, mon.service-public.fr adossé à service-public.fr lancé en octobre deux mille, carte nationale d'identité électronique, carte d'agent public, dématérialisation du Journal Officiel et des achats publics.
+
+      Dans les marchés publics, le système d'acquisition dynamique et l'enchère électronique, cette dernière exclue en dessous de cent trente-trois mille euros hors taxes pour les fournitures et services.
+
+      Le schéma directeur structure les travaux deux mille six-deux mille dix en quarante-sept initiatives regroupées en socle commun, domaines sectoriels et nouveaux services ; un chef de file par initiative.
+
+      Instances du schéma directeur : Comité des secrétaires généraux, comité de pilotage de l'initiative, chef de file.
+
+      Référentiels : RGI, obligatoire au sens de l'ordonnance du huit décembre deux mille cinq, RGS, RGAA, R2GA, plus la charte internet de l'État et le socle interministériel de logiciels libres.
+
+      L'interconnexion de fichiers est un traitement soumis à l'avis de la CNIL ; l'usage du numéro d'inscription au répertoire national est très encadré.
+
+      Cahier des charges des téléservices de la CNIL en cinq points : identification, authentification par confrontation, signature électronique, chiffrement des données sensibles, information et droit d'accès.
+
+EXEMPLES CITES.
+
+      Fonction d'e-envoy en Grande-Bretagne pour coordonner le développement d'Internet et des services en ligne.
+
+      Charte de qualité dite charte Marianne et trophées récompensant les administrations les plus performantes.
+
+      Journal Officiel : trente-six mille abonnés papier en deux mille trois, six virgule deux tonnes de papier par jour, un virgule quatre million d'euros d'affranchissement annuel pour l'administration.
+
+      Enchère électronique exclue pour les fournitures et services inférieurs à cent trente-trois mille euros hors taxes ; article 56 des codes des marchés publics de deux mille quatre et deux mille six.
+
+      Projet ACTES, Aide au contrôle de légalité dématérialisé, pour les actes des collectivités locales.
+
+      Initiative de développement informatique transverse dont le chef de file est le ministère de l'Économie et le programme COPERNIC.
+
+      Vit@min en deux mille trois : environ quarante-huit thèmes de travail opérationnels, près de mille six cents utilisateurs inscrits, environ mille quatre cent cinquante visites par mois ; systèmes d'information territoriaux ouverts dans tous les départements métropolitains fin octobre deux mille un.
+
+      Recommandation de la CNIL d'un identifiant annuel non signifiant pour la télédéclaration de revenus plutôt que le numéro de foyer fiscal ; carte du professionnel de santé pour signer électroniquement les feuilles de soins.

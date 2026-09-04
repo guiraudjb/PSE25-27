@@ -1,213 +1,233 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 6, thème 1
-SI DE L'ÉTAT : CONTEXTE INTERMINISTÉRIEL, RIE ET RÉFÉRENTIELS
-=======================================================================
+LE SYSTÈME D'INFORMATION DE L'ÉTAT - CONTEXTE INTERMINISTÉRIEL, RÉSEAU INTERMINISTÉRIEL ET RÉFÉRENTIELS.
 
-1. QUELQUES CHIFFRES CLÉS (fonction publique d'État)
------------------------------------------------------------------------
-- Dépense annuelle : ~2 Md€ hors T2 (dépenses de personnel).
-- 2 millions d'agents avec boîte mail et poste de travail.
-- Plus de 20 000 implantations géographiques.
-- ~20 000 agents « métier SIC » (hors militaires) ; ~10 % de
-  contractuels (vs 15 % en moyenne dans la fonction publique d'État).
-- Plus de 130 centres informatiques principaux (13 000 m²), dont 7 de
-  plus de 500 m². Éléments déterminants : PUISSANCE ÉLECTRIQUE et
-  CAPACITÉ DE CLIMATISATION (plus la superficie).
-- 6 réseaux ministériels principaux -> convergence vers le RIE :
-  backbone de 17 tronçons, 12 points d'interconnexion backbone (PIB)
-  dans des DC ministériels, 12 000 km de fibre optique, dimensionnement
-  initial 10 Gb/s, technologie MPLS + IPv4 + IPv6, 17 000 sites cible
-  (métropole + DOM-COM), une quinzaine de SI ministériels transportés.
+LEXIQUE COMPLET.
 
-2. STRUCTURES INTERMINISTÉRIELLES (chronologie)
------------------------------------------------------------------------
-- 1998 : unité TIC de la Délégation Interministérielle à la Réforme de
-  l'État (DIRE3-UTIC) + mission MTIC. La MTIC a piloté les premiers
-  réseaux (ADER) et méta-annuaire (MAIA).
-- 2001 : ATICA (Agence des Technologies de l'Information et de la
-  Communication dans l'Administration) remplace la MTIC.
-- 2002 : l'ATICA présente le premier CADRE GÉNÉRAL D'INTEROPÉRABILITÉ
-  (circulaire PM) ; officialise la charte de nommage internet de
-  l'administration.
-- 2003 : rapport HYPER RÉPUBLIQUE (Pierre de La Coste) : « révolution
-  copernicienne » -> l'administration s'organise autour de l'usager ;
-  logique de silo -> logique en réseau ; 1 373 formulaires CERFA.
-- Février 2003 : ADAE (Agence de Développement de l'Administration
-  Électronique). Plans ADELE 2004-2007 (140 mesures) et ADELE 2006-2010.
-- Novembre 2002 : RE/SO 2007 (Raffarin), approche offre/demande.
-- Décembre 2005 : DGME (Direction Générale de la Modernisation de
-  l'État), créée à Bercy ; l'ADAE est supprimée. Recréée le 3 janvier
-  2008 (post-RGPP 2007) : « faire mieux avec moins ».
-- Rapport CARCENAC (2011) : 4 étapes de l'administration électronique
-  citoyenne — dialogue/information / interaction simple sur le web /
-  gestion complète en ligne / guichet unique. Propose PUGNACE.
-- PAGSI (janvier 1998, Jospin) : 6 chantiers — école, culture, service
-  public, entreprise, innovation, régulation.
-- 21 février 2011 : DISIC (Direction interministérielle des SIC de
-  l'État), décret n° 2011-193, auprès du PM/SGG. Directeurs : Jérôme
-  Filippini puis Jacques Marzin (ex-Helios puis CHORUS, le PGI unifié
-  interministériel sur SAP).
-  * 3 services : 1. stratégie, urbanisation et innovation ;
-    2. performance et maîtrise des risques ; 3. programmes et opérations
-    (RIE, transformation des centres informatiques, SIC territoriaux).
-  * Comitologie : CSIC (Conseil des SIC — secrétaires généraux, DGSIC
-    Défense, DGME, DB, ANSSI, SAE ; 2x/an) et CTSIC (Comité Technique
-    des SIC — DSI ministériels ; mensuel).
-  * Article 7 : information au-delà de 5 M€, avis au-delà de 9 M€.
-- Octobre 2012 : SGMAP (Secrétariat Général pour la Modernisation de
-  l'Action Publique), rattaché au PM. Entités : mission ETALAB (créée
-  février 2011, ouverture des données publiques), DIMAP (remplace la
-  DGME), DISIC.
-- CIMAP (Comité Interministériel pour la Modernisation de l'Action
-  Publique) : instance de décision/arbitrage. 1er CIMAP 18 décembre
-  2012 (50 décisions, 5 domaines). 4e CIMAP 18 décembre 2013.
-- 21 septembre 2015 : DISIC + Etalab + pôle Innovation fusionnés dans la
-  DINSIC (décret n° 2015-1165).
-- Novembre 2017 : le SGMAP laisse place à la DITP (Direction
-  Interministérielle de la Transformation Publique) et à la DINSIC
-  (décrets du 20 novembre 2017).
+      MTIC : Mission interministérielle pour les technologies de l'information et de la communication, structure de soutien aux administrations, ayant piloté les premiers réseaux de données ADER et le méta-annuaire MAIA.
 
-3. PLANS D'ACTION ET CONCRÉTISATIONS
------------------------------------------------------------------------
-- Circulaires Juppé 1996 : 15 mai (site internet ministériel
-  institutionnel obligatoire) ; 16 septembre (schéma directeur
-  ministériel SI et télécoms obligatoire).
-- PAGSI (1998), RE/SO 2007 (2002), ADELE (2004 : simplifier la vie de
-  l'usager, améliorer l'efficience du service public, valoriser l'agent).
-- Schéma directeur pour l'administration électronique 2006-2010 :
-  47 initiatives thématiques.
-- service-public.fr (octobre 2000), mon.service-public.fr (identité
-  citoyenne, coffre-fort de documents), administration24h24.gouv.fr
-  (janvier 2007, fondu ensuite), GéoPortail.
-- Plan Numérique 2012 (octobre 2008). Rapport Riester (février 2010) :
-  réduire le nombre de sites internet publics. Plateforme data.gouv.fr
-  (décembre 2011).
-- France Connect : fédération d'identités, démarrée automne 2014,
-  démonstrateur janvier 2015. Règlement européen e-IDAS (28 août 2014) :
-  identification électronique interopérable dans l'UE d'ici 2018.
-- SIDSIC (Services Interministériels Départementaux des SIC, engagés en
-  2011) : équipes informatiques des préfectures et DDI regroupées sous
-  l'autorité des secrétaires généraux des préfectures (~1 150 agents,
-  soutien de 55 000 agents).
+      ATICA : Agence des technologies de l'information et de la communication dans l'administration, qui a remplacé la MTIC en deux mille un et présenté en deux mille deux le premier cadre général d'interopérabilité.
 
-4. ZOOM SUR LE RIE
------------------------------------------------------------------------
-- Décidé par le Conseil des ministres du 25 mai 2011 : réseau
-  interministériel SÉCURISÉ regroupant les réseaux des ministères,
-  assurant la CONTINUITÉ de l'action gouvernementale en cas de
-  dysfonctionnement grave d'Internet.
-- Cœur de réseau haut débit, IPv6, résilience forte (maillage fin),
-  souplesse des modes de raccordement.
-- S'appuie sur l'infrastructure optique de RENATER (Réseau national de
-  télécommunications pour la technologie, l'enseignement et la
-  recherche). RENATER 6 : capacité du cœur de réseau 10 -> 100 Gbit/s.
-- Remplace AdER/SIGMA (dernières prestations résiliées le 7 juin 2016,
-  3,6 M€/an).
-- GOUVERNANCE : SCN RIE (service à compétence nationale), intégré au
-  SGMAP. 6 pôles opérationnels : Relations clients, Pilotage de
-  l'exploitation, Expertise, SUPERVISION (NOC — Network Operations
-  Center, 24h/24 7j/7), SÉCURITÉ (SOC — Security Operations Center),
-  Support et gestion.
-- SERVICES : accès à internet ; nommage (DNS) ; échanges
-  interministériels du réseau AdER (intranet interministériel) ;
-  service de temps (NTP, ouvert fin 2016). 18 ministères clients,
-  450 000 agents couverts fin 2016.
-- Interconnexion avec TESTA-ng (réseau protégé de l'UE, ex s-TESTA) via
-  le TAP (TESTA Access Point) sur le PIB de Paris 4 (Osny), janvier 2016.
-- Adressage interministériel : 100.65.0.0/16 + sous-domaine rie.gouv.fr
-  (remplace AdER 161.48.0.0/19 + ader.gouv.fr).
-- Sécurisation croisée des datacenters hébergeant des PIB : liaison de
-  secours mutualisée vers un PIB secondaire.
+      PAGSI : Plan d'action gouvernemental pour l'entrée de la France dans la société de l'information, lancé en janvier mille neuf cent quatre-vingt-dix-huit autour de six chantiers, école, culture, service public, entreprise, innovation et régulation.
 
-5. TEXTES JURIDIQUES CLÉS
------------------------------------------------------------------------
-- Directive 1999/93/CE (13/12/1999) : cadre communautaire pour la
-  signature électronique.
-- LOI n° 2000-230 du 13 mars 2000 : adaptation du droit de la preuve.
-  L'écrit électronique est admis en preuve au même titre que l'écrit
-  papier, sous réserve d'IDENTIFICATION de l'émetteur et de conditions
-  garantissant l'INTÉGRITÉ. Décret n° 2001-272 du 30 mars 2001 (art.
-  1316-4 du code civil).
-- Loi du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN).
-- Loi n° 2005-102 du 11 février 2005 (égalité des droits des personnes
-  handicapées) : art. 47 -> base du RGAA.
-- ORDONNANCE n° 2005-1516 du 8 décembre 2005 (échanges électroniques
-  usagers <-> autorités administratives) : définit les termes (SI,
-  prestataire de services de confiance, produit de sécurité,
-  téléservice) ; systématise l'accusé de réception/enregistrement
-  électronique ; crée mon.service-public.fr ; institue RGI (art. 11),
-  RGS (art. 9) et RGAA.
-- Décret n° 2007-284 du 2 mars 2007 : modalités d'élaboration du RGI.
-- Décret n° 2009-834 du 7 juillet 2009 : création de l'ANSSI.
-- Décret n° 2011-193 du 21 février 2011 : création de la DISIC.
-- Circulaire PM 19 septembre 2012 : logiciels libres ; SILL (socle
-  interministériel de logiciels libres).
-- DÉCRET n° 2014-879 du 1er août 2014 : renforce l'UNICITÉ du SI de
-  l'État, placé sous la responsabilité du Premier ministre. 4 services
-  NON délégables sauf décision du PM : infrastructures informatiques,
-  réseaux de communication, services numériques d'usage partagé, SI de
-  fonctions transversales. Projets > 9 M€ -> avis conforme du DISIC.
-- ORDONNANCE n° 2014-1330 du 6 novembre 2014 (SVE) : droit de saisir
-  l'administration par voie électronique à partir du 7 novembre 2015.
-- Circulaire n° 5764/SG PM du 20 janvier 2015 : optimisation des
-  dépenses SI (objectif -500 à 800 M€ en 3 à 5 ans, base 2013).
+      Rapport Carcenac : rapport du printemps deux mille un décrivant les quatre étapes de l'administration électronique citoyenne et proposant le programme PUGNACE.
 
-6. RGI, RGS, RGAA
------------------------------------------------------------------------
-RGI (Référentiel Général d'Interopérabilité)
-- Cadre de recommandations référençant les normes et standards
-  favorisant l'INTEROPÉRABILITÉ au sein des SI de l'administration ;
-  détermine les répertoires de données, normes et standards à utiliser.
-- V1.0 : 12 juin 2009. V2.0 : arrêté du 20 avril 2016. Débat sur
-  l'exclusion d'Open XML (Microsoft) à côté d'ODF.
+      Rapport Hyper République : rapport de Pierre de La Coste de janvier deux mille trois plaidant pour le passage d'une logique de silo à une logique en réseau et une réorganisation autour de l'usager.
 
-RGS (Référentiel Général de Sécurité)
-- Recueil de règles et bonnes pratiques SSI ; destiné aux autorités
-  administratives ET aux professionnels qui les assistent.
-- Propriété de l'État ; rédigé conjointement par l'ANSSI et la DGME.
-- Préconise une DÉMARCHE D'AMÉLIORATION CONTINUE de type ISO 27001.
-- Produits de sécurité et PSCo (prestataires de services de confiance)
-  qualifiés -> référencés par l'État pour les téléservices requérant ce
-  niveau.
-- V1.0 : 6 mai 2010. V2.0 : 13 juin 2014 (applicable depuis le 1er
-  juillet 2014).
+      ADAE : Agence de développement de l'administration électronique, créée en février deux mille trois, à l'origine des plans stratégiques ADELE.
 
-RGAA (Référentiel Général d'Accessibilité pour les Administrations)
-- Traduction opérationnelle des critères d'accessibilité + méthodologie
-  de vérification ; aligné sur les WCAG 2.0 (Web Content Accessibility
-  Guidelines, 11 décembre 2008, W3C). N'EST PAS une nouvelle norme.
-- 4 PRINCIPES FONDAMENTAUX : PERCEPTIBLE, UTILISABLE, COMPRÉHENSIBLE,
-  ROBUSTE.
-- Niveau légalement exigé : DOUBLE A (AA), aussi préconisé par le
-  Parlement européen. Délai de 18 mois pour migrer vers une nouvelle
-  version.
-- V3.0 : arrêté du 29 avril 2015 (capitalise sur AccessiWeb, référentiel
-  HTML5/ARIA).
-- 2 DOCUMENTS à publier : page d'aide (langage non technique, contact +
-  coordonnées du défenseur des droits, accessible depuis toutes les
-  pages) ET déclaration de conformité (niveau précis + dérogations
-  justifiées).
-- Sanction : à défaut de correction dans les 6 mois suivant une mise en
-  demeure, ajout à une liste de services non-conformes publiée.
-- Portée : uniquement les applications et contenus web consultables via
-  un navigateur (y compris sur smartphone) ; PAS les applications
-  mobiles natives, PAS les logiciels de bureau, PAS les postes de
-  travail.
-- Charte internet de l'État V1.0 (circulaire PM n° 5574 du 16 février
-  2012) ; label « e-accessible » (5 niveaux) ; FIPHFP (finance audits et
-  mise en conformité dans la limite de 50 %, ~1,5 M€/an).
+      ADELE : programme gouvernemental d'administration électronique deux mille quatre-deux mille sept, de cent quarante mesures, visant à simplifier la vie de l'usager, améliorer l'efficience du service public et valoriser l'agent.
 
-=======================================================================
-À RETENIR
-- SI de l'État : ~2 Md€/an hors T2, 2 M d'agents, RIE en convergence des
-  6 réseaux ministériels (MPLS, IPv4/IPv6, 12 000 km de fibre).
-- Chronologie : MTIC -> ATICA (2001) -> ADAE (2003) -> DGME (2005/2008)
-  -> DISIC (21 fév. 2011) -> SGMAP (2012) -> DINSIC (2015) -> DITP +
-  DINSIC (2017).
-- RIE : décidé le 25 mai 2011, sur RENATER, remplace AdER/SIGMA,
-  gouverné par le SCN RIE (NOC + SOC), adressage 100.65.0.0/16.
-- Textes : loi 13 mars 2000 (preuve électronique), ordonnance 8 déc.
-  2005 (crée RGI/RGS/RGAA), décret 1er août 2014 (unicité du SI),
-  ordonnance SVE 6 nov. 2014.
-- RGI (interopérabilité, arrêté 20 avr. 2016) ; RGS (sécurité, ANSSI +
-  DGME, ISO 27001, PSCo) ; RGAA (accessibilité, WCAG 2.0, principes
-  P-U-C-R, niveau AA, web via navigateur seulement).
+      DGME : Direction générale de la modernisation de l'État, créée à Bercy en décembre deux mille cinq, remplaçant l'ADAE, chargée de la LOLF et des audits de modernisation, puis recréée en deux mille huit après la RGPP.
+
+      RGPP : Révision générale des politiques publiques de deux mille sept, visant à faire mieux avec moins, notamment par le non-remplacement d'un fonctionnaire sur deux partant à la retraite.
+
+      DISIC : Direction interministérielle des systèmes d'information et de communication de l'État, créée par le décret du vingt et un février deux mille onze auprès du Premier ministre, chargée du cadre stratégique commun, de la gestion de la performance, des opérations de mutualisation et de l'alerte sur les projets majeurs.
+
+      Article 7 : disposition du décret créant la DISIC prévoyant que le directeur interministériel est informé pour tout projet dont le coût dépasse cinq millions d'euros et consulté pour avis au-delà de neuf millions d'euros.
+
+      SGMAP : Secrétariat général pour la modernisation de l'action publique, créé en octobre deux mille douze auprès du Premier ministre, structuré autour d'Etalab, de la DIMAP et de la DISIC.
+
+      Etalab : mission créée en février deux mille onze, chargée de l'ouverture des données publiques et du portail data.gouv.fr.
+
+      DIMAP : Direction interministérielle pour la modernisation de l'action publique, qui a remplacé la DGME.
+
+      DINSIC : Direction interministérielle du numérique et du système d'information et de communication de l'État, née le vingt et un septembre deux mille quinze de la fusion de la DISIC, d'Etalab et du pôle Innovation.
+
+      DITP : Direction interministérielle de la transformation publique, créée en novembre deux mille dix-sept avec la DINSIC en remplacement du SGMAP.
+
+      CIMAP : Comité interministériel pour la modernisation de l'action publique, instance de décision et d'arbitrage, premier comité le dix-huit décembre deux mille douze.
+
+      CSIC : Conseil des systèmes d'information et de communication, réunissant les secrétaires généraux, la DGSIC de la Défense, la DGME, la Direction du budget, l'ANSSI et le Service des achats de l'État, consulté deux fois par an.
+
+      CTSIC : Comité technique des systèmes d'information et de communication, réunissant les directeurs des systèmes d'information ministériels chaque mois.
+
+      Palier de maturité 1 : exercice mené dans chaque ministère mesurant le niveau atteint selon dix critères et les actions à entreprendre pour la mise sous contrôle de la fonction des systèmes d'information.
+
+      Contrat de progrès : engagement réciproque entre la DISIC et chaque ministère autour de la mise sous contrôle du système d'information, signé en juin deux mille treize.
+
+      MAREVA2 : méthode d'analyse et de retour de la valeur des projets, couplant l'évaluation économique à l'évaluation qualitative des enjeux stratégiques, environnementaux, sociaux et systémiques.
+
+      CGI : Commissariat général à l'investissement, chargé d'évaluer tout projet informatique dont l'investissement dépasse cinquante millions d'euros.
+
+      RZF : responsable de zone fonctionnelle, acteur de l'urbanisation chargé des trajectoires d'évolution des fonctions transverses.
+
+      France Connect : composant de fédération d'identités numériques démarré à l'automne deux mille quatorze, avec un démonstrateur opérationnel depuis janvier deux mille quinze, intégrant des fournisseurs d'identité comme impot.gouv.fr, La Poste et l'assurance maladie.
+
+      e-IDAS : règlement européen publié le vingt-huit août deux mille quatorze imposant un dispositif d'identification numérique interopérable entre États membres avant deux mille dix-huit.
+
+      SIDSIC : Services interministériels départementaux des systèmes d'information et de communication, créés à partir de deux mille onze pour rassembler les équipes informatiques des préfectures et des directions départementales interministérielles.
+
+      RéATE : Réforme de l'administration territoriale de l'État, à l'origine de la constitution des SIDSIC.
+
+      RIE : Réseau interministériel de l'État, réseau sécurisé regroupant les réseaux des ministères et permettant la continuité de l'action gouvernementale en cas de dysfonctionnement grave d'Internet, décidé au conseil des ministres du vingt-cinq mai deux mille onze.
+
+      RENATER : Réseau national de télécommunications pour la technologie, l'enseignement et la recherche, infrastructure optique à haut débit sur laquelle s'appuie le RIE.
+
+      SCN RIE : service à compétence nationale gérant le RIE, intégré au SGMAP, organisé en six pôles opérationnels.
+
+      NOC : Network Operations Center, pôle de supervision assurant la permanence opérationnelle du RIE vingt-quatre heures sur vingt-quatre et sept jours sur sept.
+
+      SOC : Security Operations Center, pôle de sécurité pilotant l'amélioration continue de la sécurité du RIE.
+
+      PIB : point d'interconnexion backbone, localisé dans un centre de données ministériel.
+
+      AdER : administration en réseau, service d'échanges interministériels et intranet interministériel, dont le marché AdER/SIGMA a été résilié le sept juin deux mille seize.
+
+      SIAM : service inter-administration de messagerie, assuré via les plateformes de service intégrées au RIE.
+
+      TESTA : réseau de télécommunication protégé de l'Union européenne, interconnecté avec le RIE par un point d'accès dédié.
+
+      Sécurisation croisée : dispositif où, si le raccordement d'un centre de données à son point d'interconnexion nominal est hors service, les flux empruntent une liaison de secours mutualisée vers un point secondaire.
+
+      RGI : Référentiel général d'interopérabilité, cadre de recommandations référençant normes et standards favorisant l'interopérabilité des systèmes d'information de l'administration, prévu par l'article 11 de l'ordonnance du huit décembre deux mille cinq.
+
+      RGS : Référentiel général de sécurité, recueil de règles et de bonnes pratiques de sécurité des systèmes d'information, rédigé conjointement par l'ANSSI et la DGME, prévu par l'article 9 de l'ordonnance du huit décembre deux mille cinq.
+
+      PSCo : prestataire de services de confiance, pouvant être qualifié à un niveau de sécurité et référencé par l'État.
+
+      RGAA : Référentiel général d'accessibilité pour les administrations, traduction opérationnelle des critères d'accessibilité des règles internationales WCAG 2.0, prévu par la loi du onze février deux mille cinq.
+
+      WCAG 2.0 : Web Content Accessibility Guidelines, règles internationales d'accessibilité du contenu web du W3C, du onze décembre deux mille huit, standard de référence retenu par la loi française.
+
+      Niveau double A : niveau d'accessibilité légalement exigé, également préconisé par le Parlement européen.
+
+      SILL : socle interministériel de logiciels libres, cadre de convergence des logiciels libres à privilégier, présenté par fonctionnalité avec la version préconisée.
+
+      Décret 2014-879 : décret du premier août deux mille quatorze renforçant l'unicité du système d'information de l'État, placé sous la responsabilité du Premier ministre, et le rôle de la DISIC sur les couches basses.
+
+      Ordonnance SVE : ordonnance du six novembre deux mille quatorze établissant le droit de chaque usager de saisir l'administration par voie électronique à partir du sept novembre deux mille quinze.
+
+COURS DÉTAILLÉ.
+
+I. QUELQUES CHIFFRES CLÉS DU SYSTÈME D'INFORMATION DE LA FONCTION PUBLIQUE D'ÉTAT.
+
+      Sur le périmètre des principaux ministères, hors opérateurs sous tutelle et hors missions de sécurité et de défense, le système d'information de l'État représente une dépense annuelle de deux milliards d'euros hors dépenses de personnel, deux millions d'agents dotés d'une boîte aux lettres et d'un poste de travail, plus de vingt mille implantations géographiques et vingt mille agents publics du métier des systèmes d'information et de communication, dont environ dix pour cent de contractuels contre quinze pour cent en moyenne dans la fonction publique d'État, le poids des contractuels étant inversement proportionnel à la taille des ministères.
+
+      L'hébergement compte plus de cent trente centres informatiques principaux, treize mille mètres carrés, dont sept de plus de cinq cents mètres carrés, la superficie n'étant plus l'élément fondamental, au profit de la puissance électrique et de la capacité de climatisation. Six réseaux informatiques ministériels principaux convergent vers le RIE, qui comprend un cœur de dix-sept tronçons, douze points d'interconnexion backbone en centres de données ministériels, douze mille kilomètres de fibre optique, un dimensionnement initial à dix gigabits par seconde, la technologie MPLS en IPv4 et IPv6, une cible de dix-sept mille sites en métropole et outre-mer, une quinzaine de systèmes d'information ministériels transportés et plusieurs milliers d'applications métiers et transverses.
+
+II. LE CONTEXTE INTERMINISTÉRIEL - HISTORIQUE DES STRUCTURES.
+
+   A. Des premières structures à la DGME.
+
+      La réforme de l'État a très tôt été placée auprès des services du Premier ministre, avec dès mille neuf cent quatre-vingt-dix-huit une unité dédiée aux technologies de l'information et la mission MTIC. En deux mille un, l'ATICA a remplacé la MTIC, se concentrant sur la mutualisation technique, réseau et services associés ; la MTIC avait piloté les premiers réseaux de données ADER et le méta-annuaire MAIA. En deux mille deux, l'ATICA a présenté par circulaire le premier cadre général d'interopérabilité, avec des recommandations sur le réseau, l'annuaire de messagerie, l'infrastructure de gestion de clés et les formats, et officialisé la charte de nommage internet de l'administration.
+
+      Le rapport Carcenac du printemps deux mille un décrit quatre étapes de l'administration électronique citoyenne, le dialogue et l'information, l'interaction simple sur le web, la gestion complète en ligne d'une démarche et la distribution des services par un guichet unique, et propose de regrouper les efforts dans un programme dit PUGNACE. Le rapport Hyper République de Pierre de La Coste, en janvier deux mille trois, présente les freins à l'administration électronique comme essentiellement sociologiques, plaide pour le décloisonnement d'une administration centralisée et taylorienne, le passage d'une logique de silo à une logique en réseau et la réorganisation autour de l'usager ; il combat le nombre élevé de formulaires, mille trois cent soixante-treize agréés par le CERFA, et demande que tout courrier administratif comporte une adresse de courriel.
+
+      En février deux mille trois est créée l'ADAE, Agence de développement de l'administration électronique, qui conduit le plan stratégique ADELE deux mille quatre-deux mille sept, plus de cent quarante mesures, et le second plan ADELE deux mille six-deux mille dix. En décembre deux mille cinq, la partie administration électronique est reprise par la DGME, Direction générale de la modernisation de l'État, créée à Bercy, l'accent restant mis sur la LOLF et une centaine d'audits de modernisation. Après la RGPP de deux mille sept, une nouvelle DGME est créée le trois janvier deux mille huit, avec l'objectif de faire mieux avec moins, notamment par le non-remplacement d'un fonctionnaire sur deux partant à la retraite ; elle comprend huit équipes leviers dont une chargée des systèmes d'information, qui lance l'exercice du palier de maturité 1.
+
+   B. De la DISIC à la DINSIC.
+
+      La DISIC, Direction interministérielle des systèmes d'information et de communication de l'État, est créée par le décret du vingt et un février deux mille onze auprès du Premier ministre, d'abord confiée à Jérôme Filippini puis, en novembre deux mille douze, à Jacques Marzin, qui avait mené les programmes Helios puis CHORUS. La DISIC élabore le cadre stratégique commun soumis au Premier ministre, définit un cadre commun de gestion de la performance, propose les opérations de mutualisation entre administrations et en propose la gouvernance, et alerte le Premier ministre sur les enjeux et risques des projets d'importance majeure. Elle est organisée en trois services, stratégie, urbanisation et innovation, performance et maîtrise des risques, et programmes et opérations, ce dernier portant le RIE, la transformation des centres informatiques et les systèmes d'information et de communication territoriaux. Sa comitologie comprend le Conseil des systèmes d'information et de communication, réuni deux fois par an, et le Comité technique des systèmes d'information et de communication, réuni chaque mois.
+
+      En octobre deux mille douze est créé le SGMAP, Secrétariat général pour la modernisation de l'action publique, rattaché au Premier ministre, autour de l'appui à la transformation, du bon usage du numérique, de la transparence de l'action publique et du portail unique interministériel d'informations publiques, de la présence territoriale et de l'association des usagers et des agents. Il est structuré autour d'Etalab, de la DIMAP qui remplace la DGME, et de la DISIC. Le décret du vingt et un septembre deux mille quinze réorganise le SGMAP et fusionne la DISIC, Etalab et le pôle Innovation au sein de la DINSIC, Direction interministérielle du numérique et du système d'information et de communication de l'État. Le CIMAP, Comité interministériel pour la modernisation de l'action publique, est l'instance de décision et d'arbitrage, son premier comité s'étant tenu le dix-huit décembre deux mille douze avec cinquante décisions réparties en cinq domaines. Le quatrième CIMAP, le dix-huit décembre deux mille treize, vise à moderniser en profondeur le système d'information de l'État, dont plusieurs décisions relèvent des systèmes d'information et de communication, la décision numéro vingt-deux mandatant la DISIC pour proposer les leviers de transformation avec un objectif d'économies de cinq cents à huit cents millions d'euros en trois à cinq ans, la décision numéro vingt-trois fixant l'objectif que la majorité des Français privilégient les services publics numériques d'ici deux mille seize, la décision numéro vingt-quatre réaffirmant la gratuité de la réutilisation des données publiques. En novembre deux mille dix-sept, le SGMAP laisse place à la DITP, Direction interministérielle de la transformation publique, sous l'autorité du ministre de l'Action et des Comptes publics, et à la DINSIC, sous l'autorité du ministre chargé du numérique.
+
+III. LES PLANS D'ACTION GOUVERNEMENTAUX.
+
+      Sur vingt ans, plusieurs plans se sont succédé quelle que soit la couleur politique. Les circulaires Juppé de mille neuf cent quatre-vingt-seize imposent un site internet ministériel et des schémas directeurs des systèmes d'information et des télécommunications. Le PAGSI de janvier mille neuf cent quatre-vingt-dix-huit, sous Lionel Jospin, s'articule autour de six chantiers, école, culture, service public, entreprise, innovation et régulation, avec l'équipement des lycées et le développement du commerce électronique. Le plan RE/SO 2007 de novembre deux mille deux, sous Jean-Pierre Raffarin, adopte une approche offre et demande. Le programme ADELE de février deux mille quatre s'articule autour d'un plan stratégique et d'un plan d'action actualisé chaque année. Le schéma directeur pour l'administration électronique deux mille six-deux mille dix définit des principes d'urbanisation structurés en quarante-sept initiatives thématiques, avec des réalisations comme le portail service-public.fr ouvert en octobre deux mille, le service mon.service-public.fr de gestion de l'identité citoyenne, le portail des démarches en ligne ouvert en janvier deux mille sept et le GéoPortail.
+
+      Le Plan Numérique 2012, livré en octobre deux mille huit, repose sur l'accès de tous aux réseaux numériques, le développement de la production de contenus, la diversification des usages avec le renforcement de la confiance numérique et la lutte contre la cybercriminalité, et la rénovation de la gouvernance de l'économie numérique. Le rapport Riester de février deux mille dix préconise de réduire fortement le nombre de sites, ramené de cinq cent soixante-quatre à deux cent quarante-deux, et un deuxième rapport de septembre deux mille onze formule quinze nouvelles propositions inspirées des médias sociaux et de l'internet mobile, dont l'aide personnalisée à l'usager en cours de démarche et la mise à disposition gratuite des données publiques avec la plateforme data.gouv.fr.
+
+IV. LES CONCRÉTISATIONS DE LA DISIC.
+
+   A. Dès deux mille onze.
+
+      La DISIC établit une feuille de route pour une vision stratégique du système d'information de l'État en trois volets : piloter la transformation pour aligner les systèmes d'information et de communication sur les enjeux métiers, avec les directeurs des systèmes d'information impliqués en amont des décisions et la convergence vers le palier 1 de maturité ; mieux investir et réduire les risques, en professionnalisant la programmation budgétaire pluriannuelle, en sécurisant les grands projets applicatifs dès avant leur lancement au titre de l'article 7, et en réduisant radicalement le patrimoine applicatif de plusieurs milliers d'applications ; anticiper et innover, en favorisant la dématérialisation, l'administration électronique, l'ouverture des données, la mobilité et les systèmes d'information géographique, tout en garantissant la sécurité.
+
+      Elle lance l'exercice du palier de maturité 1 dans chaque ministère selon dix critères. Le conseil des ministres du vingt-cinq mai deux mille onze décide la mise en place du RIE, réseau interministériel sécurisé regroupant les réseaux des ministères et permettant la continuité de l'action gouvernementale en cas de dysfonctionnement grave d'Internet, avec un cœur à haut débit en IPv6, une forte résilience par maillage fin, une souplesse de raccordement et des services construits progressivement. Elle engage la rationalisation des centres informatiques et des travaux sur les ressources humaines des systèmes d'information et de communication.
+
+   B. Dès deux mille douze et deux mille treize.
+
+      La DISIC élabore le cadre stratégique commun prévu par l'article 3 du décret la créant. Le conseil des systèmes d'information et de communication du vingt-six avril deux mille douze approuve l'évaluation des coûts du système d'information de l'État, l'expérimentation d'un référentiel des coûts avec cinq ministères et l'examen conjoint de la structure du budget des systèmes d'information avec deux ministères. Jacques Marzin présente la feuille de route deux mille treize-deux mille quinze, insistant sur la nécessité de prioriser, ce qui aboutit aux contrats de progrès, engagements réciproques entre la DISIC et les ministères, signés en juin deux mille treize entre le SGMAP et les secrétaires généraux de chaque ministère.
+
+      Dès deux mille treize s'ajoute la sécurisation des projets au titre de l'article 7, présentation pour information au-delà de cinq millions d'euros de coût complet et pour avis au-delà de neuf millions, avec la systématisation de la méthode MAREVA2 et une évaluation par le Commissariat général à l'investissement pour tout projet dont l'investissement dépasse cinquante millions d'euros. L'urbanisation du système d'information est portée par des responsables de zone fonctionnelle en charge des trajectoires d'évolution des fonctions transverses.
+
+   C. Dès deux mille quatorze et deux mille quinze.
+
+      La DISIC lance douze groupes de travail pour décliner les mesures vingt-deux à vingt-sept du quatrième CIMAP et finaliser un plan de transformation du système d'information de l'État, chaque thème étant piloté par un directeur des systèmes d'information ministériel, achats-contrats, internalisation des projets, mutualisation des infrastructures, pilotage des investissements, décommissionnement des anciennes applications, industrialisation des développements, mutualisation de l'expertise, services mutualisés, chaîne de soutien utilisateur. Les efforts sont organisés autour de trois axes, une meilleure maîtrise des flux d'investissements projet, une optimisation du patrimoine applicatif avec plans de décommissionnement et gestion des licences, et une mutualisation plus poussée des infrastructures, avec l'hypothèse de concentration de cent dix-sept sites d'hébergement à dix-sept en dix ans. Trois chantiers prioritaires sont lancés, les comités d'investissements des ministères, la stratégie de plateforme de l'État avec l'identité numérique France Connect, et une capacité d'hébergement interministériel via le programme d'investissements d'avenir. Trois leviers sont nécessaires, opérationnel, juridique reconnaissant l'unicité du système d'information de l'État sous la responsabilité du Premier ministre, et budgétaire pour réinvestir une partie des économies, ce dernier étant abandonné faute d'adhésion des ministères.
+
+      En deux mille quinze sont publiés la circulaire du Premier ministre sur les dépenses des systèmes d'information de janvier, un tableau de bord des projets sensibles dit TOP 50, une version allégée de MAREVA2, l'actualisation des cadres normatifs d'urbanisation et d'architecture, la publication de la version 3.0 du RGAA, la mise en place de cursus de formation aux métiers clés, un réseau social professionnel des agents, l'ouverture du RIE pour six mille sites sur dix-sept mille, une équipe pour la solution libre d'archivage électronique VITAM, un marché interministériel de cloud public et une offre interne de cloud convergeant vers le logiciel libre OpenStack. La stratégie de plateforme de l'État combine la mise à disposition des données publiques, la maîtrise par l'usager de ses données personnelles et la construction d'interfaces ; une identité numérique interopérable est rendue nécessaire par le règlement européen e-IDAS du vingt-huit août deux mille quatorze, et le composant France Connect, démarré à l'automne deux mille quatorze selon des méthodes agiles, a un démonstrateur opérationnel depuis janvier deux mille quinze, avec les fournisseurs d'identité impot.gouv.fr, La Poste et l'assurance maladie.
+
+      Le programme des SIDSIC, Services interministériels départementaux des systèmes d'information et de communication, engagé en deux mille onze pour accompagner la Réforme de l'administration territoriale de l'État, rassemble les équipes informatiques des préfectures et des directions départementales interministérielles, soit environ mille cent cinquante agents assurant le soutien informatique de cinquante-cinq mille agents.
+
+V. ZOOM SUR LE RÉSEAU INTERMINISTÉRIEL DE L'ÉTAT.
+
+   A. Principes et intégration des ressources.
+
+      Le RIE est un vecteur de transition numérique au service de la modernisation de l'action publique. Des instances de gouvernance interministérielles dédiées assurent la concertation entre ministères ; l'unification des réseaux ministériels favorise la mise en commun des infrastructures, source d'économies de fonctionnement. Le RIE s'appuie sur l'infrastructure optique à haut débit du réseau RENATER, existant robuste et pérenne, pour optimiser les coûts opérationnels ; les compétences ministérielles et interministérielles sont associées au pilotage pendant le déploiement et l'exploitation. Le raccordement est effectué de façon souple et progressive selon les besoins des ministères ; les centres informatiques ministériels sont intégrés en phase de construction pour assurer la continuité des flux interministériels historiquement portés par le réseau AdER/SIGMA. Le RIE raccordera l'ensemble des sites, centrales et déconcentrés, en métropole et outre-mer, et contribue à la sécurisation en profondeur des infrastructures vis-à-vis des réseaux tiers, notamment Internet.
+
+   B. La gouvernance et l'organisation.
+
+      Le service à compétence nationale RIE est intégré au SGMAP. Il est organisé en six pôles opérationnels : relations clients, avec des interlocuteurs identifiés par ministère ; pilotage de l'exploitation, portant les relations avec les fournisseurs et opérateurs et la production des accès ; expertise, conseillant les projets interministériels et les migrations ; supervision, le Network Operations Center assurant la permanence vingt-quatre heures sur vingt-quatre et sept jours sur sept ; sécurité, le Security Operations Center pilotant l'amélioration continue de la sécurité des flux et le maintien en conditions de sécurité ; support et gestion, portant les opérations budgétaires et le fonctionnement courant.
+
+   C. Les évolutions récentes et les services.
+
+      En deux mille seize, les logiciels d'exploitation de tous les équipements du cœur de réseau sont mis à jour pour le maintien en conditions opérationnelle et de sécurité ; le passage à RENATER 6 initie l'augmentation de la capacité de transport du cœur de dix à cent gigabits par seconde ; de nouvelles entités sont raccordées, la Cour des comptes et le site Ségur-Fontenoy abritant le Défenseur des droits et la CNIL ; le réseau européen TESTA-ng est interconnecté au RIE par un point d'accès dédié pour l'accès aux applications de la Commission européenne. La sécurisation croisée des centres de données hébergeant des points d'interconnexion backbone est mise en œuvre : si le raccordement au point nominal est hors service, les flux empruntent une liaison de secours mutualisée vers un point secondaire, deux centres de données se secourant réciproquement.
+
+      Les services du RIE recouvrent l'accès à Internet, passé de douze ministères clients pour quatre cent mille agents fin deux mille quinze à dix-huit ministères pour quatre cent cinquante mille agents fin deux mille seize, le nommage par le protocole DNS pour l'ensemble des clients, les échanges interministériels dans le cadre du réseau AdER, l'intranet interministériel, et un service de temps par le protocole NTP ouvert fin deux mille seize. Le marché AdER/SIGMA a été résilié le sept juin deux mille seize, infrastructure de trois virgule six millions d'euros annuels définitivement fermée, les échanges interministériels et le service inter-administration de messagerie SIAM étant désormais assurés par les plateformes de service intégrées au RIE ; l'adressage interministériel RIE et le sous-domaine rie.gouv.fr se sont fortement développés en remplacement de l'ancien adressage AdER, et une doctrine de convention de nommage du DNS interministériel a été diffusée.
+
+VI. LES TEXTES JURIDIQUES.
+
+      Les circulaires du Premier ministre du quinze mai et du seize septembre mille neuf cent quatre-vingt-seize imposent un site internet ministériel institutionnel et un schéma directeur ministériel. La loi du treize mars deux mille, prise après la directive européenne du treize décembre mille neuf cent quatre-vingt-dix-neuf, adapte le droit de la preuve : l'écrit électronique est admis en preuve au même titre que l'écrit papier sous réserve d'identifier son auteur et de garantir son intégrité ; le décret du trente mars deux mille un est pris pour l'application de l'article 1316-4 du code civil relatif à la signature électronique. L'ordonnance du huit décembre deux mille cinq relative aux échanges électroniques entre usagers et autorités administratives définit les termes, systématise l'accusé de réception électronique, crée l'espace mon.service-public.fr et met en place les référentiels RGI, RGS et RGAA.
+
+      Le décret numéro 2011-193 du vingt et un février deux mille onze crée la DISIC, qui oriente, anime et coordonne les actions visant à améliorer la qualité, l'efficacité, l'efficience et la fiabilité du service rendu, organise les opérations de mutualisation et, dans son article 7, prévoit l'information au-delà de cinq millions d'euros et l'avis au-delà de neuf millions d'euros. La circulaire du Premier ministre du dix-neuf septembre deux mille douze oriente l'usage des logiciels libres, avec le socle interministériel de logiciels libres présentant, par fonctionnalité, le logiciel préconisé et sa version. La circulaire du sept mars deux mille treize porte le cadre stratégique commun du système d'information de l'État. Le décret numéro 2014-879 du premier août deux mille quatorze renforce l'unicité du système d'information de l'État, composé de l'ensemble des infrastructures et services logiciels concourant aux missions des services de l'État, placé sous la responsabilité du Premier ministre, déléguée de plein droit aux ministres sauf pour les infrastructures informatiques, les réseaux de communication, les services numériques d'usage partagé et les systèmes d'information des fonctions transversales ; les projets dépassant neuf millions d'euros sont soumis pour avis conforme au directeur interministériel. L'ordonnance numéro 2014-1330 du six novembre deux mille quatorze établit le droit de saisir l'administration par voie électronique à partir du sept novembre deux mille quinze, imposant une dématérialisation complète des entrants. La circulaire du vingt janvier deux mille quinze fixe l'objectif de diminuer la dépense informatique annuelle de cinq cents à huit cents millions d'euros en trois à cinq ans, impose le référentiel des activités des systèmes d'information et de communication au premier janvier deux mille seize, crée un budget centralisé géré par la DISIC et un tableau de bord des projets sensibles. L'arrêté du vingt-neuf avril deux mille quinze publie la version 3.0 du RGAA.
+
+VII. LES RÉFÉRENTIELS GÉNÉRAUX.
+
+   A. L'interopérabilité - le RGI.
+
+      Le RGI est un cadre de recommandations référençant les normes et standards favorisant l'interopérabilité des systèmes d'information de l'administration ; il détermine les répertoires de données, normes et standards à utiliser, permettant d'aller au-delà des arrangements bilatéraux. Sa version 1.0 a été publiée le douze juin deux mille neuf, sa version 2.0 officialisée par l'arrêté du vingt avril deux mille seize, avec un débat sur l'exclusion du format Open XML de Microsoft à côté d'ODF.
+
+   B. La sécurité - le RGS.
+
+      Le RGS est un recueil de règles et de bonnes pratiques de sécurité des systèmes d'information, destiné aux autorités administratives et aux professionnels qui les assistent, éditeurs, autorités de certification. Il est la propriété de l'État et est rédigé conjointement par l'ANSSI et la DGME. Les produits de sécurité et les prestataires de services de confiance qualifiés peuvent être référencés par l'État et deviennent utilisables pour les téléservices exigeant ce niveau de sécurité, le référencement étant subordonné au respect du cahier des charges approuvé par arrêté du dix-huit janvier deux mille douze. Le RGS préconise une démarche d'amélioration continue selon la norme ISO 27001 ; sa version 1.0 a été publiée le six mai deux mille dix, sa version 2.0 le treize juin deux mille quatorze, applicable depuis le premier juillet deux mille quatorze.
+
+   C. L'accessibilité - le RGAA.
+
+      La loi du onze février deux mille cinq fait de l'accessibilité une exigence pour tous les services de communication publique en ligne de l'État, des collectivités et des établissements publics, et reconnaît les recommandations internationales comme référence. Le RGAA, référentiel à forte dimension technique, offre une traduction opérationnelle des critères des règles internationales WCAG 2.0 du onze décembre deux mille huit et une méthodologie de vérification. Il repose sur quatre principes fondamentaux : perceptible, avec des équivalents textuels au contenu non textuel et une séparation du premier plan et de l'arrière-plan ; utilisable, avec des fonctionnalités accessibles au clavier, un temps suffisant et des éléments d'orientation ; compréhensible, avec un contenu lisible, un fonctionnement prévisible et l'aide à la correction des erreurs ; robuste, avec la compatibilité avec les agents utilisateurs actuels et futurs et les technologies d'assistance. La version 3.0 du référentiel, entrée en vigueur après l'arrêté du vingt-neuf avril deux mille quinze, est une évolution majeure prenant en compte HTML5 et ARIA.
+
+   D. La foire aux questions du RGAA.
+
+      Le RGAA encadre l'accessibilité des contenus numériques ; il ne constitue pas une nouvelle norme mais une méthodologie de vérification des standards internationaux. Sont concernés tous les services de communication publique en ligne de l'État, des collectivités et des établissements publics, ainsi que tout organisme prenant en charge une activité d'intérêt général sous le contrôle d'une personne publique. Tous les documents du RGAA sont opposables. Le niveau légalement exigé est le niveau double A, également préconisé par le Parlement européen. Depuis mai deux mille douze, tous les sites et applications accessibles depuis un navigateur doivent respecter le RGAA, avec un délai de dix-huit mois pour la mise à jour vers une nouvelle version. Deux documents sont attendus, une page d'aide en langage non technique mentionnant un contact et le Défenseur des droits, et une déclaration de conformité indiquant le niveau précis et les dérogations justifiées. En cas de non-respect, à défaut de correction dans les six mois suivant une mise en demeure, le nom du service est publié sur une liste des services non conformes ; l'utilisateur lésé peut demander une médiation au Défenseur des droits ou réparation auprès du juge. Le RGAA ne traite actuellement que l'accessibilité des applications et contenus web consultables depuis un navigateur, y compris sur smartphone, mais pas les applications mobiles ni les logiciels de bureau ; ses critères et tests sont normatifs, mais en l'absence de mise à jour sous deux ans il est autorisé de créer ses propres tests compatibles.
+
+      Par ailleurs, la charte internet de l'État, publiée par la circulaire du seize février deux mille douze, constitue un guide pratique de qualité de l'Internet de l'État incluant un niveau élevé d'accessibilité ; la DISIC a initié un label e-accessible à cinq niveaux, affiché dans les écrans, le premier signalant le démarrage de la démarche et le quatrième étant proche du RGAA. Le Fonds pour l'insertion des personnes handicapées dans la fonction publique finance les audits et la mise en conformité des sites, dans la limite de cinquante pour cent des dépenses, pour une enveloppe globale de un virgule cinq million d'euros par an.
+
+POINTS D'ATTENTION.
+
+      Chiffres à retenir : deux milliards d'euros de dépense annuelle hors personnel, deux millions d'agents équipés, plus de cent trente centres informatiques, six réseaux ministériels convergeant vers le RIE.
+
+      Chronologie des structures : MTIC, puis ATICA en deux mille un, ADAE en deux mille trois, DGME en deux mille cinq puis recréée en deux mille huit, DISIC en deux mille onze, SGMAP en deux mille douze, DINSIC en deux mille quinze, DITP et DINSIC en deux mille dix-sept.
+
+      L'article 7 du décret DISIC : information au-delà de cinq millions d'euros, avis au-delà de neuf millions ; le décret 2014-879 rend l'avis conforme au-delà de neuf millions.
+
+      Le RIE, décidé au conseil des ministres du vingt-cinq mai deux mille onze, assure la continuité de l'action gouvernementale en cas de dysfonctionnement grave d'Internet ; il s'appuie sur RENATER, un cœur IPv6 et un maillage résilient.
+
+      Le service à compétence nationale RIE est organisé en six pôles ; le NOC assure la supervision en continu, le SOC la sécurité.
+
+      La sécurisation croisée mutualise une liaison de secours entre deux centres de données rattachés à des points d'interconnexion différents.
+
+      Le décret 2014-879 place le système d'information de l'État sous la responsabilité du Premier ministre, sans délégation aux ministres pour les infrastructures, les réseaux, les services d'usage partagé et les systèmes des fonctions transversales.
+
+      Trois référentiels issus de l'ordonnance du huit décembre deux mille cinq : RGI pour l'interopérabilité, RGS pour la sécurité, RGAA pour l'accessibilité.
+
+      Le RGS est rédigé par l'ANSSI et la DGME et préconise une démarche ISO 27001 ; il permet le référencement des produits de sécurité et des prestataires de services de confiance.
+
+      Le RGAA transpose les WCAG 2.0 selon quatre principes, perceptible, utilisable, compréhensible, robuste ; niveau légalement exigé, double A.
+
+EXEMPLES CITES.
+
+      Réseaux et annuaires interministériels historiques : ADER, méta-annuaire MAIA, réseau de coordination AdER/SIGMA.
+
+      Programmes menés par Jacques Marzin avant la DISIC : Helios, refonte du système comptable des collectivités, et CHORUS, progiciel de gestion intégré interministériel de l'État fondé sur SAP.
+
+      Décision numéro vingt-deux du quatrième CIMAP : objectif d'économies de cinq cents à huit cents millions d'euros en trois à cinq ans sur une dépense annuelle de deux milliards d'euros hors personnel.
+
+      Concentration des sites d'hébergement de cent dix-sept à dix-sept en dix ans ; ouverture du RIE pour six mille sites sur dix-sept mille fin juin deux mille quinze.
+
+      RENATER 6 portant la capacité du cœur de réseau de dix à cent gigabits par seconde ; interconnexion du réseau européen TESTA-ng.
+
+      Résiliation du marché AdER/SIGMA le sept juin deux mille seize, trois virgule six millions d'euros annuels ; ouverture d'un service de temps NTP fin deux mille seize.
+
+      France Connect avec les fournisseurs d'identité impot.gouv.fr, La Poste et l'assurance maladie ; règlement européen e-IDAS du vingt-huit août deux mille quatorze.
+
+      Version 1.0 du RGI le douze juin deux mille neuf, version 2.0 par arrêté du vingt avril deux mille seize ; RGS version 1.0 le six mai deux mille dix, version 2.0 le treize juin deux mille quatorze ; RGAA version 3.0 par arrêté du vingt-neuf avril deux mille quinze.
+
+      Réduction du nombre de sites de l'administration de cinq cent soixante-quatre à deux cent quarante-deux ; création de la plateforme data.gouv.fr en décembre deux mille onze.

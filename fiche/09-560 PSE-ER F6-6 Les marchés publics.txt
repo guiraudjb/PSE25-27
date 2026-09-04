@@ -1,243 +1,416 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 6, thème 6
-LES MARCHÉS PUBLICS
-=======================================================================
+LES MARCHÉS PUBLICS.
 
-1. LES PRINCIPES FONDAMENTAUX DE LA COMMANDE PUBLIQUE
------------------------------------------------------------------------
-- LIBERTÉ D'ACCÈS : toute personne peut se porter candidate ; on ne peut
-  écarter un candidat que sur des conditions du code, des cahiers des
-  charges (capacité, garanties financières) ou des caractéristiques de
-  l'offre.
-- ÉGALITÉ DE TRAITEMENT : même information à tous ; une question posée
-  par une société est transmise, avec sa réponse, à TOUS les candidats
-  ayant retiré les cahiers des charges (ou refus de répondre).
-- TRANSPARENCE : mise en œuvre par la PUBLICITÉ.
-  * PUBLICATION = diffusion d'un avis via les organismes officiels
-    (BOAMP — Bulletin Officiel des Annonces des Marchés Publics).
-  * PUBLICITÉ = tous les moyens de faire connaître le marché. La
-    publication est une modalité de publicité, la publicité ne s'y
-    limite pas.
-  * Publicité en principe dès le 1er euro ; dispense en dessous de
-    20 000 puis 25 000 € HT. PUBLICATION obligatoire à partir de
-    133 000 € HT (fournitures et services).
 
-2. LES ACTEURS
------------------------------------------------------------------------
-- POUVOIR ADJUDICATEUR / ENTITÉ ADJUDICATRICE : acheteurs soumis à
-  l'ordonnance n° 2015-899 du 23 juillet 2015 (marchés) et n° 2016-65 du
-  29 janvier 2016 (concessions).
-  Pouvoirs adjudicateurs = 3 catégories : personnes morales de droit
-  public ; personnes morales de droit privé poursuivant une mission
-  d'intérêt général financées principalement sur fonds publics ;
-  personnes morales de droit privé constituées par des pouvoirs
-  adjudicateurs.
-- SAE (Service des Achats de l'État) : décret du 19 mars 2009 (RGPP),
-  remplace l'Agence centrale des Achats. 3 NIVEAUX : globalisation des
-  achats, maîtrise des consommations, simplification des procédures.
-- CAO (Commission d'Appel d'Offres) : dépouillement des candidatures /
-  offres, choix du titulaire. Modifications du CMP de décembre 2008 :
-  CAO des collectivités MAINTENUE, CAO des marchés de l'État SUPPRIMÉE
-  (art. 21) -> remplacée de fait par un comité d'expertise.
-- CMPE (Commission des Marchés Publics de l'État) : 1er février 2005,
-  remplace la CSMI. Contrôle les marchés informatiques à partir de
-  6 M€ HT. Contrôle FACULTATIF.
+LEXIQUE COMPLET.
 
-3. LES DOCUMENTS CONTRACTUELS
------------------------------------------------------------------------
-- Cahiers des charges = documents GÉNÉRAUX (clauses d'une catégorie) +
-  documents PARTICULIERS (dispositions propres au marché).
-- CCAG (Cahier des Clauses Administratives Générales) : 4 CCAG ;
-  2 informatiques : CCAG FCS (Fournitures Courantes et Services —
-  consommables, logiciels « sur étagère ») et CCAG PI (Prestations
-  Intellectuelles — études, développements). Dérogeable via un article
-  du CCAP.
-  * Nouveau CCAG FCS : arrêté du 19 janvier 2009. L'ancien CHAPITRE VII
-    (marchés informatiques) a disparu -> intégré dans le CCAG TIC
-    (Techniques de l'Informatique et de la Communication), publié 2009.
-  * Marché mêlant matériels + intégration : CCAG FCS si l'ACQUISITION
-    domine financièrement, CCAG PI si le DÉVELOPPEMENT domine.
-- CCTG (Cahier des Clauses Techniques Générales) : PAS de CCTG
-  informatique.
-- Cahier des clauses PARTICULIÈRES : partie du DCE (Dossier de
-  Consultation des Entreprises).
-  * CCAP : engagements contractuels du titulaire (nature, durée,
-    modalités d'exécution, paiement, obligations).
-  * CCTP : description PRÉCISE des prestations, par référence à des
-    normes ou en termes de performance / exigences fonctionnelles.
-    PAS discriminatoire : pas de mode de fabrication, pas de marque
-    (sauf « ou équivalent » si justifié par l'objet).
-- ACTE D'ENGAGEMENT : pièce signée par le candidat (offre + adhésion aux
-  clauses), puis par la personne publique. Les BONS DE COMMANDE ne font
-  PLUS partie des pièces constitutives du marché.
+      Marché public : contrat conclu à titre onéreux entre un acheteur public et un opérateur économique pour répondre à un besoin de travaux, de fournitures ou de services, soumis aux principes de la commande publique et, au-dessus de certains seuils, à des procédures formalisées.
 
-4. LES ÉTAPES DE L'ACHAT PUBLIC
------------------------------------------------------------------------
-DÉTERMINATION DES BESOINS (préalable indispensable) : « la nature et
-l'étendue des besoins sont déterminées avec précision avant tout appel
-à la concurrence ». 4 considérations : analyse des besoins fonctionnels,
-connaissance des fournisseurs, distinction achats standard / spécifiques,
-démarche en COÛT GLOBAL (prix + fonctionnement + maintenance ; vrai en
-informatique : logiciel + redevance + maintenance).
+      Commande publique : ensemble des achats réalisés par les personnes publiques, régi depuis le premier avril deux mille seize par une réforme d'ensemble et fondé sur trois principes, la liberté d'accès, l'égalité de traitement des candidats et la transparence des procédures.
 
-MARCHÉS FRACTIONNÉS (2 catégories) :
-- MARCHÉ À BONS DE COMMANDE : besoin connu, date inconnue (biens
-  consommables). Durée MAX 4 ANS. Conclu avec un MINIMUM et un MAXIMUM.
-  Publicité / mise en concurrence sur le MAXIMUM. Acheteur tenu de
-  commander au moins le MINIMUM et de s'adresser exclusivement au
-  titulaire.
-- MARCHÉ À TRANCHES CONDITIONNELLES : tranche FERME (réalisée) + tranches
-  CONDITIONNELLES (affermies au choix). Acheteur engagé sur la seule
-  tranche ferme. Seuils appréciés sur l'ENSEMBLE des tranches.
+      Liberté d'accès à la commande publique : principe permettant à toute personne de se porter candidate à un marché public, l'acheteur ne pouvant écarter un candidat que sur des conditions prévues par le code, par les cahiers des charges, capacité ou garanties financières, ou sur les caractéristiques de l'offre.
 
-MULTI-ATTRIBUTION : plusieurs titulaires remis en compétition à chaque
-bon de commande. Pour les biens à fortes variations techniques/prix
-(matériel micro-informatique).
+      Égalité de traitement des candidats : principe imposant de traiter de la même façon toute personne placée dans la même situation et de donner à tous la même information sur le marché, une question posée par une société devant être transmise avec sa réponse à tous les candidats ayant retiré les cahiers des charges, sauf refus de répondre.
 
-FORME DU MARCHÉ :
-- ALLOTISSEMENT : division en LOTS selon la nature des fournitures /
-  prestations -> étend la concurrence.
-- MARCHÉ UNIQUE : un SEUL titulaire. Si l'acheteur ne peut coordonner
-  les lots ou si économies d'échelle. Marché global construction +
-  exploitation -> coûts séparés.
-- Distinction marché unique / à lots = sur le TITULAIRE ; marché à
-  tranches / à bons de commande = sur les MODALITÉS d'acquisition.
+      Transparence des procédures : principe mis en œuvre notamment par la publicité, un marché étant réputé passé dans des conditions satisfaisantes si les moyens de publicité ont réellement informé les prestataires potentiels et abouti à une mise en concurrence réelle et effective.
 
-ACHAT GROUPÉ : acheter seul, se grouper, ou recourir à une centrale
-d'achat.
-- COORDINATION (au sein d'une personne publique) : un seul marché + bons
-  de commande, ou plusieurs marchés (convention de prix + marché-type).
-- GROUPEMENT DE COMMANDE (entre personnes publiques) : convention
-  constitutive. Le COORDONNATEUR signe et notifie (ou signe, notifie et
-  exécute) au nom des membres. La CAO peut être celle du coordonnateur.
-- CENTRALE D'ACHAT : doit respecter les règles de publicité et de mise
-  en concurrence. ACCORD-CADRE = sélectionne des prestataires remis en
-  concurrence ultérieurement (survenance du besoin / périodicité).
-  Durée MAX 4 ANS. Caractéristiques essentielles fixées, complétées par
-  les marchés SUBSÉQUENTS sans modification substantielle.
+      Publicité : utilisation de tous les moyens possibles pour faire connaître l'existence d'un marché, envoi de lettres d'information, annonce sur un serveur, publication.
 
-5. LES PROCÉDURES SELON LE MONTANT (marchés de l'État, fournitures et
-   services)
------------------------------------------------------------------------
-Plus le montant est élevé, plus les obligations (publicité, contrôle,
-traçabilité) sont grandes. 3 SEUILS.
-- Article 40 CMP 2015 : dispense de publicité / procédure passe de
-  20 000 à 25 000 € HT. Décret n° 2016-360 du 25 mars 2016 : marchés
-  < 25 000 € HT dispensés de publicité ET de mise en concurrence.
-- MARCHÉ DE GRÉ À GRÉ : < 25 000 € HT. Absence de publicité. Soumis aux
-  principes de la commande publique (art. 1er).
-- PROCÉDURE ADAPTÉE (MAPA / MPA) : entre 25 000 et 134 000 € HT.
-  L'acheteur détermine LUI-MÊME la procédure de publicité et de mise en
-  concurrence, adaptée à l'objet, au montant et à sa taille. Favorise la
-  négociation et les échanges dématérialisés.
-- APPEL D'OFFRES : OBLIGATOIRE au-dessus de 134 000 € HT. 2 variantes :
-  * OUVERT : nombre de candidats NON limité ; UNE SEULE enveloppe
-    (candidature + offre) depuis le CMP 2009 ; délai de réception des
-    offres >= 52 JOURS.
-  * RESTREINT : séparation nette candidatures / offres ; sélection
-    préalable des candidatures (délai >= 37 JOURS) ; seuls les candidats
-    sélectionnés reçoivent les cahiers des charges et peuvent remettre
-    une offre.
-- PROCÉDURE NÉGOCIÉE : choix après négociation, cas limitativement
-  énumérés (art. 35). 3 formes : avec publicité et mise en concurrence ;
-  sans publicité préalable mais avec mise en concurrence ; sans
-  publicité ni mise en concurrence. Utilisée pour les matériels /
-  logiciels protégés par DROITS D'AUTEUR (packs Microsoft).
-- DIALOGUE COMPÉTITIF : combine négociation et appel d'offres. Possible
-  UNIQUEMENT si marché COMPLEXE : le pouvoir adjudicateur ne peut définir
-  seul les moyens techniques, ou établir le montage juridique/financier.
-  Programme fonctionnel ; autant de phases de dialogue que nécessaire.
+      Publication : diffusion d'un avis concernant les prestations du marché par les organismes officiels tels que le Bulletin officiel des annonces des marchés publics, dit BOAMP ; la publication est une modalité de la publicité, mais la publicité ne se limite pas à la publication.
 
-6. LE CHOIX DU TITULAIRE
------------------------------------------------------------------------
-- Principe : OFFRE ÉCONOMIQUEMENT LA PLUS AVANTAGEUSE = « MIEUX-DISANT »
-  (pas « moins-disant »). Le prix est un critère parmi d'autres.
-- Offre ANORMALEMENT BASSE : prix ne correspondant pas à une réalité
-  économique.
-- 2 types d'informations : CRITÈRES DE CANDIDATURE (capacité, références,
-  potentialités) et CRITÈRES DE CHOIX (comparaison des offres). Les
-  critères doivent être connus à l'avance.
-- CRITÈRES DE CAPACITÉ (ancienne 1re enveloppe) : capacités TECHNIQUES
-  (moyens matériels et humains), FINANCIÈRES (chiffre d'affaires,
-  attestations bancaires, bilans), PROFESSIONNELLES (qualifications).
-- CRITÈRES DE CHOIX (liste du CMP) : coût d'utilisation, valeur
-  technique, caractère innovant, performances environnementales, délai
-  d'exécution, qualités esthétiques et fonctionnelles, SAV et assistance
-  technique, date et délai de livraison, prix.
-- PONDÉRATION : SEULEMENT pour les critères de choix (pas pour les
-  critères de candidature). Ex. validité technique 60 % / prix 40 %.
-  Notes chiffrées précisées dès le cahier des charges.
-- Les références et potentialités ne peuvent PAS être un critère de
-  choix des offres. Aucun critère nouveau, supprimé ou modifié dans le
-  rapport de choix.
-- AVIS D'ATTRIBUTION : publié pour les marchés > 133 000 € HT (nom de
-  la société, montant).
+      BOAMP : Bulletin officiel des annonces des marchés publics, organe officiel de publication des avis relatifs aux marchés publics.
 
-7. LA VÉRIFICATION DES PRESTATIONS
------------------------------------------------------------------------
-MARCHÉS DE FOURNITURES COURANTES ET SERVICES (CCAG FCS puis CCAG TIC) :
-- MOM (Mise en Ordre de Marche) : installation par le titulaire, délai
-  d'UN MOIS à compter de la date contractuelle de livraison ;
-  procès-verbal.
-- VA (Vérification d'Aptitude) : après la MOM ; constate que les
-  prestations ont les caractéristiques techniques les rendant APTES à
-  remplir les fonctions. VA positive -> la VSR débute.
-- VSR (Vérification de Service Régulier) : constate que les prestations
-  assurent un SERVICE RÉGULIER en conditions normales ; s'observe
-  pendant UN MOIS. Service réputé régulier si les indisponibilités
-  cumulées par élément de matériel <= 2 % de la durée d'utilisation
-  effective (8 h - 18 h, du lundi au vendredi, jours fériés exclus).
-- ADMISSION : VSR positive. En règle générale, LA VSR VAUT ADMISSION.
+      Pouvoir adjudicateur : acheteur, public ou privé, soumis aux règles de l'ordonnance du vingt-trois juillet deux mille quinze relative aux marchés publics et de l'ordonnance du vingt-neuf janvier deux mille seize relative aux contrats de concession, recouvrant les personnes morales de droit public, les personnes morales de droit privé poursuivant une mission d'intérêt général et financées principalement sur fonds publics et les personnes morales de droit privé constituées par des pouvoirs adjudicateurs pour réaliser des activités en commun.
 
-MARCHÉS DE PRESTATIONS INTELLECTUELLES (CCAG PI) : vérification pour
-chaque lot / tranche. RECETTE PROVISOIRE + RECETTE DÉFINITIVE.
-Notification du titulaire (avis de présentation). Décision (PV) :
-RÉCEPTION / AJOURNEMENT (motivé + délai) / RÉCEPTION AVEC RÉFACTION /
-REJET. En règle générale, LA RECETTE DÉFINITIVE VAUT ADMISSION.
+      Entité adjudicatrice : pouvoir adjudicateur ou entreprise publique exerçant une activité d'opérateur de réseaux, ainsi que certains organismes de droit privé bénéficiant de droits spéciaux ou exclusifs pour une telle activité.
 
-8. SOUS-TRAITANCE, MODIFICATION, DÉMATÉRIALISATION
------------------------------------------------------------------------
-SOUS-TRAITANCE : le titulaire d'un marché de travaux, de services ou
-industriel peut sous-traiter certaines parties, à condition d'obtenir
-l'ACCEPTATION de chaque sous-traitant par le pouvoir adjudicateur. Le
-titulaire demeure PERSONNELLEMENT RESPONSABLE (pas de relation
-contractuelle maître d'ouvrage <-> sous-traitant). Acceptation au dépôt
-de l'offre ou pendant l'exécution. PAIEMENT DIRECT si le contrat de
-sous-traitance >= 600 € TTC.
+      SAE : service des achats de l'État, service à compétence nationale rattaché au secrétaire général du ministère, créé par le décret du dix-neuf mars deux mille neuf dans le cadre de la révision générale des politiques publiques, en remplacement de l'Agence centrale des achats, chargé de définir et de mettre en œuvre une politique d'achats.
 
-MODIFICATION : AVENANT = acte modifiant / complétant des clauses. NE
-PEUT PAS bouleverser l'économie du marché, ni en changer l'objet, ni
-toucher au PRIX. Seuil au-delà duquel il constitue un nouveau marché :
-apprécié AU CAS PAR CAS par le juge administratif. Marché complémentaire
-et marché de prestations similaires.
+      RGPP : révision générale des politiques publiques, cadre de réforme de l'État décidé en décembre deux mille sept, à l'origine de la création du service des achats de l'État.
 
-DÉMATÉRIALISATION :
-- Depuis le 1er janvier 2010, marchés > 90 000 € HT : publication
-  électronique des AAPC (avis d'appel public à la concurrence) et du
-  DCE sur une plateforme ; le pouvoir adjudicateur PEUT imposer la
-  transmission électronique ; RÉPONSE ÉLECTRONIQUE OBLIGATOIRE pour les
-  candidats du secteur informatique.
-- Depuis le 1er janvier 2012, le pouvoir adjudicateur NE PEUT PLUS
-  refuser les documents transmis par voie électronique.
+      CAO : commission d'appel d'offres, organe qui assurait le dépouillement des candidatures et des offres et le choix du titulaire ou la proposition de déclarer le marché infructueux.
 
-=======================================================================
-À RETENIR
-- 3 principes : liberté d'accès, égalité de traitement, transparence
-  (publicité != publication ; BOAMP).
-- Acteurs : SAE (2009, RGPP), CAO de l'État supprimée (2008), CMPE
-  (marchés info > 6 M€, contrôle facultatif).
-- Documents : CCAG FCS / CCAG PI / CCAG TIC (2009) ; DCE = CCAP + CCTP.
-- Marchés fractionnés : bons de commande (min/max, 4 ans max) / tranches
-  (ferme + conditionnelles) ; multi-attribution (micro-informatique) ;
-  accord-cadre (4 ans max).
-- Seuils État (fournitures/services) : gré à gré < 25 000 € ; MAPA
-  25 000-134 000 € ; appel d'offres > 134 000 € (ouvert : 1 enveloppe,
-  52 j ; restreint : 37 j) ; négociée (droits d'auteur) ; dialogue
-  compétitif (marché complexe).
-- Choix : mieux-disant ; critères de candidature (technique / financière
-  / professionnelle) ; pondération = choix seulement (ex. 60/40).
-- Vérification FCS : MOM (1 mois) -> VA -> VSR (1 mois, 2 % d'indispo)
-  -> admission. PI : recette provisoire + définitive.
-- Sous-traitance : acceptation du PA, titulaire responsable, paiement
-  direct >= 600 € TTC. Avenant : pas de bouleversement de l'économie.
-- Démat : > 90 000 € en 2010 ; réception électronique obligatoire pour
-  le PA en 2012.
+      CMPE : commission des marchés publics de l'État, mise en place le premier février deux mille cinq en remplacement de la commission spécialisée des marchés informatiques, chargée de contrôler les marchés informatiques de l'État à partir d'un seuil de six millions d'euros hors taxes, son contrôle étant facultatif.
+
+      Cahier des charges : document contractuel qui lie la personne publique au titulaire, comprenant des documents généraux applicables à toute une catégorie de marchés et des documents particuliers propres au marché.
+
+      CCAG : cahier des clauses administratives générales, document général applicable à une catégorie de marchés, auquel il est possible de déroger par un article du cahier des clauses administratives particulières ; il existe quatre CCAG dont deux intéressent l'informatique, celui des fournitures courantes et services et celui des prestations intellectuelles.
+
+      CCAG-FCS : cahier des clauses administratives générales des marchés de fournitures courantes et de services, approuvé par arrêté du dix-neuf janvier deux mille neuf, visant les consommables et les logiciels sur étagère ne nécessitant aucune intervention de l'éditeur.
+
+      CCAG-PI : cahier des clauses administratives générales des prestations intellectuelles, applicable lorsque la personne publique demande une prestation intellectuelle spécifique, étude de faisabilité ou développement d'application.
+
+      CCAG-TIC : cahier des clauses administratives générales des techniques de l'information et de la communication, appelé à reprendre le chapitre relatif aux marchés informatiques, l'ancien chapitre sept du CCAG-FCS, publié dans le courant de l'année deux mille neuf.
+
+      CCTG : cahier des clauses techniques générales, rassemblant les clauses techniques applicables à une prestation de même nature ; il n'existe pas de cahier des clauses techniques générales applicable au domaine informatique.
+
+      DCE : dossier de consultation des entreprises, comprenant les cahiers des clauses particulières, qui doivent être rédigés de façon claire, explicite et homogène.
+
+      CCAP : cahier des clauses administratives particulières, fixant précisément les engagements contractuels du titulaire, nature du marché, durée, modalités d'exécution, conditions de paiement, obligations de livraison et de secret, spécifique à l'objet du marché.
+
+      CCTP : cahier des clauses techniques particulières, rassemblant les dispositions qui donnent une description précise des prestations, par référence à des normes ou en termes de performance et d'exigences fonctionnelles, sans caractère discriminatoire ni mention d'un procédé de fabrication ou d'une marque, sauf accompagnée de la mention ou équivalent si justifiée par l'objet.
+
+      Acte d'engagement : pièce signée par le candidat dans laquelle il présente son offre et adhère aux clauses rédigées par la personne publique, puis signée par celle-ci ; les bons de commande ne font plus partie des pièces constitutives du marché.
+
+      Marché fractionné : marché utilisé lorsque l'acheteur ne connaît pas précisément les quantités ou ne peut réaliser en une seule fois l'ensemble d'un programme, prenant la forme du marché à bons de commande ou du marché à tranches conditionnelles.
+
+      Marché à bons de commande : marché conclu lorsque le besoin est connu mais non sa date exacte, notamment pour les biens consommables, d'une durée qui ne peut excéder quatre ans, conclu avec un minimum et un maximum, la publicité et la mise en concurrence se faisant sur le maximum et l'acheteur étant tenu de commander au moins le minimum au seul titulaire.
+
+      Marché à tranches conditionnelles : marché composé d'une tranche ferme qui sera réalisée et d'une ou plusieurs tranches conditionnelles affermies selon le choix de la personne publique, l'acheteur n'étant engagé que sur la tranche ferme mais les seuils s'appréciant sur l'ensemble des tranches.
+
+      Multi-attribution : conclusion d'un marché avec plusieurs titulaires remis en compétition lors de chaque bon de commande, utilisée pour les biens dont les caractéristiques techniques et le prix connaissent de fortes variations, comme le matériel micro-informatique.
+
+      Variante : proposition des candidats s'écartant du cahier des charges, à ne pas interdire dans l'avis d'appel public à la concurrence si l'acheteur les souhaite et dont les limites sont définies dans le règlement de la consultation.
+
+      Allotissement : division du marché en plusieurs lots selon la nature des fournitures et des prestations, procédé qui étend le champ de la concurrence à des entreprises non aptes à réaliser l'intégralité du marché.
+
+      Marché unique : marché confié à une seule et même société, préférable lorsque l'acheteur ne peut coordonner les actions des titulaires de lots ou lorsque des économies d'échelle le justifient, les coûts de construction et d'exploitation devant alors être présentés séparément.
+
+      Coordination : organisation par une personne publique des achats de ses services, par un seul marché avec bons de commande émis par chaque service ou par plusieurs marchés distincts sur la base d'une convention de prix et d'un marché type.
+
+      Groupement de commande : coordination et regroupement des achats de plusieurs personnes publiques par une convention constitutive précisant les besoins de chacun, un coordonnateur étant chargé de signer et notifier le marché, ou de le signer, le notifier et l'exécuter au nom des membres, la commission d'appel d'offres pouvant être celle du coordonnateur.
+
+      Centrale d'achat : organisme auquel l'acheteur peut recourir pour ne pas procéder lui-même aux procédures de passation, à condition que la centrale respecte elle-même les règles de publicité et de mise en concurrence.
+
+      Accord-cadre : dispositif permettant de sélectionner un certain nombre de prestataires ensuite remis en concurrence lors de la survenance du besoin ou selon une périodicité fixée, conclu pour une durée maximale de quatre ans et fixant les caractéristiques essentielles des prestations, les marchés subséquents pouvant compléter et préciser l'accord sans le modifier substantiellement.
+
+      Seuils de procédure : montants qui déterminent la nature du marché à passer, la logique étant que plus le montant est élevé, plus les obligations de publicité, de contrôle et de traçabilité sont grandes.
+
+      Marché de gré à gré : marché de l'État d'un montant inférieur à vingt-cinq mille euros hors taxes, caractérisé par une absence de publicité selon l'article quarante du code des marchés publics, mais soumis aux principes de la commande publique.
+
+      Procédure adaptée : procédure, appelée MAPA ou MPA, utilisée lorsque le montant prévisionnel est estimé entre vingt-cinq mille euros hors taxes et cent trente-quatre mille euros hors taxes, l'acheteur déterminant lui-même la publicité et la mise en concurrence, adaptées à la nature et au montant de l'achat et à sa propre taille.
+
+      Appel d'offres : procédure obligatoire au-dessus de cent trente-quatre mille euros hors taxes pour les marchés de fournitures et de services, comportant deux variantes fondées sur les mêmes principes mais avec un calendrier et des phases différents.
+
+      Appel d'offres ouvert : variante dans laquelle la personne publique publie un avis fixant un délai de réception des offres d'au moins cinquante-deux jours à compter de l'envoi, ne peut pas limiter le nombre de candidats et reçoit une seule enveloppe contenant candidature et offre.
+
+      Appel d'offres restreint : variante marquée par une séparation nette entre le dépouillement des candidatures et celui des offres, avec un délai de réception des candidatures d'au moins trente-sept jours, une sélection préalable des candidats sur les critères de l'avis, puis l'envoi des cahiers des charges aux seuls candidats retenus.
+
+      Procédure négociée : procédure permettant à la personne publique de choisir le titulaire après négociation dans des cas limitativement énumérés à l'article trente-cinq, sous trois formes, avec publicité et mise en concurrence, sans publicité préalable et avec mise en concurrence, sans publicité ni mise en concurrence, utilisée notamment pour les matériels et logiciels protégés par des droits d'auteur, comme les packs Microsoft.
+
+      Dialogue compétitif : catégorie de marché combinant négociation et appel d'offres, réservée aux marchés complexes lorsque le pouvoir adjudicateur n'est pas en mesure de définir seul les moyens techniques ou d'établir le montage juridique ou financier, permettant plusieurs phases de dialogue jusqu'à la rédaction d'un cahier des charges définitif et l'obtention d'une offre finale.
+
+      Offre économiquement la plus avantageuse : offre retenue selon la règle du mieux-disant plutôt que du moins-disant, non nécessairement assimilable au prix le plus bas, le prix figurant parmi les critères de choix.
+
+      Offre anormalement basse : offre dont le prix ne correspond pas à une réalité économique, que la connaissance des prestations par le PSE-ER permet de détecter.
+
+      Critères de candidature : éléments permettant de vérifier la capacité, les références et les potentialités des sociétés, servant à juger la recevabilité des candidatures et ne pouvant constituer un critère de choix des offres.
+
+      Critères de capacité : critères correspondant à l'ancienne première enveloppe, comprenant les capacités techniques, moyens matériels et humains, les capacités financières, crédibilité financière établie par le chiffre d'affaires, des attestations bancaires ou des bilans, et les capacités professionnelles, qualifications requises prouvées par des certifications ou des expériences.
+
+      Critères de choix : critères servant à comparer les offres, déterminés lors de la rédaction du cahier des clauses techniques particulières et présentant un lien avec les objectifs et les besoins ; le code en dresse la liste, coût d'utilisation, valeur technique, caractère innovant, performances environnementales, délai d'exécution, qualités esthétiques et fonctionnelles, service après-vente et assistance, date et délai de livraison, prix.
+
+      Pondération des critères : indication du poids relatif de chaque critère de choix, valable pour les seuls critères de choix et non pour les critères de candidature, l'appréciation étant quantifiée par des notes chiffrées précisées dès l'élaboration du cahier des charges.
+
+      Avis d'attribution : avis que le pouvoir adjudicateur est tenu de faire publier pour les marchés d'un montant supérieur à cent trente-trois mille euros hors taxes, indiquant le nom de la société retenue et le montant du marché.
+
+      MOM : mise en ordre de marche, installation et mise en état de fonctionnement du matériel et des logiciels par le titulaire, dans un délai d'un mois à compter de la date contractuelle de livraison, donnant lieu à un procès-verbal, susceptible de sursis ou de prolongation.
+
+      VA : vérification d'aptitude, intervenant après la mise en ordre de marche pour constater que les prestations présentent les caractéristiques techniques qui les rendent aptes à remplir les fonctions du marché, une décision positive faisant débuter la vérification de service régulier.
+
+      VSR : vérification de service régulier, ayant pour objet de constater que les prestations assurent un service régulier dans les conditions normales d'exploitation, observée pendant un mois à partir de la décision positive de vérification d'aptitude, le service étant réputé régulier si la durée cumulée des indisponibilités par élément de matériel ne dépasse pas deux pour cent de la durée d'utilisation effective, de huit heures à dix-huit heures du lundi au vendredi, jours fériés exclus.
+
+      Admission : décision prise par la personne publique lorsque la vérification de service régulier est positive et notifiée au titulaire ; en règle générale, la vérification de service régulier vaut admission.
+
+      Recette provisoire et recette définitive : opérations de vérification propres aux marchés de prestations intellectuelles, effectuées pour chaque lot et chaque tranche ; en règle générale, la recette définitive vaut admission.
+
+      Ajournement : décision motivée et assortie d'un délai prise lorsque les prestations peuvent être rendues conformes moyennant certains compléments, améliorations ou mises au point.
+
+      Réfaction : décision motivée de recevoir les prestations qui, sans satisfaire entièrement au marché, peuvent être utilisées en l'état, moyennant une réduction d'un montant déterminé.
+
+      Rejet : décision motivée prise lorsque les prestations appellent des réserves telles qu'il n'est possible d'en prononcer ni l'ajournement ni la réception avec réfaction.
+
+      Sous-traitance : faculté pour le titulaire d'un marché de travaux, de services ou industriel de confier l'exécution de certaines parties à un sous-traitant, à condition d'avoir obtenu du pouvoir adjudicateur l'acceptation de chaque sous-traitant, le titulaire demeurant personnellement responsable de toutes les obligations du marché.
+
+      Paiement direct : paiement du sous-traitant accepté et dont les conditions de paiement ont été agréées, effectué directement par le pouvoir adjudicateur pour la partie du marché dont il assure l'exécution, lorsque le montant du contrat de sous-traitance est égal ou supérieur à six cents euros toutes taxes comprises.
+
+      Avenant : acte juridique par lequel les parties conviennent de modifier ou de compléter une ou plusieurs clauses du marché, sans pouvoir se substituer au contrat initial, bouleverser l'économie du marché, en changer l'objet ni toucher à des éléments substantiels comme le prix, le seuil au-delà duquel il constitue un nouveau marché étant apprécié au cas par cas par le juge administratif.
+
+      Marché complémentaire et marché de prestations similaires : mécanismes permettant de prolonger un marché public, soumis à des conditions très strictes et à des hypothèses très limitées.
+
+      Dématérialisation des marchés publics : ensemble des mesures favorisant les échanges dématérialisés, traité dans le cahier Administration électronique, avec publication électronique des avis d'appel public à la concurrence et du dossier de consultation, possibilité d'imposer la transmission électronique et obligation pour les candidats du secteur informatique de répondre par voie électronique.
+
+      AAPC : avis d'appel public à la concurrence, avis que le pouvoir adjudicateur doit publier de manière électronique sur une plateforme de dématérialisation à partir du premier janvier deux mille dix pour les marchés dont le seuil est supérieur à quatre-vingt-dix mille euros.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LES PRINCIPES FONDAMENTAUX DE LA COMMANDE PUBLIQUE.
+
+
+   A. La liberté d'accès.
+
+      Cette liberté consiste à permettre à toute personne de se porter candidate à un marché public. La personne publique ne peut écarter les candidats que sur des conditions énoncées soit par le code des marchés publics, soit par les cahiers des charges, capacité ou garanties financières, ou sur la base des caractéristiques de l'offre.
+
+      Pour un PSE-ER, c'est par la préparation des conditions du cahier des charges, puis par la participation aux réunions d'examen des candidatures et des propositions, qu'il pourra contribuer au respect de ce principe.
+
+
+   B. L'égalité de traitement des candidats.
+
+      Toute personne candidate doit être traitée de la même façon qu'une autre placée dans la même situation. La personne publique doit mettre tous les candidats dans la même situation et donner à tous la même information sur les conditions du marché.
+
+      Lorsqu'une société pose des questions relatives à un marché, la personne publique est tenue soit de transmettre la question et sa réponse à l'ensemble des candidats ayant retiré les cahiers des charges, soit de refuser de répondre si elle considère que l'information n'a pas à être communiquée. Un PSE-ER est donc tenu d'informer le gestionnaire du marché lorsqu'une société le sollicite directement, et doit être prudent lorsqu'une société le rencontre pour discuter de projets en cours, certaines informations pouvant la placer en situation préférentielle.
+
+
+   C. La transparence des procédures.
+
+      La transparence est mise en œuvre notamment au travers de la publicité. Un marché est réputé passé dans des conditions satisfaisantes si les moyens de publicité utilisés ont réellement permis aux prestataires potentiels d'être informés et ont abouti à une diversité d'offres permettant une mise en concurrence réelle et effective.
+
+      Il convient de distinguer la publicité et la publication. La publication est la diffusion d'un avis via les organismes officiels tels que le BOAMP. La publicité est l'utilisation de tous les moyens possibles pour faire connaître l'existence du marché. La publication est donc une modalité de publicité, mais la publicité ne s'y limite pas.
+
+      En principe, des mesures de publicité doivent être mises en œuvre dès le premier euro dépensé. Toutefois, les marchés inférieurs à vingt mille euros hors taxes pouvaient être passés sans mesure de publicité, seuil porté ensuite à vingt-cinq mille euros hors taxes. La publication est mise en place à partir de certains seuils, de cent trente-trois mille euros hors taxes pour les marchés de fournitures et de services. L'application de ce principe accroît les chances d'obtenir l'offre économiquement la plus avantageuse et garantit un bon usage des deniers publics.
+
+
+II. LES ACTEURS DE LA COMMANDE PUBLIQUE.
+
+
+   A. Pouvoirs adjudicateurs et entités adjudicatrices.
+
+      Les notions de pouvoir adjudicateur et d'entité adjudicatrice désignent les acheteurs, publics ou privés, soumis aux règles de l'ordonnance du vingt-trois juillet deux mille quinze relative aux marchés publics et de l'ordonnance du vingt-neuf janvier deux mille seize relative aux contrats de concession.
+
+      Les pouvoirs adjudicateurs recouvrent trois catégories de personnes : les personnes morales de droit public, les personnes morales de droit privé poursuivant une mission d'intérêt général et financées principalement sur fonds publics, et les personnes morales de droit privé constituées par des pouvoirs adjudicateurs pour réaliser certaines activités en commun. Les entités adjudicatrices sont des pouvoirs adjudicateurs ou des entreprises publiques exerçant une activité d'opérateur de réseaux, ainsi que certains organismes de droit privé bénéficiant de droits spéciaux ou exclusifs pour une telle activité.
+
+
+   B. Le service des achats de l'État.
+
+      Le service des achats de l'État a été créé par le décret du dix-neuf mars deux mille neuf, à la suite d'une décision prise en décembre deux mille sept dans le cadre de la révision générale des politiques publiques. Il remplace l'Agence centrale des achats, créée par arrêté du vingt-six novembre deux mille quatre. C'est un service à compétence nationale rattaché au secrétaire général du ministère, chargé de définir et de mettre en œuvre une nouvelle politique d'achats pour les ministères économiques et financiers.
+
+      Il agit à trois niveaux complémentaires. La globalisation des achats consiste à unifier les pratiques et à regrouper des marchés pour optimiser les achats à plus grande échelle et réduire les coûts sans dégrader la qualité. La maîtrise des consommations aide les services à utiliser au mieux les ressources, notamment par des guides de bonnes pratiques. La simplification des procédures met à disposition des marchés globalisés à exécution locale, des plateformes de commande en ligne et des cartes achat, pour réduire les délais et les coûts de traitement.
+
+
+   C. La commission d'appel d'offres.
+
+      Cette commission assurait l'ensemble des actes concernant le marché public, dépouillement des candidatures et des offres, choix du titulaire ou proposition de rendre le marché infructueux. Les modifications apportées au code des marchés publics en décembre deux mille huit ont changé sa tenue. La commission d'appel d'offres des collectivités locales est maintenue, mais celle des marchés de l'État est supprimée par l'article vingt et un du code des marchés publics. En pratique, un comité d'expertise réunissant les techniciens à l'origine du marché et le représentant du pouvoir adjudicateur la remplace.
+
+
+   D. La commission des marchés publics de l'État.
+
+      La commission des marchés publics de l'État a été mise en place le premier février deux mille cinq, en remplacement de la commission spécialisée des marchés informatiques, et est chargée de contrôler les marchés informatiques de l'État. Elle est compétente à partir d'un seuil de six millions d'euros hors taxes et pour certains cas particuliers. Son contrôle n'est pas obligatoire mais seulement facultatif.
+
+
+III. LES DOCUMENTS CONTRACTUELS.
+
+
+   A. Documents généraux et documents particuliers.
+
+      Les cahiers des charges lient la personne publique au titulaire. Ils comprennent des documents généraux, qui réunissent les clauses applicables à toute une catégorie de marchés, et des documents particuliers, qui contiennent les dispositions propres au marché.
+
+
+   B. Les cahiers des clauses générales.
+
+      Ces documents s'appliquent à toute une catégorie de marchés et il est possible d'y déroger, généralement par un article du cahier des clauses administratives particulières mentionnant toutes les dérogations apportées.
+
+      Il existe quatre cahiers des clauses administratives générales, dont deux intéressent l'informatique. Le cahier des clauses administratives générales des fournitures courantes et services vise les consommables et les logiciels sur étagère, qui ne nécessitent aucune intervention de l'éditeur. Un nouveau cahier a été approuvé par arrêté du dix-neuf janvier deux mille neuf, dans une refonte d'ensemble visant l'harmonisation et la simplification. L'ancien chapitre sept relatif aux marchés informatiques n'y figure plus et doit être intégré au nouveau cahier des techniques de l'information et de la communication, publié dans le courant de l'année deux mille neuf. Le nouveau cahier facilite l'exécution des marchés : le titulaire qui estime qu'un ordre de service appelle des observations doit les notifier dans un délai de quinze jours sous peine de forclusion, et il peut refuser d'exécuter un ordre de démarrage notifié plus de six mois après la notification du marché. Il introduit une pénalité pour indisponibilité dans les marchés de maintenance à l'article quatorze point deux.
+
+      Le cahier des clauses administratives générales des prestations intellectuelles s'applique lorsque la personne publique demande une prestation intellectuelle spécifique, étude de faisabilité ou développement d'application. Lorsqu'un seul marché regroupe acquisition de matériels et prestations d'intégration, on retient le cahier des fournitures courantes et services si l'acquisition de matériels est financièrement la plus importante, et le cahier des prestations intellectuelles si ce sont les prestations de développement.
+
+      Le cahier des clauses techniques générales rassemble les clauses techniques applicables à une prestation de même nature. Il n'existe pas de cahier des clauses techniques générales applicable au domaine informatique.
+
+
+   C. Les cahiers des clauses particulières.
+
+      Ces documents font partie du dossier de consultation des entreprises et doivent être rédigés de façon claire, explicite et homogène pour éviter tout contentieux sur le périmètre du marché.
+
+      Le cahier des clauses administratives particulières fixe précisément les engagements contractuels du titulaire, la nature du marché, sa durée, les modalités d'exécution, les conditions de paiement et les obligations de livraison et de secret. Il est spécifique à l'objet du marché.
+
+      Le cahier des clauses techniques particulières donne une description précise des prestations, soit par référence à des normes, agréments ou référentiels techniques, soit en termes de performance ou d'exigences fonctionnelles suffisamment précises. La description ne doit pas avoir un caractère discriminatoire ni être destinée à une société en particulier. Les spécifications techniques ne peuvent faire mention d'un mode ou procédé de fabrication particulier, d'une provenance ou d'une marque, à moins que cette mention, justifiée par l'objet du marché, soit accompagnée des mots ou équivalent.
+
+
+   D. L'acte d'engagement.
+
+      C'est la pièce signée par le candidat, dans laquelle il présente son offre et adhère aux clauses rédigées par la personne publique, puis signée par celle-ci. Parmi les mentions obligatoires figurent l'identification des parties, la justification de la qualité des signataires, l'objet du marché, la référence aux articles du code, l'énumération des pièces et leur ordre de priorité, le prix ou ses modalités de détermination, la durée d'exécution ou les dates prévisionnelles, les conditions de réception, de livraison ou d'admission, les conditions de règlement et les délais de paiement, les conditions de résiliation, la date de notification, le comptable assignataire et les éléments propres aux marchés fractionnés. Les bons de commande ne font plus partie des pièces constitutives du marché.
+
+
+IV. LES ÉTAPES DE L'ACHAT PUBLIC.
+
+
+   A. La détermination des besoins.
+
+      La phase d'expression des besoins est le préalable indispensable à toute commande publique. Le code dispose que la nature et l'étendue des besoins à satisfaire sont déterminées avec précision avant tout appel à la concurrence ou toute négociation.
+
+      L'expression des besoins fait appel à quatre considérations principales : l'analyse des besoins fonctionnels des services, sur la base par exemple d'états de consommation ; la connaissance la plus approfondie possible des fournisseurs et des documentations techniques ; la distinction entre achats standard et achats spécifiques, y compris au sein d'une même catégorie de biens ; et, lorsque c'est possible, l'adoption d'une démarche en coût global prenant en compte non seulement le prix à l'achat, mais aussi les coûts de fonctionnement et de maintenance, ce qui est particulièrement vrai en informatique où l'acquisition d'un logiciel s'accompagne toujours du paiement de redevances et de maintenance.
+
+      Un PSE-ER qui participerait à la définition des besoins avant un appel à la concurrence doit se situer dans les conditions les plus favorables : définir au mieux le besoin, affiner sa connaissance du secteur, éviter d'alourdir inutilement le coût des procédures par des exigences non justifiées, et adapter la procédure aux mécanismes de formation des prix en choisissant le bon moment et la forme de prix, ferme, actualisable ou révisable.
+
+
+   B. Les marchés fractionnés.
+
+      Si l'acheteur ne peut connaître précisément les quantités à commander ou réaliser en une seule fois l'ensemble d'un programme, il peut recourir au marché fractionné, qui prend deux formes.
+
+      Le marché à bons de commande s'impose lorsque la personne publique a besoin de prestations mais ne connaît pas la date exacte du besoin, notamment pour les biens consommables. Sa durée ne peut excéder quatre ans. Il est en principe conclu avec un minimum et un maximum, les obligations de publicité et de mise en concurrence se déterminant sur la base du maximum, et l'acheteur est tenu de commander au moins le minimum et de s'adresser exclusivement au titulaire.
+
+      Le marché à tranches conditionnelles est utilisé lorsque la personne publique ne sait pas si elle aura besoin de toutes les prestations prévues. Il comprend une tranche ferme, qui sera réalisée, et une ou plusieurs tranches conditionnelles, affermies selon le choix de la personne publique. L'acheteur n'est engagé que sur la tranche ferme, mais l'appréciation des seuils de procédure et de publicité additionne les montants estimés de l'ensemble des tranches.
+
+      Le code organise la multi-attribution lorsque l'achat porte sur des biens dont les caractéristiques techniques et le prix connaissent de fortes variations, comme le matériel micro-informatique. Elle permet de conclure des marchés avec plusieurs titulaires, remis en compétition lors de chaque bon de commande. Enfin, une bonne définition des besoins n'exclut pas de laisser une part d'initiative aux candidats par des variantes, à condition de ne pas les interdire dans l'avis d'appel public à la concurrence et d'en définir les limites dans le règlement de la consultation.
+
+
+   C. La forme du marché.
+
+      C'est le pouvoir adjudicateur qui décide de passer un marché unique ou séparé en lots, en analysant les avantages économiques, financiers ou techniques de chaque forme.
+
+      L'allotissement divise le marché en plusieurs lots selon la nature des fournitures et des prestations. Il étend le champ de la concurrence à des entreprises compétitives qui ne sont pas nécessairement aptes à réaliser l'intégralité du marché ; un marché de fournitures informatiques pourra ainsi comprendre un lot d'ordinateurs et un lot d'imprimantes.
+
+      Le marché unique est préférable lorsque l'acheteur n'a pas la capacité technique de coordonner les actions des titulaires de lots, ou lorsque des économies d'échelle le justifient. Il implique un seul titulaire. Pour un marché global de construction et d'exploitation ou de maintenance, les coûts doivent apparaître de manière séparée, sans qu'il soit possible de compenser l'un par l'autre.
+
+      La distinction entre marché unique et marché à lots porte sur le titulaire, un ou plusieurs, tandis que la distinction entre marché à tranches et marché à bons de commande porte sur les modalités d'acquisition ; un marché unique comme un marché à lots peuvent être à tranches ou à bons de commande.
+
+
+   D. Les modalités d'achat groupé.
+
+      Les acheteurs publics peuvent acheter seuls, se grouper, ou recourir à une centrale d'achat, notamment pour réaliser des économies d'échelle.
+
+      La coordination consiste, pour une personne publique, à coordonner les achats de ses services, par la passation d'un seul marché avec émission de bons de commande par chaque service, ou par la passation de plusieurs marchés distincts sur la base d'une convention de prix et d'un marché type.
+
+      Le groupement de commande coordonne et regroupe les achats de plusieurs personnes publiques, qui passent une convention constitutive précisant les besoins de chacun. Le coordonnateur est chargé de signer et notifier le marché, ou de le signer, le notifier et l'exécuter au nom des membres, et la commission d'appel d'offres peut être celle du coordonnateur.
+
+      La centrale d'achat est autorisée à condition de respecter elle-même les règles de publicité et de mise en concurrence imposées par le code. Deux procédures coordonnées sont possibles, la passation d'un seul marché avec bons de commande émis par les services, ou la passation de plusieurs marchés distincts, le service centralisateur concluant alors une convention de prix et un marché type, appelés accord-cadre. L'accord-cadre sélectionne un certain nombre de prestataires ensuite remis en concurrence lors de la survenance du besoin ou selon une périodicité fixée. Il est conclu pour une durée maximale de quatre ans et fixe les caractéristiques essentielles des prestations, les marchés subséquents pouvant compléter et préciser l'accord sans le modifier substantiellement. Il permet une remise en concurrence rapide, un achat plus efficace lorsque les prix sont volatils, un ajustement périodique des offres pour maintenir la qualité, et une certaine souplesse en cas d'évolution du besoin.
+
+
+   E. La détermination de la procédure.
+
+      Le pouvoir adjudicateur doit estimer de manière sincère et raisonnable le montant du marché pour déterminer la procédure. En dessous des seuils de procédure, la passation n'est pas fixée de manière stricte et est adaptée par la personne publique ; au-dessus, la mise en concurrence est formalisée et précisée par le code. Les seuils diffèrent selon qu'il s'agit d'un marché de fournitures et services ou de travaux, et selon qu'il s'agit de l'État ou des collectivités. Pour l'informatique, on retient les marchés de fournitures et services de l'État.
+
+      Le code institue trois seuils. L'article quarante du code des marchés publics de deux mille quinze porte de vingt mille à vingt-cinq mille euros le seuil en deçà duquel les administrations ne sont pas obligées de faire de la publicité ni de passer par une procédure de marchés publics. Un décret de juillet deux mille quinze fixe un deuxième seuil à quatre-vingt-dix mille euros hors taxes, pour les marchés situés entre vingt-cinq mille et quatre-vingt-dix mille euros hors taxes. Le dernier seuil concerne tous les marchés supérieurs à quatre-vingt-dix mille euros hors taxes.
+
+      Le marché de gré à gré est passé par l'État pour un montant inférieur à vingt-cinq mille euros hors taxes et se caractérise, selon l'article quarante, par une absence de publicité, tout en restant soumis aux principes de la commande publique de l'article premier.
+
+      La procédure adaptée, appelée MAPA ou MPA, est utilisée lorsque le montant prévisionnel est estimé entre vingt-cinq mille euros hors taxes et cent trente-quatre mille euros hors taxes. Les marchés d'un faible montant, inférieurs à vingt-cinq mille euros hors taxes, ne sont plus assimilés à des marchés à procédure adaptée et sont dispensés de publicité et de mise en concurrence par le décret du vingt-cinq mars deux mille seize. Dans la procédure adaptée, l'acheteur détermine lui-même la publicité et la mise en concurrence, adaptées à la nature et au montant de l'achat ainsi qu'à sa propre taille, ce qui favorise la négociation et les échanges dématérialisés.
+
+      La procédure d'appel d'offres est obligatoire au-dessus de cent trente-quatre mille euros hors taxes pour les marchés de fournitures et services. Dans l'appel d'offres ouvert, la personne publique publie un avis fixant un délai de réception des offres d'au moins cinquante-deux jours à compter de l'envoi, ne peut pas limiter le nombre de candidats, et reçoit une seule enveloppe contenant la candidature et l'offre, alors que le pli en contenait deux auparavant. Elle vérifie d'abord que les sociétés ne sont pas condamnées pénalement, sont inscrites au registre du commerce et ont fourni tous les documents demandés, puis les offres sont étudiées au regard des critères annoncés, généralement par les techniciens à l'origine du marché, avant présentation au pouvoir adjudicateur qui décide de retenir un titulaire ou de déclarer le marché infructueux. L'appel d'offres restreint est identique, la différence notable étant la séparation nette entre le dépouillement des candidatures et celui des offres ; le délai de réception des candidatures est d'au moins trente-sept jours, une analyse technique sélectionne les candidats qui recevront les cahiers des charges, et seuls ces candidats peuvent remettre une offre.
+
+      Il existe des cas particuliers. Dans la procédure négociée, la personne publique choisit le titulaire après négociation dans des cas limitativement énumérés à l'article trente-cinq, sous trois formes, avec publicité et mise en concurrence, sans publicité préalable et avec mise en concurrence, sans publicité ni mise en concurrence ; elle est notamment utilisée pour les matériels et logiciels protégés par des droits d'auteur, comme les packs Microsoft. Le dialogue compétitif combine négociation et appel d'offres et n'est possible que lorsque le marché est complexe, c'est-à-dire quand le pouvoir adjudicateur n'est pas en mesure de définir seul les moyens techniques ou d'établir le montage juridique ou financier. Il se déroule par un avis public, le dépôt des candidatures, la sélection des candidats admis à déposer une offre, un dialogue avec chacune des sociétés retenues, puis le choix de celle qui répond le mieux aux besoins ; l'acheteur établit un programme fonctionnel et il peut y avoir autant de phases de dialogue que nécessaire pour aboutir à un cahier des charges définitif et à une offre finale.
+
+
+V. LE CHOIX DU TITULAIRE.
+
+
+   A. Le principe du mieux-disant.
+
+      Le code affirme le choix de l'offre économiquement la plus avantageuse comme garantie de l'efficacité de la commande publique, la règle du mieux-disant plutôt que du moins-disant se traduisant par la présence du critère prix parmi les autres critères. L'offre économiquement la plus avantageuse n'est pas nécessairement le prix le plus bas. Un PSE-ER, par sa connaissance des prestations, peut aider à détecter les offres anormalement basses, dont le prix ne correspond pas à une réalité économique, et à évaluer la qualité des prestations proposées.
+
+      Le code prévoit deux types d'informations : des éléments vérifiant la capacité, les références et les potentialités des sociétés, les critères de candidature, et des éléments comparant les offres, les critères de choix. La personne publique doit faire connaître à l'avance les critères de comparaison des offres.
+
+
+   B. Les critères de capacité des candidats.
+
+      Ces critères correspondent à l'ancienne première enveloppe et comprennent trois types de capacités. Les capacités techniques sont les moyens matériels et humains du candidat, appréciés quantitativement et qualitativement, éventuellement par des certificats de livraisons, des certificats de bonne exécution ou une description de l'équipement technique. Les capacités financières doivent établir la crédibilité financière du candidat et sa capacité à mener à bien le marché, par le chiffre d'affaires général ou spécifique, des attestations bancaires, des bilans ou extraits de bilans. Les capacités professionnelles vérifient que le candidat possède les qualifications requises, la preuve pouvant être apportée par des organismes de certification ou des expériences réalisées dans le même domaine.
+
+
+   C. Les critères de choix et leur pondération.
+
+      Les critères de choix sont déterminés lors de la rédaction du cahier des clauses techniques particulières, car ils sont liés aux fonctionnalités demandées, et doivent présenter un lien avec les objectifs et les besoins. Le code en dresse la liste : coût d'utilisation, valeur technique de l'offre, caractère innovant, performances en matière d'environnement, délai d'exécution, qualités esthétiques et fonctionnelles, service après-vente et assistance technique, date et délai de livraison, prix des prestations. D'autres critères peuvent être pris en compte s'ils sont justifiés par l'objet du marché.
+
+      La pondération n'est valable que pour les critères de choix, non pour les critères de candidature. La personne publique indique le poids relatif de chaque critère, par exemple validité technique soixante pour cent et prix quarante pour cent, l'appréciation étant quantifiée par des notes chiffrées précisées dès l'élaboration du cahier des charges. Les références et potentialités des sociétés s'apprécient lors de l'examen des capacités et ne peuvent en aucun cas constituer un critère de choix des offres. Le rapport de choix doit reprendre l'intégralité des critères du cahier des charges ; aucun critère nouveau ne peut être utilisé, aucun critère ne peut être supprimé ou modifié dans son libellé ou sa pondération, et les différences de notes doivent être expliquées de manière claire et homogène.
+
+      Pour les marchés d'un montant supérieur à cent trente-trois mille euros hors taxes, le pouvoir adjudicateur est tenu de faire publier l'avis d'attribution, indiquant notamment le nom de la société retenue et le montant du marché.
+
+
+VI. LA VÉRIFICATION DES PRESTATIONS.
+
+
+   A. Dans les marchés de fournitures courantes et de services.
+
+      Lorsque le titulaire livre les objets ou les prestations, la personne publique procède à des vérifications pour s'assurer de leur conformité.
+
+      L'installation et la mise en ordre de marche du matériel et des logiciels sont réalisées par le titulaire, qui dispose d'un mois à compter de la date contractuelle de livraison, remet un procès-verbal de mise en ordre de marche et indique s'il sera présent aux opérations de vérification ; ce délai peut faire l'objet d'un sursis ou d'une prolongation.
+
+      La vérification d'aptitude intervient après la mise en ordre de marche et constate que les prestations présentent les caractéristiques techniques qui les rendent aptes à remplir les fonctions du marché, éventuellement par l'exécution de programmes ou de bancs d'essais. Si la décision est positive, la vérification de service régulier débute.
+
+      La vérification de service régulier constate que les prestations assurent un service régulier dans les conditions normales d'exploitation. La régularité s'observe pendant un mois à partir de la décision positive de vérification d'aptitude. Le service est réputé régulier si la durée cumulée sur le mois des indisponibilités imputables à chaque élément de matériel ne dépasse pas deux pour cent de la durée d'utilisation effective, qui s'étend de huit heures à dix-huit heures du lundi au vendredi, jours fériés exclus.
+
+      L'admission est prise lorsque la vérification de service régulier est positive et est notifiée au titulaire. En règle générale, la vérification de service régulier vaut admission.
+
+
+   B. Dans les marchés de prestations intellectuelles.
+
+      Les opérations de vérification s'effectuent pour chaque lot et chaque tranche, un découpage en phases pouvant aussi être prévu. Le titulaire notifie à la personne responsable du marché la date à laquelle les prestations seront présentées, par un avis de présentation. Les opérations de vérification se composent d'une recette provisoire et d'une recette définitive.
+
+      À l'issue des vérifications, la personne responsable du marché prononce une décision notifiée au titulaire : la réception des prestations si elles répondent au marché ; l'ajournement, motivé et assorti d'un délai, si elles peuvent être rendues conformes moyennant des compléments ; la réception avec réfaction d'un montant déterminé si elles peuvent être utilisées en l'état sans satisfaire entièrement au marché ; le rejet si les réserves sont telles qu'il n'est possible de prononcer ni l'ajournement ni la réception avec réfaction. En règle générale, la recette définitive vaut admission.
+
+
+VII. LA SOUS-TRAITANCE, LA MODIFICATION ET LA DÉMATÉRIALISATION.
+
+
+   A. Le recours à la sous-traitance.
+
+      Le titulaire d'un marché de travaux, de services ou industriel peut sous-traiter l'exécution de certaines parties de son marché, à condition d'avoir obtenu du pouvoir adjudicateur l'acceptation de chaque sous-traitant. En cas de sous-traitance, le titulaire demeure personnellement responsable de l'exécution de toutes les obligations du marché, car il n'y a pas de relation contractuelle entre le maître d'ouvrage et le sous-traitant.
+
+      L'acceptation de chaque sous-traitant peut intervenir au moment du dépôt de l'offre ou après le choix du titulaire, pendant l'exécution. Si, après la notification du marché, le titulaire envisage de confier à des sous-traitants bénéficiant du paiement direct des prestations pour un montant supérieur à celui indiqué, il demande la modification de l'acte d'engagement. Lorsque le montant du contrat de sous-traitance est égal ou supérieur à six cents euros toutes taxes comprises, le sous-traitant accepté et dont les conditions de paiement ont été agréées est payé directement pour la partie du marché qu'il exécute.
+
+
+   B. La modification du marché.
+
+      La modification des prestations ou des conditions d'exécution prend la forme d'un avenant, acte juridique par lequel les parties conviennent de modifier ou de compléter une ou plusieurs clauses. Cette modification ne peut se substituer au contrat initial, bouleverser l'économie du marché, en changer l'objet, ni toucher à des éléments substantiels comme le prix. Le seuil au-delà duquel un avenant constitue un nouveau marché n'est pas fixé par la réglementation et est apprécié au cas par cas par le juge administratif. Le marché complémentaire et le marché de prestations similaires permettent de prolonger un marché, dans des hypothèses très limitées et sous des conditions très strictes.
+
+
+   C. La dématérialisation des marchés publics.
+
+      La dématérialisation est l'une des modifications majeures du code des marchés publics et est traitée dans le cahier Administration électronique. À partir du premier janvier deux mille dix, pour les marchés dont le seuil est supérieur à quatre-vingt-dix mille euros, s'appliquent l'obligation de publier les avis d'appel public à la concurrence de manière électronique sur une plateforme de dématérialisation, l'obligation d'y dématérialiser le dossier de consultation des entreprises, la possibilité pour le pouvoir adjudicateur d'imposer la transmission électronique des candidatures et des offres, et l'obligation, pour les candidats des marchés du secteur informatique, de répondre par voie électronique. À partir du premier janvier deux mille douze, le pouvoir adjudicateur ne peut plus refuser de recevoir les documents des candidats par voie électronique, et la transmission sur papier ne peut plus être imposée par le règlement de consultation.
+
+
+POINTS D'ATTENTION.
+
+      Trois principes fondent la commande publique, la liberté d'accès, l'égalité de traitement des candidats et la transparence des procédures.
+
+      Il faut distinguer la publicité, tous les moyens de faire connaître le marché, de la publication, diffusion d'un avis par les organismes officiels comme le BOAMP ; la publication est une modalité de la publicité.
+
+      Le service des achats de l'État date de deux mille neuf et de la révision générale des politiques publiques ; la commission d'appel d'offres de l'État est supprimée par les modifications de deux mille huit, celle des collectivités est maintenue.
+
+      La commission des marchés publics de l'État contrôle les marchés informatiques à partir de six millions d'euros hors taxes, et ce contrôle est facultatif.
+
+      Quatre cahiers des clauses administratives générales existent, dont deux pour l'informatique, celui des fournitures courantes et services et celui des prestations intellectuelles ; le nouveau cahier des techniques de l'information et de la communication reprend l'ancien chapitre sept.
+
+      Pour un marché mêlant matériels et intégration, on applique le cahier des fournitures courantes et services si l'acquisition domine financièrement, celui des prestations intellectuelles si le développement domine.
+
+      Le dossier de consultation des entreprises comprend le cahier des clauses administratives particulières et le cahier des clauses techniques particulières ; les bons de commande ne sont plus des pièces constitutives du marché.
+
+      Le marché à bons de commande, quatre ans au maximum, est conclu avec un minimum et un maximum ; le marché à tranches comprend une tranche ferme et des tranches conditionnelles ; la multi-attribution vise le matériel micro-informatique.
+
+      La distinction marché unique ou marché à lots porte sur le titulaire ; la distinction marché à tranches ou à bons de commande porte sur les modalités d'acquisition.
+
+      L'accord-cadre sélectionne des prestataires remis en concurrence ultérieurement, pour une durée maximale de quatre ans.
+
+      Trois seuils pour les marchés de fournitures et services de l'État, le gré à gré en dessous de vingt-cinq mille euros hors taxes, la procédure adaptée entre vingt-cinq mille et cent trente-quatre mille euros hors taxes, l'appel d'offres obligatoire au-dessus de cent trente-quatre mille euros hors taxes.
+
+      L'appel d'offres ouvert impose un délai d'au moins cinquante-deux jours et une seule enveloppe ; l'appel d'offres restreint impose un délai de candidatures d'au moins trente-sept jours et sépare nettement candidatures et offres.
+
+      La procédure négociée relève de l'article trente-cinq et sert notamment aux logiciels protégés par des droits d'auteur ; le dialogue compétitif est réservé aux marchés complexes.
+
+      Le choix retient le mieux-disant ; les critères de candidature portent sur les capacités techniques, financières et professionnelles ; la pondération ne s'applique qu'aux critères de choix.
+
+      L'avis d'attribution est publié pour les marchés supérieurs à cent trente-trois mille euros hors taxes.
+
+      Dans les marchés de fournitures courantes et services, l'ordre est mise en ordre de marche, un mois, puis vérification d'aptitude, puis vérification de service régulier, un mois avec deux pour cent d'indisponibilité tolérée, puis admission ; en règle générale la vérification de service régulier vaut admission.
+
+      Dans les marchés de prestations intellectuelles, la vérification se compose d'une recette provisoire et d'une recette définitive, et les décisions possibles sont réception, ajournement, réception avec réfaction ou rejet.
+
+      En sous-traitance, le pouvoir adjudicateur accepte chaque sous-traitant, le titulaire reste personnellement responsable, et le paiement direct s'applique à partir de six cents euros toutes taxes comprises.
+
+      L'avenant ne peut bouleverser l'économie du marché, en changer l'objet ni toucher au prix ; le seuil de requalification en nouveau marché est apprécié au cas par cas par le juge administratif.
+
+      La dématérialisation s'impose au-dessus de quatre-vingt-dix mille euros à partir de deux mille dix, et le pouvoir adjudicateur ne peut plus refuser la voie électronique à partir de deux mille douze.
+
+
+EXEMPLES CITES.
+
+      Ordonnance du vingt-trois juillet deux mille quinze relative aux marchés publics et ordonnance du vingt-neuf janvier deux mille seize relative aux contrats de concession.
+
+      Décret du dix-neuf mars deux mille neuf créant le service des achats de l'État ; arrêté du vingt-six novembre deux mille quatre créant l'Agence centrale des achats qu'il remplace.
+
+      Article vingt et un du code des marchés publics supprimant la commission d'appel d'offres pour les marchés de l'État.
+
+      Arrêté du dix-neuf janvier deux mille neuf approuvant le nouveau cahier des clauses administratives générales des fournitures courantes et de services ; article quatorze point deux introduisant la pénalité pour indisponibilité dans les marchés de maintenance.
+
+      Marché de fournitures de matériels informatiques alloti en un lot d'ordinateurs et un lot d'imprimantes.
+
+      Article quarante du code des marchés publics de deux mille quinze portant le seuil de dispense de vingt mille à vingt-cinq mille euros ; décret de juillet deux mille quinze fixant le seuil de quatre-vingt-dix mille euros hors taxes ; décret du vingt-cinq mars deux mille seize dispensant de publicité et de mise en concurrence les marchés inférieurs à vingt-cinq mille euros hors taxes.
+
+      Article trente-cinq encadrant la procédure négociée ; achat des droits sur les packs Microsoft par le biais du marché négocié.
+
+      Pondération type de soixante pour cent pour la validité technique et de quarante pour cent pour le prix.
+
+      Article vingt-sept point deux et article treize point trois du cahier des clauses administratives générales des fournitures courantes et services pour les décisions de vérification et les délais ; article trente-deux du cahier des clauses administratives générales des prestations intellectuelles pour les opérations de vérification.
+
+      Paiement direct du sous-traitant à partir de six cents euros toutes taxes comprises.
+
+      Échéances de dématérialisation du premier janvier deux mille dix pour les marchés supérieurs à quatre-vingt-dix mille euros et du premier janvier deux mille douze pour l'obligation de recevoir les documents par voie électronique.

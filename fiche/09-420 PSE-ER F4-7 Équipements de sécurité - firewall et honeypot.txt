@@ -1,101 +1,113 @@
-FICHE DE RÉVISION — PSE Expert Réseau — Fascicule 4, thème 7
-ÉQUIPEMENTS DE SÉCURITÉ : FIREWALL ET HONEYPOT
-=======================================================================
+ÉQUIPEMENTS DE SÉCURITÉ - PARE-FEU ET POTS DE MIEL.
 
-1. LE FIREWALL (PARE-FEU)
------------------------------------------------------------------------
-RÔLES :
-- Protéger le réseau du monde extérieur (Internet, autres services de
-  l'entreprise).
-- Maintenir les utilisateurs à l'intérieur du réseau.
-- Restreindre le nombre de machines à surveiller avec attention.
-- Laisser ouvertes certaines machines nécessaires (serveur web, DNS).
+LEXIQUE COMPLET.
 
-INDISPENSABLE MAIS JAMAIS SUFFISANT :
-- Pas de protection contre le monde intérieur (menaces internes).
-- Pas de protection contre les mots de passe faibles.
-- Ne dispense pas de : protéger/administrer chaque machine, structurer le
-  réseau, éduquer et sensibiliser les utilisateurs, faire signer une
-  charte de bonne utilisation, assurer une surveillance quotidienne.
+      Pare-feu : équipement ou logiciel qui contrôle les accès entrants et sortants d'un réseau, par service et par adresse IP, afin de protéger le réseau du monde extérieur et de restreindre le nombre de machines à surveiller étroitement.
 
-POLITIQUE DE SÉCURITÉ (deux approches) :
-- Tout autoriser puis interdire progressivement (liste noire).
-- Tout interdire puis ouvrir sélectivement (liste blanche — plus sûr).
+      Politique de sécurité du pare-feu : règle de base retenue pour la configuration, soit tout autoriser puis interdire progressivement, soit tout interdire puis ouvrir sélectivement.
 
-Le firewall contrôle les accès entrants et sortants :
-- par service (port) ;
-- par adresse IP ;
-- (selon le type) par contenu du paquet.
+      Filtre de paquets : type de pare-feu qui trie les paquets selon les adresses IP, les ports source et destination et le contenu, sans notion de contexte.
 
-TYPES DE FIREWALL :
-- Filtre de paquets : trie selon adresses IP, ports source/destination,
-  contenu. PAS de notion de contexte : décision d'après le paquet en
-  cours uniquement.
-  * Problème des fragments IP : pas de numéro de port dans les fragments.
-  * Protocoles difficiles à filtrer : FTP (plusieurs ports à synchroniser).
-- Passerelle de circuits : relaie les connexions TCP. L'appelant se
-  connecte à un port TCP de la passerelle, elle-même connectée au port du
-  service de la machine destination.
-- Passerelle d'applications : un programme spécifique par application
-  (relai courrier, relai HTTP) ; sectionne les flux ; plus complexe à
-  mettre en œuvre.
-- Combinaison des trois.
-- Firewall « stateful multilayer » : inspection avec état + inspection
-  applicative multicouche.
+      Passerelle de circuits : type de pare-feu qui relaie les connexions TCP, l'appelant se connectant à un port TCP de la passerelle, elle-même connectée au port du service de la machine de destination.
 
-FONCTIONNALITÉS D'UN FIREWALL RÉCENT :
-- Filtrage IP / protocole.
-- Inspection stateful et applicative ; détection de trafic anormal (IA).
-- Filtrage applicatif : HTTP (restriction d'URL), antispam, antivirus,
-  anti-malware.
-- Translation d'adresses (NAT).
-- Tunnels IPsec, PPTP, L2TP.
-- Identification des connexions.
-- Interface web de configuration.
-- Relai applicatif (proxy).
-- Détection d'intrusion (IDS) et prévention d'intrusion (IPS).
+      Passerelle d'applications : type de pare-feu qui définit un programme spécifique par application, comme un relais de courrier ou un relais HTTP, permettant de sectionner les flux, mais plus complexe à mettre en œuvre.
 
-EXEMPLES : Checkpoint ; Cisco PIX et ASA ; serveur BSD/Linux avec
-iptables (Linux) ou Packet Filter (BSD).
+      Pare-feu stateful multilayer : pare-feu combinant filtrage de paquets, passerelle de circuits et passerelle d'applications, avec suivi d'état des connexions sur plusieurs couches.
 
-PROTECTION DU POSTE DE TRAVAIL (partie intégrante de la sécurité du
-site) : antivirus, anti-spyware, firewall personnel, application des
-correctifs de vulnérabilités.
+      Inspection stateful : analyse d'un pare-feu qui garde la trace de l'état des connexions établies, par opposition au filtrage de paquets sans contexte.
 
-2. LES HONEYPOTS (POTS DE MIEL)
------------------------------------------------------------------------
-DÉFINITION : machine connectée au réseau et VOLONTAIREMENT de sécurité
-faible, conçue pour attirer les attaquants.
+      Translation d'adresses : fonction d'un pare-feu qui réécrit les adresses IP entre le réseau interne et l'extérieur.
 
-OBJECTIFS :
-- Distraire un attaquant pour protéger des machines plus sensibles.
-- Découvrir de nouvelles techniques d'attaque et de nouveaux outils.
+      Relais applicatif : fonction de mandataire, ou proxy, assurée par un pare-feu pour un protocole applicatif.
 
-PROJETS : Honeynet (honeynet.org) ; NoAH — European Network of Affined
-Honeypots.
+      IDS : système de détection d'intrusion, fonction proposée par les pare-feu récents.
 
-HONEYPOTS À FAIBLE INTERACTION :
-- Récolte d'informations à MOINDRE RISQUE (services seulement simulés).
-- Exemples : honeyd, honeytrap, nepenthes, Specter (commercial).
+      IPS : système de prévention d'intrusion, fonction proposée par les pare-feu récents.
 
-HONEYPOTS À FORTE INTERACTION :
-- Donnent de VÉRITABLES ACCÈS aux attaquants.
-- Risques bien plus importants -> déploiement prudent.
-- Exemple : ROO HoneyWall.
+      iptables : outil de pare-feu du noyau Linux permettant de bâtir un serveur pare-feu simple.
 
-=======================================================================
-À RETENIR
-- Firewall = indispensable mais jamais suffisant (rien contre l'interne
-  ni les mots de passe faibles).
-- 2 politiques : liste noire (tout ouvrir puis fermer) / liste blanche
-  (tout fermer puis ouvrir).
-- Types : filtre de paquets (sans état), passerelle de circuits (relai
-  TCP), passerelle d'applications (proxy par appli), stateful multilayer.
-- Fragments IP et FTP = cas difficiles pour le filtrage.
-- Firewall récent : NAT, VPN (IPsec/PPTP/L2TP), proxy, IDS/IPS, filtrage
-  applicatif.
-- Poste de travail : antivirus + anti-spyware + firewall personnel +
-  correctifs.
-- Honeypot : machine-leurre à sécurité faible ; faible interaction
-  (simulation, peu de risque) vs forte interaction (vrais accès, risque
-  élevé).
+      Packet Filter : outil de pare-feu des systèmes BSD, équivalent d'iptables.
+
+      Pare-feu personnel : logiciel de pare-feu installé sur un poste de travail pour le protéger individuellement.
+
+      Pot de miel : en anglais honeypot, machine connectée au réseau et volontairement peu sécurisée, destinée à distraire un attaquant et à découvrir de nouvelles techniques et de nouveaux outils d'attaque.
+
+      Pot de miel à faible interaction : pot de miel qui émule des services pour récolter des informations à moindre risque, comme honeyd, honeytrap, nepenthes ou Specter.
+
+      Pot de miel à forte interaction : pot de miel qui offre de véritables accès à des attaquants, présentant des risques beaucoup plus importants et exigeant un déploiement prudent, comme ROO HoneyWall.
+
+      Honeynet : réseau de pots de miel, illustré par le projet Honeynet et par le réseau européen NoAH, European Network of Affined Honeypots.
+
+COURS DÉTAILLÉ.
+
+I. LE PARE-FEU.
+
+   A. Rôle et limites.
+
+      Un pare-feu offre plusieurs services. Il protège le réseau du monde extérieur, Internet et autres services de l'entreprise. Il maintient des utilisateurs à l'intérieur du réseau, employés ou enfants. Il restreint le nombre de machines à surveiller avec un maximum d'attention, certaines machines comme un serveur web ou un serveur DNS devant rester ouvertes.
+
+      C'est un outil souvent indispensable mais jamais suffisant. Il n'offre aucune protection contre le monde intérieur ni contre les mots de passe faibles. Il ne dispense pas de bien protéger et administrer toutes ses machines, de bien structurer son réseau, d'éduquer et de sensibiliser les utilisateurs, de faire signer une charte de bonne utilisation et d'assurer une surveillance quotidienne.
+
+      Un pare-feu nécessite l'établissement d'une politique de sécurité, selon deux logiques opposées, tout autoriser puis interdire progressivement, ou tout interdire puis ouvrir sélectivement. Il contrôle les accès entrants et sortants par service et par adresse IP.
+
+   B. Les types de pare-feu.
+
+      Il existe différents types de pare-feu qui se spécialisent dans différentes tâches, les filtres de paquets, les passerelles de circuits, les passerelles d'applications et la combinaison des trois.
+
+      Les filtres de paquets trient les paquets en fonction des adresses IP, des ports source et destination et du contenu. Les pare-feu de ce type n'ont pas de notion de contexte, la décision étant prise d'après le contenu du paquet en cours. Les fragments IP posent problème car ils ne contiennent pas de numéro de port. Certains protocoles sont difficiles à filtrer, comme FTP, qui a plusieurs ports à filtrer et à synchroniser.
+
+      Les passerelles de circuits relaient les connexions TCP. L'appelant se connecte à un port TCP de la passerelle, elle-même connectée au port du service de la machine de destination.
+
+      Les passerelles d'applications définissent un programme spécifique pour chaque application, par exemple un relais de courrier ou un relais HTTP. Elles permettent de sectionner les flux mais sont plus complexes à mettre en œuvre.
+
+      Le pare-feu dit stateful multilayer combine les trois approches avec un suivi d'état sur plusieurs couches.
+
+   C. Les fonctionnalités des pare-feu récents.
+
+      Les pare-feu récents autorisent de nombreuses fonctionnalités : filtrage sur adresses IP et protocole, inspection stateful et applicative, intelligence artificielle pour détecter le trafic anormal, filtrage applicatif HTTP avec restriction des URL accessibles, anti-spam, antivirus et anti-logiciel malveillant, translation d'adresses, tunnels IPsec, PPTP et L2TP, identification des connexions, serveur web offrant une interface de configuration, relais applicatif ou proxy, détection d'intrusion IDS et prévention d'intrusion IPS.
+
+      Des exemples de pare-feu sont Checkpoint, les gammes Cisco PIX et ASA, et un serveur simple sous BSD ou Linux avec iptables sous Linux ou Packet Filter sous BSD.
+
+   D. La protection du poste de travail.
+
+      Les postes de travail doivent être protégés individuellement car ils font partie intégrante de la sécurité d'un site : antivirus, anti-spywares, pare-feu personnels et mise à jour de correction des vulnérabilités.
+
+II. LES POTS DE MIEL.
+
+   A. Principe et objectifs.
+
+      Un pot de miel est une machine connectée au réseau et volontairement de sécurité faible. Elle répond à deux objectifs, distraire un attaquant pour protéger des machines plus sensibles, et découvrir de nouvelles techniques d'attaque et de nouveaux outils. Des exemples de mise en œuvre sont le projet Honeynet et le réseau européen NoAH, European Network of Affined Honeypots.
+
+   B. Faible et forte interaction.
+
+      Les pots de miel à faible interaction permettent la récolte d'informations à moindre risque. Les exemples cités sont honeyd, honeytrap, nepenthes et Specter, ce dernier commercial.
+
+      Les pots de miel à forte interaction donnent de véritables accès à des attaquants. Les risques sont beaucoup plus importants et impliquent un déploiement prudent. L'exemple cité est ROO HoneyWall.
+
+POINTS D'ATTENTION.
+
+      Le pare-feu est indispensable mais jamais suffisant : il ne protège pas de la menace interne ni des mots de passe faibles et ne remplace ni la structuration du réseau, ni la sensibilisation des utilisateurs, ni la surveillance quotidienne.
+
+      Deux politiques opposées : tout autoriser puis restreindre, ou tout interdire puis ouvrir sélectivement ; la seconde est la plus sûre.
+
+      Un filtre de paquets n'a pas de notion de contexte ; l'inspection stateful, elle, suit l'état des connexions.
+
+      Les fragments IP et le protocole FTP, à plusieurs ports, sont des cas difficiles à filtrer.
+
+      Trois familles à distinguer : filtre de paquets, passerelle de circuits qui relaie du TCP, passerelle d'applications qui a un programme par service et sectionne les flux.
+
+      Le poste de travail se protège en propre, il fait partie de la sécurité du site.
+
+      Un pot de miel à forte interaction offre un vrai accès à l'attaquant : puissant pour l'observation, mais dangereux, à déployer avec prudence.
+
+EXEMPLES CITES.
+
+      Pare-feu : Checkpoint, Cisco PIX et ASA, serveur BSD ou Linux avec Packet Filter ou iptables.
+
+      Tunnels supportés par les pare-feu récents : IPsec, PPTP, L2TP.
+
+      Projet Honeynet et réseau européen NoAH, European Network of Affined Honeypots.
+
+      Pots de miel à faible interaction : honeyd, honeytrap, nepenthes, Specter, ce dernier commercial.
+
+      Pot de miel à forte interaction : ROO HoneyWall.

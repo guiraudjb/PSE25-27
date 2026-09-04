@@ -1,234 +1,327 @@
-FICHE DE RÉVISION — PSE Expert Réseau
-Fascicule 6, thème 7 : ToIP et convergence téléphonie / informatique
-=====================================================================
+LA TÉLÉPHONIE SUR IP ET LA CONVERGENCE TÉLÉPHONIE-INFORMATIQUE.
 
-1. LA TÉLÉPHONIE TRADITIONNELLE
-------------------------------------------------------------
-- Réseau support : Réseau Téléphonique Commuté public (RTCP / RTC),
-  en anglais Public Switched Telephone Network (PSTN). Réseau né à la fin
-  du XIXe siècle, très fortement interactif.
-- Contraintes temporelles (valables aussi pour la ToIP) :
-    * latence < 300 ms  -> interaction humaine acceptable
-    * latence < 150 ms  -> bonne qualité de conversation
-    * latence < 28 ms   -> écho non sensible ; irréaliste, d'où des
-      SUPPRESSEURS D'ÉCHO dans les terminaux.
-- Établissement de la liaison : autocommutateurs électromécaniques puis
-  électroniques. En entreprise : PABX (Private Automatic Branch eXchange),
-  autocommutateur privé reliant les lignes internes entre elles et au
-  réseau public.
-- Signalisation : localiser le destinataire (numéro), faire sonner,
-  établir / maintenir / relâcher la liaison, assurer la facturation.
-  Le RNIS a ajouté présentation du numéro appelant, transfert d'appel, etc.
-  Aujourd'hui signalisation et voix circulent sur des canaux dédiés.
-  Ensemble des protocoles : Signaling System #7 (SS7) de l'UIT.
-- Numérisation (années 1990) : le son est codé en bits par un CODEC
-  (codeur-décodeur). Avantages : pas d'affaiblissement, multiplexage
-  exploitant le fait qu'on ne parle en moyenne que 35 % du temps.
 
-2. LA VOIX SUR IP (VoIP)
-------------------------------------------------------------
-- Définition large : au-delà de la téléphonie sur IP, la VoIP couvre la
-  vidéo sur IP, la visioconférence, la gestion des autocommutateurs sur
-  IP (IPBX) et les messages échangés avec les postes IP / softphones.
-- Objectifs :
-    * convergence vers un réseau unique (données applicatives, voix, vidéo)
-    * réduction des coûts (abonnements IP forfaitaires)
-    * nouveaux services (ex. présence d'un utilisateur)
-    * gestion simplifiée (disparition des commutateurs locaux, gestion des
-      téléphones à distance en IP).
-- Contraintes propres au transport par PAQUETS (vs circuit) :
-    * pas de réservation de ressource -> délais de transit variables ->
-      débit de parole déformé (accéléré, ralenti, saccadé)
-    * ordre initial des paquets non garanti (arrivée dans le désordre)
-    * signalisation toujours nécessaire : H.323 (H.225 + H.245, UIT)
-      et SIP (IETF).
-- Effet de GIGUE : décalage variable dû au mode asynchrone, à compenser
-  par les équipements et applications d'extrémité.
-- RTP (Real-time Transport Protocol) : compense gigue et changement
-  d'ordre des paquets pour les données ISOCHRONES (voix, vidéo restituées
-  avec le même décalage qu'à l'émission).
-- RTCP (Real-time Transport Control Protocol) : transporte les infos de
-  qualité de transmission et l'identité des participants.
-- RTP/RTCP le plus souvent transportés par UDP ; aucune influence sur la
-  QoS du réseau IP sous-jacent.
-- Gain de bande passante : ~50 % (et plus en visioconférence à plusieurs)
-  grâce aux 35 % de temps de parole.
+LEXIQUE COMPLET.
 
-3. CODECS ET QUALITÉ
-------------------------------------------------------------
-- MOS (Mean Opinion Score) : qualité mesurée de 2 à 5.
-    5 = haute qualité (flux RNIS) ; 2 = voix robotisée.
-- Codecs AUDIO : G711, G722, G726, G728, G729.
-- Codecs VIDÉO : H261, H263, H264 (MPEG4 AVC).
-- G711 : le plus ancien mais MOS de 4,2 -> référent du domaine.
-- G722 : codage large bande pour la conférence, très gourmand en bande
-  passante.
-- G.711 / théorème de Shannon : bande téléphonique limitée à
-  fmax = 3400 Hz -> échantillonnage à 8000 Hz (~2,35 fmax).
-- Rapport signal / bruit (échelle) : 90 dB haute fidélité, 50 excellent,
-  40 très bon, 30 bon, 20 moyen, 10 inexploitable. Les signaux faibles
-  sont pénalisés (jusqu'à 15 dB, mauvais) -> bruit de quantification.
-- Vidéo : compression généralement destructive, taux > 140:1.
+      RTC ou RTCP : réseau téléphonique commuté public, en anglais Public Switched Telephone Network ou PSTN, réseau support de la téléphonie traditionnelle, né des premiers essais de la fin du dix-neuvième siècle et fortement contraint par le temps de latence en raison du caractère interactif de la conversation.
 
-4. LA NORME H.323 (UIT)
-------------------------------------------------------------
-- Ensemble de normes pour les communications multimédia sur IP (cœur de
-  réseau et dialogue avec IPBX). Versions successives 1995-2013 ;
-  dernière version 7.1 = mars 2013.
-- Éléments de réseau définis :
-    * TERMINAUX
-    * GARDE-BARRIÈRES (gatekeepers) : traduction d'adresse = association
-      alias H.323 <-> adresse IP (localisation) ; gestion des
-      autorisations (permission d'appel, limitation de bande passante,
-      gestion du trafic LAN) ; gestion des appels, journalisation,
-      reporting. Adresses possibles de type email (préfixe h323:) ou
-      numéro de téléphone.
-    * PASSERELLES (gateways) : interconnexion avec H.320 / H.324,
-      téléphones classiques.
-    * CONTRÔLEURS MULTIPOINTS : MCU (Multipoint Control Unit) pour les
-      conférences (> 2 interlocuteurs), avec MC (Multipoint Controller)
-      et MP (Multipoint Processor).
-- Établissement d'appel : DEUX connexions TCP sur des ports distincts,
-  chargées de fonctions précises ; échange des capacités audio/vidéo ;
-  définition éventuelle d'un maître (transmission des clés de chiffrement)
-  et d'un esclave ; messages/commandes de synchronisation évitant les
-  états instables.
-- TCP pour la signalisation : sûr contre la perte de paquets, mais
-    * en cas de congestion, paquets IP en retard
-    * TCP orienté flux et non messages -> H.323 doit adapter/transformer
-      les trames.
-- Ensuite, la voix passe en UDP avec RTP / RTCP.
-- Protocoles H.323 : H.323 (System Document), H.225.0 (signalisation
-  d'appel, empaquetage, enregistrement au garde-barrière, admission,
-  état), H.245 (contrôle, aussi H.324/H.310), T.120 (contrôle des
-  données et conférences), RTP, RTCP (IETF).
-- Cisco : SCCP (Skinny Call Control Protocol), évolution propriétaire de
-  H.323.
-- Aujourd'hui H.323 est remplacé par SIP.
+      Latence : temps de transit du signal ; pour une interaction humaine acceptable, elle doit être inférieure à trois cents millisecondes, pour une bonne qualité de conversation inférieure à cent cinquante millisecondes, et pour un écho non sensible à l'oreille inférieure à vingt-huit millisecondes.
 
-5. LE PROTOCOLE SIP (IETF)
-------------------------------------------------------------
-- Session Initiation Protocol ; premiers développements en 1999 ;
-  protocole orienté session, gère aussi la messagerie instantanée.
-- Défini par l'IETF, notamment RFC 3261 (complétée par des dizaines
-  d'autres RFC, ex. 3265). Ouvert, standard, protocole principal de
-  signalisation en VoIP ; aussi visiophonie, messagerie instantanée.
-- Fonctions : établir, modifier, terminer des sessions multimédia ;
-  authentification et localisation des participants ; négociation des
-  médias en encapsulant des messages SDP (Session Description Protocol).
-- SIP NE transporte PAS les données de session (voix, vidéo) : il est
-  indépendant du transport ; le plus souvent RTP assure les flux
-  audio/vidéo.
-- Avantages sur H.323 : plus souple, rapide, modulaire ; MOBILITÉ
-  centrale (personal mobility : même identité, joignable via domicile,
-  travail, portable, tablette) ; architecture distribuée -> meilleure
-  montée en charge.
-- Adopté par les FAI, les opérateurs mobiles, les constructeurs d'IPBX,
-  la visioconférence.
+      Suppresseur d'écho : dispositif équipant les terminaux pour compenser l'écho, la contrainte de latence inférieure à vingt-huit millisecondes étant en pratique irréaliste.
 
-6. POURQUOI UDP POUR VOIX ET VIDÉO
-------------------------------------------------------------
-- TCP trop lent pour du temps réel. UDP (niveau 4) : en-tête de 8 octets
-  (3x moins que TCP) = port source, port destination, longueur, checksum
-  (option). Simple multiplexage/démultiplexage par numéros de ports.
-- Transport NON FIABLE : pas d'acquittement, pas de réémission, pas de
-  contrôle de congestion -> communication accélérée ; la gestion des
-  pertes revient aux couches supérieures (optimisation, pas sécurisation).
-- UDP ne fournit ni séquencement ni horodatage -> pas de synchronisation
-  ni de remise en ordre : fonction assurée par RTP sur les couches hautes.
-- Internet = réseau « best effort » -> gigue. Solutions : évolution des
-  protocoles ou de la qualité des réseaux. IPv6 : le FLOW LABEL et les
-  indices de priorité préservent l'intégrité d'un flux et tiennent compte
-  des contraintes de temps dans le routage.
+      Autocommutateur : équipement établissant, maintenant et relâchant les liaisons téléphoniques, d'abord électromécanique puis électronique.
 
-7. LE COUPLAGE TÉLÉPHONIE / INFORMATIQUE (CTI)
-------------------------------------------------------------
-- CTI (Computer Telephony Integration) : concept de la fin des années 80,
-  associe dynamiquement informatique et téléphonie. Aujourd'hui natif
-  dans les serveurs centraux de téléphonie (IPBX).
-- Principe : relier le PABX au serveur CTI pour raccorder réseau
-  téléphonique et réseau informatique ; le PABX communique en temps réel
-  l'état du réseau téléphonique, l'informatique peut générer des
-  commandes téléphoniques. Bénéfices : rentabilité, productivité, service
-  client rapide.
-- PABX -> IPBX : autocommutateurs raccordés au LAN Ethernet ; interfaces
-  PABX-LAN en voie de disparition ; les IPBX sont des serveurs
-  spécialisés portant les fonctions du couplage.
-- TAO (téléphonie assistée par ordinateur) : lien CTI entre application
-  informatique et poste téléphonique. Briques : pôle téléphonique + pôle
-  informatique + éventuellement serveur vocal interactif (SVI / IVR) qui
-  qualifie l'appel. Les 3 réunies = CENTRE D'APPEL.
-- Raccordement : passerelle desservant les PC clients via un LAN TCP/IP.
-- Types d'applicatifs :
-    * FIRST PARTY : gestion d'un poste (extrémité active), bureautique
-      simple.
-    * THIRD PARTY : gestion simultanée de n postes depuis un serveur ;
-      applications verticales (bureautique complexe, call center).
-- Émission d'appel :
-    * mode PRÉDICTIF : appel déclenché par le serveur, transféré à un
-      agent libre seulement après décroché.
-    * mode PREVIEW : appel déclenché après prévisualisation par le
-      téléacteur via son application client.
-- ACD (Automatic Call Distribution) : distributeur automatique d'appels
-  entrants placés en files d'attente.
+      PABX : Private Automatic Branch eXchange, autocommutateur privé d'entreprise reliant les lignes internes entre elles ou vers le réseau public.
 
-8. LES BRIQUES ET SERVICES DU CTI
-------------------------------------------------------------
-- QUATRE éléments : l'autocommutateur, le serveur de couplage, le serveur
-  vocal, le middleware.
-    * Serveur de couplage = clé de voûte : centralise les commandes
-      téléphoniques et les échanges avec l'informatique (le bon dossier
-      remonte sur l'écran de l'agent).
-    * Serveur vocal : ex. invite l'appelant à taper un numéro de dossier.
-    * Middleware : interfaces de programmation TAPI, TSAPI, CSTA et outils
-      pour développer les commandes d'appel liées à l'application ;
-      intégration avec les grands progiciels de gestion.
-- Empilement type : Applications Helpdesk / Middleware (couches logicielles
-  intermédiaires) / Interfaces TAPI, TSAPI, CSTA / Hardware PABX, LAN.
-- SERVICES SIMPLES (4) : établissement d'appel, notification des appels
-  reçus, réponse (après notification), libération.
-- SERVICES COMPLEXES : double appel, transfert, conférence à trois,
-  reprise (reprise de l'appel en garde), déviation pendant la sonnerie,
-  suivi des appels, envoi de fréquences vocales Q23 (accès serveurs
-  vocaux), suivi de communication (numéro SDA reçu, dernier numéro
-  d'annuaire renvoyé, numéro de l'appelant).
-- Autres services : renvois (fixe inconditionnel, sur occupation, sur non
-  réponse), annulation/lecture des renvois, parcage et reprise de
-  parcage, rappel automatique sur poste occupé, offre sans secret,
-  interception, ne pas déranger.
-- Quatre grands types d'applications CTI (IDC) : CTI bureautique
-  (synchronisation appels-données, messagerie unifiée, annuaires,
-  télécopie), intégration CTI/Internet (fax et téléphonie sur Internet),
-  Web Call Centre, centres d'appels.
-- Apports à la bureautique communicante : accueil personnalisé, accès
-  immédiat au dossier et à l'historique client, association voix+données
-  lors d'un transfert, gestion des absences, planification des appels,
-  règles de priorité, travail coopératif, garantie d'aboutissement,
-  accès aux ressources où que l'on soit.
-- Questions préalables au choix d'une solution : quel type d'application ?
-  jusqu'où pousser l'intégration ? quelle architecture ? autocommutateur
-  compatible ? ne pas sous-estimer le cahier des charges ni l'évolutivité.
+      Signalisation : ensemble des procédés permettant de localiser le destinataire par son numéro, de faire sonner son téléphone, d'établir, de maintenir puis de relâcher la liaison et d'assurer la facturation.
 
-9. CONCLUSION / POINTS DE VIGILANCE
-------------------------------------------------------------
-- Complexité de la voix IP : nature des équipements (analogique/numérique),
-  absence de QoS du réseau compensée par les normes (H.323, SIP ou MGCP,
-  RTP, RTCP), diversité des débits imposant des codecs spécifiques,
-  limites de TCP/IP à adapter pour la signalisation, solutions
-  propriétaires exigeant interopérabilité et compatibilité entre versions.
-- La VoIP s'est imposée chez les FAI (communications gratuites), via des
-  logiciels (Skype, ~300 M d'utilisateurs en 2016) et nativement en 4G
-  (LTE-Advanced).
-- Sécurité VoIP : confidentialité, authentification, intégrité,
-  disponibilité.
-- Points clés de la téléphonie sur Internet : interopérabilité (protocoles
-  communs, interconnexion), qualité de service, simplicité, espace
-  d'adressage (numérotation) et annuaires, cadre légal.
+      RNIS : réseau numérique à intégration de services, ayant apporté de nouvelles fonctions de signalisation comme la présentation du numéro de l'appelant et le transfert d'appel.
 
-MOTS-CLÉS : RTC/PSTN, PABX, PABX->IPBX, SS7/UIT, RNIS, codec, MOS (2-5),
-G711 (MOS 4,2), G722, latence 150/300 ms, effet de gigue, RTP, RTCP, UDP,
-données isochrones, H.323 (H.225/H.245), garde-barrière (gatekeeper),
-passerelle, MCU (MC/MP), T.120, SCCP (Cisco), SIP (RFC 3261, IETF), SDP,
-personal mobility, best effort, IPv6 flow label, CTI, TAO, SVI/IVR,
-First Party / Third Party, mode prédictif / preview, ACD, serveur de
-couplage, middleware (TAPI, TSAPI, CSTA).
+      SS7 : Signaling System numéro sept, ensemble des protocoles de signalisation téléphonique définis par l'Union internationale des télécommunications, dite UIT ; aujourd'hui les flux de signalisation et ceux de la voix circulent sur des canaux dédiés.
+
+      Codec : codeur-décodeur numérisant le son en une suite de bits ; la numérisation, généralisée dans les années mille neuf cent quatre-vingt-dix, évite les affaiblissements et permet le multiplexage.
+
+      VoIP : voix sur IP, concept né de la généralisation des réseaux IP, plus large que la téléphonie sur IP puisqu'il couvre aussi la vidéo sur IP, la visioconférence et la gestion des autocommutateurs téléphoniques sur IP ainsi que les échanges avec les postes IP ou leurs interfaces logicielles.
+
+      ToIP : téléphonie sur IP, application de la voix sur IP à la téléphonie, soumise aux mêmes contraintes que la téléphonie traditionnelle, latence et suppression d'écho, mais aussi à des contraintes propres au transport par paquets.
+
+      Convergence des réseaux : objectif consistant à faire transiter les données applicatives, la voix et la vidéo sur un réseau unique, avec réduction des coûts par intégration de la téléphonie et abonnements IP le plus souvent forfaitaires, nouveaux services comme la présence, et gestion simplifiée par disparition des commutateurs locaux.
+
+      Effet de gigue : variation du délai de transit des paquets due au mode de transport asynchrone, provoquant un décalage dans les signaux de parole qui doit être compensé par les équipements et applications d'extrémité.
+
+      Données isochrones : données comme la voix ou la vidéo devant être restituées dans le temps avec un décalage identique à celui de leur émission.
+
+      RTP : Real Time Transport Protocol, protocole compensant les effets de gigue et les changements d'ordre des paquets pour les données isochrones, le plus souvent transporté par UDP.
+
+      RTCP : Real Time Transport Control Protocol, protocole transportant les informations sur la qualité de la transmission et sur l'identité des participants, par exemple à une visioconférence ; RTP et RTCP n'ont aucune influence sur la qualité de service du réseau IP sous-jacent.
+
+      MOS : Mean Opinion Score, échelle de mesure de la qualité d'un flux allant de deux à cinq, la valeur cinq correspondant à la haute qualité obtenue par les flux RNIS et la valeur deux à une voix robotisée.
+
+      G711 : codec audio le plus ancien, obtenant un score MOS de quatre virgule deux, ce qui en fait un référent ; il concerne l'échantillonnage et les lois de compression de la modulation par impulsion et codage des fréquences vocales.
+
+      G722 : codec audio à codage large bande utilisé pour les applications de conférence, mais très gourmand en bande passante.
+
+      H.323 : ensemble de normes définies par l'UIT pour les communications multimédia dans les réseaux IP, à la fois pour le cœur de réseau et pour le dialogue avec les autocommutateurs IPBX, faisant partie de la série H point trente-deux x consacrée à la vidéoconférence.
+
+      Garde-barrière : en anglais gatekeeper, élément de réseau H.323 assurant la traduction d'adresse, c'est-à-dire l'association entre un alias H.323 et une adresse IP, dite aussi localisation, ainsi que la gestion des autorisations, la limitation de bande passante, la gestion du trafic sur le réseau local, la gestion des appels, la journalisation et la génération d'états.
+
+      Passerelle H.323 : en anglais gateway, élément assurant l'interconnexion avec les autres réseaux, H.320, H.324 et téléphones classiques.
+
+      MCU : Multipoint Control Unit, équipement de gestion des conférences mettant en jeu plus de deux interlocuteurs, s'appuyant sur un Multipoint Controller, dit MC, et un Multipoint Processor, dit MP.
+
+      H.225 point zéro : protocole H.323 de signalisation d'appel, d'empaquetage, d'enregistrement au garde-barrière, d'admission et d'état.
+
+      H.245 : protocole H.323 de contrôle, également utilisé dans H.324 et H.310.
+
+      T.120 : protocole de contrôle des données et des conférences dans H.323.
+
+      SCCP : Skinny Call Control Protocol, évolution propriétaire de H.323 utilisée par Cisco.
+
+      SIP : Session Initiation Protocol, protocole orienté session dont les premiers développements datent de mille neuf cent quatre-vingt-dix-neuf, défini par l'IETF, en particulier par la RFC 3261 complétée par plusieurs dizaines d'autres RFC, ouvert et standard, protocole principal de la signalisation en voix sur IP et utilisé aussi en visiophonie et en messagerie instantanée ; il remplace aujourd'hui H.323.
+
+      IETF : Internet Engineering Task Force, organisme de normalisation d'Internet à l'origine de SIP, RTP et RTCP.
+
+      SDP : Session Description Protocol, protocole dont les messages sont encapsulés par SIP pour la négociation des types de média utilisables par les participants.
+
+      Personal mobility : mobilité personnelle, notion centrale de SIP par laquelle un même utilisateur, en conservant la même identité, peut être joint par différents moyens, domicile, travail, portable, tablette.
+
+      UDP : User Datagram Protocol, protocole de transport de niveau quatre plus simple et plus rapide que TCP, à en-tête de huit octets, port source, port destination, longueur des données et deux octets de somme de contrôle en option, transport non fiable sans acquittement, sans réémission ni contrôle de congestion, bien adapté au trafic temps réel.
+
+      Best effort : mode de fonctionnement d'Internet, conçu pour les échanges de données informatiques et non pour le temps réel, à l'origine des phénomènes de gigue qui dégradent les visioconférences.
+
+      Flow label : étiquette de flux d'IPv6 qui, avec les indices de priorité, permet de préserver l'intégrité d'un flux et de tenir compte des contraintes de temps lors du routage.
+
+      CTI : Computer Telephony Integration, couplage téléphonie-informatique, concept apparu à la fin des années quatre-vingt visant à associer dynamiquement l'informatique et la téléphonie, aujourd'hui natif dans les serveurs centraux de téléphonie IPBX.
+
+      IPBX : autocommutateur privé interconnecté au réseau local Ethernet, serveur spécialisé apportant les fonctions du couplage téléphonie-informatique, issu de l'évolution des PABX.
+
+      TAO : téléphonie assistée par ordinateur, reliant par un lien CTI une application informatique et le poste téléphonique, à partir d'un pôle téléphonique et d'un pôle informatique.
+
+      SVI ou IVR : serveur vocal interactif, en anglais Interactive Voice Response, qui qualifie l'appel pour le diriger vers un agent spécifique ; la réunion du pôle téléphonique, du pôle informatique et du serveur vocal interactif constitue un centre d'appel au sens fort.
+
+      Application first party : application CTI gérant un poste de travail considéré comme extrémité active d'une communication, tournée vers la bureautique simple.
+
+      Application third party : application CTI gérant simultanément plusieurs postes de travail à partir d'un applicatif sur une seule machine serveur, visant les applications verticales, bureautique complexe et centre d'appel.
+
+      Mode prédictif : mode d'émission d'appel où l'appel est déclenché par l'application CTI du serveur et n'est transféré sur un agent libre qu'une fois qu'il a été décroché.
+
+      Mode preview : mode d'émission d'appel où l'appel est déclenché par l'application CTI serveur après avoir été prévisualisé par le téléacteur au travers de son application client.
+
+      ACD : Automatic Call Distribution, distributeur d'appels automatique qui écoule au mieux les flux d'appels entrants placés dans des files d'attente.
+
+      Serveur de couplage : clé de voûte du système de couplage téléphonie-informatique, centralisant les commandes téléphoniques et les échanges avec l'informatique, de sorte que le bon dossier se présente sur l'écran de la personne qui prend l'appel.
+
+      Middleware : couche logicielle intermédiaire dont les interfaces de programmation et les outils permettent de développer les commandes d'appel téléphonique liées à l'application et de l'intégrer avec les grands progiciels de gestion.
+
+      TAPI, TSAPI, CSTA : interfaces de programmation du couplage téléphonie-informatique.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LA TÉLÉPHONIE TRADITIONNELLE.
+
+
+   A. Le réseau et ses contraintes.
+
+      La téléphonie traditionnelle s'appuie sur le réseau téléphonique commuté public, en anglais Public Switched Telephone Network. Depuis les premiers essais de la fin du dix-neuvième siècle, ce réseau a beaucoup évolué. Une conversation étant fortement interactive, le réseau doit répondre à une contrainte temporelle forte : le temps de latence doit être inférieur à trois cents millisecondes pour une interaction humaine acceptable et à cent cinquante millisecondes pour une bonne qualité de conversation. Pour que l'écho ne soit pas trop sensible à l'oreille, il faudrait une latence inférieure à vingt-huit millisecondes ; cette contrainte étant extrême, les terminaux sont équipés de suppresseurs d'écho.
+
+
+   B. L'établissement de la liaison et la signalisation.
+
+      Avant que les interlocuteurs ne puissent se parler, il faut établir une liaison entre eux. Cet établissement était réalisé par des autocommutateurs électromécaniques, puis électroniques. En entreprise, on trouve des commutateurs privés appelés PABX, pour Private Automatic Branch eXchange, reliant les lignes internes entre elles ou vers le réseau public.
+
+      Ces opérations s'appuient sur des procédés de signalisation permettant de localiser le destinataire par son numéro, de faire sonner son téléphone, d'établir, de maintenir puis de relâcher la liaison, et d'assurer la facturation. Le réseau numérique à intégration de services a apporté de nouvelles fonctions, comme la présentation du numéro de l'appelant et le transfert d'appel. Aujourd'hui, les flux de signalisation et ceux de la voix circulent sur des canaux dédiés. L'ensemble des protocoles nécessaires à la signalisation téléphonique est défini par le Signaling System numéro sept de l'Union internationale des télécommunications.
+
+
+   C. La numérisation de la voix.
+
+      Une fois la liaison établie, il faut transporter la voix. Dans les années mille neuf cent quatre-vingt-dix, le réseau est progressivement devenu numérique : le son est numérisé en une suite de bits par un codeur-décodeur, appelé codec. Cette solution évite les affaiblissements et permet une utilisation optimale des ressources par des mécanismes de multiplexage exploitant le fait qu'on ne parle en moyenne que trente-cinq pour cent du temps au cours d'une conversation, pour une bien meilleure qualité de voix.
+
+
+II. LA VOIX SUR IP.
+
+
+   A. Définition et objectifs.
+
+      La généralisation des réseaux IP, publics comme privés, a permis l'émergence du concept de voix sur IP. Cette notion est bien moins restrictive que la seule téléphonie sur IP : elle s'applique aussi à la vidéo sur IP, à la visioconférence, à la gestion des autocommutateurs téléphoniques sur IP et aux messages échangés avec les postes téléphoniques IP ou leur interface logicielle.
+
+      Les objectifs sont multiples : une convergence des réseaux vers un réseau unique sur lequel transitent les données applicatives, la voix et la vidéo ; une réduction importante des coûts de communication par l'intégration de la téléphonie parmi d'autres applications, les abonnements aux réseaux IP étant généralement forfaitaires ; de nouveaux services, par exemple savoir si un utilisateur est présent ; et une gestion simplifiée, par la disparition des commutateurs locaux et la gestion des téléphones à distance en IP.
+
+
+   B. Les contraintes du transport par paquets.
+
+      La téléphonie sur IP doit répondre aux mêmes contraintes que la téléphonie traditionnelle, un temps de latence inférieur à cent cinquante millisecondes pour une bonne interactivité, trois cents millisecondes pour un niveau acceptable, et une suppression de l'écho, mais elle doit aussi répondre à des contraintes propres. Le recours à un réseau IP, donc à un transport par paquets à la place d'un transfert par circuit, a plusieurs impacts. Il n'y a pas de réservation de ressource, si bien que les délais de transit peuvent varier d'un paquet à l'autre et déformer le débit de parole initial, en l'accélérant, en le ralentissant ou en le saccadant. L'ordre initial des paquets peut ne pas être respecté et les paquets arriver dans le désordre. Enfin, une signalisation reste nécessaire ; les principaux protocoles sont H.323, en fait H.225 et H.245, défini par l'Union internationale des télécommunications, et SIP, issu de l'IETF.
+
+      Au-delà du simple transport, la voix sur IP traite des connexions IP de bout en bout, de la négociation des types de codecs audio et vidéo selon les réseaux d'accès, de la définition des protocoles selon que l'information transite par le cœur ou en bordure des réseaux, et de la normalisation des formats de messages échangés. Chaque interlocuteur parlant environ trente-cinq pour cent de son temps, on peut gagner jusqu'à cinquante pour cent de capacité de bande passante, et davantage en visioconférence à plusieurs participants.
+
+
+   C. La compensation de la gigue.
+
+      L'inconvénient principal du transport en mode asynchrone est qu'il génère l'effet de gigue, un décalage dans les signaux de parole qui doit être compensé par les équipements et les applications d'extrémité. C'est aux protocoles RTP, Real Time Transport Protocol, et RTCP, Real Time Transport Control Protocol, que revient la fonction de compensation pour les données isochrones, c'est-à-dire les données comme la voix ou la vidéo qui doivent être restituées avec le même décalage qu'au moment de leur émission. RTP compense les effets de gigue et les changements d'ordre des paquets. RTCP transporte les informations sur la qualité de la transmission et sur l'identité des participants. Ces deux protocoles sont souvent transportés par UDP et n'ont aucune influence sur la qualité de service fournie par le réseau IP sous-jacent.
+
+
+III. LES CODECS ET LA QUALITÉ.
+
+
+   A. La mesure de la qualité.
+
+      Tous les flux multimédia doivent être transcrits au format numérique, ce qui est le rôle des codecs audio et vidéo. La méthode d'échantillonnage détermine la qualité du flux, mesurée sur une échelle de deux à cinq appelée Mean Opinion Score ; la valeur cinq correspond à la haute qualité obtenue par les flux RNIS et la valeur deux à l'équivalent d'une voix robotisée.
+
+
+   B. Les principaux codecs.
+
+      Parmi les codecs audio figurent G711, G722, G726, G728 et G729 ; parmi les codecs vidéo figurent H261, H263 et H264, aussi appelé MPEG4 AVC. Bien qu'étant le plus ancien, G711 obtient un score de quatre virgule deux, ce qui en fait un référent du domaine. G722 fournit un codage large bande utilisé pour les applications de conférence, mais très gourmand en bande passante.
+
+
+   C. Le codec G711 et la numérisation.
+
+      Le codec G711 concerne l'échantillonnage et les lois de compression de la modulation par impulsion et codage des fréquences vocales. La bande téléphonique étant limitée à une fréquence maximale de trois mille quatre cents hertz, la fréquence d'échantillonnage est fixée à huit mille hertz, soit environ deux virgule trente-cinq fois la fréquence maximale, par application du théorème de Shannon. L'écart entre la valeur de quantification et la valeur exacte se traduit par un bruit de quantification. Le rapport signal sur bruit est une fonction linéaire du signal d'entrée jusqu'à saturation, ce qui pénalise les signaux faibles : plus le signal est faible, plus le rapport est mauvais, jusqu'à quinze décibels pour les faibles signaux, ce qui est franchement mauvais. Sur l'échelle des valeurs, quatre-vingt-dix décibels correspondent à la haute fidélité, cinquante à excellent, quarante à très bon, trente à bon, vingt à moyen et dix à inexploitable.
+
+      Avant transmission, l'information analogique audio subit trois transformations, l'échantillonnage, la quantification et la compression, la quantification comprimant déjà l'information avec une perte assurée. Les paramètres à connaître sont la fréquence d'échantillonnage, le nombre de bits codant les valeurs d'amplitude et le nombre de canaux, mono ou stéréo. La vidéo numérique non compressée est trop volumineuse pour les réseaux ; les techniques de compression pour les bas débits sont généralement destructives, avec des taux supérieurs à cent quarante pour un, une partie de l'information étant irrémédiablement perdue.
+
+
+IV. LA NORME H.323.
+
+
+   A. Rôle et éléments de réseau.
+
+      H.323 est un ensemble de normes définies par l'Union internationale des télécommunications pour les communications multimédia dans les réseaux IP, à la fois pour le cœur de réseau et pour le dialogue avec les autocommutateurs IPBX. La norme a connu de nombreuses versions améliorées entre mille neuf cent quatre-vingt-quinze et deux mille treize, la dernière version sept virgule un datant de mars deux mille treize. Elle fait partie de la série H point trente-deux x consacrée à la vidéoconférence, est prévue pour les réseaux locaux comme pour Internet, et est la base du groupement IMTC, International Multimedia Teleconferencing Consortium.
+
+      H.323 définit plusieurs éléments de réseau : les terminaux, les gardes-barrières ou gatekeepers, les passerelles ou gateways vers H.320 et H.324 et les téléphones classiques, et les contrôleurs multipoints. Les gardes-barrières réalisent la traduction d'adresse, non pas une translation d'adresse IP classique mais l'association entre un alias H.323, identifiant de l'utilisateur, et une adresse IP issue du référencement du terminal, ce qu'on appelle aussi la localisation. Ils gèrent aussi les autorisations, la permission d'effectuer un appel, la limitation de bande passante, la gestion du trafic sur le réseau local, la gestion des appels, la journalisation et la génération d'états. Les adresses peuvent être de type courrier électronique, éventuellement préfixées de l'indication h323, ou de type numéro de téléphone. Les passerelles assurent l'interconnexion avec les autres réseaux. Le multipoint est géré par les Multipoint Controller et les Multipoint Processor, le Multipoint Control Unit étant l'équipement de gestion des conférences réunissant plus de deux interlocuteurs.
+
+
+   B. L'établissement d'appel et les protocoles.
+
+      Pour que deux équipements, souvent de constructeurs différents, dialoguent, il faut un référentiel commun définissant les procédures de signalisation pour l'établissement et le relâchement d'appel ou de conférence, le choix de codecs communs et l'identification des adresses IP. H.323 recourt à deux connexions TCP différentes pour l'établissement d'un appel, chacune sur des ports différents et chargée de fonctions précises. Les équipements échangent la mesure de leur capacité audio et vidéo et définissent éventuellement un maître et un esclave, le maître étant par exemple responsable de la transmission des clés de chiffrement. Ces échanges sont balisés par des messages qui synchronisent le dialogue et évitent un état instable.
+
+      Le recours à TCP pour la signalisation est un gage de sécurité contre la perte de paquets, mais il présente deux inconvénients : en cas de congestion du réseau de transport, les paquets IP peuvent arriver trop tard ; et TCP est orienté flux et non messages, si bien que H.323 doit adapter et transformer la nature des trames selon les besoins. À partir de l'établissement, le dialogue voix est transmis par UDP en utilisant RTP et RTCP.
+
+      Les protocoles de H.323 sont H.323 lui-même comme document système, H.225 point zéro pour la signalisation d'appel, l'empaquetage, l'enregistrement au garde-barrière, l'admission et l'état, H.245 pour le contrôle, également utilisé dans H.324 et H.310, T.120 pour le contrôle des données et des conférences, ainsi que RTP et RTCP de l'IETF. Cisco utilise SCCP, Skinny Call Control Protocol, évolution propriétaire de H.323. Aujourd'hui, H.323 est remplacé par SIP.
+
+
+V. LE PROTOCOLE SIP.
+
+
+   A. Origine et rôle.
+
+      Les premiers développements de SIP datent de mille neuf cent quatre-vingt-dix-neuf. C'est un protocole orienté session qui a évolué sans cesse, en intégrant notamment la gestion de la messagerie instantanée. Il est défini par l'IETF, en particulier par la RFC 3261, complétée par plusieurs dizaines d'autres RFC dont la 3265. SIP est ouvert, standard, et c'est le protocole principal utilisé pour la signalisation en voix sur IP ; il est aussi utilisé en visiophonie et en messagerie instantanée.
+
+      SIP a été conçu pour établir, modifier et terminer des sessions multimédia. Il se charge de l'authentification et de la localisation des participants et de la négociation des types de média en encapsulant des messages SDP, Session Description Protocol. SIP ne transporte pas les données échangées durant la session, comme la voix ou la vidéo ; il est indépendant de la transmission des données, mais le protocole RTP assure le plus souvent le transport des flux audio et vidéo.
+
+
+   B. Les avantages sur H.323.
+
+      SIP est issu du monde protocolaire d'Internet. Il est plus souple, plus rapide et plus modulaire que H.323. La mobilité est une notion centrale de SIP, la mobilité personnelle : en conservant la même identité, un même utilisateur peut être joint par différents moyens, domicile, travail, portable, tablette. Son architecture distribuée le rend plus apte à la montée en charge. Le protocole s'est imposé auprès des fournisseurs d'accès Internet, des opérateurs de téléphonie mobile, des constructeurs d'autocommutateurs et de la visioconférence.
+
+
+VI. LE CHOIX D'UDP ET LES LIMITES DES RÉSEAUX.
+
+
+   A. Pourquoi UDP pour la voix et la vidéo.
+
+      TCP est un protocole trop lent pour faire transiter du trafic temps réel sur IP. UDP est un protocole de niveau quatre plus simple et plus rapide, mieux adapté aux applications temps réel comme la visioconférence. Son en-tête de huit octets, trois fois moins que pour TCP, ne contient que le port source, le port de destination, la longueur des données et deux octets de somme de contrôle en option. UDP se contente de multiplexer et de démultiplexer selon les numéros de ports. C'est un transport non fiable, sans acquittement des paquets, sans réémission ni contrôle de congestion, ce qui accélère la communication ; la gestion des éventuelles pertes revient aux applications des couches supérieures, non en sécurisant mais en optimisant. UDP ne donne pas d'informations sur le séquencement des paquets et n'offre pas l'horodatage, donc ne permet pas de gérer la synchronisation et la remise en ordre ; cette fonction, indispensable à la diffusion vidéo, est implémentée sur les couches supérieures par des protocoles comme RTP.
+
+
+   B. Une connexion sur IP et la sécurité.
+
+      La connexion s'effectue à l'initiative du client, qui contacte le serveur en TCP ou UDP ; le serveur contacte alors le client en TCP ou UDP sur des ports non privilégiés. Il est donc nécessaire d'ouvrir un flux vers des ports non privilégiés depuis l'extérieur vers les machines internes, ce qui peut corrompre la sécurité du réseau interne, car un serveur de base de données ou un autre applicatif peut fonctionner sur ces ports. Un filtrage IP doit alors être dynamique, c'est-à-dire déterminer, d'après les informations de la première connexion du client vers le serveur, sur quels ports le client et le serveur se mettent d'accord pour la connexion retour.
+
+
+   C. Normalisation et limites de l'IP conferencing.
+
+      De mille neuf cent quatre-vingt à mille neuf cent quatre-vingt-dix, la visioconférence a souffert de l'absence de normalisation des terminaux, chaque industriel développant une version propriétaire incompatible avec les marques concurrentes. La normalisation garantit l'interopérabilité des équipements pour les fonctions de base et est un facteur de développement des usages. Elle est prise en charge par l'Union internationale des télécommunications, instance internationale indépendante sous l'égide de l'Organisation des Nations unies, qui se rapproche de l'IETF pour la normalisation des échanges de visioconférence sur Internet.
+
+      La croissance de l'Internet conferencing reste subordonnée à l'augmentation de la disponibilité et de la capacité d'Internet, mais il ne s'agit pas seulement d'augmenter la bande passante. Internet est un réseau de type best effort, conçu pour les échanges de données informatiques, ce qui pose problème aux applications de visioconférence. Les phénomènes de gigue, où les paquets arrivent à intervalles irréguliers, peuvent être contournés par l'évolution des protocoles ou de la qualité des réseaux. IPv6 apporte des réponses au trafic vidéo : l'étiquette de flux et les indices de priorité permettent de préserver l'intégrité d'un flux et de tenir compte des contraintes de temps en routant avec plus de discernement.
+
+
+VII. LE COUPLAGE TÉLÉPHONIE-INFORMATIQUE.
+
+
+   A. Philosophie, principes et objectifs.
+
+      Le concept de couplage téléphonie-informatique, en anglais Computer Telephony Integration, est apparu à la fin des années quatre-vingt et vise à associer dynamiquement l'informatique et la téléphonie. Aujourd'hui, cette association est native dans les serveurs centraux de téléphonie, les IPBX.
+
+      Dans sa définition générale, le couplage représente le lien entre le PABX de l'entreprise et le serveur de couplage, afin de raccorder le réseau téléphonique au réseau informatique. Il s'agit de communiquer en temps réel l'état global du réseau téléphonique au réseau informatique lorsque celui-ci en a besoin, et inversement le réseau informatique peut générer des commandes téléphoniques à destination du PABX. Les bénéfices se traduisent par une rentabilité et une productivité accrues et un service rapide et efficace auprès des clients. Les PABX ont évolué vers des IPBX, autocommutateurs interconnectés au réseau local Ethernet ; les interfaces entre PABX et réseau local se raréfient, et les IPBX sont des serveurs spécialisés apportant les fonctions du couplage.
+
+
+   B. Le fonctionnement.
+
+      La téléphonie assistée par ordinateur permet, par un lien de couplage, de relier une application informatique avec le poste téléphonique. Elle repose sur deux briques élémentaires, le pôle téléphonique, poste ou ensemble de postes, et le pôle informatique, poste seul ou postes en réseau. Elle peut aussi intégrer un serveur vocal interactif, en anglais Interactive Voice Response, qui qualifie l'appel pour le diriger vers un agent spécifique et une application déterminée. Lorsque ces trois briques sont présentes, il est question de centre d'appel au sens fort. Le raccordement se fait par une passerelle desservant les PC clients au travers d'un réseau local utilisant les couches TCP/IP.
+
+      Les applicatifs s'élaborent selon deux axes. Le type first party gère un poste de travail considéré comme extrémité active d'une communication et vise la bureautique simple. Le type third party gère simultanément plusieurs postes à partir d'un applicatif sur une seule machine serveur et vise les applications verticales, bureautique complexe et centre d'appel. Le couplage permet la montée de la fiche client et l'émission d'appel, en mode prédictif où l'appel, déclenché par l'application du serveur, n'est transféré sur un agent libre qu'après décroché, et en mode preview où l'appel est déclenché après prévisualisation par le téléacteur. Le distributeur d'appels automatique, en anglais Automatic Call Distribution, écoule au mieux les flux d'appels entrants placés en files d'attente.
+
+
+   C. Les briques du couplage.
+
+      Un système de couplage repose sur quatre éléments, l'autocommutateur, le serveur de couplage, le serveur vocal et le middleware. Le serveur de couplage est la clé de voûte : il centralise les commandes téléphoniques et les échanges avec l'informatique, de sorte que le bon dossier se présente sur l'écran du PC de la personne qui prend l'appel. Le serveur vocal invite par exemple l'appelant à taper sur le clavier de son téléphone le numéro de son dossier. Le middleware, avec ses interfaces de programmation TAPI, TSAPI et CSTA et ses outils, permet de développer les commandes d'appel téléphonique liées à l'application et d'intégrer le couplage avec les grands progiciels de gestion. L'empilement type comprend les applications de type helpdesk, le middleware comme couche logicielle intermédiaire, les interfaces TAPI, TSAPI et CSTA, et le matériel, PABX et réseau local.
+
+
+   D. Les services et les applications.
+
+      Il existe quatre services simples : l'établissement d'appel vers un demandé, la notification des appels reçus, la réponse après notification et la libération de l'appel en cours. Les services complexes comprennent le double appel, le transfert avec retrait du demandeur mettant en communication les deux demandés, la conférence à trois, la reprise de l'appel en garde en cas de double appel, la déviation vers un tiers pendant la sonnerie, le suivi des appels avec visualisation de l'état du distant, l'envoi de fréquences vocales dit Q23 pour l'accès aux serveurs vocaux et aux messageries, et le suivi de communication qui présente au minimum le numéro reçu par sélection directe à l'arrivée, le dernier numéro d'annuaire renvoyé et le numéro de l'appelant lorsqu'il est disponible. D'autres services existent, les renvois fixes inconditionnels ou sur occupation ou non-réponse, l'annulation et la lecture des renvois actifs, le parcage et la reprise de parcage, le rappel automatique sur poste occupé, l'offre sans secret, l'interception d'un numéro d'annuaire et le ne pas déranger.
+
+      Le cabinet IDC identifie quatre grands types d'applications du couplage : le couplage bureautique, synchronisation des appels et des données, messagerie unifiée, gestion des annuaires, serveur de télécopie ; l'intégration entre couplage et Internet, fax et téléphonie sur Internet ; le Web call center ; et les centres d'appels. Le succès du couplage bureautique tient à la normalisation et à l'ouverture des solutions, ainsi qu'à l'existence d'offres de grands éditeurs comme Microsoft, présents dans presque toutes les entreprises. Les logiciels applicatifs et les middleware assurent la prise et l'émission d'appels, l'identification de l'appelant, un répertoire, la gestion d'agenda, l'affichage des dossiers clients et l'accès aux serveurs d'informations de l'entreprise.
+
+      Les apports du couplage à la bureautique communicante sont l'amélioration de l'accueil par un service personnalisé, l'accès immédiat au dossier et à l'historique du client avec association de la voix et des données lors d'un transfert, la gestion des absences, la planification des appels, la mise en œuvre de règles de priorité, le travail coopératif et la conférence voix et données, la garantie de l'aboutissement d'un appel et l'accès aux ressources de communication quel que soit l'endroit. Avant de choisir une solution, il ne faut pas sous-estimer l'élaboration du cahier des charges ni l'évolutivité, et il faut se demander quel type d'application déployer, jusqu'où pousser l'intégration, quelle architecture mettre en place et si l'autocommutateur est compatible.
+
+
+VIII. CONCLUSION ET USAGES.
+
+
+   A. La complexité de la voix sur IP.
+
+      La complexité du traitement de la voix sur IP tient à la nature des équipements de transport, analogique ou numérique, à l'absence de qualité de service du réseau qui doit être compensée par des mécanismes internes aux normes H.323, SIP ou MGCP et RTP et RTCP, à la diversité des débits réels qui impose des codecs spécifiques, aux limitations de TCP/IP qui doivent être adaptées pour la signalisation, et à la diversité des solutions propriétaires qui exige compatibilité et interopérabilité entre les équipements et entre les versions.
+
+
+   B. La diffusion de la voix sur IP.
+
+      La voix sur IP s'est largement imposée chez les fournisseurs d'accès Internet, qui proposent des communications téléphoniques gratuites grâce à cette technologie. S'y ajoutent des offres logicielles, dont la plus connue est Skype, avec trois cents millions d'utilisateurs en deux mille seize. Les problématiques d'échange de flux vidéo sur IP sont les mêmes que pour la voix seule. La téléphonie mobile de quatrième génération, dite 4G ou LTE-Advanced, utilise nativement la voix sur IP pour les communications. La voix sur IP doit répondre aux problématiques de confidentialité, d'authentification, d'intégrité et de disponibilité. Les points clés de la téléphonie sur Internet sont l'interopérabilité, avec l'adoption d'un même ensemble de protocoles communs et l'interconnexion avec d'autres réseaux, la qualité de service, la simplicité, l'espace d'adressage et les annuaires, ainsi que les législations et les remarques de certains opérateurs.
+
+
+POINTS D'ATTENTION.
+
+      La contrainte de latence vaut aussi bien pour le réseau commuté que pour la téléphonie sur IP, moins de cent cinquante millisecondes pour une bonne qualité, moins de trois cents millisecondes pour un niveau acceptable, moins de vingt-huit millisecondes pour un écho non sensible.
+
+      On ne parle en moyenne que trente-cinq pour cent du temps d'une conversation, ce qui permet le multiplexage et un gain de bande passante pouvant atteindre cinquante pour cent.
+
+      La voix sur IP est plus large que la téléphonie sur IP et couvre aussi la vidéo sur IP, la visioconférence et la gestion des autocommutateurs IPBX.
+
+      Le transport par paquets, à la différence du circuit, n'offre pas de réservation de ressource, d'où des délais variables, un ordre des paquets non garanti et l'effet de gigue.
+
+      RTP compense la gigue et le désordre des paquets pour les données isochrones ; RTCP transporte la qualité de transmission et l'identité des participants ; les deux sont le plus souvent portés par UDP et n'influencent pas la qualité de service du réseau.
+
+      Le score MOS va de deux, voix robotisée, à cinq, qualité RNIS ; G711 est le plus ancien mais reste un référent avec un score de quatre virgule deux.
+
+      Pour G711, la bande est limitée à trois mille quatre cents hertz et l'échantillonnage fixé à huit mille hertz, soit environ deux virgule trente-cinq fois la fréquence maximale, selon le théorème de Shannon.
+
+      H.323 est défini par l'Union internationale des télécommunications, SIP par l'IETF ; H.323 utilise deux connexions TCP pour la signalisation, puis la voix passe en UDP avec RTP et RTCP ; aujourd'hui H.323 est remplacé par SIP.
+
+      Le garde-barrière H.323 assure la traduction d'adresse, association d'un alias et d'une adresse IP, et la gestion des autorisations ; la passerelle assure l'interconnexion avec les réseaux classiques ; le Multipoint Control Unit gère les conférences de plus de deux interlocuteurs.
+
+      SIP ne transporte pas la voix ni la vidéo ; il est indépendant du transport, négocie les médias en encapsulant SDP, et RTP assure le plus souvent les flux.
+
+      La mobilité personnelle est centrale dans SIP, une même identité joignable par plusieurs moyens ; l'architecture distribuée favorise la montée en charge.
+
+      UDP est préféré pour le temps réel, en-tête de huit octets, transport non fiable sans acquittement ni contrôle de congestion, la remise en ordre étant assurée par les couches hautes via RTP.
+
+      La connexion voix sur IP, ouverte par le client puis en retour par le serveur sur des ports non privilégiés, impose un filtrage IP dynamique pour ne pas compromettre le réseau interne.
+
+      Internet est un réseau best effort ; IPv6 aide le trafic vidéo par l'étiquette de flux et les indices de priorité.
+
+      Le couplage téléphonie-informatique, né à la fin des années quatre-vingt, relie le PABX au serveur de couplage ; il est aujourd'hui natif dans les IPBX.
+
+      La réunion du pôle téléphonique, du pôle informatique et du serveur vocal interactif forme un centre d'appel au sens fort.
+
+      Les applications first party gèrent un poste pour la bureautique simple ; les applications third party gèrent plusieurs postes pour les applications verticales et les centres d'appels.
+
+      Le système de couplage repose sur quatre éléments, l'autocommutateur, le serveur de couplage, clé de voûte, le serveur vocal et le middleware, dont les interfaces sont TAPI, TSAPI et CSTA.
+
+      Il existe quatre services simples, établissement d'appel, notification, réponse et libération, complétés par des services complexes comme le double appel, le transfert, la conférence à trois et l'envoi de fréquences vocales Q23.
+
+
+EXEMPLES CITES.
+
+      Réseau téléphonique commuté public, en anglais Public Switched Telephone Network ; autocommutateur privé PABX ; réseau numérique à intégration de services.
+
+      Signaling System numéro sept de l'Union internationale des télécommunications pour la signalisation téléphonique.
+
+      Codecs audio G711, G722, G726, G728 et G729 ; codecs vidéo H261, H263 et H264, aussi appelé MPEG4 AVC.
+
+      Score MOS de quatre virgule deux pour G711 ; échelle du rapport signal sur bruit, quatre-vingt-dix décibels pour la haute fidélité, dix pour un signal inexploitable ; taux de compression vidéo supérieur à cent quarante pour un.
+
+      Norme H.323 de l'Union internationale des télécommunications, versions de mille neuf cent quatre-vingt-quinze à deux mille treize, dernière version sept virgule un de mars deux mille treize ; groupement IMTC, International Multimedia Teleconferencing Consortium.
+
+      Protocoles H.225 point zéro, H.245, T.120, RTP et RTCP ; interconnexion avec H.320 et H.324 ; SCCP, Skinny Call Control Protocol, utilisé par Cisco.
+
+      Protocole SIP défini par la RFC 3261 de l'IETF, complétée notamment par la RFC 3265 ; messages SDP, Session Description Protocol ; premiers développements en mille neuf cent quatre-vingt-dix-neuf.
+
+      Adresse H.323 de type courrier électronique préfixée de l'indication h323, ou de type numéro de téléphone.
+
+      En-tête UDP de huit octets, trois fois plus court que celui de TCP.
+
+      Étiquette de flux et indices de priorité d'IPv6 pour le trafic vidéo.
+
+      Interfaces de couplage TAPI, TSAPI et CSTA ; envoi de fréquences vocales Q23 pour l'accès aux serveurs vocaux.
+
+      Logiciel Skype, trois cents millions d'utilisateurs en deux mille seize ; téléphonie mobile de quatrième génération 4G ou LTE-Advanced utilisant nativement la voix sur IP ; cabinet IDC identifiant quatre grands types d'applications du couplage.
