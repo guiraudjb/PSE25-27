@@ -1,0 +1,56 @@
+TITRE : Inode et Superbloc Riddim
+
+[Intro]
+Écoute la structure derrière chaque fichier
+Inode, superbloc, tout est bien rangé
+Inode et superbloc, oh yeah
+
+[Couplet 1]
+Le SGF organise, identifie, sécurise
+Superbloc garde les infos globales, précise
+Bitmap des inodes, bitmap des blocs de données
+Chaque fichier a son inode, bien déterminée
+
+HDD tourne mécanique, latence des têtes
+SSD sans latence, mais l'usure guette
+Douze pointeurs directs dans chaque inode
+Indirects simples, doubles, triples, la méthode
+
+[Refrain]
+Inode et superbloc, structure invisible
+Bloc de quatre kilo-octets, la cible
+Inode et superbloc, jamais de nom dedans
+Juste les métadonnées, le contenant
+
+[Couplet 2]
+Fragmentation interne gaspille dans le bloc
+Fragmentation externe éparpille comme un choc
+Noatime évite d'écrire à chaque lecture
+Discard active le TRIM, une autre facture
+
+Table des fichiers ouverts, descripteur zéro un deux
+Entrée standard, sortie, erreur, un jeu sérieux
+Open, read, write, lseek, close, les appels
+Strace trace tout, un outil essentiel
+
+[Refrain]
+Inode et superbloc, structure invisible
+Bloc de quatre kilo-octets, la cible
+Inode et superbloc, jamais de nom dedans
+Juste les métadonnées, le contenant
+
+[Pont]
+Mille vingt-quatre descripteurs par défaut
+Fuite de fichiers ouverts, un vrai défaut
+Df moins i surveille la saturation
+Fstrim nettoie le SSD sans hésitation
+
+[Refrain final]
+Inode et superbloc, le disque qui respire
+Blocs et bitmaps, tout un empire
+Inode et superbloc, la donnée bien gardée
+Jusqu'au bout du système, jamais s'égarer
+
+[Outro]
+Inode, inode, superbloc
+One love, one network, structure

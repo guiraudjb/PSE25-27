@@ -1,0 +1,56 @@
+TITRE : Partition et Volume Riddim
+
+[Intro]
+Écoute le disque qui se divise bien
+MBR, GPT, LVM, tiens
+Partition et volume, oh yeah
+
+[Couplet 1]
+MBR limité à quatre partitions
+GPT supporte cent vingt-huit, la vision
+fdisk pour le MBR, gdisk pour le GPT
+parted gère les deux, universalité
+
+LVM empile PV, VG puis LV
+Pvcreate, vgcreate, lvcreate, on active
+Boot toujours hors LVM, en ext4 gardé
+Sauvegarder le MBR avec dd, jamais oublié
+
+[Refrain]
+Partition et volume, la flexibilité
+Ext4, XFS, Btrfs, la variété
+Partition et volume, LVM qui étend
+Pvmove déplace sans interrompre le vent
+
+[Couplet 2]
+Lvextend agrandit, resize2fs ajuste
+Lvreduce est risqué, vérifier c'est juste
+Snapshot figé pour sauvegarder sans stress
+Pvdisplay, vgdisplay montrent le progrès
+
+Mkfs formate, fsck répare avec soin
+Mount rend accessible, fstab prend soin
+Df moins h montre l'espace, moins i les inodes
+Lsof trouve qui bloque, jamais en mode
+
+[Refrain]
+Partition et volume, la flexibilité
+Ext4, XFS, Btrfs, la variété
+Partition et volume, LVM qui étend
+Pvmove déplace sans interrompre le vent
+
+[Pont]
+VFS uniformise chaque système de fichiers
+Proc et sys exposent noyau et matériel entier
+Udev configure le périphérique détecté
+Inode et dentry, structures bien pensées
+
+[Refrain final]
+Partition et volume, l'administration solide
+Serveur critique, un partitionnement lucide
+Partition et volume, la donnée protégée
+Jusqu'au bout du disque, jamais elle ne fuit
+
+[Outro]
+LVM, LVM, partition et volume
+One love, one network, administration

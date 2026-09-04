@@ -1,0 +1,56 @@
+TITRE : Manipuler Linux Riddim
+
+[Intro]
+Écoute le terminal qui répond vite
+Pwd, cd, ls, la navigation invite
+Manipuler Linux, oh yeah
+
+[Couplet 1]
+Pwd affiche où je suis, cd me déplace
+Mkdir moins p crée l'arborescence en une passe
+Rmdir pour les vides, rm moins r pour le reste
+Rm moins i confirme, une sécurité leste
+
+Touch crée ou met à jour l'horodatage
+Cat affiche tout, less pour le grand voyage
+Head et tail montrent début et fin
+Tail moins f suit les logs sans fin
+
+[Refrain]
+Manipuler Linux, cp copie, mv déplace
+Tar compresse, gzip et bzip2 laissent leur trace
+Manipuler Linux, chmod, chown, chgrp
+Setuid, setgid, sticky bit, un vrai groupe
+
+[Couplet 2]
+Find explore en temps réel chaque critère
+Locate interroge la base, bien plus légère
+Diff compare, md5sum vérifie l'intégrité
+Grep cherche le motif avec habileté
+
+Zéro un deux, entrée, sortie, erreur standard
+Chevron simple écrase, double ajoute au hasard
+Chevron inversé lit, here document déploie
+Le pipe enchaîne les commandes, quelle joie
+
+[Refrain]
+Manipuler Linux, cp copie, mv déplace
+Tar compresse, gzip et bzip2 laissent leur trace
+Manipuler Linux, chmod, chown, chgrp
+Setuid, setgid, sticky bit, un vrai groupe
+
+[Pont]
+Rm jamais de corbeille, alias rm moins i prudent
+Shadow bien protégé, permissions surveillées vraiment
+Setfacl et getfacl affinent chaque droit
+Watch surveille le répertoire, minute par minute, tout droit
+
+[Refrain final]
+Manipuler Linux, la maîtrise du terminal
+Chaque commande a son rôle, essentiel
+Manipuler Linux, l'administrateur avisé
+Jusqu'au bout du pipe, jamais dépassé
+
+[Outro]
+Linux, Linux, manipuler avec art
+One love, one network, terminal

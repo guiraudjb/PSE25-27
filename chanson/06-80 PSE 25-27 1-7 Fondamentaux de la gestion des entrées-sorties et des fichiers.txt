@@ -1,0 +1,56 @@
+TITRE : Entrées Sorties Riddim
+
+[Intro]
+Écoute le bus qui relie chaque composant
+Processeur, mémoire, contrôleur, en avant
+Entrées sorties, oh yeah
+
+[Couplet 1]
+HAL isole le noyau du matériel
+Bus système relie processeur et mémoire, essentiel
+Contrôleur traduit les commandes génériques
+Tampon lisse les flux, une gestion logique
+
+Flux séquentiel comme le clavier qui tape
+Mode bloc adressable, comme le disque qui frappe
+DMA échange sans solliciter le CPU
+IRQ signale, la table IDT au rendez-vous
+
+[Refrain]
+Entrées sorties, interruption plutôt que polling
+DMA libère le processeur, un vrai calling
+Entrées sorties, pilote traduit chaque instruction
+Pont nord rapide, pont sud pour la friction
+
+[Couplet 2]
+MBR limité à deux virgule deux téraoctets
+GPT dépasse, illimité, un vrai projet
+BIOS seize bits lent, UEFI plus rapide
+Secure Boot protège, GPT solide
+
+Secteur cinq cent douze octets sur le disque dur
+SSD en pages, blocs pour effacer, c'est sûr
+Wear leveling gère l'usure des cellules
+Fsck répare, chkdsk sous Windows, la ficelle
+
+[Refrain]
+Entrées sorties, interruption plutôt que polling
+DMA libère le processeur, un vrai calling
+Entrées sorties, pilote traduit chaque instruction
+Pont nord rapide, pont sud pour la friction
+
+[Pont]
+Journalisation protège avant chaque écriture
+Write-back risque la perte sans onduleur, une friture
+Cache disque accélère les données fréquentes
+FAT et inodes, deux méthodes différentes
+
+[Refrain final]
+Entrées sorties, l'architecture bien pensée
+Bloc et flux, chaque périphérique classé
+Entrées sorties, le système qui orchestre
+Jusqu'au bout du bus, jamais il ne reste
+
+[Outro]
+Entrées sorties, entrées sorties
+One love, one network, architecture unie

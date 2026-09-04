@@ -1,0 +1,56 @@
+TITRE : Processus et Mémoire Riddim
+
+[Intro]
+Écoute le processus qui prend la main
+PCB, ordonnanceur, un ballet sans fin
+Processus et mémoire, oh yeah
+
+[Couplet 1]
+Processus lourd, isolé, sa propre mémoire
+Thread léger, partage l'espace, plus véloce à voir
+PCB carte d'identité, registres et état
+Commutation de contexte, un coût qu'on ne rate pas
+
+FIFO traite dans l'ordre, tâche courte pénalisée
+SJF privilégie le court, famine à éviter
+Round-Robin, quantum fixe, équité pour tous
+HPF priorise, vieillissement contre le courroux
+
+[Refrain]
+Processus et mémoire, préemption garantie
+Round-Robin, CFS, l'équité continue
+Processus et mémoire, mutex protège tout
+Interblocage évité, brisons un verrou
+
+[Couplet 2]
+Condition de course, accès non protégé
+Quatre conditions de Coffman pour l'interblocage
+Dîner des philosophes, fourchette hiérarchisée
+Sémaphore compte, attend, signale sans tarder
+
+MMU traduit l'adresse virtuelle en physique
+Pagination découpe en pages, la logique
+LRU remplace la page la moins utilisée
+Segmentation protège code, pile, données
+
+[Refrain]
+Processus et mémoire, préemption garantie
+Round-Robin, CFS, l'équité continue
+Processus et mémoire, mutex protège tout
+Interblocage évité, brisons un verrou
+
+[Pont]
+Mode noyau, accès total, sans limite
+Mode utilisateur, restreint à son espace, vite
+CFS de Linux, parts proportionnelles au poids
+Serveur web utilise les threads à chaque fois
+
+[Refrain final]
+Processus et mémoire, le système qui jongle
+Ordonnance et alloue, jamais il ne bafouille
+Processus et mémoire, l'équilibre parfait
+Jusqu'au bout du quantum, le système est prêt
+
+[Outro]
+Processus, mémoire, fondamentaux
+One love, one network, système loyal

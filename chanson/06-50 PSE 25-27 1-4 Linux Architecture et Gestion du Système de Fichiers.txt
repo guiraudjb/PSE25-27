@@ -1,0 +1,56 @@
+TITRE : Tout Est Fichier Riddim
+
+[Intro]
+Écoute le principe qui unit tout
+Tout est fichier, du clavier au bout
+Tout est fichier, oh yeah
+
+[Couplet 1]
+Inode décrit chaque fichier sans le nom
+Lien dur pointe pareil, une même maison
+Lien symbolique cassé si la cible s'en va
+FHS structure l'arborescence, on y va
+
+Boot, etc, bin, sbin, var, home, root
+Mnt et media pour les points de montage, tout
+Chemin absolu commence par la racine
+Chemin relatif suit le répertoire en cuisine
+
+[Refrain]
+Tout est fichier, programmes et périphériques
+Sockets et tubes, une logique identique
+Tout est fichier, ls moins l dévoile le type
+Tiret, d, l, p, c, b, s, la panoplie
+
+[Couplet 2]
+Rwx pour lire, écrire et exécuter
+Chmod, chown, umask, bien configurer
+Setuid, setgid, sticky bit sur tmp
+ACL affine avec getfacl, un exemple
+
+Ext4 domine, XFS pour les gros volumes
+Btrfs snapshot, F2FS pour les colonnes flash
+NFS partage à distance via RPC
+Mount raccorde, umount libère, jamais forcé
+
+[Refrain]
+Tout est fichier, programmes et périphériques
+Sockets et tubes, une logique identique
+Tout est fichier, ls moins l dévoile le type
+Tiret, d, l, p, c, b, s, la panoplie
+
+[Pont]
+Dev null avale tout sans jamais rendre
+Dev random génère l'aléatoire à comprendre
+Deux cent cinquante-cinq caractères maximum
+Racine jamais démontée, un vrai royaume
+
+[Refrain final]
+Tout est fichier, la philosophie Linux
+Chmod sept cinq cinq, un standard qui fixe
+Tout est fichier, l'arborescence bien tenue
+Jusqu'au bout du chemin, jamais perdue
+
+[Outro]
+Tout est fichier, tout est fichier
+One love, one network, Linux entier

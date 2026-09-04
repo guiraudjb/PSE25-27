@@ -1,0 +1,56 @@
+TITRE : Noyau Monolithique Riddim
+
+[Intro]
+Écoute le cœur du système qui bat
+Noyau monolithique modulaire, le combat
+Noyau, oh yeah
+
+[Couplet 1]
+Monolithique regroupe tout dans un bloc
+Micro-noyau isole, plus robuste au choc
+Linux choisit le monolithique modulaire
+Modules point ko chargés sans refaire l'affaire
+
+Task_struct porte l'état de chaque processus
+CFS distribue le temps, équitable et inclus
+VFS unifie l'accès à chaque fichier
+Inode, dentry, superblock, bien rangés
+
+[Refrain]
+Noyau monolithique, performance et flexibilité
+Modules chargés sans jamais recompiler
+Noyau monolithique, CFS ordonnance
+Live patching corrige sans interruption de service
+
+[Couplet 2]
+Kernel point org télécharge les sources
+Make menuconfig configure sans détour
+Make moins j nproc compile sur tous les cœurs
+GRUB installé, initrd en douceur
+
+Modprobe charge un module, dépendances gérées
+Sysctl ajuste à chaud, swappiness réglée
+Dmesg lit le tampon, diagnostic rapide
+Uname moins r vérifie la version stable
+
+[Refrain]
+Noyau monolithique, performance et flexibilité
+Modules chargés sans jamais recompiler
+Noyau monolithique, CFS ordonnance
+Live patching corrige sans interruption de service
+
+[Pont]
+Hugepages optimisent la base de données
+Eppf transforme le noyau en vue éclairée
+Version LTS pour la stabilité en prod
+Toujours garder l'ancien noyau, méthode
+
+[Refrain final]
+Noyau monolithique, le cœur qui gère tout
+Portable et évolutif, jusqu'au bout
+Noyau monolithique modulaire et fort
+Jusqu'au bout du système, jamais il ne dort
+
+[Outro]
+Noyau, noyau, monolithique modulaire
+One love, one network, kernel

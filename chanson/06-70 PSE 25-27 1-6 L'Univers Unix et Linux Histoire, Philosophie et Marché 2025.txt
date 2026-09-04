@@ -1,0 +1,56 @@
+TITRE : Histoire Unix Riddim
+
+[Intro]
+Écoute l'histoire depuis Multics tombé
+Ken Thompson en soixante-neuf a tout lancé
+Histoire Unix, oh yeah
+
+[Couplet 1]
+Multics trop complexe, le PL1 abandonné
+Unics devient Unix en soixante et onze, gravé
+Dennis Ritchie réécrit tout en langage C
+Portable, léger, l'université adopte l'idée
+
+Berkeley invente BSD, TCP-IP naît
+POSIX unifie pour que rien ne se perde
+Linus Torvalds en quatre-vingt-onze démarre
+GNU-Linux, GCC et bash, tout s'amarre
+
+[Refrain]
+Histoire Unix, Open Group certifie
+Système ouvert, interopérabilité unie
+Histoire Unix, portable et distribué
+GPL partage, jamais confisqué
+
+[Couplet 2]
+AIX chez IBM, SMIT pour administrer
+FreeBSD, NetBSD, OpenBSD sécurisé
+Solaris et ZFS, compression intégrée
+Darwin chez Apple, Mach et BSD mêlés
+
+Minix pédagogique, micro-noyau pur
+Red Hat, openSUSE, Ubuntu, le futur
+Linux domine le Top 500 en entier
+Gendarmerie française sur Ubuntu migrée
+
+[Refrain]
+Histoire Unix, Open Group certifie
+Système ouvert, interopérabilité unie
+Histoire Unix, portable et distribué
+GPL partage, jamais confisqué
+
+[Pont]
+Version paire stable, impaire en développement
+Une règle du passé, plus vraie maintenant
+Système distribué peut rester propriétaire
+Système ouvert garde ses specs peu ordinaires
+
+[Refrain final]
+Histoire Unix, un demi-siècle de code
+Du laboratoire Bell jusqu'au cloud, la méthode
+Histoire Unix, la philosophie qui dure
+Jusqu'au bout du terminal, toujours pure
+
+[Outro]
+Unix, Linux, histoire et philosophie
+One love, one network, la lignée
