@@ -1,0 +1,68 @@
+TITRE : Cyberdico Riddim
+
+[Intro]
+Écoute bien le glossaire
+La cyber, c'est notre affaire, yeah
+
+[Couplet 1]
+Phishing, hameçonnage
+On mord pas à l'appât, non non
+Ransomware prend en otage
+Mais nous on n'a pas peur de ça
+
+Cheval de Troie caché dedans
+Virus qui se propage lentement
+Le ver qui court tout seul dans le vent
+Botnet zombie, tout le temps
+
+[Refrain]
+Confidentialité, intégrité, disponibilité
+Trois piliers pour se protéger
+Dans le cyberespace faut veiller
+
+Authentification avant tout ça
+Pare-feu debout, VPN dans le tunnel
+On reste unis, on reste fidèles
+Oh-oh, cyberdico, oh-oh
+
+[Couplet 2]
+DDoS vient noyer le système
+Mille machines dans le problème
+Injection SQL dans la base
+Faut fermer bien chaque impasse
+
+Ingénierie sociale
+La confiance qu'on abuse
+Spearphishing vise juste
+Prudence, jamais je n'excuse
+
+[Refrain]
+Confidentialité, intégrité, disponibilité
+Trois piliers pour se protéger
+Dans le cyberespace faut veiller
+
+Authentification avant tout ça
+Pare-feu debout, VPN dans le tunnel
+On reste unis, on reste fidèles
+Oh-oh, cyberdico, oh-oh
+
+[Pont]
+ANSSI veille sur la nation
+CERT répond à l'alerte
+EBIOS calcule le risque
+PCA garde la porte ouverte
+
+Zero-day, personne ne sait
+Vulnérabilité qui inquiète
+Patch vite le système, frère
+Sinon la brèche persévère
+
+[Refrain final]
+Confidentialité, intégrité, disponibilité
+Trois piliers pour se protéger
+Cyberdico, cyberdico
+Mots et sagesse, protège-toi bien
+
+[Outro]
+Cyberdico... mots et sagesse
+Protège bien, protège sans cesse, yeah

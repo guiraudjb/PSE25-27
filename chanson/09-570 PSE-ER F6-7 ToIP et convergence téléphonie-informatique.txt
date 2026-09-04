@@ -1,0 +1,70 @@
+TITRE : La Voix Qui Voyage
+
+[Intro]
+Écoute la voix qui voyage sur le réseau
+Oh yeah...
+
+[Couplet 1]
+Le vieux téléphone RTC
+Autocommutateur fatigué
+Aujourd'hui la voix prend l'IP
+Paquet par paquet, elle part loin
+
+Cent cinquante millisecondes
+Pour que la parole soit ronde
+Sinon la gigue vient danser
+RTP vient tout réparer
+
+[Refrain]
+Voix sur IP, voix qui vole
+Sur le réseau elle console
+Convergence de la parole et des données
+Même chemin, même onde
+
+H.323 ou SIP
+Deux chemins pour le même trip
+La voix qui voyage, la voix qui chante
+Sur le fil qui nous enchante
+
+[Couplet 2]
+Codec qui compresse le son
+G711, le vétéran
+De huit mille hertz on échantillonne
+Shannon nous montre le ton
+
+Couplage téléphonie-info
+Le CTI ouvre le combo
+Le dossier client apparaît
+Dès que le téléphone sonnerait
+
+[Refrain]
+Voix sur IP, voix qui vole
+Sur le réseau elle console
+Convergence de la parole et des données
+Même chemin, même onde
+
+H.323 ou SIP
+Deux chemins pour le même trip
+La voix qui voyage, la voix qui chante
+Sur le fil qui nous enchante
+
+[Pont]
+Best effort sur Internet
+La gigue jamais ne s'arrête
+Mais IPv6 arrive en force
+Flow label lui donne de l'entorse
+
+Skype, opérateurs
+Tout le monde chante en IP
+La 4G porte la voix
+Sans effort, sans détour, sans loi
+
+[Refrain final]
+Voix sur IP, voix qui vole
+Sur le réseau elle console
+La voix qui voyage, la voix qui chante
+Pour toujours elle nous enchante
+
+[Outro]
+La voix qui voyage
+Toujours plus loin, yeah man...
