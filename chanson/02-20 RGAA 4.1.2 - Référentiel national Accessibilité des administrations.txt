@@ -1,0 +1,56 @@
+TITRE : Accessible Riddim
+
+[Intro]
+Écoute la page pour tout le monde
+Perceptible, utilisable, la ronde
+RGAA, RGAA, accessibilité
+
+[Couplet 1]
+Chaque image porteuse a son texte alternatif
+Décoration ignorée, attribut alt vide, c'est natif
+Contraste quatre virgule cinq pour le texte normal
+Trois pour un pour le grand, jamais banal
+
+Lien explicite, on sait où il mène
+Formulaire étiqueté, jamais de peine
+Clavier partout, pas de piège qui bloque
+Focus visible sur chaque équipement qui toque
+
+[Refrain]
+Accessible, activable, pour tous les usagers
+Perceptible, utilisable, sans se presser
+Accessible, compréhensible, robuste aussi
+Cinquante pour cent de critères, conformité partielle, oui
+
+[Couplet 2]
+Tableau de données, en-tête bien relié
+Sous-titre sur la vidéo synchronisée
+Structure de titres, h1 jusqu'à h6
+Landmarks WAI-ARIA, header, nav, main, exact
+
+Deux cent cinquante millions de chiffre d'affaires
+Personne morale publique doit se soumettre
+Déclaration d'accessibilité affichée
+Défenseur des droits pour le recours donné
+
+[Refrain]
+Accessible, activable, pour tous les usagers
+Perceptible, utilisable, sans se presser
+Accessible, compréhensible, robuste aussi
+Cinquante pour cent de critères, conformité partielle, oui
+
+[Pont]
+Charge disproportionnée, dérogation motivée
+CAPTCHA avec alternative, jamais oublié
+Deux cents pour cent d'agrandissement, texte lisible
+Trois cent vingt pixels, toujours accessible
+
+[Refrain final]
+Accessible pour tous, sans exception
+RGAA guide chaque conception
+Accessible, la page qui inclut
+Perceptible, utilisable, jusqu'au bout
+
+[Outro]
+RGAA, accessibilité
+One love, one network, pour tous, oh yeah

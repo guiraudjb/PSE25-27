@@ -1,0 +1,56 @@
+TITRE : Hygiène Numérique Riddim
+
+[Intro]
+Écoute les quarante règles d'hygiène
+Sensibilise, connais, authentifie, la chaîne
+Hygiène numérique, oh yeah
+
+[Couplet 1]
+Cartographie du réseau, comptes privilégiés
+Revue régulière, accès obsolètes coupés
+Compte nominatif, compte admin séparé
+Authentification forte, deux facteurs pour entrer
+
+Mot de passe jamais réutilisé, robuste
+Coffre-fort numérique, protection juste
+Antivirus, pare-feu local activé
+Clé USB inconnue, jamais branchée
+
+[Refrain]
+Hygiène numérique, protège chaque poste
+Segmentation du réseau, zone démilitarisée à ton poste
+Hygiène numérique, administration isolée
+Réseau dédié, jamais connecté
+
+[Couplet 2]
+Wi-Fi WPA2, chiffrement robuste
+Tunnel VPN IPsec, non débrayable, juste
+Disque dur nomade intégralement chiffré
+Terminaux mobiles jamais mélangés
+
+Correctifs appliqués dans le mois qui suit
+CERT-FR informe des failles qui nuisent
+Journalisation, NTP synchronise le temps
+Sauvegarde hors ligne, testée régulièrement
+
+[Refrain]
+Hygiène numérique, protège chaque poste
+Segmentation du réseau, zone démilitarisée à ton poste
+Hygiène numérique, administration isolée
+Réseau dédié, jamais connecté
+
+[Pont]
+RSSI désigné, référent connu de tous
+Charte informatique signée avant tout
+PASSI qualifié pour l'audit de sécurité
+EBIOS structure toute l'analyse citée
+
+[Refrain final]
+Hygiène numérique, quarante règles d'or
+Chaque utilisateur est un maillon fort
+Hygiène numérique, la sécurité au quotidien
+Jusqu'au bout du réseau, ça se maintient
+
+[Outro]
+ANSSI, hygiène numérique
+One love, one network, pratique

@@ -1,0 +1,56 @@
+TITRE : Interopérabilité Riddim
+
+[Intro]
+Écoute les systèmes qui se comprennent
+Ensemble ils parlent, ensemble ils s'entraînent
+RGI, RGI, interopérabilité
+
+[Couplet 1]
+A2A, A2B, A2C, les échanges
+Autorité, entreprise, citoyen, mélange
+Standard ouvert, spécification publique
+Mature, pertinent, indépendant, logique
+
+IPv6 recommandé, IPv4 en fin de vie
+TLS un point deux protège la voie
+HTTPS, SFTP, le transfert sécurisé
+JSON léger, XML plus dépassé
+
+[Refrain]
+Interopérabilité, cinq niveaux qui s'accordent
+Politique, juridique, organisationnel encore
+Interopérabilité, sémantique et technique
+FranceConnect qui relie, profil identique
+
+[Couplet 2]
+Identité pivot, nom, prénom, naissance
+Code sexe ISO, une norme de référence
+Open ID Connect au-dessus d'OAuth
+REST privilégié, API État Plateforme, oh
+
+UTF-8 encode chaque caractère
+PDF/A pour l'archive millénaire
+Profil P1, P2, P4, P5, P6 aussi
+Chacun son usage bien défini
+
+[Refrain]
+Interopérabilité, cinq niveaux qui s'accordent
+Politique, juridique, organisationnel encore
+Interopérabilité, sémantique et technique
+FranceConnect qui relie, profil identique
+
+[Pont]
+Recommandé, en observation, en fin de vie
+Retiré du référentiel, décommissionné aussi
+Trois ans pour l'existant, douze mois le nouveau
+Le RGS valide le niveau du réseau
+
+[Refrain final]
+Interopérabilité, les systèmes en accord
+Ensemble ils avancent, ensemble ils sont forts
+Interopérabilité, le lien numérique
+Jusqu'au bout du réseau, harmonique
+
+[Outro]
+RGI, interopérabilité
+One love, one network, connectivité

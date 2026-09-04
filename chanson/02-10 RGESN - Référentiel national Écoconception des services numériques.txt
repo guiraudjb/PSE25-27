@@ -1,0 +1,56 @@
+TITRE : Écoconception Riddim
+
+[Intro]
+Écoute le service numérique sobre
+Moins de ressources, la planète en octobre
+RGESN, oh yeah, écoconception
+
+[Couplet 1]
+Le terminal ancien doit encore fonctionner
+Sept ans, dix ans, jamais forcé à jeter
+Fabrication du terminal, l'impact majeur
+Allonger sa vie, c'est notre bonheur
+
+Soixante-dix-huit critères, neuf thématiques
+Prioritaire, recommandé, modéré, logique
+Score d'avancement, la déclaration publique
+Transparence totale sur l'écologique
+
+[Refrain]
+Écoconception, sobriété numérique
+Défilement infini, jamais automatique
+Écoconception, ressources économisées
+Le score qui monte, bien pondéré
+
+[Couplet 2]
+WebP, AVIF, format léger d'image
+AV1, VP9, vidéo sans dommage
+Lazy loading, cache bien exploité
+Brotli, GZIP, tout compressé
+
+Le PUE de l'hébergeur en dessous de un virgule cinq
+L'électricité renouvelable, l'eau économisée aussi
+Chaleur fatale récupérée pour chauffer
+Données froides séparées, bien rangées
+
+[Refrain]
+Écoconception, sobriété numérique
+Défilement infini, jamais automatique
+Écoconception, ressources économisées
+Le score qui monte, bien pondéré
+
+[Pont]
+Modèle pré-entraîné plutôt que tout refaire
+Régression simple avant le deep learning austère
+Dark pattern jamais, mode sobriété proposé
+Deux virgule cinq pour cent d'empreinte à réduire
+
+[Refrain final]
+Écoconception, service durable
+Terminal ancien, toujours capable
+Écoconception, sobriété gagnante
+Pour la planète, une chanson vivante
+
+[Outro]
+RGESN, écoconception
+One love, one network, sobriété
