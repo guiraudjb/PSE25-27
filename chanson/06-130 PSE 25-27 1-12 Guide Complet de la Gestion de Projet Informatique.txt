@@ -1,0 +1,56 @@
+TITRE : Sprint et Backlog Riddim
+
+[Intro]
+Écoute le projet qui prend forme et sens
+Modèle en V ou Scrum, le bon choix immense
+Sprint et backlog, oh yeah
+
+[Couplet 1]
+ISO dix mille six, le cadre normatif
+MOA porte le besoin, budget effectif
+MOE réalise, l'architecture technique
+Modèle en V, symétrie systématique
+
+Scrum découpe en sprints de deux à quatre semaines
+Product Owner priorise, la vision qui s'enchaîne
+Scrum Master facilite, lève chaque obstacle
+Kanban visualise le flux, WIP en spectacle
+
+[Refrain]
+Sprint et backlog, user story bien écrite
+Critères d'acceptation, la validation rapide
+Sprint et backlog, MoSCoW, RICE, DEEP
+Product Backlog priorisé, jamais on ne dort
+
+[Couplet 2]
+Daily Scrum, Sprint Review, Rétrospective
+Cérémonies qui rythment chaque perspective
+Scrumban mélange structure et flux continu
+COPIL stratégique, COPRO le suivi tenu
+
+CODEN valide l'opportunité nouvelle
+COSTRAT supervise la stratégie officielle
+Jira, Trello, Asana pour visualiser
+DevOps et SRE, la qualité assurée
+
+[Refrain]
+Sprint et backlog, user story bien écrite
+Critères d'acceptation, la validation rapide
+Sprint et backlog, MoSCoW, RICE, DEEP
+Product Backlog priorisé, jamais on ne dort
+
+[Pont]
+Projet temporaire, jamais répétitif
+Product Manager vise le marché, actif
+Rigidité du V, l'agilité qui répond
+Hybride combine structure et flexion
+
+[Refrain final]
+Sprint et backlog, la gouvernance en marche
+Modèle en V, Scrum, Kanban, chaque démarche
+Sprint et backlog, le projet bien mené
+Jusqu'au bout du sprint, jamais dépassé
+
+[Outro]
+Sprint, sprint, backlog
+One love, one network, gestion de projet

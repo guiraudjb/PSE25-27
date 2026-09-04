@@ -1,0 +1,56 @@
+TITRE : Fork et Exec Riddim
+
+[Intro]
+Écoute le père qui donne naissance au fils
+Fork duplique, exec recouvre, la suite
+Fork et exec, oh yeah
+
+[Couplet 1]
+Programme statique, processus dynamique en vie
+PID unique, PPID du père, la filiation suivie
+Swapper PID zéro, invisible, discret
+Init ou Systemd, PID un, le premier prêt
+
+Fork copie le processus, le code reste partagé
+Le fils reçoit zéro, le père le PID gardé
+Exec recouvre le code par un nouveau programme
+Orphelin adopté par Init quand le père se lame
+
+[Refrain]
+Fork et exec, la création de vie
+Round Robin quantum, dix à cent millisecondes suivies
+Fork et exec, mode utilisateur, mode noyau
+IRQ bascule, le contexte sauvegardé comme il faut
+
+[Couplet 2]
+Zone de code, données, tas, pile, cinq espaces
+Table des processus garde chaque trace
+RUID réel, EUID effectif qui prévaut
+Set-uid endosse les droits du propriétaire, chapeau
+
+Répertoire proc expose chaque PID en direct
+Cwd, environ, exe, maps, status, un contrat
+State sleeping, running, zombie ou stopped
+VmSize et VmRSS, la mémoire bien notée
+
+[Refrain]
+Fork et exec, la création de vie
+Round Robin quantum, dix à cent millisecondes suivies
+Fork et exec, mode utilisateur, mode noyau
+IRQ bascule, le contexte sauvegardé comme il faut
+
+[Pont]
+Priorité augmente pour éviter la famine
+Ps, lsof, sleep, des commandes qui illuminent
+Cron démon tourne en arrière-plan, discret
+Libc point so, ld-linux, dans maps apparaît
+
+[Refrain final]
+Fork et exec, la hiérarchie des processus
+Swapper, Init, chaque fils bien reçu
+Fork et exec, Linux qui orchestre tout
+Jusqu'au bout du PID, jamais le bout
+
+[Outro]
+Fork, exec, processus Linux
+One love, one network, principes

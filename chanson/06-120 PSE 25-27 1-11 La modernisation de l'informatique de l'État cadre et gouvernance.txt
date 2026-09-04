@@ -1,0 +1,56 @@
+TITRE : DINUM Gouvernance Riddim
+
+[Intro]
+Écoute l'État qui se modernise
+DINUM pilote, la stratégie s'organise
+DINUM gouvernance, oh yeah
+
+[Couplet 1]
+SGMAP en deux mille douze a tout lancé
+DITP et DINSIC, la scission actée
+DINUM en deux mille dix-neuf réunifie
+Sous le Premier ministre, la ligne unie
+
+RGI facilite l'interopérabilité
+RGS impose l'homologation de sécurité
+Audit statique et dynamique, faille traquée
+Cinq ans de prison si la faille est laissée
+
+[Refrain]
+DINUM gouvernance, cinq référentiels debout
+RGI, RGS, RGAA, RGPD, RGESN partout
+DINUM gouvernance, TECH POINT GOUV avance
+Etalab ouvre la donnée en confiance
+
+[Couplet 2]
+RGAA garantit l'accès pour tous les publics
+Perceptible, utilisable, compréhensible, logique
+RGPD encadre chaque donnée personnelle
+RGESN questionne avant la démarche officielle
+
+FranceConnect étend l'identification sûre
+France Visas dématérialise sans rature
+Neuf millions d'euros, le seuil des grands projets
+Panorama semestriel, les risques signalés
+
+[Refrain]
+DINUM gouvernance, cinq référentiels debout
+RGI, RGS, RGAA, RGPD, RGESN partout
+DINUM gouvernance, TECH POINT GOUV avance
+Etalab ouvre la donnée en confiance
+
+[Pont]
+Loi République numérique libère le code source
+Data point gouv point fr, publication de force
+Burp Suite et ZAP testent chaque faille
+XSS, injection SQL, la vigilance qui taille
+
+[Refrain final]
+DINUM gouvernance, la transformation avance
+Mutualisation, interopérabilité, confiance
+DINUM gouvernance, l'État numérique uni
+Jusqu'au bout du référentiel, jamais fini
+
+[Outro]
+DINUM, DINUM, gouvernance
+One love, one network, transformation

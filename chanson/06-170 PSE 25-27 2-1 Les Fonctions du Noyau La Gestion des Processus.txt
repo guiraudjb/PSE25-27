@@ -1,0 +1,56 @@
+TITRE : Quantum et PCB Riddim
+
+[Intro]
+Écoute le processus qui prend son tour
+Quantum et PCB, ordonnancement chaque jour
+Quantum et PCB, oh yeah
+
+[Couplet 1]
+Processus dynamique, programme en exécution
+Pile pour les fonctions, tas pour l'allocation
+PCB sauvegarde le contexte vital
+Isolé, sécurisé, un espace total
+
+Processus lourd isolé, thread léger partagé
+IPC échangent quand ils sont séparés
+Dispatcher commute le contexte très vite
+Haut niveau stratégie, bas niveau explicite
+
+[Refrain]
+Quantum et PCB, préemptive ou pas
+Non préemptive monopolise, un vrai tracas
+Quantum et PCB, Round Robin équitable
+Section critique protégée, indispensable
+
+[Couplet 2]
+FIFO dans l'ordre, SJF le plus court d'abord
+HRN équilibre attente et durée, un compromis fort
+Mutex verrouille, sémaphore compte et signale
+Interblocage, attente circulaire fatale
+
+Dîner des philosophes, fourchette hiérarchisée
+IPC fichiers, mémoire, pipes, sockets, signaux mêlés
+Famine guette le processus jamais servi
+Section critique, la ressource bien choisie
+
+[Refrain]
+Quantum et PCB, préemptive ou pas
+Non préemptive monopolise, un vrai tracas
+Quantum et PCB, Round Robin équitable
+Section critique protégée, indispensable
+
+[Pont]
+Registres, compteur ordinal, pointeur de pile
+Contexte matériel et logiciel, une pile agile
+Mode utilisateur restreint, mode noyau total
+Linux, Windows, Unix, BSD, macOS, un signal
+
+[Refrain final]
+Quantum et PCB, le noyau qui orchestre
+Sauvegarde et restaure, jamais il ne reste
+Quantum et PCB, la gestion des processus
+Jusqu'au bout du cycle, jamais déçus
+
+[Outro]
+Quantum, PCB, gestion des processus
+One love, one network, ordonnancement

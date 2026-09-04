@@ -1,0 +1,56 @@
+TITRE : Quatre Libertés Riddim
+
+[Intro]
+Écoute le code que tout le monde peut lire
+Logiciel libre, quatre libertés à conquérir
+Quatre libertés, oh yeah
+
+[Couplet 1]
+Exécuter, étudier, redistribuer, améliorer
+FSF défend l'éthique, l'OSI le marché
+Code source lisible contre binaire verrouillé
+FLOSS réconcilie les deux philosophies
+
+GPL copyleft, la réciprocité s'impose
+CeCILL en France, la même chose propose
+BSD et MIT permissives et souples
+LGPL protège la bibliothèque en couple
+
+[Refrain]
+Quatre libertés, exécuter sans contrainte
+Étudier, modifier, redistribuer sans crainte
+Quatre libertés, le code qui se partage
+Copyleft ou permissif, chacun son langage
+
+[Couplet 2]
+Red Hat vend le support, pas la licence
+Mutualisation publique, une vraie alliance
+Open Core, gratuit puis payant plus loin
+Eclipse fédère les industriels du coin
+
+Circulaire Ayrault pousse l'alternative libre
+Trente mille emplois, un secteur qui vibre
+DGFiP pilote le marché interministériel
+Sept jours pour reverser le code essentiel
+
+[Refrain]
+Quatre libertés, exécuter sans contrainte
+Étudier, modifier, redistribuer sans crainte
+Quatre libertés, le code qui se partage
+Copyleft ou permissif, chacun son langage
+
+[Pont]
+Gratuit n'est pas libre, la nuance est là
+Firefox et Linux, la liberté qui va
+OSPO européen, l'autonomie visée
+Souveraineté numérique, jamais dépassée
+
+[Refrain final]
+Quatre libertés, le logiciel qui rassemble
+Communauté mondiale, on avance ensemble
+Quatre libertés, la transparence gagnante
+Jusqu'au bout du code, source vivante
+
+[Outro]
+Libre, libre, quatre libertés
+One love, one network, code partagé

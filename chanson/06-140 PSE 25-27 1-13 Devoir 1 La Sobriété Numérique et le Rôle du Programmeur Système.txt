@@ -1,0 +1,56 @@
+TITRE : SPE Riddim
+
+[Intro]
+Écoute le PSE qui pense sobriété
+Performance, efficience, la trinité
+SPE Riddim, oh yeah
+
+[Couplet 1]
+Sobriété, performance, efficience, le triptyque
+RGESN mutualise, allonge le matériel physique
+RGI standardise chaque protocole d'échange
+RGPD minimise, moins de données étranges
+
+Right sizing ajuste au plus juste chaque ressource
+GreenOps pilote l'empreinte, sans ressource en trop
+PUE mesure l'énergie du datacenter
+Cloud au centre optimise, laisse le vieux serveur
+
+[Refrain]
+SPE Riddim, sobriété, performance, efficience
+Cinq référentiels guident chaque expérience
+SPE Riddim, vingt-deux pour cent visés
+Deux mille vingt-sept, l'objectif fixé
+
+[Couplet 2]
+Architecture scalable s'adapte à la charge
+Auto-scaling ajoute et retire, jamais large
+Virtualisation et conteneurs, taux d'usage monte
+FinOps et GreenOps, le duo qui compte
+
+PSE conseille dès la conception du projet
+Scripts optimisés, batchs mieux planifiés
+Matériel de seconde main, qualifié, réemployé
+Don point archives domaines, biens partagés
+
+[Refrain]
+SPE Riddim, sobriété, performance, efficience
+Cinq référentiels guident chaque expérience
+SPE Riddim, vingt-deux pour cent visés
+Deux mille vingt-sept, l'objectif fixé
+
+[Pont]
+Style administratif, jamais de nous
+Le comment et l'outil, expliqués partout
+Transversalité entre sobriété et métier
+Gras numérique nettoyé, l'habillage allégé
+
+[Refrain final]
+SPE Riddim, le PSE acteur clé
+Conception, exploitation, cycle de vie pensé
+SPE Riddim, l'avenir réglementaire
+Jusqu'au bout du serveur, sobriété exemplaire
+
+[Outro]
+SPE, SPE, sobriété
+One love, one network, performance

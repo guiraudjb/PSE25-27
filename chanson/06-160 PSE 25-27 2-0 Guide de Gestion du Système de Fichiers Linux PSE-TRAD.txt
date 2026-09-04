@@ -1,0 +1,56 @@
+TITRE : Du Noyau au SGF Riddim
+
+[Intro]
+Écoute le noyau qui arbitre tout
+Du noyau au SGF, un même bout
+Du noyau au SGF, oh yeah
+
+[Couplet 1]
+Monolithique modulaire, Linux qui charge
+Ordonnanceur attribue priorité et charge
+Top affiche l'état, S pour le sommeil
+Swappiness règle le seuil du réveil
+
+Superbloc contient les infos globales
+FHS structure boot, var, usr, opt, la balle
+Inode porte l'identité, jamais le nom
+Saturation d'inodes bloque sans qu'on comprenne pourquoi non
+
+[Refrain]
+Du noyau au SGF, PV, VG puis LV
+Rootvg, datavg, appvg, bien nommé
+Du noyau au SGF, pvmove à chaud
+Migration sans coupure, jamais un sursaut
+
+[Couplet 2]
+Fdisk prépare la partition en huit e
+Rsync synchronise, deux passes, c'est la clé
+Première passe à chaud, seconde à l'arrêt
+Bascule finale, renommage, tout est prêt
+
+Uname moins a vérifie le noyau actif
+Lsmod liste les modules, modprobe actif
+Free moins h montre la mémoire et le swap
+Df moins i surveille les inodes sans couac
+
+[Refrain]
+Du noyau au SGF, PV, VG puis LV
+Rootvg, datavg, appvg, bien nommé
+Du noyau au SGF, pvmove à chaud
+Migration sans coupure, jamais un sursaut
+
+[Pont]
+Corruption du superbloc, système perdu
+SAN, NAS, RAID, des savoirs bien tenus
+Virtualisation, conteneurisation, l'infra moderne
+Diagnostic, résolution, rédaction, la caserne
+
+[Refrain final]
+Du noyau au SGF, l'épreuve PSE-TRAD
+Diagnostic précis, une hiérarchie qu'on rassure
+Du noyau au SGF, la maîtrise complète
+Jusqu'au bout du volume, jamais on ne s'arrête
+
+[Outro]
+Noyau, SGF, du noyau au SGF
+One love, one network, préparation

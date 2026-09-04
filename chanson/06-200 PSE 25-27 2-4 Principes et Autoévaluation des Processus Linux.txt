@@ -1,0 +1,56 @@
+TITRE : Table des Processus Riddim
+
+[Intro]
+Écoute encore une fois fork qui duplique
+Table des processus, la révision pratique
+Table des processus, oh yeah
+
+[Couplet 1]
+Fork crée le fils, duplication exacte
+Père et fils partagent code, descripteurs, un pacte
+Nouvelle entrée dans la table des processus
+Trois régions mémoire, code, données, pile, reçus
+
+Exec recouvre la région de code active
+Le programme hérité devient une autre missive
+Exit libère les ressources, l'état devient zombie
+Le cycle de vie s'achève, jamais anarchie
+
+[Refrain]
+Table des processus, jamais la table des inodes
+Fork, exec, exit, les trois commandes en mode
+Table des processus, mode utilisateur restreint
+Mode noyau privilégié, l'appel qui atteint
+
+[Couplet 2]
+Set-uid bit endosse les droits du propriétaire
+EUID prime sur RUID, une règle claire
+Passwd illustre le set-uid de root
+Create n'existe pas, fork est la vraie route
+
+Swapper et scheduler, jamais des modes d'exécution
+Table des régions pointe vers la structure commune
+Autoévaluation confirme chaque notion apprise
+Fork, exec, exit, la base bien comprise
+
+[Refrain]
+Table des processus, jamais la table des inodes
+Fork, exec, exit, les trois commandes en mode
+Table des processus, mode utilisateur restreint
+Mode noyau privilégié, l'appel qui atteint
+
+[Pont]
+Duplication exacte, un miroir du père
+Nouvelle table des régions, une structure claire
+Descripteurs de fichiers dupliqués aussi
+Le fils commence sa vie, jamais transi
+
+[Refrain final]
+Table des processus, la révision achevée
+Fork, exec, exit, bien assimilée
+Table des processus, les fondamentaux Linux
+Jusqu'au bout de l'exercice, jamais déçus
+
+[Outro]
+Fork, exec, exit, table des processus
+One love, one network, autoévaluation

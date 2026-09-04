@@ -1,0 +1,56 @@
+TITRE : Injonction Paradoxale Riddim
+
+[Intro]
+Écoute la sobriété qui transforme tout
+RGAA, RGS, RGPD, un même bout
+Injonction paradoxale, oh yeah
+
+[Couplet 1]
+Bercy vert vise vingt-deux pour cent en moins
+RGAA simplifie contenus et témoins
+RGS injonction paradoxale, logs réduits
+Traçabilité sécurité, un vrai conflit
+
+RGPD minimise, données supprimées
+RGESN dicte dès la conception, pensée
+Mutualisation consolide les serveurs sous-utilisés
+Reconditionnement plutôt que remplacer
+
+[Refrain]
+Injonction paradoxale, logs et sécurité
+Sobriété et traçabilité, dualité
+Injonction paradoxale, le PSE arbitre
+Frugalité sans jamais dégrader le titre
+
+[Couplet 2]
+Datacentres sobres, PUE amélioré
+Architecture scalable, pic mieux dompté
+Traitements replanifiés hors des heures de charge
+Environnements fermés quand plus rien ne charge
+
+PSE recommande en comité d'architecture
+Scripts allégés, boucles sous surveillance sûre
+Priorisation des services critiques gardée
+Fichiers temporaires, croissance surveillée
+
+[Refrain]
+Injonction paradoxale, logs et sécurité
+Sobriété et traçabilité, dualité
+Injonction paradoxale, le PSE arbitre
+Frugalité sans jamais dégrader le titre
+
+[Pont]
+IA dans les services publics, défi énergétique
+PSE forme les équipes, culture pédagogique
+DevOps partage la sobriété en continu
+Acteur transverse, jamais le stratège reconnu
+
+[Refrain final]
+Injonction paradoxale, la sobriété qui dure
+Performance et disponibilité, sans rupture
+Injonction paradoxale, l'équilibre trouvé
+Jusqu'au bout du batch, jamais dépassé
+
+[Outro]
+Sobriété, sobriété, injonction
+One love, one network, équilibre

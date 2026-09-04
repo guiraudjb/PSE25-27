@@ -1,0 +1,56 @@
+TITRE : IPC Système V Riddim
+
+[Intro]
+Écoute les processus qui se parlent bien
+Mémoire, tube, socket, chacun son lien
+IPC système V, oh yeah
+
+[Couplet 1]
+Exclusion mutuelle protège la section critique
+Attente active boucle, gaspillage énergétique
+Test and Set demande sans jamais dormir
+Dijkstra invente les sémaphores pour finir
+
+P demande l'entrée, V libère à la sortie
+Sémaphore binaire ou comptant, une vraie partie
+Mémoire partagée, pas de copie, très rapide
+Sémaphore d'exclusion et de synchro, une aide
+
+[Refrain]
+IPC système V, mémoire, file, sémaphore
+Trois piliers de la communication encore
+IPC système V, tube ordinaire ou nommé
+FIFO persiste, pipe volatile et lié
+
+[Couplet 2]
+File de messages, premier entré premier sorti
+Trois sémaphores nécessaires, jamais réduits
+Rendez-vous synchronise émetteur et récepteur
+Accusé de réception libère le préempteur
+
+Tube ordinaire réservé à la filiation
+FIFO fichier p, toute communication
+Signal interrompt, SIGKILL, SIGTERM, SIGSTOP
+Socket bidirectionnel, PF_UNIX ou PF_INET, top
+
+[Refrain]
+IPC système V, mémoire, file, sémaphore
+Trois piliers de la communication encore
+IPC système V, tube ordinaire ou nommé
+FIFO persiste, pipe volatile et lié
+
+[Pont]
+Interblocage, étreinte fatale entre deux
+Dîner des philosophes, l'exemple fameux
+Kill moins l liste tous les signaux du système
+Rm supprime le tube nommé, un vrai théorème
+
+[Refrain final]
+IPC système V, la synchronisation parfaite
+Mémoire, sémaphore, file, une architecture faite
+IPC système V, les processus coordonnés
+Jusqu'au bout du rendez-vous, jamais désynchronisés
+
+[Outro]
+IPC, IPC, système V
+One love, one network, communication
