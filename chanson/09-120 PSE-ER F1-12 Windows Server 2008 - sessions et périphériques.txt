@@ -1,0 +1,56 @@
+TITRE : Winlogon et IRP Riddim
+
+[Intro]
+Ctrl Alt Suppr, la SAS que Winlogon intercepte
+Deux bureaux créés à l'ouverture, un secret qu'on respecte
+Winlogon et IRP, oh yeah
+
+[Couplet 1]
+Winlogon processus critique, jamais on ne l'arrête
+LogonUI vérifie via les credential providers en cachette
+LsaLogonUser fournit les infos aux packages d'authentification
+Jeton dupliqué, fourni à Winlogon, la connexion en action
+
+Gestionnaire d'E/S crée l'IRP, cœur du système entier
+Pilote reçoit, exécute, puis renvoie au gestionnaire, léger
+Plug and Play énumère, charge le pilote, alloue les ressources
+HAL isole le pilote du processeur, une vraie ressource
+
+[Refrain]
+Winlogon et IRP, S zéro à S cinq les états
+Hiberfil point sys sauvegarde la mémoire avant l'arrêt complet
+Winlogon et IRP, D zéro à D trois pour les périphériques
+Signature des pilotes, ignorer, avertir, interdire, une pratique
+
+[Couplet 2]
+Devmgmt point msc ouvre le gestionnaire de périphériques
+Icône grisée pour les cachés, croix rouge pour les statiques
+WHQL teste les pilotes, la signature Microsoft les certifie
+Sfc point exe protège les fichiers critiques, une garantie
+
+Pool d'impression regroupe plusieurs imprimantes en une logique
+IPP imprime via http, un chemin bien pratique
+Priorités d'impression de un à quatre-vingt-dix-neuf, la hiérarchie
+NDIS pilote les cartes réseau, iSCSI le SAN qui varie
+
+[Refrain]
+Winlogon et IRP, S zéro à S cinq les états
+Hiberfil point sys sauvegarde la mémoire avant l'arrêt complet
+Winlogon et IRP, D zéro à D trois pour les périphériques
+Signature des pilotes, ignorer, avertir, interdire, une pratique
+
+[Pont]
+Winlogon, lsass, smss, csrss, processus jamais arrêtés
+Le veille S un à S quatre repasse toujours par S zéro d'abord
+Un contrôleur IDE n'écrit que sur un disque à la fois
+AGP, PCI, DVI combinés alignent l'affichage sur le plus lent, une loi
+
+[Refrain final]
+Winlogon et IRP, l'ouverture de session sécurisée
+Périphériques gérés du BIOS à l'imprimante posée
+Winlogon et IRP, Windows Server au centre
+Jusqu'au bout du port, jamais de latence
+
+[Outro]
+Winlogon, IRP, périphérique
+One love, one network, session

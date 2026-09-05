@@ -1,0 +1,56 @@
+TITRE : CSMA CA et CPL Riddim
+
+[Intro]
+Le courant porteur transporte les données sur le câble électrique
+HomePlug Alliance en deux mille, un standard authentique
+CSMA CA et CPL, oh yeah
+
+[Couplet 1]
+HomePlug AV deux cents mégabits, incompatible mais cohabite
+OFDM divise en porteuses orthogonales, une technique explicite
+Couplage capacitif majoritaire, inductif plus efficace
+Injecteur, répéteur, filtre, chaque équipement a sa place
+
+Bluetooth deux virgule quatre gigahertz, piconet de huit appareils
+WiMax boucle locale radio, cinquante kilomètres sans pareil
+Wi-Fi cinq quatre-vingt-onze cent b, g, n, ac en évolution
+MIMO double la portée, jusqu'à huit flux en ac, une innovation
+
+[Refrain]
+CSMA CA et CPL, RTS, CTS, ACK
+Le support réservé avant l'envoi, jamais de couac
+CSMA CA et CPL, DIFS avant l'émission
+NAV calcule le temps d'attente, une vraie précision
+
+[Couplet 2]
+SSID identifie le réseau, BSSID l'adresse MAC
+IBSS ad-hoc sans point d'accès, BSS avec, un vrai contact
+ESS regroupe plusieurs BSS par système de distribution
+Roaming change de point d'accès sans perdre la connexion
+
+WEP remplacé par TKIP puis par WPA sur huit cent un x
+WPA deux dans huit cent onze i, incompatible avec l'ancien fixe
+La station cachée guette, VCS avec RTS CTS protège
+Power over Ethernet alimente les bornes, quarante-huit volts qui siège
+
+[Refrain]
+CSMA CA et CPL, RTS, CTS, ACK
+Le support réservé avant l'envoi, jamais de couac
+CSMA CA et CPL, DIFS avant l'émission
+NAV calcule le temps d'attente, une vraie précision
+
+[Pont]
+Le signal CPL reste dans le compteur seulement avec un filtre
+Deux virgule quatre gigahertz seule bande libre, sans besoin de philtre
+En radio impossible d'écouter et d'émettre en même temps
+Éviter la collision plutôt que la détecter, un principe constant
+
+[Refrain final]
+CSMA CA et CPL, le sans fil et le courant
+Bluetooth, Wi-Fi, WiMax, un monde grouillant
+CSMA CA et CPL, la mobilité assurée
+Jusqu'au bout de l'onde, jamais coupée
+
+[Outro]
+Wi-Fi, CPL, Bluetooth
+One love, one network, sans fil

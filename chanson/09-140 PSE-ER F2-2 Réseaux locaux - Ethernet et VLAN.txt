@@ -1,0 +1,56 @@
+TITRE : CSMA CD et VLAN Riddim
+
+[Intro]
+ALOHA en soixante-dix, l'embryon d'Ethernet à Hawaï
+DIX standard en quatre-vingt, IEEE huit cent deux trois ensuite, appuyé
+CSMA CD et VLAN, oh yeah
+
+[Couplet 1]
+Adresse MAC quarante-huit bits, constructeur et numéro de série
+Unicast, broadcast FF partout, multicast pour la série
+Trame V deux avec Ethertype, huit cent deux trois avec longueur
+Padding jusqu'à soixante-quatre octets, la taille minimale au cœur
+
+Préambule synchronise l'horloge, FCS détecte l'erreur
+Service sans connexion, non fiable, TCP gère l'ampleur
+Fenêtre de collision, cinquante et un virgule deux microsecondes
+Jamming trente-deux bits, Binary Exponential Backoff seconde
+
+[Refrain]
+CSMA CD et VLAN, écoute puis émission
+Collision détectée, retransmission après réflexion
+CSMA CD et VLAN, mode partagé ou commuté
+Switch élimine les collisions, la distance illimitée
+
+[Couplet 2]
+LLC un sans connexion, LLC deux avec acquittement
+SNAP gère cent vingt-huit protocoles, un vrai fondement
+Dix Base T sur paires torsadées, Fast Ethernet cent mégabits
+Gigabit sur fibre ou cuivre, dix giga sur fibre explicite
+
+VLAN par port, par MAC, ou par adresse IP
+Huit cent un point Q ajoute quatre octets, tag qui multiplie
+Quatre mille quatre-vingt-quatorze VLAN adressables au total
+Trunk regroupe les liens logiques sur un lien physique, un vrai capital
+
+[Refrain]
+CSMA CD et VLAN, écoute puis émission
+Collision détectée, retransmission après réflexion
+CSMA CD et VLAN, mode partagé ou commuté
+Switch élimine les collisions, la distance illimitée
+
+[Pont]
+Domaine de collision en couche deux, domaine de diffusion en couche trois
+VLAN cloisonne, sécurise, réduit la diffusion à la fois
+Deux VLAN différents communiquent seulement via un routeur
+Le tag recalcule le FCS à chaque insertion, sans erreur
+
+[Refrain final]
+CSMA CD et VLAN, la topologie en étoile
+Bus logique diffusé, Ethernet qui jamais ne dévoile
+CSMA CD et VLAN, le réseau local structuré
+Jusqu'au bout de la trame, jamais isolé
+
+[Outro]
+Ethernet, VLAN, trame
+One love, one network, réseau local

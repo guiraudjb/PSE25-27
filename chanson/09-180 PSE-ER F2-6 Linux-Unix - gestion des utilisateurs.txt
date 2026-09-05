@@ -1,0 +1,56 @@
+TITRE : Passwd Shadow Riddim
+
+[Intro]
+Sept champs dans etc passwd, le login jusqu'au shell
+Le mot de passe réel se cache dans shadow, un secret fidèle
+Passwd shadow, oh yeah
+
+[Couplet 1]
+UID zéro pour root, jamais deux comptes avec ce chiffre
+Nobody pour NFS non fiable, sudo évite le philtre
+GID zéro pour le groupe root, sans cohérence entre systèmes
+Etc group liste membres et GID, une structure qu'on aime
+
+Crypt basé sur DES, treize caractères de longueur
+MD5 trente-quatre caractères, dollar un dollar en préfixe, une lueur
+Blowfish dollar deux a, SHA512 plus robuste encore
+Le sel aléatoire évite de détecter deux mots de passe identiques d'accord
+
+[Refrain]
+Passwd shadow, neuf champs bien rangés
+Date du dernier changement, en jours depuis soixante-dix comptés
+Passwd shadow, minimum et maximum de jours
+Expiration du compte, jamais de connexion au petit jour
+
+[Couplet 2]
+GECOS stocke nom, bureau, téléphone séparés par des virgules
+Chfn modifie, souvent inopérant avec LDAP, une bascule
+Vipw édite passwd et shadow en sécurité, sans accroc
+Etc skel copie les fichiers de démarrage, umask zéro sept sept, un bloc
+
+PAM centralise l'authentification sans recompiler
+LDAP structure hiérarchique, RFC deux mille trois cent sept, un pilier
+Active Directory utilise LDAP et Kerberos ensemble
+SSO authentifie une fois, Kerberos, JOSSO, CAS qui rassemblent
+
+[Refrain]
+Passwd shadow, neuf champs bien rangés
+Date du dernier changement, en jours depuis soixante-dix comptés
+Passwd shadow, minimum et maximum de jours
+Expiration du compte, jamais de connexion au petit jour
+
+[Pont]
+Un champ mot de passe vide est un trou de sécurité majeur
+Jamais réutiliser un UID supprimé, ça sème l'erreur
+Si passwd et group divergent, c'est passwd qui prévaut
+LDAP doit être en haute disponibilité, sinon tout s'écroule
+
+[Refrain final]
+Passwd shadow, la gestion des utilisateurs
+Useradd, usermod, userdel, les outils moteurs
+Passwd shadow, la sécurité des comptes
+Jusqu'au bout du login, jamais de mécompte
+
+[Outro]
+Passwd, shadow, LDAP
+One love, one network, utilisateurs

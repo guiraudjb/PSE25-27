@@ -1,0 +1,56 @@
+TITRE : Subnetting VLSM CIDR Riddim
+
+[Intro]
+RFC dix-neuf dix-huit réserve les adresses privées, un cadeau
+Dix point zéro, cent soixante-douze seize, cent quatre-vingt-douze cent soixante-huit, le tableau
+Subnetting VLSM CIDR, oh yeah
+
+[Couplet 1]
+Masque et adresse font un ET logique pour trouver le réseau
+Diffusion dirigée tous les bits host à un, un vrai signal beau
+Diffusion limitée deux cent cinquante-cinq quatre fois, reste locale
+Zéro point zéro point zéro point zéro, adresse source, jamais finale
+
+Subnetting divise host-id en subnetwork et host, RFC neuf cinquante
+Huit sous-réseaux demandent trois bits, slash vingt-sept, la donne est lancée
+Pas égale deux cent cinquante-six moins la valeur du dernier octet
+RIPv1 ignore le premier et le dernier sous-réseau, un vrai regret
+
+[Refrain]
+Subnetting VLSM CIDR, masque à longueur variable
+VLSM subdivise récursivement, un calcul remarquable
+Subnetting VLSM CIDR, sur-adressage sans classe
+CIDR élimine A B C, seize classes C en une masse
+
+[Couplet 2]
+RIPv2 et OSPF véhiculent les masques, VLSM supporté
+CIDR slash vingt donne quatre mille quatre-vingt-seize, une capacité
+Route aggregation regroupe les routes proches en une seule
+DHCP Discover, Offer, Request, Ack, le bail qui s'écoule
+
+Serveur DHCP même segment Ethernet, sinon agent de relais
+Réservation lie la MAC à l'IP fixe, jamais un délai
+IPv6 cent vingt-huit bits, en-tête de quarante octets complet
+IPsec obligatoire, anycast remplace le broadcast, un progrès concret
+
+[Refrain]
+Subnetting VLSM CIDR, masque à longueur variable
+VLSM subdivise récursivement, un calcul remarquable
+Subnetting VLSM CIDR, sur-adressage sans classe
+CIDR élimine A B C, seize classes C en une masse
+
+[Pont]
+Une adresse sans son masque reste une information incomplète
+IGMP gère le multicast, ICMP gère l'erreur, jamais en boucle secrète
+Le VLSM sert l'interne, le CIDR sert les fournisseurs d'accès
+Le subnetting reste la technique la plus utilisée, sans excès
+
+[Refrain final]
+Subnetting VLSM CIDR, l'art de diviser l'espace
+Chaque bit compté, chaque adresse a sa place
+Subnetting VLSM CIDR, du masque au routage
+Jusqu'au bout du préfixe, jamais de dommage
+
+[Outro]
+Subnetting, VLSM, CIDR
+One love, one network, adressage

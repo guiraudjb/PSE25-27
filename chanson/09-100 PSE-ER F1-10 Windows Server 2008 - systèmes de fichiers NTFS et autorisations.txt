@@ -1,0 +1,56 @@
+TITRE : MFT et ACL Riddim
+
+[Intro]
+Le MBR au cylindre zéro contient la table des partitions
+NTFS stocke tout dans la MFT, une vraie institution
+MFT et ACL, oh yeah
+
+[Couplet 1]
+FAT16 deux téra clusters, FAT32 plus de deux cent millions
+NTFS seize exaoctets, deux cent cinquante-cinq caractères, une extension
+LCN compte depuis le début du volume, VCN l'offset du fichier
+Metafichiers, seize premiers enregistrements, le mft mir en veille
+
+Attribut résident dans la MFT, non résident en extension
+Jeton d'accès comparé aux ACE, sujet et objet en tension
+DACL autorise, refuse, SACL audite l'accès
+Faute de décision, la fin de liste refuse sans excès
+
+[Refrain]
+MFT et ACL, contrôle d'accès discrétionnaire
+Propriétaire, héritage, autorisations explicites ou millénaires
+MFT et ACL, EFS chiffre par paire de clés
+Compression NTFS incompatible au chiffrement, jamais mêlées
+
+[Couplet 2]
+Autorisations de partage et NTFS restent indépendantes
+Les plus restrictives des deux s'appliquent, une règle importante
+Afficher le contenu hérité par dossier, pas par fichier
+Lecture et exécution hérité par les deux, un vrai métier
+
+Quota limite l'espace par volume ou par dossier
+Dirquota augmente automatiquement le seuil sans tricher
+Cliché instantané récupère un fichier supprimé ou écrasé
+Espace de noms DFS unifie les partages dispersés
+
+[Refrain]
+MFT et ACL, contrôle d'accès discrétionnaire
+Propriétaire, héritage, autorisations explicites ou millénaires
+MFT et ACL, EFS chiffre par paire de clés
+Compression NTFS incompatible au chiffrement, jamais mêlées
+
+[Pont]
+Sans entrée qui autorise, l'accès reste toujours refusé
+Les autorisations explicites priment sur celles héritées
+Aucun système hors Windows NT ne lit une partition NTFS
+Un fichier chiffré reste verrouillé sans la clé, même avec accès
+
+[Refrain final]
+MFT et ACL, la structure et la sécurité
+Windows Server 2008 protège chaque propriété
+MFT et ACL, du cluster au descripteur
+Jusqu'au bout du fichier, jamais d'erreur
+
+[Outro]
+NTFS, MFT, ACL
+One love, one network, autorisations

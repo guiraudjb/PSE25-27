@@ -1,0 +1,56 @@
+TITRE : Shannon et Baud Riddim
+
+[Intro]
+L'information est une suite de bits que la machine comprend
+Le signal transcrit en tension, fréquence ou lumière, un vrai talent
+Shannon et baud, oh yeah
+
+[Couplet 1]
+Échantillonnage prélève l'amplitude à intervalles réguliers
+Shannon exige le double de la fréquence maximale, sans quartier
+ETTD génère les données, ETCD module le signal
+Synchrone coïncide avec l'horloge, asynchrone reste marginal
+
+Full-duplex transmet dans les deux sens simultanément
+Half-duplex alterne, simplex ne va que dans un sens, clairement
+Rapidité de modulation en bauds, valence en bits par top
+Débit égale valence fois rapidité, la formule au galop
+
+[Refrain]
+Shannon et baud, bruit blanc, bruit impulsif, thermique
+Rapport signal sur bruit détermine la qualité numérique
+Shannon et baud, bande de base ou onde porteuse
+FSK, PSK, MAQ modulent la fréquence studieuse
+
+[Couplet 2]
+Codage Manchester bivalent, front montant ou descendant
+Critère de Nyquist limite la rapidité à deux fois la bande, exigeant
+Multiplexage fréquentiel découpe en canaux réservés
+PDH plésiochrone, SDH synchrone à la nanoseconde, un progrès
+
+Paire torsadée catégorie six pour le gigabit
+Fibre monomode cent gigahertz sur un kilomètre, un exploit
+Répéteur régénère en couche un, sans filtrer les collisions
+Pont filtre en couche deux, Spanning Tree évite les boucles, une solution
+
+[Refrain]
+Shannon et baud, bruit blanc, bruit impulsif, thermique
+Rapport signal sur bruit détermine la qualité numérique
+Shannon et baud, bande de base ou onde porteuse
+FSK, PSK, MAQ modulent la fréquence studieuse
+
+[Pont]
+La paradiaphonie faible donne une mesure élevée en décibels
+Hub duplique sur tous les ports, switch segmente en réel
+Routeur route par tables, passerelle convertit les protocoles
+La bande de base reste limitée aux courtes distances, une école
+
+[Refrain final]
+Shannon et baud, du signal à l'équipement
+Répéteur, pont, routeur, chaque couche a son fondement
+Shannon et baud, la transmission maîtrisée
+Jusqu'au bout du support, jamais dégradée
+
+[Outro]
+Signal, modulation, support
+One love, one network, transmission

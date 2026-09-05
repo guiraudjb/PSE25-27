@@ -1,0 +1,56 @@
+TITRE : TTL et Fragmentation Riddim
+
+[Intro]
+IP fait ce qui est possible pour porter le datagramme au loin
+Sans garantir la remise, sans connexion, sans témoin
+TTL et fragmentation, oh yeah
+
+[Couplet 1]
+Trente-deux bits pour l'adresse, Net-ID et Host-ID divisés
+Classe A jusqu'à cent vingt-sept, classe B cent quatre-vingt-onze, classé
+Classe C cent quatre-vingt-douze deux cent vingt-trois, deux cent cinquante-quatre hôtes
+NIC attribue les adresses, sinon le plan devient un vrai piège, une côte
+
+MTU mille cinq cents octets pour Ethernet, la limite
+Fragmentation découpe si le réseau suivant l'exige, une élite
+Fragment Offset en blocs de huit octets depuis le début
+Réassemblage seulement par le destinataire, jamais en cours de route
+
+[Refrain]
+TTL et fragmentation, decrémenté à chaque routeur
+Datagramme détruit à zéro, évite l'erreur
+TTL et fragmentation, checksum recalculé sans cesse
+En-tête réinterprété à chaque saut, une vraie prouesse
+
+[Couplet 2]
+ARP résout l'adresse physique depuis l'adresse logique connue
+RARP fait l'inverse, la station sans disque avant tout attendue
+ICMP signale destination injoignable, dépassement de temps
+Ping envoie un echo request, reçoit un echo reply à temps
+
+Version quatre bits, LET minimum cinq mots de trente-deux
+TOS priorise délai, débit ou fiabilité, un choix judicieux
+Options de taille variable, implémentées par tout module IP
+GGP relie les routeurs entre eux, un dialogue typique
+
+[Refrain]
+TTL et fragmentation, decrémenté à chaque routeur
+Datagramme détruit à zéro, évite l'erreur
+TTL et fragmentation, checksum recalculé sans cesse
+En-tête réinterprété à chaque saut, une vraie prouesse
+
+[Pont]
+Une adresse IP identifie une connexion, pas une machine entière
+Le réassemblage perd tout si un seul fragment ne rentre pas dans l'aire
+Aucun message ICMP en réponse à un message ICMP, jamais de boucle
+RARP s'émet avant même le chargement du système, sans reproche
+
+[Refrain final]
+TTL et fragmentation, IP le pilier du réseau
+Non fiable, non connecté, mais fidèle au tableau
+TTL et fragmentation, ARP et ICMP en renfort
+Jusqu'au bout du datagramme, jamais de tort
+
+[Outro]
+IP, ARP, ICMP
+One love, one network, protocole

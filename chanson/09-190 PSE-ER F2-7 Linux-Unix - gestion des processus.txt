@@ -1,0 +1,56 @@
+TITRE : Fork et Exec Riddim
+
+[Intro]
+Le programme statique, le processus qui prend vie
+Fork clone, exec recouvre, le cycle qui varie
+Fork et exec, oh yeah
+
+[Couplet 1]
+Init premier processus, ancêtre de tous les autres
+Processus père et fils, une hiérarchie qui se dénoue
+Fork alloue une entrée, duplique la zone u
+Copy-on-write économise, jusqu'à la première écriture, imprévu
+
+Exec libère tout sauf l'entrée et la zone u
+Alloue texte, données, pile et tas, un nouveau statut
+Wait attend le fils, récupère le code de sortie
+Exit termine, laisse un zombie, le père doit y voir
+
+[Refrain]
+Fork et exec, PID attribué au fork
+Conservé lors de l'exec, jamais un remords
+Fork et exec, thread partage tout sauf trois choses
+Compteur, pile, registres, le reste qu'on propose
+
+[Couplet 2]
+Changement de contexte sauvegarde puis rétablit l'état
+Ordonnancement équilibre efficacité et équité, un vrai combat
+Round robin, priorités, durées variables, l'algorithme choisit
+Pseudo-parallélisme simule le multitâche, un vrai profit
+
+Descripteurs zéro un deux, entrée, sortie, erreur standard
+Chevron simple écrase, double chevron ajoute sans retard
+SIGHUP relit la config, SIGKILL tue sans pitié
+SIGTERM demande poliment, SIGCHLD informe le père, une vraie amitié
+
+[Refrain]
+Fork et exec, PID attribué au fork
+Conservé lors de l'exec, jamais un remords
+Fork et exec, thread partage tout sauf trois choses
+Compteur, pile, registres, le reste qu'on propose
+
+[Pont]
+Ps moins aux sur BSD, ps moins edf sur AT&T
+Kill envoie n'importe quel signal au même propriétaire, sans complexité
+At lance différé, crontab répète à intervalles
+Race condition et deadlock guettent les threads, une vraie bataille
+
+[Refrain final]
+Fork et exec, le cycle de vie du processus
+De la naissance au zombie, un chemin bien conclu
+Fork et exec, Linux et Unix au cœur
+Jusqu'au bout du PID, jamais d'erreur
+
+[Outro]
+Fork, exec, processus
+One love, one network, gestion des processus

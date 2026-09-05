@@ -1,0 +1,56 @@
+TITRE : SID et Jeton Riddim
+
+[Intro]
+TCSEC exige ouverture de session sécurisée, un vrai départ
+LSASS gère la stratégie locale, Lsass point exe au cœur
+SID et jeton, oh yeah
+
+[Couplet 1]
+PatchGuard protège le noyau contre les rootkits qui rôdent
+KMCS vérifie la signature du code, une bonne méthode
+SRM définit le jeton, contrôle l'accès aux objets
+SAM stocke comptes locaux dans HKLM SAM, un vrai projet
+
+Winlogon crée le shell, LogonUI vérifie les identifiants
+Netlogon ouvre le canal sécurisé vers le contrôleur, patiemment
+Packages d'authentification valident nom et mot de passe
+LSA construit la session de connexion, la sécurité qui embrasse
+
+[Refrain]
+SID et jeton, S un cinq vingt et un, l'autorité
+Cinq cents le RID administrateur, une identité
+SID et jeton, DACL et SACL dans le descripteur
+Propriétaire lit et modifie toujours, jamais un imposteur
+
+[Couplet 2]
+Kerberos V cinq authentifie mutuellement client et serveur
+SSL TLS sécurise le web, NTLM en mode mineur
+Login deux cent cinquante-six caractères, insensible à la casse
+Mot de passe SAM quatorze, domaine cent vingt-sept, une vraie surface
+
+Contrôle d'accès rapproche permissions, descripteur et jeton
+Droits d'utilisateur s'appliquent au compte, jamais à l'objet, une distinction
+Audit consigne dans le journal de sécurité chaque accès
+GPO applique automatiquement les règles sans excès
+
+[Refrain]
+SID et jeton, S un cinq vingt et un, l'autorité
+Cinq cents le RID administrateur, une identité
+SID et jeton, DACL et SACL dans le descripteur
+Propriétaire lit et modifie toujours, jamais un imposteur
+
+[Pont]
+Contrôle d'accès et audit n'ont lieu qu'à l'ouverture de l'objet
+Les permissions restent valables tant que l'objet reste ouvert et concret
+Mode mixte avec NTLM, paramètre par défaut de Windows Server
+Sans package d'authentification valide, la connexion s'arrête net
+
+[Refrain final]
+SID et jeton, le modèle de sécurité complet
+Authentification, contrôle d'accès, audit sans arrêt
+SID et jeton, Windows Server protégé
+Jusqu'au bout du domaine, jamais piraté
+
+[Outro]
+SID, LSASS, Kerberos
+One love, one network, sécurité
