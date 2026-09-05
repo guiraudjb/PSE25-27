@@ -1,0 +1,56 @@
+TITRE : VHE Roaming Riddim
+
+[Intro]
+Mobilité reconstitue l'univers du nomade à distance
+VHE environnement personnel virtuel, une vraie assonance
+VHE roaming, oh yeah
+
+[Couplet 1]
+Supply chain, forces commerciales, terrain, management
+Quatre axes de la mobilité professionnelle, un vrai mouvement
+Smartphone, PDA, ultra portable, chacun son usage
+Symbian, Windows Mobile, Palm OS, trois systèmes en partage
+
+WPAN par Bluetooth, WLAN par le Wi-Fi et HiperLAN
+WWAN par GSM, GPRS, Edge, UMTS, HSDPA en élan
+Edge multiplie par quatre le débit du GPRS ancien
+HSDPA jusqu'à quatorze virgule quatre mégabits, un gain certain
+
+[Refrain]
+VHE roaming, changer de réseau sans perdre la communication
+Pas encore garanti, l'UMTS se dégrade sans hésitation
+VHE roaming, mobilité réduite ou complète en action
+Déconnecté avec synchronisation, ou temps réel en fonction
+
+[Couplet 2]
+Quatre volets du projet, fonctionnel, organisationnel, technique, applicatif
+VPN SSL ou IPsec pour le transport, un choix décisif
+Authentification faible par mot de passe, forte par certificat
+Vérification de conformité du poste, antivirus, pare-feu actifs
+
+DMZ porte bastion IPS, reverse proxy, cache, authentification
+Rupture protocolaire et NAT séparent l'extérieur en fonction
+Device Management triangule par GSM pour localiser
+Pay per use facture au volume, jamais au temps passé
+
+[Refrain]
+VHE roaming, changer de réseau sans perdre la communication
+Pas encore garanti, l'UMTS se dégrade sans hésitation
+VHE roaming, mobilité réduite ou complète en action
+Déconnecté avec synchronisation, ou temps réel en fonction
+
+[Pont]
+La mobilité change d'abord les comportements humains, un vrai projet
+Une solution mutualisée unique évite les coûts en excès
+Le passage à HSDPA exige la modulation seize QAM avancée
+Une unité d'organisation dédiée regroupe les mobiles dans l'Active Directory posée
+
+[Refrain final]
+VHE roaming, la mobilité en entreprise
+Terminaux, réseaux, sécurité, une vraie emprise
+VHE roaming, du bureau au nomade
+Jusqu'au bout du signal, jamais de bévue maussade
+
+[Outro]
+Mobilité, VHE, roaming
+One love, one network, accès distants mobiles

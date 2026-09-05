@@ -1,0 +1,56 @@
+TITRE : NAS RADIUS Tunnel Riddim
+
+[Intro]
+Accès distant relie le nomade à l'entreprise au loin
+RTC physiquement sécurisé, jamais partagé, un vrai coin
+NAS RADIUS tunnel, oh yeah
+
+[Couplet 1]
+PPP encapsule IP entre l'utilisateur et le NAS
+CHAP hache le mot de passe, préféré à PAP, un vrai pas
+NAS client RADIUS, dialogue avec le proxy dédié
+Serveur primaire et secondaire, une redondance assurée
+
+VPN-RAS traverse Internet, milieu hostile et guetté
+ISAKMP négocie chiffrement, intégrité, durée de vie de la clé
+Association de sécurité fixe le contexte de protection
+ESP chiffre chaque paquet, une vraie fonction
+
+[Refrain]
+NAS RADIUS tunnel, authentification mutuelle par certificat
+Puis identifiant mot de passe, une double sécurité en acte
+NAS RADIUS tunnel, ARP spoofing, DNS spoofing en embuscade
+Homme du milieu guette la faille, une attaque qui persuade
+
+[Couplet 2]
+RADIUS assure authentification, autorisation et trace
+Couplé à LDAP ou SQL, une solution robuste qui s'implante
+Le serveur RADIUS isolé, accessible aux seuls clients et proxies
+IOS mis à jour contre le déni de service, une vraie stratégie
+
+Sécurité physique, local protégé, badge ou code d'accès
+CDROM et USB désactivés contre les Live CD en excès
+Module de chiffrement matériel évite de saturer le processeur
+Sauvegarde quotidienne des serveurs, une vraie rigueur
+
+[Refrain]
+NAS RADIUS tunnel, authentification mutuelle par certificat
+Puis identifiant mot de passe, une double sécurité en acte
+NAS RADIUS tunnel, ARP spoofing, DNS spoofing en embuscade
+Homme du milieu guette la faille, une attaque qui persuade
+
+[Pont]
+Le réseau téléphonique reste difficile à espionner, jamais partagé
+Internet expose à l'interception, plus simple à attaquer
+Même chiffré, le trafic reste interceptable mais inexploitable
+Le chiffrement de la SA rend la donnée impénétrable
+
+[Refrain final]
+NAS RADIUS tunnel, l'accès distant sécurisé
+Modem ou Internet, toujours authentifié
+NAS RADIUS tunnel, du nomade à l'entreprise
+Jusqu'au bout du tunnel, jamais de surprise
+
+[Outro]
+NAS, RADIUS, VPN
+One love, one network, accès distants

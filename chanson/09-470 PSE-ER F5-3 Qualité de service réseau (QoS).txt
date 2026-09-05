@@ -1,0 +1,56 @@
+TITRE : QdS E800 Riddim
+
+[Intro]
+Qualité de service, effet global sur la satisfaction
+E800 distingue attente et fonctionnement, une distinction
+QdS E800, oh yeah
+
+[Couplet 1]
+Disponibilité, fiabilité, délai, capacité, quatre critères
+Valeur de conception, courante, seuil, une vraie frontière
+Accès, maintien, libération, trois phases du transfert
+Fidélité continue le service, même en pointe ouvert
+
+Taux de rejet mesure la disponibilité en mode connecté
+Accessibilité du service, du réseau, de la connexion, bien détaillé
+Fiabilité surveille pertes, dé-séquencement, erreurs de liens
+Capacité juge la charge restante, un taux qui revient
+
+[Refrain]
+QdS E800, best-effort par défaut sur Internet
+Discrimination des services, classes différenciées en effet
+QdS E800, FIFO, priority, weighted fair queuing
+RSVP réserve par le destinataire, un protocole marquant
+
+[Couplet 2]
+Trafic shaping contrôle le volume entrant dans le réseau
+Admission control limite l'entrée des flux, un vrai tableau
+La couche transport comble le fossé de la couche réseau
+Temps d'établissement, débit, taux d'erreur résiduel, un vrai niveau
+
+NIC dépend de l'ISOC, attribue les adresses officielles
+NAT traduit une pour une, PAT ajoute le port essentiel
+Segmentation par routeurs filtrants, pare-feu en renfort
+Plans de numérotation confidentiels, une bonne sorte
+
+[Refrain]
+QdS E800, best-effort par défaut sur Internet
+Discrimination des services, classes différenciées en effet
+QdS E800, FIFO, priority, weighted fair queuing
+RSVP réserve par le destinataire, un protocole marquant
+
+[Pont]
+Le fournisseur mesure une moyenne, l'utilisateur veut chaque transaction
+Un réseau fiable à quatre-vingt-dix-huit pour cent frustre malgré la précision
+Trois types de contrats, réseau, équipement, dialogue, une vraie couche
+Le débit applicatif diffère du débit normalisé, jamais une confusion farouche
+
+[Refrain final]
+QdS E800, la satisfaction mesurée
+Fournisseur et utilisateur, deux visions négociées
+QdS E800, du critère au contrat
+Jusqu'au bout du flux, jamais de couac
+
+[Outro]
+QoS, RSVP, réseau
+One love, one network, qualité de service

@@ -1,0 +1,56 @@
+TITRE : Déconnecter Sans Éteindre Riddim
+
+[Intro]
+Détection host-based analyse les journaux locaux
+Network-based capture le trafic, un vrai signal
+Déconnecter sans éteindre, oh yeah
+
+[Couplet 1]
+Déconnecter la machine du réseau, jamais l'éteindre
+Prévenir de vive voix, l'intrus pourrait tout comprendre
+Copie physique avec dd, secteurs non occupés compris
+Jamais stocker l'image sur le disque analysé, un principe compris
+
+Réinstaller entièrement depuis une source saine et sûre
+Supprimer la seule faille exploitée ne suffit pas, une figure
+Force brute teste tout, dictionnaire teste les mots connus
+Compromis temps-mémoire casse le hash LM, un coup reçu
+
+[Refrain]
+Déconnecter sans éteindre, prévenir le CERT en renfort
+Jamais contacter l'attaquant soi-même, un vrai remord
+Déconnecter sans éteindre, huit règles ANSSI pour le mot de passe
+Distinct par système, jamais par un tiers, une bonne classe
+
+[Couplet 2]
+DDoS volumétrique sature la bande, épuisement de ressource
+Réflexion usurpe l'IP victime, amplification en surdose
+DNS, NTP, SNMP, SSDP amplifient la réponse
+Blackholing route vers le néant, le déni devient l'offense
+
+Journalisation horodatée, synchronisée par NTP commun
+Export sur machine distincte, rotation formalisée, un par un
+Réduire la surface d'attaque, supprimer le superflu partout
+AppLocker cible un utilisateur, SRP touchait tout le monde après tout
+
+[Refrain]
+Déconnecter sans éteindre, prévenir le CERT en renfort
+Jamais contacter l'attaquant soi-même, un vrai remord
+Déconnecter sans éteindre, huit règles ANSSI pour le mot de passe
+Distinct par système, jamais par un tiers, une bonne classe
+
+[Pont]
+Ne jamais activer le suivi de connexions devant un serveur exposé
+Un pare-feu peut devenir la cible du DDoS, un piège caché
+Seule la direction peut déposer plainte, jamais l'administrateur seul
+Un audit ne prouve jamais l'absence de faille, un rappel solennel
+
+[Refrain final]
+Déconnecter sans éteindre, la réaction méthodique
+Copie, analyse, réinstallation, une pratique logique
+Déconnecter sans éteindre, la sécurité opérationnelle
+Jusqu'au bout de l'incident, jamais accidentelle
+
+[Outro]
+Intrusion, mot de passe, DDoS
+One love, one network, sécurité opérationnelle

@@ -1,0 +1,56 @@
+TITRE : Bi-Clé Certificat X509 Riddim
+
+[Intro]
+Chiffrer transforme le clair en cryptogramme secret
+Décrypter sans la clé, déchiffrer avec, un vrai décret
+Bi-clé certificat X509, oh yeah
+
+[Couplet 1]
+Symétrique une clé partagée, DES, AES, RC4 rapide
+Asymétrique deux clés, publique et privée, une aide solide
+Diffie-Hellman mille neuf cent soixante-seize, l'article fondateur
+Factorisation et logarithme discret, les problèmes en douceur
+
+RSA chiffre et signe, DSA signe seulement, en soi
+Hachage transforme en condensat, MD5 cassé, une loi
+SHA-1 retiré, SHA-2 reste utilisable pour l'instant
+SHA-3 depuis deux mille douze, une alternative naissante
+
+[Refrain]
+Bi-clé certificat X509, RFC deux mille quatre cent cinquante-neuf
+Autorité de certification signe, un tiers de confiance neuf
+Bi-clé certificat X509, LDAP publie les clés publiques
+CRL liste les révoqués, une protection authentique
+
+[Couplet 2]
+Signature chiffre l'empreinte avec la clé privée de l'émetteur
+Vérification avec la clé publique, intégrité et authenticité en chœur
+IGC gère le cycle de vie, génération jusqu'à révocation
+Autorité d'enregistrement contrôle, opérateur assure la distribution
+
+SSH génère une paire RSA, chiffre la session en symétrique
+SSL entre application et transport, HTTPS son fabrique
+IPsec authentifie et chiffre, AH ou ESP en renfort
+Mode transport, tunnel, intermédiaire, une protection forte
+
+[Refrain]
+Bi-clé certificat X509, RFC deux mille quatre cent cinquante-neuf
+Autorité de certification signe, un tiers de confiance neuf
+Bi-clé certificat X509, LDAP publie les clés publiques
+CRL liste les révoqués, une protection authentique
+
+[Pont]
+L'asymétrique lève le partage de secret mais reste lent
+On combine les deux, la clé de session en volume important
+Aucun protocole ne révoque automatiquement, une gestion humaine
+Le premier enrôlement repose sur le physique, jamais la chaîne cryptographique seule certaine
+
+[Refrain final]
+Bi-clé certificat X509, la confiance numérique
+Chiffrement, signature, une chaîne authentique
+Bi-clé certificat X509, du secret à la preuve
+Jusqu'au bout de la clé, jamais l'épreuve
+
+[Outro]
+Chiffrement, PKI, certificat
+One love, one network, sécurité cryptographique

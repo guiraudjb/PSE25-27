@@ -1,0 +1,56 @@
+TITRE : Firewall Honeypot Riddim
+
+[Intro]
+Le pare-feu protège le réseau du monde extérieur
+Restreint les machines à surveiller, un vrai moteur
+Firewall honeypot, oh yeah
+
+[Couplet 1]
+Filtre de paquets trie par adresse, port et contenu sans état
+Passerelle de circuits relaie le TCP, un vrai combat
+Passerelle d'applications a un programme par service précis
+Stateful multilayer combine les trois, une architecture qui suit
+
+Tout autoriser puis interdire, ou l'inverse plus prudent
+Fragments IP et FTP posent problème au filtrage évident
+Iptables sous Linux, Packet Filter chez BSD
+IDS et IPS s'ajoutent aux pare-feu modernisés
+
+[Refrain]
+Firewall honeypot, jamais suffisant seul
+Ni les mots de passe faibles ni la menace interne, aucun linceul
+Firewall honeypot, translation d'adresse en renfort
+Relais applicatif protège chaque protocole, un effort
+
+[Couplet 2]
+Pot de miel volontairement peu sécurisé, un vrai leurre
+Distrait l'attaquant, révèle ses techniques, une vraie lueur
+Faible interaction, honeyd, honeytrap, un risque mesuré
+Forte interaction, ROO HoneyWall, un déploiement prudent et posé
+
+Honeynet regroupe plusieurs pots de miel en réseau
+Projet Honeynet, NoAH européen, un vrai réseau
+Le poste de travail se protège aussi individuellement
+Antivirus, pare-feu personnel, mise à jour régulièrement
+
+[Refrain]
+Firewall honeypot, jamais suffisant seul
+Ni les mots de passe faibles ni la menace interne, aucun linceul
+Firewall honeypot, translation d'adresse en renfort
+Relais applicatif protège chaque protocole, un effort
+
+[Pont]
+Un filtre de paquets n'a pas de notion de contexte, attention
+L'inspection stateful suit l'état de chaque connexion
+Un pot de miel à forte interaction offre un vrai accès, un risque réel
+Jamais le déployer sans prudence, un vrai rituel
+
+[Refrain final]
+Firewall honeypot, la sécurité périmétrique
+Filtrage, leurre, une défense stratégique
+Firewall honeypot, jamais baisser la garde
+Jusqu'au bout du réseau, la vigilance qui darde
+
+[Outro]
+Pare-feu, pot de miel, sécurité
+One love, one network, équipements

@@ -1,0 +1,56 @@
+TITRE : DAS NAS SAN Riddim
+
+[Intro]
+DAS attachement direct, un seul serveur accède au disque
+NAS serveur de fichiers sur le réseau, un partage typique
+DAS NAS SAN, oh yeah
+
+[Couplet 1]
+SAN réseau dédié, Fibre Channel, FCoE, iSCSI
+Point à point, fabric, boucle, trois topologies choisies
+HBA équipe chaque serveur, en double pour la sécurité
+Deux fabrics éliminent le point de défaillance, une vraie qualité
+
+RAID zéro rapide sans sécurité, entrelacement pur
+RAID un le miroir duplique, une protection sûre
+RAID cinq parité répartie, trois disques au minimum requis
+SATA lent et gros, SAS rapide pour la production choisie
+
+[Refrain]
+DAS NAS SAN, SMB CIFS pour Windows en local
+NFS pour Unix, Linux, NCP pour Novell, un protocole normal
+DAS NAS SAN, dé-duplication économise l'espace occupé
+Thin provisioning promet sans tout allouer
+
+[Couplet 2]
+Fibre Channel norme ANSI X3T11, fibre optique au loin
+FC-PH regroupe FC-zéro, un, deux, un codage huit b dix b au coin
+Snapshot copie instantanée, clone copie identique d'un volume
+Réplication synchrone ou asynchrone vers un site qui résout le problème
+
+Virtualisation du stockage, machines virtuelles sans souci d'emplacement
+NDMP réduit le trafic pour sauvegarder les NAS efficacement
+Norme PFC pour les alimentations, ANSI TIA neuf cent quarante-deux
+Sauvegarde de secours sur site éloigné, jamais un site unique
+
+[Refrain]
+DAS NAS SAN, SMB CIFS pour Windows en local
+NFS pour Unix, Linux, NCP pour Novell, un protocole normal
+DAS NAS SAN, dé-duplication économise l'espace occupé
+Thin provisioning promet sans tout allouer
+
+[Pont]
+Un NAS partage la bande passante avec les autres connexions du LAN
+Un SAN dédié coûte cher mais offre haute disponibilité en amont
+RAID matériel décharge le processeur, RAID logiciel plus économe
+La vérification régulière des données évite le pire syndrome
+
+[Refrain final]
+DAS NAS SAN, les architectures de stockage
+Direct, réseau local, dédié, chacun son usage
+DAS NAS SAN, du disque à la virtualisation
+Jusqu'au bout du volume, jamais de corruption
+
+[Outro]
+DAS, NAS, SAN
+One love, one network, stockage en réseau

@@ -1,0 +1,56 @@
+TITRE : URL HTTP HTML Riddim
+
+[Intro]
+Internet interconnexion de réseaux, un système sans propriétaire
+Intranet réservé à l'organisme, un même vocabulaire
+URL HTTP HTML, oh yeah
+
+[Couplet 1]
+MAE, NAP, PPP, points de concentration du net
+ISP connecte ses routeurs, moyennant une redevance qu'on paye
+Intranet trois niveaux, client, serveur d'application, base de données
+Client léger, navigateur seul, une architecture bien pensée
+
+Extranet étend l'intranet aux partenaires par VPN
+DMZ zone démilitarisée, un espace intermédiaire serein
+Architecture standard un pare-feu, SSL et certificat
+Architecture sécurisée deux pare-feu, un tunnel VPN exact
+
+[Refrain]
+URL HTTP HTML, protocole, nom DNS, nom du document
+URL HTTP HTML, trois concepts du web fondamentalement
+URL HTTP HTML, HTTP zéro neuf un seul verbe GET
+Un un ajoute Host obligatoire, connexion persistante en projet
+
+[Couplet 2]
+HTTP un zéro RFC dix-neuf quarante-cinq, GET, HEAD, POST
+HTTP un un RFC deux mille six cent seize, OPTIONS, TRACE, le poste
+GET et HEAD sûres et idempotentes, un principe qui persiste
+POST ni l'une ni l'autre, PUT et DELETE idempotentes existent
+
+Cache-Control public, private, no-cache, max-age négocié
+ETag valide par empreinte, If-None-Match vérifié
+SPDY multiplexe, compresse les en-têtes, prélude à HTTP deux
+CSS sépare structure et style, cascade et héritage précieux
+
+[Refrain]
+URL HTTP HTML, protocole, nom DNS, nom du document
+URL HTTP HTML, trois concepts du web fondamentalement
+URL HTTP HTML, HTTP zéro neuf un seul verbe GET
+Un un ajoute Host obligatoire, connexion persistante en projet
+
+[Pont]
+Le Web né de Tim Berners-Lee en mille neuf cent quatre-vingt-neuf
+W3C fondé par CERN et MIT, un consortium tout neuf
+Load balancing répartit sur des machines actives ensemble
+Fail over bascule sur le passif, chacun dimensionné, ça ressemble
+
+[Refrain final]
+URL HTTP HTML, l'essor du web mondial
+Internet, intranet, extranet, un cheminement graduel
+URL HTTP HTML, du lien hypertexte à la page
+Jusqu'au bout du protocole, jamais un naufrage
+
+[Outro]
+Internet, HTTP, HTML
+One love, one network, essor du web

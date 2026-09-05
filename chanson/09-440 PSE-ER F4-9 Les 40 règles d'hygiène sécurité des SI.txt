@@ -1,0 +1,56 @@
+TITRE : Quarante Règles ANSSI Riddim
+
+[Intro]
+Neuf domaines de l'ANSSI, une quarantaine de règles posées
+Sensibiliser, former, connaître le système exposé
+Quarante règles ANSSI, oh yeah
+
+[Couplet 1]
+Comptes nominatifs partout, génériques restent marginaux
+Authentification forte, deux facteurs, jamais un seul niveau
+Configurations par défaut modifiées dès l'installation
+Coffre-fort numérique protège les mots de passe, une précaution
+
+Segmenter en zones, VLAN et sous-réseaux dédiés
+Un réseau à plat laisse l'attaquant tout traverser
+WPA2, AES CCMP pour le Wi-Fi robuste et sûr
+Protocoles en s final, HTTPS, IMAPS, une armure
+
+[Refrain]
+Quarante règles ANSSI, poste d'administration sans Internet
+Réseau d'administration cloisonné, physiquement ou en secret
+Quarante règles ANSSI, aucun utilisateur administrateur par défaut
+Magasin d'applications validées couvre les besoins bientôt
+
+[Couplet 2]
+Terminaux nomades banalisés, filtre de confidentialité posé
+Chiffrement complet du disque avant tout, priorité affirmée
+VPN IPsec automatique et non débrayable pour le nomade
+Ne jamais mélanger usage personnel et professionnel, une bonne parade
+
+Correctifs appliqués dans le mois suivant leur publication
+Composants obsolètes isolés au réseau, une vraie précaution
+Journaux conservés au moins un an, horloges synchronisées par NTP
+Audit annuel mesure les écarts, jamais une preuve complète
+
+[Refrain]
+Quarante règles ANSSI, poste d'administration sans Internet
+Réseau d'administration cloisonné, physiquement ou en secret
+Quarante règles ANSSI, aucun utilisateur administrateur par défaut
+Magasin d'applications validées couvre les besoins bientôt
+
+[Pont]
+La sécurité tient au maillon le plus faible, jamais oublié
+Gestion centralisée homogénéise tout le parc informatisé
+En cas d'incident, déconnecter, maintenir sous tension, alerter
+Le référent en sécurité, premier contact, jamais isolé
+
+[Refrain final]
+Quarante règles ANSSI, l'hygiène des systèmes d'information
+Former, connaître, authentifier, une vraie construction
+Quarante règles ANSSI, du poste au réseau
+Jusqu'au bout de la règle, jamais de défaut
+
+[Outro]
+ANSSI, hygiène, sécurité
+One love, one network, quarante règles

@@ -1,0 +1,56 @@
+TITRE : Botnet Buffer Overflow Riddim
+
+[Intro]
+Ingénierie sociale exploite la faille humaine, un vrai levier
+MICE, VICE, argent, idéologie, un piège à surveiller
+Botnet buffer overflow, oh yeah
+
+[Couplet 1]
+Sniffing capture les paquets en clair, un vrai danger
+Scanning cherche les ports ouverts avant d'attaquer
+Virus, ver, cheval de Troie, chacun sa méthode
+Spyware collecte en douce, une vraie mélodie discorde
+
+Botnet piloté par IRC, web, ou pair-à-pair
+Spam quatre-vingt-dix pour cent du trafic, un vrai calvaire
+Phishing hameçonne depuis deux mille trois massivement
+Scam la fraude quatre cent dix-neuf, un piège financier ancien
+
+[Refrain]
+Botnet buffer overflow, deux tiers des vulnérabilités
+Stack smashing écrase l'adresse de retour, une réalité
+Botnet buffer overflow, canary protège la pile
+SYN flood inonde de faux SYN, une attaque facile
+
+[Couplet 2]
+DDoS distribué écroule la bande passante d'un coup
+Mafiaboy à quinze ans contre eBay, un dégât fou
+ARP spoofing pollue le cache, homme du milieu qui guette
+DNS cache poisoning reroute vers un site pirate, une menace secrète
+
+XSS vole les cookies de session dans le navigateur
+Injection SQL exploite un formulaire sans contrôle intérieur
+Nmap scanne les ports, Nessus détecte les vulnérabilités
+Rootkit remplace ps et netstat, dissimule l'activité
+
+[Refrain]
+Botnet buffer overflow, deux tiers des vulnérabilités
+Stack smashing écrase l'adresse de retour, une réalité
+Botnet buffer overflow, canary protège la pile
+SYN flood inonde de faux SYN, une attaque facile
+
+[Pont]
+Un scan de ports sur un tiers est une tentative d'intrusion en droit
+Le déni de service reste facile à monter, difficile à contrer, tu vois
+La virtualisation concentre le risque, une panne bloque tout
+Tripwire contrôle l'intégrité contre les rootkits, un vrai bout
+
+[Refrain final]
+Botnet buffer overflow, la typologie des menaces
+Humaine, technique, applicative, une vraie richesse
+Botnet buffer overflow, connaître pour se défendre
+Jusqu'au bout de la faille, jamais se rendre
+
+[Outro]
+Virus, botnet, intrusion
+One love, one network, menaces réseau
