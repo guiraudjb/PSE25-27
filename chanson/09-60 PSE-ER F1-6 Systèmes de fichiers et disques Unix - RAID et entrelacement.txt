@@ -1,0 +1,56 @@
+TITRE : Inode et RAID Riddim
+
+[Intro]
+Tout est fichier, l'inode décrit tout sauf le nom
+Blocs directs, indirects, jusqu'au bloc triple, un vrai renom
+Inode et RAID, oh yeah
+
+[Couplet 1]
+Fichier normal, répertoire, lien dur, lien symbolique
+Lien dur partage l'inode, jamais entre partitions, logique
+Fichier spécial en mode caractère ou en mode bloc
+Numéro majeur pour le pilote, mineur pour chaque bloc
+
+System V aux blocs d'un kilo, super bloc critique
+FFS de Berkeley réplique le super bloc, tactique
+EXT4 utilise les extents, début, taille et bloc physique
+ZFS cent vingt-huit bits, snapshot par copy-on-write, magnifique
+
+[Refrain]
+Inode et RAID, EXT3, EXT4, Btrfs
+Journalisation protège contre la panne, un vrai relief
+Inode et RAID, zéro sans redondance, rapide
+Un pour le miroir, cinq pour la parité répartie, solide
+
+[Couplet 2]
+RAID zéro répartit sans tolérance, vitesse maximale
+RAID un duplique, cent pour cent de disques en surcharge, un total
+RAID cinq calcule la parité sur un secteur, répartie
+RAID six deux parités, deux disques de panne, une garantie
+
+Mkfs crée le système de fichiers sur le fichier spécial
+Fsck vérifie super bloc, inodes, répertoires, un bilan
+LVM avec pvcreate, vgcreate, lvcreate, la logique
+Volume logique étend le système de fichiers, une pratique
+
+[Refrain]
+Inode et RAID, EXT3, EXT4, Btrfs
+Journalisation protège contre la panne, un vrai relief
+Inode et RAID, zéro sans redondance, rapide
+Un pour le miroir, cinq pour la parité répartie, solide
+
+[Pont]
+L'inode n'est unique qu'au sein d'une même partition
+Le lien symbolique casse si la source change de position
+Le fsck d'un FFS est long à cause de la structure éparpillée
+RAID un-zéro préféré à zéro-un pour sa tolérance élevée
+
+[Refrain final]
+Inode et RAID, du fichier au disque physique
+Formatage, partitionnement, une chaîne logique
+Inode et RAID, la fiabilité des données
+Jusqu'au bout du bloc, jamais abandonnée
+
+[Outro]
+Inode, RAID, système de fichiers
+One love, one network, stockage

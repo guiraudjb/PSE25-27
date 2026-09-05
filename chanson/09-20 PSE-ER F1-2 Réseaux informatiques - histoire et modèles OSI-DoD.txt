@@ -1,0 +1,56 @@
+TITRE : ARPANET RFC Riddim
+
+[Intro]
+Vingt et un novembre soixante-neuf, UCLA Stanford relié
+ARPANET résiste à l'attaque, commutation par paquets, lié
+ARPANET RFC, oh yeah
+
+[Couplet 1]
+BBN gagne l'appel d'offres, construit les IMP ancêtres du routeur
+NWG rassemble les doctorants sous Crocker, une lueur
+Première RFC en avril soixante-neuf, la machine hôte
+IETF succède au NWG, la documentation dépose
+
+Sept couches OSI, physique à application, une échelle
+ISO lance les travaux en soixante-dix-sept, universelle
+Quatre couches DOD, accès réseau, Internet, transport
+Application regroupe session présentation, un vrai rapport
+
+[Refrain]
+ARPANET RFC, encapsulation, désencapsulation
+Communication horizontale et verticale, une vraie relation
+ARPANET RFC, TCP fiable, UDP léger
+IP achemine sans connexion, ARP résout l'adresse à trouver
+
+[Couplet 2]
+Deux cent treize hôtes en quatre-vingt-un, mille en quatre-vingt-quatre
+DNS implémenté, le référencement prend l'essor
+SNA d'IBM, DNA de Digital, DSA de Bull propriétaires
+Le modèle TCP-IP s'impose, souple et prospère
+
+PAN, LAN, MAN, WAN, l'échelle des réseaux
+DHCP attribue l'IP, un bail de trois jours, un vrai cadeau
+SMTP port vingt-cinq, POP cent dix, IMAP cent quarante-trois
+Résolution DNS ou fichier hosts, le chemin tracé
+
+[Refrain]
+ARPANET RFC, encapsulation, désencapsulation
+Communication horizontale et verticale, une vraie relation
+ARPANET RFC, TCP fiable, UDP léger
+IP achemine sans connexion, ARP résout l'adresse à trouver
+
+[Pont]
+La couche présentation, première hors du transfert direct
+Le message descend puis remonte les couches sans défaut
+OSI théorique et complexe, jamais pleinement déployé
+TCP-IP pragmatique, natif sous Unix, adopté
+
+[Refrain final]
+ARPANET RFC, l'histoire des réseaux
+De quatre nœuds au monde entier, un chemin nouveau
+ARPANET RFC, OSI et DOD comparés
+Jusqu'au bout du paquet, jamais désynchronisé
+
+[Outro]
+ARPANET, OSI, DOD
+One love, one network, histoire

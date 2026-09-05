@@ -1,0 +1,56 @@
+TITRE : Shell et Root Riddim
+
+[Intro]
+Le shell interprète les commandes avant le noyau
+Root a tous les droits, l'utilisateur un peu moins beau
+Shell et root, oh yeah
+
+[Couplet 1]
+Terminal virtuel, VT100 de DEC, le pionnier
+Telnet expose le mot de passe en clair, un danger
+SSH chiffre le tunnel, la version sécurisée
+Bash sur-ensemble de sh, la compatibilité assurée
+
+Noyau gère processus et fichiers, deux composantes
+Scheduler partage le temps CPU équitablement, sans lenteur ambiante
+Multitâche préemptif, le système décide du temps alloué
+Fichier spécial donne accès au matériel, jamais direct exposé
+
+[Refrain]
+Shell et root, l'administrateur aux commandes
+Man, apropos, whatis, la documentation qui commande
+Shell et root, find, grep, sed et awk
+Pipe enchaîne les commandes, un vrai bivouac
+
+[Couplet 2]
+VI seul éditeur standard, mode édition, mode insertion
+ESC repasse en édition, un vrai réflexe, une précaution
+Emacs environnement complet, édition et bien plus
+Etc hosts, etc group, etc shells, les fichiers en plus
+
+Cron exécute périodiquement, crontab planifie les tâches
+Syslogd stocke dans var log, par application il détache
+SMIT pour AIX, SAM pour HP-UX, interfaces graphiques
+L'administrateur gère comptes, matériel, sécurité, une pratique
+
+[Refrain]
+Shell et root, l'administrateur aux commandes
+Man, apropos, whatis, la documentation qui commande
+Shell et root, find, grep, sed et awk
+Pipe enchaîne les commandes, un vrai bivouac
+
+[Pont]
+Telnet fait circuler l'identifiant en clair, un risque
+SSH le remplace nettement, une pratique moins hispide
+Jamais de modification importante un vendredi après-midi
+Documenter chaque action, se méfier de l'expansion, une règle établie
+
+[Refrain final]
+Shell et root, l'administration Unix
+Diplomatie, sécurité, un métier complexe et fixe
+Shell et root, du clavier au système
+Jusqu'au bout du prompt, jamais d'à-peu-près
+
+[Outro]
+Shell, root, administration
+One love, one network, mission

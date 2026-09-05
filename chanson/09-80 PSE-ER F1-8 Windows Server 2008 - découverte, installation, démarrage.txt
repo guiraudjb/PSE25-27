@@ -1,0 +1,56 @@
+TITRE : BCD Bootmgr Riddim
+
+[Intro]
+Windows NT ouvre la lignée serveur en quatre-vingt-treize
+BCD remplace Boot point ini, une nouvelle vie
+BCD bootmgr, oh yeah
+
+[Couplet 1]
+Standard, Enterprise, Datacenter, Web, cinq éditions
+Server Core en invite de commande, sans distraction
+Mode utilisateur et mode noyau, deux couches essentielles
+HAL abstrait le matériel, l'exécutif au cœur de la moelle
+
+IIS réécrit, modulaire, réduit la surface d'attaque
+Hyper-V virtualise sur soixante-quatre bits, une vraie attaque
+RODC, NAP, ADFS étendent la sécurité au réseau
+WIM installe par image, plus rapide qu'un fichier par fichier, un vrai cadeau
+
+[Refrain]
+BCD bootmgr, remplace Ntldr et Boot ini
+Winload point exe charge les pilotes, puis le noyau surgit
+BCD bootmgr, MBR pointe vers bootmgr point exe
+NTFS privilégié, FAT32 limité et vieux, tenace
+
+[Couplet 2]
+Soixante jours de grâce avant activation, slmgr rearm prolonge
+CAL par utilisateur ou par périphérique, un choix qui s'allonge
+NTFS jusqu'à deux téra-octets, chiffrement et compression
+FAT32 limité à trente-deux gigas, quatre gigas par fichier, une restriction
+
+F8 ouvre les options avancées après le BIOS
+Mode sans échec, ntbtlog point txt liste les pilotes, précis
+Dernière configuration valide ramène après l'écran bleu
+Bcdedit gère le BCD, sauvegarder avant de changer, un vœu
+
+[Refrain]
+BCD bootmgr, remplace Ntldr et Boot ini
+Winload point exe charge les pilotes, puis le noyau surgit
+BCD bootmgr, MBR pointe vers bootmgr point exe
+NTFS privilégié, FAT32 limité et vieux, tenace
+
+[Pont]
+Server Core ne se convertit jamais sans réinstaller
+En soixante-quatre bits, les pilotes doivent être signés
+Toujours privilégier une installation neuve à une mise à jour
+Un BIOS ACPI non conforme peut bloquer toute la procédure
+
+[Refrain final]
+BCD bootmgr, l'environnement de démarrage repensé
+UEFI et BIOS pris en charge, jamais dépassé
+BCD bootmgr, de la mise sous tension à la connexion
+Jusqu'au bout du chargeur, jamais d'interruption
+
+[Outro]
+BCD, bootmgr, winload
+One love, one network, Windows Server

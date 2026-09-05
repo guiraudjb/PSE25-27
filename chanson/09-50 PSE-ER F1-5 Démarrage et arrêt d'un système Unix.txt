@@ -1,0 +1,56 @@
+TITRE : Bootstrap GRUB Riddim
+
+[Intro]
+Le firmware vérifie le matériel, lance init en premier
+Bootstrap du MBR au noyau, six phases à franchir
+Bootstrap GRUB, oh yeah
+
+[Couplet 1]
+BIOS lit le MBR, cinq cent douze octets du disque
+Chargeur primaire puis secondaire, un enchaînement typique
+GRUB choisit le noyau dans une liste, options passées
+Grub point conf ou menu point lst, la configuration tracée
+
+Init reçoit toujours le PID un, sched le PID zéro
+Kswapd pagine, ksoftirqd gère les interruptions, un vrai héros
+Mode single-user monte seulement la racine en lecture seule
+Fsck répare le système de fichiers avant que le boot ne s'écoule
+
+[Refrain]
+Bootstrap GRUB, sept niveaux d'exécution
+Zéro l'arrêt, un le single-user, cinq la résolution
+Bootstrap GRUB, scripts S pour start, K pour kill
+Systemd remplace init, parallélisation agile
+
+[Couplet 2]
+Telinit trois change de niveau, inittab décrit la transition
+Chkconfig gère les scripts sur Red Hat, une bonne disposition
+Upstart fonctionne par événements chez Debian et Ubuntu
+SMF sur Solaris avec FMRI, svcs et svcadm, un vrai statut
+
+Shutdown prévient les utilisateurs avant l'arrêt propre
+Halt synchronise les disques, arrête le noyau, une œuvre
+Reboot redémarre après extinction, jamais de coupure brutale
+GRUB doit précéder Windows en multiboot, une règle capitale
+
+[Refrain]
+Bootstrap GRUB, sept niveaux d'exécution
+Zéro l'arrêt, un le single-user, cinq la résolution
+Bootstrap GRUB, scripts S pour start, K pour kill
+Systemd remplace init, parallélisation agile
+
+[Pont]
+La période de bootstrapping reste courte mais critique
+Un système de fichiers endommagé bloque tout, un vrai handicap
+Les options passées au noyau via GRUB ne sont pas persistantes
+Il faut les inscrire dans les fichiers pour qu'elles soient constantes
+
+[Refrain final]
+Bootstrap GRUB, du firmware au multi-utilisateur
+Chaque étape vérifiée, jamais d'erreur
+Bootstrap GRUB, systemd, Upstart, SMF
+Jusqu'au bout du niveau, jamais de déf
+
+[Outro]
+GRUB, init, systemd
+One love, one network, démarrage

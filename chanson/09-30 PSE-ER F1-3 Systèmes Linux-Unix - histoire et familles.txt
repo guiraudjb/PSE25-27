@@ -1,0 +1,56 @@
+TITRE : GNU Not Unix Riddim
+
+[Intro]
+Multics au MIT, Bell Labs et General Electric ensemble
+Ken Thompson réécrit Unix sur un PDP-sept qui tremble
+GNU Not Unix, oh yeah
+
+[Couplet 1]
+Premier janvier soixante-dix, naissance officielle d'Unix
+Langage C en soixante-treize rend le système portable, un fix
+BSD naît à Berkeley, financé par la DARPA pour TCP-IP
+System V commercialisé par AT&T en quatre-vingt-trois, un principe
+
+Le schisme sépare System V et BSD, deux écoles
+AIX, HP-UX, Solaris héritent de System V, une école
+FreeBSD, NetBSD, OpenBSD viennent de Berkeley, une lignée
+POSIX standardise en quatre-vingt-quatre, la portabilité visée
+
+[Refrain]
+GNU Not Unix, Stallman fonde la FSF
+Copyleft et licence GPL, jamais un chef
+GNU Not Unix, Linus lance le noyau en quatre-vingt-onze
+Linux compatible x86, une communauté qui s'y love
+
+[Couplet 2]
+Solaris hybride, BSD puis System V Release Four
+SunOS devient Solaris en février quatre-vingt-onze, un vrai décor
+AIX sur processeurs POWER, ODM sa base orientée objet
+HP-UX sur PA-RISC puis Itanium, un vrai projet
+
+Slackware première distribution, proche de BSD sans runlevel
+Red Hat commercial en RPM, Debian en DEB, un modèle
+Ubuntu dérive de Debian, Mint la plus téléchargée
+Gentoo compile sur mesure, l'esprit BSD préservé
+
+[Refrain]
+GNU Not Unix, Stallman fonde la FSF
+Copyleft et licence GPL, jamais un chef
+GNU Not Unix, Linus lance le noyau en quatre-vingt-onze
+Linux compatible x86, une communauté qui s'y love
+
+[Pont]
+Les horloges Unix démarrent au premier janvier soixante-dix
+GNU n'est pas Unix, Linux en est le noyau qui unit
+Le copyleft impose que tout dérivé reste ouvert et libre
+Malgré POSIX et SVID, aucun standard ne s'équilibre
+
+[Refrain final]
+GNU Not Unix, de Multics à Linux
+Une histoire de schismes, de licences, un flux
+GNU Not Unix, le noyau qui manquait
+Jusqu'au bout du kernel, jamais figé
+
+[Outro]
+Unix, BSD, GNU Linux
+One love, one network, histoire des systèmes

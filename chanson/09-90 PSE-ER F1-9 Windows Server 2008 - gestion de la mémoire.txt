@@ -1,0 +1,56 @@
+TITRE : Pagination Working Set Riddim
+
+[Intro]
+La mémoire virtuelle donne l'illusion d'un espace infini
+Pages de quatre mille quatre-vingt-seize octets, un découpage fini
+Pagination working set, oh yeah
+
+[Couplet 1]
+x86 trente-deux bits depuis le 80386 d'Intel
+Athlon 64 d'AMD en deux mille trois, un vrai modèle
+WoW64 exécute le trente-deux bits nativement
+Itanium soixante-quatre bits pur, incompatible totalement
+
+Gestionnaire de mémoire alloue, traduit, pagine au surengagement
+Copy-on-write recopie une page à l'écriture seulement
+Pile descend, tas monte, jamais ils ne doivent se rencontrer
+DLL mappées par le noyau avant le point d'entrée à activer
+
+[Refrain]
+Pagination working set, TLB cache les traductions
+Défaut de page charge à la demande, avec précaution
+Pagination working set, stratégie premier entré premier sorti
+Working set trimming réduit le jeu de pages, un compromis
+
+[Couplet 2]
+Base de données des pages physiques, cinq états chaînés
+Valide, à zéro, libre, en attente, modifié, mauvais, classés
+Niveau C2 impose des pages à zéro pour la sécurité
+Modified page writer écrit sur disque quand le seuil est dépassé
+
+Thread composé de registres, deux piles, une zone TLS
+Trente-deux niveaux de priorité, préemptif sans détresse
+Round robin partage le temps entre threads de même rang
+MBR jusqu'à quatre téra-octets, GPT jusqu'à dix-huit exaoctets, un rang
+
+[Refrain]
+Pagination working set, TLB cache les traductions
+Défaut de page charge à la demande, avec précaution
+Pagination working set, stratégie premier entré premier sorti
+Working set trimming réduit le jeu de pages, un compromis
+
+[Pont]
+Un processeur soixante-quatre bits adresse en pratique quarante bits
+LARGEADDRESSAWARE permet quatre gigas à l'application, un profit
+La priorité préemptive s'applique aux threads, jamais aux process
+Les disques dynamiques absents sur portables, une vraie régresse
+
+[Refrain final]
+Pagination working set, la mémoire bien gérée
+Défauts de page, TLB, jamais surchargée
+Pagination working set, processus et threads alignés
+Jusqu'au bout du cluster, jamais désorganisé
+
+[Outro]
+Mémoire, pagination, thread
+One love, one network, Windows Server

@@ -1,0 +1,56 @@
+TITRE : Man Apropos Riddim
+
+[Intro]
+Man affiche le mode d'emploi de chaque commande
+Apropos cherche par mot-clé, une aide qui se répand
+Man apropos, oh yeah
+
+[Couplet 1]
+Bash, ksh, sh, l'interpréteur qui dialogue
+Type indique commande interne ou externe, une prologue
+PATH liste les répertoires où trouver l'exécutable
+Whoami, id, which identifient l'utilisateur capable
+
+Ls tiret l affiche permissions, propriétaire et taille
+Tiret a montre les fichiers cachés, tiret t trie sans faille
+Cp, mv, rm manipulent fichiers et répertoires
+Rm tiret rf supprime sans confirmation, un vrai pouvoir
+
+[Refrain]
+Man apropos, whatis résume en une ligne
+Find cherche par nom, par type, une vraie consigne
+Man apropos, cron planifie les tâches
+Crontab moins e édite, cinq champs sans anicroche
+
+[Couplet 2]
+Chevron sortant écrase, double chevron ajoute à la suite
+Pipe transmet la sortie à l'entrée suivante, une conduite
+Point-virgule enchaîne, double esperluette si succès
+Double barre verticale si échec, le code retour en accès
+
+Mount monte un système de fichiers sur son point
+Umount démonte, fuser identifie qui occupe, un vrai coin
+Fsck vérifie super bloc, inodes et répertoires en séquence
+Pvcreate, vgcreate, lvcreate structurent le LVM en substance
+
+[Refrain]
+Man apropos, whatis résume en une ligne
+Find cherche par nom, par type, une vraie consigne
+Man apropos, cron planifie les tâches
+Crontab moins e édite, cinq champs sans anicroche
+
+[Pont]
+La variable SHELL peut tromper, pas toujours le shell utilisé
+Find peut consommer beaucoup, éviter toute l'arborescence à scanner
+Ne jamais lancer fsck sur une partition montée activement
+Réduire d'abord le système de fichiers, puis le volume logiquement
+
+[Refrain final]
+Man apropos, les commandes du quotidien
+Shell, fichiers, processus, le terminal souverain
+Man apropos, l'administrateur outillé
+Jusqu'au bout du prompt, jamais bloqué
+
+[Outro]
+Man, find, cron
+One love, one network, commandes essentielles
