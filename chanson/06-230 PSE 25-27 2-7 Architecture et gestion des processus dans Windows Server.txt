@@ -1,0 +1,56 @@
+TITRE : Job Object Riddim
+
+[Intro]
+Écoute Windows qui gère mille cœurs
+Job Object regroupe, isole, mesure
+Job Object, oh yeah
+
+[Couplet 1]
+Processus isolé, espace mémoire indépendant
+Ring trois utilisateur, ring zéro puissant
+Job Object limite CPU, mémoire, IO
+Comme les cgroups Linux, un vrai combo
+
+NUMA gère la latence selon la localisation
+Soft NUMA subdivise pour la scalabilité, sensation
+IOCP porte l'entrée sortie asynchrone
+UMS laisse l'appli ordonnancer, une zone
+
+[Refrain]
+Job Object, isolation comme un cgroup
+CPU rate control, mémoire sous le toit
+Job Object, NUMA optimise la latence
+Soft NUMA répartit avec assurance
+
+[Couplet 2]
+Named Pipes rapides, optimisés pour SMB
+Sockets supportent QUIC, IPv6, la clé
+VMBus relie l'hôte aux machines virtuelles
+Enlightened Scheduling collabore, une échelle
+
+Priorité de zéro à trente et un niveaux
+Seize à trente et un pour le temps réel, nouveaux
+Priority Boost évite la famine qui guette
+CFG, DEP, ASLR protègent la requête
+
+[Refrain]
+Job Object, isolation comme un cgroup
+CPU rate control, mémoire sous le toit
+Job Object, NUMA optimise la latence
+Soft NUMA répartit avec assurance
+
+[Pont]
+Fibres obsolètes, dangereuses aujourd'hui
+NetBIOS abandonné, un vieux appui
+SQL Server et IIS bénéficient du NUMA
+Thread Pool moderne, IOCP intégré déjà
+
+[Refrain final]
+Job Object, l'architecture qui évolue
+Des centaines de cœurs, jamais déçue
+Job Object, Windows Server puissant
+Jusqu'au bout du quantum, toujours performant
+
+[Outro]
+Job Object, Windows Server
+One love, one network, architecture

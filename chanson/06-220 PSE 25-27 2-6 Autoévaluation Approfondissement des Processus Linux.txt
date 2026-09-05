@@ -1,0 +1,56 @@
+TITRE : Cycle de Vie Express Riddim
+
+[Intro]
+Écoute les cinq étapes en un instant
+Créé, prêt, exécution, zombie, détruit, présent
+Cycle de vie express, oh yeah
+
+[Couplet 1]
+Création d'abord, le processus qui naît
+Prêt ensuite, en attente du processeur complet
+Exécution active, le CPU qui travaille
+Terminé, zombie, une étape qui s'égale
+
+Lecture disque bloque, l'appel système attend
+Endormi le processus, jamais consommant
+Réveillé quand la donnée est disponible enfin
+Context switch sauve et restaure, un vrai destin
+
+[Refrain]
+Cycle de vie express, nice ajuste la priorité
+Threads simples à synchroniser et communiquer
+Cycle de vie express, ps, top et pstree
+Visualisent l'arbre et l'état condensé
+
+[Couplet 2]
+Simplicité de communication, un vrai atout
+Synchronisation facile, rapidité debout
+Zombie transitoire, entre fin et nettoyage
+Vmstat n'est pas listé, un piège de langage
+
+Processlist n'existe pas, une fausse réponse
+Pstree dédié à la filiation immense
+Disque dur exemple du passage à l'endormi
+Nice cité pour la priorité statique aussi
+
+[Refrain]
+Cycle de vie express, nice ajuste la priorité
+Threads simples à synchroniser et communiquer
+Cycle de vie express, ps, top et pstree
+Visualisent l'arbre et l'état condensé
+
+[Pont]
+Cinq étapes chronologiques, un ordre logique
+Création, prêt, exécution, la pratique
+Zombie puis détruit, la fin du chemin
+Autoévaluation confirme chaque terrain
+
+[Refrain final]
+Cycle de vie express, la révision achevée
+Cinq étapes bien claires, jamais oubliées
+Cycle de vie express, Linux condensé
+Jusqu'au bout du processus, jamais dépassé
+
+[Outro]
+Cycle de vie, processus Linux
+One love, one network, autoévaluation

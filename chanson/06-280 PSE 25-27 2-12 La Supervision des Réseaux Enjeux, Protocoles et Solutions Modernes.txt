@@ -1,0 +1,56 @@
+TITRE : Supervision Réseau Riddim
+
+[Intro]
+Écoute le réseau qu'on surveille sans cesse
+SNMP interroge, la télémétrie qui presse
+Supervision réseau, oh yeah
+
+[Couplet 1]
+Polling interroge, le serveur qui demande
+OID cible la métrique, une info qui commande
+MIB hiérarchise, la base de données
+Trap alerte sans accusé, Inform la garantie fondée
+
+Port cent soixante et un pour les requêtes qui filent
+Port cent soixante-deux pour les alarmes agiles
+GetRequest, GetBulk, SetRequest en action
+ASN un décrit chaque type, une convention
+
+[Refrain]
+Supervision réseau, Pull pour SNMP
+Push pour la télémétrie, un autre concept
+Supervision réseau, gNMI remplace tout
+YANG structure les données, un modèle debout
+
+[Couplet 2]
+SNMP version trois chiffre et authentifie
+OpenConfig invente gNMI, une autre vie
+Capabilities, Get, Set, Subscribe en flux
+GRPC transporte, Protobuf ou JSON reçu
+
+Prometheus collecte avec PromQL affiné
+Grafana visualise, tableau de bord animé
+Loki indexe les logs par labels précis
+Zabbix, Nagios, Netdata, tout est compris
+
+[Refrain]
+Supervision réseau, Pull pour SNMP
+Push pour la télémétrie, un autre concept
+Supervision réseau, gNMI remplace tout
+YANG structure les données, un modèle debout
+
+[Pont]
+Architecture centralisée, un SPOF qui guette
+Hiérarchique et distribuée, la haute disponibilité complète
+ColdStart, LinkDown, AuthenticationFailure signalés
+Un routeur toutes les cinq cents millisecondes, sa charge envoyée
+
+[Refrain final]
+Supervision réseau, la santé du système
+Cartographie, incidents, performance, un même thème
+Supervision réseau, moderne et connectée
+Jusqu'au bout du flux, jamais dépassée
+
+[Outro]
+SNMP, gNMI, supervision
+One love, one network, télémétrie

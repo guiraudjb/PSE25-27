@@ -1,0 +1,56 @@
+TITRE : Portail SSO Riddim
+
+[Intro]
+Écoute le portail, un seul point d'entrée
+SSO connecte tout, jamais répété
+Portail SSO, oh yeah
+
+[Couplet 1]
+LDAP centralise chaque identité
+SAML pour l'entreprise, protocole affirmé
+OAuth et OpenID pour le cloud, le mobile
+SSO serveur sécurise, SSO client plus fragile
+
+CMS agrège Drupal, WordPress, Liferay
+3D-Secure authentifie le porteur du CB
+DSP2 impose l'authentification forte
+Franchise à cinquante euros, la loi qui porte
+
+[Refrain]
+Portail SSO, un seul mot de passe pour tout
+Authentification unique, centralisée debout
+Portail SSO, paiement sécurisé aussi
+Tokenisation protège, jamais transi
+
+[Couplet 2]
+BYOD et COPE, les terminaux se mêlent
+MDM supervise tout l'appareil, une sentinelle
+MAM isole les applications professionnelles
+EMM unifie les deux forces essentielles
+
+Swift natif performant, Kotlin pour Android
+React Native hybride, un code qui répond
+PWA accessible sans téléchargement requis
+Zero Trust vérifie chaque accès conquis
+
+[Refrain]
+Portail SSO, un seul mot de passe pour tout
+Authentification unique, centralisée debout
+Portail SSO, paiement sécurisé aussi
+Tokenisation protège, jamais transi
+
+[Pont]
+Okta, Azure AD, Ping Identity en jeu
+SIPS, PayPal, Apple Pay, un choix chanceux
+Jailbreak détecté, l'appareil signalé
+MDM efface à distance si volé
+
+[Refrain final]
+Portail SSO, l'accès unifié partout
+Mobilité, paiement, sécurité debout
+Portail SSO, la confiance numérique
+Jusqu'au bout du terminal, authentique
+
+[Outro]
+SSO, portail, mobilité
+One love, one network, sécurité

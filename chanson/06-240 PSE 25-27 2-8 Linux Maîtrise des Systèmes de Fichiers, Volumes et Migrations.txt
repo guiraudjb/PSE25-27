@@ -1,0 +1,56 @@
+TITRE : SAN NAS Riddim
+
+[Intro]
+Écoute le stockage qui traverse le réseau
+SAN en fibre, NAS en Ethernet, le tableau
+SAN NAS, oh yeah
+
+[Couplet 1]
+Noyau orchestre l'ordonnancement et l'isolation
+Superbloc, inode, blocs, la structure en action
+FHS organise boot, var, usr, la norme
+Saturation d'inodes bloque même hors de forme
+
+LVM abstrait PV, VG et LV
+Pvmove déplace à chaud sans jamais couper
+Rsync synchronise pour changer de système
+Deux passes, la seconde à l'arrêt, un vrai théorème
+
+[Refrain]
+SAN NAS, fibre optique, World Wide Name
+Zoning sécurise, LUN mapping en trame
+SAN NAS, masking autorise l'accès
+NFS pour Linux, CIFS pour le procès
+
+[Couplet 2]
+SAN couche basse, performance de disque local
+NAS couche haute, administration facile, banal
+Charge CPU élevée, jamais isolée seule
+Swappiness réglé, la RAM qui s'écoule
+
+Pvs, vgs, lvs surveillent le LVM
+Xfs gère les gros fichiers cartographiques, un thème
+Hitachi, Dell, Purestorage, Netapp en baie
+Rsync moins delete, irréversible, attention vraie
+
+[Refrain]
+SAN NAS, fibre optique, World Wide Name
+Zoning sécurise, LUN mapping en trame
+SAN NAS, masking autorise l'accès
+NFS pour Linux, CIFS pour le procès
+
+[Pont]
+Snmp interroge la MIB à distance
+Swappiness dans proc sys vm, une balance
+Migration LVM garde le même format
+Rsync change le type, un tout autre combat
+
+[Refrain final]
+SAN NAS, le stockage bien maîtrisé
+Migration à chaud, jamais interrompue
+SAN NAS, l'infrastructure moderne
+Jusqu'au bout du volume, la caserne
+
+[Outro]
+SAN, NAS, stockage réseau
+One love, one network, migration

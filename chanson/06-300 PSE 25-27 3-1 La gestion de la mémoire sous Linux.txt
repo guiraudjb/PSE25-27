@@ -1,0 +1,56 @@
+TITRE : Kswapd et OOM Riddim
+
+[Intro]
+Écoute kswapd qui scanne sans arrêt
+Libérer la RAM avant qu'elle ne craque
+Kswapd et OOM, oh yeah
+
+[Couplet 1]
+Page de quatre kilo-octets, l'unité de base
+Frame en mémoire physique, une présence de classe
+TLB cache la traduction récente et rapide
+VMA décrit chaque zone, une carte solide
+
+Linux abandonne la segmentation classique
+Modèle plat, base zéro, une logique pratique
+Tables de pages à quatre ou cinq niveaux montent
+Registres, caches L1 L2 L3, la hiérarchie compte
+
+[Refrain]
+Kswapd et OOM, défaut de page mineur, majeur
+Lecture disque lente, mise à jour rapide, la lueur
+Kswapd et OOM, le tueur intervient en urgence
+Score de dangerosité, la dernière chance
+
+[Couplet 2]
+HugePages jusqu'à un giga-octet pour les gros calculs
+Moins de défauts de cache, une vitesse qui recule
+Défaut mineur met à jour juste la table
+Défaut majeur lit le disque, opération pas commode
+
+Swap déplace les pages inactives au repos
+Kswapd scanne en continu, jamais en repos
+OOM Killer sacrifie le processus le plus lourd
+Score calculé pour préserver le système autour
+
+[Refrain]
+Kswapd et OOM, défaut de page mineur, majeur
+Lecture disque lente, mise à jour rapide, la lueur
+Kswapd et OOM, le tueur intervient en urgence
+Score de dangerosité, la dernière chance
+
+[Pont]
+Meminfo, free, htop, vmstat pour observer
+Maps, smaps, pagemap pour bien vérifier
+Swapon, swapoff activent ou coupent l'échange
+Swappiness ajustée par sysctl, une balance
+
+[Refrain final]
+Kswapd et OOM, la mémoire bien gérée
+Cache réutilisable, jamais saturée
+Kswapd et OOM, Linux qui protège
+Jusqu'au bout de la RAM, jamais de piège
+
+[Outro]
+Kswapd, OOM, mémoire Linux
+One love, one network, gestion

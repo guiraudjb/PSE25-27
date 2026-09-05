@@ -1,0 +1,56 @@
+TITRE : États et Threads Riddim
+
+[Intro]
+Écoute l'état qui change à chaque instant
+Créé, prêt, en cours, endormi, zombie, suspendu, présent
+États et threads, oh yeah
+
+[Couplet 1]
+R pour running, S sommeil interruptible
+D sommeil profond, jamais interruptible
+Z le zombie attend que le père acquitte
+T stoppé par SIGSTOP, un signal qui persiste
+
+Fork crée le fils, exec charge le code neuf
+Quantum épuisé, préemption qui émeut
+Schedule choisit, context_switch bascule
+Registres sauvés, la pile qui recule
+
+[Refrain]
+États et threads, SCHED_FIFO sans quantum
+SCHED_RR partage, SCHED_OTHER en tourniquet, hum
+États et threads, nice de moins vingt à dix-neuf
+Priorité inversée, la règle qui neuve
+
+[Couplet 2]
+Pthread partage mémoire, code, tas, fichiers
+Pile individuelle, chaque thread singulier
+Pstree dessine l'arbre depuis systemd
+Top moins H montre chaque thread en détail
+
+Vmstat compte les changements de contexte
+Renice ajuste sans relancer, un vrai prétexte
+Root seul abaisse la valeur nice
+Tomcat, quarante-huit threads, un vrai calice
+
+[Refrain]
+États et threads, SCHED_FIFO sans quantum
+SCHED_RR partage, SCHED_OTHER en tourniquet, hum
+États et threads, nice de moins vingt à dix-neuf
+Priorité inversée, la règle qui neuve
+
+[Pont]
+Migration et watchdog en SCHED_FIFO priorité max
+Mille changements de contexte par seconde, un vrai flux
+Zombie ne consomme ni CPU ni mémoire
+Juste une entrée qui attend dans l'histoire
+
+[Refrain final]
+États et threads, le cycle de vie complet
+Naissance, exécution, mort, jamais incomplet
+États et threads, Linux bien ordonné
+Jusqu'au bout du quantum, jamais dépassé
+
+[Outro]
+États, threads, processus Linux
+One love, one network, ordonnancement

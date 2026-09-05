@@ -1,0 +1,56 @@
+TITRE : Pagination Segmentation Riddim
+
+[Intro]
+Écoute la mémoire qui se découpe en pages
+Chargeur, MMU, translation, un vrai voyage
+Pagination segmentation, oh yeah
+
+[Couplet 1]
+Chargeur place le binaire en mémoire vive
+Translation d'adresses, indispensable, active
+MMU traduit le virtuel en physique réel
+Zone noyau privilégiée, zone utilisateur, un ciel
+
+Partitions fixes, fragmentation interne qui gaspille
+Partitions variables, compaction qui s'affile
+Mémoire virtuelle donne l'illusion d'espace
+Table des pages indique où chaque page se place
+
+[Refrain]
+Pagination segmentation, quatre kilo-octets la page
+FIFO, LRU, LFU, MFU, l'usage
+Pagination segmentation, code, données, pile
+Numéro de segment, de page, offset agile
+
+[Couplet 2]
+Mode noyau accède à tout, complet, privilégié
+Mode utilisateur restreint, isolé, sécurisé
+Appel système bascule par interruption logicielle
+Défaut de page réclame la page essentielle
+
+Segmentation découpe en zones logiques distinctes
+Partage possible pour bibliothèques, une instance
+x86 combine segment puis pagine dedans
+Flexibilité, protection, efficacité, un vrai instant
+
+[Refrain]
+Pagination segmentation, quatre kilo-octets la page
+FIFO, LRU, LFU, MFU, l'usage
+Pagination segmentation, code, données, pile
+Numéro de segment, de page, offset agile
+
+[Pont]
+Linux, Windows, Unix, BSD, macOS pareil
+Universel le principe, le même appareil
+Libérer la RAM sans dégrader la vitesse
+Le défi permanent de chaque système qui presse
+
+[Refrain final]
+Pagination segmentation, le noyau qui gère
+Mémoire virtuelle, l'illusion nécessaire
+Pagination segmentation, x86 combine tout
+Jusqu'au bout de la page, jamais le bout
+
+[Outro]
+Pagination, segmentation, mémoire
+One love, one network, gestion

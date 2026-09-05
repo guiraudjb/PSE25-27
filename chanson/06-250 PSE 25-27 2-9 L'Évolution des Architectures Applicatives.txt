@@ -1,0 +1,56 @@
+TITRE : Du Mainframe au Microservice Riddim
+
+[Intro]
+Écoute le mainframe qui centralisait tout
+Terminal passif, un seul point debout
+Du mainframe au microservice, oh yeah
+
+[Couplet 1]
+Mainframe centralise dans les années soixante
+Client-serveur décentralise, deux tiers qui comptent
+Web recentralise, navigateur client léger
+HTTP, HTML, standards mondiaux affichés
+
+Trois tiers sépare présentation, métier, données
+J2EE, point NET, serveurs d'applications montées
+MOM facilite l'asynchrone historique
+Promesses en JavaScript, plus légère pratique
+
+[Refrain]
+Du mainframe au microservice, SOAP puis REST
+JSON remplace XML, plus léger, plus prompt
+Du mainframe au microservice, stateless avance
+Scalabilité, la charge qui se balance
+
+[Couplet 2]
+SPA charge une fois, met à jour dynamique
+SSR résout le SEO, une pratique logique
+GraphQL demande exactement les champs voulus
+REST reste simple, les deux sont résolus
+
+Microservices découplent chaque fonction métier
+Docker encapsule, portable et léger
+Kubernetes orchestre le déploiement massif
+Redémarrage automatique, un système actif
+
+[Refrain]
+Du mainframe au microservice, SOAP puis REST
+JSON remplace XML, plus léger, plus prompt
+Du mainframe au microservice, stateless avance
+Scalabilité, la charge qui se balance
+
+[Pont]
+Banque et assurance gardent encore le mainframe
+CORBA, DCOM, les middlewares du passé, la trame
+React, Angular, Vue point js, l'ère moderne
+Docker, Kubernetes, l'orchestration gouverne
+
+[Refrain final]
+Du mainframe au microservice, l'histoire qui tourne
+Centralisation, décentralisation, le cycle retourne
+Du mainframe au microservice, l'architecture avance
+Jusqu'au bout du cluster, en confiance
+
+[Outro]
+Mainframe, microservice, architecture
+One love, one network, évolution
