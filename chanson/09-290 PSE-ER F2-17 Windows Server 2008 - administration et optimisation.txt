@@ -1,0 +1,56 @@
+TITRE : ServerManagerCmd Riddim
+
+[Intro]
+Gestionnaire de serveur centralise rôles et fonctionnalités
+Trente-cinq fonctionnalités par défaut, aucune installée, une réalité
+ServerManagerCmd, oh yeah
+
+[Couplet 1]
+MMC héberge les composants enfichables, extension point msc
+Mode Auteur sans restriction, mode Utilisateur plus discret
+RSAT remplace l'adminpak pour l'administration à distance
+ServerManagerCmd moins q liste, install et remove en substance
+
+Ocsetup et pkgmgr, seuls moyens sous Server Core
+Netsh configure en contextes, WinRS exécute à distance, encore
+WMIC interroge les objets WMI par alias, natif complet
+Powershell retourne des objets point NET, un langage complet
+
+[Refrain]
+ServerManagerCmd, BitLocker chiffre avec le TPM intégré
+EFS chiffre par paire de clés, cinquante-six bits par défaut, gardé
+ServerManagerCmd, IPSec protège de bout en bout
+L'agent tourne dans lsass point exe, sécurisant tout
+
+[Couplet 2]
+Convert unité fs ntfs ne pose pas les ACL comme à l'install
+Ansi recommande douze caractères minimum, un mot de passe habile
+Renommer l'administrateur, créer un leurre audité sans privilège
+Partages en Contrôle total par défaut, à restreindre avec vigilance et siège
+
+Observateur d'événements cinq cent douze kilos par journal
+Moniteur de fiabilité classe les défaillances, un vrai signal
+SNMP remonte les informations dans les MIB à la NMS
+Terminal Server transmet clavier souris affichage, sans stress
+
+[Refrain]
+ServerManagerCmd, BitLocker chiffre avec le TPM intégré
+EFS chiffre par paire de clés, cinquante-six bits par défaut, gardé
+ServerManagerCmd, IPSec protège de bout en bout
+L'agent tourne dans lsass point exe, sécurisant tout
+
+[Pont]
+La passerelle TS encapsule RDP en HTTPS sur le port quatre cent quarante-trois
+Le Session Broker redirige vers le serveur qui héberge la session déjà
+Un dossier chiffré par EFS ne peut jamais être partagé sur le réseau
+Les quotas NTFS s'appliquent au volume entier, jamais à un dossier isolé plus beau
+
+[Refrain final]
+ServerManagerCmd, l'administration structurée
+Sécurité, performance, tout est surveillé
+ServerManagerCmd, Windows Server maîtrisé
+Jusqu'au bout du rôle, jamais dépassé
+
+[Outro]
+Gestionnaire, sécurité, Terminal Server
+One love, one network, administration

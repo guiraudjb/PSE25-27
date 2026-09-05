@@ -1,0 +1,56 @@
+TITRE : Resolv Conf et BIND Riddim
+
+[Intro]
+ICANN attribue adresses, noms de domaine et ports
+IETF publie les RFC, huit mille documents forts
+Resolv conf et BIND, oh yeah
+
+[Couplet 1]
+IPv4 quatre octets, IPv6 seize octets étendus
+Encapsulation ajoute l'en-tête à chaque couche descendue
+MTU mille cinq cents octets pour Ethernet standard
+Subnetting réaffecte le host-id, un slash vingt-six retard
+
+CIDR RFC mille cinq cent dix-neuf, sur-adressage sans classe
+RFC dix-neuf dix-huit réserve les adresses privées en masse
+NAT réécrit l'adresse source au routeur de bordure
+IP forwarding désactivé sauf routeur, une bonne mesure
+
+[Refrain]
+Resolv conf et BIND, trois nameserver au maximum
+Named point conf configure les zones, un vrai royaume
+Resolv conf et BIND, SOA, NS, MX, A en cascade
+Résolution inverse en in-addr point arpa, une façade
+
+[Couplet 2]
+DHCP hérite de BOOTP, port soixante-sept soixante-huit
+Discover, Offer, Request, Ack, le bail qui s'ensuit
+Ftpd écoute sur le port vingt et un, data sur le vingt
+Etc ftpusers bloque root, une sécurité qu'on défend
+
+NTP synchronise depuis mille neuf cent soixante-dix jusqu'à deux mille trente-huit
+MTA achemine comme un centre de tri, Postfix ou Sendmail, un culte
+POP transfère et supprime, IMAP garde sur le serveur
+MUA compose, MDA livre à bon port, sans erreur
+
+[Refrain]
+Resolv conf et BIND, trois nameserver au maximum
+Named point conf configure les zones, un vrai royaume
+Resolv conf et BIND, SOA, NS, MX, A en cascade
+Résolution inverse en in-addr point arpa, une façade
+
+[Pont]
+Une RFC jamais modifiée, une mise à jour est une nouvelle RFC
+IPv6 fixe la frontière à slash soixante-quatre, une nouvelle donne avec elle
+Seul root écoute sous mille vingt-quatre, une règle de sécurité
+Le DNS oubliant le point final ajoute la zone par erreur, une réalité
+
+[Refrain final]
+Resolv conf et BIND, la configuration réseau
+Adressage, routage, DNS, un système bien beau
+Resolv conf et BIND, DHCP et messagerie
+Jusqu'au bout du paquet, jamais d'anomalie
+
+[Outro]
+DNS, DHCP, BIND
+One love, one network, services réseau

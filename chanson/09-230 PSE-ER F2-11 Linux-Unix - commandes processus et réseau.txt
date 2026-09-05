@@ -1,0 +1,56 @@
+TITRE : Wireshark et Ss Riddim
+
+[Intro]
+Ps aux sur BSD, ps edf sur AT&T, la commande classique
+Top et htop supervisent en continu, une vue dynamique
+Wireshark et ss, oh yeah
+
+[Couplet 1]
+Kill moins neuf détruit brutalement avec SIGKILL sans grâce
+Kill moins un force la relecture de config, une bonne place
+At lance différé, crontab répète à intervalles précis
+Six champs minute heure jour mois semaine, la commande qui suit
+
+Tar crée, extrait, liste avec les options c t x v f
+Cpio alimenté par find transmet la liste, un vrai chef-d'œuvre
+Rsync utilise ssh, ne transfère que le modifié, économe
+Net-tools devient iproute2, ip addr remplace ifconfig, un nouveau tome
+
+[Refrain]
+Wireshark et ss, tcpdump en mode promiscuous
+Capture tous les paquets, root exigé, jamais anxieux
+Wireshark et ss, filtre de capture puis d'affichage
+Cent protocoles disséqués, le couteau suisse en usage
+
+[Couplet 2]
+Ping envoie echo-request, reçoit echo-reply en retour
+Huit octets pour l'en-tête ICMP, quatre requêtes par tour
+Traceroute augmente le TTL, chaque routeur répond une erreur
+Tcptraceroute en TCP SYN contourne le pare-feu trompeur
+
+Netstat donne connexions TCP UDP depuis proc net
+Ss le remplace avec état established, syn-sent complet
+Arp moins a affiche la table MAC vers IP dynamique
+Route moins n devient ip route, une syntaxe pragmatique
+
+[Refrain]
+Wireshark et ss, tcpdump en mode promiscuous
+Capture tous les paquets, root exigé, jamais anxieux
+Wireshark et ss, filtre de capture puis d'affichage
+Cent protocoles disséqués, le couteau suisse en usage
+
+[Pont]
+Ps ne montre jamais la liste exacte à l'instant même
+Ping avec un nom utilise etc hosts et non le DNS, un dilemme
+Un pare-feu bloque parfois ICMP, ping reste alors sans écho
+Tcpdump exige le mode promiscuous, une interface sans repos
+
+[Refrain final]
+Wireshark et ss, l'analyse du réseau
+Ping, traceroute, netstat, un arsenal bien beau
+Wireshark et ss, du processus au paquet
+Jusqu'au bout du socket, jamais d'échec complet
+
+[Outro]
+Ps, ping, Wireshark
+One love, one network, commandes réseau

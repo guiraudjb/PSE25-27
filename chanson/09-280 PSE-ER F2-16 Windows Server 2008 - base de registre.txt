@@ -1,0 +1,56 @@
+TITRE : Ruche et HKEY Riddim
+
+[Intro]
+Le registre remplace ini, sys et com d'antan
+HKEY préfixe les six clés racines, un système marquant
+Ruche et HKEY, oh yeah
+
+[Couplet 1]
+HKCU préférences de l'utilisateur, Ntuser point dat son profil
+HKU une sous-clé par profil, point DEFAULT pour Winlogon docile
+HKCR associations d'extensions et classes COM, virtualisé
+HKLM contient BCD, SAM, SECURITY, SOFTWARE, SYSTEM, un vrai résumé
+
+HKEY_CURRENT_CONFIG simple lien vers le profil matériel actif
+HKEY_PERFORMANCE_DATA accède aux compteurs, un mécanisme réactif
+Ruche stockée en fichier, non lisible en session, une structure
+Ruche volatile comme HARDWARE, recréée à chaque ouverture
+
+[Refrain]
+Ruche et HKEY, gestionnaire de configuration au centre
+Charge les ruches, note le chemin dans Hivelist qui s'ancre
+Ruche et HKEY, registre transactionnel depuis deux mille huit
+Kernel Transaction Manager garantit chaque conduite
+
+[Couplet 2]
+Mécanisme de callback filtre avant et après chaque service
+Profondeur ordonne les rappels, chiffrement avant l'antivirus, une police
+Descripteur de sécurité partagé, un seul exemplaire par ruche
+Noms ASCII stockés compacts, convertis en Unicode à la touche
+
+Table de cache accélère les recherches fréquentes des clés
+Table différée garde les blocs récemment fermés, sans les jeter
+Regedit point exe l'éditeur graphique principal
+Reg point exe et Regini en ligne de commande, un outil normal
+
+[Refrain]
+Ruche et HKEY, gestionnaire de configuration au centre
+Charge les ruches, note le chemin dans Hivelist qui s'ancre
+Ruche et HKEY, registre transactionnel depuis deux mille huit
+Kernel Transaction Manager garantit chaque conduite
+
+[Pont]
+Sur un système inactif, aucune activité de registre ne devrait survenir
+RegNotifyChangeKey évite le sondage actif, un thread qui dort sans souffrir
+HKLM BCD remplace Boot point ini depuis Windows Server deux mille huit
+On ne modifie le registre que pour des paramètres sans interface, une conduite
+
+[Refrain final]
+Ruche et HKEY, le cœur de configuration
+Chaque clé, chaque valeur, une organisation
+Ruche et HKEY, Windows Server au centre
+Jusqu'au bout de la clé, jamais ne se déprend
+
+[Outro]
+Registre, ruche, HKLM
+One love, one network, configuration

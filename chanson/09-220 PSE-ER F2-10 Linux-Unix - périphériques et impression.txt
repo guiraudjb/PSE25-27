@@ -1,0 +1,56 @@
+TITRE : Lp Spool Riddim
+
+[Intro]
+Telnet en clair, RLOGIN dispense sans mot de passe parfois
+Hosts point equiv et rhosts, jamais pour root, une loi
+Lp spool, oh yeah
+
+[Couplet 1]
+NFS exporte côté serveur, monte côté client
+Etc fstab et exports, mount et umount, un lien
+Mode caractère transfère direct, terminal et clavier
+Mode bloc assemble en tampon, disque et bande à ranger
+
+Numéro majeur identifie le pilote et son contrôleur
+Numéro mineur précise la partition ou l'emplacement, un vrai facteur
+Dev null le trou noir, dev zero génère des zéros
+Hda maître, hdb esclave, sda le SCSI, ttyS0 le vrai héros
+
+[Refrain]
+Lp spool, répertoire des demandes en attente
+Accept et reject contrôlent le flux, une consigne exigeante
+Lp spool, lpsched ordonnance vers l'imprimante
+Lpmove reroute, cancel élimine, une gestion marquante
+
+[Couplet 2]
+Termcap décrit dans etc, terminfo compile par lettre
+Variable TERM choisit parmi les terminaux reconnus, à mettre
+CUPS aujourd'hui le plus utilisé, cupsd le démon
+Berkeley lpd, LPRng amélioré, une évolution sans faux bond
+
+PostScript abandonné par les imprimantes bon marché
+APS Filter et Magic Filter convertissent sans lâcher
+Destination isolée ou classe, un groupe d'imprimantes
+LPDEST ou option moins d priorise la demande courante
+
+[Refrain]
+Lp spool, répertoire des demandes en attente
+Accept et reject contrôlent le flux, une consigne exigeante
+Lp spool, lpsched ordonnance vers l'imprimante
+Lpmove reroute, cancel élimine, une gestion marquante
+
+[Pont]
+Telnet expose les mots de passe, SSH doit être préféré
+Le mode bloc assemble avant transfert, le caractère est direct et pressé
+Terminfo généralement préféré, emacs a ses propres définitions
+CUPS devant Berkeley et LPRng, une vraie évolution
+
+[Refrain final]
+Lp spool, l'impression sous Unix
+Du fichier spécial à la page imprimée, un vrai fix
+Lp spool, chaque périphérique un fichier
+Jusqu'au bout du flux, jamais de sanglier
+
+[Outro]
+NFS, impression, périphérique
+One love, one network, gestion Unix

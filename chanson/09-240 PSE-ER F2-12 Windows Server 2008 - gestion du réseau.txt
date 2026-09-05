@@ -1,0 +1,56 @@
+TITRE : WINS et DFSR Riddim
+
+[Intro]
+Accès à distance en proxy, dial-up ou VPN choisi
+SSTP passe par le port quatre cent quarante-trois, un pare-feu franchi
+WINS et DFSR, oh yeah
+
+[Couplet 1]
+Active Directory stocké dans Ntds point dit, une base
+ESE alias JET Blue gère le magasin avec efficace
+LSASS exécute le service d'annuaire, un vrai pilier
+Répartition de charge réseau, trente-deux hôtes à gérer
+
+DFS relie les partages en un seul espace de noms
+FRS puis DFSR répliquent avec RDC, économisant en tout lieu
+Seuls les volumes NTFS sont reproduits par le journal
+DFSR multi-maître, topologie en anneau, étoile ou en aval
+
+[Refrain]
+WINS et DFSR, résolution NetBIOS par diffusion
+LMHOSTS en dernier recours, une vraie précaution
+WINS et DFSR, inscription valable six jours
+Renouvelée à mi-chemin, la réplication toujours en cours
+
+[Couplet 2]
+TRACERT incrémente le TTL depuis un, trois requêtes chaque saut
+PATHPING plus rapide, attend la fin pour les stats, un vrai assaut
+NBTSTAT visualise le cache NetBIOS, six cents secondes
+NETDIAG teste tout, DNS, Kerberos, une ronde féconde
+
+Ports NetBIOS cent trente-sept et cent trente-neuf routables
+Diffusion NetBIOS jamais ne passe le routeur, une donnée sensible
+DNS résout en priorité, NetBIOS en secours seulement
+LLMNR pallie l'absence d'IPv4, un mécanisme intelligemment
+
+[Refrain]
+WINS et DFSR, résolution NetBIOS par diffusion
+LMHOSTS en dernier recours, une vraie précaution
+WINS et DFSR, inscription valable six jours
+Renouvelée à mi-chemin, la réplication toujours en cours
+
+[Pont]
+L'accès à distance agit en proxy, pas en contrôle à distance direct
+Le cluster réseau ne partage jamais l'état de l'application, un fait exact
+Seuls les répertoires NTFS peuvent être répliqués par DFSR
+Un nom de plus de seize caractères devient un nom DNS, pas NetBIOS, sincère
+
+[Refrain final]
+WINS et DFSR, le réseau Windows structuré
+Active Directory, DFS, tout est interconnecté
+WINS et DFSR, du client au contrôleur
+Jusqu'au bout du domaine, jamais d'erreur
+
+[Outro]
+WINS, DFSR, Active Directory
+One love, one network, gestion réseau

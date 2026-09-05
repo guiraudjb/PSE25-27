@@ -1,0 +1,56 @@
+TITRE : Étendue et SOA Riddim
+
+[Intro]
+DHCP dérive de BOOTP, RFC neuf cent cinquante et un
+Découverte, offre, requête, accusé, un cycle opportun
+Étendue et SOA, oh yeah
+
+[Couplet 1]
+Serveur DHCP adresse fixe, port soixante-huit à l'écoute
+Client sur le soixante-sept, agent de relais sur la route
+Étendue groupe les plages consécutives d'un sous-réseau
+Réservation lie la MAC à l'IP, un bail toujours nouveau
+
+Option Client FQDN quatre-vingt-un informe le serveur DNS
+Le serveur envoie un message UPDATE, l'intégration se précise
+Autorisation obligatoire dans Active Directory avant de servir
+Clustering DHCP mieux que le fractionnement, pour ne rien perdre
+
+[Refrain]
+Étendue et SOA, quatre étapes DHCP en boucle
+Serveur primaire fait autorité, secondaire copie sans reproche
+Étendue et SOA, A, AAAA, CNAME, MX, NS, PTR
+Zone intégrée Active Directory réplique sans transfert particulier
+
+[Couplet 2]
+FQDN termine par un point, cent vingt-sept niveaux possibles
+Mode itératif sur Internet, récursif en local, plus sensible
+IXFR transfert incrémental, mode par défaut de Windows Server
+RR SRV localise LDAP trois cent quatre-vingt-neuf, Kerberos quatre-vingt-huit, un repère
+
+DDNS RFC deux mille cent trente-six, OPCODE UPDATE atomique
+Mise à jour sécurisée négocie Kerberos, un contexte authentique
+RODC zone en lecture seule, plus robuste aux attaques
+Zone de noms globaux remplace WINS, une alternative qui marque
+
+[Refrain]
+Étendue et SOA, quatre étapes DHCP en boucle
+Serveur primaire fait autorité, secondaire copie sans reproche
+Étendue et SOA, A, AAAA, CNAME, MX, NS, PTR
+Zone intégrée Active Directory réplique sans transfert particulier
+
+[Pont]
+Un serveur DHCP non autorisé ne répond à aucune requête
+Le fractionnement d'étendue perd la moitié des adresses, une défaite
+DHCPv6 configure avec état selon les drapeaux M et O
+Le service client DHCP génère les mises à jour, même à IP fixe, un vrai flot
+
+[Refrain final]
+Étendue et SOA, DHCP et DNS liés
+Active Directory au centre, tout est répliqué
+Étendue et SOA, Windows Server structuré
+Jusqu'au bout du bail, jamais d'erreur
+
+[Outro]
+DHCP, DNS, Active Directory
+One love, one network, services réseau

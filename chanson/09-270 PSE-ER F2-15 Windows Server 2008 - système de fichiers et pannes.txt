@@ -1,0 +1,56 @@
+TITRE : MFT Journal RAID Riddim
+
+[Intro]
+NTFS bloque l'accès pour un seul utilisateur, sécurisé
+Convert point exe transforme FAT en NTFS, jamais l'inverse osé
+MFT journal RAID, oh yeah
+
+[Couplet 1]
+MFT grandit à chaque création, jamais elle ne rétrécit
+Descripteur résident ou non résident, un choix qui se précise
+Arbre B plus organise les clusters, mieux qu'une simple table
+Cluster de cinq cents octets à soixante-quatre kilo, variable et capable
+
+Fichier journal enregistre avant d'écrire, transaction garantie
+Écriture paresseuse en tampon, puis reportée, une économie
+Point de contrôle note l'état périodiquement dans le journal
+À la panne, refaire le clos, défaire l'inachevé, un ordre normal
+
+[Refrain]
+MFT journal RAID, WRP protège DLL, EXE, SYS
+Windows Installer ignore et journalise, sans compromis
+MFT journal RAID, un pour le miroir, cinq pour la parité
+Vingt pour cent d'espace pour la parité, cinquante pour le mirroré
+
+[Couplet 2]
+Disque de base en partitions, disque dynamique en volumes
+Volume simple, multiple, agrégat par bande sans consolider
+Deux disques maximum en miroir Windows, trois pour le RAID cinq
+Reconstruction régénère les données depuis la parité, une vraie astuce
+
+Quotas seulement sur volumes NTFS, jamais sur FAT ou dossiers
+Conversion en disque dynamique irréversible, un point à considérer
+États erreur, en état, en état avec risque, initialisation
+Gestion de disque configure la tolérance avec un assistant, une solution
+
+[Refrain]
+MFT journal RAID, WRP protège DLL, EXE, SYS
+Windows Installer ignore et journalise, sans compromis
+MFT journal RAID, un pour le miroir, cinq pour la parité
+Vingt pour cent d'espace pour la parité, cinquante pour le mirroré
+
+[Pont]
+Un volume multiple perd tout si un seul disque tombe en panne
+Le RAID cinq calcule la parité, plus lent en écriture qu'un miroir se damne
+La MFT est dupliquée pour la sécurité, jamais un seul point de défaillance
+Windows Server ne s'installe pas sur un volume dynamique créé pendant l'installation, patience
+
+[Refrain final]
+MFT journal RAID, NTFS et la tolérance de pannes
+Journalisation, réplication, jamais une donnée abandonnée
+MFT journal RAID, du cluster au disque
+Jusqu'au bout du volume, jamais de risque
+
+[Outro]
+NTFS, MFT, RAID
+One love, one network, fichiers et pannes

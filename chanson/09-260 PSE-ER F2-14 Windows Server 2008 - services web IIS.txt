@@ -1,0 +1,56 @@
+TITRE : HTTP Sys et WAS Riddim
+
+[Intro]
+IIS sept découpé en quarante modules, plus léger qu'avant
+IIS six en un seul bloc, l'installation complète pesant
+HTTP sys et WAS, oh yeah
+
+[Couplet 1]
+HTTP point sys pilote noyau, remplace Winsock depuis IIS six
+Mise en cache et en file d'attente en mode noyau, une matrice
+Service WWW configure l'écouteur, notifie WAS en renfort
+WAS gère le pool d'applications et les process de travail sans effort
+
+ApplicationHost point config lu au démarrage par WAS
+Adaptateur d'écoute prépare les auditeurs, un vrai contrat
+Modules HTTP contenu statique, document par défaut, WebDAV
+ASP point NET managé, CGI, ISAPI, SSI, un vrai canevas
+
+[Refrain]
+HTTP sys et WAS, authentification anonyme d'abord essayée
+Windows intégrée sans mot de passe envoyé, sécurisée
+HTTP sys et WAS, Digest en hash unilatéral
+Kerberos v cinq remplace NTLM, protocole principal
+
+[Couplet 2]
+SSL trois zéro chiffre avec certificat serveur et client
+Clé de session quarante bits, cent vingt-huit avec SGC brillant
+Authentification de base en Base64 non chiffrée, un risque réel
+Seulement sûre avec SSL ou une ligne dédiée, un rituel
+
+WebDAV affiche le stockage comme un système de fichiers
+Verrouillage empêche deux modifications simultanées, un vrai métier
+FTP Restart reprend le téléchargement interrompu sans tout refaire
+Inetmgr ouvre le Gestionnaire des services Internet, un repère
+
+[Refrain]
+HTTP sys et WAS, authentification anonyme d'abord essayée
+Windows intégrée sans mot de passe envoyé, sécurisée
+HTTP sys et WAS, Digest en hash unilatéral
+Kerberos v cinq remplace NTLM, protocole principal
+
+[Pont]
+L'architecture modulaire réduit la surface d'attaque, un vrai gain
+WAS fonctionne sans WWW si aucun HTTP n'est requis, certain
+L'authentification intégrée ne passe pas les proxy HTTP, un souci d'intranet
+La sauvegarde de la métabase ne couvre jamais le contenu complet
+
+[Refrain final]
+HTTP sys et WAS, IIS the serveur web
+Modulaire, sécurisé, jamais un point faible
+HTTP sys et WAS, Windows Server au poste
+Jusqu'au bout du binding, jamais de riposte
+
+[Outro]
+IIS, HTTP sys, WAS
+One love, one network, services web

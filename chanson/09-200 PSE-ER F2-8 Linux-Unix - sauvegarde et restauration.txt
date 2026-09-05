@@ -1,0 +1,56 @@
+TITRE : Tar Dump LTO Riddim
+
+[Intro]
+Sauvegarde locale reste sur site, externalisée part au loin
+Archivage légal conserve pour l'administration, un besoin
+Tar dump LTO, oh yeah
+
+[Couplet 1]
+Complète sauvegarde tout, différentielle depuis la dernière complète
+Incrémentale depuis la dernière quelle qu'elle soit, une méthode discrète
+Niveau zéro intégral, chaque niveau suit le précédent
+Restauration incrémentale rejoue tout dans l'ordre, patiemment
+
+Tar accède au système de fichiers normalement, verbeux
+Cpio lit par l'entrée standard, multi-volume, studieux
+Dd transfère brut, convertit EBCDIC en ASCII sans faille
+Mt fait avancer, reculer, rembobiner la bande sans entaille
+
+[Refrain]
+Tar dump LTO, LTO un cent gigas, LTO sept six téras
+WORM écrit une fois pour l'archivage, jamais de couac
+Tar dump LTO, dump consulte la structure interne
+Restore restaure tout automatiquement, une chaîne moderne
+
+[Couplet 2]
+Fbackup ne franchit pas NFS sauf indication contraire
+HP OmniBack centralise, exige un serveur de base, un vrai repère
+Ufsdump et ufsrestore équivalents sous Solaris
+Mksysb crée la bande amorçable AIX, une vraie polaire
+
+AMANDA centralise sur un serveur puissant les clients légers
+Rsync ne transfère que les fichiers modifiés, économe et léger
+Ratio de compression deux pour un jusqu'à la cinquième génération
+Librairie robotisée charge les bandes par bras, une automatisation
+
+[Refrain]
+Tar dump LTO, LTO un cent gigas, LTO sept six téras
+WORM écrit une fois pour l'archivage, jamais de couac
+Tar dump LTO, dump consulte la structure interne
+Restore restaure tout automatiquement, une chaîne moderne
+
+[Pont]
+Un fichier détruit sous Unix ne peut jamais être récupéré
+Sauvegarde intégrale ne veut pas dire tout le système sauvegardé
+Les sauvegardes externalisées partent hors site aussitôt réalisées
+Ne jamais changer la zone cible entre deux sauvegardes planifiées
+
+[Refrain final]
+Tar dump LTO, la politique de sauvegarde
+Quoi, où, qui, comment, quand, une garde
+Tar dump LTO, la donnée protégée
+Jusqu'au bout de la bande, jamais effacée
+
+[Outro]
+Sauvegarde, restauration, bande
+One love, one network, protection des données
