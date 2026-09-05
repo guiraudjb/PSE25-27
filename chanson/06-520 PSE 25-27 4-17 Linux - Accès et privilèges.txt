@@ -1,0 +1,56 @@
+TITRE : Sudo Visudo Riddim
+
+[Intro]
+UID zéro pour root, mille pour l'utilisateur standard
+Etc passwd, etc shadow, la sécurité au départ
+Sudo visudo, oh yeah
+
+[Couplet 1]
+Login x UID GID description home shell, le format
+Etc shadow chiffre en SHA cinq cent douze, un rempart
+Useradd crée le compte, moins uid, moins home, moins r pour système
+Usermod moins aG ajoute au groupe sans effacer le schème
+
+Userdel moins r supprime compte et répertoire personnel
+Chage moins M quatre-vingt-dix fixe la durée essentielle
+Chage moins E verrouille le compte après la date fixée
+Who, last, lastb tracent les connexions et les échecs passés
+
+[Refrain]
+Sudo visudo, delegation de privilège
+Nom user all égal root, la commande qu'on protège
+Sudo visudo, traçabilité et audit
+Etc sudoers point d, la syntaxe qui évite le déficit
+
+[Couplet 2]
+PAM apporte modularité, bibliothèques dot so
+Auth required pam unix point so, la strategie du mot
+Required continue même en échec, sufficient arrête net
+Requisite bloque immédiatement, un contrôle bien complet
+
+Groupadd moins g mille un crée le groupe avec son GID
+Usermod moins G seul remplace tous les groupes, un vrai interdit
+Usermod moins aG ajoute sans effacer les autres groupes
+Le moindre privilège limite la montée si le système déraille et troue
+
+[Refrain]
+Sudo visudo, delegation de privilège
+Nom user all égal root, la commande qu'on protège
+Sudo visudo, traçabilité et audit
+Etc sudoers point d, la syntaxe qui évite le déficit
+
+[Pont]
+Usr sbin nologin interdit toute connexion interactive
+Les comptes de service en profitent, une pratique active
+Jamais modifier shadow directement, un risque insensé
+Passwd et chage sont les seules commandes à utiliser
+
+[Refrain final]
+Sudo visudo, UID et GID structurent
+Chaque utilisateur, chaque groupe, une architecture
+Sudo visudo, PAM sécurise l'accès
+Jusqu'au bout du login, jamais d'excès
+
+[Outro]
+UID, GID, sudo
+One love, one network, privilèges

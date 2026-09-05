@@ -1,0 +1,56 @@
+TITRE : Apachectl Graceful Riddim
+
+[Intro]
+Apache né en mille neuf cent quatre-vingt-quinze, a patchy server
+HTTP port quatre-vingt, HTTPS quatre cent quarante-trois, un repère
+Apachectl graceful, oh yeah
+
+[Couplet 1]
+Get récupère, post envoie, head les entêtes seulement
+Put remplace, delete efface, cinq verbes clairement
+Deux cents succès, quatre cent trois interdit, quatre cent quatre absent
+Cinq cents erreur serveur, cinq cent trois service, un mauvais moment
+
+Document root dans var www html, le répertoire de base
+Virtual host par IP ou par nom, SNI dans la phase
+Apachectl configtest vérifie avant tout redémarrage
+Apachectl graceful recharge sans couper le passage
+
+[Refrain]
+Apachectl graceful, MPM prefork, worker, event
+Chaque mode gère processus et threads différemment, complet
+Apachectl graceful, mod ssl chiffre la voie
+TLS un point deux, un point trois, la sécurité qu'on emploie
+
+[Couplet 2]
+A2enmod, a2ensite activent sur Debian par lien symbolique
+Httpd point conf sur Red Hat, une structure identique
+Access log trace IP, méthode, code retour, la taille
+Error log liste les erreurs, emerg jusqu'à debug sans faille
+
+Mod proxy http fait reverse proxy, proxy pass, proxy pass reverse
+Keep alive réutilise la connexion, une pratique diverse
+Prefork mono-thread, seul compatible non thread-safe
+Worker et event réduisent la mémoire, une meilleure interface
+
+[Refrain]
+Apachectl graceful, MPM prefork, worker, event
+Chaque mode gère processus et threads différemment, complet
+Apachectl graceful, mod ssl chiffre la voie
+TLS un point deux, un point trois, la sécurité qu'on emploie
+
+[Pont]
+Sans ServerName, Apache cherche en DNS inverse, un souci
+Allow Deny Order obsolètes, Require les remplace ici
+TLS un point zéro et un point un ne sont plus sécurisés
+Nginx, HAProxy, Varnish, des alternatives à essayer
+
+[Refrain final]
+Apachectl graceful, le serveur web historique
+Modulaire, multiplateforme, une référence classique
+Apachectl graceful, HTTP et HTTPS
+Jusqu'au bout du port, jamais d'excès
+
+[Outro]
+Apache, HTTP, virtual host
+One love, one network, serveur web

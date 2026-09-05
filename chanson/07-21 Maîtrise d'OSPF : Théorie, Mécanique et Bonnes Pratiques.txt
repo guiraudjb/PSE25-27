@@ -1,0 +1,56 @@
+TITRE : Dijkstra et LSA Riddim
+
+[Intro]
+OSPF abandonne le vecteur de distance pour l'état de liens
+Dijkstra calcule le plus court chemin, un algorithme ancien
+Dijkstra et LSA, oh yeah
+
+[Couplet 1]
+Table des voisins recense les routeurs directement connectés
+Table topologique rassemble toutes les LSA collectées
+Table de routage extrait les meilleurs trajets sans boucle
+Router ID sur trente-deux bits, un nom qui ne recule
+
+Hello découvre les voisins, un battement de cœur régulier
+Database description résume avant de tout échanger
+Link State Request réclame l'information manquante précise
+Link State Update transporte les LSA, une donnée qui se glisse
+
+[Refrain]
+Dijkstra et LSA, sept états vers l'adjacence
+Down, init, two-way, exstart, exchange, loading, full, la séquence
+Dijkstra et LSA, DR centralise les échanges
+Sur le réseau broadcast, le chef évite les mélanges
+
+[Couplet 2]
+Zone zéro la zone centrale, transit obligatoire
+LSA type un reste dans la zone, jamais elle ne sort au loin
+LSA type trois résume aux frontières par le routeur ABR
+LSA type cinq inonde le domaine avec les routes externes, un flair
+
+Stub bloque les routes externes, route par défaut minimale
+Totally stubby pousse l'optimisation à son maximum, une échelle
+Not-so-stubby autorise un ASBR local dans la zone fuyante
+Virtual link crée un tunnel de signalisation, une jonction suppléante
+
+[Refrain]
+Dijkstra et LSA, sept états vers l'adjacence
+Down, init, two-way, exstart, exchange, loading, full, la séquence
+Dijkstra et LSA, DR centralise les échanges
+Sur le réseau broadcast, le chef évite les mélanges
+
+[Pont]
+MTU incohérent bloque l'échange en phase exchange complet
+Deux router ID identiques empêchent le maître, un conflit net
+Reference bandwidth doit s'ajuster pour la fibre ultra rapide
+Authentification par clé secrète empêche l'intrusion perfide
+
+[Refrain final]
+Dijkstra et LSA, l'algorithme sans boucle
+Chaque routeur au sommet de son arbre, une meute qui ne recule
+Dijkstra et LSA, la convergence parfaite
+Jusqu'au bout de la zone, jamais de défaite
+
+[Outro]
+OSPF, Dijkstra, LSA
+One love, one network, état de liens

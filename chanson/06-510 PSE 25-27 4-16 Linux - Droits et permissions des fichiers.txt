@@ -1,0 +1,56 @@
+TITRE : SUID SGID Sticky Riddim
+
+[Intro]
+Tout est fichier sous Linux, ls moins l dévoile
+User, Group, Other, trois catégories, une toile
+SUID SGID Sticky, oh yeah
+
+[Couplet 1]
+R quatre lecture, W deux écriture, X un exécution
+Rwx égale sept, rw tiret égale six, la addition
+Sept cinq cinq en octal donne rwxr-xr-x complet
+Umask retire des droits, six cent soixante-six moins le décret
+
+Chmod u plus x ajoute l'exécution au propriétaire
+Chmod sept cinq cinq fixe les droits en notation binaire
+Chown user deux points groupe change propriétaire et groupe entier
+Umask zéro vingt-deux donne six quarante-quatre, un fichier ordinaire
+
+[Refrain]
+SUID SGID Sticky, les trois bits spéciaux
+S remplace le x chez user ou chez group, un signal
+SUID SGID Sticky, t remplace le x chez other
+Passwd, tmp, dossier partagé, chaque bit son histoire
+
+[Couplet 2]
+SUID quatre mille exécute avec les droits du propriétaire
+Passwd modifie etc shadow, exemple exemplaire
+SGID deux mille sur dossier fait hériter le groupe
+Sticky bit mille protège tmp, personne ne dupe
+
+Getfacl affiche les ACL, setfacl les modifie
+Setfacl moins m u deux points alice deux points rw signifie
+Mount moins o acl active le système étendu
+Un plus après les droits dans ls moins l, ACL reconnu
+
+[Refrain]
+SUID SGID Sticky, les trois bits spéciaux
+S remplace le x chez user ou chez group, un signal
+SUID SGID Sticky, t remplace le x chez other
+Passwd, tmp, dossier partagé, chaque bit son histoire
+
+[Pont]
+Le SUID sur un script est ignoré par le noyau
+Seul le binaire compilé profite du chapeau
+Un umask zéro vingt-sept retire tout à other
+Les fichiers de config restent secrets, hors de vue, un vrai trésor
+
+[Refrain final]
+SUID SGID Sticky, la sécurité par octal
+UGO structure l'accès, un système canonique
+SUID SGID Sticky, ACL en renfort
+Jusqu'au bout du bit, jamais de tort
+
+[Outro]
+Chmod, chown, permissions
+One love, one network, UGO

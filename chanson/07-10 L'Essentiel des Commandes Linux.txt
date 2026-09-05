@@ -1,0 +1,56 @@
+TITRE : Commandes Essentielles Riddim
+
+[Intro]
+Man affiche la page, apropos cherche la fonction
+Whatis résume en une ligne, une explication
+Commandes essentielles, oh yeah
+
+[Couplet 1]
+Ls moins a montre les fichiers cachés dans le dossier
+Ls moins l affiche type et permissions sans tricher
+Ls moins R récursif, moins t trie par date, moins S par taille
+Pwd montre où l'on est, mkdir crée sans faille
+
+Rm supprime, moins r récursif, moins f sans confirmation
+Cp copie, moins r pour les dossiers, mv pour la migration
+Touch crée un fichier vide ou met à jour l'horodatage
+Cat affiche, less parcourt, head et tail montrent un passage
+
+[Refrain]
+Commandes essentielles, uname affiche le système
+Uptime le temps de marche, hostname l'identité même
+Commandes essentielles, ps et top montrent les processus
+Kill termine, pkill par nom, htop l'interface exclusive
+
+[Couplet 2]
+Chmod et chown gèrent permissions et propriétaires
+Sept sept sept donne rwx à tous, un exemple ordinaire
+Grep cherche une chaîne, moins i ignore la casse
+Find cherche des fichiers, locate accélère la trace
+
+Df montre l'espace disque, du l'utilisation par dossier
+Free affiche la mémoire libre et utilisée sans tricher
+Ssh connecte à distance, scp copie de façon sécurisée
+Rsync synchronise, wget télécharge sans hésiter
+
+[Refrain]
+Commandes essentielles, uname affiche le système
+Uptime le temps de marche, hostname l'identité même
+Commandes essentielles, ps et top montrent les processus
+Kill termine, pkill par nom, htop l'interface exclusive
+
+[Pont]
+Rm moins rf supprime sans jamais demander confirmation
+Yum, dnf, apt varient selon la distribution
+Tar cf archive un répertoire en une seule opération
+Gpg chiffre et déchiffre, une vraie protection
+
+[Refrain final]
+Commandes essentielles, le shell à portée de main
+Kernel, processus, fichiers, un système souverain
+Commandes essentielles, l'aide-mémoire du terminal
+Jusqu'au bout du prompt, jamais anormal
+
+[Outro]
+Ls, grep, chmod
+One love, one network, commandes

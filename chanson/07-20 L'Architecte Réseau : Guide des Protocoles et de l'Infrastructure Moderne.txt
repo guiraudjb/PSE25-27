@@ -1,0 +1,56 @@
+TITRE : Plan de Contrôle Plan de Données Riddim
+
+[Intro]
+VLAN isole les domaines de diffusion sur le réseau
+Spanning Tree bloque les boucles, évite le chaos, tableau
+Plan de contrôle plan de données, oh yeah
+
+[Couplet 1]
+Table MAC associe adresse physique et port du commutateur
+RIB stocke les routes, FIB copie optimisée en processeur
+Table ARP cache l'association IP et adresse physique
+LSDB cartographie tous les routeurs de la zone, une carte topique
+
+LACP agrège les liens pour bande passante et haute dispo
+VXLAN encapsule les trames dans des paquets, un vrai combo
+BGP EVPN contrôle le réseau superposé moderne
+Fini le blocage de la moitié des liens, une ère qui s'inverne
+
+[Refrain]
+Plan de contrôle plan de données, le cerveau et les muscles
+OSPF calcule vite, BGP interconnecte sans obstacle
+Plan de contrôle plan de données, VRF isole les tables
+Système autonome, unité de base, incontestable
+
+[Couplet 2]
+ARP et NDP relient adresse logique et adresse physique
+VRRP partage IP et MAC virtuelles entre routeurs, tactique
+OSPF construit la carte complète et converge très vite
+BGP applique des politiques strictes, le trafic qu'on invite
+
+DHCP et DNS automatisent hôtes et noms de domaine
+MPLS aiguille par étiquette, rapide sans analyse vaine
+IPsec chiffre, NAT traduit contre la pénurie
+SD-WAN sépare contrôle et données, une nouvelle voie choisie
+
+[Refrain]
+Plan de contrôle plan de données, le cerveau et les muscles
+OSPF calcule vite, BGP interconnecte sans obstacle
+Plan de contrôle plan de données, VRF isole les tables
+Système autonome, unité de base, incontestable
+
+[Pont]
+QoS classe le trafic, priorise la voix en congestion
+Télémétrie continue remplace l'interrogation, une évolution
+Show interface, show ip route, show arp diagnostiquent
+Le chemin retour différent du chemin aller complique la pratique
+
+[Refrain final]
+Plan de contrôle plan de données, l'architecture moderne
+De la couche physique à BGP, une chaîne qui gouverne
+Plan de contrôle plan de données, du câble au cloud
+Jusqu'au bout du paquet, jamais de trou
+
+[Outro]
+VLAN, OSPF, BGP
+One love, one network, architecture

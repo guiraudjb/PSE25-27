@@ -1,0 +1,56 @@
+TITRE : Smbd Winbindd Riddim
+
+[Intro]
+Samba relie Linux, Windows et macOS ensemble
+SMB CIFS partagent fichiers, un pont qui rassemble
+Smbd winbindd, oh yeah
+
+[Couplet 1]
+Smbd gère fichiers et imprimantes, TCP quatre cent quarante-cinq
+Nmbd résout NetBIOS, UDP cent trente-sept obsolète, on le laisse
+Winbindd intègre Active Directory, LDAP et Kerberos ensemble
+Etc samba smb point conf, la configuration qui rassemble
+
+Section global définit workgroup et server string, un nom
+Section homes partage les répertoires personnels, une fonction
+Section public autorise l'invité, guest ok yes activé
+Section secure restreint aux groupes, valid users protégé
+
+[Refrain]
+Smbd winbindd, SMB deux, SMB trois sécurisés
+Smbpasswd moins a ajoute l'utilisateur autorisé
+Smbd winbindd, testparm vérifie la syntaxe
+Smbstatus affiche connexions actives, sans complexe
+
+[Couplet 2]
+SMB1 vulnérable à EternalBlue, désactivé depuis quatre point sept
+SMB trois point un point un chiffre obligatoirement, un progrès
+Net ads join rejoint le domaine Active Directory
+Idmap traduit les SID Windows en UID Linux, une magie
+
+Smbclient moins L liste les partages disponibles au loin
+Pdbedit moins L affiche tous les utilisateurs Samba au coin
+Chmod et chown Linux s'appliquent en plus des droits Samba
+Le plus restrictif des deux prévaut, jamais l'un sans l'autre là
+
+[Refrain]
+Smbd winbindd, SMB deux, SMB trois sécurisés
+Smbpasswd moins a ajoute l'utilisateur autorisé
+Smbd winbindd, testparm vérifie la syntaxe
+Smbstatus affiche connexions actives, sans complexe
+
+[Pont]
+Samba garde sa propre base de mots de passe, distincte de shadow
+Sans smbpasswd moins a, la connexion Samba tombe à zéro
+SELinux exige le contexte samba share t sur le dossier
+Sans ce contexte, l'accès reste bloqué malgré les droits sans erreur
+
+[Refrain final]
+Smbd winbindd, le pont entre les mondes
+Fichiers, imprimantes, dans le réseau qui abonde
+Smbd winbindd, Active Directory relié
+Jusqu'au bout du partage, jamais isolé
+
+[Outro]
+Samba, SMB, partage
+One love, one network, interopérabilité

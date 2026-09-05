@@ -1,0 +1,56 @@
+TITRE : Appel Système Riddim
+
+[Intro]
+Le programme demande, l'appel système transite
+Espace utilisateur vers noyau, la seule voie légitime
+Appel système, oh yeah
+
+[Couplet 1]
+Bus transporte les données entre processeur et mémoire
+Contrôleur gère erreurs et interruptions, un territoire
+Pilote traduit les commandes génériques en instructions
+Peripherique caractère en flux, bloc en accès aléatoire, distinction
+
+E/S programmées bloquent le CPU pendant toute l'opération
+DMA libère le processeur pour une autre application
+Interruption suspend le programme, exécute la routine du noyau
+Puis reprend l'exécution normale, un vrai tableau
+
+[Refrain]
+Appel système, seule interface noyau utilisateur
+Vérifie les droits, identifie, déclenche avec rigueur
+Appel système, abstraction matérielle en fichier
+Dev sda le disque, dev tty le clavier, sans détour à trier
+
+[Couplet 2]
+Lsblk affiche l'arborescence des disques et partitions
+Lspci et lsusb identifient le matériel en action
+Iostat moins x un affiche pourcentage util et l'attente
+Vmstat donne une vue globale mémoire, swap, E/S présente
+
+Iotop identifie en temps réel qui consomme le plus
+Proc interrupts liste chaque interruption reçue au-dessus
+Root généralement requis pour voir tous les processus
+Sinon seul l'utilisateur courant reste visible, exclusif
+
+[Refrain]
+Appel système, seule interface noyau utilisateur
+Vérifie les droits, identifie, déclenche avec rigueur
+Appel système, abstraction matérielle en fichier
+Dev sda le disque, dev tty le clavier, sans détour à trier
+
+[Pont]
+Une milliseconde pour le disque, une nanoseconde pour le CPU
+Minimiser les E/S synchrones, privilégier l'asynchrone, un vrai jeu
+DMA ne supprime pas la latence, l'interruption reste à traiter
+Petits transferts, le coût du DMA peut dépasser le bénéfice
+
+[Refrain final]
+Appel système, le noyau au centre de tout
+Sécurité, isolation, cohérence jusqu'au bout
+Appel système, caractère et bloc distincts
+Jusqu'au bout du bus, jamais instinct
+
+[Outro]
+Appel système, bus, interruption
+One love, one network, E/S

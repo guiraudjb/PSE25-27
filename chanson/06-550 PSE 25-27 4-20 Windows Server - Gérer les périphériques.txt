@@ -1,0 +1,56 @@
+TITRE : IRP et Driver Stack Riddim
+
+[Intro]
+HAL abstrait le matériel du noyau Windows
+I/O Manager crée l'IRP, achemine sans faux pas
+IRP et Driver Stack, oh yeah
+
+[Couplet 1]
+Application, API Win32, I/O Manager, pilotes, matériel
+Le chemin de la requête suit cette chaîne essentielle
+HAL assure l'indépendance entre noyau et constructeur
+Interruptions homogènes, compatibilité, un vrai moteur
+
+IRP contient l'opération, le buffer, le contexte, l'état
+Cache Manager limite les accès physiques, un vrai résultat
+Memory Manager gère les buffers et le memory-mapped I/O
+Security Reference Monitor vérifie les droits, un vrai contrôle
+
+[Refrain]
+IRP et Driver Stack, filtre, fonction, bus empilés
+Chaque pilote traite, modifie ou transmet, un relais
+IRP et Driver Stack, KMDF le modèle moderne
+UMDF en mode utilisateur, la stabilité qu'on gouverne
+
+[Couplet 2]
+WDM ancien modèle, bas niveau, complexe et peu sûr
+KMDF simplifie mémoire, Plug and Play, une vraie armure
+IRQ classique, MSI-X répartit sur les processeurs
+Plug and Play détecte, installe, attribue les ressources en douceur
+
+IOCP permet l'asynchrone pour IIS et SQL Server
+Overlapped I/O continue l'exécution, un vrai transfert
+Devmgmt point msc administre, diagnostique le matériel
+HVCI protège l'intégrité du code contre l'injection, un vrai rempart
+
+[Refrain]
+IRP et Driver Stack, filtre, fonction, bus empilés
+Chaque pilote traite, modifie ou transmet, un relais
+IRP et Driver Stack, KMDF le modèle moderne
+UMDF en mode utilisateur, la stabilité qu'on gouverne
+
+[Pont]
+Une application ne touche jamais le matériel directement
+Un pilote noyau buggé crashe le système instantanément
+Driver Verifier stress-teste, jamais en production sans raison
+Sans asynchronisme, chaque connexion bloque un thread, une prison
+
+[Refrain final]
+IRP et Driver Stack, Windows Server au centre
+Cinq composants coordonnés, une architecture qui s'ancre
+IRP et Driver Stack, sécurité et performance
+Jusqu'au bout du bus, jamais de défaillance
+
+[Outro]
+HAL, IRP, driver
+One love, one network, périphérique

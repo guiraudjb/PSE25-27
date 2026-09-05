@@ -1,0 +1,56 @@
+TITRE : DMA et Page Cache Riddim
+
+[Intro]
+Interruption libère le CPU de l'attente active
+DMA transfère direct, sans le processeur, une pratique attractive
+DMA et page cache, oh yeah
+
+[Couplet 1]
+Fichier spécial dans dev représente le périphérique
+Type caractère en flux, tty le terminal typique
+Type bloc par blocs fixes, sda le disque dur
+Numéro majeur désigne le pilote, mineur distingue chaque murmure
+
+Contrôleur traduit les commandes en instructions matérielles
+Pilote fait l'interface entre noyau et carte réelle
+VFS uniformise l'accès à chaque système de fichiers
+Ext4, NTFS, FAT32, une interface singulière
+
+[Refrain]
+DMA et page cache, huit étapes vers le disque
+Requête, appel système, VFS, pilote, un risque minimisé
+DMA et page cache, write-back en mémoire d'abord
+Sync synchronise avant la coupure, un vrai remord
+
+[Couplet 2]
+Page cache stocke les données des fichiers lus récemment
+Buffer cache historique, aujourd'hui unifié quasiment
+Write-back écrit d'abord en cache puis synchronise au disque
+Un arrêt brutal sans sync perd les données, un vrai risque
+
+Ls moins l dev affiche type caractère ou bloc précis
+Cat proc devices liste pilotes reconnus, un vrai avis
+Dmesg affiche messages noyau, détection matérielle
+Free montre buff slash cache, mémoire récupérable, essentielle
+
+[Refrain]
+DMA et page cache, huit étapes vers le disque
+Requête, appel système, VFS, pilote, un risque minimisé
+DMA et page cache, write-back en mémoire d'abord
+Sync synchronise avant la coupure, un vrai remord
+
+[Pont]
+Sans pilote pour le numéro majeur, le noyau reste bloqué
+Même si le fichier spécial existe, rien n'est débloqué
+Le page cache occupe la mémoire, un comportement normal
+Free le montre disponible, récupérable en cas de signal
+
+[Refrain final]
+DMA et page cache, l'optimisation du noyau
+Interruption élimine l'attente, un système plus beau
+DMA et page cache, tout est fichier chez Linux
+Jusqu'au bout du bloc, jamais de flux fictif
+
+[Outro]
+DMA, cache, interruption
+One love, one network, entrées-sorties
