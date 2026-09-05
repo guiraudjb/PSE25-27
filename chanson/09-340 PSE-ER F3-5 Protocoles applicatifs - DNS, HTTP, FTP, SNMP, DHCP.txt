@@ -1,0 +1,56 @@
+TITRE : GET SET TRAP Riddim
+
+[Intro]
+SNMP encapsulé dans UDP, question-réponse asynchrone
+MIB regroupe les variables, la SMI les structure sans tonne
+GET SET TRAP, oh yeah
+
+[Couplet 1]
+DHCP distribue l'adresse IP, complément de BOOTP
+Bail à date de début et de fin, prolongeable sans stop
+HTTP port quatre-vingt, méthode GET, POST, une requête et réponse
+FTP deux connexions, vingt et un contrôle, vingt les données en cadence
+
+DNS traduit nom en adresse, port cinquante-trois en UDP
+RR type A, CNAME, MX, PTR, NS, SOA, un défilé
+Résolution récursive ou itérative selon le serveur sollicité
+Répartition de charge DNS, plusieurs IP mélangées, un ordre varié
+
+[Refrain]
+GET SET TRAP, SNMP interroge un agent distant
+Version un et deux faibles, version trois authentifiant
+GET SET TRAP, HTTP GET, HEAD, POST, PUT, DELETE
+Codes vingt réussite, quarante erreur, cinquante défaite
+
+[Couplet 2]
+RTP ajoute marqueurs temporels pour la voix et la vidéo
+RTCP contrôle la qualité, RSVP réserve la bande, un cadeau
+BOOTP pour stations sans disque, SMTP pour le courrier
+TELNET port vingt-trois en clair, un vrai danger à écarter
+
+RLOGIN faisait passer les identifiants en clair aussi
+SSH port vingt-deux chiffre tout, remplace tout ça aujourd'hui
+Zone primaire fait autorité, secondaire copie régulièrement
+TFTP sur UDP met à jour les équipements simplement
+
+[Refrain]
+GET SET TRAP, SNMP interroge un agent distant
+Version un et deux faibles, version trois authentifiant
+GET SET TRAP, HTTP GET, HEAD, POST, PUT, DELETE
+Codes vingt réussite, quarante erreur, cinquante défaite
+
+[Pont]
+FTP contrôle sur le port vingt et un, données coupées après transfert
+Un serveur DHCP sans lien direct exige un agent relais, un transfert
+Le SOA est obligatoire pour définir une zone DNS entière
+RLOGIN et TELNET abandonnés, SSH la voie coutumière
+
+[Refrain final]
+GET SET TRAP, les protocoles applicatifs
+DNS, HTTP, FTP, SNMP, DHCP actifs
+GET SET TRAP, la couche la plus haute
+Jusqu'au bout de la requête, jamais de faute
+
+[Outro]
+DNS, HTTP, SNMP
+One love, one network, protocoles applicatifs

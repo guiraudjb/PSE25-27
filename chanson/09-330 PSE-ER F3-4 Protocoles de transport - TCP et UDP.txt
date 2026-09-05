@@ -1,0 +1,56 @@
+TITRE : Three Way Handshake TCP Riddim
+
+[Intro]
+TCP achemine de processus à processus, un vrai transport
+UDP reste simple, sans connexion, sans effort
+Three way handshake TCP, oh yeah
+
+[Couplet 1]
+Segment coupe le flot, numéro de séquence sur les octets
+Port source, port destination sur seize bits, un vrai jouet
+Socket, adresse IP plus port, unique dans le réseau entier
+Connexion, deux sockets, bidirectionnelle en full-duplex, léger
+
+Well known ports sous mille vingt-quatre, réservés au standard
+Fenêtre indique la place libre, un contrôle de flux sans retard
+Checksum sur pseudo-en-tête, adresse source et destination
+Bourrage complète l'en-tête à quatre octets, une précaution
+
+[Refrain]
+Three way handshake TCP, SYN puis SYN-ACK puis ACK
+Ouverture active, ouverture passive, jamais un couac
+Three way handshake TCP, FIN, ACK, FIN, ACK pour clore
+Fermeture active ou passive, une temporisation qui dévore
+
+[Couplet 2]
+Go back n retransmet tout depuis le segment perdu
+Piggybacking glisse l'accusé dans les données, un temps gagné et têtu
+Contrôle de flux adapte à la vitesse du récepteur, une jauge
+Contrôle de congestion s'adapte au réseau, jamais un naufrage
+
+UDP non fiable, non connecté, simple et rapide
+DNS, streaming, voix sur IP en profitent, une aide limpide
+Port destinataire inutilisé, message ICMP en retour
+Longueur minimum huit octets, maximum soixante-quatre kilos un jour
+
+[Refrain]
+Three way handshake TCP, SYN puis SYN-ACK puis ACK
+Ouverture active, ouverture passive, jamais un couac
+Three way handshake TCP, FIN, ACK, FIN, ACK pour clore
+Fermeture active ou passive, une temporisation qui dévore
+
+[Pont]
+TCP numérote les octets, pas les segments, contre les doublons
+Le pseudo-en-tête n'existe pas dans le segment, une fiction bien bonne
+Une connexion TCP se libère même sans le dernier ACK reçu
+UDP ne fiabilise rien, la couche supérieure prend le relais dû
+
+[Refrain final]
+Three way handshake TCP, fiable et ordonné
+UDP rapide et léger, jamais fatigué
+Three way handshake TCP, la couche transport
+Jusqu'au bout du port, jamais de tort
+
+[Outro]
+TCP, UDP, transport
+One love, one network, protocoles

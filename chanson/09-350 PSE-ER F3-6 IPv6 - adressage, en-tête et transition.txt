@@ -1,0 +1,56 @@
+TITRE : Neighbor Discovery Riddim
+
+[Intro]
+Cent vingt-huit bits, huit groupes hexadécimaux séparés
+Une seule compression par deux-points doubles, jamais répétée
+Neighbor Discovery, oh yeah
+
+[Couplet 1]
+Unicast identifie une interface, loopback deux-points deux-points un
+Site local FC00 slash sept, lien local FE80 pour chacun
+Multicast remplace le broadcast, FF02 un pour tous les nœuds
+FF02 deux pour les routeurs, anycast vers le plus proche noeud
+
+En-tête quarante octets, simplifié malgré sa longueur
+Version, classe de trafic, identificateur de flux, une lueur
+Nombre de sauts remplace le TTL, plus de checksum d'en-tête
+IPv6 fragmente à la source, jamais dans la trajectoire secrète
+
+[Refrain]
+Neighbor Discovery, sollicitation puis annonce de voisin
+Cache NDP remplace ARP, un mécanisme malin
+Neighbor Discovery, découverte de préfixe par le routeur
+Détection d'inaccessibilité, un vrai gardien de la lueur
+
+[Couplet 2]
+ICMPv6 numéro cinquante-huit remplace IGMP et ARP
+Type un destination inaccessible, type deux le paquet trop grand qui part
+Jamais filtrer le message paquet trop grand, sous peine de couper le flux
+Auto-configuration sans état par préfixe, avec état par DHCPv6 têtu
+
+Détection d'adresse dupliquée avant de valider l'adresse provisoire
+Dual Stack fait cohabiter IPv4 et IPv6, une vraie victoire
+Tunnel encapsule IPv6 dans IPv4 pour traverser l'existant
+NAT-PT traduit les en-têtes à la frontière, un pont important
+
+[Refrain]
+Neighbor Discovery, sollicitation puis annonce de voisin
+Cache NDP remplace ARP, un mécanisme malin
+Neighbor Discovery, découverte de préfixe par le routeur
+Détection d'inaccessibilité, un vrai gardien de la lueur
+
+[Pont]
+Il n'y a pas de broadcast en IPv6, seulement le multicast
+Une adresse passe de provisoire à valide après une seconde, un vrai contraste
+Le serveur DNS doit supporter AAAA même sans IPv6 activé
+Les extensions sauf hop by hop ne sont jamais traitées en chemin
+
+[Refrain final]
+Neighbor Discovery, IPv6 le futur
+Adressage étendu, sécurité, une architecture sûre
+Neighbor Discovery, de l'auto-configuration à la transition
+Jusqu'au bout du préfixe, jamais de collision
+
+[Outro]
+IPv6, ICMPv6, Neighbor Discovery
+One love, one network, adressage étendu

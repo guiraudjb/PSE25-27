@@ -1,0 +1,56 @@
+TITRE : Nagios RRDTOOL Riddim
+
+[Intro]
+Cinq axes de l'ISO, anomalies, config, performance
+Sécurité, comptabilité, une vraie cohérence
+Nagios RRDTOOL, oh yeah
+
+[Couplet 1]
+Superviser c'est anticiper, jamais subir l'information
+Trop d'infos tue l'info, une bonne organisation
+Réseau, système, applicatif, trois niveaux à couvrir
+Un port ouvert ne garantit pas que l'appli va bien tenir
+
+ICMP comble l'absence d'erreur d'IP, un vrai messager
+SNMP standard de fait, plus simple que CMIP à programmer
+Port UDP cent soixante et un pour l'agent, cent soixante-deux pour la TRAP
+La communauté passe en clair, une faille qu'on ne peut pas rattraper
+
+[Refrain]
+Nagios RRDTOOL, plus de mille deux cents plugins
+Codes retour zéro OK, un warning, deux critique, un signe
+Nagios RRDTOOL, NRPE en polling actif
+NSCA en trapping passif, un mode alternatif
+
+[Couplet 2]
+MIB structure en arbre, OID identifie chaque objet
+ASN.1 décrit les types, INTEGER, Counter complet
+MIB standard commence à un trois six un deux un
+MIB privée sous enterprises, un numéro pour chacun
+
+MRTG génère des graphes PNG depuis SNMP collecté
+RRDTOOL améliore le stockage en Round Robin, adopté
+Zabbix, Cacti, Shinken, ICINGA, des forks bien pensés
+Centréon compatible Nagios, une évolution française
+
+[Refrain]
+Nagios RRDTOOL, plus de mille deux cents plugins
+Codes retour zéro OK, un warning, deux critique, un signe
+Nagios RRDTOOL, NRPE en polling actif
+NSCA en trapping passif, un mode alternatif
+
+[Pont]
+L'expert réseau ne se limite jamais aux couches deux et trois
+Un taux de disponibilité à quatre-vingt-dix-neuf virgule neuf neuf neuf, la loi
+SNMP repose sur UDP, rapide mais non fiable, un risque accepté
+NSCA inverse le sens des connexions, utile derrière un pare-feu isolé
+
+[Refrain final]
+Nagios RRDTOOL, la supervision structurée
+Fault, config, performance, tout est surveillé
+Nagios RRDTOOL, du plugin au graphique
+Jusqu'au bout de l'alerte, jamais statique
+
+[Outro]
+SNMP, Nagios, supervision
+One love, one network, administration réseau

@@ -1,0 +1,56 @@
+TITRE : LSP et Cellule ATM Riddim
+
+[Intro]
+MPLS combine commutation et routage, un vrai mélange
+IETF normalise le label sur trente-deux bits qui se range
+LSP et cellule ATM, oh yeah
+
+[Couplet 1]
+LER consulte sa table, ajoute la référence à l'entrée
+LSR remplace la référence, LIB la fait circuler
+LSP chemin non bidirectionnel, le retour peut varier
+Localité des références, un numéro jamais partagé au loin isolé
+
+FEC regroupe les flux de même destination et service
+LDP réserve la bande selon la qualité qu'on choisit
+Le chemin fixé à l'entrée n'est jamais recalculé en route
+GMPLS étend aux longueurs d'onde, une nouvelle déroute
+
+[Refrain]
+LSP et cellule ATM, cinquante-trois octets fixes
+Cinq d'en-tête, quarante-huit d'information, une matrice
+LSP et cellule ATM, PRM en trois plans distincts
+Usager, commande, gestion, une structure bien peinte
+
+[Couplet 2]
+Couche PHY délimite la cellule par le HEC recalculé
+Couche ATM commute par VP et VC, jamais dévié
+AAL un et deux temps réel, trois quatre orienté connexion
+AAL cinq pour IP, seule vraiment en fonction
+
+CBR débit constant, VBR variable pour le MPEG
+ABR piloté par cellules RM, UBR sans garantie, un vrai régime
+GCRA écarte les cellules non conformes au contrat de trafic
+CLR dix puissance moins dix, un taux de perte authentique
+
+[Refrain]
+LSP et cellule ATM, cinquante-trois octets fixes
+Cinq d'en-tête, quarante-huit d'information, une matrice
+LSP et cellule ATM, PRM en trois plans distincts
+Usager, commande, gestion, une structure bien peinte
+
+[Pont]
+Les nœuds MPLS ne remontent jamais à la couche trois pour commuter
+Seules AAL trois quatre et cinq sont vraiment utilisées, la réalité
+La gigue se corrige à l'entrée des commutateurs par l'horloge interne
+Le CLR reste garanti même pour les cellules marquées, une règle externe
+
+[Refrain final]
+LSP et cellule ATM, la commutation rapide
+LIB, FEC, PRM, une architecture solide
+LSP et cellule ATM, opérateurs qui s'appuient
+Jusqu'au bout du label, jamais ne fuit
+
+[Outro]
+MPLS, ATM, label
+One love, one network, commutation

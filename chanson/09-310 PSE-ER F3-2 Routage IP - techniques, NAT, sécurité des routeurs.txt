@@ -1,0 +1,56 @@
+TITRE : NAT PAT IPsec Riddim
+
+[Intro]
+Le routeur consulte sa table à l'adresse de destination
+Routage direct ou indirect, une vraie coopération
+NAT PAT IPsec, oh yeah
+
+[Couplet 1]
+Système autonome sous une même autorité administrative
+RIPE-NCC attribue en Europe, IANA en perspective
+IGP à l'intérieur, RIP ou OSPF pour naviguer
+EGP à l'extérieur, BGPv4 pour agréger
+
+Vector-Distance compte les sauts, RIP limité à seize
+Link-State construit la carte, Dijkstra calcule sans malaise
+OSPF version trois, adapté aux grands réseaux, un vrai savoir
+RIP et OSPF ne routent pas, seulement les tables à recevoir
+
+[Refrain]
+NAT PAT IPsec, ALI devient AGI à la frontière
+Traduction statique fixe, dynamique dans un pool qui espère
+NAT PAT IPsec, PAT ajoute le port à la trame
+Quatre mille ALI pour une AGI, une même flamme
+
+[Couplet 2]
+Overlapping traduit aussi les adresses externes usurpées
+ALE et AGE évitent la confusion, bien pensée
+TFTP charge la config sans mot de passe, un risque à connaître
+Copy running-config tftp sauvegarde avant de paraître
+
+AH authentifie sans chiffrer, un numéro de séquence contre le rejeu
+ESP chiffre d'abord, authentifie ensuite, un jeu
+IKE négocie les algorithmes en ligne, une norme sûre
+Mode transport protège le contenu, mode tunnel toute la structure
+
+[Refrain]
+NAT PAT IPsec, ALI devient AGI à la frontière
+Traduction statique fixe, dynamique dans un pool qui espère
+NAT PAT IPsec, PAT ajoute le port à la trame
+Quatre mille ALI pour une AGI, une même flamme
+
+[Pont]
+Un seul balayage de la table suffit, le suivant est direct
+RIP converge lentement dans un grand réseau, un défaut abstrait
+Le NAT reste une solution à court terme avant IPv6
+Le mode transport ne protège jamais l'en-tête, un choix technique
+
+[Refrain final]
+NAT PAT IPsec, le routage et sa sécurité
+Statique, dynamique, chiffré, jamais démuni
+NAT PAT IPsec, du routeur au tunnel
+Jusqu'au bout du paquet, jamais artificiel
+
+[Outro]
+NAT, routage, IPsec
+One love, one network, sécurité des routeurs

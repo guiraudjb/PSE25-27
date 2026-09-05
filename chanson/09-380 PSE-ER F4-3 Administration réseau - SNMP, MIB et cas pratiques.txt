@@ -1,0 +1,56 @@
+TITRE : Manager Agent SINAPS Riddim
+
+[Intro]
+Manager et agent dialoguent sur le modèle SNMP
+Station d'administration présente, agent délivre sans arrêt
+Manager agent SINAPS, oh yeah
+
+[Couplet 1]
+SINAPS v5 compatible Nagios pour traiter l'alerte
+Base MySQL réplique vers le site de secours, une porte ouverte
+Collecteurs hébergent Nagios, transmettent aux serveurs de restitution
+Serveurs d'application écrivent, serveurs de calcul lisent en fonction
+
+Gestion des fautes surveille, localise et résout la panne
+Gestion des configurations identifie chaque équipement sans qu'il se fane
+Gestion des performances mesure le trafic et la disponibilité
+Gestion comptable reste insatisfaite, sans connaître l'identité
+
+[Refrain]
+Manager agent SINAPS, GetRequest et GetResponse
+NoSuchObject, GetBulk, SetRequest, une vraie séquence
+Manager agent SINAPS, Trap seul message à l'initiative
+De l'agent vers le manager, une alarme active
+
+[Couplet 2]
+CMIP en théorie meilleur, en mode connecté, mieux sécurisé
+Mais SNMP plus simple s'est imposé, largement adopté
+SNMPv2 sans chiffrement, communauté en clair, une faille
+SNMPv3 apporte USM, MD5, SHA, DES qui travaille
+
+MIB RMON surveille en autonome et rapporte en SNMP
+NTP synchronise les horloges, essentiel pour corréler
+OpenNMS, MRTG, VNC, OpenSSH pour l'ASR à la DGI
+Projet piloté par l'équipe ESR, un vrai défi choisi
+
+[Refrain]
+Manager agent SINAPS, GetRequest et GetResponse
+NoSuchObject, GetBulk, SetRequest, une vraie séquence
+Manager agent SINAPS, Trap seul message à l'initiative
+De l'agent vers le manager, une alarme active
+
+[Pont]
+La mise à jour d'une branche standard crée une nouvelle branche voisine
+L'ancienne devenant obsolète, une compatibilité qui domine
+Les constructeurs travaillent dans leur branche privée seulement
+CMIP délaissé pour sa complexité, SNMP triomphant simplement
+
+[Refrain final]
+Manager agent SINAPS, le modèle d'administration
+MIB, OID, protocole, une vraie coordination
+Manager agent SINAPS, de la DGFiP au SG-SEP
+Jusqu'au bout du réseau, jamais de couac inquiet
+
+[Outro]
+SNMP, MIB, SINAPS
+One love, one network, cas pratiques

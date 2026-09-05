@@ -1,0 +1,56 @@
+TITRE : EBIOS Cinq Modules Riddim
+
+[Intro]
+Intégrité, confidentialité, disponibilité, cinq objectifs de sécurité
+Non-répudiation, authentification, jamais négligés
+EBIOS cinq modules, oh yeah
+
+[Couplet 1]
+Le ver Internet de quatre-vingt-huit, étudiant de Cornell lâché
+Soixante mille machines, trois pour cent contaminées, réseau bloqué
+CERT Coordination Center né de cet incident majeur
+FIRST fédère en quatre-vingt-dix, le CERTA en France depuis
+
+ANSSI édite EBIOS, créée en quatre-vingt-quinze
+CLUSIF derrière MEHARI, Carnegie Mellon pour OCTAVE qu'on précise
+ISO vingt-sept mille un, Plan Do Check Act en boucle
+Vingt-sept mille cinq gère le risque, une norme qui roucoule
+
+[Refrain]
+EBIOS cinq modules, contexte, événements redoutés
+Scénarios de menaces, risques bien étudiés
+EBIOS cinq modules, mesures de sécurité en renfort
+Homologation prononcée, jamais sans effort
+
+[Couplet 2]
+Bien essentiel apprécié en besoins, jamais en vulnérabilité
+Bien support porte les vulnérabilités, propriétaire désigné
+Source de menace, menace, vulnérabilité, impact réuni
+Événement redouté au niveau fonctionnel, jamais technique ni
+
+Scénario de menace combine menace et bien support exploité
+Risque, combinaison des deux, gravité et vraisemblance évaluées
+Éviter, réduire, transférer, ou prendre le risque assumé
+Trois lignes de défense, préventive, protectrice, récupératrice, complétées
+
+[Refrain]
+EBIOS cinq modules, contexte, événements redoutés
+Scénarios de menaces, risques bien étudiés
+EBIOS cinq modules, mesures de sécurité en renfort
+Homologation prononcée, jamais sans effort
+
+[Pont]
+La cartographie des risques conditionne toute la sécurité
+Un risque pris reste toujours un risque résiduel, une vérité
+L'homologation dure de trois à cinq ans généralement
+Toute évolution impactant la sécurité en redemande formellement
+
+[Refrain final]
+EBIOS cinq modules, la gestion des risques française
+Itérative, structurée, jamais elle ne s'apaise
+EBIOS cinq modules, du contexte à l'homologation
+Jusqu'au bout du risque, jamais d'improvisation
+
+[Outro]
+EBIOS, ANSSI, sécurité
+One love, one network, gestion des risques

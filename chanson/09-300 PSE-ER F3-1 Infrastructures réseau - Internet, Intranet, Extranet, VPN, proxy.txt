@@ -1,0 +1,56 @@
+TITRE : Proxy Firewall DMZ Riddim
+
+[Intro]
+Internet réseau de réseaux, ARPANET pour ancêtre
+Backbone en fibre, satellite, ondes qui pénètrent
+Proxy firewall DMZ, oh yeah
+
+[Couplet 1]
+Intranet rapatrie les standards internet en interne
+HTML, HTTP, navigateur, un accès qui gouverne
+Trois niveaux, client, serveur d'application, base de données
+Extranet ouvre l'intranet aux partenaires, une entrée contrôlée
+
+DNS traduit le nom en IP depuis mille neuf cent quatre-vingt-quatre
+AFNIC gère la France, le NIC gère le décor
+VPN relie deux réseaux distants comme s'ils étaient connectés
+Tunnel au niveau réseau, transport, ou application, chiffré
+
+[Refrain]
+Proxy firewall DMZ, rupture de flux, cache économe
+Client invisible derrière l'IP du proxy, un vrai fantôme
+Proxy firewall DMZ, stateless ou stateful inspection
+Applicatif en couche sept, un module par protocole, une protection
+
+[Couplet 2]
+Firewall authentifiant filtre selon l'utilisateur connecté
+Firewall personnel protège le poste, virus repérés
+DMZ double protection par coupe-feux, un site ouvert
+Serveur de commerce électronique isolé, jamais offert
+
+Norme de jure par l'ISO, cent organismes nationaux
+AFNOR, ANSI, BSI, DIN, chacun son étendard
+Norme de facto un standard sans valeur internationale
+PPP connecte le particulier sans sécurité totale
+
+[Refrain]
+Proxy firewall DMZ, rupture de flux, cache économe
+Client invisible derrière l'IP du proxy, un vrai fantôme
+Proxy firewall DMZ, stateless ou stateful inspection
+Applicatif en couche sept, un module par protocole, une protection
+
+[Pont]
+Un intranet n'est ni un internet local ni un réseau local
+Une nouvelle ressource web accessible sans intervention, un signal
+BtoC vise le consommateur, BtoB les professionnels en place
+Le fichier hosts a cédé au DNS, hiérarchique et efficace
+
+[Refrain final]
+Proxy firewall DMZ, l'architecture sécurisée
+Internet, intranet, extranet, chacun sa contrée
+Proxy firewall DMZ, du particulier à l'entreprise
+Jusqu'au bout du tunnel, jamais de surprise
+
+[Outro]
+Internet, intranet, VPN
+One love, one network, infrastructures
