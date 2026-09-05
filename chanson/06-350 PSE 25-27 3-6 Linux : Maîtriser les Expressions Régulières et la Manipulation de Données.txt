@@ -1,0 +1,56 @@
+TITRE : Regex Riddim
+
+[Intro]
+Écoute le motif qui cherche dans le texte
+Point, étoile, crochet, une syntaxe honnête
+Regex Riddim, oh yeah
+
+[Couplet 1]
+Le point remplace un caractère inconnu
+L'étoile répète zéro ou plusieurs fois, bienvenu
+Antislash neutralise le métacaractère
+Accent circonflexe cible le début, une manière
+
+Dollar marque la fin de ligne précise
+Pipe choisit entre deux alternatives, une convoitise
+Crochets listent les caractères possibles
+Dans les crochets, plus rien n'est indomptable
+
+[Refrain]
+Regex Riddim, grep, sed, awk s'en servent
+Vi et nano les intègrent, jamais ne dessèchent
+Regex Riddim, intervalles et négations
+Alpha, digit, les classes en action
+
+[Couplet 2]
+Le plus exige au moins une occurrence présente
+Le point d'interrogation rend facultatif, une attente
+Les accolades précisent le nombre exact voulu
+Les parenthèses groupent, un motif reconnu
+
+Validation d'email, de téléphone, d'adresse
+Nettoyage des espaces, des caractères en détresse
+Circonflexe plus error cible les lignes d'erreur
+Antislash point extension dollar pour la bonne heure
+
+[Refrain]
+Regex Riddim, grep, sed, awk s'en servent
+Vi et nano les intègrent, jamais ne dessèchent
+Regex Riddim, intervalles et négations
+Alpha, digit, les classes en action
+
+[Pont]
+Dans les crochets, les caractères perdent leur pouvoir
+Classes prédéfinies plus fiables, un vrai savoir
+Sed corrige les retours à la ligne parasites
+Recherche aléatoire devient intelligente, une élite
+
+[Refrain final]
+Regex Riddim, la maîtrise du motif
+Filtrer, extraire, valider, un objectif
+Regex Riddim, l'ordinateur transformé
+Jusqu'au bout du texte, jamais dépassé
+
+[Outro]
+Regex, expressions régulières
+One love, one network, manipulation

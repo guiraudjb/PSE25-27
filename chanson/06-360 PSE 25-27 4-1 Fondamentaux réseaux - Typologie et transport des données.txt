@@ -1,0 +1,56 @@
+TITRE : Paquet et Trame Riddim
+
+[Intro]
+Écoute le paquet qui voyage de nœud en nœud
+ARPANET est né pour résister à tout
+Paquet et trame, oh yeah
+
+[Couplet 1]
+Soixante-neuf, premier lien UCLA Stanford
+RFC dès soixante-huit, la mémoire qui sort fort
+PAN, LAN, MAN, RAN, WAN, cinq échelles
+TCP-IP domine, la suite universelle
+
+Bus, anneau, étoile, hiérarchique, maillée
+Topologies physiques, chacune sa réalité
+Token Ring en anneau, Ethernet en étoile
+Maillée résiste aux pannes, jamais ne dévoile
+
+[Refrain]
+Paquet et trame, encapsulés pour voyager
+Table de routage guide chaque nœud à trouver
+Paquet et trame, routage ou commutation
+OSPF, BGP évaluent chaque option
+
+[Couplet 2]
+Routage choisit la route dynamique et changeante
+Deux paquets du même flot, chemin différent, une attente
+Commutation établit un chemin dédié d'abord
+TCP signale avant d'envoyer, un effort
+
+Bus passif, une panne coupe tout le câble
+Étoile isole, une panne reste gérable
+Mille neuf cent quatre-vingt-quatre, mille vingt-quatre machines
+DNS arrive, un système qui domine
+
+[Refrain]
+Paquet et trame, encapsulés pour voyager
+Table de routage guide chaque nœud à trouver
+Paquet et trame, routage ou commutation
+OSPF, BGP évaluent chaque option
+
+[Pont]
+Mutualisation des ressources, le premier enjeu
+Intranet, Extranet étendent l'espace, un jeu
+ToIP, VoIP fédèrent voix et données
+Bluetooth relie le PAN, une portée limitée
+
+[Refrain final]
+Paquet et trame, les réseaux qui grandissent
+De l'ARPANET à Internet, l'histoire persiste
+Paquet et trame, le transport bien pensé
+Jusqu'au bout du nœud, jamais dépassé
+
+[Outro]
+Paquet, trame, réseau
+One love, one network, transport

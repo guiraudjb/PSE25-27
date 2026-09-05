@@ -1,0 +1,56 @@
+TITRE : Routeur et Switch Riddim
+
+[Intro]
+Écoute l'équipement qui relie chaque réseau
+Répéteur, pont, switch, routeur, le tableau
+Routeur et switch, oh yeah
+
+[Couplet 1]
+Répéteur amplifie le signal sans le changer
+Multiplexeur partage la voie, FDM ou TDM, léger
+Pont filtre au niveau deux, adresses MAC en jeu
+Commutateur apprend, table MAC, un peu à peu
+
+VLAN huit cent un point Q segmente logiquement
+VRRP assure la redondance du routeur, vraiment
+ACL filtre le trafic selon la règle posée
+Routeur niveau trois, table de routage activée
+
+[Refrain]
+Routeur et switch, niveau deux, niveau trois
+Table MAC apprend, table de routage à la fois
+Routeur et switch, NAT, VPN, pare-feu
+Passerelle applicative, aujourd'hui bien peu
+
+[Couplet 2]
+Routage statique, configuré à la main
+Routage dynamique, RIP, OSPF, BGP demain
+RIP vecteur de distance pour les petits réseaux
+OSPF état de liens pour les grands, un vrai tableau
+
+CSU-DSU traduit Ethernet vers Frame Relay
+STP évite les boucles de diffusion, un vrai relais
+Passerelle convertit X point quatre cents vers SMTP
+API et middleware remplacent aujourd'hui, complet
+
+[Refrain]
+Routeur et switch, niveau deux, niveau trois
+Table MAC apprend, table de routage à la fois
+Routeur et switch, NAT, VPN, pare-feu
+Passerelle applicative, aujourd'hui bien peu
+
+[Pont]
+Répéteur amplifie aussi le bruit, jamais filtré
+Broadcast storm guetté sans STP configuré
+Cent mètres limite le cuivre pour Ethernet
+Quatre cent mille voies sur une fibre, un exploit complet
+
+[Refrain final]
+Routeur et switch, l'interconnexion bien pensée
+Chaque niveau OSI, sa fonction dédiée
+Routeur et switch, le réseau qui structure
+Jusqu'au bout du port, sans rupture
+
+[Outro]
+Routeur, switch, interconnexion
+One love, one network, équipement

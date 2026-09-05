@@ -1,0 +1,56 @@
+TITRE : Three Way Handshake Riddim
+
+[Intro]
+Écoute le client qui dit SYN au serveur
+SYN-ACK répond, ACK confirme avec ardeur
+Three way handshake, oh yeah
+
+[Couplet 1]
+ARP traduit l'IP en adresse MAC locale
+RARP fait l'inverse, aujourd'hui hors norme, obsolète
+ICMP transporte l'erreur, ping l'exploite bien
+TTL décroît à chaque saut, jamais ne revient
+
+IP non fiable, non connecté, achemine
+Fragmentation si le paquet dépasse la limite MTU, la routine
+TCP fiable, contrôle de flux, retransmission
+UDP rapide, léger, sans vérification
+
+[Refrain]
+Three way handshake, SYN, SYN-ACK, ACK
+Connexion établie, la synchronisation, exact
+Three way handshake, ports réservés, dynamiques
+Socket unique, IP deux points port, la pratique
+
+[Couplet 2]
+HTTP port quatre-vingt, HTTPS quatre cent quarante-trois
+SSH port vingt-deux, sécurise l'accès, tu vois
+DNS cinquante-trois, NTP cent vingt-trois en UDP
+SMTP vingt-cinq, POP3 cent dix, IMAP cent quarante-trois
+
+Ip addr affiche les interfaces réseau
+Ip route montre la table, le bon tableau
+Ss remplace netstat, tcpdump capture le flux
+Telnet obsolète, SSH le remplace, exclu
+
+[Refrain]
+Three way handshake, SYN, SYN-ACK, ACK
+Connexion établie, la synchronisation, exact
+Three way handshake, ports réservés, dynamiques
+Socket unique, IP deux points port, la pratique
+
+[Pont]
+ARP poisoning usurpe l'adresse MAC, un danger
+FTP transmet en clair, jamais à privilégier
+TLS un point deux, un point trois chiffrent la voie
+Etc hosts, resolv point conf configurent la loi
+
+[Refrain final]
+Three way handshake, Linux hérite d'Unix
+TCP-IP natif, un noyau qui fixe
+Three way handshake, le réseau qui connecte
+Jusqu'au bout du port, la trame qui respecte
+
+[Outro]
+TCP, IP, three way handshake
+One love, one network, connexion

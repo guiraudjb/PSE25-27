@@ -1,0 +1,56 @@
+TITRE : Vi Mode Riddim
+
+[Intro]
+Écoute l'éditeur qui n'affiche qu'une ligne
+Ed historique, puis vi qui s'aligne
+Vi mode, oh yeah
+
+[Couplet 1]
+Ed adresse chaque ligne, jamais la page entière
+Mémoire tampon protège avant que tu n'espères
+Vi né à Berkeley, plein écran, rapide au clavier
+Trois modes, commande, insertion, ex pour valider
+
+Mode commande interprète chaque touche pressée
+Mode insertion laisse le texte s'ajouter
+Mode ex sauvegarde ou substitue en bas d'écran
+Vim ajoute couleur et complétion, un vrai élan
+
+[Refrain]
+Vi mode, dd supprime la ligne entière
+U annule, wq sauve et ferme, une manière
+Vi mode, neuf registres numérotés
+Anonyme colle, jamais un texte égaré
+
+[Couplet 2]
+Emacs noyau en C, logique en Lisp au sommet
+Buffer gap insère vite, hook déclenche en secret
+Nano démarre direct, menu en bas d'écran
+Contrôle O sauvegarde, contrôle X ferme sans tourment
+
+Ed sans confirmation, prudence de mise
+Vue en lecture seule pour éviter la bêtise
+Registres nommés de vi vidés à la fermeture
+Nano confirme avant de perdre l'écriture
+
+[Refrain]
+Vi mode, dd supprime la ligne entière
+U annule, wq sauve et ferme, une manière
+Vi mode, neuf registres numérotés
+Anonyme colle, jamais un texte égaré
+
+[Pont]
+S slash g remplace toutes les occurrences en ligne
+Contrôle X contrôle F ouvre un fichier dans Emacs, une consigne
+M x lance une commande étendue, un mot complet
+Toujours sauvegarder avant de quitter, c'est le secret
+
+[Refrain final]
+Vi mode, les éditeurs texte de Linux
+Ed, vi, Emacs, nano, chacun son flux
+Vi mode, la manipulation précise
+Jusqu'au bout du buffer, jamais de crise
+
+[Outro]
+Vi, ed, Emacs, nano
+One love, one network, édition

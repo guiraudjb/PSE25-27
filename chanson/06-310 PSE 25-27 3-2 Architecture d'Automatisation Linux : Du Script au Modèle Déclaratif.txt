@@ -1,0 +1,56 @@
+TITRE : GitOps Idempotence Riddim
+
+[Intro]
+Écoute le script qui devient déclaratif
+Git devient la vérité, un état positif
+GitOps idempotence, oh yeah
+
+[Couplet 1]
+Mur de la variance, l'échelle qui grandit
+Mur de l'idempotence, le script qui pâlit
+Mur de traçabilité, aucune source unique
+Mur de l'action humaine, un délai chronique
+
+État désiré décrit, jamais de procédure
+GitOps centralise, Pull Request qui rassure
+Historique infalsifiable, l'audit facile
+Convergence continue corrige avant que ça vacille
+
+[Refrain]
+GitOps idempotence, même résultat toujours
+Push ou pull, les deux modèles au bon jour
+GitOps idempotence, secrets jamais en clair
+Injectés dynamiquement, une sécurité claire
+
+[Couplet 2]
+Rôles indépendants encapsulent chaque service
+Dépendances déclarées, un ordre qui glisse
+Tests automatiques avant la production
+Bastion restreint, moindre privilège en action
+
+Ansible-galaxy vérifie chaque signature
+Timeout trois cents, forks dix, une vraie mesure
+Git revert annule un déploiement fautif
+Observabilité identifie chaque dérive active
+
+[Refrain]
+GitOps idempotence, même résultat toujours
+Push ou pull, les deux modèles au bon jour
+GitOps idempotence, secrets jamais en clair
+Injectés dynamiquement, une sécurité claire
+
+[Pont]
+MTTR réduit, la panne vite réparée
+Ingénierie logicielle, l'administration élevée
+Convergence continue, l'auto-guérison qui opère
+Drift détecté avant la panne sévère
+
+[Refrain final]
+GitOps idempotence, l'infrastructure en code
+Prévisible et fiable, jamais en mode
+GitOps idempotence, l'automatisation avance
+Jusqu'au bout du pipeline, en confiance
+
+[Outro]
+GitOps, idempotence, infrastructure
+One love, one network, automatisation

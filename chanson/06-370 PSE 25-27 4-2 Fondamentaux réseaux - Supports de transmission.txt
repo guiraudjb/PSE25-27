@@ -1,0 +1,56 @@
+TITRE : Support de Transmission Riddim
+
+[Intro]
+Écoute le signal qui traverse le cuivre et le verre
+Paire torsadée, fibre, ou les ondes dans l'air
+Support de transmission, oh yeah
+
+[Couplet 1]
+UTP non blindée, STP contre le bruit
+Coaxial obsolète mais jadis bien construit
+Fibre multimode, cinq cents mètres, un giga
+Monomode cent kilomètres, dix gigas, hors catégorie
+
+Réflexion totale interne confine la lumière
+ISO onze mille huit cent un classe chaque manière
+Catégorie six pour le gigabit à jour
+Catégorie huit, quarante gigas dans la tour
+
+[Refrain]
+Support de transmission, métallique ou optique
+Immatériel aussi, les ondes électromagnétiques
+Support de transmission, débit, distance, coût
+Chaque critère compte pour le meilleur bout
+
+[Couplet 2]
+Faisceau hertzien en ligne de vue directe
+Satellite géostationnaire, latence qui affecte
+Starlink en orbite basse réduit le délai
+Wi-Fi six OFDMA partage le canal, un régal
+
+Bluetooth sur deux virgule quatre gigahertz
+BLE économise l'énergie, un vrai savoir-faire
+Wi-Fi sept vise quarante-six gigas bientôt
+FTTH déploie la fibre jusqu'à la maison, un flot
+
+[Refrain]
+Support de transmission, métallique ou optique
+Immatériel aussi, les ondes électromagnétiques
+Support de transmission, débit, distance, coût
+Chaque critère compte pour le meilleur bout
+
+[Pont]
+Monomode et multimode jamais interchangeables
+Cinq cents à sept cents millisecondes, latence impraticable
+Bluetooth et Wi-Fi partagent la même bande
+Interférence possible, une vigilance demandée
+
+[Refrain final]
+Support de transmission, l'infrastructure physique
+Du cuivre à la lumière, une histoire logique
+Support de transmission, sans fil aujourd'hui
+Jusqu'au bout du signal, jamais de bruit
+
+[Outro]
+Fibre, cuivre, sans fil, support
+One love, one network, transmission

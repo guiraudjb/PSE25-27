@@ -1,0 +1,56 @@
+TITRE : OSI TCP-IP Riddim
+
+[Intro]
+Écoute les couches qui empilent le savoir
+OSI théorique, TCP-IP au pouvoir
+OSI TCP-IP, oh yeah
+
+[Couplet 1]
+ISO conçoit OSI dès soixante-dix-sept
+IBM, Bull, Apple, propriétaires, jamais complets
+TCP-IP naît de l'ARPA en soixante-quatorze
+Sept couches OSI, quatre couches TCP, la noce
+
+Physique, liaison, réseau, transport, session
+Présentation, application, chaque zone a sa mission
+Encapsulation ajoute l'en-tête à chaque niveau
+Décapsulation retire, un miroir, un tableau
+
+[Refrain]
+OSI TCP-IP, bit, trame, paquet, segment
+Chaque couche a son unité, un vrai fondement
+OSI TCP-IP, homologues communiquent
+Interopérabilité, standard qui explique
+
+[Couplet 2]
+Acces réseau regroupe physique et liaison
+Internet correspond au réseau, une même mission
+Transport reste pareil, TCP ou UDP
+Application regroupe session, présentation, complété
+
+TCP fiable, orienté connexion, sûr
+UDP rapide, sans connexion, léger et pur
+ARP appartient à la couche Internet, pas au niveau bas
+ICMP transporte l'erreur, ping l'utilise là-bas
+
+[Refrain]
+OSI TCP-IP, bit, trame, paquet, segment
+Chaque couche a son unité, un vrai fondement
+OSI TCP-IP, homologues communiquent
+Interopérabilité, standard qui explique
+
+[Pont]
+OSI jamais déployé en entier, une référence
+TCP-IP domine par sa simplicité, l'évidence
+Open source en C, indépendant du support
+HTTP sur TCP, streaming sur UDP, un vrai rapport
+
+[Refrain final]
+OSI TCP-IP, la norme qui structure
+Sept couches ou quatre, une même culture
+OSI TCP-IP, le standard qui gagne
+Jusqu'au bout du modèle, jamais ne stagne
+
+[Outro]
+OSI, TCP-IP, modèles en couches
+One love, one network, normatif

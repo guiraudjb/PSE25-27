@@ -1,0 +1,56 @@
+TITRE : AWK et SED Riddim
+
+[Intro]
+Écoute le flux de texte qui se transforme
+Sed édite, awk calcule, une même norme
+AWK et SED, oh yeah
+
+[Couplet 1]
+Pattern space charge la ligne, un cycle sans fin
+Hold space mémorise pour le prochain refrain
+Adresse cible une ligne, un intervalle, un motif
+Substitution remplace, l'opération est native
+
+Awk découpe en champs, chaque enregistrement
+Begin ouvre, le corps traite, end conclut vraiment
+Length, substr, gsub, des fonctions natives
+Boucles et conditions comme en C, actives
+
+[Refrain]
+AWK et SED, transformer sans altérer
+Sed en flux continu, jamais saturé
+AWK et SED, colonnes et calculs
+Grep, sort, uniq, cut, un même véhicule
+
+[Couplet 2]
+Tr traduit caractère par caractère, un nettoyage
+Cut isole les champs selon le délimiteur, un passage
+Grep repère le motif, egrep les complexes
+Sort trie, uniq déduplique après le tri, un réflexe
+
+Head et tail échantillonnent le fichier entier
+Fold limite la ligne pour mieux visualiser
+Pipe enchaîne chaque outil en une chaîne
+Petits programmes spécialisés, la philosophie humaine
+
+[Refrain]
+AWK et SED, transformer sans altérer
+Sed en flux continu, jamais saturé
+AWK et SED, colonnes et calculs
+Grep, sort, uniq, cut, un même véhicule
+
+[Pont]
+Sed s slash ancien slash nouveau slash g remplace tout
+Awk print dollar un affiche la première colonne, debout
+Tr moins d supprime un caractère indésirable
+Tail moins f suit le log en temps réel, capable
+
+[Refrain final]
+AWK et SED, la boîte à outils Unix
+Sed transforme, awk calcule, un vrai fix
+AWK et SED, la puissance modulaire
+Jusqu'au bout du pipe, sans limite claire
+
+[Outro]
+AWK, SED, filtres Linux
+One love, one network, manipulation

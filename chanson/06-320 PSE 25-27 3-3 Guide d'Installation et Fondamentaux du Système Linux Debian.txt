@@ -1,0 +1,56 @@
+TITRE : Boot Chain Debian Riddim
+
+[Intro]
+Écoute le firmware qui s'éveille en premier
+BIOS ou UEFI, le chemin tout tracé
+Boot chain Debian, oh yeah
+
+[Couplet 1]
+UEFI remplace BIOS, GPT au lieu de MBR
+GRUB deux charge le noyau, initramfs en l'air
+Noyau décompresse, monte la racine sécurisée
+Systemd démarre les services en parallèle, activée
+
+Secure Boot vérifie chaque signature en chaîne
+LVM isole les répertoires, une prudence certaine
+Ext4 générique, XFS pour les grandes bases
+SSH seul service actif, pare-feu qui embrasse
+
+[Refrain]
+Boot chain Debian, firmware, GRUB, noyau
+Initramfs, systemd, le démarrage sans défaut
+Boot chain Debian, LUKS chiffre le disque
+Journald centralise, la sécurité au disque
+
+[Couplet 2]
+PXE déploie en masse, DHCP donne l'adresse
+TFTP transfère le léger, HTTP le lourd sans faiblesse
+Preseed répond aux questions sans un mot
+Terraform décrit l'infra en un seul flot
+
+Ansible sans agent configure via SSH
+Packer fige les images, immuables et prêtes
+Proxmox, Hyper-V, hyperviseurs de type un
+VirtIO paravirtualise, performance en commun
+
+[Refrain]
+Boot chain Debian, firmware, GRUB, noyau
+Initramfs, systemd, le démarrage sans défaut
+Boot chain Debian, LUKS chiffre le disque
+Journald centralise, la sécurité au disque
+
+[Pont]
+Sha256sum vérifie l'ISO avant l'usage
+Dd copie bit à bit, un outil sage
+Compte root jamais pour l'administration
+Clonage nettoie les clés, une régénération
+
+[Refrain final]
+Boot chain Debian, l'installation maîtrisée
+Manuelle, virtuelle ou automatisée
+Boot chain Debian, DevOps qui avance
+Jusqu'au bout du pipeline, en confiance
+
+[Outro]
+Boot chain, Debian, installation
+One love, one network, fondamentaux
