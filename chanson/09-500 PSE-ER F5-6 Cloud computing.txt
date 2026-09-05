@@ -1,0 +1,56 @@
+TITRE : SaaS PaaS IaaS Riddim
+
+[Intro]
+Le cloud déporte vers Internet données et services
+NIST définit la demande, la flexibilité, le service
+SaaS PaaS IaaS, oh yeah
+
+[Couplet 1]
+SaaS fournit le logiciel en ligne, successeur de l'ASP
+IaaS livre infrastructure de calcul, technique et complet
+PaaS offre une plateforme de développement en ligne
+Trois modèles de services, chacun sa propre consigne
+
+Cloud public mutualisé chez un fournisseur lointain
+Cloud interne mutualise en interne, sans grand gain
+Cloud privé ou hybride, géré à distance mais dédié
+Cloud communautaire partagé par un même secteur mutualisé
+
+[Refrain]
+SaaS PaaS IaaS, Safe Harbor rendu inopérant
+Par le Patriot Act américain, un accord défaillant
+SaaS PaaS IaaS, un vrai projet d'entreprise à mener
+Jamais opportuniste, mais stratégique et planifié
+
+[Couplet 2]
+Identifier les données et traitements avant de migrer
+Analyse de risques, perte de gouvernance à éviter
+Choisir le type de cloud, le prestataire avec garanties
+Contrat détaillé sur localisation, sécurité, réversibilité
+
+CAPEX diminue, OPEX augmente dans le nouveau modèle
+Veille, architecture, pilotage de contrat, un rôle qui s'appelle
+Développement et infrastructure délaissés progressivement
+La France en tête d'Europe, une adoption massivement
+
+[Refrain]
+SaaS PaaS IaaS, Safe Harbor rendu inopérant
+Par le Patriot Act américain, un accord défaillant
+SaaS PaaS IaaS, un vrai projet d'entreprise à mener
+Jamais opportuniste, mais stratégique et planifié
+
+[Pont]
+Google Docs interdit en Norvège et au Danemark, un signal
+Le cloud interne n'apporte aucune innovation majeure, banal
+La réversibilité doit être formalisée dans le contrat écrit
+Sans elle, récupérer ses données devient un vrai souci
+
+[Refrain final]
+SaaS PaaS IaaS, la troisième révolution des plateformes
+Après le mainframe et le PC, une nouvelle plateforme
+SaaS PaaS IaaS, du service à la demande
+Jusqu'au bout du nuage, jamais de méprise grande
+
+[Outro]
+Cloud, SaaS, virtualisation
+One love, one network, informatique en nuage

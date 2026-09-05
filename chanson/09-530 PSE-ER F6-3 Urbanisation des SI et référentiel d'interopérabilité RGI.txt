@@ -1,0 +1,56 @@
+TITRE : Zone Quartier Bloc Riddim
+
+[Intro]
+Urbanisme la méthode, urbanisation son application
+Modulaire, évolutif, rénovable par section
+Zone quartier bloc, oh yeah
+
+[Couplet 1]
+Domaine groupe les applications, sous-domaine le subdivise
+Zone acquisition recueille, opérationnelle traite, émission avise
+Trois zones fondamentales structurent chaque domaine
+Quartier répartit par nature, assimilé au sous-domaine
+
+Bloc fonctionnel plus petite unité, un seul quartier propriétaire
+Autonome, asynchrone, donnée mono-propriétaire
+Flux externe ou interne déclenche le traitement du bloc
+CRE compte rendu après traitement de l'événement en bloc
+
+[Refrain]
+Zone quartier bloc, cartographie de l'existant d'abord
+Puis diagnostic, plan cible, trajectoire de migration encore
+Zone quartier bloc, huit domaines au Trésor public
+Recouvrement, dépense, comptabilité, un schéma authentique
+
+[Couplet 2]
+RGI ordonnance du huit décembre deux mille cinq, une obligation
+Trois volets, sémantique, technique, organisationnel en action
+A2A entre administrations, A2B avec l'entreprise, A2C le citoyen
+EIF cadre européen, NIFO observe le lien
+
+Quatre niveaux, obligatoire, recommandé, déconseillé, interdit
+PNG recommandé, GIF déconseillé, un format qui pâlit
+TCP ou UDP obligatoires pour tout flux applicatif transporté
+Version deux du RGI par arrêté du vingt avril officialisé
+
+[Refrain]
+Zone quartier bloc, cartographie de l'existant d'abord
+Puis diagnostic, plan cible, trajectoire de migration encore
+Zone quartier bloc, huit domaines au Trésor public
+Recouvrement, dépense, comptabilité, un schéma authentique
+
+[Pont]
+L'urbanisation se situe en amont, jamais un projet isolé
+Une tâche de fond permanente, jamais achevée
+Le RGI a force d'obligation, contrairement au cadre commun
+Une dérogation exige un dossier justifié, jamais à la légère aucun
+
+[Refrain final]
+Zone quartier bloc, l'urbanisme des systèmes
+Domaine, zone, quartier, bloc, un vrai théorème
+Zone quartier bloc, interopérabilité assurée
+Jusqu'au bout du flux, jamais désorganisée
+
+[Outro]
+Urbanisation, RGI, interopérabilité
+One love, one network, systèmes d'information
