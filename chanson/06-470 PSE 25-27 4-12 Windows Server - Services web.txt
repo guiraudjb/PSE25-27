@@ -1,0 +1,56 @@
+TITRE : Pool d'Applications Riddim
+
+[Intro]
+HTTP point sys écoute au niveau noyau, discret
+IIS héberge les sites, ASP point NET complet
+Pool d'applications, oh yeah
+
+[Couplet 1]
+Binding associe IP, port, hôte et protocole choisi
+Racine physique dans C inetpub wwwroot, ainsi soit-il
+Pool d'applications isole chaque site dans w trois wp exe
+Un site plante, les autres tournent, la stabilité persiste
+
+Install-WindowsFeature Web-Server installe IIS complet
+Vérification sur http localhost, la page s'affiche, parfait
+New-Website crée un site en une commande PowerShell
+Iisreset redémarre le service, un geste actionnel
+
+[Refrain]
+Pool d'applications, isolation, sécurité
+HTTP quatre-vingt, HTTPS quatre cent quarante-trois activé
+Pool d'applications, w trois wp exe le processus
+Kestrel derrière IIS pour ASP point NET Core, un plus
+
+[Couplet 2]
+Certificat auto-signé, PKI interne ou autorité publique
+HTTPS chiffre via TLS SSL, la sécurité authentique
+Authentification anonyme pour le public, Windows pour l'intranet
+Basic encode en Base64, HTTPS obligatoire, un secret
+
+Codes HTTP deux cents succès, trois cent un redirection
+Quatre cent trois interdit, quatre cent quatre absent, une notion
+Cinq cents erreur serveur, cinq cent trois pool arrêté
+ARR fait reverse proxy et répartition de charge, activé
+
+[Refrain]
+Pool d'applications, isolation, sécurité
+HTTP quatre-vingt, HTTPS quatre cent quarante-trois activé
+Pool d'applications, w trois wp exe le processus
+Kestrel derrière IIS pour ASP point NET Core, un plus
+
+[Pont]
+HTTP point sys tourne en mode noyau, faille critique
+Basic sans HTTPS expose les mots de passe, un risque authentique
+Permission NTFS lecture minimum sur wwwroot exigée
+Recyclage du pool perd les sessions non persistées
+
+[Refrain final]
+Pool d'applications, IIS le serveur web
+Sites, certificats, journaux dans inetpub logs, un relève
+Pool d'applications, Windows Server au poste
+Jusqu'au bout du binding, jamais de riposte
+
+[Outro]
+IIS, pool, HTTPS
+One love, one network, services web

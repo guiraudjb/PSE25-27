@@ -1,0 +1,56 @@
+TITRE : HKEY et Ruche Riddim
+
+[Intro]
+La base de registre remplace autoexec et config sys
+HKLM, HKCU, chaque clé a son avis
+HKEY et ruche, oh yeah
+
+[Couplet 1]
+HKEY_LOCAL_MACHINE regroupe matériel, pilotes, services
+HKEY_CURRENT_USER pointe le profil, bureau, préférences propices
+HKEY_USERS contient tous les profils chargés sur le poste
+HKEY_CLASSES_ROOT associe extension et programme, la réponse
+
+HKEY_CURRENT_CONFIG lie le profil matériel actif au démarrage
+HKEY_PERFORMANCE_DATA compte les compteurs, un vrai reportage
+Ruche chargée en mémoire au démarrage ou connexion
+Stockée dans system32 config, chaque profil sa portion
+
+[Refrain]
+HKEY et ruche, cinq clés racines qui gouvernent
+REG_SZ, REG_DWORD, REG_BINARY, chaque type qu'on énumère
+HKEY et ruche, Regedit sans garde-fou
+REG.EXE en ligne de commande, importe et export partout
+
+[Couplet 2]
+NTUSER point dat stocke la ruche de chaque utilisateur
+HKLM BCD remplace boot point ini, un nouvel auteur
+Bcdedit modifie le démarrage, jamais le registre en direct
+Reg add HKLM software test crée une valeur, un fait exact
+
+GPO déploient les paramètres sans toucher poste par poste
+Malwares exploitent la clé Run pour leur persistance, une imposte
+Corruption du registre cause écran bleu, système qui bloque
+Restauration de l'état système ou sauvegarde, l'unique remoque
+
+[Refrain]
+HKEY et ruche, cinq clés racines qui gouvernent
+REG_SZ, REG_DWORD, REG_BINARY, chaque type qu'on énumère
+HKEY et ruche, Regedit sans garde-fou
+REG.EXE en ligne de commande, importe et export partout
+
+[Pont]
+Exporter avant modifier, un fichier point reg en sauvegarde
+Reg import restaure la clé, en cas d'erreur qui retarde
+Les cleaners non officiels suppriment des clés valides
+Toujours préférer GPO, la méthode plus solide
+
+[Refrain final]
+HKEY et ruche, le cœur de Windows Server
+Chaque paramètre, chaque service, dans l'arbre hiérarchique clair
+HKEY et ruche, la configuration centrale
+Jusqu'au bout de la clé, jamais banale
+
+[Outro]
+Registre, ruche, HKLM
+One love, one network, configuration

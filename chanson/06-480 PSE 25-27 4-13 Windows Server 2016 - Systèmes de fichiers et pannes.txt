@@ -1,0 +1,56 @@
+TITRE : MFT et Journal Riddim
+
+[Intro]
+NTFS depuis NT Server trois virgule un, la référence
+MFT décrit chaque fichier, le journal assure la cohérence
+MFT et journal, oh yeah
+
+[Couplet 1]
+FAT32 limité à quatre giga par fichier, deux téra le volume
+ExFAT dépasse la limite, multiplateforme, un vrai baume
+NTFS gère deux cent cinquante-six téra, ACL et compression
+EFS chiffre les fichiers sensibles, une vraie protection
+
+MFT contient une entrée par fichier, dupliquée pour la sécurité
+Position notée dans le MBR, jamais perdue, jamais isolée
+Journal enregistre avant d'écrire, redo, undo au redémarrage
+Après une panne, les transactions incomplètes annulées, un sage arbitrage
+
+[Refrain]
+MFT et journal, la structure NTFS
+Sécurité, fiabilité, quotas, ACL, tout accès
+MFT et journal, B plus Tree organise
+Chkdsk slash f slash r répare, la panne se maîtrise
+
+[Couplet 2]
+ReFS depuis Windows Server deux mille douze, résilient
+Checksums vérifient chaque lecture, un contrôle intelligent
+Copy-on-Write protège les métadonnées avant remplacement
+Trente-cinq péta de fichiers et volumes, un cluster de soixante-quatre kilo, vraiment
+
+RAID un miroir duplique sur deux disques, lecture rapide
+RAID cinq répartit données et parité, vingt pour cent, une aide
+Storage Spaces gère le pool logiciel, miroir ou parité
+WRP protège DLL, EXE, OCX, SYS contre la modification, gardée
+
+[Refrain]
+MFT et journal, la structure NTFS
+Sécurité, fiabilité, quotas, ACL, tout accès
+MFT et journal, B plus Tree organise
+Chkdsk slash f slash r répare, la panne se maîtrise
+
+[Pont]
+Ransomware chiffre les fichiers avec les droits de l'utilisateur connecté
+Shadow Copy et sauvegarde hors ligne, seules protections attestées
+ReFS jamais bootable, NTFS reste le volume système requis
+Disque dynamique irréversible, jamais reconverti sans souci
+
+[Refrain final]
+MFT et journal, NTFS et ReFS
+Windows Server protège chaque octet, chaque accès
+MFT et journal, la fiabilité au poste
+Jusqu'au bout du secteur, jamais de riposte
+
+[Outro]
+NTFS, ReFS, journal
+One love, one network, fichiers

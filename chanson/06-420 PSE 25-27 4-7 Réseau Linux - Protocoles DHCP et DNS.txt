@@ -1,0 +1,56 @@
+TITRE : DORA et Zone DNS Riddim
+
+[Intro]
+Discovery, Offer, Request, Acknowledgement
+DORA achemine la configuration automatiquement
+DORA et zone DNS, oh yeah
+
+[Couplet 1]
+DHCPDISCOVER en broadcast cherche un serveur DHCP
+DHCPOFFER propose une adresse disponible, complet
+DHCPREQUEST accepte, DHCPACK confirme la donne
+Port soixante-huit client, port soixante-sept serveur, la norme
+
+Dhcpd tourne sous Linux, isc-dhcp-server le paquet
+Dhcpd point conf définit les baux et les tickets
+DHCP statique associe la MAC à l'IP fixe
+Sans serveur DHCP, cent soixante-neuf point deux cent cinquante-quatre, APIPA fixe
+
+[Refrain]
+DORA et zone DNS, la hiérarchie distribuée
+ICANN supervise, registry et registrar mêlés
+DORA et zone DNS, treize serveurs racines
+Anycast sur cent trente sites, la résilience domine
+
+[Couplet 2]
+Enregistrement A pour IPv4, AAAA pour IPv6
+CNAME crée un alias, MX dirige le mail, complet
+NS indique l'autorité, PTR la résolution inverse
+SOA porte le numéro de série, incrémenté sans qu'on ne le renverse
+
+BIND le logiciel serveur, named point conf configure les zones
+Named-checkconf vérifie, named-checkzone la zone qu'on façonne
+Etc resolv point conf pointe vers les serveurs à interroger
+Etc nsswitch point conf ordonne, files puis dns, l'ordre à respecter
+
+[Refrain]
+DORA et zone DNS, la hiérarchie distribuée
+ICANN supervise, registry et registrar mêlés
+DORA et zone DNS, treize serveurs racines
+Anycast sur cent trente sites, la résilience domine
+
+[Pont]
+Serveur DHCP rogue attribue de fausses adresses, un danger
+Le DHCP statique et le port security viennent protéger
+Master autorise les mises à jour, Slave copie pour la garde
+Forward relaie, Hint met en cache, chaque rôle qui s'accorde
+
+[Refrain final]
+DORA et zone DNS, l'annuaire du réseau
+Nom de domaine vers IP, un système bien beau
+DORA et zone DNS, hiérarchique et distribué
+Jusqu'au bout du domaine, jamais isolé
+
+[Outro]
+DHCP, DNS, résolution
+One love, one network, DORA

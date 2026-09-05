@@ -1,0 +1,56 @@
+TITRE : CIDR Slash Riddim
+
+[Intro]
+Trente-deux bits pour IPv4, cent vingt-huit pour IPv6
+Adresse logique qui identifie chaque appareil connecté
+CIDR slash, oh yeah
+
+[Couplet 1]
+RFC sept cent quatre-vingt-onze définit le protocole IP
+Classe A de zéro à cent vingt-sept, seize virgule sept millions d'hôtes qui s'inscrivent
+Classe B cent vingt-huit à cent quatre-vingt-onze, soixante-cinq mille hôtes en jeu
+Classe C cent quatre-vingt-douze à deux cent vingt-trois, deux cent cinquante-quatre, un peu
+
+Classe D multicast, deux cent vingt-quatre à deux cent trente-neuf
+Classe E réservée aux essais, deux cent quarante et plus loin
+RFC dix-neuf dix-huit protège les adresses privées
+Dix point zéro, cent soixante-douze point seize, cent quatre-vingt-douze point cent soixante-huit, gravées
+
+[Refrain]
+CIDR slash, notation qui regroupe les blocs
+Deux puissance trente-deux moins masque, moins deux pour le stock
+CIDR slash, adresse réseau et broadcast
+Bits hôtes à zéro ou à un, le contraste
+
+[Couplet 2]
+IPv6 en RFC deux mille quatre cent soixante, huit groupes hexadécimaux
+Trois cent quarante sextillions d'adresses, un chiffre colossal
+Deux points doubles une seule fois, jamais répétés
+FE80 lien-local, APIPA son équivalent chez IPv6, dévoilé
+
+Dual stack fait cohabiter IPv4 et IPv6 ensemble
+Enregistrement A et AAAA dans le DNS qui rassemble
+VLSM ajuste chaque sous-réseau à sa taille réelle
+Ip addr add, ip route add, configuration temporelle
+
+[Refrain]
+CIDR slash, notation qui regroupe les blocs
+Deux puissance trente-deux moins masque, moins deux pour le stock
+CIDR slash, adresse réseau et broadcast
+Bits hôtes à zéro ou à un, le contraste
+
+[Pont]
+NAT traduit le privé en public pour sortir sur le net
+Tunneling six vers quatre encapsule, Teredo le complet
+NAT-PT traduit les en-têtes à la frontière posée
+La 5G impose IPv6, la migration est amorcée
+
+[Refrain final]
+CIDR slash, l'adressage qui structure
+IPv4 épuisé, IPv6 le futur
+CIDR slash, du masque au sous-réseau
+Jusqu'au bout du bit, jamais de trop
+
+[Outro]
+IPv4, IPv6, CIDR
+One love, one network, adressage

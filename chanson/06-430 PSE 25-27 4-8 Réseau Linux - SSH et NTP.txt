@@ -1,0 +1,56 @@
+TITRE : Clé Publique Clé Privée Riddim
+
+[Intro]
+Telnet en clair, un risque de sniffing sur le câble
+SSH chiffre tout, le port vingt-deux, imparable
+Clé publique clé privée, oh yeah
+
+[Couplet 1]
+Cryptographie asymétrique échange la clé de session
+Cryptographie symétrique chiffre ensuite, la vraie mission
+Clé privée jamais partagée, gardée bien au chaud
+RSA, DSA signent avec des clés de mille à deux mille bits, un flot
+
+Authorized_keys sur le serveur accueille les clés autorisées
+Known_hosts sur le client garde l'empreinte enregistrée
+Ssh-keygen dash t rsa dash b deux mille quarante-huit génère la paire
+Ssh-copy-id dépose la clé publique, un geste qui libère
+
+[Refrain]
+Clé publique clé privée, échange à l'ouverture
+Clé de session symétrique protège l'écriture
+Clé publique clé privée, SCP et SFTP
+Transfert chiffré de fichiers, en toute sécurité
+
+[Couplet 2]
+Sshd_config configure port, protocole deux, la base
+PasswordAuthentication no ferme l'accès qu'on efface
+PermitRootLogin no bloque la racine directe
+Chmod sept cents sur ssh, six cents sur authorized, la recette
+
+NTP synchronise les horloges à la microseconde
+Stratum zéro l'horloge atomique, la référence féconde
+Stratum un directement connecté, INRIA, CINES en France
+Ntpd, iburst accélèrent la première convergence
+
+[Refrain]
+Clé publique clé privée, échange à l'ouverture
+Clé de session symétrique protège l'écriture
+Clé publique clé privée, SCP et SFTP
+Transfert chiffré de fichiers, en toute sécurité
+
+[Pont]
+Si l'empreinte du serveur change, SSH bloque l'accès
+Man-in-the-middle repéré, la connexion s'arrête net
+Seconde intercalaire ajuste le temps coordonné universel
+Ntpq dash p affiche stratum et offset, un contrôle essentiel
+
+[Refrain final]
+Clé publique clé privée, la connexion sécurisée
+NTP aligne le temps, jamais désynchronisée
+Clé publique clé privée, SSH le standard
+Jusqu'au bout du port vingt-deux, jamais de retard
+
+[Outro]
+SSH, NTP, sécurité
+One love, one network, synchronisé

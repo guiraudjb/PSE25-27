@@ -1,0 +1,56 @@
+TITRE : Pile TCP-IP Windows Riddim
+
+[Intro]
+Winsock ouvre les sockets, NDIS pilote la carte
+Pile TCP-IP Windows, chaque couche a sa part
+Pile TCP-IP Windows, oh yeah
+
+[Couplet 1]
+Couche accès réseau gère la trame et le matériel
+Couche Internet adresse et route, IP essentiel
+Couche transport TCP fiable ou UDP léger
+Couche application, DNS, DHCP, HTTPS, SMB, un régal
+
+SMB partage fichiers et imprimantes sur le réseau
+RDP port trois mille trois cent quatre-vingt-neuf, le bureau
+IIS héberge HTTP et HTTPS avec TLS
+WMI supervise, administre à distance, sans délai
+
+[Refrain]
+Pile TCP-IP Windows, Winsock et NDIS
+WFP filtre le trafic, le pare-feu qui saisit
+Pile TCP-IP Windows, DNS cinquante-trois
+DHCP soixante-sept, soixante-huit, SMB quatre cent quarante-cinq
+
+[Couplet 2]
+IPv6 activé par défaut, Active Directory en dépend
+SLAAC, DHCPv6, dual stack le comprend
+SDN sépare contrôle et transport, tout piloté par logiciel
+Hyper-V virtualise commutateurs, VLAN, un modèle essentiel
+
+NIC Teaming agrège les cartes pour plus de bande passante
+Failover Clustering bascule si un nœud se déconnecte
+Pathping combine ping et tracert, l'analyse avancée
+Ipconfig slash all affiche toute la configuration posée
+
+[Refrain]
+Pile TCP-IP Windows, Winsock et NDIS
+WFP filtre le trafic, le pare-feu qui saisit
+Pile TCP-IP Windows, DNS cinquante-trois
+DHCP soixante-sept, soixante-huit, SMB quatre cent quarante-cinq
+
+[Pont]
+SMB port cent trente-neuf obsolète, EternalBlue le danger
+Port quatre cent quarante-cinq aujourd'hui doit le remplacer
+RDP exposé sans NLA, la force brute guette
+NetBIOS limité à quinze caractères, une relique qu'on rejette
+
+[Refrain final]
+Pile TCP-IP Windows, le réseau structuré
+Quatre couches qui empilent, jamais désordonné
+Pile TCP-IP Windows, Active Directory en tête
+Jusqu'au bout du port, la sécurité complète
+
+[Outro]
+Winsock, NDIS, pile réseau
+One love, one network, Windows

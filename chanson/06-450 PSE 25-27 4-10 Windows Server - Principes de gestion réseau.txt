@@ -1,0 +1,56 @@
+TITRE : Domaine et Cluster Riddim
+
+[Intro]
+Groupe de travail pair à pair, chacun pour soi
+Domaine centralisé par le contrôleur, la loi
+Domaine et cluster, oh yeah
+
+[Couplet 1]
+Groupe de travail simple, pas de serveur central
+Chaque poste gère ses comptes, sa sécurité, son journal
+Domaine Windows centralise, Active Directory au cœur
+Contrôleur de domaine authentifie, applique les GPO, sans erreur
+
+Terminal Server, RDS, seul l'affichage est transmis
+RDP port trois mille trois cent quatre-vingt-neuf, ainsi soit-il compris
+NAS partage fichiers en SMB CIFS ou en NFS
+SAN dédié au stockage, Fibre Channel, iSCSI, FCoE
+
+[Refrain]
+Domaine et cluster, haute disponibilité
+Failover bascule, un nœud tombe, l'autre est prêt
+Domaine et cluster, NLB équilibre la charge
+SAN et NAS stockent, chacun a sa marge
+
+[Couplet 2]
+GPO configure les postes, applique les règles de sécurité
+Active Directory stocke utilisateurs, groupes, ordinateurs, imprimantes
+iSCSI transporte le SCSI sur IP Ethernet, économique
+FCoE encapsule Fibre Channel dans la trame, unique
+
+Cluster de basculement assure la continuité de service
+NLB répartit les connexions, améliore la performance active
+Un cluster nécessite un stockage partagé, un réseau fiable
+Live Migration déplace les VM sans coupure, remarquable
+
+[Refrain]
+Domaine et cluster, haute disponibilité
+Failover bascule, un nœud tombe, l'autre est prêt
+Domaine et cluster, NLB équilibre la charge
+SAN et NAS stockent, chacun a sa marge
+
+[Pont]
+Sans DNS, le domaine tombe, authentification en panne
+GPO interdit l'accès aux paramètres, une règle qui s'organise
+RDS impose des licences CAL par utilisateur ou appareil
+NAS limité par l'Ethernet, SAN dédié en éveil
+
+[Refrain final]
+Domaine et cluster, l'infrastructure pro
+Centralisée, résiliente, jusqu'au bout du réseau
+Domaine et cluster, Windows Server au sommet
+Jamais de panne isolée, jamais d'arrêt complet
+
+[Outro]
+Domaine, cluster, haute disponibilité
+One love, one network, Windows Server

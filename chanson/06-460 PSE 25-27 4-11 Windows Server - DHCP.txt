@@ -1,0 +1,56 @@
+TITRE : Étendue et Zone Intégrée Riddim
+
+[Intro]
+DORA distribue l'adresse sur le réseau Windows
+Zone intégrée réplique dans Active Directory, sans faux pas
+Étendue et zone intégrée, oh yeah
+
+[Couplet 1]
+RFC deux mille cent trente et un définit le DHCP
+Étendue Scope distribue une plage IP, bien codée
+Réservation lie une MAC à une IP à jamais
+Exclusion protège les adresses statiques, sans jamais faillir
+
+Add DhcpServerInDC autorise le serveur dans l'annuaire
+Sans autorisation, les clients l'ignorent, c'est nécessaire
+Option zéro zéro trois la passerelle, zéro zéro six le DNS
+Options zéro six six zéro six sept démarrent le PXE sans disque, précis
+
+[Refrain]
+Étendue et zone intégrée, DORA distribue
+Discover, Offer, Request, Acknowledge, la suite continue
+Étendue et zone intégrée, réplication Active Directory
+Sécurisée, automatique, sans transfert manuel, c'est ainsi
+
+[Couplet 2]
+DNS RFC mille trente-quatre et mille trente-cinq, la référence
+Enregistrement A, AAAA, PTR, CNAME, MX en cadence
+NS indique l'autorité, SRV localise Kerberos et LDAP
+Zone directe nom vers IP, zone inverse fait l'inverse net
+
+DNS dynamique enregistre automatiquement chaque poste
+DHCP met à jour le DNS, la cohérence à son poste
+Redirecteur transmet vers le FAI si la zone est inconnue
+DNSSEC signe les enregistrements, l'authenticité continue
+
+[Refrain]
+Étendue et zone intégrée, DORA distribue
+Discover, Offer, Request, Acknowledge, la suite continue
+Étendue et zone intégrée, réplication Active Directory
+Sécurisée, automatique, sans transfert manuel, c'est ainsi
+
+[Pont]
+T1 à cinquante pour cent renouvelle auprès du même serveur
+T2 à quatre-vingt-sept virgule cinq pour cent change de fournisseur
+Sans enregistrement SRV, plus de contrôleur trouvé
+Authentification bloquée, tout le domaine paralysé
+
+[Refrain final]
+Étendue et zone intégrée, DHCP et DNS liés
+Le client démarre, s'enregistre, peut communiquer
+Étendue et zone intégrée, Windows Server au centre
+Jusqu'au bout du bail, jamais de latence
+
+[Outro]
+DHCP, DNS, Windows Server
+One love, one network, intégré

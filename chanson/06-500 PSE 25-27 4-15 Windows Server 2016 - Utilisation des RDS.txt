@@ -1,0 +1,56 @@
+TITRE : RD Gateway Riddim
+
+[Intro]
+RDS transmet le bureau à distance, un vrai voyage
+RDP port trois mille trois cent quatre-vingt-neuf, l'affichage
+RD Gateway, oh yeah
+
+[Couplet 1]
+RD Session Host exécute les applications, les sessions isolées
+RD Connection Broker répartit, reconnecte, équilibre la volée
+RD Web Access publie dans le navigateur, sans client RDP
+RD Gateway sécurise depuis Internet, SSL TLS complet
+
+RD Licensing gère les CAL, par utilisateur ou appareil
+Cent vingt jours de grâce avant l'obligation de licence, un réveil
+RemoteApp publie une seule application, pas tout le bureau
+Word s'exécute au loin, s'affiche en local, un vrai tableau
+
+[Refrain]
+RD Gateway, Internet vers le serveur RDS
+Sans exposer le port trois mille trois cent quatre-vingt-neuf, jamais
+RD Gateway, NLA authentifie avant la session
+Kerberos, NTLM sécurisent la connexion
+
+[Couplet 2]
+Déploiement rapide installe Broker, Web Access, Session Host ensemble
+Déploiement standard gère plusieurs serveurs, la charge qui s'assemble
+Test-NetConnection serveur port trois mille trois cent quatre-vingt-neuf vérifie l'accès
+Enter-PSSession ouvre une session PowerShell distante, un vrai succès
+
+Port UDP trois mille trois cent quatre-vingt-neuf optimise l'affichage
+Sans NLA, l'écran de connexion expose une surface, un mauvais présage
+RD Connection Broker doit être en haute disponibilité
+Sinon point unique de défaillance, toute l'infrastructure est menacée
+
+[Refrain]
+RD Gateway, Internet vers le serveur RDS
+Sans exposer le port trois mille trois cent quatre-vingt-neuf, jamais
+RD Gateway, NLA authentifie avant la session
+Kerberos, NTLM sécurisent la connexion
+
+[Pont]
+Sans licence RDS active, le serveur refuse les connexions
+Vérifier RD Licensing, l'activation, les GPO en question
+Performances dégradées si le serveur est surchargé
+Ajouter des Session Host, répartir les utilisateurs, un remède avéré
+
+[Refrain final]
+RD Gateway, RDS le bureau à distance
+Centralisé, sécurisé, une vraie performance
+RD Gateway, Windows Server au sommet
+Jusqu'au bout du port, jamais d'arrêt complet
+
+[Outro]
+RDS, RDP, RD Gateway
+One love, one network, bureau distant
