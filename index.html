@@ -1446,14 +1446,25 @@
         const pointers = new Map();
         let isDragging = false, startX = 0, startY = 0, lastPinchDist = null;
 
+        // #terminal est pivoté à 90deg en orientation portrait (voir CSS) : les
+        // coordonnées écran (clientX/Y) doivent être reprojetées dans le repère
+        // local (non pivoté) de l'image avant de servir au calcul du pan.
+        function localPoint(e) {
+            if (window.matchMedia('(orientation: portrait)').matches) {
+                return { x: e.clientY, y: -e.clientX };
+            }
+            return { x: e.clientX, y: e.clientY };
+        }
+
         container.addEventListener('pointerdown', e => {
             if(e.target.closest('button')) return; // laisser les boutons zoom fonctionner
-            pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+            const p = localPoint(e);
+            pointers.set(e.pointerId, p);
             container.setPointerCapture(e.pointerId);
             if(pointers.size === 1 && zoomLevel > 1) {
                 isDragging = true;
-                startX = e.clientX - panX;
-                startY = e.clientY - panY;
+                startX = p.x - panX;
+                startY = p.y - panY;
                 container.style.cursor = 'grabbing';
             }
             if(pointers.size === 2) {
@@ -1465,7 +1476,8 @@
         });
 
         container.addEventListener('pointermove', e => {
-            pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+            const p = localPoint(e);
+            pointers.set(e.pointerId, p);
             if(pointers.size === 2) {
                 const pts = [...pointers.values()];
                 const dist = Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
@@ -1476,8 +1488,8 @@
                 }
                 lastPinchDist = dist;
             } else if(isDragging) {
-                panX = e.clientX - startX;
-                panY = e.clientY - startY;
+                panX = p.x - startX;
+                panY = p.y - startY;
                 applyInfoTransform();
             }
         });
