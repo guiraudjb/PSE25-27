@@ -1,0 +1,67 @@
+TITRE : Root Refusé Riddim
+
+[Intro]
+Quatre piliers dans le cycle, homologation, durcir, écosystème, MCS
+Sécurité sous Linux, jamais figée, toujours en progrès
+Root refusé, oh yeah
+
+[Couplet 1]
+Homologation, décision de l'autorité compétente
+Risques identifiés, résiduels acceptés, jamais zéro en attente
+AQSSI signe le cadre, autorité d'homologation valide et assume
+RSSI conseille, MOA le besoin, MOE construit, PASSI audite sans présumer
+
+RGS et PSSIE, PMSN au niveau ministère
+II neuf cent un pour le diffusion restreinte, ISO vingt-sept mille en repère
+EBIOS Risk Manager, cinq ateliers pour cartographier
+Cadrage, sources, scénarios stratégiques et opérationnels, puis traiter
+
+[Refrain]
+Root refusé, PermitRootLogin no
+Clé SSH, sudo, jamais de mot de passe en trop
+Root refusé, moindre privilège avant tout
+Sept étapes vers l'homologation, trois ans jusqu'au bout
+
+[Couplet 2]
+Durcir un système, exposer le nécessaire, rien de plus
+SELinux sur RHEL, AppArmor sur Debian, contrôle d'accès conclu
+Permissions rwx, chmod, ACL, umask zéro vingt-sept
+Sticky bit sur tmp, SUID recensé, aucune faille qui subsiste
+
+Pare-feu deny all, nftables ferme tout sauf l'essentiel
+Sysctl durcit le noyau, ASLR, anti-spoofing réel
+Paquets réduits, moins de CVE à surveiller au quotidien
+Volumes chiffrés par LUKS, cryptsetup protège bien
+
+[Refrain]
+Root refusé, PermitRootLogin no
+Clé SSH, sudo, jamais de mot de passe en trop
+Root refusé, moindre privilège avant tout
+Sept étapes vers l'homologation, trois ans jusqu'au bout
+
+[Pont]
+Srv-app01 en danger, accès direct root, aucune protection
+Fail2Ban bannit les IP, firewall-cmd limite la connexion
+Autour de Linux, virtualisation, cloud, bastion d'administration
+Règle trois deux un pour la sauvegarde, seul rempart contre la destruction
+
+[Couplet 3]
+Maintien en conditions de sécurité, la veille ne s'arrête jamais
+CERT-FR, flux CVE, threat intelligence, alertes qui alertent
+Scan, qualification, correction, contrôle d'efficacité en boucle
+RTO le délai de reprise, RPO la perte que l'on découple
+
+Lynis calcule un score, OpenSCAP valide la conformité CIS
+Ansible et Terraform automatisent, la stabilité se maîtrise
+Incident détecté, confiné, éradiqué, retour d'expérience noté
+PRA PCA testés, jamais de plan resté au placard oublié
+
+[Refrain final]
+Root refusé, PermitRootLogin no
+Clé SSH, sudo, jamais de mot de passe en trop
+Root refusé, moindre privilège avant tout
+De l'homologation au MCS, la boucle ne s'arrête pas
+
+[Outro]
+SELinux, AppArmor, Fail2Ban
+One love, one network, sécurité sans fin
