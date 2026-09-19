@@ -1,0 +1,195 @@
+RAPPORT D'ACTIVITÉ TRACFIN 2025, TOME 1, ACTIVITÉ ET IMPACT DE TRACFIN ET SES PARTENAIRES.
+
+LEXIQUE COMPLET.
+
+      Tracfin, pour Traitement du renseignement et action contre les circuits financiers clandestins, est la cellule de renseignement financier française placée sous l'autorité des ministères économiques et financiers.
+
+      Une cellule de renseignement financier, ou CRF, est l'organisme national chargé de recevoir, analyser et transmettre les informations relatives aux soupçons de blanchiment de capitaux et de financement du terrorisme.
+
+      La LCB-FT désigne la lutte contre le blanchiment de capitaux et le financement du terrorisme, dispositif national et européen auquel sont assujettis plus de 230 000 professionnels en France.
+
+      Une déclaration de soupçon, ou DS, est l'information transmise à Tracfin par un professionnel assujetti au titre de l'article L. 561-15 du Code monétaire et financier, dès lors qu'il soupçonne qu'une somme ou une opération provient d'une infraction ou est liée au financement du terrorisme.
+
+      Une communication systématique d'information, ou COSI, est une information brute transmise automatiquement à Tracfin sur certains types d'opérations, notamment les retraits et dépôts d'espèces ou les transmissions de fonds dépassant certains seuils.
+
+      Une information de soupçon, ou IS, est une information reçue par Tracfin de la part d'administrations publiques ou d'autorités de contrôle, au titre des articles L. 561-27, L. 561-28 ou L. 561-31-2 du Code monétaire et financier.
+
+      Le droit de communication est la prérogative permettant à Tracfin de demander des informations complémentaires à un professionnel assujetti ou non assujetti, au titre de l'article L. 561-25 du Code monétaire et financier.
+
+      Le droit d'opposition est la prérogative permettant à Tracfin d'ordonner le report d'une opération financière suspecte, pour une durée pouvant être prorogée jusqu'à dix jours, afin de sécuriser une saisie pénale par l'autorité judiciaire.
+
+      Un signalement globalisé désigne une liste de personnes physiques ou morales soupçonnées d'un même type d'infraction, sans avoir fait l'objet d'une enquête approfondie, transmise à des partenaires pour orienter leurs contrôles.
+
+      Le dispositif des circuits courts est une procédure accélérée de traitement des déclarations de soupçon visant des sociétés éphémères, permettant une saisie rapide de leurs avoirs grâce au droit d'opposition.
+
+      Une société éphémère, ou société lessiveuse, est une société sans véritable activité économique, dont le bénéficiaire effectif est masqué par un gérant de paille, utilisée pour faire transiter des fonds d'origine criminelle.
+
+      Un prestataire de services sur crypto-actifs, ou PSCA, est un acteur qui assure la conservation, l'achat, la vente ou l'échange d'actifs numériques pour le compte de tiers.
+
+      L'Analyse nationale des risques, ou ANR, est le document qui évalue le niveau de risque de blanchiment de capitaux et de financement du terrorisme propre à chaque secteur professionnel assujetti.
+
+      L'Autorité européenne de lutte contre le blanchiment de capitaux, ou AMLA, est l'agence de l'Union européenne créée pour superviser directement certains établissements financiers à haut risque et coordonner les cellules de renseignement financier des États membres.
+
+      L'État-major de lutte contre la criminalité organisée, ou EMCO, est la structure interministérielle créée par la loi contre le narcotrafic pour centraliser les informations et coordonner l'action des services de l'État contre la criminalité organisée.
+
+      Le Groupe Egmont est une organisation internationale regroupant 182 cellules de renseignement financier, qui facilite la coopération et l'échange sécurisé d'informations entre elles.
+
+      Le GAFI, Groupe d'action financière, est l'organisation internationale qui définit les standards mondiaux de lutte contre le blanchiment de capitaux et le financement du terrorisme.
+
+COURS DÉTAILLÉ.
+
+I. PRÉSENTATION GÉNÉRALE DE TRACFIN.
+
+   A. Une double identité au service de trois missions.
+
+      Tracfin est la cellule de renseignement financier française placée sous l'autorité des ministères économiques et financiers, et depuis 2008 l'un des six services de la communauté nationale du renseignement dits du premier cercle.
+
+      Cette double identité lui confère trois missions, la lutte contre la criminalité économique et financière et le blanchiment des produits des activités criminelles, la lutte contre la fraude aux finances publiques, et la défense et la promotion des intérêts fondamentaux de la Nation.
+
+   B. Un rôle pivot entre prévention et répression.
+
+      Ne pouvant pas s'autosaisir, Tracfin dépend de ses capteurs financiers, déclarations de soupçon, informations de soupçon, communications systématiques d'information et informations reçues de cellules de renseignement étrangères.
+
+      Une fois les informations recueillies, Tracfin les analyse, les enrichit et transmet le résultat de ses investigations à l'autorité judiciaire, aux administrations partenaires ou à ses homologues étrangers, tout en protégeant l'identité du déclarant.
+
+   C. Des moyens humains variés au service de l'efficacité.
+
+      Au 31 décembre 2025, le service compte 231 agents, dont 44 pour cent de femmes occupant plus de la moitié des postes d'encadrement, 52 pour cent de fonctionnaires issus de plus de 20 corps d'origine différents, et 48 pour cent de contractuels aux profils variés, enquêteurs financiers, analystes du renseignement, data scientists ou experts en crypto-actifs.
+
+II. LES CHIFFRES CLÉS DE L'ANNÉE 2025.
+
+   A. Une hausse générale des informations reçues.
+
+      Tracfin a reçu 278 484 déclarations de soupçon en 2025, soit une hausse de 32 pour cent par rapport à 2024, portant le total des informations reçues à 283 599, également en hausse de 32 pour cent.
+
+      Le service a également reçu 3 048 informations de soupçon, en hausse de 19 pour cent, et 2 067 informations de cellules de renseignement étrangères, en hausse de 23 pour cent.
+
+   B. Des résultats opérationnels marquants.
+
+      Tracfin a reçu 4 622 335 communications systématiques d'information portant sur des transmissions de fonds, et 53 623 485 communications systématiques d'information portant sur des dépôts ou retraits d'espèces.
+
+      Le service a réalisé 4 386 transmissions résultant d'investigations approfondies, en hausse de 10 pour cent, et 285 signalements globalisés, quatre fois plus qu'en 2024, visant au total 17 980 personnes physiques ou morales.
+
+      Les enjeux estimés dans les transmissions relatives à la fraude aux finances publiques atteignent 3,2 milliards d'euros, tandis que 40 millions d'euros d'avoirs criminels ont été saisis grâce au seul dispositif des circuits courts, en hausse de 40 pour cent, et qu'un tiers des contrôles engagés par l'URSSAF fait suite à un signalement de Tracfin.
+
+III. L'ACTIVITÉ DÉCLARATIVE DES PROFESSIONNELS ASSUJETTIS.
+
+   A. Le secteur financier, toujours largement majoritaire.
+
+      Le secteur financier représente 93 pour cent des déclarations de soupçon reçues, passant de 196 670 en 2024 à 258 470 en 2025, soit une hausse de 31 pour cent.
+
+      Les banques et établissements de crédit constituent le premier contributeur avec 163 630 déclarations de soupçon, en hausse de 45 pour cent, représentant 59 pour cent du flux déclaratif total reçu par Tracfin en 2025.
+
+      Les établissements de monnaie électronique progressent de 53 pour cent avec 17 036 déclarations, et les prestataires de services sur crypto-actifs progressent de 58 pour cent avec 4 850 déclarations, ces derniers devant collecter et vérifier les informations de traçabilité imposées par le règlement européen dit TFR sur les transferts de fonds.
+
+      Tracfin déplore en revanche une activité déclarative encore largement insuffisante des professions liées aux services d'investissement, comme les conseillers en investissement financier, dont seuls 3 pour cent des 6 707 professionnels immatriculés ont déjà transmis une déclaration de soupçon.
+
+   B. Le secteur non financier, en forte progression mais encore hétérogène.
+
+      Le secteur non financier ne représente que 7 pour cent du flux déclaratif total, mais progresse fortement avec 20 014 déclarations de soupçon en 2025 contre 14 495 en 2024, soit une hausse de 38 pour cent.
+
+      Les notaires représentent à eux seuls 33 pour cent du flux non financier avec 6 590 déclarations, en hausse de 64 pour cent, suivis par les opérateurs de jeu, les greffes des tribunaux de commerce et les administrateurs judiciaires et mandataires judiciaires, tous en forte progression.
+
+      Le service déplore cependant que les agents sportifs, assujettis depuis 2013, n'aient toujours transmis aucune déclaration de soupçon en 2025 malgré des actions de sensibilisation spécifiques, et que les avocats demeurent également très peu déclarants avec seulement 38 déclarations.
+
+   C. Focus sur des professions à enjeux particuliers.
+
+      Les greffiers des tribunaux de commerce sont en première ligne dans la lutte contre les sociétés éphémères, Tracfin leur ayant signalé plus de 8 000 sociétés en 2025, dont 80 pour cent ont été radiées du registre du commerce et des sociétés.
+
+      Les sociétés de domiciliation et les professionnels de l'immobilier ont chacun bénéficié d'une brochure pédagogique publiée conjointement par Tracfin et la DGCCRF, rappelant leurs obligations LCB-FT, dans un contexte où l'assujettissement des promoteurs immobiliers est prévu au plus tard le 10 juillet 2027.
+
+   D. La qualité formelle des déclarations de soupçon reçues en 2025.
+
+      La longueur médiane de l'exposé des faits est de 2 365 caractères, mais 12 pour cent des déclarations comptent moins de 1 000 caractères et 4 pour cent moins de 280 caractères, soit la longueur d'un tweet, ce qui est jugé insuffisant pour caractériser un soupçon.
+
+      98 pour cent des déclarations comportent au moins une pièce jointe, mais les CARPA, les avocats, les commissaires de justice et les administrateurs et mandataires judiciaires omettent plus régulièrement de joindre des documents d'identification.
+
+      Les déclarants du secteur financier précisent l'infraction soupçonnée dans 85 pour cent des cas, contre seulement 51 pour cent pour le secteur non financier, ce qui s'explique en partie par un manque de visibilité de certaines professions sur les infractions sous-jacentes possibles.
+
+IV. L'ACTIVITÉ DE TRACFIN ET SON IMPACT.
+
+   A. Une priorité forte donnée à la criminalité organisée.
+
+      L'État-major de lutte contre la criminalité organisée, ou EMCO, a été inauguré le 14 mai 2025 par le président de la République pour rassembler les forces de l'État, dont Tracfin, autour de la centralisation des informations, de la coordination opérationnelle et de l'évaluation globale de la menace.
+
+      L'action de Tracfin sur la criminalité organisée repose sur deux axes, démanteler les réseaux de blanchiment en identifiant leurs vecteurs, et cartographier le patrimoine économique des criminels pour faciliter la saisie de leurs actifs.
+
+   B. Tracer les flux d'origine criminelle pour saisir les avoirs.
+
+      Les transmissions à l'autorité judiciaire en matière de blanchiment de capitaux d'origine criminelle ont progressé de 33 pour cent, pour atteindre 602 notes et transmissions en 2025.
+
+      Le dispositif des circuits courts a permis de cibler 400 nouvelles sociétés éphémères, aboutissant à la saisie judiciaire de 40 millions d'euros, soit une hausse de 55 pour cent des sociétés ciblées et de 40 pour cent des fonds saisis par rapport à 2024.
+
+      Les transmissions concernant le secteur des jeux d'argent et de hasard ont progressé de 125 pour cent, et Tracfin a transmis 53 notes aux parquets pour des faits liés à la pédocriminalité, notamment l'achat de contenus pédocriminels via le livestreaming.
+
+   C. Entraver le financement du terrorisme et défendre les intérêts fondamentaux de la Nation.
+
+      Les informations transmises en matière de lutte contre le financement du terrorisme et de défense des intérêts fondamentaux de la Nation ont atteint 2 491, en hausse de 15 pour cent, dans un contexte de menace terroriste toujours élevée et de multiplication des opérations d'ingérence étrangère à l'approche des élections municipales de 2026 et présidentielles de 2027.
+
+      Les crypto-actifs constituent un enjeu transversal du service, avec une capitalisation mondiale de 2 273 milliards d'euros, une taskforce dédiée créée en interne, et un doublement des transmissions impliquant ce vecteur financier en 2025.
+
+      La loi du 13 juin 2025 a introduit une présomption de blanchiment pour les crypto-actifs comportant une fonction d'anonymisation, comme le Monero, ou recourant à des mixeurs, permettant à Tracfin de ne plus avoir à identifier l'infraction initiale dès lors que l'origine des fonds est inconnue.
+
+   D. Identifier les atteintes aux finances publiques.
+
+      Les transmissions concernant les atteintes aux finances publiques ont augmenté de 17 pour cent pour atteindre 852, représentant des enjeux financiers estimés à près de 3,2 milliards d'euros et concernant la fraude sociale, la fraude fiscale et la fraude douanière.
+
+      Trente pour cent des contrôles engagés par l'URSSAF en matière de travail dissimulé font suite à une information de Tracfin, ayant donné lieu à 470 millions d'euros de redressements en 2025, contre 266 millions d'euros en 2024.
+
+      La détection par Tracfin de fraudes au dispositif MaPrimeRénov a conduit à la fermeture provisoire du guichet à l'été 2025, et depuis le 1er octobre 2025 Tracfin peut adresser directement des informations à l'Agence nationale de l'habitat pour orienter ses contrôles.
+
+   E. Mieux orienter les capteurs des professionnels.
+
+      Tracfin a mené plus de 200 actions institutionnelles en 2025, permettant de rencontrer plus de 5 000 professionnels, notamment cinq ateliers thématiques réunissant 435 représentants des déclarants sur la fiscalité patrimoniale et la criminalité organisée.
+
+      Le Forum Tracfin, organisé le 7 novembre 2025 pour sa troisième édition, a réuni plus de 350 participants autour du gouverneur de la Banque de France, qui a souligné le risque de saturation du dispositif si la hausse du volume déclaratif ne s'accompagne pas d'une amélioration de la qualité des soupçons.
+
+   F. Un cadre juridique renforcé en 2025.
+
+      La loi du 13 juin 2025 visant à sortir la France du piège du narcotrafic étend le périmètre des professions assujetties, avec effet au plus tard en juillet 2027, aux marchands de biens et promoteurs immobiliers, aux vendeurs et loueurs de véhicules, navires et aéronefs privés et aux clubs de football professionnels, et permettra aux lanceurs d'alerte de saisir directement Tracfin à compter du 1er juillet 2026.
+
+      Le Conseil d'État, saisi par le Gouvernement, a rendu un avis le 23 janvier 2025 confirmant que l'obligation déclarative de l'article L. 561-15 du Code monétaire et financier porte aussi bien sur les sommes issues d'une infraction que sur les opérations portant sur ces sommes, sans se limiter aux seuls faits de blanchiment caractérisé.
+
+   G. Une coopération internationale déterminante.
+
+      L'Autorité européenne de lutte contre le blanchiment de capitaux, ou AMLA, entrée en fonction le 1er janvier 2025 avec son siège à Francfort, supervisera directement certains établissements à haut risque à compter du 1er janvier 2028 et coordonnera les cellules de renseignement financier européennes.
+
+      Tracfin a reçu 1 917 informations de cellules de renseignement étrangères en 2025, en hausse de 19 pour cent, dont 72 pour cent en provenance de l'Union européenne, et a signé un nouveau protocole de coopération avec la cellule de renseignement financier suisse, portant à 54 le nombre total d'accords conclus depuis sa création.
+
+V. CAHIER STATISTIQUE ET REPÈRES MÉTHODOLOGIQUES.
+
+   A. Rappel des grandes masses statistiques de 2025.
+
+      Le total des déclarations de soupçon des professions financières et non financières atteint 278 484 en 2025, contre 211 165 en 2024, et le nombre de droits de communication exercés par Tracfin atteint 24 109, en hausse de 22 pour cent.
+
+      Les déclarants basés en Outre-mer ont transmis près de 3 800 déclarations de soupçon en 2025, soit 1,5 pour cent du flux total, avec une progression de 25 pour cent, portée notamment par une hausse de 112 pour cent à La Réunion.
+
+   B. Les définitions clés du repère méthodologique.
+
+      Les COSI dits COSI 1 portent sur les transmissions de fonds à partir d'espèces ou de monnaie électronique dépassant 1 000 euros à l'unité ou 2 000 euros cumulés sur un mois civil pour un même client, tandis que les COSI dits COSI 2 portent sur les dépôts ou retraits d'espèces cumulés dépassant 10 000 euros sur un mois civil.
+
+      Le droit de communication est mobilisé au titre des articles L. 561-25 ou L. 561-25-1 du Code monétaire et financier, tandis que le droit d'opposition permet de reporter une opération pour une durée pouvant être prorogée jusqu'à dix jours afin de sécuriser une saisie judiciaire.
+
+POINTS D'ATTENTION.
+
+      Le secteur financier concentre 93 pour cent des déclarations de soupçon et les banques en constituent à elles seules 59 pour cent, ce qui doit rester à l'esprit pour toute analyse de la répartition du flux déclaratif.
+
+      Certaines professions assujetties restent structurellement sous-déclarantes malgré les enjeux qu'elles présentent, notamment les agents sportifs, les conseillers en investissement financier et les avocats.
+
+      La qualité formelle d'une déclaration de soupçon, longueur de l'exposé des faits, pièces jointes, identification des personnes et précision de l'infraction soupçonnée, conditionne directement son exploitation par Tracfin.
+
+      Le dispositif des circuits courts, fondé sur le droit d'opposition, constitue l'outil le plus emblématique de l'entrave rapide aux sociétés éphémères et à leurs avoirs criminels.
+
+      Le cadre juridique de la LCB-FT évolue rapidement, avec l'entrée en vigueur progressive du règlement européen AMLR, la montée en puissance de l'AMLA et l'extension continue du périmètre des professions assujetties.
+
+EXEMPLES CITÉS.
+
+      Le dispositif des circuits courts a permis de saisir 40 millions d'euros d'avoirs criminels en 2025 en ciblant 400 nouvelles sociétés éphémères.
+
+      Tracfin a signalé plus de 8 000 sociétés aux greffiers des tribunaux de commerce, dont 80 pour cent ont été radiées.
+
+      La détection de fraudes au dispositif MaPrimeRénov a conduit à la fermeture provisoire du guichet à l'été 2025.
+
+      La loi du 13 juin 2025 a créé une présomption de blanchiment pour les crypto-actifs anonymisés de type Monero ou utilisant des mixeurs.
+
+      L'Autorité européenne de lutte contre le blanchiment de capitaux, l'AMLA, a son siège à Francfort et est entrée en fonction le 1er janvier 2025.
