@@ -39,6 +39,17 @@ OUR_TO_ES_NAME = {
 }
 ES_TO_OUR_NAME = {es: ours for ours, es in OUR_TO_ES_NAME.items()}
 
+# Correction pour les boutons de face (a/b/x/y) uniquement : es_input.cfg fait
+# foi pour select/start/pageup/pagedown/hat (vérifié identique ci-dessous),
+# mais l'assignation a/b/x/y qu'EmulationStation y stocke ne correspond PAS
+# aux lettres A/B/C/D imprimées sur cette manette (ES ne teste que
+# confirmer/annuler au moment de la configuration, sans égard aux lettres
+# physiques). Mesuré bouton par bouton avec l'utilisateur via un outil pygame
+# dédié (mapping_test.py) le 19/09/2026 : A=3, B=1, C=0, D=2.
+VERIFIED_FACE_BUTTONS = {
+    '030000005e0400008e02000010010000': {'a': 3, 'b': 1, 'x': 0, 'y': 2},
+}
+
 SEMANTIC_BUTTON_IDS = {}
 if HAVE_SDL2_CONTROLLER:
     SEMANTIC_BUTTON_IDS = {
@@ -110,12 +121,20 @@ class Pad:
         except Exception:
             self.guid = None
 
-        self.es_buttons = ES_BUTTON_MAPPINGS.get(self.guid)
+        es_buttons = ES_BUTTON_MAPPINGS.get(self.guid)
+        verified_face = VERIFIED_FACE_BUTTONS.get(self.guid)
+        if verified_face:
+            es_buttons = dict(es_buttons) if es_buttons else {}
+            es_buttons.update(verified_face)
+        self.es_buttons = es_buttons or None
+
         self.controller = None
         if self.es_buttons is None and HAVE_SDL2_CONTROLLER and sdl2ctrl.is_controller(index):
             self.controller = sdl2ctrl.Controller(index)
 
-        if self.es_buttons is not None:
+        if verified_face:
+            source = 'vérifié manuellement + es_input.cfg'
+        elif self.es_buttons is not None:
             source = 'es_input.cfg'
         elif self.controller is not None:
             source = 'sdl_gamecontroller'
@@ -225,7 +244,7 @@ def init_pads(max_pads=4):
             guid = j.get_guid()
         except Exception:
             guid = 'inconnu-{}'.format(i)
-        if guid in ES_BUTTON_MAPPINGS:
+        if guid in ES_BUTTON_MAPPINGS or guid in VERIFIED_FACE_BUTTONS:
             priority = 2
         elif HAVE_SDL2_CONTROLLER and sdl2ctrl.is_controller(i):
             priority = 1
