@@ -78,6 +78,7 @@ class App:
         self.quiz_index = 0
         self.quiz_score = 0
         self.quiz_selected = 0
+        self.quiz_dpad_used = False
         self.quiz_chosen = None
         self.quiz_last_correct = None
         self.flash_cards = []
@@ -221,16 +222,28 @@ class App:
 
     def load_quiz_question(self):
         self.quiz_selected = 0
+        # Tant que la croix directionnelle n'a pas servi sur CETTE question,
+        # une lettre pressée saute directement au choix correspondant (mode
+        # rapide). Dès qu'elle a servi, le curseur qu'elle a positionné
+        # devient prioritaire : n'importe quel bouton A/B/C/D valide alors la
+        # ligne surlignée, comme partout ailleurs dans l'appli (cohérence
+        # attendue par l'utilisateur -> évite le "il fait l'inverse de ce que
+        # je vois à l'écran").
+        self.quiz_dpad_used = False
 
     def handle_quiz_ask(self, action):
         q = self.quiz_questions[self.quiz_index]
         if action in ('up', 'down'):
             n = len(q['choix'])
             self.quiz_selected = (self.quiz_selected + (1 if action == 'down' else -1)) % n
+            self.quiz_dpad_used = True
         elif action in FACE_TO_CHOICE_INDEX:
-            idx = FACE_TO_CHOICE_INDEX[action]
-            if idx < len(q['choix']):
-                self.confirm_quiz_choice(idx)
+            if self.quiz_dpad_used:
+                self.confirm_quiz_choice(self.quiz_selected)
+            else:
+                idx = FACE_TO_CHOICE_INDEX[action]
+                if idx < len(q['choix']):
+                    self.confirm_quiz_choice(idx)
         elif action == 'action':
             self.confirm_quiz_choice(self.quiz_selected)
         elif action in ('shoulder_l', 'shoulder_r', 'back'):
@@ -343,7 +356,7 @@ class App:
         ui.draw_choice_rows(self.screen, self.fonts, self.screen_w, choices_top, choices_bottom,
                              q['choix'], self.quiz_selected)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A/B/C/D', 'Répondre'), ('L1', 'Abandonner')])
+                              [('A/B/C/D', 'Répondre'), ('▲▼', 'Naviguer'), ('L1', 'Abandonner')])
 
     def draw_quiz_feedback(self):
         q = self.quiz_questions[self.quiz_index]
