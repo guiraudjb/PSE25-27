@@ -1,0 +1,55 @@
+Quel est l'événement majeur de fin 2025 mentionné par l'ANSSI concernant les infrastructures critiques européennes ?,Une série d'attaques informatiques coordonnées à visée destructive contre les infrastructures électriques polonaises.
+"Selon l'éditorial de Vincent Strubel, à quoi la France doit-elle se préparer d'ici 2030 ?",Une augmentation massive des attaques dites « hybrides » avec des effets destructeurs sur les infrastructures critiques.
+Quelle tendance l'ANSSI observe-t-elle en 2025 concernant la distinction entre les acteurs étatiques et les cybercriminels ?,"Les frontières entre ces deux types d'acteurs s'érodent, avec un partage croissant d'outils et de méthodes."
+Quels sont les deux piliers réglementaires européens mentionnés pour élever le niveau de maturité cyber de la Nation ?,La directive $NIS2$ et le $Cyber Resilience Act$ ($CRA$).
+Quelle évolution quantitative l'ANSSI a-t-elle constatée pour les événements de sécurité traités entre 2024 et 2025 ?,"Une diminution de $18 \%$ du nombre d'événements, s'expliquant par le pic exceptionnel lié aux Jeux Olympiques de 2024."
+Quelle est la différence entre un « signalement » et un « incident » selon la terminologie de l'ANSSI ?,Un incident est un événement où l'ANSSI confirme qu'un acteur malveillant a conduit des actions avec succès sur le système d'information.
+Quel secteur d'activité a été le plus touché par les incidents traités par l'ANSSI en 2025 ?,"Le secteur de l'éducation et de la recherche, représentant $34 \%$ des cas."
+Quels sont les quatre secteurs concentrant $76 \%$ des incidents en 2025 ?,"L'éducation et la recherche, les ministères et collectivités territoriales, la santé et les télécommunications."
+En quoi consiste la « triple extorsion » pratiquée par certains groupes cybercriminels ?,"Au chiffrement et à l'exfiltration de données, s'ajoutent des attaques $DDoS$ ou des pressions exercées sur les partenaires et clients de la victime."
+Quel type d'entité reste la catégorie la plus affectée par les rançongiciels en 2025 ?,"Les $PME$, $TPE$ et $ETI$ ($37 \%$ des victimes)."
+Quelle est la franchise de rançongiciel la plus populaire de l'année 2025 avec plus de 700 victimes revendiquées ?,La souche $Qilin$.
+Définition : $RaaS$ ($Ransomware-as-a-Service$),Modèle économique où un opérateur fournit des services et ressources d'attaque à des affiliés en échange d'un pourcentage des rançons.
+Pourquoi l'ANSSI déconseille-t-elle les mesures d'endiguement précipitées comme le débranchement brutal d'un centre de données ?,Cela peut entraîner l'absence de garantie de retour à l'état nominal et altérer ou supprimer les traces essentielles de l'attaque.
+Quel est l'objectif principal de l'opération de coopération internationale $ENDGAME$ ?,"Le démantèlement d'infrastructures liées à des codes cybercriminels, tels que $Lumma Stealer$ ou $Rhadamanthys$."
+Quel est le rôle d'un $IAB$ ($Initial Access Broker$) dans l'écosystème cybercriminel ?,Il agit comme un intermédiaire qui revend des accès initiaux à des systèmes compromis pour permettre des attaques ultérieures.
+Définition : $Infostealer$,"Code malveillant conçu pour collecter des informations sur le poste de travail, comme des identifiants de navigateur ou des cookies de session."
+Quel changement notable de comportement a été observé chez l'acteur réputé nord-coréen $Moonstone Sleet$ en 2025 ?,"L'utilisation de services de rançongiciel comme service ($RaaS$) traditionnellement cybercriminels, en l'occurrence $Qilin$."
+Quel mode opératoire réputé russe a ciblé l'ONG Reporters Sans Frontières ($RSF$) en mars 2025 ?,Le groupe $Callisto$ (également attribué au $FSB$).
+"Quel nouvel acteur réputé lié à la Russie, baptisé « $Laundry Bear$ », a été identifié en 2025 par les agences néerlandaises ?",Un groupe menant des attaques par pulvérisation de mots de passe contre des entités gouvernementales et militaires de l'UE et de l'OTAN.
+Quel secteur stratégique a été massivement ciblé par le groupe réputé chinois $Salt Typhoon$ aux États-Unis et en France ?,Le secteur des télécommunications.
+Quelle technique le groupe $Turla$ utilise-t-il pour cibler le personnel diplomatique à Moscou ?,"L'attaque $Adversary-in-the-middle$, facilitée par le système d'interception légale russe $SORM$."
+Quels types d'attaques le groupe $Sandworm$ (réputé lié au $GRU$) mène-t-il prioritairement contre l'Ukraine ?,Des attaques à des fins de sabotage et de destruction utilisant des codes de type $wiper$.
+Comment les groupes hacktivistes pro-russes comme $Z-Pentest Alliance$ tentent-ils de saboter des infrastructures en France ?,"En ciblant des automates industriels (eau, énergie) dont l'interface de gestion est exposée sur Internet sans protection suffisante."
+Pourquoi les attaquants utilisent-ils de plus en plus d'outils $RMM$ ($Remote Monitoring and Management$) ?,Ces outils légitimes permettent de dissimuler le trafic malveillant et de réduire le coût de maintien d'une infrastructure propre à l'attaquant.
+Terme : $LOLBins$ ($Living Off the Land Binaries$),Binaires légitimes d'un système d'exploitation détournés pour réaliser des activités malveillantes de manière furtive.
+Quel est le risque majeur lié à l'intégration d'IA générative sans cloisonnement dans un environnement professionnel ?,L'augmentation de la surface d'attaque et le risque de compromission de la confidentialité des données traitées par les modèles.
+En quoi consiste la technique de « $MFA Fatigue$ » ?,À bombarder la victime de demandes d'authentification multifactorielle jusqu'à ce qu'elle en accepte une par inadvertance ou lassitude.
+Quel groupe cybercriminel s'est distingué en 2025 par sa maîtrise avancée du $SIM-Swapping$ et de l'hameçonnage vocal ?,Le groupe $Scattered Spider$.
+Quelle est la particularité de la technique d'attaque appelée « $Clickfix$ » ?,Elle incite la victime à exécuter elle-même des commandes malveillantes (souvent via un faux captcha) pour infecter son poste.
+Pourquoi l'utilisation d'outils de sécurité offensifs publics complique-t-elle l'imputation cyber ?,"Ces outils peuvent être réutilisés par de nombreux groupes différents, rendant les marqueurs techniques moins discriminants."
+Quelle est la durée de vie moyenne estimée d'un groupe de rançongiciel en 2023 ?,$262$ jours.
+Définition : $MaaS$ ($Malware-as-a-Service$),"Vente de codes malveillants clés en main sur des forums, incluant souvent des capacités de vol de données et de déploiement de charges supplémentaires."
+Quel type de document fuit régulièrement en 2025 et permet de mieux comprendre l'organisation interne des prestataires de $LIO$ chinois ?,"Des bases de données de documents internes exposant les clients gouvernementaux, les prix des prestations et les cibles potentielles."
+Pourquoi l'ANSSI recommande-t-elle des audits de sécurité « larges » plutôt que de simples tests « $RedTeam$ » ?,Les tests $RedTeam$ sont souvent trop parcellaires et ne permettent pas une recherche exhaustive de tous les chemins de compromission possibles.
+Quel est le danger des mécanismes $MFA$ ou des bastions en cas de compromission directe du poste de l'utilisateur ?,L'attaquant peut s'injecter dans la session active et utiliser le même canal que l'utilisateur légitime sans être bloqué par ces mesures.
+Comment les autorités chinoises utilisent-elles le « $lawfare$ » pour compromettre des entreprises étrangères ?,En imposant légalement l'installation de logiciels administratifs contenant des fonctionnalités d'énumération et de surveillance du système d'information.
+Quel service de l'État français est chargé de la détection et de la caractérisation des ingérences numériques étrangères ?,$VIGINUM$.
+Comment évolue le volume annuel des publications de vulnérabilités depuis 2020 ?,Il connaît une croissance moyenne de $18 \%$ par an.
+Quel pourcentage des vulnérabilités publiées fait l'objet d'une exploitation réelle ?,Environ $6 \%$.
+Pourquoi les interfaces d'administration des équipements de sécurité ne doivent-elles jamais être exposées sur Internet ?,Elles sont des cibles de choix permettant à un attaquant d'obtenir un haut niveau de privilèges et de verrouiller l'accès aux administrateurs légitimes.
+À partir de quelle date le $Cyber Resilience Act$ imposera-t-il le signalement des vulnérabilités exploitées aux $CSIRT$ nationaux ?,À compter du 11 septembre 2026.
+Quel éditeur d'équipements $VPN$ a été particulièrement ciblé par des vulnérabilités jour-zéro exploitées par le groupe $UNC5221$ en 2025 ?,L'éditeur $Ivanti$ ($CVE-2025-0282$ et $0283$).
+Quelle solution collaborative de Microsoft a été la cible d'une vague d'exploitations massives baptisée « $toolshell$ » à l'été 2025 ?,La solution $SharePoint$.
+Quel protocole $Cisco$ non authentifié a été exploité pour compromettre plus de 50 équipements lors d'une campagne en 2025 ?,$Cisco Smart Install$ ($SMI$).
+Quel est l'objectif des attaques $XSS$ ciblant spécifiquement les clients webmail ?,"Le vol de courriels, la récupération de listes de contacts ou la mise en place de filtres de redirection frauduleux."
+Quelle plateforme de virtualisation a été visée par trois vulnérabilités critiques ($CVE-2025-22224$ à $22226$) exploitées en jour-zéro ?,$VMware ESXi$.
+Quel type d'attaques l'ANSSI observe-t-elle principalement sur les terminaux mobiles ?,Des compromissions à des fins d'espionnage menées par des acteurs étatiques via des capacités de $LIOP$ (Lutte Informatique Offensive Privée).
+Quels sont les trois principaux logiciels espions mobiles mentionnés dans les notifications de menace d'Apple ?,"$Pegasus$, $Predator$ et $Triangulation$."
+Définition : $Supply-chain attack$ (Attaque par la chaîne d'approvisionnement),"Technique consistant à compromettre un tiers (fournisseur, prestataire) pour atteindre et infecter la victime finale."
+Quel secteur industriel français a été touché par plusieurs compromissions de sous-traitants au premier semestre 2025 ?,La Base Industrielle et Technologique de Défense ($BITD$).
+Pourquoi la compromission d'un fournisseur de services $Cloud$ est-elle jugée systémique ?,Parce qu'une unique compromission peut affecter simultanément un grand nombre d'entités clientes et paralyser des services grand public.
+Quel type d'activité malveillante est fréquemment observé sur des instances cloud publiques compromises pour détourner leur puissance de calcul ?,Le minage de cryptomonnaies ($crypto-minage$).
+Pourquoi l'obtention des journaux d'activité ($logs$) est-elle souvent complexe dans les environnements $Cloud$ lors d'un incident ?,En raison du manque de contrôle direct du client final sur l'infrastructure du prestataire et des limites contractuelles de rétention.
+Quelle est la recommandation majeure de l'ANSSI concernant l'utilisation de logiciels non maîtrisés imposés par un cadre légal étranger ?,"Installer le logiciel sur un poste dédié et isolé, et surveiller étroitement ses flux d'information sortants."
+Quel est le risque réputationnel associé aux fuites de données ($leaks$) pour une entreprise ?,"La perte de confiance des usagers et partenaires, pouvant aller jusqu'à menacer la survie économique de l'entité."

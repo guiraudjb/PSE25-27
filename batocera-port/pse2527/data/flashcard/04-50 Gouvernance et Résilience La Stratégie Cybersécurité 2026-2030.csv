@@ -1,0 +1,56 @@
+Quel est l'objet de régulation principal du RGPD (Règlement Général sur la Protection des Données) ?,Le RGPD se focalise sur le traitement des données personnelles.
+Quel est l'objet de régulation principal de l'AI Act (ou RIA) ?,L'AI Act régule les systèmes d'intelligence artificielle en fonction de leur niveau de risque.
+Qui est considéré comme responsable de traitement au titre du RGPD lors de la phase de développement d'un système d'IA ?,Le fournisseur du système d'IA est généralement considéré comme responsable de traitement.
+Qui endosse la responsabilité de traitement au titre du RGPD lors du déploiement d'un système d'IA traitant des données personnelles ?,L'utilisateur du système d'IA qui traite des données personnelles endosse cette responsabilité.
+"À partir de quelle date les pratiques d'IA présentant un risque inacceptable, comme la notation sociale, sont-elles interdites par l'AI Act ?",Ces pratiques sont interdites dès le 2 février 2025.
+"Quelle entité européenne, rattachée à la Commission, assure la supervision des modèles d'IA à usage général (GPAI) ?",Le Bureau de l'IA (AI Office) assure cette supervision.
+La directive _____ remplace la directive initiale de 2016 pour répondre à l'intensification des cybermenaces.,"(UE) 2022/2555, ou NIS2"
+"Combien de secteurs d'activité la directive NIS2 couvre-t-elle, par rapport à la directive précédente ?","NIS2 couvre dix-huit secteurs d'activité, contre sept auparavant."
+Quelles sont les deux catégories d'entités régulées distinguées par la directive NIS2 ?,Les Entités Essentielles (EE) et les Entités Importantes (EI).
+"Selon NIS2, quels sont les seuils de taille pour une entreprise être considérée comme une Entité Essentielle (EE) ?",Elle doit être une grande entreprise (>250 employés ou >50M€ de chiffre d'affaires).
+Quel type de surveillance s'applique aux Entités Essentielles (EE) sous NIS2 ?,Une surveillance ex ante (audits réguliers) et ex post.
+Quel est le montant maximal des sanctions pour une Entité Essentielle (EE) en cas de non-conformité à NIS2 ?,Le maximum est de 10 millions d'euros ou 2% du chiffre d'affaires mondial.
+Quel type de surveillance s'applique aux Entités Importantes (EI) sous NIS2 ?,Une surveillance ex post (uniquement en cas de preuve de non-conformité).
+Quel est le montant maximal des sanctions pour une Entité Importante (EI) en cas de non-conformité à NIS2 ?,"Le maximum est de 7 millions d'euros ou 1,4% du chiffre d'affaires mondial."
+Quels sont les délais stricts pour la déclaration d'un incident significatif sous NIS2 ?,Un avertissement précoce sous 24 heures et une notification complète sous 72 heures.
+Quel outil l'ANSSI met-elle à disposition pour aider les entités à s'auto-évaluer par rapport à la directive NIS2 ?,"L'ANSSI met à disposition le simulateur ""MonEspaceNIS2""."
+Quel règlement européen introduit des exigences de cybersécurité pour tous les produits comportant des éléments numériques ?,Le Cyber Resilience Act (CRA).
+À partir de quand les obligations principales du Cyber Resilience Act (CRA) seront-elles applicables ?,Elles seront applicables dès décembre 2027.
+Quelle obligation le CRA impose-t-il aux fabricants concernant le cycle de vie de leurs produits ?,"Ils doivent garantir la cybersécurité des produits tout au long de leur cycle de vie, incluant des mises à jour de sécurité."
+Quel référentiel français impose aux administrations des règles strictes pour garantir la confidentialité et l'intégrité des échanges ?,Le Référentiel Général de Sécurité (RGS).
+Quel organisme supervise la qualification des produits de sécurité selon le RGS ?,L'ANSSI supervise cette qualification.
+Quel est l'objectif du Référentiel Général d'Interopérabilité (RGI) ?,Il vise à éviter les formats propriétaires et l'enfermement technologique en recommandant des standards ouverts.
+Quel est l'objectif du Référentiel Général d'Accessibilité pour les Administrations (RGAA) ?,Il vise à garantir l'inclusion numérique des personnes en situation de handicap.
+À quelle sanction s'exposent les organismes ne respectant pas les critères du RGAA ?,Ils s'exposent à des sanctions administratives pouvant atteindre 25 000 euros par an et par service.
+De quelle loi le Référentiel Général d'Écoconception de Services Numériques (RGESN) est-il le fruit ?,Il est le fruit de la loi REEN du 15 novembre 2021.
+Quel est l'objectif principal du RGESN ?,Il vise à réduire l'empreinte environnementale du numérique en proposant 79 critères d'écoconception.
+"Selon le document, quel pourcentage de l'impact carbone du numérique provient de la fabrication des équipements ?",80% de l'impact carbone provient de la fabrication des équipements.
+Quel outil permet d'évaluer la maturité environnementale des services numériques selon les principes du RGESN ?,"L'outil ""NumEcoDiag""."
+Sous l'égide de quel organisme la Stratégie nationale de cybersécurité 2026-2030 a-t-elle été élaborée ?,Elle a été élaborée sous l'égide du SGDSN.
+Quel est le pilier central de la Stratégie nationale de cybersécurité 2026-2030 ?,La réduction des dépendances technologiques critiques pour assurer la souveraineté et la maîtrise des fondements numériques.
+Quel est l'objectif de la France en matière de talents cyber selon la stratégie 2026-2030 ?,Devenir le plus grand vivier de talents cyber en Europe.
+Quelle action clé est prévue pour 2026 afin de développer le vivier de talents cyber en France ?,La création d'une plateforme nationale unique d'orientation et de formation.
+Quelle action clé est prévue pour 2027 afin d'améliorer la résilience de la nation face aux cyberattaques ?,La généralisation des exercices de crise cyber à tous les secteurs.
+Quelle est l'ambition de la France concernant les technologies de cloud et de chiffrement d'ici 2030 ?,Réaliser un investissement massif dans le cloud souverain et le chiffrement post-quantique.
+Sous l'autorité de qui le Secrétariat général de la défense et de la sécurité nationale (SGDSN) est-il placé ?,Le SGDSN est placé sous l'autorité du Premier ministre.
+Quel est le rôle principal du SGDSN en cas de crise majeure ?,Il assure le secrétariat des conseils de défense et coordonne l'action interministérielle.
+"Quel service spécialisé, supervisé par le SGDSN, est chargé de la vigilance contre les ingérences numériques étrangères ?",VIGINUM.
+À quel organisme l'Agence nationale de la sécurité des systèmes d'information (ANSSI) est-elle rattachée ?,L'ANSSI est rattachée au SGDSN.
+"Quelle est la mission de ""Défense et Réaction"" de l'ANSSI ?",Détecter les attaques informatiques et piloter la réaction pour les administrations et les entités critiques.
+"Quelle est la mission de ""Régulation et Qualification"" de l'ANSSI ?","Gérer les visas de sécurité (SecNumCloud, PASSI) et superviser l'application de NIS2."
+Acronyme : OSIIC,Définition : Opérateur des Systèmes d'Information Interministériels Classifiés.
+Quelle est la mission principale de l'OSIIC ?,Garantir les communications sécurisées des plus hautes autorités de l'État en tout temps et en tout lieu.
+Citez un réseau classifié interministériel déployé et administré par l'OSIIC.,"ISIS, HORUS ou OSIRIS."
+"Quel label, délivré par l'ANSSI, représente le plus haut niveau d'exigence pour les services cloud ?",Le label SecNumCloud.
+Quelle mesure cruciale pour la souveraineté a été introduite dans la version 3.2 du référentiel SecNumCloud ?,L'immunité face aux lois extraterritoriales (comme le Cloud Act).
+"Dans le contexte de SecNumCloud, que permet le ""principe de composition"" ?",Il permet à des éditeurs de logiciels de s'appuyer sur des infrastructures déjà qualifiées pour accélérer leur propre certification.
+Quelle est l'estimation du surcoût d'exploitation d'une infrastructure qualifiée SecNumCloud ?,Le surcoût est estimé entre 25 % et 40 % par rapport au cloud traditionnel.
+"À partir de 2026, quelle obligation pèse sur chaque ministère concernant ses données sensibles ?",Chaque ministère devra cartographier ses données sensibles pour garantir leur hébergement exclusif sur des solutions qualifiées SecNumCloud.
+"Dans la méthodologie d'un Plan de Reprise d'Activité (PRA), que signifie l'acronyme BIA ?","BIA signifie Business Impact Analysis, soit l'identification des processus métiers critiques."
+"Dans la méthodologie d'un PRA, que signifie l'acronyme PRI ?","PRI signifie Plan de Reprise Informatique, qui contient les procédures techniques de restauration."
+Quel est l'objectif d'une clause de réversibilité dans un contrat de service numérique ?,Elle garantit que l'entité peut récupérer l'intégralité de ses données et changer de prestataire sans rupture de service.
+Quel est l'objectif de la Mesure 9 du Plan national de lutte contre la corruption 2025-2029 ?,Identifier et sécuriser les fichiers de l'État les plus exposés aux risques de consultation ou divulgation indue liés à la corruption.
+"Dans le plan anticorruption, que désigne le terme ""criblage"" (Mesure 12) ?",La vérification du comportement ou du passé pénal des agents occupant des fonctions sensibles.
+Quelle garantie offre la plateforme de signalement anonyme centralisée (Mesure 13) du plan anticorruption ?,Elle garantit la confidentialité absolue de l'identité des lanceurs d'alerte.
+Quelle agence française encourage l'utilisation de l'IA pour la détection des signaux faibles de corruption ?,L'Agence française anticorruption (AFA).
+Quel nouveau parquet national a été créé pour collaborer avec le PNF dans la répression de la criminalité organisée ?,Le Parquet national anticriminalité organisée (Pnaco).

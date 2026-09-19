@@ -1,0 +1,52 @@
+Où les programmes et leurs données doivent-ils être chargés avant l'exécution par le CPU ?,En mémoire centrale (RAM).
+Quel composant du noyau charge le binaire exécutable en mémoire et initialise l'état du processus ?,Le chargeur (loader).
+Les exécutables utilisent principalement des adresses symboliques ou _____.,relatives
+À quel moment précis les adresses physiques exactes d'un programme sont-elles déterminées ?,Au moment du chargement.
+La translation d'adresses par le chargeur est une méthode logicielle qualifiée de _____.,coûteuse
+Quel matériel spécialisé réalise la translation d'adresses dans les systèmes d'exploitation actuels ?,La MMU (Memory Management Unit).
+Citez l'une des quatre missions principales du gestionnaire de mémoire.,Allouer la mémoire aux processus.
+Comment appelle-t-on le mécanisme de gestion de l'échange entre la RAM et le disque lors d'une saturation ?,Le swap.
+Quelles sont les deux zones globales de division de la RAM dans les OS actuels ?,La zone noyau et la zone utilisateur.
+Quel mode d'exécution permet un accès direct aux périphériques et aux ports d'E/S ?,Le mode noyau (mode privilégié).
+Par quel biais les programmes utilisateur accèdent-ils indirectement au matériel ?,Les appels système.
+Quel phénomène provoque le passage temporaire du mode utilisateur au mode noyau lors d'un appel système ?,Une interruption logicielle.
+Quel est l'objectif principal de la restriction du mode utilisateur ?,Garantir l'isolation des processus et la sécurité globale du système.
+Dans quel type de partitionnement les zones sont-elles définies dès le démarrage du système ?,Le partitionnement en partitions fixes.
+Comment appelle-t-on le gaspillage de mémoire lorsqu'une partition n'est que partiellement utilisée ?,La fragmentation interne.
+Quel type de partitionnement adapte la taille des zones aux besoins réels des processus ?,Le partitionnement en partitions variables.
+La technique consistant à déplacer des blocs mémoire pour optimiser l'espace libre est la _____.,compaction
+Quelle illusion la mémoire virtuelle donne-t-elle à chaque processus ?,L'illusion d'un espace d'adressage continu et plus grand que la RAM physique.
+"Dans un système à mémoire virtuelle, le transfert RAM $\leftrightarrow$ disque est géré par _____.",le système (automatiquement)
+Quel outil logiciel assure la correspondance entre adresses virtuelles et physiques ?,La table des pages.
+Quels sont les trois types de protection fine permis par la mémoire virtuelle ?,"Lecture, écriture et exécution."
+Comment appelle-t-on les unités de découpage de taille égale dans l'espace virtuel ?,Les pages.
+Comment appelle-t-on les unités de découpage de la mémoire réelle (physique) ?,Les cadres (frames).
+Quelle est la taille standard d'une page mentionnée dans le document ?,$4$ Ko
+Vrai ou Faux : Toutes les pages d'un processus doivent être en RAM pour que l'exécution commence.,Faux.
+Quel composant sert de cache rapide pour les dernières traductions d'adresses ?,Le TLB (Translation Lookaside Buffer).
+Qu'est-ce qu'un 'page fault' ?,Une interruption déclenchée lorsqu'une page demandée n'est pas présente en RAM.
+Quel algorithme de remplacement de pages expulse systématiquement la page la plus ancienne ?,L'algorithme FIFO.
+Sur quel critère l'algorithme LRU se base-t-il pour remplacer une page ?,La récence d'utilisation.
+Quelle est la fonction du 'dirty bit' (bit de modification) lors du remplacement de page ?,Indiquer si la page a été modifiée depuis son chargement.
+L'algorithme LFU sélectionne les pages à sortir en fonction de leur _____ d'utilisation.,fréquence
+Quel est l'objectif final des algorithmes de remplacement de pages ?,Libérer de la RAM sans multiplier les défauts de page.
+La segmentation découpe l'espace mémoire d'un processus en zones _____.,logiques
+Citez deux exemples de segments logiques d'un processus.,Le segment code et le segment pile.
+Quelles sont les trois caractéristiques essentielles de chaque segment ?,"Une adresse de base, une taille et un numéro de segment."
+Quel avantage de la segmentation permet d'utiliser des ressources communes comme les bibliothèques ?,Le partage possible des segments.
+"Vrai ou Faux : Dans la segmentation, une modification d'un segment affecte directement les autres segments du processus.",Faux.
+Quelle architecture matérielle est connue pour combiner segmentation et pagination ?,L'architecture x86.
+"Dans un système combiné, quelle opération de division est effectuée en premier sur l'espace du processus ?",La segmentation.
+Quels sont les trois composants d'une adresse complète dans un système combiné ?,"Le numéro de segment, le numéro de page et l'offset (décalage)."
+Quel est l'avantage principal de la combinaison segmentation / pagination ?,"Apporter flexibilité, protection et efficacité."
+Terme : Mémoire centrale (RAM),"Définition : Espace de travail du processeur, rapide mais volatile."
+Terme : Swap (fichier d'échange),Définition : Espace disque réservé aux pages déplacées hors de la RAM.
+Quelle unité matérielle est spécifiquement chargée de la protection fine de la mémoire ?,La MMU.
+Dans quel mode le système peut-il modifier les tables de segments ou de pages ?,Le mode noyau.
+À quoi sert le bit de référence dans la gestion des pages ?,À savoir si la page a été consultée récemment pour aider les algorithmes de remplacement.
+Quel type de partitionnement nécessite parfois une 'compaction' ?,Le partitionnement en partitions variables.
+Comment appelle-t-on l'adresse de début d'un segment ?,L'adresse de base.
+"Le chargeur prépare trois zones principales pour le processus : les segments, les données et la _____.",pile
+Vrai ou Faux : La pagination utilise des blocs de taille fixe.,Vrai.
+Vrai ou Faux : La segmentation utilise des blocs de taille fixe.,Faux (taille variable).
+Quel type de mémoire est considéré comme le 'socle indispensable' pour comprendre les OS modernes ?,La gestion de la mémoire par le noyau.

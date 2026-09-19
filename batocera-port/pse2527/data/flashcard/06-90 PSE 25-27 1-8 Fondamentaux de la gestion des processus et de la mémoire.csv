@@ -1,0 +1,59 @@
+Qu'est-ce qu'un processus selon le système d'exploitation ?,"Une entité dynamique gérée par le système d'exploitation, qui englobe le code exécutable et l'ensemble des ressources nécessaires à son fonctionnement."
+"Quelles ressources un processus englobe-t-il, en plus de son code exécutable ?","Un espace d'adressage en mémoire vive, des variables, des constantes, et une pile d'exécution."
+Quel est le principal avantage de l'espace mémoire dédié qui isole un processus des autres ?,Il garantit que ses données ne soient pas corrompues ou accessibles sans autorisation.
+Quelle est la différence fondamentale entre un processus lourd et un processus léger (thread) ?,"Un processus lourd a son propre espace mémoire indépendant, tandis que les threads partagent le même espace d'adressage au sein d'un processus parent."
+Pourquoi les threads sont-ils souvent privilégiés pour les tâches nécessitant une exécution concurrentielle ?,Parce qu'ils sont plus légers et plus rapides à créer ou à détruire que les processus lourds.
+Quel risque majeur le partage de mémoire entre threads impose-t-il ?,"Le risque de conflits, comme lorsque deux threads tentent de modifier la même variable simultanément (conditions de course)."
+Qu'est-ce que le contexte d'exécution d'un processus ?,"L'ensemble des informations nécessaires pour interrompre et reprendre son exécution de manière transparente, incluant l'état des registres et les descripteurs de fichiers."
+Comment les systèmes d'exploitation modernes créent-ils une illusion de simultanéité avec un seul processeur ?,"En utilisant le multi-tâche et le temps partagé, où le processeur alloue de très courtes tranches de temps à chaque processus."
+Quel est l'un des rôles principaux du système d'exploitation dans la gestion des processus ?,"Assurer une allocation équitable et efficace des ressources (mémoire, temps processeur, E/S)."
+Pourquoi l'isolation des processus est-elle cruciale pour la stabilité et la sécurité du système ?,Elle empêche qu'une défaillance ou une attaque dans une application ne compromette l'ensemble du système.
+À quoi servent les mécanismes de communication inter-processus (IPC) ?,"Ils permettent aux processus de collaborer, d'échanger des données et de synchroniser leurs actions tout en maintenant leur indépendance."
+Citez trois exemples de mécanismes de communication inter-processus (IPC).,"Les tubes (pipes), les sockets et la mémoire partagée."
+"Pour éviter les problèmes de concurrence entre threads, les développeurs doivent utiliser des mécanismes de _____, comme les verrous (mutex) ou les sémaphores.",synchronisation
+"Quel est le rôle du gestionnaire de tâches, ou 'scheduler' ?","Il décide quel processus doit s'exécuter à un instant donné et pour combien de temps, en optimisant les performances globales du système."
+Quelle est la différence entre l'ordonnanceur de haut niveau (Long Term) et l'ordonnanceur de bas niveau (Short Term) ?,"L'ordonnanceur de haut niveau gère l'admission des processus en mémoire, tandis que celui de bas niveau gère la commutation de contexte entre les processus prêts."
+Définition : Commutation de contexte,Le mécanisme qui permet de sauvegarder l'état d'un processus interrompu et de restaurer celui du processus suivant pour l'exécution.
+Quel est le principal inconvénient de la commutation de contexte ?,"Elle a un coût en temps CPU (overhead), qui peut devenir problématique si le système bascule trop fréquemment entre les processus."
+"Dans la multiprogrammation non préemptive, quand un processus abandonne-t-il le contrôle du processeur ?","Uniquement lorsqu'il se termine ou qu'il se bloque volontairement (par exemple, en attendant une entrée/sortie)."
+Quel est le principal défaut de la multiprogrammation non préemptive ?,Un processus mal conçu ou trop long peut monopoliser le CPU et bloquer les autres tâches.
+Comment fonctionne la multiprogrammation préemptive ?,"Le système d'exploitation peut interrompre un processus à tout moment, généralement après l'expiration d'un quantum de temps, pour allouer le CPU à un autre processus."
+Quels sont les trois états principaux d'un processus dans un système préemptif ?,"Élu (en cours d'exécution), Prêt (en attente du CPU), et Bloqué (en attente d'une ressource)."
+Quel est le principal enjeu de l'ordonnancement sur les processeurs multi-cœurs ?,"Tirer parti du parallélisme réel en répartissant efficacement les tâches sur les différents cœurs, tout en gérant les ressources partagées."
+Concept : Affinité CPU (CPU affinity),La tendance de certains processus à mieux performer sur un cœur spécifique en raison de la localisation de leurs données dans les caches de ce cœur.
+Qu'est-ce que le Process Control Block (PCB) ?,"Une structure de données qui agit comme une carte d'identité pour chaque processus, stockant toutes les informations nécessaires à sa gestion par le système d'exploitation."
+Citez trois types d'informations stockées dans un PCB.,"L'état actuel du processus (élu, prêt, bloqué), les valeurs des registres du processeur, et les droits d'accès aux ressources."
+"Quel est le principe de l'algorithme d'ordonnancement FIFO (First In, First Out) ?","Il traite les processus dans l'ordre strict de leur arrivée, sans tenir compte de leur durée ou de leur priorité."
+Quel est le principal inconvénient de l'algorithme FIFO ?,Un processus long en tête de file peut retarder indéfiniment l'exécution de tâches courtes et critiques.
+Quel est l'objectif de l'algorithme SJF (Shortest Job First) ?,Minimiser le temps d'attente moyen en donnant la priorité aux processus dont l'exécution est la plus courte.
+L'algorithme SJF et sa variante préemptive SRTF introduisent un risque de _____ pour les processus longs.,famine
+Comment fonctionne l'algorithme Round-Robin (tourniquet) ?,"Il alloue à chaque processus un quantum de temps fixe avant de passer au suivant, garantissant un accès régulier au processeur pour toutes les tâches."
+Quel risque présente l'algorithme HPF (Highest Priority First) ?,Un risque de famine pour les processus de faible priorité si des tâches prioritaires arrivent continuellement.
+Qu'est-ce que le mécanisme de vieillissement (aging) utilisé pour atténuer la famine dans les algorithmes à priorité ?,Un mécanisme où la priorité des processus en attente est progressivement augmentée au fil du temps.
+Comment l'algorithme HRN (Highest Ratio Next) améliore-t-il l'algorithme SJF ?,"Il prend en compte non seulement la durée estimée du processus mais aussi son temps d'attente, réduisant ainsi les risques de famine."
+Quel est le principe de l'algorithme MLF (Multi-Level Feedback Queue) ?,"Il utilise plusieurs files de priorité, chacune avec sa propre politique, et rétrograde les processus qui consomment trop de temps CPU vers des files de priorité inférieure."
+Comment l'algorithme CFS (Completely Fair Scheduler) de Linux assure-t-il l'équité ?,"Il utilise un modèle basé sur des parts proportionnelles où chaque processus reçoit une fraction du temps CPU en fonction de son poids, éliminant ainsi les quanta de temps fixes."
+Qu'est-ce qu'une condition de course (race condition) ?,Un conflit qui survient lorsque plusieurs processus ou threads tentent d'accéder ou de modifier simultanément une même ressource partagée.
+Qu'est-ce qu'un interblocage (deadlock) ?,"Une situation où deux ou plusieurs processus se retrouvent bloqués indéfiniment, chacun attendant une ressource détenue par un autre."
+Quelles sont les quatre conditions de Coffman nécessaires à un interblocage ?,"Exclusion mutuelle, attente circulaire, non-préemption, et attente active."
+À quoi sert un mutex (verrou) ?,"Il agit comme un cadenas pour protéger une section critique, garantissant qu'un seul processus ou thread peut y accéder à la fois."
+Comment un sémaphore gère-t-il l'accès aux ressources ?,"Il utilise un compteur pour limiter l'accès à un nombre fixe de ressources, avec les opérations P (attendre) et V (signaler)."
+"Dans le problème du producteur/consommateur, comment les sémaphores empêchent-ils les erreurs ?","Un sémaphore compte les places vides pour bloquer le producteur si le tampon est plein, et un autre compte les éléments pleins pour bloquer le consommateur si le tampon est vide."
+Que modélise le problème du 'dîner des philosophes' ?,Les défis de l'allocation des ressources et les risques d'interblocage dans les systèmes concurrents.
+Comment l'instauration d'une hiérarchie des ressources (numérotation des fourchettes) résout-elle le dîner des philosophes ?,"Elle brise la condition d'attente circulaire en obligeant chaque philosophe à saisir les fourchettes dans un ordre prédéfini, ce qui empêche les blocages mutuels."
+Quelle est la distinction fondamentale entre le mode noyau et le mode utilisateur en gestion de la mémoire ?,"En mode noyau, le SE a un accès illimité à la mémoire et au matériel, tandis qu'en mode utilisateur, les applications ont un accès restreint à leur propre espace mémoire."
+Qu'est-ce que la pagination en gestion de la mémoire ?,Une technique qui divise la mémoire virtuelle et la mémoire physique en blocs de taille fixe appelés 'pages'.
+Quel est le but principal de la mémoire virtuelle ?,"Donner à chaque processus l'illusion qu'il dispose de sa propre mémoire contiguë et illimitée, alors que la RAM physique est partagée."
+Quel est le rôle de l'unité de gestion de mémoire (MMU) ?,"Traduire les adresses virtuelles utilisées par les processus en adresses physiques réelles dans la RAM, à l'aide des tables de pages."
+Quand un défaut de page (page fault) est-il déclenché ?,Lorsqu'un processus tente d'accéder à une page qui n'est pas actuellement présente en mémoire vive (RAM).
+Quel est le principe de l'algorithme de remplacement de pages LRU (Least Recently Used) ?,Il décharge de la RAM les pages qui n'ont pas été utilisées depuis le plus longtemps.
+Qu'est-ce que la segmentation en gestion de la mémoire ?,"Une technique qui découpe l'espace d'adressage d'un processus en segments logiques de taille variable (code, données, pile)."
+Comment la segmentation facilite-t-elle la protection de la mémoire ?,"Elle permet d'attribuer des droits d'accès spécifiques (lecture, écriture, exécution) à chaque segment logique."
+Quel est le principal avantage de combiner la segmentation et la pagination ?,Cela offre une gestion de la mémoire à la fois flexible (structure logique des segments) et efficace (gestion physique par pages fixes).
+Les processus légers sont plus communément appelés _____.,threads
+La méthode où un processeur alloue des tranches de temps très courtes à chaque processus est appelée le _____.,temps partagé (time-sharing)
+"L'ordonnanceur de bas niveau est responsable de la _____, un mécanisme clé qui permet de basculer rapidement d'un processus à un autre.",commutation de contexte
+Terminologie : Le temps alloué à un processus dans un algorithme comme Round-Robin s'appelle un _____.,quantum de temps
+"Dans le contexte des interblocages, que signifie la condition d'attente circulaire ?",Chaque processus dans un groupe attend une ressource qui est détenue par un autre processus du même groupe.
+"Les _____ permettent une communication unidirectionnelle entre processus apparentés, comme un parent et son enfant.",tubes (pipes)
+"Quelle technique de gestion mémoire reflète la structure naturelle des programmes en découpant la mémoire en blocs logiques comme le code, les données et la pile ?",La segmentation

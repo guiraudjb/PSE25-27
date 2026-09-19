@@ -1,0 +1,80 @@
+Quel est l'objectif principal de l'utilisation des VLANs (Virtual LAN) ?,Isoler les domaines de diffusion (broadcast) et segmenter logiquement le réseau physique.
+"Selon le standard 802.1Q, quelle est la taille du tag inséré dans l'en-tête Ethernet ?",4 octets.
+"Dans un environnement VLAN, quel type de port enlève le tag 802.1Q avant de délivrer la trame au poste final ?",Le port Access.
+Quel protocole de couche 2 permet d'éviter les tempêtes de diffusion (Broadcast Storms) ?,STP (Spanning Tree Protocol).
+Quelles unités de données les commutateurs s'échangent-ils pour élire un Root Bridge dans STP ?,Les BPDU (Bridge Protocol Data Units).
+Quel est l'avantage principal du protocole LACP (802.3ad) par rapport à un lien physique unique ?,Augmenter la bande passante et assurer la haute disponibilité par agrégation de liens.
+Quels protocoles permettent de cartographier dynamiquement les voisins directement connectés à un équipement ?,LLDP (standard) et CDP (Cisco).
+Pourquoi le Spanning Tree est-il considéré comme inefficace dans les grands Datacenters modernes ?,Il bloque la moitié des liens physiques et gère mal la mobilité fluide des machines virtuelles.
+"Dans une architecture moderne, quel protocole est généralement utilisé comme plan de contrôle pour VXLAN ?",BGP EVPN.
+Comment VXLAN permet-il d'utiliser tous les chemins physiques disponibles (ECMP) ?,En encapsulant les trames de couche 2 dans des paquets IP de couche 3.
+Quel protocole résout les adresses IP en adresses MAC en IPv4 ?,ARP (Address Resolution Protocol).
+Quel mécanisme remplace ARP en IPv6 pour la découverte des voisins ?,NDP (Neighbor Discovery Protocol) via des messages Multicast ICMPv6.
+Quel est le rôle des protocoles FHRP tels que HSRP ou VRRP ?,Fournir une passerelle par défaut (Gateway) redondante aux hôtes d'un réseau.
+"Dans un groupe FHRP, que se passe-t-il si le routeur 'Standby' ne reçoit plus les 'Keepalives' du maître ?",Il prend instantanément le relais et devient le routeur actif.
+Quel algorithme mathématique OSPF utilise-t-il pour déterminer le chemin optimal ?,L'algorithme SPF de Dijkstra.
+Sur quoi se base le calcul du 'coût' d'une route dans le protocole OSPF ?,La bande passante de l'interface.
+Comment appelle-t-on la base de données contenant la carte complète du réseau dans OSPF ?,La LSDB (Link-State Database).
+Pourquoi BGP est-il classé comme un protocole 'Path-Vector' ?,Il utilise une liste de systèmes autonomes (AS-Path) pour déterminer le chemin vers une destination.
+Sur quel port et quel protocole de transport les sessions BGP s'appuient-elles ?,Le port TCP 179.
+"Dans une architecture Spine-Leaf de Datacenter, pourquoi utilise-t-on 'eBGP' plutôt qu'OSPF ?",Pour limiter les domaines de pannes et garantir une stabilité massive à grande échelle.
+Quel acronyme décrit le processus d'attribution d'adresse IP par un serveur DHCP ?,"DORA (Discover, Offer, Request, Ack)."
+Quels sont les ports UDP utilisés par le service DHCP ?,Les ports 67 (serveur) et 68 (client).
+Quel est le rôle principal du DNS (Domain Name System) ?,Résoudre des noms de domaines lisibles par l'homme en adresses IP.
+Quelle technique MPLS permet d'accélérer la commutation en évitant l'analyse complète de l'en-tête IP ?,L'ajout d'une étiquette (Label) entre la couche 2 et la couche 3.
+"Dans un réseau MPLS, quelle est la fonction du routeur P (Provider) ?",Commuter les paquets rapidement en lisant uniquement l'étiquette (Label).
+Quelle suite de protocoles est utilisée pour chiffrer et authentifier les communications VPN sur Internet ?,IPsec (Internet Protocol Security).
+Quelle est la fonction du NAT (Network Address Translation) ?,Traduire les adresses IP privées en adresses publiques pour économiser l'espace IPv4.
+"Dans le modèle SD-WAN, quel plan est séparé du plan de données pour être centralisé ?",Le plan de contrôle (Control Plane).
+Comment définit-on l'Underlay dans une architecture SD-WAN ?,"Il s'agit du transport physique sous-jacent (Internet, MPLS, 4G/5G)."
+Quel est l'intérêt d'utiliser l'Overlay dans un réseau moderne ?,Créer des réseaux virtuels sécurisés et indépendants du transport physique.
+À quoi servent les mécanismes de QoS (Quality of Service) ?,"Prioriser, limiter ou garantir le traitement de certains flux critiques lors d'une congestion."
+Où se situe le marquage DSCP (Differentiated Services Code Point) ?,Dans l'en-tête du paquet IP (Couche 3).
+Quel type de file d'attente (Queuing) est utilisé pour garantir une latence minimale à la voix sur IP ?,La LLQ (Low Latency Queuing).
+Différence : Policing vs Shaping,"Le Policing détruit brutalement l'excès de trafic, tandis que le Shaping le lisse en le mettant en mémoire tampon."
+Quel protocole historique de QoS tentait de réserver la bande passante de bout en bout avant l'envoi ?,IntServ (avec le protocole RSVP).
+Quel standard de management permet de récupérer des alertes textuelles 'poussées' par l'équipement ?,Le Syslog.
+Quelle est la différence majeure entre le polling SNMP et la Streaming Telemetry ?,"SNMP interroge périodiquement (lent), alors que la télémétrie 'pousse' les données en temps réel."
+Quel langage de modélisation de données est utilisé avec NETCONF et RESTCONF ?,YANG (Yet Another Next Generation).
+Qu'est-ce que le 'Duplex Mismatch' et quelle est sa conséquence ?,Une discordance de mode (Full vs Half) causant des collisions tardives (Late Collisions) et des erreurs CRC.
+Pourquoi une incohérence de MTU (Maximum Transmission Unit) bloque-t-elle OSPF ?,L'échange de la base de données (LSDB) échoue car les paquets trop gros sont rejetés par le voisin.
+Qu'est-ce que la CAM Table (ou Table MAC) ?,La base de données d'un commutateur associant les adresses MAC aux ports physiques.
+Quelle table contient toutes les routes apprises par un routeur avant sélection de la meilleure ?,La RIB (Routing Information Base).
+À quoi sert la FIB (Forwarding Information Base) ?,C'est une copie optimisée de la table de routage programmée dans le matériel (ASIC) pour accélérer le transfert.
+Quel composant matériel du routeur est responsable du 'Data Plane' ?,L'ASIC (Application-Specific Integrated Circuit).
+Que signifie un état 'Incomplete' dans une table ARP ?,La requête ARP a été envoyée mais aucune réponse n'a été reçue (cible éteinte ou isolée).
+Quel phénomène se produit lorsque deux routeurs HSRP deviennent 'Active' en même temps ?,Un conflit d'IP (Split-brain L2) suite à une rupture de communication des keepalives.
+Quelle est la cause principale d'un rejet de paquet par un pare-feu dans un routage asymétrique ?,Le pare-feu n'a pas vu le début de la session (TCP SYN) et rejette le paquet retour (Stateful Drop).
+Qu'est-ce qu'un 'Trou Noir MTU' (PMTUD Blackhole) ?,La destruction silencieuse de gros paquets car un message ICMP 'Fragmentation Needed' est bloqué par un pare-feu.
+Quelle technique Wireshark permet de copier le trafic d'un port distant à travers un tunnel ?,L'ERSPAN (Encapsulated Remote SPAN).
+"Dans Wireshark, quel filtre permet d'identifier les paquets perdus ou la congestion réseau ?",tcp.analysis.retransmission
+Quel type de message ICMP indique quel routeur a décidé de détruire un paquet ?,Destination Unreachable (ICMP type 3).
+"Dans OSPF, quel est l'identifiant unique d'un routeur dans le réseau ?",Le Router ID.
+Sur quelle adresse multicast OSPF envoie-t-il ses paquets Hello par défaut ?,224.0.0.5
+Quel rôle est élu dans un réseau OSPF multi-accès pour centraliser les échanges de LSA ?,Le DR (Designated Router).
+Pourquoi découpe-t-on un réseau OSPF en Aires (Areas) ?,Pour limiter la taille de la LSDB et réduire la fréquence des calculs SPF.
+Comment appelle-t-on un routeur situé à la frontière entre l'Area 0 et une autre aire OSPF ?,Un ABR (Area Border Router).
+Quelle est la fonction du 'DHCP Snooping' ?,Empêcher les serveurs DHCP non autorisés de répondre aux clients.
+Quel mécanisme de sécurité de couche 2 s'appuie sur la table de liaison DHCP pour valider les paquets ARP ?,DAI (Dynamic ARP Inspection).
+"Dans la 'Charnière' réseau, que se passe-t-il si ARP ne fonctionne pas ?",Le niveau 3 (IP) reste bloqué en mémoire car il ne peut pas forger la trame de couche 2.
+Quel champ est utilisé pour la priorité QoS au niveau de la couche 2 (802.1Q) ?,Le champ CoS (Class of Service / 802.1p).
+Quel est le format de données structuré typiquement poussé par gRPC en télémétrie ?,JSON ou Protobuf.
+Pourquoi le Router ID OSPF est-il souvent configuré sur une interface Loopback ?,Parce qu'une interface Loopback est virtuelle et ne tombe jamais physiquement.
+Quelle commande permet de vérifier la puissance optique d'un transceiver (Rx/Tx) ?,DOM/DDM (Digital Optical Monitoring).
+Quel est l'état OSPF final indiquant qu'une adjacence complète est établie ?,L'état FULL.
+"Dans BGP, à quoi sert l'attribut AS-Path ?",À lister les systèmes autonomes traversés et à éviter les boucles de routage.
+Qu'est-ce qu'une VRF (Virtual Routing and Forwarding) ?,Un mécanisme permettant d'avoir plusieurs tables de routage indépendantes sur un même routeur.
+Quel est le bénéfice principal du SD-WAN pour une entreprise utilisant le Cloud ?,Orienter dynamiquement le trafic applicatif vers le meilleur lien (Internet ou MPLS) en temps réel.
+Quel protocole de couche 2.5 est utilisé pour annoncer ses propres capacités aux voisins ?,LLDP (Link Layer Discovery Protocol).
+"Dans le processus DORA, quel message est envoyé par le serveur pour confirmer l'attribution de l'IP ?",DHCP ACK.
+Quelle est la fonction du protocole ESP dans IPsec ?,Chiffrer le contenu des paquets IP pour assurer la confidentialité.
+Quel type d'architecture réseau utilise des rôles nommés 'Spine' et 'Leaf' ?,L'architecture Datacenter moderne (Clos Fabric).
+"Dans Wireshark, quel filtre permet d'isoler uniquement les requêtes ARP ?",arp
+Pourquoi le 'Shaping' est-il préférable au 'Policing' vers un lien opérateur ?,Pour éviter que l'opérateur ne détruise les paquets en lissant le débit sous le contrat souscrit.
+Quelle est la principale différence entre RSTP et STP ?,La vitesse de convergence (RSTP est beaucoup plus rapide).
+Quel protocole de management utilise le modèle 'Pull' (interrogation par le serveur) ?,SNMP.
+Quel est le rôle du 'Control Plane' dans un routeur ?,"C'est le 'cerveau' qui calcule les routes et gère les protocoles (OSPF, BGP)."
+Que signifie l'acronyme LSA dans le contexte d'OSPF ?,Link-State Advertisement.
+"Dans un réseau VXLAN, qu'est-ce qu'un VTEP ?",Le point de terminaison du tunnel qui effectue l'encapsulation et la désencapsulation.
+Quel est le but de la classification et du marquage en QoS ?,Identifier le trafic dès l'entrée du réseau pour lui appliquer un traitement spécifique ultérieur.
+Quelle technologie permet de simuler un niveau 2 géant sur une infrastructure de niveau 3 ?,VXLAN.

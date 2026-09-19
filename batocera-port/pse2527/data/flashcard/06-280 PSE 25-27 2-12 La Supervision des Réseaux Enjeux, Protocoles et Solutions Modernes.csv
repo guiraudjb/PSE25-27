@@ -1,0 +1,50 @@
+Quels sont les deux niveaux d'hétérogénéité qui complexifient les réseaux modernes ?,"Les protocoles de transport (TCP/IP, UDP, etc.) et les infrastructures physiques (câblage, cloud, etc.)."
+"Face à l'hétérogénéité des réseaux, quel est l'un des enjeux majeurs de la supervision ?","Offrir une solution unique pour la gestion centralisée, indépendamment des contraintes physiques et techniques."
+Pourquoi l'automatisation du traitement de l'information est-elle essentielle en supervision réseau ?,Car il est impossible pour les administrateurs de surveiller manuellement toutes les informations remontées en raison de la taille et de la criticité des réseaux.
+Citez deux fonctions permises par l'automatisation en supervision réseau.,"La collecte et l'analyse des données en temps réel, et la génération de statistiques et de rapports."
+Quel est l'objectif principal de la supervision en termes de continuité de service ?,Permettre une détection proactive des anomalies et une réaction rapide pour maintenir la Qualité de Service (QoS).
+Quelle est la définition de la supervision réseau (monitoring) ?,"Un ensemble de protocoles, matériels et logiciels visant à contrôler la santé du réseau et à garantir la Qualité de Service (QoS)."
+"Quelle fonction de la supervision consiste à vérifier l'état des serveurs, routeurs et switchs en continu ?",La surveillance en temps réel.
+"En supervision, la fonction de _____ et _____ permet l'identification des équipements connectés et la mise à jour dynamique de la topologie.",cartographie et inventaire du réseau
+Quelle fonction de la supervision est responsable de l'identification des pannes et du diagnostic des causes racines ?,La détection et la gestion des incidents.
+Citez deux métriques clés analysées pour l'optimisation des performances réseau.,Le temps de réponse des applications et le taux d'occupation des liens réseau.
+À quoi sert la fonction de 'Gestion des configurations et des changements' en supervision ?,À suivre les modifications apportées aux équipements et à maintenir un historique pour les audits.
+"Dans le cadre de la sécurité, que permet de détecter la supervision ?",Les tentatives d'intrusion ou les comportements anormaux comme le trafic suspect.
+À quoi sert la fonction d'historisation et d'analyse des données de supervision ?,"À établir des tendances, faciliter les analyses post-incident et générer des rapports."
+Quel est le protocole standard historique pour la supervision des réseaux TCP/IP ?,Le protocole SNMP (Simple Network Management Protocol).
+Quelle version de SNMP apporte des améliorations en termes de sécurité comme le chiffrement et l'authentification ?,SNMPv3.
+"Le mécanisme de base de SNMP, où un serveur interroge régulièrement les équipements, est appelé _____.",le polling
+"En SNMP, quel protocole de transport est utilisé et sur quels ports ?","Le protocole UDP, sur le port 161 pour les requêtes et 162 pour les alarmes."
+Quelle requête SNMP est utilisée pour lire une variable spécifique sur un agent ?,GetRequest.
+Quelle requête SNMP est optimisée pour lire un grand ensemble de variables en une seule fois ?,GetBulk.
+"Quelle requête SNMP permet de modifier une variable sur un équipement, par exemple pour une reconfiguration ?",SetRequest.
+"En SNMP, quelle est la différence fondamentale entre un message 'Trap' et un message 'Inform' ?","Le 'Trap' est une notification sans accusé de réception, tandis que l''Inform' en requiert un, offrant une meilleure fiabilité."
+Citez un exemple d'alarme standard en SNMP indiquant qu'un lien réseau est hors service.,LinkDown (code 2).
+"Dans les versions SNMPv1/v2c, le champ 'Community' définit un domaine de gestion. Par quoi est-il remplacé en SNMPv3 ?",Par des utilisateurs et des niveaux de sécurité.
+"En SNMP, qu'est-ce qu'un OID (Object Identifier) ?",Un identifiant unique d'un objet ou d'une métrique dans la MIB (Management Information Base).
+"Quel type de donnée SNMP est un compteur 32 bits qui peut monter ou descendre, typique pour le taux d'utilisation CPU ?",Gauge.
+Quel type de donnée SNMP représente le temps écoulé en centièmes de seconde depuis un événement ?,TimeTicks.
+Quelle est la principale limite du protocole SNMP en termes de réactivité ?,Son fonctionnement par interrogation périodique (polling) introduit des latences.
+Comment la télémétrie inverse-t-elle le modèle de fonctionnement de SNMP ?,"Les équipements envoient (push) leurs données en continu vers le superviseur, au lieu d'attendre d'être interrogés (pull)."
+Quel est le principal avantage de la télémétrie par rapport à SNMP en termes de latence ?,"La télémétrie fournit des données en temps réel, alors que SNMP a un délai entre deux requêtes."
+"Quel framework moderne, basé sur HTTP/2, est souvent utilisé pour les communications en télémétrie ?",gRPC (Google Remote Procedure Call).
+Qu'est-ce que le protocole gNMI ?,"Un protocole standardisé qui utilise gRPC pour récupérer et modifier des configurations, et recevoir des flux de télémétrie."
+"Alors que SNMP utilise des MIB, sur quel type de modèles de données plus lisibles et modernes s'appuie gNMI ?",Les modèles YANG.
+"Quelle opération clé de gNMI permet à un superviseur de s'abonner à un flux de données en temps réel, comme la charge CPU toutes les secondes ?",L'opération 'Subscribe'.
+Quel avantage de sécurité natif possède gNMI par rapport à SNMPv1/v2c ?,Le chiffrement natif via TLS.
+Citez deux outils modernes avec lesquels gNMI s'intègre facilement.,Prometheus (via des exporteurs) et Grafana (pour la visualisation).
+Quelle architecture de supervision est idéale pour les petites infrastructures mais présente un risque de point unique de défaillance ?,L'architecture centralisée.
+Décrivez l'architecture de supervision hiérarchique.,"Un serveur central supervise plusieurs serveurs régionaux, chacun responsable d'un segment du réseau (ex: sites distants)."
+Pour quel type d'environnement une architecture de supervision distribuée est-elle réservée ?,"Pour les très grands réseaux (opérateurs, cloud providers) ou les environnements critiques nécessitant une résilience maximale."
+Quel outil est considéré comme la référence pour la collecte et le stockage des métriques en temps réel dans les environnements cloud ?,Prometheus.
+Quel est le rôle principal de Grafana dans une stack de supervision moderne ?,C'est une plateforme de visualisation flexible pour créer des tableaux de bord unifiés à partir de multiples sources de données.
+"Quelle solution de gestion de logs, développée par Grafana Labs, est une alternative légère à la stack ELK ?",Loki.
+"Dans quel cas la stack Elasticsearch, Logstash et Kibana (ELK) reste-t-elle une solution puissante ?","Pour les environnements nécessitant une analyse approfondie des logs, notamment en sécurité ou débogage."
+Quelle solution de supervision est décrite comme une solution tout-en-un pour les réseaux hétérogènes avec des fonctions avancées d'alertes ?,Zabbix.
+"Bien qu'ancien, quel outil de supervision est encore très présent en raison de sa robustesse ?",Nagios.
+"Quel standard ouvert émerge pour la collecte unifiée de télémétrie (métriques, logs, traces) ?",OpenTelemetry.
+"La télémétrie utilise un modèle de _____ où les équipements envoient leurs données, tandis que SNMP utilise un modèle de _____ où le serveur les demande.","push, pull"
+"En gNMI, l'opération _____ permet à l'équipement d'annoncer les données qu'il peut fournir.",Capabilities
+Quel est le principal inconvénient de l'architecture de supervision centralisée ?,Elle représente un point unique de défaillance (SPOF) et sa scalabilité est limitée.
+Quel est le langage de requête spécifique à Prometheus utilisé pour interroger les métriques ?,PromQL.
+Quelle est la principale différence dans la méthode d'indexation entre Loki et Elasticsearch ?,"Loki indexe les logs par labels, tandis qu'Elasticsearch indexe le contenu complet, ce qui rend Loki plus léger en stockage."

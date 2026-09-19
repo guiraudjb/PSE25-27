@@ -1,0 +1,65 @@
+Quel organisme a développé le modèle DOD (ancêtre de TCP/IP) dans les années 1970 ?,L'ARPA (Advanced Research Projects Agency) du Département de la Défense américain.
+Comment appelle-t-on les documents techniques qui ont standardisé les protocoles TCP/IP ?,Les RFC (Request For Comments).
+Quel système d'exploitation éducatif a inspiré Linus Torvalds pour la création de Linux en 1991 ?,"Le système Minix, développé par Andrew Tanenbaum."
+"Le modèle TCP/IP est souvent qualifié de standard de _____, contrairement au modèle OSI qui est une norme ISO.",fait
+Quelle est la fonction principale du protocole ARP ?,Traduire une adresse IP (niveau 3) en une adresse MAC (niveau 2).
+Commande Linux : Afficher toutes les entrées du cache ARP.,ip neigh show
+Comment appelle-t-on l'attaque informatique où un attaquant usurpe l'adresse MAC d'un hôte via ARP ?,L'ARP poisoning (ou ARP spoofing).
+Quel protocole permet à une station sans disque de connaître son adresse IP à partir de son adresse MAC ?,Le protocole RARP (Reverse Address Resolution Protocol).
+Par quel protocole moderne le protocole RARP a-t-il été remplacé ?,Le protocole DHCP (Dynamic Host Configuration Protocol).
+À quel niveau du modèle OSI se situe le protocole ICMP ?,Au niveau 3 (couche Réseau).
+Quel message ICMP est envoyé par un routeur lorsqu'un paquet ne peut pas atteindre sa destination ?,Destination Unreachable (Hôte ou réseau inaccessible).
+Quel est le rôle du champ TTL (Time To Live) dans un paquet IP ?,Éviter les boucles infinies en limitant le nombre de sauts (hops).
+Quels sont les deux types de messages ICMP utilisés par la commande ping ?,Echo Request et Echo Reply.
+Pourquoi le protocole IP est-il qualifié de service « non fiable » ?,"Il achemine les datagrammes sans garantie de livraison, d'ordre ou d'intégrité."
+Comment se nomme l'unité de données traitée par le protocole IP ?,Le datagramme (ou paquet IP).
+Que signifie l'acronyme MTU dans le contexte de la fragmentation IP ?,Maximum Transmission Unit.
+Commande Linux : Afficher la table de routage IP actuelle.,ip route
+Commande Linux : Définir 192.168.1.1 comme passerelle par défaut.,ip route add default via 192.168.1.1
+"Le protocole TCP est orienté _____, contrairement à UDP qui est sans connexion.",connexion
+Quelles sont les trois étapes de l'établissement d'une connexion TCP ?,"SYN, SYN-ACK, puis ACK (Three-Way Handshake)."
+Comment TCP garantit-il que les données sont réassemblées dans le bon ordre par le destinataire ?,Grâce à l'utilisation de numéros de séquence pour chaque octet envoyé.
+"Dans le protocole TCP, que signifie l'acronyme RTT ?",Round Trip Time (Temps d'aller-retour).
+Concept : Socket,Definition : Combinaison unique d'une adresse IP et d'un numéro de port au sein d'un réseau.
+Quelle est la plage de numéros pour les ports dits « réservés » ou standards ?,$0$ à $1023$.
+Commande Linux : Lister les processus utilisant des connexions TCP.,lsof -i TCP
+Pourquoi UDP est-il préféré à TCP pour le streaming vidéo ou la VoIP ?,Pour sa rapidité et sa faible latence (absence de mécanismes de contrôle complexes).
+Quelle est la taille de l'en-tête d'un segment UDP ?,$8$ octets.
+Quel port standard est utilisé par le protocole DNS pour les requêtes de résolution de nom ?,Le port $53$.
+Quel port standard est utilisé par NTP (Network Time Protocol) ?,Le port $123$.
+Quel protocole de transport est utilisé par HTTP (port 80) ?,TCP.
+Quel port est associé au service HTTPS ?,Le port $443$.
+Quels sont les deux ports utilisés par le protocole FTP et leurs fonctions respectives ?,$20$ pour les données et $21$ pour le contrôle.
+Quel protocole de transfert de fichiers sécurisé utilise SSH sur le port 22 ?,Le protocole SFTP (ou SCP).
+Quel protocole est utilisé pour l'envoi d'emails entre serveurs (port 25) ?,SMTP (Simple Mail Transfer Protocol).
+Quelle est la différence majeure entre POP3 et IMAP4 pour la réception d'emails ?,POP3 stocke localement alors qu'IMAP4 synchronise les messages sans les supprimer du serveur.
+Quel protocole de communication à distance non sécurisé a été remplacé par SSH ?,Telnet (port 23).
+Quels sont les deux protocoles de chiffrement utilisés pour sécuriser HTTP en HTTPS ?,SSL (Secure Sockets Layer) ou TLS (Transport Layer Security).
+Commande Linux : Tester la connectivité avec l'hôte 8.8.8.8 via ICMP.,ping 8.8.8.8
+Commande Linux : Identifier les sauts (hops) intermédiaires pour atteindre une destination.,traceroute (ou mtr)
+Commande Linux : Afficher les ports TCP et UDP en écoute sur le système.,ss -tuln
+"Quel outil en ligne de commande permet de transférer des données via divers protocoles (HTTP, FTP, etc.) ?",curl
+Quel fichier Linux contient la résolution statique locale des noms d'hôtes en adresses IP ?,/etc/hosts
+Dans quel fichier Linux configure-t-on les serveurs DNS du système ?,/etc/resolv.conf
+"Sur une distribution Debian, quel fichier est utilisé pour configurer statiquement l'interface eth0 ?",/etc/network/interfaces
+"Sur CentOS/RHEL, dans quel répertoire se trouvent les scripts de configuration des interfaces réseau ?",/etc/sysconfig/network-scripts/
+Quel fichier définit l'ordre de priorité entre les fichiers locaux et le DNS pour la résolution de noms ?,/etc/nsswitch.conf
+Commande Linux : Désactiver le service telnet au démarrage via systemd.,systemctl disable telnet
+Quel outil Linux (successeur d'iptables) permet de configurer le pare-feu ?,firewalld
+Commande Linux : Capturer le trafic HTTP (port 80) sur l'interface eth0.,tcpdump -i eth0 port 80
+Quelle commande Linux est utilisée pour vérifier que le serveur Apache est démarré ?,systemctl status apache2 (ou httpd)
+Quel protocole de couche 4 n'effectue aucun contrôle de flux ni d'acquittement ?,UDP.
+La commande _____ est l'alternative moderne à netstat pour surveiller les sockets réseau.,ss
+Quel enregistrement DNS de type « A » lie un nom de domaine à une adresse _____ ?,IPv4
+L'encapsulation ICMP se fait directement dans des datagrammes _____.,IP
+"Sous Linux, quel paquet logiciel fournit la commande 'ip' ?",iproute2
+"Dans une configuration d'interface statique, que définit le paramètre 'gateway' ?",L'adresse IP du routeur permettant d'accéder aux réseaux externes.
+Quelle est la fonction d'une 'entrée statique' dans le cache ARP ?,Réduire le trafic réseau en évitant les requêtes ARP répétées pour un hôte fréquent.
+Quel est le risque sécuritaire d'utiliser Telnet pour l'administration distante ?,Les données (dont les identifiants) circulent en clair sur le réseau.
+"L'échange SYN, SYN-ACK, ACK définit une ouverture _____ côté serveur.",passive
+Quel outil permet de surveiller la consommation de bande passante en temps réel par interface ?,iftop (ou nload / vnstat).
+La commande 'dig' est principalement utilisée pour diagnostiquer le service _____.,DNS
+"Dans /etc/resolv.conf, quel mot-clé précède l'adresse IP du serveur DNS ?",nameserver
+Quel flag TCP est envoyé par le client pour initier le Three-Way Handshake ?,Le flag SYN.
+"Le modèle DOD à 4 couches a été conçu pour être _____, flexible et interopérable.",robuste
+Comment appelle-t-on le mécanisme TCP qui adapte le débit à la capacité du tampon du récepteur ?,Le contrôle de flux (via le fenêtrage).

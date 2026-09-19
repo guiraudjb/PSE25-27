@@ -1,0 +1,41 @@
+Quel est le rôle principal du noyau d'un système d'exploitation ?,"Le noyau gère les ressources de la machine (processeur, mémoire, périphériques) et contrôle l'exécution des processus."
+Qu'est-ce qu'un processus selon le document ?,"Un processus est un programme en cours d'exécution, accompagné de ses ressources, dont le cycle de vie est géré par le noyau."
+Quels sont les quatre éléments principaux qui composent un processus ?,"Le code, un espace mémoire dédié, un contexte d'exécution et un état."
+"Dans l'espace mémoire d'un processus, à quoi sert la pile (stack) ?",La pile gère les appels de fonctions et les variables locales.
+"Dans l'espace mémoire d'un processus, à quoi sert le tas (heap) ?",Le tas est une zone utilisée pour les allocations dynamiques de mémoire.
+Quels sont les trois états possibles d'un processus mentionnés dans le document ?,"Prêt, élu (en cours) ou bloqué."
+Quelle est la principale caractéristique d'un processus lourd en termes de mémoire ?,"Il possède son propre espace mémoire, totalement isolé des autres processus."
+Comment les processus lourds communiquent-ils entre eux ?,"Ils nécessitent des mécanismes de communication dédiés, connus sous le nom d'IPC (Inter-Process Communication)."
+"Comment définit-on un processus léger, ou thread ?",C'est une unité d'exécution qui appartient à un processus et qui permet de diviser un travail en tâches parallèles.
+Quelle ressource les threads d'un même processus partagent-ils ?,Ils partagent l'espace mémoire du processus parent.
+"Même s'ils partagent la mémoire, qu'est-ce que chaque thread possède de manière individuelle ?",Chaque thread possède son propre contexte d'exécution.
+Citez un avantage majeur du multithreading pour les systèmes modernes.,Il permet une meilleure exploitation des processeurs multicœurs.
+Quel est le rôle de l'ordonnanceur (scheduler) dans un système d'exploitation ?,L'ordonnanceur décide quel processus utilise le processeur et pour combien de temps.
+L'ordonnanceur attribue à un processus une durée d'utilisation du processeur appelée _____.,quantum de temps
+Citez une raison pour laquelle l'ordonnanceur peut interrompre un processus.,Son quantum de temps est terminé ou il est bloqué en attente d'une ressource (ex: E/S).
+Quelle est la différence entre l'ordonnanceur de haut niveau et le dispatcher ?,"L'ordonnanceur de haut niveau définit la stratégie et les priorités, tandis que le dispatcher (bas niveau) effectue la commutation de contexte."
+Comment fonctionne la multiprogrammation non préemptive ?,Le processus en cours d'exécution conserve le processeur jusqu'à ce qu'il se termine ou se bloque volontairement.
+Quel est le principal inconvénient de la multiprogrammation non préemptive ?,"Le risque de monopolisation du processeur par un seul processus, ce qui la rend peu adaptée aux systèmes interactifs."
+Comment fonctionne la multiprogrammation préemptive ?,Le noyau peut interrompre un processus à tout moment pour en exécuter un autre.
+Quel type de multiprogrammation est utilisé par tous les systèmes d'exploitation modernes ?,"La multiprogrammation préemptive, indispensable au multitâche."
+Qu'est-ce que le contexte matériel d'un processus ?,L'ensemble des informations liées au processeur nécessaires pour reprendre l'exécution du processus.
+Le _____ est un registre qui contient l'adresse de la prochaine instruction à exécuter.,compteur ordinal
+Citez deux éléments faisant partie du contexte matériel d'un processus.,"Les registres du processeur, le compteur ordinal, le pointeur de pile ou le mode d'exécution."
+Qu'est-ce que le contexte logiciel d'un processus ?,L'ensemble des informations gérées par l'OS pour contrôler le comportement et les droits du processus.
+Citez deux éléments faisant partie du contexte logiciel d'un processus.,"La priorité, les fichiers ouverts, les droits d'accès ou les ressources allouées."
+Définition: PCB (Process Control Block),Une structure de données en mémoire où le noyau enregistre le contexte d'un processus lors d'une interruption.
+Pourquoi le PCB est-il essentiel ?,"Sans le PCB, il serait impossible de reprendre correctement l'exécution d'un processus après une interruption."
+Quel algorithme d'ordonnancement exécute les processus dans leur ordre d'arrivée ?,FIFO (First In / First Out).
+Quel est le principe de l'algorithme d'ordonnancement Round Robin (tourniquet) ?,Il attribue à chaque processus un quantum de temps fixe pour assurer une bonne réactivité.
+"Quel type d'algorithme d'ordonnancement, comme SJF ou SRTF, privilégie les processus les plus courts ?",Les algorithmes qui cherchent à réduire le temps d'attente moyen.
+Comment l'algorithme MLF (Multilevel Feedback) ajuste-t-il les priorités ?,"Il ajuste la priorité selon le comportement du processus (par exemple, s'il est long ou court)."
+Pourquoi est-il nécessaire d'avoir des mécanismes de synchronisation entre processus ?,"Pour assurer la cohérence, la sécurité et la protection des ressources communes auxquelles plusieurs processus peuvent accéder."
+Qu'est-ce qu'une section critique dans le code d'un programme ?,C'est une partie du code qui manipule des ressources partagées et qui nécessite donc une protection.
+Définition: Mutex,Un mécanisme de synchronisation qui fonctionne comme un verrou permettant un accès exclusif à une ressource partagée.
+Définition: Sémaphore,Un mécanisme de synchronisation qui fonctionne comme un compteur pour contrôler le nombre d'accès simultanés à une ressource.
+Quel risque se produit lorsqu'il y a une attente circulaire entre plusieurs processus pour des ressources ?,Un interblocage (deadlock).
+Qu'est-ce que la famine (starvation) dans le contexte de la gestion des processus ?,C'est une situation où un processus n'est jamais choisi par l'ordonnanceur pour être exécuté.
+Citez trois mécanismes d'échange d'informations entre processus (IPC).,"Fichiers, mémoire partagée, pipes (tubes), files de messages, sockets ou signaux."
+Quelle est la différence fondamentale entre un programme et un processus ?,"Un programme est un fichier de code non exécuté, tandis qu'un processus est un programme en cours d'exécution avec ses ressources."
+Le _____ est la durée d'exécution allouée à un processus par l'ordonnanceur.,quantum
+Le _____ est un verrou d'exclusion mutuelle.,Mutex

@@ -1,0 +1,52 @@
+Quel est l'objectif principal de la Suite Numérique développée par le gouvernement français ?,Renforcer l'autonomie numérique face aux GAFAM en proposant un ensemble de logiciels bureautiques open source et souverains.
+La Suite Numérique est principalement destinée à quelle catégorie d'utilisateurs ?,Aux agents de la fonction publique (agents publics).
+Comment les utilisateurs accèdent-ils aux outils de La Suite Numérique ?,Via le système d'authentification unique ProConnect.
+Quelle est l'alternative à Gmail proposée dans La Suite Numérique ?,"Un client de messagerie électronique nommé ""Messagerie""."
+Quel outil de La Suite Numérique est conçu comme une alternative à Microsoft Teams et chiffre les messages de bout en bout ?,La messagerie instantanée Tchap.
+"Pour remplacer des services comme WeTransfer, quel outil La Suite Numérique propose-t-elle pour l'envoi de fichiers volumineux ?",France Transfert.
+"Quel tableur collaboratif, alternative à Excel, est inclus dans La Suite Numérique ?",Grist.
+"L'éditeur de texte collaboratif de La Suite Numérique, qui peut se substituer à Google Docs, s'appelle _____.",Docs.
+Quel outil de visioconférence de La Suite Numérique est un concurrent de Google Meet ?,Visio.
+Les applications de La Suite Numérique sont hébergées sur des infrastructures certifiées par l'ANSSI. Quel est le nom de cette certification ?,SecNumCloud.
+Quels pays ont collaboré au développement de La Suite Numérique ?,"La France, l'Allemagne et les Pays-Bas."
+L'outil Docs de La Suite Numérique intègre des fonctionnalités d'IA pour quelles tâches ?,"La reformulation, la traduction et le résumé de textes."
+Quelle technologie l'outil Visio utilise-t-il pour fournir un service de transcription ?,L'intelligence artificielle (IA).
+Quels organismes gouvernementaux ont collaboré pour créer le logiciel Docs ?,La Direction interministérielle du numérique (DINUM) française et le centre allemand pour la souveraineté numérique (ZenDiS).
+"Docs utilise uniquement des technologies _____, avec un code source publié sur GitHub.",open source
+Quels sont les trois principaux frameworks technologiques utilisés par le logiciel Docs ?,"Django Rest (backend), Next.js (frontend) et BlockNotes.js (édition)."
+"En mars 2025, Docs permettait d'exporter des documents dans quels trois formats ?","PDF, Microsoft Word et OpenDocument."
+Quel événement géopolitique a été un catalyseur pour la collaboration franco-allemande sur le projet Docs ?,Les changements de politique sous la seconde administration Trump.
+"Combien d'agents publics utilisent mensuellement LaSuite, selon les chiffres de début 2026 ?",Plus de 500 000 agents.
+Quel outil de LaSuite est une messagerie instantanée sécurisée basée sur le protocole Matrix ?,Tchap.
+"En plus de Docs et Grist, quel nouvel outil de gestion de fichiers est mentionné sur le site de LaSuite ?","Fichiers, pour centraliser et partager des documents."
+Quel est le nom de l'entité qui réunit les 10 cofinanceurs interministériels décidant des orientations de LaSuite ?,Le club LaSuite.
+Toute organisation non éligible à l'offre de l'État peut-elle utiliser LaSuite ?,"Oui, en déployant sa propre instance, car LaSuite est un ensemble d'outils libres."
+"Début 2026, quel outil de LaSuite venait officiellement de sortir de sa phase bêta après avoir obtenu une nouvelle homologation de sécurité ?",Visio.
+Sur quelle technologie open-source pour la communication en temps réel repose l'outil Visio ?,WebRTC.
+Quelle plateforme de développement l'outil Visio utilise-t-il ?,LiveKit.
+Quelle est l'ambition principale de LaSuite pour l'année 2026 ?,Transformer la collection d'outils en un espace de travail totalement fluide et interopérable.
+Quelle intégration majeure est prévue pour Visio en 2026 afin de le rendre compatible avec des outils existants ?,La compatibilité avec Outlook et les équipements de salles de conférence physiques.
+"Quel a été le premier outil de ce qui deviendra LaSuite, lancé en 2019 par la DINSIC ?",La messagerie instantanée Tchap.
+"Selon l'article de Solutions Numériques, quel modèle d'IA a été utilisé par la DINUM pour développer l'assistant IA de LaSuite ?",Les modèles de Mistral AI.
+Quelle est la principale critique des éditeurs de logiciels français (comme le CNLL) envers LaSuite ?,Ils estiment que l'État crée une situation de concurrence déloyale et irresponsable avec les entreprises privées.
+Quel organisme avait critiqué en 2024 le faible taux d'adoption des outils numériques proposés aux agents publics avant LaSuite ?,La Cour des Comptes.
+"En décembre 2025, combien d'utilisateurs actifs mensuels comptait la messagerie Tchap ?",Environ 375 000 utilisateurs.
+"Selon les chiffres de fin 2025, l'application Visio comptait _____ utilisateurs actifs.",60 000
+Le tableur Grist est passé de 1 000 à _____ agents utilisateurs par mois entre 2024 et fin 2025.,15 000
+"Quelle est la fonction de l'application ""Fichiers"", alors en version bêta fin 2025 ?","Éditer, stocker et organiser les fichiers dans un espace sécurisé."
+Quel est le nom de l'initiative visant à fournir une version de la suite numérique aux communes et collectivités ?,La Suite Territoriale.
+Qu'est-ce que l'Indice de Résilience Numérique (IRN) ?,Un outil visant à mesurer la dépendance technologique d'une organisation pour la transformer en un risque pilotable.
+"L'analyse de l'IRN part des _____ pour identifier les actifs numériques critiques, plutôt que de faire un inventaire exhaustif du SI.",métiers et des fonctions vitales
+L'IRN évalue la résilience selon huit dimensions regroupées en trois catégories de risques. Quelles sont ces trois catégories ?,"Business, sécurité et technologie."
+Quel est l'organisme de l'État chargé de piloter le développement et le déploiement de La Suite Numérique ?,La Direction interministérielle du numérique (DINUM).
+Quel projet La Suite Numérique a-t-elle remplacé ou fait évoluer à partir de 2024 ?,"Le « sac à dos numérique de l’agent public », lancé en 2021."
+Lors de quel événement le lancement officiel de La Suite Numérique a-t-il été annoncé le 23 mai 2024 ?,Le salon VivaTech.
+Quel document officiel daté de mars 2024 détaille le financement et les objectifs du projet de La Suite Numérique ?,Le contrat de transformation du Fonds pour la Transformation de l'Action Publique (FTAP).
+"Quel est le budget total du projet La Suite Numérique, tel qu'indiqué dans le contrat FTAP de mars 2024 ?",8 500 000 euros.
+"Selon le document FTAP, combien le projet vise-t-il d'agents de la Fonction Publique d'État et de la Fonction Publique Territoriale respectivement ?","2,5 millions d'agents de l'État et 1,9 million d'agents territoriaux."
+Quelle est la date de fin prévue pour le projet de développement initial de La Suite Numérique ?,30 juin 2026.
+"Quel outil de LaSuite est décrit comme ""l'éditeur de texte collaboratif qui privilégie le contenu sur la mise en forme"" ?",Docs.
+"À long terme, quelle structure européenne vise à assurer le pilotage du projet LaSuite ?",Un consortium pour les communs numériques (DC-EDIC) au sein de l'Union européenne.
+"Quelle fonctionnalité de Grist permet de créer des applications simples (formulaire, calendrier) à partir des données ?",Une application No Code.
+Comment LaSuite incite-t-elle les agents à réduire l'envoi de pièces jointes volumineuses ?,En les encourageant à envoyer un lien vers un document stocké sur l'application Fichiers.
+Quelle entité a succédé à la DINSIC et pilote aujourd'hui LaSuite ?,La DINUM (Direction interministérielle du numérique).

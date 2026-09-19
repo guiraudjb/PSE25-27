@@ -1,0 +1,34 @@
+Quelle est la définition de la sobriété numérique proposée dans le document ?,"C'est le fait de concevoir, produire et utiliser le numérique de manière plus sobre pour réduire son impact environnemental tout en maintenant son efficacité."
+Que signifie l'acronyme SRE dans le contexte des services publics français ?,Services Publics Écoresponsables.
+Quel objectif de réduction des émissions de gaz à effet de serre la circulaire SRE fixe-t-elle pour les services publics d'ici 2027 ?,Un objectif de réduction de 22%.
+Citez les cinq référentiels clés qui complètent la démarche de sobriété numérique dans le secteur public français.,"RGESN, RGI, RGAA, RGS, et RGPD."
+Que signifie l'acronyme RGESN ?,Référentiel Général d’Écoconception de Services Numériques.
+Que signifie l'acronyme RGI ?,Référentiel Général d’Interopérabilité.
+Que signifie l'acronyme RGAA ?,Référentiel Général d’Amélioration de l’Accessibilité.
+Que signifie l'acronyme RGS ?,Référentiel Général de Sécurité.
+De quelle manière le RGI et le RGS contribuent-ils à un système d'information (SI) plus sobre ?,Ils poussent à une urbanisation stricte du SI en mutualisant les briques logicielles et en standardisant les protocoles d'échange.
+Comment le RGAA (accessibilité) favorise-t-il la sobriété numérique ?,Il incite à adopter un code plus sobre en réduisant les habillages superflus (cosmétiques) des applications web.
+Quel principe du RGPD (protection des données) contribue directement à la sobriété numérique ?,"Le principe de minimisation, qui impose de ne collecter que les données strictement nécessaires."
+Comment le RGESN encourage-t-il la sobriété au niveau matériel ?,Il pousse à une mutualisation matérielle et à un allongement de la durée de vie des équipements.
+Vers quelle doctrine de l'État les évolutions architecturales pour la sobriété numérique convergent-elles ?,"La doctrine ""Cloud au centre""."
+"Quel est l'objectif principal de la doctrine ""Cloud au centre"" en matière de ressources ?",Optimiser la consommation de ressources via de nouvelles pratiques d'exploitation et une mutualisation massive.
+"La pratique qui consiste à ajuster au plus juste la ressource allouée à une application, pour éviter le surdimensionnement, est appelée _____.",right sizing
+Quel mécanisme permet d'ajuster dynamiquement les ressources allouées en fonction des pics de charge ?,"L'élasticité, ou l'""auto-scaling""."
+"Dans le cadre des politiques GreenOps et FinOps, à quoi servent principalement les outils de supervision ?",À mesurer la consommation en ressources et en énergie de chaque processus.
+Comment les développeurs peuvent-ils utiliser les indicateurs des outils de supervision pour la sobriété ?,Pour mesurer la performance de leur code et optimiser l'efficience des applicatifs.
+Quel est le rôle du Programmeur Système d'Exploitation (PSE) en tant que conseiller technique dans la modernisation du SI ?,Il optimise le système et fournit des configurations fines.
+Vers quelles pratiques le PSE doit-il accompagner les équipes de développement ?,Vers les pratiques du cloud et de l'écoconception.
+"Lors de l'intégration d'un projet, que peut recommander un PSE pour améliorer la sobriété ?","Il peut recommander les infrastructures les moins énergivores, qu'elles soient en cloud public ou privé."
+À quelle étape cruciale du projet le PSE doit-il intervenir pour aider à dimensionner les besoins au plus juste ?,Dès la phase de conception.
+"Dans la gestion du cycle de vie du matériel, quelle action permet un gain important pour réduire l'impact carbone ?","La gestion de la fin de vie du matériel, incluant la requalification et le don."
+Que permet la requalification de matériel de seconde main ?,Elle permet d'envisager l'utilisation de serveurs déclassés pour des environnements non critiques.
+Quelle est la perspective finale sur la sobriété numérique : une contrainte ou une opportunité ?,C'est une opportunité de retransformer le système d'information de l'État.
+"La synergie des cinq référentiels (RGI, RGAA, RGS, RGPD, RGESN) permet au PSE de passer de la _____ à la _____.","théorie, pratique"
+"D'après la fiche de correction, quelle expertise technique le PSE doit-il apporter pour une conception plus efficiente ?","Son expertise technique et architecturale, avec des recommandations favorisant une conception plus efficiente."
+Quel rôle de suivi le PSE a-t-il dans l'optimisation des consommations ?,"La supervision et l'analyse des consommations (CPU, logs)."
+"Au-delà des infrastructures, quels éléments applicatifs le PSE doit-il optimiser ?",Les scripts et les batchs.
+Quel est le rôle du PSE dans la diffusion des bonnes pratiques de sobriété ?,L'acculturation des équipes et le partage des bonnes pratiques.
+"Que signifie l'acronyme SPI, un des concepts attendus mentionnés dans la fiche de correction ?","Sobriété, Performance, Efficience."
+Quel indicateur de performance énergétique des data centers est un concept attendu dans la copie ?,Le PUE (Power Usage Effectiveness).
+Quelle recommandation de style d'écriture est donnée dans la fiche de correction pour un devoir administratif ?,"Adopter un style neutre, sans utilisation de pronoms personnels (comme ""nous""), et s'appuyer sur des formulations impersonnelles."
+"La synergie des cinq référentiels permet de construire un SI plus _____, plus sécurisé et moins énergivore.",robuste

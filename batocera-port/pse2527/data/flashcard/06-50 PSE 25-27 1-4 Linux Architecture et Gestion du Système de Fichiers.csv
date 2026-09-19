@@ -1,0 +1,71 @@
+"Sous Linux, quelle est la conception unifiée qui simplifie la gestion des ressources comme les programmes, les périphériques ou les répertoires ?","La conception selon laquelle ""tout est fichier""."
+Quelle structure décrit chaque fichier sous Linux et contient ses métadonnées mais pas son nom ?,Un inode (index node).
+Quels sont les identifiants du propriétaire et du groupe contenus dans un inode ?,L'UID (User ID) et le GID (Group ID).
+"Outre l'UID et le GID, citez trois autres métadonnées stockées dans un inode.","La taille du fichier, les droits d’accès et les horodatages (création, modification, accès)."
+"La structure d'un inode typique est composée d'un en-tête de métadonnées, de 12 pointeurs directs, et de trois types de pointeurs indirects. Lesquels ?","Un pointeur indirect simple, un pointeur indirect double et un pointeur indirect triple."
+Quel est l'avantage de la structure des inodes avec des pointeurs directs et indirects ?,Elle permet de gérer des fichiers très volumineux tout en optimisant l'accès aux petits fichiers.
+Où se situe la table des inodes sur un système de gestion de fichiers Linux ?,Elle est située dans les premières zones du système de gestion de fichiers.
+Quel type de système de fichiers Linux ajoute un journal à ext2 pour limiter la corruption en cas de coupure ?,Le système de fichiers ext3.
+Le système de fichiers _____ introduit les extents (ensembles de blocs contigus) et supporte des fichiers jusqu'à 16 To.,ext4
+Pour quel type de charge de travail le système de fichiers XFS est-il optimisé ?,Il est optimisé pour les gros volumes et les fichiers massifs.
+"Quel système de fichiers moderne offre des fonctionnalités avancées comme les snapshots, la compression et la gestion intégrée du RAID ?",Btrfs (B-tree File System).
+Quelle commande permet de surveiller l'utilisation des inodes sur un système de fichiers ?,La commande `df -i`.
+Quelle commande est utilisée pour vérifier l'intégrité d'un système de fichiers sous Linux ?,La commande `fsck` (file system check).
+Comment le système d'exploitation gère-t-il les fichiers spéciaux comme les sockets ou les tubes nommés pour garantir leur intégrité ?,"Ils sont gérés à l'intérieur même du noyau, qui assure lui-même les entrées et sorties sur ces fichiers."
+"Dans la sortie de `ls -l`, quel caractère indique un fichier ordinaire ?",Le tiret (-).
+"Dans la sortie de `ls -l`, quel caractère indique un répertoire ?",La lettre 'd'.
+"Dans la sortie de `ls -l`, quel caractère indique un lien symbolique ?",La lettre 'l'.
+"Dans la sortie de `ls -l`, quel caractère indique un fichier spécial de type caractère (character device) ?",La lettre 'c'.
+"Dans la sortie de `ls -l`, quel caractère indique un fichier spécial de type bloc (block device) ?",La lettre 'b'.
+"Dans la sortie de `ls -l`, quel caractère indique un tube nommé (FIFO) ?",La lettre 'p'.
+"Dans la sortie de `ls -l`, quel caractère indique un socket ?",La lettre 's'.
+Quelle est la principale différence entre un lien dur et un lien symbolique ?,"Un lien dur pointe vers un inode, tandis qu'un lien symbolique pointe vers un chemin (nom de fichier)."
+Que se passe-t-il si le fichier cible d'un lien symbolique est supprimé ?,"Le lien symbolique devient ""cassé"" (broken)."
+Quel est le point de départ de l'arborescence hiérarchique des fichiers sous Linux ?,"La racine, représentée par le symbole ""/""."
+Quelle est la longueur maximale d'un nom de fichier sous Linux ?,255 caractères.
+Quelle est la différence fondamentale entre un chemin absolu et un chemin relatif ?,"Un chemin absolu commence toujours par la racine (/), tandis qu'un chemin relatif dépend du répertoire courant."
+"En navigation de fichiers, que représente le symbole ""."" (point) ?",Il représente le répertoire courant.
+"En navigation de fichiers, que représente le symbole "".."" (double point) ?",Il représente le répertoire parent.
+Quel standard définit la structure et la destination de chaque répertoire principal sur un système Linux ?,Le FHS (Filesystem Hierarchy Standard).
+"Quel répertoire contient le noyau Linux, l'initramfs et les fichiers de démarrage ?",Le répertoire `/boot`.
+Où sont stockés les fichiers de configuration du système et des applications ?,Dans le répertoire `/etc`.
+Dans quels répertoires trouve-t-on les exécutables et utilitaires système essentiels ?,"Dans `/bin`, `/sbin`, `/usr/bin`, et `/usr/sbin`."
+Où sont stockées les bibliothèques partagées nécessaires au fonctionnement du système et des programmes ?,Dans les répertoires `/lib` et `/usr/lib`.
+Quel répertoire est utilisé pour stocker les journaux (logs) du système et des applications ?,Le répertoire `/var/log`.
+Où sont situés par défaut les répertoires personnels des utilisateurs ?,Dans le répertoire `/home`.
+Quel est le répertoire personnel de l'administrateur système (superutilisateur) ?,Le répertoire `/root`.
+À quoi servent les répertoires `/mnt` et `/media` ?,Ce sont des points de montage pour des systèmes de fichiers temporaires ou amovibles.
+"Dans la gestion des droits Linux, quelles sont les trois catégories de propriétaires pour un fichier ?","L'utilisateur (u), le groupe (g), et les autres (o)."
+Quelles sont les trois permissions de base applicables à un fichier ou un répertoire ?,"Lecture (r), écriture (w), et exécution (x)."
+Que signifie la permission `-rwxr-xr--` pour le groupe propriétaire du fichier ?,"Les membres du groupe ont les permissions de lecture (r) et d'exécution (x), mais pas d'écriture."
+Quel bit de permission spécial permet à un exécutable de s'exécuter avec les droits de son propriétaire plutôt que ceux de l'utilisateur qui le lance ?,Le bit `setuid` (Set User ID).
+Quel est l'effet du 'sticky bit' lorsqu'il est appliqué à un répertoire comme `/tmp` ?,Il empêche les utilisateurs de supprimer les fichiers des autres utilisateurs dans ce répertoire.
+"En notation octale, quelle valeur numérique correspond à la permission 'lecture' (r) ?",La valeur 4.
+"En notation octale, quelle valeur numérique correspond à la permission 'écriture' (w) ?",La valeur 2.
+"En notation octale, quelle valeur numérique correspond à la permission 'exécution' (x) ?",La valeur 1.
+Quelle est la notation symbolique (rwx) correspondant au nombre octal '7' ?,`rwx` (4+2+1).
+Quelle est la notation symbolique (rwx) correspondant au nombre octal '6' ?,`rw-` (4+2).
+Quelle est la notation symbolique (rwx) correspondant au nombre octal '5' ?,`r-x` (4+1).
+"Quelle commande permet de modifier les permissions d'un fichier en utilisant la notation octale, par exemple `755` ?","La commande `chmod` (par exemple, `chmod 755 fichier`)."
+Quelle commande est utilisée pour changer le propriétaire (utilisateur et groupe) d'un fichier ?,"La commande `chown` (par exemple, `chown user:group fichier`)."
+Quelle commande définit les permissions par défaut appliquées à la création d'un nouveau fichier ?,La commande `umask`.
+Qu'est-ce que le NFS (Network File System) ?,Un système de fichiers distribué qui permet d'accéder à un stockage distant sur le réseau comme s'il était local.
+Quelle est la principale caractéristique d'ext4 qui limite la fragmentation et améliore les performances par rapport à ext3 ?,"L'utilisation des 'extents', qui regroupent les données en plages contiguës."
+"Quel système de fichiers a été spécifiquement conçu pour les supports de stockage basés sur de la mémoire flash (SSD, eMMC) ?",F2FS (Flash-Friendly File System).
+Comment le système de fichiers F2FS améliore-t-il la durée de vie des supports flash ?,Il utilise une structure en log et une gestion optimisée de l'usure (wear leveling) pour répartir intelligemment les écritures.
+À quel moment l'administrateur système choisit-il le type de système de fichiers pour un volume de stockage ?,Au moment du formatage de la partition ou du volume logique (avec des commandes comme `mkfs`).
+Dans quel fichier de configuration sont définis les montages de systèmes de fichiers à effectuer automatiquement au démarrage ?,Le fichier `/etc/fstab`.
+Quelle est l'opération qui rend le contenu d'un système de fichiers (comme une clé USB) accessible dans l'arborescence principale ?,Le montage (mounting).
+Qu'est-ce qu'un point de montage ?,Un répertoire de l'arborescence existante où le contenu d'un autre système de fichiers est rendu accessible.
+Quel est le seul système de fichiers qui ne peut jamais être démonté tant que le système d'exploitation est actif ?,Le système de fichiers racine (`/`).
+Quelle commande permet de créer un nouveau répertoire ?,La commande `mkdir`.
+Quelle commande est utilisée à la fois pour renommer et pour déplacer des fichiers ou des répertoires ?,La commande `mv`.
+Quelle option doit-on ajouter à la commande `rm` pour supprimer un répertoire et tout son contenu ?,L'option `-r` (récursif).
+La commande `cd` signifie _____ et permet de changer de répertoire courant.,change directory
+Quelle commande affiche le chemin absolu du répertoire de travail actuel ?,La commande `pwd` (print working directory).
+Quelle fonctionnalité de Btrfs permet de créer des instantanés (en lecture seule ou en écriture) d'un système de fichiers ?,Les 'snapshots'.
+Quel est le mécanisme utilisé par les systèmes de fichiers comme ext3 et ext4 pour réduire les risques de corruption en cas de coupure brutale ?,La journalisation (journaling).
+Quel répertoire FHS contient les fichiers récupérés après une vérification du disque (fsck) ?,Le répertoire `/lost+found`.
+"Dans le FHS, le répertoire _____ est dédié aux logiciels additionnels installés par des tiers.",/opt
+À quoi sert le répertoire `/var/run` selon le standard FHS ?,"Il contient des informations sur l'état du système depuis le dernier démarrage, comme les fichiers PID des applications."
+Quelle est la principale différence de communication entre un tube nommé (FIFO) et un socket ?,"Un socket peut être utilisé pour la communication à travers un réseau, contrairement à un tube nommé qui est local à la machine."

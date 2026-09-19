@@ -1,0 +1,54 @@
+Quel organisme assure la maintenance du logiciel libre Apache HTTP Server ?,L'Apache Software Foundation.
+Quelle est l'origine étymologique du nom « Apache » pour le serveur web ?,"Un jeu de mot sur « A Patchy server », car il était initialement une collection de correctifs."
+Citez trois langages de scripts supportés par le serveur Apache via des modules.,"PHP, Perl et Python."
+Quelle est la branche stable actuelle recommandée pour le serveur Apache ?,La version 2.4.x.
+Le protocole HTTP est dit « _____ » car chaque requête est indépendante et le serveur ne garde pas de mémoire des interactions précédentes.,sans état (stateless)
+Quel port de communication est utilisé par défaut pour la version sécurisée HTTPS ?,Le port 443.
+Quel verbe HTTP est principalement utilisé pour récupérer une ressource du serveur ?,GET
+Quel verbe HTTP est utilisé pour obtenir uniquement les entêtes d'une réponse sans le corps du document ?,HEAD
+"Dans le cadre du protocole REST, quel verbe est employé pour effacer une ressource ?",DELETE
+Signification du code de retour HTTP 403 :,Forbidden (accès interdit).
+Signification du code de retour HTTP 404 :,Not Found (document introuvable).
+Signification du code de retour HTTP 500 :,Internal Server Error (erreur interne du serveur).
+Quelle innovation majeure apporte la version HTTP/2 par rapport à HTTP/1.1 ?,Le multiplexage complet des requêtes dans une seule connexion TCP.
+Sur quel protocole de transport le standard HTTP/3 s'appuie-t-il ?,QUIC (basé sur UDP).
+Quelle commande apachectl permet d'afficher la version d'Apache installée ?,apachectl -v
+Quelle commande apachectl permet de lister les modules compilés statiquement ?,apachectl -l
+Quelle est la différence entre un redémarrage « restart » et « graceful » ?,Le mode graceful attend la fin du traitement des requêtes en cours avant de recharger les processus.
+Quelle option de l'utilitaire apachectl vérifie la syntaxe des fichiers de configuration ?,configtest
+"Sur Debian, quel est le chemin du fichier de configuration principal d'Apache ?",/etc/apache2/apache2.conf
+"Sur Debian, dans quel répertoire stocke-t-on la configuration disponible mais non activée ?",/etc/apache2/sites-available/
+Quel outil permet d'activer un module spécifique sur une distribution de type Debian ?,a2enmod
+"Sur Red Hat, quel est le nom du package et du répertoire principal de configuration ?",httpd
+"Quel fichier de journalisation trace les caractéristiques (IP, méthode, code retour) de chaque requête servie ?",access_log
+Quelle directive permet de définir le format des logs d'accès ?,LogFormat
+"Dans la directive LogLevel, quel niveau correspond à un événement important mais normal ?",notice
+"Quel niveau de LogLevel est le plus grave, indiquant que le système est inutilisable ?",emerg
+Directive : ServerRoot,Définition : Indique la racine de la configuration du serveur Apache.
+Quelle directive définit le répertoire contenant les documents publics à servir ?,DocumentRoot
+Quelle directive de section applique une configuration uniquement à un chemin spécifique de l'URL (arborescence du site) ?,Location
+Terme désignant la cohabitation de plusieurs sites web différents sur un même serveur physique :,Hôte virtuel (Virtual Host).
+Quel est l'avantage principal de l'hôte virtuel par nom par rapport à l'hôte virtuel par IP ?,Il permet d'économiser des adresses IPv4 en partageant une seule IP pour plusieurs domaines.
+Quel mécanisme TLS permet l'utilisation d'hôtes virtuels par nom pour des connexions chiffrées ?,SNI (Server Name Indication).
+"Dans la configuration Apache, quelle directive est utilisée pour charger un module externe ?",LoadModule
+Quelle est la fonction d'un « reverse proxy » ?,Permettre l'accès à une zone interne en masquant les adresses réelles des serveurs au client.
+Quelle directive Apache est indispensable pour configurer un reverse proxy ?,ProxyPass
+Quel module Apache doit être chargé pour activer le support du protocole HTTPS ?,mod_ssl
+Quelle directive permet d'activer le moteur SSL au sein d'un VirtualHost ?,SSLEngine on
+Comment restreindre les protocoles acceptés uniquement à TLS 1.2 et 1.3 ?,SSLProtocol TLSv1.2 TLSv1.3
+Quelle directive désactive la diffusion de la version précise d'Apache et des modules dans les entêtes ?,ServerTokens Prod
+Quelle directive permet de limiter l'accès à un sous-réseau spécifique dans Apache 2.4 ?,Require ip [adresse_réseau]
+Que signifie l'acronyme MPM dans l'architecture d'Apache ?,Multi-Processing Module
+Quelle est la particularité du MPM prefork concernant la gestion des threads ?,Il est mono-threadé ; chaque requête est traitée par un processus enfant distinct.
+Pourquoi le MPM prefork est-il encore utilisé malgré sa forte consommation mémoire ?,Il est le seul compatible avec les modules qui ne sont pas « thread-safe ».
+Quel MPM est recommandé pour les sites gérant de nombreuses connexions persistantes ou lentes ?,MPM event
+Quelle directive ajuste le nombre minimum de processus libres maintenus en attente ?,MinSpareServers
+Quelle directive limite le nombre maximal de processus pour éviter la saturation mémoire ?,ServerLimit
+Pourquoi est-il utile de définir une valeur pour MaxRequestPerChild ?,Pour éviter que d'éventuelles fuites mémoire ne paralysent le système en renouvelant les processus périodiquement.
+Quel est le rôle de la directive TimeOut ?,Définir le temps maximum d'attente lors de la réception d'une requête ou de la transmission de données.
+Le _____ permet au client de demander plusieurs ressources successives au sein d'une même connexion TCP.,KeepAlive
+Quelle directive permet d'activer explicitement le protocole HTTP/2 dans Apache ?,Protocols h2 http/1.1
+Quel serveur web alternatif est réputé pour sa performance et sa faible consommation mémoire sur internet ?,Nginx
+"Logiciel alternatif spécialisé dans le rôle de proxy internet, supportant aussi le FTP :",Squid
+Quel outil spécialisé est utilisé pour la répartition de charge (load balancing) TCP/HTTP ?,HAProxy
+Quelle solution logicielle est spécialisée dans le cache de contenu web pour accélérer le trafic ?,Varnish

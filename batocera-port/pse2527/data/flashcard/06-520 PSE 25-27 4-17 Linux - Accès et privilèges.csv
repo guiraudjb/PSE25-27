@@ -1,0 +1,50 @@
+"Sous Linux, quel est l'identifiant numérique unique utilisé pour identifier les utilisateurs ?",L'UID (User ID).
+Quel est l'identifiant numérique (UID) réservé par défaut au compte root ?,$0$.
+Quelle est la plage de valeurs par défaut des UID pour les comptes systèmes ?,$1$ à $999$.
+À partir de quel UID commence généralement l'attribution pour les utilisateurs standards ?,$\ge 1000$.
+"Dans quel fichier sont stockées les informations non sensibles des utilisateurs (login, UID, home, etc.) ?",/etc/passwd.
+Où se trouve traditionnellement le répertoire personnel d'un utilisateur standard ?,/home/<nom_utilisateur>.
+"Dans le fichier /etc/passwd, que signifie le caractère 'x' en deuxième champ de la ligne d'un utilisateur ?",Il indique la présence d'un mot de passe (stocké ailleurs).
+"Dans le fichier /etc/passwd, que représente l'acronyme GID ?",Group ID (Identifiant de groupe).
+Quel fichier Linux contient les mots de passe chiffrés pour garantir la sécurité du système ?,/etc/shadow.
+Quels sont les privilèges d'accès requis pour lire ou écrire dans le fichier /etc/shadow ?,Seul l'utilisateur root y a accès.
+"Dans /etc/shadow, quel algorithme de hachage est indiqué par le sigle $6$ ?",SHA-512.
+Quelle commande permet de créer un nouvel utilisateur dans le système ?,useradd.
+"Lors de l'utilisation de useradd, quelle option permet de définir une date d'expiration pour le compte ?",-e (exemple: useradd -e 2026-12-31).
+Quel shell de connexion doit-on attribuer à un compte de service pour interdire toute connexion interactive ?,/usr/sbin/nologin.
+Quelle commande usermod permet de changer le login (nom d'utilisateur) d'un compte existant ?,usermod -l <nouveau_login> <ancien_login>.
+Quelle commande usermod permet de changer le répertoire personnel tout en déplaçant les fichiers actuels ?,usermod -d <nouveau_home> -m <utilisateur>.
+Quelle commande permet de supprimer un utilisateur ainsi que son répertoire personnel ?,userdel -r <utilisateur>.
+Quelle commande permet de modifier le mot de passe d'un utilisateur ?,passwd <utilisateur>.
+Quelle commande chage permet de définir une expiration du mot de passe après 90 jours ?,chage -M 90 <utilisateur>.
+Quelle commande permet d'afficher les paramètres d'expiration du mot de passe d'un utilisateur ?,chage -l <utilisateur>.
+Quelle commande usermod permet de verrouiller (désactiver) un compte utilisateur ?,usermod -L <utilisateur>.
+Quelle commande permet de déverrouiller un compte utilisateur précédemment bloqué ?,usermod -U <utilisateur>.
+Quelle commande affiche la liste des utilisateurs actuellement connectés au système ?,who.
+Quelle commande permet de consulter l'historique des connexions passées ?,last.
+Quelle commande permet de lister les échecs de connexion au système ?,lastb.
+Dans quel fichier sont stockées les informations relatives aux groupes du système ?,/etc/group.
+Quelle commande permet de créer un nouveau groupe avec un GID spécifique ?,groupadd -g <GID> <nom_groupe>.
+Quelles sont les deux commandes permettant d'afficher les groupes auxquels appartient un utilisateur ?,groups ou id.
+Quelle commande permet de supprimer un groupe existant ?,groupdel <nom_groupe>.
+Quelle commande usermod permet d'ajouter un utilisateur à un groupe secondaire sans supprimer ses autres appartenances ?,usermod -aG <groupe> <utilisateur>.
+Que signifie l'acronyme PAM dans le contexte de la sécurité Linux ?,Plugable Authentication Module.
+Quel est l'avantage principal de PAM concernant l'évolution des méthodes d'authentification (ex: biométrie) ?,Il permet d'ajouter des méthodes sans recompiler les programmes existants.
+Dans quels répertoires se trouve généralement la configuration de PAM ?,/etc/pam.d/ et /etc/security/.
+"Dans PAM, à quoi sert le type de module 'auth' ?",Il gère l'authentification de l'utilisateur.
+"Dans PAM, quel type de module est utilisé pour la journalisation des connexions ?",session.
+"Dans PAM, quel type de module gère la mise à jour des mots de passe ?",passwd.
+"Dans PAM, à quoi sert le type de module 'account' ?",Il vérifie la validité des informations de l'utilisateur (ex: compte expiré).
+"Dans PAM, que signifie la stratégie 'required' ?","Le module doit réussir pour que l'action soit validée, mais les tests continuent."
+"Dans PAM, quelle stratégie valide immédiatement l'action si le module réussit ?",sufficient.
+"Dans PAM, que se passe-t-il si un module avec la stratégie 'requisite' échoue ?",L'action échoue immédiatement et les tests s'arrêtent.
+Quelle commande permet de vérifier si un programme utilise nativement les bibliothèques PAM ?,ldd <programme>.
+Que signifie le nom de la commande sudo ?,Substitute User DO.
+Quel est le principal avantage de sudo par rapport au partage du mot de passe root ?,Il permet une traçabilité des actions et limite les commandes autorisées.
+Quelle commande spécifique doit être utilisée pour éditer le fichier de configuration de sudo en toute sécurité ?,visudo.
+À quel groupe faut-il généralement ajouter un utilisateur pour lui donner les privilèges sudo (selon la distribution) ?,Le groupe sudo ou wheel.
+Quel principe de sécurité Linux consiste à limiter les droits d'un processus pour réduire l'impact d'une faille ?,Le principe du moindre privilège.
+"Dans l'exercice 4 du support, quelle commande force un utilisateur à changer son mot de passe au prochain login ?",chage -d 0 <utilisateur>.
+"Selon l'exercice 7, que signifie l'exécution de chage -E 2025-12-31 user1 après la date indiquée ?",Le compte est verrouillé définitivement.
+Quelle est la fonction principale du groupe primaire par rapport aux groupes secondaires ?,Il est utilisé par défaut lors de la création de nouveaux fichiers.
+Quelle commande permet de créer un utilisateur avec son home directory et un groupe primaire spécifique ?,useradd -m -g <groupe> <utilisateur>.

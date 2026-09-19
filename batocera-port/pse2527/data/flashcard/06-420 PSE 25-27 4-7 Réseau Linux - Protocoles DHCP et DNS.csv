@@ -1,0 +1,65 @@
+Quel est le rôle principal du protocole DHCP ?,Permettre à un client d'obtenir automatiquement une configuration IP complète sans intervention manuelle.
+"Citez trois éléments, outre l'adresse IP, fournis par une configuration DHCP.","Le masque de sous-réseau, la passerelle par défaut et les adresses des serveurs DNS."
+Quelle est la signification du terme « lease time » dans le contexte du DHCP ?,Il s'agit de la durée du bail pendant laquelle l'adresse IP est attribuée au client.
+"Dans le processus DHCP en 4 étapes, quelle est la première étape initiée par le client ?",Le Discovery (DHCPDISCOVER).
+Comment s'appelle l'étape où le serveur DHCP propose une adresse IP disponible au client ?,L'étape Offer (DHCPOFFER).
+À quoi sert l'étape « Request » (DHCPREQUEST) dans l'attribution d'une adresse IP ?,Elle permet au client d'envoyer une requête pour accepter l'offre faite par le serveur.
+Quelle est la dernière étape du processus DHCP qui finalise l'attribution ?,"L'étape Ack (DHCPACK), où le serveur confirme l'attribution."
+Quel port UDP est utilisé par le client DHCP pour communiquer avec le serveur ?,Le port 68.
+Quel port UDP est utilisé par le serveur DHCP pour recevoir les requêtes des clients ?,Le port 67.
+Quel avantage offre la centralisation via un serveur DHCP ?,"Un seul serveur gère les configurations pour tout un réseau, simplifiant la gestion."
+Comment appelle-t-on la méthode DHCP qui associe une adresse MAC à une adresse IP fixe ?,Le DHCP statique (ou pseudo-dynamique).
+Quelle plage d'adresses IPv4 est utilisée par le mécanisme APIPA en cas d'indisponibilité du serveur DHCP ?,Les adresses de type 169.254.x.y.
+"Sur les distributions RedHat/CentOS, dans quel répertoire configure-t-on l'interface client pour le DHCP ?",/etc/sysconfig/network-scripts/
+"Dans le fichier de configuration d'interface Linux, quelle valeur doit prendre la variable BOOTPROTO pour activer le DHCP ?",BOOTPROTO=dhcp
+"Où est stocké le bail DHCP (durée, serveur, etc.) côté client sous Linux ?",/var/lib/dhcp/dhclient-<interface>.leases
+Quelle commande permet de forcer le renouvellement d'un bail DHCP pour l'interface eth0 ?,dhclient -r eth0 && dhclient eth0
+Quel est le nom du paquet Linux généralement utilisé pour le serveur DHCP ?,isc-dhcp-server (utilisant le démon dhcpd).
+Quel fichier contient la configuration principale du serveur DHCP ?,/etc/dhcp/dhcpd.conf
+"Dans dhcpd.conf, quel mot-clé définit la plage d'adresses IP allouables aux clients ?",range
+"Dans dhcpd.conf, quelle option définit l'adresse de la passerelle par défaut ?",option routers
+Comment démarre-t-on le service DHCP sous un système utilisant Systemd ?,systemctl start dhcpd
+Quel est le rôle fondamental du système DNS ?,Traduire un nom de domaine en adresse IP et inversement.
+À quel élément d'un annuaire téléphonique le DNS compare-t-il l'adresse IP ?,Au numéro de téléphone.
+Qu'est-ce qu'une « résolution inverse » en DNS ?,La conversion d'une adresse IP en un nom de domaine.
+Quel organisme supervise l'attribution des noms de domaine et des adresses IP au niveau mondial ?,L'ICANN.
+Que désigne l'acronyme TLD dans l'architecture DNS ?,Top-Level Domain (Domaine de premier niveau).
+Donnez un exemple de ccTLD (Country Code Top-Level Domain).,".fr (ou .de, .uk, .eu)."
+Quel est le rôle d'un « Registrar » (Bureau d'enregistrement) ?,"Vendre des noms de domaine aux utilisateurs finaux (ex. : OVH, Gandi)."
+Combien de serveurs racines (lettres A à M) existent officiellement dans la hiérarchie DNS ?,13 serveurs racines.
+Quelle technique permet de dupliquer les serveurs racines dans le monde pour améliorer la résilience ?,L'Anycast.
+Quel fichier contient la liste des serveurs racines pour un serveur DNS Bind ?,named.cache (ou named.root).
+Quelle est la différence entre un serveur DNS « Master » et un serveur « Slave » ?,"Le Master gère la zone et autorise les mises à jour, tandis que le Slave en copie les données pour la redondance."
+Quel type de serveur DNS se contente de transmettre les requêtes à un serveur autoritaire ?,Le serveur Forward (serveur relais).
+À quoi sert un serveur DNS de type « Hint/Cache » ?,Il stocke les réponses DNS pour accélérer les requêtes futures.
+"Lors d'une requête pour www.example.com, quel serveur est interrogé après le serveur racine ?",Le serveur TLD .com.
+Quel enregistrement DNS associe un nom à une adresse IPv4 ?,L'enregistrement de type A.
+Quel enregistrement DNS associe un nom à une adresse IPv6 ?,L'enregistrement de type AAAA.
+À quoi sert l'enregistrement CNAME ?,À créer un alias vers un autre nom de domaine.
+Quel type d'enregistrement définit les serveurs de messagerie pour un domaine ?,L'enregistrement MX (Mail Exchanger).
+Quel enregistrement DNS est spécifiquement utilisé pour la résolution inverse ?,L'enregistrement PTR (Pointer).
+Que contient l'enregistrement SOA (Start of Authority) ?,"Des informations sur la zone comme le serveur primaire, le contact et les durées de rafraîchissement."
+Quel est le nom du paquet serveur DNS le plus utilisé sous Linux (CentOS/Debian) ?,bind (ou bind9).
+"Dans Bind, quel fichier définit les zones et les options globales ?",/etc/named.conf
+Où sont généralement situés les fichiers de zone directe sous Linux ?,/var/named/
+Quelle option de /etc/named.conf permet de restreindre l'écoute à une adresse IP spécifique ?,listen-on
+Comment s'appelle l'outil permettant de vérifier la syntaxe du fichier /etc/named.conf ?,named-checkconf
+Quelle commande Systemd permet de démarrer le service DNS Bind ?,systemctl start named
+"Dans un fichier de zone, que représente la directive $TTL ?",La durée de vie par défaut des enregistrements en secondes.
+Quel fichier client définit l'ordre de résolution des noms (fichiers locaux vs DNS) ?,/etc/nsswitch.conf
+"Dans /etc/resolv.conf, quel mot-clé précède l'adresse IP du serveur DNS à interroger ?",nameserver
+À quoi sert la directive « search » dans le fichier /etc/resolv.conf ?,À définir un domaine de recherche pour compléter les noms courts.
+Quel fichier Linux permet d'effectuer une résolution de nom statique sans interroger de serveur DNS ?,/etc/hosts
+Quelle commande simple permet de résoudre un nom ou une IP en utilisant les résolveurs configurés ?,host
+Quel outil interactif permet d'interroger spécifiquement un serveur DNS ?,nslookup
+Quel outil avancé est recommandé pour obtenir des requêtes DNS détaillées sous Linux ?,dig
+Quelle option de la commande « dig » permet d'effectuer une résolution inverse ?,dig -x
+L'attribution d'une IP selon l'adresse MAC est appelée _____ statique.,DHCP
+Le processus de résolution transformant une IP en nom est dit _____.,inverse
+Le serveur racine DNS est symbolisé par un _____ dans la hiérarchie.,point (.)
+"Pour vérifier une zone DNS spécifique, on utilise la commande _____.",named-checkzone
+"Dans /etc/nsswitch.conf, la ligne « hosts: files dns » signifie que le fichier _____ est consulté en premier.",/etc/hosts
+Le port UDP du serveur DHCP est le $67$. (Vrai/Faux),Vrai
+Le fichier de configuration d'interface Linux pour eth0 est typiquement nommé _____.,ifcfg-eth0
+L'acronyme DNS signifie _____.,Domain Name System
+"En DHCP, le client diffuse sa requête initiale en mode _____.",broadcast

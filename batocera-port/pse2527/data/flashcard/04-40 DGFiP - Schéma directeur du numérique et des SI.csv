@@ -1,0 +1,75 @@
+Quel est l'acronyme du document stratégique de la DGFiP pour le numérique ?,SDNum (Schéma directeur du numérique).
+Sur quelles technologies le système informatique centralisé de la DGFiP était-il basé au début des années 1970 ?,Sur des technologies « Mainframe ».
+Quel grand programme a structuré le SI fiscal de la DGFiP à travers la création de référentiels ?,Le programme Copernic.
+Quel projet majeur de la DGFiP a permis la réussite du prélèvement à la source en 2019 ?,Le projet PAS (Prélèvement à la Source).
+Depuis quelle année la résorption de la dette technique et fonctionnelle est-elle un axe prioritaire pour la DGFiP ?,Depuis 2020.
+Combien d'agents de la DGFiP exercent-ils directement leurs missions dans les services informatiques ?,Plus de 5 000 agents.
+Comment s'appelle l'entité de la DGFiP qui porte l'ensemble des composantes de fabrication logicielle ?,La DPN (Direction des Projets Numériques).
+Quelle nouvelle entité a été créée en 2021 pour porter l'accélération de la transformation numérique de la DGFiP ?,La DTNum (Délégation à la Transformation Numérique).
+Combien de Directions interrégionales des services informatiques (DISI) la DGFiP compte-t-elle ?,Sept DISI.
+"Approximativement, combien d'applications ou de produits le Service des Systèmes d’Information (SSI) de la DGFiP pilote-t-il ?",Près de 800 applications (785 recensées en décembre 2024).
+Quels sont les deux projets innovants cités faisant appel à l'IA ?,LLaMandement et Foncier Innovant.
+Quelle orientation technologique par défaut la DGFiP adopte-t-elle pour ses nouveaux projets ?,L'orientation par défaut vers le cloud (« Cloud First »).
+Le mode d'organisation rapprochant développeurs (Dev) et exploitants informatiques (Ops) qui s'étend progressivement à la DGFiP est le _____.,DevOps.
+Quelle est l'une des priorités numériques de la DGFiP pour mieux utiliser ses données ?,Fiabiliser les données pour mieux les valoriser.
+Comment s'appelle la plateforme interne de la DGFiP conçue pour la valorisation des données tout en garantissant la sécurité ?,La Plateforme sécurisée de données (PSD).
+À quelle échéance la DGFiP prévoit-elle de publier un plan stratégique spécifique sur l'IA ?,Fin 2025.
+Quel projet vise à moderniser le système d’information comptable du secteur public local et hospitalier ?,HELIOS 2.
+Quel est l'objectif principal de la réforme de la facturation électronique ?,Imposer l’échange de factures électroniques entre assujettis à la TVA.
+Quand les grandes entreprises seront-elles dans l'obligation d'émettre des factures électroniques ?,En septembre 2026.
+Quel projet doit remplacer l'application AMD pour le recouvrement des amendes ?,Le projet NARA (Nouvelle Application de Recouvrement des Amendes).
+"Quel projet porte la modernisation de l'outil de gestion de la fiscalité des particuliers, en migrant les fonctionnalités d'Iliad ?",Le projet Gestpart.
+"Quel projet utilise l'IA pour la détection sur image (piscines, bâtis non déclarés) afin de fiabiliser les bases fiscales ?",Le projet Foncier Innovant.
+Quel projet a modernisé les outils du contrôle fiscal en mettant à disposition des outils comme Vue360 et GALAXIE ?,Le programme PILAT.
+"Quel projet utilise l'IA pour le ciblage de la fraude fiscale, programmant une part importante des contrôles ?",Le projet CFVR (Ciblage de la Fraude et Valorisation des Requêtes).
+Quel est l'objectif du projet DAC7 ?,Échanger des informations fiscales internationales sur les revenus générés via les plateformes numériques.
+Quel outil de recherche documentaire intelligente sera mis à disposition des agents en 2026 ?,LexIA.
+"Quel portail offre aux professionnels un point d'entrée unique pour leurs données fiscales, sociales et douanières ?",Portailpro.gouv.
+Quel projet porte sur la refonte du fichier des comptes bancaires et assimilés ?,FICOBA3.
+Quelle est la plateforme cloud interministérielle opérée par la DGFiP ?,NUBO.
+"Quel projet modernisera les ventes aux enchères publiques des domaines, en remplaçant HERMES ?",Le projet VEGA.
+Quel est le nom du programme d'amélioration de l'environnement de travail numérique de l'agent à la DGFiP ?,ETNA.
+"Quelle application permet aux agents de la DGFiP de signaler, suivre et traiter les incidents (agressions, etc.) ?",Sign@lFIP.
+"Quel projet remplacera les applications LORCA, MENTOR et TI pour la gestion intégrée du recrutement par concours ?",CAMELIA.
+Terme : Démarche UX.,"Définition : Démarche qui place les besoins, les attentes et les comportements des utilisateurs au centre de la conception de produits."
+Terme : RGAA.,"Définition : Référentiel Général d’Amélioration de l’Accessibilité, qui engage les administrations à rendre leurs services numériques accessibles aux personnes handicapées."
+Quel était le taux de disponibilité des applications pour les usagers en 2024 ?,"98,7%."
+"La _____ du système d’information correspond à l’accumulation de retards dans les composants techniques, applicatifs et fonctionnels.",dette.
+Quel est l'objectif de taux de conformité à la cible technologique que la DGFiP vise pour fin 2027 ?,78%.
+"Quel est le nom du cloud interne de la DGFiP, appuyé sur des logiciels libres et qu'elle maîtrise complètement ?",NUBO.
+Quel pourcentage de son portefeuille d'applications la DGFiP a-t-elle pour objectif d'opérer sur Nubo d'ici 2027 ?,30%.
+"Quelle méthode de gestion de projet, par opposition au cycle en V, favorise une approche flexible et des itérations courtes ?",La méthode agile.
+Terme : API (dans le contexte du SI).,Définition : Interface de programmation d'application qui standardise l'échange d'informations entre logiciels pour favoriser la réutilisation des données.
+Citez l'un des six référentiels de données centralisées sur lesquels s'articule le SI de la DGFiP.,"PERS (personnes), OCFI (occurrences fiscales), RTAUX (taux PAS), TOPAD (structures), FICOBA (coordonnées bancaires), RLOC (locaux) ou ROP (organismes publics)."
+L'urbanisation du SI vise à organiser et optimiser le système d’information pour réduire les _____ et faciliter la réutilisation des données.,redondances applicatives.
+Quelle méthode est utilisée par la DGFiP pour l'analyse des grands projets en termes de moyens et de retour sur investissement ?,La méthode MAREVA.
+Comment s'appelle l'instance de gouvernance incontournable qui valide les architectures applicatives et techniques des projets à la DGFiP ?,Le CAI (Comité d’Architecture Informatique).
+Quelle est l'orientation par défaut de la DGFiP concernant le choix entre logiciel libre et logiciel propriétaire ?,L'orientation par défaut est vers le logiciel libre.
+"Citez une norme ou un référentiel de bonnes pratiques que la DGFiP instancie, en dehors des référentiels généraux de l'État (RGS, RGI, etc.).","ITIL (qualité des services), Scrum/SAFe (agilité) ou ISO 9001 (ateliers éditiques)."
+"Le projet BANKFIP, nouvelle banque en ligne, sera une première implémentation à la DGFiP du _____.",Référentiel Général d’Eco-conception de Services Numériques (RGESN).
+Quel projet interne à la DGFiP vise à déployer des LLM (modèles d'IA génératifs) vers les agents ?,Le projet Caradoc.
+Quelle est la principale force sur laquelle la DGFiP mise pour développer et maintenir son SI ?,Ses forces internes stables (agents fonctionnaires ou contractuels).
+"Quel métier du SI, en dehors des développeurs et exploitants, est identifié comme devant être reconnu et renforcé ?",Le métier de maîtrise d’ouvrage (MOA) ou le métier de directeur de projet.
+Comment s'appelle la structure créée au sein de la DTNum pour développer des projets numériques innovants avec des « intrapreneurs » ?,La Fabrique numérique.
+Quel principe guide la DGFiP pour garantir la qualité de ses services publics numériques et leur évolution continue ?,La maîtrise de ses données et de ses outils numériques.
+Le projet GMBI est un outil numérique d'appui à la modernisation des missions _____ et à la fiabilisation des bases de fiscalité directe locale.,foncières.
+Quel est l'objectif du projet interministériel IQUIT ?,Dématérialiser la délivrance des quitus fiscaux pour les véhicules automobiles.
+Quel projet a permis la généralisation du référentiel budgétaire et comptable unique des collectivités locales (M57) ?,Le Compte Financier Unique (CFU).
+"La plateforme collaborative NOVAE, généralisée fin 2023, est issue de quel programme ?",Le programme ETNA (Environnement de Travail Numérique de l'Agent).
+"Pour les nouvelles applications critiques, la résilience du SI s'appuie sur l'architecture de NUBO, répartie sur combien de sites physiques distincts ?",Deux sites physiques distincts.
+Quelle est la finalité du projet 'Tableau de bord de l’accueil usagers' attendu en 2026 ?,Offrir un outil d'aide à la décision en centralisant les informations relatives à l'accueil des usagers.
+"Quel principe d'action structurant est appliqué pour la conception, le déploiement et l'évolution des solutions numériques de la DGFiP ?",Mettre l’utilisateur au centre.
+La DGFiP s'oriente vers une sortie des systèmes d'exploitation _____ pour réduire sa dette technique.,GCOS.
+"En matière de tests, la DGFiP distingue a minima les tests techniques, fonctionnels, d'intégration technique, de bout en bout et la _____.",validation métier.
+"Le pilotage, la conception, le développement et l'exploitation du SI sont maîtrisés et mis en œuvre par des _____.",agents DGFiP.
+"Quel service, en plus du SSI et de la DTNum, contribue à la fabrication de logiciels pour répondre à des besoins spécifiques ?",Les logiciels d'initiatives locales ou les intrapreneurs de la Fabrique numérique.
+Le Schéma Directeur du Numérique (SDNum) est conçu pour être mis à jour à quelle fréquence ?,Annuellement.
+"Dans la démarche de construction du SDNum, que signifie le parangonnage ?",La collecte d'informations auprès d'administrations fiscales étrangères pour comparer et s'inspirer de leurs pratiques.
+Quel projet vise à moderniser les applications de gestion de la fiscalité directe locale (FDL et FIDELIO) ?,Le projet BASIL.
+Le projet de modernisation de l'application PAYFIP vise à en faire l'outil de _____ des administrations publiques.,paiement en ligne.
+Terme : TAAP (dans Chorus).,"Définition : Traitement Automatique d’Analyse Prédictive, un algorithme d'IA qui aide au contrôle des dépenses de l'État."
+"Le renforcement de la sécurisation de l'accès au compte fiscal des particuliers, généralisé en 2025, passe par la mise en place d'une _____.",double authentification.
+Quelle est la mission du projet MUTSI ?,Mutualiser et moderniser les systèmes d’information de gestion et paiement des retraites du service des retraites de l'état (SRE) et de la Caisse des dépôts et consignations (CDC).
+Le projet BALTIC a pour but de faciliter la consultation des données _____ et des extraits de rôles des impôts directs locaux.,cadastrales.
+Quel est l'un des deux objectifs du mode d'organisation DevOps ?,Favoriser une collaboration fluide entre tous les acteurs (Dev et Ops) OU intégrer et déployer en continu.
+"Quel référentiel inter-administratif, intégrant celui des locaux de la DGFiP, a été ouvert en 2024 ?",Le RIAL (Référentiel Inter-Administratif des Locaux).

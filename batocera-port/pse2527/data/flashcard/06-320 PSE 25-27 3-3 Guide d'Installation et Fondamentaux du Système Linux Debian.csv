@@ -1,0 +1,50 @@
+Quel type de firmware remplace progressivement le BIOS depuis une dizaine d'années ?,L'UEFI (Unified Extensible Firmware Interface).
+Quelle est la limite de taille des disques supportée par une table de partition MBR ?,2 To.
+Quel système de table de partition permet à l'UEFI de supporter des disques de plus de 2 To ?,Le GPT (GUID Partition Table).
+Quel mécanisme UEFI vérifie la signature cryptographique du noyau pour empêcher le code non autorisé ?,Le Secure Boot.
+Quel est le nom du bootloader standard utilisé par la majorité des distributions Linux ?,GRUB2.
+Où est stocké l'exécutable GRUB2 sur un système démarrant en mode UEFI ?,Sur la partition système EFI (ESP).
+Quel fichier contient le cœur du système d'exploitation chargé par GRUB2 ?,Le fichier vmlinuz.
+Quel système de fichiers temporaire contient les pilotes nécessaires pour monter la partition racine ?,L'initramfs (initial RAM filesystem).
+"Dans les distributions modernes, quel est le premier processus lancé par le noyau ?",systemd.
+Quel composant de systemd est responsable de la collecte et de la gestion des journaux ?,journald.
+Quelle commande Linux permet de vérifier l'intégrité d'une image ISO téléchargée ?,sha256sum.
+Quel outil en ligne de commande est la référence pour copier une image ISO sur une clé USB ?,La commande dd.
+Quelle technologie apporte de la flexibilité en permettant de redimensionner les partitions après l'installation ?,LVM (Logical Volume Manager).
+Pourquoi est-il conseillé d'isoler le répertoire /var sur une partition distincte ?,Pour éviter qu'une saturation des logs ne bloque l'ensemble du système.
+"Quel est le système de fichiers historique de Linux, réputé pour sa stabilité ?",ext4.
+Quelle est la contrainte majeure du système de fichiers XFS concernant la gestion de l'espace ?,Il ne peut pas être réduit en taille.
+Quel système de fichiers est recommandé pour les charges d'écriture soutenues et les fichiers volumineux ?,XFS.
+Quelle solution logicielle constitue le standard pour le chiffrement de disque sous Linux ?,LUKS (Linux Unified Key Setup).
+"Dans le Secure Boot, comment appelle-t-on la clé maîtresse installée par le constructeur ?",La Platform Key (PK).
+Quel est l'unique service réseau qu'il est recommandé d'activer par défaut pour l'administration ?,Le service SSH (OpenSSH).
+Quel utilitaire simple sert d'interface au pare-feu sous Ubuntu ?,ufw (Uncomplicated Firewall).
+Quelle commande journalctl permet de suivre les journaux système en temps réel ?,journalctl -f.
+Quel paquet permet de configurer les mises à jour de sécurité automatiques sous Ubuntu ?,unattended-upgrades.
+Comment définit-on un hyperviseur de Type 1 ?,Un logiciel s'exécutant directement sur le matériel physique (bare-metal).
+Quelle famille de pilotes paravirtualisés offre les meilleures performances E/S pour les machines virtuelles ?,Les pilotes VirtIO.
+Quel agent doit être installé dans une VM pour permettre à l'hyperviseur Proxmox de l'administrer ?,QEMU Guest Agent.
+Quelle génération de machine virtuelle faut-il choisir sous Hyper-V pour supporter l'UEFI ?,La Génération 2.
+"Lors de la création d'un template, quel fichier d'identifiant unique doit impérativement être vidé ?",/etc/machine-id.
+Quel protocole réseau permet de démarrer une machine sans système d'exploitation pour l'installer ?,Le protocole PXE (Preboot eXecution Environment).
+"Dans une architecture PXE, quelle option DHCP indique l'adresse du serveur TFTP ?",L'option 66.
+"Dans une architecture PXE, quelle option DHCP précise le nom du fichier de boot ?",L'option 67.
+Quel protocole léger est utilisé pour transmettre le bootloader et le noyau lors d'un boot PXE ?,TFTP.
+Comment se nomme le système d'automatisation de l'installateur pour Debian et Ubuntu ?,Preseed.
+Quel outil d'automatisation est le standard pour les distributions de la famille Red Hat ?,Kickstart.
+Quel outil universel configure un système Linux au moment de son premier démarrage ?,cloud-init.
+Quel concept désigne la gestion de l'infrastructure via des fichiers de configuration versionnés ?,Infrastructure as Code (IaC).
+Quel outil de HashiCorp est la référence pour le provisionnement d'infrastructure ?,Terraform.
+Quel langage déclaratif est utilisé par Terraform pour décrire l'infrastructure ?,Le HCL (HashiCorp Configuration Language).
+Quel outil de gestion de configuration fonctionne sans agent en se connectant via SSH ?,Ansible.
+Comment appelle-t-on les fichiers YAML décrivant les tâches à exécuter dans Ansible ?,Des playbooks.
+Quel outil permet d'automatiser la création d'images pré-configurées (templates) ?,Packer.
+"Dans un pipeline CI/CD, quel est l'objectif de l'étape de 'Provisioning' ?",Déployer les ressources matérielles ou virtuelles (via Terraform par exemple).
+Pourquoi privilégier un compte utilisateur standard avec sudo plutôt que le compte root ?,Pour renforcer la sécurité lors de l'administration quotidienne.
+Quelle partition est obligatoire pour une installation Linux en mode UEFI ?,La partition EFI (/boot/efi).
+Quel service systemd gère le démarrage parallélisé des services ?,systemd.
+Que signifie l'acronyme ESP dans le contexte du boot UEFI ?,EFI System Partition.
+Quel est l'avantage principal de l'utilisation d'une infrastructure immuable ?,On remplace les serveurs par de nouvelles images au lieu de les modifier.
+Quelle est la fonction du Platform Key (PK) dans la hiérarchie Secure Boot ?,Servir de clé maîtresse pour autoriser la modification des autres clés.
+"Dans Ansible, que permet de faire la directive 'become: yes' ?",Passer en mode administrateur (privilèges sudo) pour exécuter une tâche.
+Quelle est la taille recommandée pour la partition /boot selon le guide ?,2 Go.

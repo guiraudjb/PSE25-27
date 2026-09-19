@@ -1,0 +1,55 @@
+Quel est le rôle principal des équipements d'interconnexion dans un réseau informatique ?,Relier physiquement des réseaux et acheminer les informations efficacement.
+À quel niveau du modèle OSI les répéteurs opèrent-ils ?,Niveau 1 (Couche Physique).
+À quel niveau du modèle OSI les ponts (bridges) et commutateurs (switches) opèrent-ils ?,Niveau 2 (Couche Liaison).
+À quel niveau du modèle OSI les routeurs opèrent-ils ?,Niveau 3 (Couche Réseau).
+À quel niveau du modèle OSI les passerelles (gateways) opèrent-ils ?,Niveau Applicatif (Couches 5-7).
+Quelle est la différence entre un équipement d'interconnexion et un équipement de communication interne ?,"L'interconnexion relie plusieurs réseaux, la communication interne relie les nœuds d'un même réseau."
+Citez un exemple d'équipement de communication interne au sein d'un réseau local (LAN).,Le commutateur (switch) ou le hub.
+Quel est l'enjeu principal de l'utilisation des commutateurs par rapport aux hubs ?,Améliorer les performances en évitant les collisions.
+Quelle fonctionnalité des routeurs permet de sécuriser le trafic ?,Les listes de contrôle d'accès (ACL) ou le pare-feu intégré.
+Quelle est la fonction première d'un répéteur ?,Amplifier et régénérer le signal pour étendre la portée du réseau.
+Pourquoi dit-on que les répéteurs sont transparents pour les couches supérieures ?,Parce qu'ils ne modifient pas les données transmises (pas de conversion de protocole).
+Quelle est la limite de distance classique pour Ethernet en câble cuivre qu'un répéteur permet de dépasser ?,$100 m$.
+Quel est l'inconvénient majeur d'un répéteur concernant la qualité du signal ?,Il amplifie également le bruit du signal.
+Quel équipement de niveau 1 permet de faire transiter plusieurs voies de communication sur un unique support physique ?,Le multiplexeur.
+Définition : Multiplexage fréquentiel (FDM).,Technique où la bande de fréquence est partagée entre les différentes voies.
+Définition : Multiplexage temporel (TDM).,Technique où le temps d'utilisation du support est partagé entre les voies.
+Quel est le cas d'usage typique des multiplexeurs dans les réseaux WAN ?,L'optimisation de la bande passante pour les liaisons longue distance.
+Sur quelle base les ponts et commutateurs acheminent-ils les trames ?,Les adresses MAC.
+Dans quelle sous-couche de la couche Liaison les ponts agissent-ils spécifiquement ?,La sous-couche LLC (Logical Link Control).
+Quel est l'avantage des ponts pour la performance d'un réseau ?,Ils filtrent les collisions en isolant les segments de réseau.
+Quel risque réseau majeur est associé à l'utilisation des ponts ?,La création de boucles (risque de storm de diffusion).
+Pourquoi les ponts sont-ils moins utilisés aujourd'hui ?,Ils ont été remplacés par les commutateurs (switches).
+Comment un commutateur apprend-il l'emplacement des nœuds sur le réseau ?,En enregistrant l'adresse MAC de l'émetteur et le port d'origine dans sa table.
+Quelle norme est utilisée par les commutateurs avancés pour gérer les réseaux locaux virtuels (VLAN) ?,$802.1Q$.
+Quelle est la fonction d'un commutateur de niveau 3 ?,Le routage inter-VLAN en fonction des adresses IP.
+Quel protocole assure la redondance du routeur par défaut pour éviter les pannes ?,VRRP (Virtual Router Redundancy Protocol).
+À quoi servent les ACL (Access Control Lists) sur un commutateur ou un routeur ?,À filtrer l'accès aux sous-réseaux IP en fonction de règles définies.
+Quelle fonction de niveau 4 un commutateur peut-il assurer ?,L'autorisation ou le blocage de flux sur des ports TCP/UDP spécifiques.
+Quel est l'avantage principal d'un commutateur par rapport à un hub ?,Il n'envoie les trames que vers le port de destination (réduction des collisions).
+Quel équipement est utilisé pour relier des réseaux hétérogènes comme un LAN et un WAN ?,Le routeur.
+Comment appelle-t-on le composant d'un routeur frontière qui traduit les trames entre protocoles LAN et WAN ?,L'unité CSU/DSU (Channel Service Unit/Data Service Unit).
+Définition : Routage statique.,Mode où les tables de routage sont configurées manuellement par l'administrateur.
+Définition : Routage dynamique.,Mode où les tables sont mises à jour automatiquement via des protocoles de routage.
+Citez un exemple de protocole de routage à vecteur de distance.,RIP.
+Citez deux exemples de protocoles de routage à état de liens.,OSPF et BGP.
+Quel protocole de routage est spécifiquement utilisé pour l'Internet ?,BGP.
+Quelle fonctionnalité du routeur permet de partager une seule adresse IP publique entre plusieurs nœuds privés ?,Le NAT (Network Address Translation).
+Quel est le rôle d'une passerelle (gateway) au niveau applicatif ?,Assurer la compatibilité en convertissant les protocoles entre applications hétérogènes.
+Pourquoi les passerelles sont-elles de moins en moins présentes aujourd'hui ?,"Elles sont remplacées par des webservices, des API ou des middleware."
+Citez un exemple historique de conversion de protocole effectuée par une passerelle.,La conversion entre $X.400$ et SMTP.
+Quel est l'inconvénient majeur des passerelles concernant la performance ?,Un traitement logiciel lourd limitant les performances.
+Quel équipement choisir pour segmenter un LAN et réduire les collisions ?,Le commutateur (switch).
+Quel protocole permet d'éviter les boucles de commutation ?,STP (Spanning Tree Protocol).
+Vrai ou Faux : Un répéteur filtre le trafic pour réduire la congestion.,"Faux (il répète tout, y compris le bruit et les collisions)."
+Quel est l'avantage de la commutation matérielle des switches ?,Elle offre une haute performance par rapport au traitement logiciel des ponts.
+Quel équipement est indispensable pour créer des tunnels sécurisés (VPN) entre sites distants ?,Le routeur.
+"Dans le cadre de l'adaptation des supports, quel passage un répéteur peut-il faciliter ?",Le passage du coaxial à la fibre optique ($coaxial \rightarrow fibre$).
+Quelle est la fonction d'un 'routeur frontière' ?,Connecter un réseau local (LAN) à un réseau étendu (WAN).
+Les tables d'association MAC/port sont une caractéristique de quel équipement ?,Le commutateur (switch).
+Quelle est la métrique principale utilisée par les protocoles à vecteur de distance ?,La distance (souvent le nombre de sauts).
+Quel type de multiplexage est couramment utilisé en téléphonie analogique ?,Le multiplexage fréquentiel (FDM).
+Quel type de multiplexage est privilégié pour les réseaux numériques ?,Le multiplexage temporel (TDM).
+Quelle est la fonction du protocole OSPF dans un grand réseau ?,Calculer le chemin le plus court en partageant une carte complète du réseau.
+Pourquoi un routeur introduit-il généralement plus de latence qu'un commutateur ?,À cause du temps nécessaire au traitement et à l'analyse des paquets de niveau 3.
+Quelle est la bonne pratique pour gérer des réseaux complexes et évolutifs ?,"Configurer le routage dynamique (OSPF, BGP)."

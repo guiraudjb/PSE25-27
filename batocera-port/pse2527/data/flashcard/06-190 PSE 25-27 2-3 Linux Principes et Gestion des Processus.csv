@@ -1,0 +1,50 @@
+Quelle est la différence fondamentale entre un programme et un processus ?,"Un programme est un fichier exécutable statique sur le disque, tandis qu'un processus est une instance d'un programme en cours d'exécution en mémoire."
+"Dans un système multitâche, comment le système d'exploitation donne-t-il l'illusion d'exécuter plusieurs processus simultanément ?",En allouant successivement le CPU à chaque processus pour de courtes périodes.
+Quelles sont les cinq zones mémoires constituant un processus sous Linux ?,"Le code, les données initialisées, les données non initialisées, le tas (heap) et la pile (stack)."
+La zone mémoire d'un processus qui contient le flot séquentiel des instructions en langage machine est appelée la section _____.,code
+À quoi sert la zone mémoire de la 'pile' (stack) dans un processus ?,"Elle stocke les données des appels de fonction, comme les paramètres, les variables locales et les adresses de retour."
+Comment évolue la taille de la pile (stack) durant l'exécution d'un programme ?,"Elle varie dynamiquement, augmentant à chaque appel de fonction et diminuant à chaque retour de fonction."
+À quoi sert la zone mémoire du 'tas' (heap) dans un processus ?,Elle est réservée pour l'allocation dynamique de mémoire à la demande du programme.
+Comment les zones de la pile (stack) et du tas (heap) sont-elles organisées en mémoire pour optimiser l'espace ?,Elles s'étendent de façon inverse dans la même zone d'espace libre pour pouvoir se compenser mutuellement.
+Quelle structure de données le système d'exploitation utilise-t-il pour stocker les informations spécifiques à chaque processus ?,La table des processus.
+Que représente le PID (Process ID) dans la table des processus ?,"C'est un identifiant unique pour chaque processus, calculé en incrémentant le dernier identifiant alloué."
+Que représente le PPID (Parent Process ID) ?,C'est l'identifiant du processus père qui a créé le processus courant.
+Que devient un processus si son père termine son exécution avant lui ?,Il est 'adopté' par le processus 'init' ou 'systemd' et son PPID devient 1.
+Quelle est la différence entre le RUID (Real User ID) et l'EUID (Effective User ID) ?,"Le RUID est l'ID de l'utilisateur qui a lancé le programme, tandis que l'EUID est l'ID effectif sous lequel le programme s'exécute, qui peut être différent."
+Dans quel cas l'EUID d'un processus peut-il être différent de son RUID ?,"Lorsque le programme exécuté a le 'set-uid bit' positionné, lui permettant de s'exécuter avec les droits de son propriétaire."
+"Outre les identifiants et les droits, quelles autres informations essentielles la table des processus contient-elle ?","Des références aux zones mémoires, aux fichiers ouverts, la priorité, l'état du processus et les signaux non traités."
+"Quel est le premier processus créé au démarrage du noyau Linux, ayant le PID 0 ?",Le processus 'swapper'.
+"Quel processus, ayant le PID 1, est le père de la plupart des autres processus du système sous Linux ?","Le processus 'init' ou, sur les distributions modernes, 'systemd'."
+"La création d'un processus sous Linux se fait toujours en deux étapes : la duplication, suivie potentiellement d'un _____ de code.",recouvrement
+Quel appel système est utilisé pour réaliser la duplication d'un processus ?,L'appel système `fork()`.
+"Lors d'un appel à `fork()`, qu'est-ce qui est copié du processus parent au processus fils ?","Le contexte du parent, incluant les zones mémoires (pile, tas, données) et la table des fichiers ouverts."
+"Lors d'un `fork()`, la zone mémoire du code est-elle dupliquée ou partagée entre le père et le fils ?",Elle est partagée car elle n'a pas vocation à être modifiée.
+Quelle valeur l'appel système `fork()` retourne-t-il au processus père ?,Le PID du processus fils nouvellement créé.
+Quelle valeur l'appel système `fork()` retourne-t-il au processus fils ?,La valeur 0.
+Quel appel système permet à un processus de remplacer son code par celui d'un nouveau programme ?,"L'appel système `exec()` (ou une de ses variantes comme execl, execv, etc.)."
+Que se passe-t-il dans les zones mémoires d'un processus lorsqu'il exécute un appel à `exec()` ?,"Les zones de données, de pile et de tas sont écrasées et remplacées par celles du nouveau programme, et une nouvelle zone de code est allouée."
+Quels sont les deux modes d'exécution d'un processus sous Linux ?,Le mode utilisateur et le mode noyau.
+"Quel est le mode d'exécution par défaut d'un processus, avec des droits restreints ?",Le mode utilisateur.
+Décrivez le mode noyau (kernel mode).,"C'est un mode d'exécution privilégié sans restrictions, permettant d'accéder à toutes les zones mémoires et instructions."
+Citez trois événements pouvant déclencher un passage du mode utilisateur au mode noyau.,"Un appel à une fonction système, l'exécution d'une opération non autorisée, ou une interruption matérielle (IRQ)."
+"Pourquoi le noyau n'est-il pas considéré comme un ensemble de processus distincts, mais plutôt comme une partie de chaque processus utilisateur ?","Parce que chaque processus utilisateur passe en mode noyau pour exécuter des opérations privilégiées, intégrant ainsi le code du noyau dans son propre flux d'exécution."
+Qu'est-ce que l'ordonnancement (scheduling) des processus ?,C'est la fonction du système d'exploitation qui partage le processeur entre les différents processus demandant à être exécutés.
+Quelle est la caractéristique d'un algorithme d'ordonnancement non préemptif ?,Un processus en cours d'exécution conserve le processeur jusqu'à ce qu'il le libère volontairement à la fin de son exécution.
+Qu'est-ce qu'un algorithme d'ordonnancement préemptif ?,Le système d'exploitation peut interrompre un processus en cours d'exécution pour allouer le processeur à une tâche plus prioritaire.
+"Dans une politique d'ordonnancement à tourniquet (round-robin), qu'est-ce que le 'quantum de temps' ?",C'est le temps d'exécution maximal alloué à un processus avant qu'il ne soit interrompu (préempté) par l'ordonnanceur.
+Comment les systèmes d'exploitation modernes gèrent-ils les priorités des processus lors de l'ordonnancement ?,"Ils utilisent des files d'attente multiples, sélectionnant les processus dans la file de priorité la plus élevée."
+Quel mécanisme empêche un processus de basse priorité d'être indéfiniment privé de processeur (famine) ?,"Le vieillissement (aging), où la priorité d'un processus augmente progressivement avec son temps d'attente."
+Quel pseudo-système de fichiers sous Linux permet d'obtenir des informations sur les processus en cours d'exécution ?,Le pseudo-système de fichiers `/proc`.
+"Dans le système de fichiers `/proc`, comment est nommé le répertoire correspondant à un processus spécifique ?","Le répertoire prend comme nom le PID du processus (par exemple, `/proc/1234`)."
+"Dans `/proc/{pid}`, quel fichier ou lien symbolique pointe vers le répertoire de travail courant du processus ?",Le lien symbolique `cwd` (current working directory).
+"Dans `/proc/{pid}`, quel lien symbolique pointe vers le fichier exécutable contenant le code du processus ?",Le lien symbolique `exe`.
+Que contient le répertoire `/proc/{pid}/fd` ?,"Il contient des liens symboliques vers les fichiers ouverts par le processus, nommés d'après leurs descripteurs de fichiers."
+"Quel fichier dans `/proc/{pid}` fournit des informations détaillées sur l'état du processus, comme son nom, son PID, son PPID et son état (sleeping, running, etc.) ?",Le fichier `status`.
+"Dans le fichier `/proc/{pid}/status`, que signifie l'état 'S' (sleeping) ?",Le processus est en attente et interruptible.
+"Dans le fichier `/proc/{pid}/status`, que signifie l'état 'R' (running) ?",Le processus est en cours d'exécution ou est prêt à être exécuté.
+"Dans le fichier `/proc/{pid}/status`, que signifie l'état 'Z' (zombie) ?",Le processus a terminé son exécution mais attend que son parent lise son état de sortie.
+Quels sont les trois descripteurs de fichiers standards ouverts par défaut pour tout processus ?,"0 (stdin), 1 (stdout) et 2 (stderr)."
+Quel fichier dans `/proc/{pid}` fournit une cartographie détaillée des zones mémoires du processus ?,Le fichier `maps`.
+"Dans le fichier `/proc/{pid}/maps`, comment peut-on distinguer la zone de code des autres zones ?",La zone de code a la permission d'exécution ('x').
+"Dans le fichier `/proc/{pid}/maps`, quelle permission indique qu'une zone mémoire est modifiable ?",La permission d'écriture ('w').
+"Dans le fichier `/proc/{pid}/status`, à quoi correspond la valeur `VmRSS` ?",C'est la taille de la mémoire réellement occupée par le processus en RAM (Resident Set Size).

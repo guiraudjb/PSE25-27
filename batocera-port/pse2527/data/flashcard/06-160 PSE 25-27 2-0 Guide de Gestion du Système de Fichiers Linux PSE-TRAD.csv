@@ -1,0 +1,47 @@
+"Quel est l'objectif principal du webinaire ""La gestion des volumes sous Linux"" ?",Proposer une vision structurée du noyau Linux et du système de fichiers pour comprendre les mécanismes internes qui soutiennent l'administration quotidienne.
+"Selon la présentation, quelle est la faiblesse d'une administration Linux reposant souvent sur des automatismes ?","Ce manque de compréhension interne devient critique lors d'incidents, de problèmes de performance ou de décisions d'architecture."
+Quel est le rôle fondamental du noyau Linux dans le système d'exploitation ?,Il constitue le cœur du système et arbitre l'accès à toutes les ressources matérielles.
+Quelle commande permet d'afficher la version du noyau Linux et d'autres informations système ?,La commande `uname -a`.
+"Linux repose sur une architecture _____, qui combine performance et flexibilité.",monolithique modulaire
+Dans quel répertoire sont situés les modules du noyau chargeables dynamiquement ?,Dans `/lib/modules/<version_du_noyau>`.
+Quelle commande liste les modules actuellement chargés par le noyau ?,La commande `lsmod`.
+Quelles deux commandes permettent de charger un module dans le noyau ?,Les commandes `modprobe` et `insmod`.
+Quelle commande permet de décharger un module du noyau ?,La commande `rmmod`.
+Où se trouvent les fichiers de configuration permettant d'automatiser le chargement des modules au démarrage ?,Dans le répertoire `/etc/modprobe.d/`.
+"Pour un administrateur système, le noyau est à la fois un levier de performance et une source potentielle d'_____.",instabilité
+Comment un programme est-il exécuté par le système Linux ?,"Il s'exécute sous forme de processus, planifié par l'ordonnanceur du noyau."
+Quelle commande est principalement utilisée pour afficher l'état des processus en cours d'exécution ?,La commande `ps` (Process Status).
+"Dans la sortie de la commande `ps`, que signifie le statut 'S' pour un processus ?",Le processus est en état de sommeil (sleep).
+"Dans la sortie de `ps`, que signifie le statut 'Ss' ?",Il s'agit d'un processus en sommeil qui est également un leader de session (session leader).
+"Dans la sortie de `ps`, que signifie le statut 'S<' ?",Il s'agit d'un processus en sommeil avec une priorité élevée.
+"Dans la sortie de `ps`, que signifie le statut 'Sl' ?",Il s'agit d'un processus en sommeil qui est multi-threadé.
+Quel est le principal outil de supervision des processus en temps réel affichant l'utilisation du CPU et de la mémoire ?,La commande `top`.
+Quelles sont les trois ressources mémoire gérées par le noyau Linux ?,"La mémoire vive (RAM), le cache disque et le swap."
+Qu'est-ce que le paramètre `swappiness` du noyau Linux contrôle ?,Il contrôle la propension du noyau à utiliser l'espace de swap.
+Comment peut-on afficher la valeur actuelle du paramètre `swappiness` ?,En lisant le contenu du fichier `/proc/sys/vm/swappiness` (par exemple avec `cat`).
+Quelle commande permet d'afficher l'utilisation de la mémoire et du swap de manière lisible par l'homme ?,La commande `free -h`.
+"Quelle commande rapporte des statistiques sur la mémoire virtuelle, les processus, le swap et l'activité CPU ?",La commande `vmstat`.
+Quel est le rôle du système de gestion de fichiers (SGF) sous Linux ?,"Il transforme le stockage brut en une organisation logique exploitable, garantissant cohérence, intégrité et persistance des données."
+"Quelle est la philosophie de Linux concernant les fichiers, les périphériques et les processus ?","Il adopte une approche unifiée où tout est représenté de manière homogène, souvent comme un fichier."
+"Dans la liste des fichiers, quel caractère indique un fichier classique (texte, binaire) ?",Le caractère '-'.
+"Dans la liste des fichiers, quel caractère indique un répertoire ?",Le caractère 'd'.
+"Dans la liste des fichiers, quel caractère indique un lien symbolique ?",Le caractère 'l'.
+"Dans la liste des fichiers, quel caractère indique une interface fichier en mode caractère (device file / character) ?",Le caractère 'c'.
+"Dans la liste des fichiers, quel caractère indique une socket ?",Le caractère 's'.
+"Dans la liste des fichiers, quel caractère indique un tube nommé (named pipe) ?",Le caractère 'p'.
+"Dans la liste des fichiers, quel caractère indique une interface en mode bloc (block device) ?",Le caractère 'b'.
+Comment se nomme la convention normalisée qui définit la structure de l'arborescence des fichiers sous Linux ?,Le FHS (Filesystem Hierarchy Standard).
+Quelles sont les trois commandes de base pour la navigation dans l'arborescence des fichiers ?,"`pwd`, `cd`, `ls`."
+Quelles sont les deux commandes principales pour la manipulation des répertoires (création/suppression) ?,`mkdir` et `rmdir`.
+Quelles commandes sont utilisées pour manipuler les droits et les propriétaires d'un fichier ?,`chmod` et `chown`.
+Quelles sont les deux principales commandes pour rechercher des fichiers sur le système ?,`find` et `locate`.
+Quelles commandes permettent de connaître l'utilisation de l'espace disque ?,`du` et `df`.
+Quel type de fichiers trouve-t-on principalement dans le répertoire `/dev` ?,Des fichiers spéciaux représentant des périphériques (interfaces matérielles) et des liens.
+Quel est le rôle principal du répertoire `/etc` ?,Il contient les fichiers de configuration du système et des applications.
+Quel type de données contient le répertoire `/var` ?,"Il contient des données variables, comme les fichiers de logs et les files de messages, dont le contenu change fréquemment."
+À quoi sert le répertoire `/opt` ?,"Il est destiné à l'installation de logiciels additionnels ou tiers, souvent en dehors du gestionnaire de paquets du système."
+Que contient typiquement le répertoire `/home` ?,Il contient les répertoires personnels des utilisateurs du système.
+Quel est le rôle critique du répertoire `/boot` ?,"Il contient les fichiers essentiels au démarrage du système, comme le noyau Linux, l'initrd et le chargeur de démarrage (bootloader)."
+Quels sont les trois principaux types de fichiers trouvés dans le répertoire `/boot` ?,"Le noyau (vmlinuz), les scripts de démarrage initiaux (initrd) et le chargeur de démarrage (grub)."
+Que signifie l'acronyme `usr` dans `/usr` et que contient ce répertoire ?,User System Resources ; il contient la majorité des programmes et données utilisateur-système non essentiels au démarrage minimal.
+Quelle est la fonction du répertoire `/tmp` ?,Il est utilisé pour stocker des fichiers temporaires créés par les programmes pendant leur exécution.

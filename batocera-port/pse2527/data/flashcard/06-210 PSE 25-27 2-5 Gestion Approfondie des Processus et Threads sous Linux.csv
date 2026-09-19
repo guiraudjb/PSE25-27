@@ -1,0 +1,68 @@
+Quelle est la responsabilité principale du système d’exploitation dans la gestion des processus ?,"Il gère l'ensemble des processus, alloue le temps processeur et gère leurs états (attente, blocage, exécution)."
+"Que signifie l'état ""créé"" pour un processus ?","Le processus vient d'être créé par un parent via `fork()` et `exec()`, ses ressources mémoires sont allouées et il est listé dans la table des processus."
+Dans quel état se trouve un processus qui n'attend que l'allocation du processeur pour s'exécuter ?,"L'état ""prêt""."
+"Un processus est dit ""en cours d’exécution"" lorsqu'il exécute ses instructions sur _____.",l'unité de traitement (processeur).
+"Combien de processus peuvent être dans l'état ""en cours d'exécution"" simultanément sur un seul cœur de processeur ?",Un seul.
+"Qu'attend un processus se trouvant dans l'état ""endormi"" ?","Un événement externe, communiqué par un signal ou une interruption, pour se réveiller."
+"Quelle est la caractéristique principale de l'état ""suspendu"" d'un processus ?",Il est mis en pause volontairement par un utilisateur et nécessite une demande explicite de reprise pour continuer.
+"Sous Linux, l'état `TASK_RUNNING` (R) regroupe quels deux états généraux d'un processus ?","Les états ""prêt"" et ""en cours d’exécution""."
+Que signifie l'état `TASK_INTERRUPTIBLE` (S) sous Linux ?,Le processus est endormi mais peut être réveillé par un signal générique ou un timer.
+Par quoi un processus dans l'état `TASK_UNINTERRUPTIBLE` (D) peut-il être réveillé ?,"Uniquement par un événement spécifique, comme la fin d'une opération d'entrée/sortie sur disque."
+"Dans l'état `TASK_ZOMBIE` (Z), qu'est-ce qui empêche le processus d'être complètement supprimé du système ?",Il attend que son processus père prenne en compte sa terminaison.
+L'état `TASK_STOPPED` (T) est généralement provoqué par quelle action de l'utilisateur ?,L'envoi du signal `SIGSTOP` ou l'utilisation de la combinaison de touches `CTRL-Z` dans un terminal.
+Comment le mécanisme de swapping fonctionne-t-il sur les systèmes Linux modernes ?,"Le système n'échange pas des processus entiers, mais travaille au niveau des pages mémoires individuelles."
+À quel niveau du système les interruptions se produisent-elles ?,Au niveau matériel (hardware).
+Qu'est-ce qu'un signal dans le contexte des processus Linux ?,Un événement logiciel asynchrone envoyé à un processus pour le notifier d'une situation.
+Pourquoi l'effet d'un signal sur un processus n'est-il pas instantané ?,Car le noyau examine la réception d'un signal uniquement au moment de passer du mode noyau au mode utilisateur.
+Quel signal un processus père reçoit-il lorsqu'un de ses processus fils se termine ?,Le signal `SIGCHLD`.
+Quels sont les deux appels système fondamentaux pour la création d'un nouveau processus ?,"L'appel `fork()` pour dupliquer le parent, suivi de `exec()` pour charger le nouveau programme."
+"Après sa création, un processus passe de l'état ""créé"" à l'état _____.",prêt
+Que se passe-t-il lorsqu'un processus est préempté ?,L'ordonnanceur interrompt son exécution pour allouer le processeur à un autre processus.
+"Lorsqu'un processus effectue une demande d'entrée/sortie, comme une lecture de fichier, dans quel état passe-t-il ?","Il passe à l'état ""endormi"" en attendant la fin de l'opération."
+Quel appel système un processus exécute-t-il pour signaler la fin de son exécution et passer à l'état zombie ?,L'appel système `exit()`.
+Qui est responsable du nettoyage final d'un processus zombie ?,"Son processus père, après avoir reçu et traité le signal `SIGCHLD`."
+"Si un processus père se termine avant son fils, quel processus adopte le processus fils orphelin ?","Le processus initial du système, `init` ou `systemd` (PID 1)."
+Quel est le rôle de l'ordonnanceur (scheduler) ?,Partager le temps du processeur entre les différents processus prêts à s'exécuter.
+"Comment la commande `top` identifie-t-elle les processus dits ""temps réel"" ?","Elle affiche la mention ""rt"" (realtime) dans la colonne de priorité."
+Décrivez le comportement d'un processus sous la politique d'ordonnancement `SCHED_FIFO`.,"Il s'exécute jusqu'à ce qu'il se termine, se bloque, ou qu'un processus de priorité supérieure devienne prêt."
+Quelle est la principale différence entre les politiques d'ordonnancement `SCHED_RR` et `SCHED_FIFO` ?,"`SCHED_RR` alloue un quantum de temps fixe, permettant un tourniquet (round-robin) entre processus de même priorité."
+Quelle politique d'ordonnancement est utilisée pour les processus standards sous Linux ?,`SCHED_OTHER` (ou `SCHED_NORMAL`).
+Comment la priorité d'un processus `SCHED_OTHER` est-elle calculée ?,"Elle est basée sur une priorité statique, une valeur `nice` ajustée par l'utilisateur, et un bonus dynamique basé sur l'historique."
+"Dans la plage de valeurs `nice` (-20 à +19), laquelle correspond à la plus haute priorité ?",La valeur -20.
+Quelle est la plage de priorité interne pour les processus traditionnels sous Linux ?,De 100 (plus prioritaire) à 139 (moins prioritaire).
+Qui est autorisé à augmenter la priorité d'un processus en lui assignant une valeur `nice` négative ?,Uniquement le super-utilisateur (root).
+Quelle commande permet de modifier la priorité d'un processus déjà en cours d'exécution ?,La commande `renice`.
+Citez trois événements qui déclenchent un changement de contexte.,"La fin du quantum de temps, un appel système bloquant (E/S), ou la fin d'exécution du processus."
+Quelle fonction du noyau est responsable de choisir le prochain processus à exécuter ?,La fonction `schedule()`.
+Quelles informations minimales sur un processus doivent être sauvegardées lors d'un changement de contexte ?,Le compteur ordinal (adresse de la prochaine instruction) et l'état des registres du processeur.
+Concept : Thread (Processus léger),"Définition : Un fil d'exécution au sein d'un processus qui partage les zones mémoire (code, données) mais possède sa propre pile d'exécution."
+Pourquoi la création d'un thread est-elle moins coûteuse que la création d'un processus ?,"Parce que les régions mémoires et les descripteurs de fichiers sont partagés, ne nécessitant pas de duplication complète."
+Quel est le principal avantage des threads pour la communication inter-tâches ?,"La communication est simplifiée car ils partagent un espace mémoire commun, évitant les mécanismes complexes d'IPC."
+Comment les threads aident-ils à exploiter pleinement le matériel des systèmes multiprocesseurs ?,Le système d'exploitation peut répartir les threads d'une même application sur différents cœurs de processeur pour une exécution parallèle.
+Quelle est la principale difficulté dans la programmation d'applications multi-thread ?,"La gestion des accès concurrents aux données partagées, qui nécessite des mécanismes de synchronisation et d'exclusion mutuelle."
+"Sous Linux, quelle est la bibliothèque standard utilisée pour l'implémentation des threads ?",La librairie `pthread`.
+À quoi sert la commande `pstree` ?,Elle affiche la hiérarchie des processus sous forme d'un arbre de filiation.
+"Dans la sortie de `pstree`, comment sont représentés les threads d'un processus ?","Ils sont affichés avec le nom du processus entre accolades, par exemple `auditd-{auditd}`."
+"Dans la sortie de `ps -ef`, que représentent les colonnes `PID` et `PPID` ?",`PID` est l'identifiant du processus et `PPID` est l'identifiant de son processus père.
+Quel est l'avantage principal de la commande `top` par rapport à `ps` ?,"`top` fournit une vue dynamique des processus, rafraîchie en temps réel et triée par défaut par utilisation du CPU."
+"Dans la sortie de `vmstat`, que signifient les colonnes `r` et `b` sous l'en-tête `procs` ?","`r` est le nombre de processus exécutables (prêts ou en exécution), et `b` est le nombre de processus en sommeil non interruptible."
+"Dans la sortie de `vmstat`, que mesurent les colonnes `cs` et `in` sous l'en-tête `system` ?","`cs` mesure le nombre de changements de contexte par seconde, et `in` le nombre d'interruptions par seconde."
+"Dans la colonne `STAT` de la commande `ps`, que signifie le caractère `S` ?",`S` indique un sommeil interruptible (interruptible sleep).
+"Dans la colonne `STAT` de la commande `ps`, que signifie le caractère `T` ?",`T` indique que le processus est suspendu (stopped).
+"Dans la colonne `STAT` de la commande `ps`, que signifie le caractère `Z` ?",`Z` indique que le processus est un zombie.
+"Dans la colonne `STAT` de `ps`, que signifie le caractère `l` (L minuscule) ?",Il indique que le processus est multi-thread.
+"Dans la colonne `STAT` de `ps`, que signifie le caractère `<` ?",Il indique que le processus a une priorité supérieure à la normale (valeur `nice` négative).
+Quel signal faut-il envoyer avec la commande `kill` pour suspendre un processus ?,Le signal `SIGSTOP`.
+"Après avoir suspendu un processus avec `SIGSTOP`, quel signal faut-il utiliser pour le faire reprendre ?",Le signal `SIGCONT`.
+Quelle est la différence fondamentale entre les signaux `SIGTERM` et `SIGKILL` ?,"`SIGTERM` est une demande polie de terminaison que le processus peut intercepter, tandis que `SIGKILL` force l'arrêt immédiat du processus."
+"Quelle option de la commande `ps` permet de spécifier les colonnes à afficher, comme `nice` ou `cls` ?",L'option `-o`.
+"Dans la sortie de `ps -o cls`, que signifie l'abréviation `TS` ?",Elle signifie `Time Sharing` et correspond à la politique d'ordonnancement `SCHED_OTHER`.
+Quelle option doit-on ajouter à la commande `ps` pour visualiser les threads individuels d'un processus ?,L'option `-T`.
+"Dans la sortie de `ps -T`, quelle est la différence entre les colonnes `PID` et `SPID` ?","`PID` est l'identifiant du processus partagé par tous les threads, tandis que `SPID` est l'identifiant unique de chaque thread."
+Comment peut-on visualiser les threads de manière dynamique avec la commande `top` ?,En lançant `top` avec l'option `-H`.
+"La commande _____ est lancée avec une valeur `nice` de -12, ce qui signifie que ses processus fils, comme `ps`, hériteront de cette priorité élevée.",bash
+À quoi sert la commande `chrt` ?,Elle permet d'afficher ou de modifier la politique d'ordonnancement et les attributs temps réel d'un processus.
+Quels deux modes d'exécution un processus peut-il alterner durant sa vie ?,Le mode utilisateur (avec restrictions) et le mode noyau (avec privilèges).
+"Selon les exemples, les processus système comme `migration` et `watchdog` utilisent la politique d'ordonnancement la plus prioritaire, qui est _____.",`SCHED_FIFO` (FF).
+"Outre `SCHED_OTHER`, citez deux autres politiques d'ordonnancement pour les processus non temps réel.",`SCHED_BATCH` pour les traitements longs et `SCHED_IDLE` pour les tâches de très basse priorité.
+Quelle commande Linux est essentielle pour consulter la documentation détaillée et toutes les options d'une commande comme `ps` ou `top` ?,La commande `man`.

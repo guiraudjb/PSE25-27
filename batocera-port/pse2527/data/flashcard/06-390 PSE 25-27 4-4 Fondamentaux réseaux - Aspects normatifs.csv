@@ -1,0 +1,55 @@
+"Quel était le problème majeur des réseaux propriétaires d'IBM, BULL ou APPLE dans les années 1960-1970 ?",Ils étaient cloisonnés et incompatibles entre eux.
+Définition : Interopérabilité,Capacité de systèmes hétérogènes à communiquer sans dépendre de technologies spécifiques à un constructeur.
+Quelle organisation a initié le modèle OSI en 1977 ?,L'ISO (International Standards Organisation).
+En quelle année la norme ISO IS7498 (modèle OSI) a-t-elle été officiellement adoptée ?,1984
+D'où provient originellement le modèle TCP/IP ?,Des travaux de l'ARPA (DOD) et des chercheurs d'ARPANET.
+Quel est l'objectif de la segmentation de la complexité dans les modèles en couches ?,Diviser les problèmes de communication en sous-problèmes plus simples à gérer.
+"Dans un modèle en couches, comment appelle-t-on l'ajout de métadonnées lors de la descente des données ?",L'encapsulation
+Que deviennent les en-têtes lors de la réception des données par la machine de destination ?,Ils sont retirés par chaque couche successive (décapsulation).
+Le fait qu'une couche puisse évoluer sans affecter les autres illustre quel avantage ?,La modularité
+"Dans la communication verticale, quels services utilise la couche $N$ ?",Les services fournis par la couche $N-1$.
+Comment appelle-t-on deux entités situées au même niveau sur deux machines différentes ?,Des entités paires.
+Quelle information de contrôle les couches homologues échangent-elles via les en-têtes ?,Des accusés de réception ou des signalements d'erreurs.
+Quelle est l'unité de données échangée entre les couches Transport et Réseau ?,Le segment
+Quelle est l'unité de données échangée entre les couches Réseau et Accès réseau ?,Le datagramme
+Quel terme désigne l'unité de données transmise par la couche Accès réseau sur le support physique ?,La trame
+Quelles couches (numéros) sont qualifiées de « couches basses » ?,Les couches $1$ à $4$.
+De quoi sont responsables les « couches hautes » ($5$ à $7$) ?,"Du traitement des données (gestion de session, formatage)."
+Quel est le rôle principal de la couche Physique (1) du modèle OSI ?,La transmission des bits sur le support physique.
+Citez un exemple de protocole ou de norme de la couche Physique.,RS-232 ou Ethernet (10BASE-T).
+Quelle couche OSI gère le découpage en trames et la détection d'erreurs ?,La couche Liaison (2).
+Citez un protocole opérant au niveau de la couche Liaison.,"Ethernet, PPP ou Wi-Fi (802.11)."
+Quel est le rôle de la couche Réseau (3) dans le modèle OSI ?,Assurer le routage et l'adressage logique des paquets.
+Citez deux protocoles de la couche Réseau.,"IP et ICMP (ou OSPF, BGP)."
+"Quelle couche OSI est responsable de la fiabilité, du contrôle de flux et du multiplexage ?",La couche Transport (4).
+Quels sont les deux principaux protocoles de la couche Transport ?,TCP et UDP.
+Quelle est la fonction de la couche Session (5) ?,"La gestion des connexions (ouverture, fermeture, synchronisation)."
+"Quelle couche OSI s'occupe du chiffrement, de la compression et de la conversion des données ?",La couche Présentation (6).
+Comment appelle-t-on l'unité de données de la couche Présentation ?,Le PPDU (Presentation PDU).
+Quel est le rôle de la couche Application (7) ?,"Fournir une interface utilisateur pour les services réseau (web, email)."
+Citez deux protocoles de la couche Application.,"HTTP et DNS (ou FTP, SMTP)."
+Pourquoi le modèle OSI est-il considéré comme une force malgré sa faible utilisation pratique ?,Il fournit un vocabulaire et un cadre de référence théorique complet.
+Citez un inconvénient majeur du modèle OSI par rapport à TCP/IP.,Sa complexité d'implémentation et son coût élevé.
+Combien de couches comporte le modèle TCP/IP ?,$4$
+À quelles couches du modèle OSI correspond la couche Application (4) de TCP/IP ?,"Les couches Session ($5$), Présentation ($6$) et Application ($7$)."
+Quelle couche TCP/IP regroupe les fonctions des couches Physique et Liaison de l'OSI ?,La couche Accès réseau (1).
+Quel protocole TCP/IP est qualifié d'« orienté connexion » avec garantie de fiabilité ?,TCP
+Pour quel type d'applications utilise-t-on le protocole UDP ?,"Celles tolérant des pertes, comme le streaming vidéo ou la VoIP."
+Quel est le rôle de la couche Internet (2) dans le modèle TCP/IP ?,Router les paquets via des adresses IP.
+À quoi sert le protocole ARP au sein de la couche Internet ?,À la résolution d'adresses MAC.
+Quel protocole est utilisé pour les messages de contrôle et d'erreur au niveau Internet ?,ICMP
+Comment sont acheminés les paquets dans la couche Internet de TCP/IP ?,De manière indépendante (mode non connecté).
+Quelle couche TCP/IP gère les adresses physiques (MAC) ?,La couche Accès réseau (1).
+Pourquoi dit-on que le modèle TCP/IP est « indépendant du support physique » ?,"Il peut fonctionner sur n'importe quelle technologie (câble, fibre, sans fil, satellite)."
+Quel avantage de TCP/IP facilite son adoption par les développeurs ?,Il est open source (sources en C disponibles gratuitement).
+Quelle caractéristique de TCP/IP lui permet de s'adapter à l'IoT ou au Cloud ?,Son évolutivité
+"Entre OSI et TCP/IP, lequel s'est imposé comme le « standard de fait » ?",TCP/IP
+Quel protocole est utilisé pour le transfert de fichiers au niveau applicatif ?,FTP
+"Dans le modèle OSI, quelle couche normalise les caractéristiques électriques des connecteurs ?",La couche Physique (1).
+Le protocole SSL/TLS se situe généralement à quelle couche du modèle OSI ?,La couche Présentation (6).
+Citez un protocole de la couche Accès réseau de TCP/IP.,"Ethernet (ou Wi-Fi, PPP)."
+Quelle est l'unité de données de la couche Internet ?,Le datagramme
+"Dans le fonctionnement vertical, que fournit la couche $N-1$ à la couche $N$ ?",Des services
+Quel modèle a été qualifié de « standard pragmatique d'Internet » ?,Le modèle TCP/IP (DOD).
+Quel est le rôle du protocole DNS ?,La résolution de noms de domaines.
+Quel protocole de transport n'utilise pas d'accusés de réception ?,UDP

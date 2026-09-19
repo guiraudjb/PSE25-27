@@ -1,0 +1,53 @@
+"Dans les premiers systèmes, quel composant gérait directement les opérations d'entrée/sortie ?",Le processeur (CPU).
+Quel était l'inconvénient majeur de la gestion des E/S par le CPU dans les anciens systèmes ?,Une forte perte de performance car le CPU était mobilisé par chaque opération.
+Quel mécanisme a permis d'éviter l'attente active du processeur lors d'une opération d'E/S ?,Les interruptions.
+Que signifie l'acronyme DMA dans le contexte des entrées/sorties ?,Direct Memory Access (Accès direct à la mémoire).
+Quel est l'avantage principal du mécanisme de DMA ?,Permettre des transferts directs entre la mémoire et les périphériques sans solliciter le CPU.
+Dans quel répertoire Linux se situent les fichiers spéciaux représentant les périphériques ?,/dev
+Quels sont les deux types principaux de fichiers spéciaux sous Linux ?,Les fichiers de type caractère et les fichiers de type bloc.
+À quel type de matériel sont associés les fichiers de type caractère ?,Aux périphériques en flux (ex : terminaux).
+À quel type de matériel sont associés les fichiers de type bloc ?,Aux périphériques de stockage (ex : disques durs).
+Donnez un exemple de chemin pour un fichier spécial de type caractère.,/dev/tty
+Donnez un exemple de chemin pour un fichier spécial de type bloc.,/dev/sda
+Quelles opérations classiques sont utilisées pour accéder au matériel via les fichiers spéciaux ?,Les opérations read (lecture) et write (écriture).
+Quel composant logiciel est identifié par le numéro majeur (major number) ?,Le pilote de périphérique (device driver).
+À quoi sert le numéro mineur (minor number) d'un fichier spécial ?,À distinguer les différents périphériques gérés par un même pilote.
+Comment le noyau sait-il quel pilote appeler lors d'une requête d'E/S ?,En consultant la table des périphériques via le numéro majeur.
+Quel composant matériel assure l'interface entre le périphérique et le système ?,Le contrôleur de périphérique.
+Que reçoit le contrôleur de périphérique de la part du pilote ?,Des commandes émises par le noyau.
+Citez une fonction du contrôleur concernant la surveillance du matériel.,La gestion des erreurs matérielles.
+Quelle fonction du contrôleur permet de signaler la fin d'une tâche au système ?,La génération des interruptions.
+Où sont généralement intégrés les contrôleurs dans les architectures modernes ?,Dans les périphériques ou dans les chipsets.
+Quel est l'objectif premier de l'utilisation du buffer cache et du page cache ?,Limiter les accès directs aux périphériques physiques.
+Quelle est la fonction spécifique du page cache ?,Stocker en mémoire les données issues des fichiers.
+"Historiquement, à quoi servait spécifiquement le buffer cache ?",Aux blocs de périphériques (systèmes de fichiers).
+Quel est l'état de l'unification du page cache et du buffer cache dans les noyaux Linux modernes ?,Ils sont aujourd'hui largement unifiés.
+"Lors d'une lecture, que se passe-t-il si les données sont déjà dans le cache ?",Elles sont directement utilisées sans accès disque.
+"Lors d'une lecture, que se passe-t-il si les données sont absentes du cache ?",Elles sont chargées depuis le disque puis mises en cache.
+En quoi consiste la stratégie de 'write-back' pour l'écriture de données ?,Les données sont écrites en mémoire avant d'être synchronisées plus tard avec le disque.
+Sur quel critère le noyau gère-t-il automatiquement la taille des caches ?,En fonction de l'utilisation globale de la mémoire vive.
+Quelle est la première étape du chemin d'une opération d'E/S ?,Un processus effectue une requête (read ou write).
+Que signifie l'acronyme VFS ?,Virtual File System (Système de fichiers virtuel).
+Quel est le rôle du VFS dans le chemin d'une opération d'entrée/sortie ?,Fournir une interface uniforme pour tous les types de systèmes de fichiers.
+Quel composant est sollicité immédiatement après le système de fichiers (VFS) ?,Le pilote de périphérique (device driver).
+Quel événement matériel marque la fin d'une opération d'E/S au niveau du contrôleur ?,Une interruption.
+Pourquoi le chemin d'une opération d'E/S peut-il entraîner de la latence ?,À cause du grand nombre de couches logicielles et matérielles à traverser.
+Quelle commande permet d'afficher les fichiers spéciaux et leur type (c ou b) ?,ls -l /dev
+Quelle commande permet de lister les pilotes associés aux périphériques reconnus ?,cat /proc/devices
+Quelle commande affiche les messages de détection du matériel par le noyau ?,dmesg
+Quelle commande Linux est utilisée pour observer l'utilisation du cache mémoire ?,free
+Quelle commande force l'écriture immédiate des données du cache vers le disque ?,sync
+Quelle commande affiche la taille exacte en octets d'un disque comme /dev/sda ?,blockdev --getsize64 /dev/sda
+Comment appelle-t-on le mode où le processeur vérifie sans cesse si un périphérique a fini son travail ?,L'attente active.
+Vrai ou Faux : Le numéro majeur d'un périphérique permet de choisir entre deux partitions d'un même disque.,Faux (C'est le rôle du numéro mineur).
+Quelle couche du noyau traduit une requête générique en opérations spécifiques à un système de fichiers ?,Le VFS (Virtual File System).
+Le buffer cache concerne principalement les données de quel type de périphérique ?,Les périphériques de type bloc.
+Quel composant logiciel transforme l'appel système en instructions pour le contrôleur ?,Le pilote de périphérique (driver).
+"Dans la commande `ls -l /dev`, que signifie la lettre 'b' en début de ligne ?",Le fichier est un périphérique de type bloc (block device).
+"Dans la commande `ls -l /dev`, que signifie la lettre 'c' en début de ligne ?",Le fichier est un périphérique de type caractère (character device).
+Pourquoi l'apparition de la multiprogrammation a-t-elle favorisé l'évolution des E/S ?,Pour optimiser l'usage du CPU en ne le bloquant plus pendant les transferts de données.
+Quel est le rôle du contrôleur vis-à-vis des commandes du pilote ?,Il les traduit en instructions compréhensibles par le matériel.
+Quelle est la conséquence directe d'un cache read hit ?,Une amélioration des temps de réponse en évitant l'accès au disque.
+Le pilote de périphérique (driver) fait-il partie de l'espace utilisateur ou du noyau ?,Du noyau.
+Quel outil permet de voir si des erreurs de driver sont survenues récemment ?,dmesg
+Que se passe-t-il pour un processus après l'envoi de sa requête d'E/S au noyau ?,Il attend généralement que les données lui soient transmises après l'interruption.

@@ -1,0 +1,53 @@
+Quel était l'objectif initial des réseaux informatiques ?,"Faire communiquer des entités distantes comme des ordinateurs, des serveurs ou des imprimantes."
+Qu'est-ce qu'un protocole de communication dans le contexte des réseaux ?,Une description formelle de règles à suivre pour échanger des informations.
+À quoi servent les métadonnées (en-têtes) dans un paquet réseau ?,"À acheminer les données vers leur destination, de manière analogue à une adresse sur une enveloppe postale."
+Quelle suite de protocoles s'est imposée comme le standard de fait mondial ?,La suite TCP/IP.
+Citez un enjeu majeur auquel répond la suite TCP/IP.,"La mutualisation des ressources, comme le partage de fichiers ou d'imprimantes."
+Comment appelle-t-on les réseaux créés pour connecter des utilisateurs au sein d'une seule organisation ?,Un Intranet.
+Quel terme désigne la convergence entre les réseaux téléphoniques et informatiques ?,La ToIP (Telephony over IP) ou VoIP (Voice over IP).
+Quel organisme du Département de la Défense américain est à l'origine d'ARPANET ?,L'ARPA (Advanced Research Projects Agency).
+Quel était l'objectif stratégique d'ARPANET lors de sa conception dans les années 1960 ?,Être résistant à une attaque nucléaire en connectant des réseaux hétérogènes.
+Sur quelle innovation technologique majeure reposait ARPANET pour le transfert de données ?,La commutation par paquets.
+En quelle année le premier lien ARPANET a-t-il été établi entre UCLA et le Stanford Research Institute ?,1969.
+Que signifie l'acronyme RFC dans l'histoire d'Internet ?,Request For Comments.
+Quel groupe a créé les premières RFC en 1968 ?,Le Network Working Group (NWG).
+Quelle notion fondamentale la toute première RFC d'avril 1969 définissait-elle ?,La notion de machine « hôte ».
+En quelle année le DNS (Domain Name System) a-t-il été mis en place ?,1984.
+Quels sont les deux critères principaux utilisés pour classer les typologies de réseaux ?,L'étendue géographique et le débit.
+Définition : Réseau PAN (Personal Area Network).,Réseau interconnectant des équipements personnels sur quelques mètres pour un seul utilisateur.
+Donnez un exemple concret d'usage d'un réseau PAN.,La connexion entre un smartphone et un casque Bluetooth.
+Définition : Réseau LAN (Local Area Network).,Réseau couvrant un bâtiment ou un campus sur plusieurs centaines de mètres.
+Quel est l'ordre de grandeur du débit d'un réseau LAN typique ?,De quelques Mégabits à plusieurs centaines de Mégabits par seconde.
+Définition : Réseau MAN (Metropolitan Area Network).,Interconnexion de plusieurs LAN à l'échelle d'une ville via des liens haut débit.
+Définition : Réseau RAN (Regional Area Network).,Réseau couvrant une large superficie (jusqu'à 50 km de rayon) pour connecter de nombreux utilisateurs.
+Définition : Réseau WAN (Wide Area Network).,"Réseau reliant des pays, des continents ou des zones géographiques vastes."
+Quel est l'exemple le plus connu de réseau WAN ?,Internet.
+Qu'est-ce qu'une topologie physique ?,Le mode d'interconnexion matérielle et physique des équipements du réseau.
+Qu'est-ce qu'une topologie logique ?,Le mode de circulation des données et d'échange des messages sur le réseau.
+Comment sont reliées les stations dans une topologie en bus ?,Par un câble coaxial commun appelé bus.
+Pourquoi l'étendue d'un réseau en bus est-elle limitée ?,Parce que les connexions sont passives et le signal n'est pas régénéré.
+Quel est l'inconvénient majeur d'une topologie en bus ?,Une panne du câble central paralyse l'ensemble du réseau.
+Dans quelle topologie les équipements forment-ils une boucle fermée ?,La topologie en anneau.
+Quelle est la caractéristique des nœuds dans une topologie en anneau ?,Ils sont actifs et régénèrent le signal.
+Comment peut-on sécuriser une topologie en anneau contre une coupure de câble ?,En doublant l'anneau.
+Décrivez la structure d'une topologie en étoile.,Tous les nœuds sont connectés individuellement à un nœud central (concentrateur ou hub).
+Quel est l'avantage principal de la topologie en étoile en cas de panne d'un nœud ?,La panne d'un nœud n'affecte pas le reste du réseau.
+Quel type de câblage est généralement utilisé pour les réseaux Ethernet en étoile ?,Les paires torsadées.
+Qu'est-ce qu'une topologie hiérarchique ?,Un ensemble de réseaux en étoile reliés entre eux par des concentrateurs.
+Comment fonctionne une topologie arborescente ?,Un nœud est connecté à un répéteur qui étend le réseau sous forme de nouveaux bus.
+Définition : Topologie maillée.,"Chaque nœud est relié à plusieurs autres, offrant plusieurs chemins pour les données."
+Quel est l'avantage principal de la topologie maillée ?,La résilience en cas de panne d'un lien grâce à la redondance.
+Sous quelle forme les données transitent-elles sur les réseaux ?,Sous forme de paquets.
+Dans quoi un paquet est-il encapsulé pour circuler sur le réseau ?,Dans une trame.
+"Quel est le rôle des nœuds de transfert (routeurs, commutateurs) ?",Recevoir les paquets et déterminer leur prochain saut vers la destination.
+Qu'utilise un nœud pour déterminer la route optimale d'un paquet ?,Une table de routage.
+"Dans le routage de paquets, deux paquets d'un même flot empruntent-ils forcément le même chemin ?","Non, la route peut varier dynamiquement selon l'état du réseau (trafic, pannes)."
+Citez deux exemples de protocoles de routage mentionnés dans le document.,OSPF et BGP.
+Comment fonctionne la commutation de paquets ?,Un chemin dédié est établi pour tous les paquets d'un même flot via une procédure de signalisation.
+Pourquoi la commutation de paquets est-elle plus onéreuse que le routage ?,"À cause de la signalisation nécessaire pour établir le chemin, qui est coûteuse en ressources."
+La topologie _____ est caractérisée par l'utilisation de concentrateurs reliant des structures en étoile entre elles.,hiérarchique
+Le réseau _____ est celui qui permet d'interconnecter des millions de LAN à travers le monde.,WAN (ou Internet)
+"Dans une topologie en _____, le signal est régénéré par chaque nœud car ils sont considérés comme actifs.",anneau
+"L'ancêtre d'Internet, né dans les années 1960, s'appelait _____.",ARPANET
+Le protocole _____ définit les règles de structuration des informations via des adresses IP et des ports.,TCP/IP
+L'unité binaire permettant de reconnaître le début et la fin d'un message encapsulant un paquet est la _____.,trame

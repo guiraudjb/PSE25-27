@@ -1,0 +1,56 @@
+Quelle est la distinction fondamentale entre un logiciel libre et un logiciel propriétaire ?,"L'accès au code source, qui est fourni avec le logiciel libre mais pas avec le logiciel propriétaire."
+Sous quelle forme un logiciel propriétaire est-il généralement distribué ?,"Uniquement sous forme de code exécutable (fichier binaire), illisible pour les humains."
+Quel outil transforme le code source en code exécutable ?,Un compilateur.
+Quel problème de sécurité majeur peut poser l'opacité du code des logiciels propriétaires ?,Les utilisateurs ne peuvent pas vérifier si le logiciel contient des failles ou des fonctionnalités indésirables comme la collecte de données.
+"Selon la Free Software Foundation (FSF), quelle est la première liberté fondamentale du logiciel libre ?",La liberté d'exécuter le programme pour n'importe quel usage.
+"Quelle est la deuxième liberté fondamentale du logiciel libre, rendue possible par l'accès au code source ?",La liberté d'étudier le fonctionnement du programme et de l'adapter à ses besoins.
+"Quelle est la troisième liberté fondamentale du logiciel libre, favorisant sa large diffusion ?",La liberté de redistribuer des copies du logiciel.
+"Quelle est la quatrième liberté fondamentale du logiciel libre, qui encourage l'innovation continue ?",La liberté d'améliorer le programme et de publier ces améliorations pour le bénéfice de tous.
+Quel est le rôle juridique d'une licence libre ?,Elle encadre les libertés fondamentales et les protège contre les tentatives de restriction par des tiers.
+"Quel mécanisme juridique ingénieux, utilisé par la licence GNU GPL, emploie le droit d'auteur pour protéger les libertés des utilisateurs ?",Le copyleft (ou gauche d'auteur).
+Quelle est la principale obligation imposée par la licence GNU General Public License (GPL) ?,Toute version modifiée du logiciel doit être distribuée sous les mêmes termes que l'original.
+"Le mouvement du logiciel libre, porté par la FSF, est avant tout une démarche _____ qui place la liberté des utilisateurs au cœur de ses préoccupations.",éthique et politique
+"Quelle organisation adopte une perspective plus pragmatique sur le logiciel libre, axée sur l'efficacité technologique et les avantages économiques ?",L'Open Source Initiative (OSI).
+Que signifie l'acronyme FLOSS ?,"Free/Libre/Open-Source Software, un terme pour réconcilier les approches du logiciel libre et de l'open source."
+Le principe du _____ exige que toute œuvre dérivée d'un logiciel libre conserve les mêmes libertés que l'original.,copyleft
+"Quelle licence, conçue par le CEA, le CNRS et l'INRIA, est une adaptation française de la GPL compatible avec le droit français et européen ?",La licence CeCILL.
+Comment les licences permissives (comme BSD et MIT) se distinguent-elles des licences copyleft ?,Elles permettent d'intégrer le code dans des logiciels propriétaires sans obliger à publier les modifications sous la même licence.
+Quelle est la principale condition imposée par les licences permissives comme BSD ou MIT lors de la réutilisation du code ?,Conserver une mention des auteurs originaux.
+"Quelle licence est l'adaptation française des licences permissives, développée par le CEA, le CNRS et l'INRIA ?",La licence CeCILL-B.
+À quel type de logiciel la licence LGPL (Lesser General Public License) est-elle spécifiquement destinée ?,Aux bibliothèques logicielles et autres composants réutilisables.
+Quelle flexibilité la licence LGPL offre-t-elle par rapport à la GPL ?,"Elle permet d'utiliser une bibliothèque sous LGPL dans un logiciel propriétaire, à condition que les modifications de la bibliothèque elle-même restent libres."
+Quelle licence est l'adaptation française de la LGPL ?,La licence CeCILL-C.
+À quel type d'œuvres les licences Creative Commons (CC) s'appliquent-elles ?,"Aux œuvres non logicielles, comme les textes, les images, la musique ou les vidéos."
+Quelles clauses restrictives des licences Creative Commons les éloignent de la philosophie du logiciel libre ?,Les clauses NC (Non Commercial) et ND (No Derivatives).
+Citez un modèle économique du logiciel libre basé sur des revenus récurrents.,Les abonnements pour des mises à jour et des services supplémentaires.
+Quel service essentiel est souvent proposé sous forme de contrats payants par des sociétés comme Red Hat ?,"Le support technique (assistance, correctifs prioritaires, interventions)."
+En quoi consiste le modèle économique de la certification de matériels ?,Les fabricants de matériel paient les éditeurs de distributions pour tester et certifier la compatibilité de leurs produits.
+Qu'est-ce que la mutualisation de développements dans le contexte du logiciel libre ?,Une stratégie où plusieurs organisations financent conjointement le développement de fonctionnalités ou de correctifs.
+Citez un exemple de solution clé en main basée sur des logiciels libres.,"Les box des fournisseurs d'accès à Internet (FAI) ou les appliances matérielles préconfigurées (pare-feu, serveurs NAS)."
+Comment fonctionne un modèle économique hybride pour un logiciel libre ?,Une base logicielle libre est complétée par des extensions propriétaires payantes.
+Quel rôle le mécénat et le sponsoring jouent-ils dans l'écosystème du logiciel libre ?,Ils permettent à des entreprises ou des fondations de soutenir financièrement le développement de projets libres.
+Quel document de 2012 marque un tournant dans l'adoption des logiciels libres par l'administration française ?,La circulaire Ayrault.
+"Quel est l'un des principaux avantages des logiciels libres pour l'administration, souligné par la circulaire de 2012 ?","La réduction des coûts, la souplesse d'utilisation et la souveraineté numérique."
+Quelle direction interministérielle joue un rôle clé dans la mise en œuvre de la politique française en faveur des logiciels libres ?,La Direction interministérielle du numérique (DINum).
+"Selon le CNLL, combien d'emplois le secteur du logiciel libre représente-t-il en France ?",Environ 30 000 emplois.
+Quelle est l'importance de la commande publique pour les entreprises du logiciel libre en France ?,"C'est un levier essentiel, 82,8 % de ces entreprises ayant des clients dans le secteur public."
+En quoi les standards ouverts sont-ils fondamentaux pour l'informatique ?,"Ils permettent l'interopérabilité, c'est-à-dire la communication entre différents logiciels et matériels sans dépendre de solutions propriétaires."
+Pourquoi le mouvement du logiciel libre s'oppose-t-il aux brevets logiciels ?,Car ils peuvent entraver l'innovation et limiter la liberté des développeurs en couvrant des algorithmes ou des méthodes logicielles.
+Quel est l'un des objectifs principaux de la stratégie européenne 2020-2023 pour les logiciels libres ?,Minimiser les risques de dépendance envers des fournisseurs étrangers et renforcer l'autonomie technologique de l'Europe.
+Quelle structure la Commission européenne a-t-elle créée pour mettre en œuvre sa stratégie pour les logiciels libres ?,Un bureau dédié aux logiciels libres (Open Source Program Office - OSPO).
+Quelles entités pilotent le marché de support logiciel libre interministériel en France ?,La Direction Générale des Finances Publiques (DGFiP) en collaboration avec la Direction des Achats de l’État (DAE).
+Quelles instances de gouvernance supervisent le marché de support interministériel et à quelle fréquence se réunissent-elles ?,Le comité de pilotage (COPIL) tous les trois mois et le comité de suivi des prestations (CSP) tous les mois.
+Le périmètre du support logiciel libre interministériel est ajusté dynamiquement tous les _____.,trimestres
+Quelle est l'obligation fondamentale du titulaire du marché de support interministériel lorsqu'il développe un correctif ?,Il doit reverser le correctif à la communauté open source concernée sous 7 jours ouvrés après validation.
+"Dans le cadre du support interministériel, quel est l'objectif d'une veille stratégique ?",Évaluer la maturité et la pertinence d'un domaine fonctionnel pour aider l'encadrement à prendre des décisions.
+Quelle méthode est utilisée pour réaliser la veille technique dans le marché de support interministériel ?,La méthode QSOS (Qualification and Selection of Open Source Software).
+À quoi servent les prestations à bons de commande dans le marché de support interministériel ?,"À répondre aux besoins spécifiques ou ponctuels non couverts par le périmètre forfaitaire, comme un support 24/7."
+Que garantit la clause de réversibilité des données du marché de support interministériel ?,Elle permet à l'administration de récupérer l'intégralité des livrables et des données de support en fin de contrat.
+"Dans le contexte des logiciels, que signifie le terme ""code source"" ?","Le code écrit dans un langage de programmation compréhensible par les humains, avant sa compilation."
+Citez un exemple de logiciel libre mentionné dans le document.,Firefox ou Apache.
+"Pour l'Open Source Initiative (OSI), l'ouverture du code source est avant tout un moyen d'améliorer la _____ des logiciels.",qualité
+Laquelle des quatre libertés fondamentales garantit que les utilisateurs ne sont pas restreints à des contextes d'utilisation spécifiques ?,La première liberté : exécuter le programme pour n'importe quel usage.
+Quel type d'entreprises constitue la majorité du secteur du logiciel libre en France ?,Des TPE (Très Petites Entreprises) et PME (Petites et Moyennes Entreprises).
+"L'enjeu de réduire la dépendance aux éditeurs étrangers, souvent américains ou asiatiques, est appelé la _____.",souveraineté numérique
+"Dans le marché de support interministériel, les logiciels sont classés comme _____ ou non _____, ce qui influence les délais de réponse.",critique
+Quel est le délai maximal pour fournir une solution définitive à une anomalie sur un logiciel non critique dans le cadre du support interministériel ?,60 jours.

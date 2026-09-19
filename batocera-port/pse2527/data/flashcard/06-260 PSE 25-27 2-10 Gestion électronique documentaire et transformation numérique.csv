@@ -1,0 +1,50 @@
+Quelle est la définition de la Gestion Électronique de Documents (GED) ?,Un ensemble d'outils et de méthodes conçus pour maîtriser l'intégralité des flux documentaires au sein d'une organisation.
+Quand l'acronyme GED devient-il GEIDE ?,Lorsque la gestion englobe non seulement les documents mais aussi l'information de manière plus large.
+Quelle est l'ambition première de la GED ?,"Transformer les documents physiques ou numériques en ressources accessibles, exploitables et sécurisées."
+Citez cinq étapes essentielles du cycle de vie d'un document couvertes par la GED.,"Acquisition, indexation, classement, recherche, diffusion et stockage."
+La GED permet de constituer un _____ unique et fiable.,référentiel
+Quels sont les deux types de contenus que la GED peut gérer ?,"Des documents structurés (bases de données, XML) et des contenus non structurés (emails, rapports)."
+Quel concept est au cœur de la GED et garantit la gestion optimale d'un document à chaque étape de son existence ?,Le cycle de vie des documents.
+À quoi servent les métadonnées ajoutées aux documents lors de leur capture dans une GED ?,Elles facilitent leur identification et leur utilisation ultérieure.
+"Quelle avancée technologique des années 1990, combinée aux scanners, a été majeure pour l'essor de la GED ?",La reconnaissance optique de caractères (OCR).
+À partir de quelle décennie les solutions de GED se sont-elles progressivement imposées dans les entreprises et administrations ?,Les années 1990.
+Qu'est-ce qu'un 'cloud souverain' dans le contexte de la GED ?,"Une plateforme cloud hébergée sur le territoire national ou européen, garantissant que les données restent sous contrôle local."
+Quel règlement européen sur la protection des données rend les clouds souverains particulièrement pertinents ?,Le RGPD (Règlement Général sur la Protection des Données).
+Comment l'intelligence artificielle (IA) optimise-t-elle les processus de GED ?,"Elle analyse, classe et indexe automatiquement des volumes massifs de documents grâce au machine learning et au traitement du langage naturel."
+Quel avantage clé de la GEIDE offre une visibilité complète sur le parcours de chaque document ?,L'amélioration de la traçabilité.
+"En centralisant les documents dans un référentiel unique, la GEIDE brise les _____ entre services.",silos
+Concept : Mutualisation de l'information,"Levier de la GEIDE qui centralise les documents pour briser les silos, favoriser le partage des bonnes pratiques et valoriser le patrimoine informationnel."
+Quelle est la principale différence d'orientation entre la GED et l'archivage électronique ?,"La GED est orientée vers la gestion des documents actifs (courants), tandis que l'archivage vise à préserver des documents à valeur probante ou historique."
+Dans quel système (GED ou archivage électronique) la modification ou suppression d'un document par son auteur est-elle généralement autorisée ?,Dans la GED.
+Quel format de fichier est un standard ouvert et durable recommandé pour l'archivage électronique afin d'éviter l'obsolescence ?,Le PDF/A.
+Pourquoi l'interopérabilité est-elle un critère clé de l'archivage électronique ?,"Car les archives doivent pouvoir être consultées et échangées entre différents systèmes, même des décennies après leur création."
+La _____ marque la première étape critique dans la mise en place d’une solution de GED.,l'acquisition et la dématérialisation
+Quelle fonctionnalité ajoute une couche de traçabilité essentielle en associant une date et une heure à chaque document capturé ?,L'horodatage automatique.
+Technologie IA : RAD (Reconnaissance Automatique de Documents),Définition : Technologie qui permet d'identifier le type de document scanné en analysant sa mise en page.
+Quelle technologie d'IA va plus loin que l'OCR en extrayant et structurant des informations clés comme des numéros de facture ou des dates ?,La Lecture Automatique de Documents (LAD).
+Qu'est-ce que l'indexation sémantique réalisée par l'IA ?,"C'est l'analyse du contenu des documents pour identifier des entités nommées (noms, lieux) et des relations entre fichiers pour des recherches contextuelles."
+Quel type de stockage est préconisé pour les archives nécessitant une haute sécurité et redondance ?,Le stockage sur des clouds souverains.
+Qu'est-ce qu'un workflow documentaire ?,"Un processus qui structure la circulation des documents et coordonne les actions des différents acteurs, par exemple via un circuit de validation."
+Quelle fonctionnalité de la GED permet de conserver l'historique des modifications d'un document et d'identifier les auteurs ?,La gestion des versions.
+Citez un gain organisationnel majeur de la dématérialisation interne.,La réduction des délais de traitement et la diminution des risques d'erreurs ou de pertes de documents.
+Comment la dématérialisation des factures améliore-t-elle la trésorerie d'une entreprise ?,Elle accélère les cycles de paiement et réduit les retards de paiement.
+"Quel plan, lancé en 1998, a posé les bases de la transformation numérique de l'administration française ?",Le Plan d’Action Gouvernemental pour la Société de l’Information (PAGSI).
+"Quel programme, déployé entre 2004 et 2012, a marqué un tournant en plaçant l'usager au centre de la dématérialisation administrative ?",Le programme ADELE (Administration Électronique).
+"Quel portail, ouvert en 2009, a unifié l'accès à des centaines de démarches administratives en France ?",Le portail mon.service-public.fr.
+Quel était l'objectif principal du plan France Numérique 2020 concernant les démarches administratives ?,L’abandon définitif du papier et la dématérialisation intégrale des démarches.
+Le _____ est un concept clé de la GED qui garantit que chaque document est géré de manière optimale à chaque étape de son existence.,cycle de vie des documents
+"Les solutions de GED étaient initialement cantonnées à des systèmes _____, souvent lourds et coûteux à maintenir.",locaux
+En quoi les clouds souverains se distinguent-ils des clouds publics traditionnels en matière de législation ?,Ils garantissent que les données restent à l’abri des risques liés à l’extraterritorialité des lois.
+"Grâce à l'IA, les outils de recherche intelligente permettent aux utilisateurs de retrouver un document en formulant des requêtes en _____.",langage naturel
+L'automatisation dans la GEIDE élimine les _____ liés à la manipulation manuelle de fichiers.,goulots d’étranglement
+Pourquoi l'enregistrement et l'horodatage de chaque action sont-ils précieux dans les environnements réglementés ?,Car ils permettent de prouver l'intégrité et l'authenticité des documents.
+Quelle est la principale contrainte de l'archivage électronique concernant l'altération d'un document ?,Il interdit toute altération une fois le document versé dans le système.
+L'archivage électronique exige l'utilisation de standards _____ et durables pour éviter l'obsolescence.,ouverts
+"Quels supports, encore utilisés dans les archives historiques, peuvent être numérisés et intégrés dans une GED ?",Les microfilms.
+Technologie IA : IRC (Reconnaissance Intelligente de Caractères),Définition : Outil combiné à l'OCR et des dictionnaires contextuels pour corriger les erreurs de lecture et structurer les données.
+Comment la GED gère-t-elle la diffusion de documents pour préserver la confidentialité ?,"Via des droits d’accès finement paramétrés, garantissant que chaque utilisateur ne voit que les informations pertinentes."
+Citez un exemple de fonctionnalité de partage sécurisé dans une GED.,Des liens temporaires ou des watermarks (filigranes).
+"Quel est l'avantage principal des outils collaboratifs intégrés à la GED (messagerie, visioconférence) ?","Ils permettent de discuter et d'annoter un document sans quitter l'environnement de travail, favorisant une collaboration agile."
+"Sur le plan financier, la dématérialisation offre des économies substantielles en réduisant les dépenses liées à l'impression, au stockage physique et à l'_____.",envoi postal
+Quel est l'enjeu démocratique d'une administration dématérialisée selon le texte ?,"Elle est synonyme d'égalité d'accès aux services publics, quel que soit le lieu de résidence ou la situation sociale."
+Comment les clouds souverains protègent-ils les données administratives des risques d'extraterritorialité ?,En stockant et traitant les données sur des serveurs situés en France (ou en Europe).

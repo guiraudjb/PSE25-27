@@ -1,0 +1,59 @@
+"Selon la norme ISO 22301, qu'est-ce que la gestion de la continuité d'activité ?","C'est un processus de management holistique qui identifie les menaces potentielles et leurs impacts, et fournit un cadre pour construire la résilience de l’organisation."
+Quel est l'objet principal d'un plan de continuité d'activité (PCA) ?,Il vise à garantir à une organisation la reprise et la continuité de ses activités à la suite d'un sinistre ou d'un événement perturbant gravement son fonctionnement.
+"Le règlement n° 97-02 définit le PCA comme l'ensemble des mesures visant à assurer le maintien, même en mode _____, des prestations de services ou tâches opérationnelles essentielles.",dégradé
+Pourquoi un PCA est-il considéré comme un plan nécessairement évolutif ?,"Parce que les priorités de l'organisation évoluent avec les modifications d'objectifs, d'obligations, de relations avec les partenaires et d'appréciation du risque."
+Quels sont les trois points principaux que doit comprendre le contenu d'un PCA ?,"Le contexte et les activités essentielles, les risques retenus, et la stratégie de continuité d'activité."
+Quelle est la première étape essentielle dans la méthodologie d'élaboration d'un PCA ?,"Définir le contexte (externe et interne), le périmètre et les objectifs de l'organisation."
+"Après avoir défini le contexte, quelle est la deuxième étape de la méthodologie du PCA ?",Identifier et formaliser les besoins de continuité pour chaque activité essentielle et processus critique.
+Quelle étape suit l'identification des besoins de continuité dans l'élaboration d'un PCA ?,L'identification et la gestion des risques prioritaires.
+"Une fois les risques gérés, quelle est la quatrième étape dans la création d'un PCA ?",Choisir les scénarios de risques résiduels à prendre en compte.
+"Quelle est la cinquième étape de la méthodologie du PCA, après avoir choisi les scénarios ?",Formaliser les moyens et procédures nécessaires pour pallier la perte de ressources critiques.
+"Après la formalisation des moyens et procédures, quelle est la sixième étape de la démarche PCA ?","Définir la stratégie de continuité, en optimisant les coûts et les délais d'interruption."
+"Quelle est la septième étape dans l'élaboration d'un PCA, liée à la gestion de l'événement lui-même ?",Spécifier les procédures de gestion de crise et de communication.
+"Une fois la stratégie et les procédures de crise définies, quelle est la huitième étape du processus PCA ?",Rédiger le plan de continuité et la documentation associée.
+Quelle est la neuvième étape cruciale après la rédaction du PCA ?,Assurer la capacité de mise en œuvre du plan en vérifiant la disponibilité des ressources et la connaissance des procédures.
+"Quelle est la dixième et dernière étape, assurant la pérennité du PCA ?",Faire évoluer le plan grâce à des exercices et des retours d'expérience (RETEX).
+"Selon le guide, quels types de responsables est-il déconseillé de nommer comme chef de projet PCA ?",Il est déconseillé de choisir le responsable des affaires générales ou un responsable informatique.
+Quel est l'acronyme pour la durée maximale pendant laquelle une interruption de service est tolérable ?,DMIA (Durée Maximale d'Interruption Admissible).
+Quelles sont les cinq catégories de ressources critiques à analyser pour les besoins de continuité ?,"Ressources humaines, infrastructures, système d’information, ressources intellectuelles, et fournisseurs externes."
+La démarche qui permet de quantifier la probabilité et les impacts des risques pour prendre des décisions rationnelles est la démarche de _____.,gestion du risque
+"Dans l'évaluation des risques, quels sont les deux critères principaux utilisés pour classer les risques ?",La probabilité d'occurrence (ou plausibilité) et la gravité d'impact.
+Que permet la fonction de 'veille' dans le cadre de la gestion de crise associée au PCA ?,Elle permet de détecter des signes précurseurs et de préparer les responsables concernés.
+Quel est le rôle de la cellule de crise dans la mise en œuvre du PCA ?,Elle joue un rôle clé dans l'activation des dispositifs du PCA qui sont les plus adaptés à la situation.
+Quelle est la différence fondamentale entre la démarche complète et la démarche simplifiée pour élaborer un PCA ?,"La démarche complète s'inscrit dans la politique de gestion des risques, tandis que la démarche simplifiée se concentre sur les effets et les actions de reprise."
+"Lors de la définition du périmètre d'un PCA, quels sont les trois champs à analyser ?","Les champs géographique, organisationnel et fonctionnel."
+Que sont les 'activités essentielles' d'une organisation dans le contexte d'un PCA ?,Ce sont les activités nécessaires à l'atteinte des objectifs de l'organisation et au respect de ses obligations.
+Que sont les 'processus critiques' dans le cadre d'un PCA ?,Ce sont les processus essentiels au maintien d'une activité essentielle.
+Quels sont les trois indicateurs utilisés pour quantifier le niveau du besoin de continuité ?,"Le niveau de service minimum, le niveau d'indisponibilité minimum (ou DMIA), et les ressources indispensables à la reprise."
+Qu'est-ce qu'un 'mode dégradé' dans un PCA ?,"Un fonctionnement temporaire avec un niveau de service réduit, permettant de tolérer une interruption plus longue de l'activité normale."
+Terme : PDMA,"Définition : Perte de Données Maximale Admissible, qui quantifie le niveau de mise à jour des données sauvegardées nécessaire pour la reprise."
+Citez trois types de conséquences mesurables d'une interruption de service.,"Coût humain, perte de part de marché, conséquences juridiques, impacts opérationnels, perte d'image, etc. (toute réponse de 3 éléments de la liste est correcte)."
+Quelles sont les quatre étapes de la démarche de gestion du risque ?,"Identifier les risques, analyser les risques, évaluer les risques, et traiter les risques."
+"Dans une approche 'tous risques', quels sont les quatre grands types de risques à identifier ?","Risques stratégiques, risques opérationnels, risques de gouvernance et risques de conformité."
+Qu'est-ce qu'une 'vulnérabilité' dans l'analyse de risque ?,C'est un facteur intrinsèque ou une faiblesse d'un système qui le rend sensible à une menace et qui peut augmenter la gravité des impacts.
+"Comment peut-on traiter un risque, autre que de l'accepter ?","On peut le refuser (arrêter l'activité), l'éliminer, en diminuer la probabilité, en modifier les conséquences ou le partager (ex: assurance)."
+Terme : PRMA,"Définition : Perte de Ressources Maximale Admissible, le niveau minimum de ressources qui doit subsister après un sinistre pour permettre la reprise."
+Terme : DMRP,"Définition : Durée Maximale de Reprise technique Prévue, le délai avant de fonctionner en mode de secours avec reprise des moyens techniques."
+"Dans les exigences pour les ressources humaines, que signifie assurer la 'suppléance du personnel' ?","Cela signifie que pour tout poste sensible, il faut disposer du nom du titulaire et d'un suppléant désigné."
+L'analyse du _____ est un préalable car elle permet de préciser le périmètre et les enjeux de l'organisation pour le PCA.,contexte
+"Pour chaque processus critique, il faut définir le niveau de service minimum indispensable ainsi que la _____ maximale acceptable.",durée d'indisponibilité
+"Le traitement des risques prioritaires consiste à décider d'une action pour éliminer, limiter ou _____ le risque.","gérer financièrement (assurance, partage)"
+Les actions de _____ visent à diminuer la probabilité d'occurrence d'un risque.,prévention
+Les actions de _____ visent à limiter les effets directs d'un sinistre.,protection
+La stratégie de continuité doit résulter de l'optimisation entre le coût des exigences opérationnelles et le coût de _____ de l'activité.,l'interruption
+Comment le guide recommande-t-il de vérifier l'efficacité d'un PCA une fois celui-ci réalisé ?,"Par la vérification des documents par un tiers, des tests de basculement et des exercices."
+Quel est l'un des premiers actes d'implication de la direction lors du lancement d'une démarche PCA ?,Communiquer sur les finalités et mobiliser les responsables des métiers et des processus.
+La démarche simplifiée se focalise sur les scénarios en partant des _____ possibles sur le fonctionnement de l'organisation.,effets
+L'analyse des conséquences d'une interruption d'activité permet de valider la _____.,Durée Maximale d'Interruption Admissible (DMIA)
+"Un risque peut être caractérisé par trois composantes : la menace, la vulnérabilité et les _____.",impacts
+Que représente la matrice des risques ?,Elle hiérarchise les risques en croisant les critères de probabilité et d'impact.
+"Dans le contexte du PCA, les risques résiduels sont ceux qui demeurent après les actions de _____ et de protection.",prévention
+A quoi sert la cartographie des processus et des flux ?,Elle permet de mieux appréhender les relations entre les processus et de définir leur criticité pour les activités essentielles.
+En quoi consiste la 'maintenance opérationnelle' du plan de continuité ?,"Elle consiste à vérifier l'efficacité du plan via des indicateurs, des tests, des exercices, et à suivre les améliorations."
+Quel organisme est l'autorité nationale française en matière de sécurité des systèmes d'information ?,L'Agence Nationale de la Sécurité des Systèmes d'Information (ANSSI).
+Dans quels cas un PCA peut-il être activé en mode 'réflexe' sans nécessairement réunir une cellule de crise ?,"Dans le cas de situations fréquentes et bien connues, comme les fortes tempêtes dans les Antilles."
+"Pourquoi est-il crucial de définir des exigences de continuité vis-à-vis des partenaires externes (fournisseurs, prestataires) ?",Pour limiter les effets en cascade et s'assurer que les flux externes critiques ne sont pas interrompus.
+"Quel est l'objectif de la fiche pratique 19, 'Le bilan coût/avantage d'un PCA' ?",Elle vise à aider à arbitrer et optimiser la stratégie de continuité en confrontant le coût de l'interruption au coût des mesures de continuité.
+"Selon le guide, que faut-il faire si une organisation dispose déjà de plusieurs PCA sectoriels (pandémie, informatique, etc.) ?",Il est recommandé de les agréger dans un PCA global en créant un 'tronc commun' pour assurer la cohérence.
+Comment le critère de 'confidentialité' est-il lié à la continuité d'activité ?,"Une perte de confidentialité peut conduire à l'arrêt de certaines activités très sensibles, voire à la faillite de l'organisation."
+Quels types de documents sont fournis en annexe du guide pour aider à la mise en pratique ?,"Un lexique, des références, une fiche d'auto-évaluation, un modèle d'analyse des risques et un modèle de RETEX."

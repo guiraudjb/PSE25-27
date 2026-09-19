@@ -1,0 +1,339 @@
+#!/usr/bin/env python
+# PSE25-27 Revision - jeu de revision (Quiz + Flashcards) pour Batocera / systeme pygame
+# A la manette : D-pad/stick pour naviguer, A pour valider, B pour revenir en arriere.
+import os
+import sys
+import pygame
+import pygame.freetype
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import data_loader as dl
+import input_handler as inp
+import ui
+
+WINDOW_SURFACE = pygame.HWSURFACE | pygame.DOUBLEBUF
+MAX_JOYSTICKS = 4
+QUIZ_QUESTION_COUNT = 15
+
+STATE_SERIES = 'series'
+STATE_MODULE = 'module'
+STATE_MODE = 'mode'
+STATE_QUIZ_ASK = 'quiz_ask'
+STATE_QUIZ_FEEDBACK = 'quiz_feedback'
+STATE_QUIZ_END = 'quiz_end'
+STATE_FLASH = 'flash'
+
+
+class App:
+    def __init__(self):
+        pygame.init()
+        pygame.joystick.init()
+        self.joysticks = [None] * MAX_JOYSTICKS
+        for i in range(min(pygame.joystick.get_count(), MAX_JOYSTICKS)):
+            joy = pygame.joystick.Joystick(i)
+            joy.init()
+            self.joysticks[i] = joy
+
+        info = pygame.display.Info()
+        self.screen_w, self.screen_h = info.current_w, info.current_h
+        if self.screen_w < 640 or self.screen_h < 480:
+            self.screen_w, self.screen_h = 1280, 720
+        self.screen = pygame.display.set_mode((self.screen_w, self.screen_h), WINDOW_SURFACE)
+        pygame.display.set_caption("PSE25-27 Révision")
+        pygame.mouse.set_visible(False)
+
+        scale = self.screen_h / 720.0
+        self.fonts = ui.Fonts(scale=scale)
+        self.clock = pygame.time.Clock()
+        self.repeat = inp.RepeatState()
+
+        self.series = dl.load_series()
+        self.series_menu = ui.ListMenu(
+            [{'label': "Série {} ({} modules)".format(code, len(mods)), 'code': code, 'modules': mods}
+             for code, mods in self.series],
+            self.screen_w, self.screen_h)
+
+        self.module_menu = None
+        self.mode_menu = None
+        self.current_module = None
+        self.quiz_questions = []
+        self.quiz_index = 0
+        self.quiz_score = 0
+        self.quiz_choice_menu = None
+        self.quiz_last_correct = None
+        self.flash_cards = []
+        self.flash_index = 0
+        self.flash_flipped = False
+
+        self.state = STATE_SERIES
+        self.running = True
+
+    # ------------------------------------------------------------------
+    def run(self):
+        while self.running:
+            self.handle_input()
+            self.draw()
+            pygame.display.flip()
+            self.clock.tick(30)
+        pygame.quit()
+
+    # ------------------------------------------------------------------
+    def handle_input(self):
+        for event in pygame.event.get():
+            action, repeatable = inp.translate_event(event)
+            if action == 'quit':
+                self.running = False
+                return
+            if action:
+                self.dispatch(action)
+
+        # répétition des directions maintenues (stick analogique)
+        direction = self.repeat.poll(self.joysticks)
+        if direction:
+            self.dispatch(direction)
+
+    def dispatch(self, action):
+        if self.state == STATE_SERIES:
+            self.handle_series(action)
+        elif self.state == STATE_MODULE:
+            self.handle_module(action)
+        elif self.state == STATE_MODE:
+            self.handle_mode(action)
+        elif self.state == STATE_QUIZ_ASK:
+            self.handle_quiz_ask(action)
+        elif self.state == STATE_QUIZ_FEEDBACK:
+            self.handle_quiz_feedback(action)
+        elif self.state == STATE_QUIZ_END:
+            self.handle_quiz_end(action)
+        elif self.state == STATE_FLASH:
+            self.handle_flash(action)
+
+    # ------------------------------------------------------------------
+    # SERIES
+    def handle_series(self, action):
+        if action in ('up', 'down'):
+            self.series_menu.move(action)
+        elif action == 'action':
+            item = self.series_menu.current()
+            if item:
+                self.enter_module_menu(item['modules'])
+        elif action == 'back':
+            self.running = False
+
+    def enter_module_menu(self, modules):
+        self.module_menu = ui.ListMenu(
+            [{'label': m['titre'], 'badge': m['numero'], 'base': m['base']} for m in modules],
+            self.screen_w, self.screen_h)
+        self.state = STATE_MODULE
+
+    # ------------------------------------------------------------------
+    # MODULE
+    def handle_module(self, action):
+        if action in ('up', 'down'):
+            self.module_menu.move(action)
+        elif action == 'action':
+            item = self.module_menu.current()
+            if item:
+                self.current_module = item
+                self.enter_mode_menu()
+        elif action == 'back':
+            self.state = STATE_SERIES
+
+    def enter_mode_menu(self):
+        self.mode_menu = ui.ListMenu(
+            [{'label': 'QUIZ', 'mode': 'quiz'}, {'label': 'FLASHCARDS', 'mode': 'flash'}],
+            self.screen_w, self.screen_h, top=260, item_height=70)
+        self.state = STATE_MODE
+
+    # ------------------------------------------------------------------
+    # MODE
+    def handle_mode(self, action):
+        if action in ('up', 'down'):
+            self.mode_menu.move(action)
+        elif action == 'action':
+            item = self.mode_menu.current()
+            if item['mode'] == 'quiz':
+                self.start_quiz()
+            else:
+                self.start_flash()
+        elif action == 'back':
+            self.state = STATE_MODULE
+
+    # ------------------------------------------------------------------
+    # QUIZ
+    def start_quiz(self):
+        self.quiz_questions = dl.load_quiz(self.current_module['base'], QUIZ_QUESTION_COUNT)
+        self.quiz_index = 0
+        self.quiz_score = 0
+        if not self.quiz_questions:
+            self.state = STATE_MODE
+            return
+        self.load_quiz_question()
+        self.state = STATE_QUIZ_ASK
+
+    def load_quiz_question(self):
+        q = self.quiz_questions[self.quiz_index]
+        self.quiz_choice_menu = ui.ListMenu(
+            [{'label': c} for c in q['choix']],
+            self.screen_w, self.screen_h, top=int(self.screen_h * 0.5), item_height=60)
+
+    def handle_quiz_ask(self, action):
+        if action in ('up', 'down'):
+            self.quiz_choice_menu.move(action)
+        elif action == 'action':
+            q = self.quiz_questions[self.quiz_index]
+            chosen = self.quiz_choice_menu.selected
+            self.quiz_last_correct = (chosen == q['correct'])
+            if self.quiz_last_correct:
+                self.quiz_score += 1
+            self.state = STATE_QUIZ_FEEDBACK
+        elif action == 'back':
+            self.state = STATE_MODE
+
+    def handle_quiz_feedback(self, action):
+        if action == 'action' or action == 'back':
+            self.quiz_index += 1
+            if self.quiz_index >= len(self.quiz_questions):
+                self.state = STATE_QUIZ_END
+            else:
+                self.load_quiz_question()
+                self.state = STATE_QUIZ_ASK
+
+    def handle_quiz_end(self, action):
+        if action in ('action', 'back'):
+            self.state = STATE_MODE
+
+    # ------------------------------------------------------------------
+    # FLASHCARDS
+    def start_flash(self):
+        self.flash_cards = dl.load_flashcards(self.current_module['base'])
+        self.flash_index = 0
+        self.flash_flipped = False
+        self.state = STATE_FLASH
+
+    def handle_flash(self, action):
+        if not self.flash_cards:
+            if action == 'back':
+                self.state = STATE_MODE
+            return
+        if action == 'action':
+            self.flash_flipped = not self.flash_flipped
+        elif action == 'right':
+            self.flash_index = (self.flash_index + 1) % len(self.flash_cards)
+            self.flash_flipped = False
+        elif action == 'left':
+            self.flash_index = (self.flash_index - 1) % len(self.flash_cards)
+            self.flash_flipped = False
+        elif action == 'back':
+            self.state = STATE_MODE
+
+    # ------------------------------------------------------------------
+    # DRAW
+    def draw(self):
+        self.screen.fill(ui.COLOR_BG)
+        if self.state == STATE_SERIES:
+            self.draw_series()
+        elif self.state == STATE_MODULE:
+            self.draw_module()
+        elif self.state == STATE_MODE:
+            self.draw_mode()
+        elif self.state == STATE_QUIZ_ASK:
+            self.draw_quiz_ask()
+        elif self.state == STATE_QUIZ_FEEDBACK:
+            self.draw_quiz_feedback()
+        elif self.state == STATE_QUIZ_END:
+            self.draw_quiz_end()
+        elif self.state == STATE_FLASH:
+            self.draw_flash()
+
+    def draw_header(self, title):
+        pygame.draw.rect(self.screen, ui.COLOR_PRIMARY, (0, 0, self.screen_w, 90))
+        title = ui.truncate_to_width(self.fonts.title, title, self.screen_w - 80)
+        self.fonts.title.render_to(self.screen, (40, 18), title, ui.COLOR_WHITE)
+
+    def draw_series(self):
+        self.draw_header("PSE25-27 — RÉVISION")
+        self.series_menu.draw(self.screen, self.fonts)
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
+                              [('A', 'Choisir'), ('B', 'Quitter')])
+
+    def draw_module(self):
+        code = self.series_menu.current()['code']
+        self.draw_header("SÉRIE {}".format(code))
+        self.module_menu.draw(self.screen, self.fonts, badge_key='badge')
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
+                              [('A', 'Choisir'), ('B', 'Retour')])
+
+    def draw_mode(self):
+        self.draw_header(self.current_module['label'])
+        self.mode_menu.draw(self.screen, self.fonts)
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
+                              [('A', 'Choisir'), ('B', 'Retour')])
+
+    def draw_quiz_ask(self):
+        q = self.quiz_questions[self.quiz_index]
+        self.draw_header("QUIZ  —  {}/{}  —  Score {}".format(
+            self.quiz_index + 1, len(self.quiz_questions), self.quiz_score))
+        margin = 60
+        ui.draw_text(self.screen, self.fonts.medium, q['question'], (margin, 120),
+                     color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
+        self.quiz_choice_menu.draw(self.screen, self.fonts)
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
+                              [('A', 'Valider'), ('B', 'Abandonner')])
+
+    def draw_quiz_feedback(self):
+        q = self.quiz_questions[self.quiz_index]
+        self.draw_header("QUIZ  —  {}/{}  —  Score {}".format(
+            self.quiz_index + 1, len(self.quiz_questions), self.quiz_score))
+        margin = 60
+        result_text = "BONNE RÉPONSE !" if self.quiz_last_correct else "MAUVAISE RÉPONSE"
+        result_color = ui.COLOR_SUCCESS if self.quiz_last_correct else ui.COLOR_ERROR
+        self.fonts.large.render_to(self.screen, (margin, 130), result_text, result_color)
+        correct_label = q['choix'][q['correct']]
+        ui.draw_text(self.screen, self.fonts.medium, "Réponse : " + correct_label, (margin, 190),
+                     color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
+        ui.draw_text(self.screen, self.fonts.small, q['explication'], (margin, 260),
+                     color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
+                              [('A', 'Continuer')])
+
+    def draw_quiz_end(self):
+        self.draw_header("RÉSULTAT")
+        total = len(self.quiz_questions)
+        pct = int(100 * self.quiz_score / total) if total else 0
+        text = "Score final : {} / {}  ({} %)".format(self.quiz_score, total, pct)
+        self.fonts.large.render_to(self.screen, (60, 200), text, ui.COLOR_PRIMARY)
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
+                              [('A', 'Retour au menu')])
+
+    def draw_flash(self):
+        self.draw_header("FLASHCARDS  —  {}".format(self.current_module['label']))
+        if not self.flash_cards:
+            self.fonts.medium.render_to(self.screen, (60, 160), "Aucune flashcard pour ce module.", ui.COLOR_TEXT)
+            ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h, [('B', 'Retour')])
+            return
+        card = self.flash_cards[self.flash_index]
+        margin = 100
+        card_rect = pygame.Rect(margin, 140, self.screen_w - 2 * margin, self.screen_h - 280)
+        pygame.draw.rect(self.screen, ui.COLOR_PANEL, card_rect, border_radius=16)
+        pygame.draw.rect(self.screen, ui.COLOR_PRIMARY, card_rect, width=3, border_radius=16)
+        face_label = "VERSO" if self.flash_flipped else "RECTO"
+        text = card['verso'] if self.flash_flipped else card['recto']
+        self.fonts.small.render_to(self.screen, (card_rect.x + 24, card_rect.y + 16), face_label, ui.COLOR_PRIMARY)
+        ui.draw_text(self.screen, self.fonts.medium, text, (card_rect.x + 40, card_rect.y + 70),
+                     color=ui.COLOR_TEXT, max_width=card_rect.width - 80)
+        counter = "{} / {}".format(self.flash_index + 1, len(self.flash_cards))
+        counter_rect = self.fonts.small.get_rect(counter)
+        self.fonts.small.render_to(self.screen, (self.screen_w // 2 - counter_rect.width // 2, card_rect.bottom + 16),
+                                    counter, ui.COLOR_TEXT)
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
+                              [('A', 'Retourner'), ('◄►', 'Carte suivante/précédente'), ('B', 'Retour')])
+
+
+def main():
+    app = App()
+    app.run()
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,52 @@
+"Selon la norme ISO 10006 (reprise par l'AFNOR), comment est défini un projet ?","C'est un ensemble d’activités coordonnées et maîtrisées, délimitées dans le temps, visant à atteindre un objectif précis en respectant des contraintes de délais, de coûts et de ressources."
+Quelle est la définition d'un projet selon l'AFITEP ?,"C'est une mission claire, dotée d’un début et d’une fin, visant à satisfaire un besoin spécifique à travers des actions ciblées et des ressources allouées."
+Quelle caractéristique d'un projet informatique le différencie des processus répétitifs ou continus ?,"Sa nature temporaire, avec un cadre strictement délimité par des échéances et des livrables définis."
+"Outre les délais et les coûts, sur quels autres aspects un projet informatique a-t-il des objectifs exigeants ?",Sur la qualité et les performances attendues.
+Quels sont les quatre types de risques qui doivent être anticipés dans un projet informatique complexe ?,"Les risques fonctionnels, techniques, organisationnels et financiers."
+La première étape de la démarche projet consiste à prévoir et à _____ l'ensemble des tâches.,planifier
+Quel est l'objectif d'optimiser les interactions entre les différentes activités d'un projet ?,Garantir une cohérence globale et éviter les silos.
+Pourquoi une démarche projet doit-elle intégrer une dimension réactive ?,Pour s'adapter aux évolutions imprévues et préserver la pertinence et la faisabilité du projet.
+Quel modèle de cycle de vie classique associe systématiquement chaque phase de conception à une phase de test correspondante ?,Le modèle en V.
+Quel est le principal inconvénient du modèle en V ?,"Sa rigidité intrinsèque, qui rend difficile l’intégration de modifications tardives."
+Quel besoin a mené à l'émergence des modèles agiles ?,Un besoin croissant de flexibilité et d’itérations rapides.
+Comment les modèles agiles structurent-ils le développement ?,En découpant le développement en cycles courts et en privilégiant une collaboration étroite.
+Quel est l'avantage des modèles de développement hybrides ?,Ils offrent un équilibre entre la structure des modèles traditionnels et l'adaptabilité des modèles agiles.
+"En Scrum, comment appelle-t-on les itérations courtes de travail ?",Les sprints.
+Quelle est la durée typique d'un sprint en Scrum ?,De deux à quatre semaines.
+Rôle en Scrum : Qui est responsable de la vision produit et de la gestion du backlog ?,Le Product Owner (PO).
+Rôle en Scrum : Qui est chargé de faciliter les processus et de lever les obstacles pour l'équipe ?,Le Scrum Master (SM).
+"Artefact Scrum : Quel document recense l'ensemble des user stories, bugs et améliorations priorisées ?",Le Product Backlog.
+Artefact Scrum : Qu'est-ce que le Sprint Backlog ?,La liste des tâches sélectionnées par l'équipe pour être réalisées pendant le sprint en cours.
+Cérémonie Scrum : Quel est l'objectif du Sprint Planning ?,Planifier le travail à effectuer pendant le sprint.
+Cérémonie Scrum : Quelle cérémonie sert à synchroniser l'équipe de développement quotidiennement ?,Le Daily Scrum.
+Cérémonie Scrum : À quoi sert la Sprint Review ?,À inspecter l'incrément produit pendant le sprint et à adapter le Product Backlog si nécessaire.
+Cérémonie Scrum : Quel est le but de la Sprint Retrospective ?,Identifier les points à améliorer dans le processus de travail de l'équipe.
+Qu'est-ce qui est produit à la fin de chaque sprint Scrum ?,Un incrément potentiellement livrable du produit.
+Sur quels deux principes clés la méthode Kanban est-elle axée ?,La visualisation du flux de travail et la limitation du travail en cours (WIP).
+Quel est l'outil visuel principal utilisé dans la méthode Kanban ?,"Le tableau Kanban, divisé en colonnes (ex: À faire, En cours, Terminé)."
+Comment Kanban gère-t-il le flux de travail par rapport à Scrum ?,"Kanban utilise un flux continu, tandis que Scrum est basé sur des itérations fixes appelées sprints."
+Qu'est-ce que le Scrumban ?,"Une approche hybride qui combine la structure de Scrum (rôles, cérémonies) avec la flexibilité et le flux continu de Kanban."
+Quelle étape marque le point de départ essentiel d'un projet informatique ?,L'expression des besoins.
+"Dans l'expression des besoins, quel est le rôle de la Maîtrise d’Ouvrage (MOA) ?",Elle exprime les objectifs stratégiques et fonctionnels.
+"Dans l'expression des besoins, quel est le rôle de la Maîtrise d’Œuvre (MOE) ?",Elle analyse les besoins pour en évaluer la faisabilité technique et les contraintes.
+"Quel outil, formulé de manière simple et centré sur l'utilisateur, est le vecteur principal pour capturer les besoins ?",Les user stories (récits utilisateur).
+À quoi servent les critères d'acceptation qui complètent une user story ?,Ils précisent les conditions de validation de la fonctionnalité et servent de référence pour les tests.
+"Quel artefact agile centralise l'ensemble des fonctionnalités, améliorations et corrections à réaliser, organisées par priorité ?",Le Product Backlog.
+Citez une méthode structurée pour hiérarchiser les éléments du Product Backlog.,"MoSCoW, RICE, ou DEEP."
+Comment appelle-t-on les sessions dédiées où l'équipe affine les user stories et estime leur complexité ?,Les sessions de backlog grooming (ou affinage du backlog).
+"En Scrum, le Product Backlog est le point de départ de chaque _____.",sprint
+"Dans Kanban, le backlog sert de _____ de tâches priorisées pour un flux de travail continu.",réservoir
+Définition : Maîtrise d’Ouvrage (MOA),"L'entité qui porte le besoin du projet, définit les objectifs, valide les livrables et garantit l'adéquation de la solution aux attentes métiers."
+Définition : Maîtrise d’Œuvre (MOE),"L'entité responsable de la réalisation technique du projet, des choix d'architecture et du développement."
+Quel est le rôle du Comité de pilotage (COPIL) ?,"Valider les avancées aux jalons clés, arbitrer les décisions stratégiques et assurer l'alignement du projet avec les objectifs de l'organisation."
+Quel est le rôle du Comité de projet (COPRO) ?,"Assurer un suivi opérationnel régulier, identifier les risques, résoudre les blocages et garantir une communication fluide."
+Rôle en agilité : Qui définit la stratégie produit et la roadmap à moyen et long terme ?,Le Product Manager (PM).
+Qu'est-ce que la comitologie dans la gestion de projet ?,L'ensemble des comités et instances de décision mis en place pour structurer la gouvernance d'un projet.
+"Selon le diagramme des phases de projet à la DGFIP, quelle est la première phase ?",Phase 1 : Expression du besoin.
+"D'après le diagramme DGFIP, citez un livrable clé de la phase de Conception.","Spécifications fonctionnelles, applicatives et techniques, Plan Sécurité Projet ou Stratégie de test."
+"Dans le modèle DGFIP, quelle instance de validation intervient lors de la phase d'Étude d'opportunité et de faisabilité ?",CODEN / COSTRAT / COPSI.
+"D'après le diagramme DGFIP, le COPRO est l'instance de validation pour la majorité des phases, de la _____ à la mise en exploitation.",Conception
+Que signifie l'acronyme CODEN ?,COmité des DEmandes Nouvelles.
+Que signifie l'acronyme COPSI ?,COmité de Pilotage des Systèmes d'Information.
+Que signifie l'acronyme COSTRAT ?,COmité STRATégique.
+Quel livrable est attendu à la fin de la phase 'Mise en exploitation' dans le diagramme DGFIP ?,"Support de formation, Kit d'assistance, ou Feuille de route de mise en production."

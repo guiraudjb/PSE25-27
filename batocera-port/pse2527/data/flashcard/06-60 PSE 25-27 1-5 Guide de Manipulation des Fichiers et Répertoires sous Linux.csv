@@ -1,0 +1,75 @@
+Quelle commande Linux affiche le chemin absolu du répertoire courant ?,La commande `pwd` (print working directory).
+Comment utiliser la commande `cd` pour remonter d'un niveau vers le répertoire parent ?,En utilisant la commande `cd ..`.
+Quelle commande permet de revenir au répertoire de travail précédent ?,La commande `cd -`.
+Comment revenir directement au répertoire personnel de l'utilisateur avec la commande `cd` ?,En utilisant `cd` seul ou `cd ~`.
+"Pour créer une arborescence de répertoires complète, même si les répertoires parents n'existent pas, on utilise la commande `mkdir` avec l'option _____.",-p
+Quelle commande est utilisée pour supprimer un répertoire vide ?,La commande `rmdir`.
+"Pour supprimer un répertoire et tout son contenu de manière récursive, quelle commande et quelle option faut-il utiliser ?",La commande `rm -r`.
+Quelle option peut-on ajouter à la commande `rm` pour demander une confirmation avant chaque suppression ?,L'option `-i`.
+"Pour afficher une liste détaillée des fichiers incluant droits, propriétaire et taille, on utilise la commande `ls` avec l'option _____.",-l
+"Comment lister tous les fichiers d'un répertoire, y compris les fichiers cachés ?",En utilisant la commande `ls -a`.
+"Quelle option de la commande `ls` affiche les tailles des fichiers dans un format lisible par l'homme (Ko, Mo, Go) ?","L'option `-h` (utilisée en combinaison avec -l, soit `ls -lh`)."
+"Pour lister récursivement le contenu de tous les sous-répertoires, quelle option de la commande `ls` faut-il utiliser ?",L'option `-R`.
+Quelle option de `ls` permet de trier les fichiers par taille ?,L'option `-S`.
+Quelle option de `ls` permet de trier les fichiers par date de modification ?,L'option `-t`.
+Quelle commande et option affichent le numéro d'inode associé à chaque fichier ?,La commande `ls -i`.
+Concept: Inode,"Une structure de données contenant toutes les métadonnées d'un fichier (permissions, taille, propriétaire, etc.), à l'exception de son nom."
+Que signifie le fait que deux fichiers aient le même numéro d'inode ?,Cela signifie qu'ils sont des liens physiques (hard links) l'un vers l'autre.
+Quelle est l'utilité principale de la commande `touch fichier.txt` ?,Elle crée un fichier vide nommé `fichier.txt` ou met à jour son horodatage s'il existe déjà.
+"Pour écrire du texte dans un fichier en écrasant son contenu, on utilise la commande `echo` avec le symbole de redirection _____.",>
+"Pour ajouter du texte à la fin d'un fichier sans effacer son contenu, on utilise `echo` avec le symbole de redirection _____.",>>
+Quelle commande est idéale pour lire des fichiers volumineux page par page dans le terminal ?,La commande `less`.
+"Pour afficher les 20 premières lignes d'un fichier, quelle commande utiliser ?",La commande `head -n 20 nom_du_fichier`.
+"Quelle commande permet de suivre en temps réel les ajouts à la fin d'un fichier, comme un journal de logs ?",La commande `tail -f nom_du_fichier`.
+"En Linux, la commande `mv fichier1 nouveau_nom` est utilisée à la fois pour déplacer et pour _____ un fichier.",renommer
+"Pour copier un répertoire entier et son contenu, quelle option doit être utilisée avec la commande `cp` ?",L'option `-r` (récursif).
+Quelle commande est utilisée pour créer une archive (non compressée) d'un dossier ?,La commande `tar -cvf archive.tar /dossier`.
+"Pour créer une archive compressée au format gzip, quelle est la syntaxe de la commande `tar` ?",La syntaxe est `tar -czvf archive.tar.gz /dossier`.
+Quelle commande permet de décompresser un fichier avec l'extension `.gz` ?,La commande `gunzip`.
+Quel outil de compression offre généralement un meilleur taux de compression que `gzip` ?,L'outil `bzip2`.
+"Dans la notation des droits `rwxr-x---`, quels droits possède le groupe ?",Le groupe possède les droits de lecture (`r`) et d'exécution (`x`).
+Quelle commande est utilisée pour modifier les droits d'accès d'un fichier ou d'un répertoire ?,La commande `chmod`.
+Quelle commande modifie le propriétaire d'un fichier ?,La commande `chown`.
+"Pour changer uniquement le groupe associé à un fichier, quelle commande faut-il utiliser ?",La commande `chgrp`.
+La commande `chmod 755 fichier` utilise la notation _____ pour définir les permissions.,octale
+Que signifie le droit spécial SUID (Set User ID) sur un fichier exécutable ?,"Le fichier s'exécute avec les privilèges de son propriétaire, et non de l'utilisateur qui le lance."
+Quel est l'effet du droit spécial SGID (Set Group ID) lorsqu'il est appliqué à un répertoire ?,Les nouveaux fichiers créés dans ce répertoire héritent du groupe du répertoire parent.
+Quel est le rôle du `sticky bit` lorsqu'il est appliqué à un répertoire comme `/tmp` ?,Il empêche un utilisateur de supprimer un fichier qui ne lui appartient pas dans ce répertoire.
+Quelle commande permet d'afficher les ACL (Access Control Lists) d'un fichier ?,La commande `getfacl`.
+"Comment ajouter un droit de lecture, écriture et exécution pour l'utilisateur `bob` sur un fichier en utilisant les ACL ?",Avec la commande `setfacl -m u:bob:rwx fichier`.
+"Quelle commande explore l'arborescence en temps réel pour trouver des fichiers selon des critères précis (nom, taille, etc.) ?",La commande `find`.
+"Quelle commande utilise une base de données indexée pour trouver rapidement des fichiers, mais nécessite une mise à jour via `updatedb` ?",La commande `locate`.
+"Pour trouver tous les fichiers terminant par `.conf` dans le répertoire `/etc`, quelle commande `find` utiliser ?","La commande `find /etc -name ""*.conf""`."
+"Quelle commande affiche les différences entre deux fichiers texte, ligne par ligne ?",La commande `diff`.
+"Pour vérifier l'intégrité d'un fichier en calculant une empreinte cryptographique robuste, quelle commande est recommandée ?",La commande `sha256sum`.
+Quelle commande est utilisée pour rechercher toutes les occurrences d'un mot ou d'un motif dans un fichier ?,La commande `grep`.
+"Pour effectuer une recherche insensible à la casse avec `grep`, il faut utiliser l'option _____.",-i
+Quelle commande permet de compter le nombre de lignes dans un fichier ?,La commande `wc -l`.
+Quelle commande supprime les lignes dupliquées consécutives dans un fichier trié ?,La commande `uniq`.
+"Dans une expression régulière `grep`, que représente le caractère `.` (point) ?",Il représente n'importe quel caractère unique.
+"Dans un pattern `grep`, que désignent les symboles `^` et `$` ?",Le symbole `^` désigne le début de la ligne et `$` désigne la fin de la ligne.
+Que fait la commande `watch -n 2 ls -lh` ?,Elle exécute la commande `ls -lh` toutes les 2 secondes et affiche le résultat en temps réel.
+"Sous Linux, chaque processus manipule trois flux standards : stdin (0), stdout (1) et _____ (2).",stderr (la sortie d'erreurs)
+"Quel opérateur de redirection permet de diriger la sortie standard d'une commande vers un fichier, en écrasant son contenu ?",L'opérateur `>`.
+"Pour rediriger la sortie d'erreurs (stderr) d'une commande vers un fichier, quel opérateur utilise-t-on ?",L'opérateur `2>`.
+Comment rediriger à la fois la sortie standard et la sortie d'erreurs vers un seul et même fichier ?,En utilisant l'opérateur `&>` ou la syntaxe `> fichier 2>&1`.
+Quel est le rôle du `pipe` (caractère `|`) en ligne de commande ?,"Il permet de chaîner des commandes, en utilisant la sortie standard de la commande de gauche comme entrée standard pour la commande de droite."
+Que fait la commande `ps aux | grep ssh` ?,Elle liste tous les processus en cours (`ps aux`) et filtre le résultat pour n'afficher que les lignes contenant `ssh`.
+Comment utiliser `echo` pour initialiser un fichier de configuration vide ?,Avec la commande `touch nom_du_fichier.conf`.
+Quelle est la bonne pratique avant de modifier un fichier de configuration système critique ?,"Faire une copie de sauvegarde du fichier (par exemple, avec l'extension `.bak`)."
+Quel est l'avantage principal des ACL (Access Control Lists) par rapport aux permissions traditionnelles ?,Elles offrent un contrôle plus fin en permettant d'attribuer des droits personnalisés à plusieurs utilisateurs ou groupes spécifiques.
+La syntaxe `<<EOF` dans un script shell introduit un _____.,here document
+"Pour archiver et compresser le répertoire `/etc` dans un fichier nommé `backup_DATE.tar.gz`, on peut utiliser la commande `tar -czvf backup_$(____ +%F).tar.gz /etc`.",date
+Quelle commande permet de trouver et supprimer les fichiers de plus de 30 jours dans le répertoire `/backup` ?,La commande `find /backup -type f -mtime +30 -delete`.
+"Pour trier numériquement les lignes d'un fichier, quelle option doit-on utiliser avec la commande `sort` ?",L'option `-n`.
+Quel éditeur de texte en mode console est considéré comme simple et adapté aux débutants ?,L'éditeur `nano`.
+Quel est l'utilitaire qui permet de programmer l'exécution de tâches récurrentes comme le nettoyage de fichiers temporaires ?,L'ordonnanceur `cron`.
+Comment afficher les 50 dernières lignes d'un fichier de log ?,Avec la commande `tail -n 50 fichier.log`.
+La commande `cp -u fichier1 fichier2` ne copie `fichier1` que si _____.,`fichier1` est plus récent que `fichier2`
+"Pour définir les droits `rw-r--r--` en notation octale, quel nombre faut-il utiliser avec `chmod` ?",Le nombre `644`.
+"Dans une expression régulière `grep`, à quoi correspond le pattern `[0-9]` ?",Il correspond à une ligne contenant au moins un chiffre.
+"Dans une expression régulière `grep`, que signifie l'étoile `*` ?",Elle indique zéro ou plusieurs occurrences du caractère précédent.
+Quelle commande redirige le contenu du fichier `noms.txt` vers l'entrée standard de la commande `sort` ?,La commande `sort < noms.txt`.
+"Quel est le nom du fichier qui initialise des paramétrages propres à un utilisateur, comme des alias ?",Le fichier `~/.bashrc`.
+"Pour sécuriser le fichier des mots de passe `/etc/shadow`, quelle commande `chmod` est recommandée ?",La commande `chmod 600 /etc/shadow`.
+Quelle commande est utilisée pour comparer deux fichiers octet par octet et s'arrête à la première différence ?,La commande `cmp`.

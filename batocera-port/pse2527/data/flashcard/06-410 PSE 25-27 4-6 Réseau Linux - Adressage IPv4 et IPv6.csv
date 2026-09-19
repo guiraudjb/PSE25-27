@@ -1,0 +1,50 @@
+Dans quelle RFC est défini le protocole IP (Internet Protocol) ?,La RFC 791.
+À quel niveau du modèle OSI se situe le protocole IP ?,Le niveau 3 (couche Réseau).
+Quels sont les deux éléments que le protocole IP ne garantit pas lors du transport des paquets ?,La fiabilité et l'ordre des paquets.
+Quelle est la fonction du MTU (Maximum Transmission Unit) dans le protocole IP ?,Il définit la taille maximale d'un datagramme avant fragmentation.
+Quel protocole est utilisé pour les messages d'erreur et de diagnostic comme la commande ping ?,ICMP (Internet Control Message Protocol).
+Quel protocole permet de résoudre une adresse IP en adresse MAC ?,Le protocole ARP.
+Sur combien de bits est codée une adresse IPv4 ?,32 bits (4 octets).
+Quel est le nombre théorique maximal d'adresses IPv4 disponibles ?,"$2^{32}$ (environ 4,3 milliards)."
+Quelle est la plage de valeurs du premier octet d'une adresse IPv4 de Classe A ?,De 0 à 127.
+Quel est le masque de sous-réseau par défaut pour une adresse de Classe B ?,255.255.0.0.
+À quoi servent les adresses IPv4 de Classe D ?,Au Multicast (diffusion vers un groupe d'hôtes).
+Comment identifie-t-on une adresse réseau en IPv4 ?,Tous les bits de la partie hôte (host) sont à 0.
+Quelle adresse IPv4 spécifique est utilisée pour le bouclage local (loopback) ?,127.0.0.1.
+Citez l'une des trois plages d'adresses privées définies par la RFC 1918.,"10.0.0.0/8, 172.16.0.0/12 ou 192.168.0.0/16."
+Quel est le rôle des adresses APIPA (169.254.x.y) ?,L'auto-attribution d'IP si aucun serveur DHCP n'est disponible.
+Que signifie l'acronyme CIDR dans le contexte de l'adressage IP ?,Classless Inter-Domain Routing.
+Sur combien de bits est codée une adresse IPv6 ?,128 bits.
+Combien de groupes hexadécimaux composent une adresse IPv6 complète ?,8 groupes de 16 bits.
+Quelle est l'adresse de bouclage (loopback) en IPv6 ?,::1/128.
+Quel préfixe IPv6 identifie les adresses privées (Unique Local Address) ?,FC00::/7.
+Quel type d'adresse IPv6 remplace le broadcast de l'IPv4 ?,Le Multicast (FF00::/8).
+Quel préfixe est utilisé pour les adresses de lien-local (Link-local) en IPv6 ?,FE80::/64.
+Quelle est la taille de l'en-tête fixe d'un paquet IPv6 ?,40 octets.
+"Dans l'en-tête IPv6, quel champ remplace le TTL (Time To Live) de l'IPv4 ?",Le champ 'Nombre de sauts' (Hop Limit).
+Qu'est-ce que le mécanisme 'Dual Stack' dans la transition vers l'IPv6 ?,Le support simultané des protocoles IPv4 et IPv6 par un nœud réseau.
+Quel mécanisme de transition encapsule des datagrammes IPv6 dans de l'IPv4 ?,"Le Tunneling (ex: 6to4, Teredo)."
+Comment calcule-t-on le nombre d'adresses d'hôtes disponibles pour un masque IPv4 de longueur $L$ ?,$2^{32-L} - 2$.
+Que signifie VLSM dans le découpage de sous-réseaux ?,Variable Length Subnet Masking.
+"Sous Linux, quelle commande permet de lister les cartes réseau PCI ?",lspci | grep -i ethernet
+Quelle commande Linux moderne remplace `ifconfig` pour afficher les adresses IP ?,ip addr show
+Quelle commande `ip` permet d'activer une interface réseau nommée enp0s3 ?,ip link set enp0s3 up
+"Dans la famille RedHat, quel fichier configure les paramètres IP statiques d'une interface spécifique ?",/etc/sysconfig/network-scripts/ifcfg-<interface>
+Quel fichier sous Debian/Ubuntu contient la configuration persistante des interfaces réseau ?,/etc/network/interfaces
+Quel fichier Linux est utilisé pour la résolution statique des noms d'hôtes (IP vers nom) ?,/etc/hosts
+Quel fichier contient la configuration des serveurs DNS sous Linux ?,/etc/resolv.conf
+Quel fichier définit l'ordre de priorité entre les fichiers locaux et le DNS pour la résolution de noms ?,/etc/nsswitch.conf
+Quelle commande est l'alternative moderne à `netstat` pour surveiller les ports ouverts ?,ss -tuln
+Quel outil permet de capturer et d'analyser le trafic réseau en temps réel en ligne de commande ?,tcpdump
+Quelle commande combine les fonctionnalités de `ping` et de `traceroute` ?,mtr
+"Dans une procédure de validation réseau, que teste-t-on après avoir vérifié l'interface locale ?",La connectivité avec la passerelle (Gateway).
+Quelle commande permet de tester spécifiquement la connectivité ICMP en IPv6 ?,ping6
+Combien de bits sont alloués à l'identificateur de flux dans l'en-tête IPv6 ?,20 bits.
+Quelle commande Linux permet d'ajouter une route par défaut via l'adresse 192.168.1.1 ?,ip route add default via 192.168.1.1
+Comment appelle-t-on le type d'adresse IPv6 qui achemine un paquet vers l'interface la plus proche d'un groupe ?,Anycast.
+Quel est le masque par défaut (en notation décimale) d'une adresse de Classe C ?,255.255.255.0.
+Quelle option de la commande `ping` permet d'envoyer un message en broadcast en IPv4 ?,ping -b
+Quel outil affiche le trafic réseau en temps réel par interface avec une interface graphique en terminal ?,nload
+L'en-tête IPv4 possède 14 champs ; combien en possède l'en-tête IPv6 ?,8 champs.
+Quel est le rôle du fichier `/etc/services` ?,L'association entre les numéros de ports et les noms de services.
+Pourquoi l'IPv6 intègre-t-il nativement IPsec ?,Pour assurer obligatoirement le chiffrement et l'authentification des paquets.

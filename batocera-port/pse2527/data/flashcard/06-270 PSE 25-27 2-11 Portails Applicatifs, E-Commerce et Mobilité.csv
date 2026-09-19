@@ -1,0 +1,69 @@
+Quelle est la définition d'un portail applicatif ?,C'est une plateforme web qui offre un point d'entrée unifié et une authentification centralisée à diverses ressources d'un système d'information.
+Quel est l'enjeu stratégique de la centralisation pour un portail applicatif ?,Regrouper en un seul endroit des outils disparates pour améliorer l'efficacité et réduire la complexité pour les utilisateurs.
+Comment un portail applicatif améliore-t-il l'expérience utilisateur ?,"Grâce à une interface personnalisable selon le profil de l'utilisateur (rôle, service, droits d'accès), ce qui optimise la productivité."
+"Quel pourcentage de Français possédaient un smartphone en 2025, renforçant l'enjeu de mobilité des portails ?",91% des Français possédaient un smartphone en 2025.
+L'authentification unique (SSO) et les protocoles comme la biométrie sont des évolutions récentes visant à renforcer quel aspect des portails applicatifs ?,La sécurité.
+"Quel est le principe de l'authentification unique (Single Sign-On, SSO) ?",Permettre à un utilisateur de s'identifier une seule fois pour accéder à l'ensemble des applications et services autorisés.
+"Dans le SSO serveur, sur quoi les applications métier s'appuient-elles pour authentifier les utilisateurs ?","Elles s'appuient sur une base centrale, généralement un annuaire LDAP ou Active Directory."
+Quel est l'un des principaux défis techniques du SSO serveur ?,La nécessité d'adapter chaque application pour qu'elle reconnaisse les tokens d'authentification émis par le portail.
+Comment fonctionne une solution de SSO client ?,Un logiciel sur le poste utilisateur stocke les identifiants et les transmet automatiquement au navigateur.
+Quel est le principal risque de sécurité associé au SSO client ?,"Des risques de sécurité si le poste client est compromis, car les identifiants y sont stockés."
+Quel protocole SSO est considéré comme le standard pour les applications d'entreprise ?,SAML 2.0.
+"Pour les applications cloud et mobiles, quel couple de protocoles SSO est privilégié ?",OAuth 2.0 / OpenID Connect.
+Quels sont les trois grands types de contenus agrégés par un portail applicatif ?,"Contenus éditoriaux/documentaires, applications métier, et outils collaboratifs."
+Citez deux exemples de CMS open source pour la gestion de contenu d'un portail.,"Liferay, Drupal, WordPress ou Typo3."
+Citez deux exemples de CMS propriétaires pour la gestion de contenu d'un portail.,"BEA Weblogic Portal, IBM Websphere ou Oracle Application Server."
+Quelles sont les trois attentes principales des consommateurs concernant le paiement en ligne ?,"La simplicité, la sécurité et le choix des options de paiement."
+Quel est l'un des défis majeurs pour les e-commerçants lié au processus de paiement ?,"Réduire l'abandon de panier, qui peut être causé par un processus trop complexe."
+À combien pourraient s'élever les pertes mondiales dues à la fraude en ligne en 2025 ?,Plus de 50 milliards de dollars.
+"Quel protocole, créé par Visa et MasterCard, ajoute une couche de sécurité à l'authentification du porteur de carte bancaire ?",Le protocole 3D-Secure.
+Quelle directive européenne impose l'authentification forte (SCA) pour la majorité des transactions en ligne ?,La directive DSP2 (Directive sur les Services de Paiement 2).
+Quel est le principal avantage du protocole 3D-Secure pour les commerçants ?,La responsabilité est transférée à la banque en cas de fraude sur une transaction authentifiée.
+"Quelle est la principale solution de paiement sécurisé en France, développée par Worldline (ex-Atos) ?",SIPS (Secure Internet Payment Services).
+"La solution SIPS est conforme à la norme internationale pour la sécurité des données de carte, appelée _____.",PCI/DSS.
+Qu'est-ce qu'un portefeuille électronique (ou e-wallet) ?,Un service permettant de stocker des moyens de paiement et de réaliser des transactions sans resaisir ses coordonnées bancaires.
+"Quel portefeuille électronique, soutenu par les banques françaises, a remplacé Paylib ?",Wero.
+"Quelle technique d'usurpation d'identité, via de faux emails ou sites, vise à voler des coordonnées bancaires ?",Le phishing (ou hameçonnage).
+"En cas de fraude, la directive DSP2 limite la responsabilité du client en réduisant la franchise à quel montant ?",50 €.
+Quelle technologie de sécurité remplace les données bancaires réelles par un jeton unique pour chaque transaction ?,La tokenisation.
+"Une bonne pratique pour les consommateurs est de vérifier que l'URL du site de paiement commence par _____, indiquant une connexion sécurisée.",HTTPS.
+"Faites la distinction entre un accès ""itinérant"" et un accès ""nomade"" en entreprise.","L'accès itinérant est depuis un point différent au sein du réseau de l'entreprise, tandis que l'accès nomade est depuis l'extérieur de l'entreprise (domicile, hôtel, etc.)."
+"En 2025, quel est le taux de pénétration des tablettes en France ?",54%.
+"Quelle est la différence entre un terminal ""maîtrisé"" (COPE) et un terminal ""non maîtrisé"" (BYOD) ?","Un terminal maîtrisé est fourni et configuré par l'entreprise, tandis qu'un terminal non maîtrisé est l'appareil personnel de l'employé."
+Quelle technologie est utilisée pour chiffrer les données transitant entre un terminal mobile et le système d'information de l'entreprise ?,Un VPN (Virtual Private Network).
+Qu'est-ce que l'authentification multi-facteurs (MFA) ?,Une méthode d'authentification qui combine plusieurs types de preuves d'identité (ex: mot de passe + SMS + biométrie).
+"Quel protocole de Microsoft permet la synchronisation en temps réel des emails, contacts et calendriers sur mobile ?",ActiveSync.
+Quel est le principal avantage du développement d'applications mobiles en programmation native ?,Les performances optimales et l'accès complet aux fonctionnalités du terminal.
+Quel est le principal inconvénient du développement d'applications mobiles en programmation native ?,Le coût et le temps de développement sont multipliés par le nombre de plateformes à supporter.
+Les outils comme React Native et Flutter relèvent de quelle technique de développement mobile ?,La programmation hybride.
+Quel est l'avantage majeur de la programmation hybride pour le développement mobile ?,"Un code unique pour iOS et Android, réduisant les coûts et les délais."
+Les Progressive Web Apps (PWA) sont développées avec quelles technologies web ?,"HTML5, CSS3 et JavaScript."
+Quel est l'avantage principal d'une Progressive Web App (PWA) pour l'utilisateur ?,"Aucun téléchargement n'est nécessaire, l'accès se fait via le navigateur et les mises à jour sont instantanées."
+Quelle est la définition d'une solution MDM (Mobile Device Management) ?,"C'est une solution logicielle permettant de superviser, sécuriser et gérer à distance un parc de terminaux mobiles."
+La capacité de déployer des correctifs de sécurité à distance pour le système d'exploitation d'un mobile est appelée mise à jour _____.,OTA (Over-The-Air).
+Quelle fonctionnalité de sécurité d'un MDM permet de supprimer les données d'un terminal en cas de perte ou de vol ?,L'effacement à distance.
+Qu'est-ce qu'un MDM peut détecter sur un terminal qui indique une élévation de privilèges et un risque de sécurité majeur ?,Le jailbreak (iOS) ou le rooting (Android).
+"Quel est le principal inconvénient d'une solution MDM du point de vue de l'employé, surtout en mode BYOD ?","Le caractère intrusif perçu, pouvant être ressenti comme une atteinte à la vie privée."
+Citez deux exemples de solutions MDM.,"Jamf, Microsoft Intune, VMware Workspace ONE, IBM MaaS360, ou MobileIron."
+Combien de cyberattaques ciblant des mobiles ont été recensées en France en 2023 ?,"307 023, soit une augmentation de 52% en un an."
+"Dans une Politique de Sécurité des Systèmes d'Information (PSSI) mobile, quel principe limite les droits d'accès aux seules données nécessaires ?",Le principe du moindre privilège.
+Qu'est-ce que le MAM (Mobile Application Management) ?,"Une solution qui sécurise et gère spécifiquement les applications métiers sur un terminal, souvent en les isolant dans un conteneur sécurisé."
+Comment une solution MAM peut-elle contrôler les données d'entreprise au sein d'une application ?,En restreignant des actions comme le copier/coller des données de l'application sécurisée vers une application personnelle.
+Qu'est-ce qu'une solution EMM (Enterprise Mobility Management) ?,Une solution unifiée qui combine les fonctionnalités du MDM (gestion du terminal) et du MAM (gestion des applications).
+Quel principe de sécurité postule qu'aucune confiance n'est accordée par défaut et que chaque accès doit être systématiquement vérifié ?,"Le principe de ""Zero Trust"" (confiance zéro)."
+L'utilisation de clés de sécurité physiques comme YubiKey est une tendance visant à renforcer quoi ?,L'authentification sans mot de passe.
+Quelle est la part de l'e-commerce dans les dépenses des Français selon le document ?,L'e-commerce représente 28% des dépenses des Français.
+Quels sont les deux types de solutions SSO décrits dans le document ?,Le SSO serveur (centralisé) et le SSO client (logiciel sur le poste).
+Quel est le principal avantage du SSO serveur en termes de sécurité ?,"Il n'y a pas de transmission de mots de passe, ce qui renforce la sécurité."
+"Pour les besoins complexes, les portails basés sur _____ ou les solutions SaaS offrent des fonctionnalités avancées.",Java.
+Le marché du SSO devrait atteindre combien de milliards de dollars en 2025 ?,"3,34 milliards de dollars."
+Quel portefeuille électronique est spécifiquement intégré à l'écosystème Apple et utilise la biométrie ?,Apple Pay.
+Quel pourcentage de Français utilisent un portefeuille numérique en 2025 ?,89%.
+Quel protocole standard est utilisé pour sécuriser les échanges entre un navigateur et un serveur de paiement (indiqué par HTTPS) ?,Le chiffrement SSL/TLS.
+Quel pourcentage des actifs sont équipés d'ordinateurs portables ?,89%.
+Qu'est-ce que l'encapsulation dans le contexte du MAM ?,"C'est le fait de placer les applications métiers dans un conteneur sécurisé, les isolant des données personnelles sur le terminal."
+"En programmation mobile, quel est l'inconvénient des performances pour les applications hybrides par rapport aux natives ?",Les performances sont légèrement inférieures à celles des applications natives.
+Quel est le principal inconvénient d'une Progressive Web App (PWA) ?,Ses fonctionnalités sont limitées en mode hors ligne et elle est moins intégrée à l'OS.
+Quelle fonctionnalité d'un MDM permet de déployer automatiquement des applications métiers ou de sécurité sur les terminaux ?,La distribution et mise à jour d'applications.
+"Une fonctionnalité de sécurité d'un MDM est la _____, qui restreint l'usage du terminal dans certaines zones géographiques.",Limitation géolocalisée.
+Quel est le rôle d'un proxy applicatif dans la sécurisation de la synchronisation des données mobiles ?,"Il filtre les accès selon le terminal, les droits utilisateurs ou l'identifiant de l'équipement."

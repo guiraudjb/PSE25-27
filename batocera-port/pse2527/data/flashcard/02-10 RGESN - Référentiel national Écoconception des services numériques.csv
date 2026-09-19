@@ -1,0 +1,72 @@
+Quelle loi française a prévu la création du référentiel général de l'écoconception des services numériques (RGESN) ?,L'article 25 de la loi n° 2021-1485 du 15 novembre 2021 visant à réduire l’empreinte environnementale du numérique en France.
+Quelles sont les trois principales autorités publiques qui ont élaboré le RGESN ?,"L'Arcep (Autorité de régulation des communications électroniques), l'Arcom (Autorité de régulation de la communication audiovisuelle et numérique) et l'ADEME (Agence de l'environnement et de la maîtrise de l'énergie)."
+Quel est le statut juridique du RGESN ?,"C'est un document non contraignant, servant de socle commun de bonnes pratiques."
+"Selon l'étude ADEME-Arcep, quelle part de l'empreinte carbone en France le numérique représente-t-il ?","Le numérique représente 2,5 % de l'empreinte carbone en France."
+Quelle composante du numérique est responsable de la majeure partie de son empreinte environnementale ?,La fabrication des terminaux.
+"Selon le RGESN, l'écoconception des services numériques est un levier pour allonger la _____ des terminaux.",durée de vie
+Citez un critère du RGESN visant à limiter les stratégies de captation de l'attention.,"Restreindre les fonctionnalités comme le défilement infini, le déclenchement automatique des vidéos ou les notifications intempestives."
+Quel est l'un des quatre objectifs principaux du RGESN ?,Concevoir des services numériques plus durables pour allonger la durée de vie des terminaux.
+Quel est le deuxième objectif principal du RGESN ?,Promouvoir une démarche de sobriété environnementale face aux stratégies de captation de l’attention.
+Quel est le troisième objectif principal du RGESN ?,Diminuer les ressources mobilisées sur le cycle de vie du service numérique.
+Quel est le quatrième objectif principal du RGESN ?,Accroître le niveau de transparence sur l’empreinte environnementale du service numérique.
+Combien de critères le RGESN propose-t-il au total ?,Le référentiel propose 78 critères sous forme de questions.
+Quels sont les trois niveaux de priorisation des critères dans le RGESN ?,"Prioritaire, Recommandé et Modéré."
+Quelle est la pondération d'un critère de niveau 'Prioritaire' dans le calcul du score d'avancement ?,"1,5."
+Quelle est la pondération d'un critère de niveau 'Recommandé' dans le calcul du score d'avancement ?,"1,25."
+Quelle est la pondération d'un critère de niveau 'Modéré' dans le calcul du score d'avancement ?,"1,0."
+Qu'est-ce que la 'déclaration d'écoconception' ?,"Un document public, prérequis pour se prévaloir de l'application du RGESN, qui garantit la transparence sur les efforts d'écoconception du service."
+Le 'score d'avancement' du RGESN mesure l'impact environnemental direct d'un service. Vrai ou faux ?,"Faux, ce n'est pas un score de calcul d'impact environnemental, mais un indicateur de suivi de la mise en œuvre du référentiel."
+Comment est calculé le score d'avancement du RGESN ?,"C'est le ratio de la somme des points des critères validés (avec pondération) sur le total des points des critères applicables (avec pondération), multiplié par 100."
+Combien y a-t-il de critères classés comme 'Prioritaire' dans le RGESN ?,Il y a 30 critères 'Prioritaire' sur 78.
+Quel est un exemple de critère 'Prioritaire' dans la thématique 'Stratégie' ?,Évaluer favorablement l'utilité du service en tenant compte de ses impacts environnementaux (critère 1.1).
+Le RGESN recommande d'utiliser des technologies standard interopérables plutôt que des technologies _____ et _____.,"spécifiques, fermées"
+Quel critère 'Prioritaire' vise à rendre un service numérique utilisable sur du matériel plus ancien ?,"Le critère 2.2, qui demande si le service est utilisable sur d'anciens modèles de terminaux."
+"Pour les applications natives, quel est l'âge minimum des terminaux sur lesquels le service doit rester utilisable (critère 2.2) ?",Le service doit être utilisable sur les équipements mis sur le marché il y a sept ans ou plus.
+"Pour un service web, quel est l'âge minimum du microprocesseur des terminaux sur lesquels il doit rester utilisable (critère 2.2) ?",Le service doit fonctionner sur des équipements dotés d'un microprocesseur mis sur le marché il y a dix ans ou plus.
+Quel critère 'Prioritaire' d'UX/UI concerne le défilement infini ?,"Le critère 4.2, qui demande si le service affiche uniquement des contenus sans défilement infini."
+"Quel mode un service vidéo devrait-il proposer pour réduire son impact, selon le critère 'Prioritaire' 5.5 ?",Un mode « écoute seule ».
+"Pour un service utilisant la blockchain, quel type de mécanisme de consensus est préconisé par le critère 'Prioritaire' 7.4 ?","Un mécanisme qui minimise sa consommation de ressources, en évitant le minage."
+Terme : PUE (Power Usage Effectiveness),"Un indicateur d'efficacité énergétique des centres de données, ratio entre l'énergie totale consommée et celle utilisée par les équipements informatiques."
+Quel est le PUE maximum recommandé pour un hébergement afin de valider le critère 8.3 du RGESN ?,"Un PUE inférieur à 1,5 en réel."
+Quel critère 'Prioritaire' concerne la nécessité d'une phase d'entraînement pour les services d'IA ?,"Le critère 9.1, qui demande si la nécessité d'une phase d'entraînement a été interrogée pour éviter un usage non justifié."
+Combien de critères sont classés comme 'Recommandé' dans le RGESN ?,Il y a 28 critères 'Recommandé' sur 78.
+Quel critère 'Recommandé' suggère qu'un service numérique doit être utilisable avec une connexion bas débit ?,Le critère 2.3 : 'Le service numérique est-il utilisable via une connexion bas débit ou hors connexion ?'
+Terme : Dark Patterns,"Des procédés manipulatoires dans une interface utilisateur, à éviter selon le critère 4.14."
+Quel format de fichier est recommandé pour les images afin d'optimiser le poids (critère 5.1) ?,"Des formats efficaces comme WebP, AVIF ou JPEG XL plutôt que JPEG ou PNG."
+Le RGESN recommande d'avoir une stratégie d'archivage et de _____ des contenus obsolètes.,suppression
+Terme : WUE (Water Usage Effectiveness),"Un indicateur de l'efficacité de l'utilisation de l'eau dans un centre de données, mesuré en L/kWh."
+Quel est le WUE maximum recommandé pour un hébergement afin de valider le critère 8.4 du RGESN ?,"Un WUE inférieur ou égal à 0,4 L/kWh."
+Combien de critères sont classés comme 'Modéré' dans le RGESN ?,Il y a 20 critères 'Modéré' sur 78.
+Quel critère 'Modéré' porte sur l'utilisation de composants fonctionnels natifs du système d'exploitation ou du navigateur ?,Le critère 4.5.
+"Le critère 3.6 ('Modéré') recommande de proposer des mises à jour _____, afin de ne pas remplacer tout le code à chaque mise à jour.",incrémentielles
+Quel critère 'Modéré' concerne la limitation du nombre de polices de caractères téléchargées ?,Le critère 4.8.
+Quelle est la limite recommandée pour le nombre de polices téléchargées par page selon le critère 4.8 ?,"Au maximum deux polices différentes avec un total de quatre variantes, ou une taille maximale de 400 Ko."
+"Selon le critère 1.1, à quels référentiels peut-on se référer pour évaluer l'utilité d'un service numérique ?","Les 17 ODD de l'ONU, les 9 limites planétaires, ou la Taxonomie européenne sur les activités vertes."
+"Quel est l'objectif du critère 1.2, qui demande de définir les cibles utilisatrices ?",Éviter de surcharger les services en fonctionnalités non essentielles ou de ne pas répondre aux attentes réelles.
+"Pour un service web, sur quelles versions de navigateurs doit-il rester utilisable selon le critère 2.4 ?","Sur les versions anciennes des principaux navigateurs web, jusqu'à deux ans."
+"Pour une application native, sur quelles versions de systèmes d'exploitation doit-elle rester utilisable selon le critère 2.4 ?","Sur les versions anciennes des systèmes d'exploitation, jusqu'à cinq ans."
+"Le concept de 'mobile first' peut permettre l'adoption d'interfaces plus _____, en lien avec le critère 2.5.",sobres
+"Quel est l'objectif du critère 2.7, qui préconise une stratégie de maintenance et de décommissionnement ?",Mettre au rebut les environnements techniques encore actifs mais qui ne sont plus utilisés pour ne pas gaspiller de ressources.
+Quelle action le RGESN recommande-t-il si un service numérique propriétaire arrive en fin de vie ?,Il est recommandé de prévoir une publication en open source du code source du service.
+"Le RGESN déconseille le recours à des briques technologiques énergivores comme le _____, la réalité virtuelle/augmentée requérant un terminal dédié, ou certains algorithmes d'apprentissage.",minage
+Pourquoi le RGESN préconise-t-il l'utilisation du protocole IPv6 (critère 3.3) ?,Pour assurer la pérennité du service face à la pénurie d'IPv4 et limiter la consommation d'énergie chez les opérateurs.
+"Quel terme désigne la surallocation de ressources systèmes ou matérielles pour un service, notamment via de nouvelles fonctionnalités non indispensables ?",L'obésiciel.
+"Qu'est-ce que le 'lazy loading' (chargement progressif), recommandé par le critère 6.5 ?",Une technique consistant à ne charger les ressources (comme les images) que lorsqu'elles deviennent visibles pour l'utilisateur.
+"Pour minimiser l'impact environnemental des calculs asynchrones (critère 8.10), quand est-il recommandé de les planifier ?",En dehors des pics quotidiens de consommation électrique et lorsque les serveurs ou réseaux sont moins sollicités.
+"Pour un service d'IA, quelle est l'alternative la plus frugale aux technologies d'apprentissage profond (deep-learning) selon le critère 9.2 ?",Des méthodes simples comme une régression ou des réseaux de neurones simples.
+Que signifie 'fine-tuning' d'un modèle pré-entraîné dans le contexte de l'IA (critère 9.3) ?,"Utiliser un modèle déjà entraîné et y ajouter des composants complémentaires spécifiques au besoin, ce qui est moins coûteux en ressources que d'entraîner un modèle de zéro."
+Quels sont les codecs vidéo considérés comme performants et recommandés par le RGESN (critère 5.4) ?,"Les codecs AV1, VP9 et HEVC."
+"Pour une vidéo, quelle est la définition maximale recommandée en mode 'sobriété énergétique' sur un smartphone ?",480p maximum.
+Quelle est la définition maximale recommandée en mode 'qualité standard' sur un PC ou une tablette ?,1080p maximum.
+Que signifie 'données chaudes' et 'données froides' dans le contexte de l'hébergement (critère 8.8) ?,"Les données 'chaudes' sont des données fréquemment utilisées, tandis que les données 'froides' sont des données archivées."
+Quel est le seuil d'intensité carbone annuel à ne pas dépasser pour l'électricité d'un hébergeur (critère 8.6) ?,100 gCO₂eq/kWh.
+En quoi consiste l'approche par 'brique' pour définir la priorité d'un critère ?,"Elle évalue si le critère réduit l'empreinte environnementale des briques les plus émettrices, comme les terminaux."
+Quel document détaille les modalités techniques et pratiques de mise en œuvre de chacun des 78 critères ?,L'annexe contenant les 'fiches pratiques'.
+"Selon le critère 1.6, la collecte de données doit être responsable et raisonnée, en complément des obligations légales de minimisation prévues par le _____.",Règlement général sur la protection des données (RGPD)
+Pourquoi le RGESN incite-t-il à l'open source (critère 1.8) ?,"Pour permettre la réutilisation du code, allonger la durée de vie du service et du matériel associé."
+Quelle action un service web peut-il mettre en place pour remplacer le défilement infini (critère 4.2) ?,Mettre en place une pagination ou un bouton 'Voir plus' pour un chargement à la demande de l'utilisateur.
+Quel débit minimum de connexion est utilisé pour tester l'utilisabilité d'un service selon le critère 2.3 ?,3G en mobilité et 512 Kbit/s en fixe.
+Quelle est l'une des trois dimensions considérées pour établir le niveau de priorisation d'un critère ?,"L'approche systémique, l'approche par brique, ou l'approche par critère (complexité de mise en œuvre)."
+Quel est l'objectif principal du critère 3.2 concernant l'architecture d'un service ?,Éviter une architecture surdimensionnée en privilégiant une architecture capable d'ajuster dynamiquement les ressources à la demande.
+"Selon le critère 4.9, pour une fonctionnalité d'autocomplétion, combien de temps et de caractères saisis faut-il attendre avant de lancer une requête réseau ?",Attendre 500 ms après la saisie et au moins 3 caractères saisis.
+Quel est le débit binaire (bitrate) maximal recommandé pour les contenus audio selon le RGESN (critère 5.6) ?,Le ratio poids/durée doit être inférieur à 1 mégaoctet par minute.

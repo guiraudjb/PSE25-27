@@ -1,0 +1,60 @@
+Quelle organisation internationale est reconnue pour son rôle central dans la standardisation d'Unix ?,L'Open Group.
+L'Open Group a été fondé en 1996 suite à la fusion de X/Open et de la _____.,Open Source Foundation
+Quel est l'objectif principal de l'Open Group ?,"Promouvoir la coopération pour établir des normes communes, garantissant l'interopérabilité et la qualité des systèmes."
+Citez une exigence technique pour qu'un système puisse porter le label Unix certifié.,"La présence d'un gestionnaire de fenêtres comme CDE, la gestion avancée des threads ou une implémentation conforme des protocoles réseau."
+Quel projet ambitieux des années 1960 est considéré comme l'ancêtre d'Unix ?,Le projet MULTICS.
+"Qui a créé la première version simplifiée d'Unix, initialement nommée UNICS en 1969 ?","Ken Thompson, un ingénieur des Bell Labs."
+En quelle année le système UNICS a-t-il été renommé UNIX ?,En 1971.
+L'arrivée de Dennis Ritchie a permis de réécrire entièrement UNIX en 1974 grâce au développement du langage _____.,C
+"Quel événement a imposé la publication du code source d'Unix dans les années 1970, favorisant son adoption universitaire ?","Le ""Consent Decree"" qui limitait le monopole d'AT&T."
+"Quelle variante d'Unix, développée par l'université de Berkeley, a introduit l'intégration native du protocole TCP/IP ?",BSD-UNIX.
+Quel standard a été créé pour remédier au risque d'incompatibilité entre les multiples versions d'Unix ?,Le standard POSIX.
+"Dans un système GNU/Linux, à quoi le terme ""Linux"" se réfère-t-il spécifiquement ?",Il ne désigne que le noyau (kernel) du système.
+Qui a initié le développement du noyau Linux ?,Linus Torvalds.
+Sous quelle licence le noyau Linux est-il distribué ?,La licence GPL (General Public License).
+"De quel projet proviennent la plupart des outils (compilateur GCC, shell bash) qui complètent le noyau Linux pour former un système d'exploitation fonctionnel ?",Le projet GNU.
+Comment appelle-t-on l'association du noyau Linux et des outils GNU ?,GNU/Linux.
+Concept: Distribution Linux,"Définition: Un ensemble de logiciels et de configurations, regroupés par un éditeur ou une communauté, pour former un système GNU/Linux complet et adapté à des besoins spécifiques."
+Quel animal est le logo de Linux et comment s'appelle-t-il ?,Un manchot nommé Tux.
+En quelle année Linus Torvalds a-t-il annoncé son projet de développer un noyau pour les processeurs 386 ?,En 1991.
+"Quel système d'exploitation, utilisé pour l'enseignement, le projet Linux visait-il initialement à remplacer ?",Le système Minix.
+"La première version stable du noyau Linux, la version 1.0, a été officiellement publiée en _____.",1994
+Quelle est la condition principale imposée par la licence GPL lors de la redistribution de code source modifié ?,Les modifications doivent elles aussi être partagées avec la communauté sous la même licence.
+"Quelle était la dernière version stable du noyau Linux en octobre 2025, selon le document ?",La version 6.5.x.
+Quelle est une caractéristique fondamentale des systèmes Unix/Linux qui garantit leur interopérabilité ?,"Leur nature de systèmes ouverts, conformes aux normes industrielles (TCP/IP, Ethernet, etc.)."
+La portabilité des systèmes Unix/Linux a été historiquement rendue possible par leur développement majoritaire en langage _____.,C
+Quel nouveau langage de programmation commence à s'imposer pour l'écriture de certaines parties du noyau Linux ?,Le langage Rust.
+Quel modèle d'architecture permet à plusieurs utilisateurs d'exécuter simultanément des processus sur un système Unix/Linux ?,Le modèle multi-utilisateurs et multitâche.
+"Les systèmes Unix/Linux fonctionnent en temps partagé et de manière _____, ce qui signifie que l'OS peut interrompre et réallouer les ressources entre les tâches.",préemptive
+Sur quelle structure repose le système de gestion de fichiers d'Unix et de Linux ?,Une arborescence hiérarchique.
+Citez deux mécanismes de sécurité avancés du système de fichiers Unix/Linux.,"Les droits d'accès, les ACL (listes de contrôle d'accès) ou les quotas."
+Citez un environnement de bureau graphique moderne disponible sur Linux en 2025.,GNOME 49.x ou KDE 6.x.
+Comment sont qualifiés les systèmes comme HP-UX ou Solaris qui s'appuient sur un noyau monolithique hérité de System V ?,"De systèmes ""Unix based""."
+Comment sont qualifiés les systèmes comme Linux ou macOS qui partagent la philosophie Unix mais utilisent des noyaux différents ?,"De systèmes ""Unix like""."
+Quel type de noyau est utilisé par macOS et iOS ?,"Un noyau hybride (Darwin), combinant Mach et des composants BSD."
+Quelle est la principale différence entre un système Unix propriétaire et un système Unix libre ?,"Les systèmes propriétaires ont un code source protégé, tandis que les systèmes libres distribuent leur code source ouvertement."
+Un système _____ se définit par sa capacité à fonctionner dans des environnements hétérogènes en respectant des propriétés comme la compatibilité et l'interopérabilité.,ouvert
+"Quelle condition, en plus du respect des standards, est essentielle pour qu'un système soit considéré comme ouvert ?",La disponibilité publique de ses spécifications internes.
+Quelle est la différence fondamentale entre un système ouvert et un système distribué ?,"Un système ouvert est défini par le respect des standards, tandis qu'un système distribué est défini par une architecture où plusieurs machines collaborent."
+"Dans quel domaine Linux est-il devenu totalement hégémonique en 2025, équipant 100% des machines du TOP500 ?",Dans le domaine des supercalculateurs.
+Quelle administration publique française est citée pour avoir migré ses postes de travail vers Ubuntu ?,La gendarmerie française.
+"Quelles technologies de conteneurisation, conçues pour Linux, ont accéléré son adoption dans le cloud ?",Docker et Kubernetes.
+Quelle est la dernière version d'AIX mentionnée pour 2025 et quels processeurs supporte-t-elle ?,"AIX 7.3, avec un support optimisé pour les processeurs POWER9 et POWER10."
+Quel est l'outil d'administration emblématique d'AIX qui simplifie la gestion du système ?,SMIT (System Management Interface Tool).
+Quel système BSD est particulièrement apprécié pour sa fiabilité et ses performances dans les environnements serveurs et réseaux ?,FreeBSD.
+Par quoi se distingue principalement NetBSD ?,"Par sa portabilité extrême, fonctionnant sur plus de 50 architectures différentes."
+"Quel système BSD est réputé pour son focus sur la sécurité, le code audité et son pare-feu intégré (PF) ?",OpenBSD.
+Quel est l'avantage de la licence permissive des systèmes BSD par rapport à la licence GPL de Linux ?,Elle permet une intégration plus facile dans des projets commerciaux.
+Quelle est la dernière version majeure d'HP-UX et en quelle année est-elle sortie ?,"HP-UX 11.31, sortie en 2007."
+Dans quel type d'environnement HP-UX est-il principalement maintenu en 2025 ?,Dans des environnements hérités (legacy) pour des raisons de compatibilité ascendante.
+Sous quel nom le système Solaris est-il aujourd'hui développé par Oracle ?,Oracle Solaris.
+Quelle technologie de système de fichiers est considérée comme l'un des atouts majeurs de Solaris ?,Le système de fichiers ZFS.
+Darwin est le noyau Unix qui sous-tend les systèmes d'exploitation _____ et _____ d'Apple.,"macOS, iOS"
+L'architecture de Darwin est dite hybride car elle combine un noyau _____ avec des composants _____.,"Mach, BSD"
+Pour quelle raison principale le système Minix a-t-il été conçu par Andrew Tanenbaum ?,Comme un outil pédagogique pour enseigner les principes des systèmes d'exploitation.
+"Quelle est la distribution Linux de référence pour les entreprises en 2025, offrant un support long terme ?",Red Hat Enterprise Linux (RHEL).
+"Suite à la transition de CentOS Linux vers CentOS Stream, citez une alternative qui offre une version stable et gratuite.",AlmaLinux ou Rocky Linux.
+Quelles sont les deux versions distinctes proposées par OpenSUSE ?,Leap (distribution stable) et Tumbleweed (rolling release).
+Quel est le nom de l'outil de configuration qui distingue la distribution OpenSUSE ?,YaST.
+"Quelle distribution, connue pour sa facilité d'utilisation, est largement adoptée pour les postes de travail et dans le cloud ?",Ubuntu.
+Que signifie l'acronyme LTS pour une version d'Ubuntu comme la 24.04 ?,"Long Term Support (Support à long terme), offrant une stabilité de cinq ans."

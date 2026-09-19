@@ -1,0 +1,67 @@
+Que signifie l'acronyme RECYF ?,Référentiel Cyber France.
+Dans quel cadre juridique le RECYF est-il mentionné ?,Le projet de loi relatif à la résilience des infrastructures critiques et au renforcement de la cybersécurité (transposition NIS 2).
+Quels sont les deux composants principaux de chaque objectif de sécurité dans le RECYF ?,L'objectif de sécurité lui-même et les moyens acceptables de conformité.
+Vrai ou Faux : L'atteinte des objectifs de sécurité définis dans le RECYF est obligatoire.,Vrai.
+À quel type d'entités les objectifs de sécurité 16 à 20 s'appliquent-ils exclusivement ?,Les entités essentielles (EE).
+Que répondent les « Moyens acceptables de conformité » par rapport à l'objectif fixé ?,Ils répondent à la question « Comment ? » (mesures à mettre en œuvre).
+Vrai ou Faux : Les moyens acceptables de conformité sont d'application obligatoire par défaut.,Faux (ils sont proposés par l'ANSSI pour démontrer l'atteinte des objectifs).
+Définition : Action d'administration,"Installation, suppression, modification ou consultation d'une configuration d'une ressource d'un SI susceptible d'en modifier le fonctionnement ou la sécurité."
+Définition : Administrateur,Personne physique disposant de droits privilégiés sur un système d'information et chargée de la maintenance ou de l'administration.
+Qu'est-ce qu'un « Annuaire » selon le glossaire RECYF ?,Une ressource logicielle centralisant les informations des utilisateurs et fournissant des mécanismes d'identification et d'authentification.
+Quelles sont les trois catégories de facteurs possibles pour une authentification multifacteur (MFA) ?,"Facteur de connaissance, facteur de possession et facteur inhérent."
+Définition : Cœur de confiance,"Ensemble des ressources regroupant les annuaires, les ressources les hébergeant ou permettant d'en prendre le contrôle."
+Qu'est-ce qu'un dispositif de détection ?,Un ensemble de ressources capables d'identifier des indicateurs de compromission et techniques d'attaques pour générer des événements de sécurité.
+Que signifie le terme DMIA ?,Durée maximale d’interruption admissible (MTPD en anglais).
+Définition : Incident de sécurité,"Événement compromettant la disponibilité, l’authenticité, l’intégrité ou la confidentialité des données ou des services."
+Qu'est-ce qu'un indicateur de compromission (IoC) ?,Une combinaison d'informations techniques et contextuelles représentatives d'une tentative ou d'une manifestation de compromission.
+Définition : Information sensible,"Données à caractère personnel sensibles (RGPD), données d'une sensibilité particulière (loi 2024-449), secret des affaires ou protection du patrimoine national."
+Qu'est-ce qu'une règle de filtrage ?,"Une instruction implémentée dans un dispositif (ex: pare-feu) pour autoriser ou interdire les flux selon l'IP, le protocole, le port ou l'applicatif."
+Définition : Système d'information d'infrastructure,"SI généraliste utile aux activités ou nécessaire au fonctionnement de plusieurs SI de l'entité (ex: annuaire, messagerie)."
+Quel est l'objectif de sécurité 1 du RECYF ?,Le recensement des systèmes d'information.
+Quelles sont les trois conditions d'exposition au risque qui obligent à appliquer les objectifs de sécurité sur un SI ?,"Dégradation/interruption des activités, divulgation d'informations sensibles ou altération des informations nécessaires."
+À quelle fréquence la liste des SI et des activités doit-elle être validée et réexaminée ?,Annuellement.
+Sous la responsabilité de qui le cadre de gouvernance de la sécurité numérique doit-il être placé ?,Du dirigeant exécutif.
+Quelle certification internationale peut être utilisée par une entité pour démontrer le respect de l'Objectif de sécurité 2 ?,La certification ISO/CEI 27001:2022.
+Quelle est la mission spécifique de la personne désignée par le dirigeant d'une Entité Essentielle (EE) selon la mesure 2.A.2 ?,Être le point de contact privilégié de l'ANSSI pour tous les sujets relatifs à la sécurité numérique.
+Quels sont les deux types de contrôle d'accès que la PSSI doit obligatoirement couvrir ?,Le contrôle d'accès physique et le contrôle d'accès logique.
+L'entité doit établir et suivre un _____ pour corriger les écarts de conformité identifiés par rapport au référentiel.,Plan d'action.
+Quel document contractuel permet de s'assurer de la conformité d'un prestataire informatique ?,Le Plan d'Assurance Sécurité (PAS) ou une charte de télémaintenance.
+L'Objectif de sécurité 4 impose d'intégrer la sécurité numérique dans la gestion des RH de l'_____ jusqu'au _____.,Arrivée d'un nouveau personnel ; départ de l'entité.
+Quel document doit être rendu opposable à chaque utilisateur des SI selon l'Objectif 4 ?,Une charte d'usage des systèmes d'information.
+Quelles sont les deux finalités majeures d'une cartographie détaillée du SI selon l'Objectif 5 ?,Le maintien en condition opérationnelle et de sécurité (MCO/MCS) et l'amélioration de la réactivité en cas d'incident.
+Quelle est la règle temporelle d'application des correctifs de sécurité pour les ressources exposées à des SI tiers ?,Sans retard injustifié (après les actions d'installation sans délai).
+Que doit faire une entité si l'installation d'un correctif de sécurité est techniquement impossible ?,Mettre en œuvre des mesures d'atténuation pour réduire les risques (ex: isolation).
+Vrai ou Faux : L'entité doit vérifier que les logiciels sont téléchargés depuis les ressources officielles des éditeurs.,Vrai.
+Quels locaux spécifiques doivent faire l'objet d'un contrôle d'accès renforcé selon l'Objectif 6 ?,Les locaux techniques ou contenant des serveurs de données.
+Qu'est-ce que le cloisonnement « logique » mentionné dans l'Objectif 7 ?,"Un cloisonnement par VLAN (réseau), par machine virtuelle (calcul) ou par volume (stockage)."
+Quel type de dispositif l'EE doit-elle mettre en œuvre pour filtrer les accès sortants vers des SI tiers ?,Une passerelle sortante (ex: serveur mandataire).
+À quelle fréquence minimale doit être effectuée la revue technique des règles de filtrage des pare-feux ?,Annuellement.
+Quel niveau de sécurité est requis pour le mécanisme d'authentification des accès distants pour les EE ?,Une authentification multifacteur (MFA).
+"Pour les équipements mobiles accédant au SI depuis un lieu non maîtrisé, quelle protection est exigée sur les mémoires de masse ?",Un mécanisme de chiffrement (ex: disque chiffré avec code PIN au démarrage).
+Que signifie l'interdiction du « AVEC » ou « BYOD » imposée aux EE par la mesure 9.2 ?,Seules les ressources matérielles gérées par l'entité (ou son prestataire) peuvent se connecter au SI.
+Quels équipements doivent obligatoirement disposer de mécanismes de protection contre les codes malveillants ?,"Les postes de travail, les serveurs et les équipements mobiles maîtrisés par l'entité."
+Quelle est l'exception à la création de comptes individuels pour un SI diffusant de l'information ?,L'accès du public à l'information (ex: site vitrine).
+Que doit faire l'entité lors du retrait d'un utilisateur ayant accès à un compte partagé ?,Renouveler l'élément secret (mot de passe) de ce compte.
+Principe du moindre privilège : L'entité n'attribue que les droits _____.,Strictement nécessaires à la réalisation des missions (besoin d'en connaître).
+Quelle est la règle d'usage des comptes d'administration selon l'Objectif 11 ?,Ils doivent être exclusivement dédiés à l'usage d'administration.
+Qu'est-ce qu'une revue de configuration des annuaires ?,Une vérification annuelle visant à identifier tout élément inutile ou anormal dans la configuration de l'annuaire.
+Quelle prestation qualifiée par l'ANSSI peut aider une entité pour la gestion des incidents (Objectif 12) ?,La prestation d'accompagnement et de conseil en sécurité (PACS).
+"Après un incident de sécurité, que doit réaliser l'EE pour limiter la récurrence du risque ?",Une analyse des causes de l'incident.
+À quelle fréquence minimale les processus de sauvegarde et de restauration doivent-ils être testés ?,Une fois par an.
+Définition : Point de rétablissement de données (PRD),Point à partir duquel les données sont restaurées en cas de reprise (RPO en anglais).
+Quels sont les deux types de plans que l'EE doit définir pour faire face aux crises cyber ?,Le plan de continuité d'activité (PCA) et le plan de reprise d'activité (PRA).
+Quel document physique doit être maintenu à jour pour la gestion de crise selon la mesure 14.2 ?,Une liste imprimée des personnes mobilisables et leurs coordonnées.
+Que signifie le terme RETEX ?,"Retour d'expérience (suite à un entraînement, un exercice ou une crise réelle)."
+Quelle est la fréquence de renouvellement du programme d'entraînement et d'exercice des EE ?,C'est un programme triennal.
+L'Objectif 16 impose une approche par les risques. Quelles sont les 3 étapes clés ?,"Suivre l'évolution des risques, définir les mesures de maîtrise et accepter les risques résiduels."
+Quelle méthode est suggérée par le RECYF pour réaliser l'analyse de risques ?,La méthode EBIOS RM.
+Quel type d'audit est mentionné comme activité minimale dans l'Objectif 17 ?,"Un test d'intrusion (ou audit de configuration, d'architecture, organisationnel, de code)."
+Qu'est-ce qu'une prestation PASSI ?,Une prestation d'audit de la sécurité des systèmes d'information qualifiée par l'ANSSI.
+"Selon l'Objectif 18, que doit faire l'entité concernant les ressources logicielles inutiles ?",Ne conserver que les ressources strictement nécessaires et désinstaller/désactiver les autres.
+L'Objectif 19 impose d'effectuer les actions d'administration via un _____ dédié.,Réseau d'administration.
+Quelle mesure doit être prise si un poste d'administrateur physique ne peut pas être dédié à l'administration ?,Mise en œuvre d'un durcissement et d'un cloisonnement du système d'exploitation.
+Dans quel délai maximum les événements de sécurité critiques doivent-ils être pris en compte par la supervision ?,Sous 24 heures ouvrées.
+Quelle est la durée minimale de conservation des journaux et événements de sécurité selon l'Objectif 20 ?,Trois mois.
+Quels sont les 4 « piliers » de répartition des objectifs de sécurité dans le modèle RECYF ?,"Gouvernance, Protection, Défense et Résilience."
+Quel risque majeur est associé à la compromission du « cœur de confiance » ?,"La compromission totale des SI liés, nécessitant parfois une reconstruction complète."
+Pourquoi le filtrage des communications (Obj 7) est-il essentiel ?,Pour limiter la latéralisation (extension de l'attaque) entre différents systèmes d'information.

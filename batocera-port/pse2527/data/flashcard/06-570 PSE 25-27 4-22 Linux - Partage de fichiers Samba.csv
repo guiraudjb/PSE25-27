@@ -1,0 +1,60 @@
+Quelle suite logicielle implémente les protocoles SMB et CIFS sur les systèmes Unix/Linux ?,Samba
+"Samba permet le partage de fichiers et d'imprimantes entre Linux, Windows et _____.",macOS
+Quel composant de Samba gère spécifiquement le partage de fichiers et d'imprimantes ?,smbd
+Quel démon Samba est responsable de la résolution de noms NetBIOS ?,nmbd
+Quel service Samba permet l'intégration avec Active Directory pour la résolution des utilisateurs et groupes ?,winbindd
+Quel port TCP est utilisé pour le protocole SMB direct ?,445
+Le port TCP _____ est utilisé pour SMB via NetBIOS.,139
+Quels sont les deux ports UDP utilisés par le service nmbd ?,137 et 138
+À quelle couche du modèle OSI se situent les démons smbd et nmbd ?,La couche 7 (Application)
+"Quel protocole est considéré comme une extension de SMB pour Internet, désormais obsolète ?",CIFS (Common Internet File System)
+Quel protocole d'authentification est utilisé par Samba lors de l'intégration avec Active Directory ?,Kerberos
+Quelle version de SMB a introduit le chiffrement de bout en bout en 2012 ?,SMB3.0
+Pourquoi le protocole SMB1 est-il considéré comme dangereux ?,Il présente des vulnérabilités critiques comme EternalBlue.
+Depuis quelle version Samba désactive-t-il SMB1 par défaut ?,La version 4.7 (2017)
+Quelle version de SMB rend le chiffrement obligatoire par défaut ?,SMB3.1.1
+Sur quelle distribution Linux et quelle version la fiche d'installation se base-t-elle ?,Debian 13 (Trixie)
+Quelle commande permet d'installer les paquets de base de Samba sur Debian ?,sudo apt install samba samba-common-bin
+Quel paquet fournit les outils clients pour tester les partages Samba ?,smbclient
+Quelle commande affiche la version installée du démon smbd ?,smbd --version
+Quelle commande systemctl permet d'activer le démarrage automatique de smbd ?,sudo systemctl enable smbd
+Quel est le chemin complet du fichier de configuration principal de Samba ?,/etc/samba/smb.conf
+"Dans smb.conf, quelle section définit les paramètres appliqués à tout le serveur ?",[global]
+Quelle section de smb.conf permet le partage automatique des répertoires personnels ?,[homes]
+Quel paramètre dans smb.conf définit le groupe de travail (workgroup) ?,workgroup
+Quel paramètre dans smb.conf permet un accès invité (guest) ?,guest ok = Yes
+Comment spécifier le chemin d'un répertoire partagé dans une section de smb.conf ?,En utilisant le paramètre 'path'.
+Quelle commande Linux est recommandée pour attribuer un partage public à l'utilisateur sans privilèges ?,sudo chown nobody:nogroup [chemin]
+Quel contexte SELinux doit être appliqué aux répertoires pour autoriser le partage via Samba ?,samba_share_t
+Quelle commande crée un utilisateur Linux sans répertoire personnel et sans shell interactif ?,sudo useradd --shell /bin/false --no-create-home [nom]
+Quelle commande permet d'ajouter un utilisateur à la base de données Samba ?,sudo smbpasswd -a [utilisateur]
+Quelle option de smbpasswd permet de désactiver un utilisateur Samba ?,L'option -d
+Quelle commande liste tous les utilisateurs présents dans la base Samba ?,sudo pdbedit -L
+Quelle commande vérifie la syntaxe du fichier /etc/samba/smb.conf ?,sudo testparm
+Quel outil affiche l'état des connexions Samba actives en temps réel ?,smbstatus
+Quelle commande smbclient permet de lister les partages d'un serveur distant ?,smbclient -L //[IP_ou_Nom] -U [utilisateur]
+L'outil _____ est utilisé pour résoudre les noms NetBIOS en adresses IP.,nmblookup
+Quel outil affiche les informations relatives aux utilisateurs et groupes gérés par Winbind ?,wbinfo
+Quelle commande 'net' permet de lister les partages d'un serveur ?,sudo net share list
+"Dans /etc/krb5.conf, que définit le paramètre 'default_realm' ?",Le domaine Active Directory par défaut (ex: MONDOMAINE.LOCAL).
+Quelle valeur doit prendre le paramètre 'security' dans smb.conf pour une intégration Active Directory ?,security = ADS
+Dans quel fichier modifie-t-on l'ordre de résolution des bases passwd et group pour inclure winbind ?,/etc/nsswitch.conf
+Quelle commande permet de joindre officiellement une machine Linux à un domaine AD ?,sudo net ads join -U administrateur
+Quel port est utilisé par LDAP (non chiffré) pour l'accès aux annuaires ?,389
+Quel port est utilisé pour LDAPS (LDAP sur SSL) ?,636
+Quel est le rôle du démon 'samba' (en minuscule) ?,Il agit comme contrôleur de domaine Active Directory (DC).
+Quelle directive smb.conf permet de limiter l'accès à une liste d'utilisateurs ou un groupe spécifique ?,valid users
+"Dans le fichier smb.conf, que signifie le symbole %u ?",Le nom de l'utilisateur courant.
+Quel paramètre de smb.conf rend un partage invisible dans l'explorateur réseau ?,browseable = No
+Quelle commande permet de vérifier quels ports smbd et nmbd écoutent ?,sudo ss -tulnp | grep -E 'smbd|nmbd'
+Quelle est l'année de sortie de SMB2.1 ?,2009
+Quelle version de SMB a introduit les signatures obligatoires pour l'intégrité ?,SMB2
+Quels sont les trois démons qu'il faut redémarrer après une intégration AD ?,"smbd, nmbd et winbindd"
+Quelle commande 'net' permet d'ajouter un utilisateur Samba avec un mot de passe et un commentaire ?,"sudo net user add [nom] [pass] -c ""[commentaire]"""
+"Dans smb.conf, à quoi sert la section [printers] ?",À définir les paramètres de partage des imprimantes via le serveur.
+Quel outil permet l'administration à distance via des appels de procédure distante (RPC) ?,rpcclient
+"Dans une configuration AD, que définit le paramètre 'idmap config' ?",La correspondance entre les SID Windows et les UID/GID Unix.
+Quel est le mode par défaut de Samba : standalone ou membre de domaine ?,Il peut fonctionner dans les deux modes (flexibilité).
+Quel est l'avantage principal de SMB3.1.1 par rapport aux versions précédentes ?,La sécurité par défaut avec chiffrement obligatoire et pré-authentification.
+Quelle commande supprime définitivement un utilisateur de la base Samba ?,sudo smbpasswd -x [utilisateur]
+Quel est le nom de code de Debian 13 ?,Trixie

@@ -1,0 +1,30 @@
+Quel organisme a organisé le webinaire sur la sobriété numérique du 20 novembre 2025 ?,L'Institut de la Gestion publique et du Développement économique (IGPDE).
+"Selon le document, quel pourcentage des émissions mondiales de gaz à effet de serre (GES) le secteur du numérique représente-t-il ?","Environ 4 %, soit plus que le transport aérien."
+"Outre les émissions de GES, quel autre impact environnemental majeur du numérique est mentionné dans le contexte ?","L'épuisement des ressources abiotiques, notamment les métaux et les minéraux."
+Quels sont les trois facteurs de croissance forte des usages numériques cités dans le document ?,"L'explosion des données, la multiplication des serveurs (généralisation du cloud) et la montée en puissance de l'IA."
+"Quelle circulaire, lancée en 2020 et révisée en 2023, vise à rendre les services publics écoresponsables ?",La circulaire “Services publics écoresponsables” (SPE).
+Quel est l'objectif chiffré de la circulaire SPE concernant les émissions de GES des services publics d'ici à 2027 ?,Une réduction de 22 % des émissions de gaz à effets de serre.
+Quelle entité pilote les feuilles de route du numérique responsable de chaque ministère en France ?,La Direction interministérielle du numérique (DINUM).
+Quelle mission pilote les initiatives de sensibilisation des agents au numérique responsable ?,La mission numérique responsable (MiNumEco).
+Quel programme d'investissement de 54 milliards d'euros soutient le numérique responsable et la durabilité des infrastructures ?,Le programme France 2030.
+Quelle est la définition officielle de la sobriété numérique selon l'ADEME/DINUM ?,"Elle consiste à concevoir, produire et utiliser le numérique de manière plus sobre, pour réduire son impact environnemental tout en maintenant son efficacité."
+La sobriété numérique est l'art d'optimiser chaque étape du _____ d'un produit ou service numérique.,cycle de vie
+Quels sont les trois piliers de l'application professionnelle de la sobriété numérique ?,"L'écoconception, la rationalisation des usages et la durabilité des infrastructures."
+Pilier de la sobriété numérique : Écoconception,Définition : Réduire les besoins dès la conception logicielle et matérielle.
+Pilier de la sobriété numérique : Rationalisation des usages,"Définition : Limiter les flux et volumes inutiles de données, qu'elles soient en transit ou stockées."
+Pilier de la sobriété numérique : Durabilité des infrastructures,"Définition : Allonger la durée de vie et réduire le gaspillage de matériel, notamment par le réemploi."
+"Dans le cadre d'une application professionnelle, que signifie 'optimiser les processus' pour la sobriété numérique ?","Surveiller les processus actifs, la mémoire et les E/S, libérer des ressources et ajuster les scripts."
+Comment peut-on rationaliser les traitements 'batch' pour la sobriété numérique ?,En planifiant leurs exécutions selon la charge du serveur et en conditionnant leur exécution à la présence de ressources.
+Quelle mesure concrète est proposée pour les serveurs inactifs afin de promouvoir la sobriété numérique ?,Les détecter et programmer des cycles de mise en veille.
+Quelle technique permet d'héberger plusieurs machines virtuelles (VM) sur un seul serveur physique pour mutualiser les ressources ?,La virtualisation des serveurs.
+"Quelle technologie, comme Docker, permet d'exécuter plusieurs applications isolées sur le même hôte pour mutualiser les ressources ?",La conteneurisation.
+"En matière de gestion des données, quelle action simple contribue à la sobriété numérique ?","Nettoyer les données, fichiers temporaires, sauvegardes obsolètes et doublons."
+Comment peut-on réduire le volume des sauvegardes et des transferts de bases de données ?,En compressant les données dans des formats adaptés.
+Comment peut-on limiter les flux réseau dans une optique de sobriété numérique ?,"En mutualisant les transferts, en limitant les requêtes inutiles ou en mettant en cache les données fréquentes."
+Acronyme : RGESN,Signification : Référentiel général d’écoconception de services numériques.
+Quel est l'objectif du RGESN ?,Définir des critères pour concevoir des services numériques responsables et servir d'outil d'évaluation.
+Quels deux autres référentiels généraux doivent être cohérents avec la sobriété numérique ?,Le Référentiel général de sécurité (RGS) et le Référentiel général d’accessibilité (RGAA).
+Acronyme : RGPD,Signification : Règlement général sur la protection des données.
+"Quel guide de 2023, créé par l'ADEME et l'ARCEP, définit les indicateurs de l'empreinte environnementale du numérique ?",Le guide ADEME / ARCEP 2023.
+La DINUM a mis en place une charte interministérielle pour un _____.,numérique responsable
+"Depuis le 16 octobre 2025, que doit prendre en compte la détermination des besoins dans le cadre du code de la commande publique (Article L2111-1) ?","Les objectifs de développement durable dans leurs dimensions économique, sociale et environnementale."

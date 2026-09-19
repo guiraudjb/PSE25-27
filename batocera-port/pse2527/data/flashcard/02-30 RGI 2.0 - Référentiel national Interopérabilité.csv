@@ -1,0 +1,76 @@
+Quel est l'acronyme pour le Référentiel Général d'Interopérabilité ?,RGI.
+Quel est l'objectif principal du RGI ?,Fixer les règles techniques permettant d'assurer l'interopérabilité des systèmes d'information des autorités administratives.
+De quelle ordonnance le RGI résulte-t-il ?,L'ordonnance n° 2005-1516 du 8 décembre 2005.
+"Selon le RGI, quelle est la définition de l'interopérabilité ?","La capacité que possède un produit ou un système, dont les interfaces sont intégralement connues, à fonctionner avec d'autres produits ou systèmes existants ou futurs et ce sans restriction d'accès ou de mise en œuvre."
+Le RGI V2.0 introduit la notion de _____ pour regrouper des standards autour de cas d'usage définis.,profil d’interopérabilité.
+Citez les trois autres référentiels généraux qui s'appliquent aux autorités administratives en plus du RGI.,"Le RGS (Sécurité), le RGAA (Accessibilité), et le R2GA (Gestion des Archives)."
+Quels sont les trois principaux cas d'échanges identifiés dans le périmètre du RGI ?,"Entre autorités administratives (A2A), entre une autorité administrative et une entreprise (A2B), et entre une autorité administrative et un citoyen (A2C)."
+Nommez les cinq niveaux d'interopérabilité décrits dans le RGI.,"Niveau politique, juridique, organisationnel, sémantique, et technique (protocole et syntaxique)."
+"Que signifie le statut ""Recommandé"" pour un standard dans le RGI ?",Il s'agit d'un standard qui répond à tous les critères de sélection et doit être respecté et appliqué par tous.
+"Que signifie le statut ""En observation"" pour un standard dans le RGI ?",Il s'agit d'un standard en émergence dont l'application est à prendre avec précaution après une phase de tests.
+"Que signifie le statut ""En fin de vie"" pour un standard dans le RGI ?","Il s'agit d'un standard qui ne doit pas être considéré comme recommandé pour les nouveaux projets, bien que son retrait ne soit pas encore exigé partout."
+"Que signifie le statut ""Retiré"" pour un standard dans le RGI ?",Il s'agit d'un standard qui ne répond plus aux critères et doit être retiré dans le cadre d'un plan de dé-commissionnement.
+"Quel protocole est la version 6 de l'Internet Protocol, recommandé pour son adressage plus large sur 128 bits ?",IPv6.
+Quel protocole assure des communications privées et protégées sur les réseaux IP en opérant à la couche réseau (couche 3 OSI) ?,IPSec (Internet Protocol Security).
+"Quel protocole de la couche transport fiabilise les flux de type HTTP, SMTP et FTP ?",TCP (Transmission Control Protocol).
+"Quel protocole de sécurisation des échanges, successeur de SSL, est recommandé en version 1.2 ou ultérieure pour être conforme au RGS ?",TLS (Transport Layer Security).
+"Quel protocole de communication client-serveur, développé pour le web, est recommandé en version 1.1 ?",HTTP (Hypertext Transfer Protocol).
+Quelle est la version sécurisée du protocole HTTP sur le protocole TLS ?,HTTPS.
+"Quel protocole est une variante sécurisée de FTP qui ""tunnelise"" la session à travers une connexion SSH ?",SFTP (SSH File Transfer Protocol).
+Quel service permet de traduire un nom de domaine en adresse IP ?,DNS (Domain Name System).
+Quel protocole permet l'interrogation et la modification des services d'annuaire et repose sur TCP/IP ?,LDAP (Lightweight Directory Access Protocol).
+Quel protocole de gestion de sessions est souvent utilisé dans les télécommunications multimédia comme la VoIP et la visiophonie ?,SIP (Session Initiation Protocol).
+Quel protocole est utilisé pour transférer le courrier électronique vers les serveurs de messagerie ?,SMTP (Simple Mail Transfer Protocol).
+Quel protocole permet de récupérer les courriers électroniques en les laissant sur le serveur ?,IMAP4 (Internet Message Access Protocol).
+Quel ensemble de protocoles ouverts est utilisé pour la messagerie instantanée et la collaboration en quasi-temps-réel ?,XMPP (Extensible Messaging and Presence Protocol).
+"Quel protocole, basé sur XML, est utilisé pour échanger des informations d’authentification et d’autorisation, notamment pour le SSO ?",SAMLv2.0 (Security Assertion Markup Language).
+"Quel protocole ouvert permet d'autoriser un site web à utiliser l'API sécurisée d'un autre site pour le compte d'un utilisateur, sans partager le mot de passe ?",OAuth 2.0.
+Quel protocole s'appuie sur OAuth 2.0 pour ajouter une couche d'identification et permettre à un client de récupérer l'identité d'un utilisateur ?,OpenID Connect.
+"Quel protocole orienté objet, bâti sur XML, permet la transmission de messages entre objets distants, souvent via HTTP ?",SOAPv1.2 (Simple Object Access Protocol).
+"Quel langage, basé sur XML, permet de décrire l'interface publique d'un service web ?",WSDL (Web Services Description Language).
+Quel standard de l'OGC est un protocole permettant d'obtenir des cartes de données géoréférencées à partir de serveurs de données ?,WMS (Web Map Service).
+"Quel standard de l'OGC permet d'interroger des serveurs cartographiques pour manipuler des objets géographiques (lignes, points, polygones) ?",WFS (Web Feature Service).
+"Quel codage de caractères, compatible avec ASCII, est conçu pour coder l'ensemble des caractères du répertoire universel et doit être utilisé pour tout échange de données ?",UTF-8.
+"Quel format de conteneur de fichier, intégrant un index de son contenu, est souvent utilisé pour l'archivage et la compression ?",ZIP.
+"Quel format ouvert de données pour les applications bureautiques (traitement de texte, tableur) est recommandé par le RGI ?",ODF (Open Document Format).
+"Quel langage de description de pages préserve la mise en forme d'un fichier (polices, images) quel que soit le système utilisé pour le visualiser ?",PDF (Portable Document Format).
+Quelle version standardisée du PDF est très répandue pour conserver et échanger des documents numériques sur le long terme ?,PDF/A.
+"Quel format de données, conçu pour représenter les pages web, est recommandé en version 5 ?",HTML (Hypertext Markup Language).
+Quel langage informatique décrit la présentation des documents HTML et XML ?,CSS (Cascading Style Sheets).
+"Quel format de données textuelles, dérivé de la notation des objets JavaScript, est peu verbeux et facile à mettre en œuvre ?",JSON (JavaScript Object Notation).
+Quel langage informatique de balisage générique est reconnaissable par son usage des chevrons (< >) et facilite l'échange de contenus complexes ?,XML (Extensible Markup Language).
+"Quel langage, basé sur YAML, est utilisé pour décrire des API RESTful ?",RAML (RESTful API Modeling Language).
+"Comment appelle-t-on la syntaxe qui définit un identifiant d'une ressource sur un réseau, comme une URL ?",URI (Uniform Resource Identifier).
+"Quel format standard ouvert est utilisé pour l'échange de données personnelles, comme des cartes de visite numériques ?",vCard.
+Quel standard est utilisé pour les échanges de données de calendrier ?,iCalendar (ou iCal).
+"Quel langage de transformation XML permet de transformer un document XML dans un autre format, comme HTML ou PDF ?",XSLT (Extensible Stylesheet Language Transformations).
+Quel langage permet de localiser une portion d'un document XML ?,XPath.
+Quelle recommandation du W3C permet l'utilisation de signatures numériques dans les documents XML ?,XML Signature (ou XMLDsig).
+"Quel format conteneur multimédia ouvert est principalement destiné à un usage sur le web, regroupant des flux vidéos VP8/VP9 et audio Vorbis/Opus ?",WebM.
+"Quel format ouvert d'images numériques, non destructeur, est adapté pour publier des images simples avec des aplats de couleurs ?",PNG (Portable Network Graphics).
+"Quel format de données, basé sur XML, est conçu pour décrire des ensembles de graphiques vectoriels ?",SVG (Scalable Vector Graphics).
+Quel ensemble d'extensions au format PDF permet la signature électronique avancée de documents ?,PAdES (PDF Advanced Electronic Signature).
+Quel ensemble d'extensions à XML-DSig permet la signature électronique avancée de documents XML ?,XAdES (XML Advanced Electronic Signatures).
+"Dans le RGI, une _____ est une personne agissant au nom ou pour le compte d’une autorité administrative.",agent.
+"Qu'est-ce qu'une ""donnée de référence"" selon le RGI ?","Une donnée utilisée fréquemment, de qualité critique, à la sémantique partagée et stable, avec une longue durée de vie et un accès facile."
+"Qu'est-ce qu'un ""fournisseur d'identité"" ?","Une entité capable de fournir une identité vérifiée d'une personne ou d'une unité légale, avec un moyen d'authentification."
+"Qu'est-ce qu'un ""fournisseur de service"" dans le contexte du RGI ?","Une autorité administrative ou une entreprise privée apte à délivrer ou opérer un service, avec une composante numérique, au profit des usagers."
+"Quel langage de modélisation unifié, basé sur une notation graphique, est recommandé pour la conception de systèmes ?",UML (Unified Modeling Language).
+Quelle notation graphique standardisée est recommandée pour modéliser des procédures d'entreprise ou des processus métier ?,BPMN (Business Process Model and Notation).
+Quel est le nom du format pivot décrivant la sémantique et le format pour les données d'identité d'une personne dans le RGI ?,IdpPERS (Identité Pivot d’une Personne).
+"Dans le format IdpPERS, quel standard est utilisé pour coder le sexe ?",ISO 5218.
+"Dans le format IdpPERS, quel standard est utilisé pour formater la date de naissance ?","ISO 8601, format étendu (AAAA-MM-JJ)."
+"Quel est le profil d'interopérabilité qui constitue le socle de base pour tous les échanges (A2C, A2B, A2A) et repose sur une architecture REST ?",P1 - Fondations État Plateforme.
+"Dans quel cas le profil P2 ""Web service SOAP"" est-il à retenir ?",Lorsque des investissements préalables ont été réalisés autour d'architectures SOAP ou pour des échanges nécessitant une gestion transactionnelle.
+"Quel profil regroupe les standards pour la messagerie, la visioconférence et les échanges de documents bureautiques ?",P3 - Communication interpersonnelle et Bureautique.
+Quel profil d'interopérabilité est spécifiquement dédié à l'archivage numérique sur le long terme ?,P4 - Archivage.
+"Les standards comme WMS, WFS, GML et GeoJSON appartiennent à quel profil d'interopérabilité ?",P5 - Géomatique.
+"Le profil P6 ""InterOPS"" est recommandé pour les échanges au sein de quelle sphère administrative ?",La sphère de la Protection Sociale.
+"Quel profil d'interopérabilité identifie les standards pour les échanges d'éléments de modélisation (processus, données, architecture) ?",P8 - Conception de système.
+"Le profil _____ regroupe les standards PAdES, XAdES, CAdES et ASIC.",P9 - Signature électronique.
+"Quel est le rôle du niveau ""sémantique"" de l'interopérabilité ?",Assurer que les entités s'entendent sur la signification des données qu’elles échangent et sur le contexte de cet échange.
+Le RGI V2.0 annule et remplace quelle version précédente ?,"La version 1.0, publiée en novembre 2009."
+"Le protocole _____ est retiré au profit de SFTP car il ne chiffre que le flux de données et non les enveloppes, laissant des informations en clair.",FTPS (File Transfer Protocol Secure).
+Quelle spécification W3C autorise les requêtes Cross-Domain pour gérer l'accès à une ressource sur un serveur par un script d'un autre domaine ?,CORS (Cross-origin resource sharing).
+"Le RGI correspond au _____ Français, dans le cadre européen défini par l'EIF.",NIF (National Interoperability Framework).
+"L'un des critères d'adoption d'un standard dans le RGI est qu'il soit _____, c'est-à-dire que sa spécification soit complète, publique et sans restriction d'accès ou de mise en œuvre.",ouvert.

@@ -1,0 +1,22 @@
+Quel est l'appel système sous Linux qui permet de créer un nouveau processus ?,L'appel système `fork()`.
+L'appel système `fork()` permet de créer un _____ du processus appelant.,doublon
+"Suite à un appel `fork()`, comment nomme-t-on le processus appelant ?",Le processus père.
+"Suite à un appel `fork()`, comment nomme-t-on le nouveau processus créé ?",Le processus fils.
+"Après un `fork()`, quelles ressources les processus père et fils partagent-ils ?",Leur région mémoire de code et les descripteurs de fichiers.
+Quel est le rôle de l'appel système `exit()` ?,Il permet à un processus de libérer les ressources qui lui sont allouées.
+Dans quel état passe un processus après avoir exécuté l'appel système `exit()` ?,Il passe à l'état zombie.
+Quel est l'appel système qui permet de recouvrir la région de code d'un processus par un nouveau programme ?,L'appel système `exec()`.
+"Dans la séquence de création d'un nouveau programme, l'appel `exec()` est généralement effectué après quel autre appel système ?",L'appel système `fork()`.
+L'appel système `create()` existe-t-il pour la création de processus sous Linux ?,"Non, l'appel système `create()` n'existe pas dans ce contexte."
+Quels sont les deux modes d'exécution d'un processus sous Linux ?,Le mode noyau et le mode utilisateur.
+"Quel est le mode d'exécution courant d'un processus, où il s'exécute avec des droits restreints ?",Le mode utilisateur.
+Quelle action provoque le basculement d'un processus du mode utilisateur au mode noyau ?,Effectuer un appel système.
+Pourquoi un processus bascule-t-il en mode noyau lors d'un appel système ?,Pour faire une demande d'exécution d'instructions privilégiées.
+"Si le binaire `passwd` a son bit `set-uid` positionné et appartient à `root`, quel identifiant utilisateur (UID) est pris en compte lors de son exécution par un autre utilisateur ?",L'Effective UID (EUID).
+À quoi sert le bit `set-uid` sur un fichier binaire ?,Il permet à l'utilisateur du binaire d'endosser les droits du propriétaire le temps de l'exécution.
+"Dans le cas d'un binaire `set-uid` appartenant à `root`, l'Effective UID (EUID) pris en compte est celui de _____.",root
+La création d'un nouveau processus nécessite une nouvelle entrée dans quelle table principale ?,La table des processus.
+"En plus de la table des processus, la création d'un nouveau processus nécessite une nouvelle entrée dans quelle autre table ?",La table des descripteurs de fichiers.
+Quelles sont les trois régions mémoires qui doivent être allouées lors de la création d'un nouveau processus ?,"La région de code, la région de données (data) et la pile (stack)."
+L'appel système `fork()` génère de nouvelles entrées par duplication dans la table des processus et dans la table des _____.,descripteurs de fichier
+"Lors d'un `fork()`, une nouvelle table des régions du processus est créée, contenant des enregistrements pour le code, les données et la _____.",pile

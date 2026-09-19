@@ -1,0 +1,44 @@
+Qu'est-ce qu'un processus dans le contexte de Windows Server ?,"Une instance en cours d’exécution d’un programme, représentant une entité d’isolation avec un espace mémoire virtuel, des handles et des threads."
+Quelles sont les trois composantes principales d'un processus sous Windows Server ?,"Un espace mémoire virtuel indépendant, un ensemble de handles vers des ressources, et un ou plusieurs threads."
+Citez deux mécanismes de sécurité qui renforcent l'isolation des processus dans Windows Server.,"La segmentation stricte entre ring 3 (mode utilisateur) et ring 0 (mode noyau), et les Process Mitigation Policies (ex: Control Flow Guard, ASLR)."
+Quelle est la taille d'espace d'adressage obligatoire pour les processus sur les versions récentes de Windows Server ?,L'espace d’adressage 64 bits est obligatoire.
+"Quelle est la principale fonction des ""Job Objects"" dans Windows Server ?","Ils permettent d'appliquer des contraintes fines (CPU, mémoire, I/O) à des groupes de processus."
+Quelle fonctionnalité des Job Objects est similaire aux cgroups sous Linux ?,"La possibilité d’isolation et de limitation des ressources (CPU, mémoire, I/O)."
+Quelle est l'unité fondamentale d'exécution dans un processus Windows ?,Le thread.
+Pour quel type de systèmes matériels l'exécution des threads est-elle particulièrement optimisée sur Windows Server ?,"Pour les systèmes massivement multicœurs, avec 64 cœurs et plus."
+Quelle est la fonction principale du pool de threads moderne de Windows ?,Il gère automatiquement le nombre optimal de threads et s'intègre avec les ports de complétion d'E/S (IOCP).
+Le mécanisme _____ permet aux applications haute performance de gérer elles-mêmes une partie de l’ordonnancement des threads.,User Mode Scheduling (UMS)
+"Pour quelles raisons les ""fibres"" (fibers) sont-elles désormais déconseillées dans Windows Server ?",À cause de leur manque de compatibilité avec les mécanismes de sécurité modernes et de nombreuses API récentes.
+Quel mécanisme classique de communication inter-processus (IPC) est optimisé pour SMB et IIS ?,Les Named Pipes (tuyaux nommés).
+Comment les fichiers mappés en mémoire (Memory Mapped Files) ont-ils été améliorés dans les versions récentes de Windows Server ?,Leurs performances ont été accrues et leur gestion sur les systèmes NUMA a été améliorée.
+"Quel protocole de communication moderne est utilisé sur Windows Server pour les microservices, via .NET ou des conteneurs ?",gRPC.
+À quoi sert le mécanisme VMBus dans un environnement virtualisé Hyper-V ?,Il assure une communication inter-VM haute performance.
+Citez deux mécanismes de communication inter-processus (IPC) considérés comme obsolètes dans les environnements Windows Server modernes.,Les Mailslots et NetBIOS.
+Définition : NUMA (Non-Uniform Memory Access),Une architecture matérielle pour serveurs avec plusieurs processeurs et nœuds mémoire où le temps d'accès à la mémoire dépend de la localisation du processeur.
+Quelle fonctionnalité Windows Server permet de définir des nœuds NUMA logiques pour améliorer la scalabilité de charges comme IIS ou SQL Server ?,Le Soft NUMA.
+"Citez deux optimisations effectuées par Windows pour être ""NUMA-aware"" (conscient de l'architecture NUMA).",L'affinité des threads et l'allocation mémoire locale sont optimisées pour réduire la latence.
+Quelle API Windows moderne permet d'effectuer des allocations mémoire orientées NUMA ?,VirtualAlloc2.
+Quel est le principe fondamental du multitâche sous Windows Server ?,"Il s'agit d'un multitâche préemptif, où le noyau peut interrompre n'importe quel thread à tout moment pour en exécuter un autre."
+Nommez trois des cinq états classiques d'un thread sous Windows.,"Prêt, en cours d’exécution, en attente, suspendu, terminé."
+De quels quatre éléments principaux l'ordonnanceur de Windows Server tient-il compte ?,"Des groupes de processeurs (> 64), de l’hyper-threading, du placement NUMA et de la consommation énergétique."
+"Qu'est-ce que le ""quantum"" dans le contexte de l'ordonnancement Windows ?","Le temps d’exécution alloué à un thread avant qu'il puisse être préempté, qui est dynamique et adapté aux charges serveur."
+Pourquoi Windows utilise-t-il des files d'attente de threads prêts (Ready Queues) par processeur ?,Pour réduire la contention (conflits d'accès) et améliorer la réactivité du système.
+Comment l'hyperviseur Hyper-V influence-t-il l'ordonnancement des processus dans une machine virtuelle ?,"Il influence la disponibilité du CPU, le temps effectif d'exécution et les priorités entre les différentes VMs."
+Quelles sont les deux plages de priorités des threads sous Windows et à quoi correspondent-elles ?,Les niveaux $0$ à $15$ sont pour les threads normaux et les niveaux $16$ à $31$ sont pour les threads temps réel.
+"Qu'est-ce que le ""Priority Boost"" modernisé dans Windows ?",Un mécanisme qui augmente temporairement la priorité des threads qui sont en attente prolongée pour éviter la famine (starvation).
+Comment Windows ajuste-t-il dynamiquement les priorités des threads ?,En augmentant la priorité des threads interactifs et en effectuant des ajustements pour éviter la famine des threads de basse priorité.
+Quel est l'impact principal de l'exécution d'un processus dans un environnement virtualisé avec Hyper-V ?,Le processus partage les cœurs physiques avec d'autres machines virtuelles et l'hyperviseur peut suspendre ses threads.
+"Qu'est-ce que l'""Enlightened Scheduling"" ?",Une collaboration entre Windows Server et Hyper-V pour optimiser le placement des VMs et leur accès aux ressources CPU.
+Définition : CFG (Control Flow Guard),Une mesure de sécurité (mitigation) qui empêche l'exécution de code non autorisé en restreignant les cibles des appels indirects.
+Définition : ASLR (Address Space Layout Randomization),Une mesure de sécurité qui charge les composants d'un processus à des adresses mémoires aléatoires pour rendre les attaques plus difficiles.
+"En plus de CFG et ASLR, citez une autre mesure de sécurité (""mitigation"") qui peut être activée processus par processus.",DEP (Data Execution Prevention) ou SEHOP (Structured Exception Handler Overwrite Protection) renforcé.
+"Quelle est la fonction d'un ""job object"" concernant la consommation CPU ?","Il permet la limitation de l'utilisation CPU, une fonctionnalité appelée ""CPU rate control""."
+"Quelle est la fonction d'un ""job object"" concernant la consommation mémoire ?",Il permet de définir des limites strictes sur l'utilisation de la mémoire par les processus qu'il contient.
+"Quelle est la fonction d'un ""job object"" concernant les opérations d'entrée/sortie ?",Il permet de fixer des limites d'IOPS (Input/Output Operations Per Second).
+"Dans le contexte de Windows Server, la communication rapide et optimisée pour SMB est une caractéristique clé des _____.",Named Pipes (tuyaux nommés)
+Le mécanisme _____ est utilisé pour la communication haute performance entre l'hôte Hyper-V et les machines virtuelles.,VMBus
+Quelle technologie permet à Windows Server de supporter et d'ordonnancer efficacement les tâches sur plus de 64 processeurs ?,Les groupes de processeurs (processor groups).
+Comment le noyau Windows a-t-il été optimisé pour les applications critiques comme SQL Server ou IIS ?,Il a été optimisé pour réduire la latence.
+Quelle protection sépare strictement le code exécuté en mode utilisateur (ring 3) du code exécuté en mode noyau (ring 0) ?,La segmentation stricte de la mémoire entre les anneaux de protection.
+"Dans les environnements cloud modernes, par quoi les processus sont-ils souvent supervisés et orchestrés ?",Ils sont supervisés par des services (Service Control Manager) et orchestrés par des systèmes comme IIS ou des orchestrateurs de conteneurs.
+"Quel composant natif de Windows est largement utilisé par .NET, PowerShell, SQL Server et IIS pour gérer les threads de manière efficace ?",Le pool de threads (Thread Pool) de Windows.

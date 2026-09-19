@@ -1,0 +1,109 @@
+Quelle est la définition d'un 'accès local' en cybersécurité ?,Il s'agit d'attaques nécessitant un accès physique au réseau ou à un équipement.
+Comment le CyberDico de l'ANSSI définit-il les 'actes de cybermalveillance' ?,"Toute infraction commise par voie numérique, comme le phishing, le piratage ou l'usurpation d'identité."
+Quel est le terme français pour 'Adware' ?,Logiciel publicitaire.
+Quel est le but principal d'un 'adware' ou logiciel publicitaire ?,Afficher des bandeaux publicitaires via le navigateur Internet de l'utilisateur.
+Qu'est-ce que l'activité d''alerte' en cybersécurité ?,Avertir une entité lors de la détection d'un potentiel incident de sécurité la concernant.
+Quel est le terme anglais pour 'Alerte malveillante' qui déclenche une réponse des forces de police ?,Swatting.
+Quel est l'objectif de l''analyse du risque numérique' ?,Apprécier les risques numériques pesant sur une organisation et identifier les mesures de sécurité pour les maîtriser.
+"Une _____ consiste à obtenir des informations sur un système en observant les signaux qu'il émet, comme sa consommation électrique.",attaque par canal auxiliaire (Side-channel-attack)
+Quel type d'attaque exploite des authentifiants précédemment exposés ?,Attaque par saisie d’authentifiants volés (Credential stuffing).
+Qu'est-ce qu'une attaque par saturation téléphonique (AST) ?,Une attaque visant à empêcher les appels d'aboutir en émettant un nombre important d'appels vers un numéro.
+"Selon l'ANSSI, qu'est-ce que l'authenticité d'une information ?",La garantie que l'information est attribuée à son auteur légitime.
+Quelle est la fonction de l'authentification ?,Vérifier l'identité dont une entité (personne ou machine) se réclame.
+Sur quel type de protocole repose souvent une 'authentification forte' ?,Des protocoles dits défi-réponse.
+Quelle est l'action d'une 'attaque par interruption de service' (DoS) ?,Empêcher ou limiter fortement la capacité d'un système à fournir le service attendu.
+Quel est le terme français pour 'Backdoor' ?,Porte dérobée.
+En quoi consiste la technique du 'balayage de ports' (Port scanning) ?,Envoyer des paquets de données sur les ports d'une machine pour en déduire leur état de disponibilité.
+Quel est le terme français pour 'Blockchain' ?,Chaîne de blocs.
+Qu'est-ce qu'un 'bombardement de courriels' (Mail bombing) ?,L'envoi d'une grande quantité de courriels à un destinataire unique dans une intention malveillante.
+Une _____ est un logiciel malveillant conçu pour causer des dommages lorsqu'une condition spécifique est remplie.,bombe logique (Logic bomb)
+Quel type de maliciel infecte le processus de démarrage du système d’exploitation pour en prendre le contrôle ?,Un bootkit.
+Quel est le terme français pour 'Botnet' ?,Réseau de machines zombies.
+Qu'est-ce qu'un 'bug bounty program' ?,Un appel à des spécialistes pour rechercher des vulnérabilités en échange d'une gratification.
+Que signifie l'acronyme 'BYOD' et son équivalent français 'AVEC' ?,Bring Your Own Device / Apportez Votre Equipement personnel de Communication.
+Qu'est-ce qu'un 'canal caché' (Covert channel) ?,"Un canal de communication qui transfère des informations de manière dissimulée, en exploitant un mécanisme non prévu pour cela."
+Définissez ce qu'est un 'canular' (Hoax) en cybersécurité.,"Une information, vraie ou fausse, incitant les destinataires à effectuer des opérations souvent dommageables."
+Un _____ est un programme qui semble utile mais possède une fonction cachée et potentiellement malveillante.,cheval de Troie (Trojan Horse)
+Qu'est-ce que le 'chiffrement' (Encryption) ?,La transformation cryptographique de données produisant un cryptogramme.
+Quel est le terme français pour désigner le 'Cloud' ?,Infrastructure nuagique.
+Qu'est-ce qu'un 'code d’exploitation' (Exploit) ?,Un programme permettant d'utiliser une ou plusieurs vulnérabilités d'un logiciel à des fins malveillantes.
+Quelle est la définition du 'cœur de confiance' (Trusted core) d'un système d'information ?,La partie du système sur laquelle repose la sécurité de la totalité du système.
+Que signifie le sigle CERT ?,"Computer Emergency Response Team, ou Equipe de réponse aux attaques cyber."
+Qu'est-ce que la 'confidentialité' en sécurité des systèmes d'information ?,La propriété d'une information à laquelle seuls ses destinataires autorisés peuvent avoir accès.
+Comment définit-on une 'crise d'origine cyber' ?,Une déstabilisation majeure du fonctionnement d'une organisation due à des actions malveillantes sur ses outils numériques.
+Quelle est la traduction française de 'Cross-Site Request Forgery' ?,Injection de requêtes illégitimes par rebond.
+Quel est le but de la 'cryptographie' ?,"Assurer la disponibilité, la confidentialité et l'intégrité des données échangées via la transformation de messages."
+Quelle science englobe la cryptographie et la cryptanalyse ?,La cryptologie.
+Qu'est-ce qu'un 'cryptomineur' (Mining malware) ?,Un maliciel permettant de valider des transactions en cryptomonnaie et de les enregistrer dans la blockchain.
+Qu'est-ce que la 'cryptographie post-quantique' ?,Un ensemble d'algorithmes conçus pour résister aux attaques des ordinateurs actuels et des futurs ordinateurs quantiques.
+Quelles sont les quatre grandes finalités des 'cyberattaques' ?,"L'appât du gain, la déstabilisation, l'espionnage et le sabotage."
+La _____ concerne les actes contrevenants aux lois utilisant les réseaux ou les systèmes d'information comme moyens ou comme cibles.,cybercriminalité (Cyber crime)
+Qu'est-ce que la 'cyberdéfense' ?,L'ensemble des mesures permettant à un État de défendre dans le cyberespace les systèmes d'information jugés essentiels.
+Comment l'ANSSI définit-elle la 'cybersécurité' ?,L'état recherché pour un système d'information lui permettant de résister à des événements issus du cyberespace.
+Quel est le terme français pour 'Cybersquatting' ?,Accaparement de noms de domaine.
+Quel est le terme français pour le 'Darknet' ou 'Dark web' ?,Internet clandestin.
+Qu'est-ce que le 'débridage système' (Jailbreak) ?,L'action de contourner les protections d'un système pour supprimer les restrictions d'utilisation du constructeur.
+Quelle est la traduction française du terme 'Defacement' ?,Défiguration ou barbouillage.
+Qu'est-ce qu'une attaque par 'déni de service distribué' (DDoS) ?,Une attaque DoS qui utilise un réseau de machines compromises pour interrompre un service.
+La technique d'exploitation d'une vulnérabilité où un programme ne vérifie pas la taille des données qu'il manipule s'appelle un _____.,débordement de tampon (Buffer overflow)
+Quel service permet d'établir une correspondance entre un nom de domaine et une adresse IP ?,Le système de nom de domaine (DNS).
+Qu'est-ce que le 'DNS pharming' ?,La modification d'un serveur DNS pour rediriger un nom de domaine vers une adresse IP malveillante.
+"Selon le RGPD, qu'est-ce qu'une 'donnée à caractère personnel' ?",Toute information se rapportant à une personne physique identifiée ou identifiable.
+Qu'est-ce qu'une 'élévation de privilège' (Privilege escalation) ?,Un mécanisme permettant à un utilisateur d'obtenir des privilèges supérieurs à ceux qu'il a normalement.
+"En gestion d'incident, qu'est-ce que l''endiguement' (Containment) ?",L'ensemble des actions prises au début d'un incident pour en contenir l'ampleur.
+Que désigne le terme 'éradication' dans le contexte de la remédiation cyber ?,La recherche et la neutralisation des emprises de l'attaquant et les mesures pour entraver son retour.
+Quel est le terme anglais pour une 'escroquerie aux faux ordres de virement' (FOVI) ?,Business Email Compromise (BEC).
+Quel type d'attaque vise à prendre pied discrètement dans un système pour en exfiltrer de l'information stratégique ?,L'espionnage (Espionage).
+"Un _____ est un logiciel qui collecte et transmet à des tiers des informations sur l'environnement où il est installé, à l'insu de l'utilisateur.",espiogiciel (Spyware)
+Qu'est-ce qu'un 'événement de sécurité' ?,Toute trace enregistrée pouvant indiquer un incident de sécurité et nécessitant une levée de doute.
+Que signifie 'exécution de code arbitraire' (Remote code execution) ?,"La mise en œuvre de commandes à distance sur un ordinateur, à l’insu de son utilisateur légitime."
+Le vol ou transfert non autorisé de données depuis un terminal ou un réseau est appelé _____.,exfiltration de données (Data exfiltration)
+Quelle est la traduction anglaise des termes 'faille' ou 'faille de sécurité' ?,"Vulnerability, security flaw, ou security breach."
+Quelle technique d'attaque consiste à tester un nombre exhaustif de mots de passe pour le deviner ?,La force-brute (Brute-force attack).
+Quel est le terme anglais pour la fraude à la carte bancaire via des distributeurs de billets ?,Skimming.
+Qu'est-ce que la 'gestion de crise cyber' ?,Un processus qui identifie les impacts potentiels menaçant une organisation et fournit un cadre pour la résilience et la réponse.
+Qu'est-ce qu'une fonction de 'hachage' (Hash Function) ?,Une fonction cryptographique qui transforme une chaîne de caractères de taille quelconque en une chaîne de taille fixe.
+Qui sont les 'hacktivistes' ?,Des individus qui utilisent des cyberattaques pour véhiculer des messages et des idéologies.
+Qu'est-ce que le 'hameçonnage ciblé' (Spearphishing) ?,Une attaque par hameçonnage qui utilise une ingénierie sociale forte pour cibler une personne ou une organisation spécifique.
+Qu'est-ce qu'un 'incident de sécurité' ?,"Un événement compromettant la disponibilité, l'authenticité, l'intégrité ou la confidentialité des données ou des services."
+Un _____ est une combinaison d'informations techniques et contextuelles permettant d'identifier une compromission.,indicateur de compromission (IOC)
+Qu'est-ce que l''ingénierie sociale' (Social engineering) ?,Une manipulation consistant à obtenir un bien ou une information en exploitant la confiance ou la crédulité de tiers.
+Qu'est-ce qu'une 'injection SQL' ?,L'interprétation imprévue d'un code SQL introduit par une voie détournée dans une application.
+"En sécurité de l'information, qu'est-ce que l''intégrité' ?",La garantie que le système et l'information ne sont modifiés que par une action volontaire et légitime.
+Quel est le terme français pour 'Keylogger' ?,Enregistreur de frappes.
+Qu'est-ce que la 'levée de doute' en cybersécurité ?,L'ensemble des actions de vérification pour qualifier un événement et différencier un faux-positif d'un incident de sécurité.
+Quelle est la traduction anglaise de 'maliciel' ou 'logiciel malveillant' ?,Malware.
+Quel est le principe d'une attaque de type 'homme-du-milieu' (Man-in-the-middle) ?,Une personne malveillante s'interpose de manière dissimulée dans un échange entre deux parties.
+Que sont les 'TTPs' d'un attaquant ?,"Les tactiques, techniques et procédures, qui correspondent à son mode opératoire d'attaque (MOA)."
+L'action de parcourir des ressources publiques pour y collecter des adresses électroniques s'appelle la _____.,moisson de courriels (Mail harvesting)
+Quel est le terme anglais pour un 'mouchard internet' ?,Web bug.
+Que gère le 'noyau' (Kernel) d'un système d'exploitation ?,Il gère les ressources de l'ordinateur et permet la communication entre les composants matériels et logiciels.
+Qu'est-ce qu'une vulnérabilité 'N-day' (ou one-day) ?,Une vulnérabilité pour laquelle un correctif est disponible mais n'a pas été déployé par l'utilisateur.
+Quelle technique vise à rendre un code source incompréhensible pour protéger un programme ?,L'offuscation (Obfuscation).
+Que signifie le sigle OIV en France ?,Opérateur d’importance vitale.
+Un _____ est un outil protégeant un ordinateur contre les attaques externes et les connexions illégitimes sortantes.,pare-feu (Firewall)
+Quelle est la différence entre le 'password spraying' et la 'force brute' ?,"Le password spraying tente d'ouvrir plusieurs comptes avec un seul mot de passe, tandis que la force brute teste de nombreux mots de passe sur un seul compte."
+Quel est le terme français pour 'Phishing' ?,Hameçonnage ou Filoutage.
+Qu'est-ce qu'un 'plan de continuité d’activité' (PCA) ?,Un ensemble de procédures pour continuer les opérations en mode dégradé suite à une perturbation.
+À quoi sert un 'plan de reprise d’activité' (PRA) ?,Il contient les procédures permettant de rétablir et reprendre les activités après un incident.
+En quoi consiste une attaque de type 'point d’eau' (Watering hole) ?,Piéger un site Internet légitime pour infecter les machines des visiteurs ayant un intérêt pour l'attaquant.
+Que signifie le terme 'polymorphe' pour un virus ?,"Que son code est chiffré et change d'une infection à l'autre, modifiant ainsi sa signature."
+Le 'Quishing' est une forme de filoutage utilisant un _____.,code à réponse rapide (QR code)
+Quel est le terme anglais pour 'rançongiciel' ?,Ransomware.
+"En cybersécurité, qu'est-ce que la 'remédiation' ?",Le projet de reprise de contrôle d'un système d'information compromis pour rétablir un état de fonctionnement suffisant.
+Quel est le terme français pour 'Rootkit' ?,Logiciel passe droit ou passe droit.
+Qu'est-ce qu'une opération de 'sabotage' en cybersécurité ?,"Une attaque générant des dommages sur un système d'information, pouvant aller jusqu'à le rendre inopérant."
+Quel est le terme français pour le 'Shadow IT' ?,Informatique de l'ombre.
+Quel est le terme français pour le 'Spam' ?,Pourriel ou polluriel.
+Qu'est-ce qu'une 'supply chain attack' (attaque contre la chaîne logistique) ?,"Une attaque qui compromet un tiers (fournisseur, prestataire) pour cibler la victime finale."
+Un _____ est un dispositif logiciel ou matériel qui capte et analyse l'activité d'un système pour détecter des attaques.,système de détection d'intrusion (IDS)
+Qu'est-ce que le 'téléchargement furtif' (Drive-by download) ?,Le téléchargement d'un logiciel malveillant qui s'effectue à l'insu de l'internaute lors de la visite d'un site web piraté.
+"L'action malveillante de déposer un nom de domaine très proche d'un autre, avec une légère différence, s'appelle le _____.",typosquatting
+Qu'est-ce que l''usurpation DNS' (DNS spoofing) ?,Une attaque où l'attaquant envoie une réponse DNS malveillante à la place du serveur légitime.
+Quel est le terme anglais pour l'usurpation de carte SIM ?,SIM swapping.
+Qu'est-ce qu'un 'vecteur d’attaque' ?,Le moyen d'accès utilisé par un acteur malveillant pour exploiter des failles de sécurité.
+Un _____ est un logiciel malveillant indépendant qui cherche à se propager au plus grand nombre de cibles possible.,ver (Worm)
+Qu'est-ce qu'un 'réseau privé virtuel' (RPV) ou VPN ?,"L'interconnexion de réseaux locaux via une technique de tunnel sécurisé, généralement à travers Internet."
+Qu'est-ce qu'une 'vulnérabilité' en informatique ?,"Une faille de sécurité pouvant affecter un logiciel, un système ou un composant matériel."
+Quelle est la particularité d'une 'vulnérabilité jour-zéro' (Zero-day) ?,Elle n'a fait l'objet d'aucune publication ou n'a reçu aucun correctif au moment de son exploitation.
+Qu'est-ce qu'une 'webshell' (console web malveillante) ?,Un fichier malveillant exécuté par un serveur web qui permet un accès et un contrôle à distance de ce serveur.
