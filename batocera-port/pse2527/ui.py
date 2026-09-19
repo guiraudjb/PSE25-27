@@ -157,12 +157,12 @@ class ListMenu:
             fonts.small.render_to(surface, (self.screen_w // 2 - 10, self.top + self.visible_count * self.item_height + 4), "▼", COLOR_PRIMARY)
 
 
-LETTER_BADGES = ('A', 'B', 'X', 'Y')
+LETTER_BADGES = ('A', 'B', 'C', 'D')  # esprit manette NeoGeo (4 boutons de face en ligne)
 
 
 def draw_choice_rows(surface, fonts, screen_w, top, bottom, choices, selected_index,
                       correct_index=None, chosen_index=None):
-    """Dessine les 4 choix du quiz en pavés larges avec une pastille A/B/X/Y à
+    """Dessine les 4 choix du quiz en pavés larges avec une pastille A/B/C/D à
     gauche (bouton physique correspondant), en occupant tout l'espace vertical
     disponible entre `top` et `bottom`.
 

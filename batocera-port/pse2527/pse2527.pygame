@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # PSE25-27 Revision - jeu de revision (Quiz + Flashcards) pour Batocera / systeme pygame
 # A la manette : D-pad/Select-Start/stick pour naviguer, A pour valider, B pour revenir
-# en arriere, et en quiz : A/B/X/Y pour repondre directement au choix correspondant.
+# en arriere, et en quiz : A/B/C/D (esprit NeoGeo) pour repondre directement au choix
+# correspondant (les identifiants internes face_a/face_b/face_x/face_y correspondent
+# aux boutons physiques 0/1/2/3, affiches a l'ecran comme A/B/C/D).
 import os
 import sys
 import pygame
@@ -16,9 +18,16 @@ WINDOW_SURFACE = pygame.HWSURFACE | pygame.DOUBLEBUF
 MAX_PADS = 4
 QUIZ_QUESTION_COUNT = 15
 
-# Actions issues des boutons de face A/B/X/Y : dans la plupart des ecrans elles
-# equivalent a 'action' (A, X, Y) / 'back' (B) ; en plein quiz elles servent
-# directement a choisir la reponse (voir handle_quiz_ask).
+def log(msg):
+    """Trace de diagnostic : Batocera capture stdout dans
+    /userdata/system/logs/es_launch_stdout.log, utile en cas de plantage
+    silencieux (aucun terminal visible sur la machine de jeu)."""
+    print('[pse2527] ' + msg, flush=True)
+
+
+# Actions issues des boutons de face (affiches A/B/C/D, esprit NeoGeo) : dans la
+# plupart des ecrans elles equivalent a 'action' (A, C, D) / 'back' (B) ; en plein
+# quiz elles servent directement a choisir la reponse (voir handle_quiz_ask).
 FACE_TO_GENERIC = {'face_a': 'action', 'face_b': 'back', 'face_x': 'action', 'face_y': 'action'}
 FACE_TO_CHOICE_INDEX = {'face_a': 0, 'face_b': 1, 'face_x': 2, 'face_y': 3}
 
@@ -33,23 +42,30 @@ STATE_FLASH = 'flash'
 
 class App:
     def __init__(self):
+        log('init: pygame.init()')
         pygame.init()
+        log('init: pads')
         self.pads = inp.init_pads(MAX_PADS)
+        log('init: {} manette(s) retenue(s)'.format(len(self.pads)))
 
         info = pygame.display.Info()
         self.screen_w, self.screen_h = info.current_w, info.current_h
         if self.screen_w < 640 or self.screen_h < 480:
             self.screen_w, self.screen_h = 1280, 720
+        log('init: display {}x{}'.format(self.screen_w, self.screen_h))
         self.screen = pygame.display.set_mode((self.screen_w, self.screen_h), WINDOW_SURFACE)
         pygame.display.set_caption("PSE25-27 Révision")
         pygame.mouse.set_visible(False)
+        log('init: display OK')
 
         scale = self.screen_h / 720.0
         self.fonts = ui.Fonts(scale=scale)
+        log('init: polices OK')
         self.clock = pygame.time.Clock()
         self.repeat = inp.RepeatState()
 
         self.series = dl.load_series()
+        log('init: {} séries chargées'.format(len(self.series)))
         self.series_menu = ui.ListMenu(
             [{'label': "Série {} ({} modules)".format(code, len(mods)), 'code': code, 'modules': mods}
              for code, mods in self.series],
@@ -75,18 +91,25 @@ class App:
         # détection initiale, ce qui peut simuler une pression fantôme au tout
         # lancement du jeu (observé : fermeture immédiate et silencieuse).
         self.startup_grace = 20
+        log('init: terminé, entrée dans la boucle principale')
 
     # ------------------------------------------------------------------
     def run(self):
+        frame = 0
         try:
             while self.running:
                 self.handle_input()
                 self.draw()
                 pygame.display.flip()
                 self.clock.tick(30)
+                frame += 1
+                if frame % 90 == 0:
+                    log('boucle active, frame={}, état={}'.format(frame, self.state))
         except Exception:
             import traceback
+            log('EXCEPTION dans la boucle principale, frame={} :'.format(frame))
             traceback.print_exc()
+        log('sortie de la boucle principale, frame={}, running={}'.format(frame, self.running))
         pygame.quit()
 
     # ------------------------------------------------------------------
@@ -98,9 +121,12 @@ class App:
         for event in pygame.event.get():
             action = inp.translate_event(event, self.pads)
             if action == 'quit':
+                log("action 'quit' reçue (evt type={}), état={}".format(event.type, self.state))
                 self.running = False
                 return
             if action and not ignore_actions:
+                if action not in ('up', 'down', 'left', 'right'):
+                    log("action '{}' (état={})".format(action, self.state))
                 self.dispatch(action)
 
         # répétition des directions maintenues (D-pad / Select-Start / stick)
@@ -109,7 +135,7 @@ class App:
             self.dispatch(direction)
 
     def dispatch(self, action):
-        # Sur l'écran de quiz, A/B/X/Y répondent directement (voir handle_quiz_ask) ;
+        # Sur l'écran de quiz, A/B/C/D répondent directement (voir handle_quiz_ask) ;
         # partout ailleurs ils équivalent simplement à action/back.
         if self.state != STATE_QUIZ_ASK:
             action = FACE_TO_GENERIC.get(action, action)
@@ -139,6 +165,7 @@ class App:
             if item:
                 self.enter_module_menu(item['modules'])
         elif action == 'back':
+            log("'back' sur l'écran des séries -> fermeture du jeu")
             self.running = False
 
     def enter_module_menu(self, modules):
@@ -316,7 +343,7 @@ class App:
         ui.draw_choice_rows(self.screen, self.fonts, self.screen_w, choices_top, choices_bottom,
                              q['choix'], self.quiz_selected)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A/B/X/Y', 'Répondre'), ('L1', 'Abandonner')])
+                              [('A/B/C/D', 'Répondre'), ('L1', 'Abandonner')])
 
     def draw_quiz_feedback(self):
         q = self.quiz_questions[self.quiz_index]
@@ -378,8 +405,16 @@ class App:
 
 
 def main():
-    app = App()
+    log('démarrage pse2527.pygame')
+    try:
+        app = App()
+    except Exception:
+        import traceback
+        log('EXCEPTION pendant App.__init__ :')
+        traceback.print_exc()
+        raise
     app.run()
+    log('fin de main()')
 
 
 if __name__ == '__main__':

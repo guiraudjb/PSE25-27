@@ -13,10 +13,11 @@ Bercy/finances publiques, PSE 25-27, PSE Expert Réseau...), chacun avec :
 
 ## Contrôles manette
 
-- D-pad / stick analogique : naviguer dans les menus et les listes
+- D-pad / stick analogique / Select-Start : naviguer dans les menus et les listes
 - **A** : valider / retourner une flashcard
 - **B** : retour à l'écran précédent
 - Gauche/Droite : carte précédente/suivante (en mode Flashcards)
+- En quiz : **A/B/C/D** (esprit manette NeoGeo) répondent directement au choix correspondant ; **L1** abandonne la question
 
 ## Origine des données
 
