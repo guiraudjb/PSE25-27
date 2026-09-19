@@ -308,26 +308,26 @@ class App:
         title_h = self.fonts.title.get_sized_height()
         self.fonts.title.render_to(self.screen, (40, (self.HEADER_H - title_h) // 2), title, ui.COLOR_WHITE)
 
-    NAV_HINT = ('▲▼/Select/Start', 'Naviguer')
+    NAV_HINT = ('▲▼', 'Naviguer')
 
     def draw_series(self):
         self.draw_header("PSE25-27 — RÉVISION")
         self.series_menu.draw(self.screen, self.fonts)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [self.NAV_HINT, ('A', 'Choisir'), ('B', 'Quitter')])
+                              [self.NAV_HINT, ('A/Start', 'Choisir'), ('B/Select', 'Quitter')])
 
     def draw_module(self):
         code = self.series_menu.current()['code']
         self.draw_header("SÉRIE {}".format(code))
         self.module_menu.draw(self.screen, self.fonts, badge_key='badge')
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [self.NAV_HINT, ('A', 'Choisir'), ('B', 'Retour')])
+                              [self.NAV_HINT, ('A/Start', 'Choisir'), ('B/Select', 'Retour')])
 
     def draw_mode(self):
         self.draw_header(self.current_module['label'])
         self.mode_menu.draw(self.screen, self.fonts)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [self.NAV_HINT, ('A', 'Choisir'), ('B', 'Retour')])
+                              [self.NAV_HINT, ('A/Start', 'Choisir'), ('B/Select', 'Retour')])
 
     def draw_quiz_ask(self):
         q = self.quiz_questions[self.quiz_index]
@@ -365,7 +365,7 @@ class App:
         ui.draw_text(self.screen, self.fonts.medium, q['explication'], (margin, expl_top),
                      color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A', 'Continuer')])
+                              [('A/Start', 'Continuer')])
 
     def draw_quiz_end(self):
         self.draw_header("RÉSULTAT")
@@ -374,13 +374,13 @@ class App:
         text = "Score final : {} / {}  ({} %)".format(self.quiz_score, total, pct)
         self.fonts.large.render_to(self.screen, (60, 200), text, ui.COLOR_PRIMARY)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A', 'Retour au menu')])
+                              [('A/Start', 'Retour au menu')])
 
     def draw_flash(self):
         self.draw_header("FLASHCARDS  —  {}".format(self.current_module['label']))
         if not self.flash_cards:
             self.fonts.medium.render_to(self.screen, (60, self.HEADER_H + 40), "Aucune flashcard pour ce module.", ui.COLOR_TEXT)
-            ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h, [('B', 'Retour')])
+            ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h, [('B/Select', 'Retour')])
             return
         card = self.flash_cards[self.flash_index]
         margin = 40
@@ -401,7 +401,7 @@ class App:
         self.fonts.small.render_to(self.screen, (self.screen_w // 2 - counter_rect.width // 2, card_rect.bottom + 10),
                                     counter, ui.COLOR_TEXT)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A', 'Retourner'), ('◄►', 'Carte suiv./préc.'), ('B', 'Retour')])
+                              [('A/Start', 'Retourner'), ('◄►', 'Carte suiv./préc.'), ('B/Select', 'Retour')])
 
 
 def main():

@@ -1,16 +1,20 @@
-"""Gestion manette/clavier via l'API sémantique SDL_GameController de pygame
-(pygame._sdl2.controller), qui s'appuie sur la base de mappings de Batocera :
-les boutons A/B/X/Y, Select (Back), Start et le D-pad sont identifiés par leur
-FONCTION plutôt que par un numéro d'index brut, ce qui évite les incohérences
-entre manettes (et le bug de "double mouvement" observé avec la lecture brute
-de pygame.joystick, quand une même pression physique du D-pad était rapportée
-par deux canaux différents en même temps).
+"""Gestion manette/clavier en réutilisant le remapping déjà configuré et
+validé par l'utilisateur dans EmulationStation (Batocera), plutôt que de
+deviner des numéros de boutons bruts : EmulationStation enregistre, pour
+chaque manette (identifiée par son GUID), le numéro de bouton/axe/hat exact
+correspondant à chaque fonction logique (a, b, x, y, start, select, pageup,
+pagedown, up/down/left/right) dans
+/userdata/system/configs/emulationstation/es_input.cfg.
 
-Repli : si une manette n'est pas reconnue par la base SDL (cas rare), on
-retombe sur une heuristique d'index bruts (mêmes valeurs que le jeu Retrotrivia
-déjà validé sur ce salon Batocera).
+C'est la source la plus fiable possible : elle a été testée par l'utilisateur
+lui-même dans le menu de configuration manette d'EmulationStation. Un contrôle
+non reconnu par la base de mappings SDL de pygame (`pygame._sdl2.controller`,
+peu fiable pour les manettes génériques/clonées) tombe en repli sur cette
+configuration ES, puis, en dernier recours, sur une heuristique générique.
 """
+import os
 import pygame
+import xml.etree.ElementTree as ET
 
 try:
     import pygame._sdl2.controller as sdl2ctrl
@@ -23,6 +27,18 @@ REPEAT_DELAY_MS = 350   # délai avant répétition d'une direction maintenue
 REPEAT_RATE_MS = 120    # intervalle de répétition
 AXIS_DEADZONE = 0.5
 
+ES_INPUT_CFG_PATHS = (
+    '/userdata/system/configs/emulationstation/es_input.cfg',
+)
+
+# Correspondance entre nos noms logiques et ceux utilisés par EmulationStation.
+OUR_TO_ES_NAME = {
+    'a': 'a', 'b': 'b', 'x': 'x', 'y': 'y',
+    'start': 'start', 'back': 'select',
+    'leftshoulder': 'pageup', 'rightshoulder': 'pagedown',
+}
+ES_TO_OUR_NAME = {es: ours for ours, es in OUR_TO_ES_NAME.items()}
+
 SEMANTIC_BUTTON_IDS = {}
 if HAVE_SDL2_CONTROLLER:
     SEMANTIC_BUTTON_IDS = {
@@ -32,64 +48,134 @@ if HAVE_SDL2_CONTROLLER:
         'y': pygame.CONTROLLER_BUTTON_Y,
         'back': pygame.CONTROLLER_BUTTON_BACK,     # Select
         'start': pygame.CONTROLLER_BUTTON_START,
-        'dpad_up': pygame.CONTROLLER_BUTTON_DPAD_UP,
-        'dpad_down': pygame.CONTROLLER_BUTTON_DPAD_DOWN,
-        'dpad_left': pygame.CONTROLLER_BUTTON_DPAD_LEFT,
-        'dpad_right': pygame.CONTROLLER_BUTTON_DPAD_RIGHT,
         'leftshoulder': pygame.CONTROLLER_BUTTON_LEFTSHOULDER,
         'rightshoulder': pygame.CONTROLLER_BUTTON_RIGHTSHOULDER,
     }
 
-# Repli : index bruts observés sur ce salon Batocera pour une manette non
-# reconnue par la base SDL (cf. Retrotrivia).
+# Dernier recours si ni es_input.cfg ni la base SDL ne reconnaissent la
+# manette (ex. tests hors Batocera). Purement indicatif, à ne pas considérer
+# fiable sur une manette réelle non testée.
 LEGACY_BUTTON_INDEXES = {
     'a': (0,), 'b': (1,), 'x': (2,), 'y': (3,),
-    'dpad_up': (8, 13), 'dpad_down': (9, 14),
-    'dpad_left': (10, 15), 'dpad_right': (11, 16),
     'back': (6,), 'start': (7,),
     'leftshoulder': (4,), 'rightshoulder': (5,),
 }
 
 
+def _load_es_button_mappings():
+    """Lit es_input.cfg : {guid: {nom_es: id_bouton}} pour chaque manette
+    qu'EmulationStation connaît déjà (boutons uniquement ; le D-pad est un hat
+    standard SDL et n'a pas besoin de cette config, voir Pad.direction)."""
+    mappings = {}
+    for path in ES_INPUT_CFG_PATHS:
+        if not os.path.exists(path):
+            continue
+        try:
+            tree = ET.parse(path)
+        except Exception:
+            continue
+        for cfg in tree.getroot().findall('inputConfig'):
+            guid = cfg.get('deviceGUID')
+            if not guid:
+                continue
+            buttons = {}
+            for inp in cfg.findall('input'):
+                if inp.get('type') == 'button':
+                    try:
+                        buttons[inp.get('name')] = int(inp.get('id'))
+                    except (TypeError, ValueError):
+                        pass
+            if buttons:
+                mappings.setdefault(guid, buttons)
+    return mappings
+
+
+ES_BUTTON_MAPPINGS = _load_es_button_mappings()
+
+
 class Pad:
-    """Une manette, avec mapping sémantique fiable quand SDL la reconnaît."""
+    """Une manette physique. Priorité de la source de mapping des boutons :
+    1) es_input.cfg (config EmulationStation, déjà validée par l'utilisateur)
+    2) base SDL_GameController de pygame (si la manette y est reconnue)
+    3) repli générique (imprécis, dernier recours)
+    Le D-pad et le stick analogique sont lus directement sur le joystick brut
+    (hat standard SDL / axes 0-1), indépendamment de la source ci-dessus."""
 
     def __init__(self, index):
         self.index = index
+        self.joystick = pygame.joystick.Joystick(index)
+        self.joystick.init()
+        try:
+            self.guid = self.joystick.get_guid()
+        except Exception:
+            self.guid = None
+
+        self.es_buttons = ES_BUTTON_MAPPINGS.get(self.guid)
         self.controller = None
-        self.joystick = None
-        if HAVE_SDL2_CONTROLLER and sdl2ctrl.is_controller(index):
+        if self.es_buttons is None and HAVE_SDL2_CONTROLLER and sdl2ctrl.is_controller(index):
             self.controller = sdl2ctrl.Controller(index)
+
+        if self.es_buttons is not None:
+            source = 'es_input.cfg'
+        elif self.controller is not None:
+            source = 'sdl_gamecontroller'
         else:
-            self.joystick = pygame.joystick.Joystick(index)
-            self.joystick.init()
+            source = 'repli générique (non testé)'
+        try:
+            name = self.joystick.get_name()
+        except Exception:
+            name = '?'
+        print('[pse2527] Pad {} "{}" (guid={}) -> mapping = {}'.format(
+            index, name, self.guid, source), flush=True)
 
     def button(self, name):
+        if self.es_buttons is not None:
+            idx = self.es_buttons.get(OUR_TO_ES_NAME.get(name, name))
+            if idx is None:
+                return False
+            try:
+                return idx < self.joystick.get_numbuttons() and bool(self.joystick.get_button(idx))
+            except Exception:
+                return False
         if self.controller is not None:
             try:
                 return bool(self.controller.get_button(SEMANTIC_BUTTON_IDS[name]))
             except Exception:
                 return False
-        if self.joystick is not None:
-            try:
-                n = self.joystick.get_numbuttons()
-                return any(idx < n and self.joystick.get_button(idx)
-                           for idx in LEGACY_BUTTON_INDEXES.get(name, ()))
-            except Exception:
-                return False
-        return False
+        try:
+            n = self.joystick.get_numbuttons()
+            return any(idx < n and self.joystick.get_button(idx)
+                       for idx in LEGACY_BUTTON_INDEXES.get(name, ()))
+        except Exception:
+            return False
+
+    def button_name_for_index(self, button_index):
+        """Retrouve le nom logique (a/b/x/y/start/back/leftshoulder/...)
+        correspondant à un numéro de bouton brut reçu par évènement."""
+        if self.es_buttons is not None:
+            # Un même index peut porter plusieurs noms ES pour un même bouton
+            # physique (ex. id=6 est à la fois "select" ET "hotkey" sur cette
+            # manette) : on ne s'arrête que sur un nom qu'on sait traduire,
+            # sinon on continue de chercher plutôt que de renvoyer None trop tôt.
+            for es_name, idx in self.es_buttons.items():
+                if idx == button_index and es_name in ES_TO_OUR_NAME:
+                    return ES_TO_OUR_NAME[es_name]
+            return None
+        if self.controller is not None:
+            for name, bid in SEMANTIC_BUTTON_IDS.items():
+                if bid == button_index:
+                    return name
+            return None
+        for name, idxs in LEGACY_BUTTON_INDEXES.items():
+            if button_index in idxs:
+                return name
+        return None
 
     def stick_direction(self):
-        """Direction du stick analogique gauche (None si dans la zone morte)."""
+        """Stick analogique gauche = axes 0/1 (lecture directe du joystick brut)."""
         try:
-            if self.controller is not None:
-                x = self.controller.get_axis(pygame.CONTROLLER_AXIS_LEFTX) / 32768.0
-                y = self.controller.get_axis(pygame.CONTROLLER_AXIS_LEFTY) / 32768.0
-            elif self.joystick is not None:
-                x = self.joystick.get_axis(0)
-                y = self.joystick.get_axis(1)
-            else:
-                return None
+            x = self.joystick.get_axis(0)
+            y = self.joystick.get_axis(1)
         except Exception:
             return None
         if y <= -AXIS_DEADZONE:
@@ -103,53 +189,50 @@ class Pad:
         return None
 
     def direction(self):
-        """Une seule direction par manette et par frame (D-pad, puis Select/Start
-        pour le haut/bas, puis stick analogique)."""
-        if self.button('dpad_up'):
+        """D-pad (hat standard SDL id=0), puis stick analogique en repli.
+        Select/Start ne sont PAS des directions : ce sont des boutons de
+        validation/retour (voir _semantic_name_to_action)."""
+        try:
+            hat = self.joystick.get_hat(0)
+        except Exception:
+            hat = (0, 0)
+        if hat == (0, 1):
             return 'up'
-        if self.button('dpad_down'):
+        if hat == (0, -1):
             return 'down'
-        if self.button('dpad_left'):
+        if hat == (-1, 0):
             return 'left'
-        if self.button('dpad_right'):
+        if hat == (1, 0):
             return 'right'
-        if self.button('back'):     # Select = haut
-            return 'up'
-        if self.button('start'):    # Start = bas
-            return 'down'
         return self.stick_direction()
 
 
 def init_pads(max_pads=4):
     """Énumère les manettes en les dédoublonnant par GUID : certaines manettes
     (notamment des pads Xbox sans fil) apparaissent sous DEUX index/périphériques
-    différents pour un seul objet physique, ce qui, sans dédoublonnage, peut faire
-    lire un bouton comme "appuyé" sur le second index fantôme alors que personne
-    n'y touche (observé : sortie immédiate et silencieuse du jeu au lancement,
-    provoquée par une fausse pression sur B)."""
+    différents pour un seul objet physique. Sans dédoublonnage, le second index
+    fantôme peut faire lire un bouton comme "appuyé" alors que personne n'y
+    touche (observé : fermeture immédiate et silencieuse du jeu au lancement)."""
     pygame.joystick.init()
     count = pygame.joystick.get_count()
-    print('[pse2527] init_pads: {} périphérique(s) joystick, sdl2_controller={}'.format(
-        count, HAVE_SDL2_CONTROLLER), flush=True)
-    chosen = {}  # guid -> (index, reconnu_par_sdl)
+    print('[pse2527] init_pads: {} périphérique(s) joystick, {} mapping(s) ES connu(s)'.format(
+        count, len(ES_BUTTON_MAPPINGS)), flush=True)
+    chosen = {}  # guid -> (index, priorité) ; priorité : 2=es_input.cfg, 1=sdl, 0=inconnu
     for i in range(count):
         try:
             j = pygame.joystick.Joystick(i)
             j.init()
             guid = j.get_guid()
-            name = j.get_name()
-        except Exception as e:
+        except Exception:
             guid = 'inconnu-{}'.format(i)
-            name = '?'
-        recognized = HAVE_SDL2_CONTROLLER and sdl2ctrl.is_controller(i)
-        print('[pse2527] init_pads:   index={} nom="{}" guid={} reconnu_sdl={}'.format(
-            i, name, guid, recognized), flush=True)
-        if guid in chosen:
-            prev_index, prev_recognized = chosen[guid]
-            if recognized and not prev_recognized:
-                chosen[guid] = (i, recognized)
-            continue
-        chosen[guid] = (i, recognized)
+        if guid in ES_BUTTON_MAPPINGS:
+            priority = 2
+        elif HAVE_SDL2_CONTROLLER and sdl2ctrl.is_controller(i):
+            priority = 1
+        else:
+            priority = 0
+        if guid not in chosen or priority > chosen[guid][1]:
+            chosen[guid] = (i, priority)
     indexes = [idx for idx, _ in chosen.values()][:max_pads]
     print('[pse2527] init_pads: index retenus après dédoublonnage = {}'.format(indexes), flush=True)
     return [Pad(i) for i in indexes]
@@ -163,23 +246,9 @@ def current_direction(pads):
     return None
 
 
-FACE_BUTTON_NAMES = ('a', 'b', 'x', 'y')
-
-
-def pressed_face_button(pads):
-    """Renvoie 'face_a'|'face_b'|'face_x'|'face_y' si l'un de ces boutons vient
-    d'être identifié comme actif sur une manette (utilisé en secours ; la
-    détection principale se fait par évènement JOYBUTTONDOWN/CONTROLLERBUTTONDOWN)."""
-    for pad in pads:
-        for name in FACE_BUTTON_NAMES:
-            if pad.button(name):
-                return 'face_' + name
-    return None
-
-
 def translate_event(event, pads):
-    """Renvoie une action logique pour un évènement ponctuel (pas les directions,
-    gérées par sondage continu via current_direction/RepeatState)."""
+    """Renvoie une action logique pour un évènement ponctuel (pas les
+    directions, gérées par sondage continu via current_direction/RepeatState)."""
     if event.type == pygame.QUIT:
         return 'quit'
 
@@ -198,31 +267,17 @@ def translate_event(event, pads):
             return 'face_y'
         return None
 
-    if event.type == pygame.CONTROLLERBUTTONDOWN:
-        return _button_id_to_action(event.button)
-
-    if event.type == pygame.JOYBUTTONDOWN:
-        # Repli uniquement pour les manettes NON reconnues par SDL (pad.controller
-        # est alors None pour cet index) : sinon l'évènement CONTROLLERBUTTONDOWN
-        # équivalent est déjà émis par SDL et on éviterait un double déclenchement.
+    # Sur cette manette (non reconnue par la base SDL), seuls les évènements
+    # joystick "bruts" sont émis, pas les CONTROLLERBUTTONDOWN sémantiques ;
+    # on gère donc les deux types d'évènements par le même chemin, en
+    # retrouvant le nom logique via la manette concernée.
+    if event.type in (pygame.JOYBUTTONDOWN, pygame.CONTROLLERBUTTONDOWN):
         for pad in pads:
-            if pad.joystick is not None and pad.controller is None:
-                for name, idxs in LEGACY_BUTTON_INDEXES.items():
-                    if event.button in idxs:
-                        if name in ('dpad_up', 'dpad_down', 'dpad_left', 'dpad_right'):
-                            return None  # géré par le sondage continu
-                        return _semantic_name_to_action(name)
+            name = pad.button_name_for_index(event.button)
+            if name:
+                return _semantic_name_to_action(name)
         return None
 
-    return None
-
-
-def _button_id_to_action(button_id):
-    for name, bid in SEMANTIC_BUTTON_IDS.items():
-        if bid == button_id:
-            if name in ('dpad_up', 'dpad_down', 'dpad_left', 'dpad_right', 'back', 'start'):
-                return None  # directions : gérées par le sondage continu (current_direction)
-            return _semantic_name_to_action(name)
     return None
 
 
@@ -233,11 +288,15 @@ def _semantic_name_to_action(name):
         return 'shoulder_l'
     if name == 'rightshoulder':
         return 'shoulder_r'
+    if name == 'start':   # Start = validation, comme le bouton A
+        return 'action'
+    if name == 'back':    # Select = retour arrière, comme le bouton B
+        return 'back'
     return None
 
 
 class RepeatState:
-    """Gère la répétition d'une direction maintenue (D-pad / Select-Start / stick)."""
+    """Gère la répétition d'une direction maintenue (D-pad / stick)."""
 
     def __init__(self):
         self.held = None
