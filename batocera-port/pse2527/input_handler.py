@@ -121,9 +121,31 @@ class Pad:
 
 
 def init_pads(max_pads=4):
+    """Énumère les manettes en les dédoublonnant par GUID : certaines manettes
+    (notamment des pads Xbox sans fil) apparaissent sous DEUX index/périphériques
+    différents pour un seul objet physique, ce qui, sans dédoublonnage, peut faire
+    lire un bouton comme "appuyé" sur le second index fantôme alors que personne
+    n'y touche (observé : sortie immédiate et silencieuse du jeu au lancement,
+    provoquée par une fausse pression sur B)."""
     pygame.joystick.init()
-    count = min(pygame.joystick.get_count(), max_pads)
-    return [Pad(i) for i in range(count)]
+    count = pygame.joystick.get_count()
+    chosen = {}  # guid -> (index, reconnu_par_sdl)
+    for i in range(count):
+        try:
+            j = pygame.joystick.Joystick(i)
+            j.init()
+            guid = j.get_guid()
+        except Exception:
+            guid = 'inconnu-{}'.format(i)
+        recognized = HAVE_SDL2_CONTROLLER and sdl2ctrl.is_controller(i)
+        if guid in chosen:
+            prev_index, prev_recognized = chosen[guid]
+            if recognized and not prev_recognized:
+                chosen[guid] = (i, recognized)
+            continue
+        chosen[guid] = (i, recognized)
+    indexes = [idx for idx, _ in chosen.values()][:max_pads]
+    return [Pad(i) for i in indexes]
 
 
 def current_direction(pads):

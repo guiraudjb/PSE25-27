@@ -70,29 +70,42 @@ class App:
 
         self.state = STATE_SERIES
         self.running = True
+        # Ignore les entrées des toutes premières frames : certaines manettes
+        # (notamment sans fil) rejouent l'état de leurs boutons lors de leur
+        # détection initiale, ce qui peut simuler une pression fantôme au tout
+        # lancement du jeu (observé : fermeture immédiate et silencieuse).
+        self.startup_grace = 20
 
     # ------------------------------------------------------------------
     def run(self):
-        while self.running:
-            self.handle_input()
-            self.draw()
-            pygame.display.flip()
-            self.clock.tick(30)
+        try:
+            while self.running:
+                self.handle_input()
+                self.draw()
+                pygame.display.flip()
+                self.clock.tick(30)
+        except Exception:
+            import traceback
+            traceback.print_exc()
         pygame.quit()
 
     # ------------------------------------------------------------------
     def handle_input(self):
+        ignore_actions = self.startup_grace > 0
+        if self.startup_grace > 0:
+            self.startup_grace -= 1
+
         for event in pygame.event.get():
             action = inp.translate_event(event, self.pads)
             if action == 'quit':
                 self.running = False
                 return
-            if action:
+            if action and not ignore_actions:
                 self.dispatch(action)
 
         # répétition des directions maintenues (D-pad / Select-Start / stick)
         direction = self.repeat.poll(self.pads)
-        if direction:
+        if direction and not ignore_actions:
             self.dispatch(direction)
 
     def dispatch(self, action):
