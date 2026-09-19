@@ -81,6 +81,28 @@ def truncate_to_width(font, text, max_width):
     return result
 
 
+TTS_LABELS = {
+    'generating': 'VOIX : préparation…',
+    'playing': 'VOIX : lecture…',
+    'error': 'VOIX : erreur',
+}
+
+
+def draw_tts_indicator(surface, fonts, screen_w, status, header_h):
+    """Petit badge dans l'en-tête, en haut à droite, indiquant l'état de la
+    synthèse vocale. Silencieux (rien affiché) si inactif ou indisponible,
+    pour ne pas encombrer l'écran en dehors d'une lecture demandée."""
+    label = TTS_LABELS.get(status)
+    if not label:
+        return
+    rect = fonts.small.get_rect(label)
+    pad = 10
+    badge_h = rect.height + 2 * pad
+    badge = pygame.Rect(screen_w - rect.width - 2 * pad - 16, (header_h - badge_h) // 2, rect.width + 2 * pad, badge_h)
+    pygame.draw.rect(surface, COLOR_ACCENT, badge, border_radius=10)
+    fonts.small.render_to(surface, (badge.x + pad, badge.y + pad), label, COLOR_WHITE)
+
+
 def draw_button_hints(surface, fonts, screen_w, screen_h, hints):
     """hints: liste de tuples (bouton, libellé), ex: [('A', 'Valider'), ('B', 'Retour')]."""
     bar_h = 48

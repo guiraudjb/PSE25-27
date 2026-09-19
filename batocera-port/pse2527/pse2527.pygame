@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import data_loader as dl
 import input_handler as inp
 import ui
+import tts
 
 WINDOW_SURFACE = pygame.HWSURFACE | pygame.DOUBLEBUF
 MAX_PADS = 4
@@ -63,6 +64,17 @@ class App:
         log('init: polices OK')
         self.clock = pygame.time.Clock()
         self.repeat = inp.RepeatState()
+
+        try:
+            pygame.mixer.init()
+            self.tts = tts.TTSManager()
+        except Exception:
+            self.tts = tts.TTSManager.__new__(tts.TTSManager)
+            self.tts.enabled = False
+            self.tts.status = tts.STATUS_UNAVAILABLE
+            self.tts.channel = None
+        log('init: TTS {} (voix {})'.format(
+            'disponible' if self.tts.enabled else 'indisponible', tts.VOICE_MODEL))
 
         self.series = dl.load_series()
         log('init: {} séries chargées'.format(len(self.series)))
@@ -221,6 +233,7 @@ class App:
         self.state = STATE_QUIZ_ASK
 
     def load_quiz_question(self):
+        self.tts.stop()
         self.quiz_selected = 0
         # Tant que la croix directionnelle n'a pas servi sur CETTE question,
         # une lettre pressée saute directement au choix correspondant (mode
@@ -246,8 +259,20 @@ class App:
                     self.confirm_quiz_choice(idx)
         elif action == 'action':
             self.confirm_quiz_choice(self.quiz_selected)
-        elif action in ('shoulder_l', 'shoulder_r', 'back'):
+        elif action == 'shoulder_r':
+            self.speak_quiz_question(q)
+        elif action in ('shoulder_l', 'back'):
+            self.tts.stop()
             self.state = STATE_MODE
+
+    def speak_quiz_question(self, q):
+        letters = ('A', 'B', 'C', 'D')
+        parts = [q['question']]
+        for letter, choix in zip(letters, q['choix']):
+            parts.append('Réponse {}. {}'.format(letter, choix))
+        text = ' '.join(parts)
+        key = '{}_quiz_{}_ask'.format(self.current_module['base'], q['id'])
+        self.tts.request(text, key)
 
     def confirm_quiz_choice(self, chosen):
         q = self.quiz_questions[self.quiz_index]
@@ -258,7 +283,13 @@ class App:
         self.state = STATE_QUIZ_FEEDBACK
 
     def handle_quiz_feedback(self, action):
-        if action == 'action' or action == 'back':
+        if action == 'shoulder_r':
+            q = self.quiz_questions[self.quiz_index]
+            prefix = 'Bonne réponse. ' if self.quiz_last_correct else 'Mauvaise réponse. '
+            text = prefix + q['explication']
+            key = '{}_quiz_{}_feedback'.format(self.current_module['base'], q['id'])
+            self.tts.request(text, key)
+        elif action == 'action' or action == 'back':
             self.quiz_index += 1
             if self.quiz_index >= len(self.quiz_questions):
                 self.state = STATE_QUIZ_END
@@ -273,6 +304,7 @@ class App:
     # ------------------------------------------------------------------
     # FLASHCARDS
     def start_flash(self):
+        self.tts.stop()
         self.flash_cards = dl.load_flashcards(self.current_module['base'])
         self.flash_index = 0
         self.flash_flipped = False
@@ -288,11 +320,23 @@ class App:
         elif action == 'right':
             self.flash_index = (self.flash_index + 1) % len(self.flash_cards)
             self.flash_flipped = False
+            self.tts.stop()
         elif action == 'left':
             self.flash_index = (self.flash_index - 1) % len(self.flash_cards)
             self.flash_flipped = False
+            self.tts.stop()
+        elif action == 'shoulder_r':
+            self.speak_flash_card()
         elif action == 'back':
+            self.tts.stop()
             self.state = STATE_MODE
+
+    def speak_flash_card(self):
+        card = self.flash_cards[self.flash_index]
+        face = 'verso' if self.flash_flipped else 'recto'
+        text = card['verso'] if self.flash_flipped else card['recto']
+        key = '{}_flash_{}_{}'.format(self.current_module['base'], self.flash_index, face)
+        self.tts.request(text, key)
 
     # ------------------------------------------------------------------
     # DRAW
@@ -355,8 +399,9 @@ class App:
         choices_bottom = self.screen_h - hint_h - 16
         ui.draw_choice_rows(self.screen, self.fonts, self.screen_w, choices_top, choices_bottom,
                              q['choix'], self.quiz_selected)
+        ui.draw_tts_indicator(self.screen, self.fonts, self.screen_w, self.tts.status, self.HEADER_H)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A/B/C/D', 'Répondre'), ('▲▼', 'Naviguer'), ('L1', 'Abandonner')])
+                              [('A/B/C/D', 'Répondre'), ('▲▼', 'Naviguer'), ('R1', 'Écouter'), ('L1', 'Abandonner')])
 
     def draw_quiz_feedback(self):
         q = self.quiz_questions[self.quiz_index]
@@ -377,8 +422,9 @@ class App:
         expl_top = choices_bottom + 24
         ui.draw_text(self.screen, self.fonts.medium, q['explication'], (margin, expl_top),
                      color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
+        ui.draw_tts_indicator(self.screen, self.fonts, self.screen_w, self.tts.status, self.HEADER_H)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A/Start', 'Continuer')])
+                              [('A/Start', 'Continuer'), ('R1', 'Écouter')])
 
     def draw_quiz_end(self):
         self.draw_header("RÉSULTAT")
@@ -413,8 +459,9 @@ class App:
         counter_rect = self.fonts.small.get_rect(counter)
         self.fonts.small.render_to(self.screen, (self.screen_w // 2 - counter_rect.width // 2, card_rect.bottom + 10),
                                     counter, ui.COLOR_TEXT)
+        ui.draw_tts_indicator(self.screen, self.fonts, self.screen_w, self.tts.status, self.HEADER_H)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A/Start', 'Retourner'), ('◄►', 'Carte suiv./préc.'), ('B/Select', 'Retour')])
+                              [('A/Start', 'Retourner'), ('◄►', 'Carte suiv./préc.'), ('R1', 'Écouter'), ('B/Select', 'Retour')])
 
 
 def main():

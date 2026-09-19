@@ -53,7 +53,7 @@ def load_quiz(base, max_questions=15):
     if not os.path.exists(path):
         return questions
     with open(path, encoding='utf-8') as f:
-        for row in csv.reader(f, delimiter=';'):
+        for row_index, row in enumerate(csv.reader(f, delimiter=';')):
             if len(row) < 7:
                 continue
             question, c1, c2, c3, c4, idx, expl = row[0], row[1], row[2], row[3], row[4], row[5], row[6]
@@ -62,6 +62,7 @@ def load_quiz(base, max_questions=15):
             except ValueError:
                 continue
             questions.append({
+                'id': row_index,  # stable (position dans le CSV, avant mélange) : sert de clé de cache TTS
                 'question': question,
                 'choix': [c1, c2, c3, c4],
                 'correct': correct,
