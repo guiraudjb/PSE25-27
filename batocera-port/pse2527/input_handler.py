@@ -227,34 +227,21 @@ class Pad:
 
 
 def init_pads(max_pads=4):
-    """Énumère les manettes en les dédoublonnant par GUID : certaines manettes
-    (notamment des pads Xbox sans fil) apparaissent sous DEUX index/périphériques
-    différents pour un seul objet physique. Sans dédoublonnage, le second index
-    fantôme peut faire lire un bouton comme "appuyé" alors que personne n'y
-    touche (observé : fermeture immédiate et silencieuse du jeu au lancement)."""
+    """Énumère toutes les manettes détectées (une par index joystick).
+
+    Note historique : deux manettes Xbox 360 (ou clones) physiquement
+    distinctes partagent souvent le MÊME GUID, ce GUID étant dérivé du
+    vendor/product ID et non d'un numéro de série (les pads Xbox 360 n'en
+    exposent pas). Un ancien dédoublonnage par GUID a été retiré ici car il
+    écartait à tort une seconde manette pourtant bien physiquement connectée
+    et fonctionnelle (constaté : sur deux manettes branchées sur des ports USB
+    différents, une seule permettait de jouer). Le mapping de boutons
+    (es_input.cfg / VERIFIED_FACE_BUTTONS), lui, reste indexé par GUID et
+    s'applique donc correctement aux deux, puisque ce sont le même modèle."""
     pygame.joystick.init()
-    count = pygame.joystick.get_count()
-    print('[pse2527] init_pads: {} périphérique(s) joystick, {} mapping(s) ES connu(s)'.format(
-        count, len(ES_BUTTON_MAPPINGS)), flush=True)
-    chosen = {}  # guid -> (index, priorité) ; priorité : 2=es_input.cfg, 1=sdl, 0=inconnu
-    for i in range(count):
-        try:
-            j = pygame.joystick.Joystick(i)
-            j.init()
-            guid = j.get_guid()
-        except Exception:
-            guid = 'inconnu-{}'.format(i)
-        if guid in ES_BUTTON_MAPPINGS or guid in VERIFIED_FACE_BUTTONS:
-            priority = 2
-        elif HAVE_SDL2_CONTROLLER and sdl2ctrl.is_controller(i):
-            priority = 1
-        else:
-            priority = 0
-        if guid not in chosen or priority > chosen[guid][1]:
-            chosen[guid] = (i, priority)
-    indexes = [idx for idx, _ in chosen.values()][:max_pads]
-    print('[pse2527] init_pads: index retenus après dédoublonnage = {}'.format(indexes), flush=True)
-    return [Pad(i) for i in indexes]
+    count = min(pygame.joystick.get_count(), max_pads)
+    print('[pse2527] init_pads: {} périphérique(s) joystick détecté(s)'.format(count), flush=True)
+    return [Pad(i) for i in range(count)]
 
 
 def current_direction(pads):
