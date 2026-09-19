@@ -96,14 +96,14 @@ def draw_button_hints(surface, fonts, screen_w, screen_h, hints):
 class ListMenu:
     """Menu vertical navigable au D-pad, avec défilement si la liste est longue."""
 
-    def __init__(self, items, screen_w, screen_h, top=140, item_height=54, visible_count=None):
+    def __init__(self, items, screen_w, screen_h, top=100, item_height=64, visible_count=None):
         self.items = items  # liste de dicts avec au moins 'label'
         self.selected = 0
         self.screen_w = screen_w
         self.screen_h = screen_h
         self.top = top
         self.item_height = item_height
-        self.visible_count = visible_count or max(1, (screen_h - top - 70) // item_height)
+        self.visible_count = visible_count or max(1, (screen_h - top - 56) // item_height)
         self.scroll = 0
 
     def move(self, direction):
@@ -155,3 +155,59 @@ class ListMenu:
             fonts.small.render_to(surface, (self.screen_w // 2 - 10, self.top - 30), "▲", COLOR_PRIMARY)
         if self.scroll + self.visible_count < len(self.items):
             fonts.small.render_to(surface, (self.screen_w // 2 - 10, self.top + self.visible_count * self.item_height + 4), "▼", COLOR_PRIMARY)
+
+
+LETTER_BADGES = ('A', 'B', 'X', 'Y')
+
+
+def draw_choice_rows(surface, fonts, screen_w, top, bottom, choices, selected_index,
+                      correct_index=None, chosen_index=None):
+    """Dessine les 4 choix du quiz en pavés larges avec une pastille A/B/X/Y à
+    gauche (bouton physique correspondant), en occupant tout l'espace vertical
+    disponible entre `top` et `bottom`.
+
+    - Avant réponse (correct_index is None) : le choix `selected_index` (repli
+      D-pad) est simplement surligné.
+    - Après réponse : le bon choix est en vert, le choix donné faux en rouge.
+    """
+    margin = 60
+    gap = 16
+    count = len(choices)
+    total_gap = gap * (count - 1)
+    item_h = (bottom - top - total_gap) // count
+    badge_size = min(item_h - 16, 64)
+
+    for i, label in enumerate(choices):
+        y = top + i * (item_h + gap)
+        rect = pygame.Rect(margin, y, screen_w - 2 * margin, item_h)
+
+        if correct_index is not None:
+            if i == correct_index:
+                bg, fg = COLOR_SUCCESS, COLOR_WHITE
+            elif i == chosen_index:
+                bg, fg = COLOR_ERROR, COLOR_WHITE
+            else:
+                bg, fg = COLOR_PANEL, COLOR_TEXT
+        else:
+            if i == selected_index:
+                bg, fg = COLOR_SELECTED_BG, COLOR_SELECTED_TEXT
+            else:
+                bg, fg = COLOR_PANEL, COLOR_TEXT
+
+        pygame.draw.rect(surface, bg, rect, border_radius=14)
+        if bg == COLOR_PANEL:
+            pygame.draw.rect(surface, (221, 221, 221), rect, width=2, border_radius=14)
+
+        badge_rect = pygame.Rect(rect.x + 16, rect.y + (rect.height - badge_size) // 2, badge_size, badge_size)
+        badge_color = fg if bg != COLOR_PANEL else COLOR_PRIMARY
+        pygame.draw.rect(surface, badge_color, badge_rect, width=3, border_radius=10)
+        letter = LETTER_BADGES[i] if i < len(LETTER_BADGES) else str(i + 1)
+        letter_rect = fonts.large.get_rect(letter)
+        fonts.large.render_to(surface, (badge_rect.centerx - letter_rect.width // 2,
+                                         badge_rect.centery - letter_rect.height // 2), letter, badge_color)
+
+        text_x = badge_rect.right + 24
+        max_w = rect.right - text_x - 20
+        text = truncate_to_width(fonts.medium, label, max_w)
+        text_rect = fonts.medium.get_rect(text)
+        fonts.medium.render_to(surface, (text_x, rect.centery - text_rect.height // 2), text, fg)

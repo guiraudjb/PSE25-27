@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # PSE25-27 Revision - jeu de revision (Quiz + Flashcards) pour Batocera / systeme pygame
-# A la manette : D-pad/stick pour naviguer, A pour valider, B pour revenir en arriere.
+# A la manette : D-pad/Select-Start/stick pour naviguer, A pour valider, B pour revenir
+# en arriere, et en quiz : A/B/X/Y pour repondre directement au choix correspondant.
 import os
 import sys
 import pygame
@@ -12,8 +13,14 @@ import input_handler as inp
 import ui
 
 WINDOW_SURFACE = pygame.HWSURFACE | pygame.DOUBLEBUF
-MAX_JOYSTICKS = 4
+MAX_PADS = 4
 QUIZ_QUESTION_COUNT = 15
+
+# Actions issues des boutons de face A/B/X/Y : dans la plupart des ecrans elles
+# equivalent a 'action' (A, X, Y) / 'back' (B) ; en plein quiz elles servent
+# directement a choisir la reponse (voir handle_quiz_ask).
+FACE_TO_GENERIC = {'face_a': 'action', 'face_b': 'back', 'face_x': 'action', 'face_y': 'action'}
+FACE_TO_CHOICE_INDEX = {'face_a': 0, 'face_b': 1, 'face_x': 2, 'face_y': 3}
 
 STATE_SERIES = 'series'
 STATE_MODULE = 'module'
@@ -27,12 +34,7 @@ STATE_FLASH = 'flash'
 class App:
     def __init__(self):
         pygame.init()
-        pygame.joystick.init()
-        self.joysticks = [None] * MAX_JOYSTICKS
-        for i in range(min(pygame.joystick.get_count(), MAX_JOYSTICKS)):
-            joy = pygame.joystick.Joystick(i)
-            joy.init()
-            self.joysticks[i] = joy
+        self.pads = inp.init_pads(MAX_PADS)
 
         info = pygame.display.Info()
         self.screen_w, self.screen_h = info.current_w, info.current_h
@@ -59,7 +61,8 @@ class App:
         self.quiz_questions = []
         self.quiz_index = 0
         self.quiz_score = 0
-        self.quiz_choice_menu = None
+        self.quiz_selected = 0
+        self.quiz_chosen = None
         self.quiz_last_correct = None
         self.flash_cards = []
         self.flash_index = 0
@@ -80,19 +83,24 @@ class App:
     # ------------------------------------------------------------------
     def handle_input(self):
         for event in pygame.event.get():
-            action, repeatable = inp.translate_event(event)
+            action = inp.translate_event(event, self.pads)
             if action == 'quit':
                 self.running = False
                 return
             if action:
                 self.dispatch(action)
 
-        # répétition des directions maintenues (stick analogique)
-        direction = self.repeat.poll(self.joysticks)
+        # répétition des directions maintenues (D-pad / Select-Start / stick)
+        direction = self.repeat.poll(self.pads)
         if direction:
             self.dispatch(direction)
 
     def dispatch(self, action):
+        # Sur l'écran de quiz, A/B/X/Y répondent directement (voir handle_quiz_ask) ;
+        # partout ailleurs ils équivalent simplement à action/back.
+        if self.state != STATE_QUIZ_ASK:
+            action = FACE_TO_GENERIC.get(action, action)
+
         if self.state == STATE_SERIES:
             self.handle_series(action)
         elif self.state == STATE_MODULE:
@@ -142,7 +150,7 @@ class App:
     def enter_mode_menu(self):
         self.mode_menu = ui.ListMenu(
             [{'label': 'QUIZ', 'mode': 'quiz'}, {'label': 'FLASHCARDS', 'mode': 'flash'}],
-            self.screen_w, self.screen_h, top=260, item_height=70)
+            self.screen_w, self.screen_h, top=140, item_height=90)
         self.state = STATE_MODE
 
     # ------------------------------------------------------------------
@@ -172,23 +180,29 @@ class App:
         self.state = STATE_QUIZ_ASK
 
     def load_quiz_question(self):
-        q = self.quiz_questions[self.quiz_index]
-        self.quiz_choice_menu = ui.ListMenu(
-            [{'label': c} for c in q['choix']],
-            self.screen_w, self.screen_h, top=int(self.screen_h * 0.5), item_height=60)
+        self.quiz_selected = 0
 
     def handle_quiz_ask(self, action):
+        q = self.quiz_questions[self.quiz_index]
         if action in ('up', 'down'):
-            self.quiz_choice_menu.move(action)
+            n = len(q['choix'])
+            self.quiz_selected = (self.quiz_selected + (1 if action == 'down' else -1)) % n
+        elif action in FACE_TO_CHOICE_INDEX:
+            idx = FACE_TO_CHOICE_INDEX[action]
+            if idx < len(q['choix']):
+                self.confirm_quiz_choice(idx)
         elif action == 'action':
-            q = self.quiz_questions[self.quiz_index]
-            chosen = self.quiz_choice_menu.selected
-            self.quiz_last_correct = (chosen == q['correct'])
-            if self.quiz_last_correct:
-                self.quiz_score += 1
-            self.state = STATE_QUIZ_FEEDBACK
-        elif action == 'back':
+            self.confirm_quiz_choice(self.quiz_selected)
+        elif action in ('shoulder_l', 'shoulder_r', 'back'):
             self.state = STATE_MODE
+
+    def confirm_quiz_choice(self, chosen):
+        q = self.quiz_questions[self.quiz_index]
+        self.quiz_chosen = chosen
+        self.quiz_last_correct = (chosen == q['correct'])
+        if self.quiz_last_correct:
+            self.quiz_score += 1
+        self.state = STATE_QUIZ_FEEDBACK
 
     def handle_quiz_feedback(self, action):
         if action == 'action' or action == 'back':
@@ -246,40 +260,50 @@ class App:
         elif self.state == STATE_FLASH:
             self.draw_flash()
 
+    HEADER_H = 70
+
     def draw_header(self, title):
-        pygame.draw.rect(self.screen, ui.COLOR_PRIMARY, (0, 0, self.screen_w, 90))
+        pygame.draw.rect(self.screen, ui.COLOR_PRIMARY, (0, 0, self.screen_w, self.HEADER_H))
         title = ui.truncate_to_width(self.fonts.title, title, self.screen_w - 80)
-        self.fonts.title.render_to(self.screen, (40, 18), title, ui.COLOR_WHITE)
+        title_h = self.fonts.title.get_sized_height()
+        self.fonts.title.render_to(self.screen, (40, (self.HEADER_H - title_h) // 2), title, ui.COLOR_WHITE)
+
+    NAV_HINT = ('▲▼/Select/Start', 'Naviguer')
 
     def draw_series(self):
         self.draw_header("PSE25-27 — RÉVISION")
         self.series_menu.draw(self.screen, self.fonts)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A', 'Choisir'), ('B', 'Quitter')])
+                              [self.NAV_HINT, ('A', 'Choisir'), ('B', 'Quitter')])
 
     def draw_module(self):
         code = self.series_menu.current()['code']
         self.draw_header("SÉRIE {}".format(code))
         self.module_menu.draw(self.screen, self.fonts, badge_key='badge')
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A', 'Choisir'), ('B', 'Retour')])
+                              [self.NAV_HINT, ('A', 'Choisir'), ('B', 'Retour')])
 
     def draw_mode(self):
         self.draw_header(self.current_module['label'])
         self.mode_menu.draw(self.screen, self.fonts)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A', 'Choisir'), ('B', 'Retour')])
+                              [self.NAV_HINT, ('A', 'Choisir'), ('B', 'Retour')])
 
     def draw_quiz_ask(self):
         q = self.quiz_questions[self.quiz_index]
         self.draw_header("QUIZ  —  {}/{}  —  Score {}".format(
             self.quiz_index + 1, len(self.quiz_questions), self.quiz_score))
         margin = 60
-        ui.draw_text(self.screen, self.fonts.medium, q['question'], (margin, 120),
-                     color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
-        self.quiz_choice_menu.draw(self.screen, self.fonts)
+        question_top = self.HEADER_H + 20
+        question_h = ui.draw_text(self.screen, self.fonts.large, q['question'], (margin, question_top),
+                                   color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
+        hint_h = 48
+        choices_top = question_top + question_h + 24
+        choices_bottom = self.screen_h - hint_h - 16
+        ui.draw_choice_rows(self.screen, self.fonts, self.screen_w, choices_top, choices_bottom,
+                             q['choix'], self.quiz_selected)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A', 'Valider'), ('B', 'Abandonner')])
+                              [('A/B/X/Y', 'Répondre'), ('L1', 'Abandonner')])
 
     def draw_quiz_feedback(self):
         q = self.quiz_questions[self.quiz_index]
@@ -288,11 +312,17 @@ class App:
         margin = 60
         result_text = "BONNE RÉPONSE !" if self.quiz_last_correct else "MAUVAISE RÉPONSE"
         result_color = ui.COLOR_SUCCESS if self.quiz_last_correct else ui.COLOR_ERROR
-        self.fonts.large.render_to(self.screen, (margin, 130), result_text, result_color)
-        correct_label = q['choix'][q['correct']]
-        ui.draw_text(self.screen, self.fonts.medium, "Réponse : " + correct_label, (margin, 190),
-                     color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
-        ui.draw_text(self.screen, self.fonts.small, q['explication'], (margin, 260),
+        result_top = self.HEADER_H + 16
+        self.fonts.large.render_to(self.screen, (margin, result_top), result_text, result_color)
+
+        choices_top = result_top + self.fonts.large.get_sized_height() + 20
+        choices_bottom = choices_top + int(self.screen_h * 0.30)
+        ui.draw_choice_rows(self.screen, self.fonts, self.screen_w, choices_top, choices_bottom,
+                             q['choix'], self.quiz_selected,
+                             correct_index=q['correct'], chosen_index=self.quiz_chosen)
+
+        expl_top = choices_bottom + 24
+        ui.draw_text(self.screen, self.fonts.medium, q['explication'], (margin, expl_top),
                      color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
                               [('A', 'Continuer')])
@@ -309,25 +339,29 @@ class App:
     def draw_flash(self):
         self.draw_header("FLASHCARDS  —  {}".format(self.current_module['label']))
         if not self.flash_cards:
-            self.fonts.medium.render_to(self.screen, (60, 160), "Aucune flashcard pour ce module.", ui.COLOR_TEXT)
+            self.fonts.medium.render_to(self.screen, (60, self.HEADER_H + 40), "Aucune flashcard pour ce module.", ui.COLOR_TEXT)
             ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h, [('B', 'Retour')])
             return
         card = self.flash_cards[self.flash_index]
-        margin = 100
-        card_rect = pygame.Rect(margin, 140, self.screen_w - 2 * margin, self.screen_h - 280)
+        margin = 40
+        hint_h = 48
+        counter_h = 40
+        top = self.HEADER_H + 14
+        bottom = self.screen_h - hint_h - counter_h - 14
+        card_rect = pygame.Rect(margin, top, self.screen_w - 2 * margin, bottom - top)
         pygame.draw.rect(self.screen, ui.COLOR_PANEL, card_rect, border_radius=16)
         pygame.draw.rect(self.screen, ui.COLOR_PRIMARY, card_rect, width=3, border_radius=16)
         face_label = "VERSO" if self.flash_flipped else "RECTO"
         text = card['verso'] if self.flash_flipped else card['recto']
-        self.fonts.small.render_to(self.screen, (card_rect.x + 24, card_rect.y + 16), face_label, ui.COLOR_PRIMARY)
-        ui.draw_text(self.screen, self.fonts.medium, text, (card_rect.x + 40, card_rect.y + 70),
+        self.fonts.small.render_to(self.screen, (card_rect.x + 24, card_rect.y + 14), face_label, ui.COLOR_PRIMARY)
+        ui.draw_text(self.screen, self.fonts.large, text, (card_rect.x + 40, card_rect.y + 60),
                      color=ui.COLOR_TEXT, max_width=card_rect.width - 80)
         counter = "{} / {}".format(self.flash_index + 1, len(self.flash_cards))
         counter_rect = self.fonts.small.get_rect(counter)
-        self.fonts.small.render_to(self.screen, (self.screen_w // 2 - counter_rect.width // 2, card_rect.bottom + 16),
+        self.fonts.small.render_to(self.screen, (self.screen_w // 2 - counter_rect.width // 2, card_rect.bottom + 10),
                                     counter, ui.COLOR_TEXT)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A', 'Retourner'), ('◄►', 'Carte suivante/précédente'), ('B', 'Retour')])
+                              [('A', 'Retourner'), ('◄►', 'Carte suiv./préc.'), ('B', 'Retour')])
 
 
 def main():
