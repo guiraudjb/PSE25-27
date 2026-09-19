@@ -285,9 +285,13 @@ class App:
     def handle_quiz_feedback(self, action):
         if action == 'shoulder_r':
             q = self.quiz_questions[self.quiz_index]
+            outcome = 'correct' if self.quiz_last_correct else 'incorrect'
             prefix = 'Bonne réponse. ' if self.quiz_last_correct else 'Mauvaise réponse. '
             text = prefix + q['explication']
-            key = '{}_quiz_{}_feedback'.format(self.current_module['base'], q['id'])
+            # La clé distingue bonne/mauvaise réponse : le texte lu diffère selon
+            # l'issue, un même cache pour les deux ferait entendre la mauvaise
+            # phrase si l'utilisateur répond différemment une autre fois.
+            key = '{}_quiz_{}_feedback_{}'.format(self.current_module['base'], q['id'], outcome)
             self.tts.request(text, key)
         elif action == 'action' or action == 'back':
             self.quiz_index += 1
