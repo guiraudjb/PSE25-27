@@ -1,0 +1,133 @@
+SERVICES RESEAUX : SSH ET NTP SOUS LINUX.
+
+LEXIQUE COMPLET.
+
+      SSH (Secure Shell) : protocole de connexion a distance chiffrant l'integralite des echanges entre le client et le serveur, remplacant les protocoles non securises Telnet, rsh, rlogin et rexec qui transmettent les identifiants en clair.
+
+      Telnet : protocole de connexion a distance obsolete et non securise transmettant les donnees en clair, vulnerable aux attaques par sniffing.
+
+      Sniffing : interception passive des donnees sur un reseau, permettant de capturer les identifiants et mots de passe transmis en clair par des protocoles non securises.
+
+      Cryptographie asymetrique : systeme utilisant une paire de cles (publique et privee) ou ce qui est chiffre avec la cle publique ne peut etre dechiffre qu'avec la cle privee correspondante.
+
+      Cryptographie symetrique : systeme utilisant la meme cle pour chiffrer et dechiffrer les donnees, plus rapide que l'asymetrique et utilise pour les donnees echangees apres l'authentification SSH.
+
+      Cle publique : partie de la paire de cles SSH partagee ouvertement, deposee sur les serveurs autorises.
+
+      Cle privee : partie de la paire de cles SSH gardee secrete sur le client, jamais partagee.
+
+      Cle de session : cle symetrique generee aleatoirement et partagee entre client et serveur pour chiffrer les donnees pendant une session SSH.
+
+      DSA (Digital Signature Algorithm) : algorithme de signature asymetrique utilise dans SSH.
+
+      RSA (Rivest Shamir Adleman) : algorithme asymetrique utilise dans SSH pour la verification, avec des cles de 512, 1024 ou 2048 bits.
+
+      authorized_keys : fichier stocke sur le serveur SSH (~/.ssh/authorized_keys) contenant les cles publiques des clients autorises a se connecter.
+
+      known_hosts : fichier stocke sur le client (~/.ssh/known_hosts) contenant les empreintes des serveurs SSH connus, permettant de detecter les attaques par usurpation (man-in-the-middle).
+
+      SCP (Secure Copy) : outil de copie de fichiers securisee entre deux hotes utilisant SSH pour le chiffrement.
+
+      SFTP (Secure File Transfer Protocol) : protocole de transfert interactif de fichiers chiffre via SSH, equivalent securise de FTP.
+
+      NTP (Network Time Protocol) : protocole de synchronisation horaire permettant de maintenir les horloges de toutes les machines d'un reseau a la meme heure, avec une precision de l'ordre de la microseconde.
+
+      Stratum (strate NTP) : niveau hierarchique d'un serveur NTP indiquant sa distance par rapport a l'horloge de reference (Stratum 0 = horloge atomique, Stratum 1 = directement connecte, Stratum 2 et 3+ = indirectement connectes).
+
+      Horloge atomique : reference temporelle de tres haute precision (Stratum 0), base du temps UTC, dont derivent tous les serveurs NTP de Stratum 1.
+
+      Seconde intercalaire : ajustement du temps coordonne (UTC) pour compenser les variations de la rotation terrestre, gere par les serveurs NTP.
+
+      ntpd : demon Linux de synchronisation NTP, fourni par le paquet ntp, configure dans /etc/ntp.conf.
+
+      ntpq -p : commande affichant les serveurs NTP (peers) avec lesquels le systeme est synchronise, leur stratum et leur offset (ecart de temps).
+
+      timedatectl : commande systemd affichant et permettant de configurer l'etat de la synchronisation horaire sur les systemes Linux modernes.
+
+      iburst : option NTP dans /etc/ntp.conf accelerant la synchronisation initiale en envoyant plusieurs requetes rapprochees.
+
+COURS DETAILLE.
+
+I. SSH : SECURISER LES CONNEXIONS ET LES TRANSFERTS DE FICHIERS.
+
+   A. Pourquoi SSH et principe de fonctionnement.
+
+      Les protocoles traditionnels comme Telnet, rsh, rlogin ou rexec presentent un risque majeur : ils transmettent les identifiants et mots de passe en clair sur le reseau, les rendant vulnerables aux attaques par sniffing (interception des donnees). SSH (Secure Shell) chiffre l'integralite des echanges entre le client et le serveur, rendant les communications securisees et inviolables sauf en cas de faille de mise en oeuvre.
+
+      SSH est devenu le standard de facto pour les connexions a distance sur des serveurs Linux, le transfert de fichiers securise via SCP (Secure Copy) ou SFTP (Secure File Transfer Protocol), et l'execution de commandes distantes sans exposer les donnees sensibles. Le port utilise est le port 22 TCP.
+
+   B. Cryptographie SSH : asymetrique et symetrique.
+
+      SSH combine deux types de cryptographie pour garantir confidentialite et integrite. La cryptographie asymetrique (cle publique/privee) est utilisee lors de l'etablissement de la connexion pour echanger une cle de session. Chaque hote (client et serveur) possede une cle publique (partagee ouvertement) et une cle privee (gardee secrete). Le client chiffre la cle de session avec la cle publique du serveur, et seul le serveur avec sa cle privee peut la dechiffrer.
+
+      La cryptographie symetrique est utilisee apres l'authentification pour chiffrer les donnees echangees : elle est plus rapide que l'asymetrique. Une cle de session generee aleatoirement est partagee entre le client et le serveur pour chiffrer et dechiffrer les communications.
+
+      Les algorithmes supportes sont DSA (Digital Signature Algorithm, rapide pour la signature) et RSA (Rivest Shamir Adleman, rapide pour la verification). Les deux utilisent des cles de 512, 1024 ou 2048 bits, 1024 bits etant un bon compromis securite/performance.
+
+   C. Configuration et utilisation de SSH sous Linux.
+
+      SSH est generalement preinstalle sur les distributions Linux via les paquets openssh-server (serveur) et openssh-client (client). Le fichier de configuration principal du serveur est /etc/ssh/sshd_config. Les directives essentielles sont : Port 22 (port d'ecoute, modifiable pour eviter les scans automatiques), Protocol 2 (SSH v2 uniquement, la v1 etant obsolete et non securisee), RSAAuthentication yes et PubkeyAuthentication yes (authentification par cle publique), PasswordAuthentication no (desactiver l'authentification par mot de passe, recommande), et PermitRootLogin no (empecher la connexion directe en root). Le service est redemarré avec "systemctl restart sshd".
+
+      Pour verifier que le service SSH est actif : "ps -ef | grep sshd" et "ss -tuln | grep 22" (confirme que le port 22 est ouvert).
+
+   D. Authentification par cles SSH.
+
+      L'authentification par cles publiques/privees est plus securisee que l'authentification par mot de passe car elle evite de transmettre des identifiants en clair.
+
+      La configuration se fait en trois etapes. Premiere etape, generer une paire de cles sur le client avec "ssh-keygen -t rsa -b 2048". La cle privee est stockee dans ~/.ssh/id_rsa (a proteger absolument) et la cle publique dans ~/.ssh/id_rsa.pub (a partager). Deuxieme etape, copier la cle publique sur le serveur avec la methode simplifiee "ssh-copy-id user@serveur" ou manuellement en ajoutant le contenu de ~/.ssh/id_rsa.pub dans ~/.ssh/authorized_keys du serveur. Les permissions doivent etre "chmod 700 ~/.ssh" et "chmod 600 ~/.ssh/authorized_keys". Troisieme etape, se connecter avec "ssh user@serveur" qui utilise la cle privee par defaut.
+
+      Lors de la premiere connexion, SSH affiche un avertissement car l'authenticite du serveur ne peut pas etre etablie et demande confirmation. Repondre "yes" ajoute la cle publique du serveur dans ~/.ssh/known_hosts. Ce fichier permet de detecter les attaques par usurpation : si la cle du serveur change de maniere inattendue, SSH refuse la connexion et affiche un avertissement.
+
+      Pour renforcer la securite, il est recommande de desactiver l'authentification par mot de passe en ajoutant "PasswordAuthentication no" et "UsePAM no" dans /etc/ssh/sshd_config, puis de redemarrer le service SSH.
+
+   E. Outils associes : SCP et SFTP.
+
+      SCP (Secure Copy) permet la copie de fichiers de maniere securisee entre deux hotes. La commande "scp fichier user@serveur:/chemin/destination" copie un fichier local vers le serveur. La commande "scp user@serveur:/chemin/fichier ." copie un fichier distant vers le repertoire local courant.
+
+      SFTP (Secure File Transfer Protocol) permet un transfert interactif de fichiers comme FTP mais entierement chiffre. La commande "sftp user@serveur" ouvre une session SFTP interactive.
+
+II. NTP : SYNCHRONISATION HORAIRE SOUS LINUX.
+
+   A. Pourquoi NTP et fonctionnement hierarchique.
+
+      Les horloges systeme des ordinateurs ont tendance a deriver avec le temps en raison de la precision limitee des oscillateurs materiels. Le NTP (Network Time Protocol) permet de synchroniser les horloges de plusieurs machines, d'eviter les derives par ajustement automatique via des serveurs de temps de reference, et d'assurer la coherence des journaux (logs), des transactions et des operations distribuees.
+
+      NTP organise les serveurs en strates (stratum). Le Stratum 0 regroupe les horloges atomiques (exemple : UTC). Le Stratum 1 regroupe les serveurs directement synchronises avec les horloges atomiques (exemples en France : INRIA, CINES). Le Stratum 2 regroupe les serveurs synchronises avec des Stratum 1 (universites, entreprises). Le Stratum 3 et plus regroupe les clients finaux synchronises avec des Stratum 2. Les serveurs NTP peuvent atteindre une precision de l'ordre de la microseconde. Les ajustements incluent parfois des secondes intercalaires pour compenser les variations de la rotation terrestre.
+
+   B. Configuration de NTP sous Linux.
+
+      Le demon NTP sous Linux est ntpd, fourni par le paquet ntp. Installation : "apt install ntp" (Debian/Ubuntu) ou "yum install ntp" (CentOS/RHEL).
+
+      Le fichier de configuration /etc/ntp.conf definit les serveurs NTP avec lesquels le systeme se synchronise (directive "server"). L'option "iburst" accelere la synchronisation initiale en envoyant plusieurs requetes rapprochees. La directive "restrict" limite les acces, par exemple "restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap" autorise le reseau local a interroger le serveur NTP sans pouvoir le modifier. Le service se demarre avec "systemctl start ntpd".
+
+      Les commandes de verification sont : "ntpq -p" (affiche les serveurs NTP avec lesquels le systeme est synchronise, leur stratum et leur offset) et "timedatectl" (affiche l'etat de la synchronisation sur les systemes modernes avec systemd).
+
+      Les commandes utiles sont : "ntpdate" (synchronise ponctuellement l'heure avec un serveur NTP), "ntpq -p" (affiche les peers NTP et leur statut), "timedatectl" (etat de synchronisation sous systemd) et "hwclock" (synchronise l'horloge materielle BIOS avec l'heure systeme).
+
+POINTS D'ATTENTION.
+
+      Ne jamais utiliser SSH v1 : la version 1 du protocole SSH est obsolete et non securisee. Le fichier /etc/ssh/sshd_config doit contenir "Protocol 2" pour forcer l'usage de SSH v2 uniquement.
+
+      La cle privee SSH (~/.ssh/id_rsa) ne doit jamais etre transmise ou partagee : seule la cle publique (~/.ssh/id_rsa.pub) est deposee sur les serveurs. Une cle privee compromise implique de regenerer une nouvelle paire de cles.
+
+      Si la cle d'empreinte d'un serveur stockee dans ~/.ssh/known_hosts ne correspond plus a la cle actuelle du serveur, SSH bloque la connexion avec un avertissement explicite pour prevenir une attaque man-in-the-middle.
+
+      Desactiver PasswordAuthentication ("PasswordAuthentication no") ne doit etre fait qu'apres avoir verifie que l'authentification par cles fonctionne correctement, sinon tout acces SSH sera impossible.
+
+      NTP est critique pour la coherence des logs : si deux machines ont des heures differentes, la correlation des journaux d'evenements devient impossible lors d'une investigation de securite.
+
+      Utiliser des serveurs NTP de Stratum 2 ou 3 pour les clients : ne pas pointer directement sur des serveurs de Stratum 1, qui sont reserves aux grandes organisations, pour ne pas les surcharger.
+
+EXEMPLES CITES.
+
+      La commande "ssh-keygen -t rsa -b 2048" genere une paire de cles RSA de 2048 bits, stockant la cle privee dans ~/.ssh/id_rsa et la cle publique dans ~/.ssh/id_rsa.pub.
+
+      La commande "ssh-copy-id user@serveur" copie automatiquement la cle publique du client dans le fichier ~/.ssh/authorized_keys du serveur.
+
+      La commande "scp fichier user@serveur:/tmp/" copie le fichier local vers le repertoire /tmp/ du serveur distant de maniere chiffree.
+
+      Les serveurs NTP francais de Stratum 1 sont INRIA et CINES, directement connectes aux horloges atomiques de reference UTC.
+
+      La commande "ntpq -p" affiche les peers NTP, leur stratum, leur reference et leur offset en millisecondes, permettant de verifier la qualite de la synchronisation.
+
+      Un fichier /etc/ntp.conf typique reference les serveurs ntp.univ-lyon1.fr et time.cloudflare.com avec l'option iburst pour une synchronisation initiale rapide.

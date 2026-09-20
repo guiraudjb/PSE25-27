@@ -1,0 +1,213 @@
+LES INFRASTRUCTURES RÉSEAU : INTERNET, INTRANET, EXTRANET, VPN ET PROXY.
+
+
+LEXIQUE COMPLET.
+
+      Internet : réseau international d'ordinateurs communiquant grâce à des protocoles normalisés d'échange de données, plus précisément un réseau de réseaux ou inter-réseau, du mot anglais internetwork, où les ordinateurs communiquent de façon transparente quel que soit leur type, avec des logiciels et protocoles appropriés.
+
+      Backbone (cœur de communication) : infrastructure matérielle de télécommunications formant les autoroutes de l'information, s'appuyant sur des fils téléphoniques, des fibres optiques, des câbles intercontinentaux, des communications par satellite et des ondes hertziennes.
+
+      Fonctionnalités d'Internet : ensemble de services dont le web, le courrier électronique en mode push asynchrone, les forums usenet en mode pop, la discussion en direct IRC synchrone, la discussion par fils sur des listes, la voix sur IP, les moteurs de recherche et annuaires, la consultation de bases de données, le transfert de fichiers FTP, la publication sur blogs et wikis, l'abonnement à des newsletters, les enchères C2C, les boutiques virtuelles, le paiement électronique, la radio et la télévision en broadcasting et le partage direct pair à pair.
+
+      Protocoles d'Internet : TCP/IP pour la transmission, HTML et HTTP pour le World Wide Web, SMTP, POP3 et IMAP pour le courrier, PGP, RSA et SSL pour la sécurisation, et RTP pour les flux temps réel.
+
+      Réseau maillé : structure d'origine d'Internet où tous les routeurs sont interconnectés aux plus proches et où il existe toujours une route possible vers la destination.
+
+      Authenticité de l'information : caractéristique difficile à établir et peu garantie sur Internet, une information pouvant être disponible à plusieurs endroits au même instant et revendiquée par chaque site, avec un caractère éphémère car les sites peuvent fermer ou être réorganisés.
+
+      Intranet : ensemble de services Internet internes à un réseau local ou à un ensemble de réseaux définis, accessibles uniquement depuis ces postes et invisibles de l'extérieur, utilisant les standards client-serveur d'Internet, TCP/IP, navigateurs et serveurs web HTTP, pour réaliser un système d'information interne à une organisation ; ce n'est ni un Internet local ni un réseau local.
+
+      Principes de l'intranet : protocoles standards TCP/IP, description standard des écrans en HTML avec pages dynamiques créées sur mesure à chaque demande, interface universelle d'accès par le protocole HTTP et un navigateur, accès depuis un simple PC, et accès égal pour tous.
+
+      Enjeux de l'intranet : amélioration de la communication interne et réduction de la rétention d'information, modification forte de l'organisation et de la culture de l'entreprise, projet stratégique, contenu accessible seulement aux utilisateurs identifiés, fédération des données ; une nouvelle ressource ajoutée au serveur web devient immédiatement accessible à tous sans intervention sur le client.
+
+      Organisation hiérarchique de l'intranet : modèle où seuls des documents vérifiés par la direction circulent, avec un administrateur et concepteur unique, facile à gérer et sûr mais réducteur.
+
+      Organisation cellulaire de l'intranet : modèle avec des serveurs autonomes multiples alimentés par contribution volontaire dans chaque service, internet en réduction sans administrateur unique, nécessitant des outils d'accès comme des moteurs de recherche.
+
+      Direction coopérative de l'intranet : modèle avec plusieurs serveurs qui coopèrent.
+
+      Architecture à trois niveaux : architecture d'un intranet composée de clients navigateurs interprétant HTML, JavaScript et CSS, d'un ou plusieurs serveurs d'application ou middleware interprétant des scripts PHP, ASP, Perl, Python ou des langages semi-compilés Java et C# et les traduisant en requêtes SQL, et d'un serveur de bases de données ; les clients gèrent l'interface graphique, les serveurs manipulent les données.
+
+      Alizé : intranet ministériel du MINEFI, donnant accès au portail du ministère, à la presse en ligne, au Journal Officiel, à l'annuaire des agents et à des sites intranets métiers comme Chorus, Ulysse à la DGFiP ou Geci à la DGCCRF.
+
+      Extranet : environnement de communication autorisant des échanges entre collaborateurs distants d'une même entreprise ou entre une entreprise, ses clients et ses fournisseurs ; ouverture sécurisée d'une partie de l'intranet vers des personnes autorisées et référencées ne faisant pas partie du personnel, exposant des informations spécifiques comme des catalogues, tarifs, produits, états de stocks, commandes et livraisons, le plus souvent des fichiers ou bases de données sur lesquels le visiteur peut faire des requêtes.
+
+      Place de marché électronique : site évaluant l'état de l'offre et de la demande entre professionnels d'un secteur, relation BtoB, par opposition au commerce électronique BtoC orienté consommateur, reproduisant sur le net le principe des marchés d'autrefois avec des enchères inversées ou non.
+
+      Contrôle d'accès de l'extranet : authentification de type nom de connexion et mot de passe contrôlant l'accès aux ressources, la communication pouvant être sécurisée par un tunnel VPN et un chiffrement symétrique ou asymétrique en cas de recherche d'intégrité et de confidentialité.
+
+      DNS (Domain Name System) : annuaire spécifique de translation entre l'adresse IP, qui identifie de manière unique une machine sur Internet, et le nom logique de l'URL, hiérarchique, redondant et distribué, dynamique avec mise à jour automatique, chaque site étant maître de ses données ; mis en place en 1984, géré par le Network Information Center et en France par l'AFNIC.
+
+      Fichier hosts : premier système de nommage, annuaire complet dans un fichier texte alimenté à la main, /etc/hosts sous Unix, utilisé de 1970 à 1984, posant des problèmes de cohérence des noms lors de la diffusion, encore utilisé pour les adresses locales comme la boucle locale.
+
+      Champ MX : enregistrement DNS donnant l'adresse de relais de messagerie.
+
+      VPN (Virtual Private Network, réseau privé virtuel) : réseau numérique de télécommunication reliant deux réseaux distants à travers Internet comme s'ils étaient connectés directement, réseau privé interconnectant sites, réseaux locaux ou ordinateurs distants d'un même organisme, virtuel grâce à des liaisons virtuelles sur une infrastructure de communication, implémentant par défaut des mécanismes de segmentation pour séparer les flux et souvent du chiffrement pour la confidentialité ; objectifs de fiabilité, disponibilité, performance et sécurité.
+
+      Niveaux de création d'un tunnel VPN : au niveau réseau où les paquets sont chiffrés par un logiciel au-dessus du support, au niveau transport où une liaison logique entre programmes coopérants chiffre à la volée, et au niveau application où l'application elle-même protège les communications.
+
+      Proxy (serveur mandataire) : service mandataire pour une application donnée, servant d'intermédiaire dans une connexion entre client et serveur pour relayer la requête, le navigateur s'adressant au proxy qui s'adresse ensuite au serveur.
+
+      Rupture de flux : premier objectif d'un proxy, mandaté par le client pour effectuer la requête auprès du serveur sans que celui-ci joigne le client directement ; le proxy récupère et renvoie la requête, le serveur répond au proxy, le proxy renvoie la réponse au client.
+
+      Cache du proxy : mise en cache des données par le proxy, permettant une économie de bande passante et des réponses rapides aux requêtes fréquentes ; le proxy permet aussi un contrôle des sites distants par des listes de contrôle d'accès, évite le routage sur le net pour les postes desservis, et rend les clients invisibles pour Internet puisqu'ils sont vus avec la seule adresse IP du proxy, ce qui est un élément de sécurité.
+
+      Firewall (pare-feu) : principal équipement filtrant permettant un contrôle du trafic réseau entrant et sortant, l'analysant, le sécurisant et le gérant, triant les flux en bloquant certains et en autorisant d'autres, premier équipement utilisé pour la sécurisation des réseaux.
+
+      Firewall stateless (sans état) : pare-feu contrôlant chaque paquet indépendamment des autres selon des règles prédéfinies appelées ACL, intervenant sur les couches réseau et transport.
+
+      Firewall stateful (à état) : évolution du stateless prenant en compte la validité des paquets par rapport aux paquets précédents, gardant en mémoire les attributs de chaque connexion du début à la fin, mécanisme de stateful inspection.
+
+      Firewall applicatif (pare-feu de type proxy ou passerelle applicative) : pare-feu fonctionnant sur la couche 7 du modèle OSI, devant connaître tous les protocoles de chaque application avec un module spécifique par protocole, par exemple un processus proxy HTTP filtrant le protocole HTTP.
+
+      Firewall authentifiant : pare-feu permettant des règles de filtrage selon les utilisateurs et non plus seulement les machines, avec une association entre l'utilisateur connecté et l'adresse IP de sa machine, permettant de suivre l'activité par utilisateur.
+
+      Firewall personnel : pare-feu installé sur les postes de travail pour contrer les virus et logiciels espions, contrôlant les accès des applications aux réseaux et repérant l'ouverture de ports par des applications non autorisées.
+
+      PPP (Point to Point Protocol) : protocole de connexion d'un particulier au fournisseur d'accès via un modem, sans sécurité particulière.
+
+      DMZ (zone démilitarisée) : zone d'une architecture réseau à double protection matérielle ou logicielle sous forme de coupe-feux, où le routeur d'entrée peut être filtrant au niveau 3, hébergeant par exemple un site de commerce électronique, un serveur de messagerie ou un serveur intranet ouverts vers Internet.
+
+      Normalisation : acte primordial des technologies de l'information rendant possible la communication entre tous les groupes d'utilisateurs, par accord sur des protocoles communs à respecter des deux côtés.
+
+      Architecture de communication propriétaire : ensemble de règles forgées par un constructeur pour ses propres matériels, inadmissible entre constructeurs différents.
+
+      Norme de jure (formelle) : norme établie par un organisme légalement constitué et mandaté, comme l'ISO qui regroupe environ cent organismes nationaux, un par pays, dont l'AFNOR en France, l'ANSI aux USA, le BSI au Royaume-Uni, le DIN en Allemagne et le JISC au Japon.
+
+      Norme de facto : norme élaborée par une organisation autre qu'un organisme formel, par exemple un consortium de fabricants ou de vendeurs, un groupe d'utilisateurs ou une association professionnelle, sans valeur internationale, aussi appelée standard de fait.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LES RÉSEAUX INTERNET, INTRANET ET EXTRANET.
+
+
+   A. Internet.
+
+      Internet est un réseau international d'ordinateurs communiquant grâce à des protocoles normalisés, plus précisément un réseau de réseaux ou inter-réseau, du mot anglais internetwork, où les ordinateurs communiquent de façon transparente quel que soit leur type avec des logiciels et protocoles appropriés ; issu du réseau ARPANET qui reliait les sites informatiques militaires américains, il n'a cessé de croître en nombre de machines, en étendue et en diversité de services.
+
+      La notion d'Internet est souvent confondue avec son infrastructure matérielle, les autoroutes de l'information composées de backbones, s'appuyant sur des fils téléphoniques, des fibres optiques, des câbles intercontinentaux, des satellites et des ondes hertziennes ; fonctionnellement, Internet est un ensemble de services, le web apparu le premier, le courrier électronique en mode push asynchrone, les forums usenet, la discussion en direct IRC synchrone, la voix sur IP, les moteurs de recherche, la consultation de bases de données, le transfert FTP, la publication sur blogs et wikis, les enchères C2C, les boutiques virtuelles, le paiement électronique, la radio et la télévision en broadcasting et le partage pair à pair.
+
+      Techniquement, ces services sont assurés par TCP/IP pour la transmission, HTML et HTTP pour le web, SMTP, POP3 et IMAP pour le courrier, PGP, RSA et SSL pour la sécurisation et RTP pour les flux temps réel ; Internet reposait au départ sur un réseau maillé où tous les routeurs sont interconnectés aux plus proches avec toujours une route possible ; toutes les données ne sont pas libres de droits, comme l'a montré la polémique autour du MP3 et du pair à pair, et l'authenticité de l'information est difficile à établir, celle-ci pouvant être disponible à plusieurs endroits et étant éphémère.
+
+
+   B. L'intranet.
+
+      Un intranet est un ensemble de services Internet internes à un réseau local ou à des réseaux définis, accessibles seulement depuis ces postes et invisibles de l'extérieur, utilisant les standards client-serveur d'Internet, TCP/IP, navigateurs et serveurs web HTTP, pour réaliser un système d'information interne à une organisation ; ce n'est ni un Internet local ni un réseau local.
+
+      Apparu dans la seconde moitié des années 1990 pour contourner les lourdeurs de l'informatique classique, il rapatrie sur les réseaux locaux ce qui faisait le succès d'Internet, à savoir les protocoles standards TCP/IP, la description standard des écrans en HTML avec des pages dynamiques créées sur mesure à chaque demande, l'interface universelle d'accès par HTTP et un navigateur, l'accès depuis un simple PC et l'accès égal pour tous.
+
+      L'intranet améliore la communication interne, réduit la rétention d'information, modifie fortement l'organisation et la culture de l'entreprise et constitue un projet stratégique ; son contenu n'est accessible qu'aux utilisateurs identifiés, l'idée étant de fédérer les données et de les rendre plus accessibles en interne ; une nouvelle ressource ajoutée au serveur web devient immédiatement accessible à tous sans intervention sur le client, et les vitesses élevées des réseaux locaux permettent des applications multimédia professionnelles comme la visiophonie ou la téléconférence.
+
+      Selon la vision de l'entreprise, l'organisation de l'intranet peut être hiérarchique avec un administrateur unique et seuls des documents vérifiés par la direction, facile à gérer et sûre mais réductrice, cellulaire avec des serveurs autonomes multiples alimentés par contribution volontaire sans administrateur unique et nécessitant des moteurs de recherche, ou en direction coopérative avec plusieurs serveurs qui coopèrent ; l'administration consiste à organiser la diversité par des modèles de design standards, l'agrégation des sites et des outils de recherche.
+
+      Un intranet repose sur une architecture à trois niveaux, des clients navigateurs interprétant HTML, JavaScript et CSS, un ou plusieurs serveurs d'application ou middleware interprétant des scripts et les traduisant en requêtes SQL, et un serveur de bases de données ; la présence du serveur donne accès aux fonctions du système d'information, applications de gestion, EDI, travail coopératif, stockage de données et annuaires, la présence du client donne accès aux fonctions d'Internet, messagerie, forums, IRC, agenda de groupe, téléphonie et accès au web ; au MINEFI, l'intranet ministériel est Alizé.
+
+
+   C. L'extranet.
+
+      L'extranet autorise des échanges entre collaborateurs distants d'une même entreprise ou entre une entreprise, ses clients et ses fournisseurs ; c'est l'ouverture sécurisée d'une partie de l'intranet vers des personnes autorisées et référencées ne faisant pas partie du personnel, exposant des informations spécifiques comme des catalogues, tarifs, états de stocks, commandes et livraisons, le plus souvent des fichiers ou bases de données sur lesquels le visiteur peut faire des requêtes.
+
+      Il améliore l'efficacité en informant la clientèle en temps réel, gère la logistique en évaluant les stocks face à la demande, réalise des économies d'échelle en évitant les réimpressions et gagne du temps en collectant les données chez les clients ; né du besoin d'accéder à un réseau fermé de type intranet depuis un réseau ouvert de type Internet, il s'est ouvert aux places de marché électroniques évaluant l'offre et la demande entre professionnels, relation BtoB, par opposition au commerce électronique BtoC ; l'accès se fait par authentification nom de connexion et mot de passe, la communication pouvant être sécurisée par un tunnel VPN et un chiffrement symétrique ou asymétrique.
+
+
+II. LES NOTIONS D'ARCHITECTURE POUR LES RÉSEAUX TCP/IP.
+
+
+   A. Le DNS.
+
+      L'essor du réseau des réseaux a exigé des solutions de localisation et de nommage des machines ; les premières solutions à base de fichier plat alimenté à la main ont été dépassées par le nombre de machines ; sur Internet, une machine est identifiée de manière unique par son adresse IP, et le DNS est un annuaire de translation entre l'adresse IP et le nom logique de l'URL.
+
+      Au départ, de 1970 à 1984, c'était un simple fichier texte, le fichier hosts ou /etc/hosts sous Unix, posant des problèmes de cohérence à la diffusion, encore utilisé pour les adresses locales comme la boucle locale ; le DNS a été mis en place en 1984, géré par le Network Information Center et en France par l'AFNIC ; il donne l'adresse IP en fonction du nom logique par requête, le nom en fonction de l'adresse IP par résolution inverse, et l'adresse de relais de messagerie par le champ MX ; il s'appuie sur un système hiérarchique, redondant et distribué, chaque site étant maître de ses données, avec mise à jour automatique.
+
+
+   B. Le VPN.
+
+      Le VPN relie deux réseaux distants à travers Internet comme s'ils étaient connectés directement ; c'est un réseau privé interconnectant sites, réseaux locaux ou ordinateurs distants d'un même organisme, virtuel grâce à des liaisons virtuelles sur une infrastructure de communication, implémentant par défaut des mécanismes de segmentation pour séparer les flux et souvent du chiffrement pour la confidentialité, avec des objectifs de fiabilité, disponibilité, performance et sécurité au sens large.
+
+      Le tunnel VPN peut être créé au niveau réseau où les paquets sont chiffrés par un logiciel au-dessus du support, au niveau transport où une liaison logique entre programmes coopérants chiffre à la volée, ou au niveau application où l'application elle-même protège les communications.
+
+
+   C. Le proxy.
+
+      Un proxy est un service mandataire pour une application donnée, servant d'intermédiaire entre client et serveur pour relayer la requête, le navigateur s'adressant au proxy qui s'adresse ensuite au serveur ; son premier objectif est la rupture de flux, le proxy étant mandaté par le client pour effectuer la requête sans que le serveur joigne le client directement, le proxy récupérant et renvoyant la requête, le serveur répondant au proxy, et le proxy renvoyant la réponse au client, pour divers protocoles, HTTP, HTTPS, FTP et SSL.
+
+      Les données sont le plus souvent mises en cache, ce qui économise la bande passante et accélère les réponses aux requêtes fréquentes ; le proxy permet un contrôle des sites distants par des ACL, évite le routage sur le net pour les postes desservis, et rend les clients invisibles pour Internet puisqu'ils sont vus avec la seule adresse IP du proxy, élément de sécurité.
+
+
+   D. Les équipements filtrants.
+
+      Le principal équipement filtrant est le firewall, qui contrôle le trafic entrant et sortant, l'analyse, le sécurise et le gère, en bloquant certains flux et en autorisant d'autres ; c'est le premier équipement utilisé pour la sécurisation des réseaux, avec plusieurs catégories aux avantages et inconvénients propres.
+
+      Les firewalls stateless contrôlent chaque paquet indépendamment selon des règles ACL prédéfinies et interviennent sur les couches réseau et transport ; les firewalls stateful prennent en compte la validité des paquets par rapport aux précédents, gardant en mémoire les attributs de chaque connexion, c'est le stateful inspection ; on distingue aussi les firewalls applicatifs fonctionnant sur la couche 7 avec un module par protocole, les firewalls authentifiants filtrant selon les utilisateurs via une association utilisateur-adresse IP, et les firewalls personnels installés sur les postes pour contrer virus et logiciels espions et contrôler les accès réseau des applications.
+
+
+III. LES ARCHITECTURES PHYSIQUES ET LA NORMALISATION.
+
+
+   A. Des architectures types.
+
+      Chaque réseau d'entreprise ouvert vers Internet est une partie du maillage mondial ; l'architecture d'un particulier connecte un modem à un fournisseur d'accès par PPP sans sécurité particulière, le fournisseur ayant souvent son propre backbone ; une petite administration a un réseau local et un routeur de sortie utilisant les services d'un opérateur, l'offre pouvant s'adosser à de l'ATM pour la commutation de niveau 2 ou à IP avec de la qualité de service gérée par MPLS, la sécurité étant gérée par contrat de service.
+
+      Une PME peut confier son site et sa connexion à une agence web, la sécurité vers Internet étant prise en charge par l'agence et celle du réseau local par l'entreprise ; une entreprise qui sécurise les échanges entre son siège et sa force de vente nomade utilise un tunnel VPN pour l'intégrité et un chiffrement pour la confidentialité ; une entreprise commerciale avec un site de commerce électronique, un serveur de messagerie ouvert, un serveur intranet et un réseau local sécurisé fait appel à une zone démilitarisée avec double protection sous forme de coupe-feux, le routeur d'entrée pouvant être filtrant au niveau 3.
+
+      Ces configurations peuvent coexister ; il n'existe pas d'architecture type procurant tous les services, on crée une architecture pour répondre à un ou plusieurs besoins relevant d'impératifs d'utilisation, de sécurité, de budget ou d'autres contraintes propres au projet.
+
+
+   B. La terminologie de la normalisation.
+
+      La normalisation rend possible la communication entre tous les groupes d'utilisateurs par accord sur des protocoles communs à respecter des deux côtés ; historiquement, chaque constructeur avait ses règles propriétaires, ce qui est inadmissible entre constructeurs différents.
+
+      La normalisation se fait par accord de l'ensemble des constructeurs, ou par imposition par un constructeur d'un protocole plus performant, qui n'est alors pas une vraie norme puisque sans valeur internationale, c'est un standard de fait ou de facto ; les organismes de normalisation visent des normes de jure faisant l'unanimité au niveau national et international ; une norme de jure est établie par un organisme légalement constitué et mandaté, comme l'ISO qui regroupe environ cent organismes nationaux, un par pays, AFNOR en France, ANSI aux USA, BSI au Royaume-Uni, DIN en Allemagne ; une norme de facto est élaborée par une autre organisation, consortium de fabricants ou de vendeurs, groupe d'utilisateurs ou association professionnelle.
+
+
+POINTS D'ATTENTION.
+
+      Internet est un réseau de réseaux, du mot anglais internetwork, reposant à l'origine sur un réseau maillé.
+
+      Un intranet n'est ni un Internet local ni un réseau local, mais l'application des solutions d'Internet au système d'information d'une organisation.
+
+      Le contenu d'un intranet n'est accessible qu'aux utilisateurs identifiés, et une nouvelle ressource devient immédiatement accessible sans intervention sur le client.
+
+      L'architecture d'un intranet est à trois niveaux, clients, serveurs d'application et serveur de bases de données.
+
+      L'extranet est l'ouverture sécurisée d'une partie de l'intranet vers des personnes autorisées extérieures au personnel.
+
+      Le commerce électronique BtoC vise le consommateur, les places de marché électroniques BtoB visent les professionnels.
+
+      Le fichier hosts, encore utilisé pour les adresses locales, a été remplacé par le DNS en 1984, hiérarchique, redondant, distribué et dynamique.
+
+      Un tunnel VPN peut être créé au niveau réseau, transport ou application.
+
+      Le proxy réalise une rupture de flux et rend les clients invisibles pour Internet en les présentant sous sa seule adresse IP.
+
+      Un firewall stateless contrôle chaque paquet indépendamment, un firewall stateful tient compte des paquets précédents par stateful inspection.
+
+      Un firewall applicatif opère sur la couche 7 avec un module par protocole.
+
+      Une norme de jure est établie par un organisme mandaté comme l'ISO ; une norme de facto est un standard de fait sans valeur internationale.
+
+
+EXEMPLES CITES.
+
+      Ancêtre d'Internet, le réseau ARPANET reliant les sites informatiques militaires américains.
+
+      Protocoles TCP/IP, HTML et HTTP, SMTP, POP3 et IMAP, PGP, RSA, SSL et RTP.
+
+      Intranet ministériel Alizé du MINEFI, avec Chorus, Ulysse à la DGFiP et Geci à la DGCCRF.
+
+      Place de marché électronique reproduisant sur le net le principe des marchés d'autrefois avec des enchères.
+
+      Suivi en temps réel de l'acheminement des colis par extranet, et situation des comptes fournie en ligne par l'Agence centrale du trésor à ses correspondants.
+
+      Fichier hosts ou /etc/hosts sous Unix utilisé de 1970 à 1984, DNS géré par le NIC et l'AFNIC en France.
+
+      Architecture d'un particulier connecté par PPP à un fournisseur d'accès disposant de son propre backbone.
+
+      Offre Global Intranet d'un opérateur adossée à de l'ATM ou à IP avec de la qualité de service MPLS.
+
+      Zone démilitarisée à double protection par coupe-feux pour une entreprise de commerce électronique.
+
+      Organismes nationaux de normalisation AFNOR, ANSI, BSI, DIN, JISC membres de l'ISO.

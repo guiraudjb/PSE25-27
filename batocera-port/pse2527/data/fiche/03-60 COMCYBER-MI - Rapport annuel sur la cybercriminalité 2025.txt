@@ -1,0 +1,205 @@
+RAPPORT ANNUEL SUR LA CYBERCRIMINALITÉ 2025.
+
+LEXIQUE COMPLET.
+
+      L'adresse publique de crypto-actifs est une chaîne de caractères alphanumériques servant de référence pour les transactions sur une blockchain.
+
+      Les affiliés sont des cybercriminels qui mènent des attaques en utilisant des outils fournis par des développeurs en échange d'une commission.
+
+      L'attaque par la chaîne logistique ou Supply Chain Attack consiste à compromettre un prestataire légitime pour atteindre une cible finale.
+
+      L'attaque sous faux drapeau est une manœuvre trompeuse visant à attribuer une cyberattaque à un tiers pour dissimuler sa véritable origine.
+
+      La blockchain est un registre distribué et sécurisé par consensus qui valide et stocke l'historique des transactions de manière immuable.
+
+      Le botnet est un réseau de machines compromises connectées à Internet et pilotées à distance par des cybercriminels.
+
+      Le bourrage d'identifiants ou Credential Stuffing est une technique automatisée testant des combinaisons d'identifiants volés pour accéder à des comptes.
+
+      L'hébergement pare-balles ou Bulletproof hosting désigne des services d'hébergement tolérant les contenus illégaux et résistant aux demandes de fermeture.
+
+      La chasse au gros gibier ou Big Game Hunting est une stratégie ciblant de grandes organisations pour maximiser les gains financiers.
+
+      Le Cybercrime-as-a-Service ou CaaS est la mise à disposition commerciale d'outils et de services cybercriminels clés en main.
+
+      Le doxing est la révélation publique non autorisée d'informations personnelles sur un individu dans le but de lui nuire.
+
+      Le deepfake est un contenu multimédia falsifié par intelligence artificielle permettant d'usurper l'identité d'une personne.
+
+      L'infostealer est un logiciel malveillant conçu pour dérober des données sensibles comme des mots de passe ou des cookies sur un appareil infecté.
+
+      L'ingénierie sociale regroupe les techniques de manipulation psychologique visant à inciter une victime à divulguer des informations ou effectuer une action.
+
+      Le rançongiciel ou ransomware est un logiciel malveillant bloquant l'accès aux données par chiffrement pour exiger le paiement d'une rançon.
+
+      Le smishing est une technique d'hameçonnage réalisée par l'envoi de SMS frauduleux.
+
+      Le spoofing est l'usurpation d'une identité technique comme un numéro de téléphone ou une adresse email pour tromper une victime.
+
+      Le vishing est une escroquerie par hameçonnage vocal utilisant le téléphone pour manipuler la victime.
+
+COURS DÉTAILLÉ.
+
+I. ÉCOSYSTÈME ET INDUSTRIALISATION DE LA MENACE.
+
+   A. Structuration du marché criminel.
+
+      Le paysage de la cybercriminalité en 2024 est marqué par une industrialisation accrue et une spécialisation des tâches inspirée des modèles économiques légaux.
+
+      Le modèle dominant est celui de la cybercriminalité en tant que service ou Cybercrime-as-a-Service qui permet la location d'outils clés en main.
+
+      Cette organisation permet à des acteurs peu compétents techniquement de mener des attaques complexes en achetant des services sur des forums dédiés.
+
+      Les rôles sont répartis entre les développeurs de logiciels, les courtiers en accès initiaux et les affiliés qui exécutent les attaques.
+
+   B. Infrastructures et communication.
+
+      Les cybercriminels utilisent des forums spécialisés pour échanger, vendre des données et recruter des complices.
+
+      Les messageries chiffrées sont privilégiées pour les communications sensibles et opérationnelles afin d'échapper à la surveillance.
+
+      L'hébergement pare-balles ou bulletproof hosting fournit des infrastructures résilientes pour héberger des contenus malveillants.
+
+      Ces hébergeurs protègent l'anonymat des criminels et ignorent les requêtes judiciaires en opérant souvent depuis des juridictions permissives.
+
+II. LES MODES OPÉRATOIRES MAJEURS.
+
+   A. Ingénierie sociale et hameçonnage.
+
+      L'hameçonnage reste le vecteur d'infection le plus répandu en misant sur la manipulation humaine pour dérober des informations.
+
+      Le smishing ou hameçonnage par SMS est en forte hausse et utilise des messages courts incitant à cliquer sur des liens frauduleux.
+
+      Le spoofing téléphonique permet aux attaquants d'afficher le numéro légitime d'une banque ou d'une institution pour tromper la victime.
+
+      L'intelligence artificielle est désormais utilisée pour rédiger des courriels d'hameçonnage hautement crédibles et personnalisés.
+
+   B. Logiciels malveillants et attaques réseaux.
+
+      Les infostealers sont des logiciels malveillants critiques en 2024 qui exfiltrent massivement des données d'identification.
+
+      Ces données volées alimentent ensuite d'autres attaques comme les intrusions réseaux ou les fraudes bancaires.
+
+      Les rançongiciels continuent de paralyser les systèmes mais le chiffrement est parfois abandonné au profit du seul vol de données.
+
+      La double ou triple extorsion combine le chiffrement, la menace de publication des données et parfois des attaques par déni de service.
+
+      Les botnets sont des réseaux d'appareils infectés loués pour mener des attaques par déni de service distribué ou miner des crypto-actifs.
+
+   C. Vols et exploitation de données.
+
+      L'année 2024 est marquée par la prise de conscience massive du danger des fuites de données personnelles.
+
+      Les données volées sont revendues sur des forums ou utilisées pour crédibiliser des attaques d'ingénierie sociale ultérieures.
+
+      Les administrations publiques représentent une cible privilégiée et constituent une part importante des fuites revendiquées.
+
+III. NOUVELLES TECHNOLOGIES ET MENACES HYBRIDES.
+
+   A. L'Intelligence Artificielle au service du crime.
+
+      L'IA générative permet la création de deepfakes audio et vidéo très réalistes pour usurper des identités et commettre des fraudes.
+
+      Les modèles de langage ou LLM facilitent la rédaction de codes malveillants et la correction de scripts pour les cybercriminels.
+
+      Des services de Deepfake-as-a-Service apparaissent et rendent la création de contenus falsifiés accessible à tous.
+
+      L'empoisonnement de données ou data poisoning est une attaque visant à corrompre les modèles d'IA en altérant leurs données d'apprentissage.
+
+   B. Usages illicites des crypto-actifs.
+
+      Les crypto-actifs servent de moyen de paiement pour les rançons et les achats illicites sur le darknet.
+
+      Les techniques de blanchiment incluent l'usage de mixeurs et le transfert de fonds entre différentes blockchains appelé chain hopping.
+
+      Les escroqueries aux faux investissements et les fausses romances exploitent la méconnaissance des victimes pour voler des fonds.
+
+      Les draineurs de portefeuilles utilisent des contrats intelligents malveillants pour vider les comptes des victimes lors de transactions.
+
+   C. Menaces hybrides et physiques.
+
+      La frontière entre le numérique et le physique s'estompe avec l'augmentation des cas d'extorsion violente de crypto-actifs.
+
+      Le doxing consiste à divulguer des informations privées pour nuire et peut conduire à des agressions physiques.
+
+      Le sabotage physique d'infrastructures numériques comme les câbles ou les antennes constitue une menace pour les services essentiels.
+
+IV. CADRE JURIDIQUE ET RÉPONSE INSTITUTIONNELLE.
+
+   A. Réglementations européennes majeures.
+
+      La directive NIS2 renforce les obligations de cybersécurité pour un grand nombre d'entités critiques et importantes.
+
+      Le règlement RIA encadre l'usage de l'intelligence artificielle selon une approche par les risques avec des sanctions financières lourdes.
+
+      Le règlement MICA régule le marché des crypto-actifs et impose un agrément aux prestataires de services pour protéger les investisseurs.
+
+   B. Évolutions jurisprudentielles.
+
+      La Cour de justice de l'Union européenne exige désormais un contrôle préalable par une autorité indépendante pour l'accès aux données téléphoniques.
+
+      La Cour de cassation a jugé que la collecte de données en sources ouvertes doit respecter un cadre légal et le principe de loyauté.
+
+V. GRANDES ENQUÊTES ET COOPÉRATION INTERNATIONALE.
+
+   A. Opérations de démantèlement.
+
+      L'opération Cronos a permis de déstabiliser l'infrastructure du rançongiciel LockBit et d'arrêter plusieurs affiliés.
+
+      L'opération Endgame a visé les botnets majeurs comme IcedID et Pikabot en arrêtant des serveurs et des administrateurs.
+
+      Le démantèlement de la messagerie chiffrée Ghost a permis l'arrestation de membres de la criminalité organisée.
+
+      L'opération Power Off a ciblé les plateformes de services d'attaques par déni de service distribué.
+
+   B. Affaires emblématiques.
+
+      L'affaire France Travail a révélé une intrusion massive et le vol de données de millions d'usagers suite à une usurpation d'identité.
+
+      La plateforme Coco a été fermée pour son rôle dans la facilitation de crimes graves comme la pédocriminalité et les guet-apens.
+
+      Le groupe Epsilon a été neutralisé après avoir utilisé des infostealers pour voler des millions de données d'entreprises françaises.
+
+VI. PROSPECTIVE ET PRÉVENTION.
+
+   A. L'IA comme outil de défense.
+
+      La stratégie CapIA du ministère de l'Intérieur vise à développer une IA souveraine et éthique pour assister les enquêteurs.
+
+      Le projet Authentik IA aide à la détection des deepfakes en analysant des marqueurs techniques dans les médias suspects.
+
+      Le projet ODIP utilise l'IA pour détecter les contenus pédopornographiques sans exposer visuellement les enquêteurs aux images.
+
+   B. Les risques liés à l'Internet des Objets.
+
+      La multiplication des objets connectés augmente la surface d'attaque exploitable par les cybercriminels.
+
+      Ces objets sont souvent peu sécurisés et peuvent être enrôlés dans des botnets pour mener des attaques massives.
+
+POINTS D'ATTENTION.
+
+La menace cybercriminelle s'industrialise avec une spécialisation accrue des acteurs.
+
+L'intelligence artificielle sert autant les attaquants pour sophistiquer leurs fraudes que les défenseurs pour la détection.
+
+Le facteur humain demeure le premier vecteur de compromission via l'ingénierie sociale.
+
+Les frontières entre cybercriminalité et criminalité physique disparaissent avec les menaces hybrides.
+
+La coopération internationale est indispensable pour démanteler des infrastructures transnationales.
+
+EXEMPLES CITES.
+
+Rançongiciels LockBit et RansomHub.
+
+Infostealers RedLine et META.
+
+Plateformes fermées Coco et Ghost.
+
+Botnets IcedID et Pikabot.
+
+Logiciel malveillant Epsilon.
+
+Attaque contre France Travail.
+
+Attaque contre le compte X de BFMTV par Epsilon.

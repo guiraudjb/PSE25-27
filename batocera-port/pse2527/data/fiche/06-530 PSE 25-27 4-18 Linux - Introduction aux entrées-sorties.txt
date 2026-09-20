@@ -1,0 +1,97 @@
+INTRODUCTION A LA GESTION DES ENTREES / SORTIES SOUS LINUX.
+
+LEXIQUE COMPLET.
+
+      Entree/Sortie (E/S) : toute operation d'echange de donnees entre le processeur ou la memoire et un peripherique (disque, clavier, ecran, reseau, etc.). Les E/S representent l'un des principaux facteurs de latence et de perte de performance dans un systeme informatique.
+
+      Interruption : signal envoye par un peripherique au processeur pour lui signaler la fin d'une operation ou un evenement necessitant une reaction immediate. Les interruptions ont permis d'eliminer l'attente active du CPU pendant les operations E/S.
+
+      DMA (Direct Memory Access) : mecanisme permettant aux peripheriques d'acceder directement a la memoire sans mobiliser le processeur. Le DMA realise les transferts de donnees entre memoire et peripheriques de maniere autonome, liberant le CPU pour d'autres traitements.
+
+      Fichier special : representation d'un peripherique sous forme de fichier dans l'arborescence Linux, stockee dans le repertoire /dev. Le principe "tout est fichier" sous Linux permet d'utiliser les operations classiques (read, write) pour acceder au materiel.
+
+      Fichier de type caractere (c) : fichier special Linux associe a un peripherique transmettant les donnees en flux octet par octet. Exemple : /dev/tty pour les terminaux.
+
+      Fichier de type bloc (b) : fichier special Linux associe a un peripherique de stockage transmettant les donnees par blocs de taille fixe. Exemple : /dev/sda pour un disque dur ou SSD.
+
+      Numero majeur (major number) : identifiant numerique d'un fichier special Linux designe le pilote de peripherique (device driver) a utiliser. Correspond a une entree dans la table des peripheriques du noyau, permettant de savoir quel driver doit etre appele pour traiter la requete E/S.
+
+      Numero mineur (minor number) : identifiant numerique d'un fichier special Linux distinguant les differents peripheriques geres par un meme pilote. Exemple : plusieurs disques ou partitions geres par le meme pilote de disque.
+
+      Controleur de peripherique : composant materiel assurant l'interface entre le peripherique et le systeme. Il recoit les commandes du noyau via le pilote, les traduit en instructions comprehensibles par le materiel, gere les echanges de donnees, les erreurs materielles et genere les interruptions.
+
+      Pilote de peripherique (device driver) : composant logiciel du noyau Linux qui fait l'interface entre le systeme d'exploitation et le controleur materiel. Le pilote comprend les specificites de chaque peripherique et dialogue avec le controleur.
+
+      VFS (Virtual File System) : couche d'abstraction du noyau Linux fournissant une interface uniforme pour tous les systemes de fichiers (ext4, NTFS, FAT32, etc.). Le VFS traduit les requetes generiques en operations specifiques au systeme de fichiers utilise.
+
+      Page cache : mecanisme du noyau Linux conservant en memoire les donnees issues des fichiers recemment lus. Lors d'une lecture, si les donnees sont presentes dans le page cache, elles sont utilisees directement sans acceder au disque.
+
+      Buffer cache : mecanisme du noyau Linux historiquement distinct du page cache, concernant les blocs de peripheriques (notamment les systemes de fichiers). Dans les noyaux Linux modernes, buffer cache et page cache sont largement unifies.
+
+      Write-back : mode d'ecriture dans lequel les donnees sont d'abord ecrites en memoire (dans le cache) avant d'etre synchronisees avec le disque. Ameliore les performances mais implique un risque de perte de donnees en cas de panne avant la synchronisation.
+
+      sync : commande Linux forcant l'ecriture immediate de toutes les donnees en memoire (cache write-back) vers le disque.
+
+COURS DETAILLE.
+
+I. EVOLUTION HISTORIQUE ET PRINCIPES DES ENTREES/SORTIES.
+
+   A. Mise en perspective historique.
+
+      Dans les premiers systemes informatiques, les entrees/sorties etaient gerees directement par le processeur. Chaque operation mobilisait le CPU, ce qui entrainait une forte perte de performance. Avec l'apparition de la multiprogrammation, il est devenu necessaire d'optimiser l'utilisation du processeur. Les systemes ont introduit des mecanismes permettant de ne plus bloquer le CPU pendant les operations E/S.
+
+      Les interruptions ont permis aux peripheriques de signaler la fin d'une operation sans que le CPU attende activement, eliminant l'attente active (polling). Le DMA (Direct Memory Access - acces direct a la memoire) a ensuite ameliore les performances en permettant des transferts directs entre memoire et peripheriques sans mobiliser le CPU. Ces evolutions ont conduit a une architecture moderne ou le noyau centralise et optimise la gestion des entrees/sorties.
+
+   B. Peripheriques et fichiers speciaux sous Linux.
+
+      Sous Linux, les peripheriques sont representes par des fichiers speciaux situes dans le repertoire /dev. Cette representation permet d'utiliser les operations classiques (read, write) pour acceder au materiel, conformement au principe "tout est fichier" de Linux. On distingue deux types principaux de fichiers speciaux. Les fichiers de type caractere (identifier par "c" dans "ls -l /dev") sont associes aux peripheriques en flux octet par octet, comme /dev/tty pour les terminaux. Les fichiers de type bloc (identifie par "b") sont associes aux peripheriques de stockage transmettant des donnees par blocs, comme /dev/sda pour un disque dur.
+
+      Chaque fichier special est identifie par deux numeros. Le numero majeur (major number) identifie le pilote de peripherique (device driver) utilise par le noyau : il correspond a une entree dans la table des peripheriques du noyau et permet de savoir quel driver doit etre appele pour traiter la requete E/S. Le numero mineur (minor number) distingue les differents peripheriques geres par ce meme pilote, par exemple plusieurs disques ou partitions. Ce mecanisme permet au noyau d'orienter correctement les requetes vers le bon composant logiciel.
+
+II. CONTROLEURS, CACHE ET CHEMIN D'UNE OPERATION E/S.
+
+   A. Les controleurs de peripheriques.
+
+      Le controleur est un composant materiel qui assure l'interface entre le peripherique et le systeme. Il recoit les commandes emises par le noyau via le pilote, puis les traduit en instructions comprehensibles par le materiel. Le controleur prend en charge plusieurs fonctions : la gestion des echanges de donnees, la gestion des erreurs materielles et la generation des interruptions. Dans les architectures actuelles, les controleurs sont souvent integres aux peripheriques ou aux chipsets, ce qui ameliore les performances et reduit la charge du processeur. Ils jouent un role essentiel dans l'optimisation des E/S en dechargeant le CPU de certaines operations.
+
+   B. Le buffer cache et le page cache.
+
+      Pour limiter les acces aux peripheriques, Linux utilise des mecanismes de cache en memoire. Le page cache stocke en memoire les donnees issues des fichiers. Lorsqu'un fichier est lu, ses donnees sont conservees en memoire afin d'eviter un nouvel acces disque lors des lectures suivantes. Le buffer cache, historiquement distinct, concerne les blocs de peripheriques (notamment les systemes de fichiers). Dans les systemes Linux modernes, ces deux mecanismes sont largement unifies dans le noyau.
+
+      Lors d'une lecture : si les donnees sont presentes en memoire, elles sont directement utilisees ; sinon, elles sont chargees depuis le disque puis mises en cache. Lors d'une ecriture (mode write-back) : les donnees sont d'abord ecrites en memoire, puis synchronisees avec le disque. Ce fonctionnement permet de reduire les acces disque, d'ameliorer les performances et d'optimiser les temps de reponse. Le noyau gere automatiquement ces caches en fonction de l'utilisation memoire.
+
+   C. Chemin d'une operation d'entree/sortie.
+
+      Une operation E/S implique plusieurs composants et suit un chemin precis en huit etapes. Premierement, un processus effectue une requete (read ou write). Deuxiemement, l'appel systeme est transmis au noyau. Troisiemement, le noyau verifie les droits et identifie le fichier ou le peripherique. Quatriemement, le systeme de fichiers, via le VFS (Virtual File System), traduit la requete en operations specifiques au systeme de fichiers utilise. Cinquiemement, le pilote de peripherique est sollicite. Sixiemement, le controleur execute l'operation materielle. Septiemement, une interruption signale la fin de l'operation. Huitiemement, les donnees sont transmises au processus.
+
+      Le VFS joue un role important en fournissant une interface uniforme pour tous les systemes de fichiers. Ce chemin montre que plusieurs couches interviennent, ce qui explique les latences possibles lors des E/S.
+
+III. COMMANDES ET OUTILS LINUX POUR LES E/S.
+
+   A. Principales commandes de diagnostic et de gestion.
+
+      La commande "ls -l /dev" affiche les fichiers speciaux et leur type (caractere ou bloc), avec les numeros majeur et mineur. La commande "cat /proc/devices" liste les peripheriques reconnus par le noyau et les pilotes associes. La commande "dmesg" affiche les messages du noyau, incluant la detection materielle, les erreurs et les informations relatives aux drivers. La commande "free" permet d'observer l'utilisation de la memoire et du cache (colonnes buff/cache). La commande "sync" force l'ecriture immediate des donnees presentes en memoire (cache write-back) vers le disque. La commande "blockdev --getsize64 /dev/sda" affiche la taille d'un peripherique bloc en octets.
+
+POINTS D'ATTENTION.
+
+      Le mode write-back du cache implique que des donnees recentes peuvent n'etre presentes qu'en memoire et non encore sur disque : un arret brutal (coupure de courant, "kill -9" du processus) peut provoquer des pertes de donnees. La commande "sync" et les systemes de fichiers avec journalisation (NTFS, ext4) limitent ce risque.
+
+      La distinction entre fichiers de type caractere et de type bloc est fondamentale : les peripheriques bloc (disques) permettent l'acces aleatoire et sont bufferises, tandis que les peripheriques caractere (terminaux, ports serie) transmettent les donnees en flux continu sans buffer de bloc.
+
+      Le numero majeur d'un fichier special est l'element cle pour le noyau : si un pilote est absent ou defaillant, le noyau ne peut pas traiter les requetes vers les peripheriques utilisant ce majeur, meme si les fichiers speciaux existent dans /dev.
+
+      Le VFS est la couche qui rend possible la coexistence de plusieurs systemes de fichiers sous Linux (ext4, NTFS, FAT32, NFS, etc.) sur un meme systeme : sans VFS, chaque application devrait connaitre le type du systeme de fichiers pour y acceder.
+
+      Le page cache peut occuper une grande partie de la memoire disponible : c'est un comportement normal et benefique sous Linux. La commande "free" affiche la memoire "disponible" en tenant compte de la memoire du cache qui peut etre recuperee immediatement si une application en a besoin.
+
+EXEMPLES CITES.
+
+      Le fichier /dev/sda est un fichier special de type bloc representant le premier disque dur du systeme. Son numero majeur identifie le pilote de disque utilise (par exemple 8 pour le driver "sd"), son numero mineur distingue le disque entier (0) des partitions (1, 2, etc.).
+
+      Le fichier /dev/tty est un fichier special de type caractere representant le terminal de connexion de l'utilisateur. Les donnees transitent octet par octet, ce qui le distingue fondamentalement d'un disque.
+
+      La commande "dmesg | grep sda" filtre les messages du noyau relatifs au disque sda, permettant de diagnostiquer les erreurs de disque (secteurs defectueux, erreurs de lecture) au niveau du driver.
+
+      La commande "free -h" affiche l'utilisation de la memoire en format lisible : la colonne "buff/cache" montre la memoire utilisee par le page cache et le buffer cache, liberee automatiquement par le noyau si une application requiert de la memoire.
+
+      La commande "sync && echo 3 > /proc/sys/vm/drop_caches" force la synchronisation des caches puis vide le page cache et le buffer cache, utile pour les tests de performances afin de partir d'un cache vide.

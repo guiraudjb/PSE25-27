@@ -1,0 +1,173 @@
+FICHE DE REVISION SUR LA SUPERVISION RESEAU PSE TRAD 2025 2027.
+
+LEXIQUE COMPLET.
+      La supervision ou monitoring désigne un ensemble de protocoles matériels et logiciels visant à contrôler la santé du réseau et garantir la Qualité de Service.
+
+      La QoS ou Qualité de Service représente le niveau de performance garanti aux utilisateurs finaux des services informatiques.
+
+      SNMP signifie Simple Network Management Protocol et constitue le standard de supervision des réseaux TCP IP fonctionnant par interrogation.
+
+      Le Polling est une méthode d'interrogation périodique où le serveur pose régulièrement des questions aux équipements pour obtenir leur état.
+
+      Un OID ou Object Identifier est un identifiant unique permettant de cibler une métrique ou un objet précis dans la base de données de l'équipement.
+
+      La MIB ou Management Information Base est la base de données hiérarchique contenant la description des objets gérés par le protocole SNMP.
+
+      Un Trap est une notification d'alarme envoyée spontanément par un agent vers le serveur sans mécanisme d'accusé de réception.
+
+      Un Inform est une notification d'alarme envoyée par un agent avec un mécanisme d'accusé de réception pour assurer une meilleure fiabilité.
+
+      Le PDU ou Protocol Data Unit est l'unité de données du protocole contenant les détails techniques de la requête ou de la réponse.
+
+      ASN 1 est le standard de description de données utilisé pour définir les types de variables dans le protocole SNMP.
+
+      La Télémétrie est un mode de supervision moderne où les équipements poussent les données en continu vers le serveur sans attendre d'être interrogés.
+
+      gNMI signifie gRPC Network Management Interface et désigne un protocole standardisé utilisant gRPC pour la configuration et la télémétrie.
+
+      YANG est un langage de modélisation de données structuré et lisible utilisé par gNMI pour remplacer les MIBs statiques.
+
+      Un SPOF ou Single Point of Failure désigne un point unique de défaillance dont la panne entraîne l'arrêt total du système.
+
+      PromQL est le langage de requête spécifique utilisé par le logiciel de supervision Prometheus.
+
+COURS DETAILLE.
+
+I. ENJEUX ET CONTEXTE DE LA SUPERVISION.
+
+   A. EVOLUTION DES RESEAUX ET BESOINS DE SUPERVISION.
+      Les réseaux ont connu une complexification rapide avec l'intégration de nouvelles technologies par les administrations.
+
+      Cette évolution a créé des environnements très hétérogènes mêlant divers protocoles de transport comme TCP IP ou UDP.
+
+      Les infrastructures physiques sont également variées incluant le câblage classique, les équipements actifs, la virtualisation et le cloud.
+
+      Cette diversité rend la gestion du parc difficile et impose l'utilisation d'outils capables d'assurer une supervision unifiée.
+
+   B. ENJEUX MAJEURS DE LA SUPERVISION.
+      Le premier enjeu est d'offrir une solution unique permettant une gestion centralisée indépendante des contraintes techniques.
+
+      Le second enjeu est l'automatisation du traitement de l'information car la surveillance manuelle est impossible sur les grands réseaux.
+
+      L'automatisation permet la collecte en temps réel, la génération de rapports et l'exécution de procédures de résolution automatique.
+
+      Le troisième enjeu est de répondre aux exigences de disponibilité car toute panne a des impacts financiers et opérationnels majeurs.
+
+      La supervision doit permettre une détection proactive des anomalies pour maintenir la Qualité de Service.
+
+   C. OBJECTIFS ET FONCTIONS CLES.
+      L'objectif principal est de contrôler en permanence la santé du réseau et de mesurer la QoS pour les utilisateurs finaux.
+
+      La surveillance en temps réel vérifie l'état des équipements comme les routeurs et le suivi des services critiques.
+
+      La cartographie permet l'identification des équipements connectés et la mise à jour dynamique de la topologie du réseau.
+
+      La gestion des incidents assure l'identification des pannes, le diagnostic des causes racines et l'envoi d'alertes sur seuils.
+
+      L'optimisation des performances analyse les temps de réponse et l'utilisation des ressources pour anticiper les saturations.
+
+      La gestion des configurations suit les modifications apportées aux équipements et maintient un historique pour les audits.
+
+      La sécurité et la conformité contrôlent les accès et détectent les comportements anormaux ou les tentatives d'intrusion.
+
+      La métrologie mesure l'utilisation des ressources comme la bande passante et applique des quotas pour réguler les flux.
+
+      L'historisation archive les données pour établir des tendances et faciliter les analyses après un incident.
+
+      Ce contexte s'applique principalement aux réseaux privés mais s'étend aux environnements hybrides et distribués.
+
+II. CADRE NORMATIF PROTOCOLES ET MECANISMES DE SUPERVISION.
+
+   A. LE PROTOCOLE SNMP.
+      SNMP est le standard pour les réseaux TCP IP et sa version 3 apporte le chiffrement et l'authentification.
+
+      Le fonctionnement repose sur un serveur qui interroge régulièrement les agents via des OID selon le principe du Polling.
+
+      Le transport des données utilise le protocole UDP sur le port 161 pour les requêtes et le port 162 pour les alarmes.
+
+      Les messages de type Requêtes envoyés par le serveur incluent GetRequest, GetNextRequest, GetBulk et SetRequest.
+
+      Les messages de type Réponses envoyés par les agents contiennent la valeur demandée ou un code d'erreur comme NoAccess.
+
+      Les messages de type Alarmes sont envoyés spontanément par les agents sous forme de Traps ou d'Informs.
+
+      La structure d'un message comprend la version, la communauté ou la sécurité, et le PDU contenant les données.
+
+      Les types de données universels ASN 1 incluent Integer, Octet String, OID et Sequence.
+
+      Les types applicatifs spécifiques sont IpAddress, Counter, Gauge, TimeTicks et Opaque.
+
+   B. TECHNOLOGIES MODERNES TELEMETRIE ET GNMI.
+      Les protocoles traditionnels comme SNMP montrent leurs limites de latence et de charge réseau dans les environnements cloud.
+
+      La télémétrie inverse le modèle en passant du Polling au Push où les équipements envoient les données en continu.
+
+      Les avantages de la télémétrie sont le temps réel, la réduction de la charge réseau, la granularité fine et la scalabilité.
+
+      Les données sont transmises sous forme de flux via gRPC et encodées en format léger JSON ou Protobuf.
+
+      Le protocole gNMI est le successeur de SNMP développé par le consortium OpenConfig utilisant gRPC.
+
+      Il remplace les MIB complexes par des modèles de données YANG qui sont structurés et lisibles.
+
+      Les trois opérations clés de gNMI sont Capabilities, Get ou Set pour la configuration, et Subscribe pour la télémétrie.
+
+      gNMI est standardisé, sécurisé nativement par TLS, extensible et facilement intégré aux outils d'automatisation.
+
+III. IMPLEMENTATION ET SOLUTIONS LOGICIELLES MODERNES.
+
+   A. ARCHITECTURES DE DEPLOIEMENT.
+      L'architecture centralisée utilise un serveur unique, ce qui est simple mais présente un risque de point unique de défaillance.
+
+      L'architecture hiérarchique utilise un serveur central et des serveurs régionaux pour réduire la latence et déléguer la gestion.
+
+      L'architecture distribuée utilise plusieurs nœuds indépendants collaboratifs avec des bases de données distribuées.
+
+      L'architecture distribuée est idéale pour les très grands réseaux et assure une haute disponibilité.
+
+   B. SOLUTIONS LOGICIELLES OPEN SOURCE ET MODERNES.
+      Prometheus est la référence pour la collecte de métriques en temps réel avec un modèle Pull et le langage PromQL.
+
+      Grafana est une plateforme de visualisation permettant de créer des tableaux de bord unifiés à partir de multiples sources.
+
+      Loki est une solution légère pour la gestion des logs qui indexe par labels plutôt que par contenu.
+
+      Elasticsearch associé à Logstash et Kibana permet une analyse approfondie des logs pour la sécurité et le débogage.
+
+      Zabbix est une solution tout en un pour les réseaux hétérogènes avec une gestion avancée des incidents.
+
+      Nagios est une solution ancienne mais reconnue pour sa robustesse dans la supervision traditionnelle.
+
+      Netdata se distingue par sa simplicité et sa capacité à fournir des métriques en temps réel avec une installation minimale.
+
+      OpenTelemetry émerge comme un standard ouvert pour la collecte unifiée de métriques, logs et traces.
+
+      OpenNMS reste une solution robuste pour la cartographie et la gestion des incidents sur les réseaux traditionnels.
+
+      L'outil gnmic permet d'exploiter le protocole gNMI pour remplacer progressivement SNMP.
+
+POINTS D'ATTENTION.
+      Il est crucial de distinguer le modèle Pull de SNMP où le serveur tire l'information du modèle Push de la Télémétrie.
+
+      Seule la version 3 de SNMP offre une sécurité réelle avec chiffrement et authentification contrairement aux versions 1 et 2c.
+
+      Les notifications de type Trap ne sont pas fiables à cent pour cent car elles ne demandent pas d'accusé de réception.
+
+      Les notifications de type Inform garantissent la réception de l'alerte grâce au mécanisme d'accusé de réception.
+
+      Les modèles YANG utilisés par gNMI remplacent les MIBs pour décrire les données de manière plus lisible.
+
+      Le type de donnée Counter ne fait qu'augmenter alors que le type Gauge peut monter et descendre.
+
+EXEMPLES CITES.
+      L'analogie pour SNMP est d'appeler quelqu'un toutes les cinq minutes pour lui demander si ça va.
+
+      Un exemple d'OID est 1 point 3 point 6 point 1 point 2 point 1 point 1 point 5 pour le nom de l'équipement.
+
+      Le code d'alarme 0 correspond à un redémarrage à froid ou ColdStart.
+
+      Le code d'alarme 2 signale qu'un lien réseau est hors service ou LinkDown.
+
+      Le code d'alarme 4 indique un échec d'authentification ou AuthenticationFailure.
+
+      Un scénario de télémétrie est un routeur envoyant toutes les 500 millisecondes sa charge CPU et son taux d'erreur.

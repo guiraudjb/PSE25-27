@@ -1,0 +1,209 @@
+LES FONCTIONS DE BASE DU NOYAU : LA GESTION DES PROCESSUS.
+
+LEXIQUE COMPLET.
+
+      Le noyau est la partie centrale du système d'exploitation gérant les ressources et les processus.
+
+      Un programme est un fichier inerte contenant du code stocké sur le disque.
+
+      Un processus est un programme dynamique en cours d'exécution avec ses ressources et un cycle de vie.
+
+      Un thread ou processus léger est une unité d'exécution au sein d'un processus partageant sa mémoire.
+
+      Le quantum est la durée de temps processeur allouée à un processus par l'ordonnanceur.
+
+      Le PCB ou Process Control Block est la structure mémoire sauvegardant le contexte vital d'un processus.
+
+      Un sémaphore est un compteur ou une variable contrôlant le nombre d'accès simultanés à une ressource.
+
+      Un mutex est un verrou logiciel assurant l'exclusion mutuelle pour l'accès à une ressource unique.
+
+      L'interblocage ou deadlock est une situation d'attente circulaire où des processus se bloquent mutuellement.
+
+      Les IPC sont les mécanismes permettant l'échange de données entre plusieurs processus.
+
+      La famine ou starvation est une situation où un processus n'obtient jamais les ressources nécessaires.
+
+      Une section critique est une partie du code manipulant des ressources partagées et nécessitant une protection.
+
+COURS DÉTAILLÉ.
+
+I. DÉFINITION ET STRUCTURE D'UN PROCESSUS.
+
+   A. Concept fondamental.
+
+      Un processus est défini comme un programme en cours d'exécution accompagné de ses ressources.
+
+      Il évolue selon un cycle de vie géré par le noyau comprenant la création, l'exécution, l'attente et la fin.
+
+      Le système d'exploitation garantit l'isolation, la sécurité et la répartition du processeur entre ces entités.
+
+   B. Composition interne.
+
+      Le processus contient le code avec les instructions du programme.
+
+      Un espace mémoire dédié est alloué et divisé en plusieurs zones spécifiques.
+
+      La pile ou stack gère les appels de fonctions et les variables locales.
+
+      Le tas ou heap est la zone utilisée pour les allocations dynamiques de mémoire.
+
+      La zone de données contient les variables globales et les constantes.
+
+      Les descripteurs permettent d'accéder aux fichiers, dossiers ou connexions réseau.
+
+      Le contexte d'exécution regroupe les registres et pointeurs nécessaires à la reprise de l'activité.
+
+      L'état du processus peut être prêt, élu lorsqu'il est en cours, ou bloqué.
+
+II. DISTINCTION ENTRE PROCESSUS LOURDS ET THREADS.
+
+   A. Les processus lourds.
+
+      Chaque processus lourd apporte son propre environnement d'exécution et consomme plus de mémoire.
+
+      Ils possèdent chacun un espace mémoire totalement isolé.
+
+      La communication entre eux nécessite des mécanismes dédiés appelés IPC.
+
+   B. Les processus légers ou threads.
+
+      Les threads permettent de diviser un travail en tâches parallèles au sein d'un même processus.
+
+      Ils partagent la mémoire du processus parent tout en ayant leur propre contexte d'exécution.
+
+      Le multithreading permet une meilleure exploitation des processeurs multicœurs.
+
+      L'utilisation de threads améliore la réactivité et la performance sans multiplier la consommation mémoire.
+
+III. LE RÔLE DE L'ORDONNANCEUR.
+
+   A. Fonctions principales.
+
+      L'ordonnanceur décide quel processus utilise le processeur et pour combien de temps.
+
+      Il attribue un quantum de temps processeur à chaque tâche.
+
+      Il interrompt un processus si son quantum est terminé ou s'il est bloqué en attente de ressource.
+
+      Il sauvegarde et restaure le contexte d'exécution via le PCB.
+
+   B. Architecture à deux niveaux.
+
+      L'ordonnanceur de haut niveau gère la stratégie globale et les priorités.
+
+      Le dispatcher est l'ordonnanceur de bas niveau assurant la commutation de contexte très rapide.
+
+IV. LA MULTIPROGRAMMATION.
+
+   A. Multiprogrammation non préemptive.
+
+      Le processus garde le processeur jusqu'à ce qu'il se bloque ou se termine volontairement.
+
+      L'avantage principal est la simplicité de mise en œuvre.
+
+      L'inconvénient majeur est le risque de monopolisation du processeur par un seul programme.
+
+      Ce mode est peu adapté aux systèmes interactifs.
+
+   B. Multiprogrammation préemptive.
+
+      Le noyau possède le pouvoir d'interrompre un processus à tout moment.
+
+      Cette méthode permet d'assurer l'équité, la réactivité et l'isolation des tâches.
+
+      Tous les systèmes d'exploitation modernes utilisent la préemption indispensable au multitâche.
+
+V. GESTION DU CONTEXTE ET PCB.
+
+   A. Le contexte matériel.
+
+      Il regroupe les informations directement liées au processeur.
+
+      Les registres processeur stockent les valeurs intermédiaires pendant l'exécution.
+
+      Le compteur ordinal indique l'adresse de la prochaine instruction à exécuter.
+
+      Le pointeur de pile marque la position de la pile utilisée pour les fonctions.
+
+      Le mode d'exécution précise si le processus est en mode utilisateur ou noyau.
+
+   B. Le contexte logiciel.
+
+      Il contient les informations gérées par le système d'exploitation.
+
+      La priorité détermine l'ordre de passage devant l'ordonnanceur.
+
+      La liste des fichiers ouverts recense les ressources utilisées actuellement.
+
+      Les droits d'accès définissent les permissions attribuées au processus.
+
+   C. Le Process Control Block.
+
+      Le PCB est la structure mémoire où le noyau enregistre le contexte à chaque interruption.
+
+      Sans cette structure, il est impossible de reprendre correctement l'exécution d'un processus.
+
+VI. ALGORITHMES D'ORDONNANCEMENT.
+
+   A. Algorithmes classiques.
+
+      L'algorithme FIFO exécute les processus dans l'ordre d'arrivée mais est mauvais pour l'interactif.
+
+      Les algorithmes SJF et SRTF privilégient les processus courts pour réduire l'attente moyenne.
+
+      L'algorithme HRN améliore l'équité en considérant le temps déjà passé en attente.
+
+   B. Algorithmes avancés.
+
+      Le Round Robin ou Tourniquet attribue un quantum fixe à chaque processus pour assurer la réactivité.
+
+      Le MLF ou Multilevel Feedback ajuste la priorité selon le comportement long ou court du processus.
+
+      Le HPF exécute les processus selon un niveau de priorité défini.
+
+      Le PDS adapte la priorité en fonction de la charge globale du système.
+
+VII. COMMUNICATION ET SYNCHRONISATION.
+
+   A. Problématique des ressources partagées.
+
+      Plusieurs processus peuvent accéder à des ressources communes ce qui impose d'assurer la cohérence.
+
+      Les sections critiques sont les parties du code manipulant ces ressources partagées.
+
+   B. Mécanismes de synchronisation.
+
+      Le mutex est un verrou permettant un accès exclusif à une ressource.
+
+      Les sémaphores contrôlent le nombre d'accès simultanés autorisés.
+
+      Les verrous ou locks sont utilisés spécifiquement pour les fichiers et bases de données.
+
+      Les signaux sont des interruptions logicielles pour la communication asynchrone.
+
+   C. Risques et échanges.
+
+      L'interblocage ou deadlock est une attente circulaire fatale entre processus.
+
+      La famine survient lorsqu'un processus n'est jamais servi par l'ordonnanceur.
+
+      Les mécanismes d'IPC incluent les fichiers, la mémoire partagée, les pipes, les sockets et les signaux.
+
+POINTS D'ATTENTION.
+
+      Il est crucial de distinguer le programme statique sur disque du processus dynamique en mémoire.
+
+      La différence entre la pile pour les variables locales et le tas pour les allocations dynamiques est fondamentale.
+
+      La préemption est le mécanisme clé garantissant qu'un système ne fige pas à cause d'un programme bloqué.
+
+      Le PCB est indispensable pour la sauvegarde et la restauration du contexte lors des commutations.
+
+      Les threads partagent la mémoire du processus parent contrairement aux processus lourds qui sont isolés.
+
+EXEMPLES CITES.
+
+      Les systèmes d'exploitation concernés sont Linux, Windows, Unix, BSD et macOS.
+
+      Les signaux mentionnés suivent les standards POSIX ou leurs équivalents Windows.

@@ -1,0 +1,176 @@
+LA BASE DE REGISTRE DE WINDOWS SERVER.
+
+
+LEXIQUE COMPLET.
+
+      Base de registre : base de données unique et hiérarchique centralisant les informations de configuration de Windows NT, composée de sous-arbres avec des clés et des valeurs, une clé pouvant contenir des sous-clés ; elle remplace les fichiers de configuration .ini, .sys et .com.
+
+      Caractère dynamique du registre : le registre est dynamique mais l'accès aux informations varie selon le service, les données d'applications n'étant lues qu'au démarrage de l'application, un changement de paramétrage imposant un redémarrage de l'application.
+
+      Moments de lecture de la configuration : le démarrage initial où le chargeur de boot lit la liste des pilotes de démarrage à charger avant le noyau, le lancement du noyau qui lit les paramètres des pilotes et des sous-systèmes, l'ouverture de session où Explorer et les composants personnalisés de l'utilisateur sont lus, et le démarrage des applications qui lisent les paramètres système et utilisateur ; sur un système inactif, il ne devrait y avoir aucune activité de registre.
+
+      RegNotifyChangeKey : fonction du registre mettant un thread en veille jusqu'à ce qu'un changement se produise dans la région surveillée, à utiliser au lieu d'une surveillance active par sondage.
+
+      Clé racine (HKEY) : l'une des six clés principales affichées comme sous-arbres par les éditeurs de registre, chaque nom commençant par HKEY_, descripteur utilisé dans les programmes pour identifier des ressources.
+
+      HKEY_CURRENT_USER (HKCU) : clé racine contenant les préférences et la configuration logicielle de l'utilisateur connecté localement, associant l'utilisateur à son profil situé dans Users/nom/Ntuser.dat, recréée à chaque chargement de profil pour faire correspondre la clé de l'utilisateur sous HKEY_USERS.
+
+      HKEY_USERS (HKU) : clé racine contenant une sous-clé par profil utilisateur et une base pour l'enregistrement de la classe de l'utilisateur, ainsi qu'une sous-clé HKU point DEFAULT liée au profil du système utilisé par Winlogon ; à la première connexion d'un compte sans profil de domaine, le système crée un profil basé sur celui stocké dans SystemDrive/Users/Default.
+
+      HKEY_CLASSES_ROOT (HKCR) : clé racine composée des associations d'extensions de fichiers, des enregistrements de classe COM et de la racine du registre virtualisée pour le contrôle des comptes utilisateur (UAC), une clé existant pour chaque extension enregistrée et pointant en général vers une autre clé de HKCR contenant les informations d'association.
+
+      HKEY_LOCAL_MACHINE (HKLM) : clé racine contenant toutes les sous-clés de configuration de la totalité du système, à savoir BCD, COMPOSANTS, HARDWARE, SAM, SECURITY, SOFTWARE et SYSTEM.
+
+      HKLM/BCD : sous-clé contenant la configuration de base de données de démarrage BCD, qui remplace le fichier Boot.ini des versions antérieures, plus flexible et isolant les données d'installation, de configuration et de démarrage.
+
+      HKEY_CURRENT_CONFIG : clé racine qui est un simple lien vers le profil matériel utilisé, stocké sous HKLM/SYSTEM/CurrentControlSet/Hardware profiles/Current, permettant à une application de référencer son profil actif même si le profil sous-jacent change entre démarrages.
+
+      HKEY_PERFORMANCE_DATA : clé racine servant de mécanisme d'accès aux valeurs de compteur de performance, le suivi à distance fonctionnant gratuitement car le registre est accessible à distance via une API normée.
+
+      Rubrique valuée : donnée d'une clé ou sous-clé, composée de trois parties, le nom, le type de données et la valeur.
+
+      Ruche (hive) : fichier stockant une partie des informations du registre, non accessible en lecture pendant une session, contenant un arbre de registre avec une clé racine ; les chemins de toutes les ruches sauf les profils utilisateurs sont codés dans le gestionnaire de configuration.
+
+      Gestionnaire de configuration : composant du noyau qui charge les ruches, note leur chemin sous HKLM/SYSTEM/CurrentControlSet/Control/Hivelist, supprime le chemin d'une ruche déchargée, et crée les clés racine reliant les ruches pour construire la structure du registre.
+
+      Ruche volatile : ruche temporaire sans fichier associé, entièrement créée et gérée en mémoire à chaque démarrage, par exemple HKLM/HARDWARE qui stocke les informations sur les périphériques physiques, l'affectation des ressources et la détection du matériel ayant lieu à chaque démarrage.
+
+      Registre transactionnel (TxR) : fonctionnalité de Windows Server 2008 garantissant des opérations transactionnelles sur le registre et leur liaison avec des opérations hors registre comme les opérations sur les fichiers, via le Kernel Transaction Manager et trois API, RegCreateKeyTransacted, RegOpenKeyTransacted et RegDeleteKeyTransacted.
+
+      Mécanisme de callback (filtrage du Registre) : modèle du gestionnaire de configuration où un pilote enregistre une fonction de rappel exécutée avant et après les services du registre, lui donnant visibilité et contrôle complets, utilisé par Process Monitor, les antivirus et les produits de chiffrement.
+
+      Profondeur (altitude) : niveau enregistré par un fournisseur dans la pile de filtrage du registre, rendant déterministe l'ordre d'appel des routines de rappel, par exemple pour qu'un produit de chiffrement décrypte avant qu'un antivirus n'analyse ; les éditeurs doivent s'inscrire auprès de Microsoft pour éviter les collisions.
+
+      Capacités du modèle de filtrage : traitement complet de l'opération en contournant le gestionnaire de configuration, redirection de l'opération vers une autre, modification des paramètres de sortie et de la valeur de retour, et marquage d'informations par clé ou par opération.
+
+      Partage des descripteurs de sécurité : optimisation où le gestionnaire de configuration ne conserve au plus qu'un exemplaire de chaque descripteur de sécurité unique par ruche, les clés partageant un descripteur existant.
+
+      Stockage ASCII des noms : optimisation où un nom ne contenant que des caractères ASCII est stocké en ASCII dans la ruche puis converti en Unicode en mémoire à la lecture, bien que le registre soit entièrement compatible Unicode.
+
+      Bloc de contrôle de clé : structure ne mémorisant que le nom de la clé et non le chemin complet, tous les blocs utilisant le même nom partageant le même bloc de contrôle de nom, stockés dans une table de hachage pour des recherches rapides.
+
+      Table de cache : table de hachage où le gestionnaire de configuration stocke les blocs de contrôle de clés fréquemment utilisés, vérifiée en premier lors d'une recherche.
+
+      Table différée : cache supplémentaire stockant des blocs de contrôle de clés pour permettre à une application de rouvrir rapidement une clé récemment fermée, les blocs les plus anciens étant supprimés au profit des plus récents.
+
+      Regedit.exe : outil graphique principal de modification du registre livré avec Windows.
+
+      Reg.exe : outil en ligne de commande permettant d'importer, exporter, sauvegarder, restaurer, comparer, modifier et supprimer des clés et des valeurs.
+
+      Regini.exe : outil en ligne de commande important les données du registre à partir de fichiers texte contenant des données de configuration ASCII ou Unicode.
+
+
+COURS DÉTAILLÉ.
+
+
+I. INTRODUCTION AU REGISTRE.
+
+      Dans Windows NT, les informations de configuration sont centralisées dans une base de données unique appelée registre, qui remplace les fichiers .ini, .sys et .com ; le registre est dynamique mais l'accès aux informations varie selon le service, les données d'applications n'étant lues qu'au démarrage de l'application, si bien qu'un changement de paramétrage impose un redémarrage de l'application.
+
+      Le registre est organisé de façon hiérarchique en sous-arbres avec des clés et des valeurs, une clé pouvant contenir des sous-clés ; avant de le manipuler pour l'administration ou la maintenance, il faut connaître son fonctionnement et ses éléments.
+
+
+II. LE FONCTIONNEMENT DU REGISTRE.
+
+
+   A. Les moments de lecture.
+
+      Les données de configuration sont lues à quatre moments principaux, le démarrage initial où le chargeur de boot lit la liste des pilotes de démarrage à charger avant l'initialisation du noyau, le lancement du noyau qui lit les paramètres des pilotes et la configuration des sous-systèmes comme le gestionnaire de mémoire et le gestionnaire des processus, l'ouverture de session où Explorer et les composants personnalisés de l'utilisateur sont lus, dont les lecteurs réseau, le fond d'écran, l'économiseur d'écran et le placement des icônes, et le démarrage des applications qui lisent les paramètres système, la liste des composants optionnels, les données de licence et les paramètres utilisateur.
+
+      Le registre peut être lu à d'autres moments, comme lors de la modification d'une valeur ou d'une clé, certaines applications surveillant leurs paramètres pour lire les mises à jour ; sur un système inactif, il ne devrait y avoir aucune activité de registre ; les applications qui sondent le registre à la recherche de changements devraient plutôt utiliser la fonction RegNotifyChangeKey, qui met un thread en veille jusqu'à un changement dans la région surveillée.
+
+
+   B. Les moments de modification.
+
+      La structure initiale et de nombreux paramètres par défaut sont copiés lors d'une nouvelle installation depuis une version prototype située sur les supports d'installation ; les utilitaires d'installation d'applications créent des paramètres par défaut reflétant les choix de configuration ; à l'installation d'un pilote, le système Plug and Play crée les paramètres présentant au gestionnaire d'entrées-sorties comment démarrer le pilote et configurer le périphérique ; et les modifications faites via les interfaces utilisateur sont souvent stockées dans le registre.
+
+
+III. LA STRUCTURE DU REGISTRE.
+
+
+   A. Les six clés racine.
+
+      Le registre est organisé en clés, sous-clés et rubriques valuées, avec six clés principales dont le nom commence par HKEY_, descripteur utilisé dans les programmes pour identifier des ressources.
+
+      HKCU contient les préférences et la configuration logicielle de l'utilisateur connecté localement, associant l'utilisateur à son profil Users/nom/Ntuser.dat, recréée à chaque chargement de profil pour correspondre à la clé de l'utilisateur sous HKU ; HKU contient une sous-clé par profil utilisateur, une base pour l'enregistrement de la classe de l'utilisateur, et une sous-clé HKU point DEFAULT liée au profil du système utilisé par Winlogon, le système créant à la première connexion d'un compte sans profil de domaine un profil basé sur celui de SystemDrive/Users/Default.
+
+      HKCR se compose des associations d'extensions de fichiers, des enregistrements de classe COM et de la racine du registre virtualisée pour le contrôle des comptes utilisateur, une clé existant pour chaque extension enregistrée et pointant vers une autre clé de HKCR ; HKLM contient toutes les sous-clés de configuration de la totalité du système, BCD, COMPOSANTS, HARDWARE, SAM, SECURITY, SOFTWARE et SYSTEM, la sous-clé BCD contenant la configuration de base de données de démarrage qui remplace Boot.ini en isolant les données d'installation, de configuration et de démarrage.
+
+      HKEY_CURRENT_CONFIG est un simple lien vers le profil matériel utilisé, stocké sous HKLM/SYSTEM/CurrentControlSet/Hardware profiles/Current, permettant à une application de référencer son profil actif même si le profil sous-jacent change ; HKEY_PERFORMANCE_DATA est le mécanisme d'accès aux valeurs de compteur de performance, le suivi à distance fonctionnant gratuitement car le registre est accessible à distance via une API normée.
+
+
+   B. Les types de données et les fichiers.
+
+      Chaque clé ou sous-clé peut contenir des rubriques valuées composées d'un nom, d'un type de données et d'une valeur ; le registre est composé de données dynamiques construites à chaque démarrage et d'informations stockées dans des fichiers appelés ruches, non accessibles en lecture pendant une session, chaque ruche contenant un arbre avec une clé racine.
+
+      Les chemins de toutes les ruches sauf les profils utilisateurs sont codés dans le gestionnaire de configuration, qui charge les ruches, note leur chemin sous HKLM/SYSTEM/CurrentControlSet/Control/Hivelist, supprime le chemin d'une ruche déchargée et crée les clés racine reliant les ruches ; certaines ruches sont volatiles, sans fichier associé, entièrement créées et gérées en mémoire à chaque démarrage, comme HKLM/HARDWARE qui stocke les informations sur les périphériques physiques puisque l'affectation des ressources et la détection du matériel ont lieu à chaque démarrage.
+
+
+IV. LES MÉCANISMES AVANCÉS.
+
+
+   A. Le registre transactionnel et le filtrage.
+
+      Avant Windows Server 2008, il n'y avait pas de moyen simple de garantir des opérations transactionnelles sur le registre ni de les lier à des opérations hors registre comme les opérations sur les fichiers ; le Kernel Transaction Manager permet une reprise robuste en cas d'erreur, via trois API, RegCreateKeyTransacted, RegOpenKeyTransacted et RegDeleteKeyTransacted.
+
+      Le gestionnaire de configuration implémente un modèle de filtrage où un pilote enregistre une fonction de rappel exécutée avant et après les services du registre, lui donnant visibilité et contrôle complets, utilisé par Process Monitor, les antivirus et les produits de chiffrement ; chaque enregistrement de callback est associé à une profondeur, niveau dans la pile de filtrage rendant déterministe l'ordre d'appel des routines, par exemple pour qu'un produit de chiffrement décrypte avant qu'un antivirus n'analyse, les éditeurs devant s'inscrire auprès de Microsoft pour éviter les collisions ; le modèle permet aussi de traiter complètement une opération en contournant le gestionnaire de configuration, de la rediriger, de modifier les paramètres de sortie et la valeur de retour, et de marquer des informations par clé ou par opération.
+
+
+   B. Les optimisations.
+
+      Le gestionnaire de configuration offre des optimisations ; presque toutes les clés ont un descripteur de sécurité, mais comme les mêmes paramètres s'appliquent souvent à des sous-arbres entiers, il ne conserve au plus qu'un exemplaire de chaque descripteur de sécurité unique par ruche, les clés partageant un descripteur existant.
+
+      Un nom ne contenant que des caractères ASCII est stocké en ASCII dans la ruche puis converti en Unicode en mémoire à la lecture, bien que le registre soit entièrement compatible Unicode ; les blocs de contrôle de clés ne mémorisent que le nom de la clé et non le chemin complet, tous les blocs utilisant le même nom partageant le même bloc de contrôle de nom, stockés dans une table de hachage ; le gestionnaire stocke les blocs fréquemment utilisés dans une table de cache de hachage vérifiée en premier, et une table différée permet de rouvrir rapidement une clé récemment fermée, les blocs les plus anciens étant supprimés au profit des plus récents.
+
+
+V. LES ÉDITEURS DE REGISTRE.
+
+      En général, on ne devrait jamais avoir à modifier directement le registre, les paramètres nécessitant des modifications manuelles devant avoir une interface utilisateur, mais certains paramètres avancés et de débogage n'en ont pas, d'où des outils graphiques et en ligne de commande.
+
+      Windows est livré avec l'outil graphique principal Regedit.exe et des outils en ligne de commande, Reg.exe permettant d'importer, exporter, sauvegarder, restaurer, comparer, modifier et supprimer des clés et des valeurs, et Regini.exe important les données du registre à partir de fichiers texte contenant des données de configuration ASCII ou Unicode.
+
+
+POINTS D'ATTENTION.
+
+      Le registre remplace les anciens fichiers de configuration .ini, .sys et .com.
+
+      Les données d'application ne sont lues qu'au démarrage de l'application, un changement imposant un redémarrage.
+
+      Sur un système inactif, il ne devrait y avoir aucune activité de registre.
+
+      Une application doit utiliser RegNotifyChangeKey plutôt que sonder le registre en boucle.
+
+      Il y a six clés racine, toutes préfixées par HKEY_.
+
+      HKEY_CURRENT_CONFIG et HKEY_CURRENT_USER ne sont pas des ruches propres mais des liens ou vues vers d'autres emplacements.
+
+      La sous-clé HKLM/BCD remplace le fichier Boot.ini des versions antérieures de Windows Server.
+
+      Les ruches volatiles comme HKLM/HARDWARE n'ont pas de fichier et sont recréées à chaque démarrage.
+
+      Le registre transactionnel de Windows Server 2008 repose sur le Kernel Transaction Manager et trois API Transacted.
+
+      Le mécanisme de callback ordonne les filtres par profondeur pour que le déchiffrement précède l'analyse antivirus.
+
+      Le gestionnaire de configuration ne garde au plus qu'un exemplaire de chaque descripteur de sécurité unique par ruche.
+
+      On ne devrait modifier directement le registre que pour des paramètres avancés sans interface utilisateur.
+
+
+EXEMPLES CITES.
+
+      Profil utilisateur stocké dans Users/nom/Ntuser.dat et associé à HKEY_CURRENT_USER.
+
+      Sous-clé HKU point DEFAULT liée au profil du système utilisé par Winlogon.
+
+      Sous-clés de HKLM BCD, COMPOSANTS, HARDWARE, SAM, SECURITY, SOFTWARE et SYSTEM.
+
+      Liste des ruches chargées sous HKLM/SYSTEM/CurrentControlSet/Control/Hivelist.
+
+      Ruche volatile HKLM/HARDWARE stockant les périphériques physiques détectés à chaque démarrage.
+
+      API RegCreateKeyTransacted, RegOpenKeyTransacted et RegDeleteKeyTransacted du registre transactionnel.
+
+      Fonction RegNotifyChangeKey mettant un thread en veille jusqu'à un changement.
+
+      Outils Regedit.exe en graphique, Reg.exe et Regini.exe en ligne de commande.

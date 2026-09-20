@@ -1,0 +1,137 @@
+SYSTEMES DE FICHIERS WINDOWS SERVER 2016 ET PANNES.
+
+LEXIQUE COMPLET.
+
+      Systeme de fichiers : methode d'organisation et de gestion des donnees sur un support de stockage, definissant la maniere dont les fichiers sont nommes, stockes, proteges et recuperes.
+
+      FAT32 (File Allocation Table 32 bits) : systeme de fichiers herite des anciennes versions de Windows, tres compatible mais limite a 4 Go par fichier et 2 To par volume, sans securite ni journalisation. Usage recommande : cles USB et supports amovibles uniquement.
+
+      exFAT (Extended FAT) : systeme de fichiers concu pour remplacer FAT32 sur les supports amovibles, supportant des fichiers de plus de 4 Go et compatible Windows, macOS et Linux. Pas de securite avancee ni de journalisation.
+
+      NTFS (New Technology File System) : systeme de fichiers par defaut de Windows Server 2016 depuis Windows NT Server 3.1, concu pour la securite, la fiabilite, les performances et la gestion de grands volumes. Il integre les ACL, la journalisation, le chiffrement EFS, la compression et les quotas.
+
+      MFT (Master File Table) : element central de NTFS contenant une entree descriptive pour chaque fichier et repertoire du volume. La MFT est dupliquee pour des raisons de securite. Sa position est enregistree dans le MBR (Master Boot Record).
+
+      Journal NTFS : fichier transactionnel de NTFS enregistrant toutes les operations avant leur execution sur le disque. En cas de panne, NTFS rejoue les transactions terminees et annule les incompletes au redemarrage.
+
+      ACL (Access Control List) : listes de controle d'acces NTFS definissant pour chaque fichier ou dossier les permissions accordees a chaque utilisateur ou groupe (Lecture, Ecriture, Modification, Controle total).
+
+      EFS (Encrypting File System) : fonctionnalite NTFS permettant le chiffrement transparent des fichiers et la protection des donnees sensibles sur les volumes NTFS.
+
+      ReFS (Resilient File System) : systeme de fichiers introduit avec Windows Server 2012, optimise pour la resilience, la detection et la correction automatique des erreurs. Il utilise des checksums sur les metadonnees et la copie sur ecriture (Copy-on-Write). Fichiers et volumes jusqu'a 35 Po. Cluster fixe de 64 Ko.
+
+      Checksum (somme de controle) : valeur calculee sur les metadonnees ou les donnees pour detecter toute corruption. ReFS verifie ces checksums a chaque lecture.
+
+      Copy-on-Write (copie sur ecriture) : mecanisme ReFS creant une nouvelle version des metadonnees avant de remplacer l'ancienne, evitant la corruption en cas de panne ou d'arret brutal.
+
+      Disque basique : mode de disque Windows par defaut organise en partitions primaires (max 4) et etendues avec des lecteurs logiques.
+
+      Disque dynamique : mode de disque Windows (depuis Windows 2000) permettant de creer des volumes pouvant s'etendre sur plusieurs disques, redimensionnables sans redemarrage.
+
+      RAID 1 (mirroring) : duplication integrale des donnees sur deux disques pour la tolerance de pannes. Performances en lecture elevees, espace disponible = plus petit disque. Minimum 2 disques sous Windows (maximum 2).
+
+      RAID 5 (agregat par bandes avec parite) : repartition des donnees et de la parite sur 3 a 32 disques. Bonnes performances en lecture, ecriture avec calcul de parite. N'occupe que 20% pour la parite (vs 50% pour le RAID 1). Reconstruction possible apres la perte d'un disque.
+
+      Storage Spaces (Espaces de stockage) : fonctionnalite Windows Server de gestion de stockage par pool logiciel similaire au RAID, avec modes miroir, parite et simple.
+
+      WRP (Windows Resource Protection) : mecanisme Windows Server 2008 et versions superieures protegeant les fichiers et cles de registre critiques (DLL, EXE, OCX, SYS) contre les modifications non autorisees.
+
+      BitLocker : fonctionnalite Windows Server permettant le chiffrement complet des volumes pour proteger les donnees en cas de vol ou d'acces physique non autorise.
+
+      Shadow Copy (copie de cliches instantanes) : fonctionnalite Windows Server permettant la restauration de versions precedentes de fichiers ou de volumes a partir de cliches instantanes.
+
+      chkdsk : utilitaire Windows de verification et de reparation du systeme de fichiers NTFS. La commande "chkdsk D: /f /r" repare les erreurs et les secteurs defectueux.
+
+COURS DETAILLE.
+
+I. LES SYSTEMES DE FICHIERS SOUS WINDOWS SERVER 2016.
+
+   A. FAT32 et exFAT.
+
+      FAT32 (File Allocation Table 32 bits) est un systeme de fichiers herite des anciennes versions de Windows. Sa structure comprend un secteur de demarrage (Boot Sector), une table d'allocation des fichiers (FAT), un repertoire racine et les zones de donnees. Ses avantages sont sa tres bonne compatibilite et son usage sur presque tous les systemes. Ses limites sont critiques : taille maximale d'un fichier de 4 Go, taille maximale d'un volume de 2 To, absence de gestion des permissions et absence de journalisation. FAT32 est utilise sur les cles USB, les cartes memoire et les supports de demarrage, mais est deconseille pour les disques connectes aux serveurs Windows.
+
+      exFAT (Extended FAT) est concu pour remplacer FAT32 sur les supports amovibles. Sa structure est similaire a FAT32 mais optimisee pour les grands volumes. Ses avantages sont le support de fichiers superieurs a 4 Go et la compatibilite multiplateforme (Windows, macOS, Linux). Ses limites sont l'absence de securite avancee et l'absence de journalisation. Il est utilise pour les disques externes et les cles USB de grande capacite, mais deconseille pour les disques de serveurs.
+
+   B. NTFS : systeme de fichiers standard Windows Server.
+
+      NTFS (New Technology File System) est le systeme de fichiers par defaut de Windows Server 2016, present depuis Windows NT Server 3.1. Il a ete concu pour la securite, la fiabilite, les performances et la gestion de grands volumes. La taille maximale d'un fichier est de 256 To, celle d'un volume de 256 To, et la longueur maximale d'un chemin est de 32 000 caracteres Unicode.
+
+      La structure NTFS repose sur la MFT (Master File Table), element central contenant une entree pour chaque fichier et repertoire. La MFT est dupliquee sur la partition pour des raisons de securite et sa position est enregistree dans le MBR. Le Boot Sector contient les informations du volume et les parametres du systeme de fichiers. NTFS organise aussi un fichier Bitmap decrivant l'etat d'allocation du volume, et un fichier journal garantissant la fiabilite de la structure. NTFS utilise une structure arborescente de type B+ Tree pour organiser les repertoires et localiser rapidement les fichiers.
+
+      La journalisation NTFS assure la fiabilite du systeme de fichiers par un mecanisme transactionnel : avant toute modification du disque, l'operation est enregistree dans le journal (redo pour la refaire, undo pour l'annuler). En cas de panne, NTFS analyse le journal au redemarrage, rejoue les transactions terminees et annule les transactions incompletes. Ce mecanisme restaure rapidement la coherence du systeme de fichiers sans intervention importante de l'administrateur.
+
+      Les fonctionnalites NTFS sont les ACL (Controle d'acces : Lecture, Ecriture, Modification, Controle total, avec proprietaire identifie pour chaque fichier), la compression native des donnees sans logiciel externe, le chiffrement EFS (Encrypting File System : chiffrement transparent des fichiers, protection des donnees sensibles), les quotas (limitation de l'espace disque par utilisateur sur les volumes NTFS uniquement) et les liens symboliques, jonctions et liens physiques.
+
+   C. ReFS : systeme de fichiers resilient.
+
+      ReFS (Resilient File System) est apparu avec Windows Server 2012. Il ameliore NTFS par des capacites plus importantes pour les fichiers, les repertoires et les volumes, et offre une resilience superieure grace a une meilleure verification des donnees, la correction des erreurs et son evolutivite. ReFS est conseille pour Hyper-V, les sauvegardes et les grands espaces de stockage.
+
+      La structure ReFS n'utilise pas de MFT classique mais des metadonnees extensives avec une architecture B+ Tree optimisee et une verification par checksums. Chaque metadonnee possede une somme de controle verifiee a chaque lecture. Si une corruption est detectee et que ReFS est associe aux Storage Spaces avec redondance (miroir), la recuperation automatique s'effectue depuis une copie saine sans interruption du service.
+
+      Les avantages de ReFS sont : l'integrite des metadonnees avec checksums, la protection contre l'endommagement des donnees, des fichiers jusqu'a 35 Po, des volumes jusqu'a 35 Po, une taille de cluster fixe de 64 Ko (non modifiable), le pool de stockage et la virtualisation, la resilience aux dommages avec recuperation automatique. La copie sur ecriture (Copy-on-Write) pour les metadonnees elimine les risques de corruption en cas de panne. ReFS herite de certaines fonctionnalites NTFS : BitLocker, ACL, journaux USN, liens symboliques, Shadow Copies.
+
+      Les limites de ReFS sont : pas de disque systeme bootable, pas de quotas disque, pas de noms courts DOS, pas d'EFS, pas de transactions NTFS, et la taille de cluster fixe a 64 Ko.
+
+II. VOLUMES, RAID ET PROTECTION DES RESSOURCES.
+
+   A. Disques basiques et dynamiques sous Windows Server.
+
+      Windows Server supporte deux types de disques. Le disque basique organise l'espace en partitions primaires (maximum 4, ou 3 primaires + 1 etendue avec des lecteurs logiques). Le disque dynamique (disponible depuis Windows 2000) organise l'espace en volumes pouvant s'etendre sur plusieurs disques, redimensionnables sans redemarrage.
+
+      Il existe trois types de volumes dynamiques. Le volume simple contient l'espace d'un seul disque. Le volume multiple contient l'espace de plusieurs disques (max 32) utilises sequentiellement (si un disque tombe, toutes les donnees sont perdues). L'agregat par bandes (RAID 0) contient l'espace libre de plusieurs disques (max 32) avec ecriture simultanee sur tous les disques pour de meilleures performances, mais sans tolerance de pannes.
+
+      Les etats possibles d'un volume dynamique sont : Erreur (le volume ne peut pas etre redémarre automatiquement et doit etre repare), En etat (le volume est accessible et n'a pas de probleme connu), En etat avec risque (accessible mais des erreurs E/S ont ete detectees) et Initialisation (en cours d'initialisation).
+
+      WRP (Windows Resource Protection) protege les fichiers et cles de registre critiques (DLL, EXE, OCX, SYS) contre les modifications non autorisees. Les copies de sauvegarde des fichiers WRP sont dans %windir%\WinSxS\Backup.
+
+   B. RAID logiciel sous Windows Server.
+
+      La tolerance de pannes RAID est configuree via le Gestionnaire de disques (MMC) sur les disques dynamiques uniquement. Windows Server gere les niveaux 1 et 5.
+
+      RAID 1 (mirroring) : toutes les donnees sont dupliquees de maniere identique sur deux disques. Bonnes performances en lecture, ecriture equivalente a un seul disque. L'espace disponible est egal au plus petit disque. Ce mode necessite au minimum deux disques (maximum deux sous Windows). Si l'un des deux disques tombe en panne, les donnees sont toujours disponibles sur l'autre.
+
+      RAID 5 (agregat par bandes avec parite) : les donnees et les informations de parite sont reparties sur 3 a 32 disques. Lecture rapide car les donnees sont lues sur plusieurs disques simultanément. Ecriture avec calcul de parite. N'occupe que 20% pour la parite contre 50% pour le RAID 1. En cas de panne d'un disque, les donnees manquantes sont regenerees a partir des informations de parite. Reconstruction RAID possible apres remplacement du disque.
+
+III. PANNES ET PROCEDURES DE REMEDIATION.
+
+   A. Pannes liees au systeme de fichiers.
+
+      La corruption du systeme de fichiers produit des symptomes de fichiers inaccessibles, d'erreurs de lecture et de disque affiche en RAW. Les causes sont les coupures electriques, les pannes de disques et les arrets brutaux. La remediation pour NTFS est la commande "chkdsk D: /f /r". Pour ReFS, on utilise ReFSUtil ou la reparation automatique si Storage Spaces avec redondance est utilise.
+
+      La corruption de la MFT (NTFS) provoque la disparition de fichiers et l'inaccessibilite du volume. La solution est "chkdsk /f" ou la restauration depuis une sauvegarde.
+
+      La saturation du volume se manifeste par l'impossibilite d'enregistrer des fichiers et des ralentissements. La remediation inclut le nettoyage des fichiers inutiles, l'extension du volume ou la mise en place de quotas utilisateurs.
+
+   B. Pannes materielle et attaques.
+
+      La defaillance physique d'un disque produit des symptomes d'erreurs SMART, de lenteurs et de secteurs defectueux. La remediation est le remplacement du disque, la reconstruction RAID ou Storage Spaces, et la restauration depuis une sauvegarde.
+
+      Les erreurs de permissions se manifestent par des acces refuses. Les causes sont les ACL incorrectes ou l'heritage casse. La solution est de retablir les ACL et de reprendre la propriete du fichier.
+
+      Un ransomware (rancongiciel) provoque le chiffrement des fichiers avec des extensions inconnues. La remediation est l'isolement immediat du serveur, la restauration depuis des sauvegardes saines, l'analyse antivirus et la restauration depuis Shadow Copy si disponible.
+
+POINTS D'ATTENTION.
+
+      FAT32 et exFAT ne proposent aucun mecanisme de securite (pas d'ACL, pas de journalisation) : ils ne conviennent jamais pour des disques de serveurs Windows, uniquement pour les supports amovibles et les echanges multiplateforme.
+
+      La corruption de la MFT NTFS est l'une des pannes les plus graves : sans MFT valide, le systeme ne peut pas acceder aux fichiers. La sauvegarde reguliere du systeme est la seule protection efficace contre une MFT irrecuperable.
+
+      Les disques dynamiques ne peuvent pas etre convertis en disques basiques sans perte de donnees : la conversion basique vers dynamique est irréversible. Ne jamais effectuer cette conversion sans sauvegarde.
+
+      ReFS ne peut pas etre utilise comme disque systeme (bootable) : le volume systeme Windows doit obligatoirement etre formatte en NTFS.
+
+      RAID 1 sous Windows Server est limite a deux disques maximum : pour des configurations avec plus de disques en miroir, il faut utiliser Storage Spaces ou un controleur RAID materiel.
+
+      Le ransomware contourne les permissions NTFS en chiffrant les fichiers avec les droits de l'utilisateur connecte : la sauvegarde hors ligne (deconnectee du reseau) et les Shadow Copies sont les protections essentielles.
+
+EXEMPLES CITES.
+
+      Un dossier NTFS Ressources Humaines peut avoir les permissions : Groupe RH en Lecture/Ecriture, Direction en Controle total, Invites sans acces. Cela illustre le principe de moindre privilege.
+
+      La commande "chkdsk D: /f /r" verifie et repare le systeme de fichiers NTFS sur le volume D:, en marquant les secteurs defectueux et en recuperant les donnees lisibles.
+
+      ReFS avec Storage Spaces en mode miroir permet la reparation automatique en ligne : si des donnees corrompues sont detectees sur un disque, elles sont automatiquement recuperees depuis la copie miroir sans interruption du service.
+
+      RAID 1 sous Windows Server ecrit simultanement les memes donnees sur deux disques : si le premier tombe en panne, l'administrateur remplace le disque defaillant et Windows reconstruit le miroir en arriere-plan.
+
+      En cas de ransomware, la restauration depuis Shadow Copy (commande "vssadmin list shadows") permet de recuperer les versions precedentes des fichiers si le Shadow Copy n'a pas ete supprime par l'attaquant.

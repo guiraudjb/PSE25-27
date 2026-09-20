@@ -1,0 +1,161 @@
+GUIDE POUR REALISER UN PLAN DE CONTINUITE D'ACTIVITE.
+
+LEXIQUE COMPLET.
+
+      Le Plan de Continuité d'Activité ou PCA est un ensemble de procédures documentées qui servent de guide pour répondre, rétablir, reprendre et retrouver un niveau de fonctionnement prédéfini après une perturbation.
+
+      La gestion de la continuité d'activité est un processus de management holistique identifiant les menaces potentielles et fournissant un cadre pour construire la résilience de l'organisation.
+
+      La résilience est la capacité d'une organisation à s'adapter dans un environnement complexe et changeant tout en préservant ses intérêts et sa réputation.
+
+      La Durée Maximale d'Interruption Acceptable ou DMIA correspond au temps nécessaire pour que les impacts défavorables d'une interruption deviennent inacceptables pour l'organisation.
+
+      La Perte de Données Maximale Admissible ou PDMA représente le niveau de perte de données, liée aux sauvegardes, que les services utilisateurs peuvent accepter.
+
+      Une ressource critique est un moyen indispensable pour maintenir ou rétablir le fonctionnement des processus essentiels.
+
+      Un sinistre est un événement perturbant gravement le fonctionnement normal de l'organisation et pouvant conduire à une cessation d'activité.
+
+      La gestion des risques est l'ensemble du processus d'identification, d'analyse et d'évaluation du risque visant à limiter les effets de l'incertitude sur les objectifs.
+
+COURS DETAILLE.
+
+I. LES FONDAMENTAUX DU PLAN DE CONTINUITE D'ACTIVITE.
+
+   A. DEFINITION ET OBJECTIFS.
+
+      Le plan de continuité d'activité a pour objet de décliner la stratégie et l'ensemble des dispositions prévues pour garantir la reprise et la continuité des activités suite à un sinistre.
+
+      L'objectif est de permettre à l'organisation de répondre à ses obligations externes législatives ou contractuelles et à ses obligations internes comme la survie de l'entreprise.
+
+      Les organisations ayant entrepris une démarche de continuité sont les plus résilientes face aux événements déstabilisants dont la fréquence et le coût ont évolué.
+
+      Le PCA permet d'éviter certains événements ou d'en limiter les effets directs sur les objectifs de l'organisation.
+
+   B. CADRE METHODOLOGIQUE ET ORGANISATION.
+
+      La démarche de continuité d'activité est le moyen d'associer de manière globale la gestion de risque, la gestion de crise et la reprise d'activité.
+
+      La direction doit s'engager fortement dans l'élaboration du PCA par la désignation d'un chef de projet et l'approbation du plan.
+
+      Il est recommandé de confier le pilotage du projet au responsable chargé de la gestion des risques ou à un responsable métier mais déconseillé de choisir le responsable informatique ou des services généraux.
+
+      Deux approches sont possibles pour élaborer un PCA, soit une démarche complète intégrant la gestion des risques, soit une démarche simplifiée focalisée sur les conséquences sans décrire les causes.
+
+      La démarche complète est la plus avantageuse car elle permet de rationaliser les choix et de justifier les investissements nécessaires.
+
+II. ANALYSE DU CONTEXTE ET DES BESOINS DE CONTINUITE.
+
+   A. DEFINITION DU PERIMETRE ET DES ACTIVITES ESSENTIELLES.
+
+      La première étape consiste à définir le contexte, les enjeux et les obligations de l'organisation pour préciser le périmètre géographique et fonctionnel du plan.
+
+      L'analyse du contexte permet d'identifier les activités essentielles pour l'atteinte des objectifs et le respect des obligations de l'organisation.
+
+      Il convient de cartographier les processus clés et les flux nécessaires au fonctionnement de ces activités essentielles.
+
+      Une fiche par processus doit être établie pour préciser la criticité, les interdépendances et les ressources associées.
+
+   B. IDENTIFICATION DES BESOINS ET DES RESSOURCES CRITIQUES.
+
+      Il est nécessaire de formaliser les besoins de continuité pour chaque activité essentielle en définissant le niveau de service minimum indispensable.
+
+      Les ressources critiques nécessaires au maintien de l'activité se classent en cinq catégories qui sont les ressources humaines, les infrastructures, les systèmes d'information, les ressources intellectuelles et les fournisseurs externes.
+
+      La quantification du besoin de continuité s'effectue à travers le niveau de service minimum, le niveau d'indisponibilité minimum et les ressources indispensables à la reprise.
+
+      L'analyse des conséquences d'une interruption de service permet de valider la durée maximale acceptable ou DMIA.
+
+III. GESTION DES RISQUES ET SCENARIOS.
+
+   A. IDENTIFICATION ET ANALYSE DES RISQUES.
+
+      La gestion du risque vise à identifier les menaces potentielles et à quantifier leur probabilité d'occurrence et leurs impacts.
+
+      L'identification des risques doit se faire selon une approche tous risques incluant les risques stratégiques, opérationnels, de gouvernance et de conformité.
+
+      Un risque se caractérise par une menace ou un scénario, une vulnérabilité que la menace exploite, et des impacts classés selon leur gravité.
+
+      L'évaluation des risques consiste à les hiérarchiser selon les critères de probabilité et de gravité pour décider des priorités de traitement.
+
+   B. TRAITEMENT DES RISQUES ET CHOIX DES SCENARIOS.
+
+      Le traitement des risques prioritaires peut consister à éliminer le risque, le limiter par la prévention et la protection, le transférer par l'assurance ou l'accepter.
+
+      Les risques résiduels qui demeurent après les actions de prévention constituent les scénarios à traiter dans le cadre du PCA.
+
+      Les scénarios retenus doivent être ceux qui conduisent à une perte de ressources critiques susceptible d'entraîner une interruption au-delà du seuil acceptable.
+
+      Il est recommandé de regrouper les risques en quelques scénarios dimensionnant pour donner plus de réalité et prendre en compte des effets aggravants simultanés.
+
+IV. STRATEGIE DE CONTINUITE ET MOYENS.
+
+   A. DEFINITION DE LA STRATEGIE ET ARBITRAGES.
+
+      La stratégie de continuité résulte d'une optimisation entre le coût des exigences opérationnelles de continuité et le coût de l'interruption d'activité.
+
+      Pour chaque activité essentielle, la stratégie doit préciser les niveaux de service retenus et les durées d'interruption maximales admissibles.
+
+      Le bilan coût avantage permet d'arbitrer car plus l'exigence de disponibilité est élevée, plus le coût du PCA augmente.
+
+      Des modes dégradés peuvent être envisagés pour rendre plus tolérable une interruption de l'activité normale en définissant des procédures spécifiques.
+
+   B. RESSOURCES ET PROCEDURES DE SECOURS.
+
+      Pour les ressources humaines, il s'agit d'identifier les positions de travail clés, les suppléants et les mécanismes d'astreinte ou de télétravail.
+
+      Pour les systèmes d'information, l'architecture doit répondre aux exigences de délais de secours et de perte de données maximale admissible.
+
+      Les infrastructures critiques doivent faire l'objet de redondances ou de solutions de repli pré-équipées.
+
+      Il est nécessaire de définir les exigences vis-à-vis des partenaires et fournisseurs critiques, notamment en contractualisant les niveaux de service et la continuité.
+
+V. MISE EN ŒUVRE ET MAINTIEN EN CONDITION OPERATIONNELLE.
+
+   A. DOCUMENTATION ET GESTION DE CRISE.
+
+      Le PCA regroupe les procédures documentées qui servent de guide pour répondre, rétablir et reprendre l'activité.
+
+      La gestion de crise permet de piloter la mise en œuvre du PCA à travers des procédures d'alerte, de qualification et d'activation de la cellule de crise.
+
+      La cellule de crise a pour fonction de maîtriser l'incertitude et de coordonner les actions de réponse et de communication.
+
+      Le plan doit décrire quand et comment déclencher le PCA, que ce soit en phase d'alerte sur signaux précurseurs ou en phase d'activation suite à un sinistre.
+
+   B. MAINTENANCE, EXERCICES ET RETOUR D'EXPERIENCE.
+
+      La maintenance opérationnelle du plan est essentielle pour vérifier la bonne mise en œuvre des dispositifs et l'efficacité du plan.
+
+      Il est nécessaire de tester régulièrement les procédures techniques et de réaliser des exercices de simulation pour entraîner les équipes.
+
+      Le PCA est un plan évolutif qui doit être revu régulièrement pour tenir compte des changements d'organisation et des risques.
+
+      Les retours d'expérience ou RETEX doivent être systématiquement réalisés après tout événement grave ou exercice pour identifier les axes d'amélioration.
+
+POINTS D'ATTENTION.
+
+Il est utopique de chercher à tout prévoir et maîtriser, l'objectif est de construire des stratégies de protection pour limiter les effets des crises.
+
+Le responsable informatique ne doit pas piloter le projet PCA car il n'a pas la vision métier globale de l'organisation.
+
+Une démarche simplifiée dissociée de la gestion des risques est déconseillée car elle peut engendrer des travaux redondants et manquer de rationalité.
+
+La perte de confidentialité des données peut conduire à la faillite de certaines organisations et doit être prise en compte.
+
+Le transfert de missions à un prestataire n'exonère pas l'entreprise de sa responsabilité juridique en cas de défaillance.
+
+Les exercices doivent être pensés en fonction de ce que l'on veut vérifier comme la procédure d'alerte ou le basculement technique.
+
+EXEMPLES CITES.
+
+Une crue ou une pandémie grippale sont des exemples de scénarios pour un PCA simplifié.
+
+La destruction d'un site est un scénario focalisé sur les conséquences sans décrire les causes.
+
+Le processus de livraison de médicaments ne peut accepter un retard supérieur à douze heures.
+
+Un processus de paye peut accepter un retard de trois jours en mode dégradé avec versement d'acomptes.
+
+L'inondation d'un site informatique nécessite deux à six semaines pour le rétablissement.
+
+Les événements du 11 septembre 2001 montrent que 49 pour cent des sociétés affectées ont déclenché leur PCA.

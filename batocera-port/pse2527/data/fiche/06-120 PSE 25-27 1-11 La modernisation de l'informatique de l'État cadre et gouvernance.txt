@@ -1,0 +1,165 @@
+LA MODERNISATION DE L'INFORMATIQUE DE L'ETAT (PSE TRAD 2025 - 2027).
+
+LEXIQUE COMPLET.
+
+      Le SGMAP correspond au Secrétariat général pour la modernisation de l'action publique créé initialement en 2012 pour piloter la transformation de l'État.
+
+      La DINUM désigne la Direction interministérielle du numérique créée en 2019 pour agir comme autorité centrale de la transformation numérique sous l'autorité du Premier ministre.
+
+      L'interopérabilité se définit comme la capacité des systèmes informatiques à communiquer et travailler ensemble malgré leurs différences d'architecture ou de langage.
+
+      Le RGI est le Référentiel Général d'Interopérabilité qui fixe des normes et standards communs pour faciliter les échanges sans imposer de solution unique.
+
+      Le RGS est le Référentiel Général de Sécurité qui définit un cadre réglementaire pour garantir la confiance et la sécurité des systèmes d'information administratifs.
+
+      L'homologation de sécurité est une démarche administrative validant qu'un système d'information est sécurisé et conforme à la réglementation en vigueur.
+
+      L'audit statique de code consiste en une technique d'examen du code source sans exécuter le programme pour détecter des vulnérabilités avant la mise en production.
+
+      L'audit dynamique est une simulation d'attaques ciblées sur un système en fonctionnement pour évaluer ses réactions face à une intrusion réelle.
+
+      L'accessibilité numérique représente la capacité d'un service ou système à être utilisé par toute personne indépendamment de son handicap ou de sa déficience.
+
+      Le RGAA est le Référentiel Général d'Amélioration de l'Accessibilité fixant les normes techniques obligatoires pour les services en ligne publics et certaines entreprises.
+
+      Le RGPD est le Règlement Général sur la Protection des Données applicable depuis 2018 pour encadrer le traitement des données personnelles dans l'Union Européenne.
+
+      L'écoconception désigne la démarche visant à réduire la consommation de ressources informatiques et l'obsolescence matérielle dès la conception des services.
+
+      Le RGESN est le Référentiel Général d'Écoconception de Services Numériques complétant les exigences environnementales des projets numériques.
+
+      Etalab est le département de la DINUM chargé de coordonner la stratégie de la donnée et de promouvoir l'ouverture des données publiques ou open data.
+
+COURS DÉTAILLÉ.
+
+I. CADRE INSTITUTIONNEL ET GOUVERNANCE.
+
+   A. Création et réorganisation historique.
+
+      La modernisation administrative a débuté avec la création du SGMAP par le décret du 30 octobre 2012 pour centraliser les efforts de transformation.
+
+      Une scission a eu lieu en 2017 créant deux entités distinctes à savoir la DITP pour la transformation publique et la DINSIC pour les enjeux numériques.
+
+      La structure actuelle est la DINUM créée par le décret du 25 octobre 2019 qui remplace la DINSIC pour renforcer la cohérence des politiques numériques.
+
+      Cette direction est placée sous l'autorité directe du Premier ministre tout en étant mise à disposition du ministre de la Transformation et de la Fonction publiques.
+
+   B. Missions stratégiques et organisation interne.
+
+      La feuille de route de la DINUM s'articule autour de la mutation des organisations publiques et du renforcement des compétences numériques des agents.
+
+      Elle vise également à développer l'exploitation des données pour l'efficacité administrative et à préserver la souveraineté numérique par des outils mutualisés.
+
+      La direction de programme TECH.GOUV pilote la transformation numérique incluant l'incubateur Beta.gouv qui utilise des méthodes agiles.
+
+      Le département Infrastructures et services opérés conçoit les infrastructures mutualisées comme le Réseau Interministériel de l'État.
+
+      Le département Etalab coordonne la politique de la donnée tandis que le département Performance des services numériques gère la mutualisation.
+
+II. REFERENTIELS ET NORMES TECHNIQUES.
+
+   A. L'interopérabilité via le RGI.
+
+      Le Référentiel Général d'Interopérabilité permet aux systèmes de travailler ensemble en utilisant des normes communes malgré leurs différences techniques.
+
+      L'objectif est d'éviter la prolifération coûteuse de choix hétéroclites en identifiant des standards incontournables et des assemblages clés.
+
+      Le RGI n'impose pas une solution unique à tout l'écosystème mais demande aux autorités d'aligner leur action sur un calendrier public de conformité.
+
+   B. La sécurité via le RGS.
+
+      Le Référentiel Général de Sécurité impose un cadre contraignant mais adaptable pour renforcer la confiance des usagers dans les services électroniques.
+
+      L'homologation de sécurité est obligatoire pour certains systèmes selon l'instruction générale interministérielle et la politique de sécurité de l'État.
+
+      L'audit statique analyse le code source pour trouver des failles comme les injections SQL mais peut générer des faux positifs.
+
+      L'audit dynamique simule des intrusions sur les formulaires et API en utilisant des outils spécialisés pour tester la résistance du système.
+
+      Le non-respect de l'obligation de sécurité est sanctionné pénalement par cinq ans d'emprisonnement et 300 000 euros d'amende selon l'article 226-17 du code pénal.
+
+   C. L'accessibilité via le RGAA.
+
+      Le RGAA découle de la loi du 11 février 2005 et s'applique au secteur public ainsi qu'aux entreprises privées réalisant plus de 250 millions d'euros de chiffre d'affaires.
+
+      Les entités doivent publier une déclaration d'accessibilité et mentionner le statut de conformité sur leur page d'accueil.
+
+      Le premier principe est que le site doit être perceptible par tout utilisateur y compris via des alternatives aux médias audios et vidéos.
+
+      Le deuxième principe exige un site utilisable où toutes les fonctionnalités sont accessibles au clavier avec un temps de consultation suffisant.
+
+      Le troisième principe impose un site compréhensible avec un contenu lisible et un fonctionnement prévisible pour éviter les erreurs.
+
+      Le quatrième principe demande un site robuste compatible avec les technologies d'assistance actuelles et futures.
+
+   D. La protection des données via le RGPD.
+
+      Le Règlement Général sur la Protection des Données est applicable depuis le 25 mai 2018 et remplace les formalités préalables par une logique de conformité continue.
+
+      Il s'applique matériellement à tout traitement de données personnelles réalisé par un organisme public ou privé.
+
+      Il s'applique territorialement à tout organisme établi dans l'UE ou à tout organisme hors UE qui cible ou profile des résidents européens.
+
+   E. L'écoconception via le RGESN.
+
+      Ce référentiel vise à réduire la consommation de ressources informatiques et énergétiques ainsi que la contribution à l'obsolescence des équipements.
+
+      La démarche commence par questionner la nécessité même du service numérique avant sa mise en œuvre technique.
+
+      Il est piloté conjointement par la DINUM et le Ministère de la Transition Écologique en partenariat avec l'ADEME.
+
+III. POLITIQUES ET INITIATIVES PHARES.
+
+   A. Contribution aux logiciels libres.
+
+      La loi pour une République numérique de 2016 reconnait les codes sources de l'administration comme des documents administratifs communicables.
+
+      Le décret de 2017 impose de privilégier les licences libres et encourage la publication des codes sur la plateforme data.gouv.fr.
+
+   B. Mutualisation des systèmes d'information.
+
+      Les projets de mutualisation sont guidés par la recherche de gains financiers et de valeur ajoutée avant les questions de gouvernance.
+
+      L'objectif n'est pas forcément une solution unique mais des outils interopérables avec une transparence totale sur la satisfaction utilisateur.
+
+      Des projets comme FranceConnect étendent l'identification sécurisée aux entreprises tandis que FRANCE VISAS dématérialise les demandes.
+
+   C. Stratégie de la donnée.
+
+      Le département Etalab coordonne l'ouverture des données publiques pour faciliter leur circulation entre administrations.
+
+      Le programme Lab IA promeut l'usage de l'intelligence artificielle dans la sphère publique pour accompagner les projets innovants.
+
+IV. PRINCIPES ET BONNES PRATIQUES PROJETS.
+
+   A. Gestion des grands projets SI.
+
+      Le choix de mutualiser doit précéder les modalités de financement et reposer sur des solutions dont le fonctionnement est démontré.
+
+      La non-participation à un service mutualisé doit être justifiée par des spécificités réelles et peut impliquer des mesures compensatoires.
+
+   B. Panorama des projets numériques.
+
+      Un panorama semestriel suit les projets stratégiques dont le coût dépasse le seuil de 9 millions d'euros.
+
+      Ce dispositif permet d'identifier les risques et de proposer des mesures correctives comme des réorientations stratégiques ou des renforts.
+
+POINTS D'ATTENTION.
+
+Il faut impérativement retenir que la sanction pénale pour défaut de sécurité des données peut atteindre 5 ans de prison et 300 000 euros d'amende.
+
+Le seuil de chiffre d'affaires rendant le RGAA obligatoire pour les entreprises privées est fixé à 250 millions d'euros réalisés en France.
+
+Les grands projets numériques de l'État sont ceux dont le budget dépasse 9 millions d'euros et font l'objet d'un suivi spécifique.
+
+Le RGPD s'applique aux entreprises étrangères hors Union Européenne si elles ciblent des citoyens européens pour leur offrir des biens ou services.
+
+EXEMPLES CITES.
+
+Les outils cités pour réaliser des audits dynamiques ou tests d'intrusion incluent Burp Suite et ZAP aussi appelé Zed Attack Proxy.
+
+Les vulnérabilités classiques détectées par audit incluent les injections SQL et les failles XSS ou Cross-Site Scripting.
+
+Les services mutualisés majeurs opérés par la DINUM comprennent le Réseau Interministériel de l'État et FranceConnect.
+
+Les applications métiers citées comme exemples de modernisation sont FRANCE VISAS pour les étrangers et PAYSAGE pour la paie publique.

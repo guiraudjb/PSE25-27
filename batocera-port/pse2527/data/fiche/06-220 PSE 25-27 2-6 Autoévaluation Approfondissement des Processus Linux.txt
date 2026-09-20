@@ -1,0 +1,109 @@
+PROCESSUS APPROFONDISSEMENTS LINUX.
+
+LEXIQUE COMPLET.
+
+      Le cycle de vie correspond à la série d'états par lesquels passe un processus depuis sa création jusqu'à sa destruction.
+
+      Un processus zombie est un processus dont l'exécution est terminée mais qui conserve encore une entrée dans la table des processus.
+
+      L'état endormi désigne la situation d'un processus en attente d'une ressource externe ou d'une donnée.
+
+      Un appel système est le mécanisme par lequel un processus demande un service au noyau provoquant souvent un changement d'état.
+
+      Le changement de contexte est l'opération de sauvegarde et de restauration de l'état d'un processus permettant au processeur de basculer d'une tâche à une autre.
+
+      La priorité statique est le niveau de priorité défini au lancement d'un processus modifiable via des commandes spécifiques.
+
+      La filiation représente l'organisation hiérarchique des processus en arborescence avec des parents et des enfants.
+
+      Les threads sont des unités d'exécution légères partageant des ressources au sein d'un même processus.
+
+COURS DÉTAILLÉ.
+
+I. LE CYCLE DE VIE DU PROCESSUS.
+
+   A. Chronologie des états.
+
+      Le document définit un cycle de vie minimal composé de cinq étapes ordonnées chronologiquement.
+
+      La première étape est la création du processus.
+
+      Le processus passe ensuite à l'état prêt à être exécuté en attente du processeur.
+
+      L'étape centrale est l'état en cours d'exécution où le processus utilise activement le processeur.
+
+      Une fois l'exécution terminée le processus passe à l'état zombie avant d'être totalement supprimé.
+
+      La dernière étape est l'état détruit où le processus disparaît du système.
+
+II. GESTION DES ÉTATS ET ENTRÉES SORTIES.
+
+   A. Mécanisme de blocage.
+
+      Un processus ne reste pas en cours d'exécution lorsqu'il doit lire une donnée sur un périphérique de stockage.
+
+      Cette action déclenche une demande d'entrée et sortie qui se résume à un appel système.
+
+      Le processus quitte le mode exécution pour se placer dans l'état endormi.
+
+   B. Reprise de l'activité.
+
+      Le processus reste endormi tant que la ressource demandée n'est pas accessible.
+
+      Le système se charge de réveiller le processus uniquement quand la donnée devient disponible.
+
+III. ORDONNANCEMENT ET CPU.
+
+   A. Le changement de contexte.
+
+      L'allocation du processeur à un nouveau processus repose sur la technique du changement de contexte.
+
+      Ce mécanisme consiste d'abord à sauvegarder le contexte d'exécution du processus courant.
+
+      Il procède ensuite à la restauration du contexte du processus nouvellement élu pour reprendre son exécution.
+
+   B. Gestion de la priorité.
+
+      Il est possible d'influencer l'ordonnancement en modifiant la priorité d'un processus.
+
+      La commande nice est l'outil spécifique pour réaliser cette opération.
+
+      Cette commande permet de modifier la priorité statique d'un processus au moment de son lancement.
+
+IV. LES THREADS ET LA SURVEILLANCE.
+
+   A. Avantages des threads.
+
+      L'usage des threads apporte plusieurs bénéfices techniques par rapport aux processus classiques.
+
+      Ils offrent une grande simplicité de communication entre les unités d'exécution.
+
+      Ils permettent également une simplicité de synchronisation des tâches.
+
+      Ils garantissent une rapidité d'exécution supérieure.
+
+   B. Visualisation et commandes.
+
+      Plusieurs outils permettent de lister les processus en cours d'exécution sur le système.
+
+      Les commandes ps et top fournissent des listes de processus actifs.
+
+      La commande pstree est spécifiquement dédiée à la visualisation de la filiation et de l'arborescence des processus.
+
+POINTS D'ATTENTION.
+
+      L'état zombie est une étape transitoire distincte qui survient après la fin de l'exécution et avant le nettoyage complet.
+
+      La simplicité de programmation et la rapidité d'ordonnancement ne sont pas considérées comme des avantages des threads dans ce document.
+
+      La commande vmstat ne fait pas partie des outils cités pour lister les processus en cours.
+
+      La commande processlist est mentionnée comme une réponse incorrecte et n'est pas une commande valide dans ce contexte.
+
+EXEMPLES CITES.
+
+      La lecture d'une donnée sur un disque dur est l'exemple utilisé pour illustrer le passage à l'état endormi.
+
+      La commande nice est citée pour l'ajustement de la priorité statique.
+
+      La commande pstree est citée pour l'observation de l'arbre des processus.

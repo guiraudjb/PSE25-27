@@ -1,0 +1,195 @@
+LE LOGICIEL LIBRE : DEFINITIONS, MODELES ECONOMIQUES, CADRE INSTITUTIONNEL ET SUPPORT INTERMINISTERIEL.
+
+LEXIQUE COMPLET.
+
+      Logiciel Propriétaire : Programme distribué uniquement sous forme de code exécutable binaire verrouillé, empêchant l'utilisateur de lire ou modifier le fonctionnement interne.
+
+      Logiciel Libre : Programme fourni avec son code source lisible, garantissant à l'utilisateur les libertés d'exécution, d'étude, de modification et de redistribution.
+
+      Code Source : Instructions du programme écrites dans un langage compréhensible par les humains comme C, Python ou Java.
+
+      Code Exécutable : Fichier binaire traduit pour être interprété directement par le processeur, illisible pour l'humain.
+
+      Compilateur : Outil technique transformant le code source en code exécutable.
+
+      FSF (Free Software Foundation) : Organisation portant la vision éthique et politique du logiciel libre, axée sur la liberté de l'utilisateur.
+
+      OSI (Open Source Initiative) : Organisation portant la vision pragmatique de l'Open Source, axée sur l'efficacité technique et le développement collaboratif.
+
+      FLOSS : Acronyme désignant globalement les logiciels respectant les principes de liberté et d'ouverture, réconciliant les approches de la FSF et de l'OSI.
+
+      Copyleft : Mécanisme juridique utilisant le droit d'auteur pour imposer que toute version modifiée d'un logiciel libre soit redistribuée sous les mêmes conditions de liberté.
+
+      Licence Permissive : Type de licence autorisant la réutilisation du code, y compris dans des logiciels propriétaires, sans obligation de réciprocité stricte.
+
+      LGPL : Licence à copyleft faible conçue pour les bibliothèques logicielles, permettant leur liaison avec des logiciels propriétaires.
+
+      Open Core : Modèle économique hybride proposant une base libre gratuite et des extensions propriétaires payantes.
+
+      Mutualisation : Financement conjoint par plusieurs entités de développements ou correctifs pour partager les coûts.
+
+      OSPO (Open Source Program Office) : Bureau dédié à la gestion et promotion du logiciel libre au sein d'une organisation comme la Commission européenne.
+
+      QSOS : Méthode d'évaluation objective et rigoureuse des logiciels libres utilisée pour la veille technique.
+
+      Réversibilité : Clause contractuelle garantissant la récupération intégrale des données et livrables en fin de marché.
+
+COURS DETAILLE.
+
+I. DEFINITIONS ET PRINCIPES FONDAMENTAUX DU LOGICIEL LIBRE.
+
+   A. Distinction fondamentale et aspect technique.
+
+      La distinction majeure entre les logiciels libres et les logiciels propriétaires réside dans l'accès au code source.
+
+      Un logiciel propriétaire est distribué uniquement sous forme binaire exécutable, ce qui verrouille l'utilisateur dans un écosystème contrôlé et opaque.
+
+      À l'inverse, le logiciel libre fournit le code source lisible, permettant une transparence totale, la correction de bugs et l'adaptation aux besoins spécifiques.
+
+      Le compilateur joue un rôle clé en traduisant le code source humain en code machine, un processus qui reste transparent et reproductible dans le cas du logiciel libre.
+
+   B. Les quatre libertés fondamentales.
+
+      La philosophie du logiciel libre repose sur quatre libertés définies par la Free Software Foundation pour garantir le contrôle de l'utilisateur.
+
+      La première liberté est d'exécuter le programme pour n'importe quel usage, sans restriction de contexte.
+
+      La deuxième liberté permet d'étudier le fonctionnement du programme et de l'adapter, ce qui nécessite l'accès au code source.
+
+      La troisième liberté autorise la redistribution de copies pour favoriser le partage et la collaboration.
+
+      La quatrième liberté encourage l'amélioration du programme et la publication des modifications pour que toute la communauté en bénéficie.
+
+   C. Débat entre Logiciel Libre et Open Source.
+
+      La FSF défend une vision éthique et politique où le logiciel est un bien commun nécessaire à l'autonomie et à la démocratie.
+
+      L'Open Source Initiative adopte une approche pragmatique centrée sur l'efficacité technique, la qualité du code et la réduction des coûts de développement.
+
+      Le terme FLOSS a été créé pour englober ces deux visions qui, malgré des motivations différentes, partagent les mêmes pratiques techniques de développement et de diffusion.
+
+II. LICENCES LIBRES ET IMPLICATIONS JURIDIQUES.
+
+   A. Licences à obligation de réciprocité ou Copyleft.
+
+      Le copyleft est un mécanisme juridique qui utilise le droit d'auteur pour garantir que les libertés fondamentales sont conservées dans toutes les versions dérivées du logiciel.
+
+      La licence GNU GPL est l'exemple le plus emblématique, obligeant toute version modifiée à être redistribuée sous les mêmes termes libres.
+
+      La licence CeCILL est une adaptation française de la GPL, développée par le CEA, le CNRS et l'INRIA pour assurer une compatibilité totale avec le droit français.
+
+   B. Licences permissives.
+
+      Ces licences, comme BSD ou MIT, se distinguent par leur flexibilité et l'absence de contraintes strictes sur la redistribution.
+
+      Elles permettent d'intégrer du code libre dans des logiciels propriétaires sans obligation de publier les modifications, favorisant une large adoption industrielle.
+
+      La licence CeCILL-B est l'équivalent français des licences permissives, offrant une sécurité juridique adaptée au droit national.
+
+   C. Licences pour composants et bibliothèques.
+
+      La licence LGPL applique un copyleft faible, permettant à un logiciel propriétaire d'utiliser une bibliothèque libre sans que le logiciel principal ne devienne libre.
+
+      La licence CeCILL-C est l'adaptation française de la LGPL, garantissant que les bibliothèques restent libres tout en permettant leur intégration dans des solutions propriétaires.
+
+   D. Le cas des licences Creative Commons.
+
+      Bien que conçues pour les œuvres culturelles, certaines licences Creative Commons comportent des clauses restrictives incompatibles avec le logiciel libre.
+
+      Les clauses interdisant l'usage commercial ou la modification s'opposent aux libertés fondamentales définies par la FSF.
+
+III. MODELES ECONOMIQUES DU LOGICIEL LIBRE.
+
+   A. Services récurrents et support technique.
+
+      L'activité économique repose souvent sur la vente d'abonnements incluant des mises à jour sécurisées et des outils de gestion.
+
+      Le support technique payant, proposé par des entreprises comme Red Hat, est crucial pour les utilisateurs gérant des systèmes critiques nécessitant une haute disponibilité.
+
+      Les SSII proposent également des prestations de service pour l'installation, la formation et le développement sur mesure.
+
+   B. Certification et mutualisation.
+
+      Les fabricants de matériel paient pour la certification de leurs produits afin d'assurer leur compatibilité avec les distributions Linux.
+
+      La mutualisation permet à plusieurs organisations, notamment publiques, de cofinancer le développement de fonctionnalités communes.
+
+   C. Ecosystèmes, solutions clés en main et hybrides.
+
+      Des fondations comme Eclipse regroupent des industriels pour collaborer sur des socles technologiques communs.
+
+      Les solutions clés en main intègrent des logiciels libres dans du matériel vendu prêt à l'emploi, comme les box internet ou les serveurs de stockage.
+
+      Le modèle hybride Open Core propose une version communautaire gratuite et monétise des extensions propriétaires destinées aux grandes entreprises.
+
+      Le mécénat et le sponsoring permettent également de financer des projets d'intérêt public ou stratégique.
+
+IV. ACTEURS INSTITUTIONNELS ET POLITIQUES PUBLIQUES.
+
+   A. Politique publique en France.
+
+      La circulaire Ayrault de 2012 impose aux administrations d'étudier systématiquement l'alternative du logiciel libre pour réduire les coûts et gagner en souplesse.
+
+      La Direction interministérielle du numérique ou DINum coordonne cette stratégie pour harmoniser les pratiques et favoriser la mutualisation.
+
+   B. Poids économique et souveraineté.
+
+      Le secteur représente environ 30 000 emplois en France avec une croissance annuelle soutenue de 30 pour cent.
+
+      La commande publique est un moteur essentiel, car plus de 82 pour cent des entreprises du libre ont des clients dans le secteur public.
+
+      Le logiciel libre est un levier de souveraineté numérique pour réduire la dépendance technologique vis-à-vis des éditeurs étrangers.
+
+   C. Standards et stratégie européenne.
+
+      L'opposition aux brevets logiciels est forte car ils peuvent bloquer l'innovation en protégeant des algorithmes plutôt que du code.
+
+      La Commission européenne a adopté une stratégie 2020-2023 visant l'autonomie technologique et la création d'un bureau dédié aux logiciels libres nommé OSPO.
+
+V. SUPPORT AUX LOGICIELS LIBRES INTERMINISTERIEL DGFIP.
+
+   A. Gouvernance et cadre institutionnel.
+
+      Le marché est piloté conjointement par la DGFiP et la Direction des Achats de l'État pour centraliser les besoins des ministères.
+
+      Des comités de pilotage trimestriels et des comités de suivi mensuels assurent la supervision et l'ajustement du dispositif.
+
+   B. Fonctionnement opérationnel.
+
+      Le périmètre couvre jusqu'à 350 logiciels, ajusté tous les trimestres selon les besoins.
+
+      Les délais de résolution varient de 2 heures à 60 jours selon la criticité du logiciel et la gravité de l'anomalie.
+
+      Une clause essentielle impose le reversement des correctifs à la communauté sous 7 jours ouvrés après validation.
+
+   C. Veille et flexibilité.
+
+      Le marché inclut des prestations de veille stratégique pour évaluer des domaines fonctionnels et de veille technique utilisant la méthode QSOS.
+
+      La réversibilité est garantie avec la restitution de toutes les données et livrables sous 10 jours ouvrés en fin de contrat.
+
+POINTS D'ATTENTION.
+
+      Il ne faut pas confondre la gratuité du téléchargement avec la notion de liberté qui concerne les droits de l'utilisateur.
+
+      L'accès au code source est la condition technique sine qua non pour exercer les libertés d'étude et de modification.
+
+      Les licences permissives autorisent la fermeture du code dans les versions dérivées, contrairement aux licences copyleft.
+
+      Le modèle économique du libre repose principalement sur le service et non sur la vente de licences d'utilisation.
+
+      Le support DGFiP exige que les corrections payées par l'administration soient reversées à la communauté.
+
+EXEMPLES CITES.
+
+      Firefox est cité comme un exemple de logiciel libre fourni avec son code source.
+
+      La licence GNU GPL est utilisée par le noyau Linux.
+
+      Les systèmes BSD comme FreeBSD ou OpenBSD illustrent l'usage de licences permissives.
+
+      L'entreprise Red Hat est citée pour son modèle économique basé sur le support technique payant.
+
+      La fondation Eclipse est donnée en exemple de groupement d'éditeurs industriels.
+
+      La méthode QSOS est l'outil cité pour la qualification et la sélection des logiciels open source.

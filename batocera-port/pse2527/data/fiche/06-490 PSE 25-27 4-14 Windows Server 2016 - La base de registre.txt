@@ -1,0 +1,129 @@
+LA BASE DE REGISTRE WINDOWS SERVER 2016.
+
+LEXIQUE COMPLET.
+
+      Base de registre (BDR / Windows Registry) : base de donnees hierarchique centralisee utilisee par Windows pour stocker les informations de configuration du systeme d'exploitation, des utilisateurs, du materiel et des applications. Elle remplace les anciens fichiers de configuration AUTOEXEC.BAT, CONFIG.SYS et les fichiers INI.
+
+      Cle de registre (Key) : element de la base de registre comparable a un dossier, pouvant contenir des sous-cles et des valeurs. Chaque cle racine commence par HKEY_.
+
+      Sous-cle (Subkey) : cle contenue dans une autre cle, permettant d'organiser les informations de configuration en arborescence hierarchique.
+
+      Valeur (Value) : element contenu dans une cle ou sous-cle, comparable a un fichier contenant une donnee. Chaque valeur est composee d'un nom, d'un type de donnees et d'une valeur.
+
+      HKEY_LOCAL_MACHINE (HKLM) : cle racine contenant les parametres globaux de l'ordinateur independants de l'utilisateur : materiel, pilotes, services, logiciels installes, configuration de demarrage (BCD). Sous-cles principales : HKLM\SYSTEM, HKLM\SOFTWARE, HKLM\SECURITY, HKLM\SAM, HKLM\BCD.
+
+      HKEY_CURRENT_USER (HKCU) : cle racine pointant vers le profil de l'utilisateur actuellement connecte (bureau, imprimantes, preferences, configuration des applications). Correspond a une sous-cle sous HKU pour l'utilisateur connecte. Profil stocke dans \Users\<username>\NTUSER.DAT.
+
+      HKEY_USERS (HKU) : cle racine contenant l'ensemble des profils utilisateurs charges sur le systeme. HKCU est un raccourci vers une partie de HKU. La sous-cle HKU\.DEFAULT correspond au profil systeme.
+
+      HKEY_CLASSES_ROOT (HKCR) : cle racine contenant les associations de fichiers, les composants COM et les informations d'integration des applications. Determine quel programme est lance quand un utilisateur ouvre un fichier.
+
+      HKEY_CURRENT_CONFIG (HKCC) : cle racine contenant les informations relatives au profil materiel actif au demarrage. Lien vers HKLM\SYSTEM\CurrentControlSet\Hardware Profiles\Current.
+
+      HKEY_PERFORMANCE_DATA (HKPD) : cle racine contenant les compteurs de performance systeme.
+
+      Ruche (Hive) : groupe logique de cles, sous-cles et valeurs charge en memoire lors du demarrage du systeme ou de la connexion d'un utilisateur. Stockee physiquement dans C:\Windows\System32\Config. Le profil de chaque utilisateur dispose de sa propre ruche dans C:\Users\<Utilisateur>\NTUSER.DAT.
+
+      REG_SZ : type de donnee registre correspondant a une chaine de caracteres de taille fixe. Exemple : nom du serveur = SRV-FICHIERS.
+
+      REG_DWORD : type de donnee registre correspondant a un entier code sur 32 bits. Exemple : EnableFirewall = 1.
+
+      REG_QWORD : type de donnee registre correspondant a un entier code sur 64 bits.
+
+      REG_BINARY : type de donnee registre correspondant a des donnees binaires de taille variable.
+
+      REG_MULTI_SZ : type de donnee registre correspondant a une liste de chaines de caracteres.
+
+      REG_EXPAND_SZ : type de donnee registre correspondant a une chaine contenant des variables systeme. Exemple : %SystemRoot%.
+
+      Regedit (regedit.exe) : editeur graphique du registre Windows permettant de consulter, modifier, exporter et importer des cles et valeurs. Aucun garde-fou : toute erreur peut endommager le systeme.
+
+      REG.EXE : outil en ligne de commande Windows permettant d'importer, d'exporter, de sauvegarder, de restaurer, de comparer, de modifier et de supprimer des cles et valeurs du registre.
+
+      BCD (Boot Configuration Data) : base de donnees de configuration du demarrage sous HKLM\BCD, remplacant le fichier Boot.ini des versions anterieures de Windows Server.
+
+COURS DETAILLE.
+
+I. STRUCTURE ET COMPOSANTS DE LA BASE DE REGISTRE.
+
+   A. Architecture generale.
+
+      La base de registre (BDR, Windows Registry) est une base de donnees hierarchique centralisee, consultee continuellement par Windows pendant son fonctionnement pour recuperer les parametres necessaires a l'execution du systeme et des applications. Elle remplace la majorite des anciens fichiers de configuration (AUTOEXEC.BAT, CONFIG.SYS, fichiers INI). Elle est organisee sous forme d'arborescence composee de cles, de sous-cles et de valeurs. Une cle est comparable a un dossier, une valeur est comparable a un fichier contenant une donnee.
+
+      Les modifications sont le plus souvent effectuees de maniere transparente via des interfaces graphiques. Quand aucune interface n'est prevue, l'administrateur utilise Regedit.exe, mais sans garde-fou : le logiciel ne verifie aucun parametre, ce qui peut endommager le systeme.
+
+   B. Les six cles racines principales.
+
+      HKEY_LOCAL_MACHINE (HKLM) contient les parametres globaux de l'ordinateur independants de l'utilisateur : materiel, pilotes, services, logiciels installes. La sous-cle HKLM\BCD contient la configuration de la base de donnees de demarrage, remplacant le fichier Boot.ini. Les sous-cles essentielles sont HKLM\SYSTEM (demarrage et services), HKLM\SOFTWARE (applications) et HKLM\SECURITY (securite).
+
+      HKEY_CURRENT_USER (HKCU) contient les parametres de l'utilisateur actuellement connecte : bureau, imprimantes, preferences et configuration des applications. Ces informations proviennent du profil utilisateur stocke dans \Users\<username>\NTUSER.DAT. HKCU est en realite un raccourci vers la sous-cle correspondante dans HKEY_USERS.
+
+      HKEY_USERS (HKU) contient l'ensemble des profils utilisateurs charges sur le systeme. La sous-cle HKU\.DEFAULT correspond au profil systeme de base utilise avant toute connexion.
+
+      HKEY_CLASSES_ROOT (HKCR) contient les associations d'extensions de fichiers, les enregistrements de classe COM et les informations d'integration des applications. Elle determine quel programme est lance quand un utilisateur ouvre un fichier et integre la virtualisation pour le controle des comptes utilisateur (UAC).
+
+      HKEY_CURRENT_CONFIG (HKCC) contient les informations relatives au profil materiel actif au demarrage. C'est un lien vers HKLM\SYSTEM\CurrentControlSet\Hardware Profiles\Current. HKEY_PERFORMANCE_DATA (HKPD) stocke les compteurs de performance systeme.
+
+   C. Les ruches et les types de donnees.
+
+      Une ruche (Hive) est un groupe logique de cles, sous-cles et valeurs charge en memoire lors du demarrage du systeme ou de la connexion d'un utilisateur. Les ruches sont physiquement stockees dans des fichiers sur le disque, principalement dans C:\Windows\System32\Config. Chaque profil utilisateur dispose de sa propre ruche dans C:\Users\<Utilisateur>\NTUSER.DAT.
+
+      Les types de donnees du registre sont : REG_SZ (chaine de caracteres Unicode de taille fixe, exemple : SRV-FICHIERS), REG_DWORD (entier 32 bits, exemple : EnableFirewall = 1), REG_QWORD (entier 64 bits), REG_BINARY (donnees binaires de taille variable), REG_MULTI_SZ (liste de chaines de caracteres) et REG_EXPAND_SZ (chaine contenant des variables systeme, exemple : %SystemRoot%).
+
+II. ROLE DU REGISTRE ET ADMINISTRATION.
+
+   A. Role du registre dans le fonctionnement systeme.
+
+      Le registre intervient dans pratiquement tous les mecanismes du systeme. Pour la gestion du demarrage, Windows lit HKLM\SYSTEM pour charger les pilotes, les services et les parametres materiels. Pour la gestion des utilisateurs, il stocke les profils, les preferences et l'environnement utilisateur. Pour la gestion du materiel, le systeme utilise le registre pour identifier les peripheriques, charger les pilotes appropries et conserver les parametres materiels. Pour la gestion des applications, les logiciels enregistrent dans le registre leurs parametres, leurs licences et leurs composants.
+
+   B. Outils d'administration du registre.
+
+      Regedit (regedit.exe) est l'editeur graphique principal du registre. Il permet la consultation, la modification, l'exportation et l'importation de cles et valeurs. Microsoft recommande la prudence lors de toute modification manuelle car Regedit ne verifie aucun parametre.
+
+      REG.EXE est l'outil en ligne de commande permettant d'importer, d'exporter, de sauvegarder, de restaurer, de comparer, de modifier et de supprimer des cles et valeurs. La commande "reg query HKLM\SOFTWARE" interroge une cle. La commande "reg add HKLM\SOFTWARE\Test /v Parametre /t REG_DWORD /d 1" ajoute une valeur REG_DWORD egale a 1. PowerShell permet l'automatisation avec des commandes comme "Get-ItemProperty HKLM:\SOFTWARE".
+
+      Les GPO (Group Policy Objects) permettent aux administrateurs de deployer des parametres de registre de maniere centralisee via des GPO locales ou Active Directory, sans modification manuelle poste par poste.
+
+      Chaque cle possede une ACL (Access Control List) definissant les droits (Lecture, Ecriture, Controle total). Les administrateurs peuvent deleguer ou restreindre l'acces aux cles sensibles.
+
+III. SAUVEGARDE, RESTAURATION ET PANNES.
+
+   A. Sauvegarde et restauration du registre.
+
+      L'exportation manuelle depuis Regedit (Fichier puis Exporter) cree un fichier .reg contenant les cles et valeurs selectionnees. Ce fichier peut etre reimporte via Fichier puis Importer, ou par la commande "reg import sauvegarde.reg". Les methodes systeme recommandees sont Windows Server Backup, la sauvegarde de l'etat systeme (System State) et les points de restauration.
+
+   B. Pannes courantes liees au registre.
+
+      La corruption du registre est causee par les arrets brutaux, les pannes de disque, les malwares et les erreurs de manipulation. Les symptomes sont les ecrans bleus (BSOD), les erreurs systeme et l'impossibilite de demarrer Windows. Microsoft indique explicitement que les erreurs de manipulation du registre peuvent necessiter une reinstallation du systeme. La remediation est la restauration depuis une sauvegarde ou la restauration de l'etat systeme.
+
+      La suppression accidentelle de cles provoque l'indisponibilite de services ou l'impossibilite d'utiliser des logiciels. La remediation est la restauration depuis une sauvegarde, l'importation d'un fichier .reg ou la restauration de l'etat systeme.
+
+      Les permissions incorrectes provoquent des acces refuses et l'incapacite pour une application de modifier sa configuration. La solution est la correction des ACL et la reprise de propriete.
+
+      Les malwares utilisent frequemment le registre pour assurer leur persistance, se lancer au demarrage et modifier la configuration systeme. Les cles de demarrage automatique (HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run) sont les cibles privilegiees.
+
+POINTS D'ATTENTION.
+
+      Toute modification du registre avec Regedit s'applique immediatement sans validation : une erreur peut rendre le systeme instable ou inaccessible. Il faut toujours sauvegarder la cle concernee avant de la modifier.
+
+      HKLM\BCD remplace le fichier Boot.ini depuis Windows Server 2008 : toute modification du demarrage doit passer par l'outil bcdedit.exe et non par une edition directe du registre.
+
+      Les applications lisent leur configuration dans le registre au moment de leur demarrage : tout changement de parametrage dans le registre necessite un redemarrage de l'application pour etre pris en compte.
+
+      Les outils de "nettoyage du registre" non officiels sont a eviter absolument : ils peuvent supprimer des cles valides et provoquer des dysfonctionnements graves sans possibilite de retour en arriere simple.
+
+      Les GPO doivent etre preferees aux modifications manuelles du registre pour les deploiements en entreprise : elles permettent la gestion centralisee, la documentation et la reversibilite des paramètres.
+
+      Les malwares exploitent les cles de demarrage automatique (HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run) pour assurer leur persistance : la surveillance de ces cles est un element essentiel de la securite.
+
+EXEMPLES CITES.
+
+      La commande "reg add HKLM\SOFTWARE\Test /v Parametre /t REG_DWORD /d 1" cree une valeur REG_DWORD nommee Parametre avec la valeur 1 sous la cle HKLM\SOFTWARE\Test.
+
+      La commande "reg query HKLM\SOFTWARE" affiche le contenu de la cle HKLM\SOFTWARE, permettant de verifier les logiciels installes et leurs parametres.
+
+      La commande PowerShell "Get-ItemProperty HKLM:\SOFTWARE" permet de consulter les proprietes de la cle HKLM\SOFTWARE et d'automatiser la gestion du registre.
+
+      L'exportation du registre depuis Regedit (Fichier puis Exporter, fichier sauvegarde.reg) permet de creer une sauvegarde d'une cle avant modification, reimportable avec "reg import sauvegarde.reg" en cas de probleme.
+
+      HKLM\SYSTEM\CurrentControlSet est la cle centrale lue au demarrage de Windows pour charger les pilotes et les services : une corruption de cette cle empeche Windows de demarrer normalement.

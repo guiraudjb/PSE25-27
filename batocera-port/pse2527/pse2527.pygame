@@ -5,6 +5,7 @@
 # correspondant (les identifiants internes face_a/face_b/face_x/face_y correspondent
 # aux boutons physiques 0/1/2/3, affiches a l'ecran comme A/B/C/D).
 import os
+import random
 import sys
 import pygame
 import pygame.freetype
@@ -18,6 +19,11 @@ import tts
 WINDOW_SURFACE = pygame.HWSURFACE | pygame.DOUBLEBUF
 MAX_PADS = 4
 QUIZ_QUESTION_COUNT = 15
+MEDIA_SEEK_STEP_S = 10  # avance/retour rapide (chanson/podcast) par pression ◄►
+# Temps de réflexion laissé APRÈS la fin de la lecture audio d'une question ou
+# d'un feedback, quand celle-ci dépasse ce que couvre déjà le minuteur choisi
+# (cas exceptionnel, ~10% des questions les plus longues avec le défaut 60s).
+MARGIN_AFTER_AUDIO_S = 20
 
 def log(msg):
     """Trace de diagnostic : Batocera capture stdout dans
@@ -35,10 +41,31 @@ FACE_TO_CHOICE_INDEX = {'face_a': 0, 'face_b': 1, 'face_x': 2, 'face_y': 3}
 STATE_SERIES = 'series'
 STATE_MODULE = 'module'
 STATE_MODE = 'mode'
+STATE_SETTINGS = 'settings'
 STATE_QUIZ_ASK = 'quiz_ask'
 STATE_QUIZ_FEEDBACK = 'quiz_feedback'
 STATE_QUIZ_END = 'quiz_end'
 STATE_FLASH = 'flash'
+STATE_MEDIA = 'media'
+STATE_INFO = 'info'
+STATE_FICHE = 'fiche'
+STATE_JUKEBOX_KIND = 'jukebox_kind'
+STATE_JUKEBOX = 'jukebox'
+
+# Même liste que le menu déroulant #timerSelect de la page web index.html
+# (la valeur par défaut diffère, voir le commentaire sur self.timer_option) :
+# compte à rebours de réponse au quiz, puis lecture de la correction, puis
+# (en flashcards) rythme de la lecture automatique.
+TIMER_OPTIONS = ['unlimited', '5', '10', '15', '20', '30', '45', '60']
+TIMER_LABELS = {
+    'unlimited': 'Illimité (validation manuelle)',
+    '5': '5 secondes', '10': '10 secondes', '15': '15 secondes',
+    '20': '20 secondes', '30': '30 secondes', '45': '45 secondes',
+    '60': '60 secondes (1 min)',
+}
+# En mode illimité, la page web utilise quand même 15s par défaut pour rythmer
+# la lecture automatique des flashcards (seul le quiz reste sans limite stricte).
+FLASH_AUTOPLAY_UNLIMITED_SECONDS = 15
 
 
 class App:
@@ -80,12 +107,40 @@ class App:
         log('init: {} séries chargées'.format(len(self.series)))
         self.series_menu = ui.ListMenu(
             [{'label': "Série {} ({} modules)".format(code, len(mods)), 'code': code, 'modules': mods}
-             for code, mods in self.series],
+             for code, mods in self.series]
+            + [{'label': 'JUKEBOX (tous podcasts/chansons)', 'jukebox': True}],
             self.screen_w, self.screen_h)
 
         self.module_menu = None
         self.mode_menu = None
         self.current_module = None
+
+        self.jukebox_kind_menu = ui.ListMenu(
+            [{'label': 'PODCAST', 'kind': 'podcast'},
+             {'label': 'MUSIQUE', 'kind': 'chanson'}],
+            self.screen_w, self.screen_h, top=140, item_height=90)
+        self.jukebox_kind = None
+        self.jukebox_playlist = []
+        self.jukebox_index = 0
+        self.jukebox_shuffle = False
+        self.jukebox_path = None
+        self.jukebox_playing = False
+        self.jukebox_position_s = 0.0
+        self.jukebox_position_ticks = 0
+        self.jukebox_info_surface = None
+
+        # 60s (et non 20s comme #timerSelect dans index.html, qui n'a pas de
+        # narration vocale) : mesuré sur les questions déjà générées, il faut
+        # ~49-52s (audio + 20s de réflexion) pour couvrir 90% des questions
+        # sans jamais couper leur lecture ; 60s en couvre ~99%. Pour le reste,
+        # voir MARGIN_AFTER_AUDIO_S plus bas (extension automatique au cas
+        # par cas des questions/réponses exceptionnellement longues).
+        self.timer_option = '60'
+        self.settings_menu = ui.ListMenu(
+            [{'label': TIMER_LABELS[opt], 'value': opt} for opt in TIMER_OPTIONS],
+            self.screen_w, self.screen_h, top=140, item_height=64)
+        self.settings_menu.selected = TIMER_OPTIONS.index(self.timer_option)
+
         self.quiz_questions = []
         self.quiz_index = 0
         self.quiz_score = 0
@@ -93,9 +148,36 @@ class App:
         self.quiz_dpad_used = False
         self.quiz_chosen = None
         self.quiz_last_correct = None
+        self.quiz_deadline = None
+        self.quiz_timer_duration = None
+        self.quiz_feedback_deadline = None
+        self.quiz_feedback_duration = None
+
         self.flash_cards = []
         self.flash_index = 0
         self.flash_flipped = False
+        self.flash_autoplay = False
+        self.flash_deadline = None
+        self.flash_duration = None
+
+        self.media_kind = None
+        self.media_path = None
+        self.media_playing = False
+        self.media_info_surface = None
+        self.media_position_s = 0.0
+        self.media_position_ticks = 0
+
+        self.info_path = None
+        self.info_surface = None
+
+        self.fiche_lines = []
+        self.fiche_page = 0
+        self.fiche_lines_per_page = 1
+        self.fiche_total_pages = 1
+        self.fiche_audio_path = None
+        self.fiche_audio_playing = False
+        self.fiche_audio_position_s = 0.0
+        self.fiche_audio_position_ticks = 0
 
         self.state = STATE_SERIES
         self.running = True
@@ -112,6 +194,7 @@ class App:
         try:
             while self.running:
                 self.handle_input()
+                self.update_timers()
                 self.draw()
                 pygame.display.flip()
                 self.clock.tick(30)
@@ -159,6 +242,8 @@ class App:
             self.handle_module(action)
         elif self.state == STATE_MODE:
             self.handle_mode(action)
+        elif self.state == STATE_SETTINGS:
+            self.handle_settings(action)
         elif self.state == STATE_QUIZ_ASK:
             self.handle_quiz_ask(action)
         elif self.state == STATE_QUIZ_FEEDBACK:
@@ -167,6 +252,34 @@ class App:
             self.handle_quiz_end(action)
         elif self.state == STATE_FLASH:
             self.handle_flash(action)
+        elif self.state == STATE_MEDIA:
+            self.handle_media(action)
+        elif self.state == STATE_INFO:
+            self.handle_info(action)
+        elif self.state == STATE_FICHE:
+            self.handle_fiche(action)
+        elif self.state == STATE_JUKEBOX_KIND:
+            self.handle_jukebox_kind(action)
+        elif self.state == STATE_JUKEBOX:
+            self.handle_jukebox(action)
+
+    def update_timers(self):
+        """Vérifiée à chaque frame (indépendamment des événements manette) :
+        fait avancer les comptes à rebours quiz/flashcard, avec le même
+        comportement que les minuteurs JS (setTimeout) de la page web."""
+        now = pygame.time.get_ticks()
+        if self.state == STATE_QUIZ_ASK and self.quiz_deadline is not None and now >= self.quiz_deadline:
+            # Fin du temps de réflexion = mauvaise réponse par défaut (comme checkAnswer(-1))
+            self.confirm_quiz_choice(-1)
+        elif self.state == STATE_QUIZ_FEEDBACK and self.quiz_feedback_deadline is not None and now >= self.quiz_feedback_deadline:
+            self.advance_quiz_feedback()
+        elif self.state == STATE_FLASH and self.flash_autoplay and self.flash_deadline is not None and now >= self.flash_deadline:
+            self.advance_flash_autoplay()
+        elif self.state == STATE_JUKEBOX and self.jukebox_playing and not pygame.mixer.music.get_busy():
+            # get_busy() ne redevient False naturellement qu'en fin de piste :
+            # une pause manuelle repasse déjà jukebox_playing à False avant
+            # d'atteindre ce test, donc pas de faux positif sur pause.
+            self.jukebox_on_track_end()
 
     # ------------------------------------------------------------------
     # SERIES
@@ -175,11 +288,31 @@ class App:
             self.series_menu.move(action)
         elif action == 'action':
             item = self.series_menu.current()
-            if item:
+            if item and item.get('jukebox'):
+                self.jukebox_kind_menu.selected = 0
+                self.state = STATE_JUKEBOX_KIND
+            elif item:
                 self.enter_module_menu(item['modules'])
+        elif action == 'shoulder_r':
+            self.enter_settings()
         elif action == 'back':
             log("'back' sur l'écran des séries -> fermeture du jeu")
             self.running = False
+
+    # ------------------------------------------------------------------
+    # SETTINGS (temps de réflexion, équivalent de #timerSelect dans index.html)
+    def enter_settings(self):
+        self.settings_menu.selected = TIMER_OPTIONS.index(self.timer_option)
+        self.state = STATE_SETTINGS
+
+    def handle_settings(self, action):
+        if action in ('up', 'down'):
+            self.settings_menu.move(action)
+        elif action == 'action':
+            self.timer_option = self.settings_menu.current()['value']
+            self.state = STATE_SERIES
+        elif action == 'back':
+            self.state = STATE_SERIES
 
     def enter_module_menu(self, modules):
         self.module_menu = ui.ListMenu(
@@ -202,7 +335,12 @@ class App:
 
     def enter_mode_menu(self):
         self.mode_menu = ui.ListMenu(
-            [{'label': 'QUIZ', 'mode': 'quiz'}, {'label': 'FLASHCARDS', 'mode': 'flash'}],
+            [{'label': 'QUIZ', 'mode': 'quiz'},
+             {'label': 'FLASHCARDS', 'mode': 'flash'},
+             {'label': 'FICHE DE RÉVISION', 'mode': 'fiche'},
+             {'label': 'CHANSON', 'mode': 'chanson'},
+             {'label': 'PODCAST', 'mode': 'podcast'},
+             {'label': 'INFOGRAPHIE', 'mode': 'info'}],
             self.screen_w, self.screen_h, top=140, item_height=90)
         self.state = STATE_MODE
 
@@ -212,11 +350,17 @@ class App:
         if action in ('up', 'down'):
             self.mode_menu.move(action)
         elif action == 'action':
-            item = self.mode_menu.current()
-            if item['mode'] == 'quiz':
+            mode = self.mode_menu.current()['mode']
+            if mode == 'quiz':
                 self.start_quiz()
-            else:
+            elif mode == 'flash':
                 self.start_flash()
+            elif mode == 'fiche':
+                self.start_fiche()
+            elif mode in ('chanson', 'podcast'):
+                self.start_media(mode)
+            elif mode == 'info':
+                self.start_info()
         elif action == 'back':
             self.state = STATE_MODULE
 
@@ -243,6 +387,28 @@ class App:
         # attendue par l'utilisateur -> évite le "il fait l'inverse de ce que
         # je vois à l'écran").
         self.quiz_dpad_used = False
+        # Lecture automatique si l'audio de cette question est déjà
+        # pré-généré ; sinon on ne force pas de synthèse Piper à la volée,
+        # l'utilisateur garde R1 pour la demander explicitement.
+        q = self.quiz_questions[self.quiz_index]
+        text, key = self.quiz_ask_text_key(q)
+        self.tts.play_if_cached(text, key)
+        self.start_quiz_timer(self.tts.cached_duration(key))
+
+    def start_quiz_timer(self, audio_duration_s=None):
+        if self.timer_option == 'unlimited':
+            self.quiz_deadline = None
+            self.quiz_timer_duration = None
+            return
+        duration = int(self.timer_option)
+        if audio_duration_s is not None:
+            # Cas exceptionnel : la question est plus longue que ce que
+            # couvre déjà le minuteur choisi - on laisse alors le temps
+            # d'entendre l'audio en entier, plus la même marge de réflexion
+            # que pour les autres questions (voir MARGIN_AFTER_AUDIO_S).
+            duration = max(duration, int(audio_duration_s) + 1 + MARGIN_AFTER_AUDIO_S)
+        self.quiz_timer_duration = duration
+        self.quiz_deadline = pygame.time.get_ticks() + duration * 1000
 
     def handle_quiz_ask(self, action):
         q = self.quiz_questions[self.quiz_index]
@@ -263,43 +429,75 @@ class App:
             self.speak_quiz_question(q)
         elif action in ('shoulder_l', 'back'):
             self.tts.stop()
+            self.quiz_deadline = None
             self.state = STATE_MODE
 
-    def speak_quiz_question(self, q):
+    def quiz_ask_text_key(self, q):
         letters = ('A', 'B', 'C', 'D')
         parts = [q['question']]
         for letter, choix in zip(letters, q['choix']):
             parts.append('Réponse {}. {}'.format(letter, choix))
         text = ' '.join(parts)
         key = '{}_quiz_{}_ask'.format(self.current_module['base'], q['id'])
+        return text, key
+
+    def speak_quiz_question(self, q):
+        text, key = self.quiz_ask_text_key(q)
         self.tts.request(text, key)
 
+    def quiz_feedback_text_key(self, q):
+        outcome = 'correct' if self.quiz_last_correct else 'incorrect'
+        prefix = 'Bonne réponse. ' if self.quiz_last_correct else 'Mauvaise réponse. '
+        text = prefix + q['explication']
+        # La clé distingue bonne/mauvaise réponse : le texte lu diffère selon
+        # l'issue, un même cache pour les deux ferait entendre la mauvaise
+        # phrase si l'utilisateur répond différemment une autre fois.
+        key = '{}_quiz_{}_feedback_{}'.format(self.current_module['base'], q['id'], outcome)
+        return text, key
+
     def confirm_quiz_choice(self, chosen):
+        # chosen == -1 : temps de réflexion écoulé (voir update_timers), traité
+        # comme une mauvaise réponse par défaut, exactement comme checkAnswer(-1)
+        # dans index.html - aucun choix n'est alors surligné en rouge.
         q = self.quiz_questions[self.quiz_index]
+        self.quiz_deadline = None
         self.quiz_chosen = chosen
         self.quiz_last_correct = (chosen == q['correct'])
         if self.quiz_last_correct:
             self.quiz_score += 1
+        self.tts.stop()
+        text, key = self.quiz_feedback_text_key(q)
+        self.tts.play_if_cached(text, key)
         self.state = STATE_QUIZ_FEEDBACK
+        self.start_feedback_timer(self.tts.cached_duration(key))
+
+    def start_feedback_timer(self, audio_duration_s=None):
+        if self.timer_option == 'unlimited':
+            self.quiz_feedback_deadline = None
+            self.quiz_feedback_duration = None
+            return
+        duration = int(self.timer_option)
+        if audio_duration_s is not None:
+            duration = max(duration, int(audio_duration_s) + 1 + MARGIN_AFTER_AUDIO_S)
+        self.quiz_feedback_duration = duration
+        self.quiz_feedback_deadline = pygame.time.get_ticks() + duration * 1000
 
     def handle_quiz_feedback(self, action):
         if action == 'shoulder_r':
             q = self.quiz_questions[self.quiz_index]
-            outcome = 'correct' if self.quiz_last_correct else 'incorrect'
-            prefix = 'Bonne réponse. ' if self.quiz_last_correct else 'Mauvaise réponse. '
-            text = prefix + q['explication']
-            # La clé distingue bonne/mauvaise réponse : le texte lu diffère selon
-            # l'issue, un même cache pour les deux ferait entendre la mauvaise
-            # phrase si l'utilisateur répond différemment une autre fois.
-            key = '{}_quiz_{}_feedback_{}'.format(self.current_module['base'], q['id'], outcome)
+            text, key = self.quiz_feedback_text_key(q)
             self.tts.request(text, key)
         elif action == 'action' or action == 'back':
-            self.quiz_index += 1
-            if self.quiz_index >= len(self.quiz_questions):
-                self.state = STATE_QUIZ_END
-            else:
-                self.load_quiz_question()
-                self.state = STATE_QUIZ_ASK
+            self.advance_quiz_feedback()
+
+    def advance_quiz_feedback(self):
+        self.quiz_feedback_deadline = None
+        self.quiz_index += 1
+        if self.quiz_index >= len(self.quiz_questions):
+            self.state = STATE_QUIZ_END
+        else:
+            self.load_quiz_question()
+            self.state = STATE_QUIZ_ASK
 
     def handle_quiz_end(self, action):
         if action in ('action', 'back'):
@@ -312,6 +510,11 @@ class App:
         self.flash_cards = dl.load_flashcards(self.current_module['base'])
         self.flash_index = 0
         self.flash_flipped = False
+        self.flash_autoplay = False
+        self.flash_deadline = None
+        if self.flash_cards:
+            text, key = self.flash_card_text_key()
+            self.tts.play_if_cached(text, key)
         self.state = STATE_FLASH
 
     def handle_flash(self, action):
@@ -319,28 +522,371 @@ class App:
             if action == 'back':
                 self.state = STATE_MODE
             return
+        if action == 'shoulder_l':
+            self.toggle_flash_autoplay()
+            return
+        if self.flash_autoplay:
+            # Pendant la lecture automatique, seuls l'arrêt (L1) et la sortie
+            # (B/Select) restent actifs - la navigation manuelle attendrait le
+            # minuteur, comme sur la page web où les contrôles manuels ne
+            # s'utilisent qu'en mode MANUEL.
+            if action == 'back':
+                self.stop_flash_autoplay()
+                self.tts.stop()
+                self.state = STATE_MODE
+            return
         if action == 'action':
             self.flash_flipped = not self.flash_flipped
+            self.tts.stop()
+            text, key = self.flash_card_text_key()
+            self.tts.play_if_cached(text, key)
         elif action == 'right':
             self.flash_index = (self.flash_index + 1) % len(self.flash_cards)
             self.flash_flipped = False
             self.tts.stop()
+            text, key = self.flash_card_text_key()
+            self.tts.play_if_cached(text, key)
         elif action == 'left':
             self.flash_index = (self.flash_index - 1) % len(self.flash_cards)
             self.flash_flipped = False
             self.tts.stop()
+            text, key = self.flash_card_text_key()
+            self.tts.play_if_cached(text, key)
         elif action == 'shoulder_r':
             self.speak_flash_card()
         elif action == 'back':
             self.tts.stop()
             self.state = STATE_MODE
 
-    def speak_flash_card(self):
+    def toggle_flash_autoplay(self):
+        self.flash_autoplay = not self.flash_autoplay
+        if self.flash_autoplay:
+            self.flash_flipped = False
+            self.start_flash_autoplay_step()
+        else:
+            self.stop_flash_autoplay()
+
+    def stop_flash_autoplay(self):
+        self.flash_autoplay = False
+        self.flash_deadline = None
+        self.flash_duration = None
+
+    def start_flash_autoplay_step(self):
+        duration = FLASH_AUTOPLAY_UNLIMITED_SECONDS if self.timer_option == 'unlimited' else int(self.timer_option)
+        self.flash_duration = duration
+        self.flash_deadline = pygame.time.get_ticks() + duration * 1000
+        self.speak_flash_card()
+
+    def advance_flash_autoplay(self):
+        if not self.flash_flipped:
+            self.flash_flipped = True
+            self.start_flash_autoplay_step()
+        elif self.flash_index < len(self.flash_cards) - 1:
+            self.flash_index += 1
+            self.flash_flipped = False
+            self.start_flash_autoplay_step()
+        else:
+            # Dernière carte atteinte : la page web arrête l'auto-lecture
+            # plutôt que de reboucler sur la première carte.
+            self.stop_flash_autoplay()
+
+    def flash_card_text_key(self):
         card = self.flash_cards[self.flash_index]
         face = 'verso' if self.flash_flipped else 'recto'
         text = card['verso'] if self.flash_flipped else card['recto']
         key = '{}_flash_{}_{}'.format(self.current_module['base'], self.flash_index, face)
+        return text, key
+
+    def speak_flash_card(self):
+        text, key = self.flash_card_text_key()
         self.tts.request(text, key)
+
+    # ------------------------------------------------------------------
+    # FICHE DE RÉVISION (texte long, paginé - pas de retour à la ligne
+    # automatique du terminal ici : chaque fiche source a un paragraphe par
+    # ligne, voir ui.wrap_paragraphs)
+    def start_fiche(self):
+        self.tts.stop()
+        base = self.current_module['base']
+        text = dl.load_fiche(base)
+        self.fiche_page = 0
+        margin = 60
+        top = self.HEADER_H + 20
+        hint_h = 48
+        counter_h = 36
+        bottom = self.screen_h - hint_h - counter_h - 10
+        line_h = self.fonts.medium.get_sized_height() + 8
+        self.fiche_lines_per_page = max(1, (bottom - top) // line_h)
+        if text:
+            max_width = self.screen_w - 2 * margin
+            self.fiche_lines = ui.wrap_paragraphs(self.fonts.medium, text, max_width)
+            self.fiche_total_pages = max(1, -(-len(self.fiche_lines) // self.fiche_lines_per_page))
+        else:
+            self.fiche_lines = []
+            self.fiche_total_pages = 1
+
+        # Narration audio (pré-générée, potentiellement longue) : lecture
+        # automatique si disponible, comme pour chanson/podcast - l'utilisateur
+        # peut continuer à tourner les pages pendant qu'elle joue, les deux
+        # sont indépendants (pas de synchronisation page/position audio).
+        self.fiche_audio_path = dl.fiche_audio_path(base)
+        self.fiche_audio_position_s = 0.0
+        self.fiche_audio_position_ticks = pygame.time.get_ticks()
+        self.fiche_audio_playing = False
+        if self.fiche_audio_path is not None:
+            pygame.mixer.music.load(self.fiche_audio_path)
+            pygame.mixer.music.play()
+            self.fiche_audio_playing = True
+
+        self.state = STATE_FICHE
+
+    def fiche_audio_elapsed_s(self):
+        if self.fiche_audio_playing:
+            return self.fiche_audio_position_s + (pygame.time.get_ticks() - self.fiche_audio_position_ticks) / 1000.0
+        return self.fiche_audio_position_s
+
+    def seek_fiche_audio(self, delta_s):
+        if self.fiche_audio_path is None:
+            return
+        new_pos = max(0.0, self.fiche_audio_elapsed_s() + delta_s)
+        try:
+            pygame.mixer.music.play(start=new_pos)
+        except pygame.error:
+            return
+        if not self.fiche_audio_playing:
+            pygame.mixer.music.pause()
+        self.fiche_audio_position_s = new_pos
+        self.fiche_audio_position_ticks = pygame.time.get_ticks()
+
+    def handle_fiche(self, action):
+        if action == 'right':
+            if self.fiche_page < self.fiche_total_pages - 1:
+                self.fiche_page += 1
+        elif action == 'left':
+            if self.fiche_page > 0:
+                self.fiche_page -= 1
+        elif action == 'action' and self.fiche_audio_path is not None:
+            if self.fiche_audio_playing:
+                pygame.mixer.music.pause()
+                self.fiche_audio_position_s = self.fiche_audio_elapsed_s()
+            else:
+                pygame.mixer.music.unpause()
+                self.fiche_audio_position_ticks = pygame.time.get_ticks()
+            self.fiche_audio_playing = not self.fiche_audio_playing
+        elif action == 'up':
+            self.seek_fiche_audio(MEDIA_SEEK_STEP_S)
+        elif action == 'down':
+            self.seek_fiche_audio(-MEDIA_SEEK_STEP_S)
+        elif action == 'back':
+            pygame.mixer.music.stop()
+            self.state = STATE_MODE
+
+    # ------------------------------------------------------------------
+    # CHANSON / PODCAST (lecteur audio simple via pygame.mixer.music, séparé
+    # du canal utilisé par la synthèse vocale - voir tts.py qui utilise
+    # pygame.mixer.Sound, donc aucun conflit entre les deux)
+    def start_media(self, kind):
+        self.tts.stop()
+        base = self.current_module['base']
+        path = dl.chanson_path(base) if kind == 'chanson' else dl.podcast_path(base)
+        self.media_kind = kind
+        self.media_path = path
+        self.media_playing = False
+        self.media_position_s = 0.0
+        self.media_position_ticks = pygame.time.get_ticks()
+        # Fond d'écran pendant la lecture : l'infographie du module, pour la
+        # chanson comme pour le podcast.
+        self.media_info_surface = self._load_infographie_surface(base)
+        if path is not None:
+            pygame.mixer.music.load(path)
+            pygame.mixer.music.play()
+            self.media_playing = True
+        self.state = STATE_MEDIA
+
+    def media_elapsed_s(self):
+        """Position de lecture actuelle, en secondes, calculée nous-mêmes
+        (pygame.mixer.music.get_pos() repart du dernier play() et ne suit pas
+        les set_pos()/seeks, donc inutilisable ici une fois qu'on avance/recule)."""
+        if self.media_playing:
+            return self.media_position_s + (pygame.time.get_ticks() - self.media_position_ticks) / 1000.0
+        return self.media_position_s
+
+    def seek_media(self, delta_s):
+        if self.media_path is None:
+            return
+        new_pos = max(0.0, self.media_elapsed_s() + delta_s)
+        try:
+            pygame.mixer.music.play(start=new_pos)
+        except pygame.error:
+            # Position hors limites (au-delà de la fin du fichier) : on l'ignore,
+            # la lecture continue là où elle en était.
+            return
+        if not self.media_playing:
+            pygame.mixer.music.pause()
+        self.media_position_s = new_pos
+        self.media_position_ticks = pygame.time.get_ticks()
+
+    def handle_media(self, action):
+        if action == 'action' and self.media_path is not None:
+            if self.media_playing:
+                pygame.mixer.music.pause()
+                self.media_position_s = self.media_elapsed_s()
+            else:
+                pygame.mixer.music.unpause()
+                self.media_position_ticks = pygame.time.get_ticks()
+            self.media_playing = not self.media_playing
+        elif action == 'left':
+            self.seek_media(-MEDIA_SEEK_STEP_S)
+        elif action == 'right':
+            self.seek_media(MEDIA_SEEK_STEP_S)
+        elif action == 'back':
+            pygame.mixer.music.stop()
+            self.state = STATE_MODE
+
+    # ------------------------------------------------------------------
+    # JUKEBOX (lecture continue/aléatoire des podcasts ou chansons de toute
+    # la bibliothèque, toutes séries confondues, avec l'infographie du module
+    # en cours en fond - même principe que CHANSON/PODCAST mais sur une
+    # playlist construite à l'avance plutôt qu'un seul module).
+    def handle_jukebox_kind(self, action):
+        if action in ('up', 'down'):
+            self.jukebox_kind_menu.move(action)
+        elif action == 'action':
+            self.start_jukebox(self.jukebox_kind_menu.current()['kind'])
+        elif action == 'back':
+            self.state = STATE_SERIES
+
+    def _jukebox_build_playlist(self, kind):
+        path_fn = dl.podcast_path if kind == 'podcast' else dl.chanson_path
+        playlist = []
+        for _, modules in self.series:
+            for m in modules:
+                if path_fn(m['base']) is not None:
+                    playlist.append({'base': m['base'], 'label': m['titre']})
+        return playlist
+
+    def start_jukebox(self, kind):
+        self.tts.stop()
+        self.jukebox_kind = kind
+        self.jukebox_playlist = self._jukebox_build_playlist(kind)
+        self.jukebox_shuffle = False
+        self.state = STATE_JUKEBOX
+        if self.jukebox_playlist:
+            self._jukebox_load_track(0)
+        else:
+            self.jukebox_path = None
+            self.jukebox_playing = False
+            self.jukebox_info_surface = None
+
+    def _jukebox_load_track(self, index):
+        self.jukebox_index = index % len(self.jukebox_playlist)
+        entry = self.jukebox_playlist[self.jukebox_index]
+        path_fn = dl.podcast_path if self.jukebox_kind == 'podcast' else dl.chanson_path
+        path = path_fn(entry['base'])
+        self.jukebox_path = path
+        self.jukebox_info_surface = self._load_infographie_surface(entry['base'])
+        self.jukebox_position_s = 0.0
+        self.jukebox_position_ticks = pygame.time.get_ticks()
+        self.jukebox_playing = False
+        if path is not None:
+            pygame.mixer.music.load(path)
+            pygame.mixer.music.play()
+            self.jukebox_playing = True
+
+    def jukebox_current_label(self):
+        if not self.jukebox_playlist:
+            return None
+        return self.jukebox_playlist[self.jukebox_index]['label']
+
+    def jukebox_elapsed_s(self):
+        if self.jukebox_playing:
+            return self.jukebox_position_s + (pygame.time.get_ticks() - self.jukebox_position_ticks) / 1000.0
+        return self.jukebox_position_s
+
+    def seek_jukebox(self, delta_s):
+        if self.jukebox_path is None:
+            return
+        new_pos = max(0.0, self.jukebox_elapsed_s() + delta_s)
+        try:
+            pygame.mixer.music.play(start=new_pos)
+        except pygame.error:
+            return
+        if not self.jukebox_playing:
+            pygame.mixer.music.pause()
+        self.jukebox_position_s = new_pos
+        self.jukebox_position_ticks = pygame.time.get_ticks()
+
+    def jukebox_advance(self, direction=1):
+        """direction=1: piste suivante (ou fin de piste naturelle) ; -1: piste
+        précédente. La navigation manuelle (◄►/joystick) reste toujours
+        séquentielle, quel que soit le mode ; le mode aléatoire ne change que
+        la piste choisie automatiquement en fin de lecture (jukebox_on_track_end)."""
+        if not self.jukebox_playlist:
+            return
+        self._jukebox_load_track(self.jukebox_index + direction)
+
+    def jukebox_on_track_end(self):
+        if not self.jukebox_playlist:
+            return
+        if self.jukebox_shuffle and len(self.jukebox_playlist) > 1:
+            next_index = self.jukebox_index
+            while next_index == self.jukebox_index:
+                next_index = random.randrange(len(self.jukebox_playlist))
+            self._jukebox_load_track(next_index)
+        else:
+            self._jukebox_load_track(self.jukebox_index + 1)
+
+    def handle_jukebox(self, action):
+        if not self.jukebox_playlist:
+            if action == 'back':
+                self.state = STATE_JUKEBOX_KIND
+            return
+        if action == 'action':
+            if self.jukebox_playing:
+                pygame.mixer.music.pause()
+                self.jukebox_position_s = self.jukebox_elapsed_s()
+            else:
+                pygame.mixer.music.unpause()
+                self.jukebox_position_ticks = pygame.time.get_ticks()
+            self.jukebox_playing = not self.jukebox_playing
+        elif action == 'left':
+            self.seek_jukebox(-MEDIA_SEEK_STEP_S)
+        elif action == 'right':
+            self.seek_jukebox(MEDIA_SEEK_STEP_S)
+        elif action == 'up':
+            self.jukebox_advance(-1)
+        elif action == 'down':
+            self.jukebox_advance(1)
+        elif action == 'shoulder_l':
+            self.jukebox_shuffle = not self.jukebox_shuffle
+        elif action == 'back':
+            pygame.mixer.music.stop()
+            self.state = STATE_JUKEBOX_KIND
+
+    # ------------------------------------------------------------------
+    # INFOGRAPHIE (image statique, mise à l'échelle pour tenir sur l'écran)
+    def _load_infographie_surface(self, base, max_w=None, max_h=None):
+        path = dl.infographie_path(base)
+        if path is None:
+            return None
+        max_w = max_w if max_w is not None else self.screen_w - 80
+        max_h = max_h if max_h is not None else self.screen_h - self.HEADER_H - 48 - 40
+        img = pygame.image.load(path).convert_alpha()
+        iw, ih = img.get_size()
+        scale = min(max_w / iw, max_h / ih, 1.0)
+        if scale < 1.0:
+            img = pygame.transform.smoothscale(img, (int(iw * scale), int(ih * scale)))
+        return img
+
+    def start_info(self):
+        self.tts.stop()
+        self.info_path = dl.infographie_path(self.current_module['base'])
+        self.info_surface = self._load_infographie_surface(self.current_module['base'])
+        self.state = STATE_INFO
+
+    def handle_info(self, action):
+        if action == 'back':
+            self.state = STATE_MODE
 
     # ------------------------------------------------------------------
     # DRAW
@@ -352,6 +898,8 @@ class App:
             self.draw_module()
         elif self.state == STATE_MODE:
             self.draw_mode()
+        elif self.state == STATE_SETTINGS:
+            self.draw_settings()
         elif self.state == STATE_QUIZ_ASK:
             self.draw_quiz_ask()
         elif self.state == STATE_QUIZ_FEEDBACK:
@@ -360,14 +908,23 @@ class App:
             self.draw_quiz_end()
         elif self.state == STATE_FLASH:
             self.draw_flash()
+        elif self.state == STATE_MEDIA:
+            self.draw_media()
+        elif self.state == STATE_INFO:
+            self.draw_info()
+        elif self.state == STATE_FICHE:
+            self.draw_fiche()
+        elif self.state == STATE_JUKEBOX_KIND:
+            self.draw_jukebox_kind()
+        elif self.state == STATE_JUKEBOX:
+            self.draw_jukebox()
 
     HEADER_H = 70
 
     def draw_header(self, title):
         pygame.draw.rect(self.screen, ui.COLOR_PRIMARY, (0, 0, self.screen_w, self.HEADER_H))
-        title = ui.truncate_to_width(self.fonts.title, title, self.screen_w - 80)
-        title_h = self.fonts.title.get_sized_height()
-        self.fonts.title.render_to(self.screen, (40, (self.HEADER_H - title_h) // 2), title, ui.COLOR_WHITE)
+        title_rect = pygame.Rect(40, 0, self.screen_w - 80, self.HEADER_H)
+        ui.draw_scrolling_text(self.screen, self.fonts.title, title, title_rect, ui.COLOR_WHITE)
 
     NAV_HINT = ('▲▼', 'Naviguer')
 
@@ -375,7 +932,13 @@ class App:
         self.draw_header("PSE25-27 — RÉVISION")
         self.series_menu.draw(self.screen, self.fonts)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [self.NAV_HINT, ('A/Start', 'Choisir'), ('B/Select', 'Quitter')])
+                              [self.NAV_HINT, ('A/Start', 'Choisir'), ('R1', 'Réglages'), ('B/Select', 'Quitter')])
+
+    def draw_settings(self):
+        self.draw_header("RÉGLAGES — TEMPS DE RÉFLEXION")
+        self.settings_menu.draw(self.screen, self.fonts)
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
+                              [self.NAV_HINT, ('A/Start', 'Choisir'), ('B/Select', 'Annuler')])
 
     def draw_module(self):
         code = self.series_menu.current()['code']
@@ -390,6 +953,8 @@ class App:
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
                               [self.NAV_HINT, ('A/Start', 'Choisir'), ('B/Select', 'Retour')])
 
+    TIMER_BAR_H = 12
+
     def draw_quiz_ask(self):
         q = self.quiz_questions[self.quiz_index]
         self.draw_header("QUIZ  —  {}/{}  —  Score {}".format(
@@ -399,10 +964,20 @@ class App:
         question_h = ui.draw_text(self.screen, self.fonts.large, q['question'], (margin, question_top),
                                    color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
         hint_h = 48
+        bar_gap = 10
         choices_top = question_top + question_h + 24
-        choices_bottom = self.screen_h - hint_h - 16
+        choices_bottom = self.screen_h - hint_h - self.TIMER_BAR_H - bar_gap - 16
         ui.draw_choice_rows(self.screen, self.fonts, self.screen_w, choices_top, choices_bottom,
                              q['choix'], self.quiz_selected)
+
+        if self.quiz_deadline is not None:
+            remaining_ms = max(0, self.quiz_deadline - pygame.time.get_ticks())
+            frac = remaining_ms / (self.quiz_timer_duration * 1000)
+        else:
+            frac = 1.0  # illimité : barre pleine, sans compte à rebours (comme index.html)
+        bar_rect = pygame.Rect(margin, choices_bottom + bar_gap, self.screen_w - 2 * margin, self.TIMER_BAR_H)
+        ui.draw_progress_bar(self.screen, bar_rect, frac)
+
         ui.draw_tts_indicator(self.screen, self.fonts, self.screen_w, self.tts.status, self.HEADER_H)
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
                               [('A/B/C/D', 'Répondre'), ('▲▼', 'Naviguer'), ('R1', 'Écouter'), ('L1', 'Abandonner')])
@@ -424,11 +999,19 @@ class App:
                              correct_index=q['correct'], chosen_index=self.quiz_chosen)
 
         expl_top = choices_bottom + 24
-        ui.draw_text(self.screen, self.fonts.medium, q['explication'], (margin, expl_top),
-                     color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
+        expl_h = ui.draw_text(self.screen, self.fonts.medium, q['explication'], (margin, expl_top),
+                               color=ui.COLOR_TEXT, max_width=self.screen_w - 2 * margin)
+
+        if self.quiz_feedback_deadline is not None:
+            remaining_ms = max(0, self.quiz_feedback_deadline - pygame.time.get_ticks())
+            frac = remaining_ms / (self.quiz_feedback_duration * 1000)
+            bar_rect = pygame.Rect(margin, expl_top + expl_h + 16, self.screen_w - 2 * margin, 8)
+            ui.draw_progress_bar(self.screen, bar_rect, frac)
+
         ui.draw_tts_indicator(self.screen, self.fonts, self.screen_w, self.tts.status, self.HEADER_H)
+        next_label = 'Continuer' if self.quiz_feedback_deadline is None else 'Continuer (auto)'
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A/Start', 'Continuer'), ('R1', 'Écouter')])
+                              [('A/Start', next_label), ('R1', 'Écouter')])
 
     def draw_quiz_end(self):
         self.draw_header("RÉSULTAT")
@@ -449,8 +1032,9 @@ class App:
         margin = 40
         hint_h = 48
         counter_h = 40
+        bar_gap = 8
         top = self.HEADER_H + 14
-        bottom = self.screen_h - hint_h - counter_h - 14
+        bottom = self.screen_h - hint_h - counter_h - self.TIMER_BAR_H - bar_gap - 14
         card_rect = pygame.Rect(margin, top, self.screen_w - 2 * margin, bottom - top)
         pygame.draw.rect(self.screen, ui.COLOR_PANEL, card_rect, border_radius=16)
         pygame.draw.rect(self.screen, ui.COLOR_PRIMARY, card_rect, width=3, border_radius=16)
@@ -459,13 +1043,146 @@ class App:
         self.fonts.small.render_to(self.screen, (card_rect.x + 24, card_rect.y + 14), face_label, ui.COLOR_PRIMARY)
         ui.draw_text(self.screen, self.fonts.large, text, (card_rect.x + 40, card_rect.y + 60),
                      color=ui.COLOR_TEXT, max_width=card_rect.width - 80)
-        counter = "{} / {}".format(self.flash_index + 1, len(self.flash_cards))
+
+        if self.flash_autoplay and self.flash_deadline is not None:
+            remaining_ms = max(0, self.flash_deadline - pygame.time.get_ticks())
+            frac = 1.0 - remaining_ms / (self.flash_duration * 1000)  # progresse comme fc-timer (0%->100%)
+        else:
+            frac = 0.0  # mode manuel : barre vide, comme index.html
+        bar_rect = pygame.Rect(margin, card_rect.bottom + bar_gap, self.screen_w - 2 * margin, self.TIMER_BAR_H)
+        ui.draw_progress_bar(self.screen, bar_rect, frac)
+
+        status = "LECTURE AUTO" if self.flash_autoplay else "MANUEL"
+        counter = "{} / {}   —   {}".format(self.flash_index + 1, len(self.flash_cards), status)
         counter_rect = self.fonts.small.get_rect(counter)
-        self.fonts.small.render_to(self.screen, (self.screen_w // 2 - counter_rect.width // 2, card_rect.bottom + 10),
+        self.fonts.small.render_to(self.screen, (self.screen_w // 2 - counter_rect.width // 2, bar_rect.bottom + 10),
                                     counter, ui.COLOR_TEXT)
         ui.draw_tts_indicator(self.screen, self.fonts, self.screen_w, self.tts.status, self.HEADER_H)
+        autoplay_hint = ('L1', 'Arrêter auto') if self.flash_autoplay else ('L1', 'Lecture auto')
+        if self.flash_autoplay:
+            hints = [autoplay_hint, ('B/Select', 'Retour')]
+        else:
+            hints = [('A/Start', 'Retourner'), ('◄►', 'Carte suiv./préc.'), autoplay_hint, ('R1', 'Écouter'), ('B/Select', 'Retour')]
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h, hints)
+
+    def draw_fiche(self):
+        self.draw_header("FICHE DE RÉVISION  —  {}".format(self.current_module['label']))
+        if not self.fiche_lines:
+            self.fonts.medium.render_to(self.screen, (60, self.HEADER_H + 40),
+                                         "Aucune fiche disponible pour ce module.", ui.COLOR_TEXT)
+            ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h, [('B/Select', 'Retour')])
+            return
+
+        margin = 60
+        top = self.HEADER_H + 20
+        line_h = self.fonts.medium.get_sized_height() + 8
+        start = self.fiche_page * self.fiche_lines_per_page
+        y = top
+        for line in self.fiche_lines[start:start + self.fiche_lines_per_page]:
+            if line:
+                self.fonts.medium.render_to(self.screen, (margin, y), line, ui.COLOR_TEXT)
+            y += line_h
+
+        counter = "Page {} / {}".format(self.fiche_page + 1, self.fiche_total_pages)
+        counter_rect = self.fonts.small.get_rect(counter)
+        counter_y = self.screen_h - 48 - 10 - counter_rect.height
+        self.fonts.small.render_to(self.screen, (self.screen_w // 2 - counter_rect.width // 2, counter_y),
+                                    counter, ui.COLOR_PRIMARY)
+
+        hints = [('◄►', 'Page suiv./préc.')]
+        right_text, right_color = None, None
+        if self.fiche_audio_path is not None:
+            elapsed = int(self.fiche_audio_elapsed_s())
+            timestamp = "{:02d}:{:02d}".format(elapsed // 60, elapsed % 60)
+            right_text = "▶  LECTURE  {}".format(timestamp) if self.fiche_audio_playing else "❚❚  PAUSE  {}".format(timestamp)
+            right_color = ui.COLOR_SUCCESS if self.fiche_audio_playing else ui.COLOR_WHITE
+            hints.append(('A/Start', 'Pause' if self.fiche_audio_playing else 'Lecture'))
+            hints.append(('▲▼', '-/+ {}s'.format(MEDIA_SEEK_STEP_S)))
+        hints.append(('B/Select', 'Retour'))
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h, hints,
+                              right_text=right_text, right_color=right_color)
+
+    def draw_media(self):
+        label = "CHANSON" if self.media_kind == 'chanson' else "PODCAST"
+        self.draw_header("{}  —  {}".format(label, self.current_module['label']))
+        if self.media_path is None:
+            self.fonts.medium.render_to(self.screen, (60, self.HEADER_H + 40),
+                                         "Aucun {} disponible pour ce module.".format(label.lower()), ui.COLOR_TEXT)
+            ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h, [('B/Select', 'Retour')])
+            return
+
+        if self.media_info_surface is not None:
+            img_rect = self.media_info_surface.get_rect()
+            img_rect.centerx = self.screen_w // 2
+            img_rect.top = self.HEADER_H + 20
+            self.screen.blit(self.media_info_surface, img_rect)
+
+        elapsed = int(self.media_elapsed_s())
+        timestamp = "{:02d}:{:02d}".format(elapsed // 60, elapsed % 60)
+        status = "▶  LECTURE  {}".format(timestamp) if self.media_playing else "❚❚  PAUSE  {}".format(timestamp)
+        # COLOR_PRIMARY (bleu très sombre) se distinguerait mal du fond sombre
+        # du bandeau d'instructions : blanc pour la pause, vert pour la lecture.
+        status_color = ui.COLOR_SUCCESS if self.media_playing else ui.COLOR_WHITE
         ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
-                              [('A/Start', 'Retourner'), ('◄►', 'Carte suiv./préc.'), ('R1', 'Écouter'), ('B/Select', 'Retour')])
+                              [('A/Start', 'Pause' if self.media_playing else 'Lecture'),
+                               ('◄►', '-/+ {}s'.format(MEDIA_SEEK_STEP_S)),
+                               ('B/Select', 'Arrêter et revenir')],
+                              right_text=status, right_color=status_color)
+
+    def draw_jukebox_kind(self):
+        self.draw_header("JUKEBOX")
+        self.jukebox_kind_menu.draw(self.screen, self.fonts)
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
+                              [self.NAV_HINT, ('A/Start', 'Choisir'), ('B/Select', 'Retour')])
+
+    def draw_jukebox(self):
+        kind_label = "MUSIQUE" if self.jukebox_kind == 'chanson' else "PODCAST"
+        if not self.jukebox_playlist:
+            self.draw_header("JUKEBOX  —  {}".format(kind_label))
+            self.fonts.medium.render_to(self.screen, (60, self.HEADER_H + 40),
+                                         "Aucun {} disponible dans la bibliothèque.".format(kind_label.lower()),
+                                         ui.COLOR_TEXT)
+            ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h, [('B/Select', 'Retour')])
+            return
+
+        self.draw_header("JUKEBOX {}  —  {}".format(kind_label, self.jukebox_current_label()))
+
+        if self.jukebox_info_surface is not None:
+            img_rect = self.jukebox_info_surface.get_rect()
+            img_rect.centerx = self.screen_w // 2
+            img_rect.top = self.HEADER_H + 20
+            self.screen.blit(self.jukebox_info_surface, img_rect)
+
+        position = "Piste {} / {}".format(self.jukebox_index + 1, len(self.jukebox_playlist))
+        position_rect = self.fonts.small.get_rect(position)
+        self.fonts.small.render_to(self.screen, (self.screen_w // 2 - position_rect.width // 2, self.HEADER_H + 12),
+                                    position, ui.COLOR_PRIMARY)
+
+        elapsed = int(self.jukebox_elapsed_s())
+        timestamp = "{:02d}:{:02d}".format(elapsed // 60, elapsed % 60)
+        status = "▶  LECTURE  {}".format(timestamp) if self.jukebox_playing else "❚❚  PAUSE  {}".format(timestamp)
+        status_color = ui.COLOR_SUCCESS if self.jukebox_playing else ui.COLOR_WHITE
+        shuffle_hint = ('L1', 'Aléatoire : ON' if self.jukebox_shuffle else 'Aléatoire : OFF')
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h,
+                              [('A/Start', 'Pause' if self.jukebox_playing else 'Lecture'),
+                               ('◄►', '-/+ {}s'.format(MEDIA_SEEK_STEP_S)),
+                               ('▲▼', 'Piste préc./suiv.'),
+                               shuffle_hint,
+                               ('B/Select', 'Retour')],
+                              right_text=status, right_color=status_color)
+
+    def draw_info(self):
+        self.draw_header("INFOGRAPHIE  —  {}".format(self.current_module['label']))
+        if self.info_surface is None:
+            self.fonts.medium.render_to(self.screen, (60, self.HEADER_H + 40),
+                                         "Aucune infographie disponible pour ce module.", ui.COLOR_TEXT)
+            ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h, [('B/Select', 'Retour')])
+            return
+        rect = self.info_surface.get_rect()
+        rect.centerx = self.screen_w // 2
+        rect.top = self.HEADER_H + 20
+        self.screen.blit(self.info_surface, rect)
+        ui.draw_button_hints(self.screen, self.fonts, self.screen_w, self.screen_h, [('B/Select', 'Retour')])
 
 
 def main():

@@ -1,0 +1,151 @@
+LINUX RESEAUX : DHCP, DNS - FONCTIONNEMENT ET CONFIGURATION.
+
+LEXIQUE COMPLET.
+
+      DHCP (Dynamic Host Configuration Protocol) : protocole permettant a un client d'obtenir automatiquement une configuration IP complete (adresse IP, masque, passerelle, serveurs DNS, hostname, duree de bail) sans intervention manuelle.
+
+      Bail DHCP (lease time) : duree pendant laquelle une adresse IP est attribuee a un client par le serveur DHCP avant expiration ou renouvellement.
+
+      DORA : acronyme des quatre etapes du protocole DHCP : Discovery, Offer, Request, Acknowledgement.
+
+      DHCPDISCOVER : message broadcast envoye par le client pour localiser un serveur DHCP.
+
+      DHCPOFFER : reponse du serveur proposant une adresse IP disponible.
+
+      DHCPREQUEST : requete du client acceptant l'offre du serveur.
+
+      DHCPACK : confirmation du serveur finalisant l'attribution de l'adresse.
+
+      DHCP statique (pseudo-dynamique) : mode de reservation associant une adresse MAC a une adresse IP fixe dans la configuration du serveur DHCP, pour garantir que le meme hote recoit toujours la meme adresse.
+
+      APIPA : adresse auto-attribuee par le systeme en 169.254.x.y si aucun serveur DHCP n'est disponible.
+
+      dhcpd : demon Linux serveur DHCP, fourni par le paquet isc-dhcp-server, configure dans /etc/dhcp/dhcpd.conf.
+
+      DNS (Domain Name System) : systeme hierarchique et distribue permettant de traduire un nom de domaine (exemple : google.com) en adresse IP (resolution directe) et inversement (resolution inverse ou reverse DNS).
+
+      Resolution directe : traduction d'un nom de domaine vers une adresse IP.
+
+      Resolution inverse : traduction d'une adresse IP vers un nom de domaine, utilisee pour le reverse DNS.
+
+      ICANN : organisme supervisant l'attribution des noms de domaine et des adresses IP a l'echelle mondiale.
+
+      Registry : organisme technique gerant les TLD (Top Level Domain). Exemples : gTLD (.com, .org, .net, .edu, .gov), ccTLD (.fr, .de, .uk, .eu), sTLD (.aero, .museum, .travel).
+
+      Registrar : societe commerciale (OVH, Gandi, GoDaddy) qui vend les noms de domaine aux utilisateurs finaux.
+
+      Serveurs racines : 13 serveurs DNS racines (A a M), geres par VeriSign, ICANN, RIPE NCC, et depliques par anycast sur plus de 130 sites. Ils repondent aux requetes pour les TLD.
+
+      Serveur DNS Master : serveur primaire gerant la zone DNS et autorisant les mises a jour.
+
+      Serveur DNS Slave : serveur secondaire copiant les donnees du master pour la redondance.
+
+      Serveur DNS Forward : serveur relais transmettant les requetes a un serveur DNS autoritaire.
+
+      Serveur DNS Hint/Cache : serveur stockant les reponses DNS pour accelerer les requetes futures.
+
+      Enregistrement A : enregistrement DNS associant un nom a une adresse IPv4.
+
+      Enregistrement AAAA : enregistrement DNS associant un nom a une adresse IPv6.
+
+      Enregistrement CNAME : enregistrement DNS creant un alias vers un autre nom.
+
+      Enregistrement MX : enregistrement DNS definissant les serveurs de mail d'un domaine.
+
+      Enregistrement NS : enregistrement DNS indiquant les serveurs DNS autoritaires d'un domaine.
+
+      Enregistrement PTR : enregistrement DNS permettant la resolution inverse (IP vers nom).
+
+      Enregistrement SOA (Start of Authority) : enregistrement DNS contenant les informations d'autorite de la zone (serveur primaire, contact, numero de serie, TTL de rafraichissement, de nouvelle tentative, d'expiration et minimum).
+
+      BIND (Berkeley Internet Name Domain) : logiciel serveur DNS le plus repandu sous Linux, paquet bind (CentOS) ou bind9 (Debian/Ubuntu).
+
+      named.conf : fichier de configuration principale de BIND definissant les zones, les options globales et les ACL.
+
+COURS DETAILLE.
+
+I. DHCP : ATTRIBUTION DYNAMIQUE DES ADRESSES IP.
+
+   A. Role et fonctionnement du protocole DHCP.
+
+      Le protocole DHCP (Dynamic Host Configuration Protocol) permet a un client (ordinateur, serveur, equipement reseau) d'obtenir automatiquement une configuration IP complete sans intervention manuelle. Cette configuration inclut une adresse IP, un masque de sous-reseau, une passerelle par defaut, les adresses des serveurs DNS, un nom d'hote (hostname) et une duree de bail (lease time).
+
+      Le processus repose sur un echange en 4 etapes decrit par l'acronyme DORA. La premiere etape (Discovery) : le client diffuse en broadcast une requete DHCPDISCOVER pour localiser un serveur DHCP. La deuxieme etape (Offer) : le serveur repond avec une offre DHCPOFFER contenant une adresse IP disponible. La troisieme etape (Request) : le client envoie une requete DHCPREQUEST pour accepter l'offre. La quatrieme etape (Ack) : le serveur confirme avec un DHCPACK finalisant l'attribution.
+
+      Les ports utilises sont le port 68 UDP pour le client et le port 67 UDP pour le serveur.
+
+      Les avantages du DHCP sont la simplification de la gestion des adresses IP (pas de configuration manuelle), la flexibilite (les adresses peuvent etre reutilisees apres expiration du bail) et la centralisation (un seul serveur gere les configurations pour tout un reseau).
+
+      Les limites et risques sont lies a la securite (un serveur DHCP non securise peut attribuer des adresses a n'importe quel client, y compris des intrus ; la solution est le DHCP statique associant une adresse MAC a une adresse IP fixe) et a la dependance (si le serveur DHCP est indisponible, les clients ne peuvent pas obtenir d'adresse, sauf attribution APIPA en 169.254.x.y sous IPv4).
+
+   B. Configuration DHCP sous Linux.
+
+      Cote client, la configuration se fait dans le fichier /etc/sysconfig/network-scripts/ifcfg-<interface> (famille RedHat/CentOS) avec le parametre BOOTPROTO=dhcp. Le bail DHCP est stocke dans /var/lib/dhcp/dhclient-<interface>.leases. Pour forcer le renouvellement du bail : "dhclient -r eth0 && dhclient eth0".
+
+      Cote serveur, le demon dhcpd (paquet isc-dhcp-server) est le serveur DHCP sous Linux. Sa configuration se fait dans /etc/dhcp/dhcpd.conf ou l'on definit les plages d'adresses dynamiques (directive "range"), les options reseau (passerelle, serveurs DNS), la duree de bail et les reservations statiques par adresse MAC (directives "host" et "hardware ethernet"). Le service est demarre avec "systemctl start dhcpd".
+
+      Les fichiers cles sont : /etc/sysconfig/network-scripts/ifcfg-eth0 (configuration client DHCP), /var/lib/dhcp/dhclient-eth0.leases (fichier de bail du client), et /etc/dhcp/dhcpd.conf (configuration du serveur DHCP avec plages, baux et reservations).
+
+II. DNS : RESOLUTION DE NOMS ET ARCHITECTURE.
+
+   A. Role, principes et hierarchie DNS.
+
+      Le DNS (Domain Name System) est un systeme hierarchique et distribue permettant de traduire un nom de domaine (exemple : google.com) en adresse IP (exemple : 142.250.179.46). Sans DNS, les utilisateurs devraient memoriser les adresses IP de tous les sites ou stocker l'integralite des adresses dans le fichier /etc/hosts. Le DNS peut aussi resoudre l'inverse (IP vers nom), utile pour le reverse DNS. L'analogie classique est l'annuaire telephonique : le nom de domaine correspond au nom de l'abonne et l'adresse IP correspond au numero de telephone.
+
+      Le DNS repose sur une arborescence inversee : la racine "." est au sommet, puis viennent les TLD (Top Level Domain), puis les domaines de second niveau. Les acteurs cles sont : l'ICANN qui supervise l'attribution des noms de domaine et des adresses IP, les Registries qui sont les organismes techniques gerant les TLD (gTLD comme .com/.org/.net/.edu/.gov, ccTLD comme .fr/.de/.uk/.eu, sTLD comme .aero/.museum/.travel), et les Registrars (OVH, Gandi, GoDaddy) qui vendent les noms de domaine aux utilisateurs finaux.
+
+      Les 13 serveurs racines (de A a M) sont geres par des organisations comme VeriSign, ICANN ou RIPE NCC. Ils repondent aux requetes pour les TLD et redirigent vers les serveurs DNS autoritaires. Ils sont depliques par anycast sur plus de 130 sites dans le monde pour ameliorer la resilience et les performances. La liste des serveurs racines est contenue dans le fichier named.cache.
+
+   B. Types de serveurs et enregistrements DNS.
+
+      Les types de serveurs DNS sont : le serveur Master (primaire, gere la zone et autorise les mises a jour), le serveur Slave (secondaire, copie les donnees du master pour la redondance), le serveur Stub (allege, repond uniquement aux requetes de type NS), le serveur Forward (relais transmettant les requetes a un serveur autoritaire) et le serveur Hint/Cache (stocke les reponses DNS pour accelerer les requetes futures).
+
+      Les enregistrements DNS courants sont : A (associe un nom a une adresse IPv4), AAAA (associe un nom a une adresse IPv6), CNAME (cree un alias vers un autre nom), MX (definit les serveurs de mail d'un domaine avec une priorite numerique), NS (indique les serveurs DNS autoritaires d'un domaine), PTR (resolution inverse IP vers nom, dans le domaine .in-addr.arpa), SOA (Start of Authority contenant le serveur primaire, le contact administratif, le numero de serie et les TTL de rafraichissement, de nouvelle tentative, d'expiration et minimum).
+
+   C. Fonctionnement d'une requete DNS.
+
+      Lorsqu'un client (par exemple un navigateur web) envoie une requete pour www.example.com, le resolveur DNS (generalement celui du FAI) effectue la resolution en plusieurs etapes. Il consulte d'abord son cache local. S'il n'y a pas de reponse en cache, il interroge un serveur racine pour trouver le serveur responsable du TLD .com. Il interroge ensuite le serveur TLD .com pour trouver le serveur DNS autoritaire de example.com. Il interroge enfin le serveur DNS autoritaire de example.com qui renvoie l'adresse IP de www.example.com. La reponse est mise en cache par le resolveur pour accelerer les prochaines requetes.
+
+III. CONFIGURATION DNS SOUS LINUX.
+
+   A. Configuration d'un serveur DNS avec BIND.
+
+      Le logiciel BIND (Berkeley Internet Name Domain) est le serveur DNS le plus repandu sous Linux. Il s'installe avec "yum install bind" (CentOS) ou "apt install bind9" (Debian/Ubuntu).
+
+      Le fichier principal /etc/named.conf definit les zones, les options globales (repertoire de travail, interfaces d'ecoute, ACL des reseaux autorises) et les zones de resolution directe et inverse. Les fichiers de zone sont stockes dans /var/named/ et contiennent les enregistrements DNS. Les outils de verification de syntaxe sont "named-checkconf /etc/named.conf" pour la configuration principale et "named-checkzone example.com /var/named/example.com.hosts" pour une zone. Le service BIND se demarre avec "systemctl start named".
+
+   B. Configuration d'un client DNS sous Linux.
+
+      Le client DNS sous Linux utilise deux fichiers principaux. Le fichier /etc/resolv.conf definit les serveurs DNS a interroger et le domaine de recherche (directive "nameserver" pour les serveurs DNS et "search" pour le suffixe de domaine). Le fichier /etc/nsswitch.conf definit l'ordre de resolution des noms : la directive "hosts: files dns" indique de chercher d'abord dans /etc/hosts, puis d'interroger le DNS.
+
+      Le fichier /etc/hosts permet une resolution statique locale sans requete DNS (format : adresse IP suivi du nom d'hote, exemple "192.168.1.10 serveur1.example.com serveur1").
+
+      Les outils de test DNS sont : "host google.com" (resolution simple utilisant le DNS ou /etc/hosts), "nslookup google.com" (outil interactif pour interroger le DNS), "dig google.com" (outil avance pour des requetes DNS detaillees) et "dig -x 8.8.8.8" (resolution inverse IP vers nom).
+
+POINTS D'ATTENTION.
+
+      Le processus DHCP en 4 etapes (DORA) utilise des ports differents pour le client (port 68 UDP) et pour le serveur (port 67 UDP) : les deux sont en UDP, pas en TCP.
+
+      Un serveur DHCP rogue (non autorise) peut attribuer de fausses configurations reseau a tous les clients du reseau : le DHCP statique lie a l'adresse MAC est la protection de base, complementee par le port security sur les commutateurs.
+
+      Le DNS ne s'appuie pas sur un seul serveur mais sur une hierarchie distribuee : la resilience provient de la combinaison des serveurs racines (anycast sur 130+ sites), des serveurs TLD et des serveurs autoritaires.
+
+      Le numero de serie dans l'enregistrement SOA doit etre incremente a chaque modification d'une zone DNS pour que les serveurs secondaires (Slave) detectent le changement et synchronisent leurs donnees.
+
+      Le fichier /etc/resolv.conf est souvent ecrase par les outils de gestion reseau (NetworkManager, dhclient) : toute modification manuelle peut etre perdue apres un renouvellement de bail DHCP ou un redemarrage.
+
+      La resolution DNS suit l'ordre defini dans /etc/nsswitch.conf : avec "hosts: files dns", le fichier /etc/hosts est toujours consulte en premier, ce qui permet de surcharger localement la resolution DNS sans modifier le serveur.
+
+EXEMPLES CITES.
+
+      La resolution directe de google.com retourne l'adresse IP 142.250.179.46.
+
+      Le DHCP statique dans dhcpd.conf permet d'associer l'adresse MAC 00:11:22:33:44:55 a l'adresse IP fixe 192.168.1.200, par exemple pour une imprimante reseau.
+
+      Le reseau 192.168.1.0/24 peut disposer d'une plage DHCP dynamique de 192.168.1.50 a 192.168.1.150 avec une duree de bail de 86 400 secondes (24 heures).
+
+      L'enregistrement MX "example.com. MX 10 mail.example.com." indique que le serveur de mail de example.com est mail.example.com avec une priorite de 10.
+
+      La commande "dig -x 8.8.8.8" effectue une resolution inverse et retourne "dns.google." (nom du serveur DNS de Google).
+
+      L'enregistrement SOA contient le numero de serie 2023010101 qui doit etre incremente a chaque modification de la zone pour declencher la synchronisation des serveurs secondaires.

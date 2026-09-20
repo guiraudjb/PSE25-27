@@ -1,0 +1,169 @@
+LES FONCTIONS DE BASE DU NOYAU LA GESTION DE LA MEMOIRE.
+
+LEXIQUE COMPLET.
+
+      La mémoire centrale ou RAM est l'espace de travail du processeur qui est rapide mais volatile.
+
+      La mémoire virtuelle représente un espace d'adressage logique qui combine la RAM et le disque.
+
+      Une page ou un cadre est l'unité de découpage de la mémoire utilisée pour la pagination.
+
+      Le défaut de page ou page fault est une interruption déclenchée lorsqu'une page demandée n'est pas présente en RAM.
+
+      La segmentation correspond au découpage logique de l'espace mémoire en plusieurs segments.
+
+      Le swap ou fichier d'échange est un espace sur le disque réservé aux pages déplacées hors de la mémoire RAM.
+
+      La MMU est le matériel spécifiquement chargé de traduire les adresses virtuelles en adresses physiques.
+
+      Le chargeur ou loader est un composant du noyau qui récupère le binaire exécutable et le charge en mémoire.
+
+      Le TLB ou Translation Lookaside Buffer est un cache très rapide qui contient les dernières traductions d'adresses virtuelles.
+
+COURS DETAILLE.
+
+I. LE ROLE DE LA MEMOIRE ET DU CHARGEUR.
+
+   A. L'importance du chargement en mémoire.
+
+      Les programmes ainsi que leurs données doivent être obligatoirement chargés en mémoire centrale RAM avant de pouvoir être exécutés par le CPU.
+
+      Le chargeur est le composant du noyau chargé de récupérer le binaire exécutable pour le placer en mémoire.
+
+      Il prépare également les différentes zones du processus comme la pile, les données et les segments, puis il initialise son état.
+
+   B. La nécessité de la translation d'adresses.
+
+      Les fichiers exécutables utilisent principalement des adresses relatives ou symboliques car les adresses physiques exactes ne sont déterminées qu'au moment précis du chargement.
+
+      Une translation d'adresses est donc absolument indispensable pour le fonctionnement du système.
+
+      Cette opération peut être réalisée soit par le chargeur via une traduction logicielle qui s'avère coûteuse, soit directement par le matériel via la MMU dans les systèmes d'exploitation actuels.
+
+II. LE GESTIONNAIRE DE MEMOIRE.
+
+   A. Les missions principales du gestionnaire.
+
+      Le gestionnaire de mémoire ou Memory Manager constitue un sous-ensemble absolument essentiel du noyau du système d'exploitation.
+
+      Il a pour mission de connaître en permanence les zones libres ou occupées de la mémoire.
+
+      Il doit également allouer la mémoire aux différents processus et la libérer une fois que ces processus sont terminés.
+
+      Il est aussi chargé de gérer l'échange entre la RAM et le disque lorsque la mémoire est totalement saturée.
+
+   B. L'organisation en zones et modes d'accès.
+
+      Dans les systèmes d'exploitation actuels, la mémoire RAM est globalement divisée en deux zones distinctes qui sont la zone noyau en mode privilégié et la zone utilisateur en mode non privilégié.
+
+      Les programmes n'accèdent jamais directement au matériel informatique.
+
+      Ils doivent obligatoirement passer par des appels système qui provoquent une interruption logicielle et un passage temporaire en mode noyau.
+
+      Le mode noyau permet un accès complet au code et aux données du système, la modification des tables de segments ou de pages, ainsi que les accès directs aux périphériques et aux ports d'entrée ou de sortie.
+
+      Le mode utilisateur est quant à lui strictement restreint afin de garantir l'isolation des processus et la sécurité globale du système.
+
+III. LE PARTITIONNEMENT DE LA MEMOIRE.
+
+   A. Les partitions fixes.
+
+      Pour exécuter plusieurs processus simultanément, la mémoire centrale doit obligatoirement être découpée.
+
+      Les partitions fixes sont des zones définies dès le démarrage du système.
+
+      Chaque processus est alors chargé dans la plus petite partition disponible qui correspond à sa taille.
+
+      Ce système peut entraîner un gaspillage appelé fragmentation interne, car une partition partiellement utilisée ne peut absolument pas être partagée avec un autre processus.
+
+   B. Les partitions variables.
+
+      Dans le système de partitions variables, la taille des partitions s'adapte dynamiquement aux besoins réels des processus en cours d'exécution.
+
+      Le disque dur peut alors servir de niveau de stockage supplémentaire pour étendre la mémoire.
+
+      Cette méthode nécessite parfois des déplacements de blocs mémoire, ce que l'on appelle la compaction, afin d'optimiser au mieux l'espace disponible.
+
+IV. LA MEMOIRE VIRTUELLE.
+
+   A. Le principe de fonctionnement de la mémoire virtuelle.
+
+      La mémoire virtuelle donne à chaque processus l'illusion d'avoir un espace d'adressage continu et surtout plus grand que la RAM physique réellement disponible.
+
+      Les données peuvent ainsi être stockées partiellement en mémoire RAM et sur le disque dur.
+
+      Le système se charge d'effectuer automatiquement les transferts nécessaires entre la RAM et le disque.
+
+      La MMU traduit ensuite les adresses virtuelles en adresses physiques réelles.
+
+      Cette translation complexe repose sur la table des pages qui indique pour chaque page si elle est présente en RAM ou si elle se trouve sur le disque dans l'espace de swap.
+
+   B. Les avantages de la mémoire virtuelle.
+
+      La mémoire virtuelle permet d'assurer une isolation stricte et sécurisée entre les différents processus en cours d'exécution.
+
+      Elle offre également une extension de la mémoire disponible bien au-delà de la capacité matérielle.
+
+      Elle garantit enfin une protection fine des accès en gérant les droits de lecture, d'écriture et d'exécution pour chaque processus.
+
+V. LA PAGINATION ET LA SEGMENTATION.
+
+   A. Les mécanismes de la pagination.
+
+      La pagination constitue la technique de base indispensable qui permet le fonctionnement de la mémoire virtuelle.
+
+      La mémoire réelle et l'espace virtuel sont découpés en pages de taille identique, qui font souvent quatre kilo-octets.
+
+      Seules les pages qui sont nécessaires à l'exécution immédiate sont effectivement chargées en RAM, tandis que les autres restent stockées sur le disque.
+
+      La correspondance entre les pages virtuelles et les cadres en RAM est strictement gérée par la table des pages.
+
+      Lorsqu'il n'y a plus de place en RAM, le système utilise des algorithmes de remplacement de pages comme FIFO où la plus ancienne page sort du système.
+
+      D'autres algorithmes comme LRU, LFU ou MFU se basent sur la récence ou la fréquence d'utilisation, et utilisent des bits de gestion comme le bit de référence ou le bit de modification.
+
+      L'objectif final de ces algorithmes est de libérer de la mémoire RAM sans multiplier de manière excessive les défauts de page.
+
+   B. Les mécanismes de la segmentation.
+
+      La segmentation est une technique qui découpe l'espace mémoire d'un processus en plusieurs zones logiques distinctes.
+
+      Ces zones peuvent être le segment de code, le segment des données globales, le segment de la pile ou le segment des tâches.
+
+      Chaque segment possède sa propre adresse de base, sa taille spécifique et son numéro identifiant unique.
+
+      Ce système présente de multiples avantages comme une taille variable selon les besoins de la machine et une protection fine des différents segments.
+
+      Il permet également un partage possible pour les bibliothèques partagées et assure une indépendance totale des segments, car une modification d'un segment n'affecte jamais les autres parties.
+
+   C. La combinaison de la pagination et de la segmentation.
+
+      De nombreux systèmes modernes ont combiné ces deux mécanismes, et c'est notamment le cas des architectures traditionnelles de type x86.
+
+      Dans cette approche, l'espace du processus est tout d'abord segmenté, puis chaque segment est ensuite minutieusement paginé.
+
+      L'adresse complète comporte alors le numéro du segment, le numéro de la page dans ce segment particulier, et enfin l'offset dans la page concernée.
+
+      Cette combinaison ingénieuse apporte au système informatique une grande flexibilité, une protection optimale et une efficacité grandement accrue.
+
+POINTS D'ATTENTION.
+
+      Ces notions de gestion de la mémoire sont universelles et valables pour tous les systèmes d'exploitation.
+
+      Il faut faire très attention aux défauts de page qui nécessitent des accès de remplacement vers le disque.
+
+      Le passage du mode utilisateur au mode noyau implique toujours une interruption logicielle du système.
+
+      Il est important de comprendre que l'objectif principal de ces méthodes est de libérer la RAM sans dégrader les performances globales.
+
+EXEMPLES CITES.
+
+      Les systèmes d'exploitation mentionnés en exemple sont Linux, Windows, Unix, BSD et macOS.
+
+      La taille standard d'une page mémoire donnée en exemple est de quatre kilo-octets.
+
+      Les algorithmes de remplacement de pages cités dans le texte sont le FIFO, le LRU, le LFU et le MFU.
+
+      Les types de segments logiques cités dans le document sont le segment de code, de données globales, de pile et de tâches.
+
+      L'architecture classique utilisant la combinaison de pagination et de segmentation est l'architecture de processeur x86.

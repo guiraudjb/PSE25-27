@@ -1,0 +1,165 @@
+LE PROJET INFORMATIQUE : DEFINITIONS, METHODES ET GOUVERNANCE (PSE TRAD 2025-2027).
+
+LEXIQUE COMPLET.
+
+      Projet informatique selon ISO 10006 et AFNOR X50-105 désigne un ensemble d'activités coordonnées et maîtrisées délimitées dans le temps visant un objectif précis sous contraintes de coûts délais et ressources.
+
+      La Maîtrise d'Ouvrage ou MOA incarne le porteur du besoin qui définit les objectifs stratégiques valide les livrables et gère le budget.
+
+      La Maîtrise d'Oeuvre ou MOE est responsable de la réalisation technique des choix architecturaux et du développement du projet.
+
+      Le Modèle en V est un cycle de vie classique caractérisé par une symétrie visuelle où chaque phase de conception est associée à une phase de test correspondante.
+
+      Scrum est un cadre méthodologique agile organisant le travail en itérations courtes appelées sprints de deux à quatre semaines.
+
+      Le Product Owner est le rôle agile responsable de la vision du produit et de la gestion priorisée du backlog.
+
+      Le Scrum Master est le facilitateur chargé de lever les obstacles et d'assurer le respect des processus agiles.
+
+      Kanban est une méthode agile axée sur la visualisation du flux de travail et la limitation du travail en cours pour optimiser l'efficacité.
+
+      Le WIP ou Work In Progress désigne la limite du nombre de tâches en cours simultanées dans la méthode Kanban.
+
+      Une User Story est une description simple d'une fonctionnalité centrée sur l'utilisateur complétée par des critères d'acceptation.
+
+      Le Product Backlog est la liste centralisée et priorisée de toutes les fonctionnalités et corrections à réaliser dans le projet.
+
+      Le COPIL ou Comité de Pilotage est l'instance stratégique qui valide les jalons clés et arbitre les décisions importantes.
+
+      Le COPRO ou Comité de Projet est l'instance opérationnelle assurant le suivi régulier des risques et de l'avancement.
+
+      Le CODEN signifie Comité des Demandes Nouvelles dans la comitologie de la DGFIP et intervient lors de l'étude d'opportunité.
+
+COURS DETAILLE.
+
+I. DEFINITION CARACTERISTIQUES ET DEMARCHE DU PROJET INFORMATIQUE.
+
+   A. Definitions normatives.
+
+      Un projet informatique se définit comme un processus unique et structuré encadré par des normes internationales telles que ISO 10006 reprise par l'AFNOR.
+
+      Il s'agit d'un ensemble d'activités coordonnées visant à atteindre un objectif précis tout en respectant des contraintes strictes de délais de coûts et de ressources.
+
+      L'AFITEP ajoute une dimension opérationnelle en décrivant le projet comme une mission claire dotée d'un début et d'une fin visant à satisfaire un besoin spécifique par des actions ciblées.
+
+   B. Caracteristiques essentielles.
+
+      La nature temporaire du projet le distingue des processus répétitifs car il possède un cadre strictement délimité par des échéances et des livrables définis à l'avance.
+
+      Les objectifs sont exigeants et portent non seulement sur les délais et les coûts mais également sur la qualité et les performances attendues imposant une allocation optimale des ressources.
+
+      Le caractère unique et complexe du projet informatique découle de l'interdépendance entre disciplines techniques et métiers nécessitant une gestion soignée des risques fonctionnels et organisationnels.
+
+   C. La demarche projet.
+
+      La démarche repose sur la capacité à prévoir et planifier l'ensemble des tâches pour maintenir la maîtrise des charges de travail tout au long du cycle de vie.
+
+      Elle implique l'optimisation des interactions entre la définition des besoins la conception le développement et la validation pour garantir une cohérence globale et éviter les silos.
+
+      Une dimension réactive est indispensable pour s'adapter aux évolutions imprévues provenant de l'environnement ou des attentes des utilisateurs afin de préserver la pertinence du projet.
+
+II. CYCLE DE VIE ET MODELES DE DEVELOPPEMENT.
+
+   A. Le modele en V classique.
+
+      Le modèle en V représente une approche structurée où chaque phase de conception et de réalisation est systématiquement associée à une phase de test correspondante créant une symétrie visuelle.
+
+      Cette méthode impose une définition exhaustive des exigences dès le départ suivie d'une conception détaillée avant toute implémentation permettant une traçabilité rigoureuse.
+
+      La rigidité intrinsèque de ce modèle rend difficile l'intégration de modifications tardives ou d'évolutions des besoins ce qui limite son adaptabilité dans des contextes changeants.
+
+   B. Modeles agiles et hybrides.
+
+      Les modèles agiles répondent au besoin de flexibilité en découpant le développement en cycles courts et en privilégiant la collaboration étroite avec les parties prenantes.
+
+      Ces approches intègrent souvent des pratiques comme DevOps ou SRE et visent une amélioration continue pour accélérer les livraisons tout en maintenant la qualité.
+
+      Les modèles hybrides combinent la structure des cycles traditionnels avec l'adaptabilité agile offrant un équilibre entre la rigueur nécessaire à certains projets et la réactivité requise par d'autres.
+
+III. METHODES AGILES SCRUM ET KANBAN.
+
+   A. La methode Scrum.
+
+      Scrum est un cadre méthodologique qui organise le travail en itérations courtes appelées sprints durant généralement de deux à quatre semaines pour livrer des incréments de produit.
+
+      Le Product Owner porte la vision du produit et gère le backlog tandis que le Scrum Master facilite les processus et protège l'équipe de développement auto organisée.
+
+      Les artefacts principaux sont le Product Backlog qui recense les besoins priorisés et le Sprint Backlog qui liste les tâches engagées pour l'itération en cours.
+
+      Les cérémonies comme le Sprint Planning le Daily Scrum la Sprint Review et la Rétrospective rythment la collaboration et assurent l'inspection et l'adaptation continues.
+
+   B. La methode Kanban.
+
+      Kanban se distingue par une approche visuelle du flux de travail utilisant un tableau divisé en colonnes pour suivre l'état des tâches.
+
+      La limitation du travail en cours ou WIP est un mécanisme central permettant d'identifier les goulots d'étranglement et d'optimiser l'efficacité de l'équipe.
+
+      Contrairement à Scrum cette méthode ne repose pas sur des sprints fixes mais sur un flux continu adapté aux environnements où les priorités changent fréquemment.
+
+      L'approche hybride Scrumban combine la structure et les rôles de Scrum avec la souplesse de gestion de flux de Kanban.
+
+IV. EXPRESSION DES BESOINS ET GESTION DU BACKLOG.
+
+   A. Expression des besoins.
+
+      L'expression des besoins traduit les attentes métiers en exigences concrètes grâce à une collaboration étroite entre la maîtrise d'ouvrage et la maîtrise d'oeuvre.
+
+      Les user stories sont utilisées pour décrire les fonctionnalités de manière simple et centrée sur l'utilisateur favorisant une compréhension partagée.
+
+      Chaque user story doit être accompagnée de critères d'acceptation précis qui définissent les conditions de validation pour les tests et la recette.
+
+      Des ateliers collaboratifs et une documentation rigoureuse formalisent ces échanges pour aligner toutes les équipes sur une vision commune du produit final.
+
+   B. Gestion du Product Backlog.
+
+      Le Product Backlog est la colonne vertébrale du projet centralisant toutes les fonctionnalités et améliorations organisées selon leur valeur métier et leur priorité.
+
+      La gestion de ce backlog incombe au Product Owner qui utilise des méthodes structurées comme MoSCoW RICE ou DEEP pour hiérarchiser les éléments.
+
+      Le backlog doit être régulièrement révisé lors de sessions d'affinage appelées backlog grooming pour estimer la complexité des tâches et préparer les travaux futurs.
+
+      Dans Scrum le backlog alimente les sprints tandis que dans Kanban il sert de réservoir pour un flux de travail continu.
+
+V. GOUVERNANCE ACTEURS ET COMITOLOGIE.
+
+   A. Roles et responsabilites.
+
+      La MOA définit la stratégie gère le budget et valide l'adéquation de la solution aux besoins métiers en agissant comme interface avec les utilisateurs.
+
+      La MOE prend en charge la réalisation technique les choix d'architecture et la gestion des équipes de développement pour garantir la qualité du produit.
+
+      Le Product Manager en agilité se positionne à l'interface du marché pour définir la stratégie produit et la roadmap à long terme.
+
+   B. Comitologie et instances de decision.
+
+      La comitologie structure la gouvernance à travers différents comités assurant la coordination et la validation à chaque niveau du projet.
+
+      Le Comité de Pilotage ou COPIL réunit la direction et la MOA pour arbitrer les décisions stratégiques aux jalons clés.
+
+      Le Comité de Projet ou COPRO assure le suivi opérationnel quotidien identifie les risques et résout les blocages techniques ou fonctionnels.
+
+      Dans le cadre spécifique de la DGFIP le CODEN valide l'opportunité des demandes nouvelles et le COSTRAT supervise la stratégie globale.
+
+      Les cérémonies agiles comme les revues de sprint s'intègrent à cette gouvernance en permettant de valider les incréments de manière itérative.
+
+POINTS D'ATTENTION.
+
+      Il est crucial de ne pas confondre la nature temporaire d'un projet avec les processus opérationnels répétitifs et continus de l'entreprise.
+
+      La distinction entre le COPIL stratégique et le COPRO opérationnel est fondamentale pour une bonne gouvernance.
+
+      Une User Story sans critères d'acceptation est incomplète car elle ne permet pas de valider objectivement la conformité du développement.
+
+      Scrum impose une cadence fixe via les sprints alors que Kanban favorise un flux continu sans timeboxing strict.
+
+      Le Product Manager gère la vision à long terme et le marché tandis que le Product Owner est focalisé sur la gestion opérationnelle du backlog de l'équipe.
+
+EXEMPLES CITES.
+
+      La norme ISO 10006 et la référence AFNOR X50 105 sont citées pour définir le cadre normatif du projet.
+
+      Les méthodes MoSCoW RICE et DEEP sont mentionnées comme outils pour hiérarchiser les éléments du backlog.
+
+      Les outils logiciels Jira Trello et Asana sont cités pour la visualisation et le suivi des tâches.
+
+      Les pratiques DevOps et SRE ou Site Reliability Engineering sont citées comme compléments aux modèles agiles.

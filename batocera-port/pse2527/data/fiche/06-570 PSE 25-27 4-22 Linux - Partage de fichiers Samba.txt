@@ -1,0 +1,109 @@
+PARTAGE DE FICHIERS AVEC SAMBA SOUS LINUX.
+
+LEXIQUE COMPLET.
+
+      Samba : suite logicielle open-source implementant les protocoles SMB (Server Message Block) et CIFS (Common Internet File System) sur les systemes Unix/Linux. Permet le partage de fichiers et d'imprimantes entre machines Linux, Windows et macOS dans un reseau heterogene. Gratuit, personnalisable, fonctionne en mode autonome (standalone) ou integre a un domaine Active Directory.
+
+      SMB (Server Message Block) : protocole principal de Samba pour le partage de fichiers et d'imprimantes. Couche applicative (OSI 7). Ports TCP 445 (SMB direct) et TCP 139 (via NetBIOS). Standard actuel en versions SMB2 et SMB3.
+
+      CIFS (Common Internet File System) : extension du protocole SMB pour Internet (ancien, Windows 2000/XP). Desormais obsolete, remplace par SMB2 et SMB3. Pas de chiffrement. Port TCP 445.
+
+      NetBIOS over TCP/IP : protocole de resolution de noms et de gestion de sessions (couches OSI 5, 4 et 3). Ports UDP 137 (Name Service), UDP 138 (Datagram), TCP 139 (Session). Obsolete avec SMB2+ mais encore utilise pour la retrocompatibilite.
+
+      smbd : daemon Samba principal gerant le partage de fichiers et d'imprimantes (protocoles SMB/CIFS). Ecoute sur TCP 445 et TCP 139. Service principal a activer sur tout serveur Samba.
+
+      nmbd : daemon Samba gerant la resolution de noms NetBIOS (equivalent DNS pour les partages SMB anciens). Ecoute sur UDP 137 et UDP 138. Obsolete avec SMB2+ mais maintenu pour la retrocompatibilite.
+
+      winbindd : daemon Samba permettant l'integration avec Active Directory. Permet la resolution des utilisateurs et groupes AD sur un systeme Linux. Utilise les protocoles LDAP et Kerberos.
+
+      /etc/samba/smb.conf : fichier de configuration principal de Samba. Organise en sections : [global] (parametres globaux), [homes] (repertoires personnels), [public] (partages invites), [secure] (partages proteges), [printers] (imprimantes).
+
+      smbpasswd : commande Samba gerant les mots de passe des utilisateurs Samba (base de donnees distincte de /etc/shadow). Options principales : -a (ajouter et creer un mot de passe), -e (activer un compte), -d (desactiver un compte), -x (supprimer un compte).
+
+      pdbedit : commande de gestion de la base de donnees des utilisateurs Samba. "pdbedit -L" liste tous les utilisateurs. "pdbedit -L -v alice" affiche les details de l'utilisateur alice.
+
+      smbclient : client SMB en ligne de commande, fonctionnant comme un client FTP pour les partages Samba. Permet de lister les partages d'un serveur, de naviguer et de transferer des fichiers.
+
+      testparm : commande verifiant la syntaxe du fichier /etc/samba/smb.conf et affichant la configuration effective resultante.
+
+      smbstatus : commande affichant l'etat des connexions Samba actives (utilisateurs connectes, fichiers ouverts, verrous).
+
+      Kerberos : protocole d'authentification securisee utilise avec Active Directory. Permet le SSO (Single Sign-On). Port TCP 88. Configuration dans /etc/krb5.conf.
+
+      LDAP (Lightweight Directory Access Protocol) : protocole d'acces aux annuaires, utilise si Samba est integre a Active Directory ou utilise un backend LDAP. Port TCP 389 (non chiffre), TCP 636 (LDAPS chiffre).
+
+      idmap : mecanisme Samba traduisant les SID (identifiants Windows) en UID/GID Linux. Necessite une configuration dans smb.conf lors de l'integration Active Directory.
+
+      valid users : directive smb.conf permettant de restreindre l'acces a un partage a des utilisateurs ou groupes specifiques. Exemple : "valid users = @smbgroup" autorise uniquement les membres du groupe smbgroup.
+
+COURS DETAILLE.
+
+I. PRESENTATION ET ARCHITECTURE DE SAMBA.
+
+   A. Qu'est-ce que Samba.
+
+      Samba est une suite logicielle open-source implementant les protocoles SMB et CIFS sur les systemes Unix/Linux. Il permet le partage de fichiers et d'imprimantes entre machines Linux, Windows et macOS dans un reseau heterogene. Il est gratuit, personnalisable et dispose d'une communaute active. Samba fonctionne en mode autonome (standalone, sans domaine) ou integre a un domaine Active Directory. Il est optimise pour les reseaux locaux (LAN) et etendus (WAN) et supporte les protocoles modernes de securite (SMB3.1.1, chiffrement AES-128/256, authentification Kerberos).
+
+      Les fonctionnalites cles sont : le partage de fichiers (acces transparent aux dossiers partages comme un disque reseau sous Windows), le partage d'imprimantes (permet a des clients Windows d'imprimer via un serveur Linux), l'authentification (gestion des utilisateurs et groupes via LDAP, Active Directory ou base locale /etc/passwd), l'integration Active Directory (Samba peut agir comme controleur de domaine DC ou comme membre d'un domaine AD) et le chiffrement SMB3 (AES-128/256 pour les transferts securises).
+
+   B. Composants principaux (daemons).
+
+      Samba est compose de quatre daemons principaux. Le daemon smbd gere le partage de fichiers et d'imprimantes en implementant les protocoles SMB/CIFS. Il ecoute sur TCP 445 (SMB direct) et TCP 139 (NetBIOS). Le daemon nmbd gere la resolution de noms NetBIOS : il est obsolete avec SMB2+ mais encore utilise pour la retrocompatibilite. Il ecoute sur UDP 137 (Name Service) et UDP 138 (Datagram). Le daemon winbindd permet l'integration avec Active Directory en assurant la resolution des utilisateurs et groupes AD sur le systeme Linux. Il utilise les protocoles LDAP et Kerberos. Le daemon samba joue le role de controleur de domaine Active Directory lorsque Samba est configure en mode DC. Il ecoute sur TCP 445, 389 (LDAP), 636 (LDAPS) et 88 (Kerberos).
+
+   C. Protocoles et versions SMB.
+
+      Samba utilise plusieurs protocoles. Le protocole SMB est le protocole principal de partage de fichiers et d'imprimantes (couche 7 OSI, ports TCP 445 et 139). CIFS est une extension historique de SMB pour Internet, desormais obsolete et remplacee par SMB2 et SMB3. NetBIOS over TCP/IP assure la resolution de noms et la gestion des sessions anciennes. LDAP assure l'acces aux annuaires en mode Active Directory. Kerberos est le protocole d'authentification securisee du domaine AD (SSO). DNS gere la resolution de noms si Samba est controleur de domaine. RPC (Remote Procedure Call) est utilise pour l'administration a distance, notamment la gestion des imprimantes.
+
+      L'evolution des versions SMB est importante. SMB1 (1980s) est le protocole de base, non securise et vulnerable (faille EternalBlue). Samba desactive SMB1 par defaut depuis la version 4.7 (2017). Windows 10 et 11 desactivent egalement SMB1 par defaut. SMB2 (2006) apporte de meilleures performances, des signatures obligatoires et le support des liens symboliques. SMB2.1 (2009) introduit le chiffrement optionnel et des optimisations pour les WAN. SMB3.0 (2012) apporte le chiffrement de bout en bout, le multicanal et la tolerance aux pannes. SMB3.1.1 (2015) rend le chiffrement obligatoire, apporte la pre-authentification et l'integration avec Kerberos : c'est la version securisee par defaut a utiliser. Il faut toujours utiliser SMB2 ou SMB3 pour des raisons de securite.
+
+II. INSTALLATION ET CONFIGURATION DE SAMBA.
+
+   A. Installation sur Debian 13 (Trixie).
+
+      Les prerequis sont : Debian 13 (Trixie) avec acces sudo, un reseau configure (adresse IP statique recommandee pour un serveur), un espace disque suffisant pour les partages et un nom d'hote configure via "hostnamectl set-hostname samba-server". L'installation s'effectue avec "sudo apt install -y samba samba-common-bin" pour les paquets principaux, et "sudo apt install -y smbclient cifs-utils" pour les outils clients permettant de tester les partages. La version installee est verifiable avec "smbd --version".
+
+      La gestion des services Samba s'effectue via systemctl. Pour verifier l'etat : "sudo systemctl status smbd" (partage de fichiers), "sudo systemctl status nmbd" (NetBIOS) et "sudo systemctl status winbindd" (integration AD). Pour activer le demarrage automatique : "sudo systemctl enable smbd nmbd winbindd". Pour demarrer, redemarrer ou arreter : "sudo systemctl start/restart/stop smbd nmbd winbindd". La verification des ports ouverts s'effectue avec "sudo ss -tulnp | grep -E 'smbd|nmbd|winbindd'" : le service doit ecouter sur TCP 445 et TCP 139 (smbd), UDP 137 et UDP 138 (nmbd).
+
+   B. Configuration du fichier smb.conf.
+
+      Le fichier de configuration principal de Samba est /etc/samba/smb.conf. Il est structure en sections. La section [global] contient les parametres appliques a tout le serveur : "workgroup = MONDOMAINE" (nom du groupe de travail ou du domaine) et "server string = Serveur Samba %h" (description du serveur). La section [homes] configure le partage automatique des repertoires /home des utilisateurs : "comment = Repertoire personnel de %u" et "browseable = No". La section [public] definit un partage avec acces invite : "path = /srv/samba/public", "comment = Partage public" et "guest ok = Yes". La section [secure] definit un partage avec acces restreint a un groupe : "path = /srv/samba/secure", "comment = Partage securise" et "valid users = @smbgroup". La section [printers] configure le partage des imprimantes : "path = /var/spool/samba" et "printable = Yes".
+
+      La creation des repertoires de partage necessite de definir des permissions Linux coherentes. Pour un partage public (lecture seule) : "sudo chmod 0755 /srv/samba/public" et "sudo chown nobody:nogroup /srv/samba/public". Pour un partage securise par groupe : "sudo chmod 0770 /srv/samba/secure" et "sudo chown root:devteam /srv/samba/secure". Pour un partage prive : "sudo chmod 0700 /srv/samba/private" et "sudo chown alice:alice /srv/samba/private". Si SELinux est actif, il faut egalement appliquer le contexte SELinux avec "sudo chcon -t samba_share_t /srv/samba/public" (ou -R pour appliquer recursivement).
+
+III. GESTION DES UTILISATEURS ET ADMINISTRATION AVANCEE.
+
+   A. Gestion des utilisateurs et groupes Samba.
+
+      Samba maintient sa propre base de donnees des mots de passe, distincte de /etc/shadow. Il faut donc creer l'utilisateur au niveau Linux ET l'ajouter dans Samba. La creation d'un utilisateur Linux dedie a Samba (sans connexion interactive) s'effectue avec "sudo useradd --shell /bin/false --no-create-home alice". L'ajout dans la base Samba s'effectue avec "sudo smbpasswd -a alice" (demande un mot de passe Samba). La commande "sudo smbpasswd -e alice" active un compte desactive. La commande "sudo smbpasswd -d alice" desactive un compte. La commande "sudo smbpasswd -x alice" supprime un compte de la base Samba.
+
+      La creation et la gestion des groupes s'effectuent avec les commandes Linux classiques : "sudo groupadd devteam" et "sudo groupadd smbgroup". L'ajout d'un utilisateur a un groupe s'effectue avec "sudo usermod -aG devteam alice". La consultation des utilisateurs Samba s'effectue avec "sudo pdbedit -L" (liste tous les utilisateurs) et "sudo pdbedit -L -v alice" (details d'un utilisateur). La commande "groups alice" verifie les groupes d'appartenance Linux.
+
+   B. Outils d'administration avancee et integration Active Directory.
+
+      Plusieurs outils d'administration sont disponibles. La commande "smbclient -L //192.168.1.100 -U alice" liste les partages disponibles sur un serveur Samba. La commande "smbclient //192.168.1.100/public -U guest -c ls" liste les fichiers d'un partage specifique. La commande "testparm" verifie la syntaxe de smb.conf et affiche la configuration effective. La commande "smbstatus" affiche l'etat des connexions Samba actives (utilisateurs connectes, fichiers ouverts). La commande "nmblookup samba-server" resout un nom NetBIOS en adresse IP. La commande "sudo net user list" liste les utilisateurs via l'outil net. La commande "sudo net share list" liste les partages Samba. La commande "wbinfo -u" liste les utilisateurs Active Directory.
+
+      L'integration de Samba dans un domaine Active Directory necessite plusieurs etapes. Il faut installer les paquets : "sudo apt install -y krb5-config winbind libpam-winbind libnss-winbind adcli realmd". Il faut configurer Kerberos dans /etc/krb5.conf avec le domaine (default_realm = MONDOMAINE.LOCAL), les options de lookup DNS et la duree de vie des tickets (ticket_lifetime = 24h). Il faut configurer Samba dans smb.conf en mode ADS : "security = ADS", "realm = MONDOMAINE.LOCAL", "workgroup = MONDOMAINE" et les directives idmap pour la traduction des SID Windows en UID/GID Linux. Il faut configurer NSS dans /etc/nsswitch.conf en ajoutant "winbind" aux lignes passwd et group. La jonction au domaine s'effectue avec "sudo net ads join -U administrateur" (demande le mot de passe administrateur AD). Les services doivent ensuite etre redemarres avec "sudo systemctl start smbd nmbd winbindd".
+
+POINTS D'ATTENTION.
+
+      SMB1 est desactive par defaut depuis Samba 4.7 (2017) et dans Windows 10/11 en raison de vulnerabilites critiques (faille EternalBlue exploitee par WannaCry). Il ne faut jamais reactiver SMB1, meme pour la compatibilite avec de vieux systemes.
+
+      Samba maintient une base de donnees de mots de passe distincte de /etc/shadow : un utilisateur Linux doit exister ET avoir ete ajoute avec "smbpasswd -a" pour pouvoir se connecter a un partage Samba authentifie. Ces deux mots de passe sont independants par defaut et peuvent diverger si la synchronisation PAM n'est pas configuree.
+
+      Les permissions Linux du repertoire partage et les permissions Samba (valid users, read only, etc.) s'appliquent de maniere cumulative : l'acces effectif resulte du niveau de permission le plus restrictif entre les deux. Un utilisateur peut avoir le droit Samba d'ecriture mais etre bloque par les droits Linux du systeme de fichiers.
+
+      La commande "testparm" doit etre executee apres chaque modification de smb.conf avant de redemarrer les services : une erreur de syntaxe dans smb.conf empeche le demarrage de smbd et rend tous les partages inaccessibles.
+
+      Si SELinux est active, appliquer le contexte samba_share_t aux repertoires partages est obligatoire : sans ce contexte, SELinux bloquera les acces Samba meme si les droits Linux et Samba sont correctement configures, ce qui peut generer une confusion de diagnostic.
+
+EXEMPLES CITES.
+
+      La commande "smbclient -L //192.168.1.100 -U alice" liste tous les partages disponibles sur le serveur Samba 192.168.1.100 en s'authentifiant en tant qu'alice : equivalent de "Connexion a un partage reseau" dans l'explorateur Windows.
+
+      La configuration d'un partage securise dans smb.conf avec "valid users = @smbgroup" et les permissions Linux "chmod 0770 /srv/samba/secure && chown root:devteam /srv/samba/secure" assure que seuls les membres du groupe smbgroup (cote Samba) ET du groupe devteam (cote Linux) peuvent acceder au partage en lecture/ecriture.
+
+      La synchronisation des mots de passe Unix et Samba via PAM (/etc/pam.d/common-password) permet qu'un changement de mot de passe Linux via "passwd alice" mette egalement a jour le mot de passe Samba : sans cette synchronisation, les deux mots de passe derivent et l'utilisateur peut se bloquer.
+
+      La commande "sudo net ads join -U administrateur" joint le serveur Samba au domaine Active Directory MONDOMAINE.LOCAL : apres jonction, les comptes AD peuvent s'authentifier sur les partages Samba sans gestion locale des utilisateurs via smbpasswd.
+
+      La commande "sudo smbpasswd -a alice" ajoute l'utilisateur alice a la base de donnees Samba en lui assignant un mot de passe SMB distinct du mot de passe Linux : alice peut ainsi se connecter aux partages Samba depuis un poste Windows avec ses identifiants Samba.

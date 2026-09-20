@@ -1,0 +1,189 @@
+DU NOYAU AU SGF - PREPARATION PSE-TRAD.
+
+LEXIQUE COMPLET.
+
+      Le noyau Linux est le cœur du système d'exploitation qui arbitre l'accès aux ressources matérielles et dont dépend chaque exécution de programme.
+
+      Une architecture monolithique modulaire est une architecture combinant performance et flexibilité où les fonctionnalités peuvent être chargées dynamiquement sous forme de modules.
+
+      Un processus est un programme en cours d'exécution planifié par l'ordonnanceur du noyau avec des priorités spécifiques.
+
+      Le swappiness est un paramètre du noyau qui influence la propension du système à utiliser l'espace d'échange sur le disque plutôt que la mémoire vive.
+
+      Un système de gestion de fichiers transforme le stockage brut en une organisation logique exploitable garantissant la cohérence et la persistance des données.
+
+      Le superbloc est une structure interne contenant les informations globales du système de fichiers dont la corruption rend le système inutilisable.
+
+      Un inode représente l'identité réelle d'un fichier indépendamment de son nom et contient les métadonnées ainsi que les pointeurs vers les données.
+
+      Le Filesystem Hierarchy Standard est une convention normalisée définissant la structure et la destination des répertoires sous Linux.
+
+      Le Logical Volume Manager ou LVM est une couche d'abstraction entre le matériel et le système de fichiers facilitant la gestion souple du stockage.
+
+      Un Volume Physique ou PV est un disque ou une partition initialisé pour être utilisé par le LVM.
+
+      Un Groupe de Volumes ou VG est un ensemble de volumes physiques constituant un réservoir d'espace de stockage unifié.
+
+      Un Volume Logique ou LV est une portion d'un groupe de volumes formatée pour accueillir un système de fichiers.
+
+      La commande rsync est un outil de synchronisation de fichiers permettant de copier des données en conservant leurs attributs.
+
+COURS DÉTAILLÉ.
+
+I. LE NOYAU LINUX ET LA GESTION DES RESSOURCES.
+
+   A. Rôle et architecture du noyau.
+
+      Le noyau Linux constitue le centre névralgique du système d'exploitation en arbitrant l'accès à toutes les ressources matérielles telles que le processeur, la mémoire et les périphériques.
+
+      Son architecture est qualifiée de monolithique modulaire, ce qui permet d'intégrer ou de charger dynamiquement des fonctionnalités sous forme de modules situés dans le répertoire des modules du noyau.
+
+      L'administrateur système doit comprendre que le noyau gère l'ordonnancement des processus et que toute défaillance à ce niveau impacte la totalité du système.
+
+   B. Gestion des processus et de la charge.
+
+      Chaque programme s'exécute sous la forme d'un processus géré par l'ordonnanceur du noyau qui attribue des priorités pour optimiser la réactivité globale.
+
+      Les outils de supervision comme la commande top permettent d'observer en temps réel les décisions de l'ordonnanceur et d'afficher les états des processus comme le sommeil ou l'exécution.
+
+      Le statut des processus fournit des indications précieuses, par exemple le statut S pour le sommeil, le caractère inférieur pour une priorité élevée ou Sl pour le multi-thread.
+
+   C. Gestion de la mémoire.
+
+      Le noyau optimise l'utilisation des ressources en gérant la mémoire vive, le cache disque et l'espace de swap.
+
+      Une mémoire fortement utilisée ne signale pas nécessairement un dysfonctionnement car le système utilise la mémoire disponible pour le cache afin d'accélérer les opérations.
+
+      Le paramètre swappiness règle le seuil d'utilisation de la RAM à partir duquel le noyau commence à écrire sur le disque, un mauvais réglage pouvant ralentir le système.
+
+II. LE SYSTÈME DE GESTION DE FICHIERS (SGF).
+
+   A. Définition et types de fichiers.
+
+      Le système de fichiers organise le stockage brut de manière logique et traite de façon homogène les fichiers, les périphériques et les processus.
+
+      Les fichiers sont identifiés par un type spécifique tel que le tiret pour un fichier classique, d pour un répertoire, l pour un lien ou b pour une interface block.
+
+   B. Arborescence et standard FHS.
+
+      L'arborescence Linux respecte le Filesystem Hierarchy Standard qui normalise l'emplacement des fichiers pour faciliter la maintenance.
+
+      Le répertoire boot contient les éléments essentiels au démarrage comme le noyau et le chargeur de démarrage grub.
+
+      Le répertoire var stocke les données variables telles que les journaux système et les files de messages qui changent fréquemment.
+
+      Le répertoire opt est réservé aux logiciels additionnels ou tiers installés en dehors du gestionnaire de paquets principal.
+
+      Le répertoire usr regroupe la majorité des programmes et données nécessaires au fonctionnement normal du système mais non essentiels au démarrage minimal.
+
+   C. Mécanismes internes.
+
+      Le fonctionnement du système de fichiers repose sur des structures invisibles dont la principale est le superbloc qui contient les paramètres globaux.
+
+      L'inode est la structure fondamentale qui porte l'identité du fichier et ses permissions, une saturation en nombre d'inodes pouvant bloquer le système même s'il reste de l'espace disque.
+
+      Les données sont stockées dans des blocs dont la taille est définie lors de la création du système de fichiers et influence les performances.
+
+III. LE LOGICAL VOLUME MANAGER (LVM).
+
+   A. Composants et architecture.
+
+      Le LVM insère une couche d'abstraction logicielle entre le disque physique et le système de fichiers pour permettre une gestion flexible.
+
+      L'architecture repose sur trois piliers que sont les volumes physiques, les groupes de volumes et les volumes logiques.
+
+      Cette technologie est indispensable en production car elle permet l'extension à chaud et la migration de données sans interruption de service.
+
+   B. Politique de nommage.
+
+      Une administration rigoureuse impose une normalisation des noms des groupes de volumes pour identifier rapidement leur usage.
+
+      Le groupe rootvg contient généralement le système d'exploitation tandis que datavg héberge les bases de données et appvg les binaires applicatifs.
+
+      Il est recommandé d'isoler les journaux de bases de données dans des groupes dédiés comme archlogvg pour adapter le type de protection RAID.
+
+   C. Préparation des disques physiques.
+
+      L'ajout d'un disque au LVM nécessite une préparation préalable de la table de partitions avec l'utilitaire fdisk.
+
+      Le type de partition doit être explicitement défini avec le code hexadécimal 8e pour indiquer qu'il s'agit d'une partition Linux LVM.
+
+IV. PROCEDURES DE MIGRATION ET MAINTENANCE.
+
+   A. Migration de données intra-LVM.
+
+      La commande pvmove permet de déplacer dynamiquement les données d'un volume physique vers un autre au sein du même groupe de volumes.
+
+      Cette opération s'effectue à chaud sans démontage des systèmes de fichiers et est utilisée pour le remplacement de disques ou la montée en capacité.
+
+      La procédure implique d'initialiser le nouveau disque, d'étendre le groupe de volumes, de déplacer les données puis de retirer l'ancien disque du groupe.
+
+   B. Migration de données de FS à FS.
+
+      La commande rsync est utilisée pour migrer des données entre deux systèmes de fichiers distincts, par exemple pour changer de type de formatage.
+
+      La procédure recommandée consiste à effectuer une première passe de synchronisation à chaud pour copier la majorité des données.
+
+      Une seconde passe doit être réalisée après l'arrêt du service ou de la base de données avec l'option de suppression pour garantir l'intégrité exacte des derniers blocs modifiés.
+
+      La bascule finale nécessite le démontage des volumes, le renommage logique des volumes LVM et le redémarrage des services.
+
+V. CONTEXTE DE L'EPREUVE ET SUJETS CONNEXES.
+
+   A. L'épreuve technique PSE-TRAD.
+
+      L'épreuve place le candidat dans une situation réelle d'incident nécessitant un diagnostic précis, une résolution technique et une proposition d'évolution.
+
+      La rédaction doit être structurée avec une introduction, un développement suivant le plan annoncé et une conclusion résumant les opérations.
+
+      Il est essentiel de justifier les actions entreprises et de faire preuve de qualités rédactionnelles pour communiquer avec une hiérarchie non experte.
+
+   B. Domaines techniques connexes.
+
+      Le métier d'administrateur nécessite des connaissances transverses en stockage incluant les protocoles SAN et NAS ainsi que les niveaux de RAID.
+
+      Les compétences doivent s'étendre aux solutions de sauvegarde et d'archivage pour assurer la sécurité et la pérennité des données.
+
+      La maîtrise des concepts de virtualisation et de conteneurisation est devenue indispensable pour gérer les infrastructures modernes.
+
+POINTS D'ATTENTION.
+
+      Une corruption du superbloc rend le système de fichiers totalement inutilisable et nécessite des outils de réparation spécifiques.
+
+      La saturation des inodes est un incident fréquent sur les serveurs applicatifs générant beaucoup de petits fichiers et se diagnostique différemment de la saturation d'espace.
+
+      L'utilisation du swap n'est pas anormale si elle reste modérée mais un réglage inadapté du swappiness peut dégrader les performances.
+
+      Lors d'une migration avec rsync, il est critique d'effectuer une passe finale service arrêté pour assurer la cohérence des données.
+
+      Toute manipulation de la table de partitions ou des volumes logiques comporte un risque de perte de données et doit être précédée de vérifications.
+
+      Il ne faut jamais oublier de démonter proprement les systèmes de fichiers avant de renommer ou de supprimer des volumes logiques.
+
+EXEMPLES CITES.
+
+      La commande uname tire a permet d'afficher les informations sur le noyau en cours d'exécution.
+
+      La commande lsmod liste les modules actuellement chargés par le noyau.
+
+      La commande modprobe permet de charger un module tandis que rmmod permet de le décharger.
+
+      La commande ps tire eo pid virgule comm virgule pri virgule ni virgule stat affiche les détails des processus avec leurs priorités.
+
+      La commande free tire h affiche l'état de la mémoire et du swap en format lisible.
+
+      La commande df tire i permet de vérifier le taux d'occupation des inodes sur les systèmes de fichiers.
+
+      La commande lsof tire p liste les fichiers ouverts par un processus spécifique.
+
+      La commande mkfs point ext4 tire b 4096 formate une partition en ext4 avec des blocs de 4 ko.
+
+      La commande pvs affiche les informations sur les volumes physiques LVM.
+
+      La commande vgextend datavg slash dev slash sde1 ajoute un nouveau disque physique au groupe de volumes datavg.
+
+      La commande pvmove slash dev slash sdc1 slash dev slash sde1 déplace les données d'un disque vers un autre à chaud.
+
+      La commande rsync tire avh tire tire progress copie les fichiers en affichant la progression.
+
+      La commande fdisk permet de modifier le type de partition en entrant le code 8e.

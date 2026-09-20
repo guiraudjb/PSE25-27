@@ -1,0 +1,265 @@
+GUIDE D'HYGIÈNE INFORMATIQUE - RENFORCER LA SÉCURITÉ DU SYSTÈME D'INFORMATION.
+
+LEXIQUE COMPLET.
+
+      L'ANSSI désigne l'Agence nationale de la sécurité des systèmes d'information qui édite ce guide.
+
+      Le Système d'Information ou SI représente le berceau des données de l'entité et l'objet principal des mesures de sécurisation.
+
+      Une DSI correspond à la Direction des Systèmes d'Information chargée de la gestion technique du parc informatique.
+
+      Un RSSI est le Responsable de la Sécurité des Systèmes d'Information qui pilote la politique de sécurité de l'organisme.
+
+      Le Plan d'Assurance Sécurité ou PAS est un document contractuel décrivant les dispositions de sécurité mises en œuvre par un prestataire d'infogérance.
+
+      Un VLAN désigne un réseau local virtuel permettant de segmenter logiquement le réseau informatique.
+
+      Le SSID est l'identifiant technique d'un réseau sans fil Wi-Fi.
+
+      TLS et IPsec sont des protocoles de sécurisation des échanges réseaux assurant confidentialité et intégrité,.
+
+      EBIOS est la méthode d'analyse de risques recommandée par l'ANSSI pour apprécier les besoins de sécurité.
+
+      Un PASSI est un Prestataire d'Audit de la Sécurité des Systèmes d'Information qualifié par l'ANSSI.
+
+COURS DÉTAILLÉ.
+
+I. SENSIBILISER ET FORMER.
+
+   A. Formation des équipes opérationnelles.
+
+      Les équipes opérationnelles disposent d'accès privilégiés et peuvent générer des vulnérabilités par inadvertance ou méconnaissance.
+
+      Ces personnels techniques doivent suivre des formations régulières sur la législation, les risques, le durcissement des systèmes ou encore la journalisation.
+
+      Cette exigence de formation doit également figurer dans les contrats des prestataires externes comme les infogérants.
+
+   B. Sensibilisation des utilisateurs.
+
+      Chaque utilisateur constitue un maillon de la chaîne de sécurité et doit être informé des enjeux et règles dès son arrivée.
+
+      Les actions de sensibilisation doivent aborder les informations sensibles, les obligations légales et les consignes quotidiennes comme le verrouillage de session.
+
+      L'élaboration d'une charte des moyens informatiques signée par l'utilisateur permet de renforcer ces mesures.
+
+   C. Maîtrise de l'infogérance.
+
+      L'externalisation nécessite d'évaluer les risques en amont et d'imposer des exigences précises au prestataire via un plan d'assurance sécurité,.
+
+      Le contrat doit prévoir la réversibilité, la réalisation d'audits et le maintien du niveau de sécurité dans le temps.
+
+II. CONNAÎTRE LE SYSTÈME D'INFORMATION.
+
+   A. Cartographie et inventaire.
+
+      Il est indispensable d'identifier les données sensibles pour déterminer sur quels serveurs et postes critiques elles se localisent.
+
+      L'entité doit maintenir à jour un schéma du réseau incluant les zones IP, les interconnexions et les équipements de sécurité.
+
+   B. Gestion des comptes privilégiés.
+
+      Un inventaire exhaustif des comptes disposant de droits administrateurs ou d'accès aux données sensibles doit être tenu à jour.
+
+      Une revue périodique de ces comptes est recommandée pour supprimer les accès obsolètes et valider la légitimité des droits.
+
+   C. Gestion des entrées et sorties.
+
+      Les procédures d'arrivée et de départ des collaborateurs doivent être définies avec les ressources humaines pour garantir la révocation des droits.
+
+      Cette gestion couvre les comptes informatiques, les accès physiques et la restitution des équipements mobiles.
+
+   D. Maîtrise des équipements connectés.
+
+      Seuls les équipements maîtrisés par l'entité doivent être autorisés à se connecter au réseau filaire ou sans fil de l'organisation.
+
+      Des solutions techniques comme l'authentification 802.1X permettent de renforcer ce contrôle d'accès.
+
+III. AUTHENTIFIER ET CONTRÔLER LES ACCÈS.
+
+   A. Identification et authentification.
+
+      Les comptes d'accès doivent être nominatifs pour permettre l'imputabilité des actions en cas d'incident.
+
+      Les administrateurs doivent disposer d'un compte dédié à l'administration distinct de leur compte utilisateur standard pour la bureautique.
+
+      L'authentification forte reposant sur deux facteurs comme une carte à puce ou un jeton doit être privilégiée lorsque cela est possible.
+
+   B. Gestion des mots de passe.
+
+      Les mots de passe doivent respecter des règles de robustesse et ne jamais être réutilisés entre la sphère privée et professionnelle.
+
+      Il est impératif de modifier systématiquement les éléments d'authentification par défaut des équipements dès leur installation.
+
+      Les mots de passe stockés doivent être protégés dans des coffres-forts numériques ou chiffrés pour éviter le vol.
+
+   C. Gestion des droits d'accès.
+
+      L'accès aux ressources sensibles comme les fichiers de configuration ou les bases de données doit être strictement limité aux personnes autorisées.
+
+      Une revue régulière des droits d'accès permet d'identifier et de corriger les accès illégitimes.
+
+IV. SÉCURISER LES POSTES.
+
+   A. Durcissement du parc informatique.
+
+      Un niveau de sécurité minimal incluant antivirus, pare-feu local et chiffrement des données doit être appliqué sur tous les postes.
+
+      Les exécutions automatiques doivent être désactivées et les applications installées limitées au strict nécessaire.
+
+      Les données sensibles transmises via Internet doivent être systématiquement chiffrées avant envoi.
+
+   B. Gestion centralisée et supports amovibles.
+
+      L'utilisation d'un outil de gestion centralisée permet d'homogénéiser les politiques de sécurité et de faciliter les mises à jour.
+
+      L'usage de supports amovibles doit être encadré et le branchement de clés USB inconnues doit être proscrit.
+
+      Le pare-feu local des postes doit être activé pour limiter les déplacements latéraux d'un attaquant au sein du réseau.
+
+V. SÉCURISER LE RÉSEAU.
+
+   A. Segmentation et cloisonnement.
+
+      Le réseau doit être segmenté en zones homogènes en fonction de la criticité des systèmes et des besoins de sécurité.
+
+      Des mécanismes de cloisonnement comme des pare-feu doivent filtrer les échanges entre ces différentes zones.
+
+      Les services visibles depuis Internet doivent être isolés dans une zone démilitarisée et protégés par des relais applicatifs.
+
+   B. Sécurisation des flux et accès distants.
+
+      Les protocoles sécurisés assurant confidentialité et intégrité comme HTTPS ou SSH doivent remplacer les protocoles clairs.
+
+      L'accès des utilisateurs à Internet doit s'effectuer via une passerelle sécurisée comprenant un serveur mandataire et un filtrage antivirus.
+
+      Les interconnexions avec les partenaires doivent être filtrées strictement et chiffrées via des tunnels IPsec si elles passent par Internet.
+
+   C. Sécurité du Wi-Fi et de la messagerie.
+
+      Les réseaux Wi-Fi doivent utiliser un chiffrement robuste WPA2 et authentifier les terminaux de l'entreprise.
+
+      Les terminaux invités ou personnels doivent être isolés sur un réseau Wi-Fi séparé sans accès au système d'information interne.
+
+      La messagerie doit être protégée par des analyses antivirus et des mécanismes d'authentification des domaines émetteurs,.
+
+   D. Sécurité physique.
+
+      L'accès aux salles serveurs et locaux techniques doit être contrôlé par badge ou serrure et tracé.
+
+      Les prises réseau situées dans les espaces publics de l'entité doivent être désactivées pour empêcher les connexions sauvages.
+
+VI. SÉCURISER L'ADMINISTRATION.
+
+   A. Isolement des fonctions d'administration.
+
+      Les postes utilisés pour l'administration ne doivent avoir aucun accès direct à Internet ni à la messagerie électronique.
+
+      L'administration du système d'information doit s'effectuer sur un réseau dédié et cloisonné physiquement ou logiquement.
+
+      Les mises à jour logicielles doivent être récupérées depuis une source sûre puis transférées vers le réseau d'administration.
+
+   B. Limitation des privilèges sur les postes de travail.
+
+      Les utilisateurs ne doivent pas disposer de droits d'administration sur leur poste de travail pour limiter l'impact des codes malveillants.
+
+      Les besoins ponctuels d'élévation de privilèges doivent être tracés, limités dans le temps et retirés ensuite.
+
+VII. GÉRER LE NOMADISME.
+
+   A. Protection des équipements nomades.
+
+      Les terminaux mobiles doivent être banalisés et équipés de filtres de confidentialité pour limiter les risques de vol et d'indiscrétion.
+
+      Le disque dur des équipements nomades doit être intégralement chiffré pour protéger les données en cas de perte ou de vol.
+
+   B. Connexions distantes sécurisées.
+
+      L'accès au système d'information depuis l'extérieur doit se faire via un tunnel VPN IPsec non débrayable par l'utilisateur,.
+
+      L'authentification forte est recommandée pour éviter l'usage d'identifiants volés.
+
+   C. Gestion des terminaux mobiles.
+
+      Il ne faut pas mélanger les usages professionnels et personnels sur les ordiphones et tablettes.
+
+      Une solution de gestion centralisée des flottes mobiles permet d'appliquer des politiques de sécurité homogènes.
+
+VIII. MAINTENIR LE SYSTÈME D'INFORMATION À JOUR.
+
+   A. Gestion des correctifs de sécurité.
+
+      Une politique de mise à jour doit garantir l'application des correctifs de sécurité dans le mois suivant leur publication.
+
+      Il est nécessaire de s'informer régulièrement des nouvelles vulnérabilités via les alertes du CERT-FR.
+
+   B. Gestion de l'obsolescence.
+
+      L'entité doit anticiper la fin de maintenance des logiciels et systèmes pour éviter d'utiliser des produits vulnérables non corrigés.
+
+      Les composants obsolètes qui ne peuvent être remplacés doivent être isolés du reste du réseau.
+
+IX. SUPERVISER, AUDITER, RÉAGIR.
+
+   A. Journalisation et surveillance.
+
+      Les événements critiques des composants importants comme les pare-feu et les serveurs doivent être journalisés et conservés.
+
+      Une synchronisation temporelle via NTP est indispensable pour corréler les événements entre les différents équipements.
+
+   B. Sauvegardes et continuité.
+
+      Une politique de sauvegarde doit définir les données vitales, la fréquence des copies et les procédures de restauration.
+
+      Les sauvegardes doivent être stockées en lieu sûr et testées régulièrement pour garantir leur exploitabilité,.
+
+   C. Audits et gestion des incidents.
+
+      Des audits de sécurité réguliers permettent de vérifier l'application des règles et de détecter les écarts.
+
+      Un référent en sécurité des systèmes d'information doit être désigné et connu de tout le personnel.
+
+      Une procédure de gestion des incidents doit prévoir l'isolement des machines compromises sans les éteindre pour permettre l'analyse.
+
+X. POUR ALLER PLUS LOIN.
+
+   A. Analyse de risques.
+
+      Une analyse de risques formelle est nécessaire pour adapter les mesures de sécurité aux enjeux spécifiques de l'entité.
+
+      La méthode EBIOS permet d'exprimer les besoins de sécurité et d'identifier les objectifs à atteindre.
+
+   B. Qualification et confiance.
+
+      Il est recommandé de privilégier l'usage de produits et services de sécurité qualifiés par l'ANSSI pour garantir leur robustesse.
+
+      Les prestataires qualifiés comme les PASSI ou PRIS offrent des garanties de compétence et de confiance.
+
+POINTS D'ATTENTION.
+
+      La sécurité n'est plus une option mais une nécessité économique et stratégique pour toutes les entités.
+
+      L'application des mesures de niveau standard constitue une première étape avant de viser le niveau renforcé.
+
+      Les configurations par défaut des équipements sont souvent connues des attaquants et constituent une vulnérabilité majeure.
+
+      L'utilisateur est souvent la première porte d'entrée des attaquants et doit être sensibilisé en conséquence.
+
+      Les mots de passe stockés sur des post-it ou des fichiers non protégés sont des cibles privilégiées.
+
+      La redirection de la messagerie professionnelle vers une boite personnelle constitue une fuite d'information irréversible.
+
+EXEMPLES CITES.
+
+      Active Directory pour la gestion centralisée des politiques de sécurité.
+
+      Applocker pour interdire l'exécution de programmes sur les périphériques amovibles.
+
+      WPA2 et AES CCMP pour le chiffrement des réseaux Wi-Fi.
+
+      HTTPS, IMAPS, SMTPS, POP3S pour la sécurisation des échanges.
+
+      SSH pour remplacer les protocoles non sécurisés comme TELNET.
+
+      WSUS pour le déploiement des mises à jour Microsoft.
+
+      EBIOS comme méthode d'analyse de risques.

@@ -1,0 +1,233 @@
+LA MÉTHODE EBIOS RISK MANAGER : GUIDE ET SUPPLÉMENT.
+
+LEXIQUE COMPLET.
+
+      L'action élémentaire désigne une action unitaire exécutée par une source de risque sur un bien support dans le cadre d'un scénario opérationnel, comme l'exploitation d'une vulnérabilité ou l'envoi d'un courriel piégé.
+
+      L'appréciation des risques regroupe l'ensemble du processus d'identification, d'analyse et d'estimation des risques, correspondant aux ateliers 2, 3 et 4 de la démarche.
+
+      Le besoin de sécurité représente la propriété de sécurité à garantir pour une valeur métier, traduisant un enjeu tel que la disponibilité, l'intégrité, la confidentialité ou la traçabilité.
+
+      Un bien support est une composante du système d'information sur laquelle repose une ou plusieurs valeurs métier, pouvant être de nature numérique, physique ou organisationnelle.
+
+      Un bien support critique est un bien support jugé très susceptible d'être ciblé par une source de risque pour atteindre son objectif et qui apparaît dans les scénarios opérationnels.
+
+      La cartographie de menace numérique de l'écosystème est une représentation visuelle du niveau de dangerosité numérique des parties prenantes vis-à-vis de l'objet étudié.
+
+      Un chemin d'attaque constitue une suite d'événements distincts que la source de risque devra probablement générer pour atteindre son objectif dans le cadre des scénarios stratégiques.
+
+      L'écosystème comprend l'ensemble des parties prenantes en interaction avec l'objet de l'étude, incluant toute relation intervenant dans son fonctionnement normal.
+
+      Un événement redouté est associé à une valeur métier et porte atteinte à un besoin de sécurité de celle-ci, comme l'indisponibilité d'un service ou la divulgation de données.
+
+      La gravité est l'estimation du niveau et de l'intensité des effets d'un risque, fournissant une mesure des impacts préjudiciables perçus.
+
+      Une mesure de sécurité est un moyen de traiter un risque prenant la forme de solutions techniques, organisationnelles ou d'exigences contractuelles.
+
+      La mission définit la fonction, la finalité et la raison d'être de l'objet de l'étude.
+
+      Un mode opératoire est une suite d'actions élémentaires que la source de risque devra probablement réaliser pour atteindre son objectif dans le cadre des scénarios opérationnels.
+
+      Le niveau de risque est une mesure de l'importance du risque, exprimée par la combinaison de la gravité et de la vraisemblance.
+
+      L'objectif visé correspond à la finalité poursuivie par une source de risque selon ses motivations, comme le vol d'informations ou le sabotage.
+
+      Une partie prenante est un élément en interaction directe ou indirecte avec l'objet de l'étude, pouvant être interne ou externe à l'organisation.
+
+      Le plan de traitement du risque formalise l'ensemble des mesures à mettre en œuvre pour traiter les risques et favoriser l'élévation du niveau de maturité de l'organisation.
+
+      Un risque est la possibilité qu'un événement redouté survienne et impacte les missions de l'objet de l'étude, décrit sous la forme d'un scénario de risque.
+
+      Un scénario de risque est un scénario complet allant de la source de risque à l'objectif visé, décrivant un chemin d'attaque et le scénario opérationnel associé.
+
+      Un scénario opérationnel est un enchaînement d'actions élémentaires portées sur les biens supports, estimé en termes de vraisemblance.
+
+      Un scénario stratégique décrit les chemins d'attaque allant d'une source de risque à un objectif visé en passant par l'écosystème et les valeurs métier, estimé en termes de gravité.
+
+      Une source de risque est un élément, une personne ou une organisation susceptible d'engendrer un risque, caractérisée par sa motivation et ses ressources.
+
+      Une valeur métier est une composante importante pour l'organisation dans l'accomplissement de sa mission, pouvant être un service, un processus ou une information.
+
+      La vraisemblance est l'estimation de la faisabilité ou de la probabilité qu'un risque se réalise selon une échelle définie.
+
+      Une vulnérabilité est une faille dans les spécifications, la conception ou l'utilisation d'un système pouvant être exploitée pour conduire à une intrusion.
+
+COURS DÉTAILLÉ.
+
+I. INTRODUCTION ET PRINCIPES GÉNÉRAUX DE LA MÉTHODE.
+
+   A. Présentation de la démarche.
+
+      EBIOS Risk Manager est une méthode d'appréciation et de traitement du risque numérique qui propose une boîte à outils adaptable selon l'objectif du projet.
+
+      La méthode adopte une approche de management du risque partant des grandes missions pour atteindre les fonctions techniques par l'étude de scénarios, combinant une approche par conformité et une approche par scénarios.
+
+      La démarche s'articule autour de cinq ateliers itératifs qui permettent d'apprécier les risques et de définir les mesures de sécurité nécessaires.
+
+   B. Les cycles de la méthode.
+
+      La méthode prévoit deux cycles distincts dont les durées sont définies lors du premier atelier.
+
+      Le cycle stratégique revisite l'ensemble de l'étude et les scénarios stratégiques, généralement tous les trois ans.
+
+      Le cycle opérationnel revient sur les scénarios opérationnels à la lumière des incidents et des nouvelles vulnérabilités, généralement sur une base annuelle.
+
+II. ATELIER 1 : CADRAGE ET SOCLE DE SÉCURITÉ.
+
+   A. Objectifs et périmètre (Fiche Méthode 1).
+
+      L'atelier 1 vise à définir le cadre de l'étude, le périmètre métier et technique, les événements redoutés et le socle de sécurité.
+
+      Le périmètre métier est défini par le recensement des missions et des valeurs métier, qui sont les processus et informations majeurs à protéger.
+
+      Le périmètre technique est défini par l'identification des biens supports, qui sont les composants du système d'information sur lesquels reposent les valeurs métier.
+
+      Les biens supports peuvent inclure des matériels, des logiciels, des réseaux, des organisations, des locaux ou des personnes.
+
+   B. Identification des biens supports (Fiche Méthode 2).
+
+      Les biens supports représentent les grandes catégories de composants d'un système d'information sur lesquels reposent les valeurs métier ou les mesures de sécurité.
+
+      Cette identification est utile lors de la définition du périmètre, de la construction des scénarios opérationnels et de la définition des mesures de sécurité.
+
+      Les catégories de biens supports incluent les systèmes informatiques, les réseaux, les organisations, et les locaux et installations physiques.
+
+   C. Événements redoutés et gravité (Fiche Méthode 3).
+
+      L'atelier identifie les événements redoutés associés aux valeurs métier et estime la gravité de leurs impacts sur l'organisation.
+
+      Les impacts peuvent être classés en plusieurs catégories telles que les impacts sur les missions, les impacts humains, financiers, juridiques ou sur l'image.
+
+      L'échelle de gravité doit être définie en concertation avec les métiers et comprendre généralement quatre ou cinq niveaux, allant de mineure à critique ou catastrophique.
+
+      Une échelle à cinq niveaux est recommandée pour mesurer des impacts très élevés correspondant à des crises majeures ou sectorielles.
+
+   D. Le socle de sécurité.
+
+      Le socle de sécurité est constitué par l'ensemble des référentiels de sécurité et réglementations qui s'appliquent à l'objet de l'étude.
+
+      L'atelier évalue l'état d'application de ce socle et identifie les écarts qui devront être justifiés ou traités.
+
+      L'objectif est de traiter les risques les plus communs et non ciblés par une approche de conformité avant d'analyser les risques ciblés.
+
+III. ATELIER 2 : SOURCES DE RISQUE.
+
+   A. Identification et caractérisation (Fiche Méthode 4).
+
+      L'atelier 2 identifie les sources de risque et leurs objectifs visés pour déterminer qui pourrait attaquer l'organisation et dans quel but.
+
+      Les sources de risque sont classées en catégories telles que les organisations étatiques, le crime organisé, les terroristes, les activistes ou les employés malveillants.
+
+      Les objectifs visés incluent l'espionnage, le prépositionnement stratégique, l'influence, l'entrave au fonctionnement, le gain lucratif ou le défi.
+
+   B. Sélection des couples Source de Risque / Objectif Visé.
+
+      Les couples formés par une source de risque et un objectif visé sont évalués selon leur pertinence pour retenir les plus prioritaires.
+
+      La pertinence est évaluée en fonction de la motivation de la source, de ses ressources et de son activité dans le secteur concerné.
+
+      Les résultats sont formalisés dans une cartographie des sources de risque, souvent représentée sous forme de radar.
+
+IV. ATELIER 3 : SCÉNARIOS STRATÉGIQUES.
+
+   A. Cartographie de l'écosystème (Fiche Méthode 5).
+
+      L'atelier 3 vise à acquérir une vision claire de l'écosystème et à évaluer la menace induite par les parties prenantes.
+
+      Les parties prenantes incluent les partenaires, fournisseurs, clients, filiales et services connexes qui interagissent avec l'objet de l'étude.
+
+      Le niveau de menace d'une partie prenante est évalué en fonction de critères d'exposition comme la dépendance et la pénétration, et de critères de fiabilité cyber comme la maturité et la confiance.
+
+      Une cartographie de menace positionne les parties prenantes dans des zones de veille, de contrôle ou de danger selon leur niveau de menace calculé.
+
+   B. Élaboration des scénarios stratégiques.
+
+      Les scénarios stratégiques sont des chemins d'attaque de haut niveau qu'une source de risque pourrait emprunter à travers l'écosystème pour atteindre son objectif.
+
+      Ces scénarios exploitent les vulnérabilités structurelles de l'écosystème et les relations avec les parties prenantes critiques.
+
+      La gravité de chaque scénario stratégique est estimée au regard des impacts potentiels sur les valeurs métier.
+
+   C. Mesures de sécurité sur l'écosystème (Fiche Méthode 6).
+
+      Des mesures de sécurité sont définies pour réduire le niveau de menace des parties prenantes, comme augmenter la confiance ou diminuer la dépendance.
+
+      Pour les parties prenantes en zone de danger, l'objectif est de réduire le risque ou de refuser l'interaction, tandis que celles en zone de contrôle nécessitent une surveillance particulière.
+
+V. ATELIER 4 : SCÉNARIOS OPÉRATIONNELS.
+
+   A. Construction des scénarios (Fiche Méthode 7).
+
+      L'atelier 4 construit des scénarios techniques décrivant les modes opératoires utilisés par les sources de risque pour réaliser les scénarios stratégiques.
+
+      Un scénario opérationnel est représenté sous forme de graphe d'attaque enchaînant des actions élémentaires sur des biens supports.
+
+      La séquence d'attaque type s'articule autour de quatre phases qui sont Connaître, Rentrer, Trouver et Exploiter.
+
+      Les actions élémentaires incluent des techniques comme le recrutement d'une source, le hameçonnage, l'intrusion physique, la latéralisation ou l'exfiltration de données.
+
+   B. Évaluation de la vraisemblance (Fiche Méthode 8).
+
+      La vraisemblance d'un scénario opérationnel reflète le degré de faisabilité ou de probabilité que l'attaque aboutisse.
+
+      L'évaluation peut se faire par une méthode expresse, standard ou avancée selon le niveau de précision souhaité.
+
+      La méthode standard évalue la probabilité de succès de chaque action élémentaire, tandis que la méthode avancée prend aussi en compte la difficulté technique pour l'attaquant.
+
+      La vraisemblance globale du scénario est déduite de la probabilité de succès et de la difficulté technique des modes opératoires identifiés.
+
+VI. ATELIER 5 : TRAITEMENT DU RISQUE.
+
+   A. Synthèse et stratégie.
+
+      L'atelier 5 synthétise l'ensemble des risques étudiés et définit une stratégie de traitement du risque.
+
+      Les scénarios de risque sont positionnés sur une cartographie selon leurs niveaux de gravité et de vraisemblance.
+
+      La stratégie de traitement fixe les seuils d'acceptation du risque, déterminant si un risque est inacceptable, tolérable sous contrôle ou acceptable en l'état.
+
+   B. Plan de traitement du risque (Fiche Méthode 9).
+
+      Les mesures de sécurité sont formalisées dans un plan de traitement du risque, structuré selon les principes de défense en profondeur.
+
+      Les mesures peuvent être classées en gouvernance, protection, défense et résilience.
+
+      Le plan inclut le responsable, les difficultés de mise en œuvre, le coût, la charge estimée et l'échéance pour chaque mesure.
+
+   C. Risques résiduels et suivi.
+
+      Les risques résiduels sont les risques subsistant après l'application des mesures de traitement définies.
+
+      Un cadre de suivi est mis en place avec des indicateurs de pilotage pour vérifier l'efficacité des mesures et surveiller l'évolution de la menace.
+
+POINTS D'ATTENTION.
+
+      L'échelle de gravité doit être élaborée en concertation avec les métiers pour garantir son appropriation et la cohérence de la cotation.
+
+      Il ne faut pas confondre les objectifs visés par la source de risque avec la motivation qui la pousse à agir.
+
+      L'évaluation de la dangerosité des parties prenantes ne préjuge pas d'une intention malveillante de leur part mais de leur susceptibilité à être exploitées.
+
+      Les mesures de sécurité du socle doivent être considérées comme acquises lors de l'élaboration des scénarios, les attaques venant en tester les limites.
+
+      L'estimation de la vraisemblance n'est pas prédictive mais conditionnelle à la tentative de l'attaquant de mener ce mode opératoire précis.
+
+      Une mesure de sécurité ne réduit le niveau de risque immédiat que si elle est effectivement mise en œuvre avant la poursuite de l'analyse.
+
+EXEMPLES CITES.
+
+      Une société de biotechnologie fabriquant des vaccins sert d'illustration tout au long du guide.
+
+      Un concurrent cherche à voler des informations de recherche et développement pour obtenir un avantage concurrentiel.
+
+      Un activiste cherche à saboter une campagne de vaccination pour générer un choc psychologique.
+
+      Un scénario stratégique montre un concurrent exfiltrant des données via le système d'information d'un laboratoire partenaire.
+
+      Un scénario opérationnel détaille une intrusion via un courriel de hameçonnage sur le service des ressources humaines.
+
+      Une échelle de gravité pour une activité industrielle distingue l'arrêt durable, l'arrêt temporaire et la poursuite en mode dégradé.
+
+      Un fournisseur de matériel de production est identifié comme une partie prenante critique en raison de son accès aux équipements de maintenance.
+
+      Des mesures de résilience incluent le renforcement du plan de continuité d'activité pour faire face aux arrêts de production.

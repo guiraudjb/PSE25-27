@@ -1,0 +1,171 @@
+LES FONDAMENTAUX DU RESEAU LE GUIDE DE L'ARCHITECTE.
+
+LEXIQUE COMPLET.
+
+      La table d'adresses MAC est la base de données d'un commutateur associant des adresses physiques aux ports pour décider du transfert des trames au niveau de la couche deux.
+
+      La table de routage ou RIB représente la vue globale et le plan de contrôle du routeur stockant toutes les routes apprises.
+
+      La table de transfert ou FIB est une copie optimisée de la table de routage programmée directement dans le matériel pour accélérer le transfert physique des paquets.
+
+      La table ARP est le cache qui stocke l'association temporaire entre une adresse logique IP et l'adresse physique correspondante.
+
+      La base de données LSDB est la cartographie exhaustive de tous les routeurs et liens d'une zone pour les protocoles à état de liens.
+
+      Les unités de données BPDU sont les messages d'échange d'informations utilisés par l'algorithme Spanning Tree.
+
+      Les annonces LSA sont les paquets envoyés par les routeurs OSPF pour décrire l'état de leurs interfaces.
+
+      Le système autonome ou AS est un ensemble de réseaux gérés par une entité unique et constitue l'unité de base pour le protocole BGP.
+
+      Le mécanisme VRF permet à un équipement d'héberger plusieurs instances indépendantes de tables de routage comme un équivalent de réseau virtuel au niveau trois.
+
+      Le plan de contrôle agit comme le cerveau calculant les routes tandis que le plan de données joue le rôle des muscles déplaçant physiquement les paquets.
+
+COURS DETAILLE.
+
+I. LA COUCHE LIAISON ET LE DATACENTER.
+
+   A. Les concepts de base de la couche deux.
+
+      Le réseau local virtuel ou VLAN permet d'isoler les domaines de diffusion afin d'améliorer la sécurité et d'optimiser les performances en limitant la propagation des trames inutiles.
+
+      Le standard insère une balise spécifique dans l'en-tête de la trame Ethernet que le commutateur ajoute sur les ports de transit et retire en délivrant au poste final.
+
+      L'algorithme Spanning Tree évite les tempêtes de diffusion mortelles pour le réseau dans des topologies où des liens physiques redondants existent.
+
+      Les commutateurs s'échangent des messages pour élire un maître et bloquent logiquement les ports redondants pour former un arbre sans boucle.
+
+      Le protocole d'agrégation de liens LACP permet d'augmenter la bande passante et d'assurer une haute disponibilité sans déclencher le blocage de l'arbre.
+
+      Les équipements négocient dynamiquement pour grouper le trafic sur plusieurs liens actifs qui apparaissent comme une seule interface logique.
+
+      Les protocoles LLDP et CDP servent à cartographier dynamiquement l'infrastructure en découvrant les voisins directement connectés grâce à l'envoi de trames de diffusion spécifiques.
+
+   B. L'évolution vers les réseaux superposés.
+
+      L'ancien modèle bloquait la moitié des liens physiques et s'adaptait mal aux centres de données immenses nécessitant une mobilité fluide des machines virtuelles.
+
+      La solution moderne consiste à utiliser des réseaux superposés comme VXLAN contrôlé par le protocole BGP EVPN.
+
+      On encapsule désormais les trames locales à l'intérieur de paquets routés permettant d'utiliser tous les chemins physiques disponibles simultanément sans recourir au blocage traditionnel.
+
+II. LE ROUTAGE ET LA REDONDANCE AU NIVEAU TROIS.
+
+   A. L'adressage et le premier saut.
+
+      Les protocoles ARP et NDP font le pont entre l'adressage logique et physique sur un segment local en interrogeant le réseau pour obtenir l'adresse matérielle d'une machine.
+
+      Les protocoles de redondance du premier saut offrent une passerelle de sortie redondante aux hôtes d'un réseau en partageant une adresse IP et une adresse physique virtuelles entre plusieurs routeurs.
+
+      Le routeur actif traite le trafic tandis que le routeur de secours prend le relais instantanément s'il ne reçoit plus les messages de maintien de vie du maître.
+
+   B. Les protocoles de routage dynamique.
+
+      Le protocole OSPF détermine dynamiquement le chemin optimal au sein de l'entreprise et converge très vite en cas de panne en construisant une carte complète du réseau.
+
+      Chaque routeur calcule le chemin le plus court basé sur le coût de la bande passante grâce à un algorithme spécifique.
+
+      Le protocole BGP sert à interconnecter d'énormes réseaux disparates en appliquant des politiques strictes de manipulation de trafic selon la volonté de l'administrateur.
+
+      L'évolution historique montre un passage vers une utilisation généralisée de BGP dans les centres de données afin de limiter les domaines de pannes et de garantir une stabilité massive à grande échelle.
+
+III. LES SERVICES DE BASE ET LA CONNECTIVITE EXTERNE.
+
+   A. L'infrastructure vitale.
+
+      Les services DHCP et DNS automatisent la configuration des hôtes et résolvent les noms lisibles par les humains en adresses réseau.
+
+      La technologie de commutation par étiquettes MPLS permet aux opérateurs d'aiguiller le trafic client de manière extrêmement rapide et isolée sans analyser l'adresse de destination à chaque saut.
+
+      Les protocoles IPsec et NAT sécurisent les communications sur Internet par le chiffrement et pallient la pénurie d'adresses en modifiant les en-têtes à la volée.
+
+   B. Le réseau étendu défini par logiciel.
+
+      Le modèle SD-WAN sépare le plan de contrôle du plan de données pour offrir plus d'agilité et réduire les coûts liés aux anciens liens dédiés.
+
+      Le système oriente dynamiquement chaque flux applicatif vers le meilleur lien disponible en temps réel selon les politiques métier définies de manière centralisée.
+
+IV. LA QUALITE DE SERVICE ET LA SUPERVISION.
+
+   A. La gestion des flux critiques.
+
+      La qualité de service garantit la survie des flux sensibles comme la voix en cas de congestion du réseau par des mécanismes de priorisation.
+
+      L'architecte classifie le trafic puis le place dans différentes files d'attente avant d'appliquer un conditionnement strict ou un lissage des données envoyées.
+
+      Les réseaux modernes identifient l'application de manière centralisée et appliquent dynamiquement la politique en mesurant la latence en temps réel.
+
+   B. L'observabilité de l'infrastructure.
+
+      La supervision classique par interrogation lente est remplacée par la télémétrie en continu et la programmabilité via des interfaces de programmation.
+
+      Les équipements envoient d'eux-mêmes leurs métriques structurées au serveur de surveillance sans attendre d'être interrogés.
+
+V. LA SYMPHONIE DES COUCHES ET L'ANALYSE DE PAQUETS.
+
+   A. L'interdépendance des niveaux.
+
+      La dépendance ascendante stipule que la couche physique fournit l'énergie nécessaire tandis que la couche liaison transporte la donnée jusqu'au prochain routeur localement.
+
+      La charnière logique indispensable permet d'associer l'adresse de routage à l'adresse matérielle pour que le paquet puisse voyager de réseau en réseau.
+
+      L'inversion moderne des couches permet de créer un paquet privé encapsulé dans un autre paquet public pour traverser Internet de manière transparente.
+
+   B. La méthode de dépannage.
+
+      L'architecte procède de bas en haut en vérifiant d'abord la couche physique pour détecter des erreurs matérielles ou des incohérences de taille de transmission.
+
+      L'analyse remonte ensuite à la couche liaison pour vérifier les blocages de sécurité ou les problèmes de réseaux virtuels avant de s'assurer du bon fonctionnement des requêtes de résolution d'adresses.
+
+      Le dépannage de la couche réseau nécessite d'examiner attentivement les problèmes de routage asymétrique et la bonne synchronisation entre le cerveau et les muscles matériels du routeur.
+
+   C. L'utilisation de l'analyseur de trames.
+
+      L'analyse des paquets permet de copier le trafic physique pour observer les échanges initiaux de connexion ou les retransmissions signalant une congestion anormale.
+
+      La détection des messages de destination injoignable aide à comprendre précisément quel équipement détruit le trafic et pour quelle raison technique.
+
+VI. LE FONCTIONNEMENT DU ROUTAGE OSPF EN DETAIL.
+
+   A. La naissance des relations de voisinage.
+
+      Le routeur utilise un identifiant unique stable pour se faire reconnaître de ses pairs sur le réseau.
+
+      Il envoie des messages de salutation spécifiques pour découvrir ses voisins et s'accorder sur des règles communes avant de devenir officiellement adjacent.
+
+   B. Le partage des connaissances topologiques.
+
+      Une fois amis les routeurs échangent des annonces détaillant leurs connexions directes et les coûts associés.
+
+      Toutes ces histoires sont compilées dans une grande base de données qui sert à calculer le meilleur itinéraire possible pour chaque destination.
+
+   C. Les limites et protections du protocole.
+
+      Une incohérence de taille de transmission maximale empêche l'échange complet des bases de données et bloque la relation indéfiniment.
+
+      Pour éviter la cacophonie sur un réseau partagé les équipements élisent un chef chargé de distribuer l'information de manière ordonnée.
+
+      Le découpage du monde en zones indépendantes permet de résumer les informations aux frontières pour éviter de surcharger les processeurs de calcul.
+
+POINTS D'ATTENTION.
+
+La commande ping erratique indique souvent un problème physique avec le matériel optique ou le câble sous-jacent.
+
+Le non respect de la correspondance du mode de communication bidirectionnel cause des collisions tardives graves.
+
+Le pare-feu rejette toujours un paquet de retour s'il n'a pas validé la demande initiale de connexion.
+
+La panne la plus complexe provient souvent du fait que le chemin de retour diffère du chemin aller dans l'infrastructure.
+
+L'absence de réponse de résolution d'adresse certifie un problème de couche liaison ou un équipement purement éteint.
+
+Les retransmissions de paquets capturées ne constituent jamais un comportement normal sur un réseau sain.
+
+EXEMPLES CITES.
+
+Affiche l'état d'une interface avec la commande show interface.
+
+Affiche la table de routage avec la commande show ip route.
+
+Affiche le cache de résolution d'adresse avec la commande show arp.

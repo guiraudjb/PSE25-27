@@ -1,0 +1,153 @@
+INSTALLATION D UN SYSTEME LINUX.
+
+LEXIQUE COMPLET.
+
+      Le firmware est un logiciel bas niveau stocke dans une memoire flash sur la carte mere qui initialise le materiel au demarrage.
+
+      Le BIOS est l ancien standard de firmware limite a des disques de deux teraoctets avec une table de partition MBR.
+
+      L UEFI est le standard moderne de firmware supportant des disques de grande capacite grace a la table GPT et integrant le Secure Boot.
+
+      Le bootloader GRUB2 est un programme chargeant le noyau Linux en memoire et lui passant le controle.
+
+      L initramfs est un systeme de fichiers temporaire contenant les modules minimaux necessaires pour monter le systeme racine.
+
+      Systemd est le premier processus lance par le noyau pour gerer le demarrage parallelise des services et la supervision du systeme.
+
+      LUKS est le standard de chiffrement de disque sous Linux fonctionnant au niveau du bloc.
+
+      Le protocole PXE est le standard pour deployer des systemes d exploitation a grande echelle via le reseau.
+
+      L Infrastructure as Code est une approche permettant de decrire l infrastructure dans des fichiers versionnes et executables.
+
+COURS DETAILLE.
+
+I. FONDAMENTAUX DE L ARCHITECTURE LINUX.
+
+   A. La chaine de demarrage et le firmware.
+
+      La chaine de demarrage est la sequence complexe qui se declenche des la mise sous tension du serveur pour initialiser le materiel.
+
+      Le tout premier code execute est le firmware qui est responsable de chercher un peripherique contenant un chargeur de demarrage.
+
+      Le BIOS historique est desormais remplace par l UEFI qui permet l utilisation de disques volumineux et securise le demarrage du materiel.
+
+   B. Le chargeur de demarrage et le noyau.
+
+      Le firmware transmet le controle au bootloader appele GRUB2 dont la mission est de charger le systeme d exploitation.
+
+      GRUB2 se charge de lire les systemes de fichiers complexes et de charger le noyau vmlinuz ainsi que l initramfs en memoire vive.
+
+      Le noyau decompresse l initramfs pour acceder aux pilotes specifiques permettant de monter la veritable partition racine de maniere securisee.
+
+   C. L initialisation par systemd.
+
+      Une fois le systeme racine monte le noyau lance le processus systemd qui prend en charge la suite de toutes les operations d initialisation.
+
+      Systemd gere le lancement parallelise des services et passe le systeme en mode multiutilisateur pour le rendre pret a accepter des connexions.
+
+      Le mecanisme Secure Boot verifie les signatures cryptographiques a chaque etape pour empecher l execution de code malveillant ou non autorise.
+
+II. INSTALLATION MANUELLE ET SECURISATION.
+
+   A. Preparation et partitionnement du disque.
+
+      L image ISO telechargee doit toujours etre verifiee via une somme de controle cryptographique avant son utilisation en environnement professionnel.
+
+      Le partitionnement est une etape critique ou l utilisation de la technologie LVM est recommandee pour isoler les repertoires sensibles.
+
+      Le choix du systeme de fichiers se porte souvent sur ext4 pour un usage generaliste ou sur XFS pour les grandes bases de donnees.
+
+   B. Finalisation et principes de moindre privilege.
+
+      L installateur configure automatiquement GRUB2 sur la partition EFI en mode UEFI ou dans le MBR en mode BIOS traditionnel.
+
+      Un principe fondamental de securite exige de n installer que les services strictement necessaires pour reduire au maximum la surface d attaque.
+
+      Le service d acces distant SSH doit etre le seul service reseau active par defaut et le serveur doit etre protege par un parefeu rigoureux.
+
+   C. Securisation avancee et journalisation.
+
+      Le chiffrement du disque principal avec le standard LUKS protege les donnees physiques en cas de vol du materiel dans les centres de donnees.
+
+      Les mises a jour de securite doivent etre automatisees et appliquees de maniere reguliere pour combler toutes les vulnerabilites decouvertes.
+
+      La configuration d un systeme de journalisation centralisee avec l utilitaire journald permet de detecter rapidement les activites suspectes sur le reseau.
+
+III. INSTALLATION SUR MACHINE VIRTUELLE.
+
+   A. Principes de la virtualisation.
+
+      La virtualisation apporte des benefices majeurs comme la consolidation materielle et la haute disponibilite aux infrastructures des datacenters modernes.
+
+      Les hyperviseurs modernes de type un comme Proxmox VE ou Hyper V representent les standards dans tous les environnements professionnels.
+
+   B. Optimisation des performances virtuelles.
+
+      L utilisation du firmware UEFI specifique nomme OVMF est fortement recommandee pour les machines virtuelles afin d activer le demarrage securise.
+
+      Les controleurs de disques et les interfaces reseau doivent utiliser des pilotes paravirtualises comme VirtIO pour obtenir des performances optimales.
+
+      L allocation des ressources du processeur doit se faire avec un nombre fixe de coeurs virtuels pour garantir une stabilite absolue des performances.
+
+   C. Creation de modeles et clonage.
+
+      Une machine virtuelle de base entierement configuree peut etre transformee en modele pour etre dupliquee massivement et tres rapidement.
+
+      Le processus de clonage necessite une preparation de securite consistant a nettoyer les cles SSH existantes et les identifiants uniques de la machine source.
+
+IV. DEPLOIEMENT AUTOMATISE PAR RESEAU.
+
+   A. Architecture du protocole d amorcage.
+
+      Le deploiement a grande echelle necessite un serveur DHCP pour fournir une adresse IP dynamique et localiser les fichiers de demarrage sur le reseau.
+
+      Un serveur de transfert TFTP transmet les fichiers legers comme le bootloader tandis qu un serveur HTTP fournit les paquets d installation volumineux.
+
+   B. Flux d installation automatisee.
+
+      Le poste client demarre directement en reseau puis telecharge le bootloader et le noyau avec son initramfs via le protocole TFTP.
+
+      Un fichier de reponse automatise est recupere pour dicter automatiquement les choix de partitionnement et de configuration locale a l installateur.
+
+      Le systeme Preseed maitrise l installation complete des environnements Debian et Ubuntu en repondant a toutes les questions de l interface de maniere invisible.
+
+V. INTEGRATION DEVOPS ET INFRASTRUCTURE.
+
+   A. La gestion globale par le code.
+
+      L approche moderne remplace la configuration manuelle en decrivant l integralite des serveurs dans des fichiers versionnes et parfaitement reproductibles.
+
+      L utilitaire Terraform est l outil de reference utilisant un langage declaratif pour provisionner et creer toutes les ressources de l infrastructure.
+
+   B. Configuration continue et images immuables.
+
+      Le logiciel Ansible est un outil sans agent qui se connecte via SSH pour executer des taches de configuration definies dans des fichiers de commandes.
+
+      Le programme Packer automatise la creation d images de systemes immuables qui sont deployees telles quelles sans aucune modification ulterieure autorisee.
+
+      L ensemble de ces outils modernes s integre dans un pipeline d integration et de deploiement continus pour gerer l entiere infrastructure informatique.
+
+POINTS D ATTENTION.
+
+      Une installation realisee a la hate sans options adaptees genere inevitablement des problemes recurrents de mises a jour et de securite des donnees.
+
+      Le compte superutilisateur ne doit jamais etre utilise pour l administration quotidienne qui exige un compte standard limite equipe des droits sudo.
+
+      Le clonage de machines virtuelles pose un risque grave de securite si les cles cryptographiques et identifiants uniques ne sont pas regeneres immediatement.
+
+      L intelligence artificielle emerge doucement comme une assistance pour ecrire des configurations complexes et optimiser les diagnostics techniques a l avenir.
+
+EXEMPLES CITES.
+
+      La commande de verification d integrite d une image ISO s effectue avec l utilitaire sha256sum.
+
+      La commande de copie materielle bit a bit vers une cle USB s execute avec l utilitaire dd.
+
+      Les commandes de configuration du parefeu nomme UFW permettent d autoriser uniquement le flux d acces distant SSH.
+
+      Les commandes systemctl servent a lister les services actifs ou a desactiver ceux qui sont inutiles.
+
+      La commande dpkg reconfigure permet de configurer des mises a jour de securite entierement automatiques avec le paquet unattended upgrades.
+
+      Les commandes de l utilitaire journalctl s utilisent pour analyser les fichiers de journalisation locaux en temps reel.

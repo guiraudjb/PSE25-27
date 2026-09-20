@@ -1,0 +1,129 @@
+GESTION DE LA MEMOIRE SOUS LINUX.
+
+LEXIQUE COMPLET.
+
+      La page est une unité de mémoire dont la taille par défaut est de quatre kilo-octets.
+
+      Le frame désigne une page qui est matériellement présente en mémoire physique.
+
+      Le TLB est un cache matériel qui stocke les traductions récentes des adresses virtuelles en adresses physiques.
+
+      La VMA correspond à une région de mémoire virtuelle qui est allouée à un processus spécifique.
+
+      Le kswapd est un daemon du noyau responsable de la gestion de la mémoire lorsque le système est sous pression.
+
+      Le tueur OOM est un mécanisme d'urgence que le noyau déclenche en cas de manque critique de mémoire.
+
+      Les HugePages sont des pages de très grande taille qui améliorent les performances et réduisent les défauts de cache de traduction.
+
+      Les défauts de page majeurs et mineurs différencient les situations qui nécessitent ou non un accès lent au disque.
+
+COURS DÉTAILLÉ.
+
+I. L'INTRODUCTION A LA GESTION MEMOIRE.
+
+   A. Les fonctions fondamentales du système.
+
+      La gestion de la mémoire est l'une des fonctions primordiales du noyau Linux.
+
+      Elle a pour rôle de garantir l'isolation stricte des processus ainsi que la protection totale de l'espace noyau.
+
+      Elle permet également des accès rapides et optimisés tout en assurant l'extension de la capacité mémoire par le biais du fichier d'échange.
+
+      Le système veille en permanence à utiliser efficacement le cache des pages et les tampons en mémoire.
+
+   B. L'abandon de la segmentation classique.
+
+      Contrairement à de nombreux systèmes historiques, Linux n'utilise plus la segmentation comme un mécanisme actif de gestion.
+
+      Toute la gestion opérationnelle repose désormais sur la pagination.
+
+      Les segments sont réduits à un modèle de mémoire plat où la base vaut zéro et la limite représente la taille maximale d'adressage.
+
+      La segmentation sert uniquement à distinguer le mode utilisateur du mode noyau et à fournir les descripteurs lors de l'amorçage.
+
+II. LA HIERARCHIE MATERIELLE ET LA PAGINATION.
+
+   A. L'exploitation des différents niveaux de mémoire.
+
+      Le système d'exploitation exploite une hiérarchie matérielle standard qui détermine les performances globales.
+
+      Les registres du processeur offrent les accès les plus rapides pour manipuler les adresses, les valeurs opérationnelles et le pointeur de pile.
+
+      Les mémoires caches de niveau un, deux et trois conservent les données récentes pour garantir un accès immédiat en cas de succès.
+
+      La mémoire centrale accueille les pages des processus, le code du noyau et le cache des fichiers.
+
+      La mémoire de masse stocke les données persistantes et les pages déplacées hors de la mémoire vive.
+
+   B. Le fonctionnement de la pagination avancée.
+
+      Linux utilise la pagination comme coeur absolu de son fonctionnement mémoire.
+
+      Le système permet d'utiliser des pages standard de quatre kilo-octets ou des pages géantes allant jusqu'à un giga-octet pour les traitements massifs.
+
+      L'architecture s'appuie sur des tables de pages comportant de quatre à cinq niveaux pour adresser de gigantesques espaces virtuels.
+
+      L'unité de gestion mémoire traduit matériellement les adresses virtuelles en adresses physiques.
+
+      Le parcours de résolution valide chaque niveau de la table avant d'appliquer un décalage final pour trouver l'adresse physique exacte.
+
+III. LA GESTION DES DEFAUTS DE PAGE ET DES URGENCES.
+
+   A. Les interruptions liées aux défauts de page.
+
+      Un défaut de page mineur se produit lorsque la page réside déjà en mémoire et requiert une simple mise à jour de la table.
+
+      Un défaut de page majeur implique que la page doit être lue depuis le disque, ce qui engendre une opération extrêmement lente.
+
+      Lors de ce processus, le noyau interrompt le programme fautif pour localiser la zone de mémoire virtuelle correspondante.
+
+      Il alloue ensuite la page nécessaire, met à jour les tables de traduction et reprend l'instruction de manière transparente.
+
+   B. Les mécanismes de sauvegarde face à la saturation.
+
+      Le mécanisme de swap est utilisé pour libérer de la mémoire vive en déplaçant les pages inactives vers le disque dur.
+
+      Le processus en arrière-plan kswapd scanne continuellement les zones mémoire pour basculer ces pages inactives et maintenir des ressources libres.
+
+      Si la pression sur la mémoire persiste malgré ces opérations de nettoyage, le mécanisme d'urgence OOM Killer intervient.
+
+      Il calcule un score de dangerosité pour chaque processus et élimine celui qui est jugé le plus sacrifiable afin de préserver le système.
+
+IV. LES CONCEPTS ET COMMANDES AVANCES.
+
+   A. Les zones de mémoire virtuelle par processus.
+
+      Chaque processus en cours d'exécution détient un ensemble de zones de mémoire virtuelle qui décrivent ses adresses de début et de fin.
+
+      Ces descripteurs contiennent aussi les permissions d'accès et indiquent si une zone correspond à un fichier directement mappé en mémoire.
+
+   B. L'allocation interne et les zones physiques.
+
+      Le noyau utilise ses propres allocateurs spécialisés pour organiser ses structures internes de manière performante.
+
+      L'allocateur par défaut est à la fois simple et rapide, tandis que d'autres variantes ciblent les systèmes aux ressources très limitées.
+
+      La mémoire physique est divisée en plusieurs zones selon d'anciennes contraintes matérielles ou selon les besoins de l'espace principal du système.
+
+POINTS D'ATTENTION.
+
+La mémoire vive affichée comme utilisée ne signifie pas nécessairement que le système est saturé puisque le cache des fichiers est réallouable dynamiquement.
+
+Toute modification de la table des pages engendre un vidage du cache des traductions qui pénalise fortement les performances du processeur.
+
+Un défaut de page majeur qui requiert la lecture d'une donnée sur le disque dur constitue une opération considérablement plus lente qu'un accès mémoire classique.
+
+L'utilisation d'un disque électronique ultra rapide permet de limiter significativement l'impact négatif lié à l'utilisation du fichier d'échange.
+
+EXEMPLES CITES.
+
+Les informations globales sur la consommation de mémoire s'obtiennent en lisant le fichier virtuel meminfo ou en utilisant les commandes free, htop et vmstat.
+
+L'analyse de la mémoire spécifique à un programme nécessite de consulter les fichiers maps, smaps et pagemap situés dans le répertoire du processus.
+
+La gestion directe du fichier d'échange se réalise grâce aux utilitaires swapon pour l'activation et swapoff pour la désactivation.
+
+Le comportement du noyau face à la saturation s'ajuste en paramétrant la valeur système nommée swappiness via l'utilitaire sysctl.
+
+La vérification de la taille par défaut des pages s'effectue en utilisant la commande getconf avec l'argument correspondant.

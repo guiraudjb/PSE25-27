@@ -1,0 +1,95 @@
+PROCESSUS ET PRINCIPES LINUX EXERCICES ET CORRIGES.
+
+LEXIQUE COMPLET.
+
+      L'appel système fork permet de créer un nouveau processus par duplication du processus appelant.
+      
+      L'appel système exec permet de recouvrir la région de code d'un processus par un nouveau programme.
+      
+      L'appel système exit permet à un processus de libérer ses ressources et de passer à l'état zombie.
+      
+      Le mode utilisateur correspond à l'exécution courante avec des droits restreints.
+      
+      Le mode noyau correspond à l'exécution d'instructions privilégiées suite à un appel système.
+      
+      Le set-uid bit est un attribut de fichier permettant d'endosser les droits du propriétaire lors de l'exécution.
+      
+      L'Effective UID est l'identifiant utilisateur effectif pris en compte pour les permissions.
+      
+      Le Reel UID est l'identifiant réel de l'utilisateur ayant lancé le processus.
+
+COURS DETAILLE.
+
+I. LA CREATION ET LA GESTION DES PROCESSUS.
+
+   A. L'appel système fork.
+
+      La création d'un nouveau processus s'effectue uniquement via l'appel système fork.
+
+      Ce mécanisme crée un doublon exact du processus appelant.
+
+      Le processus appelant est qualifié de père et le nouveau processus est qualifié de fils.
+
+      Le père et le fils partagent leur région mémoire de code ainsi que les descripteurs de fichiers.
+
+   B. Structures internes et mémoire.
+
+      La création d'un processus génère une nouvelle entrée dans la table des processus par duplication.
+
+      Une nouvelle entrée est également créée dans la table des descripteurs de fichiers.
+
+      Le système alloue trois régions mémoires spécifiques pour le code les données et la pile.
+
+      Une nouvelle table des régions propre au processus est créée pour pointer vers la table des régions globale du système.
+
+      Cette opération ne crée aucune nouvelle entrée dans la table des inodes.
+
+II. L'EXECUTION ET LA TERMINAISON DE PROGRAMMES.
+
+   A. Le mécanisme exec.
+
+      L'appel système exec est utilisé pour exécuter un nouveau programme au sein d'un processus existant.
+
+      Il fonctionne en recouvrant la région de code actuelle par celle du nouveau programme.
+
+      Cela permet de modifier le code du processus hérité du père après un fork.
+
+   B. La terminaison via exit.
+
+      L'appel système exit permet à un processus de cesser son exécution.
+
+      Cette action libère les ressources allouées au processus.
+
+      Une fois terminé le processus passe à l'état zombie.
+
+III. MODES D'EXECUTION ET SECURITE.
+
+   A. Les modes d'exécution.
+
+      Un processus évolue selon deux modes distincts qui sont le mode utilisateur et le mode noyau.
+
+      Le mode utilisateur est le mode courant où les droits sont restreints.
+
+      Le mode noyau est activé lorsqu'un processus effectue une demande d'instructions privilégiées via un appel système.
+
+   B. Gestion des droits SUID.
+
+      Le bit set-uid permet à l'utilisateur exécutant un binaire d'acquérir temporairement les droits du propriétaire du fichier.
+
+      L'identifiant pris en compte par le système pour les vérifications est l'Effective UID ou EUID.
+
+      L'identifiant réel de l'utilisateur ou Reel UID n'est pas prioritaire dans ce cas de figure.
+
+POINTS D'ATTENTION.
+
+      La fonction create n'existe pas et ne doit pas être confondue avec fork.
+
+      Les termes swapper et scheduler ne sont pas des modes d'exécution d'un processus.
+
+      La création de processus implique la table des processus et non la table des inodes.
+
+EXEMPLES CITES.
+
+      La commande passwd illustre l'utilisation du set-uid bit appartenant à root.
+
+      Les appels fork exec et exit sont les commandes fondamentales de gestion des processus.

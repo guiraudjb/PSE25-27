@@ -63,22 +63,46 @@ def wrap_text(font, text, max_width):
     return lines
 
 
-def truncate_to_width(font, text, max_width):
-    """Tronque `text` avec une ellipse pour qu'il tienne dans `max_width` pixels."""
-    if font.get_rect(text).width <= max_width:
-        return text
-    ellipsis = '…'
-    lo, hi = 0, len(text)
-    result = ellipsis
-    while lo < hi:
-        mid = (lo + hi + 1) // 2
-        candidate = text[:mid].rstrip() + ellipsis
-        if font.get_rect(candidate).width <= max_width:
-            lo = mid
-            result = candidate
-        else:
-            hi = mid - 1
-    return result
+def wrap_paragraphs(font, text, max_width):
+    """Découpe un texte multi-paragraphes (format des fiches de révision : un
+    paragraphe par ligne source, lignes vides = séparateurs) en lignes
+    d'affichage repliées à max_width, une ligne vide étant conservée entre
+    paragraphes pour l'aération visuelle."""
+    display_lines = []
+    for raw_line in text.split('\n'):
+        raw_line = raw_line.strip()
+        if not raw_line:
+            display_lines.append('')
+            continue
+        display_lines.extend(wrap_text(font, raw_line, max_width))
+    return display_lines
+
+
+SCROLL_SPEED = 70   # px/s
+SCROLL_GAP = 60      # px entre la fin et la reprise du texte, en boucle
+
+
+def draw_scrolling_text(surface, font, text, rect, color=COLOR_TEXT):
+    """Dessine `text` aligné à gauche et centré verticalement dans `rect`. S'il
+    tient dans la largeur, affichage statique. Sinon, défilement horizontal en
+    boucle (clippé à `rect`), sans jamais réduire la taille de police : c'est
+    la seule façon de garder un texte long intégralement lisible dans un cadre
+    fixe (titre d'en-tête, libellé de menu, choix de quiz...)."""
+    text_rect = font.get_rect(text)
+    y = rect.y + (rect.height - text_rect.height) // 2
+    if text_rect.width <= rect.width or rect.width <= 0:
+        font.render_to(surface, (rect.x, y), text, color)
+        return
+
+    old_clip = surface.get_clip()
+    surface.set_clip(rect)
+    loop_w = text_rect.width + SCROLL_GAP
+    offset = int((pygame.time.get_ticks() / 1000.0 * SCROLL_SPEED) % loop_w)
+    x = rect.x - offset
+    while x < rect.right:
+        font.render_to(surface, (x, y), text, color)
+        x += loop_w
+    surface.set_clip(old_clip)
 
 
 TTS_LABELS = {
@@ -103,8 +127,10 @@ def draw_tts_indicator(surface, fonts, screen_w, status, header_h):
     fonts.small.render_to(surface, (badge.x + pad, badge.y + pad), label, COLOR_WHITE)
 
 
-def draw_button_hints(surface, fonts, screen_w, screen_h, hints):
-    """hints: liste de tuples (bouton, libellé), ex: [('A', 'Valider'), ('B', 'Retour')]."""
+def draw_button_hints(surface, fonts, screen_w, screen_h, hints, right_text=None, right_color=COLOR_WHITE):
+    """hints: liste de tuples (bouton, libellé), ex: [('A', 'Valider'), ('B', 'Retour')].
+    right_text : texte optionnel affiché à droite du même bandeau (même police
+    que les instructions), ex. le statut de lecture d'un média."""
     bar_h = 48
     pygame.draw.rect(surface, COLOR_HINT_BG, (0, screen_h - bar_h, screen_w, bar_h))
     x = 24
@@ -113,6 +139,9 @@ def draw_button_hints(surface, fonts, screen_w, screen_h, hints):
         rect = fonts.hint.get_rect(text)
         fonts.hint.render_to(surface, (x, screen_h - bar_h // 2 - rect.height // 2), text, COLOR_WHITE)
         x += rect.width + 40
+    if right_text:
+        rect = fonts.hint.get_rect(right_text)
+        fonts.hint.render_to(surface, (screen_w - rect.width - 24, screen_h - bar_h // 2 - rect.height // 2), right_text, right_color)
 
 
 class ListMenu:
@@ -169,14 +198,25 @@ class ListMenu:
                 badge_reserved = badge_rect.width + 36
                 fonts.small.render_to(surface, (rect.right - badge_rect.width - 20, rect.y + (rect.height - badge_rect.height) // 2), badge, color)
             max_label_width = rect.width - 48 - badge_reserved
-            label = truncate_to_width(fonts.medium, label, max_label_width)
-            fonts.medium.render_to(surface, (rect.x + 24, rect.y + (rect.height - fonts.medium.get_sized_height()) // 2), label, color)
+            label_rect = pygame.Rect(rect.x + 24, rect.y, max_label_width, rect.height)
+            draw_scrolling_text(surface, fonts.medium, label, label_rect, color)
 
         # indicateurs de défilement
         if self.scroll > 0:
             fonts.small.render_to(surface, (self.screen_w // 2 - 10, self.top - 30), "▲", COLOR_PRIMARY)
         if self.scroll + self.visible_count < len(self.items):
             fonts.small.render_to(surface, (self.screen_w // 2 - 10, self.top + self.visible_count * self.item_height + 4), "▼", COLOR_PRIMARY)
+
+
+def draw_progress_bar(surface, rect, fraction, fg_color=COLOR_PRIMARY, bg_color=(221, 221, 221)):
+    """Barre de progression simple (compte à rebours quiz, minuteur flashcard),
+    même principe visuel que .timer-fill dans la page web : `fraction` (0..1)
+    est la portion remplie depuis la gauche."""
+    fraction = max(0.0, min(1.0, fraction))
+    pygame.draw.rect(surface, bg_color, rect, border_radius=rect.height // 2)
+    if fraction > 0:
+        fill_rect = pygame.Rect(rect.x, rect.y, int(rect.width * fraction), rect.height)
+        pygame.draw.rect(surface, fg_color, fill_rect, border_radius=rect.height // 2)
 
 
 LETTER_BADGES = ('A', 'B', 'C', 'D')  # esprit manette NeoGeo (4 boutons de face en ligne)
@@ -229,7 +269,5 @@ def draw_choice_rows(surface, fonts, screen_w, top, bottom, choices, selected_in
                                          badge_rect.centery - letter_rect.height // 2), letter, badge_color)
 
         text_x = badge_rect.right + 24
-        max_w = rect.right - text_x - 20
-        text = truncate_to_width(fonts.medium, label, max_w)
-        text_rect = fonts.medium.get_rect(text)
-        fonts.medium.render_to(surface, (text_x, rect.centery - text_rect.height // 2), text, fg)
+        text_rect_area = pygame.Rect(text_x, rect.y, rect.right - text_x - 20, rect.height)
+        draw_scrolling_text(surface, fonts.medium, label, text_rect_area, fg)

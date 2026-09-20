@@ -1,0 +1,229 @@
+LINUX : DECRIRE LES MECANISMES INTERNES DU SYSTEME DE GESTION DE FICHIERS.
+
+LEXIQUE COMPLET.
+
+      Un Système de Gestion de Fichiers ou SGF est une composante du système d'exploitation définissant l'organisation, le stockage et la manipulation des fichiers sur un périphérique pour fournir une abstraction entre le matériel et l'utilisateur.
+
+      Une Arborescence est une structure hiérarchique unique dont la racine est la barre oblique, où chaque fichier ou périphérique monté trouve sa place.
+
+      Un Inode ou Index Node est une structure de données identifiant de manière unique chaque fichier ou répertoire, contenant les métadonnées mais pas le nom du fichier.
+
+      Un Superbloc est une structure critique contenant les informations globales du système de fichiers comme la taille, le nombre d'inodes et de blocs, l'état et l'UUID.
+
+      Un Bloc de données est l'unité élémentaire de stockage du contenu des fichiers dont la taille est fixée au formatage.
+
+      Une Carte d'occupation ou Bitmap est un tableau indiquant l'état libre ou occupé des inodes ou des blocs.
+
+      La Journalisation est un mécanisme assurant la cohérence des données en cas de crash via l'écriture des métadonnées dans un journal.
+
+      Le TRIM est une commande permettant d'informer un disque SSD des blocs inutilisés pour gérer l'usure des cellules mémoire.
+
+      La Fragmentation est la dispersion des données qui peut être interne lorsqu'il y a de l'espace gaspillé dans un bloc ou externe lorsque les blocs sont éparpillés physiquement.
+
+      Les Tables Systèmes sont des zones mémoire du noyau reliant les structures logiques comme les inodes aux processus utilisateurs.
+
+      Un Appel Système ou Syscall est une fonction permettant à un programme utilisateur de demander une opération privilégiée au noyau.
+
+COURS DÉTAILLÉ.
+
+I. LE SGF ET LA STRUCTURE DU FS.
+
+   A. Le rôle du SGF.
+
+      Le SGF fournit une couche d'abstraction indispensable entre le matériel brut composé de blocs binaires et l'utilisateur.
+
+      Sa première fonction est l'organisation qui transforme l'espace disque en une structure hiérarchique cohérente autour d'une racine unique.
+
+      Il assure l'identification en associant à chaque fichier un nom et un numéro d'inode pour une gestion indépendante du support physique.
+
+      Il gère l'accès en traduisant la logique utilisateur en accès aux blocs physiques pour la lecture et l'écriture.
+
+      La sécurité est garantie par l'application de mécanismes de permissions, de contrôle d'accès et parfois de chiffrement.
+
+      La fiabilité des données repose sur la journalisation et les copies de sauvegarde des structures critiques comme les superblocs.
+
+      Enfin, le SGF optimise la performance en tenant compte de la taille des blocs et de la nature du support de stockage.
+
+   B. Les supports de stockage et les contraintes matérielles.
+
+      Les disques durs magnétiques ou HDD reposent sur des plateaux rotatifs et subissent une latence mécanique due au déplacement des têtes de lecture.
+
+      La fragmentation accentue les problèmes de performance sur les disques magnétiques en multipliant les mouvements mécaniques.
+
+      Les disques SSD basés sur de la mémoire flash NAND offrent un accès direct aux blocs sans latence mécanique mais subissent une usure des cellules à chaque écriture.
+
+      Les supports amovibles comme les clés USB ou cartes SD possèdent des contrôleurs limités et bénéficient de systèmes de fichiers spécifiques comme F2FS.
+
+      Les stockages hybrides ou distribués masquent la complexité matérielle et ajoutent des couches de réplication et de tolérance aux pannes.
+
+   C. Les structures internes.
+
+      Le superbloc contient les informations globales du système de fichiers et dispose de copies de sauvegarde pour éviter la perte totale du système.
+
+      La carte d'occupation des inodes est un tableau indiquant quels inodes sont libres ou occupés.
+
+      La carte d'occupation des blocs de données indique quels blocs sont libres ou attribués pour le stockage.
+
+      Les inodes sont les structures associées à chaque fichier contenant toutes les métadonnées.
+
+      Les blocs de données représentent les unités de stockage effectives du contenu des fichiers.
+
+   D. Les inodes en détail.
+
+      Chaque fichier ou répertoire correspond à un inode unique identifié par un numéro.
+
+      L'inode contient le type de fichier, les permissions d'accès, les identifiants UID et GID du propriétaire et les horodatages.
+
+      Il stocke également la taille du fichier, le nombre de liens durs pointant vers cet inode et les pointeurs vers les blocs de données.
+
+      Un disque peut manquer d'inodes avant de manquer d'espace disque, ce qui bloque la création de nouveaux fichiers.
+
+II. LA GESTION DES BLOCS ET DES INODES.
+
+   A. Les blocs comme unité élémentaire de stockage.
+
+      La taille d'un bloc est fixée lors du formatage et se situe souvent à 4 Ko sous le système ext4.
+
+      Des blocs de petite taille permettent de stocker efficacement de nombreux petits fichiers mais augmentent le coût de gestion.
+
+      Des blocs de grande taille optimisent les lectures séquentielles mais provoquent une fragmentation interne caractérisée par de l'espace gaspillé.
+
+      La fragmentation externe oblige les têtes de lecture des disques durs à se déplacer davantage ce qui réduit la performance.
+
+      Les systèmes de fichiers modernes tentent d'allouer les blocs de manière contiguë pour limiter la fragmentation future.
+
+   B. Les inodes et la gestion des pointeurs.
+
+      Les inodes utilisent une architecture de pointeurs pour référencer les données sur le disque.
+
+      Les douze premiers pointeurs sont directs et référencent directement des blocs de données.
+
+      Les pointeurs indirects simples, doubles et triples permettent d'adresser des fichiers de très grande taille pouvant atteindre plusieurs téraoctets.
+
+      La saturation des inodes est fréquente sur les systèmes manipulant des millions de petits fichiers comme les serveurs de messagerie.
+
+   C. Le cycle de vie des blocs et des inodes.
+
+      La création d'un fichier implique la réservation d'un inode, l'allocation de blocs et la mise à jour des bitmaps.
+
+      L'écriture provoque l'extension des pointeurs de l'inode au fur et à mesure que le fichier grossit.
+
+      La suppression retire le lien entre le nom et l'inode, mais l'inode n'est libéré que si le compteur de liens tombe à zéro.
+
+      Si un fichier supprimé est encore ouvert par un processus, son inode et ses blocs restent réservés jusqu'à la fermeture du descripteur.
+
+   D. Anomalies fréquentes et diagnostics.
+
+      La saturation des inodes se manifeste par une erreur d'espace insuffisant alors qu'il reste de l'espace disque libre.
+
+      Les blocs corrompus causés par des coupures ou des défauts physiques rendent les fichiers illisibles et génèrent des erreurs d'entrée et sortie.
+
+      Une fragmentation élevée dégrade les performances sur les environnements sollicités comme les bases de données.
+
+   E. Optimisations et options de montage.
+
+      L'option noatime empêche la mise à jour de la date d'accès à chaque lecture pour réduire les écritures inutiles sur les SSD.
+
+      L'option relatime est un compromis mettant à jour la date d'accès uniquement si nécessaire.
+
+      L'option data=ordered assure un équilibre entre sécurité et performance en journalisant les métadonnées.
+
+      L'option discard active le TRIM en continu sur les SSD mais peut dégrader les performances, il est souvent préférable de planifier la commande fstrim.
+
+III. INTERACTION ENTRE SGF ET TABLES SYSTEMES.
+
+   A. Rôle des tables systèmes.
+
+      Les tables systèmes servent de mémoire tampon entre le disque et les processus pour éviter des accès disques permanents.
+
+      Elles coordonnent l'utilisation partagée des fichiers et centralisent les mécanismes de contrôle d'accès.
+
+   B. Les principales tables utilisées.
+
+      La table des fichiers ouverts par processus associe un entier appelé descripteur à un fichier ouvert.
+
+      Les descripteurs 0, 1 et 2 correspondent respectivement à l'entrée standard, la sortie standard et la sortie d'erreur standard.
+
+      La table globale des fichiers ouverts maintenue par le noyau conserve les informations sur tous les fichiers ouverts et la position de lecture courante.
+
+      La table des inodes en mémoire contient une copie des métadonnées des inodes actifs et un compteur de références.
+
+   C. Processus d'accès et verrouillage.
+
+      L'appel système open crée une entrée dans la table globale et un descripteur dans la table du processus.
+
+      Les lectures et écritures utilisent ce descripteur pour retrouver l'entrée globale et accéder aux blocs via l'inode.
+
+      Les verrous peuvent être appliqués au niveau du fichier entier ou au niveau des enregistrements pour gérer la concurrence.
+
+   D. Cas pratiques d'administration.
+
+      La saturation des descripteurs survient lorsqu'un processus dépasse sa limite de fichiers ouverts, souvent fixée à 1024 par défaut.
+
+      L'espace disque n'est pas libéré si un fichier supprimé est maintenu ouvert par un processus actif.
+
+      Les fuites de fichiers ouverts se produisent lorsque les programmes oublient de fermer les descripteurs après utilisation.
+
+IV. LES APPELS SYSTEMES.
+
+   A. Rôle et importance.
+
+      Les appels systèmes constituent l'interface standardisée entre l'espace utilisateur et l'espace noyau pour toutes les opérations sur les fichiers.
+
+      Ils permettent aux programmes de demander au noyau l'exécution d'opérations privilégiées comme l'ouverture ou la lecture.
+
+   B. Les principaux appels systèmes.
+
+      L'appel open ouvre ou crée un fichier et retourne un descripteur.
+
+      Les appels read et write permettent respectivement de lire et d'écrire des données via le descripteur.
+
+      L'appel lseek modifie la position courante de lecture ou d'écriture dans le fichier.
+
+      L'appel close libère le descripteur et met à jour les tables systèmes.
+
+      L'appel stat récupère les métadonnées contenues dans l'inode.
+
+      Les appels link et unlink gèrent la création et la suppression des liens durs vers les inodes.
+
+   C. Interaction et diagnostic.
+
+      Chaque appel système implique un coût de performance lié au passage entre l'espace utilisateur et le noyau.
+
+      L'utilisation de buffers dans les applications permet de réduire le nombre d'appels systèmes nécessaires.
+
+      Des outils comme strace permettent de tracer les appels systèmes effectués par un processus pour le débogage.
+
+POINTS D'ATTENTION.
+
+      Un disque peut être considéré comme plein par le système s'il n'y a plus d'inodes disponibles même s'il reste de l'espace de stockage en octets.
+
+      La suppression d'un fichier via la commande rm ne libère pas immédiatement l'espace si un processus maintient ce fichier ouvert.
+
+      La fragmentation externe est critique pour les performances des disques durs mécaniques mais a moins d'impact sur les performances des SSD.
+
+      L'augmentation de la limite de fichiers ouverts par processus est souvent nécessaire pour les serveurs web ou de bases de données.
+
+      Il est crucial de distinguer les verrous globaux sur un fichier des verrous partiels sur des enregistrements.
+
+EXEMPLES CITES.
+
+      ls -li fichier.txt affiche le numéro d'inode d'un fichier.
+
+      df -i vérifie l'utilisation et la saturation éventuelle des inodes sur un système de fichiers.
+
+      filefrag -v fichier permet de vérifier combien de fragments composent un fichier.
+
+      mkfs.ext4 -N permet de définir le nombre d'inodes lors du formatage.
+
+      lsof | grep deleted identifie les fichiers supprimés mais encore ouverts par un processus.
+
+      fstrim -v / déclenche le TRIM sur un disque SSD pour effacer les blocs inutilisés.
+
+      badblocks -v /dev/sdX scanne le disque à la recherche de secteurs défectueux.
+
+      ulimit -n affiche ou modifie la limite de descripteurs de fichiers par processus.
+
+      strace -e open,read,write -p PID permet de tracer les appels systèmes d'un processus spécifique.
+
+      fuser -m /mnt/data identifie quel processus empêche le démontage d'un volume.

@@ -1,0 +1,119 @@
+SOBRIÉTÉ NUMÉRIQUE ET RÔLE DU PROGRAMMEUR SYSTÈME D'EXPLOITATION.
+
+LEXIQUE COMPLET.
+
+      La sobriété numérique se définit comme une démarche consistant à concevoir, produire et utiliser le numérique de manière plus responsable afin de réduire son impact environnemental tout en préservant son efficacité.
+
+      Le programme Bercy vert est une initiative ministérielle qui vise à diminuer de vingt-deux pour cent d'ici 2027 les émissions de gaz à effet de serre liées au numérique.
+
+      La démarche SPE désigne les Services publics écoresponsables, cadre dans lequel s'inscrit la politique de sobriété numérique au niveau ministériel.
+
+      Le RGAA est le Référentiel général d'amélioration de l'accessibilité qui garantit l'accessibilité numérique pour tous les usagers.
+
+      Le RGS signifie Référentiel général de sécurité et encadre la sécurité des systèmes d'information.
+
+      Le RGPD correspond au Règlement général sur la protection des données qui impose la gestion responsable et la minimisation des données personnelles.
+
+      Le RGESN est le Référentiel général d'écoconception qui impose des principes pour réduire l'empreinte environnementale des services numériques dès leur conception.
+
+      Le PUE ou Power Usage Effectiveness désigne l'indice d'efficacité énergétique utilisé notamment pour mesurer la performance des datacentres.
+
+      Le PSE est le Programmeur Système d'Exploitation, acteur technique et transversal clé dans la mise en œuvre de la sobriété numérique.
+
+COURS DÉTAILLÉ.
+
+I. LA TRANSFORMATION DES SYSTÈMES D'INFORMATION PAR LA SOBRIÉTÉ NUMÉRIQUE.
+
+   A. IMPACTS TECHNIQUES, ORGANISATIONNELS ET CADRE RÉGLEMENTAIRE.
+
+      La sobriété numérique transforme conjointement les architectures des systèmes d'information et les pratiques d'exploitation en conciliant la frugalité, la performance et la disponibilité.
+
+      Cette transformation globale s'inscrit dans un cadre réglementaire contraint mais structurant qui dépasse les seuls objectifs environnementaux des démarches SPE et Bercy vert.
+
+      Le respect du RGAA assure la simplicité et la compatibilité sur les arbitrages de contenus ou de fonctionnalités.
+
+      L'application du RGS soulève parfois une injonction paradoxale concernant la réduction des logs par rapport au besoin de traçabilité nécessaire à la sécurité.
+
+      Le RGPD impose la minimisation des données conservées et la suppression des données devenues inutiles.
+
+      Le RGESN dicte les principes permettant de réduire l'empreinte environnementale des services dès l'étape de leur conception.
+
+   B. TRANSFORMATION PROGRESSIVE DES INFRASTRUCTURES ET ARCHITECTURES.
+
+      La rationalisation du parc et des infrastructures s'opère à travers la mutualisation et la consolidation de l'existant pour mieux dimensionner les architectures, par exemple via la fusion de serveurs sous-utilisés.
+
+      L'allongement du cycle de vie du matériel privilégie le reconditionnement, la maintenance préventive et le choix de matériel réparable au lieu du remplacement systématique.
+
+      Le déploiement de datacentres plus sobres se caractérise par un indice d'efficacité énergétique amélioré et un refroidissement optimisé.
+
+      La mise en place d'architectures scalables et adaptatives permet de monter en capacité lors de pics d'activité et de redescendre le reste du temps.
+
+      La gestion raisonnée des données s'appuie sur une politique stricte de cycle de vie incluant l'archivage, la suppression et la limitation des duplications.
+
+      Les choix technologiques s'orientent vers des solutions plus sobres où certains environnements légers peuvent remplacer des machines virtuelles surdimensionnées.
+
+   C. ÉVOLUTION DES PRATIQUES D'EXPLOITATION ET ORGANISATION.
+
+      Les arbitrages de planification des traitements doivent désormais tenir compte des périodes de charge, des contraintes énergétiques et des fenêtres métier.
+
+      Certains traitements non critiques sont reprogrammés pour éviter les pics de charge ou pour répartir la consommation énergétique dans le temps.
+
+      Le pilotage écoresponsable des environnements intègre des indicateurs de consommation, de volumétrie et de durée d'exécution pour fermer les environnements inutilisés.
+
+      La coordination entre les équipes est renforcée pour aligner les besoins fonctionnels avec les contraintes techniques, impliquant une meilleure communication entre exploitants, architectes et développeurs.
+
+      Une logique de frugalité est intégrée dans les décisions d'exploitation, par exemple en ajustant les sauvegardes selon l'usage réel.
+
+II. LE RÔLE DU PROGRAMMEUR SYSTÈME D'EXPLOITATION (PSE).
+
+   A. EXPERTISE TECHNIQUE ET OPTIMISATION OPÉRATIONNELLE.
+
+      Le PSE mobilise son expertise pour formuler des recommandations lors des comités d'architecture et orienter les choix technologiques.
+
+      Il contribue activement à la conception de solutions techniques plus efficientes et intègre des critères de sobriété dans les environnements d'exploitation.
+
+      L'analyse des performances lui permet d'identifier les sources de surconsommation comme l'utilisation excessive du processeur ou la croissance anormale de fichiers temporaires.
+
+      L'optimisation des scripts, des batchs et des tâches planifiées passe par la mise en place de mécanismes d'automatisation sobres, comme l'ajout de conditions et la limitation des boucles.
+
+   B. QUALITÉ OPÉRATIONNELLE ET PILOTAGE DE LA DÉMARCHE SPE.
+
+      Le PSE garantit le maintien du niveau de disponibilité des services malgré les ajustements induits par la sobriété numérique.
+
+      Il assure la vérification de la priorisation des services critiques dans ce nouveau contexte de frugalité.
+
+      La surveillance proactive permet de gérer les nouveaux risques induits, tels que les conflits de traitements concurrents déclenchés après des optimisations de batchs.
+
+      La production et l'exploitation d'indicateurs précis sont nécessaires au pilotage SPE, incluant les volumes de logs, le taux de charge CPU et l'occupation du stockage.
+
+   C. ACCOMPAGNEMENT ET DIFFUSION DE LA CULTURE ÉCORESPONSABLE.
+
+      Le PSE joue un rôle pédagogique en assurant la formation des équipes d'exploitation à la sobriété numérique par la transmission de connaissances techniques appliquées.
+
+      Il valorise les actions réussies et participe à des groupes de travail pour construire une culture technique écoresponsable.
+
+      Le partage de bonnes pratiques s'étend aux développeurs, notamment dans le cadre d'une approche DevOps, pour intégrer la sobriété tout au long du cycle de développement.
+
+      Le PSE est un acteur clé de la transition bien qu'il n'agisse pas au niveau stratégique, mais en tant qu'expert technique et transverse.
+
+POINTS D'ATTENTION.
+
+      La sobriété numérique ne doit pas dégrader la performance ni la disponibilité des services publics.
+
+      Il existe une injonction paradoxale entre la volonté de réduire les logs pour la sobriété et l'obligation de traçabilité pour la sécurité selon le RGS.
+
+      L'essor de l'intelligence artificielle dans les services publics représente un défi futur majeur pour maîtriser les coûts énergétiques tout en développant des usages innovants.
+
+EXEMPLES CITES.
+
+      Fusionner des serveurs sous-utilisés pour rationaliser l'architecture.
+
+      Prolonger la durée d'utilisation de serveurs dont la charge réelle reste faible.
+
+      Reprogrammer des traitements non critiques pour éviter les pics de charge.
+
+      Fermer les environnements informatiques inutilisés.
+
+      Ajouter des conditions et limiter les boucles dans les scripts d'automatisation.
+
+      Surveiller la croissance anormale des fichiers temporaires ou des logs.

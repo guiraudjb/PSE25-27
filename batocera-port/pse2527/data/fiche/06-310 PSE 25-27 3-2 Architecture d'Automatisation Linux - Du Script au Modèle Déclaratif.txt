@@ -1,0 +1,119 @@
+CONSTRUCTION D'UNE ARCHITECTURE D'AUTOMATISATION LINUX.
+
+LEXIQUE COMPLET.
+
+      L'infrastructure as Code ou IaC est la gestion et le provisionnement de l'infrastructure à travers des fichiers de définition lisibles par machine.
+
+      Le GitOps est l'évolution logique de l'infrastructure as code où le système de contrôle de version devient la source de vérité unique et le déclencheur des modifications.
+
+      L'idempotence est la propriété garantissant qu'une opération exécutée une ou plusieurs fois produit exactement le même résultat final sans créer de dérive.
+
+      Le Mean Time To Recovery ou MTTR correspond au temps moyen nécessaire pour rétablir un service informatique après une panne ou une interruption.
+
+      Une Pull Request est une proposition de modification de code permettant une revue par les pairs avant son intégration dans l'environnement de production.
+
+      Le drift ou dérive désigne l'écart constaté entre l'état désiré configuré dans le dépôt central et l'état réel actuel observé sur les serveurs.
+
+COURS DÉTAILLÉ.
+
+I. LE PROBLÈME FONDAMENTAL DU SCRIPT FACE À LA COMPLEXITÉ.
+
+   A. Les limites structurelles de l'approche procédurale.
+
+      L'approche traditionnelle par scripts isolés devient inefficace lorsque la taille de l'infrastructure augmente de manière significative en raison de la loi d'échelle.
+
+      Le mur de la variance apparaît car il est impossible de prévoir toutes les différences d'environnement ou les configurations résiduelles sur un parc étendu.
+
+      Le mur de l'idempotence bloque les scripts standards qui ne sont pas conçus pour être exécutés plusieurs fois sans provoquer d'erreurs ou de duplications.
+
+      Le mur de la traçabilité rend la gestion de l'infrastructure chaotique en l'absence de source de vérité unique pour consigner les modifications.
+
+      Le mur de l'action humaine fragilise le système en rendant les délais de réparation dépendants de la disponibilité et de la vitesse d'intervention d'un technicien.
+
+II. LES BÉNÉFICES D'UNE ARCHITECTURE D'AUTOMATISATION.
+
+   A. Le passage de la procédure à la politique déclarative.
+
+      Une architecture automatisée remplace les suites d'instructions par la description d'un état final désiré que le système doit atteindre de manière autonome.
+
+      Cette approche permet à l'outil de gérer lui-même la complexité technique et les éventuelles variations de l'environnement matériel ou logiciel.
+
+   B. La collaboration et la traçabilité par le GitOps.
+
+      L'utilisation d'un référentiel centralisé favorise le partage des connaissances et instaure une validation systématique avant tout déploiement en production.
+
+      L'historique des modifications offre un sceau infalsifiable qui facilite les audits et permet des retours en arrière fiables en cas d'incident technique.
+
+   C. La transition vers un fonctionnement proactif.
+
+      Le système abandonne la simple réaction aux urgences pour adopter un modèle de convergence continue qui corrige les dérives avant qu'elles ne causent des pannes.
+
+      Cette automatisation de la maintenance courante libère les équipes humaines qui n'interviennent plus que pour les cas complexes et la définition des politiques.
+
+III. LES FONDATIONS D'UNE ARCHITECTURE ROBUSTE.
+
+   A. La gestion d'état et l'idempotence.
+
+      Le moteur d'automatisation compare en permanence l'état observé sur les équipements avec l'état spécifié dans les fichiers de configuration de référence.
+
+      Cette garantie de prévisibilité est indispensable pour assurer l'auto-guérison du système et permettre des reprises sur erreur sans risque de corruption.
+
+   B. La gestion sécurisée des secrets.
+
+      Aucune information confidentielle telle qu'un mot de passe ou une clé d'interface de programmation ne doit figurer en clair dans le code d'infrastructure.
+
+      Les secrets sont injectés dynamiquement par des outils spécialisés lors de l'exécution pour garantir une sécurité absolue et une rotation facilitée.
+
+   C. La gestion de configuration centralisée.
+
+      Les grands parcs informatiques nécessitent un mécanisme pour distribuer les paramètres dynamiques et découvrir les services informatiques automatiquement.
+
+      Un annuaire distribué fournit ces informations vitales aux applications sans imposer le redéploiement complet et systématique des règles d'automatisation.
+
+IV. LE CŒUR DE L'ARCHITECTURE ET SON EXPLOITATION.
+
+   A. Les modèles d'exécution disponibles.
+
+      Le modèle de type push implique un contrôleur central qui se connecte directement aux cibles pour appliquer les changements de manière immédiate.
+
+      Le modèle de type pull repose sur des agents installés sur les cibles qui récupèrent périodiquement leur configuration depuis un serveur centralisé.
+
+      La combinaison de ces deux modèles permet de concilier la résilience de la convergence continue avec la réactivité nécessaire aux interventions urgentes.
+
+   B. La conception modulaire et la gestion des dépendances.
+
+      Le code doit être structuré en rôles indépendants qui encapsulent toute la logique nécessaire à l'installation et au fonctionnement d'un service spécifique.
+
+      L'ordre d'exécution est garanti par la déclaration explicite des dépendances matérielles et logicielles au niveau de la machine et entre les différents hôtes.
+
+   C. L'industrialisation et la fiabilité en production.
+
+      Les modifications d'infrastructure subissent des tests automatiques de syntaxe et de conformité avant d'être déployées par les pipelines d'intégration continue.
+
+      La sécurisation du système repose sur des points d'accès restreints de type bastion et sur le respect rigoureux du principe de moindre privilège.
+
+      L'observabilité est assurée par la centralisation des journaux et la collecte de métriques qui permettent d'identifier rapidement les pannes ou les dérives.
+
+POINTS D'ATTENTION.
+
+      Le passage à l'échelle transforme inévitablement l'administration système en une discipline d'ingénierie logicielle à part entière.
+
+      La gestion d'état et l'idempotence sont les seules garanties viables pour assurer un comportement prévisible de l'infrastructure informatique.
+
+      L'intégration continue protège l'environnement de production contre les erreurs humaines fatales et les mauvaises configurations accidentelles.
+
+      L'observabilité proactive permet d'ajuster les règles d'automatisation en identifiant précisément les machines qui dérivent fréquemment de leur état souhaité.
+
+EXEMPLES CITES.
+
+      La condition de vérification illustrant la complexité croissante des scripts manuels est if [ -f /etc/debian_version ].
+
+      La commande utilisée pour annuler un déploiement défectueux depuis le dépôt source est git revert.
+
+      Le paramètre de protection contre le blocage indéfini du contrôleur central est timeout: 300.
+
+      Le réglage limitant la saturation du réseau lors des déploiements massifs est forks: 10.
+
+      L'outil permettant de vérifier les signatures cryptographiques des modules importés est ansible-galaxy.
+
+      La commande d'installation déclenchée de manière autonome par un agent de remédiation est apt install nginx=1.24.

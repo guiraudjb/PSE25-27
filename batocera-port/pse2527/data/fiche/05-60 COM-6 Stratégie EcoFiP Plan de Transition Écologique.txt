@@ -1,0 +1,107 @@
+STRATÉGIE DE TRANSITION ÉCOLOGIQUE ET ÉCORESPONSABILITÉ DE LA DGFIP.
+
+LEXIQUE COMPLET.
+
+      BeGES désigne le Bilan d'émission de gaz à effet de serre dont le diagnostic de référence a été établi en 2022.
+
+      EcoFiP est le nom de la mission dédiée mise en place pour piloter et orienter les actions de transition écologique au sein de la DGFiP.
+
+      DIE correspond à la Direction de l'immobilier de l'État chargée d'établir la feuille de route pour la transition écologique de l'immobilier de l'État.
+
+      GTB et BACS sont des systèmes de gestion technique et d'automatisation des bâtiments utilisés pour contrôler et piloter les consommations d'énergie.
+
+      PDME signifie Plan de Mobilité Employeur et consiste en un ensemble de mesures définies localement pour optimiser les déplacements liés à l'activité.
+
+      RFAR est le label Relations fournisseurs et achats responsables que la DGFiP cherche à obtenir pour certifier sa politique d'achats.
+
+COURS DÉTAILLÉ.
+
+I. LE CADRE STRATEGIQUE ET LA GOUVERNANCE (OBJECTIF 15).
+
+   A. Fondements et calendrier de la stratégie.
+
+      La stratégie écoresponsable de la DGFiP s'appuie sur le diagnostic du bilan d'émission de gaz à effet de serre établi en 2022 dans les 135 structures locales,.
+
+      Un plan de transition énergétique formalisant les actions futures doit être publié au premier semestre 2023,.
+
+      Le bilan d'émission de gaz à effet de serre fera l'objet d'une actualisation en 2025 qui donnera lieu à un ajustement du plan de transition.
+
+      Une nouvelle actualisation du bilan et du plan de transition est programmée pour l'année 2027.
+
+   B. Pilotage et moyens dédiés (Chantier 15-1).
+
+      Une mission dédiée nommée EcoFiP a été créée pour piloter les actions métiers et transversales incluant l'immobilier, l'informatique, les achats et la mobilité.
+
+      Cette mission sert d'interface avec les politiques ministérielles et interministérielles et aide les directions locales à décliner les mesures.
+
+      Des moyens financiers spécifiques sont inscrits au programme budgétaire de la DGFiP et s'articulent avec les financements ministériels pour la rénovation des bâtiments.
+
+   C. Formation et mobilisation des agents (Chantier 15-2).
+
+      La stratégie repose sur l'appropriation individuelle des objectifs par les agents et la valorisation des initiatives locales.
+
+      Un plan de formation massif aux enjeux de l'écoresponsabilité est prévu pour tous les niveaux hiérarchiques avec un objectif de 100 % des agents formés en 2027,.
+
+      L'écoresponsabilité est intégrée dans les objectifs des cadres dirigeants et des retours peuvent être prévus pour les collectifs de travail performants.
+
+II. ACTIONS SUR LE PATRIMOINE ET LE NUMERIQUE (OBJECTIF 16).
+
+   A. La politique immobilière et énergétique (Chantier 16-1).
+
+      L'immobilier constitue la priorité pour réduire l'empreinte carbone via la sobriété énergétique et l'adaptation au changement climatique.
+
+      La stratégie implique une réduction des surfaces tertiaires occupées pour assurer la soutenabilité de la transition.
+
+      Des audits énergétiques sont réalisés pour hiérarchiser et planifier les travaux de rénovation qu'ils soient légers ou lourds.
+
+      Le pilotage de la consommation s'appuie sur l'installation systématique de thermostats, de détecteurs de mouvement et de systèmes de gestion technique du bâtiment.
+
+      Un outil interministériel de suivi des fluides est utilisé pour détecter les dérives de consommation et optimiser les contrats.
+
+   B. Les objectifs chiffrés du parc immobilier à l'horizon 2027.
+
+      La stratégie prévoit la suppression totale des chaudières au fioul d'ici 2027.
+
+      L'objectif pour les chaudières à gaz est fixé à une baisse de 15 % sur la même période.
+
+   C. La rationalisation informatique.
+
+      L'efficacité énergétique des centres de données est améliorée partout où cela est techniquement possible.
+
+      Le nombre de salles d'hébergement informatique doit être réduit drastiquement passant de dix salles en 2022 à quatre salles en 2025.
+
+III. ACTIONS SUR LES DEPLACEMENTS ET LES ACHATS (OBJECTIF 16).
+
+   A. La gestion des mobilités (Chantier 16-2).
+
+      Les déplacements domicile-travail et professionnels représentent le premier poste d'émission de gaz à effet de serre de la DGFiP.
+
+      Des Plans de Mobilité Employeur doivent être définis localement avec pour objectif que 100 % des directions en soient dotées en 2027,.
+
+      L'électrification du parc automobile est une priorité avec un objectif de deux tiers de véhicules de service électriques ou à très faibles émissions d'ici 2027,.
+
+      Les mobilités douces sont encouragées et des dispositifs de recharge pour véhicules personnels sur le lieu de travail sont étudiés.
+
+   B. La politique d'achats responsables (Chantier 16-3).
+
+      La DGFiP vise l'obtention du label Relations fournisseurs et achats responsables en lien avec le Secrétariat général du ministère.
+
+      Les contrats intègrent une approche fondée sur le cycle de vie, l'allongement de la durée d'usage et le réemploi du matériel.
+
+      Dès 2025, 100 % des projets de marchés soumis à avis conforme devront comporter une disposition environnementale.
+
+      La consommation de papier continue d'être réduite grâce à la généralisation de la signature électronique et du visa dématérialisé.
+
+POINTS D'ATTENTION.
+
+      Il existe une différence majeure d'ambition entre les énergies fossiles d'ici 2027 car le fioul doit être totalement supprimé alors que le gaz doit seulement diminuer de 15 %.
+
+      La transition immobilière est explicitement liée à une réduction des surfaces occupées pour être financièrement soutenable.
+
+      La rationalisation informatique implique une division par plus de deux du nombre de salles d'hébergement en seulement trois ans.
+
+EXEMPLES CITES.
+
+      Les treize premiers Plans de Mobilité Employeur déployés en 2022 dans les départements des Hautes-Alpes, des Bouches-du-Rhône et de la Loire-Atlantique sont cités comme références.
+
+      La circulaire de la Première ministre du 8 février 2023 est mentionnée comme cadre pour la nouvelle dynamique immobilière et les nouvelles formes de travail.

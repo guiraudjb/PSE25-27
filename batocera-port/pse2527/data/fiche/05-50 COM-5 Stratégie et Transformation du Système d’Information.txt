@@ -1,0 +1,125 @@
+RENFORCEMENT DU SYSTEME D'INFORMATION ET VIRAGE DE LA DONNEE (DGFIP 2023-2027).
+
+LEXIQUE COMPLET.
+
+      Dette technique : Retard accumulé dans la mise à niveau technique et la maintenance du système d'information nécessitant des investissements pour être résorbé.
+
+      Schéma directeur des systèmes d'information : Plan stratégique définissant les priorités informatiques articulé avec les besoins métiers sur une perspective glissante de cinq ans.
+
+      Méthode Agile : Méthode de gestion de projet procédant par étapes itératives ou petits pas en livrant régulièrement de nouvelles fonctionnalités.
+
+      Démarche DevOps : Approche intégrant les équipes de développement et les opérations pour prendre en compte la sécurité et la performance dès le début du projet.
+
+      UX (User Experience) : Démarche centrée sur l'utilisateur qui l'associe de la conception aux évolutions pour créer des outils intuitifs et accessibles.
+
+      Lac de données : Infrastructure de stockage permettant de centraliser et de travailler de manière sécurisée sur des données massives issues de différentes applications.
+
+      Data-visualisation : Technique de représentation graphique des données pour faciliter leur analyse et l'exercice opérationnel des missions.
+
+      API : Interface de programmation permettant le développement et l'automatisation des échanges de données avec les partenaires.
+
+      Services témoins : Groupes d'utilisateurs associés directement à la mise en place des projets pour tester les solutions.
+
+COURS DETAILLE.
+
+I. CONTEXTE ET STRATEGIE GLOBALE.
+
+   A. Ambitions pour 2023-2027.
+
+      Le système d'information joue un rôle fondamental dans la qualité du service public et le travail quotidien des agents de la DGFiP.
+
+      La programmation financière prévoit une forte hausse des moyens budgétaires et humains sur la période 2023-2027 pour consolider le système et préparer l'avenir.
+
+      La stratégie repose sur deux piliers majeurs qui sont la rénovation de la gouvernance centrée sur l'utilisateur et la consolidation technique incluant le virage de la donnée.
+
+II. OBJECTIF 13 : GOUVERNANCE, UTILISATEUR ET FORCES INTERNES.
+
+   A. Rénover la gouvernance du système d'information (Chantier 13-1).
+
+      Le pilotage des chantiers sera réorganisé pour construire une stratégie pluriannuelle ciblant les priorités d'investissement.
+
+      Le schéma directeur des systèmes d'information s'articulera désormais avec les priorités métiers dans une perspective glissante à cinq ans.
+
+      L'implication des métiers sera renforcée dans la stratégie et la conduite des projets via de nouveaux dispositifs de suivi des besoins.
+
+      Des assistants digitaux seront mis en place pour alléger les tâches répétitives des agents.
+
+   B. Placer l'utilisateur au centre (Chantier 13-2).
+
+      Le système doit être disponible et résilient avec un engagement de transparence sur la qualité de service offerte aux usagers et aux agents.
+
+      La satisfaction des utilisateurs sera mesurée et communiquée par rapport aux objectifs fixés.
+
+      En cas d'incident technique, les utilisateurs devront être prévenus sans délai et accompagnés pour y faire face.
+
+      Une attention particulière sera portée à l'accessibilité des applications pour tous les publics incluant les personnes en situation de handicap.
+
+      L'indicateur clé vise à diviser par deux la durée d'indisponibilité des applications en 2027 par rapport à 2022.
+
+   C. S'appuyer sur les forces internes (Chantier 13-3).
+
+      La DGFiP consolidera ses équipes d'agents informaticiens pour conserver la maîtrise des choix techniques et méthodologiques.
+
+      La formation des agents sera renforcée tant sur le plan technique que méthodologique pour maintenir les compétences au meilleur niveau.
+
+      La capacité à piloter les prestations externes et la sous-traitance sera améliorée grâce à ces compétences internes.
+
+      L'indicateur de réussite est un taux de satisfaction des besoins de formation prioritaires de 95 % par an sur la durée du contrat.
+
+III. OBJECTIF 14 : CONSOLIDATION TECHNIQUE ET TRANSFORMATION NUMERIQUE.
+
+   A. Intensifier la résorption de la dette technique (Chantier 14-1).
+
+      La maintenance régulière du système est indispensable pour garantir sa performance et sa sécurité.
+
+      La dette technique sera identifiée via des indicateurs fonctionnels et financiers et sa résorption sera priorisée dans le schéma directeur.
+
+      Des outils industriels de pilotage seront construits pour suivre cette résorption en transparence avec les métiers.
+
+      La transition des applications vers le cloud constitue une priorité majeure pour éviter la reconstitution future de la dette technique.
+
+      L'indicateur fixe un taux de conformité à la cible technologique de 78 % en 2027.
+
+      L'objectif de transformation prévoit que 30 % du système d'information soit basculé sur le cloud en 2027.
+
+   B. Mener à bien les projets numériques (Chantier 14-2).
+
+      Le pilotage des projets sera renforcé par l'adoption de nouvelles méthodes de développement comme l'Agile et le DevOps.
+
+      La méthode UX sera généralisée pour associer les utilisateurs dès le recueil des besoins et lors des choix d'évolution.
+
+      Les bonnes pratiques seront partagées entre les projets pour capitaliser sur l'expérience acquise et industrialiser le savoir-faire.
+
+      Les conditions d'externalisation ainsi que les délais et les coûts des projets feront l'objet d'une maîtrise accrue.
+
+      L'indicateur de performance impose une dérive du coût budgétaire des projets inférieure à 20 % entre 2023 et 2027.
+
+   C. Exploiter les données (Chantier 14-3).
+
+      L'actif constitué par les données doit être valorisé pour améliorer l'exercice des missions au-delà du simple stockage.
+
+      Le lac de données permet de travailler de façon sécurisée sur des volumes massifs d'informations dispersées.
+
+      Les datascientists utiliseront l'intelligence artificielle pour mener des analyses prédictives et aider à la décision.
+
+      La data-visualisation sera déployée pour faciliter l'exercice opérationnel des missions dans les services et le réseau.
+
+      Les échanges de données avec les partenaires seront développés au moyen d'interfaces de programmation API.
+
+POINTS D'ATTENTION.
+
+      Il existe un lien direct établi entre le basculement vers le cloud et l'arrêt de la reconstitution de la dette technique.
+
+      La stratégie met l'accent sur l'internalisation des compétences pour réduire la dépendance aux prestataires externes.
+
+      L'approche utilisateur n'est pas seulement consultative mais structurelle via la méthode UX intégrée au cycle de développement.
+
+      La donnée est considérée comme un levier de pilotage actif et de prédiction et non plus comme une simple archive.
+
+EXEMPLES CITES.
+
+      Le tableau de bord TOIP est cité comme exemple d'outil de pilotage utilisant le lac de données.
+
+      Les services témoins et les groupes d'utilisateurs sont des exemples de dispositifs d'implication.
+
+      Les datacenters et les postes de travail sont des exemples d'infrastructures concernées par la mise à jour régulière.

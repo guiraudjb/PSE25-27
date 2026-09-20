@@ -85,3 +85,46 @@ def load_flashcards(base):
                 continue
             cards.append({'recto': row[0], 'verso': row[1]})
     return cards
+
+
+def chanson_path(base):
+    """Chemin du fichier chanson (mp3) du module, ou None si absent."""
+    path = os.path.join(DATA_DIR, 'chanson', base + '.mp3')
+    return path if os.path.exists(path) else None
+
+
+def podcast_path(base):
+    """Chemin du fichier podcast (mp3, converti depuis le .m4a NotebookLM
+    source - SDL_mixer sur Batocera ne décode pas l'AAC/m4a), ou None si absent."""
+    path = os.path.join(DATA_DIR, 'podcast', base + '.mp3')
+    return path if os.path.exists(path) else None
+
+
+def infographie_path(base):
+    """Chemin du fichier infographie (png) du module, ou None si absent."""
+    path = os.path.join(DATA_DIR, 'infographie', base + '.png')
+    return path if os.path.exists(path) else None
+
+
+def fiche_path(base):
+    """Chemin de la fiche de révision (txt) du module, ou None si absente."""
+    path = os.path.join(DATA_DIR, 'fiche', base + '.txt')
+    return path if os.path.exists(path) else None
+
+
+def load_fiche(base):
+    """Charge le texte complet de la fiche de révision du module, ou None si absente."""
+    path = fiche_path(base)
+    if path is None:
+        return None
+    with open(path, encoding='utf-8') as f:
+        return f.read()
+
+
+def fiche_audio_path(base):
+    """Chemin de la narration audio (mp3) de la fiche de révision du module,
+    ou None si absente. Fichier long (plusieurs dizaines de minutes possible)
+    pré-généré à l'avance et streamé via pygame.mixer.music - jamais généré à
+    la volée par Piper comme le quiz/flashcard (bien trop long pour ça)."""
+    path = os.path.join(DATA_DIR, 'fiche_audio', base + '.mp3')
+    return path if os.path.exists(path) else None

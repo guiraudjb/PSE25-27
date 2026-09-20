@@ -1,0 +1,305 @@
+RÈGLEMENT (UE) 2016/679 RELATIF À LA PROTECTION DES PERSONNES PHYSIQUES À L'ÉGARD DU TRAITEMENT DES DONNÉES À CARACTÈRE PERSONNEL.
+
+LEXIQUE COMPLET.
+
+      Les données à caractère personnel désignent toute information se rapportant à une personne physique identifiée ou identifiable nommée personne concernée.
+
+      Le traitement correspond à toute opération ou tout ensemble d'opérations effectuées sur des données telle que la collecte, l'enregistrement ou la conservation.
+
+      Le profilage est toute forme de traitement automatisé visant à évaluer des aspects personnels relatifs à une personne physique comme son rendement au travail ou sa santé.
+
+      La pseudonymisation signifie le traitement de données de façon à ce qu'elles ne puissent plus être attribuées à une personne précise sans informations supplémentaires conservées séparément.
+
+      Un fichier est tout ensemble structuré de données à caractère personnel accessibles selon des critères déterminés.
+
+      Le responsable du traitement est la personne physique ou morale ou l'autorité publique qui détermine les finalités et les moyens du traitement.
+
+      Le sous-traitant est la personne physique ou morale ou l'autorité publique qui traite des données pour le compte du responsable du traitement.
+
+      Le consentement est toute manifestation de volonté libre, spécifique, éclairée et univoque par laquelle la personne accepte le traitement par une déclaration ou un acte positif.
+
+      Une violation de données à caractère personnel est une violation de sécurité entraînant la destruction, la perte, l'altération ou la divulgation non autorisée de données.
+
+      Les données génétiques sont les données relatives aux caractéristiques génétiques héréditaires ou acquises donnant des informations uniques sur la physiologie ou la santé.
+
+      Les données biométriques sont les données résultant d'un traitement technique spécifique relatives aux caractéristiques physiques ou comportementales permettant l'identification unique.
+
+      Les données concernant la santé sont les données relatives à la santé physique ou mentale révélant des informations sur l'état de santé.
+
+      L'établissement principal correspond au lieu de l'administration centrale dans l'Union pour un responsable du traitement établi dans plusieurs États membres.
+
+      Une entreprise désigne une personne physique ou morale exerçant une activité économique quelle que soit sa forme juridique.
+
+      Le groupe d'entreprises comprend une entreprise qui exerce le contrôle et les entreprises qu'elle contrôle.
+
+      Les règles d'entreprise contraignantes sont les règles internes appliquées par un groupe d'entreprises pour les transferts de données hors de l'Union.
+
+      L'autorité de contrôle est une autorité publique indépendante instituée par un État membre.
+
+      Le traitement transfrontalier désigne un traitement ayant lieu dans plusieurs États membres ou affectant sensiblement des personnes dans plusieurs États membres.
+
+COURS DÉTAILLÉ.
+
+I. DISPOSITIONS GÉNÉRALES.
+
+   A. Objet et champ d'application.
+
+      Le règlement établit des règles relatives à la protection des libertés et droits fondamentaux des personnes physiques à l'égard du traitement des données à caractère personnel et à la libre circulation de ces données.
+
+      Le champ d'application matériel couvre le traitement automatisé en tout ou en partie ainsi que le traitement non automatisé contenu dans un fichier.
+
+      Le règlement ne s'applique pas aux activités hors du droit de l'Union, aux activités des États membres relevant de la politique étrangère, aux activités strictement personnelles ou domestiques et aux fins de prévention pénale par les autorités compétentes.
+
+      Le champ d'application territorial inclut le traitement effectué dans le cadre d'un établissement dans l'Union peu importe le lieu du traitement.
+
+      Le règlement s'applique aussi aux responsables non établis dans l'Union si les activités sont liées à l'offre de biens ou services à des personnes dans l'Union ou au suivi de leur comportement dans l'Union.
+
+II. PRINCIPES.
+
+   A. Principes relatifs au traitement.
+
+      Les données doivent être traitées de manière licite, loyale et transparente au regard de la personne concernée.
+
+      Les finalités doivent être déterminées, explicites et légitimes sans traitement ultérieur incompatible sauf pour l'archivage ou la recherche.
+
+      Le principe de minimisation impose que les données soient adéquates, pertinentes et limitées à ce qui est nécessaire.
+
+      Les données doivent être exactes et si nécessaire tenues à jour avec des mesures raisonnables pour rectifier les erreurs.
+
+      La conservation doit être limitée sous une forme permettant l'identification pendant une durée n'excédant pas celle nécessaire aux finalités.
+
+      L'intégrité et la confidentialité exigent une sécurité appropriée contre le traitement non autorisé, la perte ou la destruction.
+
+      Le responsable du traitement est responsable du respect de ces principes et doit être en mesure de le démontrer.
+
+   B. Licéité du traitement.
+
+      Le traitement est licite si la personne concernée a consenti pour une ou plusieurs finalités spécifiques.
+
+      Le traitement est licite s'il est nécessaire à l'exécution d'un contrat ou de mesures précontractuelles.
+
+      Le traitement est licite s'il est nécessaire au respect d'une obligation légale du responsable du traitement.
+
+      Le traitement est licite s'il est nécessaire à la sauvegarde des intérêts vitaux de la personne concernée ou d'une autre personne.
+
+      Le traitement est licite s'il est nécessaire à une mission d'intérêt public ou relevant de l'exercice de l'autorité publique.
+
+      Le traitement est licite s'il est nécessaire aux intérêts légitimes du responsable ou d'un tiers sauf si les droits de la personne prévalent notamment pour un enfant.
+
+   C. Consentement et catégories particulières.
+
+      Le responsable du traitement doit pouvoir démontrer que la personne a donné son consentement.
+
+      La personne concernée a le droit de retirer son consentement à tout moment aussi simplement qu'elle l'a donné.
+
+      Pour les services de la société de l'information offerts directement aux enfants, le traitement est licite à partir de seize ans ou treize ans si l'État membre le prévoit.
+
+      Le traitement des données sensibles révélant l'origine raciale, les opinions politiques, les convictions religieuses ou l'appartenance syndicale est interdit.
+
+      L'interdiction des données sensibles ne s'applique pas en cas de consentement explicite, d'obligations en droit du travail, d'intérêts vitaux ou de défense en justice.
+
+      Le traitement des données relatives aux condamnations pénales ne peut être effectué que sous le contrôle de l'autorité publique ou si autorisé par le droit.
+
+III. DROITS DE LA PERSONNE CONCERNÉE.
+
+   A. Transparence et information.
+
+      Le responsable du traitement fournit les informations d'une façon concise, transparente, compréhensible et aisément accessible.
+
+      Le responsable facilite l'exercice des droits et répond aux demandes dans un délai d'un mois prolongeable de deux mois si nécessaire.
+
+      Les informations sont fournies gratuitement sauf demande manifestement infondée ou excessive.
+
+      En cas de collecte directe, le responsable fournit son identité, les finalités, la base juridique, les destinataires et la durée de conservation.
+
+      En cas de collecte indirecte, le responsable fournit en plus la source des données dans un délai raisonnable ne dépassant pas un mois.
+
+   B. Accès, rectification et effacement.
+
+      La personne concernée a le droit d'obtenir la confirmation que des données la concernant sont traitées et d'avoir accès à ces données.
+
+      Le droit de rectification permet d'obtenir la correction des données inexactes ou de compléter des données incomplètes.
+
+      Le droit à l'effacement ou droit à l'oubli s'applique si les données ne sont plus nécessaires, si le consentement est retiré ou si le traitement est illicite.
+
+      Le droit à la limitation du traitement permet de geler l'utilisation des données en cas de contestation de leur exactitude ou d'illicéité.
+
+      Le responsable notifie toute rectification, effacement ou limitation à chaque destinataire auquel les données ont été communiquées.
+
+   C. Portabilité et opposition.
+
+      Le droit à la portabilité permet de recevoir les données fournies dans un format structuré et de les transmettre à un autre responsable.
+
+      Le droit d'opposition permet de s'opposer à tout moment au traitement fondé sur l'intérêt public ou l'intérêt légitime pour des raisons tenant à une situation particulière.
+
+      La personne concernée a le droit de s'opposer à tout moment au traitement de ses données à des fins de prospection incluant le profilage lié.
+
+      La personne a le droit de ne pas faire l'objet d'une décision fondée exclusivement sur un traitement automatisé produisant des effets juridiques.
+
+IV. RESPONSABLE DU TRAITEMENT ET SOUS-TRAITANT.
+
+   A. Obligations générales.
+
+      Le responsable met en œuvre des mesures techniques et organisationnelles appropriées pour s'assurer que le traitement est conforme au règlement.
+
+      La protection des données dès la conception impose d'intégrer les garanties nécessaires au moment de la détermination des moyens et du traitement.
+
+      La protection des données par défaut garantit que seules les données nécessaires à chaque finalité spécifique sont traitées.
+
+      Les responsables conjoints du traitement définissent de manière transparente leurs obligations respectives par voie d'accord.
+
+      Un représentant dans l'Union doit être désigné par écrit par le responsable ou le sous-traitant non établi dans l'Union si l'article 3 s'applique.
+
+   B. Sous-traitance et sécurité.
+
+      Le responsable ne fait appel qu'à des sous-traitants présentant des garanties suffisantes quant à la mise en œuvre de mesures de sécurité.
+
+      Le traitement par un sous-traitant est régi par un contrat définissant l'objet, la durée, la nature et la finalité du traitement.
+
+      Le sous-traitant ne recrute pas d'autre sous-traitant sans l'autorisation écrite préalable du responsable du traitement.
+
+      Le responsable et le sous-traitant tiennent un registre des activités de traitement sauf pour les entreprises de moins de 250 employés sans risque.
+
+      La sécurité du traitement impose des mesures comme la pseudonymisation et le chiffrement pour garantir la confidentialité et l'intégrité.
+
+   C. Notification de violations et analyse d'impact.
+
+      Le responsable notifie une violation de données à l'autorité de contrôle dans les soixante-douze heures après en avoir pris connaissance.
+
+      Le responsable communique la violation à la personne concernée dans les meilleurs délais si elle engendre un risque élevé.
+
+      Une analyse d'impact relative à la protection des données est requise avant le traitement s'il est susceptible d'engendrer un risque élevé.
+
+      Le responsable consulte l'autorité de contrôle préalablement au traitement si l'analyse d'impact indique un risque élevé non atténué.
+
+   D. Délégué à la protection des données DPO.
+
+      La désignation d'un DPO est obligatoire pour les autorités publiques et les organismes dont les activités exigent un suivi régulier à grande échelle.
+
+      Le DPO informe, conseille et contrôle le respect du règlement et fait office de point de contact pour l'autorité de contrôle.
+
+      Le DPO exerce ses missions en toute indépendance et ne reçoit aucune instruction concernant l'exercice de ses missions.
+
+   E. Codes de conduite et certification.
+
+      L'élaboration de codes de conduite est encouragée pour préciser les modalités d'application du règlement selon les secteurs.
+
+      Des mécanismes de certification et des labels sont encouragés pour démontrer que les opérations de traitement respectent le règlement.
+
+V. TRANSFERTS DE DONNÉES VERS DES PAYS TIERS.
+
+   A. Principes généraux et décisions d'adéquation.
+
+      Les transferts de données vers des pays tiers ne peuvent avoir lieu que si les conditions du règlement sont respectées.
+
+      Un transfert peut avoir lieu sur la base d'une décision d'adéquation de la Commission constatant que le pays assure un niveau de protection adéquat.
+
+   B. Garanties appropriées et dérogations.
+
+      En l'absence de décision d'adéquation le transfert nécessite des garanties appropriées comme des règles d'entreprise contraignantes ou des clauses types.
+
+      Les règles d'entreprise contraignantes s'appliquent aux transferts au sein d'un groupe d'entreprises et doivent être approuvées par l'autorité.
+
+      Des dérogations permettent le transfert en cas de consentement explicite, de nécessité contractuelle ou de motifs importants d'intérêt public.
+
+VI. AUTORITÉS DE CONTRÔLE INDÉPENDANTES.
+
+   A. Statut et indépendance.
+
+      Chaque État membre prévoit une ou plusieurs autorités publiques indépendantes chargées de surveiller l'application du règlement.
+
+      Les membres de l'autorité de contrôle exercent leurs missions en toute indépendance et ne sollicitent aucune instruction.
+
+      Chaque autorité dispose des ressources humaines, techniques et financières nécessaires et d'un budget annuel public propre.
+
+   B. Compétence et pouvoirs.
+
+      L'autorité de contrôle est compétente sur le territoire de l'État membre dont elle relève.
+
+      L'autorité de contrôle chef de file est celle de l'établissement principal pour le traitement transfrontalier selon le mécanisme de guichet unique.
+
+      L'autorité a des pouvoirs d'enquête comme ordonner la communication d'informations ou mener des audits.
+
+      L'autorité a des pouvoirs correcteurs comme avertir, ordonner la mise en conformité, limiter le traitement ou imposer des amendes.
+
+VII. COOPÉRATION ET COHÉRENCE.
+
+   A. Mécanismes de coopération.
+
+      L'autorité chef de file coopère avec les autres autorités concernées pour parvenir à un consensus sur les décisions.
+
+      Les autorités se prêtent assistance mutuelle et peuvent mener des opérations conjointes.
+
+      Le mécanisme de contrôle de la cohérence permet de régler les litiges entre autorités via le comité.
+
+   B. Comité européen de la protection des données.
+
+      Le comité est un organe de l'Union composé des chefs d'autorités de contrôle et du Contrôleur européen.
+
+      Le comité veille à l'application cohérente du règlement et émet des avis et des décisions contraignantes en cas de litige.
+
+VIII. VOIES DE RECOURS, RESPONSABILITÉ ET SANCTIONS.
+
+   A. Recours et responsabilité.
+
+      Toute personne concernée a le droit d'introduire une réclamation auprès d'une autorité de contrôle.
+
+      Toute personne a droit à un recours juridictionnel effectif contre une décision d'une autorité de contrôle ou contre un responsable du traitement.
+
+      Toute personne ayant subi un dommage matériel ou moral a le droit d'obtenir réparation du responsable ou du sous-traitant.
+
+   B. Sanctions administratives.
+
+      Les amendes administratives doivent être effectives, proportionnées et dissuasives.
+
+      Les violations graves peuvent entraîner des amendes jusqu'à vingt millions d'euros ou quatre pour cent du chiffre d'affaires mondial.
+
+      Les autres violations peuvent entraîner des amendes jusqu'à dix millions d'euros ou deux pour cent du chiffre d'affaires mondial.
+
+IX. DISPOSITIONS RELATIVES À DES SITUATIONS PARTICULIÈRES.
+
+   A. Liberté d'expression et accès aux documents.
+
+      Les États membres concilient le droit à la protection des données avec la liberté d'expression et d'information journalistique.
+
+      Les données figurant dans des documents officiels peuvent être communiquées pour concilier accès du public et protection des données.
+
+   B. Recherche et autres contextes.
+
+      Des garanties appropriées sont requises pour le traitement à des fins archivistiques, scientifiques, historiques ou statistiques.
+
+      Des règles spécifiques peuvent être prévues pour le traitement des données dans le cadre des relations de travail.
+
+      Les églises appliquant déjà des règles complètes peuvent continuer à les appliquer si elles sont mises en conformité.
+
+X. DISPOSITIONS FINALES.
+
+   A. Abrogation et entrée en vigueur.
+
+      La directive quatre-vingt-quinze quarante-six CE est abrogée.
+
+      Le règlement est applicable à partir du vingt-cinq mai deux mille dix-huit.
+
+POINTS D'ATTENTION.
+
+Le règlement introduit une logique de responsabilité active ou accountability remplaçant les déclarations préalables.
+
+Le consentement doit être un acte positif clair et le silence ou les cases pré-cochées ne constituent pas un consentement valide.
+
+Les sous-traitants ont désormais des obligations directes et une responsabilité légale en cas de non-respect du règlement.
+
+Le mécanisme de guichet unique permet aux entreprises d'avoir un interlocuteur principal pour leurs traitements transfrontaliers.
+
+Le montant des sanctions administratives est considérablement augmenté pour devenir dissuasif.
+
+EXEMPLES CITES.
+
+Un nom ou un numéro d'identification ou des données de localisation sont des exemples d'identifiants.
+
+La case cochée lors de la consultation d'un site internet est un exemple d'acte positif clair pour le consentement.
+
+Les maladies cardiovasculaires et le cancer sont cités comme des domaines de recherche bénéficiant des registres.
+
+Le rejet automatique d'une demande de crédit en ligne est un exemple de décision fondée sur un traitement automatisé.
+
+Le suivi des épidémies et des catastrophes naturelles sont des exemples de motifs d'intérêt public.

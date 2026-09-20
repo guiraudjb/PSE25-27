@@ -1,0 +1,125 @@
+LES PRINCIPES DE LA GESTION RESEAU SOUS WINDOWS SERVER.
+
+LEXIQUE COMPLET.
+
+      Groupe de travail (Workgroup) : organisation reseau simple ou chaque ordinateur reste independant, gere ses propres comptes utilisateurs et sa propre securite, sans serveur central. Les machines communiquent en pair-a-pair (Peer to Peer).
+
+      Domaine Windows : architecture reseau centralisee administree par Windows Server, reposant sur un controleur de domaine, l'authentification centralisee, des strategies de securite et les services d'annuaire Active Directory.
+
+      Controleur de domaine (Domain Controller) : serveur Windows charge d'authentifier les utilisateurs, de gerer l'annuaire Active Directory et d'appliquer les politiques reseau (GPO).
+
+      Active Directory (AD) : base de donnees centralisee contenant les utilisateurs, les groupes, les ordinateurs, les imprimantes et les ressources reseau d'un domaine Windows.
+
+      GPO (Group Policy Objects) : strategies de groupe permettant de configurer automatiquement les postes, d'appliquer des regles de securite et de limiter certaines actions utilisateur a l'echelle du domaine.
+
+      Terminal Server / RDS (Remote Desktop Services) : technologie Windows Server permettant a plusieurs utilisateurs d'executer des applications ou un bureau Windows a distance. Seul l'affichage est transmis au client via le protocole RDP.
+
+      RDP (Remote Desktop Protocol) : protocole propriétaire Microsoft de bureau a distance utilise par les RDS (Remote Desktop Services), sur le port 3389 TCP.
+
+      NAS (Network Attached Storage) : serveur de stockage connecte directement au reseau, permettant le partage de fichiers, de sauvegardes et d'espaces collaboratifs via SMB/CIFS (Windows) ou NFS (Linux).
+
+      SAN (Storage Area Network) : reseau specialise dedie au stockage haute performance, ou les volumes de stockage sont vus comme des disques locaux par les serveurs. Technologies utilisees : Fibre Channel, iSCSI, FCoE.
+
+      Fibre Channel : technologie de reseau de stockage haute performance (SAN) utilisant des liaisons fibre optique pour des debits tres eleves et une faible latence.
+
+      iSCSI : protocole permettant de transporter les commandes SCSI de stockage sur un reseau IP Ethernet, alternative moins chere au Fibre Channel pour les SAN.
+
+      FCoE (Fibre Channel over Ethernet) : protocole encapsulant le Fibre Channel dans des trames Ethernet pour converger les reseaux de stockage et les reseaux de donnees.
+
+      Cluster (Failover Clustering) : ensemble de serveurs travaillant ensemble pour assurer la haute disponibilite, la tolerance de panne et la continuite de service. En cas de panne d'un noeud, un autre prend automatiquement le relais (basculement).
+
+      NLB (Network Load Balancing) : cluster d'equilibrage de charge repartissant les connexions entrantes entre plusieurs serveurs pour ameliorer les performances et la disponibilite.
+
+      SMB/CIFS : protocoles Windows de partage de fichiers sur le reseau, utilises par le NAS et les serveurs de fichiers Windows.
+
+      NFS (Network File System) : protocole de partage de fichiers sur le reseau utilise par les systemes Linux/Unix.
+
+COURS DETAILLE.
+
+I. GROUPE DE TRAVAIL ET DOMAINE WINDOWS.
+
+   A. Le groupe de travail.
+
+      Un groupe de travail est une organisation reseau simple dans laquelle chaque ordinateur reste independant. Chaque machine possede ses propres comptes utilisateurs, sa propre configuration et sa propre securite. Il n'existe pas de serveur central charge de gerer les utilisateurs ou les droits. Les ordinateurs communiquent en mode pair-a-pair (Peer to Peer) et chaque poste peut partager des fichiers, des imprimantes et autoriser ou refuser des acces.
+
+      Les avantages du groupe de travail sont sa mise en place simple, son faible cout et son adequation aux petits reseaux. Ses inconvenients sont une administration difficile, une gestion des comptes non centralisee, une securite limitee et une mauvaise evolutivite. Il est surtout utilise dans les petits bureaux, les reseaux domestiques et les environnements de test.
+
+   B. Le domaine Windows.
+
+      Un domaine est une architecture reseau centralisee administree par Windows Server. Il repose sur un controleur de domaine, l'authentification centralisee, des strategies de securite (GPO) et des services d'annuaire. Le service principal utilise est Active Directory. Les utilisateurs ouvrent une session grace a un compte stocke sur le serveur, qui controle les identifiants, les mots de passe, les droits d'acces et les politiques de securite.
+
+      Le controleur de domaine (Domain Controller) est le serveur charge d'authentifier les utilisateurs, de gerer l'annuaire et d'appliquer les politiques reseau. Active Directory est la base de donnees contenant les utilisateurs, les groupes, les ordinateurs, les imprimantes et les ressources reseau. Les GPO (Group Policy Objects) permettent de configurer automatiquement les postes, d'appliquer des regles de securite et de limiter certaines actions utilisateur.
+
+      Les avantages du domaine sont l'administration centralisee, la securite renforcee, la gestion simplifiee, le deploiement automatise et le controle des acces. Les inconvenients sont une infrastructure plus complexe, la necessite de serveurs dedies et une maintenance plus importante.
+
+II. TERMINAL SERVER ET REMOTE DESKTOP SERVICES.
+
+   A. Fonctionnement et protocole RDP.
+
+      Un Terminal Server (appele Remote Desktop Services dans les versions modernes de Windows Server) permet a plusieurs utilisateurs d'utiliser des applications ou un bureau Windows a distance. Les applications s'executent entierement sur le serveur et seul l'affichage est transmis au client. Le client envoie ses actions (clavier, souris, commandes) et le serveur renvoie l'affichage graphique et les resultats des traitements.
+
+      Le protocole principal utilise est RDP (Remote Desktop Protocol) sur le port 3389 TCP. Les avantages sont la centralisation des applications, la reduction des besoins materiels des postes clients, l'administration simplifiee et l'acces distant securise. Les inconvenients sont la forte dependance au serveur, la consommation importante de ressources serveur et la necessite d'une bonne bande passante.
+
+      Les cas d'usage sont le teletravail, l'administration distante, la virtualisation de postes et l'acces a des applications metiers depuis des postes legers.
+
+III. STOCKAGE RESEAU : NAS ET SAN.
+
+   A. Le NAS (Network Attached Storage).
+
+      Un NAS est un serveur de stockage connecte directement au reseau. Il permet de partager des fichiers, des sauvegardes, des documents et des espaces collaboratifs. Le NAS utilise generalement les protocoles SMB/CIFS sous Windows et NFS sous Linux/Unix. Les utilisateurs accedent aux fichiers via le reseau comme a un lecteur reseau partage.
+
+      Les avantages du NAS sont son installation simple, la mutualisation du stockage, les sauvegardes centralisees et un cout raisonnable. Ses inconvenients sont des performances inferieures a un SAN et une dependance au reseau Ethernet. Il est utilise pour le partage de fichiers, les sauvegardes, l'archivage et le stockage collaboratif.
+
+   B. Le SAN (Storage Area Network).
+
+      Un SAN est un reseau specialise dedie au stockage haute performance. Contrairement au NAS, le SAN fournit des volumes de stockage vus comme des disques locaux par les serveurs. Il utilise des technologies specialisees : Fibre Channel, iSCSI et FCoE. Les serveurs accedent directement aux unites de stockage.
+
+      Les avantages du SAN sont ses tres hautes performances, sa haute disponibilite, sa grande capacite et sa redondance avancee. Ses inconvenients sont un cout eleve, une administration complexe et une infrastructure specialisee. Il est utilise dans les datacenters, la virtualisation, les bases de donnees et les clusters de serveurs.
+
+IV. CLUSTER WINDOWS SERVER.
+
+   A. Definition et types de clusters.
+
+      Un cluster est un ensemble de serveurs travaillant ensemble pour assurer la haute disponibilite, la tolerance de panne et la continuite de service. Sous Windows Server, cette fonctionnalite est fournie par Failover Clustering. Plusieurs serveurs partagent des ressources, des applications et du stockage. Si un serveur tombe en panne, un autre prend automatiquement le relais. Ce mecanisme est appele basculement (Failover).
+
+      Il existe deux types de clusters. Le cluster de basculement assure la continuite de service en cas de panne. Le cluster d'equilibrage de charge (NLB) repartit les connexions entre plusieurs serveurs pour ameliorer les performances.
+
+   B. Conditions, avantages et inconvenients.
+
+      Un cluster necessite generalement plusieurs serveurs, un reseau fiable, un stockage partage et une synchronisation correcte entre les noeuds.
+
+      Les avantages sont la haute disponibilite, la reduction des interruptions de service, l'amelioration des performances et la facilite de maintenance (les interventions peuvent se faire sans interruption de service en faisant basculer sur un autre noeud). Les inconvenients sont la complexite technique, le cout materiel et la necessite d'une administration avancee.
+
+V. SYNTHESE COMPARATIVE DES TECHNOLOGIES.
+
+   A. Tableau comparatif.
+
+      Le groupe de travail assure un reseau simple sans gestion centralisee et sans haute disponibilite. Le domaine Windows assure l'administration reseau avec gestion centralisee (Oui) et haute disponibilite possible. Le Terminal Server (RDS) assure l'acces distant avec gestion centralisee (Oui) et haute disponibilite possible. Le NAS assure le partage de fichiers avec gestion centralisee partielle et haute disponibilite limitee. Le SAN assure le stockage haute performance avec gestion centralisee (Oui) et haute disponibilite (Oui). Le cluster assure la continuite de service avec gestion centralisee (Oui) et haute disponibilite (Oui).
+
+      La maitrise des notions de domaine, cluster, NAS, SAN et Terminal Server est indispensable pour administrer une infrastructure Windows professionnelle.
+
+POINTS D'ATTENTION.
+
+      Le groupe de travail ne convient pas aux entreprises de taille moyenne et grande : l'absence de gestion centralisee oblige a creer et a gerer les comptes utilisateurs independamment sur chaque machine.
+
+      Active Directory necessite un DNS fonctionnel : la panne du DNS dans un domaine Windows provoque une indisponibilite en chaine de l'authentification, des GPO et de l'ensemble des services dependants.
+
+      Le NAS utilise le reseau Ethernet commun : ses performances sont limitees par la bande passante du reseau et les acces concurrents. Le SAN utilise un reseau dedie (Fibre Channel ou iSCSI sur VLAN dedie) pour eviter la contention.
+
+      Les RDS (Remote Desktop Services) imposent des licences CAL (Client Access License) specifiques pour chaque utilisateur ou chaque appareil se connectant : le cout de licences peut etre significatif.
+
+      Le Failover Clustering requiert que les deux noeuds accedent au meme stockage partage (SAN ou iSCSI) : un NAS seul n'est generalement pas suffisant pour le clustering avance.
+
+      iSCSI permet de creer un SAN economique en utilisant le reseau Ethernet existant, mais necessite un VLAN dedie pour isoler le trafic de stockage du trafic de donnees.
+
+EXEMPLES CITES.
+
+      Un domaine Active Directory permet a un administrateur de definir une GPO interdisant l'acces aux parametres systeme sur tous les postes du domaine, sans intervention individuelle sur chaque machine.
+
+      Le Terminal Server permet a des agents en teletravail d'acceder a leur application metier (exemple : application RH ou comptabilite) depuis un poste leger via RDP, sans installer l'application en local.
+
+      Un NAS utilisant SMB/CIFS permet aux postes Windows d'un reseau d'acceder a un lecteur partage "Z:" heberge sur le serveur NAS.
+
+      Un SAN avec iSCSI est utilise dans un cluster Hyper-V pour que plusieurs hotes d'hyperviseur partagent le meme stockage, permettant la migration a chaud des machines virtuelles (Live Migration).
+
+      Le Failover Clustering Windows permet a deux serveurs de partager un role de serveur de fichiers : si le premier noeud tombe en panne, le second reprend le service en quelques secondes sans interruption perceptible par les utilisateurs.

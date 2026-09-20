@@ -1,0 +1,191 @@
+RÈGLEMENT (UE) 2022/2065 SUR LES SERVICES NUMÉRIQUES (DSA).
+
+LEXIQUE COMPLET.
+
+      Un service intermédiaire désigne un service de la société de l'information correspondant à des prestations de simple transport, de mise en cache ou d'hébergement.
+
+      Un contenu illicite correspond à toute information qui n'est pas conforme au droit de l'Union ou au droit d'un État membre, quel que soit l'objet précis ou la nature de ce droit.
+
+      Une plateforme en ligne est un service d'hébergement qui stocke et diffuse au public des informations à la demande d'un destinataire du service, sauf si cette diffusion est une caractéristique mineure et accessoire.
+
+      Un moteur de recherche en ligne est un service intermédiaire permettant d'effectuer des recherches sur des sites internet sur la base d'une requête et renvoyant des résultats sous quelque format que ce soit.
+
+      Une très grande plateforme en ligne ou un très grand moteur de recherche en ligne est un service comptant un nombre mensuel moyen de destinataires actifs dans l'Union égal ou supérieur à 45 millions.
+
+      Un signaleur de confiance est une entité indépendante disposant d'une expertise particulière pour détecter des contenus illicites et dont les notifications doivent être traitées en priorité par les plateformes.
+
+      La modération des contenus englobe les activités automatisées ou non destinées à détecter, identifier et lutter contre les contenus illicites ou incompatibles avec les conditions générales.
+
+      Un système de recommandation est un système automatisé utilisé pour suggérer ou hiérarchiser des informations spécifiques aux destinataires du service.
+
+COURS DÉTAILLÉ.
+
+I. DISPOSITIONS GÉNÉRALES ET CHAMP D'APPLICATION.
+
+   A. Objectifs et périmètre.
+
+      Le règlement vise à contribuer au bon fonctionnement du marché intérieur en établissant des règles harmonisées pour un environnement en ligne sûr, prévisible et fiable.
+
+      Il facilite l'innovation tout en protégeant efficacement les droits fondamentaux consacrés par la Charte, y compris la protection des consommateurs.
+
+      Le texte s'applique aux services intermédiaires proposés aux destinataires situés dans l'Union, quel que soit le lieu d'établissement des fournisseurs de ces services.
+
+      La notion de lien étroit avec l'Union est établie si le fournisseur a un établissement dans l'Union ou s'il cible ses activités vers un ou plusieurs États membres ou y compte un nombre significatif d'utilisateurs.
+
+   B. Définitions clés des services.
+
+      Le service de simple transport consiste à transmettre des informations sur un réseau de communication ou à fournir l'accès à ce réseau.
+
+      Le service de mise en cache implique le stockage automatique et temporaire d'informations pour rendre leur transmission ultérieure plus efficace.
+
+      Le service d'hébergement consiste à stocker des informations fournies par un destinataire du service à sa demande.
+
+II. RESPONSABILITÉ DES FOURNISSEURS DE SERVICES INTERMÉDIAIRES.
+
+   A. Exemption conditionnelle de responsabilité.
+
+      Le fournisseur de simple transport n'est pas responsable des informations transmises s'il n'est pas à l'origine de la transmission, ne sélectionne pas le destinataire et ne modifie pas les informations.
+
+      Le fournisseur de mise en cache n'est pas responsable s'il ne modifie pas l'information, respecte les conditions d'accès et agit promptement pour retirer l'information dès qu'il sait qu'elle a été retirée à la source.
+
+      Le fournisseur d'hébergement n'est pas responsable des informations stockées s'il n'a pas effectivement connaissance de leur caractère illicite ou si, dès qu'il en a connaissance, il agit promptement pour les retirer.
+
+      Cette exemption pour l'hébergement ne s'applique pas si le destinataire du service agit sous l'autorité ou le contrôle du fournisseur.
+
+      L'exemption ne s'applique pas non plus aux plateformes permettant de conclure des contrats à distance si elles présentent l'offre de manière à ce que le consommateur croie que le produit est fourni par la plateforme elle-même.
+
+   B. Absence d'obligation générale de surveillance.
+
+      Les fournisseurs ne sont soumis à aucune obligation générale de surveiller les informations qu'ils transmettent ou stockent, ni de rechercher activement des faits révélant des activités illégales.
+
+      Le fait de mener des enquêtes volontaires ou de prendre des mesures proactives pour détecter des contenus illicites ne prive pas les fournisseurs des exemptions de responsabilité prévues.
+
+III. OBLIGATIONS DE DILIGENCE APPLICABLES À TOUS LES INTERMÉDIAIRES.
+
+   A. Points de contact et représentation légale.
+
+      Les fournisseurs doivent désigner un point de contact unique pour communiquer avec les autorités des États membres, la Commission et le comité.
+
+      Ils doivent également désigner un point de contact pour les destinataires du service permettant une communication directe et rapide qui ne repose pas uniquement sur des outils automatisés.
+
+      Les fournisseurs établis hors de l'Union mais proposant des services dans l'Union doivent désigner un représentant légal dans l'un des États membres où ils opèrent.
+
+   B. Transparence et conditions générales.
+
+      Les conditions générales doivent inclure des informations sur les politiques et outils de modération des contenus, y compris la prise de décision algorithmique.
+
+      Ces conditions doivent être rédigées dans un langage clair, simple et intelligible, et les modifications importantes doivent être notifiées aux utilisateurs.
+
+      Les fournisseurs doivent publier au moins une fois par an des rapports de transparence sur leurs activités de modération, incluant le nombre d'injonctions reçues et les mesures prises.
+
+IV. OBLIGATIONS SUPPLÉMENTAIRES POUR LES HÉBERGEURS ET PLATEFORMES EN LIGNE.
+
+   A. Mécanismes de notification et d'action pour les hébergeurs.
+
+      Les hébergeurs doivent mettre en place des mécanismes faciles d'accès permettant de signaler des contenus illicites par voie électronique.
+
+      Les notifications doivent être traitées de manière diligente, non arbitraire et objective, et le fournisseur doit informer le notifiant de sa décision.
+
+      Si un hébergeur restreint l'accès à un contenu ou suspend un compte, il doit fournir un exposé des motifs clair et spécifique au destinataire concerné.
+
+      Les hébergeurs doivent informer promptement les autorités répressives s'ils soupçonnent une infraction pénale menaçant la vie ou la sécurité des personnes.
+
+   B. Obligations spécifiques aux plateformes en ligne.
+
+      Les plateformes doivent fournir un système interne de traitement des réclamations efficace et gratuit pendant au moins six mois après une décision de modération.
+
+      Les utilisateurs doivent avoir le droit de choisir un organe de règlement extrajudiciaire des litiges certifié pour résoudre les contestations relatives aux décisions de la plateforme.
+
+      Les plateformes doivent traiter en priorité les notifications soumises par des signaleurs de confiance certifiés par le coordinateur pour les services numériques.
+
+      Des mesures doivent être prises contre les utilisations abusives, notamment la suspension des services pour les utilisateurs fournissant fréquemment des contenus manifestement illicites.
+
+      Les interfaces ne doivent pas être conçues de manière à tromper ou manipuler les utilisateurs ou à entraver leur capacité à prendre des décisions libres, interdisant ainsi les interfaces trompeuses.
+
+      La publicité sur les plateformes doit être clairement identifiable, avec mention de la personne physique ou morale pour le compte de laquelle elle est présentée et de celle qui l'a payée.
+
+      Les systèmes de recommandation doivent être transparents, avec une explication des principaux paramètres utilisés pour suggérer des informations.
+
+      La protection des mineurs impose de ne pas présenter de publicités basées sur le profilage lorsqu'il est connu avec une certitude raisonnable que l'utilisateur est mineur.
+
+   C. Obligations pour les places de marché (contrats à distance).
+
+      Les plateformes permettant de conclure des contrats à distance doivent assurer la traçabilité des professionnels en collectant et vérifiant leurs informations d'identité et bancaires avant de les autoriser à utiliser le service.
+
+      Elles doivent concevoir leur interface pour permettre aux professionnels de respecter leurs obligations en matière d'information précontractuelle et de sécurité des produits.
+
+      Si la plateforme découvre qu'un produit illégal a été vendu, elle doit informer les consommateurs concernés de l'illégalité et des voies de recours.
+
+V. RÉGIME DES TRÈS GRANDES PLATEFORMES ET MOTEURS DE RECHERCHE (VLOP/VLOSE).
+
+   A. Désignation et gestion des risques systémiques.
+
+      Sont désignés comme très grandes plateformes ou très grands moteurs de recherche ceux qui atteignent 45 millions d'utilisateurs actifs mensuels dans l'Union.
+
+      Ces acteurs doivent évaluer annuellement les risques systémiques découlant de leurs services, tels que la diffusion de contenus illicites ou les effets négatifs sur les droits fondamentaux et le discours civique.
+
+      Ils doivent mettre en place des mesures d'atténuation proportionnées et efficaces pour répondre à ces risques, comme l'adaptation de la modération ou des systèmes algorithmiques.
+
+   B. Audit, transparence renforcée et crise.
+
+      Un audit indépendant doit être réalisé au moins une fois par an aux frais du fournisseur pour vérifier le respect des obligations.
+
+      Les systèmes de recommandation doivent proposer au moins une option qui ne repose pas sur le profilage.
+
+      Un registre public des publicités doit être maintenu, contenant des détails sur le contenu, l'annonceur et les paramètres de ciblage de chaque publicité pendant un an.
+
+      Un mécanisme de réaction aux crises permet à la Commission d'exiger des mesures spécifiques en cas de menace grave pour la sécurité ou la santé publique.
+
+      Une fonction de contrôle de la conformité indépendante doit être créée, avec un responsable rendant compte directement à l'organe de direction.
+
+      Une redevance de surveillance annuelle est perçue par la Commission pour couvrir les coûts liés à ses missions de surveillance.
+
+VI. GOUVERNANCE, SURVEILLANCE ET SANCTIONS.
+
+   A. Autorités compétentes et coordination.
+
+      Chaque État membre désigne un coordinateur pour les services numériques responsable de la surveillance et de l'exécution du règlement.
+
+      Les coordinateurs disposent de pouvoirs d'enquête, comme exiger des informations ou mener des inspections, et de pouvoirs d'exécution, comme imposer des amendes.
+
+      Le Comité européen des services numériques est un groupe consultatif indépendant composé des coordinateurs nationaux pour assister la Commission et assurer une application cohérente.
+
+   B. Rôle de la Commission et sanctions.
+
+      La Commission dispose de pouvoirs exclusifs pour surveiller et faire respecter les obligations spécifiques aux très grandes plateformes et très grands moteurs de recherche concernant les risques systémiques.
+
+      La Commission peut mener des inspections, demander des informations et imposer des mesures provisoires.
+
+      En cas de non-respect, la Commission peut infliger des amendes allant jusqu'à 6 % du chiffre d'affaires mondial annuel du fournisseur.
+
+      Des astreintes peuvent être imposées jusqu'à 5 % du chiffre d'affaires journalier moyen pour contraindre au respect des décisions.
+
+      Les destinataires du service ont le droit d'introduire une plainte auprès du coordinateur pour les services numériques contre les fournisseurs en cas d'infraction.
+
+POINTS D'ATTENTION.
+
+La surveillance est partagée entre les États membres et la Commission, cette dernière ayant la primauté sur les très grandes plateformes pour les obligations systémiques.
+
+Les microentreprises et petites entreprises sont exemptées de certaines obligations lourdes, notamment celles liées à la transparence approfondie et aux obligations spécifiques des plateformes en ligne.
+
+L'obligation de traçabilité des vendeurs (KYC) ne s'applique qu'aux plateformes permettant la conclusion de contrats à distance entre consommateurs et professionnels.
+
+Le règlement maintient le principe de l'absence de responsabilité pour les intermédiaires passifs mais introduit des obligations de diligence strictes.
+
+Les chercheurs agréés peuvent obtenir l'accès aux données des très grandes plateformes pour étudier les risques systémiques.
+
+EXEMPLES CITES.
+
+Un service de simple transport transmet des informations sur un réseau de communication.
+
+Un service de mise en cache stocke temporairement des données pour optimiser la transmission.
+
+Un service d'hébergement stocke des informations à la demande d'un utilisateur.
+
+Une plateforme en ligne diffuse publiquement des informations stockées, comme un réseau social.
+
+Un moteur de recherche permet d'effectuer des requêtes par mots-clés sur des sites internet.
+
+Un contenu illicite peut inclure la vente de produits contrefaits ou des discours haineux illégaux.
+
+Une interface trompeuse rend la désinscription plus difficile que l'inscription.

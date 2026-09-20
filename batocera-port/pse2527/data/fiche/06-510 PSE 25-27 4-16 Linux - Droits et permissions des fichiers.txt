@@ -1,0 +1,99 @@
+DROITS ET PERMISSIONS DES FICHIERS SOUS LINUX.
+
+LEXIQUE COMPLET.
+
+      Droits UGO : systeme de permissions Linux associant a chaque fichier trois categories d'utilisateurs : U (User, le proprietaire), G (Group, le groupe proprietaire) et O (Other, tous les autres utilisateurs). Pour chaque categorie, trois permissions sont definissables : r (Read), w (Write) et x (eXecution).
+
+      Permission r (Read = 4) : droit de lecture. Pour un fichier, autorise la lecture de son contenu. Pour un repertoire, autorise le listage de son contenu (ls).
+
+      Permission w (Write = 2) : droit d'ecriture. Pour un fichier, autorise la modification de son contenu. Pour un repertoire, autorise l'ajout et la suppression de fichiers dans le repertoire.
+
+      Permission x (eXecution = 1) : droit d'execution. Pour un fichier, autorise son execution comme programme. Pour un repertoire, autorise le parcours au travers du repertoire (cd).
+
+      Notation octale : representation numerique des permissions Linux. r = 4, w = 2, x = 1, aucun droit = 0. Les valeurs sont additionnees pour chaque categorie : rwx = 7, rw- = 6, r-x = 5, r-- = 4. Les trois chiffres UGO sont concatenes (exemple : 755 = rwxr-xr-x).
+
+      Umask : valeur de masque definissant les permissions par defaut retirees lors de la creation de fichiers et de repertoires. Fichiers ordinaires : 666 - umask. Repertoires : 777 - umask. Un umask de 022 donne des fichiers en 644 et des repertoires en 755.
+
+      chmod : commande Linux de modification des permissions d'un fichier ou d'un repertoire. Syntaxe symbolique : "chmod u+x fichier". Syntaxe octale : "chmod 755 fichier".
+
+      chown : commande Linux de modification du proprietaire et du groupe d'un fichier. Syntaxe : "chown user:groupe fichier".
+
+      SUID (Set User ID) : bit special (notation octale 4xxx) faisant s'executer un programme avec les droits du proprietaire du programme plutot qu'avec ceux de l'utilisateur qui le lance. Affichage : "s" remplace le "x" a la position U (exemple : -rws-----).
+
+      SGID (Set Group ID) : bit special (notation octale 2xxx) faisant s'executer un programme avec les droits du groupe proprietaire. Sur un repertoire, les fichiers crees a l'interieur heritent automatiquement du groupe du repertoire. Affichage : "s" remplace le "x" a la position G (exemple : -r--rws---).
+
+      Sticky Bit : bit special (notation octale 1xxx) applique sur un repertoire : seul le proprietaire d'un fichier peut le supprimer dans ce repertoire, meme si d'autres utilisateurs ont le droit w sur le repertoire. Affichage : "t" remplace le "x" a la position O (exemple : -rwxrwxrwt). Le repertoire /tmp/ en est l'exemple classique.
+
+      ACL (Access Control List) : mecanisme de controle d'acces etendant le systeme UGO en permettant de definir des permissions specifiques pour n'importe quel utilisateur ou groupe, independamment du proprietaire et du groupe du fichier. Necessite le montage du systeme de fichiers avec "mount -o acl".
+
+      getfacl : commande Linux affichant les ACL d'un fichier ou d'un repertoire.
+
+      setfacl : commande Linux modifiant les ACL d'un fichier ou d'un repertoire. L'option -m modifie ou ajoute une ACL, -x supprime une entree ACL, -b supprime toutes les ACL, -d definit une ACL par defaut sur un repertoire.
+
+      stat : commande Linux affichant l'integralite des informations d'un fichier (type, taille, permissions, proprietaire, dates d'acces et de modification).
+
+COURS DETAILLE.
+
+I. LES FICHIERS ET LEUR TYPE SOUS LINUX.
+
+   A. Principe "tout est fichier".
+
+      Sous Linux, tout est fichier : les fichiers ordinaires, les dossiers, les liens symboliques et les peripheriques sont tous representes comme des fichiers dans l'arborescence. Les fichiers peuvent etre de differents types. La commande "ls -l" affiche les informations statistiques sur les fichiers, notamment le type represente par le premier caractere de la ligne. Le tiret "-" designe un fichier ordinaire. La lettre "d" designe un dossier (directory). La lettre "l" designe un lien symbolique. La lettre "c" designe un peripherique de type caractere. La lettre "b" designe un peripherique de type bloc. La commande "stat <nom_fichier>" affiche l'integralite des informations d'un fichier : type, taille, permissions, proprietaire, groupe et dates d'acces et de modification.
+
+II. DROITS UGO ET NOTATION OCTALE.
+
+   A. Proprietaires, groupes et permissions de base.
+
+      Chaque fichier Linux est associe a trois entites : un proprietaire (U pour User), un groupe (G pour Group) et les autres utilisateurs (O pour Other). Pour chaque entite, trois permissions sont definissables. La permission r (Read, valeur 4) autorise la lecture d'un fichier ou le listage d'un repertoire. La permission w (Write, valeur 2) autorise l'ecriture dans un fichier ou l'ajout et la suppression de fichiers dans un repertoire. La permission x (eXecution, valeur 1) autorise l'execution d'un fichier ou le parcours au travers d'un repertoire (commande cd). Un droit absent est represente par un tiret.
+
+      La notation octale associe une valeur numerique a chaque permission : r = 4, w = 2, x = 1, aucun droit = 0. Les valeurs sont additionnees : rwx = 4+2+1 = 7, rw- = 4+2+0 = 6, r-x = 4+0+1 = 5, r-- = 4+0+0 = 4. Les trois valeurs U, G, O sont concatenees pour obtenir la valeur octale globale. Un fichier avec les droits "rwx r-- -wx" a pour valeur octale globale 7 4 3.
+
+      L'umask definit les permissions par defaut retirees lors de la creation de fichiers et de repertoires. Pour les fichiers ordinaires, les droits par defaut sont calcules par 666 - umask. Pour les repertoires, ils sont calcules par 777 - umask. Un umask de 022 donne des fichiers en 644 (rw-r--r--) et des repertoires en 755 (rwxr-xr-x). Un umask de 027 donne des fichiers en 640 (rw-r-----).
+
+   B. Modification des permissions et du proprietaire.
+
+      La modification des permissions s'effectue via la commande "chmod". En notation symbolique, on utilise les lettres u (user), g (groupe), o (other) et a (all = user + groupe + other), avec "+" pour ajouter un droit et "-" pour le supprimer. La commande "chmod g+x mon_fichier" ajoute le droit d'execution au groupe proprietaire du fichier. La commande "chmod u-w mon_fichier" supprime le droit d'ecriture au proprietaire. En notation octale, "chmod 755 mon_fichier" definit les droits rwxr-xr-x.
+
+      La commande "chown identifiant_user:identifiant_group mon_fichier" modifie simultanément le proprietaire et le groupe d'appartenance d'un fichier.
+
+III. DROITS ETENDUS ET ACL.
+
+   A. Les trois bits speciaux.
+
+      Des droits etendus ont ete ajoutes au systeme UGO/RWX historique pour ameliorer la flexibilite de la gestion des droits. Il existe trois bits speciaux.
+
+      Le SUID (Set User ID, notation octale 4xxx) fait s'executer un programme avec les droits du proprietaire du programme, et non avec ceux de l'utilisateur qui le lance. L'exemple canonique est la commande "passwd" : elle a besoin des droits root pour modifier le fichier /etc/shadow (normalement reserve a root), mais doit pouvoir etre executee par n'importe quel utilisateur. Dans "ls -l", un "s" remplace le "x" a la position U (exemple : -rws-----). La permission -rwsr-xr-x signifie que le fichier possede le SUID et que le programme s'execute avec les droits du proprietaire.
+
+      Le SGID (Set Group ID, notation octale 2xxx) fait s'executer un programme avec les droits du groupe proprietaire du programme. Sur un repertoire, le SGID fait heriter aux fichiers crees a l'interieur le groupe du repertoire plutot que le groupe principal de l'utilisateur createur. La commande "chmod 2755 dossier" active le SGID : les fichiers crees dans le dossier heritent du groupe du repertoire. Dans "ls -l", un "s" remplace le "x" a la position G (exemple : -r--rws---).
+
+      Le Sticky Bit (notation octale 1xxx) applique sur un repertoire empeche les utilisateurs de supprimer ou de renommer des fichiers appartenant a d'autres utilisateurs, meme s'ils ont le droit w sur le repertoire. Seul le proprietaire d'un fichier peut le supprimer dans ce repertoire. Le repertoire /tmp/ en est l'exemple classique, accessible en ecriture par tous mais sans qu'un utilisateur puisse supprimer les fichiers des autres. Dans "ls -l", un "t" remplace le "x" a la position O (exemple : -rwxrwxrwt). La commande "chmod +t dossier" ou "chmod 1777 dossier" active le sticky bit.
+
+   B. Les ACL (Access Control Lists).
+
+      Les ACL permettent de prolonger encore plus la gestion des droits en definissant des permissions specifiques pour n'importe quel utilisateur ou groupe, independamment du proprietaire et du groupe du fichier. Elles doivent etre activees lors du montage du systeme de fichiers avec "mount -o acl".
+
+      La commande "getfacl mon_fichier" affiche les ACL parametrees. La commande "setfacl mon_fichier -m u:mon_user:x" ajoute le droit d'execution (x) a l'utilisateur mon_user sur mon_fichier. La commande "setfacl -m u:alice:rw fichier" donne la lecture et l'ecriture a alice via ACL. La commande "setfacl -x fichier" supprime une entree ACL. La commande "setfacl -b fichier" supprime toutes les ACL du fichier. La commande "setfacl -d -m u:alice:rw dossier" ajoute une ACL par defaut sur un dossier (les fichiers crees dans le dossier heriteront de cette ACL). Quand des ACL sont parametrees, la commande "ls -l" affiche un "+" en fin de la ligne de permissions (exemple : rwxrwx-rwx+ mon_fichier).
+
+POINTS D'ATTENTION.
+
+      La permission x sur un repertoire est necessaire pour le traverser avec "cd" : sans elle, meme un utilisateur avec les droits r et w sur un repertoire ne peut pas entrer dedans ni acceder aux fichiers qu'il contient.
+
+      Le SUID sur un script shell est ignore par le noyau Linux pour des raisons de securite : le SUID n'est efficace que sur les binaires compiles (ELF), pas sur les scripts.
+
+      Le SGID sur un repertoire est tres utile pour les repertoires partages entre membres d'un groupe : tous les fichiers crees heritent du groupe du repertoire, garantissant que les autres membres du groupe peuvent y acceder selon les permissions definies.
+
+      Un umask de 027 retire toutes les permissions a "Other" : les fichiers crees (640) ne peuvent pas etre lus par les autres utilisateurs, ce qui est une bonne pratique de securite pour les fichiers de configuration sensibles.
+
+      Les ACL doivent etre prises en compte dans l'ordre : si les permissions UGO autorisent l'acces mais qu'une ACL le refuse, c'est l'ACL qui prend le dessus pour l'utilisateur concerne. La commande "getfacl" est indispensable pour comprendre le comportement reel des permissions quand des ACL sont presentes.
+
+EXEMPLES CITES.
+
+      La commande "passwd" possede le SUID (affichage : -rwsr-xr-x) pour pouvoir modifier le fichier /etc/shadow reserve a root, bien qu'elle soit executee par des utilisateurs ordinaires.
+
+      Le repertoire /tmp/ possede le sticky bit (affichage : drwxrwxrwt) : tout utilisateur peut y creer des fichiers, mais seul le proprietaire d'un fichier peut le supprimer, evitant les suppressions accidentelles ou malveillantes des fichiers des autres.
+
+      Un fichier avec les droits "rwx r-- -wx" a pour valeur octale globale 7 4 3 : le proprietaire a rwx, le groupe a r--, les autres ont -wx.
+
+      La commande "setfacl -m u:alice:rw fichier" donne a l'utilisateur alice les droits de lecture et d'ecriture via ACL sur le fichier, independamment des permissions UGO et du groupe du fichier.
+
+      Un umask de 027 applique a la creation d'un fichier ordinaire donne les droits 640 (rw-r-----) : 666 - 027 = 640. Le proprietaire peut lire et ecrire, le groupe peut lire, les autres n'ont aucun droit.

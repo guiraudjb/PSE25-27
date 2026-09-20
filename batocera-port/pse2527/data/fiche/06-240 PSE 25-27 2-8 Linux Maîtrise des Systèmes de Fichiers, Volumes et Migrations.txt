@@ -1,0 +1,195 @@
+LINUX : CAS PRATIQUE INCIDENT ET MIGRATION.
+
+LEXIQUE COMPLET.
+
+      Le Noyau est la couche logicielle la plus basse du système d'exploitation agissant comme intermédiaire obligatoire entre le matériel et les applications.
+
+      L'architecture Monolithique Modulaire est une architecture où l'essentiel des fonctionnalités réside dans le noyau tout en permettant le chargement dynamique de modules.
+
+      Un Processus est la représentation interne d'un programme en cours d'exécution contenant son identifiant PID et son état.
+
+      L'Ordonnanceur est le composant du noyau déterminant quel processus accède au processeur et pour combien de temps.
+
+      Le Swappiness est un paramètre du noyau influençant sa propension à transférer des pages mémoire vers l'espace de swap.
+
+      SNMP est le protocole Simple Network Management Protocol permettant d'interroger un système distant.
+
+      Une MIB est une Management Information Base qui constitue une base de données hiérarchisée des composants systèmes.
+
+      Le SGF est le Système de Gestion des Fichiers assurant le lien entre le stockage physique et les applications.
+
+      FHS est le Filesystem Hierarchy Standard définissant la norme de localisation des répertoires sous Linux.
+
+      Le Superbloc est une structure interne contenant les informations globales du système de fichiers comme la taille ou l'état.
+
+      Un Inode est une structure représentant l'identité réelle d'un fichier et contenant ses métadonnées mais pas son nom.
+
+      LVM est le Logical Volume Manager qui crée une couche d'abstraction logicielle entre le matériel et les systèmes de fichiers.
+
+      Un Extent est une unité de données manipulée par LVM lors des migrations de volumes physiques.
+
+      SAN signifie Storage Area Network et désigne un réseau de stockage indépendant utilisant généralement la fibre optique.
+
+      NAS signifie Network Attached Storage et désigne un stockage présentant des volumes via le réseau Ethernet classique.
+
+      WWN est le World Wide Name et correspond à l'identifiant unique d'un port Fibre Channel.
+
+      Le Zoning est l'opération de création de zones de communication sécurisées au sein d'un réseau SAN.
+
+      Le LUN Mapping est le découpage des disques physiques d'une baie en unités logiques.
+
+      Le Masking est l'autorisation donnée à un serveur spécifique d'accéder à une unité logique.
+
+COURS DÉTAILLÉ.
+
+I. LE DIAGNOSTIC SUR INCIDENT.
+
+   A. LE RÔLE FONDAMENTAL DU NOYAU.
+
+      Le noyau Linux assure la cohérence globale du système en orchestrant l'accès aux ressources et en garantissant l'isolation des applications.
+
+      Son architecture est monolithique modulaire car elle intègre les fonctions vitales directement dans le noyau tout en permettant le chargement dynamique de modules stockés dans l'arborescence spécifique des bibliothèques.
+
+      Les responsabilités critiques du noyau incluent l'ordonnancement des processus, la gestion de la mémoire, les entrées et sorties ainsi que la communication réseau.
+
+   B. LA SUPERVISION DES PROCESSUS.
+
+      Chaque programme est un processus identifié par un PID et possédant un état tel que en exécution, en attente ou endormi.
+
+      L'ordonnanceur vise à équilibrer équité et réactivité en s'appuyant sur des priorités modifiables par l'administrateur.
+
+      L'observation de la charge CPU doit être interprétée avec précaution car une charge élevée n'est pas nécessairement un dysfonctionnement mais peut refléter une activité légitime.
+
+   C. SUPERVISION DE LA MÉMOIRE.
+
+      Le noyau gère la mémoire de manière opportuniste en utilisant la mémoire libre pour le cache disque afin d'accélérer les accès.
+
+      L'espace de swap permet de transférer des pages mémoire sur le disque lorsque la RAM est insuffisante mais cela peut ralentir le système.
+
+      Le paramètre swappiness règle la sensibilité du noyau à utiliser le swap et son mauvais réglage peut dégrader les performances.
+
+      La supervision s'effectue via des commandes systèmes ou via le protocole SNMP qui interroge les bases d'informations de gestion MIB.
+
+II. LE SYSTÈME DE GESTION DES FICHIERS (SGF).
+
+   A. CONCEPTS GÉNÉRAUX ET ARBORESCENCE.
+
+      Le SGF transforme le stockage physique en structure logique et garantit la persistance des données selon la philosophie Unix où tout est fichier.
+
+      L'arborescence suit le standard FHS qui normalise la localisation des fichiers de configuration, des binaires et des journaux pour faciliter la maintenance.
+
+   B. MÉCANISMES INTERNES.
+
+      Le superbloc contient les informations vitales du système de fichiers et sa corruption rend le système inutilisable.
+
+      L'inode contient les métadonnées comme les droits et le propriétaire et constitue l'identité réelle du fichier indépendamment de son nom.
+
+      Les blocs de données stockent le contenu effectif et leur taille influence la performance et l'occupation disque.
+
+   C. TYPOLOGIE ET SATURATION.
+
+      Il existe plusieurs types de fichiers identifiés par des symboles spécifiques comme les répertoires, les liens ou les périphériques.
+
+      La saturation peut survenir par manque d'espace disque ou par épuisement des inodes disponibles.
+
+      Une saturation en inodes empêche la création de nouveaux fichiers même si de l'espace disque reste libre, ce qui est fréquent avec une multitude de petits fichiers.
+
+III. CRÉATION ET PARAMÉTRAGE DES SYSTÈMES DE FICHIERS.
+
+   A. CRÉATION ET CHOIX DU SYSTÈME DE FICHIERS.
+
+      La création implique des choix structurants comme la taille des blocs et le type de système de fichiers en fonction du profil applicatif.
+
+      Certains systèmes de fichiers sont plus adaptés à la gestion de très gros fichiers tandis que d'autres gèrent mieux les petits fichiers.
+
+   B. LE LVM OU LOGICAL VOLUME MANAGER.
+
+      Le LVM introduit une abstraction entre le matériel et le système de fichiers permettant de dissocier la gestion logique de la réalité physique.
+
+      Il se compose de Volumes Physiques PV, de Groupes de Volumes VG et de Volumes Logiques LV.
+
+      Cette technologie permet des opérations à chaud comme l'extension de volume ou la migration de données sans interruption de service.
+
+IV. CAS PRATIQUE D'UNE MIGRATION DE DONNÉES.
+
+   A. MIGRATION AVEC LE LVM.
+
+      Cette méthode utilise la commande pvmove pour déplacer les données au niveau des extents physiques sans démonter les systèmes de fichiers.
+
+      L'opération commence par une analyse de l'existant pour vérifier l'espace libre disponible sur le groupe de volumes.
+
+      Le nouveau support est intégré au groupe de volumes avant de lancer le déplacement des données qui est transparent pour les applications.
+
+      Une fois la migration terminée, l'ancien support physique est retiré du groupe de volumes.
+
+   B. MIGRATION SANS LVM AVEC RSYNC.
+
+      Cette approche est nécessaire lorsque le stockage n'est pas géré par LVM ou pour changer de système de fichiers.
+
+      L'outil rsync réalise une copie logique fichier par fichier en ne transférant que les différences.
+
+      Une première synchronisation est effectuée à chaud pour copier la majorité des données tout en préservant les attributs.
+
+      Une synchronisation finale est réalisée service coupé avec une option de suppression pour garantir la stricte correspondance entre source et cible.
+
+   C. COMPARAISON DES APPROCHES.
+
+      La migration LVM est idéale pour la continuité de service lors de remplacements matériels transparents.
+
+      La migration rsync est indispensable pour les restructurations logiques ou les changements de type de système de fichiers.
+
+V. POUR ÉLARGIR VERS LE STOCKAGE SAN ET NAS.
+
+   A. LE STOCKAGE SAN.
+
+      Le SAN repose sur un réseau Fibre Channel dédié où chaque port est identifié par un World Wide Name unique.
+
+      Le zoning permet de définir des chemins et de créer des zones de communication sécurisées.
+
+      Le LUN mapping et le masking permettent de découper et d'attribuer des volumes logiques aux serveurs.
+
+      Cette technologie offre des performances élevées adaptées aux bases de données et à la virtualisation.
+
+   B. LE STOCKAGE NAS.
+
+      Le NAS utilise le réseau Ethernet classique et les protocoles TCP IP pour présenter des volumes.
+
+      Il s'appuie sur des protocoles de partage de fichiers comme NFS pour Linux ou CIFS pour Windows.
+
+      Il facilite le partage collaboratif et la gestion des droits utilisateurs via les annuaires.
+
+   C. COMPARAISON TECHNIQUE.
+
+      Le SAN évolue sur une couche basse du modèle OSI et offre des performances de type bloc disque local.
+
+      Le NAS évolue sur une couche supérieure et offre une administration simplifiée mais des performances dépendantes du réseau Ethernet.
+
+POINTS D'ATTENTION.
+
+      Une charge CPU élevée ne doit jamais être interprétée isolément sans analyser les entrées sorties et la mémoire.
+
+      La saturation en inodes est un risque majeur sur les serveurs hébergeant beaucoup de petits fichiers comme des logs.
+
+      L'option delete de la commande rsync est irréversible et supprime les données sur la destination si elles sont absentes de la source.
+
+      Le réglage du swappiness doit être adapté car une valeur incorrecte peut nuire aux performances des bases de données.
+
+      La migration par pvmove ne permet pas de changer le type de système de fichiers contrairement à rsync.
+
+EXEMPLES CITES.
+
+      La commande uname permet de connaître la version du noyau.
+
+      Le répertoire des modules se trouve dans lib modules.
+
+      Le fichier de réglage du swap est proc sys vm swappiness.
+
+      Les commandes de supervision LVM sont pvs vgs et lvs.
+
+      La commande de migration LVM est pvmove.
+
+      La commande de synchronisation est rsync avec les options archive et delete.
+
+      Le système de fichiers xfs est cité pour la gestion de gros fichiers cartographiques.
+
+      Les constructeurs de baies cités sont Hitachi Dell Purestorage et Netapp.

@@ -12,6 +12,7 @@ cache sur le disque ; les lectures suivantes du même contenu sont instantanées
 import os
 import subprocess
 import threading
+import wave
 import pygame
 
 GAME_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -44,6 +45,33 @@ class TTSManager:
         self.current_key = None   # dernier contenu demandé par l'utilisateur
         self.channel = None
         self.status = STATUS_IDLE if self.enabled else STATUS_UNAVAILABLE
+
+    def cached_duration(self, cache_key):
+        """Durée en secondes du fichier déjà en cache pour `cache_key`, ou
+        None s'il n'existe pas encore (rien à ajuster dans ce cas : sans
+        fichier en cache il n'y a pas de lecture automatique - voir
+        play_if_cached - donc pas de minuteur à étendre)."""
+        path = _cache_path(cache_key)
+        if not os.path.exists(path):
+            return None
+        try:
+            with wave.open(path, 'rb') as w:
+                return w.getnframes() / float(w.getframerate())
+        except (wave.Error, EOFError, OSError):
+            return None
+
+    def play_if_cached(self, text, cache_key):
+        """Comme request(), mais sans jamais déclencher de génération à la
+        volée : lit immédiatement si l'audio est déjà pré-généré, sinon ne
+        fait rien. Utilisée pour la lecture automatique à l'affichage d'une
+        question/carte - l'utilisateur garde request() (touche Écouter) pour
+        forcer la génération Piper à la demande si rien n'est en cache."""
+        if not self.enabled or not text:
+            return
+        path = _cache_path(cache_key)
+        if os.path.exists(path):
+            self.current_key = cache_key
+            self._play(path)
 
     def request(self, text, cache_key):
         """Demande la lecture de `text`, identifié de façon stable par

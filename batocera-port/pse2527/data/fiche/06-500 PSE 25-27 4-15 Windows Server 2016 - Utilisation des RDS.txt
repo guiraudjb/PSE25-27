@@ -1,0 +1,117 @@
+COMMUNICATION SOUS WINDOWS SERVER 2016 : UTILISATION DES SERVICES RDS.
+
+LEXIQUE COMPLET.
+
+      RDS (Remote Desktop Services) : services Bureau a distance de Windows Server permettant aux utilisateurs d'acceder a distance a un bureau Windows, a des applications ou a des ressources hebergees sur un serveur, depuis n'importe quel poste ou peripherique mobile. RDS est l'une des principales solutions de virtualisation de sessions de Microsoft.
+
+      RDP (Remote Desktop Protocol) : protocole proprietaire Microsoft utilise par RDS pour transmettre l'affichage graphique, les mouvements de souris, les frappes clavier, le son et les peripheriques rediriges entre le client et le serveur. Ports utilises : TCP 3389 et UDP 3389 (optimisation des performances).
+
+      RD Session Host (RDSH) : composant RDS hebergeant les sessions utilisateurs. Il execute les applications, gere les bureaux distants et gere les ressources systeme.
+
+      RD Connection Broker : gestionnaire de connexions RDS assurant la repartition des utilisateurs entre les serveurs Session Host, la reconnexion aux sessions existantes et l'equilibrage de charge.
+
+      RD Web Access : composant RDS permettant l'acces aux ressources et aux applications RemoteApp via un navigateur web, sans installation du client RDP.
+
+      RD Gateway : composant RDS assurant l'acces securise depuis Internet via SSL/TLS. Il evite l'exposition directe du port 3389 sur Internet et ne necessite pas de VPN. Flux : Internet vers RD Gateway vers Serveur RDS.
+
+      RD Licensing : composant RDS gerant les licences d'acces client (CAL/TS). La configuration de la gestion des licences est imperative pour que le serveur RDS continue d'accepter les connexions des clients. Types de licences : par utilisateur ou par peripherique.
+
+      RemoteApp : fonctionnalite RDS permettant de publier une application qui s'execute sur le serveur mais apparait localement sur le poste client comme si elle etait installee en local. Seule l'application est affichee, pas le bureau complet du serveur.
+
+      NLA (Network Level Authentication) : mecanisme de securite RDS imposant l'authentification AVANT l'ouverture de la session Windows. Avantages : limitation des attaques, reduction de la consommation de ressources serveur.
+
+      PowerShell Remoting : fonctionnalite PowerShell permettant d'administrer plusieurs serveurs a distance via la commande "Enter-PSSession". Avantages : automatisation et administration centralisee.
+
+      Virtualisation de sessions : principe RDS dans lequel plusieurs utilisateurs partagent les ressources d'un meme serveur, chacun disposant de sa propre session isolee.
+
+      CAL TS (Client Access License Terminal Server) : licence d'acces client obligatoire pour chaque utilisateur ou peripherique se connectant a un serveur RDS au-dela de la periode de grace de 120 jours.
+
+      Kerberos : protocole d'authentification reseau utilise par Active Directory pour verifier l'identite des utilisateurs dans les environnements Windows, utilise par RDS pour l'authentification des sessions.
+
+      NTLM (NT LAN Manager) : protocole d'authentification Windows utilise en complement de Kerberos pour les environnements sans Active Directory ou pour les acces compatibilite.
+
+COURS DETAILLE.
+
+I. COMMUNICATION RESEAU ET SERVICES RDS.
+
+   A. Principes de communication reseau sous Windows Server.
+
+      La communication reseau designe l'ensemble des mecanismes autorisant les ordinateurs, les serveurs, les applications et les utilisateurs a echanger des donnees. Sous Windows Server 2016, ces echanges permettent l'acces aux ressources partagees, l'authentification des utilisateurs, l'acces a Internet, l'administration a distance et l'hebergement d'applications et de services. Windows Server s'appuie sur la suite de protocoles TCP/IP, qui assure l'adressage, le routage, le transport des donnees et la fiabilite des echanges.
+
+   B. Fonctionnement general des services RDS.
+
+      RDS (Remote Desktop Services) permet aux utilisateurs de se connecter a leur environnement de travail depuis un poste distant, d'executer des applications installees sur le serveur, d'acceder a leurs fichiers et ressources reseau, et d'administrer des serveurs a distance. RDS constitue l'une des principales solutions de virtualisation de sessions de Microsoft.
+
+      Contrairement a un acces distant classique, l'application ne s'execute pas sur le poste client mais entierement sur le serveur. Le client recoit uniquement l'affichage, les informations graphiques et les resultats des traitements. Les avantages sont la centralisation des applications, la simplification de l'administration, la reduction des couts materiels des postes clients et l'acces depuis n'importe quel poste. Les usages principaux sont le teletravail, l'administration distante, la virtualisation de postes et l'acces a des applications metiers depuis des postes legers.
+
+      Pour qu'une connexion RDS soit possible, l'ordinateur cible doit etre allume, dispose d'une connexion reseau, avoir le Bureau a distance active, et l'administrateur doit disposer des autorisations necessaires.
+
+II. PROTOCOLE RDP ET COMPOSANTS RDS.
+
+   A. Le protocole RDP.
+
+      Les services RDS reposent sur le protocole RDP (Remote Desktop Protocol) developpe par Microsoft. RDP transmet l'affichage graphique, les mouvements de souris, les frappes clavier, le son et les peripheriques rediriges. L'architecture est simple : le client envoie les actions utilisateur, le serveur renvoie l'affichage mis a jour. Par defaut, RDP utilise le port TCP 3389 pour les connexions et le port UDP 3389 pour l'optimisation des performances.
+
+   B. Les cinq composants RDS sous Windows Server 2016.
+
+      RD Session Host (RDSH) est le serveur hebergeant les sessions utilisateurs. Il execute les applications, gere les bureaux distants et gere les ressources systeme. C'est le composant central d'une infrastructure RDS.
+
+      RD Connection Broker est le gestionnaire de connexions. Il assure la repartition des utilisateurs entre les serveurs Session Host, la reconnexion automatique aux sessions existantes apres une deconnexion, et l'equilibrage de charge.
+
+      RD Web Access permet l'acces aux ressources et aux applications RemoteApp via un simple navigateur web. Le flux est : navigateur vers RD Web Access vers applications ou bureaux distants.
+
+      RD Gateway assure l'acces securise depuis Internet. Ses avantages sont le chiffrement SSL/TLS, l'absence de VPN obligatoire pour les utilisateurs et le controle des acces. Il evite d'exposer directement le port 3389 sur Internet. Le flux est : Internet vers RD Gateway vers Serveur RDS.
+
+      RD Licensing gere les licences d'acces client TS. Deux types de licences existent : par utilisateur ou par peripherique. La configuration de la gestion des licences est imperative pour que le serveur RDS continue d'accepter les connexions au-dela de la periode de grace.
+
+III. DEPLOIEMENT, REMOTAPP ET SECURITE RDS.
+
+   A. Deploiement et RemoteApp.
+
+      L'installation RDS se fait depuis le Gestionnaire de serveur (Ajouter des roles et fonctionnalites puis Services Bureau a distance). Deux modes de deploiement existent. Le deploiement rapide installe automatiquement sur un seul serveur les composants Broker, Web Access et Session Host : adapte aux petits environnements. Le deploiement standard est utilise en production et permet de gerer plusieurs serveurs, la haute disponibilite et la montee en charge.
+
+      RemoteApp permet de publier une application qui s'execute sur le serveur mais apparait localement sur le poste client comme si elle etait installee en local. L'utilisateur ne voit pas le bureau complet du serveur, seule l'application est affichee. Exemple : Microsoft Word s'execute sur le serveur et s'affiche sur le poste client. Les avantages sont une meilleure experience utilisateur, la reduction de la bande passante consommee et la centralisation des mises a jour.
+
+   B. Securite des services RDS.
+
+      Les utilisateurs doivent disposer d'un compte Active Directory et appartenir aux groupes autorises. NLA (Network Level Authentication) impose l'authentification avant l'ouverture de la session Windows, limitant les attaques et reduisant la consommation de ressources serveur. Les communications RDP sont chiffrees via SSL/TLS ou des certificats d'entreprise. RD Gateway securise les acces externes en evitant l'exposition directe du port 3389 sur Internet. Les protocoles Kerberos et NTLM sont utilises pour l'authentification dans les environnements Active Directory.
+
+      L'administrateur peut afficher les sessions actives, deconnecter un utilisateur, fermer une session bloquee et surveiller la consommation des ressources via le Gestionnaire de serveur, le Gestionnaire des services Bureau a distance ou PowerShell.
+
+IV. PROBLEMES COURANTS ET DEPANNAGE RDS.
+
+   A. Pannes et solutions.
+
+      L'impossibilite de se connecter peut etre causee par un service RDS arrete, un pare-feu bloquant le port 3389, un probleme DNS ou un utilisateur non autorise. La verification se fait avec la commande "Test-NetConnection serveur -Port 3389".
+
+      Un probleme de licences se manifeste par le message "Le serveur de licences Bureau a distance n'est pas disponible". La solution est de verifier RD Licensing, l'activation des licences et les GPO RDS.
+
+      Les performances degradees sont causees par un serveur surcharge, une memoire insuffisante ou trop de sessions simultanees. Les solutions sont d'augmenter les ressources, de repartir les utilisateurs ou d'ajouter des serveurs Session Host.
+
+      Les deconnexions intempestives sont causees par des coupures reseau, l'expiration de session ou des strategies de groupe restrictives. Les verifications portent sur les journaux d'evenements et la configuration des delais de session.
+
+POINTS D'ATTENTION.
+
+      Le port TCP 3389 ne doit jamais etre expose directement sur Internet : utiliser RD Gateway avec SSL/TLS pour les acces externes, ce qui evite les attaques par force brute sur le service RDP.
+
+      NLA doit etre active systematiquement : sans NLA, un attaquant peut atteindre l'ecran d'ouverture de session Windows, consommant des ressources serveur et exposant une surface d'attaque supplementaire.
+
+      La configuration de RD Licensing est imperative : sans serveur de licences fonctionnel, le serveur RDS cesse d'accepter les connexions apres la periode de grace de 120 jours.
+
+      En deploiement standard, RD Connection Broker doit etre configure en haute disponibilite pour eviter qu'il devienne un point unique de defaillance (SPOF) de l'infrastructure RDS.
+
+      Le protocole UDP 3389 est utilise par RDS pour optimiser les performances graphiques : le bloquer dans le pare-feu degrade significativement la qualite des sessions, notamment pour les graphiques et les videos.
+
+      RemoteApp necessite des applications compatibles avec l'execution multi-sessions : certains logiciels utilisent des chemins ou des donnees locales incompatibles avec la virtualisation de sessions.
+
+EXEMPLES CITES.
+
+      La commande "Enter-PSSession SRV-AD01" ouvre une session PowerShell distante sur le serveur SRV-AD01, permettant l'administration a distance sans interface graphique.
+
+      La commande "Test-NetConnection serveur -Port 3389" teste la connectivite TCP vers le port 3389 du serveur RDS et permet de diagnostiquer une impossibilite de connexion.
+
+      RemoteApp permet de publier Microsoft Word sur le serveur RDS : l'utilisateur clique sur l'icone de Word sur son poste local, l'application s'ouvre dans une fenetre independante, mais s'execute entierement sur le serveur.
+
+      Un acces teletravail via RD Gateway suit le flux : l'utilisateur se connecte depuis Internet vers RD Gateway (port HTTPS 443 et SSL/TLS), qui relaie la connexion vers le serveur RDS interne (port 3389) sans exposer ce port sur Internet.
+
+      Le deploiement rapide RDS installe automatiquement sur un seul serveur le RD Connection Broker, le RD Web Access et le RD Session Host, permettant une mise en service rapide pour un environnement de petite taille.

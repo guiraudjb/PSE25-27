@@ -1,0 +1,119 @@
+CONTROLES D'ACCES ET PRIVILEGES SOUS LINUX.
+
+LEXIQUE COMPLET.
+
+      UID (User ID) : identifiant numerique unique attribue a chaque utilisateur Linux. UID 0 est reserve a root. Les UID de 1 a 999 sont reserves aux comptes systemes. Les UID superieurs ou egaux a 1000 correspondent aux utilisateurs standards.
+
+      GID (Group ID) : identifiant numerique unique attribue a chaque groupe Linux. Chaque utilisateur appartient a un groupe primaire (utilise pour la creation des fichiers) et peut appartenir a des groupes secondaires.
+
+      /etc/passwd : fichier Linux stockant les informations non sensibles de chaque utilisateur (une ligne par utilisateur). Format : login:x:UID:GID:description:home:shell. Le "x" indique la presence d'un mot de passe stocke dans /etc/shadow.
+
+      /etc/shadow : fichier Linux stockant les mots de passe chiffres des utilisateurs. Accessible uniquement a root en lecture/ecriture. Format : login:mot_de_passe_chiffre:dernier_changement:... Le prefixe $6$ dans le mot de passe chiffre indique un chiffrement SHA-512.
+
+      /etc/group : fichier Linux stockant les informations des groupes systeme (nom, GID et liste des utilisateurs membres). Chaque ligne correspond a un groupe.
+
+      useradd : commande Linux de creation de comptes utilisateurs. Les informations enrichissent /etc/passwd. Options importantes : --uid (definir l'UID), --home (definir le repertoire), -e (date d'expiration), -r (compte systeme), -s (shell de connexion).
+
+      usermod : commande Linux de modification des comptes utilisateurs existants. Options : -l (login), -d (home, avec -m pour deplacer les fichiers), -s (shell), -L (verrouiller), -U (deverrouiller), -aG (ajouter a un groupe sans supprimer les autres), -G seul (remplace TOUS les groupes secondaires).
+
+      userdel : commande Linux de suppression de comptes utilisateurs. L'option -r supprime simultanement le repertoire personnel de l'utilisateur.
+
+      passwd : commande Linux de changement de mot de passe. "passwd mon_utilisateur" change le mot de passe d'un utilisateur. "passwd -l mon_utilisateur" verrouille le compte.
+
+      chage : commande Linux de gestion de l'expiration des mots de passe et des comptes. Options : -M (duree maximale en jours), -l (afficher les parametres), -d 0 (forcer le changement au prochain login), -E (date d'expiration du compte).
+
+      groupadd : commande Linux de creation de groupes. L'option -g permet de specifier le GID.
+
+      groupdel : commande Linux de suppression de groupes.
+
+      who : commande Linux affichant la liste des utilisateurs actuellement connectes.
+
+      last : commande Linux affichant l'historique des connexions.
+
+      lastb : commande Linux affichant l'historique des echecs de connexion.
+
+      PAM (Pluggable Authentication Module) : concept Linux permettant d'apporter de la modularite et de la flexibilite a la securite de connexion. Repose sur des bibliotheques dynamiques (.so). Permet d'ajouter des mecanismes d'authentification (biometrie, tokens) sans recompiler les programmes. Configuration sous /etc/pam.d/ et /etc/security/.conf.
+
+      sudo (Substitute User DO) : commande permettant a l'administrateur d'accorder a des utilisateurs ou groupes le droit d'executer des commandes en tant qu'un autre utilisateur. Apporte la tracabilite des actions, l'audit et la reduction des risques.
+
+      visudo : commande d'edition securisee du fichier de configuration sudo. Effectue un controle de conformite syntaxique lors de l'ecriture pour eviter les erreurs bloquantes. Manipule les fichiers sous /etc/sudoers.d.
+
+      Principe du moindre privilege : bonne pratique de securite consistant a minimiser l'usage de root pour le lancement des services, a utiliser des droits temporaires et a garantir une separation des actions systeme et applicatives. Limite l'impact d'une "montee de privilege" en cas de faille.
+
+      /usr/sbin/nologin : shell de connexion special attribue aux comptes de services pour interdire toute connexion interactive. Indique que le compte ne doit pas etre utilise pour se connecter.
+
+COURS DETAILLE.
+
+I. GESTION DES UTILISATEURS LINUX.
+
+   A. Identification et stockage des informations.
+
+      Sous Linux, les utilisateurs du systeme sont identifies grace a leur UID (User ID, Identifiant Numerique Unique). Par convention : l'UID 0 est reserve a root, les UID de 1 a 999 correspondent aux comptes systemes, et les UID superieurs ou egaux a 1000 correspondent aux utilisateurs standards. A chaque utilisateur est associe un repertoire personnel (traditionnellement sous /home/<nom_utilisateur>) et un shell de connexion lance apres l'authentification.
+
+      Les informations non sensibles sont stockees dans /etc/passwd, avec une ligne par utilisateur au format : login:x:UID:GID:description:home:shell. Exemple : "postgres:x:126:134:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash". La lettre "x" indique la presence d'un mot de passe stocke separement. Le mot de passe chiffre est stocke dans /etc/shadow, accessible uniquement a root, au format : login:mot_de_passe_chiffre:dernier_changement:... Exemple : "dupont:$6$abc123$...:19876:0:99999:7:::". Le prefixe $6$ indique un chiffrement SHA-512.
+
+   B. Commandes de gestion des utilisateurs.
+
+      La creation d'un utilisateur s'effectue avec la commande "useradd" qui enrichit /etc/passwd. Exemple : "useradd -e 2026-12-31 mon_utilisateur --uid 1000 --home /home/mon_utilisateur/" cree un utilisateur avec UID 1000 et une date d'expiration au 31 decembre 2026. Les comptes associes a des services ne devant pas permettre de connexion interactive sont crees avec le shell /usr/sbin/nologin : "useradd -r -s /sbin/nologin service1" cree un compte systeme sans connexion interactive.
+
+      La modification d'un compte s'effectue avec "usermod". La commande "usermod -l nouveau_login ancien_login" change le login. La commande "usermod -d /nouveau/home -m mon_utilisateur" change le repertoire personnel et deplace les fichiers avec -m. La commande "usermod -s /bin/zsh mon_utilisateur" change le shell de connexion. La commande "usermod -aG developers mon_utilisateur" ajoute l'utilisateur au groupe developers SANS supprimer ses autres groupes (le -a est crucial). En revanche, "usermod -G admins dev1" SANS le -a remplace TOUS les groupes secondaires de dev1 par admins.
+
+      Le verrouillage d'un compte s'effectue avec "usermod -L mon_utilisateur" ou "sudo passwd -l mon_utilisateur". Le deverrouillage s'effectue avec "usermod -U mon_utilisateur". La suppression d'un compte s'effectue avec "userdel -r mon_utilisateur", l'option -r supprimant simultanement le repertoire personnel. Le changement de mot de passe s'effectue avec "passwd mon_utilisateur".
+
+      La gestion de l'expiration s'effectue avec "chage". La commande "chage -M 90 mon_utilisateur" definit une duree maximale de validite du mot de passe de 90 jours. La commande "chage -l mon_utilisateur" affiche les parametres d'expiration. La commande "chage -d 0 user1" force l'utilisateur a changer son mot de passe au prochain login. La commande "chage -E 2025-12-31 user1" definit une date d'expiration du compte : apres cette date, le compte est verrouille definitivement.
+
+      La surveillance des connexions s'effectue avec "who" (liste des utilisateurs connectes), "last" (historique des connexions) et "lastb" (historique des echecs de connexion).
+
+II. GESTION DES GROUPES ET PAM.
+
+   A. Gestion des groupes Linux.
+
+      Sous Linux, les utilisateurs du systeme sont associes a un ou plusieurs groupes systeme identifies grace a leur GID (Group ID, Identifiant Numerique Unique de groupe). Le fichier /etc/group stocke ces informations : a chaque groupe est associe un nom, un GID et une liste des utilisateurs (login) membres. Les groupes permettent une gestion plus globale de la securite lorsque le nombre de profils individuels augmente. Le groupe primaire d'un utilisateur est celui utilise lors de la creation de ses fichiers.
+
+      La creation d'un groupe s'effectue avec "groupadd -g 1001 mon_groupe". Les informations d'un groupe sont consultables avec "groups <nomgroup>" ou "id <nomgroup>". La suppression s'effectue avec "groupdel developers". L'ajout d'un utilisateur a un groupe s'effectue avec "usermod -aG developers mon_utilisateur" (le -a est indispensable pour ne pas supprimer les autres groupes).
+
+   B. PAM : Pluggable Authentication Module.
+
+      PAM (Pluggable Authentication Module) est un concept Linux permettant d'apporter de la modularite et de la flexibilite a la securite de connexion. Il ameliore la validation de connexion, renforce la politique de gestion des mots de passe, limite les tentatives de connexion infructueuses et gere la validite des mots de passe. Repose sur des bibliotheques dynamiques : il permet d'ajouter de nouveaux mecanismes d'authentification (comme la biometrie) en configurant simplement des fichiers, sans recompiler les programmes s'y appuyant.
+
+      La configuration s'effectue sous /etc/pam.d/ et /etc/security/.conf. Chaque ligne de configuration suit le format : "type strategie module.so". Exemple : "auth required pam_unix.so". Les types de modules sont : auth (pour l'authentification), session (pour la journalisation des connexions), account (pour les informations de l'utilisateur) et passwd (pour la mise a jour des mots de passe). Les strategies sont : required (sortie ko sur echec, continue le traitement), sufficient (sortie ok si valide, arrete le traitement), requisite (sortie ok mais continue) et optional (code retour ignore). L'ordre de validation se fait de haut en bas. La commande "ldd <programme>" permet de verifier si un programme utilise ou non nativement la pile PAM.
+
+III. SUDO ET MOINDRE PRIVILEGE.
+
+   A. Sudo : delegation des privileges.
+
+      Le mecanisme sudo (Substitute User DO) est une commande permettant a l'administrateur systeme d'accorder a certains utilisateurs ou groupes d'utilisateurs le droit d'executer des commandes en tant qu'un autre utilisateur. Sudo apporte la tracabilite des actions, un systeme d'audit et surtout une reduction des risques en ciblant specifiquement les commandes autorisees (arret et relance d'un service, installation de paquets, etc.).
+
+      La configuration s'effectue via la commande "visudo", qui est un editeur vi avec controle de conformite syntaxique lors de l'ecriture, manipulant les fichiers de configuration sous /etc/sudoers.d. Exemple : la ligne "nom_user ALL=(root) /usr/bin/dnf" permet a l'utilisateur nom_user d'executer la commande /usr/bin/dnf en tant que root, en precedant la commande du mot "sudo". Un mot de passe de confirmation lui est alors demande. L'utilisateur endosse ponctuellement le role de root uniquement pendant l'execution de la commande concernee : c'est la notion de delegation.
+
+      L'ajout d'un utilisateur au groupe sudo s'effectue avec "usermod -aG sudo nom_utilisateur" ou "usermod -aG wheel nom_utilisateur" selon la distribution Linux.
+
+   B. Principe du moindre privilege.
+
+      Linux s'appuie sur le principe du moindre privilege. Les bonnes pratiques conduisent a minimiser l'usage de root pour le lancement des services, a utiliser des droits temporaires, et a garantir une separation des actions systeme et applicatives. Ce principe ameliore la securite generale du systeme. Ainsi, en cas de faille dans un processus, la "montee de privilege" reste limitee et le systeme plus robuste.
+
+POINTS D'ATTENTION.
+
+      La difference entre "usermod -aG groupe utilisateur" et "usermod -G groupe utilisateur" est critique : sans le -a, "usermod -G" remplace TOUS les groupes secondaires existants de l'utilisateur par le groupe specifie, ce qui peut priver l'utilisateur de droits importants.
+
+      Le fichier /etc/shadow ne doit jamais etre modifie directement : utiliser les commandes "passwd" et "chage" pour la gestion des mots de passe et des expirations. Toute corruption de /etc/shadow peut bloquer l'acces a tous les comptes du systeme.
+
+      La date d'expiration d'un compte (chage -E) et la duree maximale du mot de passe (chage -M) sont deux mecanismes distincts : -E verrouille le compte definitivement apres la date, -M force le changement du mot de passe apres un nombre de jours. Les confondre peut entrainer des blocages inattendus.
+
+      Les comptes de services (base de donnees, serveur web, etc.) doivent etre crees avec "/usr/sbin/nologin" comme shell et sans creation de repertoire personnel si inutile : ils ne doivent jamais permettre de connexion interactive.
+
+      La configuration PAM est validee de haut en bas : une ligne "required" dont le test echoue genere un echec mais le systeme continue de lire les autres lignes avant de retourner l'echec. Une ligne "requisite" dont le test echoue arrete immediatement le traitement et retourne l'echec.
+
+      Visudo doit toujours etre utilise pour modifier les regles sudo : une erreur de syntaxe dans /etc/sudoers peut rendre sudo inutilisable pour tous les utilisateurs, y compris l'administrateur.
+
+EXEMPLES CITES.
+
+      La commande "useradd -e 2026-12-31 mon_utilisateur --uid 1000 --home /home/mon_utilisateur/" cree un utilisateur avec un UID de 1000, un repertoire personnel sous /home/mon_utilisateur/ et une date d'expiration de compte au 31 decembre 2026.
+
+      La commande "useradd -r -s /sbin/nologin service1" cree un compte systeme (UID < 1000) sans possibilite de connexion interactive, adapte aux comptes de services (base de donnees, serveur web, etc.).
+
+      La commande PAM "auth required pam_unix.so" configure le module d'authentification Unix standard avec une strategie "required" : l'echec de ce test provoque un echec global de l'authentification.
+
+      La ligne sudo "nom_user ALL=(root) /usr/bin/dnf" permet a nom_user d'executer uniquement la commande /usr/bin/dnf avec les privileges root, en tapant "sudo /usr/bin/dnf". La tracabilite est assuree dans les journaux systeme.
+
+      La commande "useradd -m -g devs user1" cree l'utilisateur user1 avec un repertoire personnel cree automatiquement (-m) et le groupe primaire "devs" (-g), avec un UID attribue automatiquement par le systeme.

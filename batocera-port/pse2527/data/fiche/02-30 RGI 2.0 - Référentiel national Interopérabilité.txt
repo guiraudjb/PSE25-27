@@ -1,0 +1,187 @@
+REFERENTIEL GENERAL D'INTEROPERABILITE (RGI) - VERSION 2.0
+
+LEXIQUE COMPLET
+
+      L'interopérabilité est la capacité que possède un produit ou un système dont les interfaces sont intégralement connues à fonctionner avec d'autres produits ou systèmes existants ou futurs et ce sans restriction d'accès ou de mise en œuvre.
+
+      Un cadre d'interopérabilité est une approche concertée spécifiant un ensemble d'éléments communs tels que le vocabulaire, les concepts, les principes, les politiques, les directives, les recommandations, les normes, les spécifications et les pratiques pour les organisations souhaitant travailler ensemble.
+
+      Une autorité administrative désigne les administrations de l'État, les collectivités territoriales, les établissements publics à caractère administratif, les organismes de protection sociale et les organismes chargés de la gestion d'un service public administratif.
+
+      Un système d'information est tout ensemble de moyens destinés à élaborer, traiter, stocker ou transmettre des informations faisant l'objet d'échanges par voie électronique entre autorités administratives et usagers ainsi qu'entre autorités administratives.
+
+      Un profil d'interopérabilité regroupe un ensemble limité de standards et de recommandations autour de cas d'usage définis pour faciliter l'appropriation et limiter les choix dans un contexte donné.
+
+      Une donnée de référence est une donnée utilisée fréquemment par un grand nombre d'acteurs, dont la qualité est critique, dont la sémantique est partagée et stable, dont la durée de vie dépasse les processus opérationnels et dont l'administration rigoureuse est nécessaire.
+
+      L'identité pivot est la description sémantique et le format à utiliser pour tous les échanges concernant les données d'identité qui caractérisent une personne et permettent de l'identifier de manière univoque.
+
+      Un fournisseur d'identité est une entité capable de fournir une identité vérifiée d'une personne ou d'une unité légale.
+
+      Un fournisseur de données est une entité détentrice de données d'intérêt public qu'elle met à disposition via des API.
+
+      Le niveau politique de l'interopérabilité concerne les visions partagées, les orientations et les stratégies convergentes favorisant la coopération entre les parties prenantes.
+
+      Le niveau sémantique recouvre la signification des mots, le rapport entre le sens des mots et le cycle de vie d'une information pour que les entités s'entendent sur la signification des données échangées.
+
+      Le niveau syntaxique concerne les formats techniques qui permettent de véhiculer les données, leur structure et leur codification indépendamment de leur sens.
+
+COURS DÉTAILLÉ
+
+I. CONTEXTE, DEFINITIONS ET OBJECTIFS
+
+   A. Cadre législatif et périmètre
+
+      Le RGI résulte des dispositions de l'ordonnance du 8 décembre 2005 et du décret du 2 mars 2007 relatifs aux échanges électroniques entre les usagers et les autorités administratives et entre les autorités administratives.
+
+      Les systèmes d'information existant à la date de publication doivent être mis en conformité dans un délai de trois ans, tandis que les nouvelles applications créées après six mois doivent être conformes sous douze mois.
+
+      Le périmètre couvre trois types d'échanges principaux qui sont les échanges entre autorités administratives notés A2A, les échanges entre une autorité administrative et une entreprise notés A2B, et les échanges entre une autorité administrative et un citoyen notés A2C.
+
+      L'interopérabilité interne aux systèmes informatiques des organisations doit être traitée dans leurs propres cadres de cohérence technique tout en veillant à appliquer au mieux les recommandations du RGI.
+
+   B. Critères d'adoption des standards
+
+      Un standard doit être ouvert, ce qui signifie que ses spécifications sont complètes, publiques, sans restriction d'accès ou de mise en œuvre, et maintenues par une organisation à but non lucratif.
+
+      Le critère de pertinence exige que l'utilité, la nécessité et la simplicité de la mise en œuvre soient clairement démontrées et adoptées par le marché.
+
+      Le standard doit être mature, ayant démontré sa fiabilité et sa stabilité en contexte réel, et être indépendant de toute infrastructure technologique ou constructeur spécifique.
+
+      Le déploiement doit être facile sans engendrer de coûts ou contraintes excessifs, et le standard doit bénéficier d'un fort soutien par l'industrie avec des expertises disponibles.
+
+   C. Niveaux d'interopérabilité
+
+      Le modèle s'aligne sur le cadre européen EIF et distingue cinq niveaux incluant le politique, le juridique, l'organisationnel, le sémantique et le technique.
+
+      Le niveau juridique veille à la conformité au cadre légal, à la propriété intellectuelle et aux accords contractuels.
+
+      Le niveau organisationnel définit les rôles, les responsabilités et les processus déterminant qui envoie la donnée et à quel moment.
+
+      Le niveau technique se divise en protocole d'échange pour le transport des données et en niveau syntaxique pour le format et la structure des données.
+
+II. ORGANISATION DES EXIGENCES
+
+   A. Statuts des standards
+
+      Le statut Recommandé désigne un standard qui répond aux critères, s'aligne avec la stratégie de l'État et doit être respecté par tous.
+
+      Le statut En observation s'applique aux standards émergents dont la maturité n'est pas totale, nécessitant une phase de tests avant une éventuelle recommandation.
+
+      Le statut En fin de vie concerne les standards dont le soutien se termine et qui ne doivent plus être utilisés pour les nouveaux projets.
+
+      Le statut Retiré indique un standard qui ne répond plus aux critères et doit faire l'objet d'un plan de décommissionnement.
+
+   B. Profils d'interopérabilité
+
+      Cette version introduit la notion de profil d'interopérabilité pour regrouper un ensemble limité de standards autour de cas d'usage définis afin d'éviter la prolifération des choix technologiques.
+
+      L'objectif est de faciliter l'appropriation du référentiel en se focalisant sur quelques grands usages clés et de limiter les choix de standards dans un contexte donné.
+
+III. INTEROPERABILITE TECHNIQUE
+
+   A. Réseau et Transport
+
+      Le protocole IPv6 est fortement recommandé car il simplifie le routage, offre un espace d'adressage étendu et intègre nativement la sécurité IPSec, tandis que IPv4 est considéré en fin de vie.
+
+      Pour la sécurité du transport, le protocole TLS version 1.2 ou ultérieure est recommandé pour assurer l'authentification, la confidentialité et l'intégrité, remplaçant le protocole SSL qui est retiré.
+
+      La synchronisation des horloges locales des ordinateurs sur un serveur de référence doit s'effectuer via le protocole NTP.
+
+   B. Transferts de fichiers et Web
+
+      Le protocole HTTP version 1.1 est le standard pour le web, avec une préférence marquée pour sa version sécurisée HTTPS.
+
+      Pour le transfert de fichiers, le protocole SFTP qui tunnelise la session via SSH est recommandé, tandis que le protocole FTPS est retiré car il ne chiffre pas les enveloppes du flux.
+
+      Les protocoles PeSIT et PRESTO sont classés en fin de vie car ils sont soit propriétaires, soit non maintenus, au profit de solutions ouvertes.
+
+   C. Messagerie et Services
+
+      Les protocoles recommandés pour la messagerie sont SMTP pour l'envoi, et POP3 ou IMAP4 pour la réception, en privilégiant leurs versions sécurisées.
+
+      La gestion des identités et des accès s'appuie sur le protocole Open ID Connect, qui ajoute une couche d'identification au standard OAuth 2.0.
+
+      Pour les services web, le standard SOAP v1.2 associé à WSDL est maintenu pour les transactions complexes, mais l'architecture REST est privilégiée pour les nouveaux échanges via le profil État Plateforme.
+
+IV. INTEROPERABILITE SYNTAXIQUE
+
+   A. Encodage et Documents
+
+      L'encodage de caractères UTF-8 est le standard universel recommandé pour tout échange de données structurées ou non.
+
+      Le format ODF est recommandé pour les documents bureautiques modifiables, tandis que le format OOXML de Microsoft est maintenu en observation en raison de sa complexité et de sa gouvernance.
+
+      Pour les documents figés, le format PDF 1.7 est la norme, et sa déclinaison PDF/A-1 ou A-2 est requise pour l'archivage à long terme.
+
+   B. Structuration des données et Web
+
+      Le format JSON est recommandé pour sa simplicité et sa lisibilité, constituant une alternative légère au XML pour les échanges de données.
+
+      Le format CSV est toléré uniquement pour les échanges entre une application et un utilisateur, mais est considéré en fin de vie pour les échanges entre applications.
+
+      Les navigateurs web supportés doivent inclure au minimum Chrome 35, Internet Explorer 10, Firefox 31 et Safari 7.
+
+   C. Multimédia et Géographie
+
+      Les conteneurs vidéo recommandés sont MP4 et MKV, associés aux codecs vidéo H.264 ou VP8 et aux codecs audio AAC, Vorbis ou MP3.
+
+      Les images doivent utiliser les formats PNG, JPEG ou SVG pour le vectoriel.
+
+      Pour les données géographiques, les formats Shapefile, GeoJSON et GML sont les standards recommandés.
+
+V. INTEROPERABILITE SEMANTIQUE
+
+   A. Modélisation
+
+      Le langage UML version 2.4 ou supérieure est recommandé pour modéliser les processus, les activités et les données.
+
+      Le standard BPMN 2.0 est préconisé pour la modélisation graphique des procédures d'entreprise et des processus métier.
+
+   B. Identité Pivot
+
+      L'identité pivot définit le jeu minimal de données pour identifier une personne physique, comprenant l'identifiant, le nom de naissance, les prénoms, le sexe, la date et le lieu de naissance.
+
+      Le sexe est codifié selon la norme ISO 5218 où 1 désigne un homme et 2 une femme.
+
+      Le pays de naissance doit respecter la norme ISO 3166-2 et le lieu de naissance utilise le Code Officiel Géographique de l'INSEE pour la France.
+
+VI. PROFILS D'INTEROPERABILITE
+
+   A. Profils techniques génériques
+
+      Le profil P1 Fondations État Plateforme est le socle recommandé pour les échanges modernes via API, reposant sur l'architecture REST, JSON, et Open ID Connect.
+
+      Le profil P2 Web Service SOAP est une alternative pour les transactions lourdes ou l'existant, utilisant SOAP, WSDL et WS-Security.
+
+      Le profil P3 Communication interpersonnelle couvre la messagerie et la bureautique, incluant les formats ODF et PDF.
+
+      Le profil P9 Signature électronique regroupe les standards PAdES, XAdES et CAdES pour garantir l'intégrité et l'authenticité des documents.
+
+   B. Profils métiers spécifiques
+
+      Le profil P4 Archivage s'appuie sur le modèle OAIS et le standard d'échange SEDA, privilégiant les formats pérennes comme PDF/A et XML.
+
+      Le profil P5 Géomatique rassemble les standards de l'OGC tels que WMS, WFS et GML pour l'échange d'informations géographiques.
+
+      Le profil P6 InterOPS est spécifique aux organismes de protection sociale pour établir un espace de confiance interne.
+
+POINTS D'ATTENTION
+
+      Le choix d'une version sécurisée d'un standard dépend toujours d'une analyse de risques préalable et de la conformité au Référentiel Général de Sécurité ou RGS.
+
+      Les standards qui ne sont pas listés dans le RGI ne peuvent pas être considérés comme recommandés et ne doivent pas être utilisés pour les échanges couverts par le référentiel.
+
+      Le format de compression ZIP est recommandé car il intègre un index permettant d'extraire un élément sans décompresser toute l'archive.
+
+      L'usage du PDF/A-3 pour l'archivage est fortement déconseillé car il peut encapsuler des formats binaires non maîtrisés.
+
+EXEMPLES CITES
+
+      L'OTAN est cité comme exemple de développement de l'interopérabilité opérationnelle pour les théâtres d'opérations communes.
+
+      La DGFiP fournissant le revenu fiscal de référence est donnée comme exemple de fournisseur de données.
+
+      FranceConnect est mentionné comme brique mutualisée utilisant le profil P1 Fondations État Plateforme.
+
+      Le code sexe INSEE utilise 1 pour les hommes et 2 pour les femmes en correspondance avec la norme ISO 5218.

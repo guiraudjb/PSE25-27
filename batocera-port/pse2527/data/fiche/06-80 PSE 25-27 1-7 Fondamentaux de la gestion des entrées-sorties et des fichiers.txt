@@ -1,0 +1,253 @@
+FICHIGERS ET GESTION DES ENTREES/SORTIES : ARCHITECTURE, PERIPHERIQUES ET STOCKAGE (PSE TRAD 2025 – 2027).
+
+LEXIQUE COMPLET.
+
+      Le système d'exploitation est un intermédiaire logiciel entre les applications et le matériel qui masque la complexité technique et gère les ressources.
+
+      La couche d'abstraction matérielle ou HAL est un composant logiciel isolant le noyau des spécificités matérielles via une interface standardisée.
+
+      Un bus est un ensemble de conducteurs électriques transportant des signaux entre les composants comme le processeur et la mémoire.
+
+      Le bus système ou FSB relie directement le processeur à la mémoire et aux contrôleurs principaux avec un débit élevé.
+
+      Un contrôleur est un intermédiaire intelligent qui traduit les commandes génériques du système en signaux spécifiques pour un périphérique.
+
+      Un tampon ou buffer est une zone de mémoire temporaire gérée par le contrôleur pour lisser les différences de vitesse de transfert.
+
+      Un périphérique de flux traite les données de manière séquentielle et continue sans accès arbitraire comme un clavier.
+
+      Un périphérique en mode bloc organise les données en blocs de taille fixe accessibles de manière arbitraire comme un disque dur.
+
+      L'accès direct en mémoire ou DMA est un mécanisme permettant aux périphériques d'échanger des données avec la mémoire sans solliciter le processeur.
+
+      Une interruption ou IRQ est un signal électrique envoyé par un périphérique au processeur pour demander une attention immédiate.
+
+      L'IDT ou Interrupt Descriptor Table est une table associant une interruption à une routine de traitement spécifique.
+
+      Le polling est une technique où le processeur vérifie constamment l'état des périphériques ce qui gaspille des ressources.
+
+      Un pilote ou driver est un logiciel traduisant les commandes du système en instructions comprises par le matériel.
+
+      Un secteur est l'unité de base de stockage sur un disque dur mécanique généralement de 512 octets.
+
+      Une page est l'unité minimale de lecture et d'écriture sur un SSD généralement de 4 Ko.
+
+      Un bloc sur un SSD est l'unité minimale d'effacement composée de plusieurs pages.
+
+      Le Master Boot Record ou MBR est le premier secteur d'un disque contenant la table des partitions limité à 2,2 To.
+
+      Le GPT ou GUID Partition Table est un schéma de partitionnement moderne supportant des disques de plus de 2 To.
+
+      Un inode est une structure de données utilisée par les systèmes Unix et Linux pour stocker les métadonnées et les pointeurs de blocs.
+
+      La journalisation est un mécanisme enregistrant les transactions dans un journal avant application pour garantir l'intégrité après une panne.
+
+      Le BIOS est un micrologiciel 16 bits d'initialisation matérielle limité par le MBR et un démarrage lent.
+
+      L'UEFI est un standard moderne 32 ou 64 bits remplaçant le BIOS et supportant le Secure Boot et le GPT.
+
+COURS DÉTAILLÉ.
+
+I. PRINCIPES ET ARCHITECTURE DES ENTREES/SORTIES.
+
+   A. Rôle du système d'exploitation.
+
+      Le système d'exploitation agit comme un intermédiaire essentiel entre les applications logicielles et le matériel informatique.
+
+      Son objectif premier est de masquer la complexité technique des périphériques en offrant une interface unifiée aux utilisateurs et développeurs.
+
+      Sans cette abstraction chaque programme devrait inclure du code spécifique pour chaque type de périphérique ce qui rendrait le développement complexe.
+
+      Le système gère également les commandes, les interruptions et les erreurs pour garantir la fiabilité des opérations.
+
+      Lorsqu'un périphérique nécessite une attention il génère une interruption que le système intercepte pour exécuter une routine dédiée.
+
+      Cette gestion permet la portabilité des logiciels qui peuvent fonctionner sur des configurations matérielles variées sans modification.
+
+   B. Composants matériels des entrées/sorties.
+
+      Les bus permettent aux composants d'échanger des données de manière organisée via des conducteurs électriques.
+
+      Le bus système relie le processeur à la mémoire et aux contrôleurs principaux pour assurer un débit élevé sur les opérations critiques.
+
+      Les bus d'entrées et sorties comme le PCIe ou l'USB connectent les périphériques externes avec des débits adaptés.
+
+      Les architectures modernes privilégient les bus série comme le SATA qui offrent des débits plus élevés que les anciens bus parallèles.
+
+      Le contrôleur agit comme un intermédiaire intelligent traduisant les commandes génériques de l'OS en signaux spécifiques pour le périphérique.
+
+      Il gère les tampons mémoire pour lisser les flux de données et signale les interruptions ou erreurs au processeur.
+
+      Les périphériques exécutent les opérations concrètes et signalent leur état via des interruptions ou des registres de statut.
+
+   C. Couche d'abstraction matérielle (HAL).
+
+      La HAL est un composant logiciel isolant le noyau des spécificités du matériel sous-jacent.
+
+      Elle fournit une interface standardisée permettant au noyau de communiquer avec les périphériques sans connaître les détails d'implémentation.
+
+      La HAL facilite la maintenance car les modifications matérielles n'affectent pas directement le noyau.
+
+      Elle simplifie le développement logiciel en permettant l'utilisation d'appels standardisés pour interagir avec le matériel.
+
+II. CLASSIFICATION ET GESTION DES PERIPHERIQUES.
+
+   A. Types de périphériques.
+
+      Les périphériques de flux traitent les données de manière séquentielle et continue sans accès arbitraire comme le clavier ou la souris.
+
+      Ils sont adaptés au temps réel mais nécessitent des tampons pour stocker les données en cas de surcharge.
+
+      Les périphériques en mode bloc organisent les données en blocs de taille fixe accessibles indépendamment comme les disques durs.
+
+      Ils permettent un accès direct à n'importe quel bloc ce qui est essentiel pour le stockage de fichiers.
+
+      Les périphériques hybrides combinent ces caractéristiques comme un écran qui peut fonctionner en mode bloc ou flux selon l'opération.
+
+   B. Gestionnaire de périphériques.
+
+      Le gestionnaire orchestre les interactions entre logiciel et matériel en envoyant des commandes et en traitant les erreurs.
+
+      Il traduit les requêtes utilisateurs en commandes spécifiques transmises via le contrôleur approprié.
+
+      La gestion des erreurs suit une approche en couches tentant d'abord une correction au niveau du contrôleur avant de remonter au système.
+
+   C. Bus et communication.
+
+      L'architecture utilise une hiérarchie de bus spécialisés pour optimiser la communication entre composants.
+
+      Le bus système au sommet gère le flux critique entre processeur et mémoire avec une latence minimale.
+
+      Le pont nord gère les composants rapides comme la mémoire tandis que le pont sud s'occupe des périphériques lents.
+
+      Cette séparation évite les goulots d'étranglement en empêchant les périphériques lents d'encombrer le bus système.
+
+      Le bus de contrôle détermine le type d'opération alors que le bus d'adresses spécifie la localisation et le bus de données transporte l'information.
+
+      La standardisation des bus assure la compatibilité et simplifie le développement des pilotes par les fabricants.
+
+III. MECANISMES D'ACCES AUX PERIPHERIQUES.
+
+   A. Méthodes d'accès aux entrées/sorties.
+
+      L'accès direct en mémoire ou DMA permet aux périphériques d'échanger des données avec la mémoire sans solliciter le processeur.
+
+      Le DMA est idéal pour les transferts volumineux libérant le processeur pour d'autres tâches.
+
+      Les ports d'entrée et sortie utilisent des interruptions pour signaler au processeur qu'un périphérique requiert son attention.
+
+      Cette méthode implique une intervention du processeur à chaque événement ce qui est utile pour l'interaction en temps réel.
+
+   B. Pilotes de périphériques.
+
+      Les pilotes agissent comme des traducteurs convertissant les commandes génériques en instructions spécifiques au matériel.
+
+      Lors de l'installation le pilote réserve des ressources comme des plages mémoires et des lignes d'interruption.
+
+      Une mauvaise configuration des ressources peut entraîner des conflits et des dysfonctionnements du système.
+
+      Les pilotes génériques offrent une compatibilité de base tandis que les pilotes spécifiques optimisent les performances du matériel.
+
+   C. Interruptions et gestion des événements.
+
+      Les interruptions permettent d'éviter le sondage constant ou polling qui gaspillerait les ressources du processeur.
+
+      Lorsqu'une interruption survient le processeur sauvegarde son contexte et exécute une routine de gestion dédiée appelée handler.
+
+      Le vecteur d'interruption dans la table IDT pointe vers la routine spécifique à exécuter pour traiter l'événement.
+
+      Une fois l'événement traité le handler restaure le contexte sauvegardé pour permettre la reprise de l'exécution normale.
+
+IV. GESTION DES FICHIERS ET DES DISQUES.
+
+   A. Structure physique des disques.
+
+      Les disques durs mécaniques sont composés de plateaux magnétiques et de têtes de lecture sur un bras mobile.
+
+      L'adressage sur disque dur utilise le triplet cylindre tête et secteur où le secteur est l'unité de base de 512 octets.
+
+      Les SSD utilisent de la mémoire flash sans pièces mobiles permettant des accès quasi instantanés.
+
+      Les SSD sont organisés en pages pour la lecture et écriture et en blocs pour l'effacement.
+
+      Des algorithmes comme le wear leveling gèrent l'usure des cellules mémoire des SSD pour maintenir leur durabilité.
+
+      Le MBR situé dans le premier secteur limite les disques à 4 partitions primaires et 2,2 To de capacité.
+
+      Le GPT remplace le MBR pour supporter un nombre illimité de partitions et des disques de grande capacité.
+
+   B. Systèmes de fichiers.
+
+      Le système de fichiers permet d'organiser et retrouver les données via une structure hiérarchisée.
+
+      Le niveau basique émet des commandes génériques traduites ensuite par les pilotes en opérations physiques.
+
+      Le niveau logique présente une arborescence de fichiers identifiés par des noms et des attributs de sécurité.
+
+      Le formatage physique divise le disque en pistes et secteurs tandis que le formatage logique écrit les structures du système de fichiers.
+
+   C. Gestion des fichiers.
+
+      Un enregistrement logique est une unité de données vue par l'utilisateur alors qu'un enregistrement physique est un bloc sur le disque.
+
+      L'accès séquentiel lit les données dans l'ordre de stockage ce qui est inefficace pour l'accès au milieu du fichier.
+
+      L'accès direct permet d'atteindre n'importe quel enregistrement via son adresse ce qui est idéal pour les bases de données.
+
+      Le catalogue ou répertoire établit la correspondance entre les noms symboliques des fichiers et leurs emplacements physiques.
+
+      L'allocation d'espace utilise des méthodes comme les listes chaînées ou les tables de pointeurs comme la FAT.
+
+      Les systèmes Unix et Linux utilisent des inodes pour stocker les métadonnées et les pointeurs vers les blocs.
+
+   D. Optimisation et intégrité des données.
+
+      Le cache disque améliore les performances en stockant les données fréquentes en mémoire vive.
+
+      L'écriture différée ou write-back présente un risque de perte de données en cas de coupure de courant avant l'écriture disque.
+
+      Les systèmes de fichiers journalisés enregistrent les transactions dans un journal avant application pour garantir l'intégrité.
+
+      Des utilitaires comme fsck analysent et corrigent les incohérences structurelles du système de fichiers après un incident.
+
+   E. BIOS et UEFI.
+
+      Le BIOS est un micrologiciel 16 bits qui initialise le matériel et charge le système d'exploitation.
+
+      Il est limité par une exécution lente et l'incapacité de gérer des disques supérieurs à 2,2 To.
+
+      L'UEFI remplace le BIOS avec une architecture 32 ou 64 bits plus rapide et modulaire.
+
+      L'UEFI supporte le GPT et intègre le Secure Boot pour protéger le démarrage contre les logiciels malveillants.
+
+      Il peut exécuter des applications de diagnostic directement depuis une partition dédiée sans lancer l'OS complet.
+
+POINTS D'ATTENTION.
+
+      Il est crucial de distinguer les périphériques de flux qui sont séquentiels des périphériques blocs qui sont adressables.
+
+      Le mécanisme de polling est inefficace comparé aux interruptions car il consomme des cycles processeur inutilement.
+
+      L'optimisation par cache en écriture crée une vulnérabilité majeure en cas de panne électrique nécessitant des onduleurs ou des journaux.
+
+      La limitation de 2,2 To du MBR rend l'utilisation du GPT obligatoire pour les disques modernes de grande capacité.
+
+      Sur un SSD l'unité d'effacement est le bloc qui est plus grand que l'unité d'écriture qui est la page.
+
+EXEMPLES CITES.
+
+      Une imprimante ou une carte réseau générant une interruption.
+
+      Le bus PCI Express et le bus USB pour les périphériques externes.
+
+      Le clavier et la souris comme périphériques de flux.
+
+      Les disques durs et les clés USB comme périphériques en mode bloc.
+
+      Un écran ou un graveur DVD comme périphériques hybrides.
+
+      Le système de fichiers FAT pour les tables de pointeurs.
+
+      Les commandes fsck sous Linux et chkdsk sous Windows pour la réparation.
+
+      Les systèmes de fichiers ext4 et NTFS comme systèmes journalisés.

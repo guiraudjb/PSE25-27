@@ -1,0 +1,210 @@
+PROCESSUS, THREADS ET ORDONNANCEMENT DANS WINDOWS SERVER.
+
+LEXIQUE COMPLET.
+      Un processus est une instance en cours d'exécution d'un programme représentant une entité d'isolation avec un espace mémoire virtuel indépendant.
+      
+      Un thread est l'unité fondamentale d'exécution contenue dans un processus.
+      
+      Un Job Object est un objet noyau permettant de regrouper des processus pour leur appliquer des contraintes de ressources et gérer leur cycle de vie.
+      
+      Le NUMA ou Non-Uniform Memory Access est une architecture système où le temps d'accès à la mémoire dépend de la localisation physique de la mémoire par rapport au processeur.
+      
+      Le Soft NUMA est une fonctionnalité permettant de définir des nœuds NUMA logiques pour répartir les charges et améliorer la scalabilité logicielle.
+      
+      UMS ou User Mode Scheduling est un mécanisme permettant aux applications de gérer elles-mêmes une partie de l'ordonnancement sans passer par le noyau.
+      
+      Les fibres sont un mécanisme d'exécution ancien et alternatif aux threads désormais déconseillé pour des raisons de sécurité.
+      
+      IOCP ou I/O Completion Ports est un modèle d'entrée et sortie asynchrone performant intégré au pool de threads moderne.
+      
+      L'Enlightened Scheduling est une collaboration entre le système d'exploitation invité et l'hyperviseur pour optimiser le placement et l'exécution des machines virtuelles.
+      
+      Le VMBus est un canal de communication haute performance entre l'hôte et les machines virtuelles ou entre les machines virtuelles elles-mêmes.
+      
+      Le Quantum est le temps d'exécution alloué à un thread par l'ordonnanceur avant qu'il ne puisse être préempté.
+      
+      Les Mitigations sont des techniques de sécurité comme CFG ou DEP appliquées processus par processus pour prévenir l'exploitation de vulnérabilités.
+
+COURS DÉTAILLÉ.
+
+I. INTRODUCTION ET EVOLUTION DE L'ARCHITECTURE.
+
+   A. Optimisation du noyau Windows NT.
+      Le noyau Windows a subi une évolution profonde pour s'adapter aux serveurs multicœurs massifs pouvant atteindre plusieurs centaines de cœurs.
+      
+      L'architecture a été revue pour exploiter efficacement la virtualisation et l'hyperviseur Hyper-V.
+      
+      Les mécanismes d'isolation, de sécurité et de supervision des processus ont été améliorés pour répondre aux exigences modernes.
+      
+      La latence a été considérablement réduite pour les applications critiques comme SQL Server et les environnements virtualisés.
+
+II. LES PROCESSUS SOUS WINDOWS SERVER.
+
+   A. Définition et rôle.
+      Le processus assure une isolation stricte comprenant un espace mémoire virtuel indépendant et un ensemble de handles vers des ressources.
+      
+      La sécurité repose sur une segmentation stricte entre le mode utilisateur ring 3 et le mode noyau ring 0.
+      
+      Des mécanismes d'atténuation de sécurité sont appliqués spécifiquement processus par processus.
+
+   B. Espace d'adressage et cycle de vie.
+      L'adressage 64 bits est désormais obligatoire sur les versions récentes de Windows Server.
+      
+      Chaque processus peut adresser un espace virtuel très large dépassant 128 To selon les éditions.
+      
+      Les processus modernes sont supervisés par le Service Control Manager et orchestrés pour un redémarrage automatique.
+
+   C. Les Job Objects.
+      Les Job Objects sont devenus centraux dans la gestion des processus en permettant une isolation similaire aux cgroups Linux.
+      
+      Ils permettent de définir des limites précises sur l'utilisation du CPU via le CPU rate control.
+      
+      Ils imposent des plafonds sur l'utilisation de la mémoire et le nombre d'opérations d'entrée et sortie par seconde.
+      
+      Ils assurent une comptabilisation complète des ressources utilisées par le groupe de processus.
+
+III. THREADS ET EXECUTION PARALLELE.
+
+   A. Gestion des Threads.
+      Le thread est l'unité fondamentale d'exécution et une application moderne peut en contenir des centaines.
+      
+      Le système optimise l'exécution sur les architectures à grand nombre de cœurs et gère l'équilibrage NUMA.
+      
+      La gestion des threads inactifs est optimisée pour réduire la consommation énergétique du serveur.
+
+   B. Le Pool de Thread moderne.
+      Le pool de thread gère automatiquement le nombre optimal de threads nécessaires à l'application.
+      
+      Il s'intègre complètement avec les ports de complétion d'entrées et sorties IOCP.
+      
+      Il dispose d'un mode adaptatif conçu pour supporter les charges de travail de type cloud.
+
+   C. User Mode Scheduling et Fibres.
+      Le User Mode Scheduling permet aux applications haute performance comme les bases de données de gérer leur propre ordonnancement.
+      
+      Les fibres sont une technologie obsolète et déconseillée car elles sont incompatibles avec les mécanismes de sécurité modernes.
+
+IV. COMMUNICATION INTER-PROCESSUS.
+
+   A. Mécanismes classiques.
+      Les Named Pipes restent très utilisés pour leur rapidité et leur optimisation pour SMB et IIS.
+      
+      Les Sockets supportent nativement TCP Fast Open, l'IPv6 amélioré et le protocole SMB sur QUIC.
+      
+      Les fichiers mappés en mémoire offrent des performances accrues avec une gestion adaptée aux systèmes NUMA.
+      
+      Les objets de synchronisation comme les mutex et les sémaphores sont toujours pertinents.
+
+   B. Mécanismes modernes et obsolètes.
+      Le RPC a été actualisé avec une sécurité renforcée.
+      
+      Le gRPC est supporté sur Windows Server via .NET ou des conteneurs pour les architectures microservices.
+      
+      Le VMBus assure une communication haute performance entre les machines virtuelles et l'hôte.
+      
+      Les Mailslots ne sont quasiment plus utilisés et NetBIOS est officiellement obsolète.
+
+V. ARCHITECTURE NUMA.
+
+   A. Rôle et importance.
+      L'architecture NUMA est essentielle pour les serveurs comportant plusieurs processeurs physiques et nœuds mémoire.
+      
+      Elle gère les différences de latence d'accès à la mémoire selon sa localisation physique.
+
+   B. Soft NUMA.
+      Le Soft NUMA permet de définir des nœuds NUMA logiques pour subdiviser les ressources matérielles.
+      
+      Cette fonctionnalité répartit mieux les charges pour des applications comme IIS et SQL Server.
+      
+      Elle améliore la scalabilité logicielle sur les systèmes massifs.
+
+   C. Gestion et APIs.
+      Windows optimise l'affinité des threads et favorise l'allocation de mémoire locale.
+      
+      Les APIs modernes incluent GetNumaNodeProcessorMaskEx et VirtualAlloc2 pour des allocations orientées NUMA.
+      
+      L'API SetThreadGroupAffinity permet de gérer l'affinité avec les groupes de processeurs.
+
+VI. MULTITACHE ET ORDONNANCEMENT.
+
+   A. Principes du multitâche.
+      Windows Server est un système préemptif où le noyau peut interrompre un thread à tout moment.
+      
+      L'ordonnancement garantit l'équité tout en servant rapidement les threads prioritaires.
+      
+      Les états des threads incluent Prêt, En cours d'exécution, En attente, Suspendu et Terminé.
+      
+      Les réveils de threads ou wake-ups sont accélérés pour supporter les charges massives.
+
+   B. L'Ordonnanceur.
+      L'ordonnanceur gère les groupes de processeurs pour supporter plus de 64 processeurs logiques.
+      
+      Il prend en compte l'Hyper-Threading, le placement NUMA et la consommation énergétique.
+      
+      Les files d'attente sont organisées par processeur et par groupe pour réduire la contention.
+
+   C. Le Quantum.
+      Le quantum est le temps d'exécution attribué à un thread et il est défini dynamiquement.
+      
+      Il s'adapte aux charges du serveur et diffère selon les classes de services.
+
+VII. PRIORITES ET PREEMPTION.
+
+   A. Modèle de priorités.
+      Les priorités sont définies sur une échelle de 0 à 31.
+      
+      Les niveaux 0 à 15 sont réservés aux threads normaux.
+      
+      Les niveaux 16 à 31 sont réservés aux threads temps réel.
+
+   B. Ajustements dynamiques.
+      Le système augmente temporairement la priorité des threads interactifs.
+      
+      Un mécanisme d'ajustement est en place pour éviter la famine des processus.
+      
+      Le Priority Boost modernisé augmente la priorité des processus en attente prolongée.
+
+VIII. INFLUENCE DE LA VIRTUALISATION.
+
+   A. Interaction Hyper-V et Processus.
+      Les processus partagent les cœurs physiques avec d'autres machines virtuelles.
+      
+      L'hyperviseur peut suspendre des threads pour préserver l'isolation entre les environnements.
+
+   B. Enlightened Scheduling et VMBus.
+      Windows Server et Hyper-V collaborent pour optimiser le placement des machines virtuelles et l'accès aux ressources.
+      
+      Le temps CPU réel est pris en compte pour un ordonnancement plus précis.
+      
+      Le VMBus facilite la communication entre l'hôte et les machines virtuelles ainsi qu'entre les machines virtuelles.
+
+IX. SECURITE MODERNE.
+
+   A. Mitigations et Contrôles.
+      Le Control Flow Guard ou CFG protège le flux de contrôle du programme.
+      
+      Le Data Execution Prevention ou DEP empêche l'exécution de code dans certaines zones mémoire.
+      
+      L'ASLR randomise l'agencement de l'espace d'adressage pour compliquer les attaques.
+      
+      Le SEHOP a été renforcé pour protéger contre l'écrasement du gestionnaire d'exceptions.
+      
+      Le contrôle des privilèges et l'isolation par tokens basse ont été renforcés.
+
+POINTS D'ATTENTION.
+Les fibres sont considérées comme obsolètes et dangereuses pour la sécurité moderne.
+
+L'utilisation de NetBIOS est officiellement obsolète et doit être évitée.
+
+L'architecture NUMA et le Soft NUMA sont critiques pour la performance des serveurs modernes à haute densité.
+
+Les Job Objects offrent une isolation des ressources comparable aux cgroups sous Linux.
+
+EXEMPLES CITES.
+SQL Server et IIS sont cités comme bénéficiaires principaux des optimisations de latence et de NUMA.
+
+Le framework .NET et PowerShell utilisent nativement le Thread Pool moderne.
+
+Les protocoles SMB sur QUIC et gRPC sont des exemples de communication moderne.
+
+Les commandes GetNumaNodeProcessorMaskEx et VirtualAlloc2 sont des exemples d'APIs NUMA.

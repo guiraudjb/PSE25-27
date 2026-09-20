@@ -1,0 +1,149 @@
+FONDAMENTAUX RESEAUX : EQUIPEMENTS D'INTERCONNEXION ET DE COMMUNICATION INTERNE.
+
+LEXIQUE COMPLET.
+
+      Equipement d'interconnexion : equipement permettant de relier plusieurs reseaux entre eux, par opposition aux equipements de communication interne qui gerent les echanges au sein d'un meme reseau.
+
+      Modele OSI : modele de reference en sept couches (Physique, Liaison, Reseau, Transport, Session, Presentation, Application) servant a classer les equipements et les protocoles reseau.
+
+      Repeteur : equipement de niveau 1 (couche Physique) amplifiant et regenerant le signal electrique pour etendre la portee du reseau sans modifier les donnees transmises.
+
+      Multiplexeur : equipement de niveau 1 permettant de faire transiter plusieurs voies de communication sur un unique support physique, via le multiplexage frequentiel (FDM) ou temporel (TDM).
+
+      FDM (Frequency Division Multiplexing) : multiplexage partageant la bande de frequence entre les voies, utilise en telephonie analogique.
+
+      TDM (Time Division Multiplexing) : multiplexage partageant le temps entre les voies, utilise dans les reseaux numeriques.
+
+      Pont (Bridge) : equipement de niveau 2 (couche Liaison) reliant des reseaux locaux heterogenes et filtrant les trames en fonction des adresses MAC, agissant au niveau de la sous-couche LLC.
+
+      Commutateur (Switch) : equipement de niveau 2 (couche Liaison) assurant la commutation intelligente des trames entre les noeuds d'un LAN en s'appuyant sur une table d'association adresse MAC / port.
+
+      Table MAC : table maintenue par un commutateur associant chaque adresse MAC a un port physique, construite automatiquement par apprentissage au fil des echanges.
+
+      VLAN (802.1Q) : reseau local virtuel permettant de segmenter logiquement un reseau physique en groupes de travail isoles, gere par les commutateurs avances.
+
+      VRRP (Virtual Router Redundancy Protocol) : protocole (RFC 2338) assurant la redondance du routeur par defaut pour eviter les interruptions de service en cas de panne.
+
+      ACL (Access Control List) : liste de regles de filtrage appliquee sur un equipement reseau pour autoriser ou bloquer des flux en fonction de criteres tels que l'adresse IP ou le port TCP/UDP.
+
+      Routeur : equipement de niveau 3 (couche Reseau) assurant le routage des paquets entre reseaux heterogenes (LAN, WAN) en s'appuyant sur des tables de routage et des adresses IP.
+
+      Routage statique : mode de routage ou les tables sont configurees manuellement par l'administrateur, simple mais peu adaptable aux changements topologiques.
+
+      Routage dynamique : mode de routage ou les tables sont mises a jour automatiquement via des protocoles tels que RIP (vecteur de distance), OSPF ou BGP (etat de liens).
+
+      RIP : protocole de routage a vecteur de distance adapte aux petits reseaux, ou chaque routeur annonce ses routes a ses voisins avec une metrique de distance.
+
+      OSPF : protocole de routage a etat de liens adapte aux grands reseaux, ou les routeurs partagent une carte complete du reseau pour calculer le chemin le plus court.
+
+      BGP : protocole de routage utilise sur Internet pour echanger les tables de routage entre grands reseaux autonomes.
+
+      NAT (Network Address Translation) : fonction du routeur permettant de partager une seule adresse IP publique entre plusieurs noeuds d'un reseau prive.
+
+      VPN (Virtual Private Network) : tunnel chiffre cree par un routeur entre des sites distants pour securiser les communications sur un reseau public.
+
+      CSU/DSU (Channel Service Unit / Data Service Unit) : equipement integre dans les routeurs frontieres permettant de traduire les trames entre les protocoles LAN et WAN (exemple : Ethernet vers Frame Relay).
+
+      Passerelle (Gateway) : equipement de niveau applicatif (couches 5 a 7) convertissant les protocoles entre des systemes utilisant des architectures differentes, aujourd'hui largement remplacee par des API et des middleware.
+
+      STP (Spanning Tree Protocol) : protocole evitant les boucles de commutation dans les reseaux contenant des commutateurs redondants.
+
+COURS DETAILLE.
+
+I. ROLE ET CLASSIFICATION DES EQUIPEMENTS D'INTERCONNEXION.
+
+   A. Definition et distinction.
+
+      Les reseaux informatiques reposent sur des equipements d'interconnexion qui permettent de relier physiquement des reseaux entre eux et d'acheminer les informations de maniere efficace. Ces equipements agissent a differents niveaux du modele OSI, chacun ayant un role specifique dans la transmission et le traitement des donnees.
+
+      Il est necessaire de distinguer deux categories. Les equipements d'interconnexion relient plusieurs reseaux entre eux, comme un routeur entre un LAN et un WAN. Les equipements de communication interne assurent le transfert des informations entre les noeuds au sein d'un meme reseau, comme un commutateur ou un hub.
+
+   B. Enjeux des equipements d'interconnexion.
+
+      Les equipements d'interconnexion repondent a quatre enjeux majeurs. Ils permettent d'etendre la portee geographique des reseaux, par exemple via des repeteurs pour contourner les limites physiques des cables. Ils ameliorent les performances, par exemple via des commutateurs pour eviter les collisions. Ils assurent l'interoperabilite entre des technologies differentes, par exemple via des passerelles. Ils securisent et filtrent le trafic, par exemple via des routeurs equipes d'ACL et de pare-feu.
+
+II. EQUIPEMENTS DE NIVEAU 1 : COUCHE PHYSIQUE.
+
+   A. Les repeteurs.
+
+      Les repeteurs agissent comme des amplificateurs de signal. Ils recoivent un signal affaibli sur un cable coaxial ou une fibre optique, le regenerent et le reemettent pour qu'il puisse parcourir de plus longues distances. Ils ne modifient pas les donnees transmises et sont donc transparents pour les couches superieures du modele OSI.
+
+      Les repeteurs sont simples et peu couteux, mais ils presentent des limites importantes : ils ne resolvent pas les problemes de congestion, ils amplifient aussi le bruit du signal, et ils ne filtrent pas le trafic car tout est repete. Leur usage principal est de depasser les distances maximales imposees par les standards, comme la limite de 100 m pour Ethernet en cable cuivre.
+
+   B. Les multiplexeurs.
+
+      Les multiplexeurs permettent de faire transiter plusieurs voies de communication sur un unique support physique. Deux techniques principales existent. Le multiplexage frequentiel (FDM) partage la bande de frequence entre les voies, comme en telephonie analogique. Le multiplexage temporel (TDM) partage le temps entre les voies, comme dans les reseaux numeriques. Les multiplexeurs peuvent supporter jusqu'a 400 000 voies simultanees.
+
+      Les multiplexeurs sont utilises dans les reseaux telephoniques pour multiplexer des milliers d'appels sur une seule fibre optique, et dans les reseaux WAN pour optimiser la bande passante des liaisons longue distance.
+
+III. EQUIPEMENTS DE NIVEAU 2 : COUCHE LIAISON.
+
+   A. Les ponts (Bridges).
+
+      Les ponts agissent au niveau de la sous-couche LLC (Logical Link Control) de la couche Liaison. Ils decodent les en-tetes des trames d'un reseau, les modifient si necessaire pour les rendre compatibles avec un autre reseau (par exemple, adaptation entre Ethernet et Token Ring), puis les acheminent vers leur destination. Ils filtrent les collisions et ameliorent les performances en isolant les segments de reseau. Les ponts sont independants des protocoles des couches superieures (IP, TCP).
+
+      Les ponts peuvent creer des boucles (risque de storm de diffusion) et leurs performances sont limitees car le traitement est logiciel. Ils sont aujourd'hui largement remplaces par les commutateurs.
+
+   B. Les commutateurs (Switches).
+
+      Un commutateur est un equipement actif connectant les appareils d'un LAN et transmettant les trames entre ses ports en couche 2 (adresses MAC), afin d'eviter les collisions. Contrairement aux repeteurs ou aux hubs, il n'envoie les trames que vers le port de destination en s'appuyant sur une table d'association MAC/port.
+
+      L'apprentissage automatique est le mecanisme fondamental du commutateur. Lorsqu'il recoit une trame, il enregistre l'adresse MAC de l'emetteur et le port d'origine dans sa table. Apres plusieurs echanges, il connait l'emplacement de chaque noeud et peut acheminer les trames directement vers leur destinataire, sans diffusion inutile.
+
+      Les commutateurs avances offrent des fonctionnalites supplementaires. Ils gerent les VLAN (norme 802.1Q) pour segmenter logiquement le reseau. En tant que commutateurs-routeurs de niveau 3, ils assurent le routage inter-VLAN en fonction des adresses IP et utilisent des protocoles de routage dynamique tels que RIP, OSPF et BGP. Le protocole VRRP (RFC 2338) assure la redondance du routeur par defaut. Les ACL filtrent l'acces aux sous-reseaux IP selon des regles definies. Enfin, les fonctions de niveau 4 permettent d'analyser le contenu des datagrammes IP pour autoriser ou bloquer des flux sur des ports TCP/UDP specifiques.
+
+IV. EQUIPEMENTS DE NIVEAU 3 : COUCHE RESEAU.
+
+   A. Les routeurs.
+
+      Les routeurs operent au niveau 3 (couche Reseau) et assurent le routage des paquets a travers des reseaux interconnectes. Ils segmentent et reassemblent les paquets, controlent la congestion, et traduisent les trames entre les protocoles LAN et WAN via une CSU/DSU. Les routeurs frontieres assurent la connexion entre un LAN et un WAN. Ils peuvent aussi scinder un reseau interne en sous-reseaux pour optimiser le trafic.
+
+      Les tables de routage permettent aux routeurs de determiner le meilleur chemin vers une destination. Le routage statique est configure manuellement par l'administrateur, simple mais peu adaptable. Le routage dynamique utilise des protocoles a vecteur de distance (RIP, pour les petits reseaux) ou a etat de liens (OSPF pour les grands reseaux, BGP pour Internet).
+
+      Les fonctionnalites avancees des routeurs incluent un pare-feu integre pour filtrer les paquets selon des regles de securite, le NAT pour partager une seule adresse IP publique entre plusieurs noeuds d'un reseau prive, et les VPN pour creer des tunnels securises entre des sites distants.
+
+V. EQUIPEMENTS DES COUCHES APPLICATIVES : PASSERELLES ET SYNTHESE.
+
+   A. Les passerelles (Gateways).
+
+      Les passerelles agissent au niveau applicatif (couches 5 a 7) pour convertir les protocoles entre des systemes utilisant des architectures differentes. Elles traduisent les donnees d'un format a un autre pour permettre a des applications non compatibles nativement de communiquer, comme la conversion de messages X.400 vers le format SMTP.
+
+      Les passerelles offrent une interoperabilite totale et sont transparentes pour les utilisateurs. Leurs limites sont une complexite de mise en oeuvre elevee et des performances limitees dues au traitement logiciel lourd. Elles sont aujourd'hui largement obsoletes, remplacees par des solutions logicielles telles que des proxys, des API ou des middleware.
+
+   B. Synthese comparative.
+
+      Le repeteur (niveau 1) amplifie le signal, est simple et transparent, mais ne filtre pas le trafic et amplifie le bruit. Le pont (niveau 2) filtre les collisions et relie des LAN heterogenes, mais est limite en performances et peut creer des boucles. Le commutateur (niveau 2) offre une haute performance par commutation materielle et un apprentissage automatique, mais est plus couteux et complexe. Le routeur (niveau 3) interconnecte des reseaux heterogenes et offre des fonctions de securite, mais introduit de la latence. La passerelle (niveaux 5 a 7) assure une interoperabilite totale mais est complexe et aujourd'hui obsolete. Le multiplexeur (niveau 1) optimise la bande passante mais depend du protocole utilise.
+
+      En matiere de bonnes pratiques, il convient d'utiliser des commutateurs avec ACL pour filtrer le trafic interne, de configurer le routage dynamique pour les reseaux complexes, et d'eviter les boucles de commutation en utilisant le protocole STP (Spanning Tree Protocol).
+
+POINTS D'ATTENTION.
+
+      Un repeteur amplifie tout le signal, y compris le bruit : il ne resout pas les problemes de qualite de transmission liees aux interferences.
+
+      Les ponts peuvent creer des boucles de diffusion (broadcast storm) lorsque plusieurs chemins redondants existent : le protocole STP (Spanning Tree Protocol) est la solution pour eviter ce probleme avec les commutateurs.
+
+      Un commutateur en mode apprentissage diffuse les trames vers tous les ports tant qu'il ne connait pas l'adresse MAC de destination : cette phase initiale est normale et temporaire.
+
+      Le routage statique est simple mais inadapte aux grands reseaux evolutifs car tout changement de topologie necessite une reconfiguration manuelle.
+
+      Les passerelles applicatives sont aujourd'hui essentiellement remplacees par des API REST ou des middleware : leur usage direct est devenu marginal dans les architectures modernes.
+
+      La fonction NAT du routeur masque les adresses IP privees du reseau interne : cela constitue un premier niveau de securite mais n'est pas un pare-feu a proprement parler.
+
+EXEMPLES CITES.
+
+      Un repeteur est utilise dans un reseau Ethernet pour prolonger un segment au-dela de la limite maximale de 100 m prevue pour les cables en cuivre.
+
+      Un multiplexeur peut faire transiter jusqu'a 400 000 voies telephoniques simultanees sur une seule fibre optique.
+
+      Un pont interconnecte un reseau Ethernet et un reseau Token Ring en adaptant les en-tetes des trames.
+
+      Un commutateur avance cree des VLAN conformes a la norme 802.1Q pour isoler des groupes de travail au sein d'un meme reseau physique.
+
+      Le protocole VRRP (RFC 2338) assure la continuite du service en cas de panne du routeur par defaut dans un LAN.
+
+      Un routeur frontiere connecte un LAN d'entreprise a Internet via une CSU/DSU qui traduit les trames Ethernet en Frame Relay.
+
+      La conversion de messages du protocole X.400 vers le protocole SMTP est un exemple historique d'usage d'une passerelle applicative.
+
+      Le protocole STP (Spanning Tree Protocol) est configure sur les commutateurs pour eviter les boucles de diffusion dans les reseaux a topologie redondante.

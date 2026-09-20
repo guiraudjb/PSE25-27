@@ -1,0 +1,161 @@
+ADRESSAGE IP : IPV4, IPV6 ET CONFIGURATION IP SOUS LINUX.
+
+LEXIQUE COMPLET.
+
+      Adresse IP : adresse logique unique attribuee a chaque interface reseau d'un equipement pour l'identifier sur un reseau, utilisee par le protocole IP pour acheminer les paquets.
+
+      IPv4 : protocole d'adressage sur 32 bits (4 octets) en notation decimale v.x.y.z (exemple : 192.168.1.1), offrant theoriquement 4,3 milliards d'adresses (2^32), une plage desormais epuisee en Europe depuis 2019 (RIPE NCC).
+
+      IPv6 (IP Next Generation) : protocole d'adressage sur 128 bits (2^128, soit 340 sextillions d'adresses), standardise par la RFC 2460 (1998) et mis a jour par la RFC 8200 (2017), avec IPsec natif et en-tete simplifie.
+
+      RFC 791 : RFC definissant le protocole IP.
+
+      Classes d'adresses IPv4 : division historique des adresses en 5 classes (A, B, C, D, E) en fonction des premiers bits.
+
+      Classe A (0-127) : 126 reseaux, 16,7 millions d'hotes par reseau, masque par defaut 255.0.0.0.
+
+      Classe B (128-191) : 16 384 reseaux, 65 534 hotes par reseau, masque 255.255.0.0.
+
+      Classe C (192-223) : 2 millions de reseaux, 254 hotes par reseau, masque 255.255.255.0.
+
+      Classe D (224-239) : adresses multicast (diffusion vers un groupe d'hotes).
+
+      Classe E (240-255) : adresses reservees aux experimentations.
+
+      Adresse reseau : adresse dont tous les bits hote sont a 0, identifiant le reseau lui-meme (exemple : 192.168.1.0).
+
+      Adresse broadcast : adresse dont tous les bits hote sont a 1, permettant la diffusion a tous les hotes du reseau (exemple : 192.168.1.255).
+
+      Adresse loopback : 127.0.0.1 en IPv4 et ::1 en IPv6, permettant le test de la pile IP sans passer par les couches inferieures.
+
+      Adresses privees (RFC 1918) : plages d'adresses non routables sur Internet : 10.0.0.0/8, 172.16.0.0/12 et 192.168.0.0/16.
+
+      APIPA : plage 169.254.x.y auto-attribuee par le systeme si aucun serveur DHCP n'est disponible.
+
+      CIDR (Classless Inter-Domain Routing) : notation permettant de regrouper des plages d'adresses en blocs de taille variable (exemple : /24 pour 256 adresses), optimisant les tables de routage et palliant l'epuisement des adresses de classes fixes.
+
+      Masque de sous-reseau (netmask) : valeur binaire permettant de determiner la partie reseau et la partie hote d'une adresse IP, et de diviser un reseau en sous-reseaux.
+
+      VLSM (Variable Length Subnet Masking) : technique permettant d'utiliser des masques de longueur variable dans un meme reseau pour adapter la taille de chaque sous-reseau aux besoins reels, evitant le gaspillage d'adresses.
+
+      NAT (Network Address Translation) : traduction d'adresses privees en adresses publiques pour acceder a Internet via un routeur, solution temporaire a l'epuisement IPv4.
+
+      Dual Stack : mecanisme de cohabitation ou les hotes et routeurs supportent simultanement IPv4 et IPv6. Le DNS utilise les enregistrements A (IPv4) et AAAA (IPv6).
+
+      Tunneling IPv6 over IPv4 : encapsulation de datagrammes IPv6 dans des paquets IPv4 pour traverser des reseaux encore en IPv4 uniquement. Protocoles : 6to4 et Teredo.
+
+      NAT-PT (Network Address Translation - Protocol Translation) : traduction dynamique des en-tetes IPv4 vers IPv6 et inversement par un routeur frontiere.
+
+      Adresse lien-local : adresse IPv6 de prefixe FE80::/64 utilisable uniquement sur le meme reseau local, equivalent de l'APIPA en IPv4.
+
+      IPsec natif : chiffrement et authentification integres nativement dans IPv6 (optionnel en IPv4).
+
+COURS DETAILLE.
+
+I. ADRESSAGE IP : FONDEMENTS ET EVOLUTION.
+
+   A. Le protocole IP et ses fonctions.
+
+      Le protocole IP (Internet Protocol), defini dans la RFC 791, est au coeur de la couche Reseau (niveau 3 du modele OSI ou niveau 2 du modele DOD/TCP-IP). Son role principal est d'acheminer les datagrammes entre les hotes d'un reseau, en designant chaque equipement par une adresse IP unique. IP ne garantit ni la fiabilite ni l'ordre des paquets, ces aspects etant geres par les couches superieures comme TCP.
+
+      IP assure trois fonctions essentielles : l'identification des hotes via une adresse logique, l'adaptation des donnees aux contraintes du reseau physique par fragmentation si la taille du datagramme depasse le MTU (Maximum Transmission Unit), et le routage des paquets vers leur destination via les tables de routage.
+
+      IP est indissociable de protocoles complementaires : ICMP pour les messages d'erreur et de diagnostic (commande ping), ARP/RARP pour la resolution d'adresses (IP vers MAC et inversement), et DHCP pour l'attribution dynamique des adresses IP.
+
+   B. IPv4 : format, classes et adresses particulieres.
+
+      Une adresse IPv4 est codee sur 32 bits (4 octets) et notee sous la forme v.x.y.z (exemple : 192.168.1.1). Chaque octet est un nombre decimal entre 0 et 255. La plage totale theorique est de 4,3 milliards d'adresses (2^32), mais elle est desormais epuisee, notamment en Europe depuis 2019.
+
+      Les adresses IPv4 etaient initialement divisees en 5 classes definies par les premiers bits. La Classe A (plage 0-127) compte 126 reseaux avec 16,7 millions d'hotes par reseau (masque 255.0.0.0). La Classe B (128-191) compte 16 384 reseaux avec 65 534 hotes par reseau (masque 255.255.0.0). La Classe C (192-223) compte 2 millions de reseaux avec 254 hotes par reseau (masque 255.255.255.0). La Classe D (224-239) est reservee au multicast. La Classe E (240-255) est reservee aux experimentations.
+
+      Les adresses particulieres sont : l'adresse reseau (tous les bits hote a 0, exemple 192.168.1.0), l'adresse broadcast (tous les bits hote a 1, exemple 192.168.1.255), le loopback (127.0.0.1), les adresses privees non routables sur Internet (RFC 1918 : 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16), et les adresses APIPA (169.254.x.y) auto-attribuees en l'absence de serveur DHCP.
+
+      Face a l'epuisement des adresses IPv4, deux solutions temporaires ont ete mises en place : le CIDR (Classless Inter-Domain Routing) permettant de regrouper des plages d'adresses et d'optimiser les tables de routage, et le NAT traduisant les adresses privees en adresses publiques pour acceder a Internet.
+
+   C. IPv6 : la reponse aux limites d'IPv4.
+
+      IPv6 (IP Next Generation) a ete standardise dans la RFC 2460 (1998) et mis a jour dans la RFC 8200 (2017). Il a ete concu pour repondre a cinq besoins : elargir l'espace d'adressage a 128 bits (340 sextillions d'adresses permettant d'attribuer une adresse a chaque appareil connecte y compris l'IoT), simplifier le routage par agregation de routes, ameliorer les performances avec un en-tete simplifie a 8 champs contre 14 en IPv4, integrer la securite avec IPsec natif, et assurer la cohabitation avec IPv4 via des mecanismes de transition.
+
+      Une adresse IPv6 est composee de 8 groupes de 16 bits en hexadecimal separes par des deux-points (exemple : 2001:0ab8:1d15:69e8:93f9:9409:9809:abcd). Deux raccourcis sont autorises : les zeros initiaux d'un groupe peuvent etre omis, et une suite de groupes nuls peut etre remplacee par "::" une seule fois seulement. L'adresse loopback IPv6 est ::1/128 (equivalent de 127.0.0.1). Les adresses privees IPv6 ont le prefixe FC00::/7.
+
+      Les types d'adresses IPv6 sont : Unicast (identifie une unique interface), Multicast (prefixe FF00::/8, remplace le broadcast IPv4), Anycast (identifie un groupe d'interfaces, le paquet etant achemine vers la plus proche), Lien-local (prefixe FE80::/64, utilisable uniquement sur le meme reseau local), et les adresses de compatibilite IPv4 (::ffff:192.0.2.1 pour le tunneling).
+
+      L'en-tete IPv6 (40 octets) est simplifie par rapport a IPv4 (20 octets). Il contient 8 champs : Version (toujours 6), Classe de trafic (priorite QoS), Identificateur de flux (routage optimise pour les flux temps reel), Longueur des donnees, En-tete suivant (protocole encapsule), Nombre de sauts (equivalent du TTL), et les adresses source et destination.
+
+II. SOUS-RESEAUX ET CIDR.
+
+   A. Masque de sous-reseau et calcul CIDR.
+
+      Le masque de sous-reseau (netmask) permet de diviser un reseau en sous-reseaux afin de reduire la taille des tables de routage, d'optimiser l'utilisation des adresses et d'ameliorer la securite par isolation des segments.
+
+      La notation CIDR exprime le nombre de bits reseau apres une barre oblique. Une adresse 192.168.1.0/24 utilise un masque 255.255.255.0 (24 bits pour le reseau, 8 pour les hotes). Avec 192.168.0.0/22, on regroupe 4 reseaux /24 (de 192.168.0.0 a 192.168.3.255) en une seule entree de routage.
+
+      Le calcul du nombre d'adresses disponibles suit la formule 2^(32 - longueur du masque) - 2 (en retirant l'adresse reseau et l'adresse broadcast). Un /24 donne 2^8 - 2 = 254 adresses utilisables. Un /23 donne 2^9 - 2 = 510 adresses utilisables.
+
+   B. VLSM : masques de longueur variable.
+
+      Le VLSM (Variable Length Subnet Masking) permet d'utiliser des masques de longueur variable dans un meme reseau pour adapter la taille des sous-reseaux aux besoins reels. Un sous-reseau de 100 hotes et un autre de 50 hotes peuvent coexister dans le meme espace d'adressage sans gaspillage.
+
+      Exemple : le reseau 192.168.0.0/24 peut etre divise en deux sous-reseaux /25 : 192.168.0.0/25 (128 adresses) et 192.168.0.128/25 (128 adresses).
+
+III. TRANSITION IPV4 VERS IPV6 ET ETAT ACTUEL.
+
+   A. Les trois mecanismes de cohabitation.
+
+      Le Dual Stack consiste a ce que les noeuds (hotes et routeurs) supportent simultanement IPv4 et IPv6. Le DNS utilise des enregistrements A pour IPv4 et AAAA pour IPv6. Un serveur web peut ainsi ecouter a la fois sur une adresse IPv6 et sur une adresse IPv4.
+
+      Le tunneling (IPv6 over IPv4) encapsule les datagrammes IPv6 dans des paquets IPv4 pour traverser des reseaux encore purement IPv4. Les protocoles 6to4 et Teredo sont les plus utilises pour connecter des ilots IPv6 via Internet.
+
+      NAT-PT (Network Address Translation - Protocol Translation) permet la traduction dynamique des en-tetes IPv4 vers IPv6 et inversement par un routeur frontiere, autorisant un reseau purement IPv6 a communiquer avec un reseau purement IPv4.
+
+   B. Etat de l'adoption en 2026.
+
+      IPv6 est en croissance notamment en Europe, en Amerique du Nord, en Inde et au Japon, avec un taux d'adoption depassant 40 a 50 % dans certains pays. En France, la 5G impose IPv6 car les operateurs ayant obtenu des frequences 5G doivent le supporter. La transition est cependant lente en raison de la complexite des migrations (materiel, logiciels, competences) et de leur cout.
+
+IV. CONFIGURATION IP SOUS LINUX.
+
+   A. Detection et configuration dynamique.
+
+      Avant de configurer le reseau, il faut identifier les interfaces disponibles. La commande "lspci | grep -i ethernet" liste les cartes reseau PCI. La commande "lshw -class network" affiche les interfaces avec leurs caracteristiques (adresse MAC, vitesse). La commande "dmesg | grep -i eth" affiche les messages du noyau lies aux interfaces. La commande "ip -d link show enp0s3" donne des informations sur le pilote de l'interface.
+
+      Les commandes du paquet iproute2 permettent une configuration dynamique (perdue apres redemarrage). "ip addr" gere les adresses IP (equivalant a ifconfig). "ip addr add 192.168.1.10/24 dev enp0s3" ajoute une IP. "ip link set enp0s3 up" ou "down" active ou desactive une interface. "ip route" gere les routes. "ip route add default via 192.168.1.1" definit la passerelle par defaut. "ip neigh" affiche la table ARP/NDP.
+
+   B. Configuration statique et fichiers.
+
+      La configuration statique persiste apres redemarrage via des fichiers specifiques a chaque distribution. Sur la famille RedHat/CentOS/RockyLinux, les fichiers /etc/sysconfig/network et /etc/sysconfig/network-scripts/ifcfg-enp0s3 configurent l'interface. Sur la famille Debian/Ubuntu, le fichier /etc/network/interfaces configure les interfaces.
+
+      Les fichiers complementaires sont : /etc/hosts (resolution statique de noms), /etc/resolv.conf (serveurs DNS), /etc/services (association ports vers services), et /etc/nsswitch.conf (ordre de resolution des noms, exemple "hosts: files dns"). Le redemarrage du service reseau se fait avec "systemctl restart network" ou "systemctl restart NetworkManager" sur les distributions recentes.
+
+   C. Validation et diagnostic reseau.
+
+      La procedure de validation d'une configuration reseau sous Linux suit six etapes. La premiere est de verifier l'interface avec "ip addr show enp0s3". La deuxieme est de tester la connectivite locale avec "ping 127.0.0.1" (valide la couche IP) et "ping 192.168.1.1" (teste la passerelle). La troisieme est de tester la connectivite externe avec "ping 8.8.8.8" et "traceroute google.com". La quatrieme est de verifier la resolution DNS avec "nslookup google.com" ou "dig google.com". La cinquieme est de verifier les routes avec "ip route show". La sixieme est de tester les services avec "curl http://192.168.1.10" pour un serveur web.
+
+      Les commandes de surveillance du trafic sont : "ss -tuln" (liste les ports TCP/UDP en ecoute), "tcpdump -i enp0s3 port 80" (capture le trafic HTTP), "iftop -i enp0s3" (trafic par connexion) et "nload enp0s3" (trafic en temps reel par interface).
+
+POINTS D'ATTENTION.
+
+      Les adresses privees (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) ne sont pas routables sur Internet : elles necessitent le NAT pour acceder a Internet depuis un reseau local.
+
+      Le calcul CIDR soustrait toujours 2 du nombre d'adresses brutes : une pour l'adresse reseau (bits hote a 0) et une pour le broadcast (bits hote a 1).
+
+      En IPv6, la notation "::" ne peut apparaitre qu'une seule fois dans une adresse : utiliser "::" deux fois serait ambigu sur le nombre de groupes nuls remplaces.
+
+      La Classe D (224-239) est reservee au multicast et ne peut pas etre attribuee a une interface comme adresse unicast.
+
+      Les commandes "ip addr add" et "ip route add" sont temporaires : les changements sont perdus apres redemarrage. La persistance necessite la modification des fichiers de configuration.
+
+      La 5G impose IPv6 en France : les operateurs disposant de licences 5G doivent supporter IPv6 nativement, accelarant ainsi la migration.
+
+EXEMPLES CITES.
+
+      L'adresse 192.168.1.0/24 utilise un masque 255.255.255.0 et offre 254 adresses utilisables (hotes de .1 a .254).
+
+      L'adresse 192.168.0.0/22 regroupe 4 reseaux /24 (de 192.168.0.0 a 192.168.3.255) en une seule entree de routage.
+
+      L'adresse APIPA 169.254.x.y est auto-attribuee par Windows ou Linux si aucun serveur DHCP n'est disponible.
+
+      Un serveur web peut ecouter sur 2001:db8::1 (IPv6) et 192.0.2.1 (IPv4) simultanement en mode Dual Stack.
+
+      La commande "ping 127.0.0.1" valide la pile IP locale sans envoyer de paquet sur le reseau physique.
+
+      La commande "tcpdump -i enp0s3 port 80" capture uniquement le trafic HTTP sur l'interface enp0s3.

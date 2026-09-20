@@ -1,0 +1,105 @@
+GENERALITES SUR LE SYSTEME D'EXPLOITATION - LA GESTION DES ENTREES / SORTIES SOUS LINUX.
+
+LEXIQUE COMPLET.
+
+      Entrees/Sorties (E/S) : ensemble des echanges de donnees entre le processeur ou la memoire et les peripheriques (disques, clavier, carte reseau, ecran). Les E/S sont beaucoup plus lentes que les operations du processeur et constituent l'un des principaux goulets d'etranglement des systemes informatiques.
+
+      Appel systeme (system call) : unique interface entre l'espace utilisateur et l'espace noyau. Tout programme souhaitant effectuer une E/S doit transiter par un appel systeme pour que le noyau prenne en charge l'operation, verifie les droits et interagisse avec le materiel.
+
+      Bus : voie de communication electronique transportant les donnees entre le processeur, la memoire et les peripheriques au sein d'une architecture informatique.
+
+      Controleur de peripherique : composant materiel assurant l'interface entre le peripherique et le systeme informatique. Il gere les echanges de donnees, les erreurs materielles et la generation des interruptions.
+
+      Pilote de peripherique (device driver) : composant logiciel du noyau traduisant les commandes generiques du systeme (lecture, ecriture) en instructions specifiques comprehensibles par le controleur materiel. Il gere egalement les erreurs et assure le bon fonctionnement des echanges.
+
+      Peripherique de type caractere : peripherique transmettant les donnees sous forme de flux continu, sequentiellement, octet par octet. Exemples : clavier, terminal, port serie.
+
+      Peripherique de type bloc : peripherique organisant les donnees en blocs de taille fixe et permettant un acces direct et aleatoire. Exemples : disques durs, SSD.
+
+      E/S programmees : methode d'acces aux peripheriques dans laquelle le processeur pilote directement toute l'operation. Simple mais inefficace car le CPU reste occupe pendant toute la duree de l'acces.
+
+      DMA (Direct Memory Access) : mecanisme permettant le transfert de donnees directement entre un peripherique et la memoire, sans mobiliser le processeur. Le CPU est libere et peut executer d'autres taches pendant le transfert. Utilise pour les peripheriques a fort debit (disques, cartes reseau).
+
+      Interruption : signal envoye par un peripherique au processeur pour lui signaler un evenement (fin d'une operation de lecture, erreur, etc.). Le processeur suspend temporairement le programme en cours, execute une routine du noyau pour traiter l'evenement, puis reprend l'execution normalement. Elimine l'attente active et ameliore l'efficacite du systeme.
+
+      Attente active (busy-waiting / polling) : methode inefficace consistant pour le CPU a interroger en continu un peripherique pour verifier si une operation est terminee. Consomme inutilement des cycles processeur.
+
+      Abstraction materielle : principe de conception du noyau Linux representant tous les peripheriques comme des fichiers dans /dev, permettant d'utiliser les memes operations (read, write) pour des ressources tres differentes et rendant le systeme portable et independant du materiel specifique.
+
+      lsblk : commande Linux affichant les disques et les partitions de maniere arborescente et structuree.
+
+      iostat : commande Linux fournissant des statistiques sur les acces disque : debit, temps d'attente, saturation. Utile pour identifier les goulots d'etranglement disque.
+
+      vmstat : commande Linux fournissant une vue globale de l'activite memoire, du swap, des E/S et du processeur.
+
+      iotop : commande Linux permettant d'identifier en temps reel les processus qui consomment le plus d'entrees/sorties. Outil de diagnostic essentiel pour les problemes de performance.
+
+      /proc et /sys : systemes de fichiers virtuels du noyau Linux fournissant des informations detaillees en temps reel sur le fonctionnement du noyau, des processus et du materiel.
+
+COURS DETAILLE.
+
+I. ROLE DES E/S ET ARCHITECTURE GENERALE.
+
+   A. Role des entrees/sorties dans un systeme d'exploitation.
+
+      Les entrees/sorties permettent aux programmes de communiquer avec les peripheriques, tels que les disques, le clavier, la carte reseau ou l'ecran. Le systeme d'exploitation joue un role central dans cette gestion : il masque la complexite du materiel, fournit des interfaces standardisees (comme read et write) et organise l'acces aux ressources entre plusieurs processus. Les operations E/S sont critiques car elles sont beaucoup plus lentes que les operations du processeur. Le systeme doit donc optimiser leur utilisation et eviter de bloquer inutilement le CPU. Le noyau agit comme intermediaire entre les applications et le materiel, garantissant la securite et la coherence des echanges.
+
+   B. Architecture generale des E/S.
+
+      Une operation d'entree/sortie repose sur plusieurs elements qui cooperent. Le peripherique (disque, clavier, carte reseau) realise l'operation physique. Le controleur assure l'interface materielle entre le peripherique et le reste du systeme. Le bus transporte les donnees. Le pilote traduit les commandes generiques du noyau en instructions specifiques au peripherique. Le noyau coordonne l'ensemble. Cette organisation en couches permet de separer les responsabilites, rend le systeme plus modulaire et permet aux applications de fonctionner independamment du materiel utilise.
+
+II. NOYAU, TYPES DE PERIPHERIQUES ET MECANISMES D'ACCES.
+
+   A. Role du noyau dans la gestion des E/S.
+
+      Le noyau est responsable de toutes les operations d'E/S. Lorsqu'un programme souhaite lire ou ecrire des donnees, il doit passer par un appel systeme. Cet appel systeme constitue l'unique interface entre l'espace utilisateur et l'espace noyau. Le noyau effectue alors plusieurs actions : il verifie les droits d'acces, identifie le peripherique concerne, declenche l'operation et retourne le resultat au programme. Ce passage obligatoire par le noyau garantit la securite des acces, l'isolation entre processus et la coherence du systeme.
+
+   B. Types de peripheriques.
+
+      Les peripheriques sont classes selon leur mode de fonctionnement. Les peripheriques de type caractere fonctionnent sous forme de flux continu : ils transmettent les donnees sequentiellement, comme le clavier ou un terminal. Les peripheriques de type bloc manipulent des donnees organisees en blocs de taille fixe : ils permettent un acces direct et aleatoire, comme les disques ou les SSD. Certains peripheriques sont hybrides et peuvent fonctionner selon les deux modes en fonction de l'utilisation. Cette distinction est importante car elle conditionne les performances et le mode d'acces aux donnees.
+
+   C. Mecanismes d'acces aux peripheriques.
+
+      Plusieurs techniques permettent d'effectuer des entrees/sorties. Dans les E/S programmees, le processeur pilote directement l'operation : cette methode est simple mais inefficace, car le CPU reste occupe pendant toute la duree de l'acces. Avec le DMA (Direct Memory Access), le transfert de donnees est realise directement entre le peripherique et la memoire sans mobiliser le processeur : le CPU est libere et peut executer d'autres taches. Le DMA est utilise pour les peripheriques a fort debit comme les disques ou les cartes reseau.
+
+III. INTERRUPTIONS, PILOTES ET ABSTRACTION.
+
+   A. Interruptions et gestion des E/S.
+
+      Les interruptions permettent aux peripheriques de signaler un evenement au processeur, par exemple la fin d'une operation de lecture. Lorsqu'une interruption se produit, le processeur suspend temporairement le programme en cours et execute une routine du noyau pour traiter l'evenement. Une fois le traitement termine, l'execution reprend normalement. Ce mecanisme evite l'attente active et ameliore fortement l'efficacite du systeme.
+
+   B. Pilotes de peripheriques et abstraction materielle.
+
+      Les pilotes sont des composants logiciels du noyau qui assurent la communication entre le systeme d'exploitation et le materiel. Ils traduisent les commandes generiques du systeme (lecture, ecriture) en instructions specifiques au peripherique. Ils gerent egalement les erreurs et assurent le bon fonctionnement des echanges. Grace aux pilotes, les applications n'ont pas besoin de connaitre les details du materiel utilise.
+
+      Linux repose sur un principe fondamental d'abstraction : tous les peripheriques sont representes comme des fichiers. Un disque est accessible via /dev/sda et un terminal via /dev/tty. Cette approche permet d'utiliser les memes operations (lecture, ecriture) pour manipuler des ressources tres differentes. Cette representation unifiee simplifie fortement l'administration du systeme. La couche d'abstraction materielle rend ainsi le systeme portable et independant du materiel specifique.
+
+   C. Commandes et outils Linux pour les E/S.
+
+      Plusieurs commandes permettent d'observer et d'analyser les entrees/sorties. La commande "ls /dev" permet de visualiser les peripheriques reconnus par le systeme. La commande "lsblk" affiche les disques et les partitions de maniere structuree et arborescente. Les commandes "lspci" et "lsusb" permettent d'identifier le materiel connecte via les bus PCI et USB.
+
+      Pour analyser les performances, "iostat" fournit des statistiques sur les acces disque (debit, temps d'attente, saturation), tandis que "vmstat" donne une vue globale de l'activite memoire et des E/S. La commande "iotop" permet d'identifier les processus qui consomment le plus d'entrees/sorties, ce qui est tres utile en diagnostic. Les systemes de fichiers virtuels /proc et /sys fournissent des informations detaillees sur le fonctionnement du noyau et du materiel.
+
+POINTS D'ATTENTION.
+
+      Les E/S sont fondamentalement plus lentes que le CPU : un acces disque prend des millisecondes la ou un cycle CPU prend des nanosecondes. Toute architecture applicative doit minimiser les E/S synchrones et privilegier les acces asynchrones ou les caches pour ne pas bloquer l'execution.
+
+      Le DMA libere le CPU mais ne supprime pas les latences : le transfert DMA prend du temps et l'interruption finale doit toujours etre traitee par le noyau. Pour les tres petits transferts, le cout de configuration du DMA peut depasser le benefice par rapport aux E/S programmees.
+
+      Les peripheriques de type caractere et de type bloc ne peuvent pas etre utilises de la meme maniere : un disque (bloc) permet de lire a une position arbitraire, mais un terminal (caractere) ne fournit que le flux sequentiel des donnees saisies. Confondre les deux types peut provoquer des erreurs inattendues.
+
+      Tous les acces aux peripheriques transitent obligatoirement par le noyau via des appels systeme : aucune application en espace utilisateur ne peut acceder directement au materiel. Ce principe garantit l'isolation, la securite et la stabilite du systeme.
+
+      La commande "iotop" necessite generalement des privileges root pour afficher les statistiques de tous les processus : sans privileges, seuls les processus de l'utilisateur courant sont visibles.
+
+EXEMPLES CITES.
+
+      Un disque dur est accessible sous Linux via le fichier special /dev/sda (peripherique de type bloc). Les partitions sont accessibles via /dev/sda1, /dev/sda2, etc. Un terminal est accessible via /dev/tty (peripherique de type caractere). Les deux sont manipules avec les memes appels systeme read et write.
+
+      La commande "lsblk" affiche l'arborescence des disques et partitions avec leur taille, leur type et leur point de montage : utile pour comprendre rapidement la structure de stockage d'un systeme.
+
+      La commande "iostat -x 1" affiche toutes les secondes les statistiques detaillees des acces disque : le taux d'utilisation (%util), le temps d'attente moyen (await) et le debit permettent d'identifier un disque sature.
+
+      La commande "iotop" affiche en temps reel les processus avec leurs debits de lecture et d'ecriture, permettant d'identifier rapidement le processus responsable d'une saturation disque.
+
+      Les systemes de fichiers virtuels /proc et /sys exposent les informations du noyau sous forme de fichiers : /proc/interrupts liste toutes les interruptions du systeme et leur nombre d'occurrences par processeur, utile pour diagnostiquer les problemes de peripheriques.

@@ -1,0 +1,203 @@
+INTRODUCTION AU SYSTEME LINUX ET UNIX : HISTOIRE, PHILOSOPHIE ET ETAT DE L'ART (2025).
+
+LEXIQUE COMPLET.
+
+      L'Open Group est un consortium international fondé en 1996 responsable de la certification des systèmes Unix selon des standards stricts pour garantir l'interopérabilité.
+
+      La certification Unix est un label attribué aux systèmes respectant des critères techniques précis comme la présence de CDE ou la gestion des threads.
+
+      MULTICS est l'ancêtre d'Unix datant des années 1960, abandonné en raison de sa complexité excessive et de l'utilisation du langage PL/1.
+
+      Le langage C est le langage de programmation créé par Dennis Ritchie en 1974 permettant la réécriture du noyau Unix pour le rendre portable.
+
+      POSIX est un standard créé pour unifier les interfaces de programmation et éviter l'incompatibilité entre les multiples versions d'Unix.
+
+      Le noyau Linux est le composant central du système gérant les ressources matérielles et les processus, créé initialement par Linus Torvalds en 1991.
+
+      GNU/Linux désigne le système d'exploitation complet associant le noyau Linux aux outils du projet GNU comme le compilateur GCC et le shell bash.
+
+      La licence GPL est une licence libre qui impose que toute modification du code source redistribuée soit partagée avec la communauté.
+
+      Un système ouvert est un système dont les spécifications sont publiques et qui respecte des normes pour assurer la compatibilité et l'interopérabilité.
+
+      Un système distribué est une architecture répartissant la charge sur plusieurs machines pour la scalabilité, qui peut être ouverte ou fermée propriétaire.
+
+      L'interopérabilité est la capacité de systèmes hétérogènes à fonctionner ensemble grâce au respect de normes communes.
+
+      La portabilité désigne la capacité d'un système à fonctionner sur différentes architectures matérielles.
+
+      Le mode préemptif est une gestion multitâche où le système d'exploitation peut interrompre une tâche pour réallouer les ressources selon des priorités.
+
+      Les quotas sont un mécanisme permettant de limiter l'espace disque utilisable par un utilisateur ou un groupe pour éviter la saturation.
+
+      SMIT est l'outil d'administration caractéristique du système AIX offrant une interface texte ou graphique.
+
+      ZFS est le système de fichiers avancé de Solaris offrant compression, déduplication et intégrité des données.
+
+      Darwin est le noyau hybride combinant Mach et des composants BSD qui sert de base aux systèmes macOS et iOS.
+
+      Minix est un système conçu à des fins pédagogiques par Andrew Tanenbaum, caractérisé par une architecture micro-noyau.
+
+COURS DETAILLE.
+
+I. RAPPEL HISTORIQUE.
+
+   A. Présentation d'Unix et standardisation.
+
+      L'Open Group est une organisation issue de la fusion entre X/Open et l'Open Source Foundation en 1996.
+
+      Ce consortium rassemble plus de 200 membres dont des acteurs industriels comme IBM et HP ainsi que des institutions comme la NASA.
+
+      La mission principale de l'Open Group est d'établir des normes communes pour garantir l'interopérabilité et la qualité des systèmes.
+
+      Pour obtenir la certification Unix, un système doit respecter des exigences techniques strictes telles que l'intégration du gestionnaire CDE et la conformité aux protocoles réseau.
+
+   B. Genèse d'Unix.
+
+      Les origines d'Unix remontent à l'échec du projet MULTICS dans les années 1960, jugé trop complexe à cause du langage PL/1.
+
+      Ken Thompson a créé une version simplifiée nommée initialement UNICS en 1969 aux laboratoires Bell, renommée ensuite UNIX en 1971.
+
+      Une révolution technique a eu lieu en 1974 lorsque Dennis Ritchie a réécrit entièrement le système en langage C.
+
+      Cette transition vers le langage C a rendu le système portable et facile à maintenir, facilitant son adoption massive notamment dans le milieu universitaire.
+
+      L'université de Berkeley a développé la variante BSD-UNIX qui a introduit le protocole TCP/IP, devenant ainsi la pierre angulaire d'Internet.
+
+      Le standard POSIX a été élaboré pour contrer les risques d'incompatibilité liés à la multiplication des versions d'Unix.
+
+   C. Ecosystème GNU/Linux.
+
+      Le terme Linux désigne strictement le noyau du système qui gère le matériel, tandis que le système complet incluant les outils GNU se nomme GNU/Linux.
+
+      Le projet a débuté en 1991 lorsque Linus Torvalds a souhaité créer une alternative au système pédagogique Minix pour les processeurs 386.
+
+      La version 1.0 stable de Linux a été publiée en 1994, intégrant des outils essentiels comme le compilateur GCC et le shell bash.
+
+      En octobre 2025, la version stable du noyau est la 6.5.x et la distinction historique entre versions paires et impaires n'existe plus.
+
+      Le langage Rust commence à être utilisé aux côtés du langage C pour l'écriture de certaines parties du noyau Linux.
+
+   D. Evolution des systèmes Unix.
+
+      L'histoire des systèmes Unix se divise en plusieurs branches complexes visualisables sur des diagrammes détaillés.
+
+      Cette famille inclut des systèmes propriétaires historiques et des systèmes modernes libres ou hybrides.
+
+II. PHILOSOPHIE GENERALE DU SYSTEME.
+
+   A. Caractéristiques techniques.
+
+      Les systèmes Unix et Linux sont des systèmes ouverts respectant des standards industriels comme TCP/IP et Ethernet.
+
+      La portabilité est une force majeure permettant à ces systèmes de fonctionner sur tout type de matériel, de l'embarqué au cloud.
+
+      L'architecture est multi-utilisateurs et multitâche, fonctionnant en temps partagé avec une gestion préemptive des processus.
+
+      Le système de fichiers est hiérarchique et sécurisé par des droits d'accès, des ACL et des quotas pour gérer l'espace disque.
+
+      Les interfaces incluent des lignes de commande puissantes et des environnements graphiques modernes comme GNOME 49.x et KDE 6.x en 2025.
+
+   B. Classification des groupes.
+
+      Les systèmes Unix Based comme HP-UX et Solaris reposent sur un noyau monolithique hérité de l'architecture System V.
+
+      Les systèmes Unix Like utilisent des noyaux différents mais partagent la même philosophie, incluant Linux et Darwin.
+
+      Les systèmes propriétaires gardent leur code fermé tandis que les systèmes libres comme Linux distribuent leur code source ouvertement.
+
+III. SYSTEMES OUVERTS.
+
+   A. Définition et principes.
+
+      Un système ouvert se définit par la disponibilité publique de ses spécifications et le respect des normes pour assurer l'interopérabilité.
+
+      L'Association Française des Utilisateurs d'Unix nommée AFUU puis AFNET a promu ces principes de transparence.
+
+      L'ouverture permet à des acteurs tiers de proposer des implémentations alternatives et favorise l'innovation collaborative.
+
+   B. Distinction Ouvert contre Distribué.
+
+      Un système distribué répartit la charge de travail sur plusieurs nœuds pour améliorer la performance et la résilience.
+
+      Un système distribué peut être techniquement fermé et propriétaire, contrairement à un système ouvert qui garantit l'accès aux spécifications.
+
+      Les infrastructures modernes comme le cloud combinent souvent une architecture distribuée avec des technologies ouvertes comme Kubernetes.
+
+   C. Positionnement sur le marché.
+
+      Les systèmes Unix propriétaires restent présents dans les secteurs critiques comme la banque pour leur stabilité éprouvée.
+
+      Linux domine totalement le secteur du calcul haute performance en équipant 100 pour cent du classement TOP500 en 2025.
+
+      Linux est également massivement adopté dans le cloud et par certaines administrations publiques comme la gendarmerie française.
+
+IV. PRESENTATION DES SYSTEMES UNIX ET LINUX DU MARCHE EN 2025.
+
+   A. AIX par IBM.
+
+      La version AIX 7.3 sortie en 2021 est optimisée pour les processeurs POWER9 et POWER10.
+
+      L'outil SMIT est l'atout majeur d'AIX car il simplifie l'administration système via une interface unifiée.
+
+      IBM propose des solutions hybrides permettant la coexistence d'AIX et de Linux sur les mêmes serveurs.
+
+   B. La famille BSD.
+
+      FreeBSD 14.3 est optimisé pour les serveurs et le stockage, avec une compatibilité améliorée pour les pilotes Linux et l'architecture ARM64.
+
+      NetBSD 10.1 est le champion de la portabilité, capable de tourner sur plus de 50 architectures différentes.
+
+      OpenBSD 7.7 se concentre sur la sécurité proactive, le code audité et intègre nativement le pare-feu PF.
+
+   C. HP-UX par HPE.
+
+      HP-UX est considéré comme un système Legacy principalement maintenu pour la compatibilité des applications héritées.
+
+      La gestion du système s'effectue via l'outil historique SAM ou l'interface web SMH.
+
+   D. Solaris par Oracle.
+
+      Solaris 11.4 met l'accent sur la virtualisation et l'intégration avec le cloud Oracle.
+
+      Le système de fichiers ZFS est sa fonctionnalité phare, offrant compression et réparation automatique des données.
+
+   E. Darwin par Apple.
+
+      Darwin est le cœur Unix des systèmes macOS 26 et iOS en 2025.
+
+      Il repose sur un noyau hybride combinant Mach et des composants BSD, optimisé pour les puces Apple Silicon.
+
+   F. Minix.
+
+      Minix est un système pédagogique créé par Andrew Tanenbaum utilisant une architecture micro-noyau pour une fiabilité maximale.
+
+      La version 3.3.0 maintient cette approche où les pilotes sont isolés en espace utilisateur.
+
+   G. Distributions Linux majeures.
+
+      Red Hat Enterprise Linux 9.4 est la référence pour les entreprises nécessitant un support long terme.
+
+      OpenSUSE propose les versions Leap pour la stabilité et Tumbleweed pour les nouveautés, gérées par l'outil YaST.
+
+      Ubuntu 24.04 est une version LTS assurant 5 ans de support, très utilisée sur les postes de travail et dans le cloud.
+
+POINTS D'ATTENTION.
+
+      Il est crucial de distinguer le noyau Linux du système complet GNU/Linux qui inclut les outils utilisateurs.
+
+      La règle historique associant les versions paires à la stabilité et impaires au développement n'est plus valide pour le noyau Linux actuel.
+
+      Un système distribué n'est pas synonyme de système ouvert car il peut reposer sur des technologies totalement propriétaires.
+
+      La licence GPL de Linux oblige au partage des modifications du code source, contrairement aux licences BSD plus permissives.
+
+EXEMPLES CITES.
+
+      L'agence spatiale NASA est membre du consortium Open Group.
+
+      La gendarmerie nationale française a migré ses postes de travail sous Ubuntu.
+
+      Les routeurs Cisco utilisent du code issu des systèmes BSD grâce à la souplesse de la licence.
+
+      Le serveur web Apache et le système graphique X11 sont des exemples emblématiques de systèmes ouverts.

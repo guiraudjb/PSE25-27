@@ -1,0 +1,219 @@
+PROCESSUS PRINCIPES LINUX.
+
+LEXIQUE COMPLET.
+
+      Un programme est un fichier exécutable statique stocké sur le disque résultant de la compilation d'un code source.
+
+      Un processus est une instance dynamique d'un programme résidant en mémoire et en cours d'exécution par le système d'exploitation.
+
+      Le PID ou Process ID est un identifiant unique attribué à chaque processus par le système.
+
+      Le PPID ou Parent Process ID correspond à l'identifiant du processus père ayant créé le processus courant.
+
+      La pile ou Stack est une zone mémoire gérée dynamiquement par le noyau pour stocker les contextes d'appels de fonctions.
+
+      Le tas ou Heap est une zone mémoire réservée à l'allocation dynamique de mémoire à la demande du programme.
+
+      Le Swapper est le premier processus créé au démarrage du noyau avec le PID 0 et père du processus init.
+
+      Un daemon est un processus s'exécutant en arrière-plan comme le service cron.
+
+      L'appel système fork permet de créer un nouveau processus par duplication du processus appelant.
+
+      L'appel système exec permet d'effectuer un recouvrement de code pour lancer un nouveau programme dans le processus courant.
+
+      Le RUID ou Real User ID est l'identifiant réel de l'utilisateur ayant lancé le processus.
+
+      L'EUID ou Effective User ID est l'identifiant effectif déterminant les droits réels du processus pouvant différer du RUID en cas d'endossement.
+
+      Le bit set-uid est un mécanisme permettant l'exécution d'un programme avec les droits du propriétaire du fichier plutôt que ceux de l'utilisateur lanceur.
+
+      Une IRQ ou Interrupt Request est une interruption matérielle provoquant un basculement vers le mode noyau.
+
+      L'ordonnancement est la fonction du système d'exploitation gérant le partage du temps processeur entre les différents processus.
+
+      Le quantum est le temps d'exécution limite alloué à un processus avant qu'il ne soit préempté.
+
+      La famine désigne une situation où un processus n'accède jamais au processeur.
+
+      Le répertoire proc est un pseudo-système de fichiers virtuel résidant en mémoire fournissant des informations sur les processus actifs.
+
+COURS DÉTAILLÉ.
+
+I. NOTION DE PROCESSUS.
+
+   A. Définition et distinction.
+
+      Un programme est un fichier inerte et statique stocké sur le disque dur.
+
+      Un processus est l'exécution dynamique de ce programme en mémoire vive.
+
+      Un même programme peut donner lieu à plusieurs processus distincts appelés instances qui possèdent des états différents.
+
+   B. Le concept de multitâche.
+
+      Le système d'exploitation crée une illusion de simultanéité en allouant successivement le processeur à chaque processus.
+
+II. LE PROCESSUS DANS LA MEMOIRE SYSTEME.
+
+   A. Structure interne en cinq zones.
+
+      La zone de code contient les instructions machine du programme et demeure fixe et partagée entre les instances.
+
+      La zone des données initialisées contient les variables ayant une valeur définie au départ du programme.
+
+      La zone des données non initialisées contient les variables qui seront initialisées durant l'exécution.
+
+      Le tas est une zone d'allocation dynamique manuelle qui s'étend vers les adresses hautes de la mémoire.
+
+      La pile est une zone d'allocation dynamique automatique gérant les appels de fonctions et s'étendant vers les adresses basses.
+
+      Les zones de pile et de tas s'étendent en sens inverse dans l'espace libre pour optimiser l'utilisation de la mémoire.
+
+   B. Gestion par le système d'exploitation.
+
+      Le système maintient une table des processus contenant les métadonnées vitales pour chaque instance en cours.
+
+      Cette table stocke les identifiants hiérarchiques tels que le PID et le PPID.
+
+      Elle contient les droits utilisateurs représentés par le RUID et l'EUID ainsi que les identifiants de groupe.
+
+      Elle conserve des références vers la table des régions mémoire et la table des descripteurs de fichiers ouverts.
+
+      Elle inclut des informations de gestion comme la priorité, l'état actuel, les signaux en attente et les statistiques de ressources.
+
+III. HIERARCHIE ET CREATION DES PROCESSUS.
+
+   A. Arborescence initiale.
+
+      Tout processus possède obligatoirement un père ce qui crée une structure hiérarchique stricte.
+
+      Le processus Swapper portant le PID 0 est créé par le noyau au démarrage et n'est pas visible via les commandes classiques.
+
+      Le Swapper crée le processus Init ou Systemd qui porte le PID 1.
+
+      Le processus Init ou Systemd engendre ensuite tous les autres processus utilisateurs comme les consoles et les services.
+
+   B. Mécanisme de duplication.
+
+      L'appel système fork crée une copie exacte du processus père.
+
+      Le PID du nouveau processus fils est calculé en incrémentant le dernier PID alloué.
+
+      Le contexte mémoire est copié à l'exception du code qui reste partagé en lecture seule.
+
+      La fonction fork retourne le PID du fils au processus père et la valeur 0 au processus fils pour les différencier.
+
+   C. Mécanisme de recouvrement.
+
+      L'appel système exec remplace le programme en cours d'exécution par un nouveau programme.
+
+      Les zones mémoires existantes sont écrasées et une nouvelle zone de code est allouée pour le nouveau programme.
+
+   D. Gestion des orphelins.
+
+      Si un processus père termine son exécution avant son fils, ce dernier est adopté par le processus Init ou Systemd.
+
+      Le PPID du processus orphelin devient alors automatiquement la valeur 1.
+
+IV. MODES D'EXECUTION.
+
+   A. Rôle du noyau.
+
+      Le système d'exploitation agit comme une interface de contrôle et de protection entre le matériel et les logiciels.
+
+      Le noyau n'est pas un processus parallèle distinct mais constitue une partie privilégiée de l'espace d'adressage de chaque processus.
+
+   B. Distinction des modes.
+
+      Le mode utilisateur est le mode par défaut offrant des droits restreints et un accès limité à la mémoire propre du processus.
+
+      Le mode noyau est un mode privilégié offrant un accès total à la mémoire et aux périphériques matériels.
+
+      Les threads noyaux sont des processus spécifiques qui s'exécutent exclusivement en mode noyau pour des tâches de maintenance.
+
+   C. Commutation de contexte.
+
+      Le passage du mode utilisateur au mode noyau est déclenché par un appel système, une opération interdite ou une interruption matérielle.
+
+      Le système sauvegarde le contexte de l'utilisateur avant d'exécuter le code du noyau puis restaure le contexte initial.
+
+V. ORDONNANCEMENT DES PROCESSUS.
+
+   A. Principes généraux.
+
+      L'ordonnancement vise à partager équitablement le temps processeur entre les différentes tâches actives.
+
+      Les systèmes modernes utilisent des algorithmes préemptifs capables d'interrompre un processus en cours d'exécution.
+
+   B. Algorithme du Tourniquet.
+
+      L'ordonnanceur utilise un mécanisme de Round Robin basé sur un quantum de temps compris entre 10 et 100 millisecondes.
+
+      Lorsque le quantum est épuisé, le processus est préempté et replacé en fin de file d'attente.
+
+   C. Gestion des priorités.
+
+      Le système utilise des files d'attente multiples pour gérer les différents niveaux de priorité des tâches.
+
+      La priorité des processus en attente augmente progressivement avec le temps pour éviter les situations de famine.
+
+VI. INFORMATION SUR UN PROCESSUS SOUS LINUX.
+
+   A. Le système de fichiers proc.
+
+      Linux expose les données du noyau via un système de fichiers virtuel monté dans le répertoire proc.
+
+      Chaque processus actif dispose d'un sous-répertoire nommé selon son PID.
+
+   B. Fichiers clés d'un processus.
+
+      Le fichier cwd est un lien symbolique pointant vers le répertoire de travail courant du processus.
+
+      Le fichier environ contient la liste des variables d'environnement accessibles au processus.
+
+      Le fichier exe est un lien symbolique vers le fichier binaire exécutable sur le disque.
+
+      Le répertoire fd contient les descripteurs de fichiers ouverts dont l'entrée et les sorties standards.
+
+      Le fichier maps détaille la cartographie des adresses mémoires virtuelles et leurs permissions d'accès.
+
+      Le fichier status fournit un résumé complet et lisible par l'humain de l'état du processus.
+
+   C. Détails du fichier status.
+
+      Le champ State indique l'état courant comme Sleeping, Running, Zombie ou Stopped.
+
+      Les champs mémoire comme VmSize et VmRSS indiquent respectivement la taille virtuelle totale et la mémoire résidente en RAM.
+
+      Les champs SigPnd et SigIgn informent sur les signaux en attente de traitement ou ignorés par le processus.
+
+POINTS D'ATTENTION.
+
+      Il ne faut pas confondre le processus Swapper de PID 0 avec le processus Init de PID 1.
+
+      Le processus Swapper est invisible via la commande ps car il appartient au noyau.
+
+      Les zones de tas et de pile s'étendent dans des directions opposées pour maximiser l'espace libre central.
+
+      La valeur de retour de la fonction fork est l'unique moyen pour le programme de déterminer s'il est le père ou le fils.
+
+      Le mode noyau correspond à un état de privilège du processeur et non à un processus distinct.
+
+      L'identifiant effectif EUID prévaut sur l'identifiant réel RUID lors de la vérification des permissions.
+
+EXEMPLES CITES.
+
+      La commande ps permet de visualiser les processus actifs.
+
+      La commande lsof liste les fichiers ouverts par les processus.
+
+      La commande sleep permet de mettre un processus en pause pendant une durée déterminée.
+
+      Le démon cron est cité comme exemple de processus s'exécutant en arrière-plan.
+
+      Le chemin proc sys kernel pid_max permet de consulter le nombre maximal de PID.
+
+      Les bibliothèques libc.so.6 et ld-linux-x86-64.so.2 apparaissent dans le fichier maps.
+
+      L'exemple du processus sleep avec le PID 9342 est utilisé pour illustrer le contenu du dossier proc.

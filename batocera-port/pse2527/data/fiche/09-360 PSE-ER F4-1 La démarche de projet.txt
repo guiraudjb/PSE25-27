@@ -1,0 +1,221 @@
+LA DÉMARCHE DE PROJET INFORMATIQUE.
+
+
+LEXIQUE COMPLET.
+
+      Projet informatique selon la norme ISO 9004-5 : ensemble d'activités coordonnées et dirigées, entreprises pour fournir à des dates de début et de fin définies un produit unique répondant à des exigences spécifiées, ayant recours à des moyens humains et non humains mis en commun dans une organisation temporaire.
+
+      Caractéristiques invariables d'un projet : tâches liées entre elles à interaction complexe, caractère unique et non répétitif, objectifs spécifiques, planification et coûts définis.
+
+      Caractéristiques d'un projet : limitation dans le temps avec un début et une fin, objectifs précis en délais, coûts, qualité et performances constituant des contraintes, réalisation unique et non répétitive, avenir incertain comportant une part de risque, complexité excluant l'improvisation d'où le recours à des outils, méthodes et normes, et organisation humaine spécifique et temporaire regroupant l'équipe de projet fournisseur, un client et des utilisateurs.
+
+      Réussite d'un projet informatique : obtenir un produit répondant à tous les besoins exprimés de l'utilisateur final mais seulement ses besoins, en respectant les contraintes prédéfinies de coût, de délai et de qualité.
+
+      Aléas d'un projet : aléas fonctionnels comme une évolution réglementaire imprévue, aléas techniques comme une mauvaise maîtrise des techniques ou la non-disponibilité des matériels, et aléas organisationnels comme l'indisponibilité des personnes ou un retard de fourniture.
+
+      Causes de dysfonctionnement : mauvaise prévision des tâches, mauvaise estimation des conséquences du changement, mauvaise organisation dans le partage des rôles, mauvaise communication entraînant des objectifs mal connus et des validations implicites, et engagements contractuels mal définis entre maîtrise d'ouvrage et maîtrise d'œuvre.
+
+      Éléments de la démarche de construction logicielle : les buts qui définissent les objectifs assignés au projet, le processus et cycle de vie qui donne l'ordre de procéder, les méthodes qui indiquent comment procéder, et le formalisme et les outils qui indiquent par quels moyens procéder.
+
+      Buts : objectifs assignés au projet répondant à la question de ce que l'on veut obtenir, à placer au premier plan et à ne jamais perdre de vue.
+
+      Processus (démarche) : fil conducteur de l'organisation des actions répondant à la question de l'ordre dans lequel procéder, régi par trois idées, prévoir et planifier les tâches sur toute la durée de vie, optimiser les interactions entre les tâches interdépendantes, et pouvoir réagir efficacement quand les buts évoluent.
+
+      Méthode : ensemble de procédures et de concepts homogènes se traduisant par des modèles, généralement indépendante du cycle de vie, répondant à la question de comment procéder.
+
+      Modèle : représentation simplifiée mais juste du système réel pour mieux le comprendre et le concevoir, principal livrable des différents stades du projet servant de point de contrôle et de validation pour minimiser les risques de dérapage.
+
+      Formalisme : langage de représentation graphique reposant sur des règles d'utilisation et une sémantique, permettant la communication entre tous les acteurs.
+
+      Outils : support indispensable du formalisme apportant productivité, référentiel et vérification du respect des normes, outils de modélisation ou de génération de code et de documentation.
+
+      Schéma directeur : planification stratégique de l'organisme dans ses domaines d'action.
+
+      Schéma directeur informatique : sous-ensemble du schéma directeur fixant les grandes orientations de la politique d'informatisation, acquisition des matériels, stratégie de sous-traitance, développement des réseaux, politique d'achat de logiciels ou de middleware, généralement défini pour cinq ans et régulièrement actualisé, reposant sur un bilan de la situation actuelle.
+
+      Étude de faisabilité et d'opportunité : réflexion générale sur chaque projet identifié, formalisée au niveau du schéma directeur, du schéma directeur informatique ou d'un avant-projet selon l'enjeu ; tous les projets ne sont pas issus du schéma directeur, une évolution de l'environnement ou une sollicitation inopinée pouvant en engendrer.
+
+      Maintenance évolutive : maintenance assimilée à un projet et conduite de façon similaire.
+
+      Lettre de mission : document nommant le chef de projet et lui donnant ordre de commencer un projet, définissant les grandes lignes, objectifs et contraintes.
+
+      Réunion de lancement : réunion regroupant les responsables stratégiques du projet, le chef de projet, les consultants éventuels et les partenaires.
+
+      Découpage en sous-projets : découpage fonctionnel, organisationnel ou technique issu des études préliminaires selon la nature des sujets à traiter.
+
+      Conduite de projet : activités de pilotage du projet, partagées entre maîtrise d'ouvrage et maîtrise d'œuvre, visant à s'assurer que le logiciel est fourni dans les conditions négociées, respect des délais, des coûts et de la qualité.
+
+      Maîtrise d'ouvrage (MOA) : le client, constitué de la direction générale ou des services gestionnaires commanditaires, propriétaires ou futurs utilisateurs, à qui appartient le système d'information et qui prend toutes les décisions ayant un impact sur lui, avec des attributions stratégiques et opérationnelles.
+
+      Attributions stratégiques de la MOA : au lancement, accord sur l'opportunité, fixation des objectifs et des conditions, mise en place des structures de pilotage, arbitrage sur les ressources ; en cours de projet, définition des grands besoins fonctionnels et des exigences de sécurité, validation des dossiers, suivi des échéances majeures.
+
+      Attributions opérationnelles de la MOA : au lancement, expression des besoins et de leur priorité, participation au diagnostic, fourniture de la volumétrie, précision des règles de gestion, validation des dossiers ; en cours de projet, conduite du changement par communication et formation, participation à la documentation utilisateur, test du produit et réception définitive des travaux.
+
+      Comité directeur (ou comité stratégique) : instance de décision et de pilotage composée de représentants de la hiérarchie des services commanditaires et parfois des utilisateurs, avec des représentants de la direction informatique, prenant en charge les attributions stratégiques de la MOA.
+
+      Comité de suivi (ou comité de pilotage) : instance de pilotage opérationnel agissant pour le compte du comité directeur, présidée par un représentant de la MOA, non systématique, absente dans les projets de petite envergure, prenant en charge les attributions opérationnelles de la MOA.
+
+      Comité des utilisateurs : instance composée d'utilisateurs représentatifs des domaines concernés, pilotée par un représentant de la MOA, aux attributions opérationnelles, expression détaillée des besoins et des règles de gestion, validation des dossiers, participation à la documentation et à la formation, réception définitive.
+
+      Maîtrise d'œuvre (MOE) : le fournisseur, responsable des travaux confiés par la MOA, devant réaliser le produit conformément aux conditions de coût, délai et qualité, généralement la direction informatique en interne ou un prestataire extérieur en cas de sous-traitance.
+
+      Attributions de la MOE : au lancement, aide à l'expression des besoins, intégration dans le système d'information existant, constitution de l'équipe projet et désignation du chef de projet ; en production, étude préalable, études détaillée et technique, conception de l'architecture, réalisation et tests fonctionnels et techniques, acquisition ou adaptation de l'infrastructure ; en conduite du changement, études d'organisation des postes, communication, formation et soutien ; à la mise en service, reprise des données, procédures provisoires, sites pilotes ; en support, gestion de l'équipe et du projet, participation aux réunions MOA et contrôle de la qualité.
+
+      Équipe projet : structure de la MOE réunissant les compétences nécessaires, une partie pouvant être sous-traitée, avec des compétences permanentes comme le chef de projet et ponctuelles comme les experts réseau, architecture ou base de données.
+
+      Organisation verticale : la plus répandue, confiant le projet au service qui assure habituellement le suivi des applications du domaine fonctionnel, avec l'avantage des compétences fonctionnelles mais un risque de cloisonnement et une difficulté pour les projets transversaux.
+
+      Organisation matricielle : réunion dans une structure spécifique et temporaire de techniciens issus de divers services placés sous la responsabilité fonctionnelle du chef de projet, avec l'avantage de la mobilité des compétences et de la dissociation projet-opérationnel, mais une gestion plus délicate si les rôles du chef de service et du chef de projet ne sont pas clairs.
+
+      Effet tunnel : absence de visibilité de la MOA sur l'avancement des travaux tant que le logiciel n'est pas terminé, à éviter par une information fine et fréquente et l'organisation de résultats intermédiaires.
+
+      Charte de projet (ou charte de fonctionnement) : document officialisant les rôles des intervenants et des structures, échangé entre MOA et MOE.
+
+      Programme : ensemble de projets, par exemple les programmes Copernic et Hélios de la DGFiP.
+
+      Diagramme de Gantt : outil de tenue du planning permettant de visualiser l'enchaînement des tâches et les tâches critiques, un retard sur une tâche critique se traduisant par un retard du projet.
+
+      CODEN (Comité des Dépenses Nouvelles) : à la DGFiP, comité associé à l'étape de lancement du projet qui valide les études précédentes et débloque les ressources.
+
+      Cycle de développement en V : modèle conceptuel limitant les retours arrière en détectant au plus tôt les incohérences des phases amont, caractérisé par des phases de réalisation mises en relation avec des phases de tests, à savoir analyse des besoins et faisabilité avec la recette, spécifications avec les tests de validation, conception architecturale avec les tests d'intégration, conception détaillée avec les tests unitaires, et codage ; lourd pour les gros projets et sujet aux effets tunnel, délaissé par l'industrie informatique mais encore utilisé ailleurs.
+
+      Méthodes agiles : méthodes apparues depuis le début des années 1990 avec le RAD, caractérisées par un plus grand pragmatisme et une forte implication du client, permettant de lever les problèmes plutôt que de les cacher, dont RAD, DSDM, Scrum, FDD, Extreme Programming, ASD et Crystal Clear.
+
+      Manifeste agile : publié en 2001, énonçant quatre valeurs, les individus et leurs interactions plus que les processus et les outils, des logiciels opérationnels plus qu'une documentation exhaustive, la collaboration avec les clients plus que la négociation contractuelle, et l'adaptation au changement plus que le suivi d'un plan.
+
+      SCRUM : méthode agile reposant sur les stories, ensemble des fonctionnalités à réaliser listées et hiérarchisées par le Product Owner qui est le client, et les sprints, ensembles de fonctionnalités cohérentes développées sur environ quatre semaines.
+
+      Product Owner : le client dans SCRUM, qui liste et hiérarchise les stories.
+
+      Itération SCRUM : suite de réunions comprenant la réunion de planification de sprint entre équipe et client fixant un périmètre qui ne peut plus évoluer jusqu'au sprint suivant, le daily meeting quotidien d'environ quinze minutes entre développeurs, la revue de sprint présentant le travail au client pour un retour immédiat, et la rétrospective de sprint réservée à l'équipe pour proposer des améliorations du processus.
+
+
+COURS DÉTAILLÉ.
+
+
+I. LE CADRE MÉTHODOLOGIQUE.
+
+
+   A. Les caractéristiques d'un projet.
+
+      Selon la norme ISO 9004-5, un projet informatique est un ensemble d'activités coordonnées et dirigées entreprises pour fournir à des dates définies un produit unique répondant à des exigences spécifiées, avec des moyens humains et non humains dans une organisation temporaire ; un projet comprend des tâches liées à interaction complexe, est unique et non répétitif, a des objectifs spécifiques et une planification et des coûts définis.
+
+      On retient d'un projet la limitation dans le temps, des objectifs précis en délais, coûts, qualité et performances constituant des contraintes, une réalisation unique, un avenir incertain comportant une part de risque, une complexité excluant l'improvisation, et une organisation humaine spécifique et temporaire regroupant l'équipe fournisseur, un client et des utilisateurs ; réussir un projet, c'est obtenir un produit répondant à tous les besoins exprimés de l'utilisateur mais seulement ses besoins, en respectant les contraintes de coût, de délai et de qualité, le projet devant fournir la démarche la plus adaptée et le chef de projet recourir à des méthodes de contrôle.
+
+
+   B. Les risques et les éléments de la démarche.
+
+      Des risques pèsent sur le projet, aléas fonctionnels comme une évolution réglementaire, aléas techniques comme une mauvaise maîtrise ou la non-disponibilité des matériels, et aléas organisationnels comme l'indisponibilité des personnes ; les causes de dysfonctionnement sont une mauvaise prévision des tâches, une mauvaise estimation des conséquences du changement, une mauvaise organisation dans le partage des rôles, une mauvaise communication et des engagements contractuels mal définis entre MOA et MOE.
+
+      La démarche de construction logicielle se compose des buts qui définissent les objectifs, du processus et cycle de vie qui donne l'ordre de procéder, des méthodes qui indiquent comment procéder, et du formalisme et des outils qui indiquent par quels moyens ; les buts doivent être placés au premier plan, le choix du processus vise à prévoir et planifier, à optimiser les interactions et à pouvoir réagir aux évolutions, la méthode repose sur des procédures et des modèles qui sont les principaux livrables et points de contrôle, et le formalisme est un langage graphique commun soutenu par des outils de modélisation ou de génération.
+
+
+   C. Le contexte général.
+
+      Le schéma directeur est la planification stratégique de l'organisme, le schéma directeur informatique en étant le sous-ensemble qui fixe les orientations d'informatisation, généralement pour cinq ans et régulièrement actualisé, reposant sur un bilan de la situation actuelle ; les études de faisabilité et d'opportunité sont formalisées au niveau du schéma directeur ou d'un avant-projet, mais tous les projets ne sont pas issus du schéma directeur, une évolution de l'environnement ou une sollicitation inopinée pouvant en engendrer, la maintenance évolutive étant assimilée à un projet.
+
+      Une fois le projet identifié, le lancement est formalisé par une lettre de mission qui nomme le chef de projet et définit objectifs et contraintes, et par une réunion de lancement regroupant les responsables stratégiques, le chef de projet et les partenaires ; les études préliminaires peuvent conduire à un découpage en sous-projets fonctionnel, organisationnel ou technique ; le pilotage relève de la conduite de projet, partagée entre MOA et MOE.
+
+
+II. L'ORGANISATION D'UN PROJET.
+
+
+   A. La maîtrise d'ouvrage.
+
+      La MOA est le client, constitué de la direction générale ou des services gestionnaires commanditaires, propriétaires ou futurs utilisateurs, à qui appartient le système d'information et qui prend toutes les décisions ayant un impact sur lui ; ses attributions stratégiques comprennent l'accord sur l'opportunité, la fixation des objectifs, la mise en place des structures de pilotage, l'arbitrage sur les ressources, la définition des besoins fonctionnels et des exigences de sécurité, la validation des dossiers et le suivi des échéances majeures.
+
+      Ses attributions opérationnelles comprennent l'expression des besoins et de leur priorité, la participation au diagnostic, la fourniture de la volumétrie, la précision des règles de gestion, la validation des dossiers, la conduite du changement par communication et formation, la participation à la documentation utilisateur, le test du produit et la réception définitive ; la MOA s'organise en un comité directeur ou stratégique qui décide et pilote, un comité de suivi ou de pilotage opérationnel non systématique, et un comité des utilisateurs qui exprime les besoins, valide les dossiers et prononce la réception.
+
+
+   B. La maîtrise d'œuvre.
+
+      La MOE est le fournisseur, responsable des travaux confiés par la MOA, devant réaliser le produit conformément aux conditions de coût, délai et qualité, généralement la direction informatique en interne ou un prestataire extérieur en sous-traitance ; ses attributions couvrent tout le cycle, aide à l'expression des besoins et intégration dans l'existant au lancement, étude préalable, conception, réalisation et tests en production, études d'organisation et formation en conduite du changement, reprise des données et sites pilotes à la mise en service, et gestion de l'équipe et contrôle de la qualité en support.
+
+      La MOE constitue une équipe projet réunissant les compétences nécessaires, avec des compétences permanentes comme le chef de projet et ponctuelles comme les experts ; l'organisation verticale, la plus répandue, confie le projet au service du domaine fonctionnel, avec l'avantage des compétences fonctionnelles mais un risque de cloisonnement, alors que l'organisation matricielle réunit des techniciens de divers services sous la responsabilité du chef de projet, avec une meilleure mobilité mais une gestion plus délicate.
+
+
+   C. Les relations MOA et MOE.
+
+      Les mauvaises relations entre MOA et MOE sont souvent invoquées pour justifier les retards, provenant d'un manque de confiance, d'une confusion des rôles, de la difficulté à prendre des décisions et à valider les documents ; la MOA a du mal à fixer des orientations tranchées et à comprendre les évaluations de charge, la MOE reproche à la MOA un manque de disponibilité et d'engagement.
+
+      Pour de bonnes relations, il faut au lancement définir clairement les périmètres respectifs, constituer rapidement les structures de pilotage, officialiser les rôles par une charte de fonctionnement et développer tôt des actions communes ; en production, la MOE doit informer aussi finement que possible la MOA pour éviter l'effet tunnel, organiser des résultats intermédiaires et tenir son rôle de conseil en remettant en cause des demandes ; la MOA ne doit pas renoncer à ses responsabilités au profit de la MOE, les deux parties recherchant un partenariat autour de l'objectif commun de construire ou faire évoluer un système d'information, les structures pouvant être modifiées en cours de projet si elles s'avèrent inefficaces.
+
+
+III. LA CONDUITE DE PROJET.
+
+
+   A. Les phases d'un projet.
+
+      Un projet est constitué d'étapes réalisées les unes après les autres ; à partir du cycle de vie de la DGFiP, on distingue l'expression initiale du besoin qui formalise le besoin et identifie les acteurs, l'étude d'opportunité qui affine la demande et commence le chiffrage en étudiant rentabilité, nécessité et risques, l'étude de faisabilité qui balaie les impacts sur le système d'information, la faisabilité technique et budgétaire, la planification et l'identification de la MOE, et le lancement du projet, principalement politique, qui valide les études et débloque les ressources, associé à la DGFiP à un CODEN.
+
+      Suivent des phases opérationnelles, la conception fonctionnelle en conception générale qui fixe le périmètre fonctionnel et les contraintes et en conception détaillée qui fournit le document de spécifications fonctionnelles servant de référence aux tests, la conception technique en conception générale qui définit les briques dans un cadre normatif et en conception détaillée qui décrit l'architecture, la réalisation qui code l'application ou déploie l'architecture avec la documentation technique, l'intégration applicative en environnement bouchonné, inter-applicative avec le reste du système d'information et du point de vue de l'exploitabilité, la mise en exploitation sur un périmètre restreint pour recueillir les retours, la mise en exploitation généralisée où le projet est confié aux équipes d'exploitation, et les cycles d'évolution qui peuvent couvrir à nouveau le cycle de vie complet.
+
+      Le pilotage, la gestion du changement et la gestion de la sécurité sont des phases transverses ; le pilotage se fait à travers des comités stratégiques en amont et opérationnels en aval, la gestion du changement accompagne les utilisateurs au plus tôt par documentation et formation, et la gestion de la sécurité commence dès la définition du projet en identifiant les données sensibles et les risques avec une équipe spécialisée, puis apporte des réponses techniques ou organisationnelles.
+
+
+   B. Les contraintes d'un projet.
+
+      La planification est essentielle mais le planning initial évolue toujours pour des raisons humaines, organisationnelles ou techniques, la disponibilité des ressources étant souvent remise en cause ; selon une étude du Gartner Group, seuls seize pour cent des projets respectent les budgets et les délais ; un projet est découpé en tâches qui s'enchaînent, en parallèle ou en séquence, le planning étant tenu par un diagramme de Gantt qui visualise l'enchaînement et les tâches critiques.
+
+      L'aspect budgétaire se décide en amont, le chef de projet affectant un budget à chaque poste après une évaluation fine des charges et du matériel ; la gestion d'équipe nécessite un large éventail de compétences que le chef de projet doit identifier, souvent acquises par la formation continue ou des prestations externes selon le budget, la communication influençant la motivation, d'où l'importance de points journaliers formalisés par les méthodes agiles.
+
+
+   C. Les méthodes de conduite.
+
+      Le cycle de développement en V a longtemps été un standard, limitant les retours arrière par la détection précoce des incohérences, avec des phases de réalisation mises en relation avec des phases de tests, analyse des besoins et recette, spécifications et tests de validation, conception architecturale et tests d'intégration, conception détaillée et tests unitaires vérifiant le comportement pour des données valides et non valides, et codage ; il est lourd pour les gros projets, sujet aux effets tunnel et à un manque de souplesse quand le besoin évolue, d'où son abandon par l'industrie informatique au profit de méthodes plus souples.
+
+      Les méthodes agiles, apparues avec le RAD au début des années 1990, se caractérisent par le pragmatisme et une forte implication du client, et permettent de lever les problèmes plutôt que de les cacher ; le manifeste agile de 2001 énonce quatre valeurs, les individus et leurs interactions plus que les processus et outils, des logiciels opérationnels plus qu'une documentation exhaustive, la collaboration avec les clients plus que la négociation contractuelle, et l'adaptation au changement plus que le suivi d'un plan.
+
+      SCRUM repose sur les stories, fonctionnalités listées et hiérarchisées par le Product Owner, et les sprints d'environ quatre semaines ; une itération comprend la réunion de planification de sprint qui négocie un périmètre figé jusqu'au sprint suivant, le daily meeting quotidien d'environ quinze minutes, la revue de sprint qui présente le travail au client pour un retour immédiat, et la rétrospective de sprint réservée à l'équipe pour améliorer le processus ; SCRUM responsabilise l'équipe, régulièrement consultée, et la succession des sprints apporte de la souplesse en détectant au plus tôt les incohérences et les manques d'informations.
+
+
+POINTS D'ATTENTION.
+
+      Réussir un projet, c'est répondre à tous les besoins exprimés mais seulement ceux-là, en respectant coût, délai et qualité.
+
+      La démarche de construction logicielle se compose des buts, du processus et cycle de vie, des méthodes, du formalisme et des outils.
+
+      Le schéma directeur informatique est généralement défini pour cinq ans, mais tous les projets ne sont pas issus du schéma directeur.
+
+      La MOA est le client propriétaire du système d'information ; la MOE est le fournisseur qui réalise le produit.
+
+      Le comité de suivi n'existe pas systématiquement ; dans les petits projets, un seul niveau de pilotage est retenu.
+
+      L'organisation verticale est la plus répandue, mais elle risque le cloisonnement pour les projets transversaux.
+
+      L'effet tunnel est l'absence de visibilité de la MOA tant que le logiciel n'est pas terminé, à éviter par des résultats intermédiaires.
+
+      La MOA ne doit pas renoncer à ses responsabilités au profit de la MOE ; les relations doivent être un partenariat.
+
+      Selon le Gartner Group, seuls seize pour cent des projets respectent les budgets et les délais.
+
+      Un retard sur une tâche critique du diagramme de Gantt se traduit par un retard du projet.
+
+      Le cycle en V est prédictif et sujet aux effets tunnel ; les méthodes agiles impliquent fortement le client.
+
+      Dans SCRUM, le périmètre d'un sprint est figé jusqu'au sprint suivant pour donner un minimum de stabilité.
+
+
+EXEMPLES CITES.
+
+      Norme ISO 9004-5 définissant le projet informatique.
+
+      Schéma directeur informatique défini pour cinq ans, avant-projet pour la réflexion générale.
+
+      Lettre de mission nommant le chef de projet et réunion de lancement.
+
+      Comité directeur, comité de suivi et comité des utilisateurs de la maîtrise d'ouvrage.
+
+      Programmes Copernic et Hélios de la Direction Générale des Finances Publiques.
+
+      CODEN, Comité des Dépenses Nouvelles, associé au lancement de projet à la DGFiP.
+
+      Diagramme de Gantt pour la tenue du planning et l'identification des tâches critiques.
+
+      Étude du Gartner Group indiquant seize pour cent de projets respectant budgets et délais.
+
+      Cycle en V avec recette, tests de validation, tests d'intégration et tests unitaires.
+
+      Manifeste agile de 2001 et méthodes RAD, DSDM, Scrum, FDD, Extreme Programming, ASD et Crystal Clear.
+
+      Méthode SCRUM avec stories, sprints d'environ quatre semaines, daily meeting et revue de sprint.
