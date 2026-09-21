@@ -1,0 +1,99 @@
+PANORAMA DE LA CYBERMENACE 2024, ANSSI.
+
+LEXIQUE COMPLET.
+
+      Le Panorama de la cybermenace est le document publié annuellement par l'ANSSI, couvrant la période du 1er janvier au 31 décembre de l'année précédente, revenant sur les grandes tendances de la menace informatique et les incidents marquants.
+
+      Un signalement regroupe tout comportement anormal ou inattendu pouvant avoir un caractère malveillant, tandis qu'un incident est un événement de sécurité où l'ANSSI confirme qu'un acteur malveillant a conduit des actions avec succès sur le système d'information de la victime.
+
+      Le durcissement du système d'information désigne l'ensemble des mesures de défense en profondeur, notamment la sécurisation de l'annuaire Active Directory, qui ralentissent la progression d'un attaquant et limitent les conséquences d'une compromission.
+
+      L'attribut ServicePrincipalName, ou SPN, est un paramètre Active Directory qui, mal positionné sur un compte privilégié, permet à un attaquant de mener une attaque par force brute dite Kerberoasting pour obtenir un mot de passe.
+
+      Une attaque par la chaîne d'approvisionnement, ou supply-chain, consiste à compromettre un éditeur de logiciel, un projet open source ou un prestataire de service pour atteindre par rebond l'ensemble de leurs clients ou utilisateurs finaux.
+
+      Nobelium est le mode opératoire d'attaque réputé lié au service de renseignement extérieur russe, le SVR, actif depuis 2020, spécialisé dans l'hameçonnage ciblé à des fins de collecte de renseignement stratégique.
+
+      Volt Typhoon est le mode opératoire d'attaque attribué par les Five Eyes à la Chine, utilisé potentiellement à des fins de pré-positionnement en vue de déstabilisation, s'appuyant sur le réseau d'anonymisation KV Botnet.
+
+      La technique dite Living off the Land, ou LoTL, consiste pour un attaquant à utiliser les outils déjà présents sur le système d'information ciblé, rendant sa détection plus difficile.
+
+      La lutte informatique offensive privée, ou LIOP, désigne le secteur des entreprises privées qui développent et commercialisent des capacités d'attaque informatique, notamment des logiciels espions, au profit d'États ou de clients privés.
+
+      L'ADINT, contraction d'advertising et intelligence, est une technique exploitant les failles du marché publicitaire pour associer un équipement à son utilisateur à des fins de surveillance ou d'espionnage.
+
+      Un Bullet Proof Hoster, ou BPH, est un hébergeur généralement situé hors d'atteinte des accords d'entraide judiciaire, offrant une immunité de fait à ses clients malveillants.
+
+      Le Ransomware as a Service, ou RaaS, est un modèle économique dans lequel un opérateur fournit un service et des ressources de rançongiciel à des affiliés, en échange d'un pourcentage des rançons obtenues.
+
+      Un infostealer est un code malveillant utilisé pour collecter des informations, notamment des authentifiants enregistrés dans les navigateurs, sur le poste de travail de la victime.
+
+      Un courtier en accès initiaux est un acteur cybercriminel spécialisé dans l'obtention et la revente d'accès non autorisés à un système d'information.
+
+      Le processus de Pall Mall, lancé en février 2024 par le Royaume-Uni et la France, est le dialogue international consacré à la lutte contre la prolifération et l'utilisation irresponsable des outils commerciaux d'intrusion cyber.
+
+COURS DÉTAILLÉ.
+
+I. LES TENDANCES GÉNÉRALES DE LA MENACE EN 2024.
+
+   A. Une hausse des événements liée aux Jeux olympiques.
+
+      En 2024, l'ANSSI a traité 4386 événements de sécurité, soit une augmentation de 15 pour cent par rapport à 2023, se décomposant en 3004 signalements et 1361 incidents. Cette augmentation s'explique en grande partie par le contexte des Jeux olympiques et paralympiques, avec une hausse des signalements à partir de mai 2024 et un pic au mois de juillet. L'ANSSI estime que les attaquants liés à l'écosystème cybercriminel ou réputés liés à la Chine et à la Russie constituent les trois principales menaces pour les systèmes d'information les plus critiques comme pour l'écosystème national.
+
+   B. Un panorama structuré en trois parties.
+
+      Le document distingue les opportunités pour les attaquants, à savoir les grands événements et les faiblesses techniques, les moyens mis en œuvre par les attaquants, notamment le ciblage de la chaîne d'approvisionnement et le mercenariat, et enfin la finalité des attaques, entre but lucratif, déstabilisation et espionnage.
+
+II. LES OPPORTUNITÉS POUR LES ATTAQUANTS.
+
+   A. Les Jeux olympiques et paralympiques de Paris 2024.
+
+      Le Comité d'organisation avait anticipé jusqu'à dix fois plus de cyberattaques qu'aux Jeux de Tokyo. Malgré une intensité élevée, aucune attaque n'a perturbé le déroulement des JOP. L'ANSSI a traité deux attaques majeures par rançongiciel pendant cette période, la compromission du réseau du Grand Palais-Réunion des Musées Nationaux par le rançongiciel BrainCipher début août 2024, et celle de l'Université Paris-Saclay par le rançongiciel WhiteRabbit le 11 août 2024, qui a notamment visé le laboratoire antidopage français. Des opérations de déstabilisation menées par des groupes hacktivistes pro-russes et pro-palestiniens ont recouru de manière constante à des attaques par déni de service distribué.
+
+   B. Les faiblesses techniques et le triptyque de la sécurité des systèmes d'information.
+
+      L'ANSSI rappelle le triptyque des bonnes pratiques, la sécurisation qui réduit l'exposition et les possibilités de latéralisation, la supervision qui détecte l'activité malveillante par l'analyse des journaux, et la réponse à incident qui intervient en dernier lieu. La priorité doit être donnée à la sécurisation de l'annuaire Active Directory. L'ANSSI constate que 82 pour cent des postes de travail des organismes utilisateurs du service ADS utilisent Windows 10, dont la fin de support est prévue le 14 octobre 2025, et que 36 pour cent des serveurs Windows sont dans une version obsolète.
+
+   C. Les vulnérabilités exploitées sur les équipements de bordure.
+
+      L'année 2024 a été marquée par des campagnes d'exploitation massive de vulnérabilités affectant des équipements de sécurité situés en bordure de système d'information, comme les pare-feux ou passerelles VPN. Plus de la moitié des opérations de cyberdéfense de l'ANSSI, son plus haut niveau d'engagement, ont eu pour origine l'exploitation de ces équipements. Les neuf vulnérabilités les plus exploitées en 2024 affectaient toutes des équipements de sécurité en bordure, notamment chez Ivanti, Palo Alto Networks et Fortinet. Le CERT-FR a traité 40 dossiers de coordination de vulnérabilités en 2024, contre 7 en 2020, et a reçu 236 signalements de vulnérabilités.
+
+III. LES MOYENS MIS EN ŒUVRE PAR LES ATTAQUANTS.
+
+   A. Le ciblage de la chaîne d'approvisionnement.
+
+      Les attaques par la chaîne d'approvisionnement logiciel visent à piéger un logiciel pour atteindre l'ensemble de ses utilisateurs, à l'image des précédents NotPetya en 2017 ou SolarWinds en 2020. En 2024, l'attaque du projet open source XZ Utils, intégré à de nombreuses distributions Linux, s'est déroulée sur environ trois ans et a permis à son auteur de devenir co-mainteneur du projet pour y introduire des modifications malveillantes. L'ANSSI a également traité en 2024 des compromissions d'entités françaises importantes via des prestataires informatiques, ainsi qu'une fuite de données visant l'éditeur AnyDesk.
+
+   B. Les réseaux d'anonymisation et les acteurs étatiques.
+
+      Les modes opératoires réputés russes comme APT28 ou Nobelium utilisent des réseaux de machines compromises à des fins d'anonymisation. Nobelium, actif depuis 2020 et lié au SVR russe, cible notamment des entités diplomatiques françaises. Depuis 2022, des modes opératoires réputés chinois utilisent des réseaux d'anonymisation industrialisés, comme celui associé au mode opératoire Volt Typhoon, employant des techniques Living off the Land particulièrement discrètes. L'ANSSI observe également une porosité croissante entre acteurs étatiques et cybercriminels, qui partagent des outils comme les chevaux de Troie d'accès distant Remcos et DarkCrystal.
+
+   C. Le mercenariat et les prestataires de la lutte informatique offensive.
+
+      La fuite de données de l'entreprise chinoise I-SOON en février 2024 a révélé un écosystème privé chinois pleinement intégré à la lutte informatique offensive étatique, ciblant au moins 45 pays dont la France, sous contrat avec le ministère de la Sécurité publique, le ministère de la Sécurité de l'État et l'Armée populaire de libération. Le ciblage des appareils mobiles par des logiciels espions commerciaux reste une menace majeure, ayant notamment affecté deux députés européens fin 2023. Face à cette prolifération, le Royaume-Uni et la France ont lancé en février 2024 le processus de Pall Mall.
+
+IV. LA FINALITÉ DES ATTAQUES OBSERVÉES.
+
+   A. Les attaques à but lucratif.
+
+      En 2024, 144 compromissions par rançongiciel ont été portées à la connaissance de l'ANSSI, un niveau comparable à 2023. Les PME, TPE et ETI restent la catégorie la plus affectée, mais la part des établissements d'enseignement supérieur a atteint 12 pour cent des attaques de ce type, à égalité avec les entreprises stratégiques. L'ANSSI a observé 39 souches différentes de rançongiciels, les plus représentées étant LockBit 3.0 avec 15 pour cent, Ransomhub et Akira avec 7 pour cent chacune, cette dernière souche n'ayant jamais été observée en France auparavant. L'année a aussi été marquée par la désorganisation de l'écosystème cybercriminel et la montée en puissance des infostealers dans les chaînes d'infection menant aux rançongiciels.
+
+   B. La déstabilisation et l'espionnage.
+
+      2024 a vu une hausse des attaques à finalité de déstabilisation, notamment opérées par des groupes hacktivistes, avec une intensité accrue des attaques par déni de service distribué. Les attaques à but d'espionnage restent, avec celles à but lucratif, les plus importantes en termes d'investissement des équipes de l'ANSSI, caractérisées par un ciblage soutenu des infrastructures de télécommunications et des intérêts stratégiques étatiques. Les territoires ultramarins sont identifiés comme particulièrement exposés aux attaques de déstabilisation et par rançongiciel, du fait d'une résilience moindre des accès à Internet.
+
+POINTS D'ATTENTION.
+
+      Le Panorama souligne que les vulnérabilités affectant les équipements de bordure sont devenues le premier vecteur d'intrusion, constituant plus de la moitié des opérations de cyberdéfense les plus critiques de l'ANSSI, ce qui déplace la priorité de durcissement vers ces équipements historiquement moins supervisés.
+
+      La divulgation des données de l'entreprise I-SOON illustre un changement de modèle, l'espionnage chinois ne reposant plus uniquement sur des contrats étatiques ciblés mais sur un ciblage opportuniste en vue d'obtenir un contrat a posteriori, brouillant l'attribution.
+
+      La porosité croissante entre acteurs étatiques et cybercriminels, par le partage d'outils, d'infrastructures et de prestataires, complique l'attribution des attaques et invite à ne plus raisonner en silos strictement séparés.
+
+EXEMPLES CITES.
+
+      La compromission du réseau du Grand Palais-RMN par le rançongiciel BrainCipher début août 2024.
+
+      L'attaque de la chaîne d'approvisionnement du projet open source XZ Utils, menée sur environ trois ans jusqu'en 2024.
+
+      La divulgation des données de l'entreprise chinoise I-SOON en février 2024, révélant un ciblage d'au moins 45 pays.
