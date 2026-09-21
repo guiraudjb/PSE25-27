@@ -1,0 +1,71 @@
+SÉLECTION D'UN LOGICIEL LIBRE, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Le maintien en condition opérationnelle, ou MCO, désigne l'ensemble des actions garantissant qu'un logiciel reste fonctionnel, tandis que le maintien en condition de sécurité, ou MCS, garantit qu'il reste sécurisé.
+
+      Le SILL, Socle Interministériel de Logiciels Libres, est un référentiel utilisé par l'écosystème pour estimer la maturité d'un projet open source.
+
+      Un SBOM, Software Bill of Materials, est la liste des dépendances d'un projet logiciel, dans un format tel que SPDX ou CycloneDX.
+
+      L'OSSF, Open Source Security Foundation, est l'organisation qui publie un guide sur le processus de divulgation des vulnérabilités pour les projets open source.
+
+      L'OWASP Developer Guide est un guide de référence sur les pratiques de développement sécurisé, cité comme référence pour évaluer les pratiques de développement d'un projet.
+
+      Une porte dérobée est un code malveillant inséré illégitimement dans un projet, comme l'illustre le cas du projet XZ Utils où un contributeur malveillant avait permis la prise de contrôle des postes utilisant cette bibliothèque.
+
+COURS DÉTAILLÉ.
+
+I. L'HISTORIQUE, LA NOTORIÉTÉ ET LE MAINTIEN OPÉRATIONNEL DU PROJET.
+
+   A. L'analyse de l'historique et de la notoriété.
+
+      L'historique et la notoriété du projet doivent être analysés, une faible activité pouvant indiquer un niveau de maturité et de stabilité élevé, mais aussi un manque de ressources pour faire vivre le projet. Peuvent être pris en compte la date de création, la régularité des contributions, le nombre et l'expérience des principaux contributeurs, ainsi que la maturité du projet telle qu'estimée par ses développeurs, par exemple une version bêta, ou par l'écosystème, utilisateurs, presse professionnelle ou SILL.
+
+   B. L'évaluation du maintien en conditions opérationnelles.
+
+      Le maintien en conditions opérationnelles doit être évalué via la déclaration de mainteneurs désignés, les commits et versions récentes sur la dernière année et la correction des bugs fonctionnels, ainsi que les évolutions de l'écosystème autour du projet, plateformes sous-jacentes ou bibliothèques utilisées, qui nécessitent souvent des efforts d'adaptation ou de portage.
+
+II. LE MAINTIEN EN CONDITION DE SÉCURITÉ ET LES DÉPENDANCES.
+
+   A. L'évaluation du maintien en condition de sécurité.
+
+      Le maintien en condition de sécurité doit être évalué à travers la présence d'un point de contact sur les aspects de sécurité et d'une procédure publique de gestion des vulnérabilités, ainsi que le nombre de correctifs de sécurité et le temps de correction des vulnérabilités critiques. Il est normal qu'un projet soit confronté à des vulnérabilités durant son cycle de vie, mais il est important qu'il soit en mesure de recevoir et de traiter ce type de rapports de bugs, le guide de l'OSSF sur le processus de divulgation des vulnérabilités pouvant servir de référence.
+
+   B. L'inventaire et la surveillance des dépendances.
+
+      Les dépendances du projet, bibliothèques partagées ou cadriciels, doivent être inventoriées et surveillées, en vérifiant la présence d'une liste de dépendances, un SBOM dans un format tel que SPDX ou CycloneDX, en s'assurant que ces dépendances sont à jour et exemptes de vulnérabilités connues, et en privilégiant les outils de gestion des dépendances qui contiennent des informations sur les vulnérabilités.
+
+   C. Les analyses de sécurité par des tiers.
+
+      D'éventuelles analyses de sécurité par des tiers doivent être identifiées, telles que la déclaration d'un visa de sécurité de l'ANSSI ou des rapports d'évaluation de la communauté open source.
+
+III. LA QUALITÉ DU SOCLE TECHNIQUE ET LES PRATIQUES DE DÉVELOPPEMENT.
+
+   A. Le socle technique.
+
+      La qualité du socle technique est attestée par la présence de documentation utilisateur et administrateur, une configuration par défaut et des recommandations de déploiement sécurisé, ainsi que l'utilisation de standards et de protocoles ouverts et éprouvés.
+
+   B. Les déclarations de pratiques de développement.
+
+      D'éventuelles déclarations de pratiques de développement doivent être identifiées, notamment la conformité à des recommandations d'implémentation sécurisée comme les règles de programmation de l'ANSSI pour le développement sécurisé en langage C et pour le développement d'applications sécurisées en Rust, l'OWASP Developer Guide et le guide de la NSA sur la gestion de la mémoire. Il convient aussi de vérifier la présence d'une revue de code par les pairs et d'analyse de code outillée, de tests unitaires et d'intégration continue, de reproductibilité des binaires générés, et de bonnes propriétés de sécurité des langages utilisés, comme la sécurité de la gestion de la mémoire ou le typage fort.
+
+   C. L'audit régulier des contributions.
+
+      L'évolution des contributions du projet et de sa sécurité doit être auditée de manière régulière, en combinant analyse manuelle et outillée, pour se protéger de l'insertion de code illégitime, comme l'illustre le cas du projet XZ Utils où un contributeur malveillant avait inséré une porte dérobée permettant la prise de contrôle des postes sur lesquels cette bibliothèque était installée.
+
+IV. LE SOUTIEN AU PROJET.
+
+      Il convient de vérifier si le projet ou ses mainteneurs ont manifesté un besoin de soutien, financier ou en contributeurs, maintenance, code ou sécurité, ces appels explicites témoignant de l'état de santé du projet. Il est recommandé de souscrire, si possible, à un contrat de support fonctionnel ou de sécurité auprès d'une communauté ou d'une entité commerciale, cette contractualisation pouvant soutenir le projet en lui assurant stabilité financière et pérennité, tout en rassurant l'entité qui le déploie.
+
+POINTS D'ATTENTION.
+
+      Le guide précise explicitement qu'il n'est pas nécessaire pour un projet d'obtenir un score parfait sur l'ensemble des critères, l'objectif étant de prendre conscience des enjeux de cybersécurité pour réaliser un choix éclairé, non d'exclure tout projet imparfait.
+
+      Le cas du projet XZ Utils est cité comme exemple concret d'insertion de porte dérobée par un contributeur devenu progressivement de confiance, justifiant l'audit régulier des contributions même pour un projet établi.
+
+EXEMPLES CITES.
+
+      Le cas du projet XZ Utils, où un contributeur malveillant a inséré une porte dérobée permettant la prise de contrôle des postes utilisant cette bibliothèque.
+
+      Les règles de programmation de l'ANSSI pour le développement sécurisé en langage C et pour le développement d'applications sécurisées en Rust.
