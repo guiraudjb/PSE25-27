@@ -1,0 +1,73 @@
+DEVSECOPS, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Le DevSecOps est la méthodologie qui vise à inclure les pratiques de sécurité dans le processus de développement et de mise en production d'applications.
+
+      La chaîne CI/CD, Continuous Integration et Continuous Deployment, comprend plusieurs outils, un orchestrateur, des dépôts de code source, des tests automatisés, un gestionnaire de secrets, des outils de déploiement et des artefacts.
+
+      L'IaC, Infrastructure as Code, est la pratique consistant à décrire l'infrastructure sous forme de code, dont la conformité doit être testée dans la CI/CD.
+
+      Un artefact est le résultat produit par la chaîne CI/CD, dont l'intégrité doit être maintenue de bout en bout par signature et vérification des tags de version.
+
+COURS DÉTAILLÉ.
+
+I. LA CARTOGRAPHIE ET L'ANALYSE DE RISQUE.
+
+   A. La cartographie des applications.
+
+      Une cartographie des applications utilisées doit être réalisée et maintenue à jour, comprenant les droits système, les secrets d'installation et de fonctionnement, les matrices de flux, les rôles des développeurs, relecture, validation, droits sur les environnements, et les référents ayant la connaissance globale technique et métier.
+
+   B. L'analyse de risque globale.
+
+      Une analyse de risque globale doit prendre en compte les chemins de compromission des postes des développeurs, de la sous-traitance, de la chaîne CI/CD, et des technologies utilisées, par exemple le cloud.
+
+II. LA SÉCURISATION DE LA CHAÎNE CI/CD DE PRODUCTION.
+
+   A. Les actions de la CI/CD de production comme actions d'administration.
+
+      Les actions réalisées par la CI/CD de production doivent être considérées comme des actions d'administration. Il est recommandé de dédier un poste d'administration pour la CI/CD de production, d'appliquer le principe de moindre privilège, de générer à la demande les jetons, tokens, et de journaliser et superviser la CI/CD.
+
+   B. La gestion sécurisée des secrets.
+
+      Les secrets doivent être gérés de manière sécurisée, avec un gestionnaire de secrets distinct par environnement, hors production et production. L'absence de secrets en dur doit être assurée dans le code source, dans les journaux d'événements des tâches, ou dans les dépôts de code.
+
+   C. La gestion rigoureuse des dépendances.
+
+      Les dépendances doivent être gérées avec rigueur, minimisées, évaluées, et les correctifs de sécurité appliqués avant déploiement.
+
+III. LES TESTS DE SÉCURITÉ ET LE DÉPLOIEMENT.
+
+   A. Les tests de sécurité automatisés dans la CI/CD.
+
+      Des tests de sécurité automatisés doivent être prévus dans la CI/CD, des tests de non-régression pour éviter de nouvelles vulnérabilités, des tests d'étanchéité entre profils d'utilisateurs, des tests d'analyse statique et dynamique, et des tests de conformité de l'infrastructure as code.
+
+   B. La sécurisation du déploiement en production.
+
+      Le déploiement en production des applications doit être sécurisé en maintenant l'intégrité du code source de bout en bout, en signant et en vérifiant les signatures des tags de version des artefacts.
+
+IV. L'AUTHENTIFICATION ET LA SÉPARATION DES INFRASTRUCTURES.
+
+   A. L'authentification multifacteur.
+
+      Une authentification multifacteur doit être implémentée pour l'accès aux dépôts et pour la signature des commits.
+
+   B. La séparation et le renouvellement des infrastructures CI/CD.
+
+      Les infrastructures CI/CD de développement et de production doivent être séparées et ne pas être exposées directement sur Internet. L'infrastructure CI/CD doit être réinstanciée régulièrement et ne doit pas stocker de données persistantes.
+
+V. LA CONFIDENTIALITÉ, LE DURCISSEMENT ET LES RÈGLES DE DÉVELOPPEMENT.
+
+      Une vigilance particulière doit être portée aux besoins en confidentialité vis-à-vis de l'infrastructure de CI/CD, par exemple sa localisation ou le test du code source en SaaS public. Des règles de développement sécurisé doivent être imposées dans les équipes, et des règles de durcissement doivent être appliquées sur les systèmes d'exploitation hébergeant les applications.
+
+POINTS D'ATTENTION.
+
+      Considérer les actions de la CI/CD de production comme des actions d'administration à part entière, avec poste dédié et principe de moindre privilège, est un changement de perspective important par rapport à une vision purement outillée de l'intégration continue.
+
+      La réinstanciation régulière de l'infrastructure CI/CD sans données persistantes limite l'impact d'une compromission éventuelle, en évitant qu'un attaquant ne puisse s'y maintenir durablement.
+
+EXEMPLES CITES.
+
+      La génération à la demande des jetons, tokens, pour la CI/CD de production, plutôt que des jetons statiques de longue durée.
+
+      Le test du code source en SaaS public, cité comme exemple de risque pour la confidentialité de l'infrastructure CI/CD.
