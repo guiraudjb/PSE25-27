@@ -1,0 +1,75 @@
+MISE EN ŒUVRE SÉCURISÉE D'UN CMS, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Un CMS, Content Management System ou système de gestion de contenu, est le logiciel utilisé pour créer et administrer un site web, par exemple WordPress, Wix, Drupal ou Joomla.
+
+      Le Mozilla Observatory est un outil de test automatisé permettant de vérifier la conformité de la configuration HTTPS d'un site à l'état de l'art.
+
+      HTTP Strict Transport Security, ou HSTS, et Content Security Policy, ou CSP, sont des mécanismes de sécurisation web à mettre en œuvre en complément de HTTPS.
+
+      Le principe du moindre privilège appliqué à l'environnement d'exécution d'un CMS concerne le runtime sous-jacent, par exemple PHP, les droits de la base de données, et la configuration système.
+
+COURS DÉTAILLÉ.
+
+I. LE CHOIX DU CMS ET LA SÉCURISATION DES ÉCHANGES.
+
+   A. L'évaluation des offres CMS.
+
+      Les offres CMS disponibles, comme WordPress, Wix, Drupal ou Joomla, doivent être évaluées de façon à choisir une offre compatible avec les critères de sécurité définis.
+
+   B. L'activation de HTTPS.
+
+      HTTPS doit être activé en se référant aux exemples de configuration de l'annexe B du guide Recommandations de sécurité relatives à TLS, des outils de tests automatisés comme le Mozilla Observatory pouvant aider à atteindre une conformité à l'état de l'art.
+
+II. LA GESTION DES EXTENSIONS ET L'ADMINISTRATION SÉCURISÉE.
+
+   A. La limitation des extensions et thèmes.
+
+      L'utilisation d'extensions, plugins, et de thèmes doit être limitée au strict nécessaire, en utilisant des extensions et thèmes activement maintenus et ayant fait l'objet d'une validation par l'éditeur, en s'appuyant sur le chapitre 6 du guide Recommandations pour la mise en œuvre d'un site web relatif à la maîtrise des contenus et des composants d'un CMS.
+
+   B. L'administration sécurisée.
+
+      Les bonnes pratiques d'administration sécurisée doivent être mises en œuvre, durcissement du poste d'administration, minimisation des ports en écoute, utilisation de protocoles sécurisés comme SSH ou TLS, comptes d'administration dédiés, et maintien en condition de sécurité, en s'appuyant sur les Recommandations relatives à l'administration sécurisée des systèmes d'information.
+
+III. L'AUTHENTIFICATION ET LA SAUVEGARDE.
+
+   A. L'authentification multifacteur des administrateurs.
+
+      L'authentification multifacteur doit être mise en place pour les administrateurs fonctionnels du site, en vérifiant la compatibilité du CMS avec les recommandations relatives au cycle de vie des facteurs d'authentification, à la limite des tentatives d'authentification, à l'innocuité des messages d'erreur, à la définition d'une politique de sécurité des mots de passe et à leur stockage sécurisé, au changement des valeurs par défaut, et à la désactivation de l'utilisateur par défaut du CMS, celui-ci étant généralement administrateur.
+
+   B. La sauvegarde du contenu et de la configuration.
+
+      Le contenu du site ainsi que la configuration du CMS, par exemple l'export de la base de données et des fichiers de configuration, doivent être sauvegardés en appliquant les règles listées dans les Essentiels sur la sauvegarde.
+
+IV. LA SÉCURISATION WEB ET DES INTERCONNEXIONS.
+
+   A. Les mécanismes de sécurisation web.
+
+      HTTP Strict Transport Security, Content Security Policy, et la sécurisation des cookies de session doivent être mis en œuvre, tel que prescrit par le guide Recommandations pour la mise en œuvre d'un site web.
+
+   B. La limitation des flux d'interconnexion.
+
+      Les flux d'interconnexion du CMS avec Internet et l'ouverture des ports doivent être identifiés et limités au strict nécessaire, en garantissant la disponibilité du service et sa résilience face aux attaques en déni de service, en suivant les Recommandations relatives à l'interconnexion d'un système d'information à Internet, dont le chapitre 4, dédié à la sécurisation de l'accès aux contenus hébergés sur le web, pour traiter le cas de la récupération de contenus externes par le CMS.
+
+V. LA JOURNALISATION ET LE DURCISSEMENT DE L'ENVIRONNEMENT D'EXÉCUTION.
+
+   A. La collecte et l'analyse des journaux.
+
+      Les journaux du CMS doivent être collectés, analysés, avec des alertes, en se référant à l'annexe A du guide Recommandations d'architecture pour la sécurité d'un système de journalisation pour la constitution d'un socle minimal, et à l'annexe C pour une introduction à la détection des incidents de sécurité.
+
+   B. Le durcissement selon le principe du moindre privilège.
+
+      L'environnement d'exécution du CMS doit être durci en appliquant le principe du moindre privilège au runtime sous-jacent, par exemple la sécurité de PHP, aux droits de la base de données, par exemple pour PostgreSQL, et à la configuration système, en mettant en œuvre les recommandations de niveaux minimal et intermédiaire du guide Recommandations de configuration d'un système GNU/Linux.
+
+POINTS D'ATTENTION.
+
+      La désactivation de l'utilisateur par défaut du CMS est explicitement rappelée comme mesure distincte du simple changement de son mot de passe, ce compte étant généralement administrateur et donc une cible privilégiée par défaut connue des attaquants.
+
+      Le durcissement du principe de moindre privilège s'applique à trois niveaux distincts et complémentaires, le runtime, la base de données et la configuration système, chacun nécessitant une attention spécifique.
+
+EXEMPLES CITES.
+
+      Le Mozilla Observatory comme outil de test automatisé de la conformité de la configuration HTTPS.
+
+      La sécurité de PHP et un exemple de configuration des droits pour PostgreSQL, comme illustrations concrètes du durcissement de l'environnement d'exécution d'un CMS.
