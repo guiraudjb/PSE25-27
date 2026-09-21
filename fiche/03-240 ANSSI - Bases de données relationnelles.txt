@@ -1,0 +1,71 @@
+BASES DE DONNÉES RELATIONNELLES, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Un SGBD, système de gestion de base de données, est le logiciel qui gère une base de données relationnelle et doit être maintenu à jour via les dépôts officiels.
+
+      Le principe de moindre privilège consiste à limiter les droits des utilisateurs au strict nécessaire, en définissant des rôles affectés aux utilisateurs.
+
+      Une requête préparée est une technique de développement permettant de se protéger des injections lors de l'accès à une base de données.
+
+      Le format SaaS, Software as a Service, désigne un mode de mise à disposition d'une base de données présentant un risque de mutualisation entre clients.
+
+COURS DÉTAILLÉ.
+
+I. LA MISE À JOUR ET LA SÉCURISATION DE L'ADMINISTRATION.
+
+   A. La mise à jour du SGBD.
+
+      Le logiciel de gestion de la base de données doit être maintenu à jour via les dépôts officiels, avec installation des mises à jour de sécurité, en s'appuyant notamment sur le guide Recommandations de configuration d'un système GNU/Linux, en particulier les mesures R58, R59, R60 et R61.
+
+   B. La sécurisation de l'administration des serveurs.
+
+      L'administration des serveurs hébergeant la base de données doit être sécurisée selon les Recommandations relatives à l'administration sécurisée des systèmes d'information, en minimisant les extensions et outils d'administration utilisés.
+
+   C. La journalisation des événements et des accès administrateurs.
+
+      Les événements et les accès administrateurs doivent être journalisés, en se référant à l'annexe A du guide Recommandations d'architecture pour la sécurité d'un système de journalisation, et plus particulièrement aux recommandations R3, R9, R26 et R27.
+
+II. LA SÉCURISATION DES ACCÈS.
+
+   A. Les comptes d'accès et l'authentification.
+
+      Des comptes d'accès distincts doivent être utilisés pour les utilisateurs humains et les applications, avec une définition claire de leur usage. Les accès doivent être systématiquement authentifiés, avec une attention particulière aux comptes par défaut et aux accès directs, en utilisant des mécanismes cryptographiques à l'état de l'art.
+
+   B. Le compte administrateur natif et l'authentification multifacteur.
+
+      Le compte administrateur natif doit être analysé régulièrement et ne doit être utilisé qu'en dernier recours. Une authentification multifacteur doit être mise en place pour les administrateurs, en s'appuyant sur les Recommandations relatives à l'authentification multifacteur et aux mots de passe.
+
+   C. Le principe de moindre privilège.
+
+      Les droits des utilisateurs doivent être limités au strict nécessaire, avec définition de rôles affectés aux utilisateurs.
+
+III. LE DURCISSEMENT DE LA CONFIGURATION.
+
+      Les données et les fichiers de configuration doivent être isolés en les stockant sur des partitions ou dans des répertoires distincts. Les fonctionnalités avancées des bases de données permettant de lire, écrire ou exécuter des fichiers du système d'exploitation doivent être désactivées. Un typage des données doit être imposé.
+
+IV. LA SAUVEGARDE, LA PROTECTION DES DONNÉES ET LA SUPERVISION.
+
+   A. Le paramétrage de la sauvegarde.
+
+      La sauvegarde doit être paramétrée, en s'appuyant sur les publications Les Fondamentaux et Les Essentiels de l'ANSSI sur la sauvegarde des systèmes d'information.
+
+   B. La protection des données sensibles.
+
+      Les fuites de données doivent être évitées en s'assurant de ne pas utiliser les données de production dans des environnements de développement ou similaires. Une attention particulière doit être portée aux bases de données proposées en format SaaS, en raison du risque de mutualisation entre clients. Les données doivent être chiffrées lors de leur transmission, on-transit, et lors de leur stockage, at-rest. Un serveur de base de données doit être dédié par niveau de sensibilité des données. Les mécanismes internes de la base de données, comme les vues, doivent être utilisés pour limiter l'accès aux données.
+
+   C. Les bonnes pratiques de développement et la supervision.
+
+      Les bonnes pratiques de développement pour l'accès aux bases de données doivent être prises en compte, par exemple l'utilisation de requêtes préparées pour se protéger des injections. Une supervision de la base de données doit être mise en place sur les ressources physiques ou virtuelles du serveur, stockage, CPU, RAM, avec un audit des événements potentiellement suspicieux.
+
+POINTS D'ATTENTION.
+
+      Le compte administrateur natif d'un SGBD, souvent utilisé par habitude pour toutes les tâches d'administration, doit au contraire être réservé au dernier recours, avec une analyse régulière de son utilisation.
+
+      Le risque de mutualisation entre clients d'une base de données proposée en SaaS est signalé comme une attention particulière distincte des risques d'une base de données hébergée en propre, même chiffrée.
+
+EXEMPLES CITES.
+
+      L'utilisation de requêtes préparées comme bonne pratique de développement pour se protéger des injections lors de l'accès à une base de données.
+
+      Un serveur de base de données dédié par niveau de sensibilité des données, plutôt qu'un serveur unique mutualisant tous les niveaux.
