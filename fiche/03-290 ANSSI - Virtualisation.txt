@@ -1,0 +1,75 @@
+VIRTUALISATION, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Une infrastructure de virtualisation désigne l'ensemble des logiciels et matériels nécessaires à la fourniture du service de virtualisation, dont l'hyperviseur.
+
+      Une carte de management, par exemple HP iLO ou Dell iDRAC, est un composant matériel lié à l'infrastructure de virtualisation devant être pris en compte dans la stratégie d'administration.
+
+      Une zone de confiance désigne un regroupement de ressources d'un niveau homogène de sensibilité et d'exposition, séparé des autres zones par une segmentation réseau physique.
+
+      La micro-segmentation réseau est la segmentation fine mise en place au sein d'une même zone de confiance.
+
+COURS DÉTAILLÉ.
+
+I. LES INFRASTRUCTURES DE VIRTUALISATION, DES CIBLES DE CHOIX.
+
+      Les infrastructures de virtualisation sont une cible de choix pour les attaquants, leur permettant d'avoir accès plus rapidement et de manière généralisée aux données et applications qu'elles hébergent. Les administrateurs doivent être formés régulièrement sur les technologies utilisées dans ces infrastructures, qui doivent être considérées comme critiques pour le système d'information, bénéficiant de mesures de protection adéquates et administrées depuis un système d'information d'administration à l'état de l'art.
+
+II. LE REGROUPEMENT ET LA SEGMENTATION.
+
+   A. Le regroupement par niveau de sensibilité.
+
+      Les nœuds de calcul et le stockage associé doivent être regroupés par niveau homogène de sensibilité et d'exposition des applications ou des données hébergées.
+
+   B. La segmentation réseau physique et la micro-segmentation.
+
+      Une segmentation réseau physique doit être mise en place entre les zones de confiance de sensibilité ou d'exposition différentes, et une micro-segmentation réseau doit être mise en place au sein de ces zones.
+
+III. LA MISE À JOUR ET L'ADMINISTRATION DES HYPERVISEURS.
+
+   A. Le maintien à jour des infrastructures.
+
+      Les infrastructures de virtualisation doivent être maintenues à jour, les mises à jour de sécurité devant être appliquées en priorité, d'autant plus en cas d'exposition à Internet.
+
+   B. L'interface réseau dédiée à l'administration.
+
+      Une interface réseau doit être dédiée à l'administration sur les hyperviseurs, connectée à un réseau d'administration à l'état de l'art, et ne devant surtout pas être accessible depuis un réseau de production ou Internet.
+
+   C. Le matériel connexe à prendre en compte.
+
+      L'ensemble du matériel en lien avec l'infrastructure de virtualisation doit être pris en compte dans la stratégie d'administration, les cartes de management comme HP iLO ou Dell iDRAC, les baies de stockage, les équipements réseau et les équipements de sécurité.
+
+IV. LES COMPTES D'ADMINISTRATION ET LEUR INDÉPENDANCE.
+
+   A. Les comptes dédiés et le moindre privilège.
+
+      Des comptes d'administration doivent être dédiés sur l'infrastructure de virtualisation, avec application du principe de moindre privilège pour les administrateurs.
+
+   B. L'indépendance vis-à-vis des annuaires de production.
+
+      Les comptes d'administration de l'infrastructure de virtualisation doivent être rendus indépendants des annuaires utilisés en production ou sur le système d'information bureautique, comme Active Directory. Les chemins de contrôle de ces annuaires doivent être vérifiés régulièrement, de manière à ce qu'ils ne permettent pas d'élévation de privilège depuis les annuaires de production vers l'infrastructure de virtualisation et inversement.
+
+V. LA SAUVEGARDE, LA VÉRIFICATION ET LA SUPERVISION.
+
+   A. La sauvegarde indépendante de l'infrastructure.
+
+      Les éléments nécessaires à la reconstruction des infrastructures de virtualisation, comme les configurations ou les binaires d'installation, doivent être sauvegardés de manière indépendante de la sauvegarde des machines virtuelles hébergées.
+
+   B. La vérification régulière des configurations.
+
+      Les configurations de l'infrastructure de virtualisation doivent être vérifiées régulièrement, en particulier sur les points cités dans ce guide.
+
+   C. La journalisation et la supervision.
+
+      Les événements de sécurité liés à l'infrastructure de virtualisation, accès ou changement de configuration, doivent être journalisés, centralisés et supervisés.
+
+POINTS D'ATTENTION.
+
+      L'exigence d'indépendance entre les comptes d'administration de la virtualisation et les annuaires de production, avec vérification bidirectionnelle des chemins de contrôle, vise à empêcher qu'une compromission de l'un ne permette une élévation de privilège vers l'autre, dans les deux sens.
+
+      La sauvegarde des éléments de reconstruction de l'infrastructure de virtualisation, distincte de la sauvegarde des machines virtuelles elles-mêmes, est une précaution souvent négligée qui garantit de pouvoir reconstruire la plateforme même si les VM hébergées sont perdues ou compromises simultanément.
+
+EXEMPLES CITES.
+
+      Les cartes de management HP iLO et Dell iDRAC comme exemples de matériel connexe à intégrer dans la stratégie d'administration de la virtualisation.
