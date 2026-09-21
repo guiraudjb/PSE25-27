@@ -1,0 +1,67 @@
+SÉCURISATION DES RÉSEAUX WI-FI, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Le Wi-Fi est une technologie de communications radiofréquences destinée au déploiement de réseaux locaux sans fil, présentant des risques tels que l'interception ou la modification du trafic réseau.
+
+      Le WPS, Wi-Fi Protected Setup, est une fonction de configuration simplifiée des points d'accès que l'ANSSI recommande de désactiver systématiquement.
+
+      L'UPnP, Universal Plug and Play, est une fonction de découverte automatique d'équipements réseau à désactiver si elle n'est pas utilisée.
+
+      Le WPA3-Enterprise et le WPA2-Enterprise sont des modes de sécurité robustes pour l'authentification Wi-Fi en environnement professionnel, s'appuyant sur des suites EAP, Extensible Authentication Protocol.
+
+      La PMF, Protected Management Frames, est la protection des trames de gestion à activer en mode WPA2-Enterprise.
+
+      Le SSID, Service Set Identifier, est le nom d'un réseau Wi-Fi, qui ne doit ni être caché inutilement ni révéler d'informations professionnelles ou personnelles.
+
+      Une infrastructure de gestion de clés, ou IGC, est le système qui permet l'auto-enrôlement des certificats par les stratégies de groupe Windows, GPO, pour authentifier les postes sur le réseau Wi-Fi.
+
+COURS DÉTAILLÉ.
+
+I. UTILISER LE WI-FI AVEC SON TERMINAL PROFESSIONNEL.
+
+   A. Les précautions individuelles.
+
+      L'ANSSI recommande de désactiver l'interface Wi-Fi et le partage de connexion quand ils ne sont pas utilisés, ainsi que la connexion automatique aux réseaux Wi-Fi connus. Il convient de se connecter uniquement à des réseaux Wi-Fi maîtrisés, et d'utiliser un VPN maîtrisé par l'entité dans les lieux publics comme les gares ou les aéroports.
+
+   B. La configuration des terminaux.
+
+      Le pare-feu local des ordinateurs portables doit être configuré pour bloquer les connexions entrantes, notamment via l'interface Wi-Fi. Les réseaux connus et leurs secrets associés doivent être supprimés avant reconditionnement, cession ou mise au rebut d'un terminal.
+
+II. DÉPLOYER DES RÉSEAUX WI-FI MAÎTRISÉS PAR L'ENTITÉ.
+
+   A. La désactivation des fonctions à risque.
+
+      Le WPS doit être systématiquement désactivé sur les points d'accès, ainsi que l'UPnP si non utilisé. Seuls les points d'accès maîtrisés par l'entité doivent être autorisés sur le réseau, l'usage de points d'accès personnels étant à proscrire en environnement professionnel.
+
+   B. Les modes de sécurité robustes.
+
+      Il convient d'utiliser les modes WPA3-Enterprise, WPA2-Enterprise sous condition, ou WPA3-Personal. En mode WPA3-Enterprise, seules les suites EAP supportant l'authentification par certificats doivent être utilisées, avec vérification de la validité des certificats via une infrastructure de gestion de clés. En mode WPA2-Enterprise, la protection des trames de gestion, PMF, doit être activée. Le mode mixte WPA3 et WPA2 doit être évité, car il peut entraîner un partage des secrets entre les deux modes et une dégradation de la sécurité.
+
+   C. Le cloisonnement des réseaux par usage.
+
+      Chaque réseau Wi-Fi doit être cloisonné dans un VLAN distinct, avec des noms de réseau, SSID, distincts pour chaque mode de sécurité, par exemple un réseau Postes de travail en WPA3-Enterprise et un réseau IoT séparé en WPA2-Enterprise pour les équipements ne supportant pas WPA3. Le SSID ne doit pas être caché, car un terminal déjà connecté révélera de toute façon le nom du réseau caché, et le SSID par défaut doit être modifié sans révéler d'information professionnelle ou personnelle. La connexion de terminaux non maîtrisés doit être bloquée par défaut, avec un réseau invité dédié et cloisonné.
+
+   D. Le contrôle des secrets d'authentification.
+
+      Les secrets d'authentification doivent être diffusés au seul personnel autorisé, et changés régulièrement ainsi que sans délai après toute suspicion de compromission.
+
+III. ADMINISTRER DES RÉSEAUX WI-FI SÉCURISÉS.
+
+   A. La journalisation des connexions.
+
+      Les points d'accès et contrôleurs Wi-Fi doivent être configurés pour permettre la collecte des événements de sécurité, idéalement redirigés vers une infrastructure centrale de supervision. La réglementation sur la conservation des données techniques de connexion doit être respectée pour les offres de Wi-Fi public.
+
+   B. L'auto-enrôlement par certificats et la sécurisation de l'administration.
+
+      Lorsqu'une infrastructure de gestion de clés existe, l'auto-enrôlement des certificats par les stratégies de groupe Windows, GPO, doit être configuré, avec restriction de l'accès au SSID concerné aux seules connexions authentifiées par certificat. Les éléments de connexion par défaut, secrets et mots de passe d'administration, doivent être modifiés. Les protocoles d'administration doivent être sécurisés, TLS ou SSH, l'interface d'administration connectée à un réseau dédié et cloisonné, et les mises à jour des systèmes, pilotes, points d'accès et contrôleurs déployées dans les meilleurs délais.
+
+POINTS D'ATTENTION.
+
+      Le guide insiste sur le fait que masquer un SSID est inutile, car un terminal précédemment connecté révélera de toute façon le nom du réseau caché lors de ses tentatives de reconnexion automatique.
+
+      Le mode mixte WPA3 et WPA2, souvent choisi par prudence de compatibilité, est explicitement déconseillé car il peut dégrader la sécurité globale du réseau en partageant les secrets entre les deux modes.
+
+EXEMPLES CITES.
+
+      Un réseau nommé Postes de travail utilisant le mode WPA3-Enterprise, distinct d'un second réseau nommé IoT en WPA2-Enterprise pour les équipements ne supportant pas WPA3.
