@@ -1,0 +1,79 @@
+SAUVEGARDE DES SYSTÈMES D'INFORMATION, GUIDE LES FONDAMENTAUX DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      La PDMA, perte de données maximale admissible, ou RPO, recovery point objective, est la durée maximale de données pouvant être perdues lors d'un incident, à prendre en compte dans la stratégie de sauvegarde.
+
+      La DMIA, durée maximale d'interruption admissible, ou RTO, recovery time objective, est la durée maximale d'indisponibilité tolérée avant restauration complète du service.
+
+      Une sauvegarde hors ligne est une sauvegarde sur un support déconnecté de tout système d'information, la bande magnétique restant le moyen le plus efficace pour cet usage.
+
+      La règle 3-2-1 désigne la conservation de trois copies distinctes des données, à savoir les données en production et deux sauvegardes sur des supports différents, dont au moins une hors ligne.
+
+      Le RBAC, Role Based Access Control, est le contrôle d'accès basé sur les rôles, permettant de segmenter les rôles des opérateurs de sauvegarde entre exploitation quotidienne et administration avancée.
+
+      La restauration croisée désigne la capacité d'une instance de serveur de sauvegarde à restaurer depuis un magasin de données ou un support référencé sur une autre instance, fonctionnalité qui doit être désactivée par défaut.
+
+      Le mode bouton rouge est le dispositif d'urgence, script automatisé ou déconnexion physique, permettant d'isoler immédiatement l'infrastructure de sauvegarde du reste du système d'information en cas d'incident.
+
+      Une solution WORM, Write Once Read Many, est une solution de stockage à écriture unique et lectures multiples, dont le mécanisme d'immuabilité empêche toute modification de la donnée après son écriture.
+
+COURS DÉTAILLÉ.
+
+I. LE CONTEXTE ET LES RAPPELS FONDAMENTAUX.
+
+   A. La menace des rançongiciels.
+
+      La sauvegarde des systèmes d'information, initialement utile pour les incidents opérationnels comme les pannes matérielles, est aujourd'hui indispensable pour répondre aux incidents de sécurité, un attaquant tentant fréquemment de chiffrer, d'effacer ou de rendre indisponible l'infrastructure de sauvegarde pour ralentir la reconstruction du système d'information et augmenter ses chances d'obtenir une rançon.
+
+   B. Les composants et les cas non couverts.
+
+      Une stratégie de sauvegarde doit tenir compte de la PDMA et de la DMIA définies pour l'ensemble des valeurs métier. Certains cas d'usage ne sont pas couverts par la sauvegarde, comme un besoin de PDMA inférieur à 24 heures, à traiter par de la réplication, ou un besoin d'archivage légal avec authenticité des données. Les composants essentiels d'une infrastructure de sauvegarde sont le catalogue ou index, l'agent logiciel présent sur les serveurs sauvegardés, le serveur de sauvegarde, et le support de sauvegarde. L'opérateur de sauvegarde doit être considéré comme un administrateur à hauts privilèges sur le système d'information.
+
+II. L'ARCHITECTURE DE L'INFRASTRUCTURE DE SAUVEGARDE.
+
+      Les serveurs de sauvegarde doivent être cloisonnés au sein du système d'administration ou dans une zone réseau distincte de la production, les flux de sauvegarde transitant au sein du réseau d'administration dans un VLAN dédié. Une instance de serveur de sauvegarde et un magasin de données dédiés doivent exister par niveau de sensibilité, notamment pour le système d'administration, les systèmes stockant des secrets et les postes bureautiques. Les serveurs hébergeant l'infrastructure de sauvegarde ne doivent pas faire partie d'un domaine Windows de production, disposant d'un système d'authentification indépendant. Les flux de sauvegarde doivent être filtrés strictement par un pare-feu interne, les magasins de données n'étant accessibles que depuis les serveurs de sauvegarde, et les flux devant être à l'initiative du serveur vers les clients sauvegardés. Une infrastructure obsolète mais conservée doit être maintenue hors ligne en condition de sécurité. Les actions réalisées sur l'infrastructure doivent être journalisées et centralisées.
+
+III. LES OPÉRATIONS DE SAUVEGARDE.
+
+   A. La règle 3-2-1 et les comptes dédiés.
+
+      La règle 3-2-1 doit être appliquée, avec une sauvegarde hors ligne indispensable même moins fréquente que les sauvegardes locales en ligne. Les opérations de sauvegarde sont des opérations d'administration et doivent respecter les bonnes pratiques d'administration sécurisée, chaque instance disposant de comptes d'administrateurs dédiés et nominatifs, avec segmentation des rôles entre exploitation quotidienne et administration avancée selon le RBAC. Les comptes techniques exécutant les agents logiciels doivent voir leurs privilèges système réduits au strict minimum, avec renouvellement régulier et automatisé des secrets.
+
+   B. Les restrictions d'usage et la mise à jour.
+
+      Il n'est pas recommandé d'autoriser les utilisateurs à exécuter directement une action de sauvegarde ou de restauration, en raison du risque d'accès illégitime aux données et d'élévation de privilèges, par exemple la restauration d'un fichier de mots de passe système connu de l'utilisateur. La restauration croisée doit être désactivée par défaut. L'ensemble des composants de l'infrastructure doit être mis à jour de manière proactive, en suivant les CVE et les bulletins d'alerte de l'éditeur.
+
+   C. Le contrôle, le test et la restauration.
+
+      La sauvegarde doit systématiquement faire l'objet d'un contrôle détectant un comportement inhabituel, volume incohérent, lenteurs réseau, ou modification des politiques. Les sauvegardes doivent être testées régulièrement, avec une procédure de restauration rédigée et régulièrement mise en œuvre. Une stratégie et un ordre de restauration doivent être définis en tenant compte de la dépendance vis-à-vis des services d'infrastructure comme le DNS ou l'annuaire, de la criticité des applications métier, et du mode de restauration. En cas d'incident de sécurité, la mesure prioritaire doit être d'isoler l'infrastructure de sauvegarde du reste du système d'information, via un mode bouton rouge d'urgence.
+
+   D. La sauvegarde de l'infrastructure elle-même et la remédiation.
+
+      Les médias d'installation et les configurations des applications métier doivent être sauvegardés. La sauvegarde de l'infrastructure de sauvegarde elle-même doit contenir au moins les binaires pour une installation minimaliste, les procédures d'import, le catalogue, la liste du matériel pour un site de secours, et les procédures d'import des clés de chiffrement. En cas de restauration après un incident, les sauvegardes peuvent contenir des implants de l'attaquant, ce qui impose de réinstaller les systèmes d'exploitation à partir d'images officielles, de réinstaller les applications à partir de binaires signés, de contrôler la conformité des configurations avant redémarrage, et de scanner les données métier avant leur importation.
+
+IV. LA PROTECTION DES DONNÉES DE SAUVEGARDE.
+
+      Les flux de sauvegarde doivent être protégés par chiffrement et authentification mutuelle à l'état de l'art, par exemple avec TLS, le niveau de robustesse devant être aligné avec celui du système de production. Si les sauvegardes sont chiffrées, la gestion des clés doit être étudiée, opérateurs détenteurs, stockage en coffre-fort, sauvegarde hors ligne des clés elles-mêmes. Lorsque la sécurité physique d'un site de sauvegarde n'est pas satisfaisante, les sauvegardes doivent être systématiquement chiffrées. Lors de la mise au rebut des supports, un effacement sécurisé, zéroïsation, ou une destruction physique doit être réalisé.
+
+V. LA VIRTUALISATION ET L'EXTERNALISATION.
+
+   A. Le choix entre sauvegarde d'image disque et agent intégré.
+
+      Pour les machines virtuelles, le choix entre sauvegarder l'image disque ou installer un agent au sein de la machine virtuelle doit tenir compte du volume de données modifiées, des besoins de granularité, du chiffrement de la machine virtuelle, et de la capacité à la reconstruire depuis zéro. La sauvegarde de l'image disque évite à l'opérateur d'accéder au contenu si la machine est chiffrée, mais peut poser problème au redémarrage de certaines applications. L'agent intégré offre une granularité de fichiers mais augmente la surface d'attaque et permet à l'opérateur d'accéder aux données en clair. Une solution hybride combinant les deux fréquences est possible. Si les serveurs de sauvegarde sont virtualisés, ils doivent être mutualisés exclusivement avec des serveurs de même sensibilité que le système d'administration.
+
+   B. Les risques et solutions en environnement externalisé.
+
+      Dans un environnement non maîtrisé, cloud public ou sous-traitance, une vigilance doit porter sur la localisation des sauvegardes au sein de l'Union européenne et le chiffrement par un moyen propre à l'entité avant envoi, ainsi que sur la durée de restauration compatible avec la DMIA. Une solution WORM en ligne est envisageable mais reste jugée moins robuste qu'une solution hors ligne déconnectée, un compromis pouvant combiner sauvegardes WORM régulières et sauvegardes hors ligne à fréquence moindre.
+
+POINTS D'ATTENTION.
+
+      L'interdiction faite aux utilisateurs d'exécuter eux-mêmes une action de sauvegarde ou de restauration, même lorsque le logiciel le permet techniquement, est justifiée par le risque très concret d'élévation de privilèges qu'illustre l'exemple de la restauration ciblée d'un fichier système de mots de passe.
+
+      Le guide rappelle explicitement que les sauvegardes elles-mêmes peuvent contenir des implants de l'attaquant après un incident, ce qui impose une remédiation granulaire, réinstallation depuis des sources de confiance plutôt qu'une simple restauration aveugle.
+
+EXEMPLES CITES.
+
+      La règle 3-2-1, trois copies des données dont au moins une hors ligne.
+
+      La restauration ciblée d'un fichier /etc/shadow comme exemple concret du risque d'élévation de privilèges par une action de restauration non contrôlée.
