@@ -1,0 +1,67 @@
+DÉNIS DE SERVICE DISTRIBUÉS, DDOS, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Une attaque par déni de service distribué, ou DDoS, Distributed Denial of Service, est une attaque en disponibilité menée depuis de multiples sources contre une cible.
+
+      Une attaque volumétrique est un type de DDoS visant à épuiser la bande passante réseau disponible, par exemple par UDP flood ou ICMP flood.
+
+      Une attaque protocolaire est un type de DDoS visant à épuiser les ressources CPU ou RAM d'une cible en détournant le fonctionnement d'un protocole, par exemple par inondation SYN ou TCP, ou attaque Smurf.
+
+      Une attaque applicative est un type de DDoS visant à épuiser les ressources CPU ou RAM d'une cible en détournant le fonctionnement d'un service, par exemple l'attaque DNS water torture qui requête massivement des serveurs pour des entrées DNS existantes.
+
+      Un CDN, Content Delivery Network, est un réseau de distribution de contenu permettant de répartir la charge sur un grand nombre de serveurs, contribuant à la résistance aux attaques DDoS.
+
+      Le trou noir, ou blackholing, et le déroutement BGP sont des techniques de dépollution des flux mises en œuvre par les fournisseurs d'accès à Internet ou les fournisseurs de services professionnels pour contrer une attaque DDoS.
+
+COURS DÉTAILLÉ.
+
+I. LES ATTAQUES DDOS, UNE MENACE PROTÉIFORME.
+
+   A. Les trois types d'attaques DDoS.
+
+      Les attaques DDoS peuvent être volumétriques, visant à épuiser la bande passante réseau disponible, protocolaires, visant à épuiser les ressources CPU ou RAM d'une cible en détournant le fonctionnement d'un protocole, ou applicatives, visant à épuiser les ressources CPU ou RAM d'une cible en détournant le fonctionnement d'un service.
+
+   B. L'adaptabilité des attaquants.
+
+      Ces types d'attaque ne sont pas exclusifs et les attaquants peuvent très facilement et rapidement adapter voire combiner leurs techniques au cours du temps, par exemple en commençant par une attaque volumétrique puis en basculant vers une attaque protocolaire si la cible prend des mesures d'atténuation spécifiques. Dans le cas d'une attaque ciblée et très probablement évolutive, l'implication complémentaire d'experts est fortement recommandée.
+
+II. CONSTRUIRE ET PROTÉGER.
+
+   A. La restriction des services exposés et l'acquisition d'un service anti-DDoS.
+
+      Les services exposés à Internet doivent être restreints au strict besoin opérationnel. Un service de protection anti-DDoS dédié à cette seule fonction doit être acquis et mis en œuvre, adapté au système d'information à protéger, auprès du prestataire d'hébergement, du fournisseur d'accès à Internet, via trou noir ou dépollution des flux, ou d'un fournisseur de service professionnel, via déroutement BGP ou dépollution des flux. Ce service doit protéger contre les attaques des niveaux 3, 4, 5 et 7 du modèle OSI, par exemple par contrôle de débit, limitation du nombre de requêtes, protection anti-robot et reconnaissance d'adresses IP réputées malveillantes. Sa mise en œuvre collaborative entre client et prestataire nécessite une prise en main, un paramétrage adapté et des tests réguliers.
+
+   B. La conception d'une architecture résiliente.
+
+      Une architecture des services permettant de répartir la charge et le trafic sur plusieurs sous-systèmes, centres de données, mécanismes de bascule réseau, répartiteurs de charge ou serveurs distribués, doit être conçue et dimensionnée en tenant compte des besoins métiers fluctuants, bande passante, puissance de calcul et capacité de stockage. Les architectures doivent permettre à un service exposé à Internet subissant une attaque DDoS de continuer à être administré, par exemple via un réseau d'administration physiquement dédié, et à ce qu'une attaque sur un service n'ait pas d'impact sur la disponibilité des autres services, par exemple via des chaînes d'accès Internet distinctes ou des hébergeurs distincts.
+
+   C. Le filtrage et les pare-feux.
+
+      Les pare-feux en coupure d'Internet doivent activer uniquement un filtrage au niveau réseau et transport, niveaux 3 et 4 du modèle OSI, désactiver les fonctions de filtrage applicatif, réduire les flux UDP entrants au strict nécessaire, et anticiper la capacité à retirer temporairement le suivi de connexions. Des pare-feux applicatifs doivent être configurés en aval pour protéger les sites web, en ajustant les limites de session et en bloquant les requêtes malveillantes. Les sites web peuvent être protégés par un CDN pour la répartition de charge, en portant attention au fait qu'une partie des ressources d'un CDN peut être hébergée à l'étranger, avec un impact potentiel en confidentialité.
+
+III. ANTICIPER ET RÉAGIR.
+
+   A. La supervision et la détection.
+
+      Un dispositif de supervision et de détection des attaques DDoS doit être mis en place afin de détecter au plus tôt une attaque, en utilisant un dispositif de centralisation des journaux pour faciliter le diagnostic a posteriori, et en rédigeant et testant régulièrement une procédure de marche à suivre en collaboration avec les prestataires de services anti-DDoS.
+
+   B. Le mode dégradé et l'inventaire des services.
+
+      Un mode dégradé doit être prévu pour les activités critiques en cas d'attaque, le temps de la remédiation, en intégrant le fait que le fournisseur d'accès à Internet peut lui-même imposer un mode dégradé en cas d'attaque sur sa propre infrastructure, même si l'attaque ne cible pas directement l'entité. Un inventaire régulier des services ouverts sur Internet doit être réalisé afin d'adapter la procédure de réponse.
+
+   C. La gestion de crise et la vigilance sur les alertes annexes.
+
+      Un dispositif de gestion des crises doit être mis en place, en lien avec les prestataires de protection DDoS et les responsables communication. Les autres alertes de sécurité générées pendant une attaque DDoS bruyante doivent être contrôlées a posteriori, car elles peuvent être le signe d'une attaque plus discrète et plus grave menée en même temps.
+
+POINTS D'ATTENTION.
+
+      Une attaque DDoS bruyante peut servir de rideau de fumée pour dissimuler une attaque plus discrète et plus grave menée simultanément, ce qui justifie de contrôler systématiquement les autres alertes de sécurité générées pendant l'incident.
+
+      Le recours à un CDN pour la résistance aux attaques DDoS n'est pas neutre en confidentialité, une partie des ressources du CDN pouvant être hébergée à l'étranger.
+
+EXEMPLES CITES.
+
+      L'attaque DNS water torture, qui requête massivement des serveurs pour des entrées DNS existantes, comme exemple d'attaque applicative.
+
+      Le fait qu'un fournisseur d'accès à Internet puisse imposer un mode dégradé à ses clients en cas d'attaque DDoS visant sa propre infrastructure, même sans cibler directement l'entité concernée.
