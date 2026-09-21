@@ -1,122 +1,96 @@
-"""Synthèse vocale locale (Piper, voix française fr_FR-siwis-medium) avec
-cache disque et génération en tâche de fond.
+"""Lecture de la voix off pré-générée (VoiceStudio, en lot hors ligne) à
+partir du cache disque.
 
-Mesuré sur la machine Batocera cible : facteur temps-réel ~1.5 (plus lent
-que le temps réel, ~12s pour une phrase de 20 mots), très différent des ~20x
-plus rapide que le temps réel observés sur une machine de développement plus
-puissante. La synthèse à la demande, bloquante, gèlerait donc le jeu de façon
-inacceptable. Solution : un fichier `.wav` par contenu (carte, question,
-explication) est généré UNE SEULE FOIS dans un thread d'arrière-plan et mis en
-cache sur le disque ; les lectures suivantes du même contenu sont instantanées.
+Toute la synthèse vocale (quiz, flashcards, fiches) est désormais générée à
+l'avance par le pipeline `generate_tts_voicestudio.py` /
+`generate_fiche_audio_voicestudio.py` et déployée avec le jeu - il n'y a plus
+de synthèse à la demande sur la Batocera (Piper, abandonné : bien trop lent
+sur cette machine, ~1.5x le temps réel, et rendu redondant par le
+pré-calcul en lot). Ce module se limite donc à lire un fichier déjà en
+cache ; s'il n'existe pas pour un contenu donné, aucun son n'est joué.
+
+Cache organisé en UN SOUS-DOSSIER PAR MODULE (cache/<base>/<suffix>.ext) et non
+plus à plat (~20 000 fichiers dans un seul dossier ralentissaient le listage,
+en particulier via SMB) - voir migrate_cache_to_subfolders.py pour la
+migration ponctuelle des fichiers déjà générés à plat avant ce changement.
 """
 import os
-import subprocess
-import threading
-import wave
 import pygame
 
 GAME_DIR = os.path.dirname(os.path.abspath(__file__))
 ASSETS_DIR = os.path.join(GAME_DIR, 'tts_assets')
-PIPER_DIR = os.path.join(ASSETS_DIR, 'piper_bin')
-PIPER_BIN = os.path.join(PIPER_DIR, 'piper')
-VOICE_MODEL = os.path.join(ASSETS_DIR, 'voices', 'fr_FR-siwis-medium.onnx')
 CACHE_DIR = os.path.join(ASSETS_DIR, 'cache')
 
-AVAILABLE = os.path.isfile(PIPER_BIN) and os.path.isfile(VOICE_MODEL)
-
 STATUS_IDLE = 'idle'
-STATUS_GENERATING = 'generating'
 STATUS_PLAYING = 'playing'
 STATUS_ERROR = 'error'
 STATUS_UNAVAILABLE = 'indisponible'
 
 
-def _cache_path(cache_key):
-    safe = ''.join(c if (c.isalnum() or c in '-_') else '_' for c in cache_key)
-    return os.path.join(CACHE_DIR, safe + '.wav')
+def _sanitize(name):
+    return ''.join(c if (c.isalnum() or c in '-_') else '_' for c in name)
+
+
+def _cache_path(base, suffix, ext='wav'):
+    return os.path.join(CACHE_DIR, _sanitize(base), _sanitize(suffix) + '.' + ext)
+
+
+def _cache_path_existing(base, suffix):
+    """Chemin du cache déjà présent pour ce module/contenu (mp3, pré-généré
+    en lot par VoiceStudio), ou None si rien n'est en cache."""
+    mp3 = _cache_path(base, suffix, 'mp3')
+    if os.path.exists(mp3):
+        return mp3
+    wav = _cache_path(base, suffix, 'wav')
+    if os.path.exists(wav):
+        return wav
+    return None
 
 
 class TTSManager:
     def __init__(self):
-        self.enabled = AVAILABLE
-        if self.enabled:
-            os.makedirs(CACHE_DIR, exist_ok=True)
-        self.pending = set()      # cache_keys dont la génération est en cours
-        self.current_key = None   # dernier contenu demandé par l'utilisateur
+        self.enabled = True
+        self.current_key = None   # (base, suffix) du dernier contenu demandé par l'utilisateur
         self.channel = None
-        self.status = STATUS_IDLE if self.enabled else STATUS_UNAVAILABLE
+        self.status = STATUS_IDLE
 
-    def cached_duration(self, cache_key):
-        """Durée en secondes du fichier déjà en cache pour `cache_key`, ou
-        None s'il n'existe pas encore (rien à ajuster dans ce cas : sans
-        fichier en cache il n'y a pas de lecture automatique - voir
-        play_if_cached - donc pas de minuteur à étendre)."""
-        path = _cache_path(cache_key)
-        if not os.path.exists(path):
+    def cached_duration(self, base, suffix):
+        """Durée en secondes du fichier déjà en cache, ou None s'il n'existe
+        pas encore (rien à ajuster dans ce cas : sans fichier en cache il n'y
+        a pas de lecture automatique - voir play_if_cached - donc pas de
+        minuteur à étendre). Passe par pygame.mixer.Sound plutôt que le
+        module `wave` : ce dernier ne lit que du PCM WAV, alors que le cache
+        pré-généré est en mp3."""
+        path = _cache_path_existing(base, suffix)
+        if path is None:
             return None
         try:
-            with wave.open(path, 'rb') as w:
-                return w.getnframes() / float(w.getframerate())
-        except (wave.Error, EOFError, OSError):
+            return pygame.mixer.Sound(path).get_length()
+        except pygame.error:
             return None
 
-    def play_if_cached(self, text, cache_key):
-        """Comme request(), mais sans jamais déclencher de génération à la
-        volée : lit immédiatement si l'audio est déjà pré-généré, sinon ne
-        fait rien. Utilisée pour la lecture automatique à l'affichage d'une
-        question/carte - l'utilisateur garde request() (touche Écouter) pour
-        forcer la génération Piper à la demande si rien n'est en cache."""
+    def play_if_cached(self, text, base, suffix):
+        """Lit immédiatement l'audio pré-généré s'il existe pour ce contenu,
+        sinon ne fait rien. Utilisée pour la lecture automatique à
+        l'affichage d'une question/carte."""
         if not self.enabled or not text:
             return
-        path = _cache_path(cache_key)
-        if os.path.exists(path):
-            self.current_key = cache_key
+        path = _cache_path_existing(base, suffix)
+        if path is not None:
+            self.current_key = (base, suffix)
             self._play(path)
 
-    def request(self, text, cache_key):
-        """Demande la lecture de `text`, identifié de façon stable par
-        `cache_key` (même contenu -> même clé, quel que soit l'ordre de
-        tirage des questions). Lecture immédiate si déjà en cache, sinon
-        génération en tâche de fond puis lecture automatique à la fin, sauf
-        si l'utilisateur a changé de carte/question entre-temps."""
+    def request(self, text, base, suffix):
+        """Demande la lecture de `text` (touche Écouter), identifié par
+        (`base`, `suffix`). Lit l'audio pré-généré s'il existe ; sinon ne
+        fait rien (plus de génération à la demande depuis l'abandon de
+        Piper - tout est pré-calculé par le pipeline VoiceStudio)."""
         if not self.enabled or not text:
             return
-        self.current_key = cache_key
-        path = _cache_path(cache_key)
-        if os.path.exists(path):
+        self.current_key = (base, suffix)
+        path = _cache_path_existing(base, suffix)
+        if path is not None:
             self._play(path)
-            return
-        self.status = STATUS_GENERATING
-        if cache_key in self.pending:
-            return
-        self.pending.add(cache_key)
-        threading.Thread(target=self._generate, args=(text, cache_key, path), daemon=True).start()
-
-    def _generate(self, text, cache_key, path):
-        tmp_path = path + '.tmp-{}'.format(os.getpid())
-        try:
-            env = dict(os.environ)
-            env['LD_LIBRARY_PATH'] = PIPER_DIR + os.pathsep + env.get('LD_LIBRARY_PATH', '')
-            proc = subprocess.run(
-                [PIPER_BIN, '--model', VOICE_MODEL, '--output_file', tmp_path],
-                input=text.encode('utf-8'), env=env,
-                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=90)
-            if proc.returncode == 0 and os.path.exists(tmp_path):
-                os.replace(tmp_path, path)
-                if self.current_key == cache_key:
-                    self._play(path)
-            elif self.current_key == cache_key:
-                self.status = STATUS_ERROR
-        except Exception:
-            if self.current_key == cache_key:
-                self.status = STATUS_ERROR
-        finally:
-            self.pending.discard(cache_key)
-            if os.path.exists(tmp_path):
-                try:
-                    os.remove(tmp_path)
-                except OSError:
-                    pass
 
     def _play(self, path):
         try:
@@ -136,9 +110,7 @@ class TTSManager:
         self.current_key = None
 
     def is_busy(self):
-        """Génération en cours ou lecture en cours, pour l'indicateur écran."""
-        if self.status == STATUS_GENERATING:
-            return True
+        """Lecture en cours, pour l'indicateur écran."""
         if self.channel is not None:
             try:
                 return bool(self.channel.get_busy())

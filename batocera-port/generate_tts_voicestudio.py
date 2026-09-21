@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """Pré-génère les fichiers audio TTS (quiz + flashcards) via VoiceStudio local,
-directement dans pse2527/tts_assets/cache/, avec la MÊME convention de nom de
-fichier que tts.py : le jeu les trouve donc automatiquement en cache au
-lancement, Piper ne servant plus que de secours pour ce qui n'est pas
-(encore) pré-généré.
+directement dans pse2527/tts_assets/cache/<module>/, avec la MÊME convention
+de sous-dossier/nom que tts.py : le jeu les trouve donc automatiquement en
+cache au lancement (plus de synthèse à la demande depuis l'abandon de Piper -
+un contenu non pré-généré reste simplement muet). Un sous-dossier par module (pas tout à plat) : plus
+de 20 000 fichiers dans un seul dossier posaient un problème de performance
+(listage, notamment via SMB) - voir migrate_cache_to_subfolders.py pour la
+migration ponctuelle des fichiers déjà générés à plat avant ce changement.
 
 Nécessite VoiceStudio démarré (http://127.0.0.1:3900, voir memory
-voicestudio-tts-fiches-wavfiche.md).
+voicestudio-tts-fiches-wavfiche.md) ET ffmpeg (conversion en mp3 après
+génération, comme generate_fiche_audio_voicestudio.py - tts.py du jeu
+reconnaît le mp3 en priorité, voir sa fonction _cache_path_existing).
 
 Voix : profil cloné PROFILE_ID (voix masculine, référence Common Voice FR
 nettoyée via /clean-audio pour retirer le bruit de fond du micro d'origine),
@@ -26,6 +31,7 @@ import argparse
 import csv
 import json
 import os
+import subprocess
 import sys
 import time
 
@@ -44,18 +50,23 @@ EFFECT_PRESET = "raw"
 LETTERS = ('A', 'B', 'C', 'D')
 
 
-def _cache_path(cache_key):
-    # Doit rester identique à tts._cache_path() du jeu : c'est cette convention
-    # de nommage qui permet au jeu de retrouver l'audio pré-généré ici en cache.
-    safe = ''.join(c if (c.isalnum() or c in '-_') else '_' for c in cache_key)
-    return os.path.join(CACHE_DIR, safe + '.wav')
+def _sanitize(name):
+    return ''.join(c if (c.isalnum() or c in '-_') else '_' for c in name)
 
 
-def synth(text, cache_key):
-    path = _cache_path(cache_key)
-    if os.path.exists(path):
+def _cache_path(base, suffix, ext):
+    # Doit rester identique à tts._cache_path() du jeu : c'est cette
+    # convention (sous-dossier par module, mp3 prioritaire sur wav) qui
+    # permet au jeu de retrouver l'audio pré-généré ici en cache.
+    return os.path.join(CACHE_DIR, _sanitize(base), _sanitize(suffix) + '.' + ext)
+
+
+def synth(text, base, suffix):
+    log_key = '{}/{}'.format(base, suffix)
+    mp3_path = _cache_path(base, suffix, 'mp3')
+    if os.path.exists(mp3_path) or os.path.exists(_cache_path(base, suffix, 'wav')):
         return 'skip'
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    os.makedirs(os.path.dirname(mp3_path), exist_ok=True)
     t0 = time.time()
     try:
         r = requests.post(VOICESTUDIO_URL, data={
@@ -64,16 +75,28 @@ def synth(text, cache_key):
             "effect_preset": EFFECT_PRESET,
         }, timeout=300)
     except Exception as e:
-        print('[ERREUR réseau] {} : {}'.format(cache_key, e), flush=True)
+        print('[ERREUR réseau] {} : {}'.format(log_key, e), flush=True)
         return 'error'
     if r.status_code != 200:
-        print('[ERREUR {}] {} : {}'.format(r.status_code, cache_key, r.text[:200]), flush=True)
+        print('[ERREUR {}] {} : {}'.format(r.status_code, log_key, r.text[:200]), flush=True)
         return 'error'
-    tmp = path + '.tmp'
-    with open(tmp, 'wb') as f:
+
+    tmp_wav = mp3_path + '.tmp.wav'
+    with open(tmp_wav, 'wb') as f:
         f.write(r.content)
-    os.replace(tmp, path)
-    print('[ok] {} ({:.1f}s, {} octets)'.format(cache_key, time.time() - t0, len(r.content)), flush=True)
+    tmp_mp3 = mp3_path + '.tmp.mp3'
+    try:
+        proc = subprocess.run(
+            ['ffmpeg', '-y', '-i', tmp_wav, '-codec:a', 'libmp3lame', '-qscale:a', '4', tmp_mp3],
+            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=60)
+    finally:
+        os.remove(tmp_wav)
+    if proc.returncode != 0 or not os.path.exists(tmp_mp3):
+        print('[ERREUR ffmpeg] {} : conversion mp3 échouée (code {})'.format(log_key, proc.returncode), flush=True)
+        return 'error'
+    os.replace(tmp_mp3, mp3_path)
+
+    print('[ok] {} ({:.1f}s, {} octets mp3)'.format(log_key, time.time() - t0, os.path.getsize(mp3_path)), flush=True)
     return 'ok'
 
 
@@ -128,19 +151,19 @@ def main():
             for q in load_all_quiz_rows(base):
                 letters_text = ' '.join('Réponse {}. {}'.format(l, c) for l, c in zip(LETTERS, q['choix']))
                 ask_text = q['question'] + ' ' + letters_text
-                ask_key = '{}_quiz_{}_ask'.format(base, q['id'])
-                stats[synth(ask_text, ask_key)] += 1
+                ask_suffix = 'quiz_{}_ask'.format(q['id'])
+                stats[synth(ask_text, base, ask_suffix)] += 1
 
                 for outcome, prefix in (('correct', 'Bonne réponse. '), ('incorrect', 'Mauvaise réponse. ')):
                     fb_text = prefix + q['explication']
-                    fb_key = '{}_quiz_{}_feedback_{}'.format(base, q['id'], outcome)
-                    stats[synth(fb_text, fb_key)] += 1
+                    fb_suffix = 'quiz_{}_feedback_{}'.format(q['id'], outcome)
+                    stats[synth(fb_text, base, fb_suffix)] += 1
 
         if not args.only_quiz:
             for idx, card in enumerate(load_all_flash_rows(base)):
                 for face in ('recto', 'verso'):
-                    key = '{}_flash_{}_{}'.format(base, idx, face)
-                    stats[synth(card[face], key)] += 1
+                    suffix = 'flash_{}_{}'.format(idx, face)
+                    stats[synth(card[face], base, suffix)] += 1
 
         elapsed = time.time() - t_start
         print('--- cumul : ok={} skip={} error={} -- {:.0f} min écoulées ---'.format(

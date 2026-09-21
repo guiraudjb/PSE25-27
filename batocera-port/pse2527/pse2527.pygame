@@ -100,8 +100,8 @@ class App:
             self.tts.enabled = False
             self.tts.status = tts.STATUS_UNAVAILABLE
             self.tts.channel = None
-        log('init: TTS {} (voix {})'.format(
-            'disponible' if self.tts.enabled else 'indisponible', tts.VOICE_MODEL))
+        log('init: TTS {}'.format(
+            'disponible' if self.tts.enabled else 'indisponible'))
 
         self.series = dl.load_series()
         log('init: {} séries chargées'.format(len(self.series)))
@@ -280,6 +280,12 @@ class App:
             # une pause manuelle repasse déjà jukebox_playing à False avant
             # d'atteindre ce test, donc pas de faux positif sur pause.
             self.jukebox_on_track_end()
+        elif self.state == STATE_MEDIA and self.media_playing and self.media_path is not None and not pygame.mixer.music.get_busy():
+            # Même détection de fin de piste que pour le jukebox : sans ça,
+            # media_elapsed_s() continue à dériver indéfiniment après la fin
+            # réelle de la lecture (pygame.mixer.music.get_pos() n'aide pas,
+            # voir son commentaire dans media_elapsed_s()).
+            self.handle_media_track_end()
 
     # ------------------------------------------------------------------
     # SERIES
@@ -388,12 +394,13 @@ class App:
         # je vois à l'écran").
         self.quiz_dpad_used = False
         # Lecture automatique si l'audio de cette question est déjà
-        # pré-généré ; sinon on ne force pas de synthèse Piper à la volée,
-        # l'utilisateur garde R1 pour la demander explicitement.
+        # pré-généré ; sinon rien ne se joue (plus de synthèse à la volée),
+        # l'utilisateur garde R1 pour retenter la lecture.
         q = self.quiz_questions[self.quiz_index]
-        text, key = self.quiz_ask_text_key(q)
-        self.tts.play_if_cached(text, key)
-        self.start_quiz_timer(self.tts.cached_duration(key))
+        base = self.current_module['base']
+        text, suffix = self.quiz_ask_suffix(q)
+        self.tts.play_if_cached(text, base, suffix)
+        self.start_quiz_timer(self.tts.cached_duration(base, suffix))
 
     def start_quiz_timer(self, audio_duration_s=None):
         if self.timer_option == 'unlimited':
@@ -432,28 +439,28 @@ class App:
             self.quiz_deadline = None
             self.state = STATE_MODE
 
-    def quiz_ask_text_key(self, q):
+    def quiz_ask_suffix(self, q):
         letters = ('A', 'B', 'C', 'D')
         parts = [q['question']]
         for letter, choix in zip(letters, q['choix']):
             parts.append('Réponse {}. {}'.format(letter, choix))
         text = ' '.join(parts)
-        key = '{}_quiz_{}_ask'.format(self.current_module['base'], q['id'])
-        return text, key
+        suffix = 'quiz_{}_ask'.format(q['id'])
+        return text, suffix
 
     def speak_quiz_question(self, q):
-        text, key = self.quiz_ask_text_key(q)
-        self.tts.request(text, key)
+        text, suffix = self.quiz_ask_suffix(q)
+        self.tts.request(text, self.current_module['base'], suffix)
 
-    def quiz_feedback_text_key(self, q):
+    def quiz_feedback_suffix(self, q):
         outcome = 'correct' if self.quiz_last_correct else 'incorrect'
         prefix = 'Bonne réponse. ' if self.quiz_last_correct else 'Mauvaise réponse. '
         text = prefix + q['explication']
-        # La clé distingue bonne/mauvaise réponse : le texte lu diffère selon
-        # l'issue, un même cache pour les deux ferait entendre la mauvaise
-        # phrase si l'utilisateur répond différemment une autre fois.
-        key = '{}_quiz_{}_feedback_{}'.format(self.current_module['base'], q['id'], outcome)
-        return text, key
+        # Le suffixe distingue bonne/mauvaise réponse : le texte lu diffère
+        # selon l'issue, un même cache pour les deux ferait entendre la
+        # mauvaise phrase si l'utilisateur répond différemment une autre fois.
+        suffix = 'quiz_{}_feedback_{}'.format(q['id'], outcome)
+        return text, suffix
 
     def confirm_quiz_choice(self, chosen):
         # chosen == -1 : temps de réflexion écoulé (voir update_timers), traité
@@ -466,10 +473,11 @@ class App:
         if self.quiz_last_correct:
             self.quiz_score += 1
         self.tts.stop()
-        text, key = self.quiz_feedback_text_key(q)
-        self.tts.play_if_cached(text, key)
+        base = self.current_module['base']
+        text, suffix = self.quiz_feedback_suffix(q)
+        self.tts.play_if_cached(text, base, suffix)
         self.state = STATE_QUIZ_FEEDBACK
-        self.start_feedback_timer(self.tts.cached_duration(key))
+        self.start_feedback_timer(self.tts.cached_duration(base, suffix))
 
     def start_feedback_timer(self, audio_duration_s=None):
         if self.timer_option == 'unlimited':
@@ -485,8 +493,8 @@ class App:
     def handle_quiz_feedback(self, action):
         if action == 'shoulder_r':
             q = self.quiz_questions[self.quiz_index]
-            text, key = self.quiz_feedback_text_key(q)
-            self.tts.request(text, key)
+            text, suffix = self.quiz_feedback_suffix(q)
+            self.tts.request(text, self.current_module['base'], suffix)
         elif action == 'action' or action == 'back':
             self.advance_quiz_feedback()
 
@@ -513,8 +521,8 @@ class App:
         self.flash_autoplay = False
         self.flash_deadline = None
         if self.flash_cards:
-            text, key = self.flash_card_text_key()
-            self.tts.play_if_cached(text, key)
+            text, suffix = self.flash_card_suffix()
+            self.tts.play_if_cached(text, self.current_module['base'], suffix)
         self.state = STATE_FLASH
 
     def handle_flash(self, action):
@@ -538,20 +546,20 @@ class App:
         if action == 'action':
             self.flash_flipped = not self.flash_flipped
             self.tts.stop()
-            text, key = self.flash_card_text_key()
-            self.tts.play_if_cached(text, key)
+            text, suffix = self.flash_card_suffix()
+            self.tts.play_if_cached(text, self.current_module['base'], suffix)
         elif action == 'right':
             self.flash_index = (self.flash_index + 1) % len(self.flash_cards)
             self.flash_flipped = False
             self.tts.stop()
-            text, key = self.flash_card_text_key()
-            self.tts.play_if_cached(text, key)
+            text, suffix = self.flash_card_suffix()
+            self.tts.play_if_cached(text, self.current_module['base'], suffix)
         elif action == 'left':
             self.flash_index = (self.flash_index - 1) % len(self.flash_cards)
             self.flash_flipped = False
             self.tts.stop()
-            text, key = self.flash_card_text_key()
-            self.tts.play_if_cached(text, key)
+            text, suffix = self.flash_card_suffix()
+            self.tts.play_if_cached(text, self.current_module['base'], suffix)
         elif action == 'shoulder_r':
             self.speak_flash_card()
         elif action == 'back':
@@ -590,16 +598,16 @@ class App:
             # plutôt que de reboucler sur la première carte.
             self.stop_flash_autoplay()
 
-    def flash_card_text_key(self):
+    def flash_card_suffix(self):
         card = self.flash_cards[self.flash_index]
         face = 'verso' if self.flash_flipped else 'recto'
         text = card['verso'] if self.flash_flipped else card['recto']
-        key = '{}_flash_{}_{}'.format(self.current_module['base'], self.flash_index, face)
-        return text, key
+        suffix = 'flash_{}_{}'.format(self.flash_index, face)
+        return text, suffix
 
     def speak_flash_card(self):
-        text, key = self.flash_card_text_key()
-        self.tts.request(text, key)
+        text, suffix = self.flash_card_suffix()
+        self.tts.request(text, self.current_module['base'], suffix)
 
     # ------------------------------------------------------------------
     # FICHE DE RÉVISION (texte long, paginé - pas de retour à la ligne
@@ -725,6 +733,22 @@ class App:
             pygame.mixer.music.pause()
         self.media_position_s = new_pos
         self.media_position_ticks = pygame.time.get_ticks()
+
+    def handle_media_track_end(self):
+        if self.media_kind == 'chanson':
+            # Lecture en boucle : redémarre depuis le début, compteur remis à
+            # zéro - les chansons sont courtes et faites pour être réécoutées
+            # en boucle (mnémotechnique), contrairement à un podcast.
+            pygame.mixer.music.play()
+            self.media_position_s = 0.0
+            self.media_position_ticks = pygame.time.get_ticks()
+            self.media_playing = True
+        else:
+            # Podcast : fin normale, pas de boucle - arrêt propre plutôt que
+            # de laisser le compteur dériver indéfiniment après la fin réelle.
+            pygame.mixer.music.stop()
+            self.media_playing = False
+            self.media_position_s = 0.0
 
     def handle_media(self, action):
         if action == 'action' and self.media_path is not None:

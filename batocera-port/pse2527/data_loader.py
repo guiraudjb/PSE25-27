@@ -125,6 +125,6 @@ def fiche_audio_path(base):
     """Chemin de la narration audio (mp3) de la fiche de révision du module,
     ou None si absente. Fichier long (plusieurs dizaines de minutes possible)
     pré-généré à l'avance et streamé via pygame.mixer.music - jamais généré à
-    la volée par Piper comme le quiz/flashcard (bien trop long pour ça)."""
+    la volée (bien trop long pour ça)."""
     path = os.path.join(DATA_DIR, 'fiche_audio', base + '.mp3')
     return path if os.path.exists(path) else None
