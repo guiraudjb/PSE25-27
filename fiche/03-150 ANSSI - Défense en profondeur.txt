@@ -1,0 +1,81 @@
+DÉFENSE EN PROFONDEUR, MISE EN ŒUVRE, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      La défense en profondeur est le principe de sécurité qui repose sur le déploiement de barrières complémentaires, chacune constituée d'un ensemble de mesures, pour s'opposer à chaque étape de progression d'un attaquant.
+
+      Une barrière représente un objectif de sécurité répondant à une étape d'un scénario de risque, se déclinant en protection avant l'attaque, défense pendant l'attaque, et résilience après l'attaque.
+
+      Une mesure est l'unité élémentaire, organisationnelle, technique ou opérationnelle, dont l'action participe à la couverture de l'objectif de sécurité d'une barrière.
+
+      La multiplicité, l'indépendance et la robustesse sont les trois critères qui déterminent l'efficacité globale de la stratégie de défense en profondeur, appliqués tant au niveau des barrières qu'au niveau des mesures.
+
+      Une sandbox est un environnement isolé permettant d'analyser dynamiquement le comportement d'un fichier ou d'un courriel suspect sans risque pour le système d'information.
+
+      Un EDR, Endpoint Detection and Response, est un outil réalisant une analyse comportementale sur les postes utilisateurs pour détecter et bloquer l'installation de logiciels malveillants.
+
+      Un site de repli à froid est une mesure de résilience consistant à disposer de fonctions critiques redondantes, indépendantes des composants de production, pour assurer la continuité d'activité.
+
+COURS DÉTAILLÉ.
+
+I. LES PRINCIPES DE LA DÉFENSE EN PROFONDEUR.
+
+   A. La structure d'une barrière selon trois axes.
+
+      La mise en œuvre d'une barrière s'articule autour de trois axes. Le rôle, qui répond à la question quoi, distingue la protection avant l'attaque, la défense pendant l'attaque, et la résilience après l'attaque. Le placement, qui répond à la question où, s'applique aux composants du système d'information, à savoir les utilisateurs, les locaux, les identités, les réseaux, les équipements, les applications et les données. L'implémentation, qui répond à la question comment, correspond aux mesures de sécurité choisies pour répondre à l'objectif de sécurité de la barrière.
+
+   B. Les trois critères d'efficacité.
+
+      La multiplicité assure que le système d'information dispose de remparts successifs et autonomes à chaque étape de progression d'un attaquant, et que chaque barrière s'appuie sur des mesures variées et complémentaires. L'indépendance garantit que les barrières reposent sur des socles technologiques distincts ne partageant pas les mêmes faiblesses, de sorte qu'une défaillance d'une barrière de protection du système de production ne doit pas entraîner une perte de visibilité depuis le système de supervision, ni compromettre les barrières de résilience du système d'administration. La robustesse s'applique aux mesures elles-mêmes, qui doivent résister aux tentatives de contournement.
+
+   C. L'adaptation au contexte du système d'information.
+
+      La mise en œuvre des mesures de sécurité doit être adaptée en fonction du niveau d'exposition du système d'information, de sa criticité et des scénarios de risque retenus, un exemple donné ne traitant généralement qu'un seul scénario parmi ceux possibles et devant être complété par d'autres mesures.
+
+II. UN EXEMPLE DE MISE EN ŒUVRE CONTRE UNE ATTAQUE PAR RANÇONGICIEL.
+
+   A. Détecter et bloquer les tentatives d'hameçonnage.
+
+      Cette barrière de défense, positionnée sur le réseau, consiste à maintenir à jour les règles de détection, à analyser les courriels de manière statique par signature et de manière dynamique dans une sandbox, et à utiliser une passerelle entrante pour réaliser ces analyses en amont du serveur de courriels.
+
+   B. Limiter la vraisemblance qu'un utilisateur exécute un logiciel malveillant.
+
+      Cette barrière de protection, positionnée sur l'utilisateur, consiste à sensibiliser régulièrement aux tentatives d'hameçonnage et à tester le comportement des utilisateurs par des campagnes internes d'hameçonnage.
+
+   C. Limiter les capacités d'un attaquant à installer des outils et à en détecter l'installation.
+
+      La barrière de protection, positionnée sur l'équipement, consiste à limiter les droits des utilisateurs selon le principe du moindre privilège, notamment en ne donnant pas de droits d'administration, et à assurer que les correctifs de sécurité des postes soient à jour. La barrière de défense correspondante consiste à réaliser une analyse comportementale sur les postes utilisateurs, par exemple avec un EDR, et à maintenir à jour les règles de détection sur les postes.
+
+   D. Limiter le canal de commande et contrôle et la latéralisation.
+
+      Pour limiter les capacités d'un attaquant à établir un canal de commande et contrôle vers Internet, il convient de mettre en œuvre un serveur mandataire pour les accès à Internet et un résolveur DNS en DMZ, rendus non contournables par défaut, et de maintenir à jour les règles de filtrage. Pour limiter les capacités de latéralisation par compromission d'un compte à privilèges sur le poste de travail, il convient d'utiliser des comptes d'administration dédiés aux postes utilisateur et de réaliser des audits réguliers du service d'annuaire central.
+
+   E. Pallier la perte de données.
+
+      Cette barrière de résilience, positionnée sur la donnée, consiste à mettre en œuvre un mécanisme de sauvegarde avec au moins une copie hors ligne, et à tester régulièrement les procédures de sauvegarde et de restauration.
+
+III. DES EXEMPLES DE BARRIÈRES GÉNÉRIQUES.
+
+   A. La protection par authentification utilisateur.
+
+      Sur le composant identité, l'authentification multi-facteur illustre la multiplicité des mesures. L'utilisation d'un jeton physique indépendant du poste d'accès au système d'information illustre l'indépendance. L'authentification par défi-réponse cryptographique et le dimensionnement approprié des secrets illustrent la robustesse.
+
+   B. La défense par analyse par anomalie des flux.
+
+      Sur le composant réseau, la multiplicité des points de collecte et d'analyse des flux illustre la multiplicité des mesures. La centralisation des alertes sur des serveurs dédiés et séparés de la production, ainsi que le positionnement de sondes derrière des TAP physiques, illustrent l'indépendance. Le maintien à jour des règles de détection et la fiabilisation des alertes illustrent la robustesse.
+
+   C. La résilience par un site de repli à froid.
+
+      Applicable à l'ensemble du système d'information ou à une partie seulement, la redondance des fonctions critiques nécessaires à la continuité d'activité illustre la multiplicité. L'indépendance complète des composants du repli à froid vis-à-vis de ceux de la production illustre l'indépendance. Le test régulier des procédures de repli et le maintien en conditions de sécurité des composants du repli illustrent la robustesse.
+
+POINTS D'ATTENTION.
+
+      Le critère d'indépendance est présenté comme particulièrement important, une défaillance d'une barrière de protection du système de production ne devant jamais entraîner une perte de visibilité depuis le système de supervision, ni compromettre les barrières de résilience du système d'administration.
+
+      L'exemple de mise en œuvre contre le rançongiciel n'est explicitement pas exhaustif, il illustre une seule chaîne de scénario et doit être complété par d'autres mesures pour couvrir l'ensemble des scénarios de risque possibles.
+
+EXEMPLES CITES.
+
+      La mise en place d'un serveur mandataire non contournable par défaut pour limiter l'établissement d'un canal de commande et contrôle vers Internet.
+
+      L'utilisation d'un jeton physique indépendant du poste d'accès comme exemple d'indépendance de l'authentification multi-facteur.
