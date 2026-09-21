@@ -1,0 +1,71 @@
+INFRASTRUCTURE DE GESTION DE CLÉS, IGC, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Une infrastructure de gestion de clés, ou IGC, est l'ensemble organisationnel et technique hiérarchique qui gère les certificats à usage interne à une entité.
+
+      Une autorité de certification, ou AC, est l'entité qui émet des certificats, organisée en hiérarchie avec au minimum une AC racine et une AC intermédiaire par AC racine.
+
+      Une politique de certification, ou PC, et une déclaration des pratiques de certification, ou DPC, sont les documents qui définissent les règles et pratiques d'une infrastructure de gestion de clés, selon les définitions de l'annexe A2 du Référentiel général de sécurité, RGS.
+
+      Un gabarit de certificat définit le type de certificat émis, par exemple d'authentification de serveur web, de chiffrement ou de signature de code, avec des champs d'extension X.509 limités aux stricts besoins.
+
+      Un HSM, Hardware Security Module, est un équipement sécurisé matériel destiné à stocker les clés privées des autorités de certification.
+
+      La CRL, Certificate Revocation List, et l'OCSP, Online Certificate Status Protocol, sont deux mécanismes de gestion de la révocation des certificats, à combiner idéalement pour assurer une redondance.
+
+      ACME, Automatic Certificate Management Environment, est le protocole permettant d'automatiser la génération, le déploiement et le renouvellement des certificats.
+
+COURS DÉTAILLÉ.
+
+I. LA CONCEPTION DE L'INFRASTRUCTURE DE GESTION DE CLÉS.
+
+   A. La hiérarchie des autorités de certification.
+
+      Une hiérarchie d'autorités de certification adaptée au besoin de l'entité doit être créée, avec au minimum une AC racine et au minimum une AC intermédiaire pour chaque AC racine. Chaque AC intermédiaire doit être dédiée à l'émission d'un ou plusieurs gabarits de certificat, avec une répartition par métier ou par usage.
+
+   B. La politique et les gabarits de certification.
+
+      Une politique de certification et une déclaration des pratiques de certification doivent être définies, rédigées et respectées, selon les définitions de l'annexe A2 du Référentiel général de sécurité. Des gabarits de certificats conformes à ces pratiques doivent être définis, en limitant les champs des extensions X.509, comme Key Usage, Extended Key Usage ou Authority Information Access, aux stricts besoins d'un gabarit donné. Les certificats émis pour un utilisateur ou un processus donné doivent être conformes aux gabarits associés.
+
+   C. La protection des échanges et des clés privées.
+
+      Les échanges entre les différentes composantes de l'IGC, autorité de certification, autorité d'enregistrement, entité d'archivage, ainsi qu'entre l'IGC et les entités finales, doivent être protégés en confidentialité, intégrité et authenticité, en particulier les demandes et délivrances de certificats. Les clés privées des AC racine doivent être stockées hors ligne, idéalement dans un HSM, celles des AC intermédiaires stockées en ligne dans un HSM, et celles des certificats d'entité finale protégées par du contrôle d'accès et idéalement par du chiffrement, avec une protection matérielle additionnelle si la sensibilité le nécessite. Une copie des clés privées des certificats dédiés au chiffrement doit être séquestrée hors ligne.
+
+   D. La gestion du cycle de vie des clés et la révocation.
+
+      Les bi-clés doivent être générées à partir d'une source d'aléa et selon des algorithmes conformes au Guide des mécanismes cryptographiques, par exemple RSA avec un module de 4096 bits ou ECDSA avec la courbe P-384 pour une AC racine, et RSA avec un module de 3072 bits ou ECDSA avec la courbe P-256 pour une AC intermédiaire ou un certificat d'entité finale. La durée de validité des certificats doit être définie selon leur sensibilité et leur exposition, par exemple une dizaine d'années pour une AC racine, quelques années pour une AC intermédiaire, et quelques mois pour un certificat d'entité finale. Une bi-clé ne doit jamais être réutilisée pour un autre usage que celui prévu par le certificat associé. Au moins un mécanisme de révocation, CRL ou OCSP, doit être mis en œuvre, deux mécanismes étant préférables pour assurer une redondance.
+
+   E. L'anticipation de la cryptographie post-quantique.
+
+      La migration de l'infrastructure de gestion de clés vers la cryptographie post-quantique doit être anticipée, en investiguant notamment la mise en œuvre de l'hybridation sur les certificats et les impacts de performance, en s'appuyant sur l'Avis de l'ANSSI sur la migration vers la cryptographie post-quantique.
+
+II. L'EXPLOITATION DE L'INFRASTRUCTURE DE GESTION DE CLÉS.
+
+   A. Les ressources humaines et la vérification des demandes.
+
+      Des ressources humaines doivent être dédiées à l'exploitation et au maintien en conditions opérationnelles et de sécurité de l'IGC, selon des processus définis au préalable. La légitimité d'une demande de certificat doit être vérifiée, en particulier la conformité du contenu à la politique de certification et la possession, par le demandeur, de la clé privée associée à la clé publique contenue dans la demande.
+
+   B. La configuration des magasins de certificats et la vérification de la chaîne.
+
+      Les magasins de certificats, des navigateurs ou des produits, doivent être configurés uniquement avec les autorités de certification strictement nécessaires. Les équipements et logiciels utilisant des certificats doivent vérifier la chaîne de certification dans son intégralité, en prenant en considération la signature du certificat, le statut de révocation et la période de validité.
+
+   C. Le renouvellement et l'automatisation.
+
+      Le renouvellement des certificats doit être anticipé, en particulier celui de l'AC racine, par exemple dès l'atteinte des deux tiers de la durée de vie du certificat, avec des tests réguliers des processus de renouvellement. La bi-clé du certificat doit être systématiquement renouvelée lors d'un renouvellement de certificat. La génération, le déploiement et le renouvellement des certificats doivent être automatisés via la mise en œuvre sécurisée de protocoles dédiés comme ACME.
+
+   D. La séparation des rôles, la journalisation et l'audit.
+
+      Des rôles distincts doivent être établis pour l'exploitation et l'administration de l'IGC, comme administrateur, responsable d'application ou opérateur. Les événements relatifs à l'IGC, émission de certificats, journaux des HSM, CRL, jetons OCSP, doivent être journalisés et surveillés. Des audits internes doivent être réalisés à une fréquence adaptée à l'entité, avec possibilité de recourir à un prestataire externe.
+
+POINTS D'ATTENTION.
+
+      La distinction du niveau de stockage des clés privées selon la position dans la hiérarchie, hors ligne pour l'AC racine, en ligne mais en HSM pour les AC intermédiaires, illustre le principe que plus une clé est haute dans la hiérarchie de confiance, plus son exposition doit être réduite.
+
+      Le renouvellement systématique de la bi-clé à chaque renouvellement de certificat, plutôt que la simple reconduction du certificat avec la même clé, est une précaution explicitement rappelée par le guide.
+
+EXEMPLES CITES.
+
+      RSA avec un module de 4096 bits ou ECDSA avec la courbe P-384 pour une AC racine, contre RSA 3072 bits ou ECDSA P-256 pour une AC intermédiaire ou un certificat d'entité finale.
+
+      Le protocole ACME pour automatiser la génération, le déploiement et le renouvellement des certificats.
