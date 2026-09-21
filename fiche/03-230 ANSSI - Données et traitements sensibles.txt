@@ -1,0 +1,67 @@
+DONNÉES ET TRAITEMENTS SENSIBLES, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Des données ou traitements sensibles sont ceux dont la compromission, la perte ou l'altération peut sérieusement entraver la capacité de l'entité à atteindre ses objectifs, voire à exister.
+
+      La mention Diffusion Restreinte, ou DR, désigne les informations très sensibles pouvant avoir un impact critique, sans relever pour autant du régime des informations classifiées Secret ou Très secret au sens de l'IGI 1300.
+
+      L'IGI 1300 est l'instruction générale interministérielle qui encadre les informations classifiées, dont les mesures de sécurisation spécifiques ne sont pas couvertes par ce guide.
+
+      Une échelle d'impact est l'outil homogène défini pour toute l'entité, permettant d'évaluer les conséquences possibles d'une compromission de données selon des critères humain, financier, juridique, opérationnel et d'image.
+
+COURS DÉTAILLÉ.
+
+I. LA DÉFINITION DE NIVEAUX DE SENSIBILITÉ.
+
+   A. L'échelle d'impact homogène.
+
+      Une échelle d'impact homogène doit être établie pour toute l'entité, permettant d'évaluer les conséquences possibles d'une compromission des données. Cette échelle peut se baser sur les besoins de sécurité, disponibilité, intégrité, confidentialité, mais une approche par impact est jugée plus intuitive pour les métiers.
+
+   B. Les quatre niveaux de gravité d'impact.
+
+      Un impact mineur se traduit par une atteinte physique ou psychique mineure, l'absence de perte financière, un simple avertissement juridique, aucune perturbation opérationnelle, et une couverture médiatique locale limitée. Un impact significatif se traduit par une atteinte physique ou psychique modérée, une perte financière inférieure à un seuil X, un règlement à l'amiable, une perturbation inférieure à un délai T, et une couverture médiatique régionale avec impact sur la réputation locale. Un impact grave se traduit par une atteinte physique ou psychique grave mais réversible, une perte comprise entre X et Y, la responsabilité civile de l'entité, une perturbation entre T et U, et une couverture médiatique nationale avec perte de confiance des parties prenantes. Un impact critique se traduit par une atteinte physique ou psychique irréversible pouvant aller jusqu'au décès, une perte supérieure à Y, la responsabilité pénale individuelle d'un dirigeant, une perturbation supérieure à U, et une couverture médiatique internationale avec perte majeure de parts de marché.
+
+   C. Les trois niveaux de sensibilité des données.
+
+      Le niveau non sensible, niveau 1, ne comporte que des impacts mineurs. Le niveau sensible comporte au moins un impact significatif, niveau 2, ou grave, niveau 3. Le niveau très sensible peut avoir un impact critique, niveau 4, et comprend notamment les informations protégées par la mention Diffusion Restreinte.
+
+II. L'IDENTIFICATION ET LA CATÉGORISATION DES DONNÉES.
+
+   A. L'inventaire macroscopique.
+
+      Un inventaire macroscopique des données et des traitements de l'entité doit être réalisé, sans se limiter aux éléments sensibles.
+
+   B. La catégorisation par division et par contexte.
+
+      Les données et traitements sensibles doivent être catégorisés par division ou direction et par contexte d'utilisation, test, production, ou contrôle interne réglementaire, par exemple les données financières, les données commerciales et de propriété intellectuelle, les données soumises à des réglementations, et les données liées au fonctionnement du système d'information comme les journaux, l'adressage IP ou les schémas d'architecture. La source et le responsable de chaque catégorie doivent être identifiés.
+
+   C. L'évaluation du niveau de sensibilité.
+
+      Le RSSI doit questionner les besoins exprimés par le métier afin d'éviter une sous-évaluation ou une surévaluation, cette évaluation devant être validée par les décideurs. Une évaluation par catégorie de données est préférable à une évaluation donnée par donnée, en raison des contraintes de temps et de disponibilité des décideurs.
+
+   D. L'élévation du niveau en cas d'agrégation et les revues régulières.
+
+      Le niveau de sensibilité doit être élevé si nécessaire lors d'accumulation ou d'agrégation de données, par exemple un dépôt contenant de nombreuses données de niveau 2 pouvant être réévalué au niveau 3. Des revues régulières doivent être incluses dans le processus d'évaluation, la sensibilité évoluant dans le temps et en fonction des contextes.
+
+III. L'ANTICIPATION ET LA PROTECTION.
+
+   A. La définition des exigences de sécurité par niveau.
+
+      Pour chaque catégorie et niveau, les besoins de sécurité dont les défaillances sont les plus susceptibles d'être à l'origine des impacts redoutés doivent être identifiés. Par exemple, si un impact opérationnel critique est surtout causé par l'indisponibilité d'une catégorie de système d'information, le besoin de disponibilité est prépondérant. Des mesures ad hoc doivent ensuite être appliquées en fonction des besoins de sécurité définis, par exemple un plan de continuité d'activité pour répondre à un besoin de disponibilité. Pour certains niveaux, comme les données Diffusion Restreinte, des exigences réglementaires spécifiques peuvent s'appliquer.
+
+   B. Le cadrage des interconnexions et la priorisation.
+
+      Les conditions d'interconnexion entre les niveaux de sensibilité, dont le niveau non sensible, doivent être cadrées. Les travaux de sécurisation doivent être priorisés en fonction de critères simples comme l'exposition, évaluée selon le nombre et le type de personnes, interne, prestataire, partenaire ou public, pouvant accéder à la donnée, et le nombre et le niveau de maîtrise des interfaces permettant d'y accéder, accès physique, accès logique ou réseau tiers.
+
+POINTS D'ATTENTION.
+
+      Le guide précise explicitement que ses recommandations ne couvrent pas les mesures de sécurisation spécifiques aux informations classifiées Secret et Très secret au sens de l'IGI 1300, qui relèvent d'un régime distinct.
+
+      La préférence pour une évaluation par catégorie de données plutôt que donnée par donnée est justifiée par le réalisme opérationnel, les décideurs ayant un temps et une disponibilité limités.
+
+EXEMPLES CITES.
+
+      Un dépôt contenant de nombreuses données de niveau 2 pouvant être réévalué au niveau 3 par effet d'agrégation.
+
+      Un plan de continuité d'activité comme mesure ad hoc répondant à un besoin de disponibilité identifié pour une catégorie de données.
