@@ -1,0 +1,111 @@
+SÉCURISATION DU POSTE DE TRAVAIL MULTI-ENVIRONNEMENTS, NON CLASSIFIÉS, GUIDE LES FONDAMENTAUX DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Un poste de travail multi-environnements est un poste destiné à faire cohabiter plusieurs environnements ne partageant pas le même niveau de sensibilité, tout en apportant des garanties de sécurité proches de celles d'un cloisonnement physique complet.
+
+      Une tâche est un ensemble d'instructions chargées en mémoire au fur et à mesure pour être exécutées, et une ressource est une entité, mémoire, réseau, tâche ou fichier, utilisée par une tâche.
+
+      Une politique de sécurité regroupe un ensemble de règles qui autorisent ou interdisent à une tâche d'effectuer une action sur une ressource.
+
+      Un domaine est l'environnement d'exécution d'une ou plusieurs tâches sur le socle, défini par l'ensemble des ressources sur lesquelles la tâche peut agir, se déclinant en domaine utilisateur, destiné à l'environnement de travail d'un utilisateur, et domaine support, destiné à une fonction annexe.
+
+      Le cloisonnement, ou isolation entre domaines, a pour objectif de garantir qu'un domaine n'accède pas aux ressources d'un autre domaine, sauf de manière contrôlée par une politique de sécurité.
+
+      La TCB, Trusted Computing Base, est l'ensemble des logiciels et matériels critiques pour la sécurité du système, dont un bug ou une vulnérabilité entraîne généralement la compromission complète du système.
+
+      Le socle est l'ensemble des matériels et logiciels permettant de faire fonctionner les domaines, incluant la TCB, et assurant l'isolation entre les différents domaines.
+
+      Le moniteur de référence est le logiciel qui autorise ou interdit l'action d'une tâche sur une ressource, sur la base d'une politique de sécurité.
+
+      Le TPM, Trusted Platform Module, est un composant sécurisé passif, matériel ou virtuel, vTPM, qui effectue des opérations cryptographiques selon la norme ISO/IEC 11889.
+
+      Une RTM, Root of Trust for Measurements, est un composant de sécurité physique permettant d'établir une chaîne de confiance mesurée dès le démarrage.
+
+COURS DÉTAILLÉ.
+
+I. LES PRINCIPES GÉNÉRAUX.
+
+   A. Le paradoxe du cloisonnement physique.
+
+      Lorsque des environnements n'ont pas le même niveau de sensibilité, sont exposés à des niveaux de menace hétérogènes, ou sont opérés par des entités différentes, il est recommandé de les cloisonner physiquement, ce qui conduit usuellement à dédier un poste à chaque environnement. Pour des raisons de coûts, de mobilité, d'ergonomie ou d'empreinte environnementale, ce document présente les fonctions de sécurité attendues sur un poste destiné à faire cohabiter différents environnements, appelé poste de travail multi-environnements.
+
+   B. Le périmètre du document.
+
+      Ce document est destiné aux éditeurs de postes multi-environnements, pas aux administrateurs systèmes, et ne traite que du cloisonnement entre systèmes d'exploitation complets, pas de l'isolation d'applicatifs au sein d'un système. Les environnements respectant ce document peuvent être Non Protégé, NP, ou Diffusion Restreinte, DR, au sens de l'Instruction Interministérielle n°901, permettant les combinaisons NP/NP, NP/DR ou DR/DR, sans se limiter à deux environnements. Le document ne traite pas des niveaux Secret ou Très Secret au sens de l'IGI 1300, et repose sur l'hypothèse d'un poste mono-utilisateur, pouvant être utilisé en nomadisme.
+
+   C. Le choix des machines virtuelles pour le cloisonnement.
+
+      Les fonctions de sécurité reposent sur l'hypothèse que des machines virtuelles sont utilisées pour cloisonner les domaines utilisateurs, offrant un cloisonnement plus fort que les technologies reposant uniquement sur les primitives d'isolation du noyau, comme les sandbox. Les VM réduisent la surface d'attaque exposée par le socle et évitent que le système d'exploitation du domaine utilisateur ait une adhérence au socle. Même des domaines utilisateurs de même sensibilité doivent être isolés les uns des autres, une sensibilité identique n'étant pas synonyme d'un droit d'accès identique.
+
+II. LES FONCTIONS DE SÉCURITÉ DU SOCLE.
+
+   A. La chaîne de démarrage et l'intégrité.
+
+      L'intégrité, l'authenticité et le non-retour en arrière des éléments de la chaîne de démarrage doivent être assurés, par exemple via UEFI Secure Boot combiné à un Measured Boot reposant sur un TPM. La configuration du firmware ne doit pas pouvoir être modifiée par un utilisateur. L'intégrité et l'authenticité des exécutables doivent être assurées par des mécanismes cryptographiques, par exemple dm-verity sous Linux, ainsi que l'intégrité de l'image du noyau projetée en mémoire et le contrôle du chargement de code en espace noyau.
+
+   B. Le chiffrement des données et la protection de la mémoire.
+
+      Toutes les données du système doivent être protégées cryptographiquement en confidentialité, intégrité et authenticité par le socle. Les données ne pouvant être protégées en confidentialité, comme une partition ESP, doivent au moins l'être en intégrité et authenticité, et ne doivent contenir ni données sensibles ni secrets. Un composant de sécurité physique, comme un TPM, doit protéger les secrets cryptographiques sensibles. Les données d'un domaine utilisateur doivent être déchiffrables uniquement par l'utilisateur légitime, à partir d'un facteur de connaissance. L'accès à la mémoire vive des domaines utilisateurs depuis l'espace utilisateur du socle doit être restreint, et le chiffrement complet de la mémoire DRAM doit être utilisé pour éviter les attaques de type coldboot.
+
+   C. Le durcissement du socle.
+
+      Le socle doit être durci à l'état de l'art en respectant la défense en profondeur, la séparation des privilèges, le moindre privilège et la minimisation de la surface d'attaque. Les informations sensibles ne doivent pas subsister en mémoire plus longtemps que nécessaire. L'accès aux ressources doit être contrôlé par un moniteur de référence, par exemple via des mécanismes de contrôle d'accès obligatoire comme SELinux ou AppArmor sous Linux. Le noyau doit être durci à l'état de l'art, et le socle doit se protéger contre les attaques micro-architecturales connues, comme Meltdown et Spectre, une attaque dans un domaine utilisateur ne devant affecter ni le socle ni les autres domaines.
+
+III. LES PÉRIPHÉRIQUES, LE RÉSEAU ET LE TEMPS.
+
+   A. Les périphériques émulés, délégués et externes.
+
+      Une instance de VMM doit être dédiée à chaque domaine utilisateur, chaque périphérique émulé étant dédié à un unique domaine utilisateur et isolé dans un domaine support dédié. L'émulation des périphériques est préférable à la délégation d'un périphérique physique, PCI passthrough, qui doit sinon être sécurisée et documentée. Les périphériques physiques externes, clavier, carte à puce, clés USB, sont rattachés au socle et ne doivent pas être simultanément accessibles par différents domaines utilisateurs ou par le socle, sauf démonstration documentée de l'absence de fuite de données lors d'un usage alterné.
+
+   B. Le réseau.
+
+      La configuration réseau du socle ne doit pouvoir être contrôlée ni par un domaine utilisateur ni par l'utilisateur, sauf exceptions limitées comme le choix d'un réseau Wi-Fi. Les flux originaires du socle doivent transiter dans un VPN chiffrant non-débrayable maîtrisé par l'entité propriétaire du poste. Les communications réseau entre les domaines utilisateurs et le socle, ainsi qu'entre domaines utilisateurs, sont interdites, sauf pour les fonctions de sécurité strictement nécessaires. Les domaines utilisateurs ne doivent pouvoir usurper ni un autre domaine ni le socle, et ne doivent accéder au réseau qu'à travers des ressources maîtrisées par le socle. Tous les flux réseau doivent être filtrés par le socle.
+
+   C. Les sources de temps.
+
+      Le socle doit utiliser une source de temps intègre, par exemple NTS, pour mettre à jour son temps local, le socle et les domaines supports devant disposer d'une source de temps commune pour corréler leurs événements de sécurité.
+
+IV. LA JOURNALISATION, LA MISE À JOUR ET L'EXPLOITATION.
+
+   A. La journalisation.
+
+      Un domaine support est dédié à la journalisation du socle, les journaux devant être protégés en intégrité et en authenticité et contenir au minimum les dysfonctionnements métier et de sécurité, les mises à jour, les authentifications et déconnexions, et les journaux des tunnels VPN. Les journaux ne doivent pas recueillir d'information permettant de s'affranchir d'une fonction de sécurité, comme des clés privées. Les journaux créés à l'intérieur d'un domaine utilisateur ne doivent pas être envoyés au socle.
+
+   B. La mise à jour.
+
+      Le socle doit rester fonctionnel et sécurisé même en cas d'échec de mise à jour, par exemple via un système de mise à jour atomique avec fallback. L'échec d'une mise à jour doit être journalisé, et les mises à jour doivent être signées, avec contrôle de la signature à l'application.
+
+   C. L'exploitation du socle par rôles.
+
+      Un rôle doit être associé à chaque type d'action d'exploitation, par exemple administrateur, auditeur ou mise à jour, chaque rôle étant clairement défini et exécuté dans un domaine support dédié disposant de privilèges minimum, sans accès aux données des utilisateurs. L'accès à ces domaines supports doit nécessiter une authentification forte.
+
+V. LA CHAÎNE DE DÉMARRAGE DES DOMAINES, L'AUTHENTIFICATION ET LES ÉCHANGES.
+
+   A. La chaîne de démarrage des domaines utilisateurs et l'authentification.
+
+      Le socle doit fournir à chaque domaine utilisateur un mécanisme de démarrage sécurisé et un élément de sécurité permettant une RTM, par exemple un TPM virtuel dédié et distinct de celui du socle. L'utilisateur doit obligatoirement s'authentifier sur le socle avant d'accéder aux domaines utilisateurs, en respectant la politique de sécurité et les exigences réglementaires de chaque domaine.
+
+   B. L'affichage de confiance et les options utilisateur.
+
+      Le socle doit permettre à l'utilisateur de connaître à tout moment et sans ambiguïté le domaine avec lequel il interagit, par exemple via une barre de confiance. Certaines options, comme le changement de mot de passe ou l'activation du Wi-Fi, peuvent être laissées à la main de l'utilisateur, à condition de ne pas impacter la sécurité du socle ni le cloisonnement, dans des domaines supports dédiés.
+
+   C. La communication entre domaines utilisateurs via des diodes.
+
+      Les communications entre domaines utilisateurs sont proscrites, sauf via un système optionnel de diodes unidirectionnelles dédiées à deux domaines identifiés, permettant l'envoi de dossiers et fichiers désignés explicitement par l'utilisateur, acceptés via une interface graphique cloisonnée, et systématiquement journalisés avec métadonnées, nom, hash, horodatage, sens du transfert. Des outils d'analyse, recherche de motifs ou antivirale, peuvent être mis en œuvre dans un domaine support dédié à cet usage, exécutés de manière non privilégiée.
+
+VI. LES RECOMMANDATIONS NON FONCTIONNELLES.
+
+      Le socle est considéré d'un niveau de sensibilité au moins égal à celui du plus sensible des domaines utilisateurs. Le concepteur doit produire une documentation technique détaillée, incluant une analyse exhaustive de la surface d'attaque et du modèle d'attaquant, ainsi qu'une SBOM listant tous les composants et leurs versions, maintenue à jour à chaque mise à jour du poste. Une procédure d'effacement sécurisé doit être définie pour anticiper le décommissionnement. Les choix de conception doivent permettre à un évaluateur de tester facilement les fonctions de sécurité, respecter la défense en profondeur, et prendre en compte le cycle de vie pour le maintien en condition opérationnelle et de sécurité, avec un délai de mise à disposition des correctifs spécifié dès la conception.
+
+POINTS D'ATTENTION.
+
+      L'exigence selon laquelle des domaines utilisateurs de même niveau de sensibilité doivent malgré tout être isolés les uns des autres rappelle qu'une sensibilité identique n'équivaut pas à un droit d'accès identique, un principe souvent négligé dans une approche naïve du cloisonnement.
+
+      Le système de diodes entre domaines utilisateurs, bien qu'optionnel, ne doit jamais pouvoir être détourné pour créer un canal de communication non surveillé, ce qui impose une journalisation systématique de chaque transfert avec ses métadonnées complètes.
+
+EXEMPLES CITES.
+
+      CLIP OS 4 et CLIP OS 5, les postes multiniveaux développés par l'ANSSI, non maintenus aujourd'hui, mais dont les travaux de conception ont permis d'identifier les fonctions de sécurité reprises dans ce document.
+
+      L'utilisation d'un TPM virtuel, vTPM, émulé par le socle et dédié à chaque domaine utilisateur, comme exemple de RTM fournie par le socle.
