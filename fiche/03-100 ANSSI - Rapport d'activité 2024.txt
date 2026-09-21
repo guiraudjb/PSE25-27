@@ -1,0 +1,155 @@
+RAPPORT D'ACTIVITÉ DE L'ANSSI 2024, LA MONTÉE EN PUISSANCE DE L'ÉCOSYSTÈME CYBER.
+
+LEXIQUE COMPLET.
+
+      L'ANSSI, Agence nationale de la sécurité des systèmes d'information, est le service du Premier ministre créé en 2009, placé sous l'autorité du secrétaire général de la défense et de la sécurité nationale, qui constitue l'autorité nationale en matière de cybersécurité et de cyberdéfense en France.
+
+      Le CERT-FR est le centre de réponse à incident national et gouvernemental pour la France, rattaché à la sous-direction Opérations de l'ANSSI.
+
+      La directive NIS 2, Network and Information Security, est la directive européenne qui renforce le niveau de cybersécurité des tissus économique et administratif des pays membres de l'Union européenne, en distinguant les entités essentielles et les entités importantes parmi dix-huit secteurs d'activité.
+
+      Le Cyber Resilience Act, ou CRA, est le règlement européen publié le 20 novembre 2024 qui définit des exigences minimales de cybersécurité pour l'ensemble des produits comportant des éléments numériques mis sur le marché européen, et qui sera entièrement applicable à partir du 11 décembre 2027.
+
+      Le règlement eIDAS est le règlement sur l'identification électronique et les services de confiance pour les transactions électroniques au sein du marché intérieur, révisé en 2024 pour instaurer un portefeuille européen d'identité numérique généralisé d'ici novembre 2026.
+
+      L'EUCC, EU Common Criteria, est le premier schéma de certification européen de cybersécurité fondé sur des critères communs, entré en vigueur en février 2024.
+
+      La mission Contrôles et Supervision est la structure créée début 2025, séparée des sous-directions et rattachée directement au directeur général de l'ANSSI, chargée des missions de contrôle au titre du dispositif SAIV, du règlement eIDAS et du règlement CSA.
+
+      La Loi de programmation militaire, ou LPM 2024-2030, est le texte promulgué le 1er août 2023 qui dote l'ANSSI de nouvelles capacités opérationnelles de prévention, de caractérisation et de neutralisation de la menace, entrées en vigueur par décret le 10 mai 2024.
+
+      La cryptographie post-quantique, ou PQC, est l'ensemble des algorithmes cryptographiques assurant une sécurité contre la menace d'un futur ordinateur quantique capable de remettre en cause la cryptographie asymétrique actuelle.
+
+      La cryptoagilité est la capacité d'un équipement à pouvoir évoluer pour mettre à jour ses algorithmes cryptographiques.
+
+      La Data-centric Security, ou DCS, est l'approche qui vise à sécuriser directement les données elles-mêmes, indépendamment de l'endroit où elles se trouvent.
+
+      SecNumCloud est la qualification qui identifie les offreurs de solutions cloud de confiance répondant à un haut niveau d'exigence technique, opérationnel et juridique.
+
+      Le NCC-FR, Centre de coordination national, est la déclinaison française du réseau européen des centres de coordination nationaux, opérée par l'ANSSI en consortium avec Bpifrance depuis juillet 2024, chargée de promouvoir les appels à projets européens en cybersécurité.
+
+      Le PACS, prestataire d'accompagnement et de conseil en sécurité des systèmes d'information, est un référentiel de qualification publié en 2023 qui assiste les responsables de la sécurité des systèmes d'information dans leurs missions.
+
+      Le PASSI, prestataire d'audit de la sécurité des systèmes d'information, et le PRIS, prestataire de réponse aux incidents de sécurité, sont deux référentiels de qualification de prestataires dont de nouvelles versions ont été publiées le 29 novembre 2024, introduisant des niveaux de qualification substantiel et élevé.
+
+      Les CSIRT territoriaux, Computer Security Incident Response Team, sont des centres de réponse aux incidents cyber implantés dans les territoires, issus du plan France Relance de 2021 et soutenus par l'ANSSI.
+
+      MonAideCyber est le dispositif gratuit qui fédère une communauté d'aidants cyber pour accompagner les bénéficiaires dans leurs démarches de renforcement de cybersécurité.
+
+      MonServiceSécurisé est la plateforme, disponible depuis 2022, qui aide les entités publiques à sécuriser leurs services en ligne et à accélérer leur homologation de sécurité.
+
+      Jecliqueoupas est la solution d'analyse de fichiers développée par la société Glimps pour l'ANSSI, mise en service en 2024 pour évaluer la dangerosité de tout document reçu par un agent public.
+
+      MonEspaceNIS2 est la plateforme en version bêta lancée en 2024 permettant à toute entité de déterminer si elle est concernée par la directive NIS 2 et à quelle catégorie elle appartient.
+
+      AlerteCyber est le dispositif, lancé en juillet 2021 à l'initiative du GIP ACYMA, qui accompagne les entités de toutes tailles face à une menace ou une faille sérieuse identifiée conjointement par l'ANSSI et cybermalveillance.gouv.fr.
+
+COURS DÉTAILLÉ.
+
+I. LES MISSIONS ET L'ORGANISATION DE L'ANSSI.
+
+   A. Le modèle français de la cybersécurité.
+
+      L'ANSSI est l'autorité nationale en matière de cybersécurité et de cyberdéfense, dont la raison d'être est de construire et d'organiser, en interministériel, la protection de la Nation face aux cyberattaques et de contribuer à la stabilité du cyberespace. Le modèle français de la cybersécurité repose sur une séparation claire, au sein de l'État, entre les missions défensives et offensives.
+
+      L'action de l'ANSSI se traduit en cinq grandes missions. Défendre les systèmes d'information critiques et les victimes de cyberattaques d'ampleur. Connaître l'état de l'art de la cybersécurité et les menaces du cyberespace. Partager de la connaissance, des recommandations et de l'expertise en sûreté numérique. Accompagner l'écosystème national et international. Réguler les organisations, les produits et les services de cybersécurité.
+
+   B. L'organisation en quatre sous-directions et une mission.
+
+      La sous-direction Expertise élabore et diffuse les bonnes pratiques de cybersécurité et contribue à améliorer l'offre de produits et services de cybersécurité. La sous-direction Opérations assure la mise en œuvre de la fonction d'autorité de défense des systèmes numériques et constitue le CERT-FR. La sous-direction Ressources est responsable de la programmation et de l'exécution des activités de gestion des ressources financières, humaines, mobilières et immobilières. La sous-direction Stratégie développe et pilote la contribution de l'ANSSI à l'élaboration des politiques publiques en faveur de la sécurité du numérique. La mission Contrôles et Supervision conçoit et met en œuvre la politique de supervision et de contrôle de l'ANSSI au titre des réglementations NIS, CSA, eIDAS et SAIV.
+
+      Depuis l'inauguration d'ArteFact à Rennes en novembre 2023, l'ANSSI fonctionne officiellement sur quatre sites, contre trois auparavant en Île-de-France, ce qui lui permet d'être plus proche de ses bénéficiaires et de renforcer les synergies entre acteurs publics et privés.
+
+   C. L'écosystème cyber national.
+
+      L'ANSSI coordonne un écosystème composé d'acteurs institutionnels, d'acteurs régulés comme les opérateurs d'importance vitale et les opérateurs de services essentiels, d'autorités politiques, d'acteurs de la cyberdéfense comme les CSIRT sectoriels et ministériels, de partenaires internationaux comme l'ENISA et l'OTAN, de la communauté scientifique et technique, et des industriels de la cybersécurité.
+
+   D. L'année 2024 en chiffres.
+
+      En 2024, l'ANSSI comptait 656 agents, avec une moyenne d'âge de 36 ans, pour un budget de 29,6 millions d'euros hors masse salariale. L'Agence a traité 4 386 événements de sécurité, en hausse de 15 pour cent par rapport à 2023, dont 1 361 incidents confirmés, en hausse de 18 pour cent. Elle a réalisé 59 191 rapports d'audits automatisés via les outils ADS et SILENE, en hausse de 56 pour cent. L'Agence a publié 11 rapports menace et incidents, 10 guides techniques, 22 articles scientifiques, 3 études de marché et 1 avis technique, et a formé 1 696 personnes au CFSSI, le centre de formation à la sécurité des systèmes d'information.
+
+II. LES JEUX OLYMPIQUES ET PARALYMPIQUES DE PARIS 2024, UN SUCCÈS COLLECTIF.
+
+   A. La préparation d'un écosystème de près de 500 entités.
+
+      À la suite de la décision de la Première ministre le 20 juillet 2022, l'ANSSI s'est vu confier le pilotage de la stratégie de prévention des cyberattaques pendant les Jeux olympiques et paralympiques de Paris 2024. L'Agence a ciblé près de 500 entités impliquées dans les Jeux, réparties en catégories selon leur criticité. La stratégie de sécurisation préventive comprenait quatre volets. Le volet diagnostic reposait sur une centaine d'audits de cybersécurité et l'accès de 80 entités aux services d'audits automatisés. Le volet sécurisation proposait des accompagnements techniques pour la plupart des entités auditées. Le volet contrôle concernait plusieurs dizaines d'entités, dont des sites de compétition. Le volet détection consistait en un déploiement d'EDR, Endpoint Detection and Response, managé et de sondes industrielles au bénéfice des entités les plus critiques.
+
+   B. La coordination opérationnelle durant l'événement.
+
+      L'ANSSI a défini un dispositif renforcé de veille, d'alerte et de traitement des événements de cybersécurité, incarné dans le Centre national de commandement stratégique, CNCS. L'Agence a été identifiée comme point d'entrée unique des signalements cyber, permettant la centralisation de l'information. Une coordination rapprochée avec l'organisateur de l'événement a été assurée par la présence d'un officier de liaison de l'ANSSI auprès des équipes cyber de Paris 2024.
+
+   C. Un bilan marqué par l'absence de crise majeure.
+
+      Entre le 8 mai, arrivée de la flamme à Marseille, et le 8 septembre 2024, date de la cérémonie de clôture des Jeux paralympiques, 548 événements de cybersécurité ont été recensés, se décomposant en 465 signalements et 83 incidents, dont l'impact a été faible ou nul. Près de la moitié de ces événements correspondaient à des indisponibilités, dont un quart dues à des attaques par déni de service distribué, DDoS. Les secteurs les plus ciblés ont été les entités gouvernementales, le sport, le divertissement et les télécommunications. Aucun événement cyber n'a affecté la tenue des cérémonies d'ouverture et de clôture ni les épreuves des Jeux.
+
+III. UN CADRE RÉGLEMENTAIRE EN PLEINE MUTATION.
+
+   A. La transposition de la directive NIS 2.
+
+      La directive NIS 2 vise à renforcer le niveau de cybersécurité des tissus économique et administratif de l'Union européenne, en élargissant le champ des entités et secteurs concernés par rapport à la première directive NIS. Elle distingue les entités essentielles et les entités importantes parmi dix-huit secteurs d'activité, et prévoit pour chacune trois actions, à savoir fournir des informations à l'autorité nationale, mettre en place des mesures de gestion des risques, et déclarer les incidents de sécurité importants. En France, le titre II du projet de loi Résilience, déposé au Parlement en vue de son examen le 15 octobre 2024, vise à transposer la directive. Cette transposition a conduit à la création de la mission Contrôles et Supervision, structure séparée des sous-directions et rattachée directement au directeur général de l'Agence.
+
+   B. Le Cyber Resilience Act et la révision du règlement eIDAS.
+
+      Complémentaire à NIS 2, le Cyber Resilience Act sécurise les produits numériques mis sur le marché européen, avec une application entière prévue au 11 décembre 2027. La révision du règlement eIDAS, entrée en vigueur le 20 mai 2024, impose aux États membres de mettre à disposition de leurs citoyens un portefeuille européen d'identité numérique reconnu dans toute l'Union d'ici novembre 2026, et élargit le périmètre des services de confiance qualifiables. Le 31 janvier 2024, la Commission européenne a adopté l'EUCC, premier schéma de certification européen de cybersécurité fondé sur des critères communs, pour lequel l'ANSSI a déposé un dossier auprès du COFRAC afin de devenir l'Autorité nationale de certification de cybersécurité.
+
+   C. La Loi de programmation militaire 2024-2030.
+
+      Le décret d'application de la LPM 2024-2030, publié le 10 mai 2024, a permis à l'ANSSI de disposer de capacités opérationnelles supplémentaires d'anticipation, de caractérisation et de neutralisation de la menace, via notamment le filtrage DNS et la collecte de cache DNS. Ces nouvelles capacités ont constitué un test de changement d'échelle opérationnel réussi lors des Jeux olympiques et paralympiques.
+
+IV. L'EXPERTISE DE L'ANSSI FACE AUX NOUVEAUX ENJEUX TECHNOLOGIQUES.
+
+   A. L'intelligence artificielle.
+
+      L'ANSSI travaille sur l'intelligence artificielle à la fois pour sécuriser les systèmes d'IA et pour identifier les opportunités et menaces qu'ils représentent, selon trois axes, la cybersécurité de l'IA, par l'IA, et face à l'IA. En avril 2024, l'Agence a publié le guide Recommandations de sécurité pour un système d'intelligence artificielle générative, qui a suscité 4 470 réactions et 15 947 clics sur LinkedIn. En octobre 2024, l'ANSSI et son homologue allemand le BSI ont publié des recommandations conjointes sur les assistants de programmation basés sur l'IA.
+
+   B. La cryptographie post-quantique.
+
+      La menace d'un futur ordinateur quantique capable de remettre en cause la cryptographie asymétrique, notamment via des attaques rétroactives dites store now decrypt later, impose une prise en compte dès aujourd'hui. L'ANSSI a défini deux axes stratégiques, garantir une offre de produits de cryptographie post-quantique de confiance, et accompagner la migration des systèmes d'information des bénéficiaires. En janvier 2024, l'Agence a publié avec ses homologues allemand, néerlandais et suédois un position paper sur la distribution quantique de clé, concluant qu'une priorité claire doit être donnée à la migration vers des solutions hybrides post-quantiques.
+
+   C. L'hébergement dans le cloud des systèmes sensibles.
+
+      Conformément à la doctrine cloud au centre de l'État, l'ANSSI a publié une série de recommandations de sécurité pour l'hébergement des systèmes d'information sensibles dans le cloud, indiquant selon la sensibilité des données et le niveau de menace les types d'offres à privilégier, et préconisant l'usage de solutions qualifiées SecNumCloud pour les systèmes de niveau de diffusion restreinte et les systèmes d'importance vitale. L'offre de cloud qualifiée SecNumCloud comprenait 14 solutions de 7 offreurs fin 2024.
+
+V. L'ACCOMPAGNEMENT DE L'ÉCOSYSTÈME ET DES BÉNÉFICIAIRES.
+
+   A. Le développement d'offres de cybersécurité de confiance.
+
+      L'ANSSI a été désignée pour incarner le NCC-FR, centre de coordination national, en consortium avec Bpifrance depuis juillet 2024, chargé de promouvoir les appels à projets européens et d'animer l'écosystème cyber. En 2024, l'Agence a qualifié les cinq premiers prestataires PACS et publié les nouvelles versions des référentiels PASSI et PRIS, introduisant des niveaux de qualification substantiel et élevé. Le nombre de prestataires PRIS a doublé en un an.
+
+   B. Le maillage territorial et le corpus de remédiation.
+
+      Un corpus de guides dédié à la remédiation des incidents, organisé en trois volets technique, opérationnel et stratégique, a été publié en janvier 2024. Les CSIRT territoriaux, au nombre de quinze avec les Centres de Ressources Cyber, ont porté à la connaissance de l'ANSSI près de 700 événements de sécurité numérique entre janvier et décembre 2024, dont 400 incidents, principalement chez les PME, TPE, ETI et les collectivités territoriales.
+
+   C. Les plateformes numériques au service des bénéficiaires.
+
+      MonAideCyber comptait plus de 1 450 aidés fin 2024 pour plus de 1 000 aidants cyber référencés. MonServiceSécurisé a permis de corriger 81 986 vulnérabilités pour 3 403 services sécurisés, avec 6 063 utilisateurs, soit une hausse de 100 pour cent en un an. Jecliqueoupas et MonEspaceNIS2 sont venus compléter l'offre de services numériques de l'Agence en 2024. Deux campagnes AlerteCyber ont été émises en 2024, portant sur une faille critique dans Microsoft Outlook et des failles critiques dans les produits QNAP.
+
+VI. LE BILAN DES DISPOSITIFS RÉGLEMENTAIRES.
+
+   A. Les dispositifs de protection et d'alerte.
+
+      Au titre de la protection des lanceurs d'alerte, l'ANSSI a reçu 236 signalements en 2024, dont 49 pour cent relatifs à des vulnérabilités affectant des sites web, sans qu'aucun déclarant n'ait été considéré de mauvaise foi. Au titre de l'alerte aux victimes, neuf campagnes de signalement représentant 15 900 adresses IP ont été menées auprès des opérateurs de communications électroniques, et 68 demandes d'identification pour 978 adresses IP ont été effectuées auprès de 34 opérateurs, Orange, SFR et Bouygues concentrant près de la moitié des demandes.
+
+   B. Les dispositifs de détection et de blocage.
+
+      Au titre de la détection des menaces étatiques et cybercriminelles, les opérateurs de communications électroniques mettent en œuvre les marqueurs fournis par l'ANSSI. Quatre opérations de recueil de données ont été lancées en 2024 auprès d'hébergeurs au titre de l'article L.2321-2-1 du code de la défense. L'ANSSI a par ailleurs développé une capacité de blocage et de redirection de noms de domaine avant les Jeux olympiques, grâce à la coopération des principaux opérateurs et du ministère de l'Intérieur.
+
+   C. La protection de la vie privée et la sécurité des réseaux 5G.
+
+      Au titre des articles 226-3 et 226-7 du code pénal, l'ANSSI a rendu 1 610 décisions d'autorisation en 2024 concernant la commercialisation et l'exploitation de dispositifs pouvant porter atteinte au secret des correspondances, dont 52 décisions de refus. Au titre de l'article L.34-11 du code des postes et des communications électroniques, l'Agence a rendu 83 décisions relatives aux antennes 5G, dont trois refus, et délivré 39 autorisations pour des cœurs de réseau 5G Standalone.
+
+POINTS D'ATTENTION.
+
+      2024 a été qualifiée d'année exceptionnelle par le directeur général Vincent Strubel, à la fois en raison du succès cyber des Jeux olympiques et paralympiques, et parce que cette même année a vu la transposition de NIS 2, l'entrée en vigueur de la LPM 2024-2030 et l'adoption du Cyber Resilience Act, qui redéfinissent en profondeur les prérogatives de contrôle et de supervision de l'ANSSI.
+
+      La création de la mission Contrôles et Supervision, séparée des sous-directions historiques, marque un changement d'échelle organisationnel majeur pour accompagner l'entrée en vigueur de réglementations européennes de plus en plus nombreuses.
+
+      La cryptographie post-quantique et l'intelligence artificielle sont présentées comme les deux grands chantiers technologiques de moyen terme de l'Agence, avec une approche fondée sur l'analyse de risque plutôt que sur l'interdiction.
+
+EXEMPLES CITES.
+
+      Les 548 événements de cybersécurité recensés pendant les Jeux olympiques et paralympiques, dont 465 signalements et 83 incidents à faible impact.
+
+      La plateforme monespacenis2.cyber.gouv.fr permettant à une entité de déterminer si elle est soumise à la directive NIS 2.
+
+      Le guide Recommandations de sécurité pour un système d'intelligence artificielle générative, publié en avril 2024.
