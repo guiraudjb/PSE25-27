@@ -1,0 +1,87 @@
+WINDOWS SERVER, SÉCURISATION INITIALE D'UN SERVEUR MEMBRE, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Le TPM, Trusted Platform Module, est un composant matériel ou virtuel de sécurité qui doit être activé en version 2 avant l'installation d'un serveur Windows.
+
+      Le Secured-core est une configuration renforcée des serveurs physiques ou virtuels disponible à partir de Windows Server 2022, à privilégier lorsque le matériel est compatible.
+
+      Le mode server core est un mode d'installation de Windows Server contenant moins de composants, offrant une surface d'attaque plus réduite que le mode Desktop Experience.
+
+      LAPS, Local Administrator Password Solution, est l'outil recommandé pour définir des mots de passe forts et différents pour les comptes administrateurs locaux de chaque serveur.
+
+      La NLA, Network Level Authentication, est l'authentification au niveau réseau qui ne doit pas être désactivée en cas d'utilisation du RDP, Remote Desktop Protocol.
+
+      L'OU, Organizational Unit ou unité d'organisation, est le conteneur Active Directory dans lequel un compte ordinateur doit être créé avant de joindre un serveur au domaine.
+
+      Djoin est l'utilitaire recommandé pour joindre un serveur au domaine Active Directory AD-DS.
+
+      BitLocker est la fonctionnalité de chiffrement des disques durs système et de données permettant de se prémunir des risques de vol.
+
+      La VBS, Virtualization Based Security, est la sécurité basée sur la virtualisation qui active des composants de sécurité dépendants, comme Credential Guard.
+
+      Le SCT, Security Compliance Toolkit, est le kit de ressources de conformité de la sécurité permettant de durcir l'environnement d'un serveur Windows.
+
+COURS DÉTAILLÉ.
+
+I. LES ÉTAPES PRÉALABLES À L'INSTALLATION.
+
+   A. L'activation des protections matérielles.
+
+      Un TPM version 2 matériel ou virtuel doit être activé, ainsi que le mode de démarrage UEFI Secure Boot. À compter de Windows Server 2022, les serveurs physiques ou virtuels doivent privilégier la configuration Secured-core lorsque le matériel est compatible.
+
+   B. Le contrôle des accès physiques et console.
+
+      L'accès physique au serveur doit être vérifié, ainsi que les accès console, via IPMI pour un serveur physique ou via la console de l'hyperviseur pour un serveur virtuel.
+
+II. L'INSTALLATION DU SYSTÈME.
+
+   A. Le choix du mode d'installation.
+
+      Le mode server core doit être privilégié car il contient moins de composants et offre une surface d'attaque plus réduite. Depuis Windows Server 2019, une interface graphique minimale peut être activée sur le server core sans bureau ni éléments multimédia. Si certains rôles ou fonctionnalités sont indisponibles en mode server core, l'installation doit alors se faire en mode Desktop Experience.
+
+   B. Les fonctionnalités de sécurité à conserver.
+
+      Les fonctionnalités de sécurité natives, comme l'UAC ou le pare-feu Windows Defender intégré, ne doivent pas être désactivées, sauf pour de rares cas légitimes. Seules les règles de pare-feu nécessaires à la production, et le cas échéant à l'administration distante via console MMC, doivent être activées. Si le RDP est malgré tout utilisé, l'authentification au niveau réseau, NLA, ne doit pas être désactivée. L'IPv6 ne doit pas non plus être désactivé, car il reste utilisé pour les communications vers le serveur lui-même, même s'il est possible de privilégier IPv4 pour toutes les communications.
+
+   C. La mise à jour et la jonction au domaine.
+
+      Le serveur doit être mis à jour avant sa connexion au réseau du système d'information de production, les fichiers d'installation, mises à jour et pilotes provenant de Microsoft Update. Pour joindre le serveur au domaine Active Directory, un compte ordinateur doit être créé préalablement dans l'unité d'organisation de destination, en s'assurant que le propriétaire de l'objet est le groupe Administrateurs intégré par défaut, l'utilitaire djoin étant recommandé. La synchronisation horaire doit être vérifiée comme provenant des contrôleurs de domaine pour le bon fonctionnement de Kerberos. Un mot de passe fort, différent pour chaque serveur, doit être défini pour les comptes administrateurs locaux, l'utilisation de LAPS étant fortement recommandée.
+
+   D. La séparation des rôles.
+
+      Les rôles, services de rôle ou applications pouvant altérer le niveau de sécurité ne doivent pas être colocalisés sur un même serveur, par exemple IIS et une autorité de certification AD-CS, ces rôles étant soumis à des besoins de sécurité différents en production, comme des accès sécurisés pour l'autorité de certification contre une disponibilité publique pour le site web de publication des listes de révocation.
+
+III. LA CONFIGURATION POST-INSTALLATION.
+
+   A. Le stockage des données et le chiffrement des disques.
+
+      Les données des services et applications doivent être stockées hors du disque système, même si l'assistant de configuration le propose par défaut, par exemple les bases AD-CS ou les bases WID et SQL. Les disques durs système et de données doivent être chiffrés avec BitLocker pour se prémunir des risques de vol.
+
+   B. L'activation de la sécurité basée sur la virtualisation.
+
+      La VBS et les composants de sécurité qui en dépendent, comme Credential Guard, doivent être activés, en tenant compte du fait que certains composants de sécurité ne sont pas compatibles avec certains rôles ou applications.
+
+   C. Les certificats et le principe du moindre privilège.
+
+      Les certificats autosignés pour le RDP et l'administration distante d'IIS doivent être remplacés par des certificats issus d'une infrastructure de gestion de clés avec un fournisseur cryptographique récent. Le principe du moindre privilège doit être appliqué pour les comptes de service, les applications et l'administration des serveurs.
+
+   D. Le durcissement et la sécurisation des communications.
+
+      L'environnement du serveur doit être durci à l'aide des outils du kit de ressources de conformité de la sécurité, SCT, ou du module PowerShell OSConfig pour Windows Server 2025. IPSec doit être configuré pour sécuriser les communications entre serveurs critiques.
+
+IV. LA FIN DE L'INSTALLATION.
+
+      Une fois ces bonnes pratiques mises en œuvre, le serveur membre est prêt à recevoir les rôles, services et applications demandés, tout en exposant une surface d'attaque réduite. D'autres étapes de sécurisation seront nécessaires en fonction des fonctionnalités installées ultérieurement.
+
+POINTS D'ATTENTION.
+
+      L'IPv6 ne doit jamais être désactivé sur un serveur Windows, même lorsque IPv4 est privilégié pour les communications applicatives, car il reste utilisé pour les communications internes vers le serveur lui-même.
+
+      La colocalisation de rôles ayant des besoins de sécurité contradictoires, comme une autorité de certification et un serveur web, peut être acceptable en environnement de test mais doit être proscrite en production.
+
+EXEMPLES CITES.
+
+      L'utilisation de LAPS pour garantir un mot de passe fort et unique par serveur pour les comptes administrateurs locaux.
+
+      Le remplacement des certificats autosignés RDP par des certificats issus d'une infrastructure de gestion de clés utilisant AD-CS et un Key Storage Provider.
