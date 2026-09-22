@@ -1,0 +1,93 @@
+RECOMMANDATIONS POUR UNE CONFIGURATION SÉCURISÉE D'UN PARE-FEU STORMSHIELD NETWORK SECURITY (SNS) EN VERSION 3.7.17, ANSSI, ANSSI-BP-031.
+
+LEXIQUE COMPLET.
+
+      SNS, Stormshield Network Security, est la gamme de pare-feux qualifiée par l'ANSSI visée par ce guide.
+
+      NSRPC, NetAsq Secure Remote Protocol Client, est le protocole d'administration en ligne de commande de SNS, utilisant le port TCP 1300.
+
+      L'antispoofing IP consiste à vérifier sur chaque interface d'entrée la légitimité de l'adresse IP source d'un paquet, en s'appuyant sur les interfaces déclarées internes et sur la table de routage, avant même l'évaluation de la politique de filtrage.
+
+      Une interface interne est une interface protégée par l'antispoofing, qui n'accepte que des paquets dont l'adresse source provient de son propre réseau de commutation.
+
+      La technique du blackholing consiste à router les flux destinés à un réseau distant accessible par IPsec vers une adresse fictive de la boucle locale, afin qu'ils soient détruits plutôt qu'émis en clair en cas d'erreur de politique IPsec.
+
+      L'UAC, User Access Control, est le mécanisme de SNS permettant de gérer finement les autorisations d'accès, de filtrage et de NAT lorsqu'un annuaire est utilisé en complément de l'authentification par certificat.
+
+COURS DÉTAILLÉ.
+
+I. L'ADMINISTRATION DU PARE-FEU.
+
+   A. Les comptes administrateurs.
+
+      Des comptes nominatifs doivent être utilisés pour toute connexion à l'interface web ou au serveur NSRPC, le compte administrateur local non nominatif étant réservé aux opérations exceptionnelles, protégé par un mot de passe fort conservé en coffre-fort et à usage limité et supervisé. L'accès SSH, limité à ce seul compte, ne doit être activé qu'à titre exceptionnel, avec une authentification par mot de passe renouvelé à chaque utilisation. L'authentification locale doit privilégier des certificats utilisateurs nominatifs plutôt que des mots de passe stockés sur l'équipement, et un accès NSRPC nécessitant un mot de passe doit suivre une politique conforme au guide dédié.
+
+   B. L'authentification centralisée et les droits d'accès.
+
+      Il est recommandé de dédier un annuaire externe à l'authentification des administrateurs, avec un compte d'accès du pare-feu restreint en lecture seule. Les droits d'administration doivent être ajustés au strict nécessaire pour chaque tâche, en s'appuyant sur des groupes d'utilisateurs déclarés dans l'annuaire plutôt que sur des attributs individuels, la modification des droits restant une opération exceptionnelle réservée au compte non nominatif.
+
+   C. Les services d'administration.
+
+      Les sous-réseaux d'administration autorisés doivent être définis explicitement via un groupe d'objets dédié, et l'administration doit s'effectuer sur une interface Ethernet dédiée à un réseau d'administration lui-même dédié. La configuration TLS par défaut de l'interface web, en mode sslparanoiac imposant TLS 1.2, doit être conservée, voire durcie en ne conservant que les suites avec ECDHE. Le certificat de l'interface web doit être remplacé par un certificat issu d'une IGC maîtrisée. Les commandes NSRPC doivent être utilisées depuis la console de l'interface web plutôt qu'en connexion directe, qui exposerait l'empreinte des mots de passe ; à défaut, des comptes dédiés à cet usage doivent être employés. La langue des traces doit être unifiée sur l'ensemble du parc et comprise par les exploitants. En contexte Diffusion Restreinte, l'option dédiée doit être activée lorsque les fonctions cryptographiques sont exploitées sur un réseau de cette sensibilité.
+
+II. LA CONFIGURATION RÉSEAU ET LES SERVICES.
+
+   A. Les interfaces et l'antispoofing.
+
+      Les interfaces réseau non utilisées doivent être désactivées pour réduire la surface d'attaque. Les interfaces internes doivent être déclarées pour bénéficier de l'antispoofing, complétées par des routes statiques pour tous les réseaux internes distants afin que la table de routage alimente également ce mécanisme, et par des règles de filtrage explicites interdisant notamment les plages d'adresses privées de la RFC 5735 en provenance d'Internet.
+
+   B. Les services de mise à jour, DNS et NTP.
+
+      Les mises à jour automatiques doivent être activées, de préférence via un miroir interne, ou à défaut via un proxy authentifiant dédié. Des serveurs DNS maîtrisés doivent être configurés, à défaut ceux du fournisseur d'accès plutôt que les serveurs par défaut de l'éditeur. Les objets dynamiques inutilisés, qui génèrent des requêtes DNS intempestives vers les domaines de l'éditeur, doivent être supprimés ou reconfigurés en statique. La synchronisation NTP doit être activée avec plusieurs serveurs de temps fiables. Un service LDAP externe doit être configuré en LDAPS avec un certificat issu d'une IGC maîtrisée et l'autorité correspondante importée sur l'équipement.
+
+III. LA POLITIQUE DE FILTRAGE ET L'ANALYSE PROTOCOLAIRE.
+
+   A. Le nommage et les règles implicites.
+
+      La politique de filtrage en production doit être renommée selon une convention explicite. Les règles de filtrage implicites, évaluées avant les règles manuelles et pouvant masquer des flux non désirés, doivent être désactivées après création de règles explicites équivalentes pour ne pas perdre les capacités d'administration.
+
+   B. L'analyse protocolaire et les objets.
+
+      Le niveau d'inspection, Firewall, IPS ou IDS, et son mode, transport ou applicatif qualifié, doivent être adaptés au rôle de l'équipement dans l'architecture : niveau Firewall pour une passerelle VPN déjà protégée en amont, IPS en mode transport en bordure d'un système d'information, IPS en mode applicatif qualifié pour protéger des serveurs internes. Les profils d'inspection doivent être ajustés au contexte, plus restrictifs pour les applications critiques, et validés en environnement de pré-production avant mise en service pour éviter de polluer la supervision. Des groupes d'objets doivent être utilisés dans la définition des règles pour centraliser les mises à jour lors de changements de topologie.
+
+IV. LES CERTIFICATS, L'IGC ET LES LISTES DE RÉVOCATION.
+
+      Une IGC externe maîtrisée, conforme au RGS, doit être utilisée pour générer les certificats du pare-feu ; à défaut, l'IGC interne de l'équipement doit être réservée aux équipements les moins exposés, avec suppression des secrets après export et administrateurs dédiés à ce rôle. La vérification des listes de révocation, CRL, doit être imposée pour les tunnels IPsec, avec une fréquence de rafraîchissement automatique adaptée à la réactivité recherchée, l'importation manuelle restant une procédure exceptionnelle.
+
+V. LE VPN IPSEC.
+
+   A. Les profils de chiffrement et l'authentification.
+
+      Les profils de chiffrement IKE et IPsec doivent employer au minimum AES-GCM 256, SHA 384 et le groupe Diffie-Hellman 19. Le protocole IKE version 2 doit être utilisé si tous les correspondants le supportent ; en IKEv1, le mode de négociation principal doit être préféré au mode agressif, qui transmet les identités en clair. L'authentification mutuelle par certificat doit être privilégiée à la clé partagée, plus difficile à révoquer individuellement et sujette à la force brute ; si une clé partagée est malgré tout utilisée, elle doit présenter une entropie d'au moins cent vingt-huit bits, être différente par tunnel et renouvelée régulièrement.
+
+   B. Le routage, le filtrage et le NAT autour d'IPsec.
+
+      Une route statique vers la boucle locale, dite blackholing, doit être configurée pour les réseaux distants IPsec afin que les paquets soient détruits plutôt qu'émis en clair en cas de politique IPsec désactivée ; l'usage d'une route par défaut doit être évité au profit de routes explicites si tous les réseaux sont connus. Les règles de filtrage doivent toujours être plus spécifiques que la politique IPsec, les règles de NAT avant IPsec toujours incluses dans cette politique, et les règles de filtrage toujours plus spécifiques que les règles de NAT avant IPsec, sous peine de fuite de données en clair lors d'une évolution non coordonnée de la topologie. Les flux entrants dont la source n'est accessible que via un tunnel doivent être filtrés selon leur provenance effective par ce tunnel, et les interfaces VPN doivent être déclarées internes pour bénéficier de l'antispoofing.
+
+   C. Les tunnels nomades et la disponibilité du tunnel.
+
+      Les tunnels d'accès nomade doivent utiliser le mode Config pour maîtriser l'adresse IP rouge distante, avec authentification par certificat des équipements ou utilisateurs plutôt que par clé partagée unique partagée par tous les clients, en s'appuyant sur une autorité de certification intermédiaire dédiée à ce service. Le mécanisme de Dead-Peer-Detection doit être activé en mode haut ou bas pour détecter un correspondant injoignable, ou en mode passif si le comportement distant est inconnu. La fonction de KeepAlive doit être activée pour maintenir un tunnel actif, son flux devant être filtré sans conservation de trace. Le champ DSCP doit conserver sa valeur par défaut sauf besoin de sécurité renforcée, où il doit alors être maîtrisé pour éviter tout canal caché.
+
+VI. LA SUPERVISION, LA SAUVEGARDE ET LA JOURNALISATION.
+
+      Seuls les serveurs de supervision doivent pouvoir interroger l'équipement en SNMP, en version 3 pour bénéficier de l'authentification et du chiffrement, avec AES et SHA1 pour un niveau acceptable bien que non conforme au RGS. Une sauvegarde automatique de la configuration doit être mise en place vers un serveur WebDAV maîtrisé en HTTPS authentifié, ou à défaut exportée par SSH via une connexion initiée par l'équipement lui-même, jamais l'inverse qui nécessiterait le compte administrateur local. Une politique de journalisation locale et centralisée doit être définie, avec rotation automatique des traces, transfert sécurisé par un protocole cryptographique robuste, et collecte a minima des événements de filtrage, de connexion, de VPN IPsec, d'authentification, d'administration, de statistiques, système et d'alarmes.
+
+POINTS D'ATTENTION.
+
+      La désactivation des règles implicites de filtrage doit toujours être précédée de la création des règles explicites équivalentes, sous peine de perdre tout accès d'administration à l'équipement.
+
+      Une politique IPsec transitoirement désactivée, par exemple lors d'une reconfiguration, peut entraîner l'émission en clair de flux destinés à un tunnel si aucune route de blackholing n'a été définie vers la boucle locale.
+
+      Le fichier de sauvegarde local généré automatiquement, backup.na.enc, est écrasé à chaque nouvelle sauvegarde et doit donc être transféré vers un équipement distant avant toute nouvelle exécution.
+
+      Certaines fonctionnalités décrites dans ce guide, explicitement signalées, ne sont pas couvertes par la cible de sécurité ayant servi à la qualification du produit, et leur usage nécessite une analyse de risque complémentaire portée devant la commission d'homologation.
+
+EXEMPLES CITÉS.
+
+      Les suites cryptographiques ECDHE-RSA-AES128-GCM-SHA256 et ECDHE-RSA-AES256-GCM-SHA384 illustrent la configuration TLS durcie recommandée pour l'interface d'administration.
+
+      L'adresse fictive 127.42.42.42 est citée en exemple de route de blackholing facilitant la maintenance de la configuration.
+
+      La commande decbackup -i backup.na -o backup.tar.gz est citée pour ouvrir un fichier de sauvegarde Stormshield hors de l'équipement, ce format n'étant pas directement lisible par un gestionnaire d'archives standard.
+
+      La commande snmpwalk -v 3 -u <user> -l authPriv -a SHA -x AES illustre l'interrogation sécurisée d'un équipement en SNMPv3.
