@@ -1,0 +1,75 @@
+MISE EN ŒUVRE DES FONCTIONNALITÉS DE SÉCURITÉ DE WINDOWS 10 REPOSANT SUR LA VIRTUALISATION, ANSSI, ANSSI-BP-039.
+
+LEXIQUE COMPLET.
+
+      La VBS, Virtualization Based Security, désigne l'ensemble des fonctionnalités de sécurité de Windows 10 reposant sur la virtualisation, réservées aux éditions Entreprise et Éducation.
+
+      Le VSM, Virtual Secure Mode, est l'environnement virtualisé de Microsoft, isolé du système d'exploitation traditionnel par un hyperviseur, dans lequel s'exécutent des processus critiques pour la sécurité.
+
+      Un Trustlet est un processus de confiance s'exécutant dans le VSM, uniquement édité par Microsoft, protégé en intégrité par une signature numérique et communiquant avec le système standard uniquement par appel de procédure distante.
+
+      Device Guard désigne l'ensemble formé par deux fonctionnalités de sécurité, l'intégrité du code protégée par l'hyperviseur, HVCI, et l'intégrité du code configurable, CCI, permettant de contrôler le code autorisé à s'exécuter sur un poste de travail.
+
+      Credential Guard est une fonctionnalité isolant dans un Trustlet dédié, LSAIso.exe, les secrets d'authentification auparavant mémorisés par le processus LSASS.exe, afin de les protéger contre leur extraction en mémoire vive.
+
+      Le Pass-the-Hash et le Pass-the-Ticket sont des techniques d'attaque consistant à réutiliser respectivement un condensat NTLM ou un ticket Kerberos extrait de la mémoire d'un poste compromis, à la place du mot de passe lui-même, pour s'authentifier auprès d'autres ressources.
+
+COURS DÉTAILLÉ.
+
+I. LA SÉCURITÉ REPOSANT SUR LA VIRTUALISATION.
+
+   A. Le fonctionnement du Virtual Secure Mode.
+
+      Le VSM s'appuie sur les jeux d'instructions de virtualisation matérielle, Intel-VT ou AMD-V, ainsi que sur le SLAT, pour faire exécuter par un hyperviseur deux systèmes invités isolés l'un de l'autre, le système d'exploitation traditionnel et le VSM lui-même, doté d'un micro-noyau léger appelé SKM et d'un environnement d'exécution de processus isolé appelé IUM dans lequel s'exécutent les Trustlets. L'intégration de la compatibilité VSM et VBS doit dès à présent être intégrée dans le processus d'achat de matériel, en tenant compte de prérequis matériels optionnels comme l'IOMMU pour les protections DMA.
+
+   B. Les limites de sécurité et la protection de l'UEFI.
+
+      Si la chaîne de démarrage de l'équipement est compromise, l'hyperviseur et tout ce qu'il exécute peuvent également l'être, ce qui justifie de protéger l'accès à l'UEFI par mot de passe ou méthode équivalente et de maintenir à jour ses composants logiciels. Le démarrage sécurisé UEFI, prérequis fondamental de la VBS, repose sur une infrastructure de gestion de clés embarquée en mémoire non volatile du matériel et doit être activé, que la VBS soit utilisée ou non, un contrôle de conformité régulier de cette infrastructure étant en outre recommandé lorsque le besoin de sécurité est élevé.
+
+   C. L'activation de la VBS et ses limites.
+
+      L'hyperviseur fait respecter des permissions d'écriture ou d'exécution exclusives sur la mémoire vive du noyau Windows standard et intègre la fonctionnalité Hyper Guard de détection de rootkits, ce qui justifie d'activer la VBS sur tout poste de travail compatible même sans recourir à un seul Trustlet. Le niveau de sécurité apporté par la VBS est toutefois fortement réduit si le démarrage sécurisé ou les protections DMA ne sont pas activés, et certaines solutions de virtualisation tierces peuvent se révéler incompatibles avec son activation.
+
+II. DEVICE GUARD ET L'INTÉGRITÉ DU CODE.
+
+   A. Les mécanismes d'intégrité du code.
+
+      L'intégrité du code valide, avant leur chargement en mémoire, la signature cryptographique de pilotes, de binaires, de scripts ou de paquets d'installation, à travers deux composants complémentaires, KMCI pour le mode noyau et UMCI pour le mode utilisateur, dont la combinaison configurable constitue l'intégrité du code configurable, CCI, offrant une granularité plus fine que les stratégies de restriction logicielle Applocker.
+
+   B. Le déploiement de la stratégie CCI.
+
+      Le déploiement d'une stratégie CCI en mode de mise en conformité, dite enforced, est recommandé sur les postes de travail sensibles dans une démarche de défense en profondeur, et son extension aux autres postes de travail doit être envisagée, éventuellement précédée d'un déploiement en mode audit, non bloquant, permettant de constituer une base de connaissance du code exécuté avant tout durcissement ultérieur.
+
+   C. L'intégrité du code protégée par l'hyperviseur.
+
+      HVCI renforce la confiance dans les mécanismes KMCI et UMCI en déportant certaines opérations de vérification dans un Trustlet protégé par le VSM, et doit être mis en œuvre sur les postes de travail compatibles après vérification de la compatibilité des pilotes de périphériques, de préférence avec un verrouillage UEFI empêchant sa désactivation logicielle par un attaquant distant.
+
+III. CREDENTIAL GUARD.
+
+   A. Les principes techniques.
+
+      Credential Guard répond au risque de récupération, par les techniques Pass-the-Hash et Pass-the-Ticket, des secrets d'authentification mémorisés en clair par le processus LSASS.exe, en déportant leur traitement vers le Trustlet isolé LSAIso.exe, le processus LSASS.exe du système standard ne conservant alors que des blobs chiffrés et éphémères.
+
+   B. Le périmètre de mise en œuvre.
+
+      La mise en œuvre de Credential Guard est recommandée au minimum sur les postes de travail sensibles où sont manipulés des comptes à privilèges de l'Active Directory, du Tiers 0 et éventuellement du Tiers 1, afin d'atténuer les risques de déplacement latéral et d'élévation de privilèges, un déploiement généralisé à l'ensemble des postes constituant un atout supplémentaire dans une démarche de défense en profondeur.
+
+   C. Les limites de Credential Guard et les mesures complémentaires.
+
+      Credential Guard ne protège ni les secrets des comptes locaux, ni ceux des programmes n'utilisant pas LSASS.exe, ni contre les enregistreurs de frappe ou les attaques physiques, ce qui justifie de compléter sa mise en œuvre par la sécurité physique des postes manipulant des comptes à privilèges, par une solution de gestion des mots de passe administrateurs locaux, et par l'interdiction de toute mémorisation des comptes à privilèges de l'AD en dehors de LSAIso.exe. Sur les postes de travail, Credential Guard doit être activé avec verrouillage UEFI, accompagné d'une sensibilisation des utilisateurs au comportement à adopter face à une demande de désactivation lors du démarrage.
+
+POINTS D'ATTENTION.
+
+      La mise en œuvre de Credential Guard doit être considérée comme une mesure de sécurité parmi d'autres dans une démarche de défense en profondeur, une entité ne devant en aucun cas s'en servir pour s'affranchir d'une gestion sécurisée des comptes à privilèges.
+
+      Toute modification malveillante d'une stratégie d'intégrité du code configurable pourrait se traduire par un déni de service empêchant des systèmes de démarrer, ce qui impose de restreindre strictement les droits d'écriture sur le fichier de stratégie et d'en protéger l'intégrité par signature.
+
+      L'utilisation de l'option HvciOptions en mode Strict est fortement déconseillée car non supportée par Microsoft et susceptible d'empêcher le démarrage du système d'exploitation.
+
+EXEMPLES CITÉS.
+
+      Microsoft LAPS, Local Administrator Password Solution, est cité comme exemple de solution de gestion des comptes administrateurs locaux intégrés.
+
+      VMWare Workstation et VirtualBox sont cités comme exemples de solutions de virtualisation tierces pouvant être incompatibles avec l'activation de la VBS.
+
+      L'outil Device Guard and Credential Guard hardware readiness tool de Microsoft est cité comme moyen de vérifier la compatibilité des pilotes avant un déploiement de HVCI.
