@@ -1,0 +1,93 @@
+RECOMMANDATIONS DE SÉCURITÉ RELATIVES À IPSEC POUR LA PROTECTION DES FLUX RÉSEAU, ANSSI, NOTE DAT-NT-003.
+
+LEXIQUE COMPLET.
+
+      IPsec, Internet Protocol Security, est une suite de protocoles normalisée par l'IETF permettant, par encapsulation, de protéger en confidentialité, intégrité et anti-rejeu un flux au niveau de la couche réseau, la couche 3 du modèle OSI.
+
+      AH, Authentication Header, est le protocole IPsec numéro 51 assurant l'intégrité et l'authentification des paquets IP, sans confidentialité.
+
+      ESP, Encapsulation Security Payload, est le protocole IPsec numéro 50 assurant la confidentialité, l'intégrité et l'authentification des paquets.
+
+      IKE, Internet Key Exchange, est le protocole d'échange de clés utilisé pour négocier dynamiquement les paramètres d'une Security Association.
+
+      Une Security Policy, SP, désigne pour un lien unidirectionnel le choix de l'usage obligatoire, facultatif ou nul d'IPsec, du mode tunnel ou transport, et du protocole AH ou ESP, l'ensemble des SP formant la SPD, Security Policy Database.
+
+      Une Security Association, SA, regroupe les données de contexte d'un lien unidirectionnel, hôtes, mode, protocole, algorithmes et clés, identifiée par un SPI, Security Parameter Index, l'ensemble des SA formant la SAD.
+
+      La PFS, Perfect Forward Secrecy, garantit qu'un attaquant obtenant ultérieurement les secrets cryptographiques ne peut pas déchiffrer des échanges antérieurs déjà enregistrés.
+
+      Le NAT-Traversal, NAT-T, encapsule le trafic IKE puis ESP dans des datagrammes UDP sur le port 4500 afin de permettre la traduction d'adresses avec IPsec.
+
+COURS DÉTAILLÉ.
+
+I. LA PRÉSENTATION ET LES CAS D'USAGE D'IPSEC.
+
+   A. La présentation générale.
+
+      IPsec protège les flux au niveau de la couche réseau, normalisé notamment par les RFC 4301 à 4309, et pris en charge nativement par la plupart des équipements réseau et systèmes d'exploitation, ce qui en fait une technologie mature et peu coûteuse à déployer, bien que souvent mal maîtrisée.
+
+   B. Les cas d'usage recommandés.
+
+      IPsec est utilisé pour les accès distants en nomadisme entre un poste client et un équipement de sécurité, pour relier deux sites distants, pour pallier la faiblesse protocolaire d'équipements ou de logiciels comme les systèmes SCADA ou les protocoles non sécurisés, et comme mesure de défense en profondeur en complément d'autres mécanismes de sécurité déjà en place. Pour les cas d'accès distant, il est recommandé de recourir à des équipements certifiés ou qualifiés par l'ANSSI dès lors qu'un besoin de confiance existe.
+
+   C. La comparaison avec TLS.
+
+      IPsec est préféré à TLS pour les usages évoqués car les opérations cryptographiques s'exécutent dans le noyau plutôt qu'en espace utilisateur, réduisant la surface d'attaque, et parce qu'IPsec recourt à un fonctionnement Encrypt-then-MAC jugé plus sûr que le MAC-then-Encrypt employé par TLS. TLS reste néanmoins pleinement adapté et complémentaire pour la sécurisation d'un protocole applicatif particulier, comme HTTPS, IMAPS ou LDAPS.
+
+II. LE FONCTIONNEMENT D'IPSEC.
+
+   A. Les protocoles AH et ESP.
+
+      Le protocole AH assure l'intégrité et l'authentification sans chiffrement, en protégeant l'ensemble du paquet y compris les en-têtes à l'exception des champs variables, ce qui crée une incompatibilité avec la traduction d'adresses. Le protocole ESP assure la confidentialité, l'intégrité et l'authentification, en ne protégeant que le contenu du paquet et non ses en-têtes. AH étant obligatoire pour la prise en charge des équipements mais ESP obligatoire pour son emploi, AH est considéré comme obsolète et son usage est déconseillé au profit d'ESP, qui doit toujours être employé avec son mécanisme de contrôle d'intégrité activé, jamais en confidentialité seule.
+
+   B. Les modes transport et tunnel.
+
+      En mode transport, les données AH ou ESP se greffent sur le paquet IP initial sans dupliquer l'en-tête. En mode tunnel, un nouveau paquet IP est généré contenant le paquet initial complet, créant deux en-têtes IP, l'en-tête externe servant au routage et l'en-tête interne pouvant être chiffrée. Le mode tunnel convient particulièrement à l'accès distant car il masque l'adressage interne du réseau privé, au prix d'une consommation réseau plus importante et d'une réduction du MTU effectif de 50 à 100 octets en général.
+
+   C. Les politiques et associations de sécurité.
+
+      Les Security Policy permettant un usage facultatif d'IPsec doivent être évitées car elles exposent à une attaque par dégradation, seuls les flux sécurisés devant être autorisés dès lors qu'un besoin de sécurité existe. Il est préférable d'avoir une politique uniforme entre le lien aller et le lien retour, malgré la possibilité technique d'un fonctionnement asymétrique.
+
+III. L'ÉTABLISSEMENT D'UN LIEN IPSEC.
+
+   A. Le choix entre mise à la clé manuelle et IKE.
+
+      Il est préférable de fixer a priori les algorithmes et tailles de clés et de n'utiliser IKE que pour l'échange de clés, ou à défaut de limiter la négociation à un nombre réduit d'algorithmes conformes à la politique de sécurité de l'organisme. La mise à la clé manuelle est fortement déconseillée car elle exige une configuration fastidieuse, ne permet pas la PFS ni l'authentification cryptographique, et doit être réservée à des tests ou diagnostics. La version 2 du protocole IKE, normalisée par la RFC 5996, est recommandée.
+
+   B. L'authentification des correspondants.
+
+      IKE se déroule en deux phases, la première établissant un canal sécurisé appelé ISAKMP SA ou IKE SA, la seconde négociant les IPsec SA protégeant le trafic utile. L'authentification de la première phase peut reposer sur un secret partagé, PSK, ou sur un mécanisme asymétrique tel que RSA, idéalement appuyé sur une infrastructure de gestion de clés facilitant la révocation. Le mode PSK doit être réservé aux tests, et s'il est utilisé exceptionnellement, son entropie doit être suffisante, une entropie inférieure à cent bits étant considérée comme un choix risqué.
+
+   D. La négociation des Security Policy et le NAT.
+
+      La négociation des SP par IKE n'a d'intérêt que pour les situations de mobilité où l'adresse IP du client nomade n'est pas connue à l'avance ; dans les autres cas, une configuration statique doit être privilégiée, et si la négociation est utilisée, la politique de filtrage doit garantir l'absence de tout flux en clair. L'utilisation du NAT avec IPsec rend AH inutilisable et impose l'activation du mécanisme NAT-Traversal, encapsulant IKE puis ESP en UDP sur le port 4500, dès lors que le NAT est nécessaire.
+
+IV. LA CONFIDENTIALITÉ PERSISTANTE ET LE CHOIX DES PARAMÈTRES.
+
+   A. La mise en œuvre de la PFS.
+
+      La PFS n'est garantie qu'en utilisant IKE avec un échange de clé Diffie-Hellman éphémère ou sa variante sur courbe elliptique, jamais avec la mise à la clé manuelle. Il est recommandé de mettre en œuvre la PFS en phase 2 lorsque les équipements le permettent, et de forcer un renouvellement périodique des clés, par exemple toutes les heures et tous les cent gigaoctets de données, afin de limiter l'impact d'une éventuelle compromission.
+
+   B. Le choix des algorithmes cryptographiques.
+
+      Il est fortement déconseillé d'employer la fonction de hachage MD5, le chiffrement DES, des clés RSA de moins de deux mille quarante-huit bits ou des clés ECDSA de moins de deux cents bits. Il est également déconseillé d'utiliser 3DES, SHA-1 ou des clés ECDSA de moins de deux cent cinquante-six bits si des alternatives plus sûres sont disponibles, comme AES, SHA-2 ou ECDSA avec des clés d'au moins deux cent cinquante-six bits. Les groupes Diffie-Hellman 1 et 2, souvent proposés par défaut, ne sont plus de taille acceptable et doivent être remplacés par des groupes plus grands, comme les groupes 14 et 15, ou par des courbes elliptiques d'au moins deux cent cinquante-six bits.
+
+POINTS D'ATTENTION.
+
+      IPsec est éprouvé mais souvent mal maîtrisé, les choix de configuration par défaut n'étant pas toujours judicieux, ce qui peut offrir un niveau de sécurité inférieur à celui attendu.
+
+      Le contrôle d'intégrité d'AH porte y compris sur les en-têtes IP, ce qui crée une incompatibilité fondamentale avec les mécanismes de traduction d'adresses, contrairement à ESP qui ne protège que le contenu utile.
+
+      Une Security Policy autorisant un usage facultatif d'IPsec expose à une attaque par dégradation, downgrade attack, qui ramène silencieusement la communication à un mode non protégé.
+
+      La sécurité d'un lien dont les algorithmes IKE sont négociés est conditionnée par l'algorithme le plus faible parmi ceux acceptés par la configuration.
+
+EXEMPLES CITÉS.
+
+      Le NAT-Traversal encapsule le trafic IKE puis ESP dans des datagrammes UDP utilisant le port 4500.
+
+      Les groupes Diffie-Hellman 14 et 15, ainsi que les courbes elliptiques ecp256, groupe 19, et ecp384bp, groupe 29, sont cités comme choix appropriés face aux groupes 1 et 2 obsolètes.
+
+      Les protocoles non sécurisés FTP, POP3, SMTP, HTTP, RDP et VNC sont cités en exemple de flux pouvant justifier l'emploi d'IPsec en protection complémentaire.
+
+      Les systèmes SCADA en milieu industriel sont cités comme exemple typique d'équipements aux mécanismes de communication peu robustes justifiant l'usage d'IPsec.
