@@ -1,0 +1,89 @@
+RECOMMANDATIONS POUR LA DÉFINITION D'UNE POLITIQUE DE FILTRAGE RÉSEAU D'UN PARE-FEU, ANSSI, NOTE DAT-NT-006.
+
+LEXIQUE COMPLET.
+
+      Un pare-feu, ou passerelle, est un équipement d'interconnexion capable de réaliser un filtrage réseau en tenant compte de l'état des connexions préalablement établies, dit stateful.
+
+      Un modèle de sécurité positif consiste à interdire par défaut tout ce qui n'est pas explicitement autorisé, par opposition à un modèle négatif qui autoriserait tout sauf ce qui est explicitement interdit.
+
+      Une règle antiparasite est une règle facultative interdisant certains flux non autorisés dont la trace n'est volontairement pas conservée, afin de garder des journaux exploitables, sous réserve qu'une autre brique de l'architecture conserve cette trace ailleurs.
+
+      Un flux implicite est un flux ouvert automatiquement par la solution technique pour faciliter l'administration ou le fonctionnement du pare-feu, sans définition manuelle explicite par l'administrateur.
+
+      Un séparateur de règles est une fonctionnalité technique permettant de scinder visuellement la politique de filtrage pour faire apparaître ses sections et ses regroupements.
+
+COURS DÉTAILLÉ.
+
+I. LE CONTEXTE ET LES MOTIVATIONS DU MODÈLE.
+
+   A. La justification de la note.
+
+      La complexification croissante des architectures d'interconnexion, l'ajout permanent de fonctionnalités aux pare-feux, l'historique parfois lourd des passerelles et la rotation des équipes d'administration dégradent naturellement l'état des politiques de filtrage, d'où le besoin d'un modèle d'organisation structurant pérenne, indépendant de la technologie et du mode d'administration employés.
+
+   B. Les conditions d'application du modèle.
+
+      Le modèle suppose que les règles sont évaluées séquentiellement de haut en bas, qu'une règle unique s'applique à un flux donné, la première qui l'autorise ou l'interdit, et qu'il est possible de définir précisément les flux ayant pour origine ou destination le pare-feu lui-même, faute de quoi les deux premières sections du modèle ne sont pas applicables.
+
+II. L'ORGANISATION EN SIX SECTIONS DE LA POLITIQUE.
+
+   A. Les flux à destination et en provenance du pare-feu.
+
+      La section un regroupe les règles autorisant l'accès aux services d'administration et de supervision du pare-feu, peu nombreuses et définies précisément au niveau des sources et des services, la surface d'attaque du pare-feu devant rester la plus réduite possible. La section deux regroupe les règles autorisant les flux émis par le pare-feu lui-même, comme l'envoi de journaux, les alertes ou la sauvegarde, définies précisément au niveau des destinations et des services.
+
+   B. La règle de protection du pare-feu.
+
+      La section trois ne comporte qu'une seule règle interdisant, en mode drop sans réponse, tout trafic à destination de toutes les interfaces de la passerelle, avec journalisation systématique. Cette règle verrouille l'accès au pare-feu de sorte qu'une règle ultérieure autorisant un flux vers le pare-feu ne soit jamais prise en compte, et permet de conserver la trace de tous les flux illégitimes visant la passerelle elle-même.
+
+   C. Les flux métiers.
+
+      La section quatre, qui constitue l'essentiel de la politique, regroupe les règles d'autorisation des flux métiers selon une logique établie et adaptée au contexte, par exemple une organisation par entité métier ou par service offert, avec des sources, destinations et services définis précisément.
+
+   D. Les règles antiparasites et l'interdiction finale.
+
+      La section cinq, facultative, contient les règles antiparasites interdisant sans journalisation certains flux non autorisés et peu significatifs, comme certains flux de broadcast, à condition qu'une trace en soit conservée ailleurs dans l'architecture selon la politique globale de journalisation. La section six comporte une unique règle d'interdiction finale, journalisée, interdisant tout trafic non explicitement autorisé, garantissant ainsi le modèle de sécurité positif même si la solution technique applique déjà une interdiction implicite non journalisée en fin de politique.
+
+III. LA MISE EN FORME DE LA POLITIQUE.
+
+   A. Les objets et leur convention de nommage.
+
+      Une politique de filtrage se compose de règles elles-mêmes construites à partir d'objets de types machine, réseau, plage réseau, service ou groupe d'objets. Une convention de nommage rigoureuse doit être définie pour chaque type d'objet afin de faciliter la recherche, la manipulation et l'audit, selon une orientation fonctionnelle, par exemple srv_dns-interne, ou technique, par exemple srv_appollo, le choix dépendant du contexte et des contraintes de la solution technique.
+
+   B. La coloration et la mise en forme des règles.
+
+      Une convention de coloration des objets, par exemple selon le niveau de confiance de la zone ou son rôle fonctionnel, aide à détecter visuellement des incohérences. Le nom d'une règle, lorsqu'il est disponible, doit indiquer le sens de communication qu'elle décrit, et le champ commentaire doit préciser le descriptif fonctionnel, la date de modification, la référence du ticket et l'identifiant de l'intervenant, ces éléments devant respecter une structure définie et adaptée au contexte.
+
+   C. Les séparateurs de règles.
+
+      Les séparateurs de règles doivent être employés pour faire apparaître visuellement les six sections du modèle et les regroupements de flux métiers, avec leur propre convention de nommage si un champ texte éditable est disponible.
+
+IV. LES BONNES PRATIQUES GÉNÉRALES ET LE CYCLE DE VIE.
+
+   A. La désactivation des flux implicites.
+
+      Certaines solutions ouvrent implicitement des flux d'administration, de fonctionnement, de VPN, de DNS ou d'ICMP pour simplifier l'exploitation, ce qui conduit souvent à des règles trop permissives et méconnues. Il est recommandé de désactiver ces flux implicites lorsque c'est possible et de définir manuellement et précisément tout flux légitime, afin de porter à la connaissance des administrateurs l'ensemble des règles appliquées et de réduire la surface d'attaque.
+
+   B. La séquence de démarrage.
+
+      Un pare-feu peut être vulnérable pendant sa séquence de démarrage, le délai entre l'allumage électrique et l'application effective de la politique pouvant, dans le pire des cas, laisser passer le trafic sans aucun contrôle. Il est recommandé de se documenter précisément sur le comportement de la solution employée et de tester ce comportement avant toute opération de maintenance nécessitant un redémarrage.
+
+   C. La documentation, la validation et la maintenance.
+
+      Les consignes de gestion des politiques de filtrage doivent être documentées et diffusées à l'ensemble des intervenants pour garantir leur respect au-delà des personnes qui les ont établies. Une politique de filtrage doit être testée en pratique une fois implémentée, le respect du modèle ne prémunissant pas contre les erreurs humaines. Elle doit ensuite être passée en revue à une fréquence bi-annuelle ou annuelle au minimum, pour supprimer les règles temporaires obsolètes, corriger les écarts aux conventions, et vérifier la cohérence des règles ajoutées depuis la dernière revue.
+
+POINTS D'ATTENTION.
+
+      L'action interdire de la règle de protection du pare-feu correspond à une suppression silencieuse du trafic sans réponse, ce qui évite de signaler trop explicitement la présence de la passerelle à un éventuel attaquant.
+
+      Une règle d'interdiction finale explicite et journalisée doit toujours être ajoutée, même si la solution technique applique déjà une interdiction implicite en fin de politique, car celle-ci n'est généralement ni journalisée ni visible explicitement.
+
+      La présence de mécanismes techniques ou organisationnels de contrôle de la politique de filtrage ne dispense jamais de la réalisation de revues régulières.
+
+EXEMPLES CITÉS.
+
+      Les services ssh et https pour l'administration, et get-snmp pour la supervision, illustrent les règles typiques de la section un, à destination du pare-feu.
+
+      Les services syslog, trap-snmp et ssh, respectivement pour l'envoi de journaux, les alertes et la sauvegarde, illustrent les règles typiques de la section deux, émises par le pare-feu.
+
+      Une règle interdisant sans journalisation les flux udp-137 et udp-138, de type NetBIOS, à destination de l'adresse de broadcast, illustre une règle antiparasite typique de la section cinq.
+
+      Un pare-feu NetAsq, solution qualifiée par l'ANSSI, est cité en exemple d'illustration du modèle complet à la fin du document.
