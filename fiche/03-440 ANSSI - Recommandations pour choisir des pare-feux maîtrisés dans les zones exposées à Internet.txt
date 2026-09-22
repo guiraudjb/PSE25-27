@@ -1,0 +1,71 @@
+RECOMMANDATIONS POUR CHOISIR DES PARE-FEUX MAÎTRISÉS DANS LES ZONES EXPOSÉES À INTERNET, ANSSI, ANSSI-PA-044.
+
+LEXIQUE COMPLET.
+
+      Le pare-feu externe est connecté directement à Internet, le pare-feu interne est connecté au système d'information à protéger, la zone entre les deux étant appelée DMZ.
+
+      Un pare-feu qualifié est un produit certifié au sens des critères communs ou de la CSPN, dont l'éditeur a en outre suivi avec succès le processus de qualification de l'ANSSI, ce qui traduit une recommandation de l'État allant au-delà de la simple certification.
+
+      Un pare-feu certifié est un produit dont la robustesse a été évaluée par un CESTI indépendant sur la base d'une cible de sécurité définie par le commanditaire, qui n'est pas nécessairement l'ANSSI.
+
+      Un réseau de classe zéro, au sens de l'Instruction Interministérielle 901, est un réseau public ou connecté à un réseau public qui n'est pas sécurisé par des dispositifs de filtrage et de rupture de flux qualifiés.
+
+      La qualification de sécurité se décline en trois niveaux, élémentaire à l'issue d'une CSPN, standard à l'issue d'une certification critères communs EAL 3+, et renforcée à l'issue d'une certification EAL 4+.
+
+COURS DÉTAILLÉ.
+
+I. L'ARCHITECTURE À DEUX PARE-FEUX EN CASCADE.
+
+   A. La nécessité d'au moins deux pare-feux.
+
+      Une passerelle Internet sécurisée doit mettre en œuvre au moins deux pare-feux en cascade, une architecture à pare-feu unique créant un point de défaillance unique dont la compromission expose l'ensemble des ressources du système d'information à protéger. Ce guide traite des fonctions de sécurité de la passerelle, comme le relais applicatif, l'authentification, la détection d'intrusion ou la journalisation, mais se concentre spécifiquement sur la fonction de filtrage réseau assurée par les pare-feux, ces autres fonctions devant préférentiellement être mises en œuvre au sein de la DMZ.
+
+   B. La diversification technologique.
+
+      L'approche mono-éditeur simplifie l'administration mais permet à un attaquant de rejouer trivialement une vulnérabilité ou une erreur de configuration d'un pare-feu sur l'autre. La mise en œuvre de pare-feux de technologies différentes, au niveau du matériel, du système d'exploitation, du moteur de filtrage et de l'interface homme-machine, doit donc être préférée, conformément au principe de défense en profondeur, à condition que les équipes d'exploitation maîtrisent réellement chacune de ces technologies, une entité disposant de multiples technologies issues de son historique devant plutôt les rationaliser.
+
+II. LE CHOIX ENTRE PARE-FEUX PHYSIQUES ET VIRTUALISÉS.
+
+   A. La dédicace des pare-feux à la fonction de filtrage.
+
+      Les pare-feux externe et interne doivent être dédiés exclusivement à la fonction de filtrage réseau, sans porter d'autres fonctions comme la terminaison VPN IPsec ou la détection d'intrusion, ce qui réduit leur surface d'attaque, diminue le risque d'erreur de configuration et améliore la disponibilité de l'ensemble des fonctions de la passerelle.
+
+   B. La préférence pour les pare-feux physiques.
+
+      Un pare-feu physique désigne une appliance prête à l'emploi ou un socle matériel durci, tandis qu'un pare-feu virtualisé désigne une instance de filtrage sur une appliance physique virtualisée ou une appliance virtuelle hébergée sur un hyperviseur. La virtualisation des pare-feux des passerelles Internet sécurisées est déconseillée de façon générale, a fortiori pour les systèmes Diffusion Restreinte ou sensibles, car la confiance dans l'isolation d'un hyperviseur est difficile à démontrer, les ressources partagées de bas niveau ne garantissant jamais une isolation complète. Si des instances virtualisées sont néanmoins utilisées pour le pare-feu externe et le pare-feu interne, elles doivent impérativement être portées par des socles physiquement séparés, jamais mutualisées entre elles.
+
+III. LES PARE-FEUX QUALIFIÉS ET CERTIFIÉS SELON LE NIVEAU DE SENSIBILITÉ.
+
+   A. La recommandation générale et le cas d'un marché limité.
+
+      Il est recommandé de mettre en œuvre des pare-feux qualifiés quel que soit le niveau de sensibilité du système d'information protégé. Si le marché ne propose qu'un seul pare-feu qualifié, il est envisageable de recourir à des pare-feux certifiés critères communs ou CSPN pour le second, à condition d'analyser attentivement leur cible de sécurité et leur rapport de certification, et de respecter les guides d'utilisation associés.
+
+   B. Le cas des systèmes Diffusion Restreinte.
+
+      Un système d'information Diffusion Restreinte doit obligatoirement disposer d'au moins un pare-feu qualifié au niveau standard en coupure de tous les flux vers et depuis le réseau de classe zéro. Le second pare-feu doit être technologiquement différent du premier, par ordre de préférence décroissant un pare-feu qualifié standard, puis élémentaire, puis simplement certifié. Si un seul pare-feu qualifié standard est déployé, il doit préférentiellement être positionné au contact du réseau de moindre confiance, c'est-à-dire en position de pare-feu externe ; tout choix différent doit être justifié et le risque résiduel formellement accepté, par exemple dans le dossier d'homologation.
+
+   C. Les systèmes sensibles et non protégés.
+
+      Les mêmes principes d'architecture que pour les systèmes Diffusion Restreinte s'appliquent aux systèmes sensibles, la mise en œuvre de pare-feux qualifiés par l'ANSSI étant obligatoire pour les administrations de l'État et les entités soumises à la protection du potentiel scientifique et technique de la nation, et recommandée pour les autres entités. Pour les systèmes non protégés, la diversification technologique et le recours à des solutions qualifiées restent recommandés sans caractère obligatoire.
+
+IV. LES ARCHITECTURES À PLUS DE DEUX PARE-FEUX.
+
+      Lorsqu'une passerelle comporte plus de deux pare-feux en cascade, les mêmes recommandations doivent être généralisées : diversification technologique, dédicace stricte à la fonction de filtrage, et recours à des pare-feux qualifiés ou à défaut certifiés. Le réseau de classe zéro n'est pas nécessairement Internet lui-même, des équipements de moindre criticité pouvant s'intercaler entre Internet et le pare-feu qualifié, ce dernier pouvant alors être protégé en frontal par un pare-feu non qualifié choisi pour des raisons technologiques particulières, par exemple une fonction anti-DDoS absente des produits qualifiés. La multiplication des pare-feux ne doit cependant jamais se faire au détriment de leur maîtrise réelle par les équipes d'exploitation.
+
+POINTS D'ATTENTION.
+
+      Les privilèges élevés d'un hyperviseur par rapport aux machines virtuelles qu'il héberge permettent à un attaquant ayant obtenu des droits sur le système de virtualisation de porter atteinte aux fonctions du pare-feu virtualisé, y compris en contournant sa politique de sécurité ou en faussant ses fonctions cryptographiques, compromettant ainsi sa capacité d'autoprotection.
+
+      Un compte d'administrateur de l'hyperviseur suffit en pratique à modifier la configuration des serveurs et des pare-feux virtualisés qu'il héberge, rendant impossible la séparation stricte entre administration système et administration réseau.
+
+      La qualification d'un pare-feu va au-delà de sa certification technique car elle intègre une analyse organisationnelle de l'éditeur, tandis que la cible de sécurité d'un produit simplement certifié est définie par l'éditeur lui-même, sans intervention de l'ANSSI sauf mensonge avéré.
+
+EXEMPLES CITÉS.
+
+      Stormshield Network Security est cité comme le seul pare-feu qualifié au niveau standard au moment de la rédaction du guide.
+
+      Stormshield SNxxxx, Cisco ASA, Check Point Security Appliance et Forcepoint NGFW appliance sont cités comme exemples d'appliances physiques, tandis que Netfilter/iptables, Packet Filter et IPFilter illustrent des socles matériels durcis.
+
+      Fortinet Virtual Domains, Palo Alto VM-Series et Cisco ASAv sont cités comme exemples de pare-feux virtualisés, hébergés sur des hyperviseurs comme Xen, VMware ESXi ou Microsoft Hyper-V.
+
+      Une fonction de protection contre les attaques en déni de service distribué, DDoS, absente des pare-feux qualifiés, est citée en exemple de raison technologique justifiant l'emploi d'un pare-feu non qualifié en frontal d'Internet.
