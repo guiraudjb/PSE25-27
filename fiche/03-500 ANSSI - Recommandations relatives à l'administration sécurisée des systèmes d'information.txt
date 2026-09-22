@@ -1,0 +1,101 @@
+RECOMMANDATIONS RELATIVES À L'ADMINISTRATION SÉCURISÉE DES SYSTÈMES D'INFORMATION, ANSSI, ANSSI-PA-022.
+
+LEXIQUE COMPLET.
+
+      Le système d'information d'administration, SI d'administration, regroupe l'ensemble des postes, réseaux, outils et comptes utilisés pour administrer les ressources d'un système d'information, et doit être considéré comme un système à part entière à sécuriser.
+
+      Une zone de confiance est un regroupement de ressources du SI administré partageant un même niveau de sensibilité, dont découlent les zones d'administration correspondantes.
+
+      Un PAMS, Prestataire d'Administration et de Maintenance Sécurisées, est un prestataire d'infogérance qualifié par l'ANSSI pour l'administration à distance de systèmes d'information.
+
+      Un rebond éphémère est une ressource intermédiaire temporaire, créée puis détruite pour chaque session, placée en coupure entre la terminaison VPN d'un administrateur tiers et le système d'information administré.
+
+      La rupture protocolaire des flux d'administration consiste à casser puis reconstruire la communication entre deux ressources au niveau d'une couche du modèle OSI, afin de ne pas exposer directement la pile protocolaire des ressources administrées.
+
+COURS DÉTAILLÉ.
+
+I. LES ADMINISTRATEURS ET LE SI D'ADMINISTRATION.
+
+   A. Les administrateurs, acteurs clés de la sécurité.
+
+      Les administrateurs doivent être informés de leurs droits et devoirs et formés à l'état de l'art en matière de sécurité des systèmes d'information, l'entité devant disposer d'une documentation à jour de ses systèmes.
+
+   B. L'analyse de risque et les zones de confiance.
+
+      Une analyse de risque doit être menée sur le SI d'administration et son écosystème, les zones de confiance du SI administré définies afin d'en déduire les zones d'administration correspondantes, et l'utilisation de produits qualifiés par l'ANSSI privilégiée. En cas de virtualisation des infrastructures d'administration, des socles physiques dédiés doivent être employés, la confiance dans le cloisonnement des environnements virtualisés restant limitée.
+
+II. LE POSTE D'ADMINISTRATION.
+
+   A. La gestion et l'architecture du poste.
+
+      Le poste d'administration doit être géré et configuré rigoureusement. Trois architectures sont envisageables par ordre de sécurité décroissant : un poste d'administration dédié exclusivement à cet usage, un poste d'administration multi-niveaux séparant les contextes par des moyens de cloisonnement technique, ou un poste d'administration avec accès distant au SI bureautique, cette dernière option étant la moins sécurisée mais parfois la seule réalisable en contexte contraint.
+
+   B. Les mesures de sécurisation.
+
+      Tout accès à Internet depuis ou vers le poste d'administration doit être bloqué, son système d'exploitation durci, les droits d'administration sur ce poste lui-même restreints, et les logiciels installés limités au strict nécessaire. L'ensemble des périphériques de stockage utilisés pour l'administration doit être chiffré.
+
+III. LE RÉSEAU D'ADMINISTRATION.
+
+   A. La protection des ressources et l'accès aux ressources administrées.
+
+      Les ressources d'administration doivent être connectées sur un réseau physique dédié, ou à défaut sur un réseau VPN IPsec dédié, avec un filtrage interne et périmétrique appliqué au SI d'administration ainsi qu'un filtrage local sur les ressources administrées elles-mêmes.
+
+   B. L'interface d'administration dédiée et le réseau étendu.
+
+      Une interface réseau physique, ou à défaut virtuelle, doit être dédiée à l'administration, avec un filtrage entre ressources d'administration et ressources administrées, et un blocage de toute connexion entre ressources administrées transitant par le réseau d'administration lui-même. Les flux d'administration transitant sur un réseau tiers doivent être protégés.
+
+IV. LES OUTILS D'ADMINISTRATION.
+
+      Les outils d'administration doivent être déployés sur des serveurs dédiés par zone d'administration, avec un filtrage entre postes d'administration et serveurs outils. Des protocoles sécurisés doivent être utilisés pour les flux d'administration, le cas échéant protégés dans un tunnel VPN IPsec, la mise en œuvre d'une rupture protocolaire de ces flux devant être étudiée, sauf si elle contredit un besoin de confidentialité auquel il faut alors renoncer.
+
+V. L'IDENTIFICATION, L'AUTHENTIFICATION ET LES DROITS.
+
+   A. Les comptes d'administration.
+
+      Des comptes d'administration dédiés doivent être utilisés, l'accès à leurs annuaires protégé, leur usage réservé aux seules actions d'administration, et des comptes individuels employés par défaut plutôt que génériques. Les événements liés à ces comptes doivent être journalisés et un processus de gestion de leur cycle de vie prévu.
+
+   B. L'authentification et les droits.
+
+      Le RGS doit guider le choix des mécanismes d'authentification, les mots de passe par défaut des comptes natifs systématiquement modifiés, et les mots de passe stockés dans un coffre-fort dédié. Une authentification double facteur doit être privilégiée pour les actions d'administration, des certificats électroniques de confiance utilisés, et une gestion centralisée de l'authentification mise en œuvre. Le principe du moindre privilège doit guider l'attribution des droits d'administration, ceux-ci étant attribués à des groupes plutôt qu'individuellement, avec des politiques de sécurité déployées en conséquence.
+
+VI. LE MAINTIEN EN CONDITION DE SÉCURITÉ, LA SAUVEGARDE ET LA SUPERVISION.
+
+      Le maintien en condition de sécurité du SI d'administration doit être réalisé scrupuleusement, avec des serveurs relais pour la récupération des mises à jour et une validation des correctifs avant leur généralisation. Une politique de sauvegarde du SI d'administration doit être définie, une zone d'administration dédiée à la journalisation mise en place, et la collecte des journaux d'événements centralisée.
+
+VII. L'ADMINISTRATION À DISTANCE ET LE NOMADISME.
+
+      Un filtre de confidentialité doit être installé sur un poste d'administration nomade, sa connexion distante sécurisée par un tunnel VPN IPsec dont la configuration ne doit pouvoir être modifiée par l'utilisateur, et un concentrateur VPN IPsec physique dédié à l'administration à distance employé.
+
+VIII. LES SYSTÈMES D'ÉCHANGES SÉCURISÉS.
+
+      Des systèmes d'échanges sécurisés doivent être déployés, le système d'échange interne dédié au SI d'administration, et seuls des protocoles de transfert autorisés vers un système d'échange externe dont l'accès doit être limité au strict besoin opérationnel. L'authentification sur un système d'échange externe ne doit jamais utiliser un compte d'administration, aucune donnée n'y étant stockée de façon permanente, et le contenu des échanges devant être analysé.
+
+IX. L'ADMINISTRATION PAR DES TIERS ET L'ASSISTANCE À DISTANCE.
+
+   A. L'infogérance et les administrateurs tiers.
+
+      Il est recommandé de recourir à une prestation d'infogérance qualifiée PAMS, en intégrant au contrat les exigences de sécurité d'accès à distance. Les postes de travail des administrateurs tiers doivent être sécurisés à l'état de l'art, une chaîne d'accès à distance leur être dédiée, avec un tunnel VPN IPsec ou à défaut TLS, des comptes d'accès et d'administration dédiés, idéalement rattachés à un annuaire propre, activés à la demande, avec authentification renforcée. Un rebond éphémère doit être mis en œuvre en coupure entre la terminaison VPN et le SI administré, avec un contrôle d'accès strict et une traçabilité complète.
+
+   B. L'assistance à distance.
+
+      L'assistance à distance doit s'appuyer sur un boîtier matériel d'acquisition vidéo, ou à défaut sur une solution logicielle collaborative dédiée.
+
+X. LES CAS PARTICULIERS D'ARCHITECTURE.
+
+      Le guide traite également l'usage d'un bastion, la possible mutualisation du poste d'administration, le choix entre une ou plusieurs solutions de poste d'administration, l'administration des ressources d'administration elles-mêmes, l'administration d'un SI déconnecté, et l'administration de ressources hébergées dans un cloud public.
+
+POINTS D'ATTENTION.
+
+      La confiance accordée au cloisonnement d'environnements virtualisés reste limitée, ce qui justifie de dédier des socles physiques distincts aux infrastructures d'administration lorsque la virtualisation est employée, en particulier pour les équipements de sécurité qui ne sont pas à privilégier en environnement virtualisé.
+
+      L'architecture de poste d'administration la moins sécurisée, celle avec accès distant au SI bureautique, ne doit être envisagée qu'en dernier recours lorsque les deux architectures précédentes ne sont pas réalisables.
+
+      L'authentification sur un système d'échange externe ne doit jamais reposer sur un compte d'administration, afin d'éviter qu'une compromission de ce système d'échange n'expose directement des identifiants privilégiés du SI d'administration.
+
+EXEMPLES CITÉS.
+
+      CLIP OS est cité comme exemple de système d'exploitation multi-niveaux pour l'architecture de poste d'administration correspondante.
+
+      Le jeton FIDO est cité comme exemple de second facteur d'authentification pour les actions d'administration.
+
+      Un boîtier matériel d'acquisition vidéo est cité comme moyen recommandé de réaliser de l'assistance à distance sans exposer directement le poste administré à un logiciel de prise en main à distance.
