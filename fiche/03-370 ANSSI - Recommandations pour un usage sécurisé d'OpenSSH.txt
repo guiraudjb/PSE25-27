@@ -1,0 +1,99 @@
+RECOMMANDATIONS POUR UN USAGE SÉCURISÉ D'(OPEN)SSH, ANSSI, NOTE DAT-NT-007.
+
+LEXIQUE COMPLET.
+
+      SSH, Secure SHell, est un protocole applicatif de couche 7 corrigeant les déficiences de FTP, RSH, RCP et TELNET, au travers de trois sous-protocoles, SSH-USERAUTH, SSH-TRANS et SSH-CONNECT.
+
+      OpenSSH est l'implémentation de référence de SSH, développée par le projet OpenBSD, composée d'un serveur sshd, de clients ssh, scp et sftp, et d'outils comme ssh-keygen, ssh-agent et ssh-keyscan.
+
+      Le modèle TOFU, Trust On First Use, désigne le comportement par défaut de ssh qui demande confirmation à l'utilisateur lors de la première connexion à un hôte inconnu avant d'enregistrer son empreinte dans known_hosts.
+
+      Le Chroot est une technique confinant un utilisateur SFTP dans une arborescence de fichiers isolée du reste du système, via l'option ChrootDirectory.
+
+      L'Agent Forwarding est un mécanisme permettant à un hôte relais de rediriger les requêtes d'authentification d'un second serveur vers l'agent du poste client, sans exposer la clé privée à l'hôte relais.
+
+      Une IGC OpenSSH est une infrastructure spécifique à SSH, non conforme au format X509, où une autorité de certification signe des certificats hôtes ou utilisateurs avec sa propre clé privée.
+
+      Un enregistrement SSHFP est un enregistrement DNS stockant l'empreinte d'une clé hôte SSH, normalisé par la RFC 4255.
+
+COURS DÉTAILLÉ.
+
+I. LA PRÉSENTATION DE SSH ET SES CAS D'USAGE.
+
+   A. Le protocole et son implémentation.
+
+      SSH corrige les déficiences des protocoles historiques FTP, TELNET, RSH et RCP en matière d'authentification, d'intégrité et de confidentialité. Seule la version 2 du protocole doit être autorisée, la version 1 étant obsolète et vulnérable, ce qui se configure avec la directive Protocol 2 de sshd_config.
+
+   B. Les cas d'usage recommandés.
+
+      SSH doit remplacer TELNET, RSH et RLOGIN pour les accès shell distants, ces serveurs historiques devant être désinstallés du système. SCP ou SFTP doivent remplacer RCP et FTP pour le transfert de fichiers, SSH multiplexant le canal de données et celui de contrôle sans nécessiter d'ouverture dynamique de port. La mise en place de tunnels SSH pour la redirection de flux doit être strictement réservée aux protocoles ne disposant pas de mécanismes de sécurité robustes, comme X11 ou VNC.
+
+II. LES BONNES PRATIQUES CRYPTOGRAPHIQUES.
+
+   A. L'authentification du serveur.
+
+      Il faut s'assurer de la légitimité du serveur contacté avant de poursuivre l'accès, par vérification de l'empreinte de sa clé publique ou par un certificat valide, ce que contrôle l'attribut StrictHostKeyChecking de ssh_config.
+
+   B. La génération des clés, tailles et algorithmes.
+
+      L'usage de clés DSA n'est pas recommandé, l'implémentation OpenSSH étant limitée à mille vingt-quatre bits, taille insuffisante. La taille de clé minimale doit être de deux mille quarante-huit bits pour RSA et de deux cent cinquante-six bits pour ECDSA, ECDSA devant être préféré à RSA lorsque les deux parties le supportent, ces tailles étant calculées pour une durée de vie estimée de trois ans de l'hôte.
+
+   C. La qualité de l'aléa et la diffusion des clés.
+
+      Les clés doivent être générées dans un contexte où la source d'aléa est fiable, idéalement sur une machine physique disposant de plusieurs sources d'entropie indépendantes, après une période d'activité suffisamment longue, les machines virtuelles souffrant d'un déterminisme réduisant l'entropie disponible. La clé privée ne doit être connue que de l'entité qui prouve son identité, une clé hôte n'étant lisible que par root et une clé utilisateur que par l'utilisateur, protégée par un mot de passe chiffré en AES-128 mode CBC plutôt qu'en 3DES, obsolète sur ce point depuis la version 5.3.
+
+   D. Le choix des algorithmes symétriques.
+
+      Le chiffrement du canal doit reposer sur AES 128, 192 ou 256 en mode CTR, qui s'affranchit des vulnérabilités connues du mode CBC utilisé par SSH, et l'intégrité sur HMAC SHA-1, SHA-256 ou SHA-512, le mode encrypt-then-mac étant préféré au mac-then-encrypt depuis la version 6.3.
+
+III. LE DURCISSEMENT DU SYSTÈME ET DES ACCÈS.
+
+   A. La séparation de privilèges et le chroot SFTP.
+
+      Le service sshd doit bénéficier de drapeaux de compilation adaptés et de la séparation de privilèges, idéalement via le sandboxing depuis la version 5.9. Les utilisateurs n'exploitant que le service SFTP doivent être chrootés dans une partition isolée via ChrootDirectory, idéalement montée en nodev, noexec et nosuid, la séparation de privilèges étant indispensable à l'efficacité de cette cage.
+
+   B. L'authentification et le contrôle d'accès utilisateur.
+
+      L'authentification doit privilégier par ordre de préférence la cryptographie asymétrique ECDSA, puis RSA, puis les tickets Kerberos via GSSAPI, puis PAM sans exposition du mot de passe, et enfin le mot de passe classique, ce dernier étant proscrit pour un utilisateur à privilèges élevés. Le module pam_krb5 ne doit pas être utilisé car il expose le mot de passe en clair au serveur, contrairement à la GSSAPI. Les comptes sans mot de passe doivent être interdits, le nombre de tentatives limité et le délai de connexion restreint, via PermitEmptyPasswords, MaxAuthTries et LoginGraceTime.
+
+   C. L'agent d'authentification et l'imputabilité.
+
+      L'agent forwarding est recommandé lorsqu'un rebond SSH est nécessaire au travers d'un hôte relais, qui doit alors être un hôte de confiance car il peut solliciter l'agent sans exposer la clé privée elle-même. Chaque utilisateur doit disposer de son propre compte unique et incessible, le compte root ne devant pas être accessible directement via PermitRootLogin no. Les accès doivent être restreints aux seuls utilisateurs ou groupes autorisés via AllowUsers ou AllowGroups, en droits positifs et éventuellement filtrés par adresse IP.
+
+   D. La restriction de l'environnement et des commandes.
+
+      L'altération de l'environnement par un utilisateur doit être bloquée par défaut via PermitUserEnvironment no, les variables autorisées étant sélectionnées au cas par cas via AcceptEnv. Les commandes exécutables par un utilisateur doivent être réduites au strict nécessaire, via la directive ForceCommand, des options du fichier authorized_keys, ou des binaires protégés comme sudo.
+
+IV. LE PROTOCOLE, L'ACCÈS RÉSEAU ET L'IGC OPENSSH.
+
+   A. L'écoute réseau et les redirections.
+
+      Le serveur SSH doit écouter uniquement sur une adresse d'administration séparée du réseau opérationnel, et lorsqu'il est exposé à un réseau non maîtrisé, un port différent du port par défaut vingt-deux, de préférence inférieur à mille vingt-quatre, est recommandé pour limiter les attaques par force brute. Sauf besoin justifié, les redirections de flux TCP doivent être désactivées via AllowTcpForwarding no, et la redirection X11 doit être désactivée sur le serveur via X11Forwarding no, le X Window System présentant de nombreuses failles de sécurité connues.
+
+   B. L'infrastructure de gestion de clés propre à OpenSSH.
+
+      Depuis la version 5.4, OpenSSH propose une IGC simplifiée non conforme au X509 et sans chaîne de certification, une autorité de certification étant créée comme une entité utilisateur ordinaire via ssh-keygen. Il est recommandé de créer des autorités distinctes selon leur rôle, hôte ou utilisateur, chacune protégée par un mot de passe unique et robuste. Les certificats générés ont une durée de validité de trois ans, et toute clé qui ne peut plus être considérée comme sûre doit être rapidement révoquée, via RevokedKeys côté serveur ou le marqueur revoked dans known_hosts côté client.
+
+   C. Les enregistrements DNS SSHFP.
+
+      Les empreintes de clés hôtes peuvent être publiées dans le DNS via des enregistrements SSHFP conformes à la RFC 4255, mais DNS n'étant pas un protocole sécurisé sauf déploiement de DNSSEC, cette validation ne constitue qu'un indicateur complémentaire et ne doit jamais se substituer à une vérification cryptographique fiable.
+
+POINTS D'ATTENTION.
+
+      Ne pas authentifier le serveur expose à une usurpation et à des attaques de l'homme du milieu permettant de récupérer l'intégralité du flux, frappes clavier, identifiants et fichiers échangés compris.
+
+      Un décalage entre l'empreinte fournie par le serveur sshd et celle publiée en DNS doit être considéré comme un incident de sécurité critique.
+
+      La compromission d'un hôte relais expose l'agent d'authentification redirigé à des requêtes non contrôlées par l'utilisateur légitime, même si la clé privée elle-même n'est jamais transmise.
+
+EXEMPLES CITÉS.
+
+      La commande ssh-keygen -t rsa -b 2048 -f <fichier> génère une clé RSA de taille conforme, et ssh-keygen -t ecdsa -b 256 -f <fichier> une clé ECDSA conforme.
+
+      Les directives Ciphers aes256-ctr,aes192-ctr,aes128-ctr et MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com illustrent la configuration cryptographique recommandée de sshd_config.
+
+      La directive Match group sftp-users suivie de ForceCommand internal-sftp et ChrootDirectory /sftp-home/%u illustre la mise en place d'un chroot SFTP.
+
+      Un utilisateur monproc dédié au monitoring peut être limité par Match user monproc suivi de ForceCommand /bin/ps -elf.
+
+      La commande ssh-keygen -s <clé privée CA> -I <identifiant> -n <identités> -V +156w <fichier clé publique> illustre la signature d'un certificat OpenSSH valable trois ans.
