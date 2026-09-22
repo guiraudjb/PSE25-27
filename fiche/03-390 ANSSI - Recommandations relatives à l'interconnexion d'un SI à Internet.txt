@@ -1,0 +1,119 @@
+RECOMMANDATIONS RELATIVES À L'INTERCONNEXION D'UN SYSTÈME D'INFORMATION À INTERNET, ANSSI, ANSSI-PA-066.
+
+LEXIQUE COMPLET.
+
+      Une DMZ, zone démilitarisée, est un sous-réseau séparant deux zones de confiance hétérogène grâce à des pare-feux réalisant un filtrage périmétrique de part et d'autre.
+
+      La passerelle Internet sécurisée est constituée d'une ou plusieurs DMZ, zones neutres et perdables, protégées par des pare-feux périmétriques et servant à la rupture protocolaire et à l'analyse du trafic entre un réseau public et le SI interne.
+
+      Une rupture protocolaire consiste à casser en entrée et reconstruire en sortie la communication entre deux ressources au niveau d'une des couches du modèle OSI.
+
+      La hiérarchie des recommandations distingue une recommandation R à l'état de l'art, une alternative R moins moins de premier niveau, une alternative R deux tirets de second niveau, et une recommandation R plus renforcée complémentaire pour les entités matures.
+
+      Le STARTTLS, ou TLS opportuniste, est une option activant le chiffrement et l'authentification d'une session SMTP si le serveur distant le supporte, sans quoi la communication se poursuit en clair.
+
+      SPF, Sender Policy Framework, DKIM, DomainKeys Identified Mail, et DMARC, Domain-based Message Authentication Reporting and Conformance, sont trois protocoles complémentaires de vérification de l'authenticité et de l'intégrité des courriels via des enregistrements DNS.
+
+      DNSSEC est une extension du DNS garantissant la fiabilité des données publiées, notamment celles utilisées par SPF, DKIM et DMARC.
+
+COURS DÉTAILLÉ.
+
+I. L'EXPRESSION DU BESOIN ET LES MENACES CONSIDÉRÉES.
+
+   A. Les menaces liées à l'interconnexion.
+
+      L'interconnexion à Internet expose à l'exfiltration de données, l'intrusion portant atteinte à l'intégrité ou la disponibilité, l'usurpation d'identité pour rebondir vers d'autres cibles, le déni de service, et l'accès des collaborateurs à des sites interdits. Il est nécessaire d'établir de manière exhaustive la liste des services nécessitant une interconnexion, en distinguant flux entrants et sortants, et de la réviser régulièrement, le choix de chaque équipement devant reposer sur son apport en sécurité, sa robustesse, et la capacité de l'équipe technique à le maîtriser, l'emploi de produits visés par l'ANSSI étant recommandé.
+
+II. L'ARCHITECTURE ET LES FONCTIONS DE SÉCURITÉ DE L'INTERCONNEXION.
+
+   A. Le filtrage périmétrique et le cloisonnement.
+
+      L'interconnexion entre Internet et la DMZ doit être protégée par un pare-feu externe maîtrisé par l'entité, et l'interconnexion entre le SI interne et la DMZ par un pare-feu interne, tous deux non contournables et appliquant une matrice de flux revue régulièrement. La passerelle Internet sécurisée doit être incontournable, tout accès Internet alternatif devant provenir d'infrastructures physiquement distinctes. Des pare-feux intermédiaires complémentaires sont recommandés pour filtrer les flux entre serveurs métier et serveurs relais au sein de la passerelle.
+
+   B. Le cloisonnement des flux et leur cinématique.
+
+      Autant de chaînes de traitement distinctes que nécessaire doivent être construites et cloisonnées selon la source des flux et les besoins de sécurité du service, le cloisonnement étant physique de préférence. Il est recommandé qu'aucun flux ne soit initié depuis la passerelle Internet sécurisée vers le SI interne, un flux d'accès étant initié par le client du SI vers la passerelle puis vers Internet, et un flux d'hébergement étant initié par le client sur Internet vers la passerelle sans jamais remonter vers le SI.
+
+   C. La rupture protocolaire, l'analyse et l'authentification.
+
+      Une rupture protocolaire doit être mise en œuvre pour se prémunir de connexions malveillantes directes, sauf pour deux points de confiance maîtrisés par l'entité comme un tunnel VPN, dont la rupture n'est pas recommandée afin de préserver la confidentialité et l'authenticité du flux. Une analyse des flux est recommandée lors de cette rupture pour détecter fuite de données ou code malveillant. Un annuaire du SI interne ne doit jamais être directement requêté par les équipements de la passerelle : un annuaire dédié en lecture seule, un mandataire inverse d'authentification, ou un mandataire d'authentification au sein du SI interne sont les trois architectures possibles.
+
+III. L'ARCHITECTURE DÉTAILLÉE ET LA MUTUALISATION.
+
+   A. Les zones et les risques de virtualisation.
+
+      Cinq zones composent une passerelle détaillée : accès interne, services internes, services exposés, services relais et accès externe. Les opportunités de virtualisation doivent être mises au regard de ses risques, déni de service et compromission facilitée en cas de mutualisation, le principe de précaution imposant des besoins de sécurité et une exposition homogènes pour toute mutualisation.
+
+   B. Les niveaux d'architecture recommandés.
+
+      L'architecture la plus sûre dédie des équipements physiques à chaque zone, y compris la commutation réseau. Une alternative moins sûre mutualise physiquement la commutation réseau en la segmentant par VLAN, tout en maintenant des commutateurs dédiés pour les services internes et exposés. La mutualisation des pare-feux interne et externe, même en instances virtuelles distinctes sur un socle commun, doit être proscrite en raison de la forte exposition de ces deux zones, une telle compromission donnant un accès direct entre le SI interne et Internet.
+
+   C. Le cas particulier du DNS.
+
+      Des résolveurs DNS distincts doivent être dédiés aux résolutions internes dans le SI interne et aux résolutions publiques dans la passerelle Internet sécurisée, ces résolveurs ne devant jamais communiquer entre eux, le pare-feu interne devant par défaut bloquer tous les flux DNS afin d'empêcher un canal d'exfiltration.
+
+   D. Le raccordement multi-sites et l'externalisation.
+
+      Dans une architecture multi-zones nécessitant plusieurs passerelles, il est recommandé de déployer la même architecture et les mêmes produits pour chacune. Si une fonction relais est externalisée dans le cloud, il est recommandé que le service soit qualifié SecNumCloud et que l'interconnexion passe par un tunnel VPN IPsec à l'état de l'art, une analyse de risque renforcée s'imposant à défaut d'une offre qualifiée.
+
+IV. LA SÉCURISATION GÉNÉRALE DE L'INTERCONNEXION.
+
+   A. L'administration et la disponibilité.
+
+      La passerelle doit être administrée de manière sécurisée selon le guide dédié de l'ANSSI. La disponibilité de l'accès Internet doit être garantie par la résilience des accès opérateurs, travaux de génie civil, redondance matérielle et configuration logicielle, et une solution de protection anti-DDoS doit être déployée. Le routage statique doit être privilégié au sein de la passerelle, les protocoles de routage dynamique désactivés, avec une vigilance particulière sur la route par défaut du pare-feu interne qui ne doit jamais pointer vers Internet.
+
+   B. La confidentialité de l'architecture.
+
+      Les connexions refusées par un pare-feu externe ne doivent générer aucune réponse, en mode DROP plutôt que REJECT, et les champs techniques divulguant de l'information sur l'infrastructure interne doivent être anonymisés lorsque c'est techniquement possible, cette mesure restant complémentaire et non prioritaire.
+
+V. LA SÉCURISATION DE L'ACCÈS AUX CONTENUS WEB.
+
+   A. Le serveur mandataire et l'authentification.
+
+      Un serveur mandataire doit être mis en place dans la zone de services relais pour tout accès aux contenus Web, exploité de manière centralisée. Tous les accès doivent être authentifiés individuellement pour les utilisateurs et de façon non ambiguë pour les services, les exceptions techniques étant gérées par une liste d'autorisations restreinte au strict besoin opérationnel.
+
+   B. L'inspection TLS et la journalisation.
+
+      La mise en place d'une inspection TLS maîtrisée est recommandée pour détecter les codes malveillants diffusés via HTTPS, avec une liste de sites de confiance non inspectés pour respecter la vie privée, cette inspection restant complémentaire aux mesures de détection des postes. Les journaux techniques et fonctionnels des mandataires doivent être centralisés, de préférence via un réseau d'administration dédié.
+
+   C. Le poste de travail et le contournement du mandataire.
+
+      Le déploiement maîtrisé d'un seul navigateur est préférable, avec surface d'attaque réduite au strict nécessaire. Le serveur mandataire doit être configuré en mode explicite et non transparent, afin d'éviter le routage d'adresses publiques en interne et de permettre l'interdiction des résolutions DNS publiques depuis les postes. Il doit être techniquement impossible pour l'utilisateur de contourner les équipements de sécurité, la configuration du mandataire devant être non modifiable, et le protocole WPAD, vulnérable, est à proscrire absolument au profit d'une politique de configuration locale ou d'un fichier PAC servi en HTTPS.
+
+VI. LA SÉCURISATION DU SERVICE DE MESSAGERIE ÉLECTRONIQUE.
+
+   A. L'architecture et le cloisonnement.
+
+      Les serveurs de boîtes aux lettres doivent être déployés au sein du SI interne, jamais dans la passerelle. Un serveur relais interne dédié doit exister pour les besoins strictement internes, sans être chaîné à un serveur SMTP exposé, tandis qu'au moins un serveur SMTP doit être positionné dans la passerelle pour les besoins externes. Les serveurs SMTP d'envoi et de réception doivent être cloisonnés en machines distinctes, avec des fonctions différenciées de nettoyage d'en-têtes pour l'envoi et d'analyse protocolaire pour la réception. Les protocoles de messagerie ne doivent être autorisés qu'entre infrastructures légitimes, toute utilisation illégitime des ports SMTP par un autre serveur devant générer une alerte.
+
+   B. La protection antispam et l'exposition des accès utilisateurs.
+
+      Des mécanismes antispam, listes d'autorisation ou d'interdiction, analyse heuristique, test de Turing pour les nouveaux expéditeurs, doivent être mis en œuvre en amont, complétés par une analyse antivirus des pièces jointes et une analyse des liens Web du corps des courriels. Le service de messagerie ne doit pas exposer sur Internet les accès utilisateurs aux boîtes aux lettres, aucun portail Webmail public ne devant être déployé ; si ce risque est accepté par une autorité d'homologation, une chaîne d'accès dédiée avec authentification double facteur et détection renforcée doit être mise en place.
+
+   C. La sécurisation des canaux de transport.
+
+      Les flux entre clients de messagerie et serveurs de boîtes aux lettres doivent être chiffrés et authentifiés via des protocoles standards comme SMTPS, POPS, IMAPS ou HTTPS. L'option STARTTLS doit être activée sur les serveurs SMTP avec une configuration tolérante acceptant aussi des paramètres de sécurité moindre pour préserver l'interopérabilité, le chiffrement implicite sur le port 465 étant à désactiver dans ce cas ; l'option REQUIRETLS, plus stricte, est recommandée pour les entités matures afin de forcer l'échange en TLS avec les destinataires qui la supportent.
+
+   D. La protection contre les courriels illégitimes.
+
+      SPF doit être supporté sur les serveurs SMTP de réception et configuré pour les domaines de l'entité en tenant un inventaire rigoureux des serveurs d'envoi autorisés. DKIM doit être supporté en réception et configuré en envoi, avec une protection rigoureuse de la clé privée de signature. DMARC doit être supporté en réception et configuré en envoi, en commençant par une politique d'acceptation de tous les courriels avant de durcir progressivement la politique. DNSSEC est recommandé pour fiabiliser les résolutions publiques sur lesquelles reposent SPF, DKIM et DMARC.
+
+POINTS D'ATTENTION.
+
+      La mutualisation des pare-feux interne et externe sur un même équipement physique, même en instances virtuelles distinctes, est proscrite car une compromission unique donnerait un accès direct entre le SI interne et Internet, ce que l'architecture cherche précisément à empêcher.
+
+      Le protocole DNS constitue un canal privilégié d'exfiltration de données pour un attaquant ; il est donc indispensable de bloquer toute possibilité de canal DNS direct ou indirect depuis une ressource du SI interne vers Internet.
+
+      L'activation de STARTTLS sur un serveur SMTP est une condition nécessaire mais non suffisante à l'utilisation effective de TLS, la communication continuant en clair si le serveur distant ne le supporte pas.
+
+      SPF, DKIM et DMARC ne protègent pas contre le typosquattage d'un nom de domaine proche, l'usurpation d'identité en amont du serveur SMTP d'envoi, ni le contenu piégé d'un courriel par ailleurs authentique.
+
+EXEMPLES CITÉS.
+
+      La méthode HTTP CONNECT sur un serveur mandataire est citée comme moyen de traiter certains flux sortants difficiles à relayer, en dernier recours face à une connexion directe entre pare-feux.
+
+      Le fichier PAC, proxy auto-config, servi en HTTPS avec certificat signé par une autorité déclarée, est cité comme méthode recommandée de configuration du mandataire, par opposition au protocole WPAD, vulnérable et à proscrire.
+
+      La politique DMARC p=none, p=quarantine et p=reject est citée comme exemple de gradation du traitement appliqué aux courriels en échec de vérification.
+
+      Les vulnérabilités Spectre et Meltdown sont citées comme exemples de fuites de données possibles via la mutualisation de ressources virtualisées.
