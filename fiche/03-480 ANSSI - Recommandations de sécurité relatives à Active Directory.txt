@@ -1,0 +1,79 @@
+RECOMMANDATIONS DE SÉCURITÉ RELATIVES À ACTIVE DIRECTORY, ANSSI, NOTE DAT-NT-17.
+
+LEXIQUE COMPLET.
+
+      Active Directory, AD, est un annuaire introduit par Windows 2000 Server centralisant les informations relatives aux utilisateurs et aux ressources d'une entreprise et fournissant des mécanismes d'identification et d'authentification.
+
+      Un contrôleur de domaine, DC, héberge une copie de l'annuaire, un catalogue global étant un DC détenant en plus une partie des informations des autres domaines de la forêt.
+
+      Un RODC, contrôleur de domaine en lecture seule, ne possède qu'une copie partielle et non modifiable de l'annuaire, destiné aux sites dont la sécurité physique n'est pas garantie.
+
+      Le KCC, Knowledge Consistency Checker, est le service qui génère dynamiquement la topologie de réplication entre contrôleurs de domaine à partir des objets Site et Lien de site.
+
+      Une forêt regroupe plusieurs domaines et constitue la frontière réelle d'isolation administrative, un domaine pouvant être administré indépendamment mais certains privilèges d'un compte d'administration de domaine traversant techniquement les frontières des domaines d'une même forêt.
+
+      L'objet AdminSDHolder protège périodiquement les ACL des comptes et groupes d'administration protégés par réapplication d'un modèle de sécurité de référence.
+
+      L'attribut adminCount, positionné à 1, marque un compte comme membre d'un groupe d'administration protégé, ce qui déclenche cette protection systématique de ses permissions.
+
+COURS DÉTAILLÉ.
+
+I. LES CONCEPTS ET LA PRIORISATION DES RECOMMANDATIONS.
+
+      Les recommandations sont priorisées sur quatre niveaux, la priorité un protégeant contre l'exploitation de vulnérabilités pouvant compromettre l'AD, la priorité deux contre les accès non autorisés, la priorité trois portant sur l'intégrité et la non-divulgation des données, et la priorité quatre couvrant un périmètre moins critique ou une complexité de mise en œuvre plus élevée. L'annuaire stocke quatre types de partitions, données du domaine, de configuration, du schéma et d'application, répliquées entre tous les contrôleurs de domaine en écriture.
+
+II. LES PRÉREQUIS À LA SÉCURISATION.
+
+   A. L'architecture physique et la réplication.
+
+      Les ports de réplication doivent être fixés pour maîtriser les flux réseau, obligatoirement si le DC est derrière un pare-feu. La topologie de réplication générée par le KCC doit être conservée tant que le produit du nombre de domaines plus un par le carré du nombre de sites reste inférieur à cent mille, au-delà de quoi une réduction des liens de site ou une planification du KCC en heures creuses doit être envisagée. Si la sécurité physique d'un DC n'est pas assurée, il doit impérativement être configuré en RODC avec chiffrement des disques, sa mise en cache des informations d'identification limitée aux comptes sans privilège du site, et un DC en écriture doit être placé dans le site sécurisé le plus proche.
+
+   B. La santé des contrôleurs de domaine et l'accès distant.
+
+      La taille des journaux d'événements doit être augmentée par GPO, jusqu'à un gigaoctet pour le journal de sécurité sur les systèmes récents, et les fonctionnalités d'audit des opérations réussies et en échec activées pour les événements de sécurité recensés, comme la modification d'une stratégie d'audit, l'ajout d'un SID History ou l'effacement d'un journal d'audit. Une infrastructure de collecte doit conserver ces journaux au format natif Microsoft plutôt que transformés en syslog, pour éviter toute perte d'information. Les connexions entrantes distantes doivent être filtrées par le pare-feu local pour n'autoriser que des postes d'administration dédiés, avec WinRM en HTTPS privilégié pour limiter les ports ouverts. Aucun logiciel tiers, y compris un antivirus, ne devrait être installé sur un contrôleur de domaine, car il en augmente la surface d'attaque. Les comptes de service doivent voir leurs privilèges minimisés, être inventoriés régulièrement, avec des procédures formalisées de changement de mot de passe.
+
+III. LES ÉLÉMENTS DE SÉCURITÉ DE L'ANNUAIRE.
+
+   A. Le niveau fonctionnel, le schéma et les relations d'approbation.
+
+      Le niveau fonctionnel le plus haut possible doit être visé, les versions récentes corrigeant les lacunes de sécurité des précédentes. Toute extension de schéma doit être préparée par l'enregistrement des OID auprès de Microsoft et validée dans un environnement hors production. L'authentification sélective doit être privilégiée pour une relation d'approbation entre deux forêts, refusant par défaut toute authentification sauf autorisation explicite. L'usage du SIDHistory doit rester temporaire, limité à la phase de migration, et le filtrage des SIDs doit toujours être activé sur une relation d'approbation entre deux forêts pour éviter tout rebond, sauf désactivation temporaire pendant une migration.
+
+   B. Les unités organisationnelles, les rôles FSMO et les stratégies de groupe.
+
+      La création d'unités organisationnelles doit rester simple et éviter de calquer l'organigramme de l'entreprise, sujet à évolution fréquente, en la réservant à des besoins de délégation d'administration ou d'application différenciée de GPO. En forêt mono-domaine, tous les rôles FSMO doivent être placés sur un même DC ; en environnement multi-domaines, le PDC doit être placé sur une machine robuste dans un site disposant d'autres DC. Une convention de nommage des GPO doit faire apparaître le type d'objet ciblé et la population visée, leur nombre limité par objet, leur partie inutilisée désactivée, le blocage d'héritage limité, et une même GPO ne doit jamais être liée plus d'une fois à une même unité organisationnelle.
+
+   C. Les groupes de sécurité et le contrôle d'accès.
+
+      Les ACL de l'objet AdminSDHolder doivent être surveillées fréquemment pour détecter tout changement. Le nombre de comptes disposant de droits d'administration sur le domaine entier doit être restreint, les groupes Opérateurs prédéfinis conservés vides au profit de groupes de sécurité dédiés, et l'imbrication des groupes vérifiée régulièrement par script pour éviter les bouclages. Un modèle de délégation de droits octroyant le moins de pouvoir possible doit être adopté pour limiter les élévations de privilèges par rebonds successifs, et la taille du ticket Kerberos maîtrisée en réduisant le nombre de groupes de sécurité et la présence de SID History.
+
+IV. LA GESTION DES COMPTES.
+
+   A. L'authentification et la catégorisation des comptes.
+
+      Le niveau d'authentification LAN Manager doit être fixé au plus haut possible, au minimum trois puis cinq, pour se protéger de la cryptanalyse des empreintes. La taille du cache de domaine doit être limitée à zéro sur les serveurs et un sur les postes de travail, les serveurs n'ayant pas vocation à être déconnectés du réseau. Un modèle de sécurité définissant des rôles différenciés doit limiter les possibilités d'élévation de privilèges, et l'attribut adminCount ne doit être positionné à un que pour les membres d'un groupe d'administration protégé, un compte devant être désactivé dès son retrait de ce groupe.
+
+   B. Les scripts, mots de passe et comptes inactifs.
+
+      Aucun mot de passe ne doit apparaître en clair dans un script, l'authentification Kerberos ou un compte de service devant être préférés. Une politique de complexité des mots de passe adaptée à la criticité de chaque compte, ainsi qu'une politique d'expiration s'appliquant à tous les types de comptes y compris d'administration et de service, doivent être configurées, plusieurs stratégies de mot de passe étant possibles depuis le niveau fonctionnel 2008. Les comptes non utilisés doivent être automatiquement désactivés après un délai déterminé, perdre tous leurs droits et être déplacés vers une unité organisationnelle dédiée, sans toutefois être supprimés afin de conserver une trace historique.
+
+V. LES MESURES ORGANISATIONNELLES PRÉVENTIVES.
+
+      Les administrateurs doivent être régulièrement sensibilisés à l'administration sécurisée d'AD et aux bonnes réactions en cas d'incident, formés aux règles de gestion de l'annuaire, et soumis à un roulement des tâches d'administration afin de détecter toute négligence ou malveillance qui passerait autrement inaperçue. Des ressources humaines suffisantes en expertise AD doivent garantir la continuité de service en cas de crise. Une revue régulière de la pertinence des droits accordés aux comptes privilégiés doit être menée, et des audits réguliers de l'annuaire commandités, idéalement par un prestataire indépendant qualifié PASSI.
+
+POINTS D'ATTENTION.
+
+      Depuis Windows 2000, l'élévation de privilèges d'un compte d'administration de domaine vers l'ensemble de la forêt reste techniquement possible par conception, même si les outils d'administration Microsoft la bloquent habituellement, ce qui fait de la frontière de forêt, et non celle de domaine, la véritable limite de sécurité.
+
+      Un compte désactivé peut être facilement réactivé, ce qui impose de systématiquement lui retirer ses droits et privilèges lors de la désactivation plutôt que de se fier à la seule désactivation du compte.
+
+      L'installation d'un logiciel tiers, même un antivirus, sur un contrôleur de domaine augmente sa surface d'attaque en y introduisant un composant logiciel supplémentaire potentiellement vulnérable.
+
+EXEMPLES CITÉS.
+
+      Le paramètre restrictedAdmin, disponible depuis Windows 2012 R2 et 8.1 puis rétroporté sur Windows 7 et 2008 R2, est cité comme moyen d'accéder au bureau à distance sans exposer l'empreinte du mot de passe sur la machine distante.
+
+      L'événement de sécurité 4719, correspondant à la modification d'une stratégie d'audit, et l'événement 1102, correspondant à l'effacement du journal d'audit, sont cités parmi les événements de criticité haute à surveiller dans un environnement AD.
+
+      Une taille maximale de journal de sécurité d'un gigaoctet est citée en exemple pour les systèmes dont le noyau est en version six ou supérieure, contre 175 mégaoctets pour les noyaux en version cinq.
+
+      L'inclusion recommandée compte utilisateur dans groupe Global, dans groupe Universel, puis dans groupe de Domaine local, est citée comme modèle d'attribution d'accès à une ressource d'un domaine.
