@@ -1,0 +1,89 @@
+RECOMMANDATIONS ET MÉTHODOLOGIE POUR LE NETTOYAGE D'UNE POLITIQUE DE FILTRAGE RÉSEAU D'UN PARE-FEU, ANSSI, NOTE DAT-NT-32.
+
+LEXIQUE COMPLET.
+
+      La logique de first-match désigne le parcours séquentiel d'une politique de filtrage, où la décision de la première règle correspondant à un flux est appliquée sans évaluer la suite de la politique.
+
+      Un objet doublon est un objet portant un nom différent mais dont les caractéristiques, comme l'adresse IP et le masque réseau, sont rigoureusement identiques à celles d'un autre objet.
+
+      Un objet inutilisé, ou orphelin, est un objet défini dans la base mais qui n'est utilisé dans aucune règle de filtrage.
+
+      Une règle redondante est une règle qui autorise un trafic déjà permis par une autre règle placée en amont dans la politique de filtrage.
+
+      Le processus d'affinage est une démarche itérative consistant à enrichir une règle amont à partir des adresses et ports observés dans les journaux d'une règle redondante, jusqu'à ce que cette dernière ne produise plus d'événements et puisse être supprimée.
+
+      La SPD, ou base d'objets, regroupe les objets réseau, service et groupe utilisés pour construire les règles d'une politique de filtrage, pouvant être partagée entre plusieurs pare-feux en administration centralisée.
+
+COURS DÉTAILLÉ.
+
+I. LES PRÉREQUIS DU NETTOYAGE.
+
+   A. Les objectifs et les causes de la perte de contrôle.
+
+      Le nettoyage vise à rendre cohérents et compréhensibles la politique de filtrage et ses objets, et à la restreindre au maximum pour n'autoriser que les flux légitimes. La perte de contrôle d'une politique provient généralement de sa complexité croissante, de l'absence de convention de rédaction, du renouvellement fréquent des équipes d'exploitation, ou du manque de maîtrise de la cartographie du système d'information, exposant à l'autorisation de flux illégitimes.
+
+   B. Les prérequis de la politique et des journaux.
+
+      La politique doit être parcourue séquentiellement selon la logique first-match, chaque règle devant disposer d'un identifiant unique indépendant de sa position, et les règles métier devant précéder les règles d'interdiction finale. Les journaux d'événements doivent contenir cet identifiant de règle et l'horloge du pare-feu doit être synchronisée sur un serveur de temps. L'utilisation d'outils d'analyse automatisée est recommandée dès lors que la politique et les journaux atteignent un volume difficilement analysable manuellement.
+
+II. LES ANOMALIES STRUCTURELLES DE LA POLITIQUE.
+
+   A. Les anomalies concernant les objets.
+
+      Les objets doublons, portant des noms différents pour des caractéristiques identiques, doivent être identifiés car ils compliquent la mise à jour et la production d'indicateurs d'usage. Les objets inutilisés, définis mais absents de toute règle, doivent également être identifiés car ils alourdissent inutilement la base et peuvent être source d'erreur.
+
+   B. Les anomalies concernant les règles.
+
+      Une règle redondante peut être rigoureusement identique à une règle amont, auquel cas l'une des deux peut être supprimée sans impact. Elle peut aussi être contenue par une règle amont, ce qui permet de simplifier la politique en supprimant la règle ou l'objet en trop. Enfin, si la règle amont est trop largement ouverte pour être simplement modifiée, la règle redondante doit être affinée par le processus itératif décrit plus loin. Les règles désactivées doivent recevoir un marquage spécifique, comme un commentaire daté, pour éviter leur suppression accidentelle lorsqu'elles sont provisionnées pour un futur projet.
+
+III. LES INDICATEURS ISSUS DE L'ANALYSE DES JOURNAUX.
+
+   A. Les conditions d'une analyse pertinente.
+
+      La journalisation doit être activée sur toutes les règles à nettoyer, sans quoi aucun indicateur d'usage réel ne peut être déterminé. L'analyse doit porter sur une période représentative de l'activité normale, ni trop courte pour ne pas manquer des flux occasionnels comme une sauvegarde mensuelle, ni trop longue pour rester exploitable et ne pas intégrer des événements obsolètes.
+
+   B. Les règles et objets inutilisés selon les journaux.
+
+      Une règle journalisée qui ne produit aucun événement sur la période d'analyse est considérée comme inutilisée, ce qui peut provenir d'une redondance, d'un projet retiré de production sans décommissionnement de sa règle, ou d'un usage occasionnel non couvert par la période, comme un plan de continuité d'activité, nécessitant alors un marquage préventif. Un objet présent dans une règle mais jamais observé dans les journaux qu'elle génère peut être retiré de cette règle sans en modifier le comportement réel.
+
+IV. LA MÉTHODOLOGIE DE NETTOYAGE EN QUATRE ÉTAPES.
+
+   A. La préparation et la mise en conformité.
+
+      Avant tout nettoyage, un modèle d'organisation et une convention de nommage doivent être définis, une convention de marquage adoptée pour repérer les règles à conserver, et les mécanismes de sauvegarde et de restauration vérifiés fonctionnels. La méthode doit être rejouée régulièrement, par exemple deux fois par an, sur l'ensemble des pare-feux d'interconnexion. La première étape consiste à traiter les règles désactivées en les marquant ou en les supprimant, à supprimer les objets inutilisés, à fusionner les objets en double, puis à appliquer la convention de nommage aux objets restants.
+
+   B. La suppression des règles inutilisées.
+
+      Avant toute suppression, il est recommandé de contacter les équipes métier concernées pour comprendre pourquoi une règle n'a pas été utilisée durant la période observée. Une fois leur aval obtenu, les règles inutilisées doivent d'abord être désactivées puis conservées le temps d'un retour arrière possible, avant suppression définitive après une durée de validation suffisante. Les règles doivent être désactivées par petits lots pour limiter les effets de bord, avec une sauvegarde après le traitement de chaque lot.
+
+   C. La suppression des règles redondantes et la simplification.
+
+      Les règles redondantes doivent être catégorisées selon les trois cas identifiés, les deux premiers permettant une simplification rapide et sans impact, le troisième nécessitant le processus d'affinage. La politique doit être sauvegardée avant et après cette étape. La simplification des règles consiste ensuite à retirer les objets inutilisés qu'elles contiennent, par lots pour limiter les effets de bord, les objets devenus orphelins étant supprimés à chaque itération, avec une sauvegarde systématique avant et après chaque simplification.
+
+V. LE PROCESSUS D'AFFINAGE DES RÈGLES.
+
+   A. Le principe itératif.
+
+      Le processus d'affinage étudie les journaux produits par une règle redondante trop largement ouverte pour en extraire les adresses et ports réellement utilisés, qui viennent enrichir la règle placée en amont. Ce cycle est répété jusqu'à ce que la règle redondante ne produise plus aucun événement, signe que tout le trafic qu'elle autorisait est désormais couvert en amont ; elle peut alors être désactivée puis supprimée, chaque modification étant tracée par une date et une référence dans le champ commentaire.
+
+   B. Les précautions du processus.
+
+      Les informations extraites des journaux doivent être analysées de manière critique pour s'assurer de leur légitimité au regard du système d'information, par des personnes en disposant d'une connaissance précise. Les objets existants doivent être réutilisés en priorité pour éviter de créer des doublons. Un niveau de précision maximal réaliste doit être fixé, certains besoins métier justifiant des flux ouverts vers des réseaux entiers plutôt que des machines uniques, et le nombre de processus d'affinage menés en parallèle doit être limité pour maîtriser la charge de travail.
+
+POINTS D'ATTENTION.
+
+      La méthode proposée n'est pas la seule possible et n'est pas nécessairement adaptée à tout contexte ; il revient à l'administrateur de vérifier sa pertinence avant application.
+
+      Le nettoyage d'une politique de filtrage peut avoir un fort impact sur les flux métiers en cas de suppression malencontreuse d'une règle ou d'un objet, ce qui impose de communiquer avec les équipes métier et de valider les procédures de sauvegarde et de restauration au préalable.
+
+      Lorsque plusieurs pare-feux partagent des règles identiques, leur nettoyage doit être mené de concert afin de préserver la cohérence entre les différentes politiques.
+
+EXEMPLES CITÉS.
+
+      Deux objets nommés srv_bdd et srv_mysql partageant la même adresse IP et le même masque réseau illustrent le cas d'objets doublons à fusionner.
+
+      Une règle R3 autorisant un flux vers le réseau net_bdd_prod tout entier, alors que seules trois adresses IP apparaissent dans ses journaux, illustre le processus d'affinage aboutissant à l'enrichissement d'une règle amont R1 avec les objets correspondant à ces adresses précises.
+
+      Une fréquence biannuelle est citée en exemple pour rejouer régulièrement la méthodologie de nettoyage sur l'ensemble des pare-feux d'interconnexion.
+
+      L'ajout d'un commentaire daté avec un numéro de ticket, par exemple ticket 39380, est cité comme méthode de traçabilité d'une modification de règle durant le processus d'affinage.
