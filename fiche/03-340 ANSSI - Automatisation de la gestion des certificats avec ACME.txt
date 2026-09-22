@@ -1,0 +1,119 @@
+AUTOMATISATION DE LA GESTION DES CERTIFICATS AVEC ACME, LES FONDAMENTAUX DE L'ANSSI, ANSSI-BP-106.
+
+LEXIQUE COMPLET.
+
+      Une autorité de certification, AC, désigne ici l'autorité d'enregistrement, la base de données associée et le service de génération de certificats du fournisseur de certificats.
+
+      Une AC publique ACME est une AC qui automatise la délivrance de certificats via le protocole ACME et dont l'AC racine est présente dans les magasins de confiance des navigateurs, l'exemple type étant Let's Encrypt.
+
+      Une AC interne ACME est une AC non reconnue publiquement dont l'AC racine nécessite un ajout explicite dans les magasins de confiance.
+
+      Un compte externe d'administration ACME sert à limiter et contrôler les actions des comptes ACME associés, notamment via une liste de domaines autorisés, et correspond à l'external account de la RFC 8555.
+
+      Un compte ACME est créé par un client ACME, correspond au ACME account de la RFC 8555, et est associé à un bi-clé JWK servant à signer ses requêtes.
+
+      Le binding, ou EAB, External Account Binding, est le mécanisme associant un compte ACME à un compte externe d'administration ACME grâce à des éléments de binding, une clé secrète MAC key et son identifiant KeyID.
+
+      Un défi ACME permet au demandeur de certificat de prouver sa possession du nom de domaine visé, selon trois types possibles, HTTP-01, DNS-01 et TLS-ALPN-01.
+
+      Un renouvellement de certificat désigne la génération d'un nouveau certificat pour le même nom de domaine avec un nouveau bi-clé.
+
+      Un certificat wildcard est un certificat valide pour tous les sous-domaines d'un domaine, de la forme étoile point domaine point extension.
+
+      Le programme Certificate Transparency, CT, est un ensemble de registres publics listant les certificats X509 émis, permettant de surveiller l'apparition de certificats illégitimes.
+
+COURS DÉTAILLÉ.
+
+I. LE CONTEXTE ET LES PRINCIPES GÉNÉRAUX.
+
+   A. Les objectifs de l'automatisation.
+
+      L'automatisation de la gestion des certificats via le protocole ACME, Automatic Certificate Management Environment, vise à limiter le risque d'indisponibilité des applicatifs métiers dû à un défaut de renouvellement, dans un contexte où la durée de vie des certificats se raccourcit. Le document s'appuie sur la RFC 8555 qui définit le protocole ACME et ses notions.
+
+      L'automatisation introduit cependant de nouveaux risques, avec une exposition accrue de l'autorité de certification par l'ajout d'un serveur ACME exposé, potentiellement sur Internet pour une AC publique, et une surface d'attaque augmentée côté demandeur par la mise en œuvre d'un client ACME.
+
+   B. Le changement de rôles et l'architecture générale.
+
+      Côté fournisseur, l'automatisation impose la création d'une autorité de certification intermédiaire dédiée, d'un serveur ACME, et la gestion de comptes externes d'administration ACME. Côté demandeur, la délivrance devient décentralisée, le certificat étant reçu directement par le client ACME au plus près du serveur web plutôt que par le responsable des certificats.
+
+      L'architecture met en jeu un service de génération des certificats, une autorité d'enregistrement, une zone de stockage des éléments de binding, un serveur ACME, un client ACME, un serveur web, et un demandeur de certificats. La création et l'association du compte externe et du compte ACME ne s'effectuent qu'une seule fois, après quoi la demande, la résolution de défi et la délivrance sont entièrement automatisables.
+
+   C. Les risques côté fournisseur de certificats.
+
+      La compromission de l'autorité d'enregistrement pourrait permettre à un attaquant de créer un compte externe avec une liste arbitraire de domaines, mais les éléments de binding limitent ce risque puisque l'attaquant doit aussi être capable de résoudre un défi ACME pour le domaine visé. La compromission du serveur ACME a un impact dépendant du cloisonnement avec l'AC. L'usurpation d'identité du titulaire d'un compte externe permet de modifier la liste des domaines autorisés, et le détournement de trafic par attaque BGP permet de valider frauduleusement des défis.
+
+   D. Les risques côté demandeur de certificats.
+
+      La compromission de la clé privée d'un compte ACME rend le compte inutilisable et peut mener à une révocation malveillante des certificats. La compromission d'un serveur hébergeant un client ACME ou du client lui-même peut permettre d'obtenir des certificats pour tout domaine sur lequel l'attaquant a des droits suffisants. La compromission des éléments de binding du compte externe permet à un attaquant de créer un compte ACME associé.
+
+II. LES RECOMMANDATIONS CONCERNANT LE FOURNISSEUR DE CERTIFICATS.
+
+   A. Le compte externe d'administration ACME.
+
+      Un compte externe doit être créé et associé à au moins une personne physique authentifiée par un mécanisme d'authentification multifacteur, aussi bien à la création qu'à toute mise à jour de ses paramètres. Un compte externe peut avoir plusieurs comptes ACME associés. Ses paramètres doivent comprendre la liste des domaines autorisés, sa durée de validité, la liste et le statut des comptes ACME associés, et le nombre de régénérations de sa clé secrète. L'alimentation de la liste des domaines autorisés doit être validée par une vérification humaine, et l'AC doit vérifier l'existence d'un enregistrement DNS CAA, Certification Authority Authorization, pour chaque domaine ajouté.
+
+   B. La compromission et le renouvellement du compte externe.
+
+      Un compte externe doit avoir une validité maximale de trois ans, et ses éléments de binding doivent être renouvelables à la demande du titulaire. En cas de compromission avérée ou suspectée, des processus dédiés de désactivation, création d'un nouveau compte et réassociation des comptes ACME non suspects doivent être appliqués, toujours via authentification multifacteur.
+
+   C. Le compte ACME et le binding.
+
+      Un compte ACME doit être associé à un unique compte externe, et il est recommandé de pouvoir le suspendre en cas de suspicion de compromission de son bi-clé. L'algorithme de MAC utilisé pour le binding doit être conforme au guide des mécanismes cryptographiques, par exemple HMAC-SHA256, et la MAC key doit être générée par un générateur aléatoire conforme, stockée et transmise de façon protégée en confidentialité et intégrité, par exemple via un conteneur chiffré ou un canal TLS conforme.
+
+   D. Le protocole ACME et la génération des certificats.
+
+      Le serveur et le client ACME doivent être conformes à la RFC 8555, toute divergence devant être documentée. Le serveur doit rejeter toute demande de certificat pour un domaine ou sous-domaine non autorisé, mettre en œuvre une validation multi-points des défis depuis plusieurs points de présence Internet, et limiter les échecs de validation, par exemple cinq échecs par compte et par heure. Un nouveau bi-clé doit être généré à chaque émission ou renouvellement, la réutilisation de clés étant proscrite, et les certificats wildcard sont interdits. La période de validité recommandée est d'au plus quatre-vingt-dix jours, avec un renouvellement anticipé.
+
+   E. L'autorité de certification et sa gouvernance.
+
+      Un certificat X509 intermédiaire doit être exclusivement dédié au service ACME, et toute l'infrastructure associée doit être cloisonnée des autres infrastructures de certification. Les droits d'écriture dans la base de données stockant les éléments de binding doivent être limités à l'autorité d'enregistrement seule. L'AC doit enregistrer ses certificats émis dans les registres du programme Certificate Transparency et surveiller l'émission de certificats concurrents pour ses domaines autorisés. Un service de test, dit staging, doit être proposé, avec des certificats facilement identifiables comme certificats de test.
+
+III. LES RECOMMANDATIONS CONCERNANT LE CLIENT ACME.
+
+   A. Les fonctionnalités et le choix du client.
+
+      Le client ACME doit être conforme à la RFC 8555 et choisi, avec ses éventuels greffons, pour son niveau de sécurité évalué, idéalement certifié ou qualifié par l'ANSSI. Il est recommandé de limiter la diversité logicielle des clients ACME sur un même système d'information afin de faciliter le maintien en conditions de sécurité.
+
+   B. La mise en œuvre et les privilèges du client.
+
+      Les droits du client ACME doivent être limités au strict minimum, avec un compte de service dédié n'ayant pas les privilèges de super-utilisateur, contrairement à une pratique courante mais déconseillée. Les services utilisant les certificats, comme le serveur web, ne doivent avoir qu'un accès en lecture. L'installation des certificats peut passer par une commande d'élévation restreinte ou par une tâche périodique indépendante. Les privilèges du client sur les serveurs DNS ou web résolvant les défis doivent être limités aux seuls répertoires nécessaires, par exemple le dossier point-bien-connu-acme-challenge pour le défi HTTP-01, avec suppression des fichiers et enregistrements après validation.
+
+   C. L'environnement d'installation et la protection des clés.
+
+      Une authentification multifacteur doit protéger l'interface de gestion des certificats. Le renouvellement des certificats doit être réalisé avec une marge de sécurité, par exemple aux deux tiers de la durée de validité, soit environ soixante jours pour des certificats de quatre-vingt-dix jours. Des tests de fonctionnement doivent être réalisés sur les environnements de staging avant mise en production. La clé secrète d'un compte externe doit être supprimée du serveur hébergeant le client une fois les comptes ACME associés, sa présence devant être limitée aux seules opérations d'association.
+
+IV. LE CHOIX DES DÉFIS ACME ET DES ARCHITECTURES.
+
+   A. La comparaison des types de défis.
+
+      Le défi HTTP-01 est facile à mettre en œuvre mais offre une preuve de possession faible, vulnérable aux attaques par téléversement de fichiers arbitraires. Le défi DNS-01 offre une preuve forte de maîtrise du domaine mais est plus complexe à déployer et impacte fortement le DNS en cas de compromission du client. Le défi TLS-ALPN-01 est facile à mettre en œuvre mais nécessite un contrôle de la pile TLS du serveur et n'est pas supporté par tous les clients ACME. Le fournisseur de certificats doit permettre au titulaire du compte externe de choisir son type de défi et lui fournir une analyse des risques associés.
+
+   B. Les architectures recommandées côté demandeur.
+
+      Il est recommandé de répartir la gestion automatisée sur plusieurs clients ACME cloisonnés, chacun ne pouvant résoudre de défis que pour un sous-ensemble de noms de domaine, avec des authentifiants distincts par client. Deux variantes existent, l'une avec un compte externe par client ACME limitant l'impact d'une compromission de compte externe, l'autre avec un compte externe unique et un compte ACME dédié par client, facilitant l'usage mais rendant la remédiation d'une compromission du compte externe plus lourde.
+
+   C. Les architectures non recommandées.
+
+      La concentration de la gestion sur un unique client ACME, un unique compte externe et un unique compte ACME facilite l'usage mais rend toute compromission, du client, du compte ACME ou du compte externe, impactante pour l'ensemble des domaines du demandeur. La répartition sur plusieurs clients ACME pouvant tous résoudre des défis pour tous les domaines, avec un compte externe et un compte ACME uniques partagés, cumule la difficulté d'usage et l'impact fort d'une compromission.
+
+POINTS D'ATTENTION.
+
+      Les éléments de binding, MAC key et KeyID, ne protègent pas le demandeur de certificats contre un attaquant déjà capable de résoudre un défi ACME, celui-ci pouvant alors obtenir un certificat valide auprès d'une autre AC publique.
+
+      Le client ACME ne doit jamais s'exécuter avec les privilèges de super-utilisateur malgré des pratiques de documentation officielle qui le suggèrent parfois.
+
+      Les certificats dits wildcard sont proscrits par ce guide.
+
+      Le programme Certificate Transparency permet de détecter l'émission illégitime de certificats par une autre autorité de certification pour un domaine autorisé du demandeur.
+
+EXEMPLES CITÉS.
+
+      Le client certbot met en œuvre l'External Account Binding via les options tiret tiret eab-kid et tiret tiret eab-hmac-key.
+
+      L'algorithme HMAC-SHA256 est cité comme exemple conforme pour le binding.
+
+      Le dossier point-bien-connu-acme-challenge est le chemin standard du défi HTTP-01 sur un serveur web.
+
+      Le sous-domaine souligné-acme-challenge est utilisé pour le défi DNS-01, avec un enregistrement CNAME pointant vers un domaine tiers moins sensible.
+
+      Let's Encrypt est cité comme exemple d'AC publique ACME où la seule validation d'un défi suffit à obtenir un certificat.
