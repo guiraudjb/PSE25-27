@@ -1,0 +1,75 @@
+RECOMMANDATIONS POUR LA MISE EN ŒUVRE D'UNE POLITIQUE DE RESTRICTIONS LOGICIELLES SOUS WINDOWS, ANSSI, DAT-NT-13/ANSSI/SDE/NP.
+
+LEXIQUE COMPLET.
+
+      Les SRP, Software Restriction Policies, sont le mécanisme historique introduit à partir de Windows XP permettant de restreindre l'exécution de programmes par liste blanche, tous les utilisateurs d'une machine étant affectés indifféremment par leurs règles.
+
+      AppLocker est l'évolution des SRP permettant de cibler un utilisateur ou un groupe précis d'une machine ou d'un domaine, disponible uniquement sur les éditions Entreprise ou équivalentes de Windows.
+
+      Une règle de type Chemin d'accès autorise ou refuse l'exécution de fichiers situés dans un répertoire et ses sous-répertoires, désignés par des variables propres à AppLocker.
+
+      Une règle de type Éditeur autorise l'exécution des fichiers signés par un éditeur donné, éventuellement combinée à des critères de nom de produit, de nom de fichier ou de version.
+
+      Une règle de type Empreinte n'autorise que le fichier correspondant exactement à une empreinte cryptographique SHA-256 donnée.
+
+      Le mode audit d'AppLocker permet de simuler l'application d'une politique de restrictions logicielles sans bloquer l'exécution des programmes, tous les évènements générés étant alors écrits dans le journal d'AppLocker.
+
+COURS DÉTAILLÉ.
+
+I. LES MÉCANISMES SRP ET APPLOCKER.
+
+   A. L'intérêt des restrictions logicielles.
+
+      Les mécanismes de restrictions logicielles reposant sur une liste blanche de programmes autorisés offrent une meilleure protection contre les programmes malveillants connus ou non des bases de signature antivirus, bloquent les logiciels indésirables ou sans licence, et n'engendrent en règle générale pas d'altération des performances du système ni de gêne pour l'utilisateur, leur intérêt se concentrant essentiellement sur les postes de travail.
+
+   B. Le choix d'AppLocker plutôt que SRP.
+
+      AppLocker, disponible sur les éditions Entreprise de Windows 7 à 10 ainsi que sur certaines éditions serveur, doit être privilégié pour la mise en œuvre d'une politique de restrictions logicielles fine, dans la mesure où il permet de cibler des utilisateurs précis, contrairement aux SRP dont les règles s'appliquent indifféremment, et où en cas de configuration simultanée des deux mécanismes seules les règles AppLocker sont prises en compte.
+
+   C. Le fonctionnement des règles.
+
+      AppLocker évalue d'abord les règles de type Refuser puis celles de type Autoriser, tout programme ne faisant l'objet d'aucune règle Autoriser étant automatiquement bloqué par refus implicite, ce qui justifie de privilégier des règles du seul type Autoriser pour une meilleure lisibilité. Les règles basées sur la signature électronique doivent être privilégiées lorsque cela est possible, les certificats et autorités de certification associés devant préalablement être vérifiés de confiance, les règles de type Empreinte offrant le meilleur niveau de sécurité au prix d'une maintenance plus lourde lors des mises à jour logicielles.
+
+II. LA MISE EN ŒUVRE D'UNE STRATÉGIE DE RESTRICTIONS LOGICIELLES.
+
+   A. La démarche préalable.
+
+      Un inventaire des applications utilisées et autorisées doit être réalisé sur l'ensemble du domaine, la fonctionnalité d'audit d'AppLocker pouvant être utilisée pour identifier les applications inconnues en l'absence d'inventaire exhaustif. Le service Identité de l'application, AppIdSvc, doit être configuré pour démarrer automatiquement sur les équipements à protéger, et ces équipements utilisés avec des comptes utilisateurs strictement non privilégiés.
+
+   B. La configuration des règles par défaut et leurs limites.
+
+      Les trois règles créées par défaut autorisant l'exécution depuis C:\Windows, depuis C:\Program Files et sans restriction pour les administrateurs doivent être renforcées, la règle sur C:\Windows autorisant de fait l'exécution depuis des sous-répertoires accessibles en écriture aux utilisateurs standard, ce qui la rend triviale à contourner. Il convient donc de lister ces répertoires accessibles en écriture pour y ajouter des exceptions, ou de remplacer la règle par défaut par une règle de type Éditeur limitée aux composants signés par Microsoft, et de remplacer de même la règle par défaut sur C:\Program Files par des règles autorisant explicitement chaque application, l'exécution de scripts depuis C:\Windows devant quant à elle être totalement refusée au profit de scripts signés ou désignés par empreinte.
+
+   C. Les règles pour les bibliothèques et les applications universelles.
+
+      Bien que non activées par défaut en raison d'un impact potentiel sur les performances, les règles concernant les bibliothèques DLL doivent être activées dans la mesure du possible, plusieurs méthodes de contournement d'AppLocker s'appuyant sur le chargement d'une bibliothèque malveillante. Les applications universelles, dont l'exécution n'est pas couverte par les règles créées pour les exécutables classiques et qui ne supportent que des règles de type Éditeur, doivent faire l'objet de règles dédiées autorisant explicitement chaque application souhaitée, les applications universelles de Microsoft nécessaires au fonctionnement du système pouvant être autorisées par deux règles Éditeur complétées d'exceptions ciblant les applications non désirées.
+
+   D. Le test et le maintien des règles.
+
+      Les règles doivent être testées en mode audit avant tout déploiement en conditions réelles, la collecte centralisée des évènements et la cmdlet GetAppLockerFileInformation permettant d'analyser les blocages potentiels, un déploiement progressif sur un échantillon représentatif étant recommandé avant une extension à l'ensemble du domaine. Toute installation de nouveau logiciel ou de mise à jour doit être précédée d'une phase de qualification sur des systèmes de référence afin d'anticiper d'éventuels blocages.
+
+III. LES CONSIDÉRATIONS DE SÉCURITÉ FONDAMENTALES.
+
+   A. Les exécutables de contournement connus.
+
+      L'exécutable regsvr32.exe, pouvant être détourné pour exécuter du code arbitraire local ou distant, ainsi que l'exécutable InstallUtil.exe du Microsoft Framework 4.0, doivent tous deux faire l'objet d'une exception de type Éditeur interdisant leur exécution par des utilisateurs non privilégiés, en complément de la règle autorisant les exécutables signés par Microsoft.
+
+   B. Les autres vecteurs de contournement.
+
+      Les composants ActiveX permettant d'instancier des programmes normalement bloqués doivent être neutralisés par des règles sur les bibliothèques associées, les programmes autorisés doivent être évalués pour s'assurer qu'ils ne permettent pas, via des modules d'extension ou des paramètres d'appel spéciaux, de contourner les règles AppLocker, les possibilités d'exécution de codes interprétés par les logiciels autorisés doivent être restreintes, notamment en limitant les macros aux seules macros signées et de confiance, et la fonction NTVDM doit être désactivée en l'absence d'application 16 bits, les applications 16 bits n'étant pas contrôlées par AppLocker.
+
+POINTS D'ATTENTION.
+
+      Si AppLocker est activé sans qu'aucune règle ne soit définie, l'exécution de tous les programmes sera bloquée, y compris les exécutables système, ce qui pourrait se traduire par l'impossibilité d'ouvrir une session sur la machine.
+
+      Il suffit d'un seul dossier autorisé par AppLocker et accessible en écriture aux comptes utilisateurs non privilégiés pour rendre inefficace l'ensemble de la stratégie AppLocker.
+
+      Les règles AppLocker autorisent ou empêchent uniquement le lancement des programmes et n'exercent aucun contrôle sur leur comportement une fois lancés, notamment via des fonctions d'appel avec des paramètres spéciaux qui permettent d'ignorer les règles.
+
+EXEMPLES CITÉS.
+
+      Le logiciel AccessEnum est cité comme outil permettant d'identifier rapidement les répertoires accessibles en écriture aux utilisateurs standard.
+
+      La cmdlet PowerShell Get-AppLockerFileInformation est citée pour obtenir des statistiques sur les fichiers qui seraient bloqués par une stratégie AppLocker en mode audit.
+
+      Le panneau de configuration Windows.ImmersiveControlPanel, le menu démarrer Microsoft.Windows.ShellExperienceHost et la calculatrice Microsoft.WindowsCalculator sont cités comme exemples de fonctionnalités système fournies par des applications universelles de Microsoft.
