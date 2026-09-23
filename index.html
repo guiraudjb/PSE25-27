@@ -835,11 +835,12 @@
 
         <div id="tab-fiche" class="tab-content" role="tabpanel" aria-labelledby="btn-fiche">
             <div id="fiche-controls" class="flashcard-controls" style="display:none; margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
-                <button class="nav-btn" onclick="rewindFiche()" aria-label="Phrase précédente">⏪</button>
+                <button class="nav-btn" onclick="rewindFiche()" aria-label="Reculer">⏪</button>
                 <button id="btn-fiche-toggle" class="nav-btn" onclick="toggleFiche()" aria-label="Lecture ou Pause">▶</button>
-                <button class="nav-btn" onclick="forwardFiche()" aria-label="Phrase suivante">⏩</button>
+                <button class="nav-btn" onclick="forwardFiche()" aria-label="Avancer">⏩</button>
                 <button class="nav-btn" onclick="stopFiche(true)" aria-label="Arrêter la lecture">■</button>
-                <select id="tts-speed" aria-label="Vitesse de lecture TTS" title="Vitesse de lecture">
+                <span id="fiche-time" aria-live="off"></span>
+                <select id="tts-speed" aria-label="Vitesse de lecture" title="Vitesse de lecture" onchange="ficheAudio.playbackRate = parseFloat(this.value)">
                     <option value="0.75">×0.75</option>
                     <option value="1" selected>×1</option>
                     <option value="1.25">×1.25</option>
@@ -935,7 +936,8 @@
     // --- VARIABLES ---
     const PATHS = {
         quiz: './quizz/', flash: './flashcard/', info: './infographie/',
-        podcast: './podcast/', tp: './tp/', fiche: './fiche/', chanson: './chanson/'
+        podcast: './podcast/', tp: './tp/', fiche: './fiche/', chanson: './chanson/',
+        ficheAudio: './batocera-port/pse2527/data/fiche_audio/'
     };
     
     let quizData = [], flashData = [], tpData = [], allModules = [];
@@ -1134,7 +1136,8 @@
             if(txtFlash) parseFlashCSV(txtFlash); else if(txtQuiz) flashData = quizData.map(q => ({ front: q.question, back: q.correctAnswer }));
             if(txtTp) parseTpCSV(txtTp); else tpData = [];
             document.getElementById('fiche-content').textContent = txtFiche ? txtFiche : "Aucune fiche de révision disponible (.txt)";
-            
+            loadFicheAudio(filename.replace('.csv', ''));
+
             resetFlashcard(); resetTp(); updateTabBadges();
 
             const img = document.getElementById('info-image');
@@ -1507,12 +1510,33 @@
 
     // --- FICHE TTS ---
     let ficheUtterance = null; let ficheChunks = []; let currentChunkIndex = 0; let isFichePaused = false;
+    // Narration pré-enregistrée (mp3 VoiceStudio, partagée avec le portage Batocera) : utilisée à la
+    // place de la synthèse vocale du navigateur quand elle existe ; sinon repli sur speechSynthesis.
+    // Les caractères interdits en SMB (ex. « : ») ont été remplacés par « - » dans les noms des mp3.
+    const ficheAudio = new Audio(); let ficheAudioOk = false; const FICHE_AUDIO_STEP = 15;
+    function formatTime(s) { if(!isFinite(s)) return '--:--'; s = Math.floor(s); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+    function updateFicheTime() { const el = document.getElementById('fiche-time'); if(el) el.textContent = ficheAudioOk ? formatTime(ficheAudio.currentTime) + ' / ' + formatTime(ficheAudio.duration) : ''; }
+    function loadFicheAudio(base) {
+        ficheAudio.pause(); ficheAudioOk = false; updateFicheTime();
+        ficheAudio.onloadedmetadata = () => { ficheAudio.playbackRate = parseFloat(document.getElementById('tts-speed')?.value || 1); updateFicheTime(); };
+        ficheAudio.onerror = () => { ficheAudioOk = false; updateFicheTime(); };
+        ficheAudio.ontimeupdate = updateFicheTime;
+        ficheAudio.onended = () => { ficheAudio.currentTime = 0; setToggleIcon('paused'); };
+        ficheAudio.preload = 'metadata';
+        const src = PATHS.ficheAudio + encodeURIComponent(base.replace(/[:*?"<>|\\]/g, '-')) + '.mp3';
+        ficheAudio.src = src;
+        // Présence vérifiée par HEAD : ne dépend pas du chargement média, différé par le navigateur tant que l'onglet est masqué.
+        fetch(src, { method: 'HEAD' }).then(r => { if(ficheAudio.src.endsWith(src.slice(1))) { ficheAudioOk = r.ok; updateFicheTime(); } }).catch(() => {});
+    }
     function updateFicheControls() {
         const isEnabled = document.getElementById('ttsToggle').checked;
         const controls = document.getElementById('fiche-controls'); if(controls) controls.style.display = isEnabled ? 'flex' : 'none';
-        if(!isEnabled) stopFiche(true); 
+        if(!isEnabled) stopFiche(true);
     }
-    function toggleFiche() { if (isFichePaused) playFiche(); else if (window.speechSynthesis.speaking) pauseFiche(); else playFiche(); }
+    function toggleFiche() {
+        if (ficheAudioOk) { if (ficheAudio.paused) { ficheAudio.play().catch(() => setToggleIcon("paused")); setToggleIcon('playing'); } else pauseFiche(); return; }
+        if (isFichePaused) playFiche(); else if (window.speechSynthesis.speaking) pauseFiche(); else playFiche();
+    }
     function setToggleIcon(state) { const btn = document.getElementById('btn-fiche-toggle'); if(!btn) return; btn.textContent = (state === 'playing') ? '⏸' : '▶'; btn.setAttribute('aria-label', (state === 'playing') ? 'Pause' : 'Lecture'); }
     function playFiche() {
         const contentDiv = document.getElementById('fiche-content'); if(!contentDiv) return;
@@ -1543,15 +1567,19 @@
         window.speechSynthesis.speak(ficheUtterance); setToggleIcon('playing');
     }
     function highlightChunk(index) { document.querySelectorAll('.reading-highlight').forEach(el => el.classList.remove('reading-highlight')); const currentSpan = document.getElementById("fiche-chunk-" + index); if(currentSpan) { currentSpan.classList.add('reading-highlight'); currentSpan.scrollIntoView({behavior: "smooth", block: "center"}); } }
-    function pauseFiche() { if(!window.speechSynthesis.speaking) return; isFichePaused = true; window.speechSynthesis.pause(); setToggleIcon('paused'); }
+    function pauseFiche() {
+        if (ficheAudioOk) { ficheAudio.pause(); setToggleIcon('paused'); return; }
+        if(!window.speechSynthesis.speaking) return; isFichePaused = true; window.speechSynthesis.pause(); setToggleIcon('paused');
+    }
     function stopFiche(reset = true) {
-        if (ficheUtterance) ficheUtterance.onend = null; 
+        ficheAudio.pause(); if(reset && ficheAudioOk) { ficheAudio.currentTime = 0; updateFicheTime(); }
+        if (ficheUtterance) ficheUtterance.onend = null;
         window.speechSynthesis.cancel(); isFichePaused = false; setToggleIcon('paused');
         if(reset) { currentChunkIndex = 0; ficheChunks = []; document.querySelectorAll('.reading-highlight').forEach(el => el.classList.remove('reading-highlight')); const contentDiv = document.getElementById('fiche-content'); if(contentDiv && contentDiv.querySelector('span')) contentDiv.textContent = contentDiv.innerText; }
     }
     function stopAudioForSeek() { if (ficheUtterance) { ficheUtterance.onend = null; ficheUtterance.onerror = null; } window.speechSynthesis.cancel(); }
-    function rewindFiche() { if(currentChunkIndex > 0) { const wasPlaying = window.speechSynthesis.speaking && !isFichePaused; if(wasPlaying) stopAudioForSeek(); currentChunkIndex--; if(wasPlaying) speakNextChunk(); else highlightChunk(currentChunkIndex); } }
-    function forwardFiche() { if(currentChunkIndex < ficheChunks.length - 1) { const wasPlaying = window.speechSynthesis.speaking && !isFichePaused; if(wasPlaying) stopAudioForSeek(); currentChunkIndex++; if(wasPlaying) speakNextChunk(); else highlightChunk(currentChunkIndex); } }
+    function rewindFiche() { if(ficheAudioOk) { ficheAudio.currentTime = Math.max(0, ficheAudio.currentTime - FICHE_AUDIO_STEP); return; } if(currentChunkIndex > 0) { const wasPlaying = window.speechSynthesis.speaking && !isFichePaused; if(wasPlaying) stopAudioForSeek(); currentChunkIndex--; if(wasPlaying) speakNextChunk(); else highlightChunk(currentChunkIndex); } }
+    function forwardFiche() { if(ficheAudioOk) { ficheAudio.currentTime = Math.min(ficheAudio.duration || 0, ficheAudio.currentTime + FICHE_AUDIO_STEP); return; } if(currentChunkIndex < ficheChunks.length - 1) { const wasPlaying = window.speechSynthesis.speaking && !isFichePaused; if(wasPlaying) stopAudioForSeek(); currentChunkIndex++; if(wasPlaying) speakNextChunk(); else highlightChunk(currentChunkIndex); } }
 
     // --- FLASHCARD SHUFFLE ---
     function shuffleFlash() {
