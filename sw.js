@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v38-cache-v1';
+const CACHE_NAME = 'v38-cache-v2';
 const ASSETS = [
   'index.html',
   'modules.json',
@@ -31,7 +31,10 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request).then((fetchResponse) => {
-        // Optionnel : Mettre en cache dynamiquement les nouveaux fichiers chargés (quizz, etc.)
+        // Mise en cache dynamique des fichiers chargés (quizz, etc.), uniquement les réponses
+        // complètes réussies : une 404 mise en cache (média pas encore publié) masquerait le
+        // fichier indéfiniment, et les réponses partielles 206 (lecture audio) ne sont pas cachables.
+        if (event.request.method !== 'GET' || fetchResponse.status !== 200) return fetchResponse;
         return caches.open(CACHE_NAME).then((cache) => {
           cache.put(event.request, fetchResponse.clone());
           return fetchResponse;
