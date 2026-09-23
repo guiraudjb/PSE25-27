@@ -1,7 +1,7 @@
-const CACHE_NAME = 'v38-cache-v2';
+const CACHE_NAME = 'v39-multi-depots';
 const ASSETS = [
   'index.html',
-  'modules.json',
+  'catalogue.json',
   'manifest.json',
   // Ajoute ici d'autres fichiers statiques si nécessaire (ex: icônes)
 ];

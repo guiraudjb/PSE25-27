@@ -1,0 +1,9 @@
+{
+  "depots": [
+    { "nom": "pse-securite-nationale", "titre": "Sécurité nationale (ANSSI, SGDSN…)", "url": "../pse-securite-nationale/" },
+    { "nom": "pse-cadre-public", "titre": "Cadre public du numérique (UE, référentiels, DINUM)", "url": "../pse-cadre-public/" },
+    { "nom": "pse-bercy", "titre": "Bercy (DGFiP et directions)", "url": "../pse-bercy/" },
+    { "nom": "pse-cours-2527", "titre": "Cours PSE 25-27", "url": "../pse-cours-2527/" },
+    { "nom": "pse-expert-reseau", "titre": "PSE Expert Réseau", "url": "../pse-expert-reseau/" }
+  ]
+}

@@ -934,10 +934,16 @@
     }
 
     // --- VARIABLES ---
+    // Les modules sont répartis dans plusieurs dépôts thématiques publiés sur le même
+    // domaine GitHub Pages (catalogue.json) : chaque chemin est relatif au dépôt du
+    // module en cours (currentBase), fixé au chargement du module.
+    let currentBase = '';
+    const moduleRepo = {};
     const PATHS = {
-        quiz: './quizz/', flash: './flashcard/', info: './infographie/',
-        podcast: './podcast/', tp: './tp/', fiche: './fiche/', chanson: './chanson/',
-        ficheAudio: './batocera-port/pse2527/data/fiche_audio/'
+        get quiz() { return currentBase + 'quizz/'; }, get flash() { return currentBase + 'flashcard/'; },
+        get info() { return currentBase + 'infographie/'; }, get podcast() { return currentBase + 'podcast/'; },
+        get tp() { return currentBase + 'tp/'; }, get fiche() { return currentBase + 'fiche/'; },
+        get chanson() { return currentBase + 'chanson/'; }, get ficheAudio() { return currentBase + 'fiche_audio/'; }
     };
     
     let quizData = [], flashData = [], tpData = [], allModules = [];
@@ -1057,13 +1063,18 @@
         const status = document.getElementById('status-msg');
         select.innerHTML = '<option>Recherche...</option>'; select.disabled = true; btn.disabled = true;
 
-        // --- GESTION DU CLOUD (BUCKETS) ---
-        // Remplace le scan de dossier par la lecture d'un fichier modules.json
-        fetch('modules.json?t=' + new Date().getTime())
-            .then(res => {
-                if(!res.ok) throw new Error("Fichier modules.json introuvable.");
-                return res.json();
-            })
+        // Catalogue des dépôts thématiques, puis modules.json de chacun (un dépôt
+        // injoignable est ignoré, les autres restent utilisables).
+        const t = '?t=' + new Date().getTime();
+        fetch('catalogue.json' + t)
+            .then(res => { if(!res.ok) throw new Error("catalogue.json introuvable."); return res.json(); })
+            .then(cat => Promise.all(cat.depots.map(d =>
+                fetch(d.url + 'modules.json' + t)
+                    .then(r => r.ok ? r.json() : [])
+                    .then(list => { list.forEach(f => { moduleRepo[f] = d.url; }); return list; })
+                    .catch(err => { console.warn('Dépôt injoignable : ' + d.url, err); return []; })
+            )))
+            .then(lists => lists.flat())
             .then(files => {
                 select.innerHTML = '';
                 if(!Array.isArray(files) || files.length === 0) { 
@@ -1093,7 +1104,7 @@
             .catch(err => { 
                 console.error(err);
                 select.innerHTML = '<option>Erreur</option>'; 
-                status.innerHTML = "<span style='color:red'>Erreur: modules.json manquant.</span>"; 
+                status.innerHTML = "<span style='color:red'>Erreur : catalogue des modules introuvable.</span>"; 
             });
     }
 
@@ -1122,6 +1133,7 @@
         const filename = document.getElementById('folderSelect').value;
         if(!filename) return;
         clearPreviousData();
+        currentBase = moduleRepo[filename] || '';
         currentFileBase = filename.replace('.csv', '');
         document.getElementById('file-indicator').textContent = currentFileBase.toUpperCase();
         
@@ -1526,7 +1538,7 @@
         const src = PATHS.ficheAudio + encodeURIComponent(base.replace(/[:*?"<>|\\]/g, '-')) + '.mp3';
         ficheAudio.src = src;
         // Présence vérifiée par HEAD : ne dépend pas du chargement média, différé par le navigateur tant que l'onglet est masqué.
-        fetch(src, { method: 'HEAD' }).then(r => { if(ficheAudio.src.endsWith(src.slice(1))) { ficheAudioOk = r.ok; updateFicheTime(); } }).catch(() => {});
+        fetch(src, { method: 'HEAD' }).then(r => { if(ficheAudio.src === new URL(src, location.href).href) { ficheAudioOk = r.ok; updateFicheTime(); } }).catch(() => {});
     }
     function updateFicheControls() {
         const isEnabled = document.getElementById('ttsToggle').checked;
