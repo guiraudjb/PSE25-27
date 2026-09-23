@@ -1,0 +1,85 @@
+SE PROTÉGER DES FUITES DE DONNÉES, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Une fuite de données désigne la compromission, volontaire ou non, de données conduisant à leur divulgation à des tiers non autorisés.
+
+      La protection des données dès la conception et par défaut est le principe issu du RGPD imposant d'intégrer la protection des données personnelles à toutes les étapes de conception d'une application.
+
+      Un logiciel DLP, Data Loss Protection, est un outil spécialisé permettant de détecter et de prévenir la fuite ou l'exfiltration non autorisée de données.
+
+      Un infostealer est un code malveillant collectant des informations, notamment des authentifiants, souvent à l'origine d'une fuite de données.
+
+      Le CTI, Cyber Threat Intelligence, est le renseignement sur la menace cyber, permettant une veille en anticipation des fuites de données.
+
+COURS DÉTAILLÉ.
+
+I. LA SENSIBILISATION ET L'ÉVALUATION DES RISQUES TIERS.
+
+   A. La sensibilisation de la direction et des salariés.
+
+      La direction et les salariés doivent être sensibilisés au rôle qu'ils jouent dans la protection des données manipulées et aux impacts d'une compromission.
+
+   B. L'évaluation des risques liés aux sous-traitants.
+
+      Les risques liés au partage de données avec des sous-traitants et fournisseurs de services doivent être évalués, avec contractualisation de la sécurisation des données.
+
+II. LA CONCEPTION ET LA GESTION DES DONNÉES.
+
+   A. La protection des données dès la conception.
+
+      Les applications doivent être développées, faites développer, ou choisies en respectant le principe de protection des données dès la conception et par défaut, issu du RGPD, par exemple en appliquant des règles restrictives quant à l'export massif de données.
+
+   B. La politique de gestion des données liée aux métiers.
+
+      Les données sensibles, personnelles ou régulées, ou de propriété intellectuelle, ainsi que les données facilement révocables, comme les mots de passe utilisateur ou les tokens, doivent être identifiées, en ne stockant que les données nécessaires au bon fonctionnement des métiers et du système d'information. Les données obsolètes doivent être archivées ou effacées de manière sécurisée. Une politique de sauvegarde sécurisée doit être définie.
+
+III. LA PRÉPARATION À LA CRISE.
+
+      Des procédures de gestion de crise doivent être créées et mises à jour, en identifiant les contacts pertinents à prévenir, comme la CNIL, l'ANSSI, la gendarmerie, cybermalveillance.gouv.fr, les prestataires, les clients ou le délégué à la protection des données, DPO. Une communication de crise doit être établie en amont, en s'appuyant sur le guide Anticiper et gérer sa communication de crise cyber.
+
+IV. LA SÉCURITÉ DES DONNÉES ET DES TRAITEMENTS.
+
+   A. Les mesures physiques et informatiques.
+
+      La sécurité et la confidentialité des données et des traitements, réalisés directement ou par un sous-traitant, doivent être assurées par des mesures de sécurité physique, comme la sécurité des accès aux locaux, et des mesures de sécurité informatique, comme la défense en profondeur, le chiffrement des données stockées et en transit, l'antivirus ou l'EDR.
+
+   B. Les accès d'administration et le maintien en condition.
+
+      Des accès d'administration sécurisés et dédiés doivent être mis en place pour les sous-traitants, ainsi que le maintien en condition opérationnelle et le maintien en condition de sécurité du système d'information.
+
+V. LA GESTION DES ACCÈS ET DES PRIVILÈGES.
+
+   A. L'authentification et la limitation des rôles.
+
+      Les recommandations relatives à l'authentification multifacteur et aux mots de passe doivent être appliquées, en évitant le cumul des rôles.
+
+   B. La minimisation des accès et la supervision.
+
+      Les accès aux données doivent être systématiquement minimisés par rôle, par zone du système d'information, développement, production ou préproduction, et par créneaux horaires. La supervision et la journalisation doivent être mises en œuvre, les journaux devant être protégés conformément aux recommandations d'architecture pour la sécurité d'un système de journalisation et en environnement Active Directory.
+
+VI. LES OUTILS SPÉCIALISÉS ET LA VEILLE.
+
+   A. Le nomadisme numérique et les outils spécialisés.
+
+      Les recommandations sur le nomadisme numérique doivent être mises en pratique, en particulier l'adoption de filtres écran de confidentialité et le verrouillage automatique des sessions. Des outils spécialisés adaptés aux besoins de l'organisation doivent être déployés et supervisés, comme des logiciels DLP ou un coffre-fort numérique.
+
+   B. La veille en réaction et en anticipation.
+
+      Des outils de veille automatique doivent être mis en place, en réaction, par exemple via haveibeenpwned.com, et si possible en anticipation, via la veille sectorielle ou le renseignement sur la menace cyber, CTI, cette veille pouvant être réalisée en interne ou via un prestataire.
+
+VII. LA COMPRÉHENSION DE LA SOURCE EN CAS DE FUITE AVÉRÉE.
+
+      En cas de fuite de données avérée, il convient de comprendre sa source pour adopter une remédiation adéquate et éviter une nouvelle compromission par le même vecteur, par exemple un infostealer.
+
+POINTS D'ATTENTION.
+
+      La minimisation des accès aux données par créneaux horaires, en complément des minimisations plus classiques par rôle et par zone du système d'information, est une précision moins courante mais explicitement citée par ce guide.
+
+      La compréhension précise de la source d'une fuite avérée est présentée comme une étape distincte de la remédiation elle-même, indispensable pour éviter qu'une nouvelle compromission n'exploite le même vecteur.
+
+EXEMPLES CITES.
+
+      Le site haveibeenpwned.com comme outil de veille automatique en réaction face à une fuite de données.
+
+      L'infostealer cité comme exemple de vecteur récurrent de compromission à l'origine de fuites de données.

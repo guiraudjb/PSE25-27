@@ -1,0 +1,81 @@
+PRÉOCCUPATIONS RELATIVES AU RESPECT DE LA VIE PRIVÉE ET À LA CONFIDENTIALITÉ DES DONNÉES SOUS WINDOWS 10, ANSSI, ANSSI-BP-036.
+
+LEXIQUE COMPLET.
+
+      Le service de télémétrie, aussi appelé Diagnostic Tracking Service ou Universal Telemetry Client, est le service Windows utilisé par Microsoft pour identifier des problèmes de sécurité et de fiabilité et améliorer la qualité de ses produits.
+
+      Les quatre niveaux de collecte des données de télémétrie, par quantité croissante de données collectées, sont sécurité, de base, amélioré et complet, ce dernier niveau collectant inévitablement des données sensibles et personnelles.
+
+      Cortana est un agent logiciel personnel capable d'envoyer des courriels, d'exécuter des applications ou de transmettre des rappels géolocalisés, lié au composant Windows Desktop Search intégré à la barre de tâches.
+
+      Une application universelle, ou UWP, Universal Windows Platform, est une application empaquetée au format unique .AppX, exécutée dans un cadre contrôlé et installable par un utilisateur non privilégié via un magasin d'applications.
+
+      Un compte Microsoft d'ouverture de session est un service d'authentification unique dans le nuage permettant d'accéder à des services Microsoft et de déporter l'authentification locale d'un poste vers une infrastructure d'annuaire centralisée hébergée par Microsoft.
+
+COURS DÉTAILLÉ.
+
+I. LE CADRE GÉNÉRAL DES RECOMMANDATIONS.
+
+   A. L'objectif et l'adaptation au contexte.
+
+      Ce guide, destiné aux postes de travail Windows 10 en environnement Active Directory d'entreprise et non aux particuliers, part du constat que des données sont collectées et corrélées entre elles par plusieurs biais du système, ces données pouvant être stockées et traitées aux États-Unis ou dans tout autre pays d'implantation de Microsoft. Les recommandations doivent être adaptées afin d'obtenir un compromis entre les besoins métier et les besoins en confidentialité, une analyse de risque devant idéalement guider cette décision au plus haut niveau de l'entité.
+
+II. LE SERVICE DE TÉLÉMÉTRIE.
+
+   A. Les niveaux de collecte.
+
+      Le service de télémétrie, configurable par stratégie de groupe, propose quatre niveaux de collecte croissante, le niveau sécurité n'étant disponible que sur les éditions Entreprise, Éducation et IoT Core, aucun niveau ne permettant de bloquer complètement l'envoi d'informations, et ces niveaux ne concernant que le système d'exploitation lui-même, les autres logiciels disposant de leurs propres paramètres de télémétrie.
+
+   B. La configuration recommandée du niveau de télémétrie.
+
+      Un niveau de télémétrie le plus réduit possible doit être configuré au regard du besoin en confidentialité et du degré d'ouverture aux services en nuage de Microsoft, le niveau de base étant à activer dès lors que ces services sont utilisés, le niveau sécurité étant à privilégier pour réduire au maximum la collecte tout en restant supporté par Microsoft, et la désactivation complète du service n'étant envisageable, en pratique non supportée par l'éditeur, que pour les entités à fort besoin de confidentialité ne recourant à aucun service en nuage.
+
+   C. La collecte de rapports d'outils intégrés.
+
+      Les rapports de l'outil de suppression de logiciels malveillants et de l'antivirus Windows Defender, transmis via le service de télémétrie, doivent voir leur envoi désactivé uniquement si l'entité repose sur des solutions de sécurité tierces concurrentes, leur désactivation en cas d'usage de ces outils intégrés dégradant sinon le niveau de sécurité qu'ils apportent.
+
+III. LES ASSISTANTS PERSONNELS ET LA PERSONNALISATION.
+
+   A. Cortana et la recherche de bureau.
+
+      L'agent Cortana, qui pour être efficace doit accéder aux informations personnelles de l'utilisateur, aux données de l'appareil et à des services en ligne, doit être désactivé en environnement professionnel, de même que l'utilisation du composant Windows Desktop Search doit être restreinte à la recherche locale, au profit d'un navigateur maîtrisé pour les recherches sur Internet.
+
+   B. La personnalisation de l'expérience utilisateur.
+
+      Les paramètres de personnalisation des saisies clavier, vocales et manuscrites, l'envoi de rapports d'erreurs et de diagnostic, le programme d'amélioration de l'expérience utilisateur ainsi que la personnalisation par les données de télémétrie doivent être désactivés, tout comme la géolocalisation au niveau système lorsqu'elle n'est nécessaire à aucune application professionnelle.
+
+IV. LES APPLICATIONS UNIVERSELLES.
+
+   A. Les caractéristiques et les risques.
+
+      Les applications universelles, moins complexes et présentant moins de risques de sécurité que les applications de bureau classiques du fait de leur cadre d'exécution contrôlé, peuvent néanmoins accéder à des ressources sensibles telles que la géolocalisation, les carnets d'adresses ou les calendriers, et transmettre ces informations à des services en ligne.
+
+   B. La maîtrise des applications universelles.
+
+      L'identifiant unique de publicité, utilisable pour corréler des informations sur l'utilisateur entre applications, doit être désactivé, et une stratégie globale de maîtrise des applications universelles adoptée, soit en restreignant précisément la liste des applications autorisées et leurs accès selon le principe de moindre privilège, soit en désactivant complètement le magasin d'applications et en désinstallant les applications préinstallées lorsque leur usage n'est pas nécessaire au contexte professionnel.
+
+V. LES SERVICES DANS LE NUAGE.
+
+   A. Les comptes Microsoft d'ouverture de session.
+
+      L'utilisation d'un compte Microsoft pour l'ouverture de session, qui déporte l'authentification locale vers une infrastructure d'annuaire centralisée dans le nuage et expose divers paramètres ainsi que les secrets d'authentification et potentiellement les clés de récupération BitLocker, doit être bloquée, seuls les annuaires internes à l'entité devant permettre les ouvertures de session.
+
+   B. OneDrive.
+
+      Le service de stockage en nuage OneDrive, dont l'utilisation aisée représente une tentation forte pour l'y stocker des données professionnelles, doit être désactivé par mesure de sécurité pour la confidentialité des données, sauf lorsque l'entité utilise par ailleurs les services d'Office 365.
+
+POINTS D'ATTENTION.
+
+      La désactivation du service de télémétrie n'est pas une pratique supportée par Microsoft et peut priver l'entité de fonctionnalités comme Windows Update for Business ou les services d'analyse de compatibilité de mise à niveau, ce choix devant donc être pesé au regard des services effectivement utilisés.
+
+      Il n'est pas recommandé de chercher à bloquer les flux réseau de télémétrie en sortie par pare-feu, les adresses IP et enregistrements DNS des serveurs de collecte de Microsoft étant sujets à modification sans préavis, une telle mesure ne devant venir qu'en complément d'une défense en profondeur.
+
+      Pour les postes de travail gérés par un environnement Active Directory, ni les notifications ni la fenêtre de configuration des paramètres de protection des données personnelles introduite en version 1703 ne sont présentées aux utilisateurs, la configuration devant donc être portée par les administrateurs via stratégie de groupe.
+
+EXEMPLES CITÉS.
+
+      Le guide CNILW10 de la CNIL est cité comme référence à destination des particuliers et utilisateurs finaux, ce document ANSSI étant lui réservé au contexte professionnel en environnement Active Directory.
+
+      Les commandes PowerShell Get-AppxPackage et Remove-AppxPackage, ainsi que l'outil DISM avec l'option Remove-ProvisionedAppxPackage, sont cités en exemple pour désinstaller des applications universelles préinstallées.
+
+      Microsoft Edge, Paramètres et Cortana sont cités comme exemples d'applications universelles ne pouvant pas être désinstallées.

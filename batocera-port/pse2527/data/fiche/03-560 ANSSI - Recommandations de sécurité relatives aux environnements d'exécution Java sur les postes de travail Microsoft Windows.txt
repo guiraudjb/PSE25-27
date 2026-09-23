@@ -1,0 +1,83 @@
+RECOMMANDATIONS DE SÉCURITÉ RELATIVES AUX ENVIRONNEMENTS D'EXÉCUTION JAVA SUR LES POSTES DE TRAVAIL MICROSOFT WINDOWS, ANSSI, DAT-NT-008/ANSSI/SDE/NP.
+
+LEXIQUE COMPLET.
+
+      Un JRE, Java Runtime Environment, est un environnement d'exécution nécessaire au fonctionnement des applications Java, dont l'installation préalable est requise sur les postes utilisateurs.
+
+      Une appliquette Java, ou applet, est une application légère mise à disposition par un serveur d'application Web, exécutée côté client via un module complémentaire du navigateur et téléchargée intégralement à chaque exécution.
+
+      Java Web Start est une fonctionnalité intermédiaire entre application lourde et application légère, permettant de démarrer et de télécharger une application Java depuis une session Web ou un fichier de raccourci JNLP, sans nécessiter de navigateur ni de module complémentaire.
+
+      Le protocole JNLP, Java Network Launching Protocol, est un protocole de démarrage d'application Java délivrée par le réseau, reposant sur des fichiers de même extension décrivant les versions de JRE compatibles, l'URL de l'application et les permissions requises.
+
+      NPAPI est une ancienne interface de programmation sur laquelle repose le module complémentaire Java des navigateurs Google Chrome et Mozilla Firefox, exécutant les plugins avec le niveau de privilège de l'utilisateur et n'apportant pas de fonction de sécurité convenable.
+
+COURS DÉTAILLÉ.
+
+I. LA PRÉSENTATION DES RISQUES.
+
+   A. Les risques de sécurité des JRE.
+
+      Les JRE font l'objet de vulnérabilités fréquentes, corrigées tardivement et souvent exploitées avant leur publication sous forme de codes d'exploitation zero-day, leur mise à jour n'étant pas nécessairement automatique, ce qui explique la fréquente compromission de postes utilisateurs par ce vecteur. L'antivirus se révèle inefficace face à ces menaces, de même que les outils de réduction des risques comme EMET, les vulnérabilités Java consistant la plupart du temps en des échappements de bac à sable qui n'exploitent pas la machine virtuelle elle-même.
+
+   B. Les versions de JRE et leur cohabitation.
+
+      Plusieurs versions majeures de JRE peuvent cohabiter sur un même poste de travail, une appliquette pouvant demander à s'exécuter sur une version particulière, y compris ancienne et vulnérable, une boîte de dialogue d'avertissement demandant depuis le JRE 1.6.0_10 l'autorisation de l'utilisateur sans que ce dernier ne mesure nécessairement l'impact de son choix.
+
+   C. L'obsolescence annoncée des appliquettes.
+
+      Le module complémentaire Java reposant sur NPAPI n'étant plus supporté par Google Chrome depuis septembre 2015 ni, à terme, par Mozilla Firefox, et Microsoft Edge ne permettant pas l'exécution d'appliquettes, Microsoft Internet Explorer 11 reste le seul navigateur capable d'exécuter des appliquettes Java après fin 2016, ce qui impose d'anticiper le remplacement ou l'évolution des applications reposant sur cette technologie.
+
+II. LA PHASE D'INVENTAIRE.
+
+   A. Le recensement des applications et des postes.
+
+      Les applications Java, lourdes, légères et Java Web Start, ainsi que leurs utilisateurs légitimes, doivent être recensées, les applications lourdes n'étant pas toujours remontées par les outils d'inventaire automatisés, ce qui rend la voie organisationnelle incontournable. Les postes de travail sur lesquels des JRE sont installés, avec leurs versions, doivent également être recensés, à l'aide d'un outil de gestion de parc ou de scripts dédiés.
+
+   B. L'identification des anomalies.
+
+      Le croisement de ces recensements permet de repérer les postes sur lesquels un JRE ou un module complémentaire Java, NPAPI sous Firefox ou ActiveX sous Internet Explorer, est inutilement installé ou activé.
+
+III. LA DÉMARCHE DE SÉCURISATION.
+
+   A. L'interdiction des JRE et modules inutiles.
+
+      Les JRE inutiles doivent être désinstallés et leur réinstallation empêchée par des mesures techniques, retrait des droits d'administration locaux, utilisation de SRP ou d'AppLocker, et organisationnelles, avec des exceptions définies pour les postes ayant réellement besoin du JRE. Lorsque seules des applications lourdes sont utilisées, les modules complémentaires Java et Java Web Start doivent être désactivés dans les navigateurs, les appliquettes et fichiers JNLP filtrés au niveau des serveurs mandataires, et Java désactivé pour les navigateurs par configuration du JRE, avec des exceptions similaires pour les utilisateurs ayant réellement besoin de Java dans un navigateur.
+
+   B. Le remplacement des appliquettes.
+
+      Lorsque le langage Java doit nécessairement être conservé, la ré-écriture des appliquettes en applications Java Web Start autonomes constitue la solution la plus complète, permettant de s'affranchir des modules complémentaires et d'anticiper l'obsolescence des appliquettes, une simple migration sans recompilation restant possible à défaut mais ne permettant pas d'anticiper cette obsolescence à partir de Java 9.
+
+   C. La configuration centralisée et le télédéploiement.
+
+      Une configuration sécurisée, homogène, centralisée et verrouillée doit être définie au moyen des fichiers deployment.properties et deployment.config avant tout déploiement du JRE, ce mécanisme permettant de définir des listes d'applications autorisées ou interdites et d'appliquer instantanément toute modification en cas d'alerte de sécurité. Le JRE doit être déployé par télédéploiement sur le périmètre le plus restreint possible correspondant aux postes utilisateurs légitimes référencés, par GPO ou tout autre outil de déploiement.
+
+   D. La gestion des mises à jour.
+
+      Une veille sur les alertes de sécurité relatives à Java et aux autres applications recensées doit être maintenue, et les applications installées mises à jour dans les plus brefs délais dès qu'une version plus sécurisée est disponible.
+
+IV. POUR ALLER PLUS LOIN.
+
+   A. Le cas des systèmes Windows 64 bits.
+
+      Sur les systèmes 64 bits, les versions 32 et 64 bits du JRE cohabitent, Internet Explorer étant par défaut exécuté en version 32 bits depuis les raccourcis usuels et n'utilisant donc qu'un JRE 32 bits, ce qui impose de mettre à jour cette version en complément de la version 64 bits, la mise à jour de cette dernière ne corrigeant en rien les vulnérabilités de la première.
+
+   B. Les fichiers JAR et JNLP, et la stratégie de navigateurs multiples.
+
+      Les fichiers d'extension .jar et .jnlp doivent être considérés comme des exécutables à part entière représentant une menace similaire, les règles s'appliquant aux fichiers .exe devant leur être étendues sur les serveurs mandataires et de filtrage des courriels. Si les ressources de l'entité le permettent, deux navigateurs distincts, l'un dédié à l'intranet avec les modules Java, l'autre dépourvu de ces modules pour Internet, peuvent être déployés et maîtrisés séparément, cette stratégie n'étant toutefois préférable à un unique navigateur bien maîtrisé que si les deux peuvent réellement être maintenus dans de bonnes conditions.
+
+POINTS D'ATTENTION.
+
+      Les outils de réduction des risques de sécurité comme EMET peuvent être d'une efficacité limitée face aux vulnérabilités Java, celles-ci consistant la plupart du temps en des échappements de bac à sable ne faisant pas appel aux techniques contre lesquelles ces outils protègent.
+
+      La mise à jour du JRE 64 bits ne corrige en rien les vulnérabilités du JRE 32 bits installé, la navigation via Internet Explorer 32 bits restant vulnérable face à une appliquette malveillante, ce qui peut être trompeur pour l'utilisateur ou l'administrateur système.
+
+      Il convient d'éviter de ré-écrire en Java Web Start une application qui s'apparenterait à un remplacement de module complémentaire et qui apporterait des problèmes de sécurité similaires, comme un serveur local en écoute communiquant avec le navigateur.
+
+EXEMPLES CITÉS.
+
+      La vulnérabilité Java du 27 août 2012, identifiée et bloquée par moins de la moitié des logiciels antivirus du marché lors de sa parution, est citée en exemple de l'inefficacité de l'antivirus face à ce type de menaces.
+
+      Le site du CERT-FR, avec son flux RSS d'avis et de bulletins d'information, est cité comme source de veille sur les alertes de sécurité relatives à Java.
+
+      La commande java -version est citée comme moyen de vérifier la version du JRE utilisée par défaut sur un poste de travail.

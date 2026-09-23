@@ -1,0 +1,81 @@
+SÉCURISER UNE MIGRATION NUMÉRIQUE, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Une migration numérique désigne un projet de transformation d'un système d'information consistant à faire évoluer ou remplacer une solution technique existante par une nouvelle.
+
+      Le plan de continuité d'activité, ou PCA, et le plan de reprise d'activité, ou PRA, sont les documents qui organisent respectivement le maintien et la restauration des activités critiques en cas de sinistre.
+
+      Le centre opérationnel de sécurité, ou SOC, Security Operations Center, est la structure chargée de la supervision et de la détection des événements de sécurité d'un système d'information.
+
+      Le maintien en conditions opérationnelles et de sécurité, MCO et MCS, désigne l'ensemble des actions permettant de garder un système fonctionnel et sécurisé tout au long de son cycle de vie.
+
+      Les heures non ouvrées, ou HNO, désignent les plages horaires en dehors des heures de bureau, pour lesquelles des procédures d'intervention sur site ou à distance doivent être définies.
+
+COURS DÉTAILLÉ.
+
+I. LE VOLET STRATÉGIQUE DE LA MIGRATION.
+
+   A. L'implication des équipes et la cartographie du système d'information.
+
+      Les équipes métier, la DSI et la sécurité, notamment le RSSI, le SOC et les experts sécurité, doivent être impliquées le plus en amont possible pour conduire le changement. La cartographie des systèmes d'information et leurs inventaires doivent être maintenus à jour avant, pendant et après la migration, jusqu'au décommissionnement complet de l'ancienne solution, en identifiant les différences d'architecture, de flux et de fonctionnalités.
+
+   B. L'analyse de risque et la continuité d'activité.
+
+      L'analyse de risque doit être mise à jour pour s'assurer que la nouvelle solution est conforme aux exigences de sécurité, disponibilité, intégrité, confidentialité et traçabilité, ainsi qu'aux réglementations applicables. Les plans de continuité d'activité et de reprise d'activité doivent être adaptés à la nouvelle solution.
+
+   C. L'externalisation et le choix des prestataires.
+
+      Le niveau de sécurité proposé contractuellement par le prestataire ainsi que les conditions de réversibilité en cas d'externalisation doivent être étudiés, en privilégiant dans la mesure du possible des services ou prestataires qualifiés par l'ANSSI.
+
+II. LE VOLET TECHNIQUE DE LA MIGRATION.
+
+   A. La sécurisation des données en transit.
+
+      Les données sensibles doivent être sécurisées en transit lors de la migration, par exemple en les chiffrant, avec une attention particulière portée aux exports massifs de données pour éviter les fuites potentielles.
+
+   B. La continuité des sauvegardes.
+
+      Les risques liés à l'altération ou à l'indisponibilité des sauvegardes doivent être anticipés en identifiant les sauvegardes impactées par la migration et leur délai d'expiration pendant la transition, et en conservant les infrastructures nécessaires pour accéder et restaurer les anciennes sauvegardes jusqu'à leur expiration, en accord avec la politique de sauvegarde de l'entité.
+
+   C. La confiance dans les moyens d'administration.
+
+      Il convient de s'assurer que les moyens d'administration et de déploiement, comme les postes ou consoles d'administration, les hyperviseurs et les serveurs de déploiement de configurations et de templates, sont de confiance, c'est-à-dire intègres et exempts de compromission, avant de vérifier que les socles de la cible, système, réseau et stockage, sont eux aussi de confiance.
+
+   D. L'amélioration de la sécurité par la refonte.
+
+      La refonte du système d'information est une occasion d'améliorer sa sécurité en appliquant les bonnes pratiques d'hygiène informatique et les recommandations de l'ANSSI, notamment le durcissement, le filtrage des flux et le maintien en conditions opérationnelles et de sécurité de l'architecture cible. Aucune modification impactante ne doit être réalisée pendant la phase critique de migration elle-même, mais strictement en amont ou en aval.
+
+III. LE VOLET OPÉRATIONNEL DE LA MIGRATION.
+
+   A. L'adaptation du centre opérationnel de sécurité.
+
+      Les impacts de la migration sur les activités du SOC, couverture et supervision, doivent être identifiés, avec mise à jour des procédures et des outils, et communication préalable du planning de migration pour éviter les fausses alertes de sécurité.
+
+   B. Le contrôle avant et après la migration.
+
+      L'absence d'alertes de sécurité doit être confirmée en amont de la migration, ou traitée le cas échéant. Le bon fonctionnement des équipements et logiciels de sécurité, EDR, pare-feu, antivirus, doit être contrôlé avant et après la migration.
+
+   C. La mise à jour des procédures opérationnelles.
+
+      L'ensemble des procédures opérationnelles et de sécurité doit être mis à jour, notamment les procédures d'intervention en heures non ouvrées sur site ou à distance. La migration ne doit être lancée qu'une fois l'ensemble de ces procédures définies et testées.
+
+IV. LA PHASE POST-MIGRATION.
+
+   A. L'audit post-migration.
+
+      Un audit post-migration doit être conduit pour identifier les problèmes de sécurité résiduels et leur opposer des contre-mesures adaptées, cet audit devant être régulièrement renouvelé tout au long du cycle de vie du nouveau système.
+
+   B. Le décommissionnement de l'ancienne solution.
+
+      Les anciens comptes, données et infrastructures doivent être décommissionnés en fonction de leur sensibilité, en se référant aux textes de loi en vigueur, notamment l'instruction interministérielle n°901 et l'arrêté du 20 août 2024 relatif aux normes techniques de destruction des informations et supports classifiés ou protégés, ainsi qu'aux recommandations de l'ANSSI pour le reconditionnement des ordinateurs de bureau ou portables.
+
+POINTS D'ATTENTION.
+
+      La règle de ne réaliser aucune modification impactante pendant la phase critique de migration, mais strictement en amont ou en aval, vise à éviter de cumuler les risques d'une bascule technique avec ceux d'une évolution de configuration non maîtrisée.
+
+      Le maintien des infrastructures permettant de restaurer les anciennes sauvegardes jusqu'à leur expiration est présenté comme une précaution distincte de la simple sauvegarde de la nouvelle solution, souvent négligée lors des projets de migration.
+
+EXEMPLES CITES.
+
+      L'instruction interministérielle n°901 et l'arrêté du 20 août 2024 relatif aux normes techniques de destruction des informations et supports classifiés ou protégés, applicables au décommissionnement post-migration.

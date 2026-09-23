@@ -1,0 +1,103 @@
+RECOMMANDATIONS DE DÉPLOIEMENT DU PROTOCOLE 802.1X POUR LE CONTRÔLE D'ACCÈS À DES RÉSEAUX LOCAUX, ANSSI, ANSSI-PA-043.
+
+LEXIQUE COMPLET.
+
+      Le réseau 802.1X, ou réseau à accès contrôlé, est un réseau dont l'accès est protégé par des mécanismes AAA, authentification, autorisation et traçabilité.
+
+      Le serveur AAA centralise les fonctions d'authentification et d'autorisation des supplicants ainsi que la journalisation des événements, il est situé dans le réseau de confiance.
+
+      Un client, appelé authenticator dans la norme, est un élément de confiance servant de point d'accès au réseau, comme un commutateur ou un point d'accès Wi-Fi.
+
+      Un supplicant est le logiciel sur l'équipement d'extrémité qui cherche à se connecter au réseau à accès contrôlé.
+
+      EAP, Extended Authentication Protocol, est le protocole abstrayant le mécanisme d'authentification, encapsulé sur les réseaux locaux par EAPoL, Extended Authentication Protocol over LAN.
+
+      Le réseau de confiance est le réseau maîtrisé transportant les échanges entre le serveur et les clients, considéré comme sûr.
+
+      WPA2-Enterprise, ou WPA2-EAP, est un réseau sans fil où chaque supplicant dispose de sa propre clé de protection négociée durant l'authentification, par opposition au WPA2 personnel à clé commune.
+
+      MACsec est une fonctionnalité récente du standard sécurisant par des moyens cryptographiques la connexion filaire entre supplicant et client, encore peu implémentée.
+
+COURS DÉTAILLÉ.
+
+I. L'ARCHITECTURE D'UN RÉSEAU À ACCÈS CONTRÔLÉ.
+
+   A. Les composants et le synoptique de connexion.
+
+      Une infrastructure 802.1X repose sur des clients offrant des ports de connexion aux supplicants, dont l'état est contrôlé par un serveur au travers du réseau de confiance. Un port reste fermé par défaut si aucune réponse du serveur n'est fournie, ce qui rend le serveur indispensable à la disponibilité du réseau. La connexion se déroule en quatre étapes, initialisation, identification, négociation EAP puis authentification, aboutissant à un message Access-Accept ou Access-Reject qui bascule le port en état autorisé ou non autorisé.
+
+   B. Le choix du protocole AAA.
+
+      La norme ne spécifie pas le protocole entre clients et serveur mais cite RADIUS et Diameter en exemple. Le protocole Diameter étant rarement implémenté dans les clients courants, l'utilisation de RADIUS est recommandée dès lors qu'un réseau à accès contrôlé doit être mis en place.
+
+   C. Les protocoles d'authentification EAP.
+
+      EAP-MD5 offre un faible niveau de sécurité, vulnérable aux attaques par dictionnaire et de l'homme du milieu, et ne permet pas l'authentification du serveur ni l'usage en réseau sans fil. EAP-MSCHAPv2 authentifie mutuellement les correspondants par mot de passe mais présente une résistance équivalente à une clé DES, jugée faible. EAP-TLS authentifie mutuellement supplicant et serveur par certificats, considéré comme sûr mais nécessitant une infrastructure de gestion de clés complète. EAP-PEAP établit un tunnel TLS authentifié par le serveur puis authentifie le supplicant à l'intérieur par une méthode interne, le plus souvent EAP-MSCHAPv2. EAP-TTLSv0 fonctionne de façon similaire à PEAP mais reste incompatible avec lui, et ne requiert qu'un certificat serveur.
+
+II. LES RECOMMANDATIONS D'AUTHENTIFICATION ET D'AUTORISATION.
+
+   A. L'authentification et l'autorisation des supplicants.
+
+      L'authentification est fortement recommandée pour tout supplicant tentant d'accéder à un réseau 802.1X, mais elle n'est pas suffisante : il est fortement conseillé d'autoriser la connexion au moyen d'une liste exhaustive d'identités autorisées, en s'assurant de la cohérence de l'identité entre identification et authentification, plutôt que d'autoriser tout supplicant simplement authentifié. Les éléments secrets du serveur, des clients et des supplicants doivent être protégés en confidentialité et intégrité.
+
+   B. Le choix des protocoles d'authentification et l'interdiction des méthodes non encapsulées.
+
+      Les protocoles d'authentification doivent utiliser une couche cryptographique standard, authentifier mutuellement supplicant et serveur, et masquer l'identité du supplicant si le contexte le justifie, ce que respectent EAP-TLS, EAP-TTLS et les dernières versions de PEAP, mais pas EAP-MSCHAPv2 ni EAP-MD5 utilisés seuls. L'authentification par méthodes non encapsulées n'est donc pas recommandée, et la configuration du serveur doit explicitement l'interdire, car un attaquant se faisant passer pour un point d'accès peut relayer les trames non protégées récupérées vers le tunnel qu'il a monté avec le serveur légitime.
+
+   C. Le réseau sans fil et la négociation cryptographique.
+
+      Il est recommandé de déployer un réseau WPA2-Enterprise pour tout réseau sans fil, avec une version récente de TLS et une suite cryptographique assurant la confidentialité persistante. Un protocole d'authentification asymétrique doit générer ses clés cryptographiques à partir d'éléments négociés pendant les deux authentifications, ce que respecte PEAP/EAP-MSCHAPv2 mais pas EAP-TTLS, qui reste vulnérable à une attaque de l'homme du milieu récupérant les authentifiants internes sans l'application de la recommandation sur les méthodes non encapsulées.
+
+III. LA SÉCURISATION DU RÉSEAU DE CONFIANCE.
+
+   A. La protection et la redondance du serveur.
+
+      Le serveur doit être implémenté sur une machine physique dédiée ou un socle virtualisé partagé avec des services de niveau d'exposition et de sécurité identiques, sa configuration système durcie, et au minimum deux serveurs doivent être présents dans le réseau de confiance pour la disponibilité, la compromission du serveur pouvant amener à une fuite immédiate des identifiants de tous les utilisateurs dans le cas d'une authentification par mot de passe.
+
+   B. Le cloisonnement et l'intégrité des échanges.
+
+      Le réseau de confiance doit être cloisonné dans un réseau dédié distinct des réseaux utilisateurs et d'administration, seuls les clients devant pouvoir se connecter au service RADIUS du serveur. Les secrets partagés entre clients et serveur, qui portent l'intégrité des messages RADIUS via une primitive MD5 peu sûre, doivent être distincts par client, générés aléatoirement sur au moins vingt-deux caractères ASCII imprimables pour une entropie de cent vingt-huit bits, supervisés et renouvelés régulièrement. Le réseau de confiance doit être protégé physiquement, il est recommandé d'authentifier également les clients auprès du serveur, et d'utiliser un protocole de communication sécurisé comme RadSec, DTLS ou IPsec pour assurer confidentialité, intégrité et non-rejeu des échanges.
+
+   C. La journalisation.
+
+      Une fonction de journalisation des événements de l'infrastructure 802.1X doit être mise en œuvre et supervisée pour anticiper et répondre aux menaces, le fonctionnement nominal ne générant normalement pas de messages d'erreur.
+
+IV. L'AFFECTATION DE VLAN ET LES LIMITES DU 802.1X.
+
+   A. L'affectation de VLAN.
+
+      L'affectation statique de VLAN doit être employée en priorité. L'affectation dynamique de VLAN utilisateurs n'est recommandée que si l'affectation statique n'est pas possible et que les clients filtrent localement les VLAN attribuables, les VLAN d'administration ne devant jamais être affectés dynamiquement, le numéro de VLAN transitant en clair et non protégé dans le paquet RADIUS.
+
+   B. Les limites intrinsèques du protocole.
+
+      Le branchement d'un concentrateur entre le port contrôlé et le supplicant permet à des équipements supplémentaires d'accéder au réseau via l'ouverture assurée par le supplicant légitime, d'où la recommandation de limiter chaque port à une seule adresse MAC autorisée. Un matériel spécifique de faible coût peut également rediriger le trafic EAPoL vers le poste légitime tout en fournissant un accès au poste illégitime, attaque contre laquelle aucune contre-mesure simple n'existe hors support de MACsec, ce qui justifie le cloisonnement, la supervision et l'authentification des services offerts aux utilisateurs, ainsi que la restriction des services accessibles en authentification automatique, notamment pour la téléphonie sur IP. La maîtrise de la configuration des équipements qui se connectent légitimement reste indispensable, car les recommandations montrent leurs limites dès qu'un supplicant peut être transformé en routeur.
+
+V. LES CAS D'USAGE ET LA DÉCISION DE DÉPLOIEMENT.
+
+   A. Les scénarios justifiant un déploiement.
+
+      Le déploiement est recommandé pour tout réseau sans fil, avec application des recommandations du réseau sans fil. Pour un réseau filaire dont la sécurité physique de certains accès n'est pas garantie, le déploiement du 802.1X est recommandé pour restreindre l'accès aux seuls équipements authentifiés, par exemple dans les salles de réunion. Pour des prises en accès libre aux collaborateurs, le 802.1X combiné à l'affectation dynamique de VLAN apporte la souplesse nécessaire.
+
+   B. Les scénarios où le déploiement n'est pas indispensable.
+
+      Lorsqu'aucun accès au réseau ne peut être atteint par un individu malveillant et que le câblage est maîtrisé, le déploiement du 802.1X n'est pas indispensable, mais la limitation du nombre d'adresses MAC autorisées par port reste indispensable, avec une précaution particulière pour les prises brassées en avance non utilisées, exposées à un apprentissage automatique de la première adresse MAC connectée.
+
+POINTS D'ATTENTION.
+
+      Un port de connexion reste fermé par défaut en l'absence de réponse du serveur, ce qui rend la disponibilité du serveur essentielle au fonctionnement du réseau.
+
+      La protection de la confidentialité d'un mot de passe ne peut jamais être garantie par des moyens purement techniques, contrairement à celle d'une clé privée.
+
+      Activer globalement l'affectation dynamique de VLAN sur tous les ports d'un système d'information confère au serveur RADIUS un rôle critique qu'il ne doit pas porter, en raison de l'absence de sécurité intrinsèque des protocoles qu'il utilise.
+
+      En l'absence de support de MACsec, aucune contre-mesure simple du 802.1X ne permet de contrer un équipement spécifique intercalé entre un client et un supplicant légitime déjà authentifié.
+
+EXEMPLES CITÉS.
+
+      Le protocole PEAP/EAP-MSCHAPv2 est cité comme méthode respectant la génération de clés à partir des deux authentifications, contrairement à EAP-TTLS seul.
+
+      wpa_supplicant est cité comme le supplicant le plus répandu sous Linux et Android, supportant EAP-TLS, EAP-TTLS-MSCHAPv2 et PEAP-MSCHAPv2.
+
+      La téléphonie sur IP, ToIP, est citée en exemple de service dont l'authentification automatique doit être strictement séparée du réseau bureautique.
+
+      Les salles de réunion sont citées comme cas d'usage typique de prises réseau à sécurité physique non garantie, justifiant le déploiement du 802.1X.

@@ -1,0 +1,71 @@
+MODÈLE ZERO TRUST, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Le modèle Zero Trust, ou ZT, est le modèle de sécurité dont l'objectif principal est de réduire la confiance implicite accordée à un sujet souhaitant accéder au système d'information.
+
+      Le contrôle d'accès logique dans le modèle Zero Trust repose sur une évaluation dynamique et régulière du sujet, une évaluation dynamique et régulière du contexte d'accès, et la criticité de la ressource accédée en disponibilité, intégrité et confidentialité.
+
+      L'ABAC, Attribute-Based Access Control, est le modèle de contrôle des autorisations permettant l'évaluation dynamique et continue des demandes d'accès selon les attributs du sujet, de la ressource et de l'environnement.
+
+      La micro-segmentation est un principe de défense en profondeur réutilisé par le modèle Zero Trust pour isoler finement les ressources d'un système d'information.
+
+COURS DÉTAILLÉ.
+
+I. LA NATURE DU MODÈLE ZERO TRUST.
+
+   A. Un modèle de sécurité, pas une technologie.
+
+      Le Zero Trust n'est pas une nouvelle technologie ou une solution commerciale tout-en-un, mais un modèle de sécurité dédié au renforcement de la sécurité d'accès aux ressources d'une entité. Il réutilise des principes connus de défense en profondeur, parmi lesquels l'authentification systématique, le principe de moindre privilège ou la micro-segmentation.
+
+   B. Les trois éléments du contrôle d'accès logique.
+
+      Le contrôle d'accès repose sur une évaluation dynamique et régulière du sujet cherchant à accéder à une ressource, une évaluation dynamique et régulière du contexte d'accès, incluant notamment l'état de sécurité du poste utilisé, et la criticité en termes de disponibilité, d'intégrité et de confidentialité de la ressource accédée.
+
+   C. Le risque d'une adoption non maîtrisée.
+
+      L'adoption du modèle Zero Trust doit être maîtrisée et progressive, sous peine d'affaiblir le système d'information tout en donnant un faux sentiment de sécurité.
+
+II. LA DÉMARCHE DE TRANSFORMATION VERS LE ZERO TRUST.
+
+   A. L'intégration dans la défense en profondeur.
+
+      Le modèle Zero Trust doit être intégré dans une démarche de défense en profondeur et de maîtrise des risques, sans être vu comme une alternative à la défense périmétrique, mais comme une approche complémentaire.
+
+   B. Le choix des cas d'usage et de la politique de contrôle d'accès.
+
+      Une trajectoire de transformation doit être définie en choisissant précisément les cas d'usage pour lesquels le modèle Zero Trust répond à un objectif de sécurité, en déterminant qui, dans quels contextes, et pour quelles ressources. Une politique de contrôle d'accès logique doit être définie au regard des objectifs de sécurité fixés pour chaque cas d'usage, uniquement sur la base d'attributs maîtrisés, c'est-à-dire des attributs que l'entité est capable de maintenir à jour et dont elle connaît le périmètre de couverture et le niveau de qualité.
+
+   C. La cartographie et les tests.
+
+      Une cartographie des applicatifs, données, utilisateurs, équipements et des flux entre tous ces éléments doit être réalisée et maintenue à jour pour mettre en œuvre des contrôles d'accès granulaires, dynamiques et réguliers. Des tests de sécurité et de bon fonctionnement doivent être réalisés avant mise en production, d'une durée suffisante, afin de fiabiliser les décisions de contrôle d'accès logique et la remontée des alertes attendues.
+
+   D. La centralisation des fonctions de contrôle d'accès.
+
+      Une attention particulière doit être portée à la centralisation des fonctions de contrôle d'accès logique, notamment à l'impact sur le système d'information d'une atteinte en disponibilité ou en intégrité de ces fonctions.
+
+III. LES GRANDS PRINCIPES TECHNIQUES DU ZERO TRUST.
+
+   A. L'infrastructure de contrôle des autorisations selon le modèle ABAC.
+
+      Une infrastructure de contrôle des autorisations doit être déployée en s'appuyant sur le modèle Attribute-Based Access Control, ABAC, permettant l'évaluation dynamique et continue des demandes d'accès selon les attributs du sujet, par exemple sa fonction, les attributs de la ressource, par exemple son niveau de confidentialité, et les attributs environnementaux liés au contexte de la demande d'accès, par exemple le niveau de conformité du moyen d'accès, l'heure ou le lieu.
+
+   B. Les infrastructures de gestion des identités, des actifs et de supervision.
+
+      Une infrastructure de gestion des identités et des authentifiants des utilisateurs, processus automatiques et équipements doit être déployée, avec un cycle de vie des comptes uniques et des authentifiants maîtrisé et progressivement automatisé. Une infrastructure de gestion des actifs et des vulnérabilités doit également être déployée, le processus d'identification des écarts par rapport à la politique de sécurité et de mise en conformité, comme la gestion des correctifs de sécurité, devant être automatisé lorsque possible. Une infrastructure de supervision de sécurité doit collecter et analyser les événements de sécurité de chaque utilisateur et équipement, avec un faible taux de faux positifs et de faux négatifs, prérequis essentiel avant toute utilisation dans les prises de décisions d'accès.
+
+   C. L'authentification forte et les équipements durcis.
+
+      Des mécanismes d'authentification multifacteur forte doivent être utilisés pour les accès utilisateurs, un fort niveau d'assurance sur l'identité de l'utilisateur étant essentiel dans le modèle Zero Trust. Des équipements durcis et maîtrisés doivent être utilisés pour les accès aux données critiques de l'entité, la visibilité sur l'état de sécurité des équipements personnels ou le niveau de confiance sur les informations qu'ils retournent étant jugés insuffisants.
+
+POINTS D'ATTENTION.
+
+      Le guide insiste sur le fait que le Zero Trust complète la défense périmétrique plutôt que de la remplacer, une confusion fréquente qui peut conduire à négliger les mesures périmétriques existantes lors d'un projet Zero Trust.
+
+      L'exigence que la politique de contrôle d'accès repose uniquement sur des attributs maîtrisés, et non sur des attributs dont l'entité ne connaît pas précisément la qualité ou la couverture, est présentée comme une condition de fiabilité essentielle du modèle.
+
+EXEMPLES CITES.
+
+      Le niveau de conformité du moyen d'accès utilisé par rapport à la politique de sécurité de l'entité, l'heure et le lieu, comme exemples d'attributs environnementaux dans le modèle ABAC.
+
+      L'insuffisance de la visibilité sur l'état de sécurité des équipements personnels pour accéder à des données critiques de l'entité.

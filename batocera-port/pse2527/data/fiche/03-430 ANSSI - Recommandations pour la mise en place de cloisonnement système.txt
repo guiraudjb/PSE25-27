@@ -1,0 +1,77 @@
+RECOMMANDATIONS POUR LA MISE EN PLACE DE CLOISONNEMENT SYSTÈME, ANSSI, ANSSI-PG-040.
+
+LEXIQUE COMPLET.
+
+      Une tâche est un ensemble d'instructions chargées en mémoire au fur et à mesure pour être exécutées, comme un processus en espace utilisateur ou une machine virtuelle.
+
+      Une ressource correspond à une information et par extension à l'objet logiciel ou matériel qui la contient, comme un descripteur de fichier, une clé cryptographique ou un registre de processeur.
+
+      Un privilège permet à une tâche de mener légitimement une action sur une ressource, l'élévation illégitime de privilège permettant à un attaquant d'accomplir des actions normalement interdites.
+
+      Le principe de moindre privilège stipule qu'une tâche ne doit bénéficier que des privilèges strictement nécessaires à l'exécution du code menant à bien ses fonctionnalités.
+
+      Un domaine est l'environnement d'exécution d'une tâche, défini par l'ensemble des ressources sur lesquelles cette tâche peut agir, ces ressources se répartissant entre ressources partagées entre domaines et ressources propres à un domaine.
+
+      Le moniteur de référence est l'entité qui implémente le mécanisme de contrôle d'accès et prend la décision d'autoriser ou d'interdire une action d'une tâche sur une ressource, mettant ainsi en œuvre la politique de sécurité.
+
+      Un composant de confiance est un composant logiciel ou matériel supposé parfait dans l'analyse de sécurité, c'est-à-dire non corruptible par l'attaquant considéré, sans que cela signifie qu'il soit incorruptible dans l'absolu.
+
+      La surface d'attaque regroupe les interfaces externes d'un composant permettant de communiquer avec un environnement contrôlé par l'attaquant, tandis que la surface de friction regroupe les autres interfaces externes, notamment avec les composants de confiance.
+
+COURS DÉTAILLÉ.
+
+I. LE CLOISONNEMENT COMME IMPLÉMENTATION DU MOINDRE PRIVILÈGE.
+
+   A. L'objectif et la démarche.
+
+      Le cloisonnement restreint les conséquences possibles de comportements inattendus d'un composant, qu'il s'agisse d'un bogue ou d'un détournement par un attaquant, en réduisant son environnement d'exécution aux ressources strictement nécessaires. Interdire par défaut toute action et n'autoriser que ce qui est nécessaire constitue la stratégie la plus efficace de mise en œuvre du principe de moindre privilège, à appliquer dès la conception du composant. Les besoins en cloisonnement doivent être considérés comme des besoins au même titre que les besoins fonctionnels dès le début d'un projet, une prise en compte tardive engendrant des surcoûts d'architecture imprévus, et les solutions démontrant la meilleure prise en compte du moindre privilège doivent être préférées lors d'un choix entre composants.
+
+   B. La formalisation en fonction de sécurité.
+
+      Cloisonner des tâches consiste à définir pour chacune son domaine d'exécution, cette spécification précise constituant une politique de sécurité, dont le respect est garanti par la fonction de sécurité de cloisonnement. L'attaquant de cette fonction est supposé contrôler un ou plusieurs domaines et cherche à effectuer une action interdite par la politique sur une ressource ; il est important de distinguer une faille du cloisonnement lui-même d'une politique de sécurité simplement mal définie.
+
+   C. Les exemples d'application.
+
+      Pour des processus utilisateurs, le moniteur de référence est le noyau du système d'exploitation, les ressources propres le contexte d'exécution et la mémoire utilisateur. Pour un système d'hypervision, le moniteur de référence est le système d'hypervision lui-même, une machine virtuelle constituant la tâche. Pour des utilisateurs distincts d'un système d'exploitation, s'appuyant sur des contrôles d'accès discrétionnaires ou obligatoires comme SELinux ou AppArmor, le noyau reste le moniteur de référence. Pour des conteneurs ou bacs à sable, appelés cages, le moniteur de référence est constitué du noyau et des programmes gestionnaires de cages.
+
+II. L'IDENTIFICATION DES BESOINS EN CLOISONNEMENT.
+
+   A. L'analyse de la sécurité attendue du composant.
+
+      Spécifier la sécurité attendue consiste à identifier les biens sensibles à protéger, le modèle d'attaquant dont découlent les composants de confiance, le périmètre du composant avec sa surface d'attaque et sa surface de friction, et les fonctions de sécurité attendues. Cette analyse doit figurer dans les documents de conception ou d'intégration, et l'intégrité des composants de confiance doit être garantie concrètement pour que la sécurité de l'ensemble repose sur des hypothèses réellement vérifiées.
+
+   B. La définition des usages et les objectifs du cloisonnement.
+
+      Des scénarios d'utilisation dont les ensembles de ressources diffèrent notablement, par exemple selon la connectivité réseau, la criticité des ressources, la périodicité des actions ou leur lien au cycle de vie du composant comme l'administration, constituent des usages distincts qu'il convient de caractériser à partir des fonctionnalités et des ressources accédées. La mise en place de cloisonnement doit alors minimiser la surface d'attaque de chaque usage en n'exposant que les interfaces utiles, cloisonner les usages entre eux via un moniteur de référence, minimiser la surface de friction en réduisant les actions possibles aux seuls besoins, limiter les conséquences d'une compromission d'un usage donné, et protéger le composant d'une compromission par d'autres composants non fiables du système global.
+
+III. L'ANALYSE DE LA SÉCURITÉ D'UN MÉCANISME DE CLOISONNEMENT.
+
+   A. Le moniteur de référence et les composants de confiance développés.
+
+      Le moniteur de référence doit être considéré comme un composant de confiance, de même que tout composant disposant d'un privilège permettant de porter atteinte à son intégrité ou à la politique qu'il applique. Un composant de confiance développé doit suivre des spécifications claires et simples, être écrit dans un langage fortement typé prévenant débordements et pointeurs invalides, suivre un référentiel de développement sécurisé, être audité par du personnel indépendant, faire l'objet de tests fonctionnels complets couvrant les opérations refusées comme acceptées, et être si possible complété par une preuve formelle de l'absence d'erreur à l'exécution.
+
+   B. Les recommandations pour tout composant de confiance et le moniteur.
+
+      Tout composant de confiance, y compris sur étagère, doit être réduit à son strict minimum par suppression ou désactivation du code inutilisé, et bénéficier de techniques de durcissement à l'état de l'art comme les canaris de pile, le principe W xor X interdisant une zone mémoire simultanément inscriptible et exécutable, ou l'ASLR. Le moniteur de référence doit vérifier la complétude du contrôle exercé sur chaque tentative d'accès au moment opportun, sans faille de type TOCTTOU, le maintien de son intégrité, et la possibilité d'auditer la politique de sécurité qu'il applique. Les tâches cloisonnées ne doivent jamais disposer d'un privilège supérieur ou égal à celui du moniteur, le principe d'interdiction par défaut doit être configurable, et les options de configuration laissées à l'utilisateur en production doivent être réduites au strict minimum pour limiter l'impact d'une erreur.
+
+   C. L'évaluation d'un mécanisme et le raffinement interne.
+
+      Évaluer un mécanisme de cloisonnement consiste à identifier tâches, ressources et moniteur de référence dans son contexte, à déduire l'ensemble des composants de confiance, à mesurer l'écart entre l'implémentation réelle et les recommandations, puis à évaluer les possibilités de réduire cet écart par durcissement. Spécifier le cloisonnement mis en place suppose d'expliciter les usages identifiés, le mécanisme retenu et la politique de sécurité de chaque domaine, et le composant ne doit pas dégrader la sécurité globale du système ni exiger d'en abaisser le niveau de durcissement pour fonctionner. Dans une démarche de défense en profondeur, il est pertinent de raffiner le cloisonnement à l'intérieur même de chaque domaine, en particulier lorsque celui-ci est de grande taille comme une machine virtuelle ou un conteneur.
+
+POINTS D'ATTENTION.
+
+      L'analyse de sécurité d'un composant ne peut jamais reposer sur l'hypothèse que le composant entier est lui-même de confiance, y compris lorsqu'il contient un noyau ou un hyperviseur, ce qui impose une analyse par niveau d'abstraction successif.
+
+      Une session utilisateur dont le contrôle d'accès sur les fichiers est implémenté par un module de code s'exécutant au sein même du processus de l'utilisateur ne réalise aucun cloisonnement réel, car rien n'isole ce module du reste du code que l'attaquant peut modifier à sa guise ; seul un contrôle d'accès implémenté par le noyau, à un niveau de privilège supérieur, constitue un véritable moniteur de référence.
+
+      Un composant ne doit jamais exiger, pour fonctionner, d'abaisser le niveau de durcissement ou de cloisonnement mis en place par d'autres composants du système qui l'accueille.
+
+EXEMPLES CITÉS.
+
+      SELinux et AppArmor sous Linux, ainsi que le mécanisme MIC sous Windows, sont cités comme implémentations classiques de contrôle d'accès obligatoire.
+
+      Xen, KVM, ESXi et Hyper-V sont cités comme hyperviseurs de type 1, par opposition à Qemu seul et VirtualBox, de type 2.
+
+      Les langages Ada, OCaml, Rust et Go sont cités comme langages fortement typés recommandés pour le développement de composants de confiance.
+
+      La sonde réseau hypothétique exIDS illustre en fin de document le raisonnement complet, avec une première architecture cloisonnant la capture réseau dans un conteneur dédié, révisée ensuite pour des raisons de performance en confiant directement l'interface réseau aux logiciels IDS, sous réserve d'un TAP unidirectionnel qualifié garantissant l'absence de rebond vers le réseau surveillé.

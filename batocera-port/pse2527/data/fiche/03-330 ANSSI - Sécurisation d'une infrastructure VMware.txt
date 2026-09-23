@@ -1,0 +1,93 @@
+SÉCURISATION D'UNE INFRASTRUCTURE VMWARE, GUIDE LES FONDAMENTAUX DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Le plan de contrôle est la partie de l'infrastructure de virtualisation responsable du pilotage de l'infrastructure virtuelle, tandis que le plan de donnée porte les machines virtuelles elles-mêmes.
+
+      Le Management domain est, dans la terminologie VMware, le cluster d'administration, et le Workload domain est un cluster de production.
+
+      Un rôle, dans vSphere, est un ensemble de privilèges qui spécifie les actions autorisées et les droits de lecture-écriture sur les propriétés d'un objet VMware.
+
+      Un vSwitch ou dvSwitch est un commutateur de niveau 2 virtualisé créé par l'hyperviseur, un dvSwitch apportant en plus une gestion centralisée et des fonctions avancées comme les PVLAN.
+
+      Un adaptateur VMKernel est le composant portant une adresse IP qui assure la connectivité entre un hyperviseur ESXi et les autres composants de l'infrastructure, comme les autres ESXi, le vCenter, NSX, une baie de stockage ou la sauvegarde.
+
+      La micro-segmentation est une technique de sécurité réseau qui cloisonne les flux de chaque machine virtuelle ou groupe de machines virtuelles à travers des règles de filtrage granulaires et cumulables, gérées de manière centralisée et indépendante du système d'exploitation de la VM.
+
+      NSX est la solution VMware apportant la micro-segmentation dans l'écosystème vSphere, composée du NSX manager, des NSX controllers, d'un module kernel déployé sur les ESXi, et des NSX edges.
+
+      Les flux nord-sud désignent les communications à l'extérieur d'une zone, par exemple vers une passerelle Internet, et les flux est-ouest désignent les communications internes à une zone, par exemple entre serveurs de même sensibilité.
+
+COURS DÉTAILLÉ.
+
+I. LES PRINCIPES GÉNÉRAUX DE L'ARCHITECTURE VMWARE.
+
+   A. Les hyperviseurs, cibles privilégiées.
+
+      Les hyperviseurs sont une cible privilégiée pour les attaquants, leur compromission permettant l'accès à l'ensemble des données et traitements hébergés, ce qui impose de considérer tant la menace étatique, motivée par l'espionnage ou la déstabilisation, que la menace cybercriminelle, motivée par le lucre ou la destruction.
+
+   B. La séparation du plan de contrôle et du plan de donnée.
+
+      L'infrastructure de virtualisation doit être considérée comme un socle indépendant des machines virtuelles qu'il héberge, séparé en un plan de contrôle, responsable du pilotage, correspondant au Management domain, et un plan de donnée, portant les machines virtuelles, correspondant au Workload domain.
+
+   C. La gestion des privilèges et le cloisonnement réseau.
+
+      Dans vSphere, la gestion des privilèges passe par l'usage de rôles, un ensemble de privilèges associé à un utilisateur sur un objet VMware. L'hyperviseur crée des périphériques virtuels, vSwitch ou dvSwitch et vNic, pour faire communiquer les machines virtuelles, la connectivité entre composants de l'infrastructure étant assurée par des adaptateurs VMKernel.
+
+   D. La micro-segmentation et ses limites.
+
+      La micro-segmentation, apportée dans l'écosystème vSphere par la solution NSX, limite la latéralisation en cas de compromission d'une machine virtuelle, limite les flux nord-sud et est-ouest, et rend le filtrage plus précis. Une solution utilisant un agent à l'intérieur de la machine virtuelle apporte un niveau de sécurité inférieur à une solution utilisant des composants au niveau de l'hyperviseur. La micro-segmentation reste un mécanisme de défense en profondeur, insuffisant à lui seul.
+
+   E. Les vecteurs d'attaque.
+
+      Les infrastructures de virtualisation sont fréquemment ciblées par des attaques par rançongiciel du fait de la concentration de machines virtuelles. Les sources de compromission incluent la latéralisation depuis l'environnement bureautique ou depuis un sous-traitant compromis, l'exploitation de vulnérabilités, l'usage de binaires compromis, l'absence de maintien en condition de sécurité, l'implant sur le stockage, et l'exposition des hyperviseurs sur Internet.
+
+II. LES RECOMMANDATIONS LIÉES À L'ARCHITECTURE.
+
+   A. La séparation des flux et le cloisonnement des ports d'administration.
+
+      Les flux du plan de contrôle, composants de management vSphere, et du plan de donnée, machines hébergées, doivent être séparés, le port d'administration d'une machine virtuelle ne devant jamais être mutualisé avec le plan de contrôle du socle, mais cloisonné au minimum par un VLAN dédié. Les flux d'administration, de stockage et de sauvegarde doivent être cloisonnés entre eux par des VLAN et adaptateurs VMKernel dédiés, les flux d'administration utilisant un port réseau physique dédié.
+
+   B. Les clusters dédiés et les zones de confiance.
+
+      Un cluster dédié à l'administration, Management domain, séparé des clusters de production, doit héberger les composants du plan de contrôle. Les clusters de production doivent être dédiés par zone de sensibilité ou de confiance, chacune gérée par un vCenter dédié hébergé dans la zone d'administration, avec une segmentation par VLAN isolant les différents plans de contrôle au sein du cluster d'administration. L'administration des hyperviseurs doit être cloisonnée de l'administration métier des VM, avec un système de gestion vCenter par zone pour le socle et un système de rebond pour l'administration métier. L'administration des cartes de contrôle à distance, comme iDRAC, doit être cloisonnée du reste de l'administration, et les flux vMotion doivent être cloisonnés pour chaque zone de confiance.
+
+   C. Le socle critique, l'indépendance des annuaires et le dédiement par sensibilité.
+
+      Le socle de virtualisation doit être considéré comme une infrastructure critique, intégré au système d'administration de l'entité, l'ensemble du matériel connexe, iLO, iDRAC, baies de stockage, devant être administré de façon sécurisée. Une interface réseau dédiée à l'administration des ESXi ne doit surtout pas être accessible depuis un réseau de production. L'annuaire d'administration de l'infrastructure VMware doit être indépendant des annuaires de production, comme Active Directory, avec vérification régulière des chemins de contrôle pour éviter toute élévation de privilège dans les deux sens. Des clusters ESXi et des datastores doivent être dédiés par niveau de sensibilité. Les configurations des ESXi doivent être vérifiées régulièrement par comparaison avec le déploiement initial. Une segmentation par PVLAN doit être mise en place sur les VM quand possible. La synchronisation horaire des VM doit être configurée avec vigilance, en évitant par exemple l'hyperviseur comme source pour les contrôleurs de domaine Active Directory. Un proxy dédié doit filtrer par liste d'autorisations les récupérations de mises à jour VMware sur Internet.
+
+III. LES ACTIONS D'ADMINISTRATION.
+
+      Une politique de gestion des droits, RBAC, cohérente avec le modèle de délégation de l'entité doit être mise en place, appliquant le principe du moindre privilège pour tous les comptes d'administration et de service. Une authentification multifacteur doit être mise en place pour la connexion des administrateurs sur vSphere et vCenter. Un ou plusieurs comptes doivent être dédiés aux actions automatisées via les API vSphere, dont les connexions doivent être supervisées pour identifier les sources légitimes. L'ensemble des composants, ESXi, vmware-tools, vCenter, outils additionnels, doit être intégré au maintien en condition de sécurité, les outils additionnels non utilisés devant être désinstallés.
+
+IV. LE DURCISSEMENT DES ESXI ET LA SUPERVISION.
+
+   A. Le durcissement des ESXi.
+
+      Les accès SSH sur les ESXi doivent être désactivés, la fonction lockdown activée en mode normal avec un accès d'urgence de type bris de glace configuré. Le secure boot doit systématiquement être activé, avec vérification de la signature des VIB. Les recommandations relatives à TLS doivent être appliquées pour les accès HTTPS de vSphere, TLS étant systématiquement activé pour vMotion. Le tagging VLAN des VM doit être configuré au niveau de l'hyperviseur, pas au sein de la VM. Le pare-feu local des ESXi doit être configuré, et l'accès aux interfaces d'administration des machines virtuelles doit impérativement être séparé de celui du socle de virtualisation.
+
+   B. La supervision de sécurité.
+
+      Doivent être archivés et supervisés les accès aux hôtes ESXi, les modifications de configuration, les redémarrages, les connexions à vSphere et vCenter, le trafic réseau des interfaces d'administration dont un niveau élevé pourrait indiquer une exfiltration, les suspensions de VM pouvant indiquer un dump mémoire, les arrêts massifs de VM pouvant indiquer un chiffrement des fichiers vmdk, l'utilisation des comptes techniques internes à privilèges root comme vpx-user et dcui, l'historique des commandes interactives, les opérations de type guest operations, et les transferts de fichiers sur les datastores.
+
+V. LA MICRO-SEGMENTATION AVEC NSX ET LA SAUVEGARDE.
+
+   A. Les recommandations pour NSX.
+
+      Le NSX manager et les NSX controllers doivent être déployés exclusivement sur un cluster d'administration, jamais sur un cluster de production, leur non-compromission étant essentielle à la sécurité de la micro-segmentation. Les règles de filtrage ne doivent pas reposer sur un critère modifiable par la machine virtuelle, comme le hostname ou l'adresse MAC. Tous les flux non explicitement autorisés doivent être bloqués, en combinant des règles génériques et spécifiques. Les zones de sensibilités différentes doivent être isolées par des pare-feux physiques, une bonne approche pour les infrastructures dynamiques combinant pare-feux physiques pour les flux nord-sud et micro-segmentation fine pour les flux est-ouest.
+
+   B. La sauvegarde de l'infrastructure et des environnements hébergés.
+
+      Une sauvegarde de l'infrastructure de virtualisation elle-même doit être mise en œuvre, contenant les binaires pour une installation minimaliste, les procédures d'import des configurations, avec test régulier des procédures de restauration des VM. Une sauvegarde des environnements hébergés doit suivre les recommandations du guide Sauvegarde des systèmes d'information.
+
+POINTS D'ATTENTION.
+
+      Le port d'administration d'une machine virtuelle ne doit jamais être mutualisé avec le plan de contrôle du socle, une confusion fréquente qui briserait la séparation censée protéger l'infrastructure de virtualisation elle-même d'une compromission d'une VM hébergée.
+
+      Une solution de micro-segmentation reposant sur un agent interne à la machine virtuelle offre un niveau de sécurité structurellement inférieur à une solution reposant sur des composants au niveau de l'hyperviseur, car l'agent est lui-même exposé à une compromission de la VM qu'il est censé protéger.
+
+EXEMPLES CITES.
+
+      Un arrêt massif de VM comme indice de suspicion de chiffrement des fichiers vmdk par un rançongiciel, et une suspension de VM comme indice de suspicion de dump mémoire.
+
+      Les comptes techniques internes vpx-user et dcui, disposant de privilèges root, comme cibles de supervision prioritaires.

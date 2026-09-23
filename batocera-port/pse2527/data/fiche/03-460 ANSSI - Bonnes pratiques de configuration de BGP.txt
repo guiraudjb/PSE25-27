@@ -1,0 +1,87 @@
+BONNES PRATIQUES DE CONFIGURATION DE BGP, ANSSI, EN COLLABORATION AVEC DES OPÉRATEURS FRANÇAIS.
+
+LEXIQUE COMPLET.
+
+      BGP, Border Gateway Protocol, est le protocole de routage inter-domaines permettant l'échange de préfixes entre systèmes autonomes, EBGP désignant les sessions établies entre AS distincts.
+
+      Un martian est un préfixe réservé à des fins spécifiques, comme les blocs d'adresses privées, qui ne devrait jamais être annoncé sur Internet.
+
+      L'AS_PATH est l'attribut BGP listant les numéros d'AS traversés par une annonce, le numéro le plus à gauche correspondant normalement à l'AS du pair émetteur.
+
+      TCP MD5 est un mécanisme d'authentification des messages TCP, décrit dans la RFC 2385, s'appuyant sur un secret partagé et un code d'authentification calculé par fonction de hachage MD5.
+
+      L'URPF, Unicast Reverse Path Forwarding, est une technique vérifiant la cohérence entre l'adresse source d'un paquet entrant, l'interface de réception et les entrées de la table de transfert, afin de lutter contre l'usurpation d'adresses IP.
+
+      Le Graceful Restart, défini par la RFC 4724, permet de conserver le transfert des paquets pendant le redémarrage du processus BGP d'un routeur, en maintenant temporairement les routes déjà apprises.
+
+COURS DÉTAILLÉ.
+
+I. LES TYPES D'INTERCONNEXION ET DE RELATION ENTRE AS.
+
+   A. Les types d'interconnexion.
+
+      Quatre types d'interconnexion sont distingués : le peering bilatéral dans un point d'échange, le peering via un serveur de routes dans un point d'échange, le peering privé point à point dans une salle télécom, et la session établie en multi-hop, où les routeurs BGP ne sont pas directement connectés.
+
+   B. Les types de relation entre AS.
+
+      Trois relations sont distinguées : la relation transitaire vers un AS feuille qui n'offre pas de service de transit, la relation transitaire vers un petit transitaire qui fournit lui-même l'accès à d'autres AS, et la relation de peering entre deux AS qui échangent leurs préfixes sans relation de transit. Les niveaux de recommandation associés à chaque bonne pratique sont gradués sur trois étoiles, du souhaitable au fortement recommandé, selon le type d'interconnexion et de relation concerné.
+
+II. LA SÉCURITÉ DES SESSIONS BGP.
+
+      BGP version 4 ne définit aucun mécanisme natif de protection des sessions, qui s'appuient sur TCP et peuvent donc être interrompues par un paquet TCP RST. TCP MD5 n'est pas un mécanisme cryptographique robuste et n'est pas conforme au RGS, mais reste, en l'absence d'alternative comme l'Authentication Option de TCP non implémentée à ce jour, un élément de défense en profondeur complémentaire. Il doit être systématiquement utilisé en interconnexion multi-hop ou via un équipement partagé comme un commutateur de point d'échange, avec un secret différent et fort pour chaque interconnexion, et cédé en priorité à un mécanisme plus robuste lorsque celui-ci est disponible sur les deux routeurs.
+
+III. LE FILTRAGE DES ANNONCES DE PRÉFIXES.
+
+   A. Le filtrage des préfixes réservés et attribués.
+
+      Les martians, préfixes réservés comme ceux des RFC 1918 et 6890, doivent être filtrés systématiquement en entrée comme en sortie. Pour une relation transitaire vers un AS feuille, les préfixes annoncés par le client doivent être filtrés pour n'accepter que ceux qui lui sont légitimement attribués, en s'appuyant sur les IRR lorsqu'ils sont disponibles, leur fiabilité n'étant toutefois pas toujours garantie.
+
+   B. Le filtrage des préfixes trop spécifiques et des routes par défaut.
+
+      Les préfixes annoncés ne doivent pas être plus spécifiques que 24 bits en IPv4 ou 48 bits en IPv6, afin de limiter la taille de la table de routage globale. La route par défaut ne doit pas être annoncée sauf demande explicite d'un client, afin d'éviter de devenir involontairement un AS de transit avec surcharge de bande passante et des routeurs.
+
+   C. La suppression des numéros d'AS privés et le filtrage volumétrique.
+
+      Les numéros d'AS privés, de 64512 à 65534 en 16 bits ou de 4200000000 à 4294967294 en 32 bits, ne doivent jamais apparaître dans les annonces publiques et doivent être systématiquement supprimés en bordure. Un filtre sur le nombre maximal de préfixes annoncés par un pair doit être mis en place côté transitaire pour se prémunir d'une réannonce accidentelle de la table de routage globale par un client, avec un seuil d'alerte et une limite de coupure adaptés au volume normalement annoncé.
+
+   D. Le filtrage sur l'AS_PATH.
+
+      Les annonces dont le premier numéro d'AS de l'AS_PATH ne correspond pas à celui du pair émetteur ne doivent pas être acceptées, ce filtrage étant activé par défaut sur certaines implémentations comme Cisco et OpenBGPD, et devant sinon être configuré explicitement à l'aide d'expressions rationnelles.
+
+IV. LES AUTRES ÉLÉMENTS DE CONFIGURATION DE BGP.
+
+   A. La journalisation.
+
+      Les changements d'état de session, appelés changements d'adjacence, ne sont pas journalisés par défaut sur les routeurs Cisco et Juniper, contrairement aux équipements Alcatel-Lucent et OpenBGPD, et doivent être activés et remontés pour la supervision, avec possibilité d'un niveau de journalisation plus détaillé à des fins de débogage.
+
+   B. Le Graceful Restart.
+
+      Ce mécanisme renforce la robustesse des interconnexions en conservant le transfert des paquets pendant le redémarrage du processus BGP d'un routeur, grâce à des routes temporairement marquées périmées puis supprimées après une durée paramétrable, généralement de l'ordre de quelques minutes, avant que le routeur redémarré ne reconstruise sa RIB et sa FIB à partir des annonces reçues de ses pairs.
+
+V. LES ÉLÉMENTS DE CONFIGURATION GÉNÉRALE DES ROUTEURS.
+
+   A. La prévention de l'usurpation d'adresses IP.
+
+      L'URPF se décline en trois modes, le mode strict qui vérifie que l'interface de réception correspond à celle qu'utiliserait la FIB pour joindre la source, le mode feasible path qui étend cette vérification aux routes alternatives, et le mode loose qui vérifie seulement que la source est routable sans tenir compte de l'interface. Le mode strict est inadapté en cas de routage asymétrique, où le mode feasible path, disponible uniquement sur certains équipementiers, ou à défaut le mode loose, doit être utilisé en cas de multihoming.
+
+   B. Le durcissement de la configuration et la protection du plan de contrôle.
+
+      Les mesures d'hygiène informatique générales s'appliquent aux routeurs BGP : protocoles sécurisés comme SSH par clé publique pour l'administration, interface dédiée et adresses IP autorisées restreintes, comptes dédiés, désactivation des services inutiles, et systèmes à jour. Le plan de contrôle, qui alimente la FIB et repose sur des unités de calcul génériques bien moins puissantes que les circuits dédiés du plan de transfert, est plus vulnérable à une saturation par déni de service et doit être protégé par des filtres éliminant le trafic illégitime avant qu'il ne l'atteigne, conformément aux principes de la RFC 6192.
+
+POINTS D'ATTENTION.
+
+      Un secret TCP MD5 identique sur plusieurs interconnexions annule l'intérêt du mécanisme, chaque interconnexion devant disposer de son propre secret fort et distinct.
+
+      L'absence de filtrage sur le nombre maximal de préfixes annoncés par un client a déjà conduit, dans plusieurs incidents réels, à la réannonce involontaire de la table de routage globale par un transitaire, les préfixes des clients bénéficiant généralement d'une valeur LOCAL_PREF plus élevée que ceux des autres pairs.
+
+      Le mode strict de l'URPF élimine à tort du trafic légitime en cas de routage asymétrique, lorsque le chemin emprunté à l'aller diffère de celui emprunté au retour entre deux AS.
+
+EXEMPLES CITÉS.
+
+      Un pair annonçant habituellement deux cents préfixes peut se voir fixer une limite maximale de mille préfixes avec un seuil d'alerte à quatre cents, illustrant le dimensionnement recommandé du filtrage volumétrique.
+
+      La commande bgp enforce-first-as sur les routeurs Cisco illustre un filtrage sur l'AS_PATH activé par défaut, tandis que la directive enforce neighbor-as yes illustre l'équivalent sur OpenBGPD.
+
+      Les systèmes d'exploitation SR-OS d'Alcatel-Lucent, IOS de Cisco, Junos de Juniper et OpenBGPD d'OpenBSD illustrent la diversité des implémentations testées dans ce guide.
+
+      La RFC 6192 est citée comme référence détaillant le filtrage de protection du plan de contrôle des routeurs, avec des exemples pour les équipements Cisco et Juniper.

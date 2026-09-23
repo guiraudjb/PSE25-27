@@ -1,0 +1,57 @@
+HYGIÈNE NUMÉRIQUE DES TÉLÉPHONES MOBILES, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Le mode Isolement, ou lockdown mode, est un mécanisme de durcissement du système d'exploitation en environnement iOS, recommandé notamment pour les populations à risque.
+
+      Le CERT-FR, cert-fr@ssi.gouv.fr ou le 3218, est le point de contact à solliciter en cas de signalement de compromission potentielle d'un compte ou d'un appareil mobile.
+
+COURS DÉTAILLÉ.
+
+I. LES BONNES PRATIQUES DE MISE À JOUR ET DE DURCISSEMENT.
+
+   A. La mise à jour systématique.
+
+      Le système d'exploitation des équipements ainsi que leurs applications doivent être mis à jour systématiquement et dans les meilleurs délais. Un redémarrage régulier permet également de limiter les impacts d'une compromission non persistante.
+
+   B. Le durcissement du système d'exploitation.
+
+      Les mécanismes de durcissement du système d'exploitation doivent être activés, notamment pour les populations à risque, le mode Isolement en environnement iOS en étant un exemple.
+
+II. LES BONNES PRATIQUES DE CONNEXION ET DE GESTION DES APPLICATIONS.
+
+   A. Les connexions à des équipements inconnus.
+
+      Les équipements ne doivent jamais être connectés à un appareil inconnu, chargeur, support de stockage ou ordinateur, ni à des réseaux Wi-Fi publics.
+
+   B. La gestion des applications et des interfaces sans fil.
+
+      Les applications et fonctionnalités non utilisées doivent être désinstallées ou désactivées, et les autorisations accordées aux applications doivent être limitées. Les interfaces sans fil, Wi-Fi, Bluetooth, NFC et localisation, doivent être désactivées si elles ne sont pas en cours d'utilisation.
+
+III. LES BONNES PRATIQUES ORGANISATIONNELLES ET DE COMMUNICATION.
+
+   A. La séparation des usages et l'extinction des équipements.
+
+      Une séparation stricte des usages personnels et professionnels doit être appliquée. Les équipements doivent être éteints complètement lorsque l'on est amené à s'en séparer.
+
+   B. La protection des conversations sensibles.
+
+      Tout équipement numérique doit être sorti des bureaux et des salles de réunion en amont de conversations sensibles afin d'éviter une captation sonore, le mode avion n'empêchant pas un logiciel espion de fonctionner.
+
+   C. Les échanges et la vigilance face à l'hameçonnage.
+
+      L'échange d'informations sensibles par SMS doit être évité, au profit de messageries utilisant un chiffrement de bout en bout pour garantir la confidentialité des échanges. Il convient de rester vigilant sur la réception de messages d'hameçonnage, pouvant notamment dissimuler des demandes illégitimes d'association de nouveaux appareils à un compte de messagerie, en confirmant autant que possible l'origine et la légitimité du message en cas de doute.
+
+IV. LA CONDUITE À TENIR EN CAS DE SIGNALEMENT.
+
+      En cas de réception de signalements, courriels ou SMS, issus des éditeurs de solutions et avertissant d'une potentielle compromission d'un compte ou d'un appareil, il convient de contacter le CERT-FR par courriel à l'adresse cert-fr@ssi.gouv.fr ou par téléphone au 3218, service gratuit plus prix d'un appel, ou au +33 9 70 83 32 18 depuis l'étranger.
+
+POINTS D'ATTENTION.
+
+      Le guide rappelle explicitement que le mode avion n'empêche pas un logiciel espion de fonctionner, ce qui invite à sortir physiquement l'équipement de la pièce plutôt que de se fier à ce mode pour protéger une conversation sensible.
+
+      Les demandes illégitimes d'association de nouveaux appareils à un compte de messagerie sont identifiées comme une technique d'hameçonnage particulière à surveiller, distincte du simple vol de mot de passe.
+
+EXEMPLES CITES.
+
+      Le mode Isolement, lockdown mode, en environnement iOS, comme exemple de mécanisme de durcissement pour les populations à risque.

@@ -1,0 +1,59 @@
+ARCHITECTURE SÉCURISÉE DE SI, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      L'architecture sécurisée d'un système d'information désigne l'ensemble des choix de conception et d'évolution d'un SI ayant des conséquences directes sur son niveau de sécurité.
+
+      EBIOS Risk Manager, ou EBIOS RM, est la méthode d'analyse de risque que l'ANSSI recommande de mener préalablement à la conception d'une architecture.
+
+      Le cloisonnement réseau, système et stockage consiste à séparer les ressources d'un système d'information en fonction des risques et des besoins métier.
+
+      Un dossier d'architecture technique est le document qui rassemble et documente les choix de conception d'un système d'information selon un ensemble de thématiques attendues.
+
+COURS DÉTAILLÉ.
+
+I. LES GRANDS PRINCIPES D'UNE ARCHITECTURE SÉCURISÉE.
+
+   A. L'analyse de risque et le cloisonnement.
+
+      Il convient de disposer d'une analyse de risque, par exemple selon la méthode EBIOS Risk Manager, et de connaître le contexte réglementaire applicable au système d'information. Les ressources doivent être cloisonnées en fonction des risques et des besoins métier, notamment suivant l'exposition et la sensibilité des données.
+
+   B. La défense en profondeur et le sens des flux.
+
+      Plusieurs barrières maîtrisées, complémentaires, indépendantes et surveillées doivent être érigées suivant le principe de défense en profondeur. Les flux doivent circuler dès que possible depuis une zone de plus haute confiance vers une zone de moindre confiance, par exemple du système d'information d'administration vers le système d'information bureautique, et non l'inverse.
+
+   C. La sécurisation des privilèges élevés et la documentation.
+
+      Les opérations nécessitant des privilèges élevés, comme les actions d'administration, doivent être sécurisées sur le système d'information, en particulier en les cloisonnant des environnements de production. Une cartographie et des inventaires doivent être élaborés, avec leur mise à jour prévue régulièrement. Il convient également de s'assurer régulièrement que les choix technologiques et d'architecture sont réellement motivés par des besoins métier avérés.
+
+II. LES THÉMATIQUES D'UN DOSSIER D'ARCHITECTURE TECHNIQUE.
+
+   A. Le contexte et la gestion des accès.
+
+      Le dossier doit couvrir les contextes métier et réglementaire, la nature et la sensibilité des données et traitements, ainsi que l'identification, l'authentification et la gestion des droits d'accès.
+
+   B. L'administration et le cloisonnement.
+
+      Le dossier doit traiter l'administration, dont la gestion des comptes à privilèges et le DevSecOps, le cloisonnement réseau, système et stockage, le chiffrement des données en transit et au repos, ainsi que le filtrage des flux.
+
+   C. Le maintien en condition et les accès externes.
+
+      Le dossier doit couvrir le maintien en condition de sécurité, MCS, les accès à distance, notamment le nomadisme numérique et les accès tiers, ainsi que les interconnexions, dont celle à Internet.
+
+   D. La protection, la continuité et la supervision.
+
+      Le dossier doit enfin traiter la protection contre les codes malveillants, la sécurité physique, le contrôle d'accès et la vidéoprotection, la continuité et la reprise d'activité, dont les sauvegardes, et la supervision de sécurité, à savoir la journalisation, la détection et le traitement des incidents.
+
+III. LES PUBLICATIONS COMPLÉMENTAIRES DE L'ANSSI.
+
+      Pour approfondir les thématiques d'un dossier d'architecture technique, l'ANSSI renvoie vers plusieurs autres publications, notamment sur l'administration sécurisée de systèmes d'information en contexte Microsoft Active Directory, le choix de pare-feux dans les zones exposées à Internet, les architectures des services DNS, la protection des systèmes d'information essentiels, le modèle Zero Trust, l'hébergement dans le cloud des systèmes d'information sensibles, les architectures de systèmes d'information sensibles ou de diffusion restreinte, et les architectures des interconnexions multiniveaux.
+
+POINTS D'ATTENTION.
+
+      Le principe de circulation des flux de la zone de plus haute confiance vers la zone de moindre confiance, et jamais l'inverse, est présenté comme un réflexe de conception fondamental, applicable dès la phase amont d'un projet d'architecture.
+
+      La vérification régulière que les choix d'architecture sont motivés par des besoins métier avérés vise à éviter la complexification inutile d'un système d'information au nom de la seule sécurité, sans lien avec un usage réel.
+
+EXEMPLES CITES.
+
+      La circulation des flux du système d'information d'administration vers le système d'information bureautique, jamais dans le sens inverse.

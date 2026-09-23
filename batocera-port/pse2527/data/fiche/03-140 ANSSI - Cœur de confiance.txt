@@ -1,0 +1,73 @@
+IDENTIFICATION DU CŒUR DE CONFIANCE D'UN SYSTÈME D'INFORMATION, GUIDE LES ESSENTIELS DE L'ANSSI.
+
+LEXIQUE COMPLET.
+
+      Le cœur de confiance d'un système d'information désigne l'ensemble des ressources informatiques dont la compromission pourrait mener à la prise de contrôle étendue du système d'information.
+
+      Un chemin de contrôle existe lorsqu'une ressource A gère légitimement une ressource B, par exemple parce qu'elle l'administre.
+
+      Un chemin d'attaque existe lorsque la compromission d'une ressource A entraîne la compromission vraisemblable d'une ressource B du cœur de confiance, en raison de vulnérabilités ou de faiblesses de configuration.
+
+      Le Tier 0, dans le modèle de tiering de Microsoft, désigne le niveau auquel le cœur de confiance d'un système d'information Windows peut être assimilé.
+
+      BloodHound et PingCastle sont des outils en sources ouvertes permettant l'analyse automatique des chemins de contrôle d'un annuaire Active Directory.
+
+      OSAKA est un outil d'analyse automatique des chemins de contrôle pour une infrastructure Kubernetes.
+
+      Un serveur SCADA est le serveur central qui pilote la majorité des automates programmables industriels, ou PLC, dans un système d'information industriel.
+
+      Un serveur MES, Manufacturing Execution System, transmet des commandes aux serveurs SCADA à partir des données d'un ERP, Enterprise Resource Planning.
+
+COURS DÉTAILLÉ.
+
+I. LA MÉTHODOLOGIE D'IDENTIFICATION DU CŒUR DE CONFIANCE.
+
+   A. L'identification du périmètre initial.
+
+      Le point de départ de la méthodologie consiste à identifier les quelques ressources informatiques sur lesquelles repose fondamentalement la gestion centralisée du système d'information, par exemple les contrôleurs de domaine Active Directory pour un système d'information Windows. Ce périmètre initial n'est pas exhaustif.
+
+   B. L'analyse des chemins de contrôle et d'attaque.
+
+      Un chemin de contrôle existe si une ressource A gère légitimement une ressource B du cœur de confiance, par exemple en l'administrant. Un chemin d'attaque existe si la compromission d'une ressource A entraîne la compromission vraisemblable d'une ressource B du cœur de confiance, en raison de vulnérabilités ou de faiblesses de configuration, en tenant compte de la sensibilité du système d'information et du profil d'attaquant déterminé par l'entité.
+
+   C. Le réajustement itératif du périmètre.
+
+      Le périmètre du cœur de confiance grandit en fonction des chemins de contrôle et d'attaque identifiés, les ressources qui contrôlent ou peuvent prendre le contrôle du cœur de confiance rejoignant le périmètre logique. Il réduit à l'inverse suite aux actions de sécurisation, comme la suppression de droits, le durcissement ou la correction de vulnérabilités. Ces deux étapes doivent être itérées, le cœur de confiance évoluant au fil des analyses, des sécurisations et du cycle de vie du système d'information.
+
+   D. Les aides à l'identification.
+
+      L'analyse nécessite de bonnes connaissances des technologies utilisées et de la cybersécurité en général, en recourant si besoin à des prestataires qualifiés par l'ANSSI. Des outils d'analyse automatique existent en sources ouvertes, comme BloodHound et PingCastle pour un annuaire Active Directory, ou OSAKA pour une infrastructure Kubernetes. Les services d'audit automatisé de l'ANSSI, notamment de l'Active Directory, sont accessibles aux opérateurs régulés et aux entités publiques.
+
+II. LES EXEMPLES DE CŒUR DE CONFIANCE.
+
+   A. Le cœur de confiance d'un système d'information reposant sur Active Directory.
+
+      Il est souvent constitué des contrôleurs de domaine Active Directory, des systèmes d'administration comme les postes d'administration ou les rebonds, des serveurs WSUS qui distribuent les mises à jour, des infrastructures de gestion de clés comme AD-CS, des hyperviseurs qui hébergent des machines virtuelles du cœur de confiance, des services de fédération ou de synchronisation d'identités comme AD-FS ou Microsoft Entra Connect, des équipements stockant des sauvegardes sensibles non chiffrées, et des serveurs pilotant des agents de gestion centralisée comme les agents antivirus, EDR, ou de déploiement de logiciels. Le cœur de confiance peut être assimilé au Tier 0 du modèle de tiering de Microsoft. En cas d'extension dans le cloud, les chemins de contrôle spécifiques à chaque éditeur, comme les comptes d'administration des tenants, doivent être analysés.
+
+   B. Le cœur de confiance d'un système d'information industriel.
+
+      Il est souvent constitué des serveurs SCADA centraux qui pilotent la majorité des automates programmables industriels, des serveurs MES qui transmettent des commandes aux SCADA à partir des données de l'ERP, et des ressources informatiques dont ces serveurs dépendent. Si des ressources du système industriel sont membres d'un domaine Active Directory, le cœur de confiance doit inclure celui de cet environnement Active Directory.
+
+III. LA SÉCURISATION DU CŒUR DE CONFIANCE.
+
+   A. La réduction et le durcissement.
+
+      Le cœur de confiance doit être réduit au strict minimum en traitant un maximum de chemins d'attaque et de contrôle. Chacune des ressources qui le composent doit être sécurisée, durcie et supervisée, avec une surface d'attaque aussi réduite que possible.
+
+   B. La délégation fine des droits et le cloisonnement de l'administration.
+
+      Une délégation fine des droits doit être mise en œuvre de sorte que peu d'administrateurs aient le contrôle du cœur de confiance, avec des actions d'administration peu fréquentes. Les systèmes et comptes d'administration du cœur de confiance doivent être sécurisés et cloisonnés, dédiés à cette administration, et opérer depuis un réseau ou un VLAN dédié et finement filtré.
+
+   C. La maîtrise des risques de sous-traitance.
+
+      La sécurité du cœur de confiance dépend de celle des systèmes d'information des prestataires lorsque sa gestion est sous-traitée, ce qui impose de maîtriser ces risques spécifiques.
+
+POINTS D'ATTENTION.
+
+      Le cœur de confiance n'est jamais figé, il évolue à chaque analyse de chemin de contrôle ou d'attaque et à chaque action de sécurisation, ce qui impose une démarche itérative plutôt qu'un inventaire ponctuel.
+
+      L'assimilation du cœur de confiance au Tier 0 du modèle de tiering de Microsoft permet de réutiliser les principes déjà connus de séparation des niveaux d'administration.
+
+EXEMPLES CITES.
+
+      Les outils BloodHound, PingCastle et OSAKA pour l'analyse automatique des chemins de contrôle d'un annuaire Active Directory ou d'une infrastructure Kubernetes.

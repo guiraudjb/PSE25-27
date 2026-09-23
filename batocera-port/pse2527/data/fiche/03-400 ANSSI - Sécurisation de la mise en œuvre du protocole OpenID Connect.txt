@@ -1,0 +1,97 @@
+RECOMMANDATIONS POUR LA SÉCURISATION DE LA MISE EN ŒUVRE DU PROTOCOLE OPENID CONNECT, ANSSI, ANSSI-PA-080.
+
+LEXIQUE COMPLET.
+
+      OIDC, OpenID Connect, est un protocole reposant sur OAuth2.0 permettant de récupérer l'identité d'un utilisateur authentifié, en ajoutant l'ID Token et en normalisant la récupération d'informations sur l'utilisateur.
+
+      OAuth2.0 est un cadre définissant des mécanismes pour obtenir l'autorisation d'accéder à des ressources protégées au nom d'un utilisateur.
+
+      Un client OIDC confidentiel est opéré dans un environnement maîtrisé, permettant de protéger ses secrets d'authentification, contrairement à un client public opéré sur un environnement non maîtrisé comme un mobile.
+
+      Le fournisseur d'identité met en œuvre trois services, l'Authorization Endpoint qui authentifie l'utilisateur et fournit un authorization code, le Token Endpoint qui échange ce code contre un access token et un ID Token, et le UserInfo Endpoint qui fournit les informations utilisateur contre un access token.
+
+      Un JWT, JSON Web Token, est un standard d'échange d'informations au format JSON, protégé en intégrité par un JWS, JSON Web Signature, à l'aide d'un HMAC ou d'une signature, ou en confidentialité par un JWE, JSON Web Encryption.
+
+      Le paramètre state est une valeur aléatoire liée à la session utilisateur permettant de contrer les attaques CSRF, tandis que le paramètre nonce est une valeur aléatoire unique permettant de contrer les attaques par rejeu.
+
+      Une redirection ouverte est une redirection non vérifiée d'un utilisateur, pouvant permettre le vol d'informations sensibles comme l'authorization code.
+
+COURS DÉTAILLÉ.
+
+I. LA PRÉSENTATION DU PROTOCOLE ET SES CINÉMATIQUES.
+
+   A. Les acteurs et les éléments échangés.
+
+      OIDC met en jeu un utilisateur, un fournisseur de service disposant d'un client OIDC confidentiel ou public, un fournisseur d'identité, et un fournisseur de données. Les éléments échangés sont les claims, l'authorization code, l'access token et l'ID Token, ce dernier étant un JWS contenant des informations sur l'authentification de l'utilisateur.
+
+   B. Le choix de la cinématique.
+
+      La cinématique authorization code, utilisée pour les clients confidentiels et les applications Web, est recommandée en priorité car elle protège la confidentialité de l'access token et permet une authentification entre le client OIDC et le Token Endpoint. Une politique de sécurité définissant les accès aux informations, avec par exemple des durées de validité différenciées selon la sensibilité, doit être mise en place.
+
+II. LA SÉCURISATION DES COMMUNICATIONS.
+
+   A. Le chiffrement et l'authentification des échanges.
+
+      Toutes les communications HTTP du protocole doivent utiliser TLS, en suivant les bonnes pratiques du guide TLS de l'ANSSI, y compris pour les communications serveur à serveur entre le client OIDC et le fournisseur d'identité, ce dernier pouvant imposer aux fournisseurs de service des suites cryptographiques robustes. Le fournisseur de service doit vérifier la correspondance entre le nom de domaine du fournisseur d'identité et le SubjectAltName du certificat présenté, et il est recommandé de mettre en œuvre le certificate pinning en préchargeant le certificat, son empreinte ou sa clé publique.
+
+III. LA SÉCURISATION DE LA DEMANDE D'AUTHENTIFICATION.
+
+   A. La protection de l'intégrité des paramètres.
+
+      Pour éviter la manipulation de paramètres sensibles, il est recommandé qu'un client OIDC envoie les paramètres dans un JWS protégé par un HMAC, ou mieux par une signature électronique qui garantit en plus l'origine de la demande. Un seul mode de transmission des paramètres devrait être autorisé par client OIDC, fixé lors de l'enrôlement, bien qu'une implémentation strictement conforme à la norme OIDC ne permette pas de l'imposer.
+
+   B. Les protections contre le CSRF, le rejeu et les redirections ouvertes.
+
+      Le paramètre state doit être systématiquement envoyé pour se protéger des attaques CSRF, généré aléatoirement avec une entropie minimale de cent vingt-huit bits, soit vingt-deux caractères ASCII imprimables, et conservé dans un cookie de session plutôt qu'en base de données. Le fournisseur d'identité doit détecter les demandes sans ce paramètre. De même, le paramètre nonce doit être systématiquement envoyé et généré aléatoirement pour contrer les attaques par rejeu, avec une détection similaire côté fournisseur d'identité. Le fournisseur d'identité doit vérifier l'appartenance de l'URL de redirection à une liste blanche associée au client OIDC, fournie lors de l'enrôlement, pour se protéger des redirections ouvertes.
+
+IV. LA SÉCURISATION DE LA RÉPONSE ET DES JETONS.
+
+   A. L'authorization code.
+
+      L'authorization code doit être généré aléatoirement avec une entropie minimale de cent vingt-huit bits, sa durée de vie limitée à quelques minutes le temps de récupérer l'ID Token et l'access token associés, et il doit être associé à l'identifiant du client OIDC pour limiter sa réutilisation sur d'autres services. Il est recommandé de le stocker sous forme d'empreinte SHA256 plutôt qu'en clair, et de vérifier la correspondance du paramètre state reçu avec celui stocké en session. Une fois les jetons délivrés, l'authorization code doit être désactivé ou supprimé pour n'être utilisable qu'une seule fois.
+
+   B. L'access token et l'ID Token.
+
+      L'authentification du client OIDC auprès du Token Endpoint doit être adaptée à la sensibilité des informations, par ordre de sécurité croissant mot de passe, JWS avec HMAC, ou JWS avec signature. Les access token sous forme d'aléa doivent avoir une entropie minimale de cent vingt-huit bits et être stockés sous forme d'empreinte SHA256 s'ils sont en base de données, transmis uniquement via l'entête Authorization et jamais écrits dans les journaux, avec une durée de validité la plus courte possible déterminée par analyse de risque. L'ID Token doit être vérifié selon les spécifications de la norme, en comparant notamment les champs nonce, iss et aud, et le HMAC de l'ID Token doit utiliser un secret différent du client_secret afin de préserver la possibilité de stocker ce dernier de façon hachée et salée. Un fournisseur de service exigeant un niveau d'authentification donné doit vérifier le champ acr de l'ID Token en conséquence.
+
+   C. La récupération du UserInfo.
+
+      L'access token, considéré comme sensible car il permet d'accéder à des informations personnelles sans authentification supplémentaire, doit être transmis par l'entête Authorization. Il est recommandé de croiser l'identifiant unique sub reçu dans le UserInfo avec celui contenu dans l'ID Token pour détecter toute incohérence.
+
+V. LA GESTION DES SECRETS ET DES SIGNATURES.
+
+   A. Les secrets d'authentification partagés.
+
+      Les secrets partagés doivent être générés aléatoirement avec une entropie minimale de cent vingt-huit bits, renouvelés régulièrement selon la politique de sécurité, différents pour chaque client OIDC afin qu'une compromission n'affecte pas les autres clients, et leur accès strictement restreint et contrôlé.
+
+   B. Les JSON Web Signature.
+
+      Il est recommandé d'utiliser des certificats signés par une autorité de confiance pour vérifier la signature d'un JWS, de restreindre l'accès à la clé privée de signature, et de mettre en œuvre un mécanisme de vérification de la révocation des certificats. La fonction de hachage du HMAC et le mécanisme de signature doivent être conformes aux annexes du RGS, avec SHA256 au minimum. Le champ alg du JWS ne doit pas être utilisé pour déterminer l'algorithme, ce dernier devant être fixé lors de l'enrôlement, car ce champ a fait l'objet de failles permettant de forger des JWS, y compris via la valeur none désactivant toute intégrité.
+
+VI. LA SÉCURISATION APPLICATIVE ET L'ENRÔLEMENT.
+
+   A. La sécurité applicative Web et la journalisation.
+
+      Les applications OIDC, exposées sur Internet et centralisant l'authentification, sont vulnérables aux failles classiques du Top Ten OWASP et doivent suivre le guide de l'ANSSI sur la sécurité des applications Web : validation stricte des paramètres, requêtes SQL paramétrées, durcissement des composants et architecture en n-tiers. Un système de journalisation doit être mis en œuvre, avec une attention particulière portée aux événements liés à l'authentification.
+
+   B. L'enrôlement des clients OIDC.
+
+      La découverte automatisée de la configuration d'un fournisseur d'identité et l'enrôlement automatisé des clients OIDC ne sont pas recommandés, car leur combinaison facilite l'attaque IdP Mix-Up qui usurpe l'identité d'un fournisseur d'identité auprès d'un fournisseur de service. L'interface Web de configuration des clients OIDC doit elle-même respecter les bonnes pratiques de sécurité, et le fournisseur d'identité doit vérifier l'identité des fournisseurs de service lors de l'enrôlement, avec un niveau de vérification adapté à la sensibilité des informations accessibles.
+
+POINTS D'ATTENTION.
+
+      Une implémentation strictement certifiée par la fondation OpenID respecte la norme OIDC sans imposer state, nonce ou un mode de transmission unique, ce qui limite l'intérêt de plusieurs recommandations si le fournisseur d'identité ne peut pas les imposer techniquement à tous ses clients.
+
+      Le champ alg d'un JWS laisse à un attaquant la possibilité de choisir l'algorithme de vérification, y compris la valeur none supprimant toute garantie d'intégrité, d'où la nécessité de fixer cet algorithme hors bande lors de l'enrôlement.
+
+      L'access token permettant d'accéder à des informations personnelles sans authentification supplémentaire du porteur, sa capture équivaut à une usurpation complète des droits qui lui sont associés jusqu'à son expiration.
+
+EXEMPLES CITÉS.
+
+      Une entropie de cent vingt-huit bits, atteinte par une chaîne de vingt-deux caractères ASCII imprimables, est l'exigence minimale citée pour le state, le nonce, l'authorization code, les access token et les secrets partagés.
+
+      La fonction de hachage SHA256 est citée comme fonction minimale conforme au RGS pour stocker les authorization code et les access token sous forme d'empreinte.
+
+      L'algorithme RSASSA-PKCS1-V1.5, bien que présent dans la RFC 7518, est cité comme non conforme au RGS lorsque certaines conditions ne sont pas respectées.
+
+      L'attaque IdP Mix-Up est citée comme motivant la désactivation de la découverte automatisée et de l'enrôlement automatisé des clients OIDC.

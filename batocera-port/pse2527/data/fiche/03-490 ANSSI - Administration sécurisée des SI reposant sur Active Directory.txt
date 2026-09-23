@@ -1,0 +1,81 @@
+RECOMMANDATIONS RELATIVES À L'ADMINISTRATION SÉCURISÉE DES SYSTÈMES D'INFORMATION REPOSANT SUR MICROSOFT ACTIVE DIRECTORY, ANSSI.
+
+LEXIQUE COMPLET.
+
+      Le modèle en trois Tiers de Microsoft découpe un système d'information en trois niveaux de confiance, Tier zéro le cœur de confiance de l'organisation, Tier un les valeurs métiers et leurs biens supports, et Tier deux les moyens d'accès utilisateur comme les postes de travail.
+
+      Le Tier zéro représente le cœur de confiance, dont les privilèges d'administration permettent le contrôle de toutes les ressources de l'annuaire, les contrôleurs de domaine en étant l'exemple type.
+
+      Un chemin de contrôle, ou chemin d'attaque, est une succession de relations de permissions ou de dépendances techniques permettant à un attaquant de progresser d'une ressource de moindre confiance vers une ressource de plus haute confiance.
+
+      L'enterprise access model est l'évolution du modèle en trois Tiers publiée par Microsoft fin 2020, renommant le Tier zéro en control plane, scindant le Tier un en data workload plane et management plane, et le Tier deux en user access et app access.
+
+      NTLM et Kerberos sont les deux protocoles d'authentification de l'environnement Windows, dont les secrets, condensats NTLM ou clés Kerberos, sont réutilisables directement par un attaquant qui les extrait de la mémoire vive d'une machine compromise.
+
+      Un RODC, contrôleur de domaine en lecture seule, est recommandé lorsque la sécurité physique d'un site n'est pas assurée.
+
+COURS DÉTAILLÉ.
+
+I. LE MODÈLE DE GESTION DES ACCÈS PRIVILÉGIÉS.
+
+   A. Les trois Tiers et leur protection proportionnée.
+
+      L'adoption d'un modèle de gestion des accès privilégiés à plusieurs niveaux de confiance est essentielle pour structurer le cloisonnement du système d'information, le modèle historique en trois Tiers de Microsoft ou son évolution enterprise access model étant recommandés. La protection du Tier zéro est prioritaire, mais les efforts doivent rapidement se porter sur le Tier un qui porte les valeurs métiers réellement essentielles à l'organisation, chaque niveau devant être protégé de manière proportionnée à sa sensibilité.
+
+   B. Les enjeux du cloisonnement et son périmètre.
+
+      L'enjeu du découpage en Tiers est d'empêcher qu'un attaquant progresse d'une zone de moindre confiance vers une zone supérieure, ce qui repose sur le traitement des chemins d'attaque propres à AD mais aussi sur un cloisonnement réseau, système et physique global, le cloisonnement réseau seul étant insuffisant car les protocoles Windows comme RPC, SMB ou Kerberos ne peuvent être filtrés en contenu par un pare-feu. Le périmètre idéal d'application du modèle est la forêt AD, frontière de sécurité stricte, sauf en environnement multiforêt où les relations d'approbation peuvent étendre les Tiers aux forêts approuvées.
+
+   C. La méthodologie itérative de cloisonnement.
+
+      Le périmètre d'application du modèle doit être défini, les valeurs métiers du Tier un identifiées, les chemins d'attaque vers le Tier zéro et le Tier un analysés, les ressources catégorisées en Tiers, l'administration de chaque Tier cloisonnée, les travaux d'architecture nécessaires menés, l'exposition de chaque Tier minimisée, les durcissements systèmes et logiciels appliqués, les droits octroyés par délégation fine, et les événements de sécurité journalisés et centralisés avec détection automatique des incidents, ce processus devant être itératif et amélioré continuellement.
+
+II. LE DURCISSEMENT DU TIER ZÉRO.
+
+   A. Les versions et la configuration système.
+
+      Les niveaux fonctionnels des domaines et forêts AD doivent être augmentés, les systèmes du Tier zéro montés en version Windows récente, maintenus en condition de sécurité de façon réactive, avec application des security baselines et usage de Windows en mode Server Core sur ce périmètre pour réduire la surface d'attaque.
+
+   B. Les objets et relations d'approbation AD.
+
+      Les chemins de contrôle vers les conteneurs système ou de configuration et vers les comptes et groupes de sécurité du Tier zéro doivent être analysés, leurs permissions préservées et contrôlées. Les relations d'approbation AD sortantes extraforêt doivent voir leur configuration durcie, idéalement avec authentification sélective, et la délégation Kerberos à travers les relations entrantes interdite. Des outils d'analyse des chemins de contrôle AD, y compris le service ADS de l'ANSSI si applicable, doivent être utilisés régulièrement.
+
+III. LA GESTION DES SECRETS D'AUTHENTIFICATION.
+
+   A. La dissémination des secrets réutilisables.
+
+      La dissémination de toute forme de secret d'authentification réutilisable doit être maîtrisée, les mots de passe des comptes administrateurs locaux diversifiés et renouvelés automatiquement, les secrets figurant dans des scripts traités, les mots de passe enregistrés dans des GPP prohibés, les tâches planifiées et services Windows traités tant pour leurs secrets que pour leur contenu exécuté, et les accès aux partages réseau hébergeant du contenu exécutable protégés.
+
+   B. Les IGC, mots de passe et comptes sensibles.
+
+      Les risques inhérents aux IGC pesant sur le Tier zéro doivent être traités, les certificats faibles ou vulnérables proscrits, les secrets d'accès à des API sensibles et les accès physiques à des secrets réutilisables du Tier zéro traités. Des stratégies de mot de passe affinées doivent être appliquées aux comptes du Tier zéro, le mot de passe du compte krbtgt renouvelé régulièrement, le renouvellement des comptes de trust et des comptes d'ordinateur sensibles contrôlé, et la robustesse du mot de passe du compte administrateur intégré assurée.
+
+IV. LA CATÉGORISATION DES INFRASTRUCTURES SUPPORT.
+
+      Les infrastructures de sauvegarde, de stockage en réseau et de virtualisation doivent voir leur catégorisation en Tiers traitée spécifiquement, la présence d'agents de gestion centralisée sur le Tier zéro limitée, et le cas des solutions de protection contre les menaces traité à part. Une architecture WSUS préservant le cloisonnement doit être mise en œuvre, les protocoles de communication réseau des ressources du Tier zéro sécurisés, et les flux réseau filtrés entre le Tier zéro et les réseaux non maîtrisés comme avec le reste du système d'information. La sécurité physique des ressources du Tier zéro doit recevoir une attention particulière, avec déploiement de RODC sécurisés si elle n'est pas assurée, et une unité organisationnelle dédiée regroupant les objets du Tier zéro avec des stratégies de sécurité restreintes.
+
+V. LES SECRETS RÉUTILISABLES, NTLM ET KERBEROS.
+
+      Les risques spécifiques de réutilisabilité des condensats NTLM et des secrets Kerberos doivent être traités, Windows Defender Credential Guard n'étant utilisé que dans une démarche de défense en profondeur et son pendant Remote Credential Guard jamais entre zones de confiance hétérogènes. La connexion à des ressources de moindre confiance doit être encadrée et restreinte, les délégations Kerberos traitées, la préauthentification Kerberos préservée pour les comptes du Tier zéro, et le blindage Kerberos activé sur ses systèmes. L'exposition par SPN de secrets du Tier zéro réutilisables doit être proscrite. L'authentification NTLM des comptes du Tier zéro doit être interdite, sa configuration durcie ailleurs, le trafic NTLM sortant bloqué depuis le Tier zéro puis étendu à tout le système d'information si possible, et les services LDAP, SMB et Web du Tier zéro protégés contre les attaques de relais NTLM.
+
+VI. L'ADMINISTRATION À DISTANCE ET LES POSTES D'ADMINISTRATION.
+
+      L'utilisation des clients de connexion distante doit être encadrée et restreinte, ceux dont l'usage reste autorisé étant durcis. Le Tier zéro doit être administré depuis des postes d'administration physiquement dédiés, toute mutualisation encadrée voire proscrite selon le contexte, et les postes multiniveaux catégorisés dans le Tier adéquat. L'accès à des ressources de zones de moindre confiance depuis le Tier zéro doit être restreint, de même que les comptes autorisés pour le déport d'affichage. Les règles de positionnement des ressources d'administration intermédiaires doivent être respectées, le déploiement d'une forêt d'administration dédiée évité sauf nécessité, auquel cas son cloisonnement doit être assuré.
+
+POINTS D'ATTENTION.
+
+      Une organisation qui compte exagérément sur le seul cloisonnement réseau pour sécuriser un système reposant sur AD se trompe : les protocoles Windows sous-jacents comme RPC, SMB et Kerberos doivent être autorisés entre systèmes et contrôleurs de domaine pour le bon fonctionnement de l'annuaire, sans que les pare-feux ne puissent contrôler le contenu légitime ou malveillant de ces communications.
+
+      Un attaquant cherche généralement à s'élever vers le Tier zéro, qui donne de facto le contrôle des Tiers un et deux, mais une attaque ciblée peut aussi viser directement l'exfiltration discrète de valeurs métiers via des accès peu privilégiés, notamment des API, moins supervisées et dont les secrets sont rarement renouvelés.
+
+      Windows Defender Remote Credential Guard ne doit jamais être utilisé entre zones de confiance hétérogènes, sous peine d'exposer les secrets réutilisables d'un Tier de haute confiance à une machine de moindre confiance.
+
+EXEMPLES CITÉS.
+
+      Les contrôleurs de domaine AD sont cités comme exemple typique de ressource de Tier zéro, un serveur de gestion de code source ou un équipement critique de chaîne de production comme exemple de Tier un, et un poste de travail bureautique comme exemple de Tier deux.
+
+      Le compte krbtgt, dont le mot de passe doit être renouvelé régulièrement, est cité comme un compte particulièrement sensible du Tier zéro puisqu'il porte la confiance de l'ensemble des tickets Kerberos du domaine.
+
+      Les protocoles RPC, SMB et Kerberos sont cités comme exemples de protocoles sous-jacents à AD que les pare-feux doivent autoriser sans pouvoir en contrôler le contenu.
+
+      Les attaques de relais NTLM contre les services LDAP, SMB et Web du Tier zéro sont citées comme des menaces spécifiques nécessitant des protections dédiées par protocole.

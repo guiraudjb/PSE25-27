@@ -1,0 +1,71 @@
+RECOMMANDATIONS DE SÉCURITÉ POUR LA JOURNALISATION DES SYSTÈMES MICROSOFT WINDOWS EN ENVIRONNEMENT ACTIVE DIRECTORY, ANSSI, ANSSI-PB-090.
+
+LEXIQUE COMPLET.
+
+      Sysmon, System Monitor, est un utilitaire gratuit de la suite Sysinternals de Microsoft offrant une journalisation avancée et configurable via un fichier XML, en complément des stratégies d'audit natives de Windows.
+
+      Le service WECSvc, Windows Event Collector, centralise sur un ou plusieurs serveurs de collecte les événements transférés par les systèmes du parc, chaque système étant alors un client WEF, Windows Event Forwarding, du service Journal d'événements de Windows.
+
+      Un abonnement, ou subscription, configuré sur un serveur collecteur précise la sélection d'événements ciblés, journaux, sévérités, fournisseurs ou identifiants, ainsi que les ordinateurs concernés et les paramètres de transfert.
+
+      Le mode Push désigne une configuration où les clients WEF initient l'envoi de leurs événements vers le serveur de collecte, par opposition au mode Pull où c'est le serveur qui vient interroger les clients.
+
+      Une enclave de collecte est la zone du système d'information interne d'une entité regroupant les dispositifs de centralisation des événements, qui reste dans le périmètre de responsabilité de l'entité même en cas d'externalisation du service de détection.
+
+COURS DÉTAILLÉ.
+
+I. LE CADRE ET LES PRÉREQUIS DE LA JOURNALISATION.
+
+   A. L'objectif et le périmètre du guide.
+
+      Ce guide décline pour les technologies Microsoft Windows les concepts génériques du guide de l'ANSSI sur l'architecture d'un système de journalisation, sans s'y substituer. Son périmètre couvre la journalisation locale des systèmes Windows et la centralisation des événements dans l'enclave de collecte interne de l'entité, à l'exclusion des systèmes hors du système d'information sans connectivité régulière. Les recommandations sont graduées d'un niveau à l'état de l'art, préparant le terrain à une réponse à incident sans détection proactive, jusqu'à un niveau renforcé nécessitant au minimum deux ingénieurs en détection à temps plein pour son maintien.
+
+   B. La synchronisation des horloges.
+
+      Les horloges des équipements doivent être synchronisées sur plusieurs sources de temps internes cohérentes entre elles, elles-mêmes synchronisées sur des sources externes fiables sauf réseau physiquement isolé. En environnement AD, les systèmes se synchronisent par défaut sur les contrôleurs de domaine, configuration à conserver, la source de temps de la forêt devant elle-même être synchronisée sur les serveurs NTP de référence, cette cohérence temporelle étant également un prérequis du bon fonctionnement de Kerberos.
+
+II. LA JOURNALISATION LOCALE SUR LES SYSTÈMES WINDOWS.
+
+   A. Les journaux utiles et les applications tierces.
+
+      Les journaux Windows utiles aux activités de détection et d'analyse doivent être identifiés et activés, cette stratégie devant être continuellement révisée en fonction de l'évolution du système d'information et des menaces. Les applications tierces doivent être privilégiées lorsqu'elles disposent nativement d'une fonctionnalité de journalisation pertinente écrivant dans des journaux gérés par le système Windows selon un format structuré, plutôt que dans le journal générique Application ou un format propriétaire.
+
+   B. Le stockage local et les stratégies d'audit.
+
+      Une rotation automatique par effacement des événements les plus anciens doit être configurée par défaut, avec des tailles de journaux permettant une rétention suffisante, la stratégie de rétention locale devenant accessoire une fois la centralisation mise en œuvre mais restant nécessaire pour les journaux non centralisés. La configuration par défaut des stratégies d'audit avancées de Windows étant insuffisante pour détecter ou analyser des incidents, elle doit être modifiée pour équilibrer volumétrie et pertinence des informations, sur la base de l'analyse de risque du système d'information.
+
+   C. La journalisation avancée par sysmon.
+
+      Sysmon doit être déployé, installé en service Windows démarrant automatiquement, sur les systèmes des entités exposées à un niveau de risque accru, avec une phase de test préalable en raison de son absence de support logiciel officiel et des risques de stabilité, notamment au-delà de deux mille lignes de configuration. Sa configuration, décrite par un fichier XML de règles combinant type d'événement, champs spécifiques et conditions, doit être élaborée et maintenue par des équipes dédiées disposant d'une bonne connaissance du système d'information, capables de déployer rapidement de nouvelles règles face à une menace émergente.
+
+III. LA COLLECTE DES JOURNAUX D'ÉVÉNEMENTS.
+
+   A. Les services natifs de centralisation.
+
+      La centralisation des événements repose en environnement Microsoft sur le service WEC, Windows Event Collector, exécuté sur les serveurs de collecte, et le service WEF, Windows Event Forwarding, porté par chaque client qui transfère ses événements selon les critères définis par des abonnements. Des serveurs de collecte doivent être déployés, le déploiement de plusieurs serveurs permettant la haute disponibilité par transfert redondant vers plusieurs collecteurs, la répartition de charge sur de grands parcs, le chaînage dans une architecture étendue, et la gestion de durées de conservation différenciées.
+
+   B. La sécurisation et la sélection des événements transférés.
+
+      Les événements doivent être centralisés dans leur format brut, le dimensionnement et la disponibilité du stockage centralisé surveillés, et le transfert des événements sécurisé. Une liste standard d'événements Windows doit être centralisée, complétée si besoin d'une liste personnalisée adaptée au contexte. Les abonnements configurés en mode Push doivent être privilégiés, le mode Pull présentant des risques nécessitant une attention particulière.
+
+   C. Le cloisonnement des serveurs de collecte et les solutions tierces.
+
+      Les serveurs de collecte doivent être cloisonnés au sein d'une architecture dédiée. Les solutions logicielles tierces de collecte doivent être proscrites sur les ressources sensibles de l'annuaire, ou à défaut ces ressources protégées spécifiquement en cas d'utilisation d'une telle solution, dont le maintien en condition de sécurité doit lui-même être assuré.
+
+POINTS D'ATTENTION.
+
+      La supervision de la sécurité par la journalisation ne peut jamais constituer la seule mesure de protection d'un système d'information ; elle est complémentaire des analyses de risque, des travaux d'architecture, des configurations adaptées et des audits de sécurité.
+
+      Sysmon n'est fourni par Microsoft sans aucun support logiciel officiel, un déploiement rapide et généralisé sur des systèmes critiques est donc déconseillé sans phase de test préalable, de même qu'il est préférable d'attendre une mise à jour mineure corrigeant les bugs avant de déployer une toute nouvelle version majeure en production.
+
+      La configuration d'un client WEF vers plusieurs serveurs WEC se traduit par l'envoi redondant de chaque événement à chacun des serveurs, ce qui doit être anticipé dans le dimensionnement du stockage centralisé.
+
+EXEMPLES CITÉS.
+
+      L'événement de sécurité 4625, caractérisant un échec d'ouverture de session, est cité en exemple d'événement pouvant faire l'objet d'un abonnement de collecte très restreint sur un serveur WECSvc.
+
+      Les fichiers de configuration sysmon-config de SwiftOnSecurity et sysmon-modular d'Olaf Hartong sont cités comme sources d'inspiration publiques pour élaborer une configuration sysmon, à adapter impérativement au contexte de chaque système d'information.
+
+      Le site Web de RENATER est cité en exemple de source proposant une liste de serveurs de temps NTP français.
+
+      Un SIEM, Security Information and Event Management, est cité comme type de solution spécialisée exploitée par les centres opérationnels de cybersécurité en aval des serveurs collecteurs Windows.

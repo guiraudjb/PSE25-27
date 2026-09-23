@@ -1,0 +1,87 @@
+RECOMMANDATIONS DE CONFIGURATION D'UN SYSTÈME GNU/LINUX, ANSSI, ANSSI-BP-028.
+
+LEXIQUE COMPLET.
+
+      Les niveaux de durcissement de ce guide sont gradués en quatre paliers cumulatifs, minimal à appliquer systématiquement, intermédiaire à rechercher dès que possible, renforcé pour les systèmes à fort besoin de sécurité, et élevé réservé aux équipes disposant des compétences et du temps nécessaires à son maintien.
+
+      Le principe de minimisation vise à réduire la surface d'attaque en évitant toute complexité inutile lors de la conception et de l'installation d'un système.
+
+      Le principe de moindre privilège stipule que tout objet ou entité géré par un système ne dispose que des droits strictement nécessaires à son exécution.
+
+      Le principe de défense en profondeur impose plusieurs couches de sécurité indépendantes et complémentaires afin de retarder un attaquant et de multiplier les occasions de détection.
+
+      Un LSM, Linux Security Module, est un cadre du noyau Linux permettant d'implémenter des mécanismes de contrôle d'accès obligatoire, MAC, comme AppArmor ou SELinux, en complément du modèle traditionnel Unix discrétionnaire, DAC.
+
+      Le cloisonnement regroupe les techniques isolant les processus d'un même système, historiquement par chroot, aujourd'hui par les espaces de noms Linux, seccomp pour le filtrage d'appels système, et les cgroups pour l'isolation des ressources.
+
+      Le service auditd est un service de journalisation avancé capable d'enregistrer des appels système, des accès à des fichiers particuliers ou des insertions de modules, selon des règles définies par l'administrateur.
+
+COURS DÉTAILLÉ.
+
+I. LES PRINCIPES GÉNÉRAUX ET LES MENACES.
+
+   A. Les niveaux de durcissement et les objectifs des attaquants.
+
+      Les recommandations s'appliquent de façon cumulative selon quatre niveaux, le minimal étant systématique et les niveaux renforcé et élevé n'étant pertinents que pour des systèmes à besoin de sécurité important, sous peine de devenir contre-productifs sans personnel qualifié pour leur maintien. Les menaces visent trois objectifs, la disponibilité par surcharge ou déni de service, la confidentialité par vol de données ou élévation de privilèges permettant une latéralisation, et l'intégrité par détournement des ressources ou mise en place de moyens de persistance, certaines menaces comme les rançongiciels combinant plusieurs de ces objectifs.
+
+   B. Les trois principes fondamentaux.
+
+      Le principe de minimisation réduit la surface d'attaque et facilite la surveillance en évitant toute complexité inutile. Le principe de moindre privilège limite les conséquences d'une vulnérabilité aux seuls privilèges octroyés et complexifie l'escalade de privilèges. Le principe de défense en profondeur combine authentification systématique avant toute opération privilégiée, journalisation centralisée, et usage préférentiel de services implémentant cloisonnement ou séparation de privilèges, chaque couche franchie générant des signaux facilitant détection et remédiation.
+
+II. LA CONFIGURATION MATÉRIELLE ET LE NOYAU.
+
+   A. Le matériel et le démarrage sécurisé.
+
+      Le choix et la configuration du matériel doivent suivre le guide dédié aux postes x86. Le BIOS ou l'UEFI doit être configuré et protégé, le démarrage sécurisé UEFI activé, ses clés préchargées idéalement remplacées, et un mot de passe défini pour le chargeur de démarrage, avec protection des paramètres de ligne de commande du noyau et de l'initramfs.
+
+   B. La configuration dynamique et statique du noyau.
+
+      L'IOMMU doit être activé, la mémoire, le noyau lui-même, les processus, le réseau IPv4 et les systèmes de fichiers doivent voir leurs options de configuration dynamique paramétrées, le chargement de modules noyau étant à désactiver en niveau renforcé et le plan IPv6 désactivé s'il n'est pas utilisé. Le LSM Yama doit être activé et configuré. De très nombreuses options de compilation du noyau, pour la gestion de la mémoire, les structures de données, l'allocateur mémoire, la gestion des modules, les événements anormaux, les primitives de sécurité, les plugins du compilateur, la pile réseau et divers comportements, ainsi que des options spécifiques aux architectures 32 bits, x86_64, ARM et ARM 64 bits, sont recommandées à des niveaux renforcé et élevé pour les administrateurs compilant leur propre noyau.
+
+III. LA CONFIGURATION SYSTÈME.
+
+   A. Le partitionnement et les comptes.
+
+      Un partitionnement type doit séparer les zones sensibles, avec un accès restreint au dossier /boot. Les comptes utilisateur inutilisés doivent être désactivés, des mots de passe robustes utilisés, et les sessions locales expirées après un délai d'inactivité. L'imputabilité des actions d'administration doit être assurée, soit par des comptes d'administration dédiés combinés à sudo, le compte root étant alors désactivé par verrouillage du mot de passe et changement du shell de login vers /bin/false, soit par la journalisation de la création de tout processus via auditd avec les règles execve et execveat, ces deux approches pouvant se combiner. Les comptes de service doivent être désactivés pour toute connexion et chaque service métier doit disposer de son propre compte système exclusif, un partage du compte générique nobody entre plusieurs services permettant à ceux-ci de s'altérer mutuellement.
+
+   B. Le contrôle d'accès obligatoire.
+
+      Au-delà du modèle traditionnel Unix, la valeur par défaut d'UMASK doit être modifiée et des fonctionnalités de contrôle d'accès obligatoire employées. Un groupe dédié à sudo doit être créé, ses directives de configuration adaptées, des utilisateurs cibles non privilégiés préférés, l'utilisation de commandes nécessitant la directive EXEC limitée, les négations bannies des spécifications sudo, les arguments précisés, et les fichiers édités de façon sécurisée avec sudo. AppArmor, LSM par défaut sous SUSE et Ubuntu reposant sur des chemins de fichiers par exécutable, doit voir ses profils activés en mode enforce plutôt que complaining lorsque la distribution le supporte. SELinux, largement utilisé sous les dérivées de Red Hat, doit être activé avec la politique targeted, les utilisateurs interactifs non privilégiés confinés, ses variables paramétrées, et ses outils de débogage désinstallés une fois la politique validée.
+
+   C. Les fichiers, les paquets et la maintenance.
+
+      Les droits d'accès aux fichiers et répertoires sensibles doivent être restreints, les secrets et droits changés dès l'installation, les accès aux sockets et pipes nommées restreints, les fichiers sans utilisateur ou groupe connu évités, le sticky bit activé sur les répertoires inscriptibles, les répertoires temporaires séparés par utilisateur, et l'usage d'exécutables setuid ou setgid évité, en particulier setuid ou setgid root en niveau renforcé. Seuls les paquets strictement nécessaires doivent être installés, depuis des dépôts de confiance et si possible durcis, avec des mises à jour régulières.
+
+IV. LA CONFIGURATION DES SERVICES.
+
+   A. Le cloisonnement et les services système.
+
+      Conformément au principe de minimisation, les services doivent être cloisonnés à l'aide des mécanismes de confinement, de filtrage et d'isolation du noyau, espaces de noms, seccomp, cgroups, ou de solutions de plus haut niveau comme les conteneurs, l'émulation ou les hyperviseurs, tout composant de cloisonnement devant lui-même être durci car la compromission du noyau ou de l'hyperviseur sous-jacent compromet l'ensemble des environnements isolés. Les authentifications distantes doivent être sécurisées par PAM, les mots de passe stockés protégés, les accès aux bases utilisateur distantes sécurisés, et les comptes système séparés des comptes d'administration de l'annuaire.
+
+   B. La journalisation, la messagerie et l'intégrité.
+
+      Un système de journalisation doit être mis en place conformément au guide dédié, avec des journaux d'activité dédiés par service, accessibles au seul serveur syslog et non lisibles, modifiables ou supprimables par le service concerné directement, et l'activité système journalisée par auditd, capable de surveiller les appels système, les accès à des fichiers particuliers et les insertions de modules. Le service de messagerie locale doit être durci et les comptes de service dotés d'un alias de messagerie. L'intégrité des fichiers doit être scellée et vérifiée, la base de données des scellés elle-même protégée.
+
+   C. Les services réseau.
+
+      Les services réseau doivent être cloisonnés, les services exposés durcis et surveillés, et leur surface d'attaque réduite au strict nécessaire.
+
+POINTS D'ATTENTION.
+
+      Verrouiller le compte root et désactiver son shell de login n'empêche pas un administrateur autorisé d'exécuter sudo bash pour obtenir malgré tout un shell root ; ces mesures techniques doivent donc être combinées à une interdiction organisationnelle de l'usage direct de ce compte.
+
+      Plusieurs services partageant le compte générique nobody se retrouvent avec les mêmes privilèges système et peuvent altérer mutuellement leur exécution, modification de configuration, envoi de signaux ou usage de ptrace, d'où la nécessité d'un compte système dédié par service métier.
+
+      La compromission du noyau ou de l'hyperviseur sous-jacent à une solution de cloisonnement, conteneurs ou machines virtuelles, entraîne la compromission de l'ensemble des environnements qu'il isole.
+
+      La journalisation systématique de la création de tout processus via auditd peut générer un volume de journaux très important selon l'activité du système, ce qui impose de la combiner à un export régulier vers un serveur centralisé.
+
+EXEMPLES CITÉS.
+
+      Les commandes usermod -L -e 1 <compte> et usermod -s /bin/false <compte> illustrent respectivement le verrouillage d'un compte et la désactivation de son shell de login.
+
+      Les règles auditd -a exit,always -F arch=b64 -S execve,execveat et leur équivalent en architecture 32 bits illustrent la journalisation de la création de tout processus.
+
+      La commande aa-status illustre la vérification de l'état d'activation d'AppArmor et du nombre de profils en mode enforce sur un système.
+
+      Un fichier /etc/audit/audit.rules surveillant l'exécution d'insmod, de modprobe et de rmmod, ainsi que les modifications du répertoire /etc/ et les appels système ptrace ou get_kernel_syms, illustre une configuration type d'auditd pour la surveillance système.

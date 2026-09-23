@@ -1,0 +1,123 @@
+RAPPORT D'ACTIVITÉ DE L'ANSSI 2025.
+
+LEXIQUE COMPLET.
+
+      La Revue nationale stratégique 2025 est le document qui vise à préparer la France à un environnement géopolitique dégradé, fixant l'objectif d'une résilience cyber de premier rang capable de surmonter une vague massive d'attaques informatiques.
+
+      La Stratégie nationale de cybersécurité 2026-2030 est le volet cyber de la Revue nationale stratégique, parue en janvier 2026, structurée en cinq piliers pour former des talents, élever le niveau général de cybersécurité et entraver la cybermenace.
+
+      Le plan stratégique de l'ANSSI 2025-2027 est le document qui décline la Stratégie nationale de cybersécurité en quatre axes, amplifier la réponse cyber, développer les expertises, promouvoir l'action européenne et internationale, et renforcer les enjeux sociétaux.
+
+      REMPAR25 est l'exercice de crise cyber massifié organisé le 18 septembre 2025 par l'ANSSI, simulant un scénario de black-out numérique et ayant réuni 5 680 participants issus de 1 263 organisations.
+
+      Le C4, Centre de coordination des crises cyber, est la structure placée sous l'égide du SGDSN, composée de l'ANSSI, du COMCYBER, de la DGA, de la DGSE, de la DGSI et du ministère de l'Europe et des Affaires étrangères.
+
+      L'APT28 est le mode opératoire d'attaque, attribué le 29 avril 2025 par la France au renseignement militaire russe, le GRU, ciblant des entités gouvernementales, diplomatiques et de recherche en France, en Europe, en Ukraine et en Amérique du Nord.
+
+      Le Cyber Resilience Act, ou CRA, est le règlement européen publié le 20 novembre 2024 définissant des exigences minimales de cybersécurité pour les produits numériques, applicable progressivement entre juin 2026 et décembre 2027.
+
+      L'EUCC, EU Common Criteria, est le schéma européen de certification de cybersécurité, pour lequel l'ANSSI a émis les deux premiers certificats européens le 31 mars 2025.
+
+      MesServicesCyber est la plateforme numérique de l'ANSSI, lancée en avril 2025, qui centralise outils, guides et ressources pour aider toute organisation à renforcer sa cybersécurité.
+
+      Le NCC-FR, Centre de coordination cyber français, est la déclinaison française du réseau européen des centres de coordination nationaux, hébergée et incarnée par l'ANSSI, cofinancée par l'Union européenne.
+
+      L'INESIA, Institut national pour l'évaluation et la sécurité de l'intelligence artificielle, est la structure pilotée par le SGDSN et la DGE qui fédère les acteurs français de la sécurité et de l'évaluation de l'IA autour de trois pôles, régulation, risques systémiques et fiabilité.
+
+      Le règlement européen sur l'intelligence artificielle, ou AI Act, est le premier cadre législatif mondial encadrant le développement et l'utilisation des systèmes d'IA, entré en vigueur le 1er août 2024.
+
+      PANAME, Privacy Auditing of AI Models, est le projet collectif lancé en juin 2025 par l'ANSSI, la CNIL, le PEReN et le PEPR Cybersécurité pour développer une bibliothèque open source d'audit de confidentialité des modèles d'IA.
+
+      La cryptographie post-quantique, ou PQC, est l'ensemble des algorithmes cryptographiques assurant une sécurité contre la menace d'un futur ordinateur quantique.
+
+      CyCLONe, Cyber Crisis Liaison Organisation Network, est le réseau européen qui rassemble les agences en charge de la gestion de crise cybernétique, complémentaire du CSIRT Network.
+
+      Locked Shields est l'exercice international de cyberdéfense auquel a participé l'ANSSI du 28 avril au 9 mai 2025, rassemblant 4 000 spécialistes de 41 nations.
+
+      ENDGAME est l'opération de coopération judiciaire internationale de démantèlement de la cybercriminalité, à laquelle l'ANSSI a apporté son soutien en mai et novembre 2025.
+
+COURS DÉTAILLÉ.
+
+I. UN CONTEXTE STRATÉGIQUE REFONDU.
+
+   A. La Revue nationale stratégique et la Stratégie nationale de cybersécurité.
+
+      Selon l'édito de Vincent Strubel, l'exercice REMPAR25 a réuni un nombre inédit de 1 263 organisations, mais ce chiffre demeure modeste à l'échelle de la Nation face à un scénario d'attaques informatiques massives à anticiper. La Revue nationale stratégique 2025 fixe pour la France l'objectif d'une résilience cyber de premier rang, entendue comme la capacité à surmonter une vague importante d'attaques informatiques. La Stratégie nationale de cybersécurité 2026-2030, parue en janvier 2026, en constitue le volet cyber, structurée en cinq piliers appelant à former davantage de talents, élever le niveau général de cybersécurité, préparer la Nation aux crises, entraver la cybermenace et préserver la maîtrise des fondements numériques.
+
+   B. Le plan stratégique de l'ANSSI 2025-2027.
+
+      Ce plan se décline en quatre axes. Amplifier et coordonner la réponse cyber face à la massification de la menace. Développer les expertises indispensables pour contrer les menaces cyber. Promouvoir une action cyber européenne et internationale efficace. Renforcer la prise en compte des enjeux sociétaux, notamment environnementaux, dans l'action de l'Agence.
+
+II. L'ANSSI EN CHIFFRES ET SON ORGANISATION EN 2025.
+
+   A. L'Agence en chiffres.
+
+      En 2025, l'ANSSI comptait 658 agents, avec une moyenne d'âge de 38 ans, pour un budget de 44,2 millions d'euros hors masse salariale, dont 16,3 millions d'euros apportés par un amendement gouvernemental de septembre 2025 au profit de la Stratégie nationale de cybersécurité 2026-2030. L'Agence a traité 3 586 événements de sécurité, en baisse de 22 pour cent par rapport à 2024, mais 1 366 incidents confirmés, en hausse de 0,4 pour cent. Elle a réalisé 84 762 rapports d'audits automatisés et formé 1 543 personnes au CFSSI.
+
+   B. Une Agence toujours implantée sur quatre sites.
+
+      L'ANSSI est implantée sur l'Hôtel national des Invalides et la tour Mercure à Paris, le Campus Cyber à La Défense et ArteFact à Rennes, ce qui la rapproche de ses bénéficiaires et renforce les synergies entre acteurs publics et privés.
+
+III. FACE À LA MASSIFICATION DE LA MENACE, DÉPLOYER ET COORDONNER LA RÉPONSE CYBER.
+
+   A. La poursuite de la transposition de NIS 2.
+
+      En 2025, le projet de loi relatif à la résilience des infrastructures critiques et au renforcement de la cybersécurité, qui transpose la directive NIS 2, a franchi des jalons importants, avec son adoption en première lecture au Sénat le 12 mars 2025 et en commission spéciale à l'Assemblée nationale le 10 septembre 2025. L'ANSSI a mis en ligne le 24 novembre 2025 un service de pré-enregistrement pour les futures entités assujetties, et a publié une version bêta du référentiel de mesures de cybersécurité recommandées pour les organisations concernées.
+
+   B. Le Cyber Resilience Act et le rôle de l'ANFR.
+
+      Le Cyber Resilience Act impose des obligations de cybersécurité aux fabricants, importateurs et distributeurs de produits numériques, sous peine de sanctions pouvant atteindre 15 millions d'euros ou 2,5 pour cent du chiffre d'affaires mondial. Le dispositif de surveillance de marché est assuré en France par l'Agence nationale des fréquences, l'ANFR, avec le soutien de l'ANSSI, qui joue également le rôle d'autorité notifiante pour accréditer les organismes d'évaluation de la conformité.
+
+   C. L'EUCC et le rôle de double autorité de l'ANSSI.
+
+      Le Centre de certification national, CCN, a reçu l'accréditation du COFRAC le 28 mars 2025 pour trois domaines, cartes à puce, dispositifs matériels avec boîtiers de sécurité, et produits réseaux ou logiciels génériques. Le 31 mars 2025, l'ANSSI a émis les deux premiers certificats EUCC de l'Union européenne. Sur l'année, une dizaine de certificats EUCC ont été émis au niveau européen, dont cinq français, par six centres d'évaluation français autorisés.
+
+   D. La Mission Contrôles et Supervision.
+
+      Selon l'échange avec Matthieu Autret et Agate Rossetti, la Mission Contrôles et Supervision est fonctionnellement séparée des fonctions d'accompagnement et de conseil de l'Agence. Elle se prépare à réaliser des procédures de contrôle pouvant conduire à une clôture, des mesures d'exécution, ou à la saisine d'une commission indépendante rattachée au SGDSN, composée de magistrats et de personnalités qualifiées.
+
+   E. Le développement d'une offre de services numériques.
+
+      MesServicesCyber, lancé en avril 2025, propose un test de maturité cyber en trois minutes et le diagnostic Cyberdépart, et a permis à plus de 300 entités bénéficiaires, dont 50 nouvelles en 2025, de consulter plus de 20 000 ressources et de réaliser plus de 9 900 tests de maturité. JeCliqueOuPas a été ouvert aux connexions via ProConnect et à l'utilisation par API, avec plus de 10 millions de fichiers analysés. En mars 2025, MonServiceSécurisé a été désigné service à impact national par la DINUM.
+
+   F. Le développement des CSIRT et la fin de France Relance.
+
+      En 2025, 366 incidents ont été relayés du CERT-FR vers les CSIRT territoriaux, et l'Agence a eu 676 interactions avec l'écosystème des CSIRT territoriaux, sectoriels et ministériels. L'appel à manifestation d'intérêt AMIRALEC a permis de sélectionner 17 projets sur 74 dossiers reçus, pour 6,8 millions d'euros de subventions. Le programme des parcours de cybersécurité du plan France Relance a pris fin en 2025, après quatre ans et 100 millions d'euros investis, ayant fait progresser en moyenne les bénéficiaires d'un score de maturité cyber de D+ à B, au profit de 945 entités dont 707 collectivités territoriales.
+
+   G. La coopération européenne et internationale.
+
+      Le CSIRT Network et le réseau CyCLONe ont permis en 2025 une coordination renforcée face aux crises transfrontalières. La coopération franco-allemande avec le BSI s'est traduite par une déclaration commune sur la souveraineté numérique en novembre 2025. L'ANSSI a participé à l'exercice Locked Shields, rassemblant 4 000 spécialistes de 41 nations, où l'équipe franco-polonaise s'est classée deuxième. L'Agence a également soutenu l'opération judiciaire internationale ENDGAME de démantèlement de la cybercriminalité.
+
+   H. L'exercice REMPAR25 et l'attribution des attaques au GRU.
+
+      Le 18 septembre 2025, l'exercice de crise massifié REMPAR25 a réuni 5 680 participants venant de 1 263 organisations, répartis dans 13 régions et 9 territoires ultramarins, sur 19 sites d'accueil. Il a révélé l'importance des plans de continuité d'activité et permis à 95 pour cent des participants de mettre en place des actions concrètes de gestion de crise à l'issue de l'exercice. Le 29 avril 2025, la France a, pour la première fois, attribué publiquement un ensemble de cyberattaques utilisant le mode opératoire APT28 au renseignement militaire russe, le GRU, à la suite d'investigations menées par l'ANSSI et ses partenaires du C4.
+
+IV. SE PRÉPARER AUX TRANSFORMATIONS ET AUX RUPTURES TECHNOLOGIQUES.
+
+   A. L'intelligence artificielle, entre cybersécurité de l'IA, par l'IA et face à l'IA.
+
+      L'ANSSI travaille sur l'IA depuis 2017 et a élargi ses réflexions dès 2022, déclinant les enjeux en trois catégories, la cybersécurité de l'IA elle-même, la cybersécurité face à l'IA utilisée par les attaquants, et la cybersécurité par l'IA au service de la défense. À l'occasion du Sommet pour l'action sur l'IA de février 2025, l'Agence a publié une analyse de risques co-signée par 19 partenaires internationaux et 5 partenaires nationaux, et organisé un exercice de crise cyber sur l'IA ayant mobilisé près de 200 participants.
+
+   B. Le règlement européen sur l'IA et l'INESIA.
+
+      Le règlement européen sur l'IA, dit AI Act, entré en vigueur le 1er août 2024, catégorise les systèmes d'IA selon leur niveau de risque. En France, la gouvernance de sa mise en œuvre a été confiée en septembre 2025 à une organisation décentralisée coordonnée par la DGE et la DGCCRF, l'ANSSI intervenant en appui sur la cybersécurité. L'INESIA, pilotée par le SGDSN et la DGE, fédère les acteurs français de la sécurité et de l'évaluation de l'IA, faisant de la France un membre du réseau international des instituts de sécurité de l'IA.
+
+   C. La transition vers la cryptographie post-quantique.
+
+      La cryptographie post-quantique reste un chantier prioritaire pour anticiper la menace d'un futur ordinateur quantique capable de remettre en cause les mécanismes cryptographiques actuels, dans la continuité des travaux engagés en 2024.
+
+POINTS D'ATTENTION.
+
+      L'édito de Vincent Strubel articule tout le rapport 2025 autour d'un même constat, la France doit se préparer à un scénario d'attaques informatiques massives, et ce constat structure à la fois la Revue nationale stratégique, la future Stratégie nationale de cybersécurité 2026-2030 et l'exercice REMPAR25.
+
+      L'attribution publique des attaques APT28 au GRU russe, le 29 avril 2025, constitue une première pour la France et illustre un changement de posture, l'ANSSI et le C4 acceptant désormais de nommer publiquement un attaquant étatique.
+
+      La fin du programme France Relance en 2025, après quatre ans et 100 millions d'euros investis, laisse un héritage d'outils et de méthodes que l'ANSSI cherche à réinvestir dans la préparation à NIS 2.
+
+EXEMPLES CITES.
+
+      L'exercice REMPAR25 du 18 septembre 2025, simulant un scénario de black-out numérique auprès de 1 263 organisations.
+
+      Les deux premiers certificats EUCC délivrés par l'ANSSI le 31 mars 2025.
+
+      La plateforme MesServicesCyber, lancée en avril 2025, avec son test de maturité cyber en trois minutes.

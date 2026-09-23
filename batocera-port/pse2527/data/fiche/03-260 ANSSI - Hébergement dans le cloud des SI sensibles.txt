@@ -1,0 +1,93 @@
+RECOMMANDATIONS POUR L'HÉBERGEMENT DANS LE CLOUD DES SYSTÈMES D'INFORMATION SENSIBLES, ANSSI.
+
+LEXIQUE COMPLET.
+
+      Une loi extraterritoriale est une législation qui impose à un hébergeur soumis à son autorité de transmettre à ses autorités nationales les données de ses clients, sans voie de recours ni information de ces derniers.
+
+      La doctrine cloud au centre est la doctrine de l'État française, animée par la Direction interministérielle du numérique, DINUM, imposant l'hébergement des systèmes d'information sensibles concernés dans des offres cloud qualifiées SecNumCloud.
+
+      SecNumCloud est le référentiel élaboré par l'ANSSI qui propose un ensemble de règles de sécurité et de bonnes pratiques d'hygiène informatique, garantissant un haut niveau d'exigence technique, opérationnel et juridique, dont découle une qualification de sécurité, ou visa de sécurité.
+
+      Une offre cloud publique est une offre mutualisée pour l'ensemble des clients de l'offreur, tandis qu'une offre cloud privée est une offre dont les ressources sont physiquement dédiées à l'entité souscrivant.
+
+      Une offre cloud communautaire est une offre physiquement dédiée à un ensemble d'entités d'intérêt commun, étatiques ou privées, et une offre cloud interne est une offre déployée en interne d'une entité pour ses besoins propres.
+
+      Un système d'information d'importance vitale, ou SIIV, est un système pour lequel l'atteinte à la sécurité ou au fonctionnement risquerait de diminuer d'une façon importante le potentiel de guerre ou économique, la sécurité ou la capacité de survie de la Nation.
+
+      La menace stratégique désigne les attaques informatiques persistantes et ciblées, menées ou financées par un État, à des fins d'espionnage, de pré-positionnement ou de déstabilisation.
+
+      La menace systémique désigne les menaces susceptibles d'affecter une large proportion d'entités, notamment la menace cybercriminelle, majoritairement opportuniste et à finalité lucrative.
+
+      La menace hacktiviste ou isolée désigne les attaques menées par un individu isolé ou un groupe hacktiviste à des fins de déstabilisation, par vengeance ou motif idéologique.
+
+COURS DÉTAILLÉ.
+
+I. LE CLOUD, UNE OPPORTUNITÉ ET UN DÉFI.
+
+      Le cloud computing représente un enjeu de sécurité pour les données et les systèmes d'information, en particulier les plus sensibles. L'état de la menace démontre que les attaquants ont identifié les offreurs de solutions cloud et leurs infrastructures comme des cibles d'intérêt, en raison de la concentration des données et des traitements qu'elles hébergent et de l'usage de solutions de virtualisation et d'administration mutualisées. Cette menace comprend également l'application de lois extraterritoriales imposant aux hébergeurs soumis à ces lois de transmettre à leurs autorités les données de leurs clients.
+
+II. UN OUTIL D'AIDE À LA DÉCISION.
+
+      Les recommandations de l'ANSSI précisent, en fonction du type de système d'information, de la sensibilité des données et du niveau de la menace associé, les types d'offres cloud à privilégier. Elles constituent un outil d'aide à la décision pour les entités envisageant un hébergement cloud pour leurs systèmes d'information de niveau diffusion restreinte, les systèmes sensibles des opérateurs d'importance vitale et des opérateurs de services essentiels, ainsi que les systèmes d'information d'importance vitale. Elles ne s'appliquent pas aux systèmes d'information classifiés et s'inscrivent en cohérence avec la doctrine cloud au centre de l'État.
+
+III. LES PRÉCAUTIONS D'EMPLOI.
+
+   A. L'étude d'impact et l'analyse de risques.
+
+      La décision de migrer des systèmes d'information vers des solutions cloud relève de la plus haute autorité de l'entité, éclairée par une étude d'impact métier et juridique ainsi qu'une analyse de risques, considérant a minima le niveau de menace maximal, les risques spécifiques de l'hébergement cloud comme l'exposition à Internet et la mutualisation des infrastructures, la sensibilité des traitements et données, et les risques juridiques liés à la portée extraterritoriale des lois.
+
+   B. La sélection des mécanismes de sécurisation et la clause de réversibilité.
+
+      Les entités doivent sélectionner des services et licences pertinents pour disposer des options et mécanismes de sécurité adaptés, la configuration des options de sécurité, comme le filtrage et le contrôle d'accès aux interfaces d'administration, restant de la responsabilité du client. Une clause de réversibilité doit être prévue pour faciliter la migration d'une technologie cloud vers une autre et limiter la dépendance à une seule offre.
+
+   C. La formation des équipes.
+
+      La formation des équipes techniques et de la chefferie de projet à l'usage des technologies cloud doit être prise en compte, contribuant à la qualité de l'étude de migration, à la maîtrise des coûts et des délais, et à l'étude exhaustive des aspects techniques et organisationnels.
+
+IV. LES TROIS ÉLÉMENTS CLÉS DES RECOMMANDATIONS.
+
+   A. La typologie des offres cloud.
+
+      Les offres cloud commerciales se déclinent en offres publiques, mutualisées pour l'ensemble des clients, privées, dont les ressources sont physiquement dédiées, et communautaires, dédiées à un ensemble d'entités d'intérêt commun. Les offres cloud non commerciales comprennent les offres internes, déployées pour les besoins propres d'une entité, et les offres communautaires internes, comme les offres étatiques Pi et Nubo. Le terme offre cloud comprend l'IaaS, le PaaS, le CaaS et le SaaS.
+
+   B. La typologie des menaces.
+
+      La menace stratégique est caractérisée par des moyens techniques et organisationnels importants et un effort de discrétion, menée ou financée par un État. La menace systémique inclut la menace cybercriminelle opportuniste et la prolifération d'outils offensifs commercialisés. La menace hacktiviste ou isolée regroupe les attaques par déni de service ou les fuites de données menées par des individus ou groupes aux moyens limités.
+
+   C. Le référentiel SecNumCloud.
+
+      La qualification SecNumCloud reconnaît des offres proposées en PaaS, IaaS ou SaaS, apportant une confiance sur l'offre cloud et les pratiques d'exploitation des offreurs qualifiés, sans préjuger du niveau de sécurité des services numériques des clients qui seront portés par ces offres. Par exemple, l'hébergement d'un site web sur une offre qualifiée n'enlève pas la nécessité de sécuriser le site web lui-même, notamment contre les injections SQL. Ce visa de sécurité facilite également les processus d'homologation des services numériques des entités clientes.
+
+   D. La nature des systèmes d'information.
+
+      Les systèmes d'information de niveau diffusion restreinte traitent des données diffusion restreinte au sens de l'IGI 1300. Les systèmes sensibles relevant de la doctrine cloud au centre traitent des données sensibles hors SIIV. Les systèmes sensibles des opérateurs d'importance vitale et des opérateurs de services essentiels sont considérés comme sensibles en raison de la nature des données traitées, sans être réglementés comme les SIIV. Les systèmes d'information d'importance vitale sont ceux dont l'atteinte à la sécurité risquerait de diminuer le potentiel de guerre ou économique, la sécurité ou la capacité de survie de la Nation.
+
+V. L'APPLICATION DES RECOMMANDATIONS PAR TYPE DE SYSTÈME D'INFORMATION.
+
+   A. Les systèmes de niveau diffusion restreinte.
+
+      L'ANSSI préconise les offres SecNumCloud non commerciales, internes et communautaires, et commerciales privées, évitant le risque de latéralisation d'un attaquant depuis l'environnement d'un client vers un autre. Les offres commerciales communautaires ou publiques peuvent être envisagées mais supposent une mutualisation des ressources. L'externalisation relève de la décision de l'entité, appuyée sur une analyse de risques. Lorsque l'accès est conditionné par la nationalité, par exemple Diffusion Restreinte Spécial France, une attention particulière doit être portée au lieu d'hébergement et à la nationalité des administrateurs, une offre non commerciale pouvant être plus adaptée.
+
+   B. Les systèmes relevant de la doctrine cloud au centre.
+
+      Conformément à la doctrine cloud au centre de l'État, leur hébergement n'est autorisé que dans des offres cloud qualifiées SecNumCloud, internes, privées, communautaires ou publiques.
+
+   C. Les systèmes des opérateurs d'importance vitale et des opérateurs de services essentiels.
+
+      L'ANSSI préconise tout type d'offres qualifiées SecNumCloud.
+
+   D. Les systèmes d'information d'importance vitale.
+
+      Le SIIV fait l'objet d'une décision motivée relevant du responsable de l'entité. Pour les SIIV compatibles avec les technologies cloud, l'ANSSI préconise les offres non commerciales internes et communautaires, et commerciales privées. Un autre type d'offre commerciale n'est pas exclu, à condition qu'elle soit qualifiée SecNumCloud et que le responsable de l'entité appuie sa décision sur une analyse de risques argumentée, dans le respect des obligations réglementaires applicables aux SIIV.
+
+POINTS D'ATTENTION.
+
+      La qualification SecNumCloud est explicitement présentée comme une garantie sur l'offre cloud et les pratiques de l'offreur, mais elle ne dispense jamais le client de sécuriser lui-même les services numériques qu'il déploie sur cette offre, comme l'illustre l'exemple d'un site web resté vulnérable aux injections SQL malgré un hébergement qualifié.
+
+      La question de la nationalité des administrateurs et du lieu d'hébergement est traitée comme un critère distinct de la seule qualification SecNumCloud, particulièrement pertinent lorsque l'accès à une information est conditionné par la nationalité, comme pour les informations Diffusion Restreinte Spécial France.
+
+EXEMPLES CITES.
+
+      Les offres cloud étatiques internes et communautaires françaises Pi et Nubo.
+
+      L'exemple d'un site web hébergé sur une offre SecNumCloud mais resté vulnérable à une injection SQL faute de correctifs de sécurité appliqués par le client.

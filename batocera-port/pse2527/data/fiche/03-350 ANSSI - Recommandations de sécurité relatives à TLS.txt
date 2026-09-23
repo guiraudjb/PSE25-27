@@ -1,0 +1,99 @@
+RECOMMANDATIONS DE SÉCURITÉ RELATIVES À TLS, ANSSI, NOTE SDE-NT-35.
+
+LEXIQUE COMPLET.
+
+      TLS, Transport Layer Security, est un protocole client-serveur assurant la confidentialité et l'intégrité des flux réseau et empêchant leur rejeu, le serveur étant toujours authentifié et le client pouvant l'être en option.
+
+      SSL, Secure Sockets Layer, est le protocole prédécesseur de TLS, apparu en 1995 et aujourd'hui obsolète.
+
+      Le handshake TLS est la phase initiale de la session au cours de laquelle sont négociés la version du protocole, la suite cryptographique et les paramètres d'échange de clé.
+
+      Une suite cryptographique associe un mécanisme d'échange de clé, un mécanisme d'authentification, un algorithme de chiffrement et une fonction de hachage, jusqu'à TLS 1.2, la suite ne précisant plus que le chiffrement et le hachage en TLS 1.3.
+
+      La PFS, Perfect Forward Secrecy ou confidentialité persistante, garantit que la compromission de la clé privée du serveur ne permet pas de déchiffrer des sessions passées, grâce à des échanges Diffie-Hellman éphémères.
+
+      ECDHE et DHE sont les variantes éphémères des algorithmes d'échange de clé Diffie-Hellman, respectivement sur courbe elliptique et sur groupe multiplicatif.
+
+      Une IGC, Infrastructure de Gestion de Clés, est l'ensemble des mécanismes et entités garantissant la validité des certificats, depuis une autorité de certification racine jusqu'au certificat du serveur.
+
+      Une CRL, Certificate Revocation List, est un fichier listant les certificats révoqués par une autorité de certification.
+
+      OCSP, Online Certificate Status Protocol, est un protocole permettant de vérifier en ligne la validité d'un certificat auprès d'un répondeur dédié.
+
+      L'agrafage OCSP consiste pour le serveur à fournir directement une réponse OCSP dans les extensions TLS, évitant au client de contacter lui-même le répondeur.
+
+      Le programme Certificate Transparency, CT, crée des registres publics de certificats X509 émis, vérifiables par des SCT, Signed Certificate Timestamp.
+
+COURS DÉTAILLÉ.
+
+I. LA PRÉSENTATION GÉNÉRALE DU PROTOCOLE.
+
+   A. Le déroulement d'une session TLS jusqu'à la version 1.2.
+
+      Le client envoie un ClientHello listant les suites cryptographiques prises en charge, le serveur répond par un ServerHello indiquant la suite retenue puis envoie son Certificate et un ServerKeyExchange signé contenant sa valeur Diffie-Hellman. Après vérification, le client répond avec un ClientKeyExchange, puis les deux parties confirment l'adoption de la suite avec un ChangeCipherSpec suivi d'un message Finished, premier message protégé de la session. Ce déroulement générique suppose l'usage d'une suite assurant la PFS.
+
+   B. Le déroulement d'une session TLS 1.3.
+
+      TLS 1.3 réduit le handshake à un seul aller-retour en supprimant ChangeCipherSpec, ServerHelloDone, ClientKeyExchange et ServerKeyExchange, les valeurs Diffie-Hellman étant désormais échangées par extension dès le ClientHello et le ServerHello. Le serveur s'authentifie via les messages Certificate et CertificateVerify, chiffrés grâce à une fonction de dérivation HKDF, et le client peut transmettre des données applicatives dès le troisième paquet. Le rafraîchissement de clé se fait par un message KeyUpdate, sans renégociation complète.
+
+   C. Les infrastructures de gestion de clés.
+
+      La validité d'un certificat X509 repose sur une chaîne de confiance jusqu'à une autorité de certification racine reconnue, listée dans les magasins de certificats des systèmes d'exploitation ou des navigateurs. La révocation s'appuie sur les CRL ou le protocole OCSP, ce dernier pouvant être remplacé par l'agrafage OCSP pour préserver la vie privée et la performance. Le programme Certificate Transparency complète ces mécanismes en permettant de détecter l'émission de certificats illégitimes.
+
+II. LA NÉGOCIATION DES PARAMÈTRES TLS.
+
+   A. Les versions de protocole et la restriction aux clients maîtrisés.
+
+      Six versions existent historiquement, SSLv2, SSLv3, TLS 1.0, TLS 1.1, TLS 1.2 et TLS 1.3. La version TLS 1.3 doit être prise en charge et privilégiée, TLS 1.2 restant acceptable sous conditions, tandis que SSLv2, SSLv3, TLS 1.0 et TLS 1.1 sont à proscrire, ces versions ne disposant pas de primitives cryptographiques à l'état de l'art. Lorsque les clients ne sont pas maîtrisés, il convient d'établir un profil de compatibilité avant d'envisager des recommandations dégradées.
+
+   B. L'échange de clé et l'authentification.
+
+      Le serveur doit toujours être authentifié à l'échange de clé, les échanges anonymes ou fondés sur des certificats bruts étant déconseillés. La PFS doit toujours être assurée par un échange Diffie-Hellman éphémère, ECDHE étant privilégié avec les courbes secp256r1, secp384r1, secp521r1, x25519 et x448 constituant des alternatives acceptables, et DHE étant toléré avec des groupes de 2048 bits minimum, 3072 bits au-delà de 2030. L'authentification du serveur par certificat doit privilégier ECDSA ou EdDSA, RSA restant toléré, de préférence en mode RSASSA-PSS plutôt que RSASSA-PKCS1-v1_5.
+
+   C. Le chiffrement symétrique et le hachage.
+
+      Les suites doivent privilégier l'algorithme AES, ChaCha20 constituant une alternative acceptable, Camellia et ARIA étant tolérés à défaut. Un mode de chiffrement intègre doit être utilisé, GCM et CCM étant privilégiés et ChaCha20_Poly1305 acceptable, le mode CBC combiné à HMAC n'étant toléré qu'avec l'extension encrypt_then_mac. Seules les fonctions de hachage de la famille SHA-2 doivent être utilisées, RC4, MD5 et SHA-1 étant proscrits. Les parties communicantes doivent disposer de plusieurs suites acceptables, et le serveur doit imposer l'ordre de ses préférences plutôt que celui du client lorsque ce dernier n'est pas maîtrisé.
+
+   D. Les extensions du protocole.
+
+      Les extensions supported_groups, signature_algorithms et renegotiation_info sont toujours recommandées, sct en cas de certificat EV, encrypt_then_mac et extended_master_secret en TLS 1.2, supported_versions et key_share en TLS 1.3. D'autres extensions comme server_name, status_request ou alpn ne sont utiles que dans certains contextes spécifiques et doivent être évaluées au cas par cas. Un ensemble d'extensions, comme max_fragment_length, truncated_hmac ou early_data, sont toujours déconseillées.
+
+   E. Les considérations additionnelles de sécurité.
+
+      Les aléas du ClientHello et du ServerHello doivent provenir d'un générateur cryptographique robuste, la structure entièrement aléatoire sur 32 octets étant préférée à l'ancienne construction préfixée par l'heure Unix. La compression TLS est à proscrire en raison du risque de compromission de cookies de session. Les tickets de session doivent avoir une durée de vie inférieure à 24 heures, et la reprise de session doit privilégier un nouvel échange de clé Diffie-Hellman pour préserver la PFS. L'extension renegotiation_info doit toujours être activée pour contrer les attaques par injection lors d'une renégociation. L'envoi de données 0-RTT, apparu avec TLS 1.3, n'est pas recommandé car ces données ne bénéficient pas de protection anti-rejeu.
+
+III. LA MISE EN PLACE DE L'IGC.
+
+   A. Les attributs des certificats X509.
+
+      Le certificat doit être signé avec une fonction de hachage de la famille SHA-2 et présenter une période de validité n'excédant pas 3 ans, ramenée à 825 jours pour un certificat émis après le premier mars 2018. Les clés RSA doivent avoir une taille minimale de 2048 bits et les clés ECDSA une taille minimale de 256 bits, avec un exposant RSA supérieur ou égal à deux puissance seize plus un.
+
+   B. Les extensions du certificat.
+
+      L'extension Key Usage doit être présente et critique, limitée à digitalSignature et keyEncipherment côté serveur, à digitalSignature côté client. L'extension Extended Key Usage doit être non critique et contenir id-kp-serverAuth côté serveur, id-kp-clientAuth côté client. L'extension Subject Alternative Name doit être non critique et contenir au moins un nom de domaine complet du service. Un même certificat ne doit pas être utilisé par plus d'une terminaison TLS, afin de limiter la mutualisation des risques. L'extension AKI doit correspondre au SKI de l'autorité signataire, et au moins une extension CRLDP ou AIA doit être présente pour permettre la vérification de révocation.
+
+   C. Le contrôle de validité et la révocation.
+
+      Les chaînes de certificats doivent être transmises ordonnées et complètes, du certificat terminal jusqu'au certificat intermédiaire signé par la racine, sans transmettre le certificat racine lui-même. L'agrafage OCSP est préféré au protocole OCSP standard et à la distribution de CRL, pour des raisons de performance et de vie privée, et des mécanismes de redondance de publication des informations de révocation doivent être mis en œuvre. En l'absence d'information de révocation accessible, un composant privilégiant la sécurité doit réagir en hard-fail, c'est-à-dire refuser la connexion plutôt que l'accepter par défaut. Dans le cadre d'une IGC publique, il est recommandé d'utiliser des certificats enregistrés dans le programme Certificate Transparency, et de rejeter tout certificat accompagné d'un SCT invalide.
+
+POINTS D'ATTENTION.
+
+      Un attaquant capable de dégrader les paramètres de sécurité d'une connexion peut exploiter des fonctions faibles encore prises en charge par les composants, ce qui motive le retrait complet des versions et suites obsolètes plutôt que leur simple désactivation par défaut.
+
+      L'attaque DROWN a montré que la seule prise en charge de SSLv2 par un serveur pouvait compromettre des sessions établies avec des versions ultérieures du protocole.
+
+      Le mode RSASSA-PKCS1-v1_5 est vulnérable à une attaque de forgerie de signature lorsque la clé publique RSA utilise un petit exposant et que la vérification de signature est incomplète.
+
+      Un comportement soft-fail face à un service de révocation indisponible permet à un attaquant disposant d'un certificat révoqué d'usurper l'identité du sujet du certificat.
+
+EXEMPLES CITÉS.
+
+      La suite TLS_AES_256_GCM_SHA384, code 0x1302, est recommandée pour TLS 1.3.
+
+      La suite TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, code 0xC02C, est recommandée pour TLS 1.2 avec un certificat ECDSA.
+
+      La suite TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, code 0xC030, est recommandée pour TLS 1.2 avec un certificat RSA.
+
+      Les navigateurs Chrome et Firefox ont remplacé les CRL et OCSP classiques par des systèmes ad hoc, respectivement CRLSets et OneCRL.
+
+      Symantec et Let's Encrypt sont cités comme autorités enregistrant systématiquement leurs certificats dans un registre Certificate Transparency.

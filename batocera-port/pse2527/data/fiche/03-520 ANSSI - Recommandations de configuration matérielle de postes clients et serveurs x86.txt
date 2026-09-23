@@ -1,0 +1,65 @@
+RECOMMANDATIONS DE CONFIGURATION MATÉRIELLE DE POSTES CLIENTS ET SERVEURS X86, ANSSI, NOTE DAT-24.
+
+LEXIQUE COMPLET.
+
+      Le bit NX/XD, no-execute ou execute-disable, est un bit de protection mémoire indiquant si le contenu d'une page est exécutable, complétant les droits classiques de lecture et d'écriture.
+
+      SMEP, Supervisor Mode Execution Prevention, empêche le processeur d'exécuter du code situé dans un espace mémoire moins privilégié que le contexte d'exécution courant, comme empêcher le noyau d'exécuter du code de l'espace utilisateur.
+
+      SMAP, Supervisor Mode Access Prevention, complète SMEP en empêchant un contexte privilégié d'accéder en lecture ou écriture à des pages mémoire marquées à un niveau de privilège plus faible.
+
+      AES-NI est une famille d'instructions non privilégiées implémentant matériellement chaque tour de l'algorithme AES, améliorant à la fois la performance et la résistance aux attaques par canaux auxiliaires temporels.
+
+      RDRAND et RDSEED sont des instructions fournissant de l'aléa matériel, RDRAND pour un usage direct et RDSEED pour l'initialisation d'un générateur pseudo-aléatoire.
+
+      VT-x chez Intel, ou AMD-V chez AMD, est la virtualisation matérielle de contexte d'exécution, à ne pas confondre avec VT-d ou AMD-Vi, la virtualisation matérielle des entrées-sorties reposant sur une IOMMU.
+
+      Une IOMMU, Input/Output Memory Management Unit, gère les accès mémoire effectués par un périphérique d'entrée-sortie donné, de façon analogue à la MMU pour un contexte d'exécution.
+
+COURS DÉTAILLÉ.
+
+I. LE SUPPORT MATÉRIEL DU PROCESSEUR.
+
+   A. Le mode d'adressage et la protection en exécution.
+
+      Le processeur choisi doit supporter les instructions 64 bits, appelées selon les systèmes AMD64, x86_64 ou Intel 64, à ne pas confondre avec l'architecture IA-64 obsolète, et un système 64 bits doit être privilégié lorsque la machine le supporte, ce mode offrant un espace d'adressage plus large, une protection NX/XD systématique et de meilleures performances, au prix d'un abandon partiel de la segmentation mémoire utilisée par certains mécanismes de durcissement. Si le mode 32 bits est malgré tout retenu, le processeur et sa MMU doivent supporter le mode PAE, seul moyen d'y bénéficier de la protection NX/XD.
+
+   B. L'Hyper-Threading et les canaux cachés.
+
+      L'Hyper-Threading double le nombre de cœurs d'exécution en partageant des ressources matérielles entre processus, ce qui expose à des attaques par canaux auxiliaires permettant d'établir des communications furtives entre processus coopératifs ou d'extraire des éléments sensibles comme des clés privées sans coopération du processus ciblé. Lorsqu'une machine héberge des contextes de sécurité distincts susceptibles d'être compromis par ces canaux, comme des frontaux SSL/TLS ou des passerelles VPN, les ressources matérielles doivent leur être dédiées par désactivation de l'Hyper-Threading, emploi de composants physiquement dédiés, ou attribution via les API du système d'exploitation comme le CPU pinning.
+
+   C. SMEP, SMAP et AES-NI.
+
+      Un processeur et un système d'exploitation supportant SMEP, disponible sur Intel depuis Ivy Bridge et sous Windows 8, Mac OS X 10.8 et Linux 3.0, sont recommandés pour complexifier l'exploitation de vulnérabilités noyau. SMAP, apparu avec les processeurs Broadwell et supporté par Linux depuis la version 3.7, est également recommandé pour limiter la manipulation de données en espace utilisateur par un noyau compromis. Le jeu d'instructions AES-NI doit être supporté, avec une préférence pour une implémentation cryptographique existante plutôt qu'un usage direct de ces instructions, qui nécessite une bonne connaissance du fonctionnement de l'AES.
+
+   D. L'aléa matériel et la virtualisation.
+
+      Une source d'aléa matérielle comme RDRAND ou RDSEED doit être disponible, mais toujours combinée à d'autres sources indépendantes du système d'exploitation, comme les interfaces /dev/random sous GNU/Linux, plutôt que de s'y substituer, ces instructions étant particulièrement utiles au démarrage lorsque l'entropie accumulée est faible. La virtualisation de contexte d'exécution, VT-x ou AMD-V, doit être désactivée par principe de précaution lorsqu'elle n'est pas strictement nécessaire, car elle peut être détournée par des rootkits pour se rendre indétectables vis-à-vis du système virtualisé. L'IOMMU, VT-d ou AMD-Vi, doit en revanche être activée lorsque l'architecture le supporte, car elle protège contre les attaques par accès mémoire direct de périphériques malveillants, indépendamment de l'activation de VT-x, avec une validation fonctionnelle recommandée après activation en raison de risques de dysfonctionnement.
+
+II. LA CONFIGURATION GÉNÉRALE DU BIOS OU UEFI.
+
+   A. Le contrôle d'accès et les périphériques.
+
+      Tous les accès en écriture au paramétrage du BIOS doivent être protégés par un mot de passe unique à chaque machine, conforme aux recommandations de la note technique dédiée aux mots de passe. Conformément au principe de minimisation, les composants non requis au fonctionnement du système, ports série, contrôleurs USB, interfaces eSATA ou Thunderbolt, cartes Wifi ou Bluetooth intégrées, doivent être désactivés, ce qui réduit la surface d'attaque et évite le chargement de pilotes potentiellement vulnérables pour des périphériques inutilisés.
+
+   B. L'ordre de démarrage et les fonctions matérielles.
+
+      Le composant sur lequel est installé le système final doit être placé en priorité la plus haute dans l'ordre de démarrage, les autres périphériques ne devant pas intervenir dans la chaîne de démarrage, afin de préserver l'intégrité du système contre un amorçage non maîtrisé. Le bit NX/XD doit être activé dans le BIOS, la fonction VT-x désactivée par défaut sauf besoin exceptionnel étudié au cas par cas, et l'IOMMU, VT-d ou AMD-Vi, activée sur les systèmes qui la supportent.
+
+POINTS D'ATTENTION.
+
+      L'activation de VT-x n'est pas nécessaire pour bénéficier des avantages de l'IOMMU, VT-d ou AMD-Vi pouvant être utilisée seule sans les services de virtualisation de contexte d'exécution.
+
+      Aucune des recommandations d'activation de fonctions matérielles de ce guide ne peut à elle seule être considérée comme un gage de fiabilité ou de robustesse, aucune évaluation de sécurité formelle de ces fonctions n'ayant été réalisée par l'ANSSI au moment de sa rédaction.
+
+      Forcer l'usage de l'IOMMU peut entraîner des dysfonctionnements, périphériques ou contrôleurs non reconnus, erreurs d'entrées-sorties, ce qui impose une validation fonctionnelle complète du système après son activation.
+
+EXEMPLES CITÉS.
+
+      Grsecurity via UDEREF, et l'hyperviseur Xen pour protéger l'accès à sa mémoire depuis les noyaux des domU, sont cités comme exemples de projets exploitant la segmentation mémoire propre au mode 32 bits, partiellement abandonnée en mode 64 bits.
+
+      Les frontaux d'accès SSL/TLS, les serveurs mandataires et mandataires inverses, et les passerelles de connexion VPN sont cités comme exemples typiques de machines manipulant plusieurs contextes de sécurité distincts, justifiant la désactivation de l'Hyper-Threading.
+
+      OpenSSL à partir de la version 1.0.1, la Crypto API du noyau Linux depuis la version 2.6.30, et CNG sous Windows depuis Windows 7 sont cités parmi les bibliothèques cryptographiques exploitant AES-NI.
+
+      L'attaque par mesure des temps d'accès au cache CPU partagé entre deux processus, permettant de récupérer une clé secrète en quelques secondes, illustre le type d'attaque par canal auxiliaire temporel contré par AES-NI.
