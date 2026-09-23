@@ -1,0 +1,57 @@
+TITRE : Port Fermé Par Défaut Riddim
+
+[Intro]
+802.1X, écoute le contrôle d'accès
+Authenticator, supplicant, serveur AAA, le procès
+Port fermé par défaut, sans réponse du serveur
+EAPoL encapsule EAP, sur le réseau, la rigueur
+
+[Couplet 1]
+RADIUS recommandé, Diameter trop rare
+EAP-MD5 faible, dictionnaire qui déclare
+EAP-TLS sûr, mais IGC complète, exigeante
+PEAP, tunnel TLS, MSCHAPv2 à l'intérieur, performante
+
+Authentification et autorisation, les deux ensemble
+Liste exhaustive d'identités, jamais qui ressemble
+Méthodes non encapsulées interdites, configuration stricte
+Serveur redondant, deux minimum, disponibilité qui persiste
+
+[Refrain]
+Port fermé par défaut, sans le serveur, rien ne passe
+WPA2-Enterprise, chaque supplicant a sa place
+RADIUS, secrets distincts, cent vingt-huit bits d'entropie
+802.1X, contrôle d'accès, sécurité garantie
+
+[Couplet 2]
+Réseau de confiance cloisonné, dédié, distinct
+RadSec, DTLS, IPsec, protection instinct
+VLAN statique en priorité, dynamique en dernier recours
+VLAN d'administration jamais dynamique, sans détour
+
+Une seule adresse MAC par port, limite le concentrateur
+MACsec, seule vraie contre-mesure, protecteur
+Journalisation supervisée, fonctionnement nominal silencieux
+Salles de réunion, prises non maîtrisées, cas fameux
+
+[Refrain]
+Port fermé par défaut, sans le serveur, rien ne passe
+WPA2-Enterprise, chaque supplicant a sa place
+RADIUS, secrets distincts, cent vingt-huit bits d'entropie
+802.1X, contrôle d'accès, sécurité garantie
+
+[Pont]
+Concentrateur intercalé, équipements en cascade
+Redirection EAPoL, matériel qui persuade
+Sans MACsec, aucune contre-mesure simple, attention
+Cloisonnement, supervision, authentification, protection
+
+[Refrain final]
+Port fermé par défaut, sans le serveur, rien ne passe
+Affectation dynamique de VLAN, rôle critique qu'on embrasse
+RADIUS, EAP-TLS, PEAP, la sécurité
+802.1X, notre priorité
+
+[Outro]
+Réseau contrôlé, accès bien filtré
+One love, one network, 802.1X déployé

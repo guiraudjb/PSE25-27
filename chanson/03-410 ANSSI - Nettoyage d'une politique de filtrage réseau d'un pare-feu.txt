@@ -1,0 +1,57 @@
+TITRE : First Match Riddim
+
+[Intro]
+Nettoyage de pare-feu, écoute first-match
+Première règle qui correspond, décision qui s'attache
+Objets doublons, objets orphelins, à traquer
+Règles redondantes, politique à simplifier
+
+[Couplet 1]
+Identifiant unique par règle, indépendant de la position
+Journaux avec l'identifiant, horloge synchronisée, précision
+Doublons fusionnés, srv_bdd, srv_mysql, même adresse
+Objets inutilisés supprimés, la base s'allège
+
+Règle rigoureusement identique, supprimée sans impact
+Règle contenue par une amont, simplifiée, exact
+Règle trop ouverte, processus d'affinage, itératif
+Jusqu'à ce qu'elle ne produise plus d'événement, actif
+
+[Refrain]
+First-match, la première règle décide
+Affinage itératif, la politique se vide
+Doublons fusionnés, orphelins supprimés
+Nettoyage du pare-feu, politique épurée
+
+[Couplet 2]
+Contacter les équipes métier, avant de désactiver
+Désactivation par petits lots, sauvegarde à chaque palier
+Retour arrière possible, avant suppression finale
+Deux fois par an, la méthode se rejoue, cycle normal
+
+Journaux extraits, adresses et ports enrichissent l'amont
+Cycle répété jusqu'à zéro événement, jusqu'au fond
+Ticket, date, référence, dans le commentaire tracé
+Objets existants réutilisés, jamais dupliqués
+
+[Refrain]
+First-match, la première règle décide
+Affinage itératif, la politique se vide
+Doublons fusionnés, orphelins supprimés
+Nettoyage du pare-feu, politique épurée
+
+[Pont]
+Plusieurs pare-feux partagent des règles identiques
+Nettoyage de concert, cohérence, logique
+Fort impact possible, suppression malencontreuse
+Sauvegarde avant, après, précaution consciencieuse
+
+[Refrain final]
+First-match, la première règle décide
+Affinage itératif, la politique se vide
+Deux fois par an, la revue régulière
+Nettoyage du pare-feu, politique claire
+
+[Outro]
+Pare-feu épuré, flux légitimes gardés
+One love, one network, politique nettoyée

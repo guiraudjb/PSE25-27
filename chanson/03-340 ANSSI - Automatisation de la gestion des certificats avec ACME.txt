@@ -1,0 +1,57 @@
+TITRE : Défi ACME Riddim
+
+[Intro]
+ACME, protocole, écoute la RFC huit mille cinq cent cinquante-cinq
+Compte externe, compte ACME, binding, on assemble
+HTTP-01, DNS-01, TLS-ALPN, trois défis
+Let's Encrypt, l'autorité publique qui certifie
+
+[Couplet 1]
+Compte externe authentifié, multifacteur, sans faille
+Liste de domaines autorisés, DNS CAA qui travaille
+MAC key générée, HMAC-SHA256, protégée
+Serveur ACME rejette les domaines non autorisés
+
+Nouveau bi-clé à chaque émission, jamais réutilisé
+Wildcard interdit, quatre-vingt-dix jours, renouvelé
+Certificate Transparency, surveille les certificats
+AC intermédiaire dédiée, cloisonnée, format compact
+
+[Refrain]
+Défi ACME, HTTP, DNS, TLS-ALPN
+Compte externe, multifacteur, jamais de refrain
+Client ACME sans privilège super-utilisateur
+Automatisation des certificats, disponibilité, ardeur
+
+[Couplet 2]
+Droits du client limités, compte de service dédié
+Renouvellement aux deux tiers, soixante jours, anticipé
+Staging avant production, tests bien menés
+Clé secrète supprimée après association, effacée
+
+Plusieurs clients ACME cloisonnés, authentifiants distincts
+Compte externe par client, limite l'impact, instinct
+Concentration sur un seul client, à éviter absolument
+Une compromission touche tout le domaine, dramatiquement
+
+[Refrain]
+Défi ACME, HTTP, DNS, TLS-ALPN
+Compte externe, multifacteur, jamais de refrain
+Client ACME sans privilège super-utilisateur
+Automatisation des certificats, disponibilité, ardeur
+
+[Pont]
+Binding ne protège pas contre un défi déjà résolu
+Un attaquant peut aller ailleurs, certificat obtenu
+Client jamais en super-utilisateur, malgré la pratique
+Wildcard proscrit, ce guide est catégorique
+
+[Refrain final]
+Défi ACME, HTTP, DNS, TLS-ALPN
+AC intermédiaire dédiée, jamais confondue
+Certificate Transparency, surveille sans relâche
+Automatisation des certificats, notre tâche
+
+[Outro]
+Certificats renouvelés, sans jamais tomber
+One love, one network, ACME automatisé

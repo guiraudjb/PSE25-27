@@ -1,0 +1,57 @@
+TITRE : Hyperviseur Critique Riddim
+
+[Intro]
+Virtualisation, écoute la cible de choix
+Hyperviseur critique, protège-le, c'est ta voix
+Zone de confiance, regroupée par sensibilité
+Segmentation physique, micro-segmentation, sécurité
+
+[Couplet 1]
+Nœuds de calcul, stockage, regroupés par niveau
+Zones de confiance séparées, réseau physique, le sceau
+Micro-segmentation au sein de chaque zone
+Mises à jour prioritaires, exposition qui talonne
+
+Interface d'administration dédiée sur l'hyperviseur
+Réseau d'administration, jamais depuis l'extérieur
+HP iLO, Dell iDRAC, cartes de management
+Baies de stockage, équipements réseau, dans le mouvement
+
+[Refrain]
+Hyperviseur critique, cible de choix
+Comptes d'administration, indépendants, sans voix
+Annuaires de production séparés, chemins vérifiés
+Virtualisation sécurisée, jamais compromise
+
+[Couplet 2]
+Comptes dédiés, moindre privilège, appliqué
+Indépendance des annuaires Active Directory, gardée
+Chemins de contrôle vérifiés dans les deux sens
+Élévation de privilège bloquée, double défense
+
+Sauvegarde indépendante des machines virtuelles
+Configurations, binaires d'installation, la vraie
+Vérification régulière des configurations, constante
+Journalisation, supervision, centralisée, vigilante
+
+[Refrain]
+Hyperviseur critique, cible de choix
+Comptes d'administration, indépendants, sans voix
+Annuaires de production séparés, chemins vérifiés
+Virtualisation sécurisée, jamais compromise
+
+[Pont]
+Formation régulière des administrateurs
+Système d'information d'administration, protecteur
+Reconstruction possible même si les VM sont perdues
+Sauvegarde distincte, précaution jamais déçue
+
+[Refrain final]
+Hyperviseur critique, cible de choix
+Zones de confiance, segmentation à la fois
+Comptes indépendants, sauvegarde séparée
+Virtualisation, infrastructure sécurisée
+
+[Outro]
+Hyperviseur protégé, infrastructure solide
+One love, one network, sécurité lucide

@@ -1,0 +1,57 @@
+TITRE : Équipements de Bordure Riddim
+
+[Intro]
+Panorama deux mille vingt-quatre, écoute la menace
+Signalement, incident, faut comprendre la nuance
+Quatre mille trois cent quatre-vingt-six événements traités
+Durcissement de l'Active Directory, priorité
+
+[Couplet 1]
+SPN mal placé, Kerberoasting, attention
+Force brute sur le compte, mauvaise configuration
+Supply-chain, chaîne d'approvisionnement piégée
+XZ Utils, trois ans d'infiltration, patience du mainteneur infiltré
+
+Nobelium russe, SVR, hameçonnage ciblé
+Volt Typhoon chinois, Living off the Land, discret
+Équipements de bordure, pare-feux, passerelles VPN
+Neuf vulnérabilités les plus exploitées, Ivanti, Fortinet, en chaîne
+
+[Refrain]
+Équipements de bordure, premier vecteur d'intrusion
+Sécuriser, superviser, répondre, la triple mission
+Signalement, incident, la nuance est là
+Cybermenace deux mille vingt-quatre, on durcit le combat
+
+[Couplet 2]
+RaaS, ransomware as a service, le modèle économique
+Infostealer collecte les mots de passe, tactique
+Courtier en accès initiaux, revend la porte ouverte
+Cent quarante-quatre rançongiciels, LockBit en tête, alerte
+
+I-SOON, fuite chinoise, quarante-cinq pays visés
+Lutte informatique offensive privée, mercenariat organisé
+Pall Mall, processus lancé par le Royaume-Uni et la France
+Bullet Proof Hoster héberge le mal, hors de portée, en balance
+
+[Refrain]
+Équipements de bordure, premier vecteur d'intrusion
+Sécuriser, superviser, répondre, la triple mission
+Signalement, incident, la nuance est là
+Cybermenace deux mille vingt-quatre, on durcit le combat
+
+[Pont]
+Déstabilisation, hacktivistes, DDoS en rafale
+Espionnage étatique, la porosité s'étale
+ADINT surveille, la pub trahit l'utilisateur
+Territoires ultramarins, plus exposés, moins de résilience, erreur
+
+[Refrain final]
+Équipements de bordure, premier vecteur d'intrusion
+Windows dix, fin de support, obsolète, attention
+Triptyque sécurité, supervision, réponse à incident
+Cybermenace deux mille vingt-quatre, on reste vigilant
+
+[Outro]
+Panorama bouclé, la menace ne dort jamais
+One love, one network, ANSSI reste éveillée

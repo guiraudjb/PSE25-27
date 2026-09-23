@@ -1,0 +1,57 @@
+TITRE : Échelle d'Impact Riddim
+
+[Intro]
+Données sensibles, écoute l'échelle d'impact
+Humain, financier, juridique, opérationnel, l'exact
+Mineur, significatif, grave, critique, quatre degrés
+Diffusion Restreinte, niveau très sensible, élevé
+
+[Couplet 1]
+Impact mineur, avertissement, sans perte financière
+Impact significatif, perte sous le seuil X, régionale l'affaire
+Impact grave, responsabilité civile, national l'écho
+Impact critique, responsabilité pénale, décès, écho international, lourd fardeau
+
+Niveau un, non sensible, que du mineur en jeu
+Niveau deux, sensible, significatif ou grave un peu
+Niveau trois, sensible aussi, grave confirmé
+Niveau quatre, très sensible, critique, Diffusion Restreinte, gardé
+
+[Refrain]
+Échelle d'impact, homogène pour l'entité
+Humain, financier, juridique, opérationnel, réputé
+Inventaire macroscopique, catégorisation par division
+Données sensibles, évaluées avec précision
+
+[Couplet 2]
+Financières, commerciales, propriété intellectuelle
+Réglementées, journaux, adressage IP, schémas, matérielle
+RSSI questionne le métier, évite l'erreur
+Évaluation par catégorie, pas donnée par donnée, meilleure
+
+Agrégation élève le niveau, dépôt réévalué
+Revues régulières, sensibilité qui a évolué
+Exigences de sécurité par niveau, PCA si besoin
+Interconnexions cadrées, exposition, priorisation, le soin
+
+[Refrain]
+Échelle d'impact, homogène pour l'entité
+Humain, financier, juridique, opérationnel, réputé
+Inventaire macroscopique, catégorisation par division
+Données sensibles, évaluées avec précision
+
+[Pont]
+IGI 1300, Secret, Très secret, régime distinct
+Ce guide ne couvre pas ce niveau, c'est instinct
+Exposition, interfaces, physique, logique, réseau tiers
+Priorisation des travaux de sécurisation, sans mystère
+
+[Refrain final]
+Échelle d'impact, homogène pour l'entité
+Quatre niveaux de gravité, bien catégorisés
+Diffusion Restreinte, très sensible, protégée
+Données sensibles, notre priorité
+
+[Outro]
+Chaque donnée pesée, chaque impact évalué
+One love, one network, sensibilité maîtrisée

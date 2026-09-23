@@ -1,0 +1,57 @@
+TITRE : Blackholing Riddim
+
+[Intro]
+Stormshield SNS, écoute la configuration
+Comptes nominatifs, compte local, exception
+NSRPC, port mille trois cents, administration
+Antispoofing IP, sur chaque interface, protection
+
+[Couplet 1]
+Interfaces internes déclarées, routes statiques ajoutées
+RFC cinq mille sept trente-cinq, adresses privées bloquées
+Certificat de l'interface remplacé, IGC maîtrisée
+Suites ECDHE seulement, TLS 1.2, durcie
+
+Règles implicites désactivées, après les explicites créées
+Sinon perte totale d'accès à l'équipement, dérapée
+Annuaire externe pour les administrateurs, lecture seule
+Groupes d'utilisateurs, droits ajustés, jamais en foule
+
+[Refrain]
+Blackholing, boucle locale, cent vingt-sept point quarante-deux
+Route fictive, paquets détruits, jamais en clair, jeu dangereux
+AES-GCM deux cent cinquante-six, SHA trois quatre-vingt-quatre
+IPsec sécurisé, filtrage plus spécifique, sans bavure
+
+[Couplet 2]
+IKEv2 privilégié, mode agressif à bannir
+Authentification par certificat, clé partagée à bannir
+DPD actif, KeepAlive filtré sans trace
+Mode Config pour les nomades, adresse IP maîtrisée, l'espace
+
+SNMPv3, AES et SHA1, supervision restreinte
+Sauvegarde WebDAV en HTTPS, ou SSH, jamais l'inverse, contrainte
+Journalisation centralisée, filtrage, VPN, authentification
+Politique IPsec désactivée, blackholing évite l'émission
+
+[Refrain]
+Blackholing, boucle locale, cent vingt-sept point quarante-deux
+Route fictive, paquets détruits, jamais en clair, jeu dangereux
+AES-GCM deux cent cinquante-six, SHA trois quatre-vingt-quatre
+IPsec sécurisé, filtrage plus spécifique, sans bavure
+
+[Pont]
+Règles de filtrage plus spécifiques que le NAT avant IPsec
+Sinon fuite de données en clair, topologie qui bascule, sec
+Fichier backup.na.enc écrasé à chaque sauvegarde
+Transférer avant la prochaine, sinon la perte guette, hagard
+
+[Refrain final]
+Blackholing, boucle locale, cent vingt-sept point quarante-deux
+Route fictive, paquets détruits, jamais en clair, jeu dangereux
+Comptes nominatifs, antispoofing, filtrage strict
+Stormshield sécurisé, notre pare-feu qualifié, explicite
+
+[Outro]
+Pare-feu configuré, flux bien maîtrisés
+One love, one network, Stormshield sécurisé

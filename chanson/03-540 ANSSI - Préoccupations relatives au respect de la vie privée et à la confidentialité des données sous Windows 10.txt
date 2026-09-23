@@ -1,0 +1,57 @@
+TITRE : Télémétrie Réduite Riddim
+
+[Intro]
+Windows 10, vie privée, écoute la télémétrie
+Sécurité, base, amélioré, complet, hiérarchie
+Niveau sécurité privilégié, réduit au maximum
+Cortana désactivé, accès aux données, un maximum
+
+[Couplet 1]
+Quatre niveaux de collecte, aucun ne bloque tout
+Niveau base si services en nuage, sinon plus doux
+Windows Defender, rapports désactivés si tiers utilisé
+Cortana accède aux données personnelles, à désactiver
+
+Recherche de bureau restreinte au local seulement
+Navigateur maîtrisé pour Internet, autrement
+Saisies clavier, vocales, manuscrites, personnalisation coupée
+Géolocalisation désactivée, si pas nécessaire, éliminée
+
+[Refrain]
+Télémétrie réduite, niveau sécurité choisi
+Compte Microsoft bloqué, annuaire interne aussi
+OneDrive désactivé, sauf Office 365 utilisé
+Windows 10, vie privée, notre priorité
+
+[Couplet 2]
+Applications universelles, cadre contrôlé, moins de risque
+Géolocalisation, carnets d'adresses accessibles, la bisque
+Identifiant unique de publicité désactivé
+Liste d'applications autorisées, moindre privilège, filtré
+
+Compte Microsoft déporte l'authentification au nuage
+Secrets, clés BitLocker exposés, un vrai naufrage
+GPO porte la configuration, pas de fenêtre utilisateur
+Stratégie de groupe, administrateurs, seuls décideurs
+
+[Refrain]
+Télémétrie réduite, niveau sécurité choisi
+Compte Microsoft bloqué, annuaire interne aussi
+OneDrive désactivé, sauf Office 365 utilisé
+Windows 10, vie privée, notre priorité
+
+[Pont]
+Désactivation complète non supportée par Microsoft
+Windows Update for Business perdu, compromis, un choc
+Bloquer les flux de télémétrie par pare-feu, inutile
+Adresses IP changent sans préavis, mesure fragile
+
+[Refrain final]
+Télémétrie réduite, niveau sécurité choisi
+Cortana, OneDrive, comptes Microsoft, tout repensé
+Analyse de risque guide la décision, au sommet
+Windows 10, vie privée, notre engagement
+
+[Outro]
+Données maîtrisées, confidentialité gardée
+One love, one network, Windows 10 configuré

@@ -1,0 +1,57 @@
+TITRE : ESP Jamais AH Riddim
+
+[Intro]
+IPsec, couche réseau, écoute la protection
+AH obsolète, ESP la bonne option
+Confidentialité, intégrité, anti-rejeu, en couche trois
+IKE négocie les clés, Security Association, ainsi va
+
+[Couplet 1]
+ESP protège le contenu, intégrité activée
+AH sur les en-têtes, incompatible avec le NAT, dépassé
+Mode tunnel pour l'accès distant, adressage masqué
+Mode transport plus léger, sans dupliquer
+
+Security Policy jamais facultative, dégradation à éviter
+IKEv2 recommandé, mise à la clé manuelle à écarter
+PSK réservé aux tests, cent bits d'entropie minimum
+RSA appuyé sur une IGC, révocation, le médium
+
+[Refrain]
+ESP jamais AH, confidentialité, intégrité
+IKE négocie, PFS toujours activée
+NAT-Traversal, port quatre mille cinq cents, UDP
+IPsec protège la couche réseau, sécurité
+
+[Couplet 2]
+PFS en phase deux, Diffie-Hellman éphémère
+Renouvellement horaire, cent gigaoctets, la barrière
+MD5, DES bannis, clés RSA deux mille quarante-huit
+Groupes un et deux obsolètes, groupes quatorze et quinze, complet
+
+Politique uniforme, aller et retour, pas d'asymétrie
+Accès distant, SCADA, protocoles non sécurisés, la voie
+FTP, POP3, SMTP, HTTP, RDP, VNC, protégés
+IPsec en défense en profondeur, jamais isolé
+
+[Refrain]
+ESP jamais AH, confidentialité, intégrité
+IKE négocie, PFS toujours activée
+NAT-Traversal, port quatre mille cinq cents, UDP
+IPsec protège la couche réseau, sécurité
+
+[Pont]
+AH incompatible avec la traduction d'adresses
+Politique facultative expose à la dégradation, sans finesse
+Sécurité du lien limitée par l'algorithme le plus faible
+IPsec mal maîtrisé, malgré sa force, sans reproche
+
+[Refrain final]
+ESP jamais AH, confidentialité, intégrité
+IKEv2, PFS, renouvellement, sécurité
+Groupes Diffie-Hellman robustes, courbes elliptiques
+IPsec, protection réseau, notre tactique
+
+[Outro]
+Flux réseau protégé, couche trois sécurisée
+One love, one network, IPsec déployé

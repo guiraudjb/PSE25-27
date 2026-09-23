@@ -1,0 +1,57 @@
+TITRE : Minimisation Moindre Privilège Riddim
+
+[Intro]
+GNU/Linux, écoute les quatre niveaux
+Minimal, intermédiaire, renforcé, élevé, le tableau
+Minimisation, moindre privilège, défense en profondeur
+Trois principes fondamentaux, notre valeur
+
+[Couplet 1]
+Secure Boot UEFI activé, clés préchargées
+Mot de passe du chargeur, initramfs protégé
+IOMMU activé, LSM Yama configuré
+Modules noyau désactivés en renforcé, verrouillé
+
+Compte root verrouillé, shell vers /bin/false
+Sudo avec comptes dédiés, imputabilité, la base
+auditd surveille execve, execveat, chaque processus
+Compte système exclusif par service, jamais confus
+
+[Refrain]
+Minimisation, moindre privilège, en couches
+AppArmor enforce, SELinux targeted, jamais relâche
+auditd trace, execve, insmod, modprobe
+GNU/Linux durci, sécurité qui progresse
+
+[Couplet 2]
+AppArmor par défaut sous SUSE, Ubuntu, chemins de fichiers
+SELinux sous Red Hat, politique targeted, sans détour à chercher
+Groupe sudo dédié, négations bannies, arguments précisés
+Setuid root évité en renforcé, droits restreints, sécurisés
+
+Cloisonnement, espaces de noms, seccomp, cgroups
+Conteneurs, hyperviseurs, isolation en boucle
+Journalisation par service, dédiée, non modifiable
+auditd combiné à un export centralisé, fiable
+
+[Refrain]
+Minimisation, moindre privilège, en couches
+AppArmor enforce, SELinux targeted, jamais relâche
+auditd trace, execve, insmod, modprobe
+GNU/Linux durci, sécurité qui progresse
+
+[Pont]
+Root verrouillé n'empêche pas sudo bash, attention
+Interdiction organisationnelle, en complément, prévention
+Compte nobody partagé, services qui s'altèrent
+Compte dédié par service, la bonne manière
+
+[Refrain final]
+Minimisation, moindre privilège, en couches
+AppArmor, SELinux, auditd, jamais relâche
+Compromission du noyau compromet tout l'isolement
+GNU/Linux durci, notre fondement
+
+[Outro]
+Système durci, surface d'attaque réduite
+One love, one network, Linux qui persiste

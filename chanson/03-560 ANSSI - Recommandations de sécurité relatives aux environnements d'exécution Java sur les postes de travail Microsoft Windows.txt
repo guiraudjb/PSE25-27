@@ -1,0 +1,57 @@
+TITRE : JRE Inutile Désinstallé Riddim
+
+[Intro]
+Java sur Windows, écoute le JRE
+Appliquettes, Java Web Start, JNLP, la clé
+Vulnérabilités fréquentes, zero-day exploitées
+Antivirus inefficace, bac à sable dépassé
+
+[Couplet 1]
+Plusieurs versions de JRE cohabitent sur un poste
+Appliquette demande une version ancienne, vulnérable, imposte
+NPAPI plus supporté par Chrome depuis quinze
+Internet Explorer, dernier navigateur, appliquettes qui s'épuisent
+
+Applications lourdes, légères, Java Web Start, recensées
+Postes avec JRE installés, versions inventoriées
+Croisement des recensements, anomalies repérées
+JRE inutile désinstallé, droits d'administration retirés
+
+[Refrain]
+JRE inutile désinstallé, réinstallation bloquée
+SRP, AppLocker, exceptions bien définies
+Modules complémentaires désactivés dans les navigateurs
+Java sur Windows, sécurisé à toute heure
+
+[Couplet 2]
+Appliquettes et JNLP filtrés aux mandataires
+Java désactivé par défaut, exceptions nécessaires
+Réécriture en Java Web Start autonome, la solution
+Deployment.properties, deployment.config, configuration
+
+Télédéploiement restreint, postes légitimes seulement
+Veille sur les alertes de sécurité, mise à jour rapidement
+JRE 32 bits et 64 bits cohabitent sur les systèmes
+Internet Explorer 32 bits, JRE 32 bits, à jour de même
+
+[Refrain]
+JRE inutile désinstallé, réinstallation bloquée
+SRP, AppLocker, exceptions bien définies
+Modules complémentaires désactivés dans les navigateurs
+Java sur Windows, sécurisé à toute heure
+
+[Pont]
+Mise à jour 64 bits ne corrige pas le 32 bits
+Navigation vulnérable malgré la mise à jour, un déficit
+Fichiers .jar, .jnlp, exécutables à part entière
+Règles des .exe étendues, sur les mandataires, frontière
+
+[Refrain final]
+JRE inutile désinstallé, réinstallation bloquée
+Deux navigateurs distincts, si bien maintenus, envisagée
+Veille CERT-FR, mise à jour dans les plus brefs délais
+Java sur Windows, notre sécurité complète
+
+[Outro]
+Environnement Java maîtrisé, postes bien protégés
+One love, one network, JRE sécurisé

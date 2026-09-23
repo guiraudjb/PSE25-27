@@ -1,0 +1,57 @@
+TITRE : Règle Trois-Deux-Un Riddim
+
+[Intro]
+Sauvegarde des systèmes, écoute PDMA, DMIA
+Perte de données admissible, durée d'interruption, voilà
+Règle trois-deux-un, trois copies, deux supports
+Une hors ligne, bande magnétique, le fort rempart
+
+[Couplet 1]
+Catalogue, agent logiciel, serveur, support
+Opérateur de sauvegarde, administrateur, sans détour
+Cloisonné dans l'administration, VLAN dédié
+Une instance par niveau de sensibilité, séparée
+
+Pas de domaine Windows de production, indépendant
+Pare-feu interne filtre strictement, en amont
+RBAC segmente exploitation et administration
+Comptes techniques réduits, secrets renouvelés, sans exception
+
+[Refrain]
+Règle trois-deux-un, trois copies protégées
+Mode bouton rouge, isole sans tarder
+Restauration croisée désactivée par défaut
+Sauvegarde des systèmes, jamais en défaut
+
+[Couplet 2]
+Utilisateurs jamais autorisés à restaurer eux-mêmes
+Fichier shadow restauré, élévation de privilège, le problème
+Mise à jour proactive, CVE suivies de près
+Contrôle du volume, lenteurs, politiques, sans reproche
+
+Restauration testée, procédure rédigée, ordre défini
+DNS, annuaire, dépendances, criticité, bien choisi
+Implants de l'attaquant dans les sauvegardes, attention
+Réinstaller depuis des sources de confiance, remédiation
+
+[Refrain]
+Règle trois-deux-un, trois copies protégées
+Mode bouton rouge, isole sans tarder
+Restauration croisée désactivée par défaut
+Sauvegarde des systèmes, jamais en défaut
+
+[Pont]
+Chiffrement des flux, authentification mutuelle, TLS
+Clés en coffre-fort, sauvegarde hors ligne, sans excès
+Image disque ou agent intégré, selon le besoin
+WORM en ligne, moins robuste, mais un bon soin
+
+[Refrain final]
+Règle trois-deux-un, trois copies protégées
+Sauvegarde de l'infrastructure elle-même, jamais oubliée
+Binaires, procédures, catalogue, matériel de secours
+Sauvegarde des systèmes, notre dernier recours
+
+[Outro]
+Données restaurées, système reconstruit
+One love, one network, sauvegarde qui construit

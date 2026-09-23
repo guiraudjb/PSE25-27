@@ -1,0 +1,57 @@
+TITRE : Six Sections Riddim
+
+[Intro]
+Politique de pare-feu, écoute les six sections
+Modèle positif, interdit par défaut, protection
+Section un, administration, section deux, émission
+Section trois, la règle qui verrouille, sans discussion
+
+[Couplet 1]
+Section trois, drop sur toutes les interfaces, journalisé
+Aucun flux ultérieur vers le pare-feu, verrouillé
+Section quatre, flux métiers, l'essentiel de la table
+Sources, destinations, services, précis et stables
+
+Section cinq, antiparasite, sans journalisation
+Broadcast NetBIOS, udp cent trente-sept, discrétion
+Section six, interdiction finale, journalisée
+Modèle positif garanti, même si implicite, existante
+
+[Refrain]
+Six sections, first-match, de haut en bas
+Drop silencieux, pas de réponse, pas de traces
+Flux implicites désactivés, définis manuellement
+Politique de pare-feu, structurée solidement
+
+[Couplet 2]
+Convention de nommage, srv_dns-interne, fonctionnelle
+Coloration des objets, zones de confiance, visuelle
+Commentaire avec date, ticket, intervenant, précision
+Séparateurs de règles, sections bien visibles, distinction
+
+Séquence de démarrage, vulnérable un instant
+Documenter le comportement, tester avant, prudent
+Revue bi-annuelle ou annuelle, au minimum
+Règles temporaires obsolètes, supprimées, sans parfum
+
+[Refrain]
+Six sections, first-match, de haut en bas
+Drop silencieux, pas de réponse, pas de traces
+Flux implicites désactivés, définis manuellement
+Politique de pare-feu, structurée solidement
+
+[Pont]
+Interdiction finale, même si implicite déjà là
+Jamais journalisée par défaut, ajoute-la, voilà
+Contrôles techniques ne dispensent jamais des revues
+Erreur humaine possible, teste ce que tu construis
+
+[Refrain final]
+Six sections, first-match, de haut en bas
+Modèle positif, tout interdit, sauf le cas
+Flux implicites désactivés, règle antiparasite
+Politique de pare-feu, notre structure définite
+
+[Outro]
+Pare-feu structuré, flux bien maîtrisés
+One love, one network, politique posée

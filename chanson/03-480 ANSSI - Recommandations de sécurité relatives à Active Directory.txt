@@ -1,0 +1,57 @@
+TITRE : AdminSDHolder Riddim
+
+[Intro]
+Active Directory, écoute les priorités
+Un, deux, trois, quatre, niveaux hiérarchisés
+Contrôleur de domaine, RODC en lecture seule
+KCC génère la topologie, la boucle
+
+[Couplet 1]
+RODC si sécurité physique non garantie
+Disques chiffrés, cache d'identification limité, épie
+Journal de sécurité, un gigaoctet, événements audités
+SID History, effacement de journal, surveillés
+
+Aucun logiciel tiers sur un DC, même antivirus
+Surface d'attaque augmentée, principe conclusif
+Comptes de service, privilèges minimisés, inventoriés
+WinRM en HTTPS, ports limités, sécurisés
+
+[Refrain]
+AdminSDHolder, ACL surveillées sans cesse
+adminCount à un, groupe protégé, promesse
+Frontière de forêt, la vraie limite de sécurité
+Active Directory, notre priorité
+
+[Couplet 2]
+Authentification sélective entre forêts, par défaut refusée
+SIDHistory temporaire, migration limitée
+Filtrage des SIDs toujours activé, contre le rebond
+Niveau fonctionnel le plus haut, versions récentes, à fond
+
+Groupes Opérateurs vides, groupes dédiés à la place
+Imbrication vérifiée, contre les bouclages, la trace
+LAN Manager niveau cinq, cryptanalyse évitée
+Cache de domaine limité, comptes inactifs désactivés
+
+[Refrain]
+AdminSDHolder, ACL surveillées sans cesse
+adminCount à un, groupe protégé, promesse
+Frontière de forêt, la vraie limite de sécurité
+Active Directory, notre priorité
+
+[Pont]
+Élévation de privilège, domaine vers la forêt, possible
+Frontière de domaine, pas assez, faille invisible
+Compte désactivé, réactivable facilement
+Retirer les droits, pas juste désactiver, clairement
+
+[Refrain final]
+AdminSDHolder, ACL surveillées sans cesse
+Comptes désactivés, sans suppression, sagesse
+Rotation des administrateurs, audit PASSI, régularité
+Active Directory, notre sécurité
+
+[Outro]
+Annuaire protégé, forêt bien gardée
+One love, one network, AD sécurisé

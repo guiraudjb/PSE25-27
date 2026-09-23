@@ -1,0 +1,57 @@
+TITRE : Moniteur de Référence Riddim
+
+[Intro]
+Cloisonnement système, écoute le moindre privilège
+Interdit par défaut, autorise ce qui protège
+Moniteur de référence, décide chaque action
+Domaine, tâche, ressource, la fondation
+
+[Couplet 1]
+Noyau pour les processus, hyperviseur pour les VM
+SELinux, AppArmor, contrôle obligatoire, le système
+Composant de confiance, non corruptible, supposé
+Surface d'attaque, surface de friction, analysée
+
+Biens sensibles identifiés, modèle d'attaquant précis
+Usages distincts caractérisés, connectivité, criticité aussi
+Minimiser la surface d'attaque de chaque usage
+Cloisonner entre eux via le moniteur, sage
+
+[Refrain]
+Moniteur de référence, jamais compromis
+Interdit par défaut, seul le nécessaire est permis
+Composant de confiance, audité, typé fortement
+Cloisonnement système, notre fondement
+
+[Couplet 2]
+Langage fortement typé, Ada, OCaml, Rust, Go
+Canaris de pile, W xor X, ASLR, le combo
+TOCTTOU évité, contrôle complet, au bon moment
+Tâche jamais un privilège égal au moniteur, clairement
+
+Xen, KVM, ESXi, Hyper-V, type un solide
+Qemu, VirtualBox, type deux, moins rigide
+Raffiner le cloisonnement à l'intérieur du domaine
+Défense en profondeur, même dans la VM, la chaîne
+
+[Refrain]
+Moniteur de référence, jamais compromis
+Interdit par défaut, seul le nécessaire est permis
+Composant de confiance, audité, typé fortement
+Cloisonnement système, notre fondement
+
+[Pont]
+Module dans le processus utilisateur, pas de vrai cloisonnement
+Seul le noyau, privilège supérieur, isolement vraiment
+Jamais abaisser le durcissement d'un autre composant
+Sonde exIDS, TAP unidirectionnel, exemple marquant
+
+[Refrain final]
+Moniteur de référence, jamais compromis
+Interdit par défaut, seul le nécessaire est permis
+Besoins de cloisonnement dès la conception, priorité
+Cloisonnement système, notre sécurité
+
+[Outro]
+Domaines cloisonnés, privilèges maîtrisés
+One love, one network, système protégé

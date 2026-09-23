@@ -1,0 +1,57 @@
+TITRE : Rideau de Fumée Riddim
+
+[Intro]
+DDoS, déni de service distribué, écoute
+Volumétrique, protocolaire, applicative, la route
+UDP flood, SYN flood, attaque Smurf
+DNS water torture, la ressource qui s'essouffle
+
+[Couplet 1]
+Bande passante épuisée, volumétrique en force
+CPU, RAM épuisés, protocolaire qui renforce
+Attaquants adaptent, combinent leurs techniques
+Services exposés restreints, au strict besoin, logique
+
+Service anti-DDoS dédié, prestataire spécialisé
+Trou noir, déroutement BGP, flux dépollués
+Niveaux trois, quatre, cinq, sept, du modèle OSI
+Contrôle de débit, protection anti-robot, ainsi
+
+[Refrain]
+Rideau de fumée, l'attaque bruyante cache
+Une attaque discrète, plus grave, à la tâche
+CDN répartit la charge, mais attention à l'étranger
+DDoS distribué, jamais on ne baisse les bras
+
+[Couplet 2]
+Architecture résiliente, répartition de charge
+Centres de données, répartiteurs, à large marge
+Réseau d'administration dédié, pendant l'attaque
+Chaînes d'accès distinctes, pas de casse en cascade
+
+Pare-feu en coupure, filtrage réseau, transport
+Pare-feu applicatif en aval, bon renfort
+Supervision, détection, centralisation des journaux
+Mode dégradé prévu, inventaire des services, sans défaut
+
+[Refrain]
+Rideau de fumée, l'attaque bruyante cache
+Une attaque discrète, plus grave, à la tâche
+CDN répartit la charge, mais attention à l'étranger
+DDoS distribué, jamais on ne baisse les bras
+
+[Pont]
+Fournisseur d'accès impose un mode dégradé
+Même sans cibler l'entité directement, avéré
+Alertes annexes contrôlées après l'attaque bruyante
+Gestion de crise avec les prestataires, en avant
+
+[Refrain final]
+Rideau de fumée, l'attaque bruyante cache
+Contrôle les autres alertes, ne baisse pas ta garde
+CDN, anti-DDoS, architecture résiliente
+DDoS distribué, la vigilance est permanente
+
+[Outro]
+Attaque contrée, service résilient
+One love, one network, jamais défaillant

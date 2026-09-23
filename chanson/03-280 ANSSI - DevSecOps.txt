@@ -1,0 +1,57 @@
+TITRE : Jetons à la Demande Riddim
+
+[Intro]
+DevSecOps, écoute la méthodologie
+Sécurité intégrée, du dev à la production, la voie
+CI/CD, orchestrateur, dépôts, artefacts
+Cartographie des applications, droits, secrets, intacts
+
+[Couplet 1]
+Matrices de flux, rôles des développeurs
+Relecture, validation, référents, la rigueur
+Analyse de risque globale, postes développeurs
+Sous-traitance, chaîne CI/CD, cloud, la profondeur
+
+CI/CD de production, action d'administration
+Poste dédié, moindre privilège, génération
+Jetons à la demande, jamais statiques, longue durée
+Journalisation, supervision, CI/CD sécurisée
+
+[Refrain]
+Jetons à la demande, pas de secret en dur
+Gestionnaire de secrets, distinct, sans fissure
+Signature des artefacts, tags de version vérifiés
+DevSecOps, intégrité de bout en bout, sécurisée
+
+[Couplet 2]
+Dépendances minimisées, évaluées, corrigées
+Tests de non-régression, étanchéité des profils, testés
+Analyse statique, dynamique, conformité IaC
+Déploiement sécurisé, artefacts signés, sans couac
+
+Authentification multifacteur, dépôts, commits signés
+CI/CD dev et production, séparées, jamais mélangées
+Réinstanciée régulièrement, sans donnée persistante
+Confidentialité, localisation, SaaS public, prudente
+
+[Refrain]
+Jetons à la demande, pas de secret en dur
+Gestionnaire de secrets, distinct, sans fissure
+Signature des artefacts, tags de version vérifiés
+DevSecOps, intégrité de bout en bout, sécurisée
+
+[Pont]
+CI/CD de production, action d'administration
+Poste dédié, changement de perspective, attention
+Réinstanciation régulière, limite la persistance
+D'une compromission, réduite sa puissance
+
+[Refrain final]
+Jetons à la demande, pas de secret en dur
+Règles de développement, durcissement, sans fissure
+Cartographie, analyse de risque, chaîne sécurisée
+DevSecOps, notre méthode privilégiée
+
+[Outro]
+Chaîne CI/CD sécurisée, artefact signé
+One love, one network, DevSecOps déployé

@@ -1,0 +1,57 @@
+TITRE : Liste Blanche Riddim
+
+[Intro]
+AppLocker, écoute la liste blanche
+SRP dépassé, AppLocker prend sa revanche
+Refuser d'abord, puis Autoriser, ordre d'évaluation
+Refus implicite, sans règle, aucune exécution
+
+[Couplet 1]
+Règle Chemin d'accès, Éditeur, ou Empreinte
+Signature électronique privilégiée, confiance contrainte
+Empreinte SHA-256, sécurité maximale, maintenance lourde
+Inventaire des applications, audit AppLocker qui sourde
+
+AppIdSvc démarré automatiquement, comptes non privilégiés
+C:\Windows, C:\Program Files, règles par défaut à corriger
+Sous-répertoires accessibles en écriture, faille triviale
+Règle Éditeur Microsoft, remplace la règle banale
+
+[Refrain]
+Liste blanche, Refuser puis Autoriser
+Un dossier en écriture suffit à tout compromettre
+AppLocker teste en mode audit, avant de déployer
+Liste blanche, sécurité, notre fierté
+
+[Couplet 2]
+Bibliothèques DLL, règles activées malgré l'impact
+Applications universelles, règles Éditeur, exact
+regsvr32, InstallUtil, exceptions à bloquer
+ActiveX neutralisé, macros signées seulement, à contrôler
+
+NTVDM désactivé sans application seize bits
+Get-AppLockerFileInformation, statistiques, vérifie
+Déploiement progressif, échantillon représentatif d'abord
+Qualification avant chaque mise à jour, sans retard
+
+[Refrain]
+Liste blanche, Refuser puis Autoriser
+Un dossier en écriture suffit à tout compromettre
+AppLocker teste en mode audit, avant de déployer
+Liste blanche, sécurité, notre fierté
+
+[Pont]
+Aucune règle définie, tout bloqué, même le système
+Impossible d'ouvrir une session, erreur catastrophique, problème
+Contrôle seulement au lancement, pas après, la limite
+AppLocker teste, ajuste, avant que ça n'irrite
+
+[Refrain final]
+Liste blanche, Refuser puis Autoriser
+AccessEnum trouve les dossiers à sécuriser
+regsvr32, InstallUtil, vecteurs de contournement
+AppLocker, notre politique, notre fondement
+
+[Outro]
+Programmes maîtrisés, exécution contrôlée
+One love, one network, AppLocker déployé

@@ -1,0 +1,57 @@
+TITRE : State et Nonce Riddim
+
+[Intro]
+OpenID Connect, écoute l'authentification
+Authorization code, ID Token, la cinématique en action
+Authorization Endpoint, Token Endpoint, UserInfo
+Client confidentiel protège ses secrets, pas comme un client public, bravo
+
+[Couplet 1]
+State contre le CSRF, cent vingt-huit bits d'entropie
+Nonce contre le rejeu, généré aléatoirement, sans répit
+Liste blanche de redirection, contre l'ouverture béante
+Authorization code, quelques minutes, durée courte, prudente
+
+TLS sur toutes les communications, du client au fournisseur
+SubjectAltName vérifié, certificate pinning, en douceur
+Empreinte SHA256, stockage plutôt qu'en clair
+Un seul usage de l'authorization code, ensuite désactivé, clair
+
+[Refrain]
+State et nonce, contre CSRF et rejeu
+Authorization code, éphémère, un seul jeu
+Access token jamais dans les journaux, entête Authorization
+OpenID Connect, sécurisé à chaque étape, sans exception
+
+[Couplet 2]
+ID Token vérifié, nonce, iss, aud comparés
+HMAC avec un secret différent du client_secret, séparé
+Champ alg jamais pour déterminer l'algorithme
+Fixé lors de l'enrôlement, contre le forgeage, le dilemme
+
+Découverte automatisée et enrôlement, à éviter
+IdP Mix-Up, usurpation du fournisseur, à contrer
+UserInfo, sub croisé avec l'ID Token, cohérence
+Journalisation des événements d'authentification, vigilance
+
+[Refrain]
+State et nonce, contre CSRF et rejeu
+Authorization code, éphémère, un seul jeu
+Access token jamais dans les journaux, entête Authorization
+OpenID Connect, sécurisé à chaque étape, sans exception
+
+[Pont]
+Norme stricte n'impose pas state ni nonce au client
+Fournisseur d'identité doit détecter l'absence, vigilant
+Alg none dans le JWS, intégrité supprimée
+Fixer l'algorithme hors bande, jamais improvisée
+
+[Refrain final]
+State et nonce, contre CSRF et rejeu
+Certificate pinning, TLS partout, un seul jeu
+Access token éphémère, entropie, empreinte SHA256
+OpenID Connect, notre protocole, sécurisé, précis
+
+[Outro]
+Identité vérifiée, session bien protégée
+One love, one network, OIDC sécurisé

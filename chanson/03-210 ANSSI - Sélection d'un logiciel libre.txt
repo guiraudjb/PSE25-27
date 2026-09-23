@@ -1,0 +1,57 @@
+TITRE : XZ Utils Riddim
+
+[Intro]
+Logiciel libre, écoute avant de choisir
+Historique, notoriété, maturité, le désir
+MCO, MCS, opérationnel et sécurité
+SILL, référentiel de maturité, vérité
+
+[Couplet 1]
+Date de création, contributions régulières
+Mainteneurs désignés, commits de l'année dernière
+Point de contact sécurité, procédure publique
+Vulnérabilités critiques, temps de correction, logique
+
+SBOM, dépendances, SPDX ou CycloneDX
+Bibliothèques à jour, exemptes de failles complexes
+Visa de sécurité ANSSI, analyse par des tiers
+Documentation utilisateur, déploiement sans mystère
+
+[Refrain]
+XZ Utils, la porte dérobée insérée
+Contributeur de confiance, progressivement infiltré
+Audit régulier des contributions, jamais relâché
+Logiciel libre, choix éclairé, sécurité vérifiée
+
+[Couplet 2]
+Règles de programmation C, applications Rust sécurisées
+OWASP Developer Guide, gestion mémoire maîtrisée
+Revue de code par les pairs, analyse outillée
+Tests unitaires, intégration continue, binaires reproductibles, prouvés
+
+Typage fort, sécurité de la mémoire, langage sûr
+Soutien au projet, financier ou contributeurs, mesure
+Contrat de support fonctionnel ou sécurité, souscrire
+Stabilité financière, pérennité, pour mieux choisir
+
+[Refrain]
+XZ Utils, la porte dérobée insérée
+Contributeur de confiance, progressivement infiltré
+Audit régulier des contributions, jamais relâché
+Logiciel libre, choix éclairé, sécurité vérifiée
+
+[Pont]
+Pas besoin d'un score parfait sur chaque critère
+Conscience des enjeux, choix qui éclaire
+Trois ans d'infiltration, XZ Utils, l'exemple concret
+Vigilance constante, même pour un projet establi, complet
+
+[Refrain final]
+XZ Utils, la porte dérobée insérée
+Historique, notoriété, maintien évalué
+SBOM, dépendances, audit des contributions
+Logiciel libre, sécurité, bonne sélection
+
+[Outro]
+Choix éclairé, pas un projet parfait
+One love, one network, la vigilance qu'on refait

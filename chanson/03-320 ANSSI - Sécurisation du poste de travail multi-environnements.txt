@@ -1,0 +1,57 @@
+TITRE : Barre de Confiance Riddim
+
+[Intro]
+Poste multi-environnements, écoute le socle
+Domaines utilisateurs, cloisonnés, pas de vacuole
+TCB, base de confiance, critique pour la sécurité
+Moniteur de référence, autorise ou refuse, en vérité
+
+[Couplet 1]
+Machines virtuelles pour cloisonner, plus fort qu'une sandbox
+Même sensibilité, isolement quand même, pas de paradoxe
+UEFI Secure Boot, Measured Boot, TPM, la chaîne
+Firmware jamais modifiable, dm-verity qui règne
+
+Chiffrement des données, confidentialité, intégrité
+TPM protège les secrets, coldboot, mémoire chiffrée
+SELinux, AppArmor, contrôle d'accès obligatoire
+Meltdown, Spectre, protection micro-architecturale, victoire
+
+[Refrain]
+Barre de confiance, sait toujours où tu es
+Domaine par domaine, jamais confondu, jamais
+VPN non-débrayable, flux du socle filtrés
+Poste multi-environnements, cloisonnement assuré
+
+[Couplet 2]
+VMM dédié par domaine, périphérique émulé
+Diodes unidirectionnelles, transferts journalisés
+Nom, hash, horodatage, sens du transfert, tracé
+Réseau du socle jamais contrôlé par l'utilisateur, gardé
+
+Journalisation dans un domaine support dédié
+Mise à jour atomique, signée, avec fallback assuré
+Authentification forte pour les rôles d'exploitation
+SBOM à jour, documentation, analyse d'attaque, précision
+
+[Refrain]
+Barre de confiance, sait toujours où tu es
+Domaine par domaine, jamais confondu, jamais
+VPN non-débrayable, flux du socle filtrés
+Poste multi-environnements, cloisonnement assuré
+
+[Pont]
+Même sensibilité, isolement quand même, obligatoire
+Sensibilité identique n'est pas droit identique, mémoire
+Diodes journalisées, jamais un canal caché
+CLIP OS, l'héritage des travaux passés
+
+[Refrain final]
+Barre de confiance, sait toujours où tu es
+Cloisonnement fort, machines virtuelles, jamais faussées
+TPM, Secure Boot, chiffrement, moniteur de référence
+Poste multi-environnements, notre différence
+
+[Outro]
+Domaines cloisonnés, sécurité affichée
+One love, one network, poste bien gardé

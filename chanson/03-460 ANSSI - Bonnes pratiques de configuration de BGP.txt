@@ -1,0 +1,57 @@
+TITRE : Martians Filtrés Riddim
+
+[Intro]
+BGP, écoute le routage inter-domaines
+AS_PATH, EBGP, préfixes qui se proclament
+Martians filtrés, RFC mille neuf cent dix-huit
+TCP MD5, secret par interconnexion, exquis
+
+[Couplet 1]
+Peering bilatéral, serveur de routes, point d'échange
+Multi-hop, transitaire, feuille, relation qui se mélange
+TCP MD5 systématique en multi-hop, secret distinct
+Pas le même secret partout, sinon l'intérêt s'éteint
+
+Préfixes du client filtrés, légitimement attribués
+Pas plus spécifiques que vingt-quatre bits, limité
+Route par défaut jamais annoncée sans demande explicite
+AS privés supprimés en bordure, soixante-quatre mille cinq douze, strict
+
+[Refrain]
+Martians filtrés, en entrée, en sortie
+AS_PATH vérifié, premier numéro qui vérifie
+URPF strict, feasible path, loose, selon le cas
+BGP sécurisé, martians jamais là
+
+[Couplet 2]
+Filtre volumétrique, seuil d'alerte, limite de coupure
+Réannonce accidentelle de la table globale, rupture
+Changements d'adjacence journalisés, supervision active
+Graceful Restart, routes périmées, transfert qui reste actif
+
+URPF strict inadapté au routage asymétrique
+Feasible path ou loose, en cas de multihoming, logique
+SSH par clé publique, interface dédiée, comptes distincts
+Plan de contrôle protégé, RFC six mille cent quatre-vingt-douze, instinct
+
+[Refrain]
+Martians filtrés, en entrée, en sortie
+AS_PATH vérifié, premier numéro qui vérifie
+URPF strict, feasible path, loose, selon le cas
+BGP sécurisé, martians jamais là
+
+[Pont]
+Secret MD5 identique partout, intérêt annulé
+Chaque interconnexion, son secret fort et dédié
+Absence de filtrage volumétrique, incidents réels passés
+Réannonce involontaire, table globale, dévastée
+
+[Refrain final]
+Martians filtrés, en entrée, en sortie
+AS_PATH vérifié, premier numéro qui vérifie
+TCP MD5, URPF, filtrage volumétrique
+BGP sécurisé, notre pratique authentique
+
+[Outro]
+Routage protégé, préfixes bien filtrés
+One love, one network, BGP sécurisé

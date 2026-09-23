@@ -1,0 +1,57 @@
+TITRE : Protocol 2 Riddim
+
+[Intro]
+SSH, remplace Telnet, RSH, FTP, écoute
+Protocol 2 seulement, version 1 hors de route
+StrictHostKeyChecking, vérifie avant d'entrer
+TOFU, empreinte enregistrée, known_hosts, gardé
+
+[Couplet 1]
+Clé RSA deux mille quarante-huit, ECDSA préférée
+ECDSA deux cent cinquante-six bits, mieux calibrée
+Aléa fiable, machine physique, entropie sûre
+AES-128 CBC protège la clé privée, structure
+
+AES CTR pour le canal, s'affranchit du CBC
+HMAC SHA-256, SHA-512, encrypt-then-mac, précis
+Séparation de privilèges, sandboxing depuis cinq-neuf
+Chroot SFTP, nodev, noexec, nosuid, la neuve
+
+[Refrain]
+Protocol 2, ECDSA, RSA, jamais DSA
+PermitRootLogin no, AllowUsers, filtré, voilà
+X11Forwarding désactivé, AllowTcpForwarding aussi
+SSH sécurisé, chaque connexion réfléchie
+
+[Couplet 2]
+ECDSA, RSA, Kerberos GSSAPI, par ordre
+Mot de passe en dernier recours, jamais pour un administrateur
+Comptes sans mot de passe interdits, MaxAuthTries limité
+PermitUserEnvironment no, AcceptEnv maîtrisé
+
+Agent forwarding, hôte relais de confiance
+ForceCommand restreint les commandes, sans distance
+Port différent du vingt-deux, si exposé au réseau
+IGC OpenSSH, autorités distinctes, certificats nouveaux
+
+[Refrain]
+Protocol 2, ECDSA, RSA, jamais DSA
+PermitRootLogin no, AllowUsers, filtré, voilà
+X11Forwarding désactivé, AllowTcpForwarding aussi
+SSH sécurisé, chaque connexion réfléchie
+
+[Pont]
+Serveur non authentifié, homme du milieu qui guette
+Frappes clavier, identifiants, fichiers, tout se répète
+SSHFP en DNS, indicateur complémentaire seulement
+Jamais substitut à la vérification, fondamentalement
+
+[Refrain final]
+Protocol 2, ECDSA, RSA, jamais DSA
+Chroot SFTP, séparation de privilèges, voilà
+X11Forwarding désactivé, agent forwarding maîtrisé
+SSH sécurisé, notre fiabilité
+
+[Outro]
+Connexion chiffrée, accès bien contrôlé
+One love, one network, SSH sécurisé

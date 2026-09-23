@@ -1,0 +1,57 @@
+TITRE : Rebond Éphémère Riddim
+
+[Intro]
+SI d'administration, système à part entière
+Zones de confiance, zones d'administration, la matière
+Poste dédié, multi-niveaux, ou accès distant
+Trois architectures, sécurité décroissante, important
+
+[Couplet 1]
+Poste d'administration, aucun accès Internet
+Système durci, droits restreints, logiciels au complet
+Réseau physique dédié, ou VPN IPsec sinon
+Filtrage interne, périmétrique, local, à foison
+
+Interface dédiée, blocage entre ressources administrées
+Comptes d'administration individuels, jamais génériques, dédiés
+Authentification double facteur, certificats de confiance
+Moindre privilège, groupes plutôt qu'individuel, vigilance
+
+[Refrain]
+Rebond éphémère, coupure entre VPN et SI
+Contrôle d'accès strict, traçabilité, jamais impuni
+PAMS qualifié, infogérance sécurisée
+SI d'administration, notre priorité
+
+[Couplet 2]
+Rupture protocolaire étudiée, sauf besoin de confidentialité
+Serveurs relais pour les mises à jour, correctifs validés
+Journalisation dédiée, collecte centralisée
+Sauvegarde du SI d'administration, politique définie
+
+Filtre de confidentialité pour le nomadisme, écran protégé
+Tunnel VPN IPsec non modifiable par l'utilisateur, verrouillé
+Système d'échange externe, jamais de compte d'administration
+Boîtier vidéo pour l'assistance à distance, sans exposition
+
+[Refrain]
+Rebond éphémère, coupure entre VPN et SI
+Contrôle d'accès strict, traçabilité, jamais impuni
+PAMS qualifié, infogérance sécurisée
+SI d'administration, notre priorité
+
+[Pont]
+Virtualisation des infrastructures d'administration, confiance limitée
+Socles physiques dédiés, précaution redoublée
+Accès distant au SI bureautique, dernier recours seulement
+Deux architectures avant, plus sûres, clairement
+
+[Refrain final]
+Rebond éphémère, coupure entre VPN et SI
+CLIP OS, jeton FIDO, sécurité qui unit
+Comptes dédiés, authentification renforcée
+SI d'administration, notre sécurité
+
+[Outro]
+Administration protégée, accès bien tracés
+One love, one network, SI sécurisé

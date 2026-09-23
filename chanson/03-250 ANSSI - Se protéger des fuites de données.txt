@@ -1,0 +1,57 @@
+TITRE : Haveibeenpwned Riddim
+
+[Intro]
+Fuite de données, écoute la protection
+Sensibilise direction et salariés, sans exception
+Protection dès la conception, par défaut, RGPD
+Sous-traitants évalués, contrat de sécurité
+
+[Couplet 1]
+Données sensibles identifiées, mots de passe révocables
+Archivées, effacées, quand elles deviennent obsolètes, capables
+Politique de sauvegarde sécurisée, définie
+Procédures de crise, CNIL, ANSSI, DPO avertis
+
+Défense en profondeur, chiffrement en transit, au repos
+Antivirus, EDR, accès d'administration, dédiés, propos
+Authentification multifacteur, rôles jamais cumulés
+Minimisation par rôle, par zone, par créneaux horaires, sans reculer
+
+[Refrain]
+Haveibeenpwned, la veille en réaction
+DLP, coffre-fort, filtre écran, protection
+CTI, renseignement, veille en anticipation
+Fuite de données, comprendre la source, remédiation
+
+[Couplet 2]
+Nomadisme numérique, verrouillage automatique
+Session verrouillée, filtre de confidentialité, pratique
+Outils spécialisés, supervisés, adaptés au besoin
+DLP détecte l'exfiltration, prévient au loin
+
+Infostealer, vecteur récurrent de compromission
+Comprendre la source, éviter la répétition
+Journalisation protégée, architecture de journalisation
+Fuite avérée, remédiation, sans hésitation
+
+[Refrain]
+Haveibeenpwned, la veille en réaction
+DLP, coffre-fort, filtre écran, protection
+CTI, renseignement, veille en anticipation
+Fuite de données, comprendre la source, remédiation
+
+[Pont]
+Minimisation par créneaux horaires, précision rare
+Accès limité dans le temps, moins de brèche à colmater
+Comprendre la source, étape distincte de la remédiation
+Éviter que le même vecteur ne cause récidive, attention
+
+[Refrain final]
+Haveibeenpwned, la veille en réaction
+Sensibilisation, sous-traitants, contractualisation
+Protection dès la conception, données minimisées
+Fuite de données, jamais tu ne seras piégée
+
+[Outro]
+Données protégées, fuite anticipée
+One love, one network, vigilance assurée

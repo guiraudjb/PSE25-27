@@ -1,0 +1,57 @@
+TITRE : Utilisateur Par Défaut Désactivé Riddim
+
+[Intro]
+CMS, WordPress, Drupal, Joomla, écoute
+HTTPS activé, Mozilla Observatory, la route
+HSTS, CSP, sécurisent le contenu
+Extensions limitées, maintenues, jamais retenues
+
+[Couplet 1]
+Thèmes validés par l'éditeur, actifs, maintenus
+Poste d'administration durci, ports minimums, retenus
+SSH, TLS, comptes dédiés, maintien en condition
+Authentification multifacteur, administrateurs, protection
+
+Cycle de vie des facteurs, tentatives limitées
+Messages d'erreur innocents, mots de passe stockés, sécurisés
+Valeurs par défaut changées, utilisateur par défaut désactivé
+Cible privilégiée des attaquants, jamais oublié
+
+[Refrain]
+Utilisateur par défaut désactivé, pas juste changé
+CMS sécurisé, HTTPS bien configuré
+Moindre privilège, runtime, base de données, système
+Trois niveaux durcis, contre chaque prisme
+
+[Couplet 2]
+Sauvegarde du contenu, export base de données
+Configuration sauvegardée, règles bien pensées
+Cookies de session sécurisés, HSTS actif
+Flux d'interconnexion limités, service résilient, actif
+
+Journaux collectés, analysés, alertes actives
+Socle minimal de journalisation, détection réactive
+PHP sécurisé, PostgreSQL, droits limités
+Niveau minimal, intermédiaire, GNU/Linux, appliqué
+
+[Refrain]
+Utilisateur par défaut désactivé, pas juste changé
+CMS sécurisé, HTTPS bien configuré
+Moindre privilège, runtime, base de données, système
+Trois niveaux durcis, contre chaque prisme
+
+[Pont]
+Compte administrateur par défaut, cible connue
+Changer le mot de passe ne suffit pas, désactive-le, continue
+Trois niveaux de durcissement, distincts, complémentaires
+Runtime, base, système, chacun sa lumière
+
+[Refrain final]
+Utilisateur par défaut désactivé, pas juste changé
+CMS sécurisé, HTTPS bien configuré
+Extensions limitées, administration durcie
+CMS, notre site, bien fortifié
+
+[Outro]
+Site sécurisé, contenu bien gardé
+One love, one network, CMS protégé

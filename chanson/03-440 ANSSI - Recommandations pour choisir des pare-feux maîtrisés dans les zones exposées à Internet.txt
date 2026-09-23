@@ -1,0 +1,57 @@
+TITRE : Deux Pare-Feux En Cascade Riddim
+
+[Intro]
+Deux pare-feux en cascade, écoute la règle
+Externe, interne, DMZ, jamais un seul qui règle
+Point de défaillance unique, à éviter absolument
+Diversification technologique, défense en profondeur, vraiment
+
+[Couplet 1]
+Matériel différent, système, moteur de filtrage
+Interface différente, contre le rejeu, l'usage
+Pare-feux dédiés au filtrage, rien d'autre à bord
+VPN IPsec, IDS, ailleurs, pas de renfort
+
+Pare-feu physique préféré au virtualisé
+Hyperviseur, isolation difficile à garantir
+Socles physiquement séparés, jamais mutualisés
+Pare-feux qualifiés, quel que soit le niveau, recommandés
+
+[Refrain]
+Deux pare-feux en cascade, technologies distinctes
+Qualifié standard, au contact du réseau moins strict
+Diffusion Restreinte, obligation, pare-feu qualifié
+Pare-feux maîtrisés, exposition sécurisée
+
+[Couplet 2]
+Second pare-feu technologiquement différent
+Qualifié standard, puis élémentaire, puis certifié franchement
+Systèmes sensibles, État, potentiel scientifique
+Pare-feux qualifiés obligatoires, jamais statique
+
+Plus de deux pare-feux, mêmes recommandations
+Anti-DDoS absent des qualifiés, en frontal, exception
+Maîtrise réelle des équipes, jamais négligée
+Multiplication sans maîtrise, sécurité dégradée
+
+[Refrain]
+Deux pare-feux en cascade, technologies distinctes
+Qualifié standard, au contact du réseau moins strict
+Diffusion Restreinte, obligation, pare-feu qualifié
+Pare-feux maîtrisés, exposition sécurisée
+
+[Pont]
+Hyperviseur compromis, pare-feu virtualisé en danger
+Compte administrateur unique, système et réseau mélangés
+Qualification va au-delà de la certification
+Analyse organisationnelle, État, vraie garantie
+
+[Refrain final]
+Deux pare-feux en cascade, technologies distinctes
+Physiques de préférence, jamais mutualisés, strict
+Stormshield qualifié standard, référence citée
+Pare-feux maîtrisés, notre sécurité
+
+[Outro]
+Passerelle protégée, deux remparts solides
+One love, one network, pare-feux lucides

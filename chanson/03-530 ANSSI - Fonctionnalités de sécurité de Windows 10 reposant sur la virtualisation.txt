@@ -1,0 +1,57 @@
+TITRE : LSAIso Riddim
+
+[Intro]
+Windows 10, Virtualization Based Security, écoute
+VSM, hyperviseur, deux systèmes sur la route
+Trustlet signé par Microsoft, isolé, protégé
+Device Guard, Credential Guard, sécurité imbriquée
+
+[Couplet 1]
+Intel-VT, AMD-V, SLAT, la base matérielle
+SKM, micro-noyau léger, IUM, environnement fidèle
+Secure Boot UEFI, prérequis fondamental
+IOMMU pour les protections DMA, essentiel
+
+KMCI, UMCI, intégrité du code, CCI configurable
+HVCI renforce la vérification, Trustlet capable
+Mode enforced sur postes sensibles, défense en profondeur
+Mode audit avant, base de connaissance, sans erreur
+
+[Refrain]
+LSAIso isole les secrets, LSASS allégé
+Pass-the-Hash, Pass-the-Ticket, neutralisés
+Credential Guard avec verrouillage UEFI, jamais désactivé
+Windows 10 sécurisé, virtualisation engagée
+
+[Couplet 2]
+Credential Guard sur les postes Tier zéro, Tier un
+Déplacement latéral limité, élévation, plus aucun
+Ne protège pas les comptes locaux, ni le keylogger
+LAPS complète, sécurité physique, à bien évaluer
+
+Chaîne de démarrage compromise, hyperviseur aussi
+UEFI protégé par mot de passe, composants à jour, choix
+HvciOptions Strict déconseillé, non supporté
+Stratégie CCI modifiée, déni de service, danger signalé
+
+[Refrain]
+LSAIso isole les secrets, LSASS allégé
+Pass-the-Hash, Pass-the-Ticket, neutralisés
+Credential Guard avec verrouillage UEFI, jamais désactivé
+Windows 10 sécurisé, virtualisation engagée
+
+[Pont]
+VMware Workstation, VirtualBox, incompatibles parfois
+Vérifier la compatibilité des pilotes avant chaque emploi
+Credential Guard, une mesure parmi d'autres, pas une fin
+Gestion sécurisée des comptes à privilèges, le vrai destin
+
+[Refrain final]
+LSAIso isole les secrets, LSASS allégé
+Device Guard, Credential Guard, sécurité imbriquée
+HVCI, verrouillage UEFI, jamais désactivé
+Windows 10, notre virtualisation sécurisée
+
+[Outro]
+Secrets isolés, postes bien protégés
+One love, one network, Windows sécurisé

@@ -1,0 +1,57 @@
+TITRE : Cartographie à Jour Riddim
+
+[Intro]
+Migration numérique, écoute bien le plan
+DSI, RSSI, SOC, tous impliqués en amont
+Cartographie à jour, avant, pendant, après
+Décommissionnement complet, jusqu'au dernier accès
+
+[Couplet 1]
+Analyse de risque mise à jour, conformité
+Disponibilité, intégrité, confidentialité
+PCA, PRA, adaptés à la nouvelle solution
+Prestataires qualifiés ANSSI, bonne réversibilité
+
+Données en transit chiffrées, exports massifs surveillés
+Sauvegardes anciennes conservées, jusqu'à expirer
+Moyens d'administration de confiance, intègres, vérifiés
+Hyperviseurs, consoles, templates, tout contrôlé
+
+[Refrain]
+Cartographie à jour, jusqu'au décommissionnement
+Aucune modification pendant la bascule, c'est le serment
+Amont ou aval, jamais pendant la migration
+Migration numérique, sécurisée à chaque étape, sans hésitation
+
+[Couplet 2]
+SOC adapté, procédures et outils mis à jour
+Planning communiqué, pas de fausse alerte au tour
+EDR, pare-feu, antivirus, contrôlés avant, après
+Heures non ouvrées, procédures d'intervention, testées
+
+Audit post-migration, contre-mesures adaptées
+Anciens comptes, données, infrastructures décommissionnées
+Instruction interministérielle, normes de destruction
+Reconditionnement des postes, dernière précaution
+
+[Refrain]
+Cartographie à jour, jusqu'au décommissionnement
+Aucune modification pendant la bascule, c'est le serment
+Amont ou aval, jamais pendant la migration
+Migration numérique, sécurisée à chaque étape, sans hésitation
+
+[Pont]
+Refonte, occasion d'améliorer la sécurité
+Durcissement, filtrage, hygiène informatique appliquée
+Socles cible, système, réseau, stockage, de confiance
+Migration réussie, sans jamais de vacance
+
+[Refrain final]
+Cartographie à jour, jusqu'au décommissionnement
+Aucune modification pendant la bascule, c'est le serment
+Sauvegardes anciennes gardées, jusqu'à leur expiration
+Migration numérique, notre protection
+
+[Outro]
+Migration bouclée, l'ancien système s'efface
+One love, one network, la sécurité qui trace

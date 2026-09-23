@@ -1,0 +1,57 @@
+TITRE : Confiance Zéro Riddim
+
+[Intro]
+Zero Trust, écoute bien, jamais de confiance
+Sujet, contexte, ressource, triple évaluation d'avance
+Pas une techno, un modèle de sécurité
+Défense en profondeur, complémentarité
+
+[Couplet 1]
+ABAC, attribut du sujet, de la ressource, du contexte
+Fonction, confidentialité, heure et lieu, la liste
+Micro-segmentation, moindre privilège, authentification
+Évaluation dynamique, régulière, sans exception
+
+Trajectoire de transformation, cas d'usage précis
+Qui, dans quel contexte, pour quelle ressource, ainsi
+Attributs maîtrisés, jamais approximatifs
+Cartographie à jour, contrôles granulaires, actifs
+
+[Refrain]
+Zero Trust complète, jamais ne remplace
+La défense périmétrique garde sa place
+Sujet, contexte, ressource, à chaque instant
+Confiance zéro, évaluation en continu, vigilant
+
+[Couplet 2]
+Infrastructure de gestion des identités, cycle de vie
+Actifs, vulnérabilités, correctifs, on surveille
+Supervision de sécurité, faible taux de faux positifs
+Authentification multifacteur forte, équipements durcis, actifs
+
+Adoption maîtrisée, progressive, pas trop vite
+Faux sentiment de sécurité, sinon ça s'effrite
+Centralisation des fonctions, disponibilité, intégrité
+Zero Trust bien intégré, sécurité renforcée
+
+[Refrain]
+Zero Trust complète, jamais ne remplace
+La défense périmétrique garde sa place
+Sujet, contexte, ressource, à chaque instant
+Confiance zéro, évaluation en continu, vigilant
+
+[Pont]
+Tests avant production, fiabiliser les décisions
+Alertes remontées, sans fausse impression
+Équipements personnels, visibilité insuffisante
+Données critiques, équipements durcis, confiance latente
+
+[Refrain final]
+Zero Trust complète, jamais ne remplace
+Défense en profondeur, la confiance qui s'efface
+ABAC évalue, sujet, ressource, contexte
+Confiance zéro, la sécurité qui persiste
+
+[Outro]
+Jamais de confiance implicite, toujours vérifier
+One love, one network, Zero Trust, sécurité

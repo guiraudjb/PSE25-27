@@ -1,0 +1,57 @@
+TITRE : NX Bit Activé Riddim
+
+[Intro]
+Configuration matérielle x86, écoute le processeur
+Soixante-quatre bits privilégiés, protection en douceur
+NX bit activé, exécution bloquée, mémoire protégée
+SMEP, SMAP, contre le noyau compromis, blindée
+
+[Couplet 1]
+Hyper-Threading désactivé, canaux cachés évités
+Frontaux SSL, passerelles VPN, contextes séparés
+AES-NI supporté, bibliothèque plutôt que l'instruction directe
+RDRAND, RDSEED, combinés à d'autres sources, correcte
+
+VT-x désactivé par défaut, rootkits qui se cachent
+IOMMU activée, VT-d, AMD-Vi, protection sans relâche
+Contre l'accès mémoire direct des périphériques malveillants
+Validation fonctionnelle après activation, prudent
+
+[Refrain]
+NX bit activé, SMEP, SMAP en renfort
+Mot de passe BIOS unique, machine par machine, fort
+Composants inutiles désactivés, ports, USB, Bluetooth
+Configuration matérielle x86, sécurité sans faute
+
+[Couplet 2]
+Ordre de démarrage, priorité au disque système
+Autres périphériques exclus, chaîne d'amorçage logique
+BIOS protégé par mot de passe, conforme aux recommandations
+Minimisation des composants, réduction de la surface, précaution
+
+VT-x et IOMMU indépendants, l'un sans l'autre possible
+Aucune fonction seule ne garantit la fiabilité, visible
+Grsecurity, Xen, exploitent la segmentation mémoire
+OpenSSL, Crypto API, CNG, exploitent AES-NI, la lumière
+
+[Refrain]
+NX bit activé, SMEP, SMAP en renfort
+Mot de passe BIOS unique, machine par machine, fort
+Composants inutiles désactivés, ports, USB, Bluetooth
+Configuration matérielle x86, sécurité sans faute
+
+[Pont]
+Canal auxiliaire temporel, cache CPU partagé
+Clé secrète récupérée en quelques secondes, danger
+IOMMU forcée peut causer des dysfonctionnements
+Validation complète après activation, changement
+
+[Refrain final]
+NX bit activé, SMEP, SMAP en renfort
+IOMMU protège contre l'accès direct, sans effort
+VT-x désactivé sauf besoin, précaution de base
+Configuration matérielle x86, notre socle solide
+
+[Outro]
+Matériel durci, processeur bien configuré
+One love, one network, x86 sécurisé

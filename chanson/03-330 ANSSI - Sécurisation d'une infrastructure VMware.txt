@@ -1,0 +1,57 @@
+TITRE : Management Domain Riddim
+
+[Intro]
+Infrastructure VMware, écoute le plan
+Plan de contrôle, plan de donnée, en avant
+Management domain, Workload domain séparés
+Hyperviseur, cible privilégiée, protège-le sans tarder
+
+[Couplet 1]
+Rôles vSphere, privilèges sur chaque objet
+vSwitch, dvSwitch, adaptateurs VMKernel, le projet
+Micro-segmentation NSX, limite la latéralisation
+Flux nord-sud, est-ouest, filtrage en précision
+
+Port d'administration de VM jamais mutualisé
+Flux d'administration, stockage, sauvegarde, VLAN dédié
+Cluster d'administration séparé de la production
+Un vCenter par zone, cloisonnement, bonne disposition
+
+[Refrain]
+Management domain, jamais mêlé à la production
+Micro-segmentation NSX, filtrage en précision
+Lockdown mode, SSH désactivé, secure boot actif
+VMware sécurisé, infrastructure critique, exhaustif
+
+[Couplet 2]
+Annuaire d'administration indépendant d'Active Directory
+Chemins de contrôle vérifiés, dans les deux sens, sans oubli
+Clusters, datastores dédiés par niveau de sensibilité
+Configurations vérifiées, comparées, régularité
+
+Authentification multifacteur, vSphere, vCenter
+RBAC, moindre privilège, comptes API à superviser
+Arrêt massif de VM, indice de chiffrement, vmdk visé
+Suspension de VM, dump mémoire suspecté
+
+[Refrain]
+Management domain, jamais mêlé à la production
+Micro-segmentation NSX, filtrage en précision
+Lockdown mode, SSH désactivé, secure boot actif
+VMware sécurisé, infrastructure critique, exhaustif
+
+[Pont]
+NSX manager sur cluster d'administration, jamais production
+Compromission du contrôleur, fin de la micro-segmentation
+vpx-user, dcui, comptes root, supervision prioritaire
+Historique des commandes, transferts de fichiers, à surveiller
+
+[Refrain final]
+Management domain, jamais mêlé à la production
+Micro-segmentation NSX, filtrage en précision
+Sauvegarde de l'infrastructure, binaires, procédures
+VMware sécurisé, notre architecture
+
+[Outro]
+Hyperviseur protégé, infrastructure solide
+One love, one network, VMware lucide

@@ -1,0 +1,57 @@
+TITRE : Sysmon Riddim
+
+[Intro]
+Journalisation Windows, écoute l'horloge synchronisée
+Contrôleurs de domaine, source de temps, Kerberos fiabilisé
+Sysmon déployé, fichier XML, règles configurées
+Stratégies d'audit avancées, par défaut insuffisantes, à corriger
+
+[Couplet 1]
+Journaux utiles identifiés, activés, révisés
+Applications tierces, format structuré, privilégié
+Rotation automatique, taille suffisante, rétention
+Stratégies d'audit modifiées, équilibre, attention
+
+Sysmon en service Windows, démarrage automatique
+Phase de test préalable, sans support officiel, logique
+Configuration maintenue par équipes dédiées, connaissance du SI
+Nouvelles règles déployées vite, face à la menace, choisi
+
+[Refrain]
+Sysmon trace, WEC collecte, WEF transfère
+Abonnements Push privilégiés, jamais en arrière
+Serveurs de collecte cloisonnés, haute disponibilité
+Journalisation Windows, notre sécurité
+
+[Couplet 2]
+WEC sur les serveurs de collecte, WEF sur chaque client
+Abonnement précise événements, journaux, sévérités, brillant
+Plusieurs collecteurs, redondance, répartition de charge
+Format brut centralisé, stockage dimensionné, large
+
+Liste standard d'événements, personnalisée au contexte
+Solutions tierces proscrites sur les ressources sensibles, texte
+Événement 4625, échec d'ouverture de session, exemple type
+SIEM en aval, centre opérationnel, logique
+
+[Refrain]
+Sysmon trace, WEC collecte, WEF transfère
+Abonnements Push privilégiés, jamais en arrière
+Serveurs de collecte cloisonnés, haute disponibilité
+Journalisation Windows, notre sécurité
+
+[Pont]
+Journalisation seule ne suffit jamais, complémentaire
+Analyse de risque, architecture, audits, nécessaires
+Sysmon sans support officiel, deux mille lignes, prudence
+Client WEF vers plusieurs WEC, redondance, dimensionnement, patience
+
+[Refrain final]
+Sysmon trace, WEC collecte, WEF transfère
+Horloges synchronisées, Kerberos, la matière
+Serveurs de collecte cloisonnés, événements bruts gardés
+Journalisation Windows, notre fiabilité
+
+[Outro]
+Événements tracés, incidents détectés
+One love, one network, Windows journalisé

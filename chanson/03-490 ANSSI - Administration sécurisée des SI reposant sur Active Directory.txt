@@ -1,0 +1,57 @@
+TITRE : Tier Zéro Protégé Riddim
+
+[Intro]
+Administration AD, écoute les trois Tiers
+Tier zéro, cœur de confiance, en premier
+Tier un, valeurs métiers, Tier deux, postes de travail
+Chemins de contrôle, chemins d'attaque, la vraie bataille
+
+[Couplet 1]
+Enterprise access model, control plane, management plane
+User access, app access, la nouvelle chaîne
+Frontière de forêt, périmètre idéal du modèle
+Cloisonnement réseau seul insuffisant, RPC, SMB qui grêle
+
+Niveau fonctionnel augmenté, Server Core sur le Tier zéro
+Chemins de contrôle analysés, permissions sous le rideau
+Authentification sélective, relations d'approbation durcies
+Délégation Kerberos entrante interdite, jamais permise
+
+[Refrain]
+Tier zéro protégé, jamais mutualisé
+NTLM interdit, Kerberos blindé, sécurisé
+Postes d'administration dédiés, physiquement séparés
+Tier zéro, notre priorité
+
+[Couplet 2]
+Mots de passe locaux diversifiés, renouvelés
+GPP prohibés, secrets jamais dans un script révélés
+krbtgt renouvelé régulièrement, compte sensible
+Windows Defender Credential Guard, défense possible
+
+Remote Credential Guard jamais entre zones hétérogènes
+Trafic NTLM sortant bloqué, relais LDAP, SMB qui gêne
+Préauthentification Kerberos préservée, blindage activé
+SPN du Tier zéro jamais exposé, secrets protégés
+
+[Refrain]
+Tier zéro protégé, jamais mutualisé
+NTLM interdit, Kerberos blindé, sécurisé
+Postes d'administration dédiés, physiquement séparés
+Tier zéro, notre priorité
+
+[Pont]
+RPC, SMB, Kerberos, protocoles sous-jacents
+Pare-feu autorise sans contrôler le contenu, prudent
+Attaquant vise le Tier zéro, mais aussi l'API peu supervisée
+Exfiltration discrète, secrets rarement renouvelés
+
+[Refrain final]
+Tier zéro protégé, jamais mutualisé
+Contrôleurs de domaine, exemple typique, cité
+Chemins de contrôle traqués, délégation fine des droits
+Tier zéro, notre AD, notre choix
+
+[Outro]
+Annuaire cloisonné, Tiers bien séparés
+One love, one network, AD sécurisé

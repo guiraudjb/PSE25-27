@@ -1,0 +1,57 @@
+TITRE : Zone de Haute Confiance Riddim
+
+[Intro]
+Architecture sécurisée, écoute bien le sens
+EBIOS Risk Manager, l'analyse de risque intense
+Cloisonnement réseau, système, stockage, par besoin
+Défense en profondeur, barrières au loin
+
+[Couplet 1]
+Flux qui circulent de haute vers moindre confiance
+Administration vers bureautique, jamais l'inverse, évidence
+Privilèges élevés cloisonnés, hors production
+Cartographie à jour, inventaire, sans exception
+
+Contexte métier, réglementaire, sensibilité des données
+Identification, authentification, droits d'accès maîtrisés
+Administration, DevSecOps, comptes à privilèges
+Cloisonnement, chiffrement, filtrage des flux, protège
+
+[Refrain]
+Zone de haute confiance vers zone de moindre confiance
+Jamais l'inverse, c'est la règle, évidence
+Dossier d'architecture technique, thématiques bien rangées
+Architecture sécurisée, besoins métier avérés
+
+[Couplet 2]
+Maintien en condition de sécurité, nomadisme, accès tiers
+Interconnexions, Internet, filtrées, sans mystère
+Codes malveillants, sécurité physique, vidéoprotection
+Continuité, reprise, sauvegardes, supervision
+
+Journalisation, détection, traitement des incidents
+EBIOS RM en amont, choix technologiques prudents
+Zero Trust, SecNumCloud, diffusion restreinte
+Interconnexions multiniveaux, architecture qui s'imprègne
+
+[Refrain]
+Zone de haute confiance vers zone de moindre confiance
+Jamais l'inverse, c'est la règle, évidence
+Dossier d'architecture technique, thématiques bien rangées
+Architecture sécurisée, besoins métier avérés
+
+[Pont]
+Choix d'architecture motivés par le réel usage
+Pas de complexité gratuite, évite le naufrage
+Barrières maîtrisées, complémentaires, surveillées
+Architecture sécurisée, jamais improvisée
+
+[Refrain final]
+Zone de haute confiance vers zone de moindre confiance
+Le réflexe de conception, dès la phase de croissance
+Cloisonnement, analyse de risque, défense en profondeur
+Architecture sécurisée, notre bonheur
+
+[Outro]
+Flux bien dirigés, système protégé
+One love, one network, architecture posée

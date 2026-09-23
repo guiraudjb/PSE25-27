@@ -1,0 +1,57 @@
+TITRE : AC Racine Hors Ligne Riddim
+
+[Intro]
+Infrastructure de gestion de clés, écoute le lexique
+AC racine, AC intermédiaire, hiérarchie authentique
+HSM pour stocker, clés privées protégées
+CRL, OCSP, révocation, deux mécanismes activés
+
+[Couplet 1]
+Politique de certification, DPC bien rédigée
+Gabarits de certificat, extensions X.509 limitées
+AC racine hors ligne, dans un HSM rangée
+AC intermédiaire en ligne, HSM aussi, sécurisée
+
+RSA quatre mille quatre-vingt-seize bits pour la racine
+ECDSA P-384, ou P-256 pour l'aval qui domine
+Bi-clé jamais réutilisée, un seul usage prévu
+Séquestre hors ligne pour les clés de chiffrement, résolu
+
+[Refrain]
+AC racine hors ligne, HSM bien gardé
+CRL, OCSP, révocation redondée
+Politique de certification, gabarits limités
+Infrastructure de gestion de clés, bien sécurisée
+
+[Couplet 2]
+Légitimité de la demande, clé privée vérifiée
+Magasins de certificats, autorités strictement limitées
+Chaîne de certification vérifiée dans son entier
+Signature, révocation, validité, sans quartier
+
+Renouvellement anticipé, deux tiers de la durée passée
+Bi-clé renouvelée à chaque certificat renouvelé
+ACME automatise génération et déploiement
+Rôles séparés, journalisation, audit régulièrement
+
+[Refrain]
+AC racine hors ligne, HSM bien gardé
+CRL, OCSP, révocation redondée
+Politique de certification, gabarits limités
+Infrastructure de gestion de clés, bien sécurisée
+
+[Pont]
+Cryptographie post-quantique, migration anticipée
+Hybridation sur les certificats, impacts évalués
+Plus la clé est haute, plus l'exposition est réduite
+AC racine protégée, jusqu'au bout de la suite
+
+[Refrain final]
+AC racine hors ligne, HSM bien gardé
+ACME automatise, renouvellement sans tarder
+Politique, gabarits, révocation redondée
+Infrastructure de gestion de clés, notre fierté
+
+[Outro]
+Clés bien protégées, certificats de confiance
+One love, one network, l'IGC avance

@@ -1,0 +1,57 @@
+TITRE : WPA3-Enterprise Riddim
+
+[Intro]
+Wi-Fi sans fil, écoute bien le refrain
+WPS désactivé, c'est le premier chemin
+UPnP coupé, si tu n'en as pas besoin
+Sécurise ton réseau, jusqu'au dernier coin
+
+[Couplet 1]
+Terminal pro, désactive l'interface au repos
+Pas de connexion automatique, ferme le réseau
+VPN maîtrisé dans les gares, les aéroports
+Pare-feu local qui bloque, connexions entrantes, fort
+
+Points d'accès maîtrisés, personnels interdits
+WPA3-Enterprise, le mode le plus solide
+WPA2-Enterprise, avec la PMF activée
+Trames de gestion protégées, bien sécurisées
+
+[Refrain]
+WPA3-Enterprise, jamais de mode mixte
+Cloisonne tes réseaux, VLAN par usage, résiste
+SSID visible, cacher ne sert à rien
+WPA3-Enterprise, sécurise ton lien
+
+[Couplet 2]
+Suite EAP par certificats, authentification
+Infrastructure de gestion de clés, vérification
+Réseau Postes de travail, réseau IoT séparé
+SSID distinct pour chaque mode, bien pensé
+
+Secrets diffusés au personnel autorisé
+Changés souvent, après doute, sans tarder
+Journalisation des connexions, supervision centrale
+Protocoles d'administration, TLS, SSH, ça cale
+
+[Refrain]
+WPA3-Enterprise, jamais de mode mixte
+Cloisonne tes réseaux, VLAN par usage, résiste
+SSID visible, cacher ne sert à rien
+WPA3-Enterprise, sécurise ton lien
+
+[Pont]
+Auto-enrôlement par GPO, certificats déployés
+Accès au SSID réservé, bien filtré
+Mots de passe par défaut, toujours modifiés
+Mises à jour des points d'accès, jamais oubliées
+
+[Refrain final]
+WPA3-Enterprise, jamais de mode mixte
+Cloisonne tes réseaux, VLAN par usage, résiste
+Le mode mixte partage les secrets, c'est le piège
+WPA3-Enterprise, la sécurité qu'on protège
+
+[Outro]
+Wi-Fi maîtrisé, réseau bien cloisonné
+One love, one network, ANSSI l'a recommandé

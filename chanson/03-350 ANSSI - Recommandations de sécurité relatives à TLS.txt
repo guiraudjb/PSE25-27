@@ -1,0 +1,57 @@
+TITRE : Perfect Forward Secrecy Riddim
+
+[Intro]
+TLS, écoute le handshake qui protège
+ClientHello, ServerHello, suite qui s'échange
+TLS 1.3, un seul aller-retour, rapide
+SSLv2, SSLv3, TLS 1.0, 1.1, proscrits, livides
+
+[Couplet 1]
+PFS toujours assurée, Diffie-Hellman éphémère
+ECDHE privilégié, secp256, la référence
+AES, GCM, CCM, chiffrement intègre
+ChaCha20-Poly1305, alternative qui s'intègre
+
+SHA-2 seulement, RC4, MD5, SHA-1 proscrits
+ECDSA, EdDSA privilégiés, RSA toléré aussi
+RSASSA-PSS plutôt que PKCS1, la précision
+Serveur impose l'ordre, jamais le client en décision
+
+[Refrain]
+Perfect Forward Secrecy, ECDHE éphémère
+La clé compromise ne déchiffre pas hier
+Agrafage OCSP, hard-fail sans hésiter
+TLS sécurisé, jamais dégradé
+
+[Couplet 2]
+Certificat trois ans maximum, huit cent vingt-cinq jours
+RSA deux mille quarante-huit bits, ECDSA au tour
+Key Usage critique, digitalSignature, keyEncipherment
+Extended Key Usage, serverAuth, clientAuth, élément
+
+Chaîne complète, ordonnée, sans certificat racine
+CRL, OCSP, redondance, la routine
+Compression TLS proscrite, tickets courte durée
+0-RTT déconseillé, pas de protection anti-rejeu, dérivé
+
+[Refrain]
+Perfect Forward Secrecy, ECDHE éphémère
+La clé compromise ne déchiffre pas hier
+Agrafage OCSP, hard-fail sans hésiter
+TLS sécurisé, jamais dégradé
+
+[Pont]
+DROWN a montré, SSLv2 compromet tout
+Retrait complet des versions obsolètes, pas juste un verrou
+Soft-fail permet l'usurpation d'un certificat révoqué
+Hard-fail systématique, jamais dérogé
+
+[Refrain final]
+Perfect Forward Secrecy, ECDHE éphémère
+TLS 1.3, un aller-retour, la nouvelle ère
+Certificate Transparency, SCT vérifié
+TLS sécurisé, notre fiabilité
+
+[Outro]
+Session protégée, confidentialité persistante
+One love, one network, TLS qui s'implante

@@ -1,0 +1,57 @@
+TITRE : Barrières Multiples Riddim
+
+[Intro]
+Défense en profondeur, écoute le principe
+Barrières complémentaires, contre chaque étape complice
+Protection, défense, résilience, les trois temps
+Multiplicité, indépendance, robustesse, c'est le vent
+
+[Couplet 1]
+Une barrière, un objectif, un scénario de risque
+Rôle, placement, implémentation, le triptyque
+Quoi, où, comment, sur chaque composant
+Utilisateurs, réseaux, données, applications, en avant
+
+Multiplicité, remparts successifs et autonomes
+Indépendance, socles technologiques, pas les mêmes hommes
+Robustesse, résiste au contournement, tiens bon
+Trois critères d'efficacité, la protection, sans pardon
+
+[Refrain]
+Barrières multiples, indépendantes, robustes
+Défense en profondeur, jamais tu ne t'ajustes
+Protection, défense, résilience à chaque pas
+Barrières multiples, l'attaquant ne passera pas
+
+[Couplet 2]
+Sandbox analyse le courriel suspect
+EDR sur le poste, comportement, détecte
+Moindre privilège, pas de droits d'administration
+Serveur mandataire, DNS en DMZ, filtration
+
+Comptes d'administration dédiés, sans latéralisation
+Sauvegarde hors ligne, testée, restauration
+Authentification multi-facteur, jeton physique indépendant
+Analyse par anomalie, sondes derrière un TAP, vigilant
+
+[Refrain]
+Barrières multiples, indépendantes, robustes
+Défense en profondeur, jamais tu ne t'ajustes
+Protection, défense, résilience à chaque pas
+Barrières multiples, l'attaquant ne passera pas
+
+[Pont]
+Site de repli à froid, redondance des fonctions
+Indépendant de la production, sans connexion
+Test régulier des procédures de repli
+Maintien en conditions de sécurité, jamais faibli
+
+[Refrain final]
+Barrières multiples, indépendantes, robustes
+Une défaillance en production ne doit jamais te coûter
+La supervision qui voit, la résilience qui dure
+Défense en profondeur, à chaque étape, mesure
+
+[Outro]
+Barrières successives, l'attaquant recule
+One love, one network, la défense qui circule

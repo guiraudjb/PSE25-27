@@ -1,0 +1,57 @@
+TITRE : Server Core Riddim
+
+[Intro]
+Windows Server, écoute avant l'installation
+TPM version deux, Secure Boot, activation
+Server Core d'abord, surface d'attaque réduite
+IPMI, console hyperviseur, contrôle sans limite
+
+[Couplet 1]
+Secured-core à partir de deux mille vingt-deux
+Server core plutôt que Desktop Experience, un peu
+UAC, pare-feu Windows Defender, jamais coupés
+NLA activée si le RDP est utilisé
+
+IPv6 jamais désactivé, même en préférant quatre
+Mise à jour Microsoft avant de se connecter
+Compte ordinateur dans l'OU, djoin pour joindre le domaine
+Synchronisation horaire des contrôleurs, Kerberos qui règne
+
+[Refrain]
+Server Core, LAPS, BitLocker, Credential Guard
+TPM, Secure Boot, NLA, jamais en retard
+Séparation des rôles, IIS loin d'AD-CS
+Windows Server sécurisé, surface réduite, sans excès
+
+[Couplet 2]
+LAPS pour le mot de passe fort, différent par serveur
+Séparation des rôles, IIS et autorité, pas la même heure
+Données hors du disque système, bases AD-CS à part
+BitLocker chiffre système et données, sans retard
+
+VBS active Credential Guard, sécurité renforcée
+Certificats autosignés remplacés, IGC dédiée
+Moindre privilège pour comptes de service, applications
+SCT durcit l'environnement, IPSec en protection
+
+[Refrain]
+Server Core, LAPS, BitLocker, Credential Guard
+TPM, Secure Boot, NLA, jamais en retard
+Séparation des rôles, IIS loin d'AD-CS
+Windows Server sécurisé, surface réduite, sans excès
+
+[Pont]
+Accès physique vérifié, console maîtrisée
+Rôles conflictuels jamais en production mélangés
+Certificats IGC, fournisseur cryptographique récent
+Le serveur est prêt, surface réduite, performant
+
+[Refrain final]
+Server Core, LAPS, BitLocker, Credential Guard
+IPv6 jamais coupé, même si IPv4 prend le départ
+Colocalisation de rôles, proscrite en production
+Windows Server sécurisé, notre protection
+
+[Outro]
+Serveur durci, prêt pour ses rôles
+One love, one network, sécurité au contrôle

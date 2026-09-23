@@ -1,0 +1,57 @@
+TITRE : Requête Préparée Riddim
+
+[Intro]
+Base de données relationnelle, écoute le SGBD
+Mise à jour via les dépôts officiels, sans délai
+Administration sécurisée, extensions minimisées
+Journalisation des accès, jamais oubliée
+
+[Couplet 1]
+Comptes distincts, humains et applications séparés
+Authentification systématique, comptes par défaut traqués
+Compte administrateur natif, en dernier recours, jamais banal
+Authentification multifacteur, pour l'administrateur, le rituel
+
+Moindre privilège, rôles affectés aux utilisateurs
+Données et configuration, partitions distinctes, rigueur
+Fonctionnalités avancées, lecture fichiers, désactivées
+Typage des données imposé, structure préservée
+
+[Refrain]
+Requête préparée, protège de l'injection
+SaaS, mutualisation, attention à la mutualisation
+Chiffrement en transit, chiffrement au repos
+Base de données relationnelle, sécurité sans repos
+
+[Couplet 2]
+Sauvegarde paramétrée, Fondamentaux, Essentiels, guide sûr
+Données de production jamais en développement, c'est mûr
+Serveur dédié par niveau de sensibilité
+Vues internes limitent l'accès, la donnée est protégée
+
+Supervision des ressources, CPU, RAM, stockage
+Audit des événements suspicieux, à chaque passage
+Requêtes préparées, contre les injections, la clé
+Bonnes pratiques de développement, sécurité assurée
+
+[Refrain]
+Requête préparée, protège de l'injection
+SaaS, mutualisation, attention à la mutualisation
+Chiffrement en transit, chiffrement au repos
+Base de données relationnelle, sécurité sans repos
+
+[Pont]
+Compte natif utilisé par habitude, mauvais réflexe
+Dernier recours seulement, c'est le vrai réflexe
+Risque de mutualisation entre clients en SaaS
+Distinct du risque propre, jamais on ne relâche
+
+[Refrain final]
+Requête préparée, protège de l'injection
+Serveur dédié par niveau, bonne dissociation
+Moindre privilège, authentification multifacteur
+Base de données relationnelle, notre valeur
+
+[Outro]
+Données protégées, requêtes sécurisées
+One love, one network, base bien gardée

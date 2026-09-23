@@ -1,0 +1,57 @@
+TITRE : Rupture Protocolaire Riddim
+
+[Intro]
+Interconnexion Internet, écoute la DMZ
+Pare-feu externe, pare-feu interne, deux zones fermées
+Rupture protocolaire, casse et reconstruit
+Passerelle sécurisée, incontournable, sans fuite
+
+[Couplet 1]
+Flux jamais initié de la passerelle vers l'interne
+Client vers passerelle, puis Internet, la chaîne externe
+Annuaire interne jamais requêté directement
+Mandataire en lecture seule, architecture prudente
+
+Mutualisation des pare-feux interne externe, proscrite
+Compromission unique, accès direct, catastrophe interdite
+DNS interne et externe, résolveurs distincts, séparés
+Canal d'exfiltration DNS, pare-feu qui bloque, filtré
+
+[Refrain]
+Rupture protocolaire, sauf VPN de confiance
+DROP jamais REJECT, silence en réponse
+Mandataire explicite, WPAD proscrit, PAC en HTTPS
+Interconnexion Internet, sécurisée sans excès
+
+[Couplet 2]
+Serveurs de boîtes aux lettres dans le SI interne
+SMTP relais dans la passerelle, fonction externe
+Pas de portail Webmail public exposé
+SPF, DKIM, DMARC, courriels authentifiés
+
+STARTTLS activé, nécessaire mais pas suffisant
+REQUIRETLS pour les matures, chiffrement exigeant
+DNSSEC fiabilise les enregistrements publics
+SPF, DKIM, DMARC ne stoppent pas le typosquatting, un truc
+
+[Refrain]
+Rupture protocolaire, sauf VPN de confiance
+DROP jamais REJECT, silence en réponse
+Mandataire explicite, WPAD proscrit, PAC en HTTPS
+Interconnexion Internet, sécurisée sans excès
+
+[Pont]
+Inspection TLS maîtrisée, détecte le code malveillant
+Liste de sites de confiance, vie privée respectant
+Route par défaut du pare-feu interne, jamais vers Internet
+Routage statique privilégié, dynamique désactivé, discret
+
+[Refrain final]
+Rupture protocolaire, sauf VPN de confiance
+Passerelle incontournable, zones distinctes, prudence
+SPF, DKIM, DMARC, DNSSEC, courriels fiables
+Interconnexion Internet, notre rempart durable
+
+[Outro]
+SI protégé, passerelle bien gardée
+One love, one network, interconnexion sécurisée

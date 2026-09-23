@@ -1,0 +1,57 @@
+TITRE : Tier Zero Riddim
+
+[Intro]
+Cœur de confiance, écoute la définition
+Ressources critiques, prise de contrôle, attention
+Chemin de contrôle, chemin d'attaque, tiens bon
+Tier 0, le cœur du système, sans pardon
+
+[Couplet 1]
+Périmètre initial, contrôleurs de domaine d'abord
+Ressource A gère B, chemin de contrôle encore
+Compromission de A mène à B, chemin d'attaque, alerte
+Vulnérabilités, faiblesses de config, la porte ouverte
+
+BloodHound, PingCastle, outils en sources ouvertes
+OSAKA pour Kubernetes, l'analyse est offerte
+Réajustement itératif, le périmètre bouge
+Durcissement, suppression de droits, le cercle qui se rouge
+
+[Refrain]
+Cœur de confiance, jamais figé, toujours mouvant
+Tier 0 de Microsoft, le modèle qu'on suivant
+Chemin de contrôle, chemin d'attaque, faut les traquer
+Cœur de confiance, réduit et bien sécurisé
+
+[Couplet 2]
+Contrôleurs de domaine, postes d'administration
+Serveurs WSUS, AD-CS, infrastructure de clés, attention
+Hyperviseurs, AD-FS, Entra Connect en renfort
+Agents EDR, antivirus centralisés, le socle fort
+
+Serveur SCADA pilote les automates industriels
+Serveur MES transmet depuis l'ERP, essentiel
+Domaine Active Directory du système industriel inclus
+Le cœur de confiance s'étend, jusqu'au bout, résolu
+
+[Refrain]
+Cœur de confiance, jamais figé, toujours mouvant
+Tier 0 de Microsoft, le modèle qu'on suivant
+Chemin de contrôle, chemin d'attaque, faut les traquer
+Cœur de confiance, réduit et bien sécurisé
+
+[Pont]
+Délégation fine des droits, peu d'administrateurs
+Réseau dédié, cloisonné, sans erreur
+Risques de sous-traitance, prestataires maîtrisés
+Le cœur de confiance dépend de leur sécurité
+
+[Refrain final]
+Cœur de confiance, jamais figé, toujours mouvant
+Analyse, sécurisation, cycle permanent
+BloodHound, PingCastle, traquent le chemin
+Cœur de confiance, protégé jusqu'à la fin
+
+[Outro]
+Tier Zero, le cœur bat, protège-le bien
+One love, one network, jusqu'au bout du chemin
