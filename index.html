@@ -1071,6 +1071,7 @@
         const t = '?t=' + new Date().getTime();
         fetch('catalogue.json' + t)
             .then(res => { if(!res.ok) throw new Error("catalogue.json introuvable."); return res.json(); })
+            .then(cat => { if (cat.titre) { document.title = cat.titre; document.getElementById('app-title').textContent = cat.titre; } return cat; })
             .then(cat => Promise.all(cat.depots.map(d =>
                 fetch(d.url + 'modules.json' + t)
                     .then(r => r.ok ? r.json() : [])
