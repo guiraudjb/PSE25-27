@@ -819,7 +819,7 @@
                     <audio id="podcast-player" controls aria-label="Lecteur audio du podcast">
                         Votre navigateur ne supporte pas l'élément audio.
                     </audio>
-                    <span id="podcast-msg" style="font-size: 0.8em; color: var(--error); display: none; margin-top: 5px;">Aucun podcast disponible (.m4a)</span>
+                    <span id="podcast-msg" style="font-size: 0.8em; color: var(--error); display: none; margin-top: 5px;">Aucun podcast disponible</span>
                 </div>
                 <div class="info-container">
                     <p id="info-placeholder" style="color:var(--text-main);">Aucune image chargée</p>
@@ -943,7 +943,9 @@
         get quiz() { return currentBase + 'quizz/'; }, get flash() { return currentBase + 'flashcard/'; },
         get info() { return currentBase + 'infographie/'; }, get podcast() { return currentBase + 'podcast/'; },
         get tp() { return currentBase + 'tp/'; }, get fiche() { return currentBase + 'fiche/'; },
-        get chanson() { return currentBase + 'chanson/'; }, get ficheAudio() { return currentBase + 'fiche_audio/'; }
+        get chanson() { return currentBase + 'chanson/'; }, get ficheAudio() { return currentBase + 'fiche_audio/'; },
+        // Audio des QCM et flashcards pré-généré pour le jeu Batocera (tts_assets/cache/, voisin de data/)
+        get ttsCache() { return currentBase + '../tts_assets/cache/'; }
     };
     
     let quizData = [], flashData = [], tpData = [], allModules = [];
@@ -1020,6 +1022,7 @@
         
         const musiqueAudio = document.getElementById('musique-player');
         if(musiqueAudio) musiqueAudio.pause();
+        stopClip();
 
         clearTimeout(fAutoplayTimeout);
         isAutoplay = false;
@@ -1160,7 +1163,7 @@
             const audio = document.getElementById('podcast-player');
             audio.onerror = () => { audio.style.display = 'none'; document.getElementById('podcast-msg').style.display = 'block'; };
             audio.onloadeddata = () => { audio.style.display = 'block'; document.getElementById('podcast-msg').style.display = 'none'; };
-            audio.src = PATHS.podcast + filename.replace('.csv', '.m4a');
+            audio.src = PATHS.podcast + filename.replace('.csv', '.mp3');
 
             // Musique (chanson) : silencieux si absente, pas de message d'erreur
             document.getElementById('musique-content').textContent = txtChanson ? txtChanson : "";
@@ -1176,21 +1179,23 @@
 
     function parseQuizCSV(text) {
         const lines = text.split('\n'); quizData = [];
-        lines.forEach(line => {
+        lines.forEach((line, lineIndex) => {
             if(!line.trim()) return;
             const cols = line.split(';');
             if(cols.length >= 7) {
                 const idx = parseInt(cols[5]);
                 let correctIndex = (idx >= 2 && idx <= 5) ? idx - 2 : 0;
-                quizData.push({ question: cols[0], choices: [cols[1], cols[2], cols[3], cols[4]], correctIndex: correctIndex, correctAnswer: cols[correctIndex + 1], expl: cols[6] });
+                quizData.push({ id: lineIndex, question: cols[0], choices: [cols[1], cols[2], cols[3], cols[4]], correctIndex: correctIndex, correctAnswer: cols[correctIndex + 1], expl: cols[6] });
             }
         });
     }
     function parseFlashCSV(text) {
         flashData = []; const regex = /(?:^|\n)(?:"([^"]*(?:""[^"]*)*)"|([^,\n]*)),(?:"([^"]*(?:""[^"]*)*)"|([^,\n]*))/g;
-        let match; while ((match = regex.exec(text))) {
+        let match, row = 0; while ((match = regex.exec(text))) {
             let f = match[1] ? match[1].replace(/""/g, '"') : match[2]; let b = match[3] ? match[3].replace(/""/g, '"') : match[4];
-            if(f && b) flashData.push({ front: f.trim(), back: b.trim() });
+            // id = rang de la ligne, comme generate_tts_voicestudio.py (clé du cache audio Batocera)
+            if(f && b) flashData.push({ id: row, front: f.trim(), back: b.trim() });
+            row++;
         }
     }
     function parseTpCSV(text) {
@@ -1204,7 +1209,7 @@
     // --- QUIZ LOGIC (AUTO-ADVANCE MODIFIE) ---
     function resetQuiz() {
         clearInterval(qTimerInterval);
-        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        stopSpeech();
         qIndex = 0; qScore = 0; qPhase = 'game'; qWrongAnswers = [];
         document.getElementById('quiz-end').classList.remove('active');
         document.getElementById('quiz-feedback').classList.remove('active');
@@ -1235,7 +1240,7 @@
         });
         harmonizeChoices();
 
-        if(document.getElementById('ttsToggle').checked) speak(q.question);
+        if(document.getElementById('ttsToggle').checked) speakClip(`quiz_${q.id}_ask`, q.question);
         startQuizTimer();
     }
 
@@ -1265,7 +1270,7 @@
 
     function checkAnswer(idx) {
         clearInterval(qTimerInterval);
-        window.speechSynthesis.cancel();
+        stopSpeech();
 
         const q = quizData[qIndex];
         const isCorrect = (idx === q.correctIndex);
@@ -1294,7 +1299,7 @@
 
             if(document.getElementById('ttsToggle').checked) {
                 let prefix = isCorrect ? "Bravo ! " : "Faux. ";
-                speak(`${prefix} La bonne réponse était : ${q.choices[q.correctIndex]}. ${q.expl}`);
+                speakClip(`quiz_${q.id}_feedback_${isCorrect ? 'correct' : 'incorrect'}`, `${prefix} La bonne réponse était : ${q.choices[q.correctIndex]}. ${q.expl}`);
             }
             startFeedbackTimer();
         };
@@ -1332,7 +1337,7 @@
 
     function nextQuizQuestion() {
         clearInterval(qTimerInterval); // Sécurité si cliqué manuellement
-        window.speechSynthesis.cancel();
+        stopSpeech();
         qIndex++; qPhase = 'game';
         document.getElementById('quiz-feedback').classList.remove('active');
         document.getElementById('quiz-game').classList.add('active');
@@ -1383,7 +1388,7 @@
     // --- FLASHCARD & TP ---
     function resetFlashcard() {
         clearTimeout(fAutoplayTimeout); isAutoplay = false;
-        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        stopSpeech();
         const btn = document.getElementById('btn-fc-autoplay'); if(btn) { btn.classList.remove('active'); btn.textContent = "▶ AUTO"; }
         document.getElementById('fc-status').textContent = "MANUEL"; document.getElementById('fc-timer').style.width = '0%';
         fIndex = 0; updateFlashcardUI();
@@ -1412,8 +1417,9 @@
         const duration = (rawVal === 'unlimited') ? 15 : parseInt(rawVal);
         
         const card = flashData[fIndex];
-        if(phase === 'front') { document.getElementById('flashcard-el').classList.remove('flipped'); if(document.getElementById('ttsToggle').checked) speak(card.front); } 
-        else { document.getElementById('flashcard-el').classList.add('flipped'); if(document.getElementById('ttsToggle').checked) speak(card.back); }
+        const flashSuffix = face => (card.id === undefined ? null : `flash_${card.id}_${face}`);
+        if(phase === 'front') { document.getElementById('flashcard-el').classList.remove('flipped'); if(document.getElementById('ttsToggle').checked) speakClip(flashSuffix('recto'), card.front); } 
+        else { document.getElementById('flashcard-el').classList.add('flipped'); if(document.getElementById('ttsToggle').checked) speakClip(flashSuffix('verso'), card.back); }
         const bar = document.getElementById('fc-timer'); bar.style.transition = 'none'; bar.style.width = '0%';
         setTimeout(() => { if(!isAutoplay) return; bar.style.transition = `width ${duration}s linear`; bar.style.width = '100%'; }, 50);
         fAutoplayTimeout = setTimeout(() => {
@@ -1518,7 +1524,23 @@
         container.addEventListener('pointercancel', endPointer);
     })();
 
-    function speak(txt) { if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(txt); u.lang = 'fr-FR'; window.speechSynthesis.speak(u); } }
+    function speak(txt) { stopClip(); if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(txt); u.lang = 'fr-FR'; window.speechSynthesis.speak(u); } }
+
+    // --- AUDIO PRÉ-ENREGISTRÉ DES QCM ET FLASHCARDS (partagé avec le jeu Batocera) ---
+    // Même convention que tts.py du jeu : tts_assets/cache/<module assaini>/<suffixe>.mp3,
+    // assainissement = tout caractère hors lettre/chiffre/-/_ remplacé par « _ ».
+    const clipAudio = new Audio();
+    function sanitizeTts(name) { return name.replace(/[^\p{L}\p{N}_-]/gu, '_'); }
+    function stopClip() { clipAudio.onerror = null; clipAudio.pause(); }
+    function speakClip(suffix, fallbackText) {
+        if (suffix === null) { speak(fallbackText); return; }
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        stopClip();
+        clipAudio.onerror = () => { clipAudio.onerror = null; speak(fallbackText); };
+        clipAudio.src = PATHS.ttsCache + encodeURIComponent(sanitizeTts(currentFileBase)) + '/' + suffix + '.mp3';
+        clipAudio.play().catch(err => { if (err.name !== 'AbortError') { clipAudio.onerror = null; speak(fallbackText); } });
+    }
+    function stopSpeech() { stopClip(); if ('speechSynthesis' in window) window.speechSynthesis.cancel(); }
 
     // --- FICHE TTS ---
     let ficheUtterance = null; let ficheChunks = []; let currentChunkIndex = 0; let isFichePaused = false;

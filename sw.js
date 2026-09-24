@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v39-multi-depots';
+const CACHE_NAME = 'v40-data-jeu';
 const ASSETS = [
   'index.html',
   'catalogue.json',
