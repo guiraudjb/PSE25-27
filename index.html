@@ -474,6 +474,14 @@
         #app-title { font-size: 1.5em; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .controls-inline { display: flex; gap: 1vw; align-items: center; }
         #file-indicator { color: var(--secondary); font-size: 0.8em; font-weight: bold; }
+        /* Icônes pixel art des modules (data/icone/<module>.png, 512x512) */
+        #file-icon { height: 28px; width: 28px; vertical-align: middle; margin-right: 6px; border-radius: 4px; image-rendering: pixelated; }
+        #module-icon-preview { width: 48px; height: 48px; flex: none; border-radius: 6px; image-rendering: pixelated; }
+        #module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; max-height: 340px; overflow-y: auto; margin-top: 10px; padding: 2px; }
+        .mod-tile { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 4px; cursor: pointer; background: var(--bg-container); color: var(--text-main); border: 2px solid var(--border); border-radius: var(--radius); font: inherit; font-size: 0.72em; }
+        .mod-tile img { width: 100%; aspect-ratio: 1; border-radius: 6px; image-rendering: pixelated; }
+        .mod-tile:hover, .mod-tile:focus-visible { border-color: var(--accent); }
+        .mod-tile.selected { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary); }
 
         .nav-tabs { display: flex; gap: 0.5vw; margin-bottom: 1vh; flex-shrink: 0; border-bottom: 1px solid var(--border); height: 6vh; }
         .tab-btn {
@@ -635,7 +643,7 @@
         <div class="header-bar">
             <h1 id="app-title" style="margin:0;">FORMATION V37</h1>
             <div class="controls-inline">
-                <span id="file-indicator" aria-label="Fichier chargé">AUCUN FICHIER</span>
+                <span><img id="file-icon" alt="" hidden><span id="file-indicator" aria-label="Fichier chargé">AUCUN FICHIER</span></span>
                 <select id="skinSelect" onchange="changeSkin(this.value)" aria-label="Choisir le thème">
                     <option value="theme-modern">Moderne (Défaut)</option>
                     
@@ -715,11 +723,13 @@
                     <span>Choix du module</span>
                     <input type="search" id="module-search" placeholder="Filtrer les modules..." aria-label="Filtrer les modules" oninput="filterModules(this.value)">
                     <div style="display:flex; gap:10px;">
+                        <img id="module-icon-preview" alt="" hidden>
                         <select id="folderSelect" class="std-select" aria-label="Liste des modules">
                             <option value="" disabled selected>Chargement des modules...</option>
                         </select>
                         <button onclick="scanFolders()" aria-label="Rafraîchir la liste" style="padding: 0 15px; background:var(--bg-container); border:1px solid var(--primary); color:var(--primary); border-radius:var(--radius); cursor:pointer;">↺</button>
                     </div>
+                    <div id="module-grid" aria-label="Modules (clic : choisir, double-clic : charger)"></div>
                 </div>
 
                 <div class="config-row">
@@ -1102,7 +1112,8 @@
                 });
                 
                 select.disabled = false; 
-                select.onchange = () => { btn.disabled = false; status.textContent = "Prêt à charger."; };
+                select.onchange = () => { btn.disabled = false; status.textContent = "Prêt à charger."; majIconeSelection(); };
+                renderModuleGrid(files);
                 status.textContent = files.length + " modules trouvés.";
             })
             .catch(err => { 
@@ -1140,6 +1151,8 @@
         currentBase = moduleRepo[filename] || '';
         currentFileBase = filename.replace('.csv', '');
         document.getElementById('file-indicator').textContent = currentFileBase.toUpperCase();
+        const fileIcon = document.getElementById('file-icon');
+        fileIcon.onerror = () => { fileIcon.hidden = true; }; fileIcon.src = iconeUrl(filename); fileIcon.hidden = false;
         
         const pQuiz = fetch(PATHS.quiz + filename).then(r => r.ok ? r.text() : null);
         const pFlash = fetch(PATHS.flash + filename).then(r => r.ok ? r.text() : null);
@@ -1638,6 +1651,36 @@
         if(btn) btn.textContent = document.fullscreenElement ? '✕' : '⛶';
     });
 
+    // --- ICÔNES DES MODULES ---
+    function iconeUrl(f) { return (moduleRepo[f] || '') + 'icone/' + encodeURIComponent(f.replace('.csv', '')) + '.png'; }
+    function renderModuleGrid(list) {
+        const g = document.getElementById('module-grid'); g.innerHTML = '';
+        list.forEach(f => {
+            const b = document.createElement('button'); b.type = 'button'; b.className = 'mod-tile';
+            b.title = f.replace('.csv', ''); b.dataset.f = f;
+            const img = document.createElement('img'); img.loading = 'lazy'; img.alt = ''; img.src = iconeUrl(f);
+            img.onerror = () => { img.style.visibility = 'hidden'; };
+            const num = document.createElement('span'); num.textContent = f.split(' ')[0];
+            b.append(img, num);
+            b.onclick = () => choisirModule(f);
+            b.ondblclick = () => { choisirModule(f); loadAllResources(); };
+            g.appendChild(b);
+        });
+        majIconeSelection();
+    }
+    function choisirModule(f) {
+        const select = document.getElementById('folderSelect'); select.value = f;
+        document.getElementById('btnLoad').disabled = false;
+        document.getElementById('status-msg').textContent = "Prêt à charger.";
+        majIconeSelection();
+    }
+    function majIconeSelection() {
+        const v = document.getElementById('folderSelect').value;
+        const prev = document.getElementById('module-icon-preview');
+        if (v && moduleRepo[v]) { prev.src = iconeUrl(v); prev.hidden = false; } else prev.hidden = true;
+        document.querySelectorAll('.mod-tile').forEach(t => t.classList.toggle('selected', t.dataset.f === v));
+    }
+
     // --- FILTRE MODULES ---
     function filterModules(query) {
         const select = document.getElementById('folderSelect');
@@ -1653,7 +1696,8 @@
             if(f === currentVal) { opt.selected = true; btn.disabled = false; }
             select.add(opt);
         });
-        select.onchange = () => { btn.disabled = false; document.getElementById('status-msg').textContent = "Prêt à charger."; };
+        select.onchange = () => { btn.disabled = false; document.getElementById('status-msg').textContent = "Prêt à charger."; majIconeSelection(); };
+        renderModuleGrid(filtered);
     }
 
     // --- BADGES ONGLETS ---
