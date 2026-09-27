@@ -1125,7 +1125,7 @@
 
     function clearPreviousData() {
         stopAllProcesses(); 
-        quizData = []; flashData = []; tpData = [];
+        quizData = []; quizPool = []; flashData = []; tpData = [];
         qIndex = 0; qScore = 0; fIndex = 0; tpIndex = 0;
         document.getElementById('q-text').innerHTML = '<div class="max-text-target">Chargement...</div>';
         document.getElementById('q-choices').innerHTML = "";
@@ -1191,6 +1191,15 @@
         });
     }
 
+    // Mégaquiz (module de synthèse) : au-delà de QUIZ_POOL_SEUIL questions, chaque partie tire
+    // QUIZ_SESSION questions au hasard dans tout le fichier (nouveau tirage à chaque reprise).
+    const QUIZ_POOL_SEUIL = 60, QUIZ_SESSION = 40; let quizPool = [];
+    function tirerQuizSession() {
+        if (quizPool.length <= QUIZ_POOL_SEUIL) { quizData = quizPool.slice(); return; }
+        const p = quizPool.slice();
+        for (let i = p.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [p[i], p[j]] = [p[j], p[i]]; }
+        quizData = p.slice(0, QUIZ_SESSION);
+    }
     function parseQuizCSV(text) {
         const lines = text.split('\n'); quizData = [];
         lines.forEach((line, lineIndex) => {
@@ -1202,6 +1211,7 @@
                 quizData.push({ id: lineIndex, question: cols[0], choices: [cols[1], cols[2], cols[3], cols[4]], correctIndex: correctIndex, correctAnswer: cols[correctIndex + 1], expl: cols[6] });
             }
         });
+        quizPool = quizData; tirerQuizSession();
     }
     function parseFlashCSV(text) {
         flashData = []; const regex = /(?:^|\n)(?:"([^"]*(?:""[^"]*)*)"|([^,\n]*)),(?:"([^"]*(?:""[^"]*)*)"|([^,\n]*))/g;
@@ -1225,6 +1235,7 @@
         clearInterval(qTimerInterval);
         stopSpeech();
         qIndex = 0; qScore = 0; qPhase = 'game'; qWrongAnswers = [];
+        tirerQuizSession();
         document.getElementById('quiz-end').classList.remove('active');
         document.getElementById('quiz-feedback').classList.remove('active');
         document.getElementById('quiz-game').classList.add('active');
