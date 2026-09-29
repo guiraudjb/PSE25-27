@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v44-data-jeu';
+const CACHE_NAME = 'v45-data-jeu';
 const ASSETS = [
   'index.html',
   'catalogue.json',

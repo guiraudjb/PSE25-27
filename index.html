@@ -1124,6 +1124,8 @@
                     return; 
                 }
                 
+                // Un même module peut figurer dans plusieurs dépôts du catalogue (ex. 00-10, commun à tous) : une seule entrée
+                files = [...new Set(files)];
                 // Tri alphabétique naturel
                 files.sort((a,b) => a.localeCompare(b, undefined, {numeric: true, sensitivity: 'base'}));
                 allModules = [...files];
