@@ -830,6 +830,12 @@
                         Votre navigateur ne supporte pas l'élément audio.
                     </audio>
                     <span id="podcast-msg" style="font-size: 0.8em; color: var(--error); display: none; margin-top: 5px;">Aucun podcast disponible</span>
+                    <div id="podcast-court-bloc" style="display: none; width: 100%; flex-direction: column; align-items: center; margin-top: 6px;">
+                        <span class="podcast-libelle" style="font-size: 0.75em; color: var(--secondary); margin-bottom: 3px;">L'essentiel en 3 min</span>
+                        <audio id="podcast-court-player" controls aria-label="Lecteur audio de la micro-chronique : l'essentiel en trois minutes">
+                            Votre navigateur ne supporte pas l'élément audio.
+                        </audio>
+                    </div>
                 </div>
                 <div class="info-container">
                     <p id="info-placeholder" style="color:var(--text-main);">Aucune image chargée</p>
@@ -951,7 +957,7 @@
     const moduleRepo = {};
     const PATHS = {
         get quiz() { return currentBase + 'quizz/'; }, get flash() { return currentBase + 'flashcard/'; },
-        get info() { return currentBase + 'infographie/'; }, get podcast() { return currentBase + 'podcast/'; },
+        get info() { return currentBase + 'infographie/'; }, get podcast() { return currentBase + 'podcast/'; }, get podcastCourt() { return currentBase + 'podcast_court/'; },
         get tp() { return currentBase + 'tp/'; }, get fiche() { return currentBase + 'fiche/'; },
         get chanson() { return currentBase + 'chanson/'; }, get ficheAudio() { return currentBase + 'fiche_audio/'; },
         // Audio des QCM et flashcards pré-généré pour le jeu Batocera (tts_assets/cache/, voisin de data/)
@@ -1026,6 +1032,8 @@
         stopFiche(false); 
         const audio = document.getElementById('podcast-player');
         if(audio) audio.pause();
+        const audioCourt = document.getElementById('podcast-court-player');
+        if(audioCourt) audioCourt.pause();
         
         // Arrête le timer quiz (question OU feedback)
         clearInterval(qTimerInterval);
@@ -1136,6 +1144,8 @@
         document.getElementById('info-image').style.transform = ''; zoomLevel = 1; panX = 0; panY = 0;
         document.getElementById('info-placeholder').classList.remove('hidden');
         document.getElementById('podcast-player').src = "";
+        document.getElementById('podcast-court-player').src = "";
+        document.getElementById('podcast-court-bloc').style.display = 'none';
         document.getElementById('musique-player').src = "";
         document.getElementById('musique-player').style.display = '';
         document.getElementById('musique-content').textContent = "";
@@ -1178,6 +1188,13 @@
             audio.onerror = () => { audio.style.display = 'none'; document.getElementById('podcast-msg').style.display = 'block'; };
             audio.onloadeddata = () => { audio.style.display = 'block'; document.getElementById('podcast-msg').style.display = 'none'; };
             audio.src = PATHS.podcast + filename.replace('.csv', '.mp3');
+
+            // Micro-chronique « l'essentiel en 3 min » : affichée seulement si elle existe
+            const court = document.getElementById('podcast-court-player'), blocCourt = document.getElementById('podcast-court-bloc');
+            court.onerror = () => { blocCourt.style.display = 'none'; };
+            court.onloadeddata = () => { blocCourt.style.display = 'flex'; };
+            court.src = PATHS.podcastCourt + filename.replace('.csv', '.mp3');
+            audio.onplay = () => court.pause(); court.onplay = () => audio.pause();   // un seul lecteur à la fois
 
             // Musique (chanson) : silencieux si absente, pas de message d'erreur
             document.getElementById('musique-content').textContent = txtChanson ? txtChanson : "";
