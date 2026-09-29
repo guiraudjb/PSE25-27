@@ -556,6 +556,16 @@
         .card-front { color: var(--primary); font-weight: 700; border: 2px solid var(--primary); }
         .card-back { color: var(--bg-container); background: var(--primary); transform: rotateY(180deg); font-weight: 500; }
         
+        .ia-intro { font-size: 0.85em; color: var(--secondary); margin: 0 0 1vh 0; }
+        .ia-liste { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+        .ia-carte { background: var(--bg-container); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+        .ia-carte h3 { margin: 0; font-size: 0.95em; color: var(--primary); }
+        .ia-carte p { margin: 0; font-size: 0.8em; color: var(--text-main); flex-grow: 1; }
+        .ia-duree { font-size: 0.72em; color: var(--secondary); }
+        .ia-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+        .ia-actions button { cursor: pointer; font: inherit; font-size: 0.8em; padding: 5px 10px; border-radius: var(--radius); border: 1px solid var(--primary); background: var(--bg-container); color: var(--primary); }
+        .ia-actions button.ia-gemini { background: var(--primary); color: var(--bg-container); font-weight: 600; }
+        #ia-message { min-height: 1.4em; font-size: 0.8em; color: var(--accent); margin-top: 6px; }
         .tp-title { font-size: 1em; color: var(--accent); margin-bottom: 1vh; text-transform: uppercase; border-bottom: 1px solid var(--secondary); width: 100%; padding-bottom: 0.5vh; flex-shrink: 0;}
 
         .fiche-text {
@@ -714,6 +724,7 @@
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-fiche" id="btn-fiche" onclick="userSwitchTab('fiche')">FICHE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-musique" id="btn-musique" onclick="userSwitchTab('musique')">MUSIQUE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tp" id="btn-tp" onclick="userSwitchTab('tp')">TP<span class="tab-badge" id="badge-tp"></span></button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ia" id="btn-ia" onclick="userSwitchTab('ia')" style="display:none" title="Entraînement avec un assistant IA (Gemini)">IA</button>
         </div>
 
         <div id="tab-settings" class="tab-content active" role="tabpanel" aria-labelledby="btn-settings">
@@ -877,6 +888,14 @@
                 </div>
                 <div class="fiche-text" id="musique-content" style="flex-grow:1; border:none; border-radius:0;" tabindex="0" aria-label="Paroles de la chanson">
                 </div>
+            </div>
+        </div>
+
+        <div id="tab-ia" class="tab-content" role="tabpanel" aria-labelledby="btn-ia">
+            <div class="scrollable-content">
+                <p class="ia-intro">Entraînement avec un assistant IA. « Ouvrir dans Gemini » copie le prompt puis ouvre Gemini dans un nouvel onglet : collez-le (Ctrl+V) et envoyez. Le prompt « Révision d'une fiche » reprend automatiquement la fiche du module chargé. Ne collez pas de données personnelles détaillées ni d'informations internes dans un assistant en ligne.</p>
+                <div id="ia-liste" class="ia-liste"></div>
+                <div id="ia-message" role="status" aria-live="polite"></div>
             </div>
         </div>
 
@@ -1175,6 +1194,7 @@
             if(txtFlash) parseFlashCSV(txtFlash); else if(txtQuiz) flashData = quizData.map(q => ({ front: q.question, back: q.correctAnswer }));
             if(txtTp) parseTpCSV(txtTp); else tpData = [];
             document.getElementById('fiche-content').textContent = txtFiche ? txtFiche : "Aucune fiche de révision disponible (.txt)";
+            ficheModuleIA = txtFiche || '';
             loadFicheAudio(filename.replace('.csv', ''));
 
             resetFlashcard(); resetTp(); updateTabBadges();
@@ -1776,6 +1796,55 @@
     // --- AUTO LOAD ---
     // Lancer la recherche automatiquement au démarrage
     window.addEventListener('load', scanFolders);
+
+    // --- ONGLET IA : prompts de chatbot du dépôt (prompts-chatbot/prompts.json, produit par scripts/prompts_json.py) ---
+    let promptsIA = [], marqueFicheIA = '', ficheModuleIA = '';
+    function chargerPromptsIA() {
+        fetch('prompts-chatbot/prompts.json?t=' + Date.now())
+            .then(r => r.ok ? r.json() : null)
+            .then(d => {
+                if (!d || !d.prompts || !d.prompts.length) return;          // pas de prompts : l'onglet reste masqué
+                promptsIA = d.prompts; marqueFicheIA = d.marque_fiche || '';
+                const liste = document.getElementById('ia-liste'); liste.innerHTML = '';
+                promptsIA.forEach((p, i) => {
+                    const carte = document.createElement('div'); carte.className = 'ia-carte';
+                    const h = document.createElement('h3'); h.textContent = p.titre;
+                    const o = document.createElement('p'); o.textContent = p.objectif ? p.objectif.charAt(0).toUpperCase() + p.objectif.slice(1) : '';
+                    const du = document.createElement('span'); du.className = 'ia-duree'; du.textContent = (p.duree ? '⏱ ' + p.duree : '') + (p.fiche ? '  ·  utilise la fiche du module chargé' : '');
+                    const a = document.createElement('div'); a.className = 'ia-actions';
+                    const bG = document.createElement('button'); bG.className = 'ia-gemini'; bG.textContent = 'Ouvrir dans Gemini';
+                    bG.setAttribute('aria-label', 'Copier le prompt « ' + p.titre + ' » et ouvrir Gemini'); bG.onclick = () => utiliserPromptIA(i, true);
+                    const bC = document.createElement('button'); bC.textContent = 'Copier';
+                    bC.setAttribute('aria-label', 'Copier le prompt « ' + p.titre + ' »'); bC.onclick = () => utiliserPromptIA(i, false);
+                    a.append(bG, bC); carte.append(h, o, du, a); liste.appendChild(carte);
+                });
+                document.getElementById('btn-ia').style.display = '';
+            })
+            .catch(() => {});
+    }
+    function texteDuPromptIA(p) {
+        if (!p.fiche) return p.prompt;
+        if (!ficheModuleIA) return null;
+        return p.prompt.replace(marqueFicheIA, ficheModuleIA.trim());
+    }
+    function utiliserPromptIA(i, ouvrir) {
+        const p = promptsIA[i], msg = document.getElementById('ia-message');
+        const texte = texteDuPromptIA(p);
+        if (texte === null) { msg.textContent = "Chargez d'abord un module (onglet Paramètres) : ce prompt utilise sa fiche."; return; }
+        // ouverture immédiate (dans le geste de l'utilisateur, sinon le navigateur bloque la fenêtre), copie en parallèle
+        if (ouvrir) window.open('https://gemini.google.com/app', '_blank', 'noopener');
+        const ok = () => { msg.textContent = ouvrir ? '✔ Prompt copié : collez-le dans Gemini (Ctrl+V) puis envoyez.' : '✔ Prompt copié dans le presse-papiers.'; };
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(texte).then(ok, () => copieSecoursIA(texte, ok, msg));
+        } else copieSecoursIA(texte, ok, msg);
+    }
+    function copieSecoursIA(texte, ok, msg) {
+        const zone = document.createElement('textarea'); zone.value = texte; zone.style.position = 'fixed'; zone.style.opacity = '0';
+        document.body.appendChild(zone); zone.select();
+        try { document.execCommand('copy') ? ok() : (msg.textContent = 'Copie impossible : sélectionnez le texte manuellement.'); }
+        finally { zone.remove(); }
+    }
+    window.addEventListener('load', chargerPromptsIA);
 
 </script>
 <script>
