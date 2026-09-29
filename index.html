@@ -724,7 +724,7 @@
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-fiche" id="btn-fiche" onclick="userSwitchTab('fiche')">FICHE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-musique" id="btn-musique" onclick="userSwitchTab('musique')">MUSIQUE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tp" id="btn-tp" onclick="userSwitchTab('tp')">TP<span class="tab-badge" id="badge-tp"></span></button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ia" id="btn-ia" onclick="userSwitchTab('ia')" style="display:none" title="Entraînement avec un assistant IA (Gemini)">IA</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ia" id="btn-ia" onclick="userSwitchTab('ia')" style="display:none" title="Entraînement avec un assistant IA (Google, ChatGPT, Claude, Gemini)">IA</button>
         </div>
 
         <div id="tab-settings" class="tab-content active" role="tabpanel" aria-labelledby="btn-settings">
@@ -893,7 +893,7 @@
 
         <div id="tab-ia" class="tab-content" role="tabpanel" aria-labelledby="btn-ia">
             <div class="scrollable-content">
-                <p class="ia-intro">Entraînement avec un assistant IA. « Ouvrir dans Gemini » copie le prompt puis ouvre Gemini dans un nouvel onglet : collez-le (Ctrl+V) et envoyez. Le prompt « Révision d'une fiche » reprend automatiquement la fiche du module chargé. Ne collez pas de données personnelles détaillées ni d'informations internes dans un assistant en ligne.</p>
+                <p class="ia-intro">Entraînement avec un assistant IA. Choisissez un assistant : Google (mode IA) et ChatGPT démarrent l'exercice tout seuls, Claude reçoit le prompt pré-rempli (appuyez sur Entrée), Gemini ne permet pas le pré-remplissage (le prompt est copié : collez-le avec Ctrl+V). Le prompt « Révision d'une fiche » reprend automatiquement la fiche du module chargé. Ne collez pas de données personnelles détaillées ni d'informations internes dans un assistant en ligne.</p>
                 <div id="ia-liste" class="ia-liste"></div>
                 <div id="ia-message" role="status" aria-live="polite"></div>
             </div>
@@ -1812,11 +1812,14 @@
                     const o = document.createElement('p'); o.textContent = p.objectif ? p.objectif.charAt(0).toUpperCase() + p.objectif.slice(1) : '';
                     const du = document.createElement('span'); du.className = 'ia-duree'; du.textContent = (p.duree ? '⏱ ' + p.duree : '') + (p.fiche ? '  ·  utilise la fiche du module chargé' : '');
                     const a = document.createElement('div'); a.className = 'ia-actions';
-                    const bG = document.createElement('button'); bG.className = 'ia-gemini'; bG.textContent = 'Ouvrir dans Gemini';
-                    bG.setAttribute('aria-label', 'Copier le prompt « ' + p.titre + ' » et ouvrir Gemini'); bG.onclick = () => utiliserPromptIA(i, true);
+                    ASSISTANTS_IA.forEach((as, k) => {
+                        const bt = document.createElement('button'); bt.textContent = as.nom; if (k === 0) bt.className = 'ia-gemini';
+                        bt.setAttribute('aria-label', 'Lancer le prompt « ' + p.titre + ' » dans ' + as.nom); bt.onclick = () => ouvrirAssistantIA(i, as);
+                        a.appendChild(bt);
+                    });
                     const bC = document.createElement('button'); bC.textContent = 'Copier';
                     bC.setAttribute('aria-label', 'Copier le prompt « ' + p.titre + ' »'); bC.onclick = () => utiliserPromptIA(i, false);
-                    a.append(bG, bC); carte.append(h, o, du, a); liste.appendChild(carte);
+                    a.appendChild(bC); carte.append(h, o, du, a); liste.appendChild(carte);
                 });
                 document.getElementById('btn-ia').style.display = '';
             })
@@ -1837,6 +1840,32 @@
         if (navigator.clipboard && window.isSecureContext) {
             navigator.clipboard.writeText(texte).then(ok, () => copieSecoursIA(texte, ok, msg));
         } else copieSecoursIA(texte, ok, msg);
+    }
+    // Assistants IA : « prefixe » = adresse qui reçoit le prompt (envoi automatique ou pré-remplissage), null = pas de
+    // pré-remplissage possible (Gemini) -> copie + ouverture. Vérifié le 29/09/26 : Google mode IA (udm=50) jusqu'à
+    // 5 300 caractères d'adresse ; au-delà de LIMITE_URL_IA (prompt avec une longue fiche) -> copie + ouverture.
+    const ASSISTANTS_IA = [
+        { nom: 'Google (mode IA)', prefixe: 'https://www.google.com/search?udm=50&q=', accueil: 'https://www.google.com/search?udm=50', envoi: true },
+        { nom: 'ChatGPT', prefixe: 'https://chatgpt.com/?q=', accueil: 'https://chatgpt.com/', envoi: true },
+        { nom: 'Claude', prefixe: 'https://claude.ai/new?q=', accueil: 'https://claude.ai/new', envoi: false },
+        { nom: 'Gemini', prefixe: null, accueil: 'https://gemini.google.com/app', envoi: false },
+    ];
+    const LIMITE_URL_IA = 7500;
+    function ouvrirAssistantIA(i, as) {
+        const p = promptsIA[i], msg = document.getElementById('ia-message');
+        const texte = texteDuPromptIA(p);
+        if (texte === null) { msg.textContent = "Chargez d'abord un module (onglet Paramètres) : ce prompt utilise sa fiche."; return; }
+        const url = as.prefixe ? as.prefixe + encodeURIComponent(texte) : null;
+        if (url && url.length <= LIMITE_URL_IA) {
+            window.open(url, '_blank', 'noopener');
+            msg.textContent = as.envoi ? '✔ Prompt envoyé à ' + as.nom + ' : répondez directement dans la page qui s\'ouvre.'
+                                       : '✔ Prompt placé dans ' + as.nom + ' : vérifiez-le puis envoyez (Entrée).';
+            return;
+        }
+        window.open(as.accueil, '_blank', 'noopener');         // dans le geste de l'utilisateur, sinon fenêtre bloquée
+        const ok = () => { msg.textContent = (url ? 'Prompt trop long pour une adresse (fiche complète) : ' : '') + 'prompt copié, collez-le (Ctrl+V) dans ' + as.nom + ' puis envoyez.'; };
+        if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texte).then(ok, () => copieSecoursIA(texte, ok, msg));
+        else copieSecoursIA(texte, ok, msg);
     }
     function copieSecoursIA(texte, ok, msg) {
         const zone = document.createElement('textarea'); zone.value = texte; zone.style.position = 'fixed'; zone.style.opacity = '0';
