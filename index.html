@@ -564,6 +564,18 @@
         .ia-duree { font-size: 0.72em; color: var(--secondary); }
         .ia-actions { display: flex; gap: 6px; flex-wrap: wrap; }
         .ia-actions button { cursor: pointer; font: inherit; font-size: 0.8em; padding: 5px 10px; border-radius: var(--radius); border: 1px solid var(--primary); background: var(--bg-container); color: var(--primary); }
+        /* Lexique : recherche dans les définitions de toutes les fiches */
+        .lex-barre { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 1vh; }
+        #lex-recherche { flex: 1 1 260px; padding: 8px 10px; border: 1px solid var(--primary); border-radius: var(--radius); background: var(--bg-container); color: var(--text-main); font-family: inherit; font-size: 1em; }
+        #lex-depot { padding: 7px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-container); color: var(--text-main); font-family: inherit; }
+        #lex-info { font-size: 0.8em; color: var(--secondary); margin: 0 0 1vh 0; }
+        .lex-entree { border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-container); padding: 8px 12px; margin-bottom: 8px; }
+        .lex-terme { margin: 0; font-size: 1em; color: var(--primary); }
+        .lex-sigle { font-size: 0.8em; color: var(--secondary); margin-left: 6px; font-weight: normal; }
+        .lex-def { margin: 4px 0 0 0; font-size: 0.88em; color: var(--text-main); line-height: 1.4; }
+        .lex-mod { display: inline-block; margin: 3px 0 0 0; font-size: 0.75em; color: var(--secondary); background: none; border: none; padding: 0; cursor: pointer; text-decoration: underline; font-family: inherit; text-align: left; }
+        .lex-mod:hover { color: var(--primary); }
+        .lex-entree mark { background: var(--primary); color: var(--bg-container); border-radius: 2px; padding: 0 1px; }
         .ia-actions button.ia-gemini { background: var(--primary); color: var(--bg-container); font-weight: 600; }
         #ia-message { min-height: 1.4em; font-size: 0.8em; color: var(--accent); margin-top: 6px; }
         .tp-title { font-size: 1em; color: var(--accent); margin-bottom: 1vh; text-transform: uppercase; border-bottom: 1px solid var(--secondary); width: 100%; padding-bottom: 0.5vh; flex-shrink: 0;}
@@ -725,6 +737,7 @@
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-musique" id="btn-musique" onclick="userSwitchTab('musique')">MUSIQUE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tp" id="btn-tp" onclick="userSwitchTab('tp')">TP<span class="tab-badge" id="badge-tp"></span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ia" id="btn-ia" onclick="userSwitchTab('ia')" style="display:none" title="Entraînement avec un assistant IA (Google, ChatGPT, Claude, Gemini)">IA</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-lexique" id="btn-lexique" onclick="userSwitchTab('lexique')" title="Rechercher un terme ou un sigle dans le lexique de toutes les fiches">LEXIQUE</button>
         </div>
 
         <div id="tab-settings" class="tab-content active" role="tabpanel" aria-labelledby="btn-settings">
@@ -899,6 +912,17 @@
             </div>
         </div>
 
+        <div id="tab-lexique" class="tab-content" role="tabpanel" aria-labelledby="btn-lexique">
+            <div class="scrollable-content">
+                <div class="lex-barre">
+                    <input type="search" id="lex-recherche" placeholder="Rechercher un terme, un sigle ou un mot (ex. KCC, homologation, 2019-828)" aria-label="Rechercher dans le lexique" oninput="rechercherLexique()" autocomplete="off">
+                    <select id="lex-depot" aria-label="Limiter à un dépôt" onchange="rechercherLexique()"><option value="">Tous les dépôts</option></select>
+                </div>
+                <p id="lex-info" role="status" aria-live="polite">Chargement du lexique…</p>
+                <div id="lex-resultats"></div>
+            </div>
+        </div>
+
         <div id="tab-tp" class="tab-content" role="tabpanel" aria-labelledby="btn-tp">
             <div style="text-align:center; color:var(--secondary);">
                 <span id="tp-progress">Exercice 1/10</span>
@@ -983,7 +1007,8 @@
         get ttsCache() { return currentBase + '../tts_assets/cache/'; }
     };
     
-    let quizData = [], flashData = [], tpData = [], allModules = [];
+    let quizData = [], flashData = [], tpData = [], allModules = [], depotsCatalogue = [];
+    let ongletApresChargement = 'infographie';
     let currentFileBase = "", currentTab = 'settings';
     let qIndex = 0, qScore = 0, qTimerInterval, qTimeLeft = 20, qIsPaused = false, qPhase = 'game', qWrongAnswers = [];
     let fIndex = 0, fAutoplayTimeout, isAutoplay = false, fPhase = 'front';
@@ -1042,6 +1067,7 @@
         if(newTab === 'flashcard') resetFlashcard();
         if(newTab === 'tp') resetTp();
         if(newTab === 'fiche') updateFicheControls();
+        if(newTab === 'lexique') ouvrirLexique();
 
         updateTabUI(newTab);
         currentTab = newTab;
@@ -1109,6 +1135,7 @@
         fetch('catalogue.json' + t)
             .then(res => { if(!res.ok) throw new Error("catalogue.json introuvable."); return res.json(); })
             .then(cat => { if (cat.titre) { document.title = cat.titre; document.getElementById('app-title').textContent = cat.titre; } return cat; })
+            .then(cat => { depotsCatalogue = cat.depots || []; return cat; })
             .then(cat => Promise.all(cat.depots.map(d =>
                 fetch(d.url + 'modules.json' + t)
                     .then(r => r.ok ? r.json() : [])
@@ -1226,7 +1253,7 @@
             musiqueAudio.src = PATHS.chanson + filename.replace('.csv', '.mp3');
 
             document.getElementById('status-msg').textContent = "Chargement terminé.";
-            userSwitchTab('infographie');
+            userSwitchTab(ongletApresChargement); ongletApresChargement = 'infographie';
         });
     }
 
@@ -1776,6 +1803,108 @@
     function showKeyboardHelp() {
         const el = document.getElementById('kbd-overlay');
         el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // --- LEXIQUE ---
+    // Chaque dépôt publie data/lexique.json (scripts/lexique.py, extrait de la rubrique LEXIQUE des fiches).
+    // Les entrées des dépôts sont fusionnées par terme (un module commun à plusieurs dépôts n'est compté qu'une fois).
+    let lexique = null, lexiqueEnCours = false;
+    const LEX_MAX = 80;
+    function normLex(s) { return (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[’']/g, ' ').replace(/\s+/g, ' ').trim(); }
+    function htmlLex(s) { return (s || '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+    function ouvrirLexique() {
+        if (lexique || lexiqueEnCours) { setTimeout(() => document.getElementById('lex-recherche').focus(), 60); return; }
+        lexiqueEnCours = true;
+        const t = '?t=' + new Date().getTime(), parCle = new Map(), sel = document.getElementById('lex-depot');
+        Promise.all(depotsCatalogue.map(d => fetch(d.url + 'lexique.json' + t).then(r => r.ok ? r.json() : null).catch(() => null).then(j => ({d, j}))))
+            .then(res => {
+                res.forEach(({d, j}) => {
+                    if (!j) return;
+                    if (depotsCatalogue.length > 1) { const o = document.createElement('option'); o.value = d.url; o.textContent = d.titre || d.nom; sel.add(o); }
+                    j.entrees.forEach(e => {
+                        const cle = e.t ? normLex(e.t) : '#' + normLex(e.d[0][0]);
+                        let x = parCle.get(cle);
+                        if (!x) { x = { t: e.t, s: e.s || '', x: e.x || '', d: [], depots: new Set(), n: '' }; parCle.set(cle, x); }
+                        x.s = x.s || e.s || ''; x.x = x.x || e.x || ''; x.depots.add(d.url);
+                        e.d.forEach(([txt, mi]) => {
+                            const mod = j.modules[mi];
+                            const dej = x.d.find(v => v.txt === txt);
+                            if (dej) { if (!dej.mods.includes(mod)) dej.mods.push(mod); } else x.d.push({ txt, mods: [mod], url: d.url });
+                        });
+                        if (e.n) x.n += ' ' + e.n;
+                    });
+                });
+                lexique = [...parCle.values()].map(x => Object.assign(x, {
+                    kt: normLex(x.t), ks: normLex(x.s), kx: normLex(x.x),
+                    kd: normLex(x.d.map(v => v.txt).join(' ') + ' ' + x.n)
+                }));
+                lexique.forEach(e => { e.kc = e.kd.replace(/ /g, ''); e.ka = e.kt + ' ' + e.ks + ' ' + e.kx; e.kac = e.ka.replace(/ /g, ''); });
+                lexique.sort((a, b) => (a.t ? 0 : 1) - (b.t ? 0 : 1) || a.kt.localeCompare(b.kt));
+                sel.style.display = sel.options.length > 2 ? '' : 'none';
+                rechercherLexique();
+                document.getElementById('lex-recherche').focus();
+            });
+    }
+    function scoreLex(e, q, mots) {
+        const qc = q.replace(/ /g, '');
+        if (e.ks && (e.ks === q || e.ks.replace(/ /g, '') === qc)) return 100;
+        if (e.kt === q) return 95;
+        if (e.kx && e.kx === q) return 90;
+        if (e.kt.startsWith(q) || (e.ks && e.ks.startsWith(q))) return 80;
+        if (e.kx.startsWith(q)) return 70;
+        if (mots.every(m => (' ' + e.ka).includes(' ' + m))) return 60;
+        if (mots.every(m => e.ka.includes(m) || e.kac.includes(m))) return 50;
+        if (mots.every(m => e.kd.includes(m) || e.kc.includes(m))) return 10;
+        return 0;
+    }
+    function surligner(texte, mots) {
+        let h = htmlLex(texte);
+        if (!mots.length) return h;
+        // repère les mots cherchés sans tenir compte des accents ni de la casse
+        mots.forEach(m => {
+            if (m.length < 2) return;
+            const re = new RegExp(m.split('').map(c => {
+                const v = {a:'[aàâä]', e:'[eéèêë]', i:'[iîï]', o:'[oôö]', u:'[uùûü]', c:'[cç]'}[c];
+                return v || c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }).join(''), 'gi');
+            h = h.replace(re, x => '<mark>' + x + '</mark>');
+        });
+        return h;
+    }
+    function rechercherLexique() {
+        if (!lexique) return;
+        const brut = document.getElementById('lex-recherche').value;
+        // un caractère isolé (« NIS 2 ») ne filtre pas seul les définitions : il est rattaché au mot précédent (« nis2 »)
+        const q = normLex(brut), depot = document.getElementById('lex-depot').value;
+        const mots = q ? q.split(' ').reduce((a, m) => { if (m.length < 2 && a.length) a[a.length - 1] += m; else a.push(m); return a; }, []) : [];
+        let liste = depot ? lexique.filter(e => e.depots.has(depot)) : lexique;
+        const info = document.getElementById('lex-info'), zone = document.getElementById('lex-resultats');
+        const total = liste.reduce((n, e) => n + e.d.length, 0);
+        if (q) liste = liste.map(e => [scoreLex(e, q, mots), e]).filter(([s]) => s > 0).sort((a, b) => b[0] - a[0] || a[1].kt.localeCompare(b[1].kt)).map(([, e]) => e);
+        info.textContent = q ? liste.length + ' résultat' + (liste.length > 1 ? 's' : '') + (liste.length > LEX_MAX ? ' (' + LEX_MAX + ' premiers affichés)' : '')
+                             : liste.length + ' termes, ' + total + ' définitions. Tapez un terme, un sigle ou un mot.';
+        zone.innerHTML = '';
+        liste.slice(0, LEX_MAX).forEach(e => {
+            const div = document.createElement('div'); div.className = 'lex-entree';
+            const titre = e.t || (e.d[0].txt.split(' ').slice(0, 6).join(' ') + '…');
+            const sig = e.s && e.s !== e.t ? e.s : '', dev = e.x && e.x !== e.t ? e.x : '';
+            let h = '<h3 class="lex-terme">' + surligner(titre, mots) + (sig || dev ? '<span class="lex-sigle">' + surligner([sig, dev].filter(Boolean).join(' · '), mots) + '</span>' : '') + '</h3>';
+            e.d.forEach(v => {
+                h += '<p class="lex-def">' + surligner(v.txt, mots) + '</p>';
+                v.mods.forEach(m => { h += '<button type="button" class="lex-mod" data-f="' + htmlLex(m) + '" title="Ouvrir la fiche de ce module">' + htmlLex(m.replace('.csv', '')) + '</button><br>'; });
+            });
+            div.innerHTML = h; zone.appendChild(div);
+        });
+        zone.querySelectorAll('.lex-mod').forEach(b => b.onclick = () => ouvrirModuleLexique(b.dataset.f));
+    }
+    function ouvrirModuleLexique(f) {
+        if (!moduleRepo[f]) return;
+        if (!allModules.includes(f)) filterModules('');
+        document.getElementById('module-search').value = '';
+        filterModules('');
+        choisirModule(f);
+        ongletApresChargement = 'fiche';
+        loadAllResources();
     }
 
     // --- RACCOURCIS CLAVIER GLOBAUX ---
