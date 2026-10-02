@@ -555,6 +555,7 @@
         }
         .card-front { color: var(--primary); font-weight: 700; border: 2px solid var(--primary); }
         .card-back { color: var(--bg-container); background: var(--primary); transform: rotateY(180deg); font-weight: 500; }
+        #tp-back { white-space: pre-line; text-align: left; align-items: flex-start; overflow-y: auto; }
         
         .ia-intro { font-size: 0.85em; color: var(--secondary); margin: 0 0 1vh 0; }
         .ia-liste { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
@@ -1533,11 +1534,13 @@
         const card = tpData[tpIndex];
         document.getElementById('tp-progress').textContent = `Exercice ${tpIndex + 1}/${tpData.length}`;
         document.getElementById('tp-title').textContent = card.title;
-        document.getElementById('tp-front').textContent = card.front; document.getElementById('tp-back').textContent = card.back;
+        document.getElementById('tp-front').textContent = card.front; document.getElementById('tp-back').textContent = etapesTp(card.back);
         maximizeText('tp-front'); maximizeText('tp-back');
         document.getElementById('tp-el').classList.remove('flipped');
         if(document.getElementById('ttsToggle').checked && currentTab === 'tp') speak(card.title + ". " + card.front);
     }
+    // Corrigé structuré : une étape par ligne (« | » ou « 1. », « 2. »…), comme dans le jeu Batocera.
+    function etapesTp(t) { return t.replace(/ \| /g, '\n').replace(/ (?=\d{1,2}\. [A-ZÉÈÀÂÎÔÇ])/g, '\n'); }
     function flipTp() {
         const el = document.getElementById('tp-el'); el.classList.toggle('flipped');
         if(document.getElementById('ttsToggle').checked && currentTab === 'tp' && el.classList.contains('flipped')) speak(tpData[tpIndex].back);

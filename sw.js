@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v47-sources-medias';
+const CACHE_NAME = 'v48-tp-etapes';
 const ASSETS = [
   'index.html',
   'catalogue.json',
