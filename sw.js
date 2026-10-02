@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v46-lexique';
+const CACHE_NAME = 'v47-sources-medias';
 const ASSETS = [
   'index.html',
   'catalogue.json',

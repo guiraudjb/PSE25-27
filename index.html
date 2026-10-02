@@ -603,6 +603,11 @@
         .info-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; background: #111; overflow: hidden; position: relative; touch-action: none; }
         #info-image { max-width: 100%; max-height: 100%; object-fit: contain; user-select: none; -webkit-user-drag: none; }
         .zoom-controls { position: absolute; bottom: 10px; right: 10px; display: flex; gap: 5px; }
+        .source-media { display: flex; gap: 6px; align-items: center; justify-content: center; flex-wrap: wrap; margin-bottom: 6px; font-size: 0.8em; }
+        .source-btn { padding: 3px 10px; border-radius: 12px; border: 1px solid var(--border); background: transparent; color: var(--text-main); cursor: pointer; font-size: 1em; }
+        .source-btn[aria-pressed="true"] { background: var(--secondary); color: var(--bg-container); border-color: var(--secondary); }
+        .source-btn.indispo { opacity: 0.45; text-decoration: line-through; }
+        .source-etat { color: var(--secondary); font-size: 0.9em; width: 100%; text-align: center; }
         .zoom-btn { width: 40px; height: 40px; border-radius: 50%; font-size: 1.5em; cursor: pointer; border: none; background: rgba(255,255,255,0.8); }
 
         .timer-container { height: 1vh; background: var(--secondary); width: 100%; margin-top: 1vh; border-radius: var(--radius); overflow: hidden; flex-shrink: 0;}
@@ -850,6 +855,12 @@
         <div id="tab-infographie" class="tab-content" role="tabpanel" aria-labelledby="btn-infographie">
             <div class="info-layout">
                 <div class="podcast-container">
+                    <div class="source-media" role="group" aria-label="Source de l'infographie et du podcast">
+                        <span>Source :</span>
+                        <button type="button" class="source-btn" id="src-local" aria-pressed="true" onclick="choisirSourceMedia('local')">Pipeline local</button>
+                        <button type="button" class="source-btn" id="src-nlm" aria-pressed="false" onclick="choisirSourceMedia('nlm')">NotebookLM</button>
+                        <span id="source-etat" class="source-etat" aria-live="polite"></span>
+                    </div>
                     <audio id="podcast-player" controls aria-label="Lecteur audio du podcast">
                         Votre navigateur ne supporte pas l'élément audio.
                     </audio>
@@ -1228,15 +1239,8 @@
 
             resetFlashcard(); resetTp(); updateTabBadges();
 
-            const img = document.getElementById('info-image');
-            img.onload = () => { img.classList.remove('hidden'); document.getElementById('info-placeholder').classList.add('hidden'); };
-            img.onerror = () => { img.classList.add('hidden'); document.getElementById('info-placeholder').classList.remove('hidden'); document.getElementById('info-placeholder').textContent = "Pas d'infographie"; };
-            img.src = PATHS.info + filename.replace('.csv', '.png');
-
+            chargerMedias(filename.replace('.csv', ''));
             const audio = document.getElementById('podcast-player');
-            audio.onerror = () => { audio.style.display = 'none'; document.getElementById('podcast-msg').style.display = 'block'; };
-            audio.onloadeddata = () => { audio.style.display = 'block'; document.getElementById('podcast-msg').style.display = 'none'; };
-            audio.src = PATHS.podcast + filename.replace('.csv', '.mp3');
 
             // Micro-chronique « l'essentiel en 3 min » : affichée seulement si elle existe
             const court = document.getElementById('podcast-court-player'), blocCourt = document.getElementById('podcast-court-bloc');
@@ -1641,6 +1645,54 @@
     const ficheAudio = new Audio(); let ficheAudioOk = false; const FICHE_AUDIO_STEP = 15;
     function formatTime(s) { if(!isFinite(s)) return '--:--'; s = Math.floor(s); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
     function updateFicheTime() { const el = document.getElementById('fiche-time'); if(el) el.textContent = ficheAudioOk ? formatTime(ficheAudio.currentTime) + ' / ' + formatTime(ficheAudio.duration) : ''; }
+    // Infographie et podcast : deux sources par module, le pipeline local (infographie/, podcast/)
+    // et NotebookLM (infographie_nlm/, podcast_nlm/). La source choisie est mémorisée ; si elle
+    // manque pour un module, l'autre est affichée à la place.
+    const SOURCES_MEDIA = { local: { info: 'infographie/', podcast: 'podcast/', nom: 'pipeline local' },
+                            nlm: { info: 'infographie_nlm/', podcast: 'podcast_nlm/', nom: 'NotebookLM' } };
+    let sourceMedia = 'local', mediaBase = '';
+    try { if (localStorage.getItem('sourceMedia') === 'nlm') sourceMedia = 'nlm'; } catch (e) {}
+    const etatMedia = { info: null, podcast: null };
+    function majEtatSource() {
+        ['local', 'nlm'].forEach(k => {
+            const b = document.getElementById('src-' + k);
+            b.setAttribute('aria-pressed', String(k === sourceMedia));
+            const absent = etatMedia.info !== null && etatMedia.podcast !== null && etatMedia.info !== k && etatMedia.podcast !== k;
+            b.classList.toggle('indispo', absent);
+            b.title = absent ? 'Pas encore disponible pour ce module' : '';
+        });
+        const autre = sourceMedia === 'local' ? 'nlm' : 'local', msg = [];
+        if (etatMedia.info === autre) msg.push('infographie');
+        if (etatMedia.podcast === autre) msg.push('podcast');
+        document.getElementById('source-etat').textContent = msg.length
+            ? msg.join(' et ') + ' : version ' + SOURCES_MEDIA[autre].nom + ' (version ' + SOURCES_MEDIA[sourceMedia].nom + ' pas encore disponible)' : '';
+    }
+    function chargerMedias(base) {
+        mediaBase = base; etatMedia.info = etatMedia.podcast = null;
+        const ordre = [sourceMedia, sourceMedia === 'local' ? 'nlm' : 'local'];
+        const img = document.getElementById('info-image'), ph = document.getElementById('info-placeholder');
+        const essaiImage = (i) => {
+            if (i >= ordre.length) { etatMedia.info = ''; img.classList.add('hidden'); ph.classList.remove('hidden'); ph.textContent = "Pas d'infographie"; majEtatSource(); return; }
+            img.onload = () => { if (mediaBase !== base) return; etatMedia.info = ordre[i]; img.classList.remove('hidden'); ph.classList.add('hidden'); majEtatSource(); };
+            img.onerror = () => { if (mediaBase === base) essaiImage(i + 1); };
+            img.src = currentBase + SOURCES_MEDIA[ordre[i]].info + base + '.png';
+        };
+        const audio = document.getElementById('podcast-player'), msg = document.getElementById('podcast-msg');
+        const essaiAudio = (i) => {
+            if (i >= ordre.length) { etatMedia.podcast = ''; audio.style.display = 'none'; msg.style.display = 'block'; majEtatSource(); return; }
+            audio.onloadedmetadata = () => { if (mediaBase !== base) return; etatMedia.podcast = ordre[i]; audio.style.display = 'block'; msg.style.display = 'none'; majEtatSource(); };
+            audio.onerror = () => { if (mediaBase === base) essaiAudio(i + 1); };
+            audio.src = currentBase + SOURCES_MEDIA[ordre[i]].podcast + base + '.mp3';
+        };
+        majEtatSource(); essaiImage(0); essaiAudio(0);
+    }
+    function choisirSourceMedia(k) {
+        if (k === sourceMedia) return;
+        sourceMedia = k;
+        try { localStorage.setItem('sourceMedia', k); } catch (e) {}
+        if (mediaBase) chargerMedias(mediaBase); else majEtatSource();
+    }
+
     function loadFicheAudio(base) {
         ficheAudio.pause(); ficheAudioOk = false; updateFicheTime();
         ficheAudio.onloadedmetadata = () => { ficheAudio.playbackRate = parseFloat(document.getElementById('tts-speed')?.value || 1); updateFicheTime(); };
