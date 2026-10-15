@@ -12,3 +12,12 @@ GitHub Pages sur le même domaine :
 - [pse-bercy](https://github.com/guiraudjb/pse-bercy) — DGFiP et directions de Bercy
 - [pse-cours-2527](https://github.com/guiraudjb/pse-cours-2527) — cours PSE 25-27
 - [pse-expert-reseau](https://github.com/guiraudjb/pse-expert-reseau) — fascicules PSE Expert Réseau
+
+## Utilisation hors ligne (Windows)
+
+Cloner ce dépôt et les dépôts thématiques côte à côte dans un même dossier, puis
+double-cliquer `lancer-site-local.bat` : il lance `serveur-local.ps1` (PowerShell, sans
+installation ni droits d'administrateur), qui sert ce dossier commun sur
+`http://localhost:8080/` (port suivant si occupé) et ouvre la page ; les chemins
+`../<dépôt>/` de `catalogue.json` sont alors lus sur le disque. Chaque dépôt thématique a
+aussi son propre lanceur (copié par `scripts/sync-web.py`).
