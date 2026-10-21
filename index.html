@@ -663,6 +663,18 @@
         kbd { background: var(--bg-page); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-family: monospace; font-size: 0.85em; }
         .kbd-close { font-size: 0.8em; color: var(--secondary); text-align: center; margin: 10px 0 0 0; }
 
+        /* Onglet SOURCES : documents d'origine du module (data/source/*.pdf, index data/sources.json) */
+        #tab-sources { flex-direction: column; gap: 8px; }
+        .src-liste { display: flex; flex-wrap: wrap; gap: 6px; }
+        .src-doc { background: var(--bg-container); color: var(--text-main); border: 1px solid var(--border); border-radius: var(--radius); padding: 6px 10px; cursor: pointer; font-family: inherit; font-size: 0.9em; text-align: left; max-width: 100%; }
+        .src-doc:hover { border-color: var(--primary); }
+        .src-doc.active { border-color: var(--primary); box-shadow: inset 0 0 0 1px var(--primary); color: var(--primary); }
+        .src-doc small { color: var(--secondary); margin-left: 6px; }
+        .src-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; font-size: 0.9em; }
+        .src-actions a { color: var(--primary); }
+        #src-viewer { flex-grow: 1; width: 100%; min-height: 60vh; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-page); }
+        #src-message { color: var(--secondary); }
+
     </style>
 </head>
 <body class="theme-modern">
@@ -740,6 +752,7 @@
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-flashcard" id="btn-flashcard" onclick="userSwitchTab('flashcard')">FLASHCARD<span class="tab-badge" id="badge-flashcard"></span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-infographie" id="btn-infographie" onclick="userSwitchTab('infographie')">INFOGRAPHIE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-fiche" id="btn-fiche" onclick="userSwitchTab('fiche')">FICHE</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-sources" id="btn-sources" onclick="userSwitchTab('sources')" style="display:none" title="Consulter le document d'origine du module (PDF public)">SOURCES</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-musique" id="btn-musique" onclick="userSwitchTab('musique')">MUSIQUE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tp" id="btn-tp" onclick="userSwitchTab('tp')">TP<span class="tab-badge" id="badge-tp"></span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ia" id="btn-ia" onclick="userSwitchTab('ia')" style="display:none" title="Entraînement avec un assistant IA (Google, ChatGPT, Claude, Gemini)">IA</button>
@@ -902,6 +915,17 @@
             <div class="fiche-text" id="fiche-content" tabindex="0" aria-label="Contenu de la fiche de révision">
                 Aucune fiche chargée.
             </div>
+        </div>
+
+        <div id="tab-sources" class="tab-content" role="tabpanel" aria-labelledby="btn-sources">
+            <div id="src-liste" class="src-liste" role="list" aria-label="Documents sources du module"></div>
+            <div class="src-actions">
+                <a id="src-ouvrir" href="#" target="_blank" rel="noopener">Ouvrir dans un nouvel onglet</a>
+                <a id="src-telecharger" href="#" download>Télécharger le PDF</a>
+                <a id="src-origine" href="#" target="_blank" rel="noopener" style="display:none">Page officielle</a>
+                <span id="src-message" role="status" aria-live="polite"></span>
+            </div>
+            <iframe id="src-viewer" title="Document source du module" src="about:blank"></iframe>
         </div>
 
         <div id="tab-musique" class="tab-content" role="tabpanel" aria-labelledby="btn-musique">
@@ -1080,6 +1104,7 @@
         if(newTab === 'tp') resetTp();
         if(newTab === 'fiche') updateFicheControls();
         if(newTab === 'lexique') ouvrirLexique();
+        if(newTab === 'sources') ouvrirSources();
 
         updateTabUI(newTab);
         currentTab = newTab;
@@ -1209,9 +1234,59 @@
         document.getElementById('musique-player').src = "";
         document.getElementById('musique-player').style.display = '';
         document.getElementById('musique-content').textContent = "";
+        viderSources();
         document.getElementById('quiz-end').classList.remove('active');
         document.getElementById('quiz-feedback').classList.remove('active');
         document.getElementById('quiz-game').classList.add('active');
+    }
+
+    // --- SOURCES ---
+    // Chaque dépôt publie data/sources.json ({module: [{fichier, titre, pages, taille, url}]}) et les PDF dans
+    // data/source/ (scripts/outils/sources/copier_sources.py). Onglet masqué si le module n'a pas de source publique.
+    // Le PDF n'est chargé dans le lecteur qu'à l'ouverture de l'onglet (fichiers parfois volumineux).
+    const sourcesIndex = {};
+    let sourcesModule = [], sourceActive = -1;
+    function viderSources() {
+        sourcesModule = []; sourceActive = -1;
+        document.getElementById('btn-sources').style.display = 'none';
+        document.getElementById('src-liste').innerHTML = '';
+        document.getElementById('src-viewer').src = 'about:blank';
+        if(currentTab === 'sources') { updateTabUI('settings'); currentTab = 'settings'; }
+    }
+    function chargerSources(module) {
+        const base = currentBase;
+        const p = sourcesIndex[base] || (sourcesIndex[base] = fetch(base + 'sources.json?t=' + Date.now())
+            .then(r => r.ok ? r.json() : {}).catch(() => ({})));
+        p.then(idx => {
+            if(currentBase !== base || currentFileBase !== module) return;   // un autre module a été chargé entre-temps
+            sourcesModule = (idx[module] || []).filter(e => e && e.fichier);
+            const liste = document.getElementById('src-liste');
+            liste.innerHTML = '';
+            sourcesModule.forEach((e, i) => {
+                const b = document.createElement('button');
+                b.className = 'src-doc'; b.setAttribute('role', 'listitem');
+                b.textContent = e.titre || e.fichier.replace('source/', '');
+                const infos = [e.pages ? e.pages + ' p.' : '', e.taille ? (e.taille / 1048576).toFixed(1).replace('.', ',') + ' Mo' : ''].filter(x => x).join(' · ');
+                if(infos) { const sm = document.createElement('small'); sm.textContent = infos; b.appendChild(sm); }
+                b.onclick = () => afficherSource(i);
+                liste.appendChild(b);
+            });
+            document.getElementById('btn-sources').style.display = sourcesModule.length ? '' : 'none';
+        });
+    }
+    function ouvrirSources() { if(sourcesModule.length && sourceActive < 0) afficherSource(0); }
+    function afficherSource(i) {
+        const e = sourcesModule[i]; if(!e) return;
+        sourceActive = i;
+        document.querySelectorAll('#src-liste .src-doc').forEach((b, j) => { b.classList.toggle('active', j === i); b.setAttribute('aria-current', j === i ? 'true' : 'false'); });
+        const url = currentBase + e.fichier;
+        document.getElementById('src-viewer').src = url;
+        document.getElementById('src-ouvrir').href = url;
+        const dl = document.getElementById('src-telecharger'); dl.href = url; dl.setAttribute('download', e.fichier.replace('source/', ''));
+        const orig = document.getElementById('src-origine');
+        orig.style.display = e.url ? '' : 'none'; if(e.url) orig.href = e.url;
+        document.getElementById('src-message').textContent = (sourcesModule.length > 1 ? 'Document ' + (i + 1) + ' sur ' + sourcesModule.length + '. ' : '') +
+            'Si le PDF ne s\'affiche pas (téléphone), utilisez « Ouvrir dans un nouvel onglet ».';
     }
 
     function loadAllResources() {
@@ -1237,6 +1312,7 @@
             document.getElementById('fiche-content').textContent = txtFiche ? txtFiche : "Aucune fiche de révision disponible (.txt)";
             ficheModuleIA = txtFiche || '';
             loadFicheAudio(filename.replace('.csv', ''));
+            chargerSources(filename.replace('.csv', ''));
 
             resetFlashcard(); resetTp(); updateTabBadges();
 

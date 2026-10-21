@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v48-tp-etapes';
+const CACHE_NAME = 'v49-sources';
 const ASSETS = [
   'index.html',
   'catalogue.json',
@@ -28,6 +28,8 @@ self.addEventListener('activate', (event) => {
 
 // Stratégie : Cache First (Récupère du cache, sinon réseau)
 self.addEventListener('fetch', (event) => {
+  // Documents sources (PDF de data/source/, parfois lourds) : jamais mis en cache, réseau direct.
+  if (event.request.url.includes('/data/source/')) return;
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request).then((fetchResponse) => {
