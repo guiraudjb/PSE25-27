@@ -1,6 +1,6 @@
 {
-  "name": "FORMATION V37 - AUTO LOAD",
-  "short_name": "FormV37",
+  "name": "FORMATION V47 - AUTO LOAD",
+  "short_name": "FormV47",
   "description": "Outil d'apprentissage interactif avec Quiz, Flashcards, Infographie, Fiche de révision et TP.",
   "start_url": "index.html",
   "display": "standalone",

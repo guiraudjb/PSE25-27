@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v49-sources';
+const CACHE_NAME = 'v50-mobile';
 const ASSETS = [
   'index.html',
   'catalogue.json',
