@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v50-mobile';
+const CACHE_NAME = 'v51-lisibilite';
 const ASSETS = [
   'index.html',
   'catalogue.json',

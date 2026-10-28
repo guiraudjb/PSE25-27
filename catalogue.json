@@ -24,6 +24,11 @@
       "nom": "pse-expert-reseau",
       "titre": "PSE Expert Réseau",
       "url": "../pse-expert-reseau/batocera/pse-expert-reseau/data/"
+    },
+    {
+      "nom": "concours-fp-rh",
+      "titre": "Inspecteur principal DGFiP (option ressources)",
+      "url": "../concours-fp-rh/batocera/concours-fp-rh/data/"
     }
   ]
 }
