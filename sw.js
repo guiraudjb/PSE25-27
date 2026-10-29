@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v55-tv-curseur';
+const CACHE_NAME = 'v56-webview-sans-voix';
 const ASSETS = [
   'index.html',
   'catalogue.json',
@@ -37,13 +37,11 @@ self.addEventListener('fetch', (event) => {
         // complètes réussies : une 404 mise en cache (média pas encore publié) masquerait le
         // fichier indéfiniment, et les réponses partielles 206 (lecture audio) ne sont pas cachables.
         if (event.request.method !== 'GET' || fetchResponse.status !== 200) return fetchResponse;
-        return caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, fetchResponse.clone());
-          return fetchResponse;
-        });
+        // Mise en cache sans attendre : un cache plein (petite box Android) ne doit jamais faire échouer le chargement
+        const copie = fetchResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copie)).catch(() => {});
+        return fetchResponse;
       });
-    }).catch(() => {
-        // Fallback si tout échoue (optionnel)
-    })
+    }).catch(() => fetch(event.request))
   );
 });

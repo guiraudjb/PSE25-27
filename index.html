@@ -1223,6 +1223,16 @@
     </div>
 
 <script>
+    // Android WebView (box Android, BrowseHere…) n'a pas de synthèse vocale : sans ce substitut, le premier appel
+    // (arrêt de la lecture au changement d'onglet ou de module) lève une erreur et bloque toute la page.
+    // Les questions, cartes et fiches restent lues par leurs fichiers mp3 quand ils existent.
+    if (!('speechSynthesis' in window) || !window.speechSynthesis) {
+        window.speechSynthesis = { speaking: false, paused: false, pending: false, cancel() {}, pause() {}, resume() {}, speak() {}, getVoices() { return []; } };
+    }
+    if (typeof window.SpeechSynthesisUtterance !== 'function') {
+        window.SpeechSynthesisUtterance = function (texte) { this.text = texte; };
+    }
+
     // --- SKINS ---
     function changeSkin(skinName) {
         document.body.className = skinName;
@@ -1573,6 +1583,10 @@
 
             document.getElementById('status-msg').textContent = "Chargement terminé.";
             userSwitchTab(ongletApresChargement); ongletApresChargement = 'infographie';
+        }).catch(err => {
+            // Échec visible plutôt que silencieux (réseau coupé, fichier illisible, fonction absente du navigateur)
+            document.getElementById('status-msg').textContent = 'Chargement impossible : ' + (err && err.message ? err.message : err);
+            if (window.tvDiag) tvDiag('ERREUR chargement : ' + (err && err.message ? err.message : err));
         });
     }
 
@@ -2878,6 +2892,8 @@
             const c = e.target; tvDiag(n + (e.pointerType ? '/' + e.pointerType : '') + ' sur ' + (c.id || c.tagName + '.' + String(c.className).split(' ')[0]));
         }, true));
         window.addEventListener('popstate', () => tvDiag('retour (historique)'), true);
+        window.addEventListener('error', e => tvDiag('ERREUR ' + e.message + ' (ligne ' + e.lineno + ')'));
+        window.addEventListener('unhandledrejection', e => tvDiag('ERREUR promesse : ' + (e.reason && e.reason.message ? e.reason.message : e.reason)));
         tvDiag('prêt');
     }
 
