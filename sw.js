@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v51-lisibilite';
+const CACHE_NAME = 'v52-tp-lisibles';
 const ASSETS = [
   'index.html',
   'catalogue.json',

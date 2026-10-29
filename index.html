@@ -547,7 +547,32 @@
         }
         .card-front { color: var(--primary); font-weight: 700; border: 2px solid var(--primary); }
         .card-back { color: var(--bg-container); background: var(--primary); transform: rotateY(180deg); font-weight: 500; }
-        #tp-back { white-space: pre-line; text-align: left; align-items: flex-start; overflow-y: auto; }
+        /* TP : feuille de lecture (énoncé, puis corrigé découpé en étapes) */
+        .tp-feuille {
+            flex-grow: 1; min-height: 0; overflow-y: auto; margin: 1vh 0; text-align: left;
+            background: var(--bg-container); color: var(--text-main); border: 1px solid var(--border); border-radius: var(--radius);
+            padding-block: 2.5vmin 4vmin; padding-inline: max(3vmin, calc((100% - 72ch) / 2));
+            font-size: 1.1em; line-height: 1.6;
+        }
+        .tp-feuille:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+        .tp-enonce p { margin: 0 0 0.45em; }
+        .tp-enonce p:last-child { margin-bottom: 0; }
+        .tp-bascule {
+            display: block; margin: 2.2vh 0 1.6vh; padding: 0.55em 1.1em; cursor: pointer;
+            font: inherit; font-size: 0.9em; font-weight: 700; border-radius: var(--radius);
+            border: 2px solid var(--primary); background: var(--bg-container); color: var(--primary);
+        }
+        .tp-bascule[aria-expanded="true"] { background: var(--primary); color: var(--bg-container); }
+        .tp-bascule:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+        .tp-corrige { border-left: 4px solid var(--primary); padding-left: 1em; }
+        .tp-corrige p { margin: 0 0 0.55em; }
+        .tp-corrige p:last-child { margin-bottom: 0; }
+        .tp-intitule { color: var(--primary); font-weight: 700; }
+        .tp-resultat { font-weight: 700; color: var(--accent); white-space: nowrap; }
+        .tp-corrige .tp-partie { font-weight: 700; color: var(--primary); margin-top: 0.8em; padding-left: 1.8em; text-indent: -1.8em; }
+        .tp-corrige .tp-souspartie { padding-left: 3.4em; text-indent: -1.6em; }
+        .tp-numero { padding-left: 1.8em; text-indent: -1.8em; }
+        .tp-marque { display: inline-block; min-width: 1.6em; padding-right: 0.2em; font-weight: 700; color: var(--primary); text-indent: 0; }
         
         .ia-intro { font-size: 0.85em; color: var(--secondary); margin: 0 0 1vh 0; }
         .ia-liste { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
@@ -571,7 +596,7 @@
         .lex-entree mark { background: var(--primary); color: var(--bg-container); border-radius: 2px; padding: 0 1px; }
         .ia-actions button.ia-gemini { background: var(--primary); color: var(--bg-container); font-weight: 600; }
         #ia-message { min-height: 1.4em; font-size: 0.8em; color: var(--accent); margin-top: 6px; }
-        .tp-title { font-size: 1em; color: var(--accent); margin-bottom: 1vh; text-transform: uppercase; border-bottom: 1px solid var(--secondary); width: 100%; padding-bottom: 0.5vh; flex-shrink: 0;}
+        .tp-title { font-size: 1.15em; line-height: 1.3; color: var(--primary); margin: 0 0 1.2vh; padding-bottom: 0.8vh; border-bottom: 1px solid var(--border); }
 
         .fiche-text {
             background: var(--bg-page); color: var(--text-main); padding: 3vmin;
@@ -1116,17 +1141,13 @@
             <div style="text-align:center; color:var(--secondary);">
                 <span id="tp-progress">Exercice 1/10</span>
             </div>
-            <div class="flashcard-container">
-                <div class="flashcard" id="tp-el" onclick="flipTp()" tabindex="0" role="button" aria-label="Exercice, appuyez sur Entrée pour voir la solution" onkeydown="handleCardKey(event, 'tp')">
-                    <div class="card-face card-front">
-                        <div id="tp-title" class="tp-title">TITRE TP</div>
-                        <div id="tp-front" class="max-text-target">Énoncé du TP...</div>
-                    </div>
-                    <div class="card-face card-back">
-                        <div id="tp-back" class="max-text-target">Correction du TP...</div>
-                    </div>
-                </div>
-            </div>
+            <!-- Feuille d'exercice : l'énoncé reste visible, le corrigé s'affiche dessous -->
+            <article class="tp-feuille" id="tp-el" tabindex="0" aria-labelledby="tp-title" onkeydown="handleCardKey(event, 'tp')">
+                <h3 id="tp-title" class="tp-title">TITRE TP</h3>
+                <div id="tp-front" class="tp-enonce">Énoncé du TP...</div>
+                <button type="button" id="tp-bascule" class="tp-bascule" onclick="flipTp()" aria-expanded="false" aria-controls="tp-back">Afficher le corrigé</button>
+                <div id="tp-back" class="tp-corrige" hidden>Correction du TP...</div>
+            </article>
             <div class="flashcard-controls">
                 <button class="nav-btn" onclick="prevTp()" aria-label="Exercice précédent">← PRÉCÉDENT</button>
                 <button class="nav-btn" onclick="nextTp()" aria-label="Exercice suivant">SUIVANT →</button>
@@ -1223,6 +1244,7 @@
     // --- ACCESSIBILITÉ ---
     function handleCardKey(e, type) {
         if (e.key === 'Enter' || e.key === ' ') {
+            if (e.target.tagName === 'BUTTON') return;   // le bouton « Afficher le corrigé » gère sa touche
             e.preventDefault();
             if (type === 'flash') flipCard();
             if (type === 'tp') flipTp();
@@ -1316,7 +1338,7 @@
         
         // ACCESSIBILITE : FOCUS MANAGEMENT SUR CHANGEMENT D'ONGLET
         const content = document.getElementById('tab-' + tabName);
-        const focusTarget = content.querySelector('.scrollable-content, .game-view, .info-layout, .fiche-text, .flashcard-container');
+        const focusTarget = content.querySelector('.scrollable-content, .game-view, .info-layout, .fiche-text, .tp-feuille, .flashcard-container');
         if(focusTarget) {
              focusTarget.setAttribute('tabindex', '-1');
              focusTarget.focus();
@@ -1328,7 +1350,6 @@
     function ajusterTextes(tabName) {
         if(tabName === 'quiz') { maximizeText('q-text'); harmonizeChoices(); }
         if(tabName === 'flashcard') { maximizeText('fc-front'); maximizeText('fc-back'); }
-        if(tabName === 'tp') { maximizeText('tp-front'); maximizeText('tp-back'); }
     }
     // Rotation du téléphone, fenêtre redimensionnée, colonne des modules repliée : nouveau calcul
     let minuterieTaille;
@@ -1398,7 +1419,7 @@
         document.getElementById('q-text').innerHTML = '<div class="max-text-target">Chargement...</div>';
         document.getElementById('q-choices').innerHTML = "";
         document.getElementById('fc-front').textContent = "Chargement..."; document.getElementById('fc-back').textContent = "...";
-        document.getElementById('tp-front').textContent = "Chargement..."; document.getElementById('tp-back').textContent = "...";
+        document.getElementById('tp-front').textContent = "Chargement..."; document.getElementById('tp-back').textContent = ""; afficherCorrige(false);
         document.getElementById('fiche-content').textContent = "Chargement...";
         document.getElementById('info-image').classList.add('hidden');
         document.getElementById('info-image').style.transform = ''; zoomLevel = 1; panX = 0; panY = 0;
@@ -1790,16 +1811,48 @@
         const card = tpData[tpIndex];
         document.getElementById('tp-progress').textContent = `Exercice ${tpIndex + 1}/${tpData.length}`;
         document.getElementById('tp-title').textContent = card.title;
-        document.getElementById('tp-front').textContent = card.front; document.getElementById('tp-back').textContent = etapesTp(card.back);
-        maximizeText('tp-front'); maximizeText('tp-back');
-        document.getElementById('tp-el').classList.remove('flipped');
-        if(document.getElementById('ttsToggle').checked && currentTab === 'tp') speak(card.title + ". " + card.front);
+        document.getElementById('tp-front').innerHTML = formaterTp(card.front);
+        document.getElementById('tp-back').innerHTML = formaterTp(card.back);
+        afficherCorrige(false);
+        document.getElementById('tp-el').scrollTop = 0;
+        if(document.getElementById('ttsToggle').checked && currentTab === 'tp') speak(card.title + ". " + texteLuTp(card.front));
     }
     // Corrigé structuré : une étape par ligne (« | » ou « 1. », « 2. »…), comme dans le jeu Batocera.
     function etapesTp(t) { return t.replace(/ \| /g, '\n').replace(/ (?=\d{1,2}\. [A-ZÉÈÀÂÎÔÇ])/g, '\n'); }
+    // Pour la voix : chaque séparateur « | » devient une fin de phrase
+    function texteLuTp(t) { return t.replace(/\.? \| /g, '. '); }
+    const echapper = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    // Mise en forme déduite du texte, sans balise dans les fichiers :
+    // intitulé « Objectifs : », résultat d'un calcul « = 879 k€ », parties de plan « I. » « A. », étapes « 1. »
+    // Intitulé : 6 mots au plus et pas de verbe conjugué (« L'épargne nette est positive : » n'en est pas un)
+    function estIntituleTp(l) { return l.split(' ').length <= 6 && !/ (est|sont|a|ont|reste|restent|doit|doivent|peut|peuvent|permet|fait)( |$)/.test(l); }
+    function formaterTp(t) {
+        const etapes = etapesTp(t).split('\n').map(s => s.trim()).filter(Boolean);
+        return etapes.map(brut => {
+            let s = echapper(brut), classe = '';
+            const plan = s.match(/^(I{1,3}|IV|V|[A-D]|\d{1,2})\. (.*)$/);
+            if (plan && etapes.length > 1) {
+                classe = /^\d/.test(plan[1]) ? 'tp-numero' : (/^[A-D]$/.test(plan[1]) ? 'tp-souspartie' : 'tp-partie');
+                s = `<span class="tp-marque">${plan[1]}.</span> ${plan[2]}`;
+            } else {
+                // Intitulé de rubrique en tête de ligne (au plus 6 mots, sans chiffre de calcul)
+                s = s.replace(/^([A-ZÉÈÀÂÎÔÇ][^:=.?!]{1,60}?) :(?= |$)/, (m, l) => estIntituleTp(l) ? `<strong class="tp-intitule">${l}</strong> :` : m);
+            }
+            // Résultat d'un calcul : la valeur après le dernier « = » de chaque proposition
+            s = s.replace(/= (-?\d[\d  ]*(?:,\d+)?(?: ?(?:k€|M€|Md€|€|%|ans?|mois|jours?|points?))?)(?=[ .,;)]|$)/g, (m, v) => `= <span class="tp-resultat">${v.trim()}</span>`);
+            return `<p${classe ? ` class="${classe}"` : ''}>${s}</p>`;
+        }).join('');
+    }
+    function afficherCorrige(visible) {
+        const b = document.getElementById('tp-bascule');
+        document.getElementById('tp-back').hidden = !visible;
+        b.setAttribute('aria-expanded', visible); b.textContent = visible ? 'Masquer le corrigé' : 'Afficher le corrigé';
+    }
     function flipTp() {
-        const el = document.getElementById('tp-el'); el.classList.toggle('flipped');
-        if(document.getElementById('ttsToggle').checked && currentTab === 'tp' && el.classList.contains('flipped')) speak(tpData[tpIndex].back);
+        const visible = document.getElementById('tp-back').hidden;
+        afficherCorrige(visible);
+        if (visible) document.getElementById('tp-bascule').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if(document.getElementById('ttsToggle').checked && currentTab === 'tp' && visible) speak(texteLuTp(tpData[tpIndex].back));
     }
     function nextTp() { if(tpIndex < tpData.length - 1) { tpIndex++; updateTpUI(); } }
     function prevTp() { if(tpIndex > 0) { tpIndex--; updateTpUI(); } }
@@ -2349,6 +2402,8 @@
     document.addEventListener('keydown', e => {
         const tag = document.activeElement.tagName;
         if(tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+        if(e.defaultPrevented) return;   // déjà traité (carte ou feuille de TP ayant le focus)
+        if(e.key === ' ' && tag === 'BUTTON') return;   // le bouton réagit lui-même à la barre d'espace
         if(e.key === 'ArrowRight') { if(currentTab === 'flashcard') nextCard(); if(currentTab === 'tp') nextTp(); }
         if(e.key === 'ArrowLeft')  { if(currentTab === 'flashcard') prevCard(); if(currentTab === 'tp') prevTp(); }
         if(e.key === ' ') {
