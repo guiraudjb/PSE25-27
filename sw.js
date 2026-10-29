@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v52-tp-lisibles';
+const CACHE_NAME = 'v53-mode-tv';
 const ASSETS = [
   'index.html',
   'catalogue.json',

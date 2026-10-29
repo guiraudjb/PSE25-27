@@ -846,6 +846,23 @@
             #tab-flashcard > p:last-child { display: none; }   /* aide des touches du clavier */
         }
 
+
+        /* =========================================
+           MODE TÉLÉVISION (html.tv) : télécommande, lecture à trois mètres
+           ========================================= */
+        .tv-seul { display: none !important; }
+        html.tv table.tv-seul { display: table !important; }
+        html.tv span.tv-seul { display: inline !important; }
+        html.tv .clavier-seul { display: none !important; }
+        html.tv { --base-font-size: clamp(14px, 2.6vmin, 44px); }
+        html.tv *:focus { outline: 0.55vmin solid var(--accent) !important; outline-offset: -0.55vmin; }
+        html.tv audio:focus { outline-offset: 0.3vmin; }
+        html.tv * { transition-duration: 0s !important; }
+        html.tv .flashcard { transition-duration: 0.4s !important; }
+        html.tv #btn-ia, html.tv #tab-flashcard > p:last-child { display: none !important; }
+        html.tv .kbd-panel { max-width: 46em; }
+        html.tv .mod-tile { min-height: 3.2em; }
+        .tv-touche { display: inline-block; width: 1em; height: 1em; border-radius: 50%; margin-right: 0.3em; vertical-align: middle; }
     </style>
 </head>
 <body class="theme-modern">
@@ -972,6 +989,7 @@
                         </select>
                     </div>
                     <label class="reglage-case"><input type="checkbox" id="ttsToggle" checked onchange="updateFicheControls(); ecrireStockage('reglageVoix', this.checked ? '1' : '0')"> Lire à voix haute les questions, les cartes et les fiches</label>
+                    <label class="reglage-case"><input type="checkbox" id="tvToggle" onchange="ecrireStockage('modeTv', this.checked ? '1' : '0'); tvActiver(this.checked)"> Mode télévision : navigation à la télécommande, textes agrandis</label>
                 </section>
                 <button id="btnLoad" class="hidden" disabled onclick="loadAllResources()" tabindex="-1" aria-hidden="true"></button>
             </div>
@@ -1175,14 +1193,22 @@
     <div id="kbd-overlay" onclick="showKeyboardHelp()" role="dialog" aria-modal="true" aria-label="Raccourcis clavier">
         <div class="kbd-panel" onclick="event.stopPropagation()">
             <h3>Raccourcis clavier</h3>
-            <table>
+            <table class="tv-seul">
+                <tr><td><kbd>▲</kbd><kbd>▼</kbd><kbd>◀</kbd><kbd>▶</kbd></td><td>Se déplacer, faire défiler la fiche</td></tr>
+                <tr><td><kbd>OK</kbd></td><td>Valider, retourner la carte, afficher le corrigé, lire ou mettre en pause</td></tr>
+                <tr><td><kbd>◀</kbd> <kbd>▶</kbd></td><td>Sur une carte ou un exercice : précédent, suivant. Sur un lecteur : reculer, avancer</td></tr>
+                <tr><td><kbd>OK</kbd></td><td>Sur l'infographie : zoomer, puis les flèches pour s'y déplacer</td></tr>
+                <tr><td><kbd>Retour</kbd></td><td>Dézoomer, revenir aux onglets</td></tr>
+                <tr><td><span class="tv-touche" style="background:#d32f2f"></span><span class="tv-touche" style="background:#2e7d32"></span><span class="tv-touche" style="background:#f9a825"></span><span class="tv-touche" style="background:#1565c0"></span></td><td>Quiz, cartes, fiche, médias</td></tr>
+            </table>
+            <table class="clavier-seul">
                 <tr><td><kbd>←</kbd> <kbd>→</kbd></td><td>Carte/exercice précédent·suivant</td></tr>
                 <tr><td><kbd>Espace</kbd></td><td>Retourner la carte / Pause lecture</td></tr>
                 <tr><td><kbd>F</kbd></td><td>Basculer plein écran</td></tr>
                 <tr><td><kbd>Échap</kbd></td><td>Quitter le plein écran</td></tr>
                 <tr><td><kbd>?</kbd></td><td>Afficher / fermer cette aide</td></tr>
             </table>
-            <p class="kbd-close">Cliquez en dehors pour fermer</p>
+            <p class="kbd-close"><span class="clavier-seul">Cliquez en dehors pour fermer</span><span class="tv-seul">Appuyez sur Retour pour fermer</span></p>
         </div>
     </div>
 
@@ -1343,6 +1369,7 @@
              focusTarget.setAttribute('tabindex', '-1');
              focusTarget.focus();
         }
+        if(tvActif) tvFocus(tvCible(tabName));
 
         setTimeout(() => ajusterTextes(tabName), 50);
     }
@@ -1376,7 +1403,7 @@
                     .catch(err => { console.warn('Dépôt injoignable : ' + d.url, err); return []; })
             )))
             // Module présent dans plusieurs dépôts (ex. 00-10) : rattaché au premier dépôt du catalogue
-            .then(lists => { lists.slice().reverse().forEach((l, i) => l.forEach(f => { moduleRepo[f] = depotsCatalogue[lists.length - 1 - i].url; })); return lists.flat(); })
+            .then(lists => { lists.slice().reverse().forEach((l, i) => l.forEach(f => { moduleRepo[f] = depotsCatalogue[lists.length - 1 - i].url; })); return [].concat.apply([], lists); })
             .then(files => {
                 select.innerHTML = '';
                 if(!Array.isArray(files) || files.length === 0) { 
@@ -1945,7 +1972,9 @@
     // Même convention que tts.py du jeu : tts_assets/cache/<module assaini>/<suffixe>.mp3,
     // assainissement = tout caractère hors lettre/chiffre/-/_ remplacé par « _ ».
     const clipAudio = new Audio();
-    function sanitizeTts(name) { return name.replace(/[^\p{L}\p{N}_-]/gu, '_'); }
+    // \p{L} (Chromium 64+) construit à l'exécution : un littéral ferait échouer tout le script sur un ancien téléviseur
+    const RE_TTS = (function () { try { return new RegExp('[^\\p{L}\\p{N}_-]', 'gu'); } catch (e) { return /[^0-9A-Za-z\u00AA\u00B5\u00BA\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u03FF\u0400-\u04FF_-]/g; } })();
+    function sanitizeTts(name) { return name.replace(RE_TTS, '_'); }
     function stopClip() { clipAudio.onerror = null; clipAudio.pause(); }
     function speakClip(suffix, fallbackText) {
         if (suffix === null) { speak(fallbackText); return; }
@@ -2015,7 +2044,7 @@
 
     function loadFicheAudio(base) {
         ficheAudio.pause(); ficheAudioOk = false; updateFicheTime();
-        ficheAudio.onloadedmetadata = () => { ficheAudio.playbackRate = parseFloat(document.getElementById('tts-speed')?.value || 1); updateFicheTime(); };
+        ficheAudio.onloadedmetadata = () => { ficheAudio.playbackRate = parseFloat((document.getElementById('tts-speed') || {}).value || 1); updateFicheTime(); };
         ficheAudio.onerror = () => { ficheAudioOk = false; updateFicheTime(); };
         ficheAudio.ontimeupdate = updateFicheTime;
         ficheAudio.onended = () => { ficheAudio.currentTime = 0; setToggleIcon('paused'); };
@@ -2058,7 +2087,7 @@
         highlightChunk(currentChunkIndex);
         if(window.speechSynthesis.speaking) window.speechSynthesis.cancel();
         ficheUtterance = new SpeechSynthesisUtterance(ficheChunks[currentChunkIndex]);
-        ficheUtterance.lang = 'fr-FR'; ficheUtterance.rate = parseFloat(document.getElementById('tts-speed')?.value || 1);
+        ficheUtterance.lang = 'fr-FR'; ficheUtterance.rate = parseFloat((document.getElementById('tts-speed') || {}).value || 1);
         ficheUtterance.onend = function() { if(!isFichePaused && ficheChunks.length > 0) { currentChunkIndex++; speakNextChunk(); } };
         ficheUtterance.onerror = function(e) { if(!isFichePaused && ficheChunks.length > 0) { currentChunkIndex++; speakNextChunk(); } };
         window.speechSynthesis.speak(ficheUtterance); setToggleIcon('playing');
@@ -2091,9 +2120,11 @@
 
     // --- PLEIN ÉCRAN ---
     function toggleFullscreen() {
-        if(!document.fullscreenElement) {
-            document.documentElement.requestFullscreen().catch(() => {});
-        } else { document.exitFullscreen(); }
+        const de = document.documentElement;
+        if(!(document.fullscreenElement || document.webkitFullscreenElement)) {
+            const req = de.requestFullscreen || de.webkitRequestFullscreen;
+            if(req) { const p = req.call(de); if(p && p.catch) p.catch(() => {}); }
+        } else { (document.exitFullscreen || document.webkitExitFullscreen).call(document); }
     }
     document.addEventListener('fullscreenchange', () => {
         const btn = document.getElementById('btn-fullscreen');
@@ -2498,6 +2529,241 @@
         finally { zone.remove(); }
     }
     window.addEventListener('load', chargerPromptsIA);
+
+    // --- MODE TÉLÉVISION ---
+    // Navigation à la télécommande : flèches (déplacement spatial du focus, défilement des textes longs), OK, Retour,
+    // touches de couleur et touches multimédia. Classe html.tv (pas sur body : changeSkin remplace sa classe).
+    // Activé tout seul sur un navigateur de téléviseur, sinon par Réglages ou par l'adresse ?tv=1 (?tv=0 pour l'enlever).
+    var tvActif = false;
+    const TV_UA = /SMART-?TV|SmartTV|Tizen|Web0S|webOS|NetCast|HbbTV|BRAVIA|VIDAA|NETTV|PhilipsTV|AQUOS|Viera|Android TV|GoogleTV|AFT[A-Z]|CrKey|Roku|Opera TV|OMI\//i;
+    const TV_CLES = {
+        ArrowLeft: 'g', Left: 'g', ArrowUp: 'h', Up: 'h', ArrowRight: 'd', Right: 'd', ArrowDown: 'b', Down: 'b', Enter: 'ok',
+        GoBack: 'retour', BrowserBack: 'retour', Escape: 'retour', Esc: 'retour', Backspace: 'retour',
+        ColorF0Red: 'rouge', ColorF1Green: 'vert', ColorF2Yellow: 'jaune', ColorF3Blue: 'bleu',
+        MediaPlayPause: 'lecture-pause', MediaPlay: 'lecture', MediaPause: 'pause', MediaStop: 'stop',
+        MediaRewind: 'recul', MediaFastForward: 'avance', MediaTrackPrevious: 'recul', MediaTrackNext: 'avance'
+    };
+    // Codes des télécommandes (Samsung Tizen, LG webOS, HbbTV) quand e.key est absent ou inconnu
+    const TV_CODES = { 37: 'g', 38: 'h', 39: 'd', 40: 'b', 13: 'ok', 10009: 'retour', 461: 'retour', 8: 'retour', 27: 'retour',
+        403: 'rouge', 404: 'vert', 405: 'jaune', 406: 'bleu', 415: 'lecture', 19: 'pause', 179: 'lecture-pause', 10252: 'lecture-pause',
+        413: 'stop', 412: 'recul', 417: 'avance' };
+    const TV_COULEURS = { rouge: 'quiz', vert: 'flashcard', jaune: 'fiche', bleu: 'infographie' };
+    const TV_SEL = 'a[href], button, input, select, textarea, summary, audio, [tabindex="0"], .fiche-text, .tp-feuille, .flashcard, .info-container';
+    const TV_ZONES = '.fiche-text, .tp-feuille, .flashcard, .info-container, audio';   // zones de lecture, même en tabindex -1
+    const TV_DEFILANTS = '.scrollable-content, #module-grid, .fiche-text, .tp-feuille, .src-liste';
+    const TV_CIBLES = {
+        settings: ['#btn-reprendre', '.mod-tile.selected', '.mod-tile', '#module-search'],
+        quiz: ['#quiz-feedback.active .action-btn', '#quiz-end.active .action-btn', '#q-choices button'],
+        flashcard: ['#flashcard-el'], infographie: ['#podcast-player', '.info-container'], fiche: ['#fiche-content'],
+        musique: ['#musique-player', '#musique-content'], tp: ['#tp-el'], lexique: ['#lex-recherche'], sources: ['#src-liste button', '#src-ouvrir']
+    };
+
+    function tvVisible(el) {
+        if (!el || el.disabled || el.hidden) return false;
+        if (!el.getClientRects().length) return false;
+        const r = el.getBoundingClientRect();
+        return r.width > 1 && r.height > 1;
+    }
+    function tvFocus(el) {
+        if (!el) return false;
+        if (!el.hasAttribute('tabindex') && !/^(A|BUTTON|INPUT|SELECT|TEXTAREA|SUMMARY)$/.test(el.tagName)) el.setAttribute('tabindex', '-1');
+        el.focus();
+        if (el.scrollIntoViewIfNeeded) el.scrollIntoViewIfNeeded(false);
+        return true;
+    }
+    function tvCible(onglet) {
+        const sels = TV_CIBLES[onglet] || [];
+        for (let i = 0; i < sels.length; i++) {
+            const els = document.querySelectorAll(sels[i]);
+            for (let j = 0; j < els.length; j++) if (tvVisible(els[j])) return els[j];
+        }
+        const zone = document.getElementById('tab-' + onglet);
+        return zone ? tvCandidats(zone)[0] || null : null;
+    }
+    function tvOngletActif() {
+        const els = document.querySelectorAll('.nav-tabs .tab-btn.active, #bottom-nav button[aria-current="page"]');
+        for (let i = 0; i < els.length; i++) if (tvVisible(els[i])) return els[i];
+        return null;
+    }
+    function tvCandidats(racine) {
+        const plus = document.getElementById('plus-sheet');
+        racine = racine || (plus && !plus.hidden ? plus : document);
+        const liste = [], els = racine.querySelectorAll(TV_SEL);
+        for (let i = 0; i < els.length; i++) {
+            const el = els[i];
+            if (el.getAttribute('tabindex') === '-1' && !el.matches(TV_ZONES)) continue;
+            if (el.closest('#kbd-overlay')) continue;
+            if (tvVisible(el)) liste.push(el);
+        }
+        return liste;
+    }
+    function tvChevauche(a1, a2, b1, b2) { return Math.max(0, Math.max(b1 - a2, a1 - b2)); }   // écart entre deux intervalles (0 s'ils se recouvrent)
+    function tvIntersecte(a, b) { return a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom; }
+    // Élément le plus proche dans la direction : distance dans l'axe, puis écart de côté (pénalisé), puis décalage des centres
+    function tvVoisin(dep, dir, liste) {
+        const a = dep.getBoundingClientRect(), ax = a.left + a.width / 2, ay = a.top + a.height / 2;
+        let best = null, bestS = Infinity;
+        for (let i = 0; i < liste.length; i++) {
+            const el = liste[i];
+            if (el === dep || el.contains(dep) || dep.contains(el)) continue;
+            const b = el.getBoundingClientRect(), bx = b.left + b.width / 2, by = b.top + b.height / 2;
+            // élément d'une liste déroulante qui ne contient pas le départ : seulement s'il est visible dans sa liste
+            const sc = el.parentElement && el.parentElement.closest(TV_DEFILANTS);
+            if (sc && !sc.contains(dep) && !tvIntersecte(b, sc.getBoundingClientRect())) continue;
+            let prim, cote, decal;
+            if (dir === 'd') { if (bx <= ax + 1 || b.right <= a.right) continue; prim = Math.max(0, b.left - a.right); cote = tvChevauche(a.top, a.bottom, b.top, b.bottom); decal = Math.abs(by - ay); }
+            else if (dir === 'g') { if (bx >= ax - 1 || b.left >= a.left) continue; prim = Math.max(0, a.left - b.right); cote = tvChevauche(a.top, a.bottom, b.top, b.bottom); decal = Math.abs(by - ay); }
+            else if (dir === 'b') { if (by <= ay + 1 || b.bottom <= a.bottom) continue; prim = Math.max(0, b.top - a.bottom); cote = tvChevauche(a.left, a.right, b.left, b.right); decal = Math.abs(bx - ax); }
+            else { if (by >= ay - 1 || b.top >= a.top) continue; prim = Math.max(0, a.top - b.bottom); cote = tvChevauche(a.left, a.right, b.left, b.right); decal = Math.abs(bx - ax); }
+            const s = prim + cote * 3 + decal * 0.05;
+            if (s < bestS) { bestS = s; best = el; }
+        }
+        return best;
+    }
+    // Conteneur (l'élément ou un parent) qui peut encore défiler vers le haut ('h') ou le bas ('b')
+    function tvDefilable(el, dir) {
+        for (let n = el; n && n !== document.body && n !== document.documentElement; n = n.parentElement) {
+            if (n.scrollHeight <= n.clientHeight + 2) continue;
+            const oy = getComputedStyle(n).overflowY;
+            if (oy !== 'auto' && oy !== 'scroll') continue;
+            if (dir === 'b' ? n.scrollTop + n.clientHeight < n.scrollHeight - 2 : n.scrollTop > 0) return n;
+        }
+        return null;
+    }
+    function tvLecteur(a, action) {
+        if (!a || !a.currentSrc) return false;
+        if (action === 'lecture' || (action === 'lecture-pause' && a.paused)) { const p = a.play(); if (p && p.catch) p.catch(() => {}); }
+        else if (action === 'pause' || action === 'lecture-pause') a.pause();
+        else if (action === 'stop') { a.pause(); a.currentTime = 0; }
+        else if (action === 'recul') a.currentTime = Math.max(0, a.currentTime - 10);
+        else if (action === 'avance') a.currentTime = Math.min(a.duration || 0, a.currentTime + 10);
+        return true;
+    }
+    function tvMedia(action) {
+        const act = document.activeElement;
+        if (act && act.tagName === 'AUDIO') return tvLecteur(act, action);
+        if (currentTab === 'fiche') {
+            if (action === 'stop') stopFiche(true); else if (action === 'recul') rewindFiche(); else if (action === 'avance') forwardFiche(); else toggleFiche();
+            return true;
+        }
+        if (currentTab === 'flashcard') { if (action === 'avance') nextCard(); else if (action === 'recul') prevCard(); else toggleFlashAutoplay(); return true; }
+        if (currentTab === 'tp') { if (action === 'avance') nextTp(); else if (action === 'recul') prevTp(); return true; }
+        const id = { infographie: 'podcast-player', musique: 'musique-player' }[currentTab];
+        return id ? tvLecteur(document.getElementById(id), action) : false;
+    }
+    // Infographie : OK zoome par paliers, les flèches déplacent l'image zoomée, Retour revient à l'image entière
+    const TV_ZOOMS = [1, 1.8, 2.6];
+    function tvZoomSuivant() {
+        let i = TV_ZOOMS.indexOf(zoomLevel);
+        zoomLevel = TV_ZOOMS[(i + 1) % TV_ZOOMS.length];
+        if (zoomLevel === 1) { panX = 0; panY = 0; }
+        tvBornerPan(); applyInfoTransform();
+    }
+    function tvBornerPan() {
+        const img = document.getElementById('info-image');
+        const mx = (zoomLevel - 1) * img.offsetWidth / 2, my = (zoomLevel - 1) * img.offsetHeight / 2;
+        panX = Math.max(-mx, Math.min(mx, panX)); panY = Math.max(-my, Math.min(my, panY));
+    }
+    function tvDeplacerImage(dir) {
+        const img = document.getElementById('info-image'), pas = 0.25 * zoomLevel;
+        if (dir === 'g') panX += img.offsetWidth * pas; if (dir === 'd') panX -= img.offsetWidth * pas;
+        if (dir === 'h') panY += img.offsetHeight * pas; if (dir === 'b') panY -= img.offsetHeight * pas;
+        tvBornerPan(); applyInfoTransform();
+    }
+
+    function tvTouche(e) {
+        if (e.key && TV_CLES[e.key]) return TV_CLES[e.key];
+        return TV_CODES[e.keyCode] || null;
+    }
+    window.addEventListener('keydown', function (e) {
+        if (!tvActif || e.altKey || e.ctrlKey || e.metaKey) return;
+        const t = tvTouche(e);
+        if (!t) return;
+        const act = document.activeElement && document.activeElement !== document.body ? document.activeElement : null;
+        const tag = act ? act.tagName : '';
+        const saisie = (tag === 'INPUT' && !/^(checkbox|radio|button|submit|range)$/.test(act.type)) || tag === 'TEXTAREA';
+        const fait = () => { e.preventDefault(); e.stopPropagation(); };
+        const aide = document.getElementById('kbd-overlay');
+
+        if (aide.style.display === 'flex') { aide.style.display = 'none'; fait(); return; }
+        if (t === 'retour') {
+            if (saisie && e.keyCode === 8) return;                 // effacer un caractère
+            const plus = document.getElementById('plus-sheet');
+            if (plus && !plus.hidden) { fermerMenuPlus(); fait(); return; }
+            if (zoomLevel !== 1) { resetZoom(); fait(); return; }
+            const onglet = tvOngletActif();
+            if (onglet && act !== onglet) { tvFocus(onglet); fait(); return; }
+            return;                                                  // déjà sur les onglets : le navigateur revient en arrière
+        }
+        if (TV_COULEURS[t]) { if (currentFileBase) userSwitchTab(TV_COULEURS[t]); fait(); return; }
+        if (/^(lecture|pause|lecture-pause|stop|recul|avance)$/.test(t)) { if (tvMedia(t)) fait(); return; }
+
+        if (t === 'ok') {
+            if (!act) { tvFocus(tvCible(currentTab)); fait(); return; }
+            if (tag === 'AUDIO') { tvLecteur(act, 'lecture-pause'); fait(); return; }
+            if (act.classList.contains('info-container')) { tvZoomSuivant(); fait(); return; }
+            if (act.id === 'fiche-content' && document.getElementById('fiche-controls').style.display !== 'none') { toggleFiche(); fait(); return; }
+            if (tag === 'SELECT' && act.showPicker) { try { act.showPicker(); fait(); } catch (x) {} }
+            return;                                                  // clic natif
+        }
+
+        // Flèches
+        if (!act) { tvFocus(tvCible(currentTab)); fait(); return; }
+        const horiz = t === 'g' || t === 'd';
+        if (saisie && horiz) return;                                 // déplacer le curseur dans le champ
+        if (horiz && tag === 'SELECT') {                             // choix précédent ou suivant, sans ouvrir la liste
+            const i = act.selectedIndex + (t === 'd' ? 1 : -1);
+            if (i >= 0 && i < act.options.length) { act.selectedIndex = i; act.dispatchEvent(new Event('change', { bubbles: true })); }
+            fait(); return;
+        }
+        if (horiz && tag === 'AUDIO') { tvLecteur(act, t === 'd' ? 'avance' : 'recul'); fait(); return; }
+        if (horiz && act.closest('#flashcard-el')) { if (t === 'd') nextCard(); else prevCard(); fait(); return; }
+        if (horiz && act.closest('#tp-el')) { if (t === 'd') nextTp(); else prevTp(); fait(); return; }
+        if (zoomLevel !== 1 && act.classList.contains('info-container')) { tvDeplacerImage(t); fait(); return; }
+
+        const cands = tvCandidats();
+        const cible = tvVoisin(act, t, cands);
+        if (!horiz) {
+            // Texte long : défiler tant que le prochain élément n'est pas dans le même conteneur
+            const cont = tvDefilable(act, t);
+            if (cont && (!cible || !cont.contains(cible))) { cont.scrollTop += (t === 'b' ? 1 : -1) * Math.round(cont.clientHeight * 0.6); fait(); return; }
+        }
+        if (cible) tvFocus(cible);
+        fait();
+    }, true);
+
+    // Focus perdu (question remplacée, vue masquée, page qui démarre) : le replacer dans l'onglet ouvert
+    let tvMinuteur = null;
+    function tvSurveiller() {
+        clearTimeout(tvMinuteur);
+        tvMinuteur = setTimeout(() => {
+            if (!tvActif || document.getElementById('kbd-overlay').style.display === 'flex') return;
+            const a = document.activeElement;
+            if (!a || a === document.body || !tvVisible(a)) tvFocus(tvCible(currentTab));
+        }, 120);
+    }
+    let tvObservateur = null;
+    function tvActiver(on) {
+        tvActif = !!on;
+        document.documentElement.classList.toggle('tv', tvActif);
+        const c = document.getElementById('tvToggle'); if (c) c.checked = tvActif;
+        if (tvActif) {
+            document.querySelector('.info-container').setAttribute('tabindex', '0');
+            document.querySelectorAll('audio').forEach(a => a.setAttribute('tabindex', '0'));
+            if (!tvObservateur && window.MutationObserver) {
+                tvObservateur = new MutationObserver(tvSurveiller);
+                tvObservateur.observe(document.getElementById('terminal'), { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'hidden'] });
+            }
+            tvSurveiller();
+        }
+        setTimeout(() => ajusterTextes(currentTab), 50);
+    }
+    (function tvInit() {
+        const m = /[?&]tv=([01])/.exec(location.search);
+        if (m) ecrireStockage('modeTv', m[1]);
+        const v = lireStockage('modeTv');
+        tvActiver(v === '1' || (v === null && TV_UA.test(navigator.userAgent)));
+    })();
 
 </script>
 <script>
