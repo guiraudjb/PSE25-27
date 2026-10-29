@@ -855,8 +855,18 @@
         html.tv span.tv-seul { display: inline !important; }
         html.tv .clavier-seul { display: none !important; }
         html.tv { --base-font-size: clamp(14px, 2.6vmin, 44px); }
-        html.tv *:focus { outline: 0.55vmin solid var(--accent) !important; outline-offset: -0.55vmin; }
-        html.tv audio:focus { outline-offset: 0.3vmin; }
+        html.tv.tv-clavier *:focus { outline: 0.55vmin solid var(--accent) !important; outline-offset: -0.55vmin; }
+        html.tv.tv-clavier audio:focus { outline-offset: 0.3vmin; }
+        /* Curseur virtuel (BrowseHere…) : il fait défiler la page entière, jamais les listes. La page reçoit donc une hauteur
+           fictive (#tv-relais) et chaque défilement est reporté sur la liste visée, l'interface restant fixe. */
+        #tv-relais { display: none; }
+        html.tv body { overflow-x: hidden; overflow-y: scroll; scrollbar-width: none; }
+        html.tv, html.tv body { scrollbar-width: none; }
+        html.tv::-webkit-scrollbar, html.tv body::-webkit-scrollbar { display: none; }
+        html.tv #terminal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: auto; height: auto; }
+        html.tv #tv-relais { display: block; position: absolute; top: 0; left: 0; width: 1px; height: 40000px; pointer-events: none; visibility: hidden; }
+        #tv-diag { position: fixed; right: 8px; bottom: 8px; z-index: 100000; width: 30em; max-width: 90vw; padding: 8px 10px; font: 13px/1.35 monospace;
+                   background: rgba(0,0,0,0.85); color: #0f0; border-radius: 6px; white-space: pre-wrap; pointer-events: none; }
         html.tv * { transition-duration: 0s !important; }
         html.tv .flashcard { transition-duration: 0.4s !important; }
         html.tv #btn-ia, html.tv #tab-flashcard > p:last-child { display: none !important; }
@@ -1369,7 +1379,7 @@
              focusTarget.setAttribute('tabindex', '-1');
              focusTarget.focus();
         }
-        if(tvActif) tvFocus(tvCible(tabName));
+        if(tvActif && tvClavier) tvFocus(tvCible(tabName));
 
         setTimeout(() => ajusterTextes(tabName), 50);
     }
@@ -2678,7 +2688,7 @@
         if (plus && !plus.hidden) { fermerMenuPlus(); return true; }
         if (zoomLevel !== 1) { resetZoom(); return true; }
         const onglet = tvOngletActif();
-        if (onglet && act !== onglet) { tvFocus(onglet); return true; }
+        if (tvClavier && onglet && act !== onglet) { tvFocus(onglet); return true; }
         return false;
     }
     // Navigateurs Android (BrowseHere, Chrome, TV Bro…) : la touche Retour n'arrive pas à la page, elle remonte l'historique.
@@ -2714,6 +2724,13 @@
         }
         if (TV_COULEURS[t]) { if (currentFileBase) userSwitchTab(TV_COULEURS[t]); fait(); return; }
         if (/^(lecture|pause|lecture-pause|stop|recul|avance)$/.test(t)) { if (tvMedia(t)) fait(); return; }
+
+        // Flèches et OK : rien d'intercepté avec un curseur virtuel ; à la première flèche, période d'essai (le curseur bouge-t-il ?)
+        if (tvCurseurFleches) return;
+        if (!tvClavier) {
+            if (t !== 'ok') tvEssaiClavier();
+            return;
+        }
 
         if (t === 'ok') {
             if (!act) { tvFocus(tvCible(currentTab)); fait(); return; }
@@ -2754,7 +2771,7 @@
     function tvSurveiller() {
         clearTimeout(tvMinuteur);
         tvMinuteur = setTimeout(() => {
-            if (!tvActif || document.getElementById('kbd-overlay').style.display === 'flex') return;
+            if (!tvActif || !tvClavier || document.getElementById('kbd-overlay').style.display === 'flex') return;
             const a = document.activeElement;
             if (!a || a === document.body || !tvVisible(a)) tvFocus(tvCible(currentTab));
         }, 120);
@@ -2773,9 +2790,97 @@
             }
             tvSurveiller();
             try { tvGarde(); } catch (e) {}
+            tvRelaisInit();
         }
         setTimeout(() => ajusterTextes(currentTab), 50);
     }
+
+    // Clavier ou curseur. Sur un vrai téléviseur, les flèches arrivent à la page : navigation au clavier (focus).
+    // Sur une box Android (BrowseHere), les flèches déplacent un curseur virtuel : la page ne doit rien intercepter,
+    // sinon OK active l'élément qui a le focus au lieu de celui qui est sous le curseur.
+    var tvClavier = false, tvCurseurFleches = false;
+    let tvPointeur = null, tvDerniereTouche = 0, tvDernierMouvement = 0, tvEssai = null;
+    function tvModeClavier(on) {
+        tvClavier = on;
+        document.documentElement.classList.toggle('tv-clavier', on);
+        tvDiag('mode ' + (on ? 'clavier' : 'curseur'));
+    }
+    function tvEssaiClavier() {
+        tvDerniereTouche = Date.now();
+        if (tvEssai) return;
+        tvEssai = setTimeout(() => {
+            tvEssai = null;
+            if (tvCurseurFleches || Date.now() - tvDernierMouvement < 350) return;
+            tvModeClavier(true);
+            tvFocus(tvCible(currentTab));
+        }, 300);
+    }
+    function tvMouvement(e) {
+        if (!tvActif) return;
+        const x = e.clientX, y = e.clientY;
+        if (tvPointeur && tvPointeur.x === x && tvPointeur.y === y) return;   // faux mouvement (Chrome, après un défilement)
+        tvPointeur = { x: x, y: y };
+        const t = Date.now();
+        if (t - tvDerniereTouche < 350 && !tvCurseurFleches) { tvCurseurFleches = true; tvDiag('curseur piloté par les flèches'); }
+        tvDernierMouvement = t;
+        if (tvClavier) tvModeClavier(false);
+    }
+    window.addEventListener('mousemove', tvMouvement, true);
+    window.addEventListener('pointerdown', tvMouvement, true);
+    window.addEventListener('touchstart', function (e) { if (e.touches && e.touches[0]) tvMouvement(e.touches[0]); }, true);
+
+    // Défilement relayé : la page entière est censée défiler de dy, on fait défiler la liste sous le curseur
+    // (ou, sans curseur connu, la liste au centre de l'onglet ouvert) puis on remet la page en place.
+    const TV_BASE = 20000;
+    function tvRelaisInit() {
+        if (!document.getElementById('tv-relais')) {
+            const d = document.createElement('div'); d.id = 'tv-relais'; d.setAttribute('aria-hidden', 'true');
+            document.body.appendChild(d);
+        }
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        window.scrollTo(0, TV_BASE);
+    }
+    function tvListeVisee() {
+        let x, y;
+        if (tvPointeur) { x = tvPointeur.x; y = tvPointeur.y; }
+        else { const z = document.querySelector('.tab-content.active'); const r = z.getBoundingClientRect(); x = r.left + r.width / 2; y = r.top + r.height / 2; }
+        for (let el = document.elementFromPoint(x, y); el && el !== document.body; el = el.parentElement) {
+            if (el.scrollHeight > el.clientHeight + 2) { const oy = getComputedStyle(el).overflowY; if (oy === 'auto' || oy === 'scroll') return el; }
+        }
+        return null;
+    }
+    window.addEventListener('scroll', function () {
+        if (!tvActif) return;
+        const dy = (window.pageYOffset || 0) - TV_BASE;
+        if (!dy) return;
+        const liste = tvListeVisee();
+        if (liste) liste.scrollTop += dy;
+        tvDiag('défilement ' + dy + ' → ' + (liste ? (liste.id || liste.className.split(' ')[0]) : 'aucune liste'));
+        window.scrollTo(0, TV_BASE);
+    });
+
+    // Diagnostic (?diag=1) : affiche les événements reçus, pour comprendre un navigateur de téléviseur
+    let tvDiagZone = null;
+    const tvDiagLignes = [];
+    function tvDiag(txt) {
+        if (!tvDiagZone) return;
+        tvDiagLignes.unshift(new Date().toTimeString().slice(3, 8) + ' ' + txt);
+        tvDiagLignes.length = Math.min(tvDiagLignes.length, 12);
+        tvDiagZone.textContent = 'TV=' + tvActif + ' clavier=' + tvClavier + ' curseurFlèches=' + tvCurseurFleches
+            + ' tactile=' + navigator.maxTouchPoints + ' ' + innerWidth + 'x' + innerHeight + '\n' + navigator.userAgent + '\n\n' + tvDiagLignes.join('\n');
+    }
+    if (/[?&]diag=1/.test(location.search)) {
+        tvDiagZone = document.createElement('div'); tvDiagZone.id = 'tv-diag'; document.body.appendChild(tvDiagZone);
+        let nMv = 0;
+        window.addEventListener('keydown', e => tvDiag('touche key=' + e.key + ' code=' + e.keyCode), true);
+        window.addEventListener('mousemove', e => { if (++nMv % 10 === 1) tvDiag('souris ' + e.clientX + ',' + e.clientY + ' (' + nMv + ')'); }, true);
+        ['pointerdown', 'touchstart', 'click', 'wheel'].forEach(n => window.addEventListener(n, e => {
+            const c = e.target; tvDiag(n + (e.pointerType ? '/' + e.pointerType : '') + ' sur ' + (c.id || c.tagName + '.' + String(c.className).split(' ')[0]));
+        }, true));
+        window.addEventListener('popstate', () => tvDiag('retour (historique)'), true);
+        tvDiag('prêt');
+    }
+
     (function tvInit() {
         const m = /[?&]tv=([01])/.exec(location.search);
         if (m) ecrireStockage('modeTv', m[1]);
