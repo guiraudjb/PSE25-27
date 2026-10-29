@@ -868,7 +868,7 @@
         html.tv #tv-relais { display: block; position: absolute; top: 0; left: 0; width: 1px; height: 40000px; pointer-events: none; visibility: hidden; }
         #tv-diag { position: fixed; right: 8px; bottom: 8px; z-index: 100000; width: 30em; max-width: 90vw; padding: 8px 10px; font: 13px/1.35 monospace;
                    background: rgba(0,0,0,0.85); color: #0f0; border-radius: 6px; white-space: pre-wrap; pointer-events: none; }
-        html.tv * { transition-duration: 0s !important; }
+        html.tv *:not(.timer-fill) { transition-duration: 0s !important; }
         html.tv .flashcard { transition-duration: 0.4s !important; }
         html.tv #btn-ia, html.tv #tab-flashcard > p:last-child { display: none !important; }
         html.tv .kbd-panel { max-width: 46em; }
@@ -1685,7 +1685,7 @@
         const maxTime = parseInt(val);
         qTimeLeft = maxTime;
         const bar = document.getElementById('q-timer');
-        bar.style.transition = 'none'; bar.style.width = '100%';
+        bar.style.transition = 'none'; bar.style.width = '100%'; void bar.offsetWidth;
         setTimeout(() => {
             if(currentTab !== 'quiz') return;
             bar.style.transition = `width ${maxTime}s linear`; bar.style.width = '0%';
@@ -1749,7 +1749,7 @@
         const duration = parseInt(val);
         const bar = document.getElementById('fb-timer');
         
-        bar.style.transition = 'none'; bar.style.width = '100%';
+        bar.style.transition = 'none'; bar.style.width = '100%'; void bar.offsetWidth;
         
         setTimeout(() => {
             bar.style.transition = `width ${duration}s linear`;
@@ -1846,7 +1846,7 @@
         const flashSuffix = face => (card.id === undefined ? null : `flash_${card.id}_${face}`);
         if(phase === 'front') { document.getElementById('flashcard-el').classList.remove('flipped'); if(document.getElementById('ttsToggle').checked) speakClip(flashSuffix('recto'), card.front); } 
         else { document.getElementById('flashcard-el').classList.add('flipped'); if(document.getElementById('ttsToggle').checked) speakClip(flashSuffix('verso'), card.back); }
-        const bar = document.getElementById('fc-timer'); bar.style.transition = 'none'; bar.style.width = '0%';
+        const bar = document.getElementById('fc-timer'); bar.style.transition = 'none'; bar.style.width = '0%'; void bar.offsetWidth;
         setTimeout(() => { if(!isAutoplay) return; bar.style.transition = `width ${duration}s linear`; bar.style.width = '100%'; }, 50);
         fAutoplayTimeout = setTimeout(() => {
             if(!isAutoplay) return;

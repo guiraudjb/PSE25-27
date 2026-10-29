@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v57-version-affichee';
+const CACHE_NAME = 'v58-barres-tv';
 const ASSETS = [
   'index.html',
   'catalogue.json',
