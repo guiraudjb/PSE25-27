@@ -2535,7 +2535,7 @@
     // touches de couleur et touches multimédia. Classe html.tv (pas sur body : changeSkin remplace sa classe).
     // Activé tout seul sur un navigateur de téléviseur, sinon par Réglages ou par l'adresse ?tv=1 (?tv=0 pour l'enlever).
     var tvActif = false;
-    const TV_UA = /SMART-?TV|SmartTV|Tizen|Web0S|webOS|NetCast|HbbTV|BRAVIA|VIDAA|NETTV|PhilipsTV|AQUOS|Viera|Android TV|GoogleTV|AFT[A-Z]|CrKey|Roku|Opera TV|OMI\//i;
+    const TV_UA = /BrowseHere|SMART-?TV|SmartTV|Tizen|Web0S|webOS|NetCast|HbbTV|BRAVIA|VIDAA|NETTV|PhilipsTV|AQUOS|Viera|Android TV|GoogleTV|AFT[A-Z]|CrKey|Roku|Opera TV|OMI\//i;
     const TV_CLES = {
         ArrowLeft: 'g', Left: 'g', ArrowUp: 'h', Up: 'h', ArrowRight: 'd', Right: 'd', ArrowDown: 'b', Down: 'b', Enter: 'ok',
         GoBack: 'retour', BrowserBack: 'retour', Escape: 'retour', Esc: 'retour', Backspace: 'retour',
@@ -2671,12 +2671,33 @@
         tvBornerPan(); applyInfoTransform();
     }
 
+    // Retour : fermer le menu, dézoomer, puis revenir aux onglets. Faux s'il n'y a plus rien à faire.
+    function tvRetour() {
+        const act = document.activeElement;
+        const plus = document.getElementById('plus-sheet');
+        if (plus && !plus.hidden) { fermerMenuPlus(); return true; }
+        if (zoomLevel !== 1) { resetZoom(); return true; }
+        const onglet = tvOngletActif();
+        if (onglet && act !== onglet) { tvFocus(onglet); return true; }
+        return false;
+    }
+    // Navigateurs Android (BrowseHere, Chrome, TV Bro…) : la touche Retour n'arrive pas à la page, elle remonte l'historique.
+    // Une entrée d'historique « de garde » l'intercepte : on fait le retour dans la page puis on remet la garde.
+    // Quand il n'y a plus rien à faire, on laisse le navigateur quitter le site.
+    function tvGarde() { if (!(history.state && history.state.tvGarde)) history.pushState({ tvGarde: true }, ''); }
+    window.addEventListener('popstate', function () {
+        if (!tvActif) return;
+        const aide = document.getElementById('kbd-overlay');
+        if (aide.style.display === 'flex') { aide.style.display = 'none'; tvGarde(); return; }
+        if (tvRetour()) tvGarde(); else history.back();
+    });
     function tvTouche(e) {
         if (e.key && TV_CLES[e.key]) return TV_CLES[e.key];
         return TV_CODES[e.keyCode] || null;
     }
     window.addEventListener('keydown', function (e) {
         if (!tvActif || e.altKey || e.ctrlKey || e.metaKey) return;
+        try { tvGarde(); } catch (x) {}   // posée après un geste : Chrome ne saute pas cette entrée au bouton Retour
         const t = tvTouche(e);
         if (!t) return;
         const act = document.activeElement && document.activeElement !== document.body ? document.activeElement : null;
@@ -2688,12 +2709,8 @@
         if (aide.style.display === 'flex') { aide.style.display = 'none'; fait(); return; }
         if (t === 'retour') {
             if (saisie && e.keyCode === 8) return;                 // effacer un caractère
-            const plus = document.getElementById('plus-sheet');
-            if (plus && !plus.hidden) { fermerMenuPlus(); fait(); return; }
-            if (zoomLevel !== 1) { resetZoom(); fait(); return; }
-            const onglet = tvOngletActif();
-            if (onglet && act !== onglet) { tvFocus(onglet); fait(); return; }
-            return;                                                  // déjà sur les onglets : le navigateur revient en arrière
+            if (tvRetour()) fait();                                  // sinon (déjà sur les onglets) : retour normal du navigateur
+            return;
         }
         if (TV_COULEURS[t]) { if (currentFileBase) userSwitchTab(TV_COULEURS[t]); fait(); return; }
         if (/^(lecture|pause|lecture-pause|stop|recul|avance)$/.test(t)) { if (tvMedia(t)) fait(); return; }
@@ -2755,6 +2772,7 @@
                 tvObservateur.observe(document.getElementById('terminal'), { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'hidden'] });
             }
             tvSurveiller();
+            try { tvGarde(); } catch (e) {}
         }
         setTimeout(() => ajusterTextes(currentTab), 50);
     }
@@ -2762,7 +2780,9 @@
         const m = /[?&]tv=([01])/.exec(location.search);
         if (m) ecrireStockage('modeTv', m[1]);
         const v = lireStockage('modeTv');
-        tvActiver(v === '1' || (v === null && TV_UA.test(navigator.userAgent)));
+        // Box Android (BrowseHere…) : Android sans écran tactile, même si l'agent utilisateur ne dit pas « TV »
+        const boxAndroid = /Android/i.test(navigator.userAgent) && navigator.maxTouchPoints === 0;
+        tvActiver(v === '1' || (v === null && (TV_UA.test(navigator.userAgent) || boxAndroid)));
     })();
 
 </script>

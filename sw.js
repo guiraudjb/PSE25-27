@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v53-mode-tv';
+const CACHE_NAME = 'v54-tv-retour-android';
 const ASSETS = [
   'index.html',
   'catalogue.json',
