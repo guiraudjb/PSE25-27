@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v56-webview-sans-voix';
+const CACHE_NAME = 'v57-version-affichee';
 const ASSETS = [
   'index.html',
   'catalogue.json',

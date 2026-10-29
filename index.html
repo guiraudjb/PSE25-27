@@ -717,6 +717,7 @@
         }
         #file-indicator { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-main); font-size: 1.05em; font-weight: 600; }
         #file-icon { margin-right: 0; }
+        #sw-version { flex: none; font-size: 0.7em; color: var(--secondary); white-space: nowrap; font-variant-numeric: tabular-nums; }
         #sidebar, #bottom-nav, #btn-biblio, #aide-sidebar { display: none; }
 
         /* Réglages */
@@ -796,7 +797,7 @@
             }
             .header-bar { height: auto; min-height: 52px; margin: 0; padding: 6px 12px; }
             #app-title { font-size: 1.15em; max-width: none; flex: 1; }
-            body.module-charge #app-title { display: none; }
+            body.module-charge #app-title, body.module-charge #sw-version { display: none; }
             body:not(.module-charge) .module-courant { display: none; }
             .module-courant {
                 margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto;
@@ -881,6 +882,7 @@
         <div class="header-bar">
             <button type="button" id="btn-biblio" class="fullscreen-btn" onclick="basculerBibliotheque()" aria-label="Masquer la liste des modules" aria-expanded="true" title="Masquer ou afficher la liste des modules">☰</button>
             <h1 id="app-title" style="margin:0;">FORMATION V47</h1>
+            <span id="sw-version" title="Version du cache hors ligne (service worker) utilisée par cette page"></span>
             <div class="module-courant"><img id="file-icon" alt="" hidden><span id="module-cote"></span><span id="file-indicator"></span></div>
             <div class="controls-inline">
                 <button class="fullscreen-btn" id="btn-fullscreen" onclick="toggleFullscreen()" aria-label="Plein écran">⛶</button>
@@ -2553,6 +2555,24 @@
         finally { zone.remove(); }
     }
     window.addEventListener('load', chargerPromptsIA);
+
+    // Version du cache hors ligne affichée à côté du titre : celle du cache utilisé (le plus récent présent),
+    // sinon celle annoncée par sw.js en ligne (première visite, avant l'installation du service worker).
+    function afficherVersionSw() {
+        const el = document.getElementById('sw-version');
+        const montrer = v => { if (v) el.textContent = v; };
+        const lireSw = () => fetch('sw.js', { cache: 'no-store' }).then(r => r.ok ? r.text() : '')
+            .then(t => { const m = /CACHE_NAME\s*=\s*'([^']+)'/.exec(t); return m ? m[1] : ''; }).catch(() => '');
+        const num = n => parseInt(n.slice(1), 10) || 0;
+        if (window.caches && caches.keys) {
+            caches.keys().then(k => {
+                const v = k.filter(n => /^v\d/.test(n)).sort((a, b) => num(a) - num(b)).pop();
+                if (v) montrer(v); else lireSw().then(montrer);
+            }).catch(() => lireSw().then(montrer));
+        } else lireSw().then(montrer);
+    }
+    window.addEventListener('load', afficherVersionSw);
+    if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('controllerchange', () => setTimeout(afficherVersionSw, 500));
 
     // --- MODE TÉLÉVISION ---
     // Navigation à la télécommande : flèches (déplacement spatial du focus, défilement des textes longs), OK, Retour,
