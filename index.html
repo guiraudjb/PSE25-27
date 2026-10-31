@@ -2063,24 +2063,30 @@
         };
         majEtatSource(); essaiImage(0); essaiAudio(0);
     }
-    // Infographie supplémentaire (data/infographie_plus/<module>.png, libellé dans <module>.txt) :
-    // bouton affiché seulement si elle existe ; il remplace l'image, le podcast continue.
-    let infoPlusActif = false;
+    // Infographie supplémentaire (data/infographie_plus/<module>.pdf ou .png, libellé dans <module>.txt) :
+    // bouton affiché seulement si elle existe. Le PDF (pense-bête A4 multipage) s'ouvre dans un
+    // nouvel onglet ; à défaut, le PNG remplace l'image et le podcast continue.
+    let infoPlusActif = false, infoPlusPdf = '';
     function majInfoPlus(base) {
         const b = document.getElementById('info-plus-btn');
-        infoPlusActif = false; b.style.display = 'none'; b.setAttribute('aria-pressed', 'false');
+        infoPlusActif = false; infoPlusPdf = ''; b.style.display = 'none'; b.setAttribute('aria-pressed', 'false');
         const url = currentBase + 'infographie_plus/' + encodeURIComponent(base);
-        fetch(url + '.png', { method: 'HEAD' }).then(r => {
-            if (!r.ok || mediaBase !== base) return;
+        const tete = (ext) => fetch(url + ext, { method: 'HEAD' }).then(r => r.ok).catch(() => false);
+        Promise.all([tete('.pdf'), tete('.png')]).then(([pdf, png]) => {
+            if ((!pdf && !png) || mediaBase !== base) return;
             return fetch(url + '.txt').then(t => t.ok ? t.text() : '').catch(() => '').then(lib => {
                 if (mediaBase !== base) return;
-                b.textContent = '📌 ' + ((lib || '').split('\n')[0].trim() || 'Infographie supplémentaire');
+                if (pdf) infoPlusPdf = url + '.pdf';
+                const nom = (lib || '').split('\n')[0].trim() || 'Infographie supplémentaire';
+                b.textContent = (pdf ? '📄 ' : '📌 ') + nom + (pdf ? ' (PDF)' : '');
+                b.title = pdf ? 'Ouvrir le PDF dans un nouvel onglet (impression A4)' : '';
                 b.style.display = '';
             });
-        }).catch(() => {});
+        });
     }
     function basculerInfoPlus() {
         if (!mediaBase) return;
+        if (infoPlusPdf) { window.open(infoPlusPdf, '_blank', 'noopener'); return; }
         const img = document.getElementById('info-image'), ph = document.getElementById('info-placeholder');
         const base = mediaBase, ancien = img.src;
         infoPlusActif = !infoPlusActif;
