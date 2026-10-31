@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v58-barres-tv';
+const CACHE_NAME = 'v59-infographie-plus';
 const ASSETS = [
   'index.html',
   'catalogue.json',
