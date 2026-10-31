@@ -1082,6 +1082,7 @@
                         <button type="button" class="source-btn" id="src-local" aria-pressed="true" onclick="choisirSourceMedia('local')">Pipeline local</button>
                         <button type="button" class="source-btn" id="src-nlm" aria-pressed="false" onclick="choisirSourceMedia('nlm')">NotebookLM</button>
                         <span id="source-etat" class="source-etat" aria-live="polite"></span>
+                        <button type="button" class="source-btn" id="info-plus-btn" aria-pressed="false" style="display:none" onclick="basculerInfoPlus()"></button>
                     </div>
                     <audio id="podcast-player" controls aria-label="Lecteur audio du podcast">
                         Votre navigateur ne supporte pas l'élément audio.
@@ -2046,6 +2047,7 @@
         mediaBase = base; etatMedia.info = etatMedia.podcast = null;
         const ordre = [sourceMedia, sourceMedia === 'local' ? 'nlm' : 'local'];
         const img = document.getElementById('info-image'), ph = document.getElementById('info-placeholder');
+        majInfoPlus(base);
         const essaiImage = (i) => {
             if (i >= ordre.length) { etatMedia.info = ''; img.classList.add('hidden'); ph.classList.remove('hidden'); ph.textContent = "Pas d'infographie"; majEtatSource(); return; }
             img.onload = () => { if (mediaBase !== base) return; etatMedia.info = ordre[i]; img.classList.remove('hidden'); ph.classList.add('hidden'); majEtatSource(); };
@@ -2060,6 +2062,41 @@
             audio.src = currentBase + SOURCES_MEDIA[ordre[i]].podcast + base + '.mp3';
         };
         majEtatSource(); essaiImage(0); essaiAudio(0);
+    }
+    // Infographie supplémentaire (data/infographie_plus/<module>.png, libellé dans <module>.txt) :
+    // bouton affiché seulement si elle existe ; il remplace l'image, le podcast continue.
+    let infoPlusActif = false;
+    function majInfoPlus(base) {
+        const b = document.getElementById('info-plus-btn');
+        infoPlusActif = false; b.style.display = 'none'; b.setAttribute('aria-pressed', 'false');
+        const url = currentBase + 'infographie_plus/' + encodeURIComponent(base);
+        fetch(url + '.png', { method: 'HEAD' }).then(r => {
+            if (!r.ok || mediaBase !== base) return;
+            return fetch(url + '.txt').then(t => t.ok ? t.text() : '').catch(() => '').then(lib => {
+                if (mediaBase !== base) return;
+                b.textContent = '📌 ' + ((lib || '').split('\n')[0].trim() || 'Infographie supplémentaire');
+                b.style.display = '';
+            });
+        }).catch(() => {});
+    }
+    function basculerInfoPlus() {
+        if (!mediaBase) return;
+        const img = document.getElementById('info-image'), ph = document.getElementById('info-placeholder');
+        const base = mediaBase, ancien = img.src;
+        infoPlusActif = !infoPlusActif;
+        document.getElementById('info-plus-btn').setAttribute('aria-pressed', String(infoPlusActif));
+        resetZoom();
+        if (infoPlusActif) {
+            img.onload = () => { if (mediaBase === base) { img.classList.remove('hidden'); ph.classList.add('hidden'); } };
+            img.onerror = null;
+            img.dataset.module = etatMedia.info ? ancien : "";
+            img.src = currentBase + 'infographie_plus/' + base + '.png';
+        } else if (img.dataset.module) {
+            img.onload = () => { if (mediaBase === base) { img.classList.remove('hidden'); ph.classList.add('hidden'); } };
+            img.src = img.dataset.module;
+        } else {
+            img.classList.add('hidden'); ph.classList.remove('hidden');
+        }
     }
     function choisirSourceMedia(k) {
         if (k === sourceMedia) return;
