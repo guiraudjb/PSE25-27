@@ -593,6 +593,21 @@
         .lex-def { margin: 4px 0 0 0; font-size: 0.88em; color: var(--text-main); line-height: 1.4; }
         .lex-mod { display: inline-block; margin: 3px 0 0 0; font-size: 0.75em; color: var(--secondary); background: none; border: none; padding: 0; cursor: pointer; text-decoration: underline; font-family: inherit; text-align: left; }
         .lex-mod:hover { color: var(--primary); }
+        /* Export glossaire */
+        .glo-barre { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 1vh; }
+        .glo-barre label { font-size: 0.85em; color: var(--secondary); }
+        #glo-depot, #glo-filtre { padding: 7px 9px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-container); color: var(--text-main); font-family: inherit; }
+        #glo-filtre { flex: 1 1 200px; }
+        .glo-btn { padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--radius); background: transparent; color: var(--text-main); cursor: pointer; font-family: inherit; }
+        #glo-info { font-size: 0.8em; color: var(--secondary); margin: 0 0 1vh 0; }
+        .glo-modules { column-width: 340px; column-gap: 16px; border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 10px; background: var(--bg-container); }
+        .glo-modules label { display: flex; gap: 6px; align-items: flex-start; font-size: 0.85em; padding: 2px 0; break-inside: avoid; cursor: pointer; color: var(--text-main); }
+        .glo-modules label.glo-cache { display: none; }
+        .glo-modules small { color: var(--secondary); white-space: nowrap; }
+        .glo-pied { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 1.2vh; }
+        .glo-export { padding: 10px 18px; border: none; border-radius: var(--radius); background: var(--primary); color: var(--bg-container); font-weight: 600; cursor: pointer; font-family: inherit; font-size: 1em; }
+        .glo-export:disabled { opacity: 0.5; cursor: default; }
+        .glo-aide { font-size: 0.75em; color: var(--secondary); }
         .lex-entree mark { background: var(--primary); color: var(--bg-container); border-radius: 2px; padding: 0 1px; }
         .ia-actions button.ia-gemini { background: var(--primary); color: var(--bg-container); font-weight: 600; }
         #ia-message { min-height: 1.4em; font-size: 0.8em; color: var(--accent); margin-top: 6px; }
@@ -904,6 +919,7 @@
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tp" id="btn-tp" onclick="userSwitchTab('tp')">TP<span class="tab-badge" id="badge-tp"></span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ia" id="btn-ia" onclick="userSwitchTab('ia')" style="display:none" title="Entraînement avec un assistant IA (Google, ChatGPT, Claude, Gemini)">IA</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-lexique" id="btn-lexique" onclick="userSwitchTab('lexique')" title="Rechercher un terme ou un sigle dans le lexique de toutes les fiches">LEXIQUE</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-glossaire" id="btn-glossaire" onclick="userSwitchTab('glossaire')" title="Exporter les définitions du lexique en glossaire PDF (A4 paysage)">EXPORT GLOSSAIRE</button>
         </div>
 
         <div id="tab-settings" class="tab-content active" role="tabpanel" aria-labelledby="btn-settings">
@@ -1168,6 +1184,24 @@
             </div>
         </div>
 
+        <div id="tab-glossaire" class="tab-content" role="tabpanel" aria-labelledby="btn-glossaire">
+            <div class="scrollable-content">
+                <div class="glo-barre">
+                    <label for="glo-depot">Dépôt</label>
+                    <select id="glo-depot" aria-label="Dépôt du glossaire" onchange="glossaireDepot()"></select>
+                    <input type="search" id="glo-filtre" placeholder="Filtrer la liste des modules" aria-label="Filtrer la liste des modules" oninput="glossaireFiltre()" autocomplete="off">
+                    <button type="button" class="glo-btn" onclick="glossaireCocher(true)">Tout cocher</button>
+                    <button type="button" class="glo-btn" onclick="glossaireCocher(false)">Tout décocher</button>
+                </div>
+                <p id="glo-info" role="status" aria-live="polite">Chargement…</p>
+                <div id="glo-modules" class="glo-modules" role="group" aria-label="Modules à inclure"></div>
+                <div class="glo-pied">
+                    <button type="button" id="glo-export" class="glo-export" onclick="exporterGlossaire()">📄 Exporter le glossaire (PDF)</button>
+                    <span class="glo-aide">A4 paysage, deux colonnes, ordre alphabétique. Dans la fenêtre d'impression, choisir « Enregistrer au format PDF ».</span>
+                </div>
+            </div>
+        </div>
+
         <div id="tab-tp" class="tab-content" role="tabpanel" aria-labelledby="btn-tp">
             <div style="text-align:center; color:var(--secondary);">
                 <span id="tp-progress">Exercice 1/10</span>
@@ -1344,6 +1378,7 @@
         if(newTab === 'tp') resetTp();
         if(newTab === 'fiche') updateFicheControls();
         if(newTab === 'lexique') ouvrirLexique();
+        if(newTab === 'glossaire') ouvrirGlossaire();
         if(newTab === 'sources') ouvrirSources();
 
         updateTabUI(newTab);
@@ -2324,7 +2359,7 @@
     if (lireStockage('biblioRepliee')) { document.body.classList.add('biblio-repliee'); document.getElementById('btn-biblio').setAttribute('aria-expanded', 'false'); }
 
     // Menu « Plus » du téléphone : onglets moins fréquents (masqués s'ils sont vides pour ce module)
-    const ONGLETS_PLUS = [['musique', 'Musique'], ['tp', 'TP'], ['sources', 'Sources'], ['ia', 'IA'], ['lexique', 'Lexique']];
+    const ONGLETS_PLUS = [['musique', 'Musique'], ['tp', 'TP'], ['sources', 'Sources'], ['ia', 'IA'], ['lexique', 'Lexique'], ['glossaire', 'Export glossaire']];
     function basculerMenuPlus() {
         const m = document.getElementById('plus-sheet');
         if (!m.hidden) { fermerMenuPlus(); return; }
@@ -2488,6 +2523,159 @@
         });
         zone.querySelectorAll('.lex-mod').forEach(b => b.onclick = () => ouvrirModuleLexique(b.dataset.f));
     }
+    // --- EXPORT GLOSSAIRE ---
+    // Glossaire PDF (A4 paysage, 2 colonnes) des définitions du lexique d'un dépôt, pour tous ses modules
+    // ou une sélection. Le PDF est produit par la fenêtre d'impression du navigateur (« Enregistrer au format PDF »).
+    const glossaireJson = new Map();   // url du dépôt → lexique.json
+    let glossaireCourant = null;
+    function ouvrirGlossaire() {
+        const sel = document.getElementById('glo-depot');
+        if (!sel.options.length) {
+            depotsCatalogue.forEach(d => { const o = document.createElement('option'); o.value = d.url; o.textContent = d.titre || d.nom; sel.add(o); });
+            const actuel = depotsCatalogue.find(d => currentBase && currentBase.startsWith(d.url.replace(/data\/$/, '')));
+            if (actuel) sel.value = actuel.url;
+        }
+        if (!glossaireCourant || glossaireCourant !== sel.value) glossaireDepot();
+    }
+    function glossaireDepot() {
+        const url = document.getElementById('glo-depot').value, zone = document.getElementById('glo-modules'), info = document.getElementById('glo-info');
+        glossaireCourant = url; zone.innerHTML = ''; info.textContent = 'Chargement du lexique…';
+        document.getElementById('glo-export').disabled = true;
+        const charge = glossaireJson.has(url) ? Promise.resolve(glossaireJson.get(url))
+            : fetch(url + 'lexique.json?t=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null).then(j => { if (j) glossaireJson.set(url, j); return j; });
+        charge.then(j => {
+            if (glossaireCourant !== url) return;
+            if (!j) { info.textContent = "Pas de lexique pour ce dépôt."; return; }
+            const parMod = j.modules.map(() => 0);
+            j.entrees.forEach(e => e.d.forEach(([, mi]) => parMod[mi]++));
+            const ordre = j.modules.map((m, i) => i).filter(i => parMod[i] > 0)
+                .sort((a, b) => j.modules[a].localeCompare(j.modules[b], 'fr', { numeric: true }));
+            ordre.forEach(i => {
+                const l = document.createElement('label');
+                l.innerHTML = '<input type="checkbox" checked data-i="' + i + '"><span>' + htmlLex(j.modules[i].replace(/\.csv$/, '')) + ' <small>(' + parMod[i] + ')</small></span>';
+                l.querySelector('input').onchange = glossaireCompter;
+                zone.appendChild(l);
+            });
+            document.getElementById('glo-filtre').value = '';
+            glossaireCompter();
+        });
+    }
+    function glossaireFiltre() {
+        const q = normLex(document.getElementById('glo-filtre').value);
+        document.querySelectorAll('#glo-modules label').forEach(l => l.classList.toggle('glo-cache', !!q && !normLex(l.textContent).includes(q)));
+    }
+    function glossaireCocher(v) {
+        // agit sur les modules visibles (le filtre permet de cocher ou décocher un groupe)
+        document.querySelectorAll('#glo-modules label:not(.glo-cache) input').forEach(c => c.checked = v);
+        glossaireCompter();
+    }
+    function glossaireSelection() {
+        return new Set([...document.querySelectorAll('#glo-modules input:checked')].map(c => +c.dataset.i));
+    }
+    function glossaireCompter() {
+        const j = glossaireJson.get(glossaireCourant); if (!j) return;
+        const sel = glossaireSelection(), tot = document.querySelectorAll('#glo-modules input').length;
+        const g = construireGlossaire(j, sel);
+        document.getElementById('glo-info').textContent = sel.size + ' module' + (sel.size > 1 ? 's' : '') + ' sur ' + tot
+            + ' · ' + g.termes.length + ' termes · ' + g.nbDef + ' définitions';
+        document.getElementById('glo-export').disabled = !g.termes.length;
+    }
+    // Terme d'une définition sans terme repéré : « X désigne… », « X est… », « X : … »
+    function termeDeduit(txt) {
+        const m = /^(?:(?:Le|La|Les|Un|Une|L['’])\s*)?(.{1,60}?)(?:\s*:\s|\s+(?:désigne|désignent|est|sont|correspond|représente|consiste)\b)/.exec(txt);
+        if (!m) return '';
+        const t = m[1].trim();
+        return t.split(' ').length <= 8 ? t.charAt(0).toUpperCase() + t.slice(1) : '';
+    }
+    function construireGlossaire(j, sel) {
+        const parCle = new Map(); let nbDef = 0;
+        j.entrees.forEach(e => {
+            const defs = e.d.filter(([, mi]) => sel.has(mi));
+            if (!defs.length) return;
+            const t = e.t || termeDeduit(defs[0][0]) || '';
+            if (!t) return;
+            const cle = normLex(t);
+            let x = parCle.get(cle);
+            if (!x) { x = { t, s: '', x: '', d: [] }; parCle.set(cle, x); }
+            x.s = x.s || e.s || ''; x.x = x.x || e.x || '';
+            defs.forEach(([txt, mi]) => {
+                const num = j.modules[mi].split(' ')[0];
+                const dej = x.d.find(v => v.txt === txt);
+                if (dej) { if (!dej.mods.includes(num)) dej.mods.push(num); } else { x.d.push({ txt, mods: [num] }); nbDef++; }
+            });
+        });
+        const termes = [...parCle.values()].sort((a, b) => a.t.localeCompare(b.t, 'fr', { sensitivity: 'base', ignorePunctuation: true, numeric: true }));
+        return { termes, nbDef };
+    }
+    function lettreGlossaire(t) {
+        const c = normLex(t).replace(/œ/g, 'oe').replace(/æ/g, 'ae').replace(/^[^a-z0-9]+/, '').charAt(0).toUpperCase();
+        return c >= 'A' && c <= 'Z' ? c : '0-9';
+    }
+    function glossaireHTML() {
+        const j = glossaireJson.get(glossaireCourant); if (!j) return null;
+        const depot = depotsCatalogue.find(d => d.url === glossaireCourant) || { nom: j.depot, titre: j.depot };
+        const sel = glossaireSelection(), g = construireGlossaire(j, sel);
+        const tous = document.querySelectorAll('#glo-modules input').length;
+        const mods = [...sel].map(i => j.modules[i].replace(/\.csv$/, '')).sort((a, b) => a.localeCompare(b, 'fr', { numeric: true }));
+        const date = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+        const site = new URL(glossaireCourant.replace(/batocera\/[^/]+\/data\/$/, ''), location.href).href;
+        const h = htmlLex;
+        let corps = '', lettre = '';
+        g.termes.forEach(e => {
+            const l = lettreGlossaire(e.t);
+            if (l !== lettre) { corps += '<h2 class="lettre">' + l + '</h2>'; lettre = l; }
+            const sig = [e.s && e.s !== e.t ? e.s : '', e.x && e.x !== e.t ? e.x : ''].filter(Boolean).join(' · ');
+            corps += '<div class="entree"><div class="terme">' + h(e.t) + (sig ? ' <span class="sigle">' + h(sig) + '</span>' : '') + '</div>'
+                + e.d.map(v => '<p class="def">' + h(v.txt) + ' <span class="mod">[' + v.mods.map(h).join(', ') + ']</span></p>').join('') + '</div>';
+        });
+        const partiel = sel.size < tous;
+        const titreDoc = 'Glossaire - ' + (depot.titre || depot.nom) + ' - ' + new Date().toISOString().slice(0, 10);
+        const listeMods = partiel ? '<section class="mods"><h2 class="titre-mods">Modules retenus (' + mods.length + ')</h2><ul>' + mods.map(m => '<li>' + h(m) + '</li>').join('') + '</ul></section>' : '';
+        const html = '<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>' + h(titreDoc) + '</title><style>'
+            + '@page{size:A4 landscape;margin:13mm 14mm 14mm;@bottom-center{content:counter(page) " / " counter(pages);font:7.5pt sans-serif;color:#777}'
+            + '@top-right{content:"Glossaire · ' + h(depot.titre || depot.nom).replace(/"/g, "'") + '";font:7.5pt sans-serif;color:#999}}'
+            + '@page:first{@bottom-center{content:none}@top-right{content:none}}'
+            + '*{box-sizing:border-box;margin:0;padding:0}body{font:8.6pt/1.38 Georgia,"DejaVu Serif","Liberation Serif",serif;color:#1c2230;-webkit-print-color-adjust:exact;print-color-adjust:exact}'
+            + '.garde{height:181mm;display:flex;flex-direction:column;justify-content:center;padding:0 22mm;border-left:9mm solid #1d4f91;break-after:page}'
+            + '.garde .sur{font:600 11pt sans-serif;letter-spacing:3pt;text-transform:uppercase;color:#1d4f91}'
+            + '.garde h1{font:700 34pt/1.1 sans-serif;margin:4mm 0 3mm}.garde .chiffres{font:12pt sans-serif;color:#5b6475;margin-bottom:12mm}'
+            + '.garde dl{display:grid;grid-template-columns:max-content 1fr;gap:2.5mm 6mm;font-size:10.5pt;max-width:210mm}.garde dt{font:600 9pt sans-serif;text-transform:uppercase;letter-spacing:1pt;color:#1d4f91;padding-top:1pt}'
+            + '.garde .note{margin-top:12mm;font-size:8.5pt;color:#777;max-width:210mm}'
+            + '.mods{break-after:page}.titre-mods{font:700 14pt sans-serif;color:#1d4f91;margin-bottom:4mm}.mods ul{columns:2;column-gap:12mm;list-style:none;font-size:8.5pt}.mods li{padding:1pt 0;break-inside:avoid}'
+            + 'main{column-count:2;column-gap:12mm;column-rule:0.4pt solid #c9ced8}'
+            + '.lettre{font:700 17pt sans-serif;color:#1d4f91;border-bottom:1.2pt solid #1d4f91;margin:3mm 0 2mm;padding-bottom:0.5mm;break-after:avoid}main .lettre:first-child{margin-top:0}'
+            + '.entree{break-inside:avoid;margin-bottom:2.2mm}.terme{font:700 9.2pt sans-serif;color:#13213a}.sigle{font:400 7.6pt sans-serif;color:#5b6475}'
+            + '.def{text-align:justify;hyphens:auto;margin-top:0.4mm}.mod{font:7pt sans-serif;color:#8a93a3;white-space:nowrap}'
+            + '</style></head><body>'
+            + '<section class="garde"><div class="sur">Glossaire</div><h1>' + h(depot.titre || depot.nom) + '</h1>'
+            + '<div class="chiffres">' + g.termes.length + ' termes · ' + g.nbDef + ' définitions · ' + (partiel ? mods.length + ' modules sur ' + tous : 'tous les modules (' + tous + ')') + '</div>'
+            + '<dl><dt>Source</dt><dd>Rubrique « Lexique » des fiches de révision du dépôt <b>' + h(depot.nom || j.depot) + '</b><br>' + h(site) + '</dd>'
+            + '<dt>Date de création</dt><dd>' + h(date) + '</dd>'
+            + '<dt>Périmètre</dt><dd>' + (partiel ? 'sélection de ' + mods.length + ' modules (liste page suivante)' : 'ensemble des modules du dépôt') + '</dd></dl>'
+            + '<p class="note">Termes classés par ordre alphabétique. Entre crochets : numéro du ou des modules d\'où provient la définition.</p></section>'
+            + listeMods + '<main>' + corps + '</main></body></html>';
+        return { html, titreDoc };
+    }
+    function exporterGlossaire() {
+        const r = glossaireHTML(); if (!r) return;
+        const { html, titreDoc } = r;
+        // impression depuis un cadre caché : pas de fenêtre surgissante bloquée
+        let f = document.getElementById('glo-cadre');
+        if (f) f.remove();
+        f = document.createElement('iframe'); f.id = 'glo-cadre';
+        f.style.cssText = 'position:fixed;width:0;height:0;border:0;right:0;bottom:0';
+        document.body.appendChild(f);
+        const titreAvant = document.title;
+        f.onload = () => {
+            document.title = titreDoc;   // nom proposé pour le fichier PDF
+            setTimeout(() => {
+                try { f.contentWindow.focus(); f.contentWindow.print(); }
+                catch (e) { document.getElementById('glo-info').textContent = "L'impression n'est pas disponible sur cet appareil."; }
+                setTimeout(() => { document.title = titreAvant; }, 1000);
+            }, 300);
+        };
+        f.srcdoc = html;
+    }
     function ouvrirModuleLexique(f) {
         if (!moduleRepo[f]) return;
         if (!allModules.includes(f)) filterModules('');
@@ -2642,7 +2830,7 @@
         settings: ['#btn-reprendre', '.mod-tile.selected', '.mod-tile', '#module-search'],
         quiz: ['#quiz-feedback.active .action-btn', '#quiz-end.active .action-btn', '#q-choices button'],
         flashcard: ['#flashcard-el'], infographie: ['#podcast-player', '.info-container'], fiche: ['#fiche-content'],
-        musique: ['#musique-player', '#musique-content'], tp: ['#tp-el'], lexique: ['#lex-recherche'], sources: ['#src-liste button', '#src-ouvrir']
+        musique: ['#musique-player', '#musique-content'], tp: ['#tp-el'], lexique: ['#lex-recherche'], glossaire: ['#glo-depot', '#glo-export'], sources: ['#src-liste button', '#src-ouvrir']
     };
 
     function tvVisible(el) {

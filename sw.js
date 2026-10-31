@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v59-infographie-plus';
+const CACHE_NAME = 'v60-export-glossaire';
 const ASSETS = [
   'index.html',
   'catalogue.json',
