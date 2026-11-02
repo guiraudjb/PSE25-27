@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v60-export-glossaire';
+const CACHE_NAME = 'v61-pense-betes-v2';
 const ASSETS = [
   'index.html',
   'catalogue.json',
@@ -13,6 +13,8 @@ self.addEventListener('install', (event) => {
       return cache.addAll(ASSETS);
     })
   );
+  // La nouvelle version prend la main sans attendre la fermeture de tous les onglets
+  self.skipWaiting();
 });
 
 // Activation : Nettoyage des anciens caches
@@ -22,7 +24,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
