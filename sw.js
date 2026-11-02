@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v62-pense-betes-v2';
+const CACHE_NAME = 'v63-ia-themes';
 const ASSETS = [
   'index.html',
   'catalogue.json',
