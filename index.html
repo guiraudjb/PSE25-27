@@ -713,6 +713,38 @@
         #src-viewer { flex-grow: 1; width: 100%; min-height: 60vh; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-page); }
         #src-message { color: var(--secondary); }
 
+        /* Onglet LECTURE : livre audio d'Amélie, pages du livre tournées pendant la lecture (data/lecture/index.json,
+           <version>.json, pages_<version>/NNN.webp ; livre-infrastructure/scripts/lecture.py) */
+        #tab-lecture { flex-direction: column; gap: 8px; }
+        .lec-barre { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+        .lec-versions { display: flex; flex-wrap: wrap; gap: 6px; }
+        #lec-audio { flex: 1 1 280px; min-width: 0; max-width: 560px; }
+        .lec-barre label { font-size: 0.9em; display: flex; gap: 6px; align-items: center; cursor: pointer; }
+        .lec-corps { flex: 1; min-height: 0; display: flex; gap: 12px; }
+        .lec-page-zone { flex: 1 1 auto; min-width: 0; min-height: 0; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .lec-page-cadre { height: 100%; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: auto; flex: 0 1 auto; }
+        #lec-page { max-height: 100%; max-width: 100%; object-fit: contain; background: #fff; border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+        .lec-nav { background: var(--bg-container); color: var(--primary); border: 1px solid var(--border); border-radius: var(--radius); font-size: 1.6em; line-height: 1; padding: 14px 8px; cursor: pointer; font-family: inherit; }
+        .lec-nav:hover:not(:disabled) { border-color: var(--primary); }
+        .lec-nav:disabled { opacity: 0.35; cursor: default; }
+        .lec-cote { flex: 0 0 300px; display: flex; flex-direction: column; gap: 10px; min-height: 0; font-size: 0.9em; }
+        .lec-cote a { color: var(--primary); }
+        #lec-numero { font-weight: 700; color: var(--primary); }
+        .lec-ligne { background: var(--bg-container); border: 1px solid var(--border); border-left: 4px solid var(--primary); border-radius: var(--radius); padding: 10px 12px; margin: 0; line-height: 1.45; min-height: 4.5em; overflow: auto; }
+        .lec-ligne:empty::before { content: "La phrase lue s'affiche ici."; color: var(--secondary); }
+        .lec-pistes { overflow: auto; min-height: 0; flex: 1; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--border); }
+        .lec-pistes button { width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--border); padding: 5px 4px; color: var(--text-main); cursor: pointer; font-family: inherit; font-size: 0.95em; }
+        .lec-pistes button:hover { color: var(--primary); }
+        .lec-pistes button[aria-current="true"] { color: var(--primary); font-weight: 700; }
+        .lec-pistes small { color: var(--secondary); margin-right: 6px; font-variant-numeric: tabular-nums; }
+        #lec-message { color: var(--secondary); }
+        @media (max-width: 900px) {
+            .lec-corps { flex-direction: column; }
+            .lec-cote { flex: 0 0 auto; }
+            .lec-pistes { max-height: 30vh; }
+            .lec-page-zone { min-height: 60vh; }
+        }
+
         /* =========================================
            4. DISPOSITION ADAPTATIVE (téléphone, tablette, ordinateur)
            Uniquement des variables de thème : les 33 thèmes restent valables.
@@ -920,6 +952,7 @@
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-infographie" id="btn-infographie" onclick="userSwitchTab('infographie')">INFOGRAPHIE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-fiche" id="btn-fiche" onclick="userSwitchTab('fiche')">FICHE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-sources" id="btn-sources" onclick="userSwitchTab('sources')" style="display:none" title="Consulter le document d'origine du module (PDF public)">SOURCES</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-lecture" id="btn-lecture" onclick="userSwitchTab('lecture')" style="display:none" title="Livre audio lu par Amélie : les pages du livre se tournent pendant la lecture">LECTURE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-musique" id="btn-musique" onclick="userSwitchTab('musique')">MUSIQUE</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tp" id="btn-tp" onclick="userSwitchTab('tp')">TP<span class="tab-badge" id="badge-tp"></span></button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ia" id="btn-ia" onclick="userSwitchTab('ia')" style="display:none" title="Entraînement avec un assistant IA (Google, ChatGPT, Claude, Gemini)">IA</button>
@@ -1158,6 +1191,29 @@
             <iframe id="src-viewer" title="Document source du module" src="about:blank"></iframe>
         </div>
 
+        <div id="tab-lecture" class="tab-content" role="tabpanel" aria-labelledby="btn-lecture">
+            <div class="lec-barre">
+                <div id="lec-versions" class="lec-versions" role="group" aria-label="Version du livre"></div>
+                <audio id="lec-audio" controls preload="metadata"></audio>
+                <label><input type="checkbox" id="lec-suivre" checked onchange="suivreLecture(this.checked)"> Tourner les pages automatiquement</label>
+                <label><input type="checkbox" id="lec-enchainer" checked onchange="ecrireStockage('lectureEnchainer', this.checked ? '1' : '0')"> Enchaîner le chapitre suivant</label>
+            </div>
+            <div class="lec-corps">
+                <div class="lec-page-zone">
+                    <button type="button" class="lec-nav" id="lec-prec" onclick="pageLectureManuelle(-1)" aria-label="Page précédente">‹</button>
+                    <div class="lec-page-cadre"><img id="lec-page" alt="" decoding="async"></div>
+                    <button type="button" class="lec-nav" id="lec-suiv" onclick="pageLectureManuelle(1)" aria-label="Page suivante">›</button>
+                </div>
+                <div class="lec-cote">
+                    <div><span id="lec-numero"></span> · <a id="lec-pdf" href="#" target="_blank" rel="noopener">Ouvrir le PDF à cette page</a></div>
+                    <button type="button" class="src-doc" id="lec-depuis" onclick="lireDepuisPage()">▶ Lire depuis cette page</button>
+                    <p id="lec-ligne" class="lec-ligne" title="Phrase en cours de lecture (texte lu par Amélie)"></p>
+                    <span id="lec-message" role="status" aria-live="polite"></span>
+                    <ol id="lec-pistes" class="lec-pistes" aria-label="Parties du chapitre"></ol>
+                </div>
+            </div>
+        </div>
+
         <div id="tab-musique" class="tab-content" role="tabpanel" aria-labelledby="btn-musique">
             <div class="musique-layout">
                 <div class="podcast-container">
@@ -1386,6 +1442,7 @@
         if(newTab === 'lexique') ouvrirLexique();
         if(newTab === 'glossaire') ouvrirGlossaire();
         if(newTab === 'sources') ouvrirSources();
+        if(newTab === 'lecture') ouvrirLecture();
 
         updateTabUI(newTab);
         currentTab = newTab;
@@ -1403,6 +1460,8 @@
         
         const musiqueAudio = document.getElementById('musique-player');
         if(musiqueAudio) musiqueAudio.pause();
+        const lecAudio = document.getElementById('lec-audio');
+        if(lecAudio) lecAudio.pause();
         stopClip();
 
         clearTimeout(fAutoplayTimeout);
@@ -1522,6 +1581,7 @@
         document.getElementById('musique-player').style.display = '';
         document.getElementById('musique-content').textContent = "";
         viderSources();
+        viderLecture();
         document.getElementById('quiz-end').classList.remove('active');
         document.getElementById('quiz-feedback').classList.remove('active');
         document.getElementById('quiz-game').classList.add('active');
@@ -1576,6 +1636,145 @@
             'Si le PDF ne s\'affiche pas (téléphone), utilisez « Ouvrir dans un nouvel onglet ».';
     }
 
+    // --- LECTURE ---
+    // Dépôt d'un livre (pse-livre-infra) : data/lecture/index.json liste les versions (standard, rédigée) et les modules
+    // lus. <version>.json donne pour chaque module l'audio du chapitre, les instants où chaque page commence à être lue
+    // (alignement de la transcription sur le texte du PDF) et les lignes horodatées. Onglet masqué ailleurs.
+    const lectureIndex = {}, lectureDonnees = {};
+    let lecture = null, lectureEnchainement = false;
+    function viderLecture() {
+        lecture = null;
+        document.getElementById('btn-lecture').style.display = 'none';
+        const a = document.getElementById('lec-audio'); a.pause(); a.removeAttribute('src'); a.load();
+        document.getElementById('lec-versions').innerHTML = '';
+        document.getElementById('lec-pistes').innerHTML = '';
+        document.getElementById('lec-ligne').textContent = '';
+        document.getElementById('lec-page').removeAttribute('src');
+        if(currentTab === 'lecture') { updateTabUI('settings'); currentTab = 'settings'; }
+    }
+    function chargerLecture(module) {
+        const base = currentBase;
+        const p = lectureIndex[base] || (lectureIndex[base] = fetch(base + 'lecture/index.json?t=' + Date.now())
+            .then(r => r.ok ? r.json() : null).catch(() => null));
+        p.then(idx => {
+            if(currentBase !== base || currentFileBase !== module) return;
+            if(!idx || !idx.modules || !idx.modules[module]) { lectureEnchainement = false; return; }
+            const versions = idx.versions.filter(v => idx.modules[module].includes(v.id));
+            lecture = { base, module, idx, versions, v: null, d: null, m: null, page: 0 };
+            const zone = document.getElementById('lec-versions'); zone.innerHTML = '';
+            versions.forEach(v => {
+                const b = document.createElement('button'); b.type = 'button'; b.className = 'src-doc'; b.dataset.v = v.id;
+                b.textContent = v.titre; b.onclick = () => choisirVersionLecture(v.id, true);
+                zone.appendChild(b);
+            });
+            document.getElementById('lec-enchainer').checked = lireStockage('lectureEnchainer') !== '0';
+            document.getElementById('btn-lecture').style.display = '';
+            if(currentTab === 'lecture') ouvrirLecture();
+        });
+    }
+    function ouvrirLecture() {
+        if(!lecture || lecture.v) return;
+        const pref = lireStockage('lectureVersion');
+        choisirVersionLecture(lecture.versions.some(v => v.id === pref) ? pref : lecture.versions[0].id, false);
+    }
+    function choisirVersionLecture(id, garderPosition) {
+        const L = lecture; if(!L) return;
+        const v = L.versions.find(x => x.id === id) || L.versions[0];
+        if(L.v === v.id) return;
+        const a = document.getElementById('lec-audio');
+        const frac = garderPosition && a.duration ? a.currentTime / a.duration : 0;
+        const jouait = (garderPosition && !a.paused) || lectureEnchainement;
+        lectureEnchainement = false;
+        ecrireStockage('lectureVersion', v.id);
+        document.querySelectorAll('#lec-versions .src-doc').forEach(b => { const ok = b.dataset.v === v.id; b.classList.toggle('active', ok); b.setAttribute('aria-pressed', ok ? 'true' : 'false'); });
+        const cle = L.base + v.fichier;
+        const p = lectureDonnees[cle] || (lectureDonnees[cle] = fetch(L.base + v.fichier).then(r => { if(!r.ok) throw new Error(r.status); return r.json(); }));
+        p.then(d => {
+            if(lecture !== L) return;
+            const m = d.modules[L.module]; if(!m) return;
+            L.v = v.id; L.d = d; L.m = m;
+            a.pause(); a.src = L.base + m.audio;
+            a.onloadedmetadata = () => { if(frac) a.currentTime = frac * a.duration; if(jouait) a.play().catch(() => {}); a.onloadedmetadata = null; };
+            const liste = document.getElementById('lec-pistes'); liste.innerHTML = '';
+            m.pistes.forEach(([t, titre]) => {
+                const li = document.createElement('li'), b = document.createElement('button'); b.type = 'button';
+                const sm = document.createElement('small'); sm.textContent = minSec(t); b.appendChild(sm);
+                b.appendChild(document.createTextNode(titre)); b.dataset.t = t;
+                b.onclick = () => { a.currentTime = t; suivreLecture(true); a.play().catch(() => {}); };
+                li.appendChild(b); liste.appendChild(li);
+            });
+            document.getElementById('lec-ligne').textContent = '';
+            document.getElementById('lec-message').textContent = v.titre + ' : ' + Math.round(m.duree / 60) + ' min de lecture.';
+            afficherPageLecture(frac ? pageAuTemps(m, frac * m.duree) : (m.pages.length ? m.pages[0][1] : d.premiere_page));
+        }).catch(() => { document.getElementById('lec-message').textContent = 'Lecture indisponible pour cette version.'; });
+    }
+    function minSec(t) { t = Math.floor(t); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); }
+    function pageAuTemps(m, t) {
+        let p = m.pages.length ? m.pages[0][1] : 1;
+        for(const [tt, pg] of m.pages) { if(tt <= t) p = pg; else break; }
+        return p;
+    }
+    function ligneAuTemps(m, t) {
+        let lo = 0, hi = m.lignes.length - 1, k = -1;
+        while(lo <= hi) { const mid = (lo + hi) >> 1; if(m.lignes[mid][0] <= t) { k = mid; lo = mid + 1; } else hi = mid - 1; }
+        return k >= 0 && t <= m.lignes[k][1] + 0.6 ? k : -1;
+    }
+    function afficherPageLecture(p) {
+        const L = lecture; if(!L || !L.d) return;
+        p = Math.max(1, Math.min(L.d.pages, p)); L.page = p;
+        const url = n => L.base + L.d.images + String(n).padStart(3, '0') + '.webp';
+        const img = document.getElementById('lec-page');
+        img.src = url(p); img.alt = 'Page ' + p + ' du livre (' + L.d.titre.toLowerCase() + ')';
+        if(p < L.d.pages) { const pre = new Image(); pre.src = url(p + 1); }
+        document.getElementById('lec-numero').textContent = 'Page ' + p + ' / ' + L.d.pages;
+        document.getElementById('lec-pdf').href = L.base + L.d.pdf + '#page=' + p;
+        document.getElementById('lec-prec').disabled = p <= 1;
+        document.getElementById('lec-suiv').disabled = p >= L.d.pages;
+        document.getElementById('lec-depuis').disabled = !L.m.pages.some(([, pg]) => pg >= p) || p > L.m.pages[L.m.pages.length - 1][1];
+    }
+    function pageLectureManuelle(delta) {
+        if(!lecture) return;
+        suivreLecture(false);                          // feuilleter suspend le suivi ; « Lire depuis cette page » le reprend
+        afficherPageLecture(lecture.page + delta);
+    }
+    function suivreLecture(oui) {
+        document.getElementById('lec-suivre').checked = oui;
+        const a = document.getElementById('lec-audio');
+        if(oui && lecture && lecture.m) afficherPageLecture(pageAuTemps(lecture.m, a.currentTime));
+    }
+    function lireDepuisPage() {
+        const L = lecture; if(!L || !L.m) return;
+        const e = L.m.pages.find(([, pg]) => pg >= L.page); if(!e) return;
+        const a = document.getElementById('lec-audio');
+        a.currentTime = e[0]; suivreLecture(true); a.play().catch(() => {});
+    }
+    (function initLecture() {
+        const a = document.getElementById('lec-audio');
+        a.addEventListener('timeupdate', () => {
+            const L = lecture; if(!L || !L.m) return;
+            if(document.getElementById('lec-suivre').checked) {
+                const p = pageAuTemps(L.m, a.currentTime);
+                if(p !== L.page) afficherPageLecture(p);
+            }
+            const k = ligneAuTemps(L.m, a.currentTime);
+            const el = document.getElementById('lec-ligne');
+            const txt = k >= 0 ? L.m.lignes[k][2] : '';
+            if(k >= 0 && el.textContent !== txt) el.textContent = txt;
+            let cur = -1; L.m.pistes.forEach(([t], i) => { if(t <= a.currentTime) cur = i; });
+            document.querySelectorAll('#lec-pistes button').forEach((b, i) => b.setAttribute('aria-current', i === cur ? 'true' : 'false'));
+        });
+        a.addEventListener('ended', () => {
+            const L = lecture; if(!L || !document.getElementById('lec-enchainer').checked) return;
+            const sel = document.getElementById('folderSelect');
+            const opts = Array.from(sel.options).map(o => o.value);
+            const i = opts.indexOf(L.module + '.csv');
+            const suivant = opts.slice(i + 1).find(o => L.idx.modules[o.replace('.csv', '')]);
+            if(!suivant) { document.getElementById('lec-message').textContent = 'Fin du livre.'; return; }
+            lectureEnchainement = true; ongletApresChargement = 'lecture';
+            sel.value = suivant; loadAllResources();
+        });
+    })();
+
     function loadAllResources() {
         const filename = document.getElementById('folderSelect').value;
         if(!filename) return;
@@ -1605,6 +1804,7 @@
             ficheModuleIA = txtFiche || '';
             loadFicheAudio(filename.replace('.csv', ''));
             chargerSources(filename.replace('.csv', ''));
+            chargerLecture(filename.replace('.csv', ''));
 
             resetFlashcard(); resetTp(); updateTabBadges();
 
@@ -2365,7 +2565,7 @@
     if (lireStockage('biblioRepliee')) { document.body.classList.add('biblio-repliee'); document.getElementById('btn-biblio').setAttribute('aria-expanded', 'false'); }
 
     // Menu « Plus » du téléphone : onglets moins fréquents (masqués s'ils sont vides pour ce module)
-    const ONGLETS_PLUS = [['musique', 'Musique'], ['tp', 'TP'], ['sources', 'Sources'], ['ia', 'IA'], ['lexique', 'Lexique'], ['glossaire', 'Export glossaire']];
+    const ONGLETS_PLUS = [['musique', 'Musique'], ['tp', 'TP'], ['sources', 'Sources'], ['lecture', 'Lecture'], ['ia', 'IA'], ['lexique', 'Lexique'], ['glossaire', 'Export glossaire']];
     function basculerMenuPlus() {
         const m = document.getElementById('plus-sheet');
         if (!m.hidden) { fermerMenuPlus(); return; }

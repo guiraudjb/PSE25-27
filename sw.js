@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v63-ia-themes';
+const CACHE_NAME = 'v64-lecture-livre';
 const ASSETS = [
   'index.html',
   'catalogue.json',
@@ -32,6 +32,8 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   // Documents sources (PDF de data/source/, parfois lourds) : jamais mis en cache, réseau direct.
   if (event.request.url.includes('/data/source/')) return;
+  // Synchronisation du livre audio (data/lecture/*.json) : refaite quand une version s'enrichit, toujours du réseau.
+  if (/\/data\/lecture\/[^/]*\.json/.test(event.request.url)) return;
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request).then((fetchResponse) => {
