@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v64-lecture-livre';
+const CACHE_NAME = 'v65-livre-infra';
 const ASSETS = [
   'index.html',
   'catalogue.json',

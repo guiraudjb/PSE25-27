@@ -29,6 +29,11 @@
       "nom": "concours-fp-rh",
       "titre": "Inspecteur principal DGFiP (option ressources)",
       "url": "../concours-fp-rh/batocera/concours-fp-rh/data/"
+    },
+    {
+      "nom": "pse-livre-infra",
+      "titre": "Livre : infrastructure informatique publique",
+      "url": "../pse-livre-infra/batocera/pse-livre-infra/data/"
     }
   ]
 }
